@@ -1,11 +1,18 @@
-﻿namespace Nikki.Reflection.ID
+﻿using Nikki.Support.Shared.Class;
+
+
+
+namespace Nikki.Reflection.ID
 {
+    /// <summary>
+    /// Class of IDs related to <see cref="Texture"/> compressions.
+    /// </summary>
     public static class EAComp
     {
         /// <summary>
         /// PAL8 Compression = 0x8
         /// </summary>
-        public const byte P8_08   = (byte)Enum.eTextureCompressionType.TEXCOMP_8BIT;
+        public const byte P8_08 = (byte)Enum.eTextureCompressionType.TEXCOMP_8BIT;
 
         /// <summary>
         /// RGBA Compression = 0x20
@@ -30,13 +37,31 @@
         /// <summary>
         /// PAL8-64 Compression = 0x81
         /// </summary>
-        public const byte SECRET  = (byte)Enum.eTextureCompressionType.TEXCOMP_8BIT_64;
+        public const byte SECRET = (byte)Enum.eTextureCompressionType.TEXCOMP_8BIT_64;
 
-
+        /// <summary>
+        /// PAL8 Compression identifier in Part 5 of <see cref="TPKBlock"/>.
+        /// </summary>
         public const uint P8_32   = 0x00000029;
+
+        /// <summary>
+        /// RGBA Compression identifier in Part 5 of <see cref="TPKBlock"/>.
+        /// </summary>
         public const uint RGBA_32 = 0x00000015;
+
+        /// <summary>
+        /// DXT1 Compression identifier in Part 5 of <see cref="TPKBlock"/>.
+        /// </summary>
         public const uint DXT1_32 = 0x31545844;
+
+        /// <summary>
+        /// DXT3 Compression identifier in Part 5 of <see cref="TPKBlock"/>.
+        /// </summary>
         public const uint DXT3_32 = 0x33545844;
+
+        /// <summary>
+        /// DXT5 Compression identifier in Part 5 of <see cref="TPKBlock"/>.
+        /// </summary>
         public const uint DXT5_32 = 0x35545844;
     }
 }
