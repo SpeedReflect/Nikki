@@ -174,7 +174,7 @@ namespace Nikki.Utils.EA
         /// </summary>
         /// <param name="PIXELFORMAT"><see cref="DDS_PIXELFORMAT"/> of the .dds header passed as a reference type.</param>
         /// <param name="compression">EA compression byte of the image.</param>
-        public static void GetPixelFormat(DDS_PIXELFORMAT PIXELFORMAT, byte compression)
+        internal static void GetPixelFormat(DDS_PIXELFORMAT PIXELFORMAT, byte compression)
         {
             switch (compression)
             {

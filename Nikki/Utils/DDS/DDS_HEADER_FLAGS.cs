@@ -5,7 +5,7 @@
 namespace Nikki.Utils.DDS
 {
     [Flags]
-    public enum DDS_HEADER_FLAGS : uint
+    internal enum DDS_HEADER_FLAGS : uint
     {
         DDS_HEIGHT = 0x00000002,  // DDSD_HEIGHT
         DDS_WIDTH = 0x00000004,  // DDSD_WIDTH

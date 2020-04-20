@@ -5,7 +5,7 @@
 namespace Nikki.Utils.DDS
 {
     [Flags]
-    public enum DDS_TYPE : uint
+    internal enum DDS_TYPE : uint
     {
         ALPHA = 0x00000002,  // DDPF_ALPHA
         FOURCC = 0x00000004,  // DDPF_FOURCC

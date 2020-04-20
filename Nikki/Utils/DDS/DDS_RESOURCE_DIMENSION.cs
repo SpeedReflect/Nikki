@@ -1,6 +1,6 @@
 ﻿namespace Nikki.Utils.DDS
 {
-    public enum DDS_RESOURCE_DIMENSION
+    internal enum DDS_RESOURCE_DIMENSION
     {
         DDS_DIMENSION_TEXTURE1D = 2,
         DDS_DIMENSION_TEXTURE2D = 3,

@@ -1,6 +1,6 @@
 ﻿namespace Nikki.Utils.DDS
 {
-    public enum DDS_ALPHA_MODE
+    internal enum DDS_ALPHA_MODE
     {
         DDS_ALPHA_MODE_UNKNOWN = 0,
         DDS_ALPHA_MODE_STRAIGHT = 1,

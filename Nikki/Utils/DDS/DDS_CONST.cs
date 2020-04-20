@@ -4,6 +4,9 @@
 
 namespace Nikki.Utils.DDS
 {
+    /// <summary>
+    /// DDS static class with methods to make <see cref="DDS_PIXELFORMAT"/>.
+    /// </summary>
     internal static class DDS_CONST
     {
         // Standard MAKEFOURCC that requires bytes to be passed

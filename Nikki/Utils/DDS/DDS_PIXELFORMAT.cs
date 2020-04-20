@@ -5,7 +5,7 @@
 namespace Nikki.Utils.DDS
 {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Size = 0x20)]
-    public class DDS_PIXELFORMAT
+    internal class DDS_PIXELFORMAT
     {
         /* 0x4C - 0x4F */ public uint dwSize;
         /* 0x50 - 0x53 */ public uint dwFlags;

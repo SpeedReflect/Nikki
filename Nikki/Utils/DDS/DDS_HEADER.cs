@@ -5,7 +5,7 @@
 namespace Nikki.Utils.DDS
 {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Size = 0x80)]
-    public class DDS_HEADER
+    internal class DDS_HEADER
     {
         /* 0x04 - 0x07 */ public uint dwSize;
         /* 0x08 - 0x0B */ public uint dwFlags;
