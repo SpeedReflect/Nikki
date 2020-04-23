@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Nikki.Support.Shared.Class;
 
 
@@ -53,5 +54,55 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// </summary>
 		/// <returns>String value.</returns>
 		public override string ToString() => $"Offset: {this.Offset:X4} | Count = {this.AttribOffsets?.Count}";
+
+		/// <summary>
+		/// Determines whether this instance and a specified object, which must also be a
+		/// <see cref="CPOffset"/> object, have the same value.
+		/// </summary>
+		/// <param name="obj">The <see cref="CPOffset"/> to compare to this instance.</param>
+		/// <returns>True if obj is a <see cref="CPOffset"/> and its value is the same as 
+		/// this instance; false otherwise. If obj is null, the method returns false.
+		/// </returns>
+		public override bool Equals(object obj) => obj is CPOffset && this == (CPOffset)obj;
+
+		/// <summary>
+		/// Returns the hash code for this <see cref="CPOffset"/>.
+		/// </summary>
+		/// <returns>A 32-bit signed integer hash code.</returns>
+		public override int GetHashCode()
+		{
+			string result = String.Empty;
+			for (int a1 = 0; a1 < this.AttribOffsets.Count; ++a1)
+				result += this.AttribOffsets[a1].ToString("X4");
+			return result.GetHashCode();
+		}
+
+		/// <summary>
+		/// Determines whether two specified <see cref="CPOffset"/> have the same value.
+		/// </summary>
+		/// <param name="off1">The first <see cref="CPOffset"/> to compare, or null.</param>
+		/// <param name="off2">The second <see cref="CPOffset"/> to compare, or null.</param>
+		/// <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
+		public static bool operator ==(CPOffset off1, CPOffset off2)
+		{
+			if (off1 is null) return off2 is null;
+			if (off2 is null) return false;
+
+			if (off1.AttribOffsets.Count != off2.AttribOffsets.Count) return false;
+			for (int a1 = 0; a1 < off1.AttribOffsets.Count; ++a1)
+			{
+				if (off1.AttribOffsets[a1] != off2.AttribOffsets[a1])
+					return false;
+			}
+			return true;
+		}
+
+		/// <summary>
+		/// Determines whether two specified <see cref="CPOffset"/> have different values.
+		/// </summary>
+		/// <param name="off1">The first <see cref="CPOffset"/> to compare, or null.</param>
+		/// <param name="off2">The second <see cref="CPOffset"/> to compare, or null.</param>
+		/// <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
+		public static bool operator !=(CPOffset off1, CPOffset off2) => !(off1 == off2);
 	}
 }

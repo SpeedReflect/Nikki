@@ -20,8 +20,8 @@ namespace Nikki.Support.Underground2.Framework
 			int key = 0;
 
 			// Initialize attrib stream
-			using var attrib_ms = new MemoryStream();
-			using var attrib_bw = new BinaryWriter(attrib_ms);
+			using var ms = new MemoryStream();
+			using var bw = new BinaryWriter(ms);
 
 			// Iterate through each model in the database
 			foreach (var model in db.DBModelPartList)
@@ -39,14 +39,14 @@ namespace Nikki.Support.Underground2.Framework
 						if (!attrib_list.ContainsKey(key)) // if it already exists, skip
 						{
 							attrib_list[key] = length++;
-							attribute.Assemble(attrib_bw, string_dict);
+							attribute.Assemble(bw, string_dict);
 						}
 					}
 				}
 			}
 
 			// Return prepared dictionary
-			attrib_buffer = attrib_ms.ToArray();
+			attrib_buffer = ms.ToArray();
 			return attrib_list;
 		}
 	}

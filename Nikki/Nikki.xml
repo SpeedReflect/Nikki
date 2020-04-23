@@ -4409,6 +4409,38 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CPOffset.Equals(System.Object)">
+            <summary>
+            Determines whether this instance and a specified object, which must also be a
+            <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPOffset"/> object, have the same value.
+            </summary>
+            <param name="obj">The <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPOffset"/> to compare to this instance.</param>
+            <returns>True if obj is a <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPOffset"/> and its value is the same as 
+            this instance; false otherwise. If obj is null, the method returns false.
+            </returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CPOffset.GetHashCode">
+            <summary>
+            Returns the hash code for this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPOffset"/>.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CPOffset.op_Equality(Nikki.Support.Shared.Parts.CarParts.CPOffset,Nikki.Support.Shared.Parts.CarParts.CPOffset)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPOffset"/> have the same value.
+            </summary>
+            <param name="off1">The first <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPOffset"/> to compare, or null.</param>
+            <param name="off2">The second <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPOffset"/> to compare, or null.</param>
+            <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CPOffset.op_Inequality(Nikki.Support.Shared.Parts.CarParts.CPOffset,Nikki.Support.Shared.Parts.CarParts.CPOffset)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPOffset"/> have different values.
+            </summary>
+            <param name="off1">The first <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPOffset"/> to compare, or null.</param>
+            <param name="off2">The second <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPOffset"/> to compare, or null.</param>
+            <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
+        </member>
         <member name="T:Nikki.Support.Shared.Parts.CarParts.CPStruct">
             <summary>
             A unit <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> struct with geometry part names.
@@ -5376,6 +5408,12 @@
             Returns PartName, Attributes count and CarPartGroupID as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.GetHashCode">
+            <summary>
+            Returns the hash code for this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
         </member>
         <member name="T:Nikki.Support.Underground2.Parts.CarParts.TempPart">
             <summary>

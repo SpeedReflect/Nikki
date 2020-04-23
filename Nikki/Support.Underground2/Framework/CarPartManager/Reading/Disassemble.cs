@@ -60,8 +60,8 @@ namespace Nikki.Support.Underground2.Framework
 
 				foreach (var temppart in tempparts)
 				{
-					offset_dict.TryGetValue(temppart.AttribOffset * 2, out var cpoff);
-					struct_dict.TryGetValue(temppart.StructOffset * 0x24, out var cpstr);
+					offset_dict.TryGetValue(temppart.AttribOffset, out var cpoff);
+					struct_dict.TryGetValue(temppart.StructOffset, out var cpstr);
 					var realpart = new RealCarPart(a1, cpoff?.AttribOffsets.Count ?? 0, collection)
 					{
 						PartName = temppart.PartNameHash.BinString(eLookupReturn.EMPTY),

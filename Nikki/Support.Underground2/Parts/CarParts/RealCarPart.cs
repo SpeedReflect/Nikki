@@ -1,4 +1,4 @@
-﻿using System.IO;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using Nikki.Utils;
@@ -95,5 +95,17 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		/// <returns>String value.</returns>
 		public override string ToString() =>
 			$"PartName: {this.PartName} | AttribCount: {this.Attributes.Count} | GroupID: {this.CarPartGroupID}";
+
+		/// <summary>
+		/// Returns the hash code for this <see cref="RealCarPart"/>.
+		/// </summary>
+		/// <returns>A 32-bit signed integer hash code.</returns>
+		public override int GetHashCode()
+		{
+			int result = this.PartName?.GetHashCode() ?? String.Empty.GetHashCode();
+			result *= this.Index + 7;
+			result ^= this.Struct.GetHashCode();
+			return result;
+		}
 	}
 }

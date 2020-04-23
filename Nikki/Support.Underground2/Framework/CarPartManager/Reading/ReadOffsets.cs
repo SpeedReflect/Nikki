@@ -23,7 +23,7 @@ namespace Nikki.Support.Underground2.Framework
 				var cpoff = new CPOffset(count, position);
 				for (int a1 = 0; a1 < count; ++a1)
 					cpoff.AttribOffsets.Add(br.ReadUInt16());
-				result[position] = cpoff;
+				result[position >> 1] = cpoff;
 			}
 			return result;
 		}

@@ -20,7 +20,7 @@ namespace Nikki.Support.Underground2.Framework
 			{
 				var position = (int)(br.BaseStream.Position - offset);
 				var cpstr = new CPStruct(br, str_reader);
-				result[position] = cpstr;
+				result[position / 0x24] = cpstr;
 			}
 			return result;
 		}
