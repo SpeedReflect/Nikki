@@ -19,4 +19,8 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Support.MostWanted\Framework\CarPartManager\Writing\" />
+  </ItemGroup>
+
 </Project>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using Nikki.Core;
-using Nikki.Database.Collection;
 using Nikki.Reflection.Interface;
 
 
@@ -81,11 +80,11 @@ namespace Nikki.Reflection.Abstract
         }
 
         /// <summary>
-        /// Gets a <see cref="APrimitive"/> class from the path provided.
+        /// Gets a <see cref="IReflective"/> class from the path provided.
         /// </summary>
-        /// <param name="path">Path of the <see cref="APrimitive"/> class to find.</param>
-        /// <returns><see cref="APrimitive"/> class.</returns>
-        public virtual APrimitive GetPrimitive(params string[] path)
+        /// <param name="path">Path of the <see cref="IReflective"/> class to find.</param>
+        /// <returns><see cref="IReflective"/> class.</returns>
+        public virtual IReflective GetPrimitive(params string[] path)
         {
             switch (path.Length)
             {
