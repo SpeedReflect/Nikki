@@ -1,8 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Collections.Generic;
-using Nikki.Utils;
 using Nikki.Support.Underground2.Parts.CarParts;
+using CoreExtensions.IO;
 
 
 
@@ -46,6 +45,7 @@ namespace Nikki.Support.Underground2.Framework
 			}
 
 			// Return prepared dictionary
+			bw.FillBuffer(0x10);
 			attrib_buffer = ms.ToArray();
 			return attrib_list;
 		}

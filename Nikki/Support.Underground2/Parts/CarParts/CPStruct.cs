@@ -71,6 +71,51 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		public string GeometryName8 { get; set; } = String.Empty;
 
 		/// <summary>
+		/// True if concatenator string exists; false otherwise.
+		/// </summary>
+		public eBoolean ConcatenatorExists { get; set; } = eBoolean.False;
+
+		/// <summary>
+		/// True if geometry 1 exists; false othewise.
+		/// </summary>
+		public eBoolean Geometry1Exists { get; set; } = eBoolean.False;
+
+		/// <summary>
+		/// True if geometry 2 exists; false othewise.
+		/// </summary>
+		public eBoolean Geometry2Exists { get; set; } = eBoolean.False;
+
+		/// <summary>
+		/// True if geometry 3 exists; false othewise.
+		/// </summary>
+		public eBoolean Geometry3Exists { get; set; } = eBoolean.False;
+
+		/// <summary>
+		/// True if geometry 4 exists; false othewise.
+		/// </summary>
+		public eBoolean Geometry4Exists { get; set; } = eBoolean.False;
+
+		/// <summary>
+		/// True if geometry 5 exists; false othewise.
+		/// </summary>
+		public eBoolean Geometry5Exists { get; set; } = eBoolean.False;
+
+		/// <summary>
+		/// True if geometry 6 exists; false othewise.
+		/// </summary>
+		public eBoolean Geometry6Exists { get; set; } = eBoolean.False;
+
+		/// <summary>
+		/// True if geometry 7 exists; false othewise.
+		/// </summary>
+		public eBoolean Geometry7Exists { get; set; } = eBoolean.False;
+
+		/// <summary>
+		/// True if geometry 8 exists; false othewise.
+		/// </summary>
+		public eBoolean Geometry8Exists { get; set; } = eBoolean.False;
+
+		/// <summary>
 		/// Initialized new instance of <see cref="CPStruct"/>.
 		/// </summary>
 		public CPStruct() { }
@@ -104,6 +149,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 				{
 					str_reader.BaseStream.Position = position << 2;
 					this.Concatenator = str_reader.ReadNullTermUTF8();
+					this.ConcatenatorExists = eBoolean.True;
 				}
 
 				// Read geometry name 1, if valid
@@ -112,6 +158,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 				{
 					str_reader.BaseStream.Position = position << 2;
 					this.GeometryName1 = str_reader.ReadNullTermUTF8();
+					this.Geometry1Exists = eBoolean.True;
 				}
 
 				// Read geometry name 2, if valid
@@ -120,6 +167,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 				{
 					str_reader.BaseStream.Position = position << 2;
 					this.GeometryName2 = str_reader.ReadNullTermUTF8();
+					this.Geometry2Exists = eBoolean.True;
 				}
 
 				// Read geometry name 3, if valid
@@ -128,6 +176,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 				{
 					str_reader.BaseStream.Position = position << 2;
 					this.GeometryName3 = str_reader.ReadNullTermUTF8();
+					this.Geometry3Exists = eBoolean.True;
 				}
 
 				// Read geometry name 4, if valid
@@ -136,6 +185,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 				{
 					str_reader.BaseStream.Position = position << 2;
 					this.GeometryName4 = str_reader.ReadNullTermUTF8();
+					this.Geometry4Exists = eBoolean.True;
 				}
 
 				// Read geometry name 5, if valid
@@ -144,6 +194,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 				{
 					str_reader.BaseStream.Position = position << 2;
 					this.GeometryName5 = str_reader.ReadNullTermUTF8();
+					this.Geometry5Exists = eBoolean.True;
 				}
 
 				// Read geometry name 6, if valid
@@ -152,6 +203,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 				{
 					str_reader.BaseStream.Position = position << 2;
 					this.GeometryName6 = str_reader.ReadNullTermUTF8();
+					this.Geometry6Exists = eBoolean.True;
 				}
 
 				// Read geometry name 7, if valid
@@ -160,6 +212,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 				{
 					str_reader.BaseStream.Position = position << 2;
 					this.GeometryName7 = str_reader.ReadNullTermUTF8();
+					this.Geometry7Exists = eBoolean.True;
 				}
 
 				// Read geometry name 8, if valid
@@ -168,27 +221,68 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 				{
 					str_reader.BaseStream.Position = position << 2;
 					this.GeometryName8 = str_reader.ReadNullTermUTF8();
+					this.Geometry8Exists = eBoolean.True;
 				}
 			}
 			else
 			{
 				uint key = br.ReadUInt16(); // skip concatenator
+				
 				key = br.ReadUInt32();
-				if (key != negative) this.GeometryName1 = key.BinString(eLookupReturn.EMPTY);
+				if (key != negative)
+				{
+					this.GeometryName1 = key.BinString(eLookupReturn.EMPTY);
+					this.Geometry1Exists = eBoolean.True;
+				}
+				
 				key = br.ReadUInt32();
-				if (key != negative) this.GeometryName2 = key.BinString(eLookupReturn.EMPTY);
+				if (key != negative)
+				{
+					this.GeometryName2 = key.BinString(eLookupReturn.EMPTY);
+					this.Geometry2Exists = eBoolean.True;
+				}
+				
 				key = br.ReadUInt32();
-				if (key != negative) this.GeometryName3 = key.BinString(eLookupReturn.EMPTY);
+				if (key != negative)
+				{
+					this.GeometryName3 = key.BinString(eLookupReturn.EMPTY);
+					this.Geometry3Exists = eBoolean.True;
+				}
+				
 				key = br.ReadUInt32();
-				if (key != negative) this.GeometryName4 = key.BinString(eLookupReturn.EMPTY);
+				if (key != negative)
+				{
+					this.GeometryName4 = key.BinString(eLookupReturn.EMPTY);
+					this.Geometry4Exists = eBoolean.True;
+				}
+				
 				key = br.ReadUInt32();
-				if (key != negative) this.GeometryName5 = key.BinString(eLookupReturn.EMPTY);
+				if (key != negative)
+				{
+					this.GeometryName5 = key.BinString(eLookupReturn.EMPTY);
+					this.Geometry5Exists = eBoolean.True;
+				}
+				
 				key = br.ReadUInt32();
-				if (key != negative) this.GeometryName6 = key.BinString(eLookupReturn.EMPTY);
+				if (key != negative)
+				{
+					this.GeometryName6 = key.BinString(eLookupReturn.EMPTY);
+					this.Geometry6Exists = eBoolean.True;
+				}
+				
 				key = br.ReadUInt32();
-				if (key != negative) this.GeometryName7 = key.BinString(eLookupReturn.EMPTY);
+				if (key != negative)
+				{
+					this.GeometryName7 = key.BinString(eLookupReturn.EMPTY);
+					this.Geometry7Exists = eBoolean.True;
+				}
+				
 				key = br.ReadUInt32();
-				if (key != negative) this.GeometryName8 = key.BinString(eLookupReturn.EMPTY);
+				if (key != negative)
+				{
+					this.GeometryName8 = key.BinString(eLookupReturn.EMPTY);
+					this.Geometry8Exists = eBoolean.True;
+				}
 			}
 		}
 
@@ -202,79 +296,81 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		{
 			uint negative = 0xFFFFFFFF;
 			int negint32 = -1;
+			int empty = String.Empty.GetHashCode();
+
 			if (this.Templated == eBoolean.True)
 			{
 				bw.Write((ushort)1);
 
-				bw.Write(String.IsNullOrEmpty(this.Concatenator)
+				bw.Write(this.ConcatenatorExists == eBoolean.False
 					? (ushort)negint32
-					: (ushort)string_dict[this.Concatenator.GetHashCode()]);
+					: (ushort)string_dict[this.Concatenator?.GetHashCode() ?? empty]);
 
-				bw.Write(String.IsNullOrEmpty(this.GeometryName1)
+				bw.Write(this.Geometry1Exists == eBoolean.False
 					? negint32
-					: string_dict[this.GeometryName1.GetHashCode()]);
+					: string_dict[this.GeometryName1?.GetHashCode() ?? empty]);
 
-				bw.Write(String.IsNullOrEmpty(this.GeometryName2)
+				bw.Write(this.Geometry2Exists == eBoolean.False
 					? negint32
-					: string_dict[this.GeometryName2.GetHashCode()]);
+					: string_dict[this.GeometryName2?.GetHashCode() ?? empty]);
 
-				bw.Write(String.IsNullOrEmpty(this.GeometryName3)
+				bw.Write(this.Geometry3Exists == eBoolean.False
 					? negint32
-					: string_dict[this.GeometryName3.GetHashCode()]);
+					: string_dict[this.GeometryName3?.GetHashCode() ?? empty]);
 
-				bw.Write(String.IsNullOrEmpty(this.GeometryName4)
+				bw.Write(this.Geometry4Exists == eBoolean.False
 					? negint32
-					: string_dict[this.GeometryName4.GetHashCode()]);
+					: string_dict[this.GeometryName4?.GetHashCode() ?? empty]);
 
-				bw.Write(String.IsNullOrEmpty(this.GeometryName5)
+				bw.Write(this.Geometry5Exists == eBoolean.False
 					? negint32
-					: string_dict[this.GeometryName5.GetHashCode()]);
+					: string_dict[this.GeometryName5?.GetHashCode() ?? empty]);
 
-				bw.Write(String.IsNullOrEmpty(this.GeometryName6)
+				bw.Write(this.Geometry6Exists == eBoolean.False
 					? negint32
-					: string_dict[this.GeometryName6.GetHashCode()]);
+					: string_dict[this.GeometryName6?.GetHashCode() ?? empty]);
 
-				bw.Write(String.IsNullOrEmpty(this.GeometryName7)
+				bw.Write(this.Geometry7Exists == eBoolean.False
 					? negint32
-					: string_dict[this.GeometryName7.GetHashCode()]);
+					: string_dict[this.GeometryName7?.GetHashCode() ?? empty]);
 
-				bw.Write(String.IsNullOrEmpty(this.GeometryName8)
+				bw.Write(this.Geometry8Exists == eBoolean.False
 					? negint32
-					: string_dict[this.GeometryName8.GetHashCode()]);
+					: string_dict[this.GeometryName8?.GetHashCode() ?? empty]);
 			}
 			else
 			{
 				bw.Write(0xFFFF0000);
 
-				bw.Write(String.IsNullOrEmpty(this.GeometryName1)
+				bw.Write(this.Geometry1Exists == eBoolean.False
 					? negative
 					: this.GeometryName1.BinHash());
 
-				bw.Write(String.IsNullOrEmpty(this.GeometryName2)
+				bw.Write(this.Geometry2Exists == eBoolean.False
 					? negative 
 					: this.GeometryName2.BinHash());
 
-				bw.Write(String.IsNullOrEmpty(this.GeometryName3)
+				bw.Write(this.Geometry3Exists == eBoolean.False
 					? negative
 					: this.GeometryName3.BinHash());
 				
-				bw.Write(String.IsNullOrEmpty(this.GeometryName4)
+				bw.Write(this.Geometry4Exists == eBoolean.False
 					? negative
 					: this.GeometryName4.BinHash());
 				
-				bw.Write(String.IsNullOrEmpty(this.GeometryName5)
+				bw.Write(this.Geometry5Exists == eBoolean.False
 					? negative
 					: this.GeometryName5.BinHash());
 				
-				bw.Write(String.IsNullOrEmpty(this.GeometryName6)
+				bw.Write(this.Geometry6Exists == eBoolean.False
 					? negative
 					: this.GeometryName6.BinHash());
 				
-				bw.Write(String.IsNullOrEmpty(this.GeometryName7)
+				bw.Write(this.Geometry7Exists == eBoolean.False
 					? negative
 					: this.GeometryName7.BinHash());
 				
-				bw.Write(String.IsNullOrEmpty(this.GeometryName8)
+				bw.Write(this.Geometry8Exists == eBoolean.False
 					? negative
 					: this.GeometryName8.BinHash());
 			}
@@ -329,7 +425,18 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 			result ^= this.GeometryName6?.GetHashCode() ?? empty;
 			result *= this.GeometryName7?.GetHashCode() ?? empty;
 			result ^= this.GeometryName8?.GetHashCode() ?? empty;
-			return result;
+
+			string str = String.Empty;
+			str += ((int)this.Geometry1Exists).ToString();
+			str += ((int)this.Geometry2Exists).ToString();
+			str += ((int)this.Geometry3Exists).ToString();
+			str += ((int)this.Geometry4Exists).ToString();
+			str += ((int)this.Geometry5Exists).ToString();
+			str += ((int)this.Geometry6Exists).ToString();
+			str += ((int)this.Geometry7Exists).ToString();
+			str += ((int)this.Geometry8Exists).ToString();
+
+			return Tuple.Create(result, str).GetHashCode();
 		}
 
 		/// <summary>

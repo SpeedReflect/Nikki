@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
 using Nikki.Support.Underground2.Parts.CarParts;
+using CoreExtensions.IO;
 
 
 
@@ -40,6 +41,7 @@ namespace Nikki.Support.Underground2.Framework
 			}
 
 			// Return prepared dictionary
+			bw.FillBuffer(0x10);
 			struct_buffer = ms.ToArray();
 			return struct_dict;
 		}

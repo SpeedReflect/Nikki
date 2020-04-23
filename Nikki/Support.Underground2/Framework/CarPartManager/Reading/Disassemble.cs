@@ -1,10 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using CoreExtensions.IO;
 using Nikki.Utils;
 using Nikki.Reflection.ID;
 using Nikki.Support.Underground2.Class;
@@ -22,8 +17,14 @@ namespace Nikki.Support.Underground2.Framework
 			var offsets = FindOffsets(br, size);
 
 			// We need to read part0 as well
+			br.BaseStream.Position = offsets[0] + 0x28;
+			int maxattrib = br.ReadInt32();
 			br.BaseStream.Position = offsets[0] + 0x30;
-			int maxnum = br.ReadInt32();
+			int maxmodels = br.ReadInt32();
+			br.BaseStream.Position = offsets[0] + 0x38;
+			int maxstruct = br.ReadInt32();
+			br.BaseStream.Position = offsets[0] + 0x40;
+			int maxcparts = br.ReadInt32();
 
 			// Initialize stream over string block
 			br.BaseStream.Position = offsets[1];
@@ -38,19 +39,19 @@ namespace Nikki.Support.Underground2.Framework
 
 			// Read all car part attributes
 			br.BaseStream.Position = offsets[3];
-			var attrib_list = ReadAttribs(br, StrReader);
+			var attrib_list = ReadAttribs(br, StrReader, maxattrib);
 
 			// Read all models
 			br.BaseStream.Position = offsets[5];
-			var models_list = ReadModels(br, maxnum);
+			var models_list = ReadModels(br, maxmodels);
 
 			// Read all car part structs
 			br.BaseStream.Position = offsets[4];
-			var struct_dict = ReadStructs(br, StrReader);
+			var struct_dict = ReadStructs(br, StrReader, maxstruct);
 
 			// Read all temporary parts
 			br.BaseStream.Position = offsets[6];
-			var temp_cparts = ReadTempParts(br, StrReader);
+			var temp_cparts = ReadTempParts(br, StrReader, maxcparts);
 
 			// Generate Model Collections
 			for (int a1 = 0; a1 < models_list.Length; ++a1)

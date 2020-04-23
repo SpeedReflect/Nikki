@@ -10,7 +10,7 @@ namespace Nikki.Support.Underground2.Framework
 {
 	public static partial class CarPartManager
 	{
-		private static CPAttribute[] ReadAttribs(BinaryReader br, BinaryReader str)
+		private static CPAttribute[] ReadAttribs(BinaryReader br, BinaryReader str, int maxlen)
 		{
 			var offset = br.BaseStream.Position + 8;
 			if (br.ReadUInt32() != CarParts.DBCARPART_ATTRIBS) return null;
@@ -18,7 +18,7 @@ namespace Nikki.Support.Underground2.Framework
 			var result = new CPAttribute[size / 8]; // set initial capacity
 
 			int count = 0;
-			while (br.BaseStream.Position < offset + size)
+			while (count < maxlen && br.BaseStream.Position < offset + size)
 			{
 				var key = br.ReadUInt32();
 				if (!Map.CarPartKeys.TryGetValue(key, out var type))

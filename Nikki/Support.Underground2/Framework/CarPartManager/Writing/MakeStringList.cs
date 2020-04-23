@@ -35,8 +35,9 @@ namespace Nikki.Support.Underground2.Framework
 			using var bw = new BinaryWriter(ms);
 
 			// Fill empty string in the beginning
-			string_dict[empty] = 0;
-			length += 4;
+			string_dict[empty] = 1;
+			length += 8;
+			bw.Write(0);
 			bw.Write(0);
 
 			// Function to write strings to dictionary and return its length
@@ -97,6 +98,9 @@ namespace Nikki.Support.Underground2.Framework
 			}
 
 			// Return prepared dictionary
+			var dif = 0x10 - ((int)ms.Length + 4) % 0x10;
+			if (dif != 0x10) bw.WriteBytes(dif);
+
 			string_buffer = ms.ToArray();
 			return string_dict;
 		}

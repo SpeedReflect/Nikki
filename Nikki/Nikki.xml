@@ -5272,6 +5272,51 @@
             Geometry name 8 of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.ConcatenatorExists">
+            <summary>
+            True if concatenator string exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry1Exists">
+            <summary>
+            True if geometry 1 exists; false othewise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry2Exists">
+            <summary>
+            True if geometry 2 exists; false othewise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry3Exists">
+            <summary>
+            True if geometry 3 exists; false othewise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry4Exists">
+            <summary>
+            True if geometry 4 exists; false othewise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry5Exists">
+            <summary>
+            True if geometry 5 exists; false othewise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry6Exists">
+            <summary>
+            True if geometry 6 exists; false othewise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry7Exists">
+            <summary>
+            True if geometry 7 exists; false othewise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry8Exists">
+            <summary>
+            True if geometry 8 exists; false othewise.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.#ctor">
             <summary>
             Initialized new instance of <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.

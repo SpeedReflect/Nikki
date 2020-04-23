@@ -59,7 +59,9 @@ namespace Nikki.Support.Underground2.Framework
 			}
 
 			// Return prepared dictionary
-			bw.FillBuffer(4);
+			var dif = 0x10 - ((int)ms.Length + 0xC) % 0x10;
+			if (dif != 0x10) bw.WriteBytes(dif);
+
 			offset_buffer = ms.ToArray();
 			return offset_dict;
 		}

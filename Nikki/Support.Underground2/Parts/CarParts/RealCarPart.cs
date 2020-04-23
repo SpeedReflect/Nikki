@@ -74,6 +74,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 			this.Index = index;
 			this.Model = model;
 			this.Attributes = new List<CPAttribute>();
+			this.Struct = new CPStruct();
 		}
 
 		/// <summary>
@@ -87,6 +88,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 			this.Index = index;
 			this.Model = model;
 			this.Attributes = new List<CPAttribute>(capacity);
+			this.Struct = new CPStruct();
 		}
 
 		/// <summary>
