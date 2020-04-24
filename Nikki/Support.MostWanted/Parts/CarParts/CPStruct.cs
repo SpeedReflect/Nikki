@@ -7,7 +7,7 @@ using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.Underground2.Parts.CarParts
+namespace Nikki.Support.MostWanted.Parts.CarParts
 {
 	/// <summary>
 	/// A unit <see cref="RealCarPart"/> struct with geometry part names.
@@ -55,21 +55,6 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		public string GeometryName5 { get; set; } = String.Empty;
 
 		/// <summary>
-		/// Geometry name 6 of this <see cref="CPStruct"/>.
-		/// </summary>
-		public string GeometryName6 { get; set; } = String.Empty;
-
-		/// <summary>
-		/// Geometry name 7 of this <see cref="CPStruct"/>.
-		/// </summary>
-		public string GeometryName7 { get; set; } = String.Empty;
-
-		/// <summary>
-		/// Geometry name 8 of this <see cref="CPStruct"/>.
-		/// </summary>
-		public string GeometryName8 { get; set; } = String.Empty;
-
-		/// <summary>
 		/// True if concatenator string exists; false otherwise.
 		/// </summary>
 		public eBoolean ConcatenatorExists { get; set; } = eBoolean.False;
@@ -98,21 +83,6 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		/// True if geometry 5 exists; false othewise.
 		/// </summary>
 		public eBoolean Geometry5Exists { get; set; } = eBoolean.False;
-
-		/// <summary>
-		/// True if geometry 6 exists; false othewise.
-		/// </summary>
-		public eBoolean Geometry6Exists { get; set; } = eBoolean.False;
-
-		/// <summary>
-		/// True if geometry 7 exists; false othewise.
-		/// </summary>
-		public eBoolean Geometry7Exists { get; set; } = eBoolean.False;
-
-		/// <summary>
-		/// True if geometry 8 exists; false othewise.
-		/// </summary>
-		public eBoolean Geometry8Exists { get; set; } = eBoolean.False;
 
 		/// <summary>
 		/// Initialized new instance of <see cref="CPStruct"/>.
@@ -195,33 +165,6 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 					this.GeometryName5 = str_reader.ReadNullTermUTF8();
 					this.Geometry5Exists = eBoolean.True;
 				}
-
-				// Read geometry name 6, if valid
-				position = br.ReadUInt32();
-				if (position != negative)
-				{
-					str_reader.BaseStream.Position = position << 2;
-					this.GeometryName6 = str_reader.ReadNullTermUTF8();
-					this.Geometry6Exists = eBoolean.True;
-				}
-
-				// Read geometry name 7, if valid
-				position = br.ReadUInt32();
-				if (position != negative)
-				{
-					str_reader.BaseStream.Position = position << 2;
-					this.GeometryName7 = str_reader.ReadNullTermUTF8();
-					this.Geometry7Exists = eBoolean.True;
-				}
-
-				// Read geometry name 8, if valid
-				position = br.ReadUInt32();
-				if (position != negative)
-				{
-					str_reader.BaseStream.Position = position << 2;
-					this.GeometryName8 = str_reader.ReadNullTermUTF8();
-					this.Geometry8Exists = eBoolean.True;
-				}
 			}
 			else
 			{
@@ -260,27 +203,6 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 				{
 					this.GeometryName5 = key.BinString(eLookupReturn.EMPTY);
 					this.Geometry5Exists = eBoolean.True;
-				}
-				
-				key = br.ReadUInt32();
-				if (key != negative)
-				{
-					this.GeometryName6 = key.BinString(eLookupReturn.EMPTY);
-					this.Geometry6Exists = eBoolean.True;
-				}
-				
-				key = br.ReadUInt32();
-				if (key != negative)
-				{
-					this.GeometryName7 = key.BinString(eLookupReturn.EMPTY);
-					this.Geometry7Exists = eBoolean.True;
-				}
-				
-				key = br.ReadUInt32();
-				if (key != negative)
-				{
-					this.GeometryName8 = key.BinString(eLookupReturn.EMPTY);
-					this.Geometry8Exists = eBoolean.True;
 				}
 			}
 		}
@@ -324,18 +246,6 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 				bw.Write(this.Geometry5Exists == eBoolean.False
 					? negint32
 					: string_dict[this.GeometryName5?.GetHashCode() ?? empty]);
-
-				bw.Write(this.Geometry6Exists == eBoolean.False
-					? negint32
-					: string_dict[this.GeometryName6?.GetHashCode() ?? empty]);
-
-				bw.Write(this.Geometry7Exists == eBoolean.False
-					? negint32
-					: string_dict[this.GeometryName7?.GetHashCode() ?? empty]);
-
-				bw.Write(this.Geometry8Exists == eBoolean.False
-					? negint32
-					: string_dict[this.GeometryName8?.GetHashCode() ?? empty]);
 			}
 			else
 			{
@@ -360,18 +270,6 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 				bw.Write(this.Geometry5Exists == eBoolean.False
 					? negative
 					: this.GeometryName5.BinHash());
-				
-				bw.Write(this.Geometry6Exists == eBoolean.False
-					? negative
-					: this.GeometryName6.BinHash());
-				
-				bw.Write(this.Geometry7Exists == eBoolean.False
-					? negative
-					: this.GeometryName7.BinHash());
-				
-				bw.Write(this.Geometry8Exists == eBoolean.False
-					? negative
-					: this.GeometryName8.BinHash());
 			}
 		}
 
@@ -391,18 +289,11 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 			result &= this.GeometryName3 == other.GeometryName3;
 			result &= this.GeometryName4 == other.GeometryName4;
 			result &= this.GeometryName5 == other.GeometryName5;
-			result &= this.GeometryName6 == other.GeometryName6;
-			result &= this.GeometryName7 == other.GeometryName7;
-			result &= this.GeometryName8 == other.GeometryName8;
 			result &= this.Geometry1Exists == other.Geometry1Exists;
 			result &= this.Geometry2Exists == other.Geometry2Exists;
 			result &= this.Geometry3Exists == other.Geometry3Exists;
 			result &= this.Geometry4Exists == other.Geometry4Exists;
 			result &= this.Geometry5Exists == other.Geometry5Exists;
-			result &= this.Geometry6Exists == other.Geometry6Exists;
-			result &= this.Geometry7Exists == other.Geometry7Exists;
-			result &= this.Geometry8Exists == other.Geometry8Exists;
-
 			return result;
 		}
 
@@ -430,9 +321,6 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 			result *= this.GeometryName3?.GetHashCode() ?? empty;
 			result ^= this.GeometryName4?.GetHashCode() ?? empty;
 			result *= this.GeometryName5?.GetHashCode() ?? empty;
-			result ^= this.GeometryName6?.GetHashCode() ?? empty;
-			result *= this.GeometryName7?.GetHashCode() ?? empty;
-			result ^= this.GeometryName8?.GetHashCode() ?? empty;
 
 			string str = String.Empty;
 			str += ((int)this.Geometry1Exists).ToString();
@@ -440,9 +328,6 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 			str += ((int)this.Geometry3Exists).ToString();
 			str += ((int)this.Geometry4Exists).ToString();
 			str += ((int)this.Geometry5Exists).ToString();
-			str += ((int)this.Geometry6Exists).ToString();
-			str += ((int)this.Geometry7Exists).ToString();
-			str += ((int)this.Geometry8Exists).ToString();
 
 			return Tuple.Create(result, str).GetHashCode();
 		}

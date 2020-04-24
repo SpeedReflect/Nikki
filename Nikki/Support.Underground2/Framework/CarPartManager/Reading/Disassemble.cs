@@ -11,6 +11,15 @@ namespace Nikki.Support.Underground2.Framework
 {
 	public static partial class CarPartManager
 	{
+		/// <summary>
+		/// Disassembles entire car parts block using <see cref="BinaryReader"/> provided 
+		/// into <see cref="DBModelPart"/> collections and stores them in 
+		/// <see cref="Database.Underground2"/> passed.
+		/// </summary>
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		/// <param name="size">Size of the car parts block.</param>
+		/// <param name="db"><see cref="Database.Underground2"/> where all collections 
+		/// should be stored.</param>
 		public static void Disassemble(BinaryReader br, int size, Database.Underground2 db)
 		{
 			long position = br.BaseStream.Position;

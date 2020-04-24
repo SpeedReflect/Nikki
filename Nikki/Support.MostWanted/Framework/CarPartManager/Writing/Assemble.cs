@@ -4,7 +4,7 @@ using Nikki.Support.MostWanted.Class;
 
 
 
-namespace Nikki.Support.Underground2.Framework
+namespace Nikki.Support.MostWanted.Framework
 {
 	public static partial class CarPartManager
 	{
@@ -13,9 +13,9 @@ namespace Nikki.Support.Underground2.Framework
 		/// writes it with <see cref="BinaryWriter"/> provided.
 		/// </summary>
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> database with roots 
+		/// <param name="db"><see cref="Database.MostWanted"/> database with roots 
 		/// and collections.</param>
-		public static void Assemble(BinaryWriter bw, Database.Underground2 db)
+		public static void Assemble(BinaryWriter bw, Database.MostWanted db)
 		{
 			// Get string map
 			var string_dict = MakeStringList(db, out var string_buffer);

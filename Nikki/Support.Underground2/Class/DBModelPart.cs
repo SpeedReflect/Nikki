@@ -31,7 +31,6 @@ namespace Nikki.Support.Underground2.Class
 
 		public Database.Underground2 Database { get; set; }
 
-
 		public DBModelPart(string CName, Database.Underground2 db)
 		{
 			this.CollectionName = CName;

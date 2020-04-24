@@ -1,47 +1,67 @@
 ﻿using System.IO;
-using System.Collections.Generic;
-using System.Text;
-using Nikki.Utils;
+using CoreExtensions.IO;
 
 
 
 namespace Nikki.Support.MostWanted.Parts.CarParts
 {
+	/// <summary>
+	/// Represents temporary car part that is used to build <see cref="RealCarPart"/>.
+	/// </summary>
 	public class TempPart
 	{
+		/// <summary>
+		/// Hash of the part name.
+		/// </summary>
 		public uint PartNameHash { get; set; }
 
-		public string PartName => this.PartNameHash.BinString(eLookupReturn.EMPTY);
+		/// <summary>
+		/// Group ID of the car.
+		/// </summary>
+		public byte CarPartGroupID { get; set; }
 
-		public byte CarPartID { get; set; }
+		/// <summary>
+		/// Unknown yet value.
+		/// </summary>
+		public ushort UpgradeGroupID { get; set; }
 
-		public ushort Unknown1 { get; set; }
-
+		/// <summary>
+		/// Index of the model of the car.
+		/// </summary>
 		public byte Index { get; set; }
 
-		public ushort CarPartOffset { get; set; }
+		/// <summary>
+		/// Debug name of the part.
+		/// </summary>
+		public string DebugName { get; set; }
 
+		/// <summary>
+		/// Attribute offset of the part.
+		/// </summary>
 		public ushort AttribOffset { get; set; }
 
+		/// <summary>
+		/// Struct offset of the part.
+		/// </summary>
 		public ushort StructOffset { get; set; }
 
-		public void Disassemble(BinaryReader br)
+		/// <summary>
+		/// Disassembles array of bytes into <see cref="TempPart"/>.
+		/// </summary>
+		/// <param name="br"><see cref="BinaryReader"/> to read with.</param>
+		/// <param name="str_reader"><see cref="BinaryReader"/> to read strings with.</param>
+		public void Disassemble(BinaryReader br, BinaryReader str_reader)
 		{
 			this.PartNameHash = br.ReadUInt32();
-			this.CarPartID = br.ReadByte();
-			this.Unknown1 = br.ReadUInt16();
+			this.CarPartGroupID = br.ReadByte();
+			this.UpgradeGroupID = br.ReadUInt16();
 			this.Index = br.ReadByte();
-			this.CarPartOffset = br.ReadUInt16();
+
+			str_reader.BaseStream.Position = br.ReadUInt16() * 4;
+			this.DebugName = str_reader.ReadNullTermUTF8();
+
 			this.AttribOffset = br.ReadUInt16();
 			this.StructOffset = br.ReadUInt16();
 		}
-
-		public void Assemble(BinaryWriter br)
-		{
-
-		}
-
-		public override string ToString() =>
-			$"FE: {this.StructOffset:X4} | Unk: {this.AttribOffset:X4} | ID: {this.Index:X2} | Name: {this.PartName}";
 	}
 }

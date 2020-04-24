@@ -1,11 +1,11 @@
 ﻿using System.IO;
 using System.Collections.Generic;
 using Nikki.Reflection.ID;
-using Nikki.Support.Underground2.Parts.CarParts;
+using Nikki.Support.MostWanted.Parts.CarParts;
 
 
 
-namespace Nikki.Support.Underground2.Framework
+namespace Nikki.Support.MostWanted.Framework
 {
 	public static partial class CarPartManager
 	{
@@ -15,14 +15,14 @@ namespace Nikki.Support.Underground2.Framework
 			var offset = br.BaseStream.Position + 8;
 			if (br.ReadUInt32() != CarParts.DBCARPART_STRUCTS) return null;
 			var size = br.ReadInt32();
-			var result = new Dictionary<int, CPStruct>(size / 0x24); // set initial capacity
+			var result = new Dictionary<int, CPStruct>(size / 0x18); // set initial capacity
 
 			int count = 0;
 			while (count < maxlen && br.BaseStream.Position < offset + size)
 			{
 				var position = (int)(br.BaseStream.Position - offset);
 				var cpstr = new CPStruct(br, str_reader);
-				result[position / 0x24] = cpstr;
+				result[position / 0x18] = cpstr;
 			}
 			return result;
 		}

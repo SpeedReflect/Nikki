@@ -2,17 +2,16 @@
 using System.IO;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
-using Nikki.Support.Underground2.Class;
-using Nikki.Support.Underground2.Parts.CarParts;
+using Nikki.Support.MostWanted.Parts.CarParts;
 using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.Underground2.Framework
+namespace Nikki.Support.MostWanted.Framework
 {
 	public static partial class CarPartManager
 	{
-		private static Dictionary<int, int> MakeStringList(Database.Underground2 db, out byte[] string_buffer)
+		private static Dictionary<int, int> MakeStringList(Database.MostWanted db, out byte[] string_buffer)
 		{
 			// Prepare stack
 			var string_dict = new Dictionary<int, int>();
@@ -65,9 +64,6 @@ namespace Nikki.Support.Underground2.Framework
 						length = Inject(cpstr.GeometryName3, length);
 						length = Inject(cpstr.GeometryName4, length);
 						length = Inject(cpstr.GeometryName5, length);
-						length = Inject(cpstr.GeometryName6, length);
-						length = Inject(cpstr.GeometryName7, length);
-						length = Inject(cpstr.GeometryName8, length);
 					}
 
 					// Iterate through attributes
@@ -88,9 +84,7 @@ namespace Nikki.Support.Underground2.Framework
 			}
 
 			// Return prepared dictionary
-			var dif = 0x10 - ((int)ms.Length + 4) % 0x10;
-			if (dif != 0x10) bw.WriteBytes(dif);
-
+			bw.FillBuffer(0x10);
 			string_buffer = ms.ToArray();
 			return string_dict;
 		}

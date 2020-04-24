@@ -35,6 +35,15 @@ namespace Nikki.Support.MostWanted.Class
 		{
 			this.CollectionName = CName;
 			this.Database = db;
+			this.ModelCarParts = new List<RealCarPart>();
 		}
+
+		/// <summary>
+		/// Returns CollectionName, BinKey and <see cref="RealCarPart"/> count as a string value.
+		/// </summary>
+		/// <returns>String value.</returns>
+		public override string ToString() =>
+			$"CollectionName: {this._collection_name} | BinKey: {this.BinKey:X8} " +
+			$"| PartCount: {this.ModelCarParts.Count}";
 	}
 }

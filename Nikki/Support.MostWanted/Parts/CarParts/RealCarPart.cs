@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Nikki.Support.Underground2.Class;
+using Nikki.Support.MostWanted.Class;
 using Nikki.Support.Shared.Parts.CarParts;
 
 
 
-namespace Nikki.Support.Underground2.Parts.CarParts
+namespace Nikki.Support.MostWanted.Parts.CarParts
 {
 	/// <summary>
 	/// A unit CarPart attribute of <see cref="DBModelPart"/>.

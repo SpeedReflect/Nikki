@@ -2831,6 +2831,618 @@
             <param name="error">Error occured when trying to set value.</param>
             <returns>True on success; false otherwise.</returns>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.ToString">
+            <summary>
+            Returns CollectionName, BinKey and <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> count as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.CarPartManager.Disassemble(System.IO.BinaryReader,System.Int32,Nikki.Database.MostWanted)">
+            <summary>
+            Disassembles entire car parts block using <see cref="T:System.IO.BinaryReader"/> provided 
+            into <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> collections and stores them in 
+            <see cref="T:Nikki.Database.MostWanted"/> passed.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="size">Size of the car parts block.</param>
+            <param name="db"><see cref="T:Nikki.Database.MostWanted"/> where all collections 
+            should be stored.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.CarPartManager.Assemble(System.IO.BinaryWriter,Nikki.Database.MostWanted)">
+            <summary>
+            Assembles entire root of <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> into a byte array and 
+            writes it with <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="db"><see cref="T:Nikki.Database.MostWanted"/> database with roots 
+            and collections.</param>
+        </member>
+        <member name="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct">
+            <summary>
+            A unit <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/> struct with geometry part names.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.Exists">
+            <summary>
+            Indicates whether this struct should exist in the database or not.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.Templated">
+            <summary>
+            If true, all strings are built using string block; otherwise they are stored as keys.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.Concatenator">
+            <summary>
+            String that is used to be concatenated in front of geometry names.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.GeometryName1">
+            <summary>
+            Geometry name 1 of this <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.GeometryName2">
+            <summary>
+            Geometry name 2 of this <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.GeometryName3">
+            <summary>
+            Geometry name 3 of this <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.GeometryName4">
+            <summary>
+            Geometry name 4 of this <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.GeometryName5">
+            <summary>
+            Geometry name 5 of this <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.ConcatenatorExists">
+            <summary>
+            True if concatenator string exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.Geometry1Exists">
+            <summary>
+            True if geometry 1 exists; false othewise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.Geometry2Exists">
+            <summary>
+            True if geometry 2 exists; false othewise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.Geometry3Exists">
+            <summary>
+            True if geometry 3 exists; false othewise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.Geometry4Exists">
+            <summary>
+            True if geometry 4 exists; false othewise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.Geometry5Exists">
+            <summary>
+            True if geometry 5 exists; false othewise.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.#ctor">
+            <summary>
+            Initialized new instance of <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.#ctor(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Disassembles byte array into <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/> using <see cref="T:System.IO.BinaryReader"/> 
+            provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.Assemble(System.IO.BinaryWriter,System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/> and writes it using <see cref="T:System.IO.BinaryWriter"/> 
+            provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
+            <param name="string_dict">Dictionary with string HashCodes and their offsets.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.ToString">
+            <summary>
+            Returns templated value and first geometry name as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.Equals(System.Object)">
+            <summary>
+            Determines whether this instance and a specified object, which must also be a
+            <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/> object, have the same value.
+            </summary>
+            <param name="obj">The <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/> to compare to this instance.</param>
+            <returns>True if obj is a <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/> and its value is the same as 
+            this instance; false otherwise. If obj is null, the method returns false.
+            </returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.GetHashCode">
+            <summary>
+            Returns the hash code for this <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/>.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.op_Equality(Nikki.Support.MostWanted.Parts.CarParts.CPStruct,Nikki.Support.MostWanted.Parts.CarParts.CPStruct)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/> have the same value.
+            </summary>
+            <param name="cp1">The first <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/> to compare, or null.</param>
+            <param name="cp2">The second <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/> to compare, or null.</param>
+            <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.op_Inequality(Nikki.Support.MostWanted.Parts.CarParts.CPStruct,Nikki.Support.MostWanted.Parts.CarParts.CPStruct)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/> have different values.
+            </summary>
+            <param name="cp1">The first <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/> to compare, or null.</param>
+            <param name="cp2">The second <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/> to compare, or null.</param>
+            <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
+        </member>
+        <member name="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart">
+            <summary>
+            A unit CarPart attribute of <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.PartName">
+            <summary>
+            Name of this <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.Index">
+            <summary>
+            Index of <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> to which this part belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.Attributes">
+            <summary>
+            Collection of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> of this <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.Struct">
+            <summary>
+            A <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/> of this <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.Model">
+            <summary>
+            <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> to which this part belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.CarPartGroupID">
+            <summary>
+            Car Part ID Group to which this part belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.UpgradeGroupID">
+            <summary>
+            Upgrade group ID of this <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.DebugName">
+            <summary>
+            Debug name of this <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.#ctor">
+            <summary>
+            Initialize new instance of <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.#ctor(System.Int32,Nikki.Support.MostWanted.Class.DBModelPart)">
+            <summary>
+            Initialize new instance of <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="index">Index of the <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> in the database.</param>
+            <param name="model"><see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> to which this part belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.#ctor(System.Int32,System.Int32,Nikki.Support.MostWanted.Class.DBModelPart)">
+            <summary>
+            Initialize new instance of <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="index">Index of the <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> in the database.</param>
+            <param name="capacity">Initial capacity of the attribute list.</param>
+            <param name="model"><see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> to which this part belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.ToString">
+            <summary>
+            Returns PartName, Attributes count and CarPartGroupID as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.GetHashCode">
+            <summary>
+            Returns the hash code for this <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="T:Nikki.Support.MostWanted.Parts.CarParts.TempPart">
+            <summary>
+            Represents temporary car part that is used to build <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.TempPart.PartNameHash">
+            <summary>
+            Hash of the part name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.TempPart.CarPartGroupID">
+            <summary>
+            Group ID of the car.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.TempPart.UpgradeGroupID">
+            <summary>
+            Unknown yet value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.TempPart.Index">
+            <summary>
+            Index of the model of the car.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.TempPart.DebugName">
+            <summary>
+            Debug name of the part.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.TempPart.AttribOffset">
+            <summary>
+            Attribute offset of the part.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.TempPart.StructOffset">
+            <summary>
+            Struct offset of the part.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.TempPart.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Disassembles array of bytes into <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.TempPart"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Framework.CarPartManager.Disassemble(System.IO.BinaryReader,System.Int32,Nikki.Database.Underground2)">
+            <summary>
+            Disassembles entire car parts block using <see cref="T:System.IO.BinaryReader"/> provided 
+            into <see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/> collections and stores them in 
+            <see cref="T:Nikki.Database.Underground2"/> passed.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="size">Size of the car parts block.</param>
+            <param name="db"><see cref="T:Nikki.Database.Underground2"/> where all collections 
+            should be stored.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Framework.CarPartManager.Assemble(System.IO.BinaryWriter,Nikki.Database.Underground2)">
+            <summary>
+            Assembles entire root of <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> into a byte array and 
+            writes it with <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="db"><see cref="T:Nikki.Database.Underground2"/> database with roots 
+            and collections.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.DBModelPart.ToString">
+            <summary>
+            Returns CollectionName, BinKey and <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> count as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct">
+            <summary>
+            A unit <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/> struct with geometry part names.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Exists">
+            <summary>
+            Indicates whether this struct should exist in the database or not.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Templated">
+            <summary>
+            If true, all strings are built using string block; otherwise they are stored as keys.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Concatenator">
+            <summary>
+            String that is used to be concatenated in front of geometry names.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.GeometryName1">
+            <summary>
+            Geometry name 1 of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.GeometryName2">
+            <summary>
+            Geometry name 2 of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.GeometryName3">
+            <summary>
+            Geometry name 3 of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.GeometryName4">
+            <summary>
+            Geometry name 4 of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.GeometryName5">
+            <summary>
+            Geometry name 5 of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.GeometryName6">
+            <summary>
+            Geometry name 6 of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.GeometryName7">
+            <summary>
+            Geometry name 7 of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.GeometryName8">
+            <summary>
+            Geometry name 8 of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.ConcatenatorExists">
+            <summary>
+            True if concatenator string exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry1Exists">
+            <summary>
+            True if geometry 1 exists; false othewise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry2Exists">
+            <summary>
+            True if geometry 2 exists; false othewise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry3Exists">
+            <summary>
+            True if geometry 3 exists; false othewise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry4Exists">
+            <summary>
+            True if geometry 4 exists; false othewise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry5Exists">
+            <summary>
+            True if geometry 5 exists; false othewise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry6Exists">
+            <summary>
+            True if geometry 6 exists; false othewise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry7Exists">
+            <summary>
+            True if geometry 7 exists; false othewise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry8Exists">
+            <summary>
+            True if geometry 8 exists; false othewise.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.#ctor">
+            <summary>
+            Initialized new instance of <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.#ctor(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Disassembles byte array into <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> using <see cref="T:System.IO.BinaryReader"/> 
+            provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Assemble(System.IO.BinaryWriter,System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> and writes it using <see cref="T:System.IO.BinaryWriter"/> 
+            provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
+            <param name="string_dict">Dictionary with string HashCodes and their offsets.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.ToString">
+            <summary>
+            Returns templated value and first geometry name as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Equals(System.Object)">
+            <summary>
+            Determines whether this instance and a specified object, which must also be a
+            <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> object, have the same value.
+            </summary>
+            <param name="obj">The <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> to compare to this instance.</param>
+            <returns>True if obj is a <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> and its value is the same as 
+            this instance; false otherwise. If obj is null, the method returns false.
+            </returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.GetHashCode">
+            <summary>
+            Returns the hash code for this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.op_Equality(Nikki.Support.Underground2.Parts.CarParts.CPStruct,Nikki.Support.Underground2.Parts.CarParts.CPStruct)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> have the same value.
+            </summary>
+            <param name="cp1">The first <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> to compare, or null.</param>
+            <param name="cp2">The second <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> to compare, or null.</param>
+            <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.op_Inequality(Nikki.Support.Underground2.Parts.CarParts.CPStruct,Nikki.Support.Underground2.Parts.CarParts.CPStruct)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> have different values.
+            </summary>
+            <param name="cp1">The first <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> to compare, or null.</param>
+            <param name="cp2">The second <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> to compare, or null.</param>
+            <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart">
+            <summary>
+            A unit CarPart attribute of <see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.PartName">
+            <summary>
+            Name of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.Index">
+            <summary>
+            Index of <see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/> to which this part belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.Attributes">
+            <summary>
+            Collection of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.Struct">
+            <summary>
+            A <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.Model">
+            <summary>
+            <see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/> to which this part belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.CarPartGroupID">
+            <summary>
+            Car Part ID Group to which this part belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.UpgradeGroupID">
+            <summary>
+            Upgrade group ID of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.DebugName">
+            <summary>
+            Debug name of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.#ctor">
+            <summary>
+            Initialize new instance of <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.#ctor(System.Int32,Nikki.Support.Underground2.Class.DBModelPart)">
+            <summary>
+            Initialize new instance of <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="index">Index of the <see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/> in the database.</param>
+            <param name="model"><see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/> to which this part belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.#ctor(System.Int32,System.Int32,Nikki.Support.Underground2.Class.DBModelPart)">
+            <summary>
+            Initialize new instance of <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="index">Index of the <see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/> in the database.</param>
+            <param name="capacity">Initial capacity of the attribute list.</param>
+            <param name="model"><see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/> to which this part belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.ToString">
+            <summary>
+            Returns PartName, Attributes count and CarPartGroupID as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.GetHashCode">
+            <summary>
+            Returns the hash code for this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Parts.CarParts.TempPart">
+            <summary>
+            Represents temporary car part that is used to build <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.TempPart.PartNameHash">
+            <summary>
+            Hash of the part name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.TempPart.CarPartGroupID">
+            <summary>
+            Group ID of the car.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.TempPart.UpgradeGroupID">
+            <summary>
+            Unknown yet value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.TempPart.Index">
+            <summary>
+            Index of the model of the car.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.TempPart.DebugName">
+            <summary>
+            Debug name of the part.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.TempPart.AttribOffset">
+            <summary>
+            Attribute offset of the part.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.TempPart.StructOffset">
+            <summary>
+            Struct offset of the part.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.TempPart.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Disassembles array of bytes into <see cref="T:Nikki.Support.Underground2.Parts.CarParts.TempPart"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+        </member>
         <member name="T:Nikki.Support.Shared.Class.AcidEffect">
             <summary>
             <see cref="T:Nikki.Support.Shared.Class.AcidEffect"/> is a collection of vectors and attributes related to acids and xenons.
@@ -5193,319 +5805,6 @@
             <summary>
             Unknown 4-byte signed integer value.
             </summary>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Class.DBModelPart.ToString">
-            <summary>
-            Returns CollectionName, BinKey and <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> count as a string value.
-            </summary>
-            <returns>String value.</returns>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Framework.CarPartManager.MakeStringList(Nikki.Database.Underground2,System.Byte[]@)">
-            <summary>
-            This method generates a string dictionary for CarPart database. It is a 
-            <see cref="M:System.String.GetHashCode"/> to string block offset dictionary, 
-            since HashCode in such large dictionaries is generally faster than using 
-            regular strings as keys. Returns map of string HashCodes and their offsets, 
-            as well as total length of the dictionary.
-            </summary>
-            <param name="db">Database with list of <see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/>.</param>
-            <param name="length">Total length of the string block.</param>
-            <returns>Dictionary of string HashCodes and their offsets.</returns>
-        </member>
-        <member name="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct">
-            <summary>
-            A unit <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/> struct with geometry part names.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Exists">
-            <summary>
-            Indicates whether this struct should exist in the database or not.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Templated">
-            <summary>
-            If true, all strings are built using string block; otherwise they are stored as keys.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Concatenator">
-            <summary>
-            String that is used to be concatenated in front of geometry names.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.GeometryName1">
-            <summary>
-            Geometry name 1 of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.GeometryName2">
-            <summary>
-            Geometry name 2 of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.GeometryName3">
-            <summary>
-            Geometry name 3 of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.GeometryName4">
-            <summary>
-            Geometry name 4 of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.GeometryName5">
-            <summary>
-            Geometry name 5 of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.GeometryName6">
-            <summary>
-            Geometry name 6 of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.GeometryName7">
-            <summary>
-            Geometry name 7 of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.GeometryName8">
-            <summary>
-            Geometry name 8 of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.ConcatenatorExists">
-            <summary>
-            True if concatenator string exists; false otherwise.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry1Exists">
-            <summary>
-            True if geometry 1 exists; false othewise.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry2Exists">
-            <summary>
-            True if geometry 2 exists; false othewise.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry3Exists">
-            <summary>
-            True if geometry 3 exists; false othewise.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry4Exists">
-            <summary>
-            True if geometry 4 exists; false othewise.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry5Exists">
-            <summary>
-            True if geometry 5 exists; false othewise.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry6Exists">
-            <summary>
-            True if geometry 6 exists; false othewise.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry7Exists">
-            <summary>
-            True if geometry 7 exists; false othewise.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Geometry8Exists">
-            <summary>
-            True if geometry 8 exists; false othewise.
-            </summary>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.#ctor">
-            <summary>
-            Initialized new instance of <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
-            </summary>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.#ctor(System.IO.BinaryReader,System.IO.BinaryReader)">
-            <summary>
-            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
-            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
-            <summary>
-            Disassembles byte array into <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> using <see cref="T:System.IO.BinaryReader"/> 
-            provided.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
-            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Assemble(System.IO.BinaryWriter,System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
-            <summary>
-            Assembles <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> and writes it using <see cref="T:System.IO.BinaryWriter"/> 
-            provided.
-            </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
-            <param name="string_dict">Dictionary with string HashCodes and their offsets.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.ToString">
-            <summary>
-            Returns templated value and first geometry name as a string value.
-            </summary>
-            <returns>String value.</returns>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.Equals(System.Object)">
-            <summary>
-            Determines whether this instance and a specified object, which must also be a
-            <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> object, have the same value.
-            </summary>
-            <param name="obj">The <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> to compare to this instance.</param>
-            <returns>True if obj is a <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> and its value is the same as 
-            this instance; false otherwise. If obj is null, the method returns false.
-            </returns>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.GetHashCode">
-            <summary>
-            Returns the hash code for this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/>.
-            </summary>
-            <returns>A 32-bit signed integer hash code.</returns>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.op_Equality(Nikki.Support.Underground2.Parts.CarParts.CPStruct,Nikki.Support.Underground2.Parts.CarParts.CPStruct)">
-            <summary>
-            Determines whether two specified <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> have the same value.
-            </summary>
-            <param name="cp1">The first <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> to compare, or null.</param>
-            <param name="cp2">The second <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> to compare, or null.</param>
-            <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.op_Inequality(Nikki.Support.Underground2.Parts.CarParts.CPStruct,Nikki.Support.Underground2.Parts.CarParts.CPStruct)">
-            <summary>
-            Determines whether two specified <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> have different values.
-            </summary>
-            <param name="cp1">The first <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> to compare, or null.</param>
-            <param name="cp2">The second <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> to compare, or null.</param>
-            <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
-        </member>
-        <member name="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart">
-            <summary>
-            A unit CarPart attribute of <see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.PartName">
-            <summary>
-            Name of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.Index">
-            <summary>
-            Index of <see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/> to which this part belongs to.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.Attributes">
-            <summary>
-            Collection of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.Struct">
-            <summary>
-            A <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct"/> of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.Model">
-            <summary>
-            <see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/> to which this part belongs to.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.CarPartGroupID">
-            <summary>
-            Car Part ID Group to which this part belongs to.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.UpgradeGroupID">
-            <summary>
-            Upgrade group ID of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.DebugName">
-            <summary>
-            Debug name of this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
-            </summary>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.#ctor">
-            <summary>
-            Initialize new instance of <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
-            </summary>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.#ctor(System.Int32,Nikki.Support.Underground2.Class.DBModelPart)">
-            <summary>
-            Initialize new instance of <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
-            </summary>
-            <param name="index">Index of the <see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/> in the database.</param>
-            <param name="model"><see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/> to which this part belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.#ctor(System.Int32,System.Int32,Nikki.Support.Underground2.Class.DBModelPart)">
-            <summary>
-            Initialize new instance of <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
-            </summary>
-            <param name="index">Index of the <see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/> in the database.</param>
-            <param name="capacity">Initial capacity of the attribute list.</param>
-            <param name="model"><see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/> to which this part belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.ToString">
-            <summary>
-            Returns PartName, Attributes count and CarPartGroupID as a string value.
-            </summary>
-            <returns>String value.</returns>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.GetHashCode">
-            <summary>
-            Returns the hash code for this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
-            </summary>
-            <returns>A 32-bit signed integer hash code.</returns>
-        </member>
-        <member name="T:Nikki.Support.Underground2.Parts.CarParts.TempPart">
-            <summary>
-            Represents temporary car part that is used to build <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.TempPart.PartNameHash">
-            <summary>
-            Hash of the part name.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.TempPart.CarPartGroupID">
-            <summary>
-            Group ID of the car.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.TempPart.UpgradeGroupID">
-            <summary>
-            Unknown yet value.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.TempPart.Index">
-            <summary>
-            Index of the model of the car.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.TempPart.DebugName">
-            <summary>
-            Debug name of the part.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.TempPart.AttribOffset">
-            <summary>
-            Attribute offset of the part.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.TempPart.StructOffset">
-            <summary>
-            Struct offset of the part.
-            </summary>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.CarParts.TempPart.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
-            <summary>
-            Disassembles array of bytes into <see cref="T:Nikki.Support.Underground2.Parts.CarParts.TempPart"/>.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
-            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
         </member>
         <member name="T:Nikki.Utils.DDS.DDS_CONST">
             <summary>
