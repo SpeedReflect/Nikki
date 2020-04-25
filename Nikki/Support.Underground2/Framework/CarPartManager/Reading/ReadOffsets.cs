@@ -14,7 +14,7 @@ namespace Nikki.Support.Underground2.Framework
 			var offset = br.BaseStream.Position + 8;
 			if (br.ReadUInt32() != CarParts.DBCARPART_OFFSETS) return null;
 			var size = br.ReadInt32();
-			var result = new Dictionary<int, CPOffset>(size / 8); // set initial capacity
+			var result = new Dictionary<int, CPOffset>(size >> 3); // set initial capacity
 
 			while (br.BaseStream.Position < offset + size)
 			{

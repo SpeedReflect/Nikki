@@ -29,6 +29,16 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		public string Value2 { get; set; }
 
 		/// <summary>
+		/// Indicates whether value 1 exists.
+		/// </summary>
+		public eBoolean Value1Exists { get; set; } = eBoolean.False;
+
+		/// <summary>
+		/// Indicates whether value 2 exists.
+		/// </summary>
+		public eBoolean Value2Exists { get; set; } = eBoolean.False;
+
+		/// <summary>
 		/// Initializes new instance of <see cref="TwoStringAttribute"/>.
 		/// </summary>
 		public TwoStringAttribute() { }
@@ -54,24 +64,35 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <param name="str_reader"><see cref="BinaryReader"/> to read strings with.</param>
 		public override void Disassemble(BinaryReader br, BinaryReader str_reader)
 		{
-			str_reader.BaseStream.Position = br.ReadUInt16() * 4;
-			this.Value1 = str_reader.ReadNullTermUTF8();
-			str_reader.BaseStream.Position = br.ReadUInt16() * 4;
-			this.Value2 = str_reader.ReadNullTermUTF8();
+			ushort position;
+			position = br.ReadUInt16();
+			if (position != 0xFFFF)
+			{
+				str_reader.BaseStream.Position = position * 4;
+				this.Value1 = str_reader.ReadNullTermUTF8();
+				this.Value1Exists = eBoolean.True;
+			}
+			position = br.ReadUInt16();
+			if (position != 0xFFFF)
+			{
+				str_reader.BaseStream.Position = position * 4;
+				this.Value2 = str_reader.ReadNullTermUTF8();
+				this.Value2Exists = eBoolean.True;
+			}
 		}
 
 		/// <summary>
-		/// Assembles <see cref="IntAttribute"/> and writes it using <see cref="BinaryWriter"/> 
+		/// Assembles <see cref="TwoStringAttribute"/> and writes it using <see cref="BinaryWriter"/> 
 		/// provided.
 		/// </summary>
 		/// <param name="bw"><see cref="BinaryWriter"/> to write with.</param>
 		/// <param name="string_dict">Dictionary of string HashCodes and their offsets.</param>
 		public override void Assemble(BinaryWriter bw, Dictionary<int, int> string_dict)
 		{
-			var result1 = String.IsNullOrEmpty(this.Value1)
+			var result1 = this.Value1Exists == eBoolean.False
 				? 0xFFFF
 				: (ushort)string_dict[this.Value1.GetHashCode()];
-			var result2 = String.IsNullOrEmpty(this.Value2)
+			var result2 = this.Value2Exists == eBoolean.False
 				? 0xFFFF
 				: (ushort)string_dict[this.Value2.GetHashCode()];
 			bw.Write(this.Key);
@@ -100,8 +121,11 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Returns the hash code for this <see cref="TwoStringAttribute"/>.
 		/// </summary>
 		/// <returns>A 32-bit signed integer hash code.</returns>
-		public override int GetHashCode() =>
-			Tuple.Create(this.Key, this.Value1, this.Value2).GetHashCode();
+		public override int GetHashCode()
+		{
+			int result = Tuple.Create(this.Key, this.Value1, this.Value2).GetHashCode();
+			return result * $"{this.Value1Exists}{this.Value2Exists}".GetHashCode();
+		}
 
 		/// <summary>
 		/// Determines whether two specified <see cref="TwoStringAttribute"/> have the same value.

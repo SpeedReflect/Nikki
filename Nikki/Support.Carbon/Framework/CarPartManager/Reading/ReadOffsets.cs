@@ -5,7 +5,7 @@ using Nikki.Support.Shared.Parts.CarParts;
 
 
 
-namespace Nikki.Support.MostWanted.Framework
+namespace Nikki.Support.Carbon.Framework
 {
 	public static partial class CarPartManager
 	{

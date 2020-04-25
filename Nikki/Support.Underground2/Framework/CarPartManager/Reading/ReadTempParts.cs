@@ -1,11 +1,11 @@
 ﻿using System.IO;
 using System.Collections.Generic;
 using Nikki.Reflection.ID;
-using Nikki.Support.MostWanted.Parts.CarParts;
+using Nikki.Support.Underground2.Parts.CarParts;
 
 
 
-namespace Nikki.Support.MostWanted.Framework
+namespace Nikki.Support.Underground2.Framework
 {
 	public static partial class CarPartManager
 	{

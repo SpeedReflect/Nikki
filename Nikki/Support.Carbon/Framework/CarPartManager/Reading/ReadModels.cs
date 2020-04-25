@@ -1,11 +1,10 @@
 ﻿using System.IO;
 using Nikki.Utils;
 using Nikki.Reflection.ID;
-using Nikki.Support.Underground2.Parts.CarParts;
 
 
 
-namespace Nikki.Support.Underground2.Framework
+namespace Nikki.Support.Carbon.Framework
 {
 	public static partial class CarPartManager
 	{
@@ -24,16 +23,6 @@ namespace Nikki.Support.Underground2.Framework
 			{
 				var key = br.ReadUInt32();
 				result[a1] = key.BinString(eLookupReturn.EMPTY);
-				foreach (var part in UsageType.PartName)
-					(result[a1] + part).BinHash();
-				foreach (var part in UsageType.TrafficPartName)
-					(result[a1] + part).BinHash();
-				foreach (var part in UsageType.SpecPartNames)
-					(result[a1] + part).BinHash();
-				foreach (var part in UsageType.MiscPartsRacer)
-					(result[a1] + part).BinHash();
-				foreach (var part in UsageType.MiscPartsTraffic)
-					(result[a1] + part).BinHash();
 			}
 			return result;
 		}

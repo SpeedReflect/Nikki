@@ -24,12 +24,17 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		public string Value { get; set; }
 
 		/// <summary>
-		/// Initializes new instance of <see cref="IntAttribute"/>.
+		/// Indicates whether value exists.
+		/// </summary>
+		public eBoolean ValueExists { get; set; } = eBoolean.False;
+
+		/// <summary>
+		/// Initializes new instance of <see cref="StringAttribute"/>.
 		/// </summary>
 		public StringAttribute() { }
 
 		/// <summary>
-		/// Initializes new instance of <see cref="IntAttribute"/> by reading data using 
+		/// Initializes new instance of <see cref="StringAttribute"/> by reading data using 
 		/// <see cref="BinaryReader"/> provided.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read with.</param>
@@ -42,19 +47,24 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		}
 
 		/// <summary>
-		/// Disassembles byte array into <see cref="IntAttribute"/> using <see cref="BinaryReader"/> 
+		/// Disassembles byte array into <see cref="StringAttribute"/> using <see cref="BinaryReader"/> 
 		/// provided.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read with.</param>
 		/// <param name="str_reader"><see cref="BinaryReader"/> to read strings with.</param>
 		public override void Disassemble(BinaryReader br, BinaryReader str_reader)
 		{
-			str_reader.BaseStream.Position = br.ReadUInt32() * 4;
-			this.Value = str_reader.ReadNullTermUTF8();
+			var position = br.ReadUInt32();
+			if (position < 0xFFFF)
+			{
+				str_reader.BaseStream.Position = position * 4;
+				this.Value = str_reader.ReadNullTermUTF8();
+				this.ValueExists = eBoolean.True;
+			}
 		}
 
 		/// <summary>
-		/// Assembles <see cref="IntAttribute"/> and writes it using <see cref="BinaryWriter"/> 
+		/// Assembles <see cref="StringAttribute"/> and writes it using <see cref="BinaryWriter"/> 
 		/// provided.
 		/// </summary>
 		/// <param name="bw"><see cref="BinaryWriter"/> to write with.</param>

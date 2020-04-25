@@ -1,15 +1,15 @@
 ﻿using System.IO;
 using System.Collections.Generic;
 using Nikki.Reflection.ID;
-using Nikki.Support.MostWanted.Parts.CarParts;
+using Nikki.Support.Carbon.Parts.CarParts;
 
 
 
-namespace Nikki.Support.MostWanted.Framework
+namespace Nikki.Support.Carbon.Framework
 {
 	public static partial class CarPartManager
 	{
-		private static List<TempPart> ReadTempParts(BinaryReader br, BinaryReader str_reader, int maxlen)
+		private static List<TempPart> ReadTempParts(BinaryReader br, int maxlen)
 		{
 			var offset = br.BaseStream.Position + 8;
 			if (br.ReadUInt32() != CarParts.DBCARPART_ARRAY) return null;
@@ -22,7 +22,7 @@ namespace Nikki.Support.MostWanted.Framework
 			while (count < maxlen && br.BaseStream.Position < offset + size)
 			{
 				var part = new TempPart();
-				part.Disassemble(br, str_reader);
+				part.Disassemble(br);
 				result.Add(part);
 				++count;
 			}

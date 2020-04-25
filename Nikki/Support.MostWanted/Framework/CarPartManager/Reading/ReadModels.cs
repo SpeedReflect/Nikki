@@ -14,7 +14,7 @@ namespace Nikki.Support.MostWanted.Framework
 			var offset = br.BaseStream.Position + 8;
 			if (br.ReadUInt32() != CarParts.DBCARPART_MODELS) return null;
 			var size = br.ReadInt32();
-			var count = size / 4;
+			var count = size >> 2;
 
 			count = (count > maxlen) ? maxlen : count;
 

@@ -15,7 +15,7 @@ namespace Nikki.Support.MostWanted.Framework
 			var offset = br.BaseStream.Position + 8;
 			if (br.ReadUInt32() != CarParts.DBCARPART_ATTRIBS) return null;
 			var size = br.ReadInt32();
-			var result = new CPAttribute[size / 8]; // set initial capacity
+			var result = new CPAttribute[size >> 3]; // set initial capacity
 
 			int count = 0;
 			while (count < maxlen && br.BaseStream.Position < offset + size)
