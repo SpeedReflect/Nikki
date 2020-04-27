@@ -43,6 +43,11 @@ namespace Nikki.Support.Shared.Class
         public virtual uint VltKey => this.CollectionName.VltHash();
 
         /// <summary>
+        /// Indicates whether current instance can be destroyed.
+        /// </summary>
+        public bool Destroy { get; set; }
+
+        /// <summary>
         /// List of all <see cref="FEngColor"/> that <see cref="FNGroup"/> contains.
         /// </summary>
         protected List<FEngColor> _colorinfo = new List<FEngColor>();

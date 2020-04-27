@@ -13,24 +13,17 @@ namespace Nikki.Utils.EA
         /// Decompresses .fng JDLZ-compressed file.
         /// </summary>
         /// <param name="fng">.fng file as a byte array.</param>
+        /// <param name="ID">ID of the .fng file.</param>
         /// <returns>Decompressed FEng file as a byte array.</returns>
-        public static unsafe byte[] Decompress(byte[] fng)
+        public static unsafe byte[] Decompress(byte[] fng, uint ID)
         {
-            if (fng[0] == 3) // return if already decompressed
+            if (ID == Global.FEngFiles) // return if already decompressed
                 return fng;
 
-            byte[] InterData = new byte[fng.Length - 12];
-            Buffer.BlockCopy(fng, 12, InterData, 0, fng.Length - 12);
-            var NewData = JDLZ.Decompress(InterData);
+            byte[] InterData = new byte[fng.Length - 4];
+            Buffer.BlockCopy(fng, 4, InterData, 0, fng.Length - 4);
+            var result = JDLZ.Decompress(InterData);
 
-            byte[] result = new byte[8 + NewData.Length];
-            fixed (byte* byteptr_t = &result[0])
-            {
-                *(uint*)(byteptr_t + 0) = Global.FEngFiles;
-                *(int*)(byteptr_t + 4) = NewData.Length;
-            }
-
-            Buffer.BlockCopy(NewData, 0, result, 8, NewData.Length);
             return result;
         }
 
