@@ -3,7 +3,9 @@ using System.IO;
 using System.Collections.Generic;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
+using Nikki.Reflection.Abstract;
 using Nikki.Support.Shared.Class;
+using Nikki.Reflection.Attributes;
 
 
 
@@ -12,7 +14,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 	/// <summary>
 	/// A <see cref="DBModelPart"/> unit attribute.
 	/// </summary>
-	public abstract class CPAttribute
+	public abstract class CPAttribute : ASubPart
 	{
 		private string _part = String.Empty;
 		private uint _key = 0;
@@ -25,6 +27,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <summary>
 		/// Name of the part to which this <see cref="CPAttribute"/> belongs to.
 		/// </summary>
+		[AccessModifiable()]
 		public string Part
 		{
 			get => this._part;

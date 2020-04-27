@@ -2,6 +2,8 @@
 using System.IO;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
+using Nikki.Reflection.Interface;
+using Nikki.Reflection.Attributes;
 
 
 
@@ -10,7 +12,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with 4-byte floating point value.
 	/// </summary>
-	public class FloatAttribute : CPAttribute
+	public class FloatAttribute : CPAttribute, ICopyable<FloatAttribute>
 	{
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="FloatAttribute"/>.
@@ -20,6 +22,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <summary>
 		/// Attribute value.
 		/// </summary>
+		[AccessModifiable()]
 		public float Value { get; set; }
 
 		/// <summary>
@@ -103,5 +106,19 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
 		public static bool operator !=(FloatAttribute at1, FloatAttribute at2) => !(at1 == at2);
 
+		/// <summary>
+		/// Creates a plain copy of the objects that contains same values.
+		/// </summary>
+		/// <returns>Exact plain copy of the object.</returns>
+		public FloatAttribute PlainCopy()
+		{
+			var result = new FloatAttribute
+			{
+				Part = this.Part,
+				Value = this.Value
+			};
+
+			return result;
+		}
 	}
 }

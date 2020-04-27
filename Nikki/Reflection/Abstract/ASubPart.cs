@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.Reflection;
@@ -11,16 +12,11 @@ namespace Nikki.Reflection.Abstract
 {
     /// <summary>
     /// <see cref="ASubPart"/> is a class that any <see cref="ACollectable"/> may include in itself. 
-    /// This class is not allowed to have any <see cref="AccessModifiableAttribute"/> 
-    /// because all properties should be public, accessible and modifiable from the outside.
+    /// This class has to have any <see cref="AccessModifiableAttribute"/> properties
+    /// so it can be declared modifiable from outside.
     /// </summary>
     public abstract class ASubPart : IReflective
     {
-        /// <summary>
-        /// Optionable <see cref="ACollectable"/> parent of this <see cref="ASubPart"/> class.
-        /// </summary>
-        public ACollectable Parent { get; set; }
-
         /// <summary>
         /// Gets <see cref="IEnumerable{T}"/> of all properties with 
         /// <see cref="AccessModifiableAttribute"/> attribute.
@@ -29,7 +25,10 @@ namespace Nikki.Reflection.Abstract
         public IEnumerable<string> GetAccessibles()
         {
             foreach (var property in this.GetType().GetProperties())
-                yield return property.Name;
+            {
+                if (Attribute.IsDefined(property, typeof(AccessModifiableAttribute)))
+                    yield return property.Name;
+            }
         }
 
         /// <summary>

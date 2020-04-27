@@ -2,6 +2,8 @@
 using System.IO;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
+using Nikki.Reflection.Interface;
+using Nikki.Reflection.Attributes;
 
 
 
@@ -10,7 +12,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with 4-byte signed integer value.
 	/// </summary>
-	public class IntAttribute : CPAttribute
+	public class IntAttribute : CPAttribute, ICopyable<IntAttribute>
 	{
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="IntAttribute"/>.
@@ -20,6 +22,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <summary>
 		/// Attribute value.
 		/// </summary>
+		[AccessModifiable()]
 		public uint Value { get; set; }
 
 		/// <summary>
@@ -102,5 +105,20 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <param name="at2">The second <see cref="IntAttribute"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
 		public static bool operator !=(IntAttribute at1, IntAttribute at2) => !(at1 == at2);
+
+		/// <summary>
+		/// Creates a plain copy of the objects that contains same values.
+		/// </summary>
+		/// <returns>Exact plain copy of the object.</returns>
+		public IntAttribute PlainCopy()
+		{
+			var result = new IntAttribute
+			{
+				Part = this.Part,
+				Value = this.Value
+			};
+
+			return result;
+		}
 	}
 }

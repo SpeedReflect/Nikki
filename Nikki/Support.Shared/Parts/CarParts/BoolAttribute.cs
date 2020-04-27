@@ -2,6 +2,8 @@
 using System.IO;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
+using Nikki.Reflection.Interface;
+using Nikki.Reflection.Attributes;
 
 
 
@@ -10,7 +12,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with 4-byte boolean value.
 	/// </summary>
-	public class BoolAttribute : CPAttribute
+	public class BoolAttribute : CPAttribute, ICopyable<BoolAttribute>
 	{
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="BoolAttribute"/>.
@@ -20,6 +22,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <summary>
 		/// Attribute value.
 		/// </summary>
+		[AccessModifiable()]
 		public eBoolean Value { get; set; }
 
 		/// <summary>
@@ -103,5 +106,20 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <param name="at2">The second <see cref="BoolAttribute"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
 		public static bool operator !=(BoolAttribute at1, BoolAttribute at2) => !(at1 == at2);
+
+		/// <summary>
+		/// Creates a plain copy of the objects that contains same values.
+		/// </summary>
+		/// <returns>Exact plain copy of the object.</returns>
+		public BoolAttribute PlainCopy()
+		{
+			var result = new BoolAttribute
+			{
+				Part = this.Part,
+				Value = this.Value
+			};
+
+			return result;
+		}
 	}
 }

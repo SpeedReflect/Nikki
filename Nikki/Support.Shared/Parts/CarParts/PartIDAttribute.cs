@@ -2,6 +2,8 @@
 using System.IO;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
+using Nikki.Reflection.Interface;
+using Nikki.Reflection.Attributes;
 
 
 
@@ -10,7 +12,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with unknown byte and part ID values.
 	/// </summary>
-	public class PartIDAttribute : CPAttribute
+	public class PartIDAttribute : CPAttribute, ICopyable<PartIDAttribute>
 	{
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="PartIDAttribute"/>.
@@ -20,11 +22,13 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <summary>
 		/// Unknown byte value.
 		/// </summary>
+		[AccessModifiable()]
 		public byte Unknown { get; set; }
 
 		/// <summary>
 		/// Part ID of this <see cref="PartIDAttribute"/>.
 		/// </summary>
+		[AccessModifiable()]
 		public byte ID { get; set; }
 
 		/// <summary>
@@ -114,5 +118,21 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <param name="at2">The second <see cref="PartIDAttribute"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
 		public static bool operator !=(PartIDAttribute at1, PartIDAttribute at2) => !(at1 == at2);
+
+		/// <summary>
+		/// Creates a plain copy of the objects that contains same values.
+		/// </summary>
+		/// <returns>Exact plain copy of the object.</returns>
+		public PartIDAttribute PlainCopy()
+		{
+			var result = new PartIDAttribute
+			{
+				Part = this.Part,
+				ID = this.ID,
+				Unknown = this.Unknown
+			};
+
+			return result;
+		}
 	}
 }

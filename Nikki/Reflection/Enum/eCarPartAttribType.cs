@@ -1,8 +1,4 @@
-﻿using Nikki.Support.Shared.Parts.CarParts;
-
-
-
-namespace Nikki.Reflection.Enum
+﻿namespace Nikki.Reflection.Enum
 {
 	/// <summary>
 	/// Enum of car part attribute types.

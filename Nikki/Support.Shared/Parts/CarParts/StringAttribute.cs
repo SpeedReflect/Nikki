@@ -2,6 +2,8 @@
 using System.IO;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
+using Nikki.Reflection.Interface;
+using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
 
 
@@ -11,7 +13,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with null-terminated string value.
 	/// </summary>
-	public class StringAttribute : CPAttribute
+	public class StringAttribute : CPAttribute, ICopyable<StringAttribute>
 	{
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="StringAttribute"/>.
@@ -21,11 +23,13 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <summary>
 		/// Attribute value.
 		/// </summary>
+		[AccessModifiable()]
 		public string Value { get; set; }
 
 		/// <summary>
 		/// Indicates whether value exists.
 		/// </summary>
+		[AccessModifiable()]
 		public eBoolean ValueExists { get; set; } = eBoolean.False;
 
 		/// <summary>
@@ -122,5 +126,21 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <param name="at2">The second <see cref="StringAttribute"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
 		public static bool operator !=(StringAttribute at1, StringAttribute at2) => !(at1 == at2);
+
+		/// <summary>
+		/// Creates a plain copy of the objects that contains same values.
+		/// </summary>
+		/// <returns>Exact plain copy of the object.</returns>
+		public StringAttribute PlainCopy()
+		{
+			var result = new StringAttribute
+			{
+				Part = this.Part,
+				Value = this.Value,
+				ValueExists = this.ValueExists
+			};
+
+			return result;
+		}
 	}
 }

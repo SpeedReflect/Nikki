@@ -2,6 +2,8 @@
 using System.IO;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
+using Nikki.Reflection.Interface;
+using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
 
 
@@ -11,7 +13,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with two null-terminated string values.
 	/// </summary>
-	public class TwoStringAttribute : CPAttribute
+	public class TwoStringAttribute : CPAttribute, ICopyable<TwoStringAttribute>
 	{
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="StringAttribute"/>.
@@ -21,21 +23,25 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <summary>
 		/// Attribute value 1.
 		/// </summary>
+		[AccessModifiable()]
 		public string Value1 { get; set; }
 
 		/// <summary>
 		/// Attribute value 2.
 		/// </summary>
+		[AccessModifiable()]
 		public string Value2 { get; set; }
 
 		/// <summary>
 		/// Indicates whether value 1 exists.
 		/// </summary>
+		[AccessModifiable()]
 		public eBoolean Value1Exists { get; set; } = eBoolean.False;
 
 		/// <summary>
 		/// Indicates whether value 2 exists.
 		/// </summary>
+		[AccessModifiable()]
 		public eBoolean Value2Exists { get; set; } = eBoolean.False;
 
 		/// <summary>
@@ -144,5 +150,23 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <param name="at2">The second <see cref="TwoStringAttribute"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
 		public static bool operator !=(TwoStringAttribute at1, TwoStringAttribute at2) => !(at1 == at2);
+
+		/// <summary>
+		/// Creates a plain copy of the objects that contains same values.
+		/// </summary>
+		/// <returns>Exact plain copy of the object.</returns>
+		public TwoStringAttribute PlainCopy()
+		{
+			var result = new TwoStringAttribute
+			{
+				Part = this.Part,
+				Value1 = this.Value1,
+				Value2 = this.Value2,
+				Value1Exists = this.Value1Exists,
+				Value2Exists = this.Value2Exists
+			};
+
+			return result;
+		}
 	}
 }
