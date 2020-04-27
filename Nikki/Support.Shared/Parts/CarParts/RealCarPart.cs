@@ -21,11 +21,6 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		public abstract List<CPAttribute> Attributes { get; set; }
 
 		/// <summary>
-		/// A <see cref="CPStruct"/> of this <see cref="RealCarPart"/>.
-		/// </summary>
-		public abstract CPStruct Struct { get; set; }
-
-		/// <summary>
 		/// Index of <see cref="DBModelPart"/> to which this part belongs to.
 		/// </summary>
 		public abstract int Index { get; set; }

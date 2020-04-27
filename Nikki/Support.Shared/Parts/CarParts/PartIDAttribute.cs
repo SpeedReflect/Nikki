@@ -95,7 +95,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// </summary>
 		/// <returns>A 32-bit signed integer hash code.</returns>
 		public override int GetHashCode() => 
-			Tuple.Create(this.Key, this.ID, this.Unknown).GetHashCode();
+			Tuple.Create(this.Key, this.ID.ToString(), this.Unknown.ToString()).GetHashCode();
 
 		/// <summary>
 		/// Determines whether two specified <see cref="PartIDAttribute"/> have the same value.

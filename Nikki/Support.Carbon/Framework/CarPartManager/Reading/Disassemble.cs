@@ -56,7 +56,7 @@ namespace Nikki.Support.Carbon.Framework
 
 			// Read all car part structs
 			br.BaseStream.Position = offsets[4];
-			//var struct_dict = ReadStructs(br, StrReader, maxstruct);
+			ReadStructs(br, StrReader, maxstruct, db);
 
 			// Read all temporary parts
 			br.BaseStream.Position = offsets[6];
@@ -68,11 +68,14 @@ namespace Nikki.Support.Carbon.Framework
 				var collection = new DBModelPart(models_list[a1], db);
 				var tempparts = temp_cparts.FindAll(_ => _.Index == a1);
 
+				int count = 0;
 				foreach (var temppart in tempparts)
 				{
 					offset_dict.TryGetValue(temppart.AttribOffset, out var cpoff);
-					//struct_dict.TryGetValue(temppart.StructOffset, out var cpstr);
-					var realpart = new RealCarPart(a1, cpoff?.AttribOffsets.Count ?? 0, collection);
+					var realpart = new RealCarPart(a1, cpoff?.AttribOffsets.Count ?? 0, collection)
+					{
+						PartName = $"{models_list[a1]}_PART_{count++.ToString()}"
+					};
 					foreach (var attroff in cpoff?.AttribOffsets ?? Enumerable.Empty<ushort>())
 					{
 						if (attroff >= attrib_list.Length) continue;

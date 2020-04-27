@@ -55,9 +55,9 @@ namespace Nikki.Support.MostWanted.Framework
 					length = Inject(realpart.DebugName, length);
 
 					// Write struct geometry names if it is templated
-					if (realpart.Struct.Templated == eBoolean.True)
+					if (realpart.Struct.Exists == eBoolean.True && realpart.Struct.Templated == eBoolean.True)
 					{
-						var cpstr = (CPStruct)realpart.Struct;
+						var cpstr = realpart.Struct;
 						length = Inject(cpstr.Concatenator, length);
 						length = Inject(cpstr.GeometryName1, length);
 						length = Inject(cpstr.GeometryName2, length);

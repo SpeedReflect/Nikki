@@ -28,29 +28,9 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 		public override List<CPAttribute> Attributes { get; set; }
 
 		/// <summary>
-		/// A <see cref="CPStruct"/> of this <see cref="RealCarPart"/>.
-		/// </summary>
-		public override Shared.Parts.CarParts.CPStruct Struct { get; set; }
-
-		/// <summary>
 		/// <see cref="DBModelPart"/> to which this part belongs to.
 		/// </summary>
 		public DBModelPart Model { get; set; }
-
-		/// <summary>
-		/// Car Part ID Group to which this part belongs to.
-		/// </summary>
-		public byte CarPartGroupID { get; set; }
-
-		/// <summary>
-		/// Upgrade group ID of this <see cref="RealCarPart"/>.
-		/// </summary>
-		public ushort UpgradeGroupID { get; set; }
-
-		/// <summary>
-		/// Debug name of this <see cref="RealCarPart"/>.
-		/// </summary>
-		public string DebugName { get; set; }
 
 		/// <summary>
 		/// Initialize new instance of <see cref="RealCarPart"/>.
@@ -58,7 +38,6 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 		public RealCarPart()
 		{
 			this.Attributes = new List<CPAttribute>();
-			this.Struct = new CPStruct();
 		}
 
 		/// <summary>
@@ -71,7 +50,6 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 			this.Index = index;
 			this.Model = model;
 			this.Attributes = new List<CPAttribute>();
-			this.Struct = new CPStruct();
 		}
 
 		/// <summary>
@@ -85,7 +63,6 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 			this.Index = index;
 			this.Model = model;
 			this.Attributes = new List<CPAttribute>(capacity);
-			this.Struct = new CPStruct();
 		}
 
 		/// <summary>
@@ -93,7 +70,7 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 		/// </summary>
 		/// <returns>String value.</returns>
 		public override string ToString() =>
-			$"PartName: {this.PartName} | AttribCount: {this.Attributes.Count} | GroupID: {this.CarPartGroupID}";
+			$"PartName: {this.PartName} | AttribCount: {this.Attributes.Count}";
 
 		/// <summary>
 		/// Returns the hash code for this <see cref="RealCarPart"/>.
@@ -103,7 +80,6 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 		{
 			int result = this.PartName?.GetHashCode() ?? String.Empty.GetHashCode();
 			result *= this.Index + 7;
-			result ^= this.Struct.GetHashCode();
 			return result;
 		}
 	}

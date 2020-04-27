@@ -96,8 +96,8 @@ namespace Nikki.Support.Shared.Parts.CarParts
 				? 0xFFFF
 				: (ushort)string_dict[this.Value2.GetHashCode()];
 			bw.Write(this.Key);
-			bw.Write(result1);
-			bw.Write(result2);
+			bw.Write((ushort)result1);
+			bw.Write((ushort)result2);
 		}
 
 		/// <summary>

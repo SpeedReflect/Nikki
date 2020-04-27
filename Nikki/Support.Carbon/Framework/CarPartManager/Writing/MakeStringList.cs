@@ -2,16 +2,16 @@
 using System.IO;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
-using Nikki.Support.Underground2.Parts.CarParts;
+using Nikki.Support.Carbon.Parts.CarParts;
 using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.Underground2.Framework
+namespace Nikki.Support.Carbon.Framework
 {
 	public static partial class CarPartManager
 	{
-		private static Dictionary<int, int> MakeStringList(Database.Underground2 db, out byte[] string_buffer)
+		private static Dictionary<int, int> MakeStringList(Database.Carbon db, out byte[] string_buffer)
 		{
 			// Prepare stack
 			var string_dict = new Dictionary<int, int>();
@@ -51,24 +51,6 @@ namespace Nikki.Support.Underground2.Framework
 				// Iterate through each RealCarPart in a model
 				foreach (RealCarPart realpart in model.ModelCarParts)
 				{
-					// Write debug name
-					length = Inject(realpart.DebugName, length);
-
-					// Write struct geometry names if it is templated
-					if (realpart.Struct.Exists == eBoolean.True && realpart.Struct.Templated == eBoolean.True)
-					{
-						var cpstr = realpart.Struct;
-						length = Inject(cpstr.Concatenator, length);
-						length = Inject(cpstr.GeometryName1, length);
-						length = Inject(cpstr.GeometryName2, length);
-						length = Inject(cpstr.GeometryName3, length);
-						length = Inject(cpstr.GeometryName4, length);
-						length = Inject(cpstr.GeometryName5, length);
-						length = Inject(cpstr.GeometryName6, length);
-						length = Inject(cpstr.GeometryName7, length);
-						length = Inject(cpstr.GeometryName8, length);
-					}
-
 					// Iterate through attributes
 					foreach (var attrib in realpart.Attributes)
 					{
@@ -86,10 +68,18 @@ namespace Nikki.Support.Underground2.Framework
 				}
 			}
 
-			// Return prepared dictionary
-			var dif = 0x10 - ((int)ms.Length + 4) % 0x10;
-			if (dif != 0x10) bw.WriteBytes(dif);
+			// Write struct geometry names if it is templated and exists
+			foreach (var str in db.CarPartStructs)
+			{
+				if (str.Exists == eBoolean.True && str.Templated == eBoolean.True)
+				{
+					for (int a1 = 0; a1 < CPStruct.StructNamesSize; ++a1)
+						length = Inject(str.GeometryName[a1], length);
+				}
+			}
 
+			// Return prepared dictionary
+			bw.FillBuffer(0x10);
 			string_buffer = ms.ToArray();
 			return string_dict;
 		}

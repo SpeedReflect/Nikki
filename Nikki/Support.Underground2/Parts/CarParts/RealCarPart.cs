@@ -30,7 +30,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		/// <summary>
 		/// A <see cref="CPStruct"/> of this <see cref="RealCarPart"/>.
 		/// </summary>
-		public override Shared.Parts.CarParts.CPStruct Struct { get; set; }
+		public CPStruct Struct { get; set; }
 
 		/// <summary>
 		/// <see cref="DBModelPart"/> to which this part belongs to.

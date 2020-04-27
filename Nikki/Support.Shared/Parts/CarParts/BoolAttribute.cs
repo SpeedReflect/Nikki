@@ -83,11 +83,8 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Returns the hash code for this <see cref="BoolAttribute"/>.
 		/// </summary>
 		/// <returns>A 32-bit signed integer hash code.</returns>
-		public override int GetHashCode()
-		{
-			var value = this.Value == eBoolean.True ? 1 : -1;
-			return Tuple.Create(this.Key, value).GetHashCode();
-		}
+		public override int GetHashCode() =>
+			Tuple.Create(this.Key, this.Value.ToString()).GetHashCode();
 
 		/// <summary>
 		/// Determines whether two specified <see cref="BoolAttribute"/> have the same value.

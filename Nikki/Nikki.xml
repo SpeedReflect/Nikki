@@ -2848,6 +2848,15 @@
             <param name="db"><see cref="T:Nikki.Database.Carbon"/> where all collections 
             should be stored.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Framework.CarPartManager.Assemble(System.IO.BinaryWriter,Nikki.Database.Carbon)">
+            <summary>
+            Assembles entire root of <see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> into a byte array and 
+            writes it with <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="db"><see cref="T:Nikki.Database.Carbon"/> database with roots 
+            and collections.</param>
+        </member>
         <member name="T:Nikki.Support.Carbon.Parts.CarParts.CPStruct">
             <summary>
             A unit <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/> struct with geometry part names.
@@ -2868,89 +2877,24 @@
             String that is used to be concatenated in front of geometry names.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.CPStruct.GeometryName1">
-            <summary>
-            Geometry name 1 of this <see cref="T:Nikki.Support.Carbon.Parts.CarParts.CPStruct"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.CPStruct.GeometryName2">
-            <summary>
-            Geometry name 2 of this <see cref="T:Nikki.Support.Carbon.Parts.CarParts.CPStruct"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.CPStruct.GeometryName3">
-            <summary>
-            Geometry name 3 of this <see cref="T:Nikki.Support.Carbon.Parts.CarParts.CPStruct"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.CPStruct.GeometryName4">
-            <summary>
-            Geometry name 4 of this <see cref="T:Nikki.Support.Carbon.Parts.CarParts.CPStruct"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.CPStruct.GeometryName5">
-            <summary>
-            Geometry name 5 of this <see cref="T:Nikki.Support.Carbon.Parts.CarParts.CPStruct"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.CPStruct.GeometryName6">
-            <summary>
-            Geometry name 6 of this <see cref="T:Nikki.Support.Carbon.Parts.CarParts.CPStruct"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.CPStruct.GeometryName7">
-            <summary>
-            Geometry name 7 of this <see cref="T:Nikki.Support.Carbon.Parts.CarParts.CPStruct"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.CPStruct.GeometryName8">
-            <summary>
-            Geometry name 8 of this <see cref="T:Nikki.Support.Carbon.Parts.CarParts.CPStruct"/>.
-            </summary>
-        </member>
         <member name="P:Nikki.Support.Carbon.Parts.CarParts.CPStruct.ConcatenatorExists">
             <summary>
             True if concatenator string exists; false otherwise.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.CPStruct.Geometry1Exists">
+        <member name="P:Nikki.Support.Carbon.Parts.CarParts.CPStruct.GeometryName">
             <summary>
-            True if geometry 1 exists; false othewise.
+            Geometry names of the struct.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.CPStruct.Geometry2Exists">
+        <member name="P:Nikki.Support.Carbon.Parts.CarParts.CPStruct.GeometryExists">
             <summary>
-            True if geometry 2 exists; false othewise.
+            Indicates existing geometries in the struct.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.CPStruct.Geometry3Exists">
+        <member name="F:Nikki.Support.Carbon.Parts.CarParts.CPStruct.StructNamesSize">
             <summary>
-            True if geometry 3 exists; false othewise.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.CPStruct.Geometry4Exists">
-            <summary>
-            True if geometry 4 exists; false othewise.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.CPStruct.Geometry5Exists">
-            <summary>
-            True if geometry 5 exists; false othewise.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.CPStruct.Geometry6Exists">
-            <summary>
-            True if geometry 6 exists; false othewise.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.CPStruct.Geometry7Exists">
-            <summary>
-            True if geometry 7 exists; false othewise.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.CPStruct.Geometry8Exists">
-            <summary>
-            True if geometry 8 exists; false othewise.
+            Amount of geometries stored in the struct.
             </summary>
         </member>
         <member name="M:Nikki.Support.Carbon.Parts.CarParts.CPStruct.#ctor">
@@ -3039,29 +2983,9 @@
             Collection of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> of this <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/>.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.Struct">
-            <summary>
-            A <see cref="T:Nikki.Support.Carbon.Parts.CarParts.CPStruct"/> of this <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/>.
-            </summary>
-        </member>
         <member name="P:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.Model">
             <summary>
             <see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> to which this part belongs to.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.CarPartGroupID">
-            <summary>
-            Car Part ID Group to which this part belongs to.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.UpgradeGroupID">
-            <summary>
-            Upgrade group ID of this <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.DebugName">
-            <summary>
-            Debug name of this <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.#ctor">
@@ -5330,11 +5254,6 @@
         <member name="P:Nikki.Support.Shared.Parts.CarParts.RealCarPart.Attributes">
             <summary>
             Collection of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Shared.Parts.CarParts.RealCarPart.Struct">
-            <summary>
-            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPStruct"/> of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Shared.Parts.CarParts.RealCarPart.Index">

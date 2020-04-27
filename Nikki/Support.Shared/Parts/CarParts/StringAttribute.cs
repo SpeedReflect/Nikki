@@ -99,7 +99,11 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Returns the hash code for this <see cref="StringAttribute"/>.
 		/// </summary>
 		/// <returns>A 32-bit signed integer hash code.</returns>
-		public override int GetHashCode() => Tuple.Create(this.Key, this.Value).GetHashCode();
+		public override int GetHashCode()
+		{
+			int result = Tuple.Create(this.Key, this.Value).GetHashCode();
+			return result * this.ValueExists.ToString().GetHashCode();
+		}
 
 		/// <summary>
 		/// Determines whether two specified <see cref="StringAttribute"/> have the same value.
