@@ -71,7 +71,7 @@ namespace Nikki.Support.Carbon.Class
                 if (value.Contains(" "))
                     throw new Exception("CollectionName cannot contain whitespace.");
                 if (value.Length > MaxCNameLength)
-                    throw new ArgumentLengthException("Length of the value passed should not exceed 13 characters.");
+                    throw new ArgumentLengthException(MaxCNameLength);
                 if (this.Database.CarTypeInfos.FindCollection(value) != null)
                     throw new CollectionExistenceException();
                 this._collection_name = value;
@@ -197,6 +197,7 @@ namespace Nikki.Support.Carbon.Class
             bw.Write(this.WheelInnerRadiusMin);
             bw.Write(this.WheelInnerRadiusMax);
             bw.Write((byte)0);
+
             bw.Write(this.HeadlightPositionX);
             bw.Write(this.HeadlightPositionY);
             bw.Write(this.HeadlightPositionZ);
@@ -225,6 +226,7 @@ namespace Nikki.Support.Carbon.Class
             bw.Write(this.KeepLoaded4);
             bw.Write(this.KeepLoaded5);
             bw.Write((short)0);
+
             bw.Write(this.MinTimeBetweenUses1);
             bw.Write(this.MinTimeBetweenUses2);
             bw.Write(this.MinTimeBetweenUses3);
@@ -266,7 +268,8 @@ namespace Nikki.Support.Carbon.Class
             this.WheelOuterRadius = br.ReadByte();
             this.WheelInnerRadiusMin = br.ReadByte();
             this.WheelInnerRadiusMax = br.ReadByte();
-            br.ReadByte();
+            br.BaseStream.Position += 1;
+
             this.HeadlightPositionX = br.ReadSingle();
             this.HeadlightPositionY = br.ReadSingle();
             this.HeadlightPositionZ = br.ReadSingle();
@@ -294,7 +297,8 @@ namespace Nikki.Support.Carbon.Class
             this.KeepLoaded3 = br.ReadByte();
             this.KeepLoaded4 = br.ReadByte();
             this.KeepLoaded5 = br.ReadByte();
-            br.ReadInt16();
+            br.BaseStream.Position += 2;
+
             this.MinTimeBetweenUses1 = br.ReadSingle();
             this.MinTimeBetweenUses2 = br.ReadSingle();
             this.MinTimeBetweenUses3 = br.ReadSingle();
@@ -313,7 +317,7 @@ namespace Nikki.Support.Carbon.Class
 
             this.DefaultSkinNumber = br.ReadByte();
             this.IsSkinnable = br.ReadEnum<eBoolean>();
-            br.ReadInt32();
+            br.BaseStream.Position += 4;
 
             this.DefaultBasePaint = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
         }

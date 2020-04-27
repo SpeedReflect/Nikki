@@ -2,7 +2,6 @@
 using System.IO;
 using Nikki.Core;
 using Nikki.Utils;
-using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 
@@ -51,14 +50,14 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public eCarbonPaint PaintType { get; set; }
+        public string PaintType { get; set; } = String.Empty;
 
         /// <summary>
         /// Gradient color value of the paint of the preset skin. Range: 0-90.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public byte PaintSwatch { get; set; }
+        public string PaintSwatch { get; set; } = String.Empty;
 
         /// <summary>
         /// Saturation value of the paint of the preset skin. Range: (float)0-1.
