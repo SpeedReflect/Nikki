@@ -63,7 +63,7 @@ namespace Nikki.Support.Carbon.Class
             get => this._collection_name;
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (String.IsNullOrWhiteSpace(value))
                     throw new ArgumentNullException("This value cannot be left empty.");
                 if (value.Contains(" "))
                     throw new Exception("CollectionName cannot contain whitespace.");

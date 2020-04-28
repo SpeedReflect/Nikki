@@ -66,7 +66,7 @@ namespace Nikki.Support.Carbon.Class
             {
                 if (!this.Deletable)
                     throw new CollectionExistenceException("CollectionName of a non-addon car cannot be changed.");
-                if (string.IsNullOrWhiteSpace(value))
+                if (String.IsNullOrWhiteSpace(value))
                     throw new ArgumentNullException("This value cannot be left empty.");
                 if (value.Contains(" "))
                     throw new Exception("CollectionName cannot contain whitespace.");

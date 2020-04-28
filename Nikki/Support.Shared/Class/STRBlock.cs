@@ -75,18 +75,6 @@ namespace Nikki.Support.Shared.Class
 		public abstract void Disassemble(BinaryReader br);
 
 		/// <summary>
-		/// Disassembles labels block array into separate properties.
-		/// </summary>
-		/// <param name="br"><see cref="BinaryReader"/> to read labels with.</param>
-		public abstract void DisperseLabels(BinaryReader br);
-
-		/// <summary>
-		/// Assembles and writes labels as a byte array.
-		/// </summary>
-		/// <param name="bw"><see cref="BinaryWriter"/> to write labels with.</param>
-		public abstract void ParseLabels(BinaryWriter bw);
-
-		/// <summary>
 		/// Gets the <see cref="StringRecord"/> from the internal list.
 		/// </summary>
 		/// <param name="key">Key of the <see cref="StringRecord"/> to find.</param>
