@@ -228,10 +228,16 @@ namespace Nikki.Support.Carbon.Class
 
         #region Main
 
-        // Default constructor
+        /// <summary>
+        /// Initializes new instance of <see cref="PresetSkin"/>.
+        /// </summary>
         public PresetSkin() { }
 
-        // Default constructor: create new skin
+        /// <summary>
+        /// Initializes new instance of <see cref="PresetSkin"/>.
+        /// </summary>
+        /// <param name="CName">CollectionName of the new instance.</param>
+        /// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
         public PresetSkin(string CName, Database.Carbon db)
         {
             this.Database = db;
@@ -239,14 +245,20 @@ namespace Nikki.Support.Carbon.Class
             CName.BinHash();
         }
 
-        // Default constructor: disassemble skin
+        /// <summary>
+        /// Initializes new instance of <see cref="PresetSkin"/>.
+        /// </summary>
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        /// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
         public unsafe PresetSkin(BinaryReader br, Database.Carbon db)
         {
             this.Database = db;
             this.Disassemble(br);
         }
 
-        // Default destructor
+        /// <summary>
+        /// Destroys current instance.
+        /// </summary>
         ~PresetSkin() { }
 
         #endregion

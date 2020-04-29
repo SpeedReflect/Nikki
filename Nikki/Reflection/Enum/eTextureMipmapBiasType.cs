@@ -3,7 +3,7 @@
     /// <summary>
     /// Enum of possible mipmap bias types.
     /// </summary>
-    public enum eTextureMipmapBiasType : int
+    public enum eTextureMipmapBiasType : byte
     {
         /// <summary>
         /// 

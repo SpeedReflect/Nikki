@@ -25,42 +25,42 @@ namespace Nikki.Support.Shared.Class
         /// <summary>
         /// Filename of the <see cref="TPKBlock"/> which was assembled. Has no effect. 0x40 bytes.
         /// </summary>
-        public abstract string Filename { get; set; }
+        public abstract string Filename { get; }
 
         /// <summary>
         /// BinHash of the Filename property.
         /// </summary>
-        public abstract uint FilenameHash { get; set; }
+        public abstract uint FilenameHash { get; }
 
         /// <summary>
         /// 
         /// </summary>
-        protected uint PermBlockByteOffset { get; set; } = 0;
+        public uint PermBlockByteOffset { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
-        protected uint PermBlockByteSize { get; set; } = 0;
+        public uint PermBlockByteSize { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
-        protected int EndianSwapped { get; set; } = 0;
+        public int EndianSwapped { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
-        protected int TexturePack { get; set; } = 0;
+        public int TexturePack { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
-        protected int TextureIndexEntryTable { get; set; } = 0;
+        public int TextureIndexEntryTable { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
-        protected int TextureStreamEntryTable { get; set; } = 0;
+        public int TextureStreamEntryTable { get; set; } = 0;
 
         /// <summary>
         /// True if <see cref="TPKBlock"/> is compressed and should be saved 
@@ -233,27 +233,6 @@ namespace Nikki.Support.Shared.Class
         /// <param name="error">Error occured when trying to replace a texture.</param>
         /// <returns>True if texture replacing was successful, false otherwise.</returns>
         public abstract bool TryReplaceTexture(uint key, eKeyType type, string filename, out string error);
-
-        /// <summary>
-        /// Attemps to export <see cref="Texture"/> specified to the path and mode provided.
-        /// </summary>
-        /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to be exported.</param>
-        /// <param name="type">Type of the key passed.</param>
-        /// <param name="path">Path where the texture should be exported.</param>
-        /// <param name="mode">Mode in which export the texture. Range: ".dds", ".png", ".jpg", ".tiff", ".bmp".</param>
-        /// <returns>True if texture export was successful, false otherwise.</returns>
-        public abstract bool TryExportTexture(uint key, eKeyType type, string path, string mode);
-
-        /// <summary>
-        /// Attemps to export <see cref="Texture"/> specified to the path and mode provided.
-        /// </summary>
-        /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to be exported.</param>
-        /// <param name="type">Type of the key passed.</param>
-        /// <param name="path">Path where the texture should be exported.</param>
-        /// <param name="mode">Mode in which export the texture. Range: ".dds", ".png", ".jpg", ".tiff", ".bmp".</param>
-        /// <param name="error">Error occured when trying to clone a texture.</param>
-        /// <returns>True if texture export was successful, false otherwise.</returns>
-        public abstract bool TryExportTexture(uint key, eKeyType type, string path, string mode, out string error);
 
         #endregion
 

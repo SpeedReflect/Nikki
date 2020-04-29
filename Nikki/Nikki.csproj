@@ -10,10 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Drawing.Common" Version="5.0.0-preview.2.20160.6" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="CoreExtensions">
       <HintPath>C:\Users\Max\source\repos\CoreExtensions\CoreExtensions\bin\Release\netcoreapp3.1\CoreExtensions.dll</HintPath>
     </Reference>

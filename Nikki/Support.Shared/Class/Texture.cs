@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Drawing;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
@@ -53,7 +52,7 @@ namespace Nikki.Support.Shared.Class
         /// <summary>
         /// Represents data offset of the block in Global data.
         /// </summary>
-        public int Offset { get; protected set; } = 0;
+        public int Offset { get; set; } = 0;
 
         /// <summary>
         /// Represents data size of the block in Global data.
@@ -63,7 +62,7 @@ namespace Nikki.Support.Shared.Class
         /// <summary>
         /// Represents palette offset of the block in Global data.
         /// </summary>
-        public int PaletteOffset { get; protected set; } = 0;
+        public int PaletteOffset { get; set; } = 0;
 
         /// <summary>
         /// Represents palette size of the block in Global data.
@@ -137,12 +136,6 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         /// <returns>.dds texture as a byte array.</returns>
         public abstract byte[] GetDDSArray();
-
-        /// <summary>
-        /// Gets .png format image from .dds data.
-        /// </summary>
-        /// <returns>.png format image.</returns>
-        public abstract Image GetImage();
 
         /// <summary>
         /// Initializes all properties of the new <see cref="Texture"/>.

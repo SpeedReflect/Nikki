@@ -103,6 +103,7 @@ namespace Nikki.Support.Carbon.Class
 		public STRBlock(string CName, Database.Carbon db)
 		{
 			this.Database = db;
+			this.CollectionName = CName;
 			CName.BinHash();
 		}
 
@@ -110,13 +111,11 @@ namespace Nikki.Support.Carbon.Class
 		/// Initializes new instance of <see cref="CarTypeInfo"/>.
 		/// </summary>
 		/// <param name="strbr"><see cref="BinaryReader"/> to read text data with.</param>
-		/// <param name="labbr"><see cref="BinaryReader"/> to read label data with.</param>
 		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-		public STRBlock(BinaryReader strbr, BinaryReader labbr, Database.Carbon db)
+		public STRBlock(BinaryReader strbr, Database.Carbon db)
 		{
 			this.Database = db;
 			this.Disassemble(strbr);
-			this.DisperseLabels(labbr);
 		}
 
 		/// <summary>
