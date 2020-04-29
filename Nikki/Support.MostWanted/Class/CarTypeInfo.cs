@@ -15,7 +15,7 @@ namespace Nikki.Support.MostWanted.Class
     /// <summary>
     /// <see cref="CarTypeInfo"/> is a collection of settings related to a car's basic information.
     /// </summary>
-    public partial class CarTypeInfo : Shared.Class.CarTypeInfo
+    public class CarTypeInfo : Shared.Class.CarTypeInfo
     {
         #region Fields
 

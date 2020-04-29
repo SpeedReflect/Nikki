@@ -18,7 +18,7 @@ namespace Nikki.Support.Carbon.Class
     /// <summary>
     /// <see cref="Texture"/> is a collection of dds image data used by the game.
     /// </summary>
-    public partial class Texture : Shared.Class.Texture
+    public class Texture : Shared.Class.Texture
     {
         #region Fields
 

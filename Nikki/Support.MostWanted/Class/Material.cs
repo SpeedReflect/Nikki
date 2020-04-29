@@ -10,7 +10,7 @@ using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.Carbon.Class
+namespace Nikki.Support.MostWanted.Class
 {
     /// <summary>
     /// <see cref="Material"/> is a collection of float attributes of shaders and materials.
@@ -34,7 +34,7 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Base size of a unit collection.
         /// </summary>
-        public const int BaseClassSize = 0xF4;
+        public const int BaseClassSize = 0xB0;
 
 		#endregion
 
@@ -43,17 +43,17 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
-		public override GameINT GameINT => GameINT.Carbon;
+		public override GameINT GameINT => GameINT.MostWanted;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
-        public override string GameSTR => GameINT.Carbon.ToString();
+        public override string GameSTR => GameINT.MostWanted.ToString();
 
         /// <summary>
         /// Database to which the class belongs to.
         /// </summary>
-        public Database.Carbon Database { get; set; }
+        public Database.MostWanted Database { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
@@ -85,34 +85,6 @@ namespace Nikki.Support.Carbon.Class
         /// Vault memory hash of the collection name.
         /// </summary>
         public override uint VltKey => this._collection_name.VltHash();
-
-        /// <summary>
-        /// Disable value of reflection colors of the material.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        public float DisableReflection { get; set; }
-
-        /// <summary>
-        /// Increment value of reflection colors of the material.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        public float StrongerReflection { get; set; }
-
-        /// <summary>
-        /// Blend value of strong colors of the material.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        public float BlendStrongColors { get; set; }
-
-        /// <summary>
-        /// Disable value of strong colors of the material.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        public float DisableStrongColors { get; set; }
 
         /// <summary>
         /// Level value of the first bright color of the material.
@@ -171,13 +143,6 @@ namespace Nikki.Support.Carbon.Class
         public float BrightColor2Blue { get; set; }
 
         /// <summary>
-        /// Main grayscale value of the material.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        public float Grayscale { get; set; }
-
-        /// <summary>
         /// Linear negativity of the material colors.
         /// </summary>
         [AccessModifiable()]
@@ -192,46 +157,46 @@ namespace Nikki.Support.Carbon.Class
         public float GradientNegative { get; set; }
 
         /// <summary>
-        /// Level value of the reflection color of the material.
+        /// Shadow level value of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float ReflectionColorLevel { get; set; }
+        public float ShadowLevel { get; set; }
 
         /// <summary>
-        /// Red value of the reflection color of the material.
+        /// Chrome level value of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float ReflectionColorRed { get; set; }
+        public float ChromeLevel { get; set; }
 
         /// <summary>
-        /// Green value of the reflection color of the material.
+        /// Matte level value of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float ReflectionColorGreen { get; set; }
+        public float MatteLevel { get; set; }
 
         /// <summary>
-        /// Blue value of the reflection color of the material.
+        /// First reflection value of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float ReflectionColorBlue { get; set; }
+        public float Reflection1 { get; set; }
 
         /// <summary>
-        /// Outer radius of the shadow fading.
+        /// Second reflection value of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float ShadowOuterRadius { get; set; }
+        public float Reflection2 { get; set; }
 
         /// <summary>
-        /// Value of the optimal light reflection on the material.
+        /// Third reflection value of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float OptimalLightReflection { get; set; }
+        public float Reflection3 { get; set; }
 
         /// <summary>
         /// Level value of the first strong color of the material.
@@ -262,46 +227,11 @@ namespace Nikki.Support.Carbon.Class
         public float StrongColor1Blue { get; set; }
 
         /// <summary>
-        /// Level value of the second strong color of the material.
+        /// Alpha value of the material colors.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float StrongColor2Level { get; set; }
-
-        /// <summary>
-        /// Red value of the second strong color of the material.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        public float StrongColor2Red { get; set; }
-
-        /// <summary>
-        /// Green value of the second strong color of the material.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        public float StrongColor2Green { get; set; }
-
-        /// <summary>
-        /// Blue value of the second strong color of the material.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        public float StrongColor2Blue { get; set; }
-
-        /// <summary>
-        /// First alpha value of the material colors.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        public float AlphaValue1 { get; set; }
-
-        /// <summary>
-        /// Second alpha value of the material colors.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        public float AlphaValue2 { get; set; }
+        public float AlphaValue { get; set; }
 
         /// <summary>
         /// Unknown 1 value of the material.
@@ -352,6 +282,20 @@ namespace Nikki.Support.Carbon.Class
         [StaticModifiable()]
         public float Unknown7 { get; set; }
 
+        /// <summary>
+        /// Unknown 8 value of the material.
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        public float Unknown8 { get; set; }
+
+        /// <summary>
+        /// Unknown 9 value of the material.
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        public float Unknown9 { get; set; }
+
         #endregion
 
         #region Main
@@ -365,8 +309,8 @@ namespace Nikki.Support.Carbon.Class
         /// Initializes new instance of <see cref="Material"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-        public Material(string CName, Database.Carbon db)
+        /// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
+        public Material(string CName, Database.MostWanted db)
         {
             this.Database = db;
             this.CollectionName = CName;
@@ -377,8 +321,8 @@ namespace Nikki.Support.Carbon.Class
         /// Initializes new instance of <see cref="Material"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-        /// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-        public unsafe Material(BinaryReader br, Database.Carbon db)
+        /// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
+        public unsafe Material(BinaryReader br, Database.MostWanted db)
         {
             this.Database = db;
             this.Disassemble(br);
@@ -401,8 +345,8 @@ namespace Nikki.Support.Carbon.Class
         {
             // Write header of the material
             bw.Write(Global.Materials);
-            bw.Write((int)0xEC);
-            bw.Write(_Unknown0);
+            bw.Write((int)0xA8);
+            bw.Write(_Unknown1);
             bw.Write(_Localizer);
             bw.Write(_Localizer);
             bw.Write(this.BinKey);
@@ -412,10 +356,6 @@ namespace Nikki.Support.Carbon.Class
             bw.WriteNullTermUTF8(this._collection_name, 0x1C);
 
             // Write all settings
-            bw.Write(this.ShadowOuterRadius);
-            bw.Write(this.OptimalLightReflection);
-            bw.Write(this.Unknown1);
-            bw.Write(this.Grayscale);
             bw.Write(this.BrightColor1Level);
             bw.Write(this.BrightColor1Red);
             bw.Write(this.BrightColor1Green);
@@ -424,32 +364,28 @@ namespace Nikki.Support.Carbon.Class
             bw.Write(this.BrightColor2Red);
             bw.Write(this.BrightColor2Green);
             bw.Write(this.BrightColor2Blue);
-            bw.Write(this.AlphaValue1);
-            bw.Write(this.AlphaValue2);
-            bw.Write(this.DisableReflection);
+            bw.Write(this.AlphaValue);
+            bw.Write(this.Reflection1);
+            bw.Write(this.Reflection2);
+            bw.Write(this.Reflection3);
+            bw.Write(this.Unknown1);
             bw.Write(this.Unknown2);
             bw.Write(this.Unknown3);
-            bw.Write(this.Unknown4);
-            bw.Write(this.Unknown5);
-            bw.Write(this.Unknown6);
-            bw.Write(this.Unknown7);
-            bw.Write(this.ReflectionColorLevel);
-            bw.Write(this.ReflectionColorRed);
-            bw.Write(this.ReflectionColorGreen);
-            bw.Write(this.ReflectionColorBlue);
-            bw.Write(this.StrongerReflection);
-            bw.Write(this.BlendStrongColors);
-            bw.Write(this.DisableStrongColors);
             bw.Write(this.StrongColor1Level);
             bw.Write(this.StrongColor1Red);
             bw.Write(this.StrongColor1Green);
             bw.Write(this.StrongColor1Blue);
-            bw.Write(this.StrongColor2Level);
-            bw.Write(this.StrongColor2Red);
-            bw.Write(this.StrongColor2Green);
-            bw.Write(this.StrongColor2Blue);
+            bw.Write(this.ShadowLevel);
+            bw.Write(this.MatteLevel);
+            bw.Write(this.ChromeLevel);
+            bw.Write(this.Unknown4);
+            bw.Write(this.Unknown5);
             bw.Write(this.LinearNegative);
             bw.Write(this.GradientNegative);
+            bw.Write(this.Unknown6);
+            bw.Write(this.Unknown7);
+            bw.Write(this.Unknown8);
+            bw.Write(this.Unknown9);
         }
 
         /// <summary>
@@ -460,12 +396,7 @@ namespace Nikki.Support.Carbon.Class
         {
             br.BaseStream.Position += 0x14;
             this._collection_name = br.ReadNullTermUTF8(0x1C);
-            br.BaseStream.Position += 0x24;
 
-            this.ShadowOuterRadius = br.ReadSingle();
-            this.OptimalLightReflection = br.ReadSingle();
-            this.Unknown1 = br.ReadSingle();
-            this.Grayscale = br.ReadSingle();
             this.BrightColor1Level = br.ReadSingle();
             this.BrightColor1Red = br.ReadSingle();
             this.BrightColor1Green = br.ReadSingle();
@@ -474,32 +405,28 @@ namespace Nikki.Support.Carbon.Class
             this.BrightColor2Red = br.ReadSingle();
             this.BrightColor2Green = br.ReadSingle();
             this.BrightColor2Blue = br.ReadSingle();
-            this.AlphaValue1 = br.ReadSingle();
-            this.AlphaValue2 = br.ReadSingle();
-            this.DisableReflection = br.ReadSingle();
+            this.AlphaValue = br.ReadSingle();
+            this.Reflection1 = br.ReadSingle();
+            this.Reflection2 = br.ReadSingle();
+            this.Reflection3 = br.ReadSingle();
+            this.Unknown1 = br.ReadSingle();
             this.Unknown2 = br.ReadSingle();
             this.Unknown3 = br.ReadSingle();
-            this.Unknown4 = br.ReadSingle();
-            this.Unknown5 = br.ReadSingle();
-            this.Unknown6 = br.ReadSingle();
-            this.Unknown7 = br.ReadSingle();
-            this.ReflectionColorLevel = br.ReadSingle();
-            this.ReflectionColorRed = br.ReadSingle();
-            this.ReflectionColorGreen = br.ReadSingle();
-            this.ReflectionColorBlue = br.ReadSingle();
-            this.StrongerReflection = br.ReadSingle();
-            this.BlendStrongColors = br.ReadSingle();
-            this.DisableStrongColors = br.ReadSingle();
             this.StrongColor1Level = br.ReadSingle();
             this.StrongColor1Red = br.ReadSingle();
             this.StrongColor1Green = br.ReadSingle();
             this.StrongColor1Blue = br.ReadSingle();
-            this.StrongColor2Level = br.ReadSingle();
-            this.StrongColor2Red = br.ReadSingle();
-            this.StrongColor2Green = br.ReadSingle();
-            this.StrongColor2Blue = br.ReadSingle();
+            this.ShadowLevel = br.ReadSingle();
+            this.MatteLevel = br.ReadSingle();
+            this.ChromeLevel = br.ReadSingle();
+            this.Unknown4 = br.ReadSingle();
+            this.Unknown5 = br.ReadSingle();
             this.LinearNegative = br.ReadSingle();
             this.GradientNegative = br.ReadSingle();
+            this.Unknown6 = br.ReadSingle();
+            this.Unknown7 = br.ReadSingle();
+            this.Unknown8 = br.ReadSingle();
+            this.Unknown9 = br.ReadSingle();
         }
 
         /// <summary>
@@ -511,44 +438,36 @@ namespace Nikki.Support.Carbon.Class
         {
             var result = new Material(CName, this.Database)
             {
-                ShadowOuterRadius = this.ShadowOuterRadius,
-                OptimalLightReflection = this.OptimalLightReflection,
-                DisableReflection = this.DisableReflection,
-                StrongerReflection = this.StrongerReflection,
-                BlendStrongColors = this.BlendStrongColors,
-                DisableStrongColors = this.DisableStrongColors,
-                StrongColor1Level = this.StrongColor1Level,
-                StrongColor1Red = this.StrongColor1Red,
-                StrongColor1Green = this.StrongColor1Green,
-                StrongColor1Blue = this.StrongColor1Blue,
-                StrongColor2Level = this.StrongColor2Level,
-                StrongColor2Red = this.StrongColor2Red,
-                StrongColor2Green = this.StrongColor2Green,
-                StrongColor2Blue = this.StrongColor2Blue,
-                BrightColor2Level = this.BrightColor2Level,
-                BrightColor2Red = this.BrightColor2Red,
-                BrightColor2Green = this.BrightColor2Green,
-                BrightColor2Blue = this.BrightColor2Blue,
                 BrightColor1Level = this.BrightColor1Level,
                 BrightColor1Red = this.BrightColor1Red,
                 BrightColor1Green = this.BrightColor1Green,
                 BrightColor1Blue = this.BrightColor1Blue,
-                Grayscale = this.Grayscale,
+                BrightColor2Level = this.BrightColor2Level,
+                BrightColor2Red = this.BrightColor2Red,
+                BrightColor2Green = this.BrightColor2Green,
+                BrightColor2Blue = this.BrightColor2Blue,
+                AlphaValue = this.AlphaValue,
+                Reflection1 = this.Reflection1,
+                Reflection2 = this.Reflection2,
+                Reflection3 = this.Reflection3,
+                StrongColor1Level = this.StrongColor1Level,
+                StrongColor1Red = this.StrongColor1Red,
+                StrongColor1Green = this.StrongColor1Green,
+                StrongColor1Blue = this.StrongColor1Blue,
+                ShadowLevel = this.ShadowLevel,
+                MatteLevel = this.MatteLevel,
+                ChromeLevel = this.ChromeLevel,
                 LinearNegative = this.LinearNegative,
                 GradientNegative = this.GradientNegative,
-                ReflectionColorLevel = this.ReflectionColorLevel,
-                ReflectionColorRed = this.ReflectionColorRed,
-                ReflectionColorGreen = this.ReflectionColorGreen,
-                ReflectionColorBlue = this.ReflectionColorBlue,
-                AlphaValue1 = this.AlphaValue1,
-                AlphaValue2 = this.AlphaValue2,
                 Unknown1 = this.Unknown1,
                 Unknown2 = this.Unknown2,
                 Unknown3 = this.Unknown3,
                 Unknown4 = this.Unknown4,
                 Unknown5 = this.Unknown5,
                 Unknown6 = this.Unknown6,
-                Unknown7 = this.Unknown7
+                Unknown7 = this.Unknown7,
+                Unknown8 = this.Unknown8,
+                Unknown9 = this.Unknown9
             };
 
             return result;

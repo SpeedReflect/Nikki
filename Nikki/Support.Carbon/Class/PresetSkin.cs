@@ -14,7 +14,7 @@ namespace Nikki.Support.Carbon.Class
     /// <summary>
     /// <see cref="PresetSkin"/> is a collection of settings related to car skins.
     /// </summary>
-    public partial class PresetSkin : Shared.Class.PresetSkin
+    public class PresetSkin : Shared.Class.PresetSkin
     {
         #region Fields
 

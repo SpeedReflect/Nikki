@@ -18,7 +18,7 @@ namespace Nikki.Support.Carbon.Class
     /// <summary>
     /// <see cref="TPKBlock"/> is a collection of <see cref="Texture"/>.
     /// </summary>
-    public partial class TPKBlock : Shared.Class.TPKBlock
+    public class TPKBlock : Shared.Class.TPKBlock
     {
         #region Fields
 

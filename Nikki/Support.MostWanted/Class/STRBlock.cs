@@ -13,7 +13,7 @@ using CoreExtensions.Text;
 
 
 
-namespace Nikki.Support.Carbon.Class
+namespace Nikki.Support.MostWanted.Class
 {
 	/// <summary>
 	/// <see cref="STRBlock"/> is a collection of language strings, hashes and labels.
@@ -24,6 +24,7 @@ namespace Nikki.Support.Carbon.Class
 
 		private string _collection_name;
 		private string _category;
+		private byte[] _unk_data;
 		private List<StringRecord> _stringinfo = new List<StringRecord>();
 
 		/// <summary>
@@ -48,17 +49,17 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
-		public override GameINT GameINT => GameINT.Carbon;
+		public override GameINT GameINT => GameINT.MostWanted;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
-		public override string GameSTR => GameINT.Carbon.ToString();
+		public override string GameSTR => GameINT.MostWanted.ToString();
 
 		/// <summary>
 		/// Database to which the class belongs to.
 		/// </summary>
-		public Database.Carbon Database { get; set; }
+		public Database.MostWanted Database { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
@@ -99,8 +100,8 @@ namespace Nikki.Support.Carbon.Class
 		/// Initializes new instance of <see cref="STRBlock"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-		public STRBlock(string CName, Database.Carbon db)
+		/// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
+		public STRBlock(string CName, Database.MostWanted db)
 		{
 			this.Database = db;
 			this.CollectionName = CName;
@@ -110,12 +111,12 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Initializes new instance of <see cref="CarTypeInfo"/>.
 		/// </summary>
-		/// <param name="strbr"><see cref="BinaryReader"/> to read text data with.</param>
-		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-		public STRBlock(BinaryReader strbr, Database.Carbon db)
+		/// <param name="br"><see cref="BinaryReader"/> to read text data with.</param>
+		/// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
+		public STRBlock(BinaryReader br, Database.MostWanted db)
 		{
 			this.Database = db;
-			this.Disassemble(strbr);
+			this.Disassemble(br);
 		}
 
 		/// <summary>
@@ -133,8 +134,9 @@ namespace Nikki.Support.Carbon.Class
 		/// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="STRBlock"/> with.</param>
 		public override void Assemble(BinaryWriter bw)
 		{
-			var hash_offset = 0x3C;
-			var text_offset = 0x3C + this.InfoLength * 8;
+			var udat_offset = 0x30;
+			var hash_offset = udat_offset + this._unk_data.Length;
+			var text_offset = hash_offset + this.InfoLength * 8;
 
 			// Sort records by keys
 			this._stringinfo.Sort((a, b) => a.Key.CompareTo(b.Key));
@@ -145,13 +147,14 @@ namespace Nikki.Support.Carbon.Class
 
 			// Save position
 			var position = bw.BaseStream.Position;
-			
+
 			// Write offsets
+			bw.Write(udat_offset);
 			bw.Write(this.InfoLength);
 			bw.Write(hash_offset);
 			bw.Write(text_offset);
-			bw.WriteNullTermUTF8(this._collection_name, 0x10);
 			bw.WriteNullTermUTF8(Settings.Watermark, 0x20);
+			bw.Write(this._unk_data);
 
 			int length = 0;
 			foreach (var info in this._stringinfo)
@@ -180,12 +183,18 @@ namespace Nikki.Support.Carbon.Class
 			int BlockSize = br.ReadInt32();
 			var broffset = br.BaseStream.Position;
 
+			int udatoffset = br.ReadInt32();
 			int numentries = br.ReadInt32();
 			int hashoffset = br.ReadInt32();
 			int textoffset = br.ReadInt32();
 
 			// Read CollectionName
-			this._collection_name = br.ReadNullTermUTF8(0x10);
+			this._collection_name = "GLOBAL"; // since there exists only one at a time
+
+			// Read unknown data
+			var unksize = hashoffset - udatoffset;
+			br.BaseStream.Position = broffset + udatoffset;
+			this._unk_data = br.ReadBytes(unksize);
 
 			// Begin reading through string records
 			for (int a1 = 0; a1 < numentries; ++a1)

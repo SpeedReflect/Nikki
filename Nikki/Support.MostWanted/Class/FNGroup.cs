@@ -14,7 +14,7 @@ namespace Nikki.Support.MostWanted.Class
     /// <summary>
     /// <see cref="FNGroup"/> is a collection of frontend group elements and scripts.
     /// </summary>
-    public partial class FNGroup : Shared.Class.FNGroup
+    public class FNGroup : Shared.Class.FNGroup
     {
 		#region Properties
 
