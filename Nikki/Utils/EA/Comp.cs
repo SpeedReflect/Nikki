@@ -288,5 +288,35 @@ namespace Nikki.Utils.EA
                 _ => null,
             };
         }
+
+        /// <summary>
+        /// Returns byte array of padding bytes required to start at offset % start_at = 0
+        /// </summary>
+        /// <param name="length">Length of the current stream to be added to.</param>
+        /// <param name="start_at">Offset at which padding ends.</param>
+        /// <returns>Byte array of padding bytes.</returns>
+        public static byte[] GetPaddingArray(int length, byte start_at)
+        {
+            byte[] result;
+            int difference = start_at - (length % start_at);
+            if (difference == start_at) difference = -1;
+            switch (difference)
+            {
+                case -1:
+                    result = new byte[0];
+                    return result;
+                case 4:
+                    result = new byte[4 + start_at];
+                    result[4] = (byte)(start_at - 4);
+                    return result;
+                case 8:
+                    result = new byte[8];
+                    return result;
+                default:
+                    result = new byte[difference];
+                    result[4] = (byte)(difference - 8);
+                    return result;
+            }
+        }
     }
 }

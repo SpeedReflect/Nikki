@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
@@ -243,51 +244,33 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="TPKBlock"/> with.</param>
         /// <returns>Array of all offsets.</returns>
-        protected abstract int[] FindOffsets(BinaryReader br);
+        protected abstract long[] FindOffsets(BinaryReader br);
 
         /// <summary>
         /// Gets amount of textures in the <see cref="TPKBlock"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="TPKBlock"/> with.</param>
-        /// <param name="offset">Partial 1 part2 offset in the tpk block array.</param>
         /// <returns>Number of textures in the tpk block.</returns>
-        protected abstract int GetTextureCount(BinaryReader br, int offset);
+        protected abstract int GetTextureCount(BinaryReader br);
 
         /// <summary>
         /// Gets <see cref="TPKBlock"/> header information.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="TPKBlock"/> with.</param>
-        /// <param name="offset">Partial 1 part1 offset in the tpk block array.</param>
-        protected abstract void GetHeaderInfo(BinaryReader br, int offset);
-
-        /// <summary>
-        /// Gets list of keys of the textures in the <see cref="TPKBlock"/>.
-        /// </summary>
-        /// <param name="br"><see cref="BinaryReader"/> to read <see cref="TPKBlock"/> with.</param>
-        /// <param name="offset">Partial 1 part2 offset in the tpk block array.</param>
-        protected abstract void GetKeyList(BinaryReader br, int offset);
+        protected abstract void GetHeaderInfo(BinaryReader br);
 
         /// <summary>
         /// Gets list of offset slots of the textures in the <see cref="TPKBlock"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="TPKBlock"/> with.</param>
-        /// <param name="offset">Partial 1 part3 offset in the tpk block array.</param>
-        protected abstract void GetOffsetSlots(BinaryReader br, int offset);
-
-        /// <summary>
-        /// Gets list of compressions of the textures in the <see cref="TPKBlock"/>.
-        /// </summary>
-        /// <param name="br"><see cref="BinaryReader"/> to read <see cref="TPKBlock"/> with.</param>
-        /// <param name="offset">Partial 1 part5 offset in the tpk block array.</param>
-        protected abstract void GetCompressionList(BinaryReader br, int offset);
+        protected abstract IEnumerable<OffSlot> GetOffsetSlots(BinaryReader br);
 
         /// <summary>
         /// Gets list of offsets and sizes of the texture headers in the <see cref="TPKBlock"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="TPKBlock"/> with.</param>
-        /// <param name="offset">Partial 1 part4 offset in the tpk block array.</param>
         /// <returns>Array of offsets and sizes of texture headers.</returns>
-        protected abstract int[,] GetTextureHeaders(BinaryReader br, int offset);
+        protected abstract int[,] GetTextureHeaders(BinaryReader br);
 
         /// <summary>
         /// Parses compressed texture and returns it on the output.
@@ -300,21 +283,6 @@ namespace Nikki.Support.Shared.Class
         #endregion
 
         #region Writing Methods
-
-        /// <summary>
-        /// Sorts textures by their binary memory hashes.
-        /// </summary>
-        protected abstract void TextureSort();
-
-        /// <summary>
-        /// Checks texture keys and tpk keys for matching.
-        /// </summary>
-        protected abstract void CheckKeys();
-
-        /// <summary>
-        /// Checks texture compressions and tpk compressions for matching.
-        /// </summary>
-        protected abstract void CheckComps();
 
         /// <summary>
         /// Assembles partial 1 part1 of the tpk block.

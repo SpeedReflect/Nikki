@@ -7,7 +7,7 @@ namespace Nikki.Reflection.Enum
 	/// <summary>
 	/// Enum of <see cref="TPKBlock"/> version types.
 	/// </summary>
-	public enum eTPKVersion : byte
+	public enum eTPKVersion : int
 	{
 		/// <summary>
 		/// 

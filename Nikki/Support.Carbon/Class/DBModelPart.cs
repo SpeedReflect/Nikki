@@ -39,11 +39,14 @@ namespace Nikki.Support.Carbon.Class
 		}
 
 		/// <summary>
-		/// Returns CollectionName, BinKey and <see cref="RealCarPart"/> count as a string value.
+		/// Returns CollectionName, BinKey and GameSTR of this <see cref="DBModelPart"/> 
+		/// as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() =>
-			$"CollectionName: {this._collection_name} | BinKey: {this.BinKey:X8} " +
-			$"| PartCount: {this.ModelCarParts.Count}";
+		public override string ToString()
+		{
+			return $"Collection Name: {this.CollectionName} | " +
+				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+		}
 	}
 }
