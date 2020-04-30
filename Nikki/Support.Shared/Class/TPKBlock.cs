@@ -273,6 +273,12 @@ namespace Nikki.Support.Shared.Class
         protected abstract int[,] GetTextureHeaders(BinaryReader br);
 
         /// <summary>
+        /// Gets list of compressions of the textures in the tpk block array.
+        /// </summary>
+        /// <param name="br"><see cref="BinaryReader"/> to read <see cref="TPKBlock"/> with.</param>
+        protected abstract IEnumerable<CompSlot> GetCompressionList(BinaryReader br);
+
+        /// <summary>
         /// Parses compressed texture and returns it on the output.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="TPKBlock"/> with.</param>

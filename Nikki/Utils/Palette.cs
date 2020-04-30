@@ -42,10 +42,12 @@ namespace Nikki.Utils
         /// Convert RGBA .dds format to 8-bit PAL8
         /// </summary>
         /// <param name="data">binary data of the .dds file including header</param>
+        /// <param name="start_at">Offset to start reading dds data at. If a real dds 
+        /// file data is passed, it usually starts at offset 0x80.</param>
         /// <returns>PAL8 formatted byte array with palette and compressed data</returns>
-        public static unsafe byte[] RGBAtoP8(byte[] data)
+        public static unsafe byte[] RGBAtoP8(byte[] data, int start_at = 0x80)
         {
-            int size = 0x400 + (data.Length - 0x80) / 4;
+            int size = 0x400 + (data.Length - start_at) / 4;
             var result = new byte[size];
             var map = new Dictionary<uint, byte>();
             int used = 0; // num of palette colors used; max = 0x100
@@ -53,7 +55,7 @@ namespace Nikki.Utils
             fixed (byte* byteptr_t = &data[0])
             {
                 // Marshal through RGBA data starting at 0x80
-                for (int offset = 0x80, mapoff = 0, dataoff = 0x400; offset < data.Length; offset += 4)
+                for (int offset = start_at, mapoff = 0, dataoff = 0x400; offset < data.Length; offset += 4)
                 {
                     uint color = *(uint*)(byteptr_t + offset);
                     if (map.TryGetValue(color, out byte index))

@@ -13,7 +13,7 @@ using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.Carbon.Class
+namespace Nikki.Support.MostWanted.Class
 {
     /// <summary>
     /// <see cref="TPKBlock"/> is a collection of <see cref="Texture"/>.
@@ -31,17 +31,17 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Game to which the class belongs to.
         /// </summary>
-        public override GameINT GameINT => GameINT.Carbon;
+        public override GameINT GameINT => GameINT.MostWanted;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
-        public override string GameSTR => GameINT.Carbon.ToString();
+        public override string GameSTR => GameINT.MostWanted.ToString();
 
         /// <summary>
         /// Database to which the class belongs to.
         /// </summary>
-        public Database.Carbon Database { get; set; }
+        public Database.MostWanted Database { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
@@ -66,7 +66,7 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Version of this <see cref="TPKBlock"/>.
         /// </summary>
-        public override eTPKVersion Version => eTPKVersion.Carbon;
+        public override eTPKVersion Version => eTPKVersion.MostWanted;
 
         /// <summary>
         /// Filename used for this <see cref="TPKBlock"/>. It is a default watermark.
@@ -108,8 +108,8 @@ namespace Nikki.Support.Carbon.Class
         /// Initializes new instance of <see cref="TPKBlock"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-        public TPKBlock(string CName, Database.Carbon db)
+        /// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
+        public TPKBlock(string CName, Database.MostWanted db)
         {
             this.Database = db;
             this.CollectionName = CName;
@@ -121,8 +121,8 @@ namespace Nikki.Support.Carbon.Class
         /// Initializes new instance of <see cref="TPKBlock"/>.
         /// </summary>
         /// <param name="index">Index of the instance in the database.</param>
-		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-        public TPKBlock(int index, Database.Carbon db)
+		/// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
+        public TPKBlock(int index, Database.MostWanted db)
         {
             if (index < 0) this.UseCurrentName = eBoolean.True;
             this.Database = db;
@@ -211,12 +211,23 @@ namespace Nikki.Support.Carbon.Class
             br.BaseStream.Position = PartOffsets[3];
             var texture_list = this.GetTextureHeaders(br);
 
+            // Get CompSlot info
+            br.BaseStream.Position = PartOffsets[4];
+            var compslot_list = this.GetCompressionList(br).ToList();
+
             if (PartOffsets[2] != -1)
             {
                 for (int a1 = 0; a1 < TextureCount; ++a1)
                 {
+                    int count = this.Textures.Count;
                     br.BaseStream.Position = Start;
                     this.ParseCompTexture(br, offslot_list[a1]);
+                    if (this.Textures.Count > count) // if texture was added
+                    {
+                        this.Textures[^1].CompVal1 = compslot_list[a1].Var1;
+                        this.Textures[^1].CompVal2 = compslot_list[a1].Var2;
+                        this.Textures[^1].CompVal3 = compslot_list[a1].Var3;
+                    }
                 }
             }
             else
@@ -225,7 +236,12 @@ namespace Nikki.Support.Carbon.Class
                 for (int a1 = 0; a1 < TextureCount; ++a1)
                 {
                     br.BaseStream.Position = texture_list[a1, 0];
-                    var tex = new Texture(br, this.CollectionName, this.Database);
+                    var tex = new Texture(br, this.CollectionName, this.Database)
+                    {
+                        CompVal1 = compslot_list[a1].Var1,
+                        CompVal2 = compslot_list[a1].Var2,
+                        CompVal3 = compslot_list[a1].Var3
+                    };
                     this.Textures.Add(tex);
                 }
 
@@ -674,10 +690,8 @@ namespace Nikki.Support.Carbon.Class
             while (br.BaseStream.Position < ReaderOffset + ReaderSize)
             {
                 offsets.Add(br.BaseStream.Position); // add offset
-                var temp = br.BaseStream.Position;
-                br.BaseStream.Position += 0x58; // advance to the name of the texture
-                br.BaseStream.Position += br.ReadByte(); // skip texture name
-                sizes.Add(br.BaseStream.Position - temp); // add size
+                sizes.Add(0x7C); // constant size
+                br.BaseStream.Position += 0x7C;
             }
 
             var result = new int[offsets.Count, 2];
@@ -720,8 +734,25 @@ namespace Nikki.Support.Carbon.Class
         /// Gets list of compressions of the textures in the tpk block array.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="TPKBlock"/> with.</param>
-        protected override IEnumerable<CompSlot> GetCompressionList(BinaryReader br) =>
-            throw new NotImplementedException();
+        protected override IEnumerable<CompSlot> GetCompressionList(BinaryReader br)
+        {
+            if (br.BaseStream.Position == -1) yield break;  // if Part5 does not exist
+
+            int ReaderSize = br.ReadInt32();
+            var ReaderOffset = br.BaseStream.Position;
+            while (br.BaseStream.Position < ReaderOffset + ReaderSize)
+            {
+                br.BaseStream.Position += 8;
+                yield return new CompSlot
+                {
+                    Var1 = br.ReadInt32(),
+                    Var2 = br.ReadInt32(),
+                    Var3 = br.ReadInt32(),
+                    Comp = br.ReadUInt32(),
+                };
+                br.BaseStream.Position += 8;
+            }
+        }
 
         #endregion
 
@@ -809,11 +840,13 @@ namespace Nikki.Support.Carbon.Class
         protected override void Get1Part5(BinaryWriter bw)
         {
             bw.Write(TPK.INFO_PART5_BLOCKID); // write ID
-            bw.Write(this.Textures.Count * 0x18); // write size
+            bw.Write(this.Textures.Count * 0x20); // write size
             for (int a1 = 0; a1 < this.Textures.Count; ++a1)
             {
-                bw.Write((int)0);
                 bw.Write((long)0);
+                bw.Write(this.Textures[a1].CompVal1);
+                bw.Write(this.Textures[a1].CompVal2);
+                bw.Write(this.Textures[a1].CompVal3);
                 bw.Write(Comp.GetInt(this.Textures[a1].Compression));
                 bw.Write((long)0);
             }
