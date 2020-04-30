@@ -15,4 +15,8 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Support.Underground2\Gameplay\" />
+  </ItemGroup>
+
 </Project>
