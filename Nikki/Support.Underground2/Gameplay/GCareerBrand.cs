@@ -132,7 +132,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		}
 
 		/// <summary>
-		/// Disassembles array into <see cref="BinaryReader"/> properties.
+		/// Disassembles array into <see cref="GCareerStage"/> properties.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="GCareerBrand"/> with.</param
 		public void Disassemble(BinaryReader br)

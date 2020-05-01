@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Enum of track difficulties in Underground 2.
 	/// </summary>
-	public enum eTrackDifficulty : int
+	public enum eTrackDifficulty : byte
 	{
 		/// <summary>
 		/// Easy difficulty.
