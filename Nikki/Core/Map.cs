@@ -21,6 +21,11 @@ namespace Nikki.Core
 		public static Dictionary<uint, string> VltKeys { get; set; } = new Dictionary<uint, string>();
 
 		/// <summary>
+		/// Index table of all performance parts.
+		/// </summary>
+		public static uint[,,] PerfPartTable { get; set; }
+
+		/// <summary>
 		/// Map of all car part labels to <see cref="eCarPartAttribType"/>.
 		/// </summary>
 		public static Dictionary<uint, eCarPartAttribType> CarPartKeys { get; set; } = new Dictionary<uint, eCarPartAttribType>()
