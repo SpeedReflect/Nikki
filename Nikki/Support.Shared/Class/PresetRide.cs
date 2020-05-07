@@ -4,7 +4,6 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
-using Nikki.Support.Shared.Parts.PresetParts;
 
 
 
@@ -63,13 +62,6 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="PresetRide"/> with.</param>
         public abstract void Disassemble(BinaryReader br);
-
-        /// <summary>
-        /// Converts all preset parts into binary memory keys.
-        /// </summary>
-        /// <param name="parts"><see cref="Concatenator"/> class of all preset ride's parts.</param>
-        /// <returns>Sorted array of all preset parts hashes.</returns>
-        protected abstract uint[] StringToKey(Concatenator parts);
 
         /// <summary>
         /// Casts all attributes from this object to another one.
