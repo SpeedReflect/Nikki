@@ -4,7 +4,7 @@ using Nikki.Reflection.Attributes;
 
 
 
-namespace GlobalLib.Support.Underground2.Parts.InfoParts
+namespace Nikki.Support.Underground2.Parts.InfoParts
 {
     /// <summary>
     /// A unit <see cref="Nitrous"/> used in car performance.

@@ -7,7 +7,7 @@ using Nikki.Reflection.Attributes;
 
 
 
-namespace GlobalLib.Support.Underground2.Parts.PresetParts
+namespace Nikki.Support.Underground2.Parts.PresetParts
 {
 	/// <summary>
 	/// A unit <see cref="DecalArray"/> used in preset rides.
