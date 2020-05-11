@@ -165,7 +165,7 @@ namespace Nikki.Support.Carbon.Class
 
 			bw.FillBuffer(0x10);
 			bw.BaseStream.Position = position - 4;
-			bw.Write(bw.BaseStream.Length - position);
+			bw.Write((int)(bw.BaseStream.Length - position));
 			bw.BaseStream.Position = bw.BaseStream.Length;
 		}
 
@@ -198,6 +198,9 @@ namespace Nikki.Support.Carbon.Class
 				info.Text = br.ReadNullTermUTF8();
 				this._stringinfo.Add(info);
 			}
+
+			// Set position to end
+			br.BaseStream.Position = broffset + BlockSize;
 		}
 
 		/// <summary>

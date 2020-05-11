@@ -56,7 +56,7 @@ namespace Nikki.Support.Carbon.Class
                     throw new ArgumentNullException("This value cannot be left empty.");
                 if (value.Contains(" "))
                     throw new Exception("CollectionName cannot contain whitespace.");
-                if (value.Length > 0x1B)
+                if (this.UseCurrentName == eBoolean.True && value.Length > 0x1B)
                     throw new ArgumentLengthException(0x1B);
                 if (this.Database.TPKBlocks.FindCollection(value) != null)
                     throw new CollectionExistenceException();
@@ -233,7 +233,7 @@ namespace Nikki.Support.Carbon.Class
                 // Finally, build all .dds files
                 for (int a1 = 0; a1 < TextureCount; ++a1)
                 {
-                    br.BaseStream.Position = PartOffsets[6] + 0x80;
+                    br.BaseStream.Position = PartOffsets[6] + 0x7C;
                     this.Textures[a1].ReadData(br, false);
                 }
             }
@@ -681,7 +681,7 @@ namespace Nikki.Support.Carbon.Class
                 result[len++] = br.BaseStream.Position; // add offset
                 br.BaseStream.Position += 0x58; // advance to the name of the texture
                 byte size = br.ReadByte();
-                br.BaseStream.Position += br.ReadByte(); // skip texture name
+                br.BaseStream.Position += size; // skip texture name
             }
 
             return result;

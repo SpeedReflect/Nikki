@@ -12,10 +12,10 @@ namespace Nikki.Core
 		/// <summary>
 		/// 
 		/// </summary>
-		public CarbonOptions Default => new CarbonOptions()
+		public static CarbonOptions Default = new CarbonOptions()
 		{
 			File = String.Empty,
-			Watermark = $"Nikki by MaxHwoy | {DateTime.Today:00/00/0000}",
+			Watermark = $"Nikki by MaxHwoy | {DateTime.Today:MM/dd/yyyy}",
 			MessageShow = false,
 			CarTypeInfos = false,
 			Collisions = true,

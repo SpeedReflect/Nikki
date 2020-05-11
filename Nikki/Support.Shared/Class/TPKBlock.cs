@@ -106,7 +106,9 @@ namespace Nikki.Support.Shared.Class
         /// <summary>
         /// Filename to which <see cref="TPKBlock"/> belong to.
         /// </summary>
-        public string BelongsToFile { get; set; }
+        public string BelongsToFile { get; set; } = String.Empty;
+
+        internal static string Watermark { get; set; } = String.Empty;
 
         #endregion
 
@@ -269,8 +271,9 @@ namespace Nikki.Support.Shared.Class
         /// Gets list of offsets and sizes of the texture headers in the <see cref="TPKBlock"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="TPKBlock"/> with.</param>
+        /// <param name="count">Number of textures to read.</param>
         /// <returns>Array of offsets and sizes of texture headers.</returns>
-        protected abstract int[,] GetTextureHeaders(BinaryReader br);
+        protected abstract long[] GetTextureHeaders(BinaryReader br, int count);
 
         /// <summary>
         /// Gets list of compressions of the textures in the tpk block array.

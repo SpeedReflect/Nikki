@@ -70,10 +70,10 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="CollisionBound"/> with.</param>
 		public void Disassemble(BinaryReader br)
 		{
-			this.CoordinateX = br.ReadInt32();
-			this.CoordinateY = br.ReadInt32();
-			this.CoordinateZ = br.ReadInt32();
-			this.CoordinateW = br.ReadInt32();
+			this.CoordinateX = br.ReadSingle();
+			this.CoordinateY = br.ReadSingle();
+			this.CoordinateZ = br.ReadSingle();
+			this.CoordinateW = br.ReadSingle();
 		}
 	}
 }

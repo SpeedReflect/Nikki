@@ -230,6 +230,8 @@ namespace Nikki.Support.Carbon.Class
             // Write CollectionName
             for (int a3 = 0; a3 < a1; ++a3)
                 bw.Write((byte)this.CollectionName[a3]);
+            bw.Write((byte)0);
+            bw.FillBuffer(4);
         }
 
         /// <summary>

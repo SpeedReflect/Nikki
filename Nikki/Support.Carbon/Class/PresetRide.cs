@@ -704,6 +704,8 @@ namespace Nikki.Support.Carbon.Class
             bw.Write(this.RightHeadlightGlass.BinHash());
             bw.Write(this.RightSideMirror.BinHash());
             bw.Write(this.Driver.BinHash());
+            bw.Write(this.SteeringWheel.BinHash());
+            bw.Write(this.Exhaust.BinHash());
             bw.Write(this.Spoiler.BinHash());
             bw.Write(this.UniversalSpoilerBase.BinHash());
 
@@ -746,7 +748,7 @@ namespace Nikki.Support.Carbon.Class
             this.PAINT_VALUES.Write(bw);
 
             // Read Autosculpt
-            bw.FillBuffer(0x10);
+            bw.WriteBytes(0x10);
             this.FRONTBUMPER.Write(bw);
             bw.Write((short)0);
             this.REARBUMPER.Write(bw);
@@ -762,9 +764,9 @@ namespace Nikki.Support.Carbon.Class
             this.ROOFSCOOP.Write(bw);
             bw.Write((short)0);
             bw.Write(this.ChopTopSizeValue);
-            bw.FillBuffer(10);
+            bw.WriteBytes(10);
             bw.Write(this.ExhaustSizeValue);
-            bw.FillBuffer(11);
+            bw.WriteBytes(11);
 
             // Read Vinyls
             this.VINYL01.Write(bw);

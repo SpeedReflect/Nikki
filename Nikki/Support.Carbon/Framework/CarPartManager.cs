@@ -46,7 +46,8 @@ namespace Nikki.Support.Carbon.Framework
 			return result;
 		}
 
-		private static Dictionary<int, int> MakeStringList(Database.Carbon db, out byte[] string_buffer)
+		private static Dictionary<int, int> MakeStringList(Database.Carbon db, 
+			string mark, out byte[] string_buffer)
 		{
 			// Prepare stack
 			var string_dict = new Dictionary<int, int>();
@@ -60,9 +61,10 @@ namespace Nikki.Support.Carbon.Framework
 
 			// Fill empty string in the beginning
 			string_dict[empty] = 1;
-			length += 8;
+			length += 0x28;
 			bw.Write(0);
 			bw.Write(0);
+			bw.WriteNullTermUTF8(mark, 0x20);
 
 			// Function to write strings to dictionary and return its length
 			var Inject = new Func<string, int, int>((value, len) =>
@@ -461,12 +463,13 @@ namespace Nikki.Support.Carbon.Framework
 		/// writes it with <see cref="BinaryWriter"/> provided.
 		/// </summary>
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		/// <param name="mark">Watermark to put in the strings block.</param>
 		/// <param name="db"><see cref="Database.Carbon"/> database with roots 
 		/// and collections.</param>
-		public static void Assemble(BinaryWriter bw, Database.Carbon db)
+		public static void Assemble(BinaryWriter bw, string mark, Database.Carbon db)
 		{
 			// Get string map
-			var string_dict = MakeStringList(db, out var string_buffer);
+			var string_dict = MakeStringList(db, mark, out var string_buffer);
 
 			// Get struct map
 			var numstructs = MakeStructList(string_dict, db, out var struct_buffer);

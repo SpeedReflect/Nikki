@@ -192,6 +192,8 @@ namespace Nikki.Database
 				false,
 				this
 			);
+
+			this.CarPartStructs = new List<CPStruct>();
 		}
 
 		/// <summary>

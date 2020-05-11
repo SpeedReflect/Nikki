@@ -48,6 +48,8 @@ namespace Nikki.Support.Shared.Class
 		/// </summary>
 		public abstract int InfoLength { get; }
 
+		internal static string Watermark { get; set; } = String.Empty;
+
 		#endregion
 
 		#region Methods

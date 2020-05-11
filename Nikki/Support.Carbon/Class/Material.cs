@@ -412,6 +412,7 @@ namespace Nikki.Support.Carbon.Class
             bw.WriteNullTermUTF8(this._collection_name, 0x1C);
 
             // Write all settings
+            bw.WriteBytes(0x24);
             bw.Write(this.ShadowOuterRadius);
             bw.Write(this.OptimalLightReflection);
             bw.Write(this.Unknown1);

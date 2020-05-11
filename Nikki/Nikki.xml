@@ -9,7 +9,7 @@
             
             </summary>
         </member>
-        <member name="P:Nikki.Core.CarbonOptions.Default">
+        <member name="F:Nikki.Core.CarbonOptions.Default">
             <summary>
             
             </summary>
@@ -5485,11 +5485,12 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Carbon.Class.TPKBlock"/> with.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.TPKBlock.GetTextureHeaders(System.IO.BinaryReader)">
+        <member name="M:Nikki.Support.Carbon.Class.TPKBlock.GetTextureHeaders(System.IO.BinaryReader,System.Int32)">
             <summary>
             Gets list of offsets and sizes of the texture headers in the <see cref="T:Nikki.Support.Carbon.Class.TPKBlock"/>.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Carbon.Class.TPKBlock"/> with.</param>
+            <param name="count">Number of textures to read.</param>
             <returns>Array of offsets and sizes of texture headers.</returns>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.TPKBlock.ParseCompTexture(System.IO.BinaryReader,Nikki.Support.Shared.Parts.TPKParts.OffSlot)">
@@ -5553,12 +5554,13 @@
             A static manager to assemble and disassemble <see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> collections.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Carbon.Framework.CarPartManager.Assemble(System.IO.BinaryWriter,Nikki.Database.Carbon)">
+        <member name="M:Nikki.Support.Carbon.Framework.CarPartManager.Assemble(System.IO.BinaryWriter,System.String,Nikki.Database.Carbon)">
             <summary>
             Assembles entire root of <see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> into a byte array and 
             writes it with <see cref="T:System.IO.BinaryWriter"/> provided.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="mark">Watermark to put in the strings block.</param>
             <param name="db"><see cref="T:Nikki.Database.Carbon"/> database with roots 
             and collections.</param>
         </member>
@@ -7849,11 +7851,12 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.MostWanted.Class.TPKBlock"/> with.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.TPKBlock.GetTextureHeaders(System.IO.BinaryReader)">
+        <member name="M:Nikki.Support.MostWanted.Class.TPKBlock.GetTextureHeaders(System.IO.BinaryReader,System.Int32)">
             <summary>
             Gets list of offsets and sizes of the texture headers in the <see cref="T:Nikki.Support.MostWanted.Class.TPKBlock"/>.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.MostWanted.Class.TPKBlock"/> with.</param>
+            <param name="count">Number of textures to read.</param>
             <returns>Array of offsets and sizes of texture headers.</returns>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.TPKBlock.ParseCompTexture(System.IO.BinaryReader,Nikki.Support.Shared.Parts.TPKParts.OffSlot)">
@@ -10024,11 +10027,12 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.TPKBlock.GetTextureHeaders(System.IO.BinaryReader)">
+        <member name="M:Nikki.Support.Shared.Class.TPKBlock.GetTextureHeaders(System.IO.BinaryReader,System.Int32)">
             <summary>
             Gets list of offsets and sizes of the texture headers in the <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> with.</param>
+            <param name="count">Number of textures to read.</param>
             <returns>Array of offsets and sizes of texture headers.</returns>
         </member>
         <member name="M:Nikki.Support.Shared.Class.TPKBlock.GetCompressionList(System.IO.BinaryReader)">
@@ -13369,11 +13373,12 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Class.TPKBlock"/> with.</param>
         </member>
-        <member name="M:Nikki.Support.Underground2.Class.TPKBlock.GetTextureHeaders(System.IO.BinaryReader)">
+        <member name="M:Nikki.Support.Underground2.Class.TPKBlock.GetTextureHeaders(System.IO.BinaryReader,System.Int32)">
             <summary>
             Gets list of offsets and sizes of the texture headers in the <see cref="T:Nikki.Support.Underground2.Class.TPKBlock"/>.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Class.TPKBlock"/> with.</param>
+            <param name="count">Number of textures to read.</param>
             <returns>Array of offsets and sizes of texture headers.</returns>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.TPKBlock.ParseCompTexture(System.IO.BinaryReader,Nikki.Support.Shared.Parts.TPKParts.OffSlot)">
