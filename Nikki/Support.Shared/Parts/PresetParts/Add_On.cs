@@ -3,7 +3,7 @@
     /// <summary>
     /// Class with all addon strings that can be used to create labels for preset parts.
     /// </summary>
-    public class Add_On
+    internal class Add_On
     {
         public string _0 = "0";
         public string _1 = "1";

@@ -7,7 +7,7 @@ using Nikki.Reflection.Attributes;
 
 
 
-namespace Nikki.Support.MostWanted.Parts.PresetParts
+namespace Nikki.Support.Carbon.Parts.PresetParts
 {
 	/// <summary>
 	/// A unit <see cref="Damages"/> used in preset rides.

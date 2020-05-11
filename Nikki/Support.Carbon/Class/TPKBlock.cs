@@ -23,6 +23,7 @@ namespace Nikki.Support.Carbon.Class
         #region Fields
 
         private string _collection_name;
+        private const long max = 0x7FFFFFFF;
 
         #endregion
 
@@ -209,9 +210,9 @@ namespace Nikki.Support.Carbon.Class
 
             // Get texture header info
             br.BaseStream.Position = PartOffsets[3];
-            var texture_list = this.GetTextureHeaders(br);
+            var texture_list = this.GetTextureHeaders(br, TextureCount);
 
-            if (PartOffsets[2] != -1)
+            if (PartOffsets[2] != max)
             {
                 for (int a1 = 0; a1 < TextureCount; ++a1)
                 {
@@ -224,7 +225,7 @@ namespace Nikki.Support.Carbon.Class
                 // Add textures to the list
                 for (int a1 = 0; a1 < TextureCount; ++a1)
                 {
-                    br.BaseStream.Position = texture_list[a1, 0];
+                    br.BaseStream.Position = texture_list[a1];
                     var tex = new Texture(br, this.CollectionName, this.Database);
                     this.Textures.Add(tex);
                 }
@@ -515,7 +516,7 @@ namespace Nikki.Support.Carbon.Class
         /// <returns>Array of all offsets.</returns>
         protected override long[] FindOffsets(BinaryReader br)
         {
-            var offsets = new long[8] { -1, -1, -1, -1, -1, -1, -1, -1 };
+            var offsets = new long[8] { max, max, max, max, max, max, max, max };
             long ReaderOffset = 0;
             uint ReaderID = 0;
             int InfoBlockSize = 0;
@@ -556,7 +557,8 @@ namespace Nikki.Support.Carbon.Class
                         goto default;
 
                     default:
-                        br.BaseStream.Position += br.ReadInt32();
+                        int size = br.ReadInt32();
+                        br.BaseStream.Position += size;
                         break;
                 }
             }
@@ -569,8 +571,8 @@ namespace Nikki.Support.Carbon.Class
                     br.BaseStream.Position += DataBlockSize;
             }
 
-            ReaderOffset += br.BaseStream.Position; // relative offset
-            while (ReaderOffset < ReaderOffset + DataBlockSize)
+            ReaderOffset = br.BaseStream.Position; // relative offset
+            while (br.BaseStream.Position < ReaderOffset + DataBlockSize)
             {
                 ReaderID = br.ReadUInt32();
                 switch (ReaderID)
@@ -588,7 +590,8 @@ namespace Nikki.Support.Carbon.Class
                         goto default;
 
                     default:
-                        ReaderOffset += br.ReadInt32();
+                        int size = br.ReadInt32();
+                        br.BaseStream.Position += size;
                         break;
                 }
             }
@@ -603,7 +606,7 @@ namespace Nikki.Support.Carbon.Class
         /// <returns>Number of textures in the tpk block.</returns>
         protected override int GetTextureCount(BinaryReader br)
         {
-            if (br.BaseStream.Position == -1) return 0; // check if Part2 even exists
+            if (br.BaseStream.Position == max) return 0; // check if Part2 even exists
             return br.ReadInt32() / 8; // 8 bytes for one texture
         }
 
@@ -613,6 +616,7 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="TPKBlock"/> with.</param>
         protected override void GetHeaderInfo(BinaryReader br)
         {
+            if (br.BaseStream.Position == max) return; // check if Part1 even exists
             if (br.ReadInt32() != 0x7C) return; // check header size
 
             // Check TPK version
@@ -639,7 +643,7 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="TPKBlock"/> with.</param>
         protected override IEnumerable<OffSlot> GetOffsetSlots(BinaryReader br)
         {
-            if (br.BaseStream.Position == -1) yield break;  // if Part3 does not exist
+            if (br.BaseStream.Position == max) yield break;  // if Part3 does not exist
 
             int ReaderSize = br.ReadInt32();
             var ReaderOffset = br.BaseStream.Position;
@@ -661,31 +665,25 @@ namespace Nikki.Support.Carbon.Class
         /// Gets list of offsets and sizes of the texture headers in the <see cref="TPKBlock"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="TPKBlock"/> with.</param>
+        /// <param name="count">Number of textures to read.</param>
         /// <returns>Array of offsets and sizes of texture headers.</returns>
-        protected override int[,] GetTextureHeaders(BinaryReader br)
+        protected override long[] GetTextureHeaders(BinaryReader br, int count)
         {
-            if (br.BaseStream.Position == -1) return null;  // if Part4 does not exist
+            if (br.BaseStream.Position == max) return null;  // if Part4 does not exist
 
             int ReaderSize = br.ReadInt32();
             var ReaderOffset = br.BaseStream.Position;
-            var offsets = new List<long>();
-            var sizes = new List<long>();
+            var result = new long[count];
 
-            while (br.BaseStream.Position < ReaderOffset + ReaderSize)
+            int len = 0;
+            while (len < count && br.BaseStream.Position < ReaderOffset + ReaderSize)
             {
-                offsets.Add(br.BaseStream.Position); // add offset
-                var temp = br.BaseStream.Position;
+                result[len++] = br.BaseStream.Position; // add offset
                 br.BaseStream.Position += 0x58; // advance to the name of the texture
+                byte size = br.ReadByte();
                 br.BaseStream.Position += br.ReadByte(); // skip texture name
-                sizes.Add(br.BaseStream.Position - temp); // add size
             }
 
-            var result = new int[offsets.Count, 2];
-            for (int a1 = 0; a1 < offsets.Count; ++a1)
-            {
-                result[a1, 0] = (int)offsets[a1];
-                result[a1, 1] = (int)sizes[a1];
-            }
             return result;
         }
 

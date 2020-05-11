@@ -4,18 +4,22 @@ using System.Text;
 
 namespace Nikki.Core
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class CarbonOptions
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public CarbonOptions Default => new CarbonOptions()
 		{
-			GlobalA = String.Empty,
-			GlobalB = String.Empty,
-			LangFile = String.Empty,
+			File = String.Empty,
 			Watermark = $"Nikki by MaxHwoy | {DateTime.Today:00/00/0000}",
 			MessageShow = false,
 			CarTypeInfos = false,
-			Collisions = false,
-			DBModelParts = false,
+			Collisions = true,
+			ModelParts = false,
 			Materials = false,
 			PresetRides = false,
 			PresetSkins = false,
@@ -23,34 +27,69 @@ namespace Nikki.Core
 			TPKBlocks = false
 		};
 
-		public string GlobalA;
+		/// <summary>
+		/// 
+		/// </summary>
+		public string File { get; set; } = String.Empty;
 
-		public string GlobalB;
+		/// <summary>
+		/// 
+		/// </summary>
+		public string Watermark { get; set; } = String.Empty;
 
-		public string LangFile;
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool MessageShow { get; set; }
 
-		public string Watermark;
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool CarTypeInfos { get; set; }
 
-		public bool MessageShow;
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool Collisions { get; set; }
 
-		public bool CarTypeInfos;
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool ModelParts { get; set; }
 
-		public bool Collisions;
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool FNGroups { get; set; }
 
-		public bool DBModelParts;
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool Materials { get; set; }
 
-		public bool FNGroups;
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool PresetRides { get; set; }
 
-		public bool Materials;
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool PresetSkins { get; set; }
 
-		public bool PresetRides;
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool STRBlocks { get; set; }
 
-		public bool PresetSkins;
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool TPKBlocks { get; set; }
 
-		public bool STRBlocks;
-
-		public bool TPKBlocks;
-
+		/// <summary>
+		/// 
+		/// </summary>
 		public CarbonOptions() { }
 	}
 }

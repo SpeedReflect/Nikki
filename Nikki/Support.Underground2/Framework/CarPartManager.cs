@@ -81,7 +81,7 @@ namespace Nikki.Support.Underground2.Framework
 			});
 
 			// Iterate through each model in the database
-			foreach (var model in db.DBModelPartList)
+			foreach (var model in db.ModelParts.Collections)
 			{
 				// Iterate through each RealCarPart in a model
 				foreach (Parts.CarParts.RealCarPart realpart in model.ModelCarParts)
@@ -144,7 +144,7 @@ namespace Nikki.Support.Underground2.Framework
 			using var bw = new BinaryWriter(ms);
 
 			// Iterate through every model in the database
-			foreach (var model in db.DBModelPartList)
+			foreach (var model in db.ModelParts.Collections)
 			{
 				// Iterate through every RealCarPart in a model
 				foreach (Parts.CarParts.RealCarPart realpart in model.ModelCarParts)
@@ -200,7 +200,7 @@ namespace Nikki.Support.Underground2.Framework
 			using var bw = new BinaryWriter(ms);
 
 			// Iterate through each model in the database
-			foreach (var model in db.DBModelPartList)
+			foreach (var model in db.ModelParts.Collections)
 			{
 				// Iterate through each RealCarPart in a model
 				foreach (Parts.CarParts.RealCarPart realpart in model.ModelCarParts)
@@ -240,7 +240,7 @@ namespace Nikki.Support.Underground2.Framework
 			using var bw = new BinaryWriter(ms);
 
 			// Iterate through every model in the database
-			foreach (var model in db.DBModelPartList)
+			foreach (var model in db.ModelParts.Collections)
 			{
 				// Iterate through every RealCarPart in a model
 				foreach (Parts.CarParts.RealCarPart realpart in model.ModelCarParts)
@@ -266,7 +266,7 @@ namespace Nikki.Support.Underground2.Framework
 		private static int MakeModelsList(Database.Underground2 db, out byte[] models_buffer)
 		{
 			// Precalculate size; offset should be at 0xC
-			var size = db.DBModelPartList.Count * 4;
+			var size = db.ModelParts.Length * 4;
 			var dif = 0x10 - (size + 4) % 0x10;
 			if (dif != 0x10) size += dif;
 			models_buffer = new byte[size];
@@ -276,11 +276,11 @@ namespace Nikki.Support.Underground2.Framework
 			using var bw = new BinaryWriter(ms);
 
 			// Write all BinKeys of models
-			for (int a1 = 0; a1 < db.DBModelPartList.Count; ++a1)
-				bw.Write(db.DBModelPartList[a1].BinKey);
+			for (int a1 = 0; a1 < db.ModelParts.Length; ++a1)
+				bw.Write(db.ModelParts[a1].BinKey);
 
 			// Return prepared list
-			return db.DBModelPartList.Count;
+			return db.ModelParts.Length;
 		}
 
 		private static int MakeCPPartList(Dictionary<int, int> string_dict, Dictionary<int, int> offset_dict,
@@ -299,7 +299,7 @@ namespace Nikki.Support.Underground2.Framework
 
 			byte count = 0;
 			// Iterate through every model in the database
-			foreach (var model in db.DBModelPartList)
+			foreach (var model in db.ModelParts.Collections)
 			{
 				// Iterate through every RealCarPart in a model
 				foreach (Parts.CarParts.RealCarPart realpart in model.ModelCarParts)
@@ -652,7 +652,7 @@ namespace Nikki.Support.Underground2.Framework
 					}
 					collection.ModelCarParts.Add(realpart);
 				}
-				db.DBModelPartList.Add(collection);
+				db.ModelParts.Collections.Add(collection);
 			}
 		}
 	}

@@ -1,6 +1,6 @@
 ﻿namespace Nikki.Support.MostWanted.Parts.CarParts
 {
-    public static class UsageType
+    internal static class UsageType
     {
         // 191 parts total (0xBF)
         public static string[] PartName = {

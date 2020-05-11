@@ -23,7 +23,6 @@ namespace Nikki.Support.Underground2.Class
 		#region Fields
 
 		private string _collection_name;
-		private string _category;
 		private byte[] _unk_data;
 		private List<StringRecord> _stringinfo = new List<StringRecord>();
 

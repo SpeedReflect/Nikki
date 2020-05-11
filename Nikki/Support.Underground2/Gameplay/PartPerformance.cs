@@ -61,7 +61,7 @@ namespace Nikki.Support.Underground2.Gameplay
 					throw new CollectionExistenceException();
 				this._collection_name = value;
 				if (this._cname_is_set)
-					Map.PerfPartTable[(int)this._part_perf_type, this._upgrade_level, this._upgrade_part_index] = ConvertX.ToUInt32(value);
+					Map.PerfPartTable[(int)this._part_perf_type, this._upgrade_level, this._upgrade_part_index] = Convert.ToUInt32(value, 16);
 			}
 		}
 

@@ -48,9 +48,6 @@ namespace Nikki.Support.Carbon.Class
         private int _unknown1 = 0;
         private int _unknown2 = 0;
         private int _unknown3 = 0;
-
-        private int _located_at = 0;
-        private int _size_of_block = 0;
         private string _parent_TPK;
 
         #endregion
@@ -191,6 +188,7 @@ namespace Nikki.Support.Carbon.Class
 
             // Write all settings
             bw.Write(this._cube_environment);
+            bw.Write((long)0);
             bw.Write(this.BinKey);
             bw.Write(this._class);
             bw.Write((uint)this.Offset);
@@ -241,6 +239,7 @@ namespace Nikki.Support.Carbon.Class
         public override void Disassemble(BinaryReader br)
         {
             this._cube_environment = br.ReadUInt32();
+            br.BaseStream.Position += 8;
             this.BinKey = br.ReadUInt32();
             this._class = br.ReadUInt32();
             this.Offset = br.ReadInt32();
@@ -278,7 +277,8 @@ namespace Nikki.Support.Carbon.Class
             this._unknown3 = br.ReadInt32();
 
             // Get texture name
-            this._collection_name = br.ReadNullTermUTF8(br.ReadByte());
+            int len = br.ReadByte();
+            this._collection_name = br.ReadNullTermUTF8(len);
         }
 
         /// <summary>

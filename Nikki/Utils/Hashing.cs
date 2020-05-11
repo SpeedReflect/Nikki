@@ -108,7 +108,11 @@ namespace Nikki.Utils
                     break;
             }
 
-            return Mix32_2(a, b, c);
+            var result = Mix32_2(a, b, c);
+
+            // Put into raider keys
+            Map.VltKeys[result] = value;
+            return result;
         }
 
         /// <summary>

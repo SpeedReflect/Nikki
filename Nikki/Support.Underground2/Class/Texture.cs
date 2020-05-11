@@ -51,9 +51,6 @@ namespace Nikki.Support.Underground2.Class
         private int _unknown3 = 0;
         private int _unknown4 = 0;
         private int _unknown5 = 0;
-
-        private int _located_at = 0;
-        private int _size_of_block = 0;
         private string _parent_TPK;
 
         #endregion

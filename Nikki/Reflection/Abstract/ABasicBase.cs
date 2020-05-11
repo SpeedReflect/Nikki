@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Nikki.Core;
+using Nikki.Database;
 using Nikki.Reflection.Interface;
 
 
@@ -41,6 +42,18 @@ namespace Nikki.Reflection.Abstract
         /// Game string to which the class belongs to.
         /// </summary>
         public abstract string GameSTR { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public abstract bool Load();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public abstract bool Save();
 
         /// <summary>
         /// Gets a <see cref="ACollectable"/> class from CollectionName and root provided.
@@ -103,10 +116,10 @@ namespace Nikki.Reflection.Abstract
         /// <summary>
         /// Attempts to set value statically in all collections in the root specified.
         /// </summary>
-        /// <param name="root"></param>
-        /// <param name="field"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="root">Root collection of the class.</param>
+        /// <param name="field">Name of the field to be modified.</param>
+        /// <param name="value">Value to be set at the field specified.</param>
+        /// <returns>True on success; false otherwise.</returns>
         public virtual bool TrySetStaticValue(string root, string field, string value)
         {
             var property = this.GetType().GetProperty(root ?? string.Empty);
@@ -123,11 +136,11 @@ namespace Nikki.Reflection.Abstract
         /// <summary>
         /// Attempts to set value statically in all collections in the root specified.
         /// </summary>
-        /// <param name="root"></param>
-        /// <param name="field"></param>
-        /// <param name="value"></param>
-        /// <param name="error"></param>
-        /// <returns></returns>
+        /// <param name="root">Root collection of the class.</param>
+        /// <param name="field">Name of the field to be modified.</param>
+        /// <param name="value">Value to be set at the field specified.</param>
+        /// <param name="error">Error occured when trying to set value.</param>
+        /// <returns>True on success; false otherwise.</returns>
         public virtual bool TrySetStaticValue(string root, string field, string value, out string error)
         {
             error = null;
@@ -444,30 +457,6 @@ namespace Nikki.Reflection.Abstract
                 return false;
             }
         }
-
-        /// <summary>
-        /// Adds collision block to the database memory.
-        /// </summary>
-        /// <param name="CName">Collection Name of the collision block.</param>
-        /// <param name="filename">Filepath of the collision block to be imported.</param>
-        /// <param name="error">Error occured when trying to add collision.</param>
-        /// <returns>True if adding was successful; false otherwise.</returns>
-        public abstract bool TryAddCollision(string CName, string filename, out string error);
-
-        /// <summary>
-        /// Exports all textures to the directory specified as .dds files.
-        /// </summary>
-        /// <param name="dir">Directory where all textures should be extracted.</param>
-        /// <returns>True if export was successful.</returns>
-        public abstract bool ExportTextures(string dir);
-
-        /// <summary>
-        /// Exports all textures to the directory specified.
-        /// </summary>
-        /// <param name="dir">Directory where all textures should be extracted.</param>
-        /// <param name="mode">Mode of extraction. Range: ".dds", ".png", ".jpg", ".tiff", ".bmp".</param>
-        /// <returns>True if export was successful.</returns>
-        public abstract bool ExportTextures(string dir, string mode);
 
         /// <summary>
         /// Gets information about <see cref="ABasicBase"/> database.

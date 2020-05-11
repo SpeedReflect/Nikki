@@ -1,6 +1,6 @@
 ﻿namespace Nikki.Support.Underground2.Parts.CarParts
 {
-	public static class UsageType
+	internal static class UsageType
 	{
 		// 270 parts total (0x10E)
 		public static string[] PartName =

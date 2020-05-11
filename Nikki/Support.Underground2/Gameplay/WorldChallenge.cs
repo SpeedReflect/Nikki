@@ -137,7 +137,7 @@ namespace Nikki.Support.Underground2.Gameplay
 
 		/// <summary>
 		/// Index of the third unique part that gets unlocked upon completion.
-		/// </summary
+		/// </summary>
 		[AccessModifiable()]
 		public byte UnlockablePart3_Index { get; set; }
 

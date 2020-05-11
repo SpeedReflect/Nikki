@@ -260,6 +260,11 @@ namespace Nikki.Support.Carbon.Class
             br.BaseStream.Position += 0x30;
             this.ManufacturerName = br.ReadNullTermUTF8(0x10);
 
+            // Hash
+            this._collection_name.BinHash();
+            this._collection_name.VltHash();
+
+            br.BaseStream.Position += 4;
             this.HeadlightFOV = br.ReadSingle();
             this.PadHighPerformance = br.ReadByte();
             this.NumAvailableSkinNumbers = br.ReadByte();

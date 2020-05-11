@@ -23,7 +23,6 @@ namespace Nikki.Support.Carbon.Class
 		#region Fields
 
 		private string _collection_name;
-		private string _category;
 		private List<StringRecord> _stringinfo = new List<StringRecord>();
 
 		/// <summary>

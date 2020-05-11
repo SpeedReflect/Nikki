@@ -3,7 +3,7 @@
     /// <summary>
     /// Class with strings to build labels for preset parts.
     /// </summary>
-    public class Concatenator
+    internal class Concatenator
     {
         // Strings in both NFSC, NFSMW and NFSUG2
         public string _BASE = "_BASE";                                        // has nothing

@@ -8,7 +8,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
 {
 	/// <summary>
 	/// A unit <see cref="RPM"/> used in car performance.
-	/// </summary
+	/// </summary>
 	public class RPM : ASubPart, ICopyable<RPM>
 	{
 		/// <summary>

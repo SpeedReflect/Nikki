@@ -8,7 +8,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
 {
     /// <summary>
     /// A unit <see cref="ECU"/> used in car performance.
-    /// </summary
+    /// </summary>
     public class ECU : ASubPart, ICopyable<ECU>
 	{
         /// <summary>
