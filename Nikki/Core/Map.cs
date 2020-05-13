@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Nikki.Reflection.Enum;
 
 
@@ -13,12 +14,18 @@ namespace Nikki.Core
 		/// <summary>
 		/// Map of all Bin keys during runtime of library.
 		/// </summary>
-		public static Dictionary<uint, string> BinKeys { get; set; } = new Dictionary<uint, string>();
+		public static Dictionary<uint, string> BinKeys { get; set; } = new Dictionary<uint, string>()
+		{
+			{ 0, String.Empty }
+		};
 
 		/// <summary>
 		/// Map of all Vlt keys during runtime of library.
 		/// </summary>
-		public static Dictionary<uint, string> VltKeys { get; set; } = new Dictionary<uint, string>();
+		public static Dictionary<uint, string> VltKeys { get; set; } = new Dictionary<uint, string>()
+		{
+			{ 0, String.Empty }
+		};
 
 		/// <summary>
 		/// Index table of all performance parts.

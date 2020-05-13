@@ -50,6 +50,8 @@ namespace Nikki.Support.Shared.Class
 
 		internal static string Watermark { get; set; } = String.Empty;
 
+		internal string BelongsToFile { get; set; } = String.Empty;
+
 		#endregion
 
 		#region Methods
