@@ -1,0 +1,16 @@
+﻿namespace Nikki.Reflection.Enum.CP
+{
+	public enum eAttribFloat : uint
+	{
+		BLEND = 0x02800544,
+		HOODHUE = 0x7822E22B,
+		HOODLUM = 0x7822F337,
+		HOODSAT = 0x78230E71,
+		TIREHUE = 0x06159D55,
+		TIRELUM = 0x0615AE61,
+		TIRESAT = 0x0615C99B,
+		SPINNEROFFSET = 0xA0773FA5,
+		SPINNER_TEXTURE = 0x931FF82E,
+		_0x9A9B6DDC = 0x9A9B6DDC,
+	}
+}

@@ -2,8 +2,9 @@
 using System.IO;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
-using Nikki.Reflection.Interface;
+using Nikki.Reflection.Enum.CP;
 using Nikki.Reflection.Attributes;
+using CoreExtensions.Conversions;
 
 
 
@@ -12,12 +13,37 @@ namespace Nikki.Support.Shared.Parts.CarParts
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with 4-byte boolean value.
 	/// </summary>
-	public class BoolAttribute : CPAttribute, ICopyable<BoolAttribute>
+	public class BoolAttribute : CPAttribute
 	{
+		private const eCarPartAttribType _type = eCarPartAttribType.Boolean;
+
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="BoolAttribute"/>.
 		/// </summary>
-		public override eCarPartAttribType AttribType => eCarPartAttribType.Boolean;
+		public override eCarPartAttribType AttribType
+		{
+			get => _type;
+			set
+			{
+				var index = this.BelongsTo.GetIndex(this);
+				this.BelongsTo.Attributes[index] = this.ConvertTo(value);
+			}
+		}
+
+		/// <summary>
+		/// Type of this <see cref="BoolAttribute"/>.
+		/// </summary>
+		[AccessModifiable()]
+		public eAttribBool Type { get; set; }
+
+		/// <summary>
+		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
+		/// </summary>
+		public override uint Key
+		{
+			get => (uint)this.Type;
+			set => this.Type = (eAttribBool)value;
+		}
 
 		/// <summary>
 		/// Attribute value.
@@ -29,6 +55,26 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Initializes new instance of <see cref="BoolAttribute"/>.
 		/// </summary>
 		public BoolAttribute() { }
+
+		/// <summary>
+		/// Initializes new instance of <see cref="BoolAttribute"/> with value provided.
+		/// </summary>
+		/// <param name="value">Value to set.</param>
+		/// <param name="part"><see cref="RealCarPart"/> to which this part belongs to.</param>
+		public BoolAttribute(object value, RealCarPart part)
+		{
+			this.BelongsTo = part;
+			try
+			{
+				this.Value = (int)value.ReinterpretCast(typeof(int)) == 0
+					? eBoolean.False
+					: eBoolean.True;
+			}
+			catch (Exception)
+			{
+				this.Value = eBoolean.False;
+			}
+		}
 
 		/// <summary>
 		/// Initializes new instance of <see cref="BoolAttribute"/> by reading data using 
@@ -111,15 +157,31 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public BoolAttribute PlainCopy()
+		public override CPAttribute PlainCopy()
 		{
 			var result = new BoolAttribute
 			{
-				Part = this.Part,
+				Type = this.Type,
 				Value = this.Value
 			};
 
 			return result;
 		}
+
+		/// <summary>
+		/// Converts this <see cref="BoolAttribute"/> to an attribute of type provided.
+		/// </summary>
+		/// <param name="type">Type of a new attribute.</param>
+		/// <returns>New <see cref="CPAttribute"/>.</returns>
+		public override CPAttribute ConvertTo(eCarPartAttribType type) =>
+			type switch
+			{
+				eCarPartAttribType.Floating => new FloatAttribute(this.Value, this.BelongsTo),
+				eCarPartAttribType.Integer => new IntAttribute(this.Value, this.BelongsTo),
+				eCarPartAttribType.String => new StringAttribute(this.Value, this.BelongsTo),
+				eCarPartAttribType.TwoString => new TwoStringAttribute(this.Value, this.BelongsTo),
+				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Value, this.BelongsTo),
+				_ => this
+			};
 	}
 }

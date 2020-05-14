@@ -274,6 +274,33 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		}
 
 		/// <summary>
+		/// Creates a plain copy of the objects that contains same values.
+		/// </summary>
+		/// <returns>Exact plain copy of the object.</returns>
+		public override Shared.Parts.CarParts.CPStruct PlainCopy()
+		{
+			var result = new CPStruct()
+			{
+				Exists = this.Exists,
+				Concatenator = this.Concatenator,
+				ConcatenatorExists = this.ConcatenatorExists,
+				Templated = this.Templated,
+				Geometry1Exists = this.Geometry1Exists,
+				Geometry2Exists = this.Geometry2Exists,
+				Geometry3Exists = this.Geometry3Exists,
+				Geometry4Exists = this.Geometry4Exists,
+				Geometry5Exists = this.Geometry5Exists,
+				GeometryName1 = this.GeometryName1,
+				GeometryName2 = this.GeometryName2,
+				GeometryName3 = this.GeometryName3,
+				GeometryName4 = this.GeometryName4,
+				GeometryName5 = this.GeometryName5
+			};
+
+			return result;
+		}
+
+		/// <summary>
 		/// Returns templated value and first geometry name as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>

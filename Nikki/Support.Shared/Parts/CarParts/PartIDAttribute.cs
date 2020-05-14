@@ -2,8 +2,9 @@
 using System.IO;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
-using Nikki.Reflection.Interface;
+using Nikki.Reflection.Enum.CP;
 using Nikki.Reflection.Attributes;
+using CoreExtensions.Conversions;
 
 
 
@@ -12,12 +13,37 @@ namespace Nikki.Support.Shared.Parts.CarParts
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with unknown byte and part ID values.
 	/// </summary>
-	public class PartIDAttribute : CPAttribute, ICopyable<PartIDAttribute>
+	public class PartIDAttribute : CPAttribute
 	{
+		private const eCarPartAttribType _type = eCarPartAttribType.CarPartID;
+
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="PartIDAttribute"/>.
 		/// </summary>
-		public override eCarPartAttribType AttribType => eCarPartAttribType.CarPartID;
+		public override eCarPartAttribType AttribType
+		{
+			get => _type;
+			set
+			{
+				var index = this.BelongsTo.GetIndex(this);
+				this.BelongsTo.Attributes[index] = this.ConvertTo(value);
+			}
+		}
+
+		/// <summary>
+		/// Type of this <see cref="BoolAttribute"/>.
+		/// </summary>
+		[AccessModifiable()]
+		public eAttribPartID Type { get; set; }
+
+		/// <summary>
+		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
+		/// </summary>
+		public override uint Key
+		{
+			get => (uint)this.Type;
+			set => this.Type = (eAttribPartID)value;
+		}
 
 		/// <summary>
 		/// Unknown byte value.
@@ -35,6 +61,26 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Initializes new instance of <see cref="PartIDAttribute"/>.
 		/// </summary>
 		public PartIDAttribute() { }
+
+		/// <summary>
+		/// Initializes new instance of <see cref="PartIDAttribute"/> with value provided.
+		/// </summary>
+		/// <param name="value">Value to set.</param>
+		/// <param name="part"><see cref="RealCarPart"/> to which this part belongs to.</param>
+		public PartIDAttribute(object value, RealCarPart part)
+		{
+			this.BelongsTo = part;
+			try
+			{
+				this.ID = (byte)value.ReinterpretCast(typeof(byte));
+				this.Unknown = 0;
+			}
+			catch (Exception)
+			{
+				this.ID = 0;
+				this.Unknown = 0;
+			}
+		}
 
 		/// <summary>
 		/// Initializes new instance of <see cref="PartIDAttribute"/> by reading data using 
@@ -123,16 +169,32 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public PartIDAttribute PlainCopy()
+		public override CPAttribute PlainCopy()
 		{
 			var result = new PartIDAttribute
 			{
-				Part = this.Part,
+				Type = this.Type,
 				ID = this.ID,
 				Unknown = this.Unknown
 			};
 
 			return result;
 		}
+
+		/// <summary>
+		/// Converts this <see cref="BoolAttribute"/> to an attribute of type provided.
+		/// </summary>
+		/// <param name="type">Type of a new attribute.</param>
+		/// <returns>New <see cref="CPAttribute"/>.</returns>
+		public override CPAttribute ConvertTo(eCarPartAttribType type) =>
+			type switch
+			{
+				eCarPartAttribType.Boolean => new BoolAttribute(this.ID, this.BelongsTo),
+				eCarPartAttribType.Floating => new FloatAttribute(this.ID, this.BelongsTo),
+				eCarPartAttribType.Integer => new IntAttribute(this.ID, this.BelongsTo),
+				eCarPartAttribType.String => new StringAttribute(this.ID, this.BelongsTo),
+				eCarPartAttribType.TwoString => new TwoStringAttribute(this.ID, this.BelongsTo),
+				_ => this
+			};
 	}
 }

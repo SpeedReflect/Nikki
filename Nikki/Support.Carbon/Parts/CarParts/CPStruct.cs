@@ -154,6 +154,29 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 		}
 
 		/// <summary>
+		/// Creates a plain copy of the objects that contains same values.
+		/// </summary>
+		/// <returns>Exact plain copy of the object.</returns>
+		public override Shared.Parts.CarParts.CPStruct PlainCopy()
+		{
+			var result = new CPStruct()
+			{
+				Exists = this.Exists,
+				Concatenator = this.Concatenator,
+				ConcatenatorExists = this.ConcatenatorExists,
+				Templated = this.Templated
+			};
+
+			for (int a1 = 0; a1 < StructNamesSize; ++a1)
+			{
+				result.GeometryExists[a1] = this.GeometryExists[a1];
+				result.GeometryName[a1] = this.GeometryName[a1];
+			}
+
+			return result;
+		}
+
+		/// <summary>
 		/// Returns templated value and first geometry name as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>

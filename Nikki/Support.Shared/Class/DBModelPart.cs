@@ -14,6 +14,8 @@ namespace Nikki.Support.Shared.Class
 	/// </summary>
 	public abstract class DBModelPart : ACollectable
 	{
+		#region Main Properties
+
 		/// <summary>
 		/// Index of this <see cref="DBModelPart"/> in the database.
 		/// </summary>
@@ -50,6 +52,15 @@ namespace Nikki.Support.Shared.Class
 		public abstract List<RealCarPart> ModelCarParts { get; set; }
 
 		/// <summary>
+		/// Total amount of <see cref="RealCarPart"/> in this <see cref="DBModelPart"/>.
+		/// </summary>
+		public virtual int Length => this.ModelCarParts.Count;
+
+		#endregion
+
+		#region Methods
+
+		/// <summary>
 		/// Casts all attributes from this object to another one.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new created object.</param>
@@ -58,5 +69,15 @@ namespace Nikki.Support.Shared.Class
 		{
 			throw new NotImplementedException();
 		}
+
+		public virtual RealCarPart GetRealPart(string name) =>
+			this.ModelCarParts.Find(_ => _.PartName == name);
+
+		public virtual RealCarPart GetRealPart(int index) =>
+			(index >= 0 && index < this.Length) ? this.ModelCarParts[index] : null;
+
+		public abstract void ResortNames();
+
+		#endregion
 	}
 }

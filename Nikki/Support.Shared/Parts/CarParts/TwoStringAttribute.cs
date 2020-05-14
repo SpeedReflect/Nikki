@@ -2,9 +2,10 @@
 using System.IO;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
-using Nikki.Reflection.Interface;
+using Nikki.Reflection.Enum.CP;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -13,24 +14,49 @@ namespace Nikki.Support.Shared.Parts.CarParts
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with two null-terminated string values.
 	/// </summary>
-	public class TwoStringAttribute : CPAttribute, ICopyable<TwoStringAttribute>
+	public class TwoStringAttribute : CPAttribute
 	{
+		private const eCarPartAttribType _type = eCarPartAttribType.TwoString;
+
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="StringAttribute"/>.
 		/// </summary>
-		public override eCarPartAttribType AttribType => eCarPartAttribType.TwoString;
+		public override eCarPartAttribType AttribType
+		{
+			get => _type;
+			set
+			{
+				var index = this.BelongsTo.GetIndex(this);
+				this.BelongsTo.Attributes[index] = this.ConvertTo(value);
+			}
+		}
+
+		/// <summary>
+		/// Type of this <see cref="BoolAttribute"/>.
+		/// </summary>
+		[AccessModifiable()]
+		public eAttribTwoString Type { get; set; }
+
+		/// <summary>
+		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
+		/// </summary>
+		public override uint Key
+		{
+			get => (uint)this.Type;
+			set => this.Type = (eAttribTwoString)value;
+		}
 
 		/// <summary>
 		/// Attribute value 1.
 		/// </summary>
 		[AccessModifiable()]
-		public string Value1 { get; set; }
+		public string Value1 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Attribute value 2.
 		/// </summary>
 		[AccessModifiable()]
-		public string Value2 { get; set; }
+		public string Value2 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Indicates whether value 1 exists.
@@ -48,6 +74,30 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Initializes new instance of <see cref="TwoStringAttribute"/>.
 		/// </summary>
 		public TwoStringAttribute() { }
+
+		/// <summary>
+		/// Initializes new instance of <see cref="TwoStringAttribute"/> with value provided.
+		/// </summary>
+		/// <param name="value">Value to set.</param>
+		/// <param name="part"><see cref="RealCarPart"/> to which this part belongs to.</param>
+		public TwoStringAttribute(object value, RealCarPart part)
+		{
+			this.BelongsTo = part;
+			try
+			{
+				this.Value1 = (string)value.ReinterpretCast(typeof(string));
+				this.Value2 = String.Empty;
+				this.Value1Exists = eBoolean.True;
+				this.Value2Exists = eBoolean.False;
+			}
+			catch (Exception)
+			{
+				this.Value1 = String.Empty;
+				this.Value2 = String.Empty;
+				this.Value1Exists = eBoolean.False;
+				this.Value2Exists = eBoolean.False;
+			}
+		}
 
 		/// <summary>
 		/// Initializes new instance of <see cref="TwoStringAttribute"/> by reading data using 
@@ -155,11 +205,11 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public TwoStringAttribute PlainCopy()
+		public override CPAttribute PlainCopy()
 		{
 			var result = new TwoStringAttribute
 			{
-				Part = this.Part,
+				Type = this.Type,
 				Value1 = this.Value1,
 				Value2 = this.Value2,
 				Value1Exists = this.Value1Exists,
@@ -168,5 +218,21 @@ namespace Nikki.Support.Shared.Parts.CarParts
 
 			return result;
 		}
+
+		/// <summary>
+		/// Converts this <see cref="BoolAttribute"/> to an attribute of type provided.
+		/// </summary>
+		/// <param name="type">Type of a new attribute.</param>
+		/// <returns>New <see cref="CPAttribute"/>.</returns>
+		public override CPAttribute ConvertTo(eCarPartAttribType type) =>
+			type switch
+			{
+				eCarPartAttribType.Boolean => new BoolAttribute(this.Value1, this.BelongsTo),
+				eCarPartAttribType.Floating => new FloatAttribute(this.Value1, this.BelongsTo),
+				eCarPartAttribType.Integer => new IntAttribute(this.Value1, this.BelongsTo),
+				eCarPartAttribType.String => new StringAttribute(this.Value1, this.BelongsTo),
+				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Value1, this.BelongsTo),
+				_ => this
+			};
 	}
 }

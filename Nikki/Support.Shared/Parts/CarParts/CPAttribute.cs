@@ -5,7 +5,8 @@ using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Support.Shared.Class;
-using Nikki.Reflection.Attributes;
+using Nikki.Reflection.Interface;
+using CoreExtensions.Reflection;
 
 
 
@@ -14,42 +15,22 @@ namespace Nikki.Support.Shared.Parts.CarParts
 	/// <summary>
 	/// A <see cref="DBModelPart"/> unit attribute.
 	/// </summary>
-	public abstract class CPAttribute : ASubPart
+	public abstract class CPAttribute : ASubPart, ICopyable<CPAttribute>
 	{
-		private string _part = String.Empty;
-		private uint _key = 0;
-
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="CPAttribute"/>.
 		/// </summary>
-		public abstract eCarPartAttribType AttribType { get; }
-
-		/// <summary>
-		/// Name of the part to which this <see cref="CPAttribute"/> belongs to.
-		/// </summary>
-		[AccessModifiable()]
-		public string Part
-		{
-			get => this._part;
-			set
-			{
-				this._part = value ?? String.Empty;
-				this._key = value.BinHash();
-			}
-		}
+		public abstract eCarPartAttribType AttribType { get; set; }
 
 		/// <summary>
 		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
 		/// </summary>
-		public uint Key
-		{
-			get => this._key;
-			set
-			{
-				this._key = value;
-				this._part = value.BinString(eLookupReturn.EMPTY);
-			}
-		}
+		public abstract uint Key { get; set; }
+
+		/// <summary>
+		/// <see cref="RealCarPart"/> to which this <see cref="CPAttribute"/> belongs to.
+		/// </summary>
+		public RealCarPart BelongsTo { get; set; }
 
 		/// <summary>
 		/// Disassembles byte array into <see cref="CPAttribute"/> using <see cref="BinaryReader"/> 
@@ -68,9 +49,22 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		public abstract void Assemble(BinaryWriter bw, Dictionary<int, int> string_dict);
 
 		/// <summary>
+		/// Converts this <see cref="CPAttribute"/> to an attribute of type provided.
+		/// </summary>
+		/// <param name="type">Type of a new attribute.</param>
+		/// <returns>New <see cref="CPAttribute"/>.</returns>
+		public abstract CPAttribute ConvertTo(eCarPartAttribType type);
+
+		/// <summary>
+		/// Creates a plain copy of the objects that contains same values.
+		/// </summary>
+		/// <returns>Exact plain copy of the object.</returns>
+		public virtual CPAttribute PlainCopy() { return null; }
+
+		/// <summary>
 		/// Returns attribute part label and its type as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() => $"{this.Part} | {this.AttribType}";
+		public override string ToString() => $"0x{this.Key:X8} | {this.AttribType}";
 	}
 }
