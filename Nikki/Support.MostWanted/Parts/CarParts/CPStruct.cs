@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
+using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
 
 
@@ -17,71 +18,85 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// <summary>
 		/// Indicates whether this struct should exist in the database or not.
 		/// </summary>
+		[AccessModifiable()]
 		public override eBoolean Exists { get; set; } = eBoolean.False;
 
 		/// <summary>
 		/// If true, all strings are built using string block; otherwise they are stored as keys.
 		/// </summary>
+		[AccessModifiable()]
 		public override eBoolean Templated { get; set; } = eBoolean.False;
 
 		/// <summary>
 		/// String that is used to be concatenated in front of geometry names.
 		/// </summary>
+		[AccessModifiable()]
 		public override string Concatenator { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry name 1 of this <see cref="CPStruct"/>.
 		/// </summary>
+		[AccessModifiable()]
 		public string GeometryName1 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry name 2 of this <see cref="CPStruct"/>.
 		/// </summary>
+		[AccessModifiable()]
 		public string GeometryName2 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry name 3 of this <see cref="CPStruct"/>.
 		/// </summary>
+		[AccessModifiable()]
 		public string GeometryName3 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry name 4 of this <see cref="CPStruct"/>.
 		/// </summary>
+		[AccessModifiable()]
 		public string GeometryName4 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry name 5 of this <see cref="CPStruct"/>.
 		/// </summary>
+		[AccessModifiable()]
 		public string GeometryName5 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// True if concatenator string exists; false otherwise.
 		/// </summary>
+		[AccessModifiable()]
 		public eBoolean ConcatenatorExists { get; set; } = eBoolean.False;
 
 		/// <summary>
 		/// True if geometry 1 exists; false othewise.
 		/// </summary>
+		[AccessModifiable()]
 		public eBoolean Geometry1Exists { get; set; } = eBoolean.False;
 
 		/// <summary>
 		/// True if geometry 2 exists; false othewise.
 		/// </summary>
+		[AccessModifiable()]
 		public eBoolean Geometry2Exists { get; set; } = eBoolean.False;
 
 		/// <summary>
 		/// True if geometry 3 exists; false othewise.
 		/// </summary>
+		[AccessModifiable()]
 		public eBoolean Geometry3Exists { get; set; } = eBoolean.False;
 
 		/// <summary>
 		/// True if geometry 4 exists; false othewise.
 		/// </summary>
+		[AccessModifiable()]
 		public eBoolean Geometry4Exists { get; set; } = eBoolean.False;
 
 		/// <summary>
 		/// True if geometry 5 exists; false othewise.
 		/// </summary>
+		[AccessModifiable()]
 		public eBoolean Geometry5Exists { get; set; } = eBoolean.False;
 
 		/// <summary>

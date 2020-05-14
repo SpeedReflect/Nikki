@@ -611,6 +611,7 @@ namespace Nikki.Support.Carbon.Framework
 					}
 					collection.ModelCarParts.Add(realpart);
 				}
+				collection.ResortNames();
 				db.ModelParts.Collections.Add(collection);
 			}
 		}

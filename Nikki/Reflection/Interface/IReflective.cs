@@ -39,6 +39,6 @@ namespace Nikki.Reflection.Interface
         /// <param name="value">Value to be set at the field specified.</param>
         /// <param name="error">Error occured when trying to set value.</param>
         /// <returns>True on success; false otherwise.</returns>
-        bool SetValue(string PropertyName, object value, ref string error);
+        bool SetValue(string PropertyName, object value, out string error);
     }
 }

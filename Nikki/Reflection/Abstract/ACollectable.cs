@@ -171,8 +171,9 @@ namespace Nikki.Reflection.Abstract
         /// <param name="value">Value to be set at the field specified.</param>
         /// <param name="error">Error occured when trying to set value.</param>
         /// <returns>True on success; false otherwise.</returns>
-        public bool SetValue(string PropertyName, object value, ref string error)
+        public bool SetValue(string PropertyName, object value, out string error)
         {
+            error = null;
             try
             {
                 var property = this.GetFastProperty(PropertyName);
@@ -183,7 +184,6 @@ namespace Nikki.Reflection.Abstract
                 }
                 if (!Attribute.IsDefined(property, typeof(AccessModifiableAttribute)))
                     throw new FieldAccessException("This field is either non-modifiable or non-accessible");
-                var type = property.GetType();
                 if (property.PropertyType.IsEnum)
                     property.SetValue(this, System.Enum.Parse(property.PropertyType, value.ToString()));
                 else

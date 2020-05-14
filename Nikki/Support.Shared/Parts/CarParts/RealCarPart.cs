@@ -83,29 +83,14 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// </summary>
 		/// <param name="key">Key of the new <see cref="CPAttribute"/>.</param>
 		/// <returns>True on success; false otherwise.</returns>
-		public virtual bool TryAddAttribute(uint key)
-		{
-			if (this.GetAttribute(key) != null) return false;
-			if (!Map.CarPartKeys.TryGetValue(key, out var type)) return false;
-			CPAttribute attribute = type switch
-			{
-				eCarPartAttribType.Boolean => new BoolAttribute(eBoolean.False, this),
-				eCarPartAttribType.Floating => new FloatAttribute((float)0, this),
-				eCarPartAttribType.CarPartID => new PartIDAttribute((int)0, this),
-				eCarPartAttribType.String => new StringAttribute(String.Empty, this),
-				eCarPartAttribType.TwoString => new TwoStringAttribute(String.Empty, this),
-				_ => new IntAttribute((int)0, this)
-			};
-			this.Attributes.Add(attribute);
-			return true;
-		}
+		public abstract bool TryAddAttribute(uint key);
 
 		/// <summary>
 		/// Attempts to add <see cref="CPAttribute"/> with label provided.
 		/// </summary>
 		/// <param name="label">Label of the new <see cref="CPAttribute"/>.</param>
 		/// <returns>True on success; false otherwise.</returns>
-		public virtual bool TryAddAttribute(string label) => this.TryAddAttribute(label.BinHash());
+		public abstract bool TryAddAttribute(string label);
 
 		/// <summary>
 		/// Attempts to add <see cref="CPAttribute"/> with key provided.
@@ -113,31 +98,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <param name="key">Key of the new <see cref="CPAttribute"/>.</param>
 		/// <param name="error">Error occured when trying to add new <see cref="CPAttribute"/>.</param>
 		/// <returns>True on success; false otherwise.</returns>
-		public virtual bool TryAddAttribute(uint key, out string error)
-		{
-			error = null;
-			if (this.GetAttribute(key) != null)
-			{
-				error = $"Attribute with key 0x{key:X8} already exists in this car part.";
-				return false;
-			}
-			if (!Map.CarPartKeys.TryGetValue(key, out var type))
-			{
-				error = $"Attribute with key 0x{key:X8} is invalid.";
-				return false;
-			}
-			CPAttribute attribute = type switch
-			{
-				eCarPartAttribType.Boolean => new BoolAttribute(eBoolean.False, this),
-				eCarPartAttribType.Floating => new FloatAttribute((float)0, this),
-				eCarPartAttribType.CarPartID => new PartIDAttribute((int)0, this),
-				eCarPartAttribType.String => new StringAttribute(String.Empty, this),
-				eCarPartAttribType.TwoString => new TwoStringAttribute(String.Empty, this),
-				_ => new IntAttribute((int)0, this)
-			};
-			this.Attributes.Add(attribute);
-			return true;
-		}
+		public abstract bool TryAddAttribute(uint key, out string error);
 
 		/// <summary>
 		/// Attempts to add <see cref="CPAttribute"/> with label provided.
@@ -145,8 +106,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <param name="label">Label of the new <see cref="CPAttribute"/>.</param>
 		/// <param name="error">Error occured when trying to add new <see cref="CPAttribute"/>.</param>
 		/// <returns>True on success; false otherwise.</returns>
-		public virtual bool TryAddAttribute(string label, out string error) =>
-			this.TryAddAttribute(label.BinHash(), out error);
+		public abstract bool TryAddAttribute(string label, out string error);
 
 		/// <summary>
 		/// Attempts to remove <see cref="CPAttribute"/> with key provided.

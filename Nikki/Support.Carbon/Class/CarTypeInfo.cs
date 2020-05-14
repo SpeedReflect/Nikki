@@ -91,11 +91,13 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Manufacturer name of the <see cref="CarTypeInfo"/>.
         /// </summary>
-        public override string ManufacturerName { get; set; }
+        [AccessModifiable()]
+        public override string ManufacturerName { get; set; } = String.Empty;
 
         /// <summary>
         /// Default base paint of the <see cref="CarTypeInfo"/>.
         /// </summary>
+        [AccessModifiable()]
         public override string DefaultBasePaint { get; set; } = String.Empty;
 
         /// <summary>
@@ -107,16 +109,19 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Spoiler type of the <see cref="CarTypeInfo"/>.
         /// </summary>
+        [AccessModifiable()]
         public string Spoiler { get; set; } = String.Empty;
 
         /// <summary>
         /// Autosculpt spoiler type of the <see cref="CarTypeInfo"/>.
         /// </summary>
+        [AccessModifiable()]
         public string SpoilerAS { get; set; } = String.Empty;
 
         /// <summary>
         /// RoofScoop type of the <see cref="CarTypeInfo"/>.
         /// </summary>
+        [AccessModifiable()]
         public string RoofScoop { get; set; } = String.Empty;
 
         #endregion

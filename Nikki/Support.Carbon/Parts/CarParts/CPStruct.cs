@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
+using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
 
 
@@ -17,31 +18,37 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 		/// <summary>
 		/// Indicates whether this struct should exist in the database or not.
 		/// </summary>
+		[AccessModifiable()]
 		public override eBoolean Exists { get; set; } = eBoolean.False;
 
 		/// <summary>
 		/// If true, all strings are built using string block; otherwise they are stored as keys.
 		/// </summary>
+		[AccessModifiable()]
 		public override eBoolean Templated { get; set; } = eBoolean.False;
 
 		/// <summary>
 		/// String that is used to be concatenated in front of geometry names.
 		/// </summary>
+		[AccessModifiable()]
 		public override string Concatenator { get; set; } = String.Empty;
 
 		/// <summary>
 		/// True if concatenator string exists; false otherwise.
 		/// </summary>
+		[AccessModifiable()]
 		public eBoolean ConcatenatorExists { get; set; } = eBoolean.False;
 
 		/// <summary>
 		/// Geometry names of the struct.
 		/// </summary>
+		[AccessModifiable()]
 		public string[] GeometryName { get; set; } = new string[StructNamesSize];
 
 		/// <summary>
 		/// Indicates existing geometries in the struct.
 		/// </summary>
+		[AccessModifiable()]
 		public eBoolean[] GeometryExists { get; set; } = new eBoolean[StructNamesSize];
 
 		/// <summary>

@@ -304,7 +304,7 @@ namespace Nikki.Support.MostWanted.Framework
 				foreach (Parts.CarParts.RealCarPart realpart in model.ModelCarParts)
 				{
 					// Write main properties
-					bw.Write(realpart.PartName.BinHash());
+					bw.Write(realpart.PartLabel.BinHash());
 					bw.Write(realpart.CarPartGroupID);
 					bw.Write(realpart.UpgradeGroupID);
 					bw.Write(count);
@@ -631,7 +631,7 @@ namespace Nikki.Support.MostWanted.Framework
 					struct_dict.TryGetValue(temppart.StructOffset, out var cpstr);
 					var realpart = new Parts.CarParts.RealCarPart(a1, cpoff?.AttribOffsets.Count ?? 0, collection)
 					{
-						PartName = temppart.PartNameHash.BinString(eLookupReturn.EMPTY),
+						PartLabel = temppart.PartNameHash.BinString(eLookupReturn.EMPTY),
 						DebugName = temppart.DebugName,
 						CarPartGroupID = temppart.CarPartGroupID,
 						UpgradeGroupID = temppart.UpgradeGroupID,
@@ -644,6 +644,7 @@ namespace Nikki.Support.MostWanted.Framework
 					}
 					collection.ModelCarParts.Add(realpart);
 				}
+				collection.ResortNames();
 				db.ModelParts.Collections.Add(collection);
 			}
 		}
