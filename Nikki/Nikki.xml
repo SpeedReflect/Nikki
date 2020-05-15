@@ -3980,9 +3980,9 @@
             ID of <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> block.
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.ID.Global.CarTypeInfo">
+        <member name="F:Nikki.Reflection.ID.Global.CarTypeInfos">
             <summary>
-            ID of <see cref="F:Nikki.Reflection.ID.Global.CarTypeInfo"/> block.
+            ID of <see cref="T:Nikki.Support.Shared.Class.CarTypeInfo"/> block.
             </summary>
         </member>
         <member name="F:Nikki.Reflection.ID.Global.SlotTypes">
@@ -3992,7 +3992,7 @@
         </member>
         <member name="F:Nikki.Reflection.ID.Global.CarParts">
             <summary>
-            ID of DBCarPart block.
+            ID of <see cref="T:Nikki.Support.Shared.Class.DBModelPart"/> block.
             </summary>
         </member>
         <member name="F:Nikki.Reflection.ID.Global.SunInfos">
@@ -4017,7 +4017,7 @@
         </member>
         <member name="F:Nikki.Reflection.ID.Global.Collisions">
             <summary>
-            ID of Collision Bounds block.
+            ID of <see cref="T:Nikki.Support.Shared.Class.Collision"/> database block.
             </summary>
         </member>
         <member name="F:Nikki.Reflection.ID.Global.CareerInfo">
@@ -4058,6 +4058,11 @@
         <member name="F:Nikki.Reflection.ID.Global.FloatChunk">
             <summary>
             ID of some unknown float chunk.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.ID.Global.LimitsTable">
+            <summary>
+            ID of Carbon limits table.
             </summary>
         </member>
         <member name="T:Nikki.Reflection.ID.TPK">

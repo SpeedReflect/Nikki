@@ -10,7 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="C:\Users\Max\source\repos\CoreExtensions\CoreExtensions\CoreExtensions.csproj" />
+    <Reference Include="CoreExtensions">
+      <HintPath>CoreExtensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

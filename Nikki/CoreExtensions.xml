@@ -97,14 +97,6 @@
             <param name="value"></param>
             <returns>Average of all values.</returns>
         </member>
-        <member name="M:CoreExtensions.Conversions.EnumerableX.Resize``1(System.Collections.Generic.List{``0},System.Int32)">
-            <summary>
-            Resizes <see cref="T:System.Collections.Generic.List`1"/> to a count specified.
-            </summary>
-            <typeparam name="TypeID"><see cref="T:System.Type"/> of elements in this list.</typeparam>
-            <param name="list">This <see cref="T:System.Collections.Generic.List`1"/> to resize.</param>
-            <param name="count">Number of items to resize to.</param>
-        </member>
         <member name="T:CoreExtensions.Conversions.FormatX">
             <summary>
             Provides extension for reverse formatting of the strings.
@@ -129,6 +121,30 @@
             <param name="format">Format to which parse the string and return the value.</param>
             <param name="result">Result value of type <see cref="T:System.IConvertible"/> passed.</param>
             <returns>Value got from format of the string passed.</returns>
+        </member>
+        <member name="T:CoreExtensions.Conversions.ListX">
+            <summary>
+            Provides all major extensions for <see cref="T:System.Collections.Generic.List`1"/>.
+            </summary>
+        </member>
+        <member name="M:CoreExtensions.Conversions.ListX.Resize``1(System.Collections.Generic.List{``0},System.Int32)">
+            <summary>
+            Resizes <see cref="T:System.Collections.Generic.List`1"/> to a count specified.
+            </summary>
+            <typeparam name="TypeID"><see cref="T:System.Type"/> of elements in this list.</typeparam>
+            <param name="list">This <see cref="T:System.Collections.Generic.List`1"/> to resize.</param>
+            <param name="count">Number of items to resize to.</param>
+        </member>
+        <member name="M:CoreExtensions.Conversions.ListX.RemoveWith``1(System.Collections.Generic.List{``0},System.Predicate{``0})">
+            <summary>
+            Searches for an element that matches the conditions defined by the specified        
+            predicate, and removes the first occurrence within the entire <see cref="T:System.Collections.Generic.List`1"/>.
+            </summary>
+            <typeparam name="TypeID"><see cref="T:System.Type"/> of elements in this list.</typeparam>
+            <param name="list">This list to remove element in.</param>
+            <param name="predicate">The <see cref="T:System.Predicate`1"/> delegate that defines the 
+            conditions of the element to remove.</param>
+            <returns></returns>
         </member>
         <member name="T:CoreExtensions.IO.BigEndianBinaryReader">
             <summary>
