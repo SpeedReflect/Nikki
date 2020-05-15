@@ -4,79 +4,79 @@
         <name>Nikki</name>
     </assembly>
     <members>
-        <member name="T:Nikki.Core.CarbonOptions">
+        <member name="T:Nikki.Core.eOptFlags">
             <summary>
-            
+            Flags that specify what collections to load.
             </summary>
         </member>
-        <member name="F:Nikki.Core.CarbonOptions.Default">
+        <member name="F:Nikki.Core.eOptFlags.None">
             <summary>
-            
+            Load nothing.
             </summary>
         </member>
-        <member name="P:Nikki.Core.CarbonOptions.File">
+        <member name="F:Nikki.Core.eOptFlags.Materials">
             <summary>
-            
+            Load Material classes.
             </summary>
         </member>
-        <member name="P:Nikki.Core.CarbonOptions.Watermark">
+        <member name="F:Nikki.Core.eOptFlags.TPKBlocks">
             <summary>
-            
+            Load TPKBlock classes.
             </summary>
         </member>
-        <member name="P:Nikki.Core.CarbonOptions.MessageShow">
+        <member name="F:Nikki.Core.eOptFlags.CarTypeInfos">
             <summary>
-            
+            Load CarTypeInfo classes.
             </summary>
         </member>
-        <member name="P:Nikki.Core.CarbonOptions.CarTypeInfos">
+        <member name="F:Nikki.Core.eOptFlags.PresetRides">
             <summary>
-            
+            Load PresetRide classes.
             </summary>
         </member>
-        <member name="P:Nikki.Core.CarbonOptions.Collisions">
+        <member name="F:Nikki.Core.eOptFlags.PresetSkins">
             <summary>
-            
+            Load PresetSkin classes.
             </summary>
         </member>
-        <member name="P:Nikki.Core.CarbonOptions.ModelParts">
+        <member name="F:Nikki.Core.eOptFlags.Collisions">
             <summary>
-            
+            Load Collision classes.
             </summary>
         </member>
-        <member name="P:Nikki.Core.CarbonOptions.FNGroups">
+        <member name="F:Nikki.Core.eOptFlags.DBModelParts">
             <summary>
-            
+            Load DBModelPart classes.
             </summary>
         </member>
-        <member name="P:Nikki.Core.CarbonOptions.Materials">
+        <member name="F:Nikki.Core.eOptFlags.FNGroups">
             <summary>
-            
+            Load FNGroup classes.
             </summary>
         </member>
-        <member name="P:Nikki.Core.CarbonOptions.PresetRides">
+        <member name="F:Nikki.Core.eOptFlags.STRBlocks">
             <summary>
-            
+            Load STRBlock classes.
             </summary>
         </member>
-        <member name="P:Nikki.Core.CarbonOptions.PresetSkins">
+        <member name="F:Nikki.Core.eOptFlags.AcidEffects">
             <summary>
-            
+            Load AcidEffect classes.
             </summary>
         </member>
-        <member name="P:Nikki.Core.CarbonOptions.STRBlocks">
+        <member name="F:Nikki.Core.eOptFlags.SunInfos">
             <summary>
-            
+            Load SunInfo classes.
             </summary>
         </member>
-        <member name="P:Nikki.Core.CarbonOptions.TPKBlocks">
+        <member name="F:Nikki.Core.eOptFlags.Tracks">
             <summary>
-            
+            Load Track classes.
             </summary>
         </member>
-        <member name="M:Nikki.Core.CarbonOptions.#ctor">
+        <member name="F:Nikki.Core.eOptFlags.GCareer">
             <summary>
-            
+            Load GCareerRace classes.
             </summary>
         </member>
         <member name="T:Nikki.Core.GameINT">
@@ -114,6 +114,35 @@
             Need for Speed: Prostreet
             </summary>
         </member>
+        <member name="T:Nikki.Core.Manager">
+            <summary>
+            Static manager to load keys and various files.
+            </summary>
+        </member>
+        <member name="M:Nikki.Core.Manager.LoadBinKeys(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Loads all BIN keys from files specified.
+            </summary>
+            <param name="files">Files to load.</param>
+        </member>
+        <member name="M:Nikki.Core.Manager.LoadVltKeys(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Loads all VLT keys from files specified.
+            </summary>
+            <param name="files">Files to load.</param>
+        </member>
+        <member name="M:Nikki.Core.Manager.LoadVaultAttributes(System.String)">
+            <summary>
+            Loads all VLT keys from attributes.bin file.
+            </summary>
+            <param name="file">attributes.bin file path.</param>
+        </member>
+        <member name="M:Nikki.Core.Manager.LoadVaultFEAttribs(System.String)">
+            <summary>
+            Loads all VLT keys from fe_attrib.bin file.
+            </summary>
+            <param name="file">fe_attrib.bin file path.</param>
+        </member>
         <member name="T:Nikki.Core.Map">
             <summary>
             Represents all important maps of the library.
@@ -138,6 +167,72 @@
             <summary>
             Map of all car part labels to <see cref="T:Nikki.Reflection.Enum.eCarPartAttribType"/>.
             </summary>
+        </member>
+        <member name="T:Nikki.Core.Options">
+            <summary>
+            A class that specifies loading and saving of files.
+            </summary>
+        </member>
+        <member name="F:Nikki.Core.Options.Default">
+            <summary>
+            Default options.
+            </summary>
+        </member>
+        <member name="P:Nikki.Core.Options.File">
+            <summary>
+            File to load or save.
+            </summary>
+        </member>
+        <member name="P:Nikki.Core.Options.Watermark">
+            <summary>
+            Watermark that is put in saved file.
+            </summary>
+        </member>
+        <member name="P:Nikki.Core.Options.MessageShow">
+            <summary>
+            True if messages should be showed as message boxes; false if output to console.
+            </summary>
+        </member>
+        <member name="P:Nikki.Core.Options.Flags">
+            <summary>
+            Optional flags that specify what collections to load.
+            </summary>
+        </member>
+        <member name="M:Nikki.Core.Options.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Core.Options"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Core.Options.#ctor(System.String)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Core.Options"/>.
+            </summary>
+            <param name="file">File to load.</param>
+        </member>
+        <member name="M:Nikki.Core.Options.#ctor(System.String,Nikki.Core.eOptFlags)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Core.Options"/>.
+            </summary>
+            <param name="file">File to load.</param>
+            <param name="flags">Flags that specify what collections to load.</param>
+        </member>
+        <member name="M:Nikki.Core.Options.#ctor(System.String,Nikki.Core.eOptFlags,System.String)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Core.Options"/>.
+            </summary>
+            <param name="file">File to load.</param>
+            <param name="flags">Flags that specify what collections to load.</param>
+            <param name="watermark">Watermark that is put in saved file.</param>
+        </member>
+        <member name="M:Nikki.Core.Options.#ctor(System.String,Nikki.Core.eOptFlags,System.String,System.Boolean)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Core.Options"/>.
+            </summary>
+            <param name="file">File to load.</param>
+            <param name="flags">Flags that specify what collections to load.</param>
+            <param name="watermark">Watermark that is put in saved file.</param>
+            <param name="message_show">True if messages should be showed in message 
+            boxes; false if they should be printed to console.</param>
         </member>
         <member name="T:Nikki.Core.Settings">
             <summary>
@@ -257,17 +352,19 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Nikki.Database.Carbon.Load">
+        <member name="M:Nikki.Database.Carbon.Load(Nikki.Core.Options)">
             <summary>
-            
+            Loads all data in the database using options passed.
             </summary>
-            <returns></returns>
+            <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to load data.</param>
+            <returns>True on success; false otherwise.</returns>
         </member>
-        <member name="M:Nikki.Database.Carbon.Save">
+        <member name="M:Nikki.Database.Carbon.Save(Nikki.Core.Options)">
             <summary>
-            
+            Saves all data in the database using options passed.
             </summary>
-            <returns></returns>
+            <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to save data.</param>
+            <returns>True on success; false otherwise.</returns>
         </member>
         <member name="T:Nikki.Database.MostWanted">
             <summary>
@@ -352,17 +449,19 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Nikki.Database.MostWanted.Load">
+        <member name="M:Nikki.Database.MostWanted.Load(Nikki.Core.Options)">
             <summary>
-            
+            Loads all data in the database using options passed.
             </summary>
-            <returns></returns>
+            <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to load data.</param>
+            <returns>True on success; false otherwise.</returns>
         </member>
-        <member name="M:Nikki.Database.MostWanted.Save">
+        <member name="M:Nikki.Database.MostWanted.Save(Nikki.Core.Options)">
             <summary>
-            
+            Saves all data in the database using options passed.
             </summary>
-            <returns></returns>
+            <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to save data.</param>
+            <returns>True on success; false otherwise.</returns>
         </member>
         <member name="T:Nikki.Database.Root`1">
             <summary>
@@ -735,41 +834,28 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Nikki.Database.Underground2.Load">
+        <member name="M:Nikki.Database.Underground2.Load(Nikki.Core.Options)">
             <summary>
-            
+            Loads all data in the database using options passed.
             </summary>
-            <returns></returns>
+            <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to load data.</param>
+            <returns>True on success; false otherwise.</returns>
         </member>
-        <member name="M:Nikki.Database.Underground2.Save">
+        <member name="M:Nikki.Database.Underground2.Save(Nikki.Core.Options)">
             <summary>
-            
+            Saves all data in the database using options passed.
             </summary>
-            <returns></returns>
+            <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to save data.</param>
+            <returns>True on success; false otherwise.</returns>
         </member>
         <member name="T:Nikki.Reflection.Abstract.ABasicBase">
             <summary>
             Very base class of any database.
             </summary>
         </member>
-        <member name="P:Nikki.Reflection.Abstract.ABasicBase.Data_GlobalABUN">
+        <member name="P:Nikki.Reflection.Abstract.ABasicBase.Buffer">
             <summary>
-            GlobalA file buffer.
-            </summary>
-        </member>
-        <member name="P:Nikki.Reflection.Abstract.ABasicBase.Data_GlobalBLZC">
-            <summary>
-            GlobalB file buffer.
-            </summary>
-        </member>
-        <member name="P:Nikki.Reflection.Abstract.ABasicBase.Data_LngGlobal">
-            <summary>
-            Language Text buffer.
-            </summary>
-        </member>
-        <member name="P:Nikki.Reflection.Abstract.ABasicBase.Data_LngLabels">
-            <summary>
-            Language Label buffer.
+            File buffer.
             </summary>
         </member>
         <member name="P:Nikki.Reflection.Abstract.ABasicBase.GameINT">
@@ -782,17 +868,19 @@
             Game string to which the class belongs to.
             </summary>
         </member>
-        <member name="M:Nikki.Reflection.Abstract.ABasicBase.Load">
+        <member name="M:Nikki.Reflection.Abstract.ABasicBase.Load(Nikki.Core.Options)">
             <summary>
-            
+            Loads all data in the database using options passed.
             </summary>
-            <returns></returns>
+            <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to load data.</param>
+            <returns>True on success; false otherwise.</returns>
         </member>
-        <member name="M:Nikki.Reflection.Abstract.ABasicBase.Save">
+        <member name="M:Nikki.Reflection.Abstract.ABasicBase.Save(Nikki.Core.Options)">
             <summary>
-            
+            Saves all data in the database using options passed.
             </summary>
-            <returns></returns>
+            <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to save data.</param>
+            <returns>True on success; false otherwise.</returns>
         </member>
         <member name="M:Nikki.Reflection.Abstract.ABasicBase.GetCollection(System.String,System.String)">
             <summary>
@@ -1113,16 +1201,6 @@
             Parent of the property and/or node.
             </summary>
         </member>
-        <member name="T:Nikki.Reflection.Attributes.LabelAttribute">
-            <summary>
-            Indicates what the property/field is used for and its optional boundaries.
-            </summary>
-        </member>
-        <member name="P:Nikki.Reflection.Attributes.LabelAttribute.Label">
-            <summary>
-            Parent of the property and/or node.
-            </summary>
-        </member>
         <member name="T:Nikki.Reflection.Attributes.ListableAttribute">
             <summary>
             Indicates that the property is an <see cref="T:System.Collections.Generic.IEnumerable`1"/> and should be
@@ -1237,6 +1315,566 @@
         <member name="F:Nikki.Reflection.BaseArguments.VLPAINT">
             <summary>
             VINYL_L1_COLOR01 as a string.
+            </summary>
+        </member>
+        <member name="T:Nikki.Reflection.Enum.CP.eAttribBool">
+            <summary>
+            All attribute types for <see cref="T:Nikki.Support.Shared.Parts.CarParts.BoolAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.STOCK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.REMAP">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.ONLINE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.CENTER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.MIRROR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.ISDECAL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.FULLBODY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.HOODLEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.HOODRIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.VERTSPLIT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.WHEELLEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.WHEELRIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.USEMARKER1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.USEMARKER2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.CARBONFIBRE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.EXCLUDE_SUV">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.EXCLUDE_UG1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.EXCLUDE_UG2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.STOCK_MATERIAL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0x87557E1E">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0xF9661A07">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Nikki.Reflection.Enum.CP.eAttribFloat">
+            <summary>
+            All attribute types for <see cref="T:Nikki.Support.Shared.Parts.CarParts.FloatAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribFloat.BLEND">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribFloat.HOODHUE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribFloat.HOODLUM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribFloat.HOODSAT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribFloat.TIREHUE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribFloat.TIRELUM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribFloat.TIRESAT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribFloat.SPINNEROFFSET">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribFloat.SPINNER_TEXTURE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribFloat._0x9A9B6DDC">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Nikki.Reflection.Enum.CP.eAttribInt">
+            <summary>
+            All attribute types for <see cref="T:Nikki.Support.Shared.Parts.CarParts.IntAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.CV">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.RED">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.RED2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MAT0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MAT1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MAT2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MAT3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MAT4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MAT5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MAT6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MAT7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.NAME">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.SIZE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.BLUE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.ALPHA">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.GREEN">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.GLOSS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.BLUE2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.SHAPE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.ALPHA2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.GREEN2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.SWATCH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MAX_LOD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.DISPRED">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.DISPBLUE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.COLOR0ID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.COLOR1ID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.COLOR2ID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.COLOR3ID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MATNAMEA">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MATNAMEB">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.HUDINDEX">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.ANIMSTYLE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.DISPGREEN">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.KITNUMBER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.HOODUNDER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.PAINTGROUP">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.NUMCOLOURS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.NUM_DECALS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.HOODEMITTER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.DAMAGELEVEL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.TEXTUREHASH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.WHEELEMITTER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.LANGUAGEHASH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.NUMREMAPCOLOURS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MORPHTARGET_NUM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.SPECIFICCARNAME">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.GROUPLANGUAGEHASH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.VINYLLANGUAGEHASH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MODEL_TABLE_OFFSET">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.PART_NAME_SELECTOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.PART_NAME_BASE_HASH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.LOD_NAME_PREFIX_NAMEHASH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.LOD_NAME_PREFIX_SELECTOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x04B39858">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x10C98090">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x1B0EA1A9">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x5412A1D9">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x6509EC92">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x65F58556">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x6BA02C05">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x7D29CF3E">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0xB5548ED7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0xC9818DFC">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0xCE7D8DB5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0xD68A7BAB">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0xE80A3B62">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0xEB0101E2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0xEBB03E66">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Nikki.Reflection.Enum.CP.eAttribPartID">
+            <summary>
+            All attribute types for <see cref="T:Nikki.Support.Shared.Parts.CarParts.PartIDAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribPartID.PARTID_UPGRADE_GROUP">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Nikki.Reflection.Enum.CP.eAttribString">
+            <summary>
+            All attribute types for <see cref="T:Nikki.Support.Shared.Parts.CarParts.StringAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribString.TEXTURE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribString.NAME_OFFSET">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribString.LOD_CHARACTERS_OFFSET">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Nikki.Reflection.Enum.CP.eAttribTwoString">
+            <summary>
+            All attribute types for <see cref="T:Nikki.Support.Shared.Parts.CarParts.TwoStringAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribTwoString.LOD_BASE_NAME">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribTwoString.PART_NAME_OFFSETS">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Nikki.Reflection.Enum.eAlphaUsageType">
@@ -3830,55 +4468,151 @@
         </member>
         <member name="T:Nikki.Support.Carbon.Class.DBModelPart">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Class.DBModelPart.CollectionName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Class.DBModelPart.BinKey">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Class.DBModelPart.VltKey">
-            <summary>
-            
+            <see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> is a collection of car parts of a specific model.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Class.DBModelPart.GameINT">
             <summary>
-            
+            Game to which the class belongs to.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Class.DBModelPart.GameSTR">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Class.DBModelPart.ModelCarParts">
-            <summary>
-            
+            Game string to which the class belongs to.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Class.DBModelPart.Database">
             <summary>
-            
+            Database to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.DBModelPart.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.DBModelPart.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.DBModelPart.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.DBModelPart.ModelCarParts">
+            <summary>
+            List of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.DBModelPart.#ctor">
             <summary>
-            
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.DBModelPart.#ctor(System.String,Nikki.Database.Carbon)">
             <summary>
-            
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/>.
             </summary>
-            <param name="CName"></param>
-            <param name="db"></param>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="db"><see cref="T:Nikki.Database.Carbon"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.ResortNames">
+            <summary>
+            Resorts all names according to their indexed position.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.SwitchParts(System.String,System.String)">
+            <summary>
+            Switches two parts and their indexes.
+            </summary>
+            <param name="part1">First <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to switch.</param>
+            <param name="part2">Second <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to switch.</param>
+            <returns>True if switching was successful; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.SwitchParts(System.String,System.String,System.String@)">
+            <summary>
+            Switches two parts and their indexes.
+            </summary>
+            <param name="part1">First <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to switch.</param>
+            <param name="part2">Second <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to switch.</param>
+            <param name="error">Error occured while trying to switch.</param>
+            <returns>True if switching was successful; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.ReverseParts">
+            <summary>
+            Reverses all parts in this <see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.SortByProperty(System.String)">
+            <summary>
+            Sorts all parts by property name provided.
+            </summary>
+            <param name="property">Property to sort by.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.SortByProperty(System.String,System.String@)">
+            <summary>
+            Sorts all parts by property name provided.
+            </summary>
+            <param name="property">Property to sort by.</param>
+            <param name="error">Error occured while trying to switch.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.TryAddRealPart(System.String)">
+            <summary>
+            Attemps to add new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="name">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.TryAddRealPart(System.String@,System.String)">
+            <summary>
+            Attemps to add new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="error">Error occured while trying to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <param name="name">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.TryRemovePart(System.String)">
+            <summary>
+            Attemps to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="name">Name of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to remove.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.TryRemovePart(System.String,System.String@)">
+            <summary>
+            Attemps to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="name">Name of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to remove.</param>
+            <param name="error">Error occured while trying to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.TryClonePart(System.String,System.String)">
+            <summary>
+            Attemps to clone a <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="newname">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <param name="copyname">Name of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.TryClonePart(System.String,System.String,System.String@)">
+            <summary>
+            Attemps to clone a <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="newname">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <param name="copyname">Name of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to clone.</param>
+            <param name="error">Error occured while trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <returns>True on success; false otherwise.</returns>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.DBModelPart.ToString">
             <summary>
@@ -5643,6 +6377,12 @@
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
             <param name="string_dict">Dictionary with string HashCodes and their offsets.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.CPStruct.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
         <member name="M:Nikki.Support.Carbon.Parts.CarParts.CPStruct.ToString">
             <summary>
             Returns templated value and first geometry name as a string value.
@@ -5737,6 +6477,140 @@
             Returns the hash code for this <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/>.
             </summary>
             <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.TryAddAttribute(System.UInt32)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="key">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.TryAddAttribute(System.String)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="label">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.TryAddAttribute(System.UInt32,System.String@)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="key">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="error">Error occured when trying to add new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.TryAddAttribute(System.String,System.String@)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="label">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="error">Error occured when trying to add new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.TryRemoveAttribute(System.UInt32)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="key">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to remove.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.TryRemoveAttribute(System.String)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="label">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to remove.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.TryRemoveAttribute(System.UInt32,System.String@)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="key">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to remove.</param>
+            <param name="error">Error occured when trying to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.TryRemoveAttribute(System.String,System.String@)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="label">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to remove.</param>
+            <param name="error">Error occured when trying to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.TryCloneAttribute(System.UInt32,System.UInt32)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="newkey">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copykey">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.TryCloneAttribute(System.UInt32,System.String)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="newkey">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.TryCloneAttribute(System.String,System.UInt32)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copykey">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.TryCloneAttribute(System.String,System.String)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.TryCloneAttribute(System.UInt32,System.UInt32,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="newkey">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copykey">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <param name="error">Error occured when trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.TryCloneAttribute(System.UInt32,System.String,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="newkey">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <param name="error">Error occured when trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.TryCloneAttribute(System.String,System.UInt32,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copykey">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <param name="error">Error occured when trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.TryCloneAttribute(System.String,System.String,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <param name="error">Error occured when trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
         </member>
         <member name="T:Nikki.Support.Carbon.Parts.CarParts.TempPart">
             <summary>
@@ -6602,59 +7476,156 @@
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.DBModelPart">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.MostWanted.Class.DBModelPart.CollectionName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.MostWanted.Class.DBModelPart.BinKey">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.MostWanted.Class.DBModelPart.VltKey">
-            <summary>
-            
+            <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> is a collection of car parts of a specific model.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Class.DBModelPart.GameINT">
             <summary>
-            
+            Game to which the class belongs to.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Class.DBModelPart.GameSTR">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.MostWanted.Class.DBModelPart.ModelCarParts">
-            <summary>
-            
+            Game string to which the class belongs to.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Class.DBModelPart.Database">
             <summary>
-            
+            Database to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.DBModelPart.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.DBModelPart.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.DBModelPart.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.DBModelPart.ModelCarParts">
+            <summary>
+            List of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.#ctor">
             <summary>
-            
+            Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.#ctor(System.String,Nikki.Database.MostWanted)">
             <summary>
-            
+            Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/>.
             </summary>
-            <param name="CName"></param>
-            <param name="db"></param>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="db"><see cref="T:Nikki.Database.MostWanted"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.ResortNames">
+            <summary>
+            Resorts all names according to their indexed position.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.SwitchParts(System.String,System.String)">
+            <summary>
+            Switches two parts and their indexes.
+            </summary>
+            <param name="part1">First <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to switch.</param>
+            <param name="part2">Second <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to switch.</param>
+            <returns>True if switching was successful; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.SwitchParts(System.String,System.String,System.String@)">
+            <summary>
+            Switches two parts and their indexes.
+            </summary>
+            <param name="part1">First <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to switch.</param>
+            <param name="part2">Second <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to switch.</param>
+            <param name="error">Error occured while trying to switch.</param>
+            <returns>True if switching was successful; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.ReverseParts">
+            <summary>
+            Reverses all parts in this <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.SortByProperty(System.String)">
+            <summary>
+            Sorts all parts by property name provided.
+            </summary>
+            <param name="property">Property to sort by.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.SortByProperty(System.String,System.String@)">
+            <summary>
+            Sorts all parts by property name provided.
+            </summary>
+            <param name="property">Property to sort by.</param>
+            <param name="error">Error occured while trying to switch.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.TryAddRealPart(System.String)">
+            <summary>
+            Attemps to add new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="name">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.TryAddRealPart(System.String@,System.String)">
+            <summary>
+            Attemps to add new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="error">Error occured while trying to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <param name="name">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.TryRemovePart(System.String)">
+            <summary>
+            Attemps to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="name">Name of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to remove.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.TryRemovePart(System.String,System.String@)">
+            <summary>
+            Attemps to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="name">Name of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to remove.</param>
+            <param name="error">Error occured while trying to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.TryClonePart(System.String,System.String)">
+            <summary>
+            Attemps to clone a <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="newname">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <param name="copyname">Name of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.TryClonePart(System.String,System.String,System.String@)">
+            <summary>
+            Attemps to clone a <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="newname">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <param name="copyname">Name of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to clone.</param>
+            <param name="error">Error occured while trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <returns>True on success; false otherwise.</returns>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.ToString">
             <summary>
-            Returns CollectionName, BinKey and <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> count as a string value.
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> 
+            as a string value.
             </summary>
             <returns>String value.</returns>
         </member>
@@ -7920,12 +8891,13 @@
             A static manager to assemble and disassemble <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> collections.
             </summary>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Framework.CarPartManager.Assemble(System.IO.BinaryWriter,Nikki.Database.MostWanted)">
+        <member name="M:Nikki.Support.MostWanted.Framework.CarPartManager.Assemble(System.IO.BinaryWriter,System.String,Nikki.Database.MostWanted)">
             <summary>
             Assembles entire root of <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> into a byte array and 
             writes it with <see cref="T:System.IO.BinaryWriter"/> provided.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="mark">Watermark to put in the strings block.</param>
             <param name="db"><see cref="T:Nikki.Database.MostWanted"/> database with roots 
             and collections.</param>
         </member>
@@ -8043,6 +9015,12 @@
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
             <param name="string_dict">Dictionary with string HashCodes and their offsets.</param>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
         <member name="M:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.ToString">
             <summary>
             Returns templated value and first geometry name as a string value.
@@ -8111,6 +9089,11 @@
             <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> to which this part belongs to.
             </summary>
         </member>
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.PartLabel">
+            <summary>
+            Label of the car part.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.CarPartGroupID">
             <summary>
             Car Part ID Group to which this part belongs to.
@@ -8157,6 +9140,140 @@
             Returns the hash code for this <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
             </summary>
             <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.TryAddAttribute(System.UInt32)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="key">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.TryAddAttribute(System.String)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="label">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.TryAddAttribute(System.UInt32,System.String@)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="key">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="error">Error occured when trying to add new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.TryAddAttribute(System.String,System.String@)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="label">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="error">Error occured when trying to add new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.TryRemoveAttribute(System.UInt32)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="key">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to remove.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.TryRemoveAttribute(System.String)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="label">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to remove.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.TryRemoveAttribute(System.UInt32,System.String@)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="key">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to remove.</param>
+            <param name="error">Error occured when trying to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.TryRemoveAttribute(System.String,System.String@)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="label">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to remove.</param>
+            <param name="error">Error occured when trying to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.TryCloneAttribute(System.UInt32,System.UInt32)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="newkey">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copykey">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.TryCloneAttribute(System.UInt32,System.String)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="newkey">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.TryCloneAttribute(System.String,System.UInt32)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copykey">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.TryCloneAttribute(System.String,System.String)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.TryCloneAttribute(System.UInt32,System.UInt32,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="newkey">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copykey">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <param name="error">Error occured when trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.TryCloneAttribute(System.UInt32,System.String,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="newkey">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <param name="error">Error occured when trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.TryCloneAttribute(System.String,System.UInt32,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copykey">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <param name="error">Error occured when trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.TryCloneAttribute(System.String,System.String,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <param name="error">Error occured when trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
         </member>
         <member name="T:Nikki.Support.MostWanted.Parts.CarParts.TempPart">
             <summary>
@@ -9143,12 +10260,120 @@
             List of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> that this <see cref="T:Nikki.Support.Shared.Class.DBModelPart"/> has.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Shared.Class.DBModelPart.Length">
+            <summary>
+            Total amount of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> in this <see cref="T:Nikki.Support.Shared.Class.DBModelPart"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Shared.Class.DBModelPart.MemoryCast(System.String)">
             <summary>
             Casts all attributes from this object to another one.
             </summary>
             <param name="CName">CollectionName of the new created object.</param>
             <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.GetRealPart(System.String)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> that has name provided.
+            </summary>
+            <param name="name">Name of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to get.</param>
+            <returns><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> with name provided.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.GetRealPart(System.Int32)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> at index specified.
+            </summary>
+            <param name="index">Index of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to get.</param>
+            <returns><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> at index specified.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.ResortNames">
+            <summary>
+            Resorts all names based on their indexing.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.SwitchParts(System.String,System.String)">
+            <summary>
+            Switches two parts and their indexes.
+            </summary>
+            <param name="part1">First <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to switch.</param>
+            <param name="part2">Second <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to switch.</param>
+            <returns>True if switching was successful; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.SwitchParts(System.String,System.String,System.String@)">
+            <summary>
+            Switches two parts and their indexes.
+            </summary>
+            <param name="part1">First <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to switch.</param>
+            <param name="part2">Second <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to switch.</param>
+            <param name="error">Error occured while trying to switch.</param>
+            <returns>True if switching was successful; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.ReverseParts">
+            <summary>
+            Reverses all parts in this <see cref="T:Nikki.Support.Shared.Class.DBModelPart"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.SortByProperty(System.String)">
+            <summary>
+            Sorts all parts by property name provided.
+            </summary>
+            <param name="property">Property to sort by.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.SortByProperty(System.String,System.String@)">
+            <summary>
+            Sorts all parts by property name provided.
+            </summary>
+            <param name="property">Property to sort by.</param>
+            <param name="error">Error occured while trying to switch.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.TryAddRealPart(System.String)">
+            <summary>
+            Attemps to add new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="name">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.TryAddRealPart(System.String@,System.String)">
+            <summary>
+            Attemps to add new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="error">Error occured while trying to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <param name="name">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.TryRemovePart(System.String)">
+            <summary>
+            Attemps to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="name">Name of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to remove.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.TryRemovePart(System.String,System.String@)">
+            <summary>
+            Attemps to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="name">Name of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to remove.</param>
+            <param name="error">Error occured while trying to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.TryClonePart(System.String,System.String)">
+            <summary>
+            Attemps to clone a <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="newname">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <param name="copyname">Name of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.TryClonePart(System.String,System.String,System.String@)">
+            <summary>
+            Attemps to clone a <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="newname">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <param name="copyname">Name of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to clone.</param>
+            <param name="error">Error occured while trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <returns>True on success; false otherwise.</returns>
         </member>
         <member name="T:Nikki.Support.Shared.Class.FNGroup">
             <summary>
@@ -9876,11 +11101,6 @@
             Index of the <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> in the Global data.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Class.TPKBlock.BelongsToFile">
-            <summary>
-            Filename to which <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> belong to.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Shared.Class.TPKBlock.MemoryCast(System.String)">
             <summary>
             Casts all attributes from this object to another one.
@@ -10300,6 +11520,16 @@
             <see cref="T:Nikki.Reflection.Enum.eCarPartAttribType"/> type of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.BoolAttribute"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.BoolAttribute.Type">
+            <summary>
+            Type of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.BoolAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.BoolAttribute.Key">
+            <summary>
+            Key of the part to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Shared.Parts.CarParts.BoolAttribute.Value">
             <summary>
             Attribute value.
@@ -10309,6 +11539,13 @@
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.BoolAttribute"/>.
             </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.BoolAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.BoolAttribute"/> with value provided.
+            </summary>
+            <param name="value">Value to set.</param>
+            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Parts.CarParts.BoolAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -10380,6 +11617,13 @@
             </summary>
             <returns>Exact plain copy of the object.</returns>
         </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.BoolAttribute.ConvertTo(Nikki.Reflection.Enum.eCarPartAttribType)">
+            <summary>
+            Converts this <see cref="T:Nikki.Support.Shared.Parts.CarParts.BoolAttribute"/> to an attribute of type provided.
+            </summary>
+            <param name="type">Type of a new attribute.</param>
+            <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
+        </member>
         <member name="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute">
             <summary>
             A <see cref="T:Nikki.Support.Shared.Class.DBModelPart"/> unit attribute.
@@ -10390,14 +11634,14 @@
             <see cref="T:Nikki.Reflection.Enum.eCarPartAttribType"/> type of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.CarParts.CPAttribute.Part">
-            <summary>
-            Name of the part to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
-            </summary>
-        </member>
         <member name="P:Nikki.Support.Shared.Parts.CarParts.CPAttribute.Key">
             <summary>
             Key of the part to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.CPAttribute.BelongsTo">
+            <summary>
+            <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
             </summary>
         </member>
         <member name="M:Nikki.Support.Shared.Parts.CarParts.CPAttribute.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
@@ -10415,6 +11659,19 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
             <param name="string_dict">Dictionary of string HashCodes and their offsets.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CPAttribute.ConvertTo(Nikki.Reflection.Enum.eCarPartAttribType)">
+            <summary>
+            Converts this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to an attribute of type provided.
+            </summary>
+            <param name="type">Type of a new attribute.</param>
+            <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CPAttribute.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
         </member>
         <member name="M:Nikki.Support.Shared.Parts.CarParts.CPAttribute.ToString">
             <summary>
@@ -10530,6 +11787,12 @@
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
             <param name="string_dict">Dictionary with string HashCodes and their offsets.</param>
         </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CPStruct.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
         <member name="T:Nikki.Support.Shared.Parts.CarParts.FloatAttribute">
             <summary>
             A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte floating point value.
@@ -10538,6 +11801,16 @@
         <member name="P:Nikki.Support.Shared.Parts.CarParts.FloatAttribute.AttribType">
             <summary>
             <see cref="T:Nikki.Reflection.Enum.eCarPartAttribType"/> type of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.FloatAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.FloatAttribute.Type">
+            <summary>
+            Type of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.BoolAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.FloatAttribute.Key">
+            <summary>
+            Key of the part to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
             </summary>
         </member>
         <member name="P:Nikki.Support.Shared.Parts.CarParts.FloatAttribute.Value">
@@ -10549,6 +11822,13 @@
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.
             </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.FloatAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.FloatAttribute"/> with value provided.
+            </summary>
+            <param name="value">Value to set.</param>
+            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Parts.CarParts.FloatAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -10620,6 +11900,13 @@
             </summary>
             <returns>Exact plain copy of the object.</returns>
         </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.FloatAttribute.ConvertTo(Nikki.Reflection.Enum.eCarPartAttribType)">
+            <summary>
+            Converts this <see cref="T:Nikki.Support.Shared.Parts.CarParts.FloatAttribute"/> to an attribute of type provided.
+            </summary>
+            <param name="type">Type of a new attribute.</param>
+            <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
+        </member>
         <member name="T:Nikki.Support.Shared.Parts.CarParts.IntAttribute">
             <summary>
             A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte signed integer value.
@@ -10628,6 +11915,16 @@
         <member name="P:Nikki.Support.Shared.Parts.CarParts.IntAttribute.AttribType">
             <summary>
             <see cref="T:Nikki.Reflection.Enum.eCarPartAttribType"/> type of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.IntAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.IntAttribute.Type">
+            <summary>
+            Type of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.BoolAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.IntAttribute.Key">
+            <summary>
+            Key of the part to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
             </summary>
         </member>
         <member name="P:Nikki.Support.Shared.Parts.CarParts.IntAttribute.Value">
@@ -10639,6 +11936,13 @@
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.IntAttribute"/>.
             </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.IntAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.IntAttribute"/> with value provided.
+            </summary>
+            <param name="value">Value to set.</param>
+            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Parts.CarParts.IntAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -10710,6 +12014,13 @@
             </summary>
             <returns>Exact plain copy of the object.</returns>
         </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.IntAttribute.ConvertTo(Nikki.Reflection.Enum.eCarPartAttribType)">
+            <summary>
+            Converts this <see cref="T:Nikki.Support.Shared.Parts.CarParts.IntAttribute"/> to an attribute of type provided.
+            </summary>
+            <param name="type">Type of a new attribute.</param>
+            <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
+        </member>
         <member name="T:Nikki.Support.Shared.Parts.CarParts.PartIDAttribute">
             <summary>
             A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with unknown byte and part ID values.
@@ -10718,6 +12029,16 @@
         <member name="P:Nikki.Support.Shared.Parts.CarParts.PartIDAttribute.AttribType">
             <summary>
             <see cref="T:Nikki.Reflection.Enum.eCarPartAttribType"/> type of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.PartIDAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.PartIDAttribute.Type">
+            <summary>
+            Type of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.BoolAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.PartIDAttribute.Key">
+            <summary>
+            Key of the part to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
             </summary>
         </member>
         <member name="P:Nikki.Support.Shared.Parts.CarParts.PartIDAttribute.Unknown">
@@ -10734,6 +12055,13 @@
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.PartIDAttribute"/>.
             </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.PartIDAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.PartIDAttribute"/> with value provided.
+            </summary>
+            <param name="value">Value to set.</param>
+            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Parts.CarParts.PartIDAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -10805,6 +12133,13 @@
             </summary>
             <returns>Exact plain copy of the object.</returns>
         </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.PartIDAttribute.ConvertTo(Nikki.Reflection.Enum.eCarPartAttribType)">
+            <summary>
+            Converts this <see cref="T:Nikki.Support.Shared.Parts.CarParts.BoolAttribute"/> to an attribute of type provided.
+            </summary>
+            <param name="type">Type of a new attribute.</param>
+            <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
+        </member>
         <member name="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart">
             <summary>
             A unit CarPart attribute of <see cref="T:Nikki.Support.Shared.Class.DBModelPart"/>.
@@ -10820,10 +12155,191 @@
             Collection of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.RealCarPart.Length">
+            <summary>
+            Total amount of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> in this <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Shared.Parts.CarParts.RealCarPart.Index">
             <summary>
             Index of <see cref="T:Nikki.Support.Shared.Class.DBModelPart"/> to which this part belongs to.
             </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.GetAttribute(System.UInt32)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with the key provided.
+            </summary>
+            <param name="key">Key of a <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to find.</param>
+            <returns>A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.GetAttribute(System.String)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with the label provided.
+            </summary>
+            <param name="label">Label of a <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to find.</param>
+            <returns>A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.GetAttribute(System.Int32)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> at index specified.
+            </summary>
+            <param name="index">Index in the list of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> at index specified.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.GetIndex(System.UInt32)">
+            <summary>
+            Gets index of an attribute that has key provided.
+            </summary>
+            <param name="key">Key of an attribute.</param>
+            <returns>Index of an attribute.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.GetIndex(System.String)">
+            <summary>
+            Gets index of an attribute that has label provided.
+            </summary>
+            <param name="label">Label of an attribute.</param>
+            <returns>Index of an attribute.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.GetIndex(Nikki.Support.Shared.Parts.CarParts.CPAttribute)">
+            <summary>
+            Gets index of an attribute provided.
+            </summary>
+            <param name="attrib"><see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to find index of.</param>
+            <returns>Index of an attribute provided.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.TryAddAttribute(System.UInt32)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="key">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.TryAddAttribute(System.String)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="label">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.TryAddAttribute(System.UInt32,System.String@)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="key">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="error">Error occured when trying to add new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.TryAddAttribute(System.String,System.String@)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="label">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="error">Error occured when trying to add new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.TryRemoveAttribute(System.UInt32)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="key">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to remove.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.TryRemoveAttribute(System.String)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="label">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to remove.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.TryRemoveAttribute(System.UInt32,System.String@)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="key">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to remove.</param>
+            <param name="error">Error occured when trying to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.TryRemoveAttribute(System.String,System.String@)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="label">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to remove.</param>
+            <param name="error">Error occured when trying to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.TryCloneAttribute(System.UInt32,System.UInt32)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="newkey">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copykey">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.TryCloneAttribute(System.UInt32,System.String)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="newkey">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.TryCloneAttribute(System.String,System.UInt32)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copykey">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.TryCloneAttribute(System.String,System.String)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.TryCloneAttribute(System.UInt32,System.UInt32,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="newkey">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copykey">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <param name="error">Error occured when trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.TryCloneAttribute(System.UInt32,System.String,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="newkey">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <param name="error">Error occured when trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.TryCloneAttribute(System.String,System.UInt32,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copykey">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <param name="error">Error occured when trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.TryCloneAttribute(System.String,System.String,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <param name="error">Error occured when trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
         </member>
         <member name="T:Nikki.Support.Shared.Parts.CarParts.StringAttribute">
             <summary>
@@ -10833,6 +12349,16 @@
         <member name="P:Nikki.Support.Shared.Parts.CarParts.StringAttribute.AttribType">
             <summary>
             <see cref="T:Nikki.Reflection.Enum.eCarPartAttribType"/> type of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.StringAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.StringAttribute.Type">
+            <summary>
+            Type of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.BoolAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.StringAttribute.Key">
+            <summary>
+            Key of the part to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
             </summary>
         </member>
         <member name="P:Nikki.Support.Shared.Parts.CarParts.StringAttribute.Value">
@@ -10849,6 +12375,13 @@
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.StringAttribute"/>.
             </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.StringAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.StringAttribute"/> with value provided.
+            </summary>
+            <param name="value">Value to set.</param>
+            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Parts.CarParts.StringAttribute.#ctor(System.IO.BinaryReader,System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -10919,6 +12452,13 @@
             </summary>
             <returns>Exact plain copy of the object.</returns>
         </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.StringAttribute.ConvertTo(Nikki.Reflection.Enum.eCarPartAttribType)">
+            <summary>
+            Converts this <see cref="T:Nikki.Support.Shared.Parts.CarParts.BoolAttribute"/> to an attribute of type provided.
+            </summary>
+            <param name="type">Type of a new attribute.</param>
+            <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
+        </member>
         <member name="T:Nikki.Support.Shared.Parts.CarParts.TwoStringAttribute">
             <summary>
             A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with two null-terminated string values.
@@ -10927,6 +12467,16 @@
         <member name="P:Nikki.Support.Shared.Parts.CarParts.TwoStringAttribute.AttribType">
             <summary>
             <see cref="T:Nikki.Reflection.Enum.eCarPartAttribType"/> type of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.StringAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.TwoStringAttribute.Type">
+            <summary>
+            Type of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.BoolAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.TwoStringAttribute.Key">
+            <summary>
+            Key of the part to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
             </summary>
         </member>
         <member name="P:Nikki.Support.Shared.Parts.CarParts.TwoStringAttribute.Value1">
@@ -10953,6 +12503,13 @@
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.TwoStringAttribute"/>.
             </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.TwoStringAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.TwoStringAttribute"/> with value provided.
+            </summary>
+            <param name="value">Value to set.</param>
+            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Parts.CarParts.TwoStringAttribute.#ctor(System.IO.BinaryReader,System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -11022,6 +12579,13 @@
             Creates a plain copy of the objects that contains same values.
             </summary>
             <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.TwoStringAttribute.ConvertTo(Nikki.Reflection.Enum.eCarPartAttribType)">
+            <summary>
+            Converts this <see cref="T:Nikki.Support.Shared.Parts.CarParts.BoolAttribute"/> to an attribute of type provided.
+            </summary>
+            <param name="type">Type of a new attribute.</param>
+            <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
         </member>
         <member name="T:Nikki.Support.Shared.Parts.FNGParts.FEngColor">
             <summary>
@@ -11954,59 +13518,156 @@
         </member>
         <member name="T:Nikki.Support.Underground2.Class.DBModelPart">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.DBModelPart.CollectionName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.DBModelPart.BinKey">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.DBModelPart.VltKey">
-            <summary>
-            
+            <see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/> is a collection of car parts of a specific model.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Class.DBModelPart.GameINT">
             <summary>
-            
+            Game to which the class belongs to.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Class.DBModelPart.GameSTR">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.DBModelPart.ModelCarParts">
-            <summary>
-            
+            Game string to which the class belongs to.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Class.DBModelPart.Database">
             <summary>
-            
+            Database to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.DBModelPart.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.DBModelPart.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.DBModelPart.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.DBModelPart.ModelCarParts">
+            <summary>
+            List of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.DBModelPart.#ctor">
             <summary>
-            
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.DBModelPart.#ctor(System.String,Nikki.Database.Underground2)">
             <summary>
-            
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/>.
             </summary>
-            <param name="CName"></param>
-            <param name="db"></param>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="db"><see cref="T:Nikki.Database.Underground2"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.DBModelPart.ResortNames">
+            <summary>
+            Resorts all names according to their indexed position.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.DBModelPart.SwitchParts(System.String,System.String)">
+            <summary>
+            Switches two parts and their indexes.
+            </summary>
+            <param name="part1">First <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to switch.</param>
+            <param name="part2">Second <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to switch.</param>
+            <returns>True if switching was successful; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.DBModelPart.SwitchParts(System.String,System.String,System.String@)">
+            <summary>
+            Switches two parts and their indexes.
+            </summary>
+            <param name="part1">First <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to switch.</param>
+            <param name="part2">Second <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to switch.</param>
+            <param name="error">Error occured while trying to switch.</param>
+            <returns>True if switching was successful; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.DBModelPart.ReverseParts">
+            <summary>
+            Reverses all parts in this <see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.DBModelPart.SortByProperty(System.String)">
+            <summary>
+            Sorts all parts by property name provided.
+            </summary>
+            <param name="property">Property to sort by.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.DBModelPart.SortByProperty(System.String,System.String@)">
+            <summary>
+            Sorts all parts by property name provided.
+            </summary>
+            <param name="property">Property to sort by.</param>
+            <param name="error">Error occured while trying to switch.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.DBModelPart.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.DBModelPart.TryAddRealPart(System.String)">
+            <summary>
+            Attemps to add new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="name">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.DBModelPart.TryAddRealPart(System.String@,System.String)">
+            <summary>
+            Attemps to add new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="error">Error occured while trying to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <param name="name">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.DBModelPart.TryRemovePart(System.String)">
+            <summary>
+            Attemps to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="name">Name of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to remove.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.DBModelPart.TryRemovePart(System.String,System.String@)">
+            <summary>
+            Attemps to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="name">Name of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to remove.</param>
+            <param name="error">Error occured while trying to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.DBModelPart.TryClonePart(System.String,System.String)">
+            <summary>
+            Attemps to clone a <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="newname">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <param name="copyname">Name of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.DBModelPart.TryClonePart(System.String,System.String,System.String@)">
+            <summary>
+            Attemps to clone a <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="newname">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <param name="copyname">Name of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to clone.</param>
+            <param name="error">Error occured while trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <returns>True on success; false otherwise.</returns>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.DBModelPart.ToString">
             <summary>
-            Returns CollectionName, BinKey and <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> count as a string value.
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/> 
+            as a string value.
             </summary>
             <returns>String value.</returns>
         </member>
@@ -13841,12 +15502,13 @@
             A static manager to assemble and disassemble <see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/> collections.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Underground2.Framework.CarPartManager.Assemble(System.IO.BinaryWriter,Nikki.Database.Underground2)">
+        <member name="M:Nikki.Support.Underground2.Framework.CarPartManager.Assemble(System.IO.BinaryWriter,System.String,Nikki.Database.Underground2)">
             <summary>
             Assembles entire root of <see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/> into a byte array and 
             writes it with <see cref="T:System.IO.BinaryWriter"/> provided.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="mark">Watermark to put in the strings block.</param>
             <param name="db"><see cref="T:Nikki.Database.Underground2"/> database with roots 
             and collections.</param>
         </member>
@@ -16019,6 +17681,12 @@
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
             <param name="string_dict">Dictionary with string HashCodes and their offsets.</param>
         </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
         <member name="M:Nikki.Support.Underground2.Parts.CarParts.CPStruct.ToString">
             <summary>
             Returns templated value and first geometry name as a string value.
@@ -16087,6 +17755,11 @@
             <see cref="T:Nikki.Support.Underground2.Class.DBModelPart"/> to which this part belongs to.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.PartLabel">
+            <summary>
+            Label of the car part.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.CarPartGroupID">
             <summary>
             Car Part ID Group to which this part belongs to.
@@ -16133,6 +17806,140 @@
             Returns the hash code for this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
             </summary>
             <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.TryAddAttribute(System.UInt32)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="key">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.TryAddAttribute(System.String)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="label">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.TryAddAttribute(System.UInt32,System.String@)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="key">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="error">Error occured when trying to add new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.TryAddAttribute(System.String,System.String@)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="label">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="error">Error occured when trying to add new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.TryRemoveAttribute(System.UInt32)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="key">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to remove.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.TryRemoveAttribute(System.String)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="label">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to remove.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.TryRemoveAttribute(System.UInt32,System.String@)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="key">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to remove.</param>
+            <param name="error">Error occured when trying to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.TryRemoveAttribute(System.String,System.String@)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="label">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to remove.</param>
+            <param name="error">Error occured when trying to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.TryCloneAttribute(System.UInt32,System.UInt32)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="newkey">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copykey">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.TryCloneAttribute(System.UInt32,System.String)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="newkey">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.TryCloneAttribute(System.String,System.UInt32)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copykey">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.TryCloneAttribute(System.String,System.String)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.TryCloneAttribute(System.UInt32,System.UInt32,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="newkey">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copykey">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <param name="error">Error occured when trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.TryCloneAttribute(System.UInt32,System.String,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="newkey">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <param name="error">Error occured when trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.TryCloneAttribute(System.String,System.UInt32,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copykey">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <param name="error">Error occured when trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.TryCloneAttribute(System.String,System.String,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <param name="error">Error occured when trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
         </member>
         <member name="T:Nikki.Support.Underground2.Parts.CarParts.RigidControls">
             <summary>

@@ -16,6 +16,8 @@ namespace Nikki.Support.Underground2.Framework
 	/// </summary>
 	public static class CareerManager
 	{
+		private const int max = 0x7FFFFFFF;
+
 		#region Private Assemble
 
 		private static byte[] WriteGCareerRaces(BinaryWriter strw, Database.Underground2 db)
@@ -231,7 +233,7 @@ namespace Nikki.Support.Underground2.Framework
 			return result;
 		}
 
-		private static unsafe byte[] WriteGCarUnlocks(Database.Underground2 db)
+		private static byte[] WriteGCarUnlocks(Database.Underground2 db)
 		{
 			var result = new byte[8 + db.GCarUnlocks.Length * 0xC];
 			using var ms = new MemoryStream(result);
@@ -250,7 +252,8 @@ namespace Nikki.Support.Underground2.Framework
 
 		private static long[] FindOffsets(BinaryReader br, int size)
 		{
-			var offsets = new long[] { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
+			var offsets = new long[] { max, max, max, max, max, max, max, 
+				max, max, max, max, max, max, max };
 			var ReaderOffset = br.BaseStream.Position;
 
 			while (br.BaseStream.Position < ReaderOffset + size)
@@ -314,7 +317,8 @@ namespace Nikki.Support.Underground2.Framework
 						goto default;
 
 					default:
-						br.BaseStream.Position += br.ReadInt32();
+						int over = br.ReadInt32();
+						br.BaseStream.Position += over;
 						break;
 				}
 			}
@@ -323,7 +327,7 @@ namespace Nikki.Support.Underground2.Framework
 
 		private static void ReadStrings(BinaryReader br)
 		{
-			if (br.BaseStream.Position == -1) return;
+			if (br.BaseStream.Position == max) return;
 			int ReaderSize = br.ReadInt32();
 			var ReaderOffset = br.BaseStream.Position;
 			while (br.BaseStream.Position < ReaderOffset + ReaderSize)
@@ -332,7 +336,7 @@ namespace Nikki.Support.Underground2.Framework
 
 		private static void ReadGCareerRaces(BinaryReader br, BinaryReader strr, Database.Underground2 db)
 		{
-			if (br.BaseStream.Position == -1) return;
+			if (br.BaseStream.Position == max) return;
 			int size = br.ReadInt32() / 0x88;
 
 			for (int a1 = 0; a1 < size; ++a1)
@@ -344,7 +348,7 @@ namespace Nikki.Support.Underground2.Framework
 
 		private static void ReadWorldShops(BinaryReader br, Database.Underground2 db)
 		{
-			if (br.BaseStream.Position == -1) return;
+			if (br.BaseStream.Position == max) return;
 			int size = br.ReadInt32() / 0xA0;
 
 			for (int a1 = 0; a1 < size; ++a1)
@@ -356,7 +360,7 @@ namespace Nikki.Support.Underground2.Framework
 
 		private static void ReadGCareerBrands(BinaryReader br, Database.Underground2 db)
 		{
-			if (br.BaseStream.Position == -1) return;
+			if (br.BaseStream.Position == max) return;
 			int size = br.ReadInt32() / 0x44;
 
 			for (int a1 = 0; a1 < size; ++a1)
@@ -368,7 +372,7 @@ namespace Nikki.Support.Underground2.Framework
 
 		private static void ReadPartPerformances(BinaryReader br, Database.Underground2 db)
 		{
-			if (br.BaseStream.Position == -1) return;
+			if (br.BaseStream.Position == max) return;
 			int size = br.ReadInt32() / 0x17C;
 
 			for (int a1 = 0; a1 < size; ++a1)
@@ -387,7 +391,7 @@ namespace Nikki.Support.Underground2.Framework
 
 		private static void ReadGShowcases(BinaryReader br, Database.Underground2 db)
 		{
-			if (br.BaseStream.Position == -1) return;
+			if (br.BaseStream.Position == max) return;
 			int size = br.ReadInt32() / 0x40;
 
 			for (int a1 = 0; a1 < size; ++a1)
@@ -399,7 +403,7 @@ namespace Nikki.Support.Underground2.Framework
 
 		private static void ReadSMSMessages(BinaryReader br, BinaryReader strr, Database.Underground2 db)
 		{
-			if (br.BaseStream.Position == -1) return;
+			if (br.BaseStream.Position == max) return;
 			int size = br.ReadInt32() / 0x14;
 
 			for (int a1 = 0; a1 < size; ++a1)
@@ -411,7 +415,7 @@ namespace Nikki.Support.Underground2.Framework
 
 		private static void ReadSponsors(BinaryReader br, BinaryReader strr, Database.Underground2 db)
 		{
-			if (br.BaseStream.Position == -1) return;
+			if (br.BaseStream.Position == max) return;
 			int size = br.ReadInt32() / 0x10;
 
 			for (int a1 = 0; a1 < size; ++a1)
@@ -423,7 +427,7 @@ namespace Nikki.Support.Underground2.Framework
 
 		private static void ReadGCareerStages(BinaryReader br, Database.Underground2 db)
 		{
-			if (br.BaseStream.Position == -1) return;
+			if (br.BaseStream.Position == max) return;
 			int size = br.ReadInt32() / 0x50;
 
 			for (int a1 = 0; a1 < size; ++a1)
@@ -435,7 +439,7 @@ namespace Nikki.Support.Underground2.Framework
 
 		private static void ReadPerfSliderTunings(BinaryReader br, Database.Underground2 db)
 		{
-			if (br.BaseStream.Position == -1) return;
+			if (br.BaseStream.Position == max) return;
 			int size = br.ReadInt32() / 0x18;
 
 			for (int a1 = 0; a1 < size; ++a1)
@@ -447,7 +451,7 @@ namespace Nikki.Support.Underground2.Framework
 
 		private static void ReadWorldChallenges(BinaryReader br, BinaryReader strr, Database.Underground2 db)
 		{
-			if (br.BaseStream.Position == -1) return;
+			if (br.BaseStream.Position == max) return;
 			int size = br.ReadInt32() / 0x18;
 
 			for (int a1 = 0; a1 < size; ++a1)
@@ -459,7 +463,7 @@ namespace Nikki.Support.Underground2.Framework
 
 		private static void ReadPartUnlockables(BinaryReader br, Database.Underground2 db)
 		{
-			if (br.BaseStream.Position == -1) return;
+			if (br.BaseStream.Position == max) return;
 			int size = br.ReadInt32() / 0x28;
 
 			for (int a1 = 0; a1 < size; ++a1)
@@ -471,7 +475,7 @@ namespace Nikki.Support.Underground2.Framework
 
 		private static void ReadBankTriggers(BinaryReader br, Database.Underground2 db)
 		{
-			if (br.BaseStream.Position == -1) return;
+			if (br.BaseStream.Position == max) return;
 			int size = br.ReadInt32() / 0xC;
 
 			for (int a1 = 0; a1 < size; ++a1)
@@ -483,7 +487,7 @@ namespace Nikki.Support.Underground2.Framework
 
 		private static void ReadGCarUnlocks(BinaryReader br, Database.Underground2 db)
 		{
-			if (br.BaseStream.Position == -1) return;
+			if (br.BaseStream.Position == max) return;
 			int size = br.ReadInt32() / 0xC;
 
 			for (int a1 = 0; a1 < size; ++a1)

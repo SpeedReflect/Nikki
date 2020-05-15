@@ -8,8 +8,15 @@ using CoreExtensions.IO;
 
 namespace Nikki.Core
 {
+	/// <summary>
+	/// Static manager to load keys and various files.
+	/// </summary>
 	public static class Manager
 	{
+		/// <summary>
+		/// Loads all BIN keys from files specified.
+		/// </summary>
+		/// <param name="files">Files to load.</param>
 		public static void LoadBinKeys(IEnumerable<string> files)
 		{
 			foreach (var file in files)
@@ -28,6 +35,10 @@ namespace Nikki.Core
 			}
 		}
 
+		/// <summary>
+		/// Loads all VLT keys from files specified.
+		/// </summary>
+		/// <param name="files">Files to load.</param>
 		public static void LoadVltKeys(IEnumerable<string> files)
 		{
 			foreach (var file in files)
@@ -46,6 +57,10 @@ namespace Nikki.Core
 			}
 		}
 
+		/// <summary>
+		/// Loads all VLT keys from attributes.bin file.
+		/// </summary>
+		/// <param name="file">attributes.bin file path.</param>
 		public static void LoadVaultAttributes(string file)
 		{
 			if (!File.Exists(file)) return;
@@ -89,6 +104,10 @@ namespace Nikki.Core
 			catch (Exception) { }
 		}
 
+		/// <summary>
+		/// Loads all VLT keys from fe_attrib.bin file.
+		/// </summary>
+		/// <param name="file">fe_attrib.bin file path.</param>
 		public static void LoadVaultFEAttribs(string file)
 		{
 			if (!File.Exists(file)) return;

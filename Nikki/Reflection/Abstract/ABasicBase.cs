@@ -14,24 +14,9 @@ namespace Nikki.Reflection.Abstract
 	public abstract class ABasicBase : IOperative
 	{
         /// <summary>
-        /// GlobalA file buffer.
+        /// File buffer.
         /// </summary>
-		public virtual byte[] Data_GlobalABUN { get; set; }
-
-        /// <summary>
-        /// GlobalB file buffer.
-        /// </summary>
-		public virtual byte[] Data_GlobalBLZC { get; set; }
-
-        /// <summary>
-        /// Language Text buffer.
-        /// </summary>
-		public virtual byte[] Data_LngGlobal { get; set; }
-
-        /// <summary>
-        /// Language Label buffer.
-        /// </summary>
-		public virtual byte[] Data_LngLabels { get; set; }
+		public virtual byte[] Buffer { get; set; }
 
         /// <summary>
         /// Game to which the class belongs to.
@@ -44,16 +29,18 @@ namespace Nikki.Reflection.Abstract
         public abstract string GameSTR { get; }
 
         /// <summary>
-        /// 
+        /// Loads all data in the database using options passed.
         /// </summary>
-        /// <returns></returns>
-        public abstract bool Load();
+        /// <param name="options"><see cref="Options"/> that are used to load data.</param>
+        /// <returns>True on success; false otherwise.</returns>
+        public abstract bool Load(Options options);
 
         /// <summary>
-        /// 
+        /// Saves all data in the database using options passed.
         /// </summary>
-        /// <returns></returns>
-        public abstract bool Save();
+        /// <param name="options"><see cref="Options"/> that are used to save data.</param>
+        /// <returns>True on success; false otherwise.</returns>
+        public abstract bool Save(Options options);
 
         /// <summary>
         /// Gets a <see cref="ACollectable"/> class from CollectionName and root provided.

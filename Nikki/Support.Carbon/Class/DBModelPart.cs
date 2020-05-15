@@ -91,8 +91,8 @@ namespace Nikki.Support.Carbon.Class
 		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
 		public DBModelPart(string CName, Database.Carbon db)
 		{
-			this.CollectionName = CName;
 			this.Database = db;
+			this.CollectionName = CName;
 			this.ModelCarParts = new List<RealCarPart>();
 		}
 

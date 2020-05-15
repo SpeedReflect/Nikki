@@ -298,6 +298,12 @@ namespace Nikki.Support.MostWanted.Class
             this._unknown3 = br.ReadInt32();
             this._unknown4 = br.ReadInt32();
             this._unknown5 = br.ReadInt32();
+
+            if (this._compression == EAComp.SECRET)
+            {
+                this._compression = EAComp.P8_08;
+                this._secretp8 = true;
+            }
         }
 
         /// <summary>

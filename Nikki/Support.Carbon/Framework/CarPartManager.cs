@@ -593,6 +593,7 @@ namespace Nikki.Support.Carbon.Framework
 			// Generate Model Collections
 			for (int a1 = 0; a1 < models_list.Length; ++a1)
 			{
+				if (String.IsNullOrEmpty(models_list[a1])) continue;
 				var collection = new DBModelPart(models_list[a1], db);
 				var tempparts = temp_cparts.FindAll(_ => _.Index == a1);
 
@@ -607,7 +608,9 @@ namespace Nikki.Support.Carbon.Framework
 					foreach (var attroff in cpoff?.AttribOffsets ?? Enumerable.Empty<ushort>())
 					{
 						if (attroff >= attrib_list.Length) continue;
-						realpart.Attributes.Add(attrib_list[attroff]);
+						var addon = attrib_list[attroff].PlainCopy();
+						addon.BelongsTo = realpart;
+						realpart.Attributes.Add(addon);
 					}
 					collection.ModelCarParts.Add(realpart);
 				}

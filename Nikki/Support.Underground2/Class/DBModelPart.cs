@@ -91,8 +91,8 @@ namespace Nikki.Support.Underground2.Class
 		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
 		public DBModelPart(string CName, Database.Underground2 db)
 		{
-			this.CollectionName = CName;
 			this.Database = db;
+			this.CollectionName = CName;
 			this.ModelCarParts = new List<RealCarPart>();
 		}
 

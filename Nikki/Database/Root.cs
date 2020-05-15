@@ -218,7 +218,7 @@ namespace Nikki.Database
 			}
 			foreach (var collection in this.Collections)
 			{
-				bool pass = collection.SetValue(field, value, ref error);
+				bool pass = collection.SetValue(field, value, out error);
 				if (!pass) return false;
 			}
 			return true;

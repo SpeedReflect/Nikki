@@ -103,12 +103,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         public int Index { get; set; }
 
-        /// <summary>
-        /// Filename to which <see cref="TPKBlock"/> belong to.
-        /// </summary>
-        public string BelongsToFile { get; set; } = String.Empty;
-
-        internal static string Watermark { get; set; } = String.Empty;
+        internal string Watermark { get; set; } = String.Empty;
 
         #endregion
 

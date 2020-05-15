@@ -1,23 +1,23 @@
 ﻿using System.IO;
 using Nikki.Core;
 using Nikki.Reflection.ID;
-using Nikki.Support.Carbon.Class;
+using Nikki.Support.MostWanted.Class;
 
 
 
-namespace Nikki.Support.Carbon.Framework
+namespace Nikki.Support.MostWanted.Framework
 {
 	internal static class Loader
 	{
 		#region Private Reading
 
-		private static void ReadMaterial(BinaryReader br, Database.Carbon db)
+		private static void ReadMaterial(BinaryReader br, Database.MostWanted db)
 		{
 			var Class = new Material(br, db);
 			db.Materials.Collections.Add(Class);
 		}
 
-		private static void ReadTPKBlock(BinaryReader br, Database.Carbon db)
+		private static void ReadTPKBlock(BinaryReader br, Database.MostWanted db)
 		{
 			br.BaseStream.Position -= 8;
 			var Class = new TPKBlock(db.TPKBlocks.Length, db);
@@ -25,7 +25,7 @@ namespace Nikki.Support.Carbon.Framework
 			db.TPKBlocks.Collections.Add(Class);
 		}
 
-		private static void ReadCarTypeInfos(BinaryReader br, int size, Database.Carbon db)
+		private static void ReadCarTypeInfos(BinaryReader br, int size, Database.MostWanted db)
 		{
 			br.BaseStream.Position += 8;
 			int len = size / CarTypeInfo.BaseClassSize;
@@ -37,10 +37,10 @@ namespace Nikki.Support.Carbon.Framework
 			}
 		}
 
-		private static void ReadCarParts(BinaryReader br, int size, Database.Carbon db) =>
+		private static void ReadCarParts(BinaryReader br, int size, Database.MostWanted db) =>
 			CarPartManager.Disassemble(br, size, db);
 
-		private static void ReadPresetRides(BinaryReader br, int size, Database.Carbon db)
+		private static void ReadPresetRides(BinaryReader br, int size, Database.MostWanted db)
 		{
 			int len = size / PresetRide.BaseClassSize;
 
@@ -51,18 +51,7 @@ namespace Nikki.Support.Carbon.Framework
 			}
 		}
 
-		private static void ReadPresetSkins(BinaryReader br, int size, Database.Carbon db)
-		{
-			int len = size / PresetSkin.BaseClassSize;
-
-			for (int a1 = 0; a1 < len; ++a1)
-			{
-				var Class = new PresetSkin(br, db);
-				db.PresetSkins.Collections.Add(Class);
-			}
-		}
-
-		private static void ReadCollisions(BinaryReader br, int size, Database.Carbon db)
+		private static void ReadCollisions(BinaryReader br, int size, Database.MostWanted db)
 		{
 			var offset = br.BaseStream.Position + size;
 
@@ -73,7 +62,7 @@ namespace Nikki.Support.Carbon.Framework
 			}
 		}
 
-		private static void ReadFNGroup(BinaryReader br, Database.Carbon db)
+		private static void ReadFNGroup(BinaryReader br, Database.MostWanted db)
 		{
 			br.BaseStream.Position -= 8;
 			var Class = new FNGroup(br, db);
@@ -81,7 +70,7 @@ namespace Nikki.Support.Carbon.Framework
 			db.FNGroups.Collections.Add(Class);
 		}
 
-		private static void ReadSTRBlock(BinaryReader br, Database.Carbon db)
+		private static void ReadSTRBlock(BinaryReader br, Database.MostWanted db)
 		{
 			br.BaseStream.Position -= 8;
 			var Class = new STRBlock(br, db);
@@ -90,7 +79,7 @@ namespace Nikki.Support.Carbon.Framework
 
 		#endregion
 
-		public static bool Invoke(Options options, Database.Carbon db)
+		public static bool Invoke(Options options, Database.MostWanted db)
 		{
 			if (!File.Exists(options.File)) return false;
 			if (options.Flags.HasFlag(eOptFlags.None)) return false;
@@ -127,11 +116,6 @@ namespace Nikki.Support.Carbon.Framework
 					case Global.PresetRides:
 						if (options.Flags.HasFlag(eOptFlags.PresetRides))
 							ReadPresetRides(br, size, db);
-						break;
-
-					case Global.PresetSkins:
-						if (options.Flags.HasFlag(eOptFlags.PresetSkins))
-							ReadPresetSkins(br, size, db);
 						break;
 
 					case Global.Collisions:

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Nikki.Core;
 using Nikki.Reflection.Abstract;
 using Nikki.Support.Carbon.Class;
@@ -95,10 +94,7 @@ namespace Nikki.Database
 		/// </summary>
         ~Carbon()
         {
-            this.Data_GlobalABUN = null;
-            this.Data_GlobalBLZC = null;
-            this.Data_LngGlobal = null;
-            this.Data_LngLabels = null;
+			this.Buffer = null;
             this.CarTypeInfos = null;
             this.FNGroups = null;
             this.Materials = null;
@@ -225,23 +221,17 @@ namespace Nikki.Database
 		}
 
 		/// <summary>
-		/// 
+		/// Loads all data in the database using options passed.
 		/// </summary>
-		/// <returns></returns>
-		public override bool Load()
-		{
-			return false;
-		}
-
-		public bool Load(CarbonOptions options) => Loader.Invoke(options, this);
+		/// <param name="options"><see cref="Options"/> that are used to load data.</param>
+		/// <returns>True on success; false otherwise.</returns>
+		public override bool Load(Options options) => Loader.Invoke(options, this);
 
 		/// <summary>
-		/// 
+		/// Saves all data in the database using options passed.
 		/// </summary>
-		/// <returns></returns>
-		public override bool Save()
-		{
-			return false;
-		}
+		/// <param name="options"><see cref="Options"/> that are used to save data.</param>
+		/// <returns>True on success; false otherwise.</returns>
+		public override bool Save(Options options) => Saver.Invoke(options, this);
 	}
 }

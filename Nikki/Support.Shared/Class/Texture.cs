@@ -15,13 +15,6 @@ namespace Nikki.Support.Shared.Class
     /// </summary>
     public abstract class Texture : ACollectable
     {
-        #region Private Fields
-
-        private short _width = 0;
-        private short _height = 0;
-
-        #endregion
-
         #region Main Properties
 
         /// <summary>
@@ -92,12 +85,12 @@ namespace Nikki.Support.Shared.Class
         /// <summary>
         /// Represents base 2 value of the width of the texture.
         /// </summary>
-        public byte Log_2_Width => (byte)Math.Log(this._width, 2);
+        public byte Log_2_Width => (byte)Math.Log(this.Width, 2);
 
         /// <summary>
         /// Represents base 2 value of the height of the texture.
         /// </summary>
-        public byte Log_2_Height => (byte)Math.Log(this._height, 2);
+        public byte Log_2_Height => (byte)Math.Log(this.Height, 2);
 
         /// <summary>
         /// Represents number of mipmaps in the texture.

@@ -607,7 +607,7 @@ namespace Nikki.Support.Underground2.Class
 
                     default:
                         int size = br.ReadInt32();
-                        ReaderOffset += size;
+                        br.BaseStream.Position += size;
                         break;
                 }
             }
@@ -695,7 +695,7 @@ namespace Nikki.Support.Underground2.Class
             int len = 0;
             while (len < count && br.BaseStream.Position < ReaderOffset + ReaderSize)
             {
-                result[len] = br.BaseStream.Position; // add offset
+                result[len++] = br.BaseStream.Position; // add offset
                 br.BaseStream.Position += 0x7C;
             }
 
@@ -776,10 +776,10 @@ namespace Nikki.Support.Underground2.Class
             bw.WriteNullTermUTF8(CName, 0x1C);
 
             // Write Filename
-            bw.WriteNullTermUTF8(this.Filename, 0x40);
+            bw.WriteNullTermUTF8(this.Watermark, 0x40);
 
             // Write all other settings
-            bw.Write(this.FilenameHash);
+            bw.Write(this.Watermark.BinHash());
             bw.Write(this.PermBlockByteOffset);
             bw.Write(this.PermBlockByteSize);
             bw.Write(this.EndianSwapped);
@@ -862,7 +862,7 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(0x18); // write size
             bw.Write((long)0);
             bw.Write(1);
-            bw.Write(this.FilenameHash);
+            bw.Write(this.Watermark.BinHash());
             bw.Write((long)0);
             bw.Write(0);
             bw.Write(0x50);

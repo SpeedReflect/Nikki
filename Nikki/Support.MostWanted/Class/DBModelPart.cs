@@ -91,8 +91,8 @@ namespace Nikki.Support.MostWanted.Class
 		/// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
 		public DBModelPart(string CName, Database.MostWanted db)
 		{
-			this.CollectionName = CName;
 			this.Database = db;
+			this.CollectionName = CName;
 			this.ModelCarParts = new List<RealCarPart>();
 		}
 

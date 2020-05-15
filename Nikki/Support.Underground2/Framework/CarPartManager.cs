@@ -46,7 +46,8 @@ namespace Nikki.Support.Underground2.Framework
 			return result;
 		}
 
-		private static Dictionary<int, int> MakeStringList(Database.Underground2 db, out byte[] string_buffer)
+		private static Dictionary<int, int> MakeStringList(Database.Underground2 db, 
+			string mark, out byte[] string_buffer)
 		{
 			// Prepare stack
 			var string_dict = new Dictionary<int, int>();
@@ -60,9 +61,10 @@ namespace Nikki.Support.Underground2.Framework
 
 			// Fill empty string in the beginning
 			string_dict[empty] = 1;
-			length += 8;
+			length += 0x28;
 			bw.Write(0);
 			bw.Write(0);
+			bw.WriteNullTermUTF8(mark, 0x20);
 
 			// Function to write strings to dictionary and return its length
 			var Inject = new Func<string, int, int>((value, len) =>
@@ -501,12 +503,13 @@ namespace Nikki.Support.Underground2.Framework
 		/// writes it with <see cref="BinaryWriter"/> provided.
 		/// </summary>
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		/// <param name="mark">Watermark to put in the strings block.</param>
 		/// <param name="db"><see cref="Database.Underground2"/> database with roots 
 		/// and collections.</param>
-		public static void Assemble(BinaryWriter bw, Database.Underground2 db)
+		public static void Assemble(BinaryWriter bw, string mark, Database.Underground2 db)
 		{
 			// Get string map
-			var string_dict = MakeStringList(db, out var string_buffer);
+			var string_dict = MakeStringList(db, mark, out var string_buffer);
 
 			// Get struct map
 			var struct_dict = MakeStructList(string_dict, db, out var struct_buffer);
@@ -630,6 +633,7 @@ namespace Nikki.Support.Underground2.Framework
 			// Generate Model Collections
 			for (int a1 = 0; a1 < models_list.Length; ++a1)
 			{
+				if (String.IsNullOrEmpty(models_list[a1])) continue;
 				var collection = new DBModelPart(models_list[a1], db);
 				var tempparts = temp_cparts.FindAll(_ => _.Index == a1);
 
@@ -643,12 +647,14 @@ namespace Nikki.Support.Underground2.Framework
 						DebugName = temppart.DebugName,
 						CarPartGroupID = temppart.CarPartGroupID,
 						UpgradeGroupID = temppart.UpgradeGroupID,
-						Struct = (Parts.CarParts.CPStruct)cpstr ?? new Parts.CarParts.CPStruct()
+						Struct = (Parts.CarParts.CPStruct)cpstr?.PlainCopy() ?? new Parts.CarParts.CPStruct()
 					};
 					foreach (var attroff in cpoff?.AttribOffsets ?? Enumerable.Empty<ushort>())
 					{
 						if (attroff >= attrib_list.Length) continue;
-						realpart.Attributes.Add(attrib_list[attroff]);
+						var addon = attrib_list[attroff].PlainCopy();
+						addon.BelongsTo = realpart;
+						realpart.Attributes.Add(addon);
 					}
 					collection.ModelCarParts.Add(realpart);
 				}
