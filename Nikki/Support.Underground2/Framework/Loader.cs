@@ -1,23 +1,23 @@
 ﻿using System.IO;
 using Nikki.Core;
 using Nikki.Reflection.ID;
-using Nikki.Support.Carbon.Class;
+using Nikki.Support.Underground2.Class;
 
 
 
-namespace Nikki.Support.Carbon.Framework
+namespace Nikki.Support.Underground2.Framework
 {
 	internal static class Loader
 	{
 		#region Private Reading
 
-		private static void ReadMaterial(BinaryReader br, Database.Carbon db)
+		private static void ReadMaterial(BinaryReader br, Database.Underground2 db)
 		{
 			var Class = new Material(br, db);
 			db.Materials.Collections.Add(Class);
 		}
 
-		private static void ReadTPKBlock(BinaryReader br, Database.Carbon db)
+		private static void ReadTPKBlock(BinaryReader br, Database.Underground2 db)
 		{
 			br.BaseStream.Position -= 8;
 			var Class = new TPKBlock(db.TPKBlocks.Length, db);
@@ -25,7 +25,7 @@ namespace Nikki.Support.Carbon.Framework
 			db.TPKBlocks.Collections.Add(Class);
 		}
 
-		private static void ReadCarTypeInfos(BinaryReader br, int size, Database.Carbon db)
+		private static void ReadCarTypeInfos(BinaryReader br, int size, Database.Underground2 db)
 		{
 			br.BaseStream.Position += 8;
 			int len = size / CarTypeInfo.BaseClassSize;
@@ -37,10 +37,13 @@ namespace Nikki.Support.Carbon.Framework
 			}
 		}
 
-		private static void ReadCarParts(BinaryReader br, int size, Database.Carbon db) =>
+		private static void ReadCarParts(BinaryReader br, int size, Database.Underground2 db) =>
 			CarPartManager.Disassemble(br, size, db);
 
-		private static void ReadPresetRides(BinaryReader br, int size, Database.Carbon db)
+		private static void ReadGCareer(BinaryReader br, int size, Database.Underground2 db) =>
+			CareerManager.Disassemble(br, size, db);
+
+		private static void ReadPresetRides(BinaryReader br, int size, Database.Underground2 db)
 		{
 			int len = size / PresetRide.BaseClassSize;
 
@@ -51,29 +54,42 @@ namespace Nikki.Support.Carbon.Framework
 			}
 		}
 
-		private static void ReadPresetSkins(BinaryReader br, int size, Database.Carbon db)
+		private static void ReadSunInfos(BinaryReader br, int size, Database.Underground2 db)
 		{
-			int len = size / PresetSkin.BaseClassSize;
+			int len = size / SunInfo.BaseClassSize;
+			br.BaseStream.Position += 8;
 
 			for (int a1 = 0; a1 < len; ++a1)
 			{
-				var Class = new PresetSkin(br, db);
-				db.PresetSkins.Collections.Add(Class);
+				var Class = new SunInfo(br, db);
+				db.SunInfos.Collections.Add(Class);
 			}
 		}
 
-		private static void ReadCollisions(BinaryReader br, int size, Database.Carbon db)
+		private static void ReadTracks(BinaryReader br, int size, Database.Underground2 db)
 		{
-			var offset = br.BaseStream.Position + size;
+			int len = size / Track.BaseClassSize;
 
-			while (br.BaseStream.Position < offset)
+			for (int a1 = 0; a1 < len; ++a1)
 			{
-				var Class = new Collision(br, db);
-				db.Collisions.Collections.Add(Class);
+				var Class = new Track(br, db);
+				db.Tracks.Collections.Add(Class);
 			}
 		}
 
-		private static void ReadFNGroup(BinaryReader br, Database.Carbon db)
+		private static void ReadAcidEffects(BinaryReader br, int size, Database.Underground2 db)
+		{
+			int len = size / AcidEffect.BaseClassSize;
+			br.BaseStream.Position += 0x18;
+
+			for (int a1 = 0; a1 < len; ++a1)
+			{
+				var Class = new AcidEffect(br, db);
+				db.AcidEffects.Collections.Add(Class);
+			}
+		}
+
+		private static void ReadFNGroup(BinaryReader br, Database.Underground2 db)
 		{
 			br.BaseStream.Position -= 8;
 			var Class = new FNGroup(br, db);
@@ -81,7 +97,7 @@ namespace Nikki.Support.Carbon.Framework
 			db.FNGroups.Collections.Add(Class);
 		}
 
-		private static void ReadSTRBlock(BinaryReader br, Database.Carbon db)
+		private static void ReadSTRBlock(BinaryReader br, Database.Underground2 db)
 		{
 			br.BaseStream.Position -= 8;
 			var Class = new STRBlock(br, db);
@@ -90,7 +106,7 @@ namespace Nikki.Support.Carbon.Framework
 
 		#endregion
 
-		public static bool Invoke(Options options, Database.Carbon db)
+		public static bool Invoke(Options options, Database.Underground2 db)
 		{
 			if (!File.Exists(options.File)) return false;
 			if (options.Flags.HasFlag(eOptFlags.None)) return false;
@@ -99,13 +115,12 @@ namespace Nikki.Support.Carbon.Framework
 			using var ms = new MemoryStream(db.Buffer);
 			using var br = new BinaryReader(ms);
 
-			uint ID = 0;
-			int size = 0;
+			bool gcareer = !options.Flags.HasFlag(eOptFlags.GCareer);
 
 			while (br.BaseStream.Position < br.BaseStream.Length)
 			{
-				ID = br.ReadUInt32();
-				size = br.ReadInt32();
+				var ID = br.ReadUInt32();
+				var size = br.ReadInt32();
 
 				switch (ID)
 				{
@@ -129,19 +144,32 @@ namespace Nikki.Support.Carbon.Framework
 							ReadPresetRides(br, size, db);
 						break;
 
-					case Global.PresetSkins:
-						if (options.Flags.HasFlag(eOptFlags.PresetSkins))
-							ReadPresetSkins(br, size, db);
-						break;
-
-					case Global.Collisions:
-						if (options.Flags.HasFlag(eOptFlags.Collisions))
-							ReadCollisions(br, size, db);
+					case Global.CareerInfo:
+						if (!gcareer)
+						{
+							ReadGCareer(br, size, db);
+							gcareer = true;
+						}
 						break;
 
 					case Global.CarParts:
 						if (options.Flags.HasFlag(eOptFlags.DBModelParts))
 							ReadCarParts(br, size, db);
+						break;
+
+					case Global.SunInfos:
+						if (options.Flags.HasFlag(eOptFlags.SunInfos))
+							ReadSunInfos(br, size, db);
+						break;
+
+					case Global.Tracks:
+						if (options.Flags.HasFlag(eOptFlags.Tracks))
+							ReadTracks(br, size, db);
+						break;
+
+					case Global.AcidEffects:
+						if (options.Flags.HasFlag(eOptFlags.AcidEffects))
+							ReadAcidEffects(br, size, db);
 						break;
 
 					case Global.FEngFiles:

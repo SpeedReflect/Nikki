@@ -127,6 +127,7 @@ namespace Nikki.Core
 			{ 0xBCADE4C3, eCarPartAttribType.Integer }, // HOODEMITTER
 			{ 0x48620C16, eCarPartAttribType.Integer }, // DAMAGELEVEL
 			{ 0x8C185134, eCarPartAttribType.Integer }, // TEXTUREHASH
+			{ 0x10C98090, eCarPartAttribType.Integer }, // TEXTURE_NAME
 			{ 0xEDBF864E, eCarPartAttribType.Integer }, // WHEELEMITTER
 			{ 0x4732DA07, eCarPartAttribType.Integer }, // LANGUAGEHASH
 			{ 0x6212682B, eCarPartAttribType.Integer }, // NUMREMAPCOLOURS
@@ -142,7 +143,6 @@ namespace Nikki.Core
 
 			// Unknown Label Attributes
 			{ 0x04B39858, eCarPartAttribType.Integer }, // 0x04B39858
-			{ 0x10C98090, eCarPartAttribType.Integer }, // 0x10C98090
 			{ 0x1B0EA1A9, eCarPartAttribType.Integer }, // 0x1B0EA1A9
 			{ 0x5412A1D9, eCarPartAttribType.Integer }, // 0x5412A1D9
 			{ 0x6509EC92, eCarPartAttribType.Integer }, // 0x6509EC92

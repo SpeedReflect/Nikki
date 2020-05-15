@@ -218,7 +218,12 @@ namespace Nikki.Reflection.Enum.CP
 		/// 
 		/// </summary>
 		TEXTUREHASH = 0x8C185134,
-		
+
+		/// <summary>
+		/// 
+		/// </summary>
+		TEXTURE_NAME = 0x10C98090,
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -283,12 +288,7 @@ namespace Nikki.Reflection.Enum.CP
 		/// 
 		/// </summary>
 		_0x04B39858 = 0x04B39858,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		_0x10C98090 = 0x10C98090,
-		
+				
 		/// <summary>
 		/// 
 		/// </summary>

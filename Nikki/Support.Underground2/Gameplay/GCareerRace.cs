@@ -707,20 +707,26 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="strr"><see cref="BinaryReader"/> to read strings with.</param>
 		public void Disassemble(BinaryReader br, BinaryReader strr)
 		{
+			ushort position = 0;
+
 			// Collection Name
-			strr.BaseStream.Position = br.ReadUInt16();
+			position = br.ReadUInt16();
+			strr.BaseStream.Position = position;
 			this._collection_name = strr.ReadNullTermUTF8();
 
 			// Intro Movie
-			strr.BaseStream.Position = br.ReadUInt16();
+			position = br.ReadUInt16();
+			strr.BaseStream.Position = position;
 			this.IntroMovie = strr.ReadNullTermUTF8();
 
 			// Outro Movie
-			strr.BaseStream.Position = br.ReadUInt16();
+			position = br.ReadUInt16();
+			strr.BaseStream.Position = position;
 			this.OutroMovie = strr.ReadNullTermUTF8();
 
 			// Event Trigger
-			strr.BaseStream.Position = br.ReadUInt16();
+			position = br.ReadUInt16();
+			strr.BaseStream.Position = position;
 			this.EventTrigger = strr.ReadNullTermUTF8();
 
 			// Event behavior
@@ -785,7 +791,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.IsHiddenEvent = br.ReadEnum<eBoolean>();
 			this._padding2 = br.ReadInt32();
 			this._padding3 = br.ReadInt32();
-			var position = br.BaseStream.Position;
+			var final = br.BaseStream.Position;
 			br.BaseStream.Position -= 0x48;
 
 			// If none of the events are drift downhill, read opponent data based on number of the opponents
@@ -793,7 +799,8 @@ namespace Nikki.Support.Underground2.Gameplay
 			{
 				if (this.NumOpponents > 0)
 				{
-					strr.BaseStream.Position = br.ReadUInt16();
+					position = br.ReadUInt16();
+					strr.BaseStream.Position = position;
 					this.OPPONENT1.Name = strr.ReadNullTermUTF8();
 					this.OPPONENT1.StatsMultiplier = br.ReadUInt16();
 					this.OPPONENT1.PresetRide = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
@@ -804,7 +811,8 @@ namespace Nikki.Support.Underground2.Gameplay
 				}
 				if (this.NumOpponents > 1)
 				{
-					strr.BaseStream.Position = br.ReadUInt16();
+					position = br.ReadUInt16();
+					strr.BaseStream.Position = position;
 					this.OPPONENT2.Name = strr.ReadNullTermUTF8();
 					this.OPPONENT2.StatsMultiplier = br.ReadUInt16();
 					this.OPPONENT2.PresetRide = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
@@ -815,7 +823,8 @@ namespace Nikki.Support.Underground2.Gameplay
 				}
 				if (this.NumOpponents > 2)
 				{
-					strr.BaseStream.Position = br.ReadUInt16();
+					position = br.ReadUInt16();
+					strr.BaseStream.Position = position;
 					this.OPPONENT3.Name = strr.ReadNullTermUTF8();
 					this.OPPONENT3.StatsMultiplier = br.ReadUInt16();
 					this.OPPONENT3.PresetRide = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
@@ -826,7 +835,8 @@ namespace Nikki.Support.Underground2.Gameplay
 				}
 				if (this.NumOpponents > 3)
 				{
-					strr.BaseStream.Position = br.ReadUInt16();
+					position = br.ReadUInt16();
+					strr.BaseStream.Position = position;
 					this.OPPONENT4.Name = strr.ReadNullTermUTF8();
 					this.OPPONENT4.StatsMultiplier = br.ReadUInt16();
 					this.OPPONENT4.PresetRide = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
@@ -837,7 +847,8 @@ namespace Nikki.Support.Underground2.Gameplay
 				}
 				if (this.NumOpponents > 4)
 				{
-					strr.BaseStream.Position = br.ReadUInt16();
+					position = br.ReadUInt16();
+					strr.BaseStream.Position = position;
 					this.OPPONENT5.Name = strr.ReadNullTermUTF8();
 					this.OPPONENT5.StatsMultiplier = br.ReadUInt16();
 					this.OPPONENT5.PresetRide = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
@@ -851,7 +862,8 @@ namespace Nikki.Support.Underground2.Gameplay
 			// If at least one of the events is downhill drift, read only 3 opponents
 			else
 			{
-				strr.BaseStream.Position = br.ReadUInt16();
+				position = br.ReadUInt16();
+				strr.BaseStream.Position = position;
 				this.OPPONENT1.Name = strr.ReadNullTermUTF8();
 				this.OPPONENT1.StatsMultiplier = br.ReadUInt16();
 				this.OPPONENT1.PresetRide = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
@@ -860,7 +872,8 @@ namespace Nikki.Support.Underground2.Gameplay
 				this.OPPONENT1.SkillHard = br.ReadByte();
 				this.OPPONENT1.CatchUp = br.ReadByte();
 
-				strr.BaseStream.Position = br.ReadUInt16();
+				position = br.ReadUInt16();
+				strr.BaseStream.Position = position;
 				this.OPPONENT2.Name = strr.ReadNullTermUTF8();
 				this.OPPONENT2.StatsMultiplier = br.ReadUInt16();
 				this.OPPONENT2.PresetRide = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
@@ -869,7 +882,8 @@ namespace Nikki.Support.Underground2.Gameplay
 				this.OPPONENT2.SkillHard = br.ReadByte();
 				this.OPPONENT2.CatchUp = br.ReadByte();
 
-				strr.BaseStream.Position = br.ReadUInt16();
+				position = br.ReadUInt16();
+				strr.BaseStream.Position = position;
 				this.OPPONENT3.Name = strr.ReadNullTermUTF8();
 				this.OPPONENT3.StatsMultiplier = br.ReadUInt16();
 				this.OPPONENT3.PresetRide = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
@@ -879,7 +893,7 @@ namespace Nikki.Support.Underground2.Gameplay
 				this.OPPONENT3.CatchUp = br.ReadByte();
 			}
 
-			br.BaseStream.Position = position;
+			br.BaseStream.Position = final;
 		}
 
 		/// <summary>

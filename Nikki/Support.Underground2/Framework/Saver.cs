@@ -2,12 +2,12 @@
 using System.IO;
 using Nikki.Core;
 using Nikki.Reflection.ID;
-using Nikki.Support.MostWanted.Class;
+using Nikki.Support.Underground2.Class;
 using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.MostWanted.Framework
+namespace Nikki.Support.Underground2.Framework
 {
 	internal static class Saver
 	{
@@ -32,13 +32,13 @@ namespace Nikki.Support.MostWanted.Framework
 			bw.Write(data);
 		}
 
-		private static void WriteMaterials(BinaryWriter bw, Database.MostWanted db)
+		private static void WriteMaterials(BinaryWriter bw, Database.Underground2 db)
 		{
 			foreach (var Class in db.Materials.Collections)
 				Class.Assemble(bw);
 		}
 
-		private static void WriteTPKBlocks(BinaryWriter bw, Options options, Database.MostWanted db)
+		private static void WriteTPKBlocks(BinaryWriter bw, Options options, Database.Underground2 db)
 		{
 			foreach (var Class in db.TPKBlocks.Collections)
 			{
@@ -48,7 +48,7 @@ namespace Nikki.Support.MostWanted.Framework
 			}
 		}
 
-		private static void WriteCarTypeInfos(BinaryWriter bw, Options options, Database.MostWanted db)
+		private static void WriteCarTypeInfos(BinaryWriter bw, Options options, Database.Underground2 db)
 		{
 			WritePadding(bw, options.Watermark);
 			bw.Write(Global.CarTypeInfos);
@@ -58,7 +58,7 @@ namespace Nikki.Support.MostWanted.Framework
 				Class.Assemble(bw);
 		}
 
-		private static void WritePresetRides(BinaryWriter bw, Options options, Database.MostWanted db)
+		private static void WritePresetRides(BinaryWriter bw, Options options, Database.Underground2 db)
 		{
 			WritePadding(bw, options.Watermark);
 			bw.Write(Global.PresetRides);
@@ -67,25 +67,45 @@ namespace Nikki.Support.MostWanted.Framework
 				Class.Assemble(bw);
 		}
 
-		private static void WriteCollisions(BinaryWriter bw, Database.MostWanted db)
-		{
-			bw.Write(Global.Collisions);
-			bw.Write(-1); // temp size
-			var pos = bw.BaseStream.Position;
-
-			foreach (var Class in db.Collisions.Collections)
-				Class.Assemble(bw);
-
-			var len = bw.BaseStream.Position;
-			bw.BaseStream.Position = pos - 4;
-			bw.Write((int)(len - pos));
-			bw.BaseStream.Position = len;
-		}
-
-		private static void WriteCarParts(BinaryWriter bw, Options options, Database.MostWanted db) =>
+		private static void WriteCarParts(BinaryWriter bw, Options options, Database.Underground2 db) =>
 			CarPartManager.Assemble(bw, options.Watermark, db);
 
-		private static void WriteFNGroups(BinaryWriter bw, Options options, Database.MostWanted db)
+		private static void WriteGCareer(BinaryWriter bw, Options options, Database.Underground2 db) =>
+			CareerManager.Assemble(bw, options.Watermark, db);
+
+		private static void WriteSunInfos(BinaryWriter bw, Options options, Database.Underground2 db)
+		{
+			WritePadding(bw, options.Watermark);
+			bw.Write(Global.SunInfos);
+			bw.Write(db.PresetRides.Length * SunInfo.BaseClassSize + 8);
+			bw.Write(0x1111111111111111);
+			foreach (var Class in db.SunInfos.Collections)
+				Class.Assemble(bw);
+		}
+
+		private static void WriteTracks(BinaryWriter bw, Options options, Database.Underground2 db)
+		{
+			WritePadding(bw, options.Watermark);
+			bw.Write(Global.Tracks);
+			bw.Write(db.Tracks.Length * Track.BaseClassSize);
+			foreach (var Class in db.Tracks.Collections)
+				Class.Assemble(bw);
+		}
+
+		private static void WriteAcidEffects(BinaryWriter bw, Options options, Database.Underground2 db)
+		{
+			WritePadding(bw, options.Watermark);
+			bw.Write(Global.AcidEffects);
+			bw.Write(db.AcidEffects.Length * AcidEffect.BaseClassSize + 0x18);
+			bw.Write(0x1111111111111111);
+			bw.Write((long)0);
+			bw.Write((int)6);
+			bw.Write(db.AcidEffects.Length);
+			foreach (var Class in db.AcidEffects.Collections)
+				Class.Assemble(bw);
+		}
+
+		private static void WriteFNGroups(BinaryWriter bw, Options options, Database.Underground2 db)
 		{
 			foreach (var Class in db.FNGroups.Collections)
 			{
@@ -94,7 +114,7 @@ namespace Nikki.Support.MostWanted.Framework
 			}
 		}
 
-		private static void WriteSTRBlocks(BinaryWriter bw, Options options, Database.MostWanted db)
+		private static void WriteSTRBlocks(BinaryWriter bw, Options options, Database.Underground2 db)
 		{
 			foreach (var Class in db.STRBlocks.Collections)
 			{
@@ -106,7 +126,7 @@ namespace Nikki.Support.MostWanted.Framework
 
 		#endregion
 
-		public static bool Invoke(Options options, Database.MostWanted db)
+		public static bool Invoke(Options options, Database.Underground2 db)
 		{
 			if (String.IsNullOrEmpty(options.File)) return false;
 			if (options.Flags.HasFlag(eOptFlags.None)) return false;
@@ -117,6 +137,8 @@ namespace Nikki.Support.MostWanted.Framework
 
 			using var br = new BinaryReader(msr);
 			using var bw = new BinaryWriter(msw);
+
+			bool gcareer = !options.Flags.HasFlag(eOptFlags.GCareer);
 
 			// Write materials first
 			if (options.Flags.HasFlag(eOptFlags.Materials)) WriteMaterials(bw, db);
@@ -175,15 +197,6 @@ namespace Nikki.Support.MostWanted.Framework
 						}
 						else goto default;
 
-					case Global.Collisions:
-						if (options.Flags.HasFlag(eOptFlags.Collisions))
-						{
-							WriteCollisions(bw, db);
-							br.BaseStream.Position += size;
-							break;
-						}
-						else goto default;
-
 					case Global.CarParts:
 						if (options.Flags.HasFlag(eOptFlags.DBModelParts))
 						{
@@ -192,6 +205,49 @@ namespace Nikki.Support.MostWanted.Framework
 							break;
 						}
 						else goto default;
+
+					case Global.CareerInfo:
+						if (!gcareer)
+						{
+							WriteGCareer(bw, options, db);
+							gcareer = true;
+							br.BaseStream.Position += size;
+							break;
+						}
+						else goto default;
+
+					case Global.SunInfos:
+						if (options.Flags.HasFlag(eOptFlags.SunInfos))
+						{
+							WriteSunInfos(bw, options, db);
+							br.BaseStream.Position += size;
+							break;
+						}
+						else goto default;
+
+					case Global.Tracks:
+						if (options.Flags.HasFlag(eOptFlags.Tracks))
+						{
+							WriteTracks(bw, options, db);
+							br.BaseStream.Position += size;
+							break;
+						}
+						else goto default;
+
+					case Global.AcidEffects:
+						if (options.Flags.HasFlag(eOptFlags.AcidEffects))
+						{
+							WriteAcidEffects(bw, options, db);
+							br.BaseStream.Position += size;
+							break;
+						}
+						else goto default;
+
+					case Global.AcidEmmiters:
+					case Global.FloatChunk:
+					case Global.ELabGlobal:
+						WritePadding(bw, options.Watermark);
+						goto default;
 
 					case Global.FEngFiles:
 					case Global.FNGCompress:

@@ -206,6 +206,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			this._collection_name = br.ReadNullTermUTF8(0x20);
 
 			// Take Photo Settings
+			br.BaseStream.Position += 4;
 			this.TakePhotoMethod = br.ReadEnum<eTakePhotoMethod>();
 			this.BelongsToStage = br.ReadByte();
 			this.CashValue = br.ReadInt16();

@@ -535,7 +535,7 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(this.PAINT_TYPES.ExhaustPaintType.BinHash());
             bw.Write(this.PAINT_TYPES.AudioPaintType.BinHash());
             bw.Write(this.PAINT_TYPES.RimsPaintType.BinHash());
-            bw.Write(this.PAINT_TYPES.SpoilerPaintType.BinHash());
+            bw.Write(this.PAINT_TYPES.SpinnersPaintType.BinHash());
             bw.Write(this.PAINT_TYPES.RoofPaintType.BinHash());
             bw.Write(this.PAINT_TYPES.MirrorsPaintType.BinHash());
             bw.Write(this.VINYL_SETS.Vinyl0_Color0.BinHash());
@@ -662,7 +662,7 @@ namespace Nikki.Support.Underground2.Class
             this.PAINT_TYPES.ExhaustPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
             this.PAINT_TYPES.AudioPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
             this.PAINT_TYPES.RimsPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.PAINT_TYPES.SpoilerPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.PAINT_TYPES.SpinnersPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
             this.PAINT_TYPES.RoofPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
             this.PAINT_TYPES.MirrorsPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
             this.VINYL_SETS.Vinyl0_Color0 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);

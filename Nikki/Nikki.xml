@@ -234,31 +234,6 @@
             <param name="message_show">True if messages should be showed in message 
             boxes; false if they should be printed to console.</param>
         </member>
-        <member name="T:Nikki.Core.Settings">
-            <summary>
-            Static class with settings applied on runtime.
-            </summary>
-        </member>
-        <member name="P:Nikki.Core.Settings.InputDirectory">
-            <summary>
-            Directory from which files should be loaded.
-            </summary>
-        </member>
-        <member name="P:Nikki.Core.Settings.OutputDirectory">
-            <summary>
-            Directory to which files should be saved.
-            </summary>
-        </member>
-        <member name="P:Nikki.Core.Settings.MessageShow">
-            <summary>
-            True if output messages to console; false if output to log file.
-            </summary>
-        </member>
-        <member name="P:Nikki.Core.Settings.Watermark">
-            <summary>
-            Watermark that is written to saved files.
-            </summary>
-        </member>
         <member name="T:Nikki.Database.Carbon">
             <summary>
             Database of roots and collections for Need for Speed: Carbon.
@@ -1697,6 +1672,11 @@
             
             </summary>
         </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.TEXTURE_NAME">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.WHEELEMITTER">
             <summary>
             
@@ -1758,11 +1738,6 @@
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x04B39858">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x10C98090">
             <summary>
             
             </summary>
@@ -15478,12 +15453,13 @@
             A static manager to assemble and disassemble GCareer collections.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Underground2.Framework.CareerManager.Assemble(System.IO.BinaryWriter,Nikki.Database.Underground2)">
+        <member name="M:Nikki.Support.Underground2.Framework.CareerManager.Assemble(System.IO.BinaryWriter,System.String,Nikki.Database.Underground2)">
             <summary>
             Assembles entire roots of GCareer collections into a byte array and 
             writes it with <see cref="T:System.IO.BinaryWriter"/> provided.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="mark">Watermark to put in the strings block.</param>
             <param name="db"><see cref="T:Nikki.Database.Underground2"/> database with roots 
             and collections.</param>
         </member>

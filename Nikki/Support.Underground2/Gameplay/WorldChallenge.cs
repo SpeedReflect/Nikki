@@ -219,12 +219,16 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="strr"><see cref="BinaryReader"/> to read strings with.</param>
 		public void Disassemble(BinaryReader br, BinaryReader strr)
 		{
+			ushort position = 0;
+
 			// Collection Name
-			strr.BaseStream.Position = br.ReadUInt16();
+			position = br.ReadUInt16();
+			strr.BaseStream.Position = position;
 			this._collection_name = strr.ReadNullTermUTF8();
 
 			// Challenge Trigger
-			strr.BaseStream.Position = br.ReadUInt16();
+			position = br.ReadUInt16();
+			strr.BaseStream.Position = position;
 			this.WorldChallengeTrigger = strr.ReadNullTermUTF8();
 
 			// Stage and Unlock settings

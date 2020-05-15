@@ -364,10 +364,12 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(this.InheritanceKey.BinHash());
             bw.Write(this.FarClip);
             bw.Write(this.Intensity);
+            bw.Write((int)0);
             bw.Write(this.LastPositionX);
             bw.Write(this.LastPositionY);
             bw.Write(this.LastPositionZ);
             bw.Write(this.LastPositionW);
+            bw.Write((int)0);
             bw.Write(this.NumZeroParticleFrames);
             bw.Write(this.CreationTimeStamp);
             bw.Write((int)0);
@@ -407,10 +409,12 @@ namespace Nikki.Support.Underground2.Class
             this.InheritanceKey = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
             this.FarClip = br.ReadSingle();
             this.Intensity = br.ReadSingle();
+            br.BaseStream.Position += 4;
             this.LastPositionX = br.ReadSingle();
             this.LastPositionY = br.ReadSingle();
             this.LastPositionZ = br.ReadSingle();
             this.LastPositionW = br.ReadSingle();
+            br.BaseStream.Position += 4;
             this.NumZeroParticleFrames = br.ReadUInt32();
             this.CreationTimeStamp = br.ReadUInt32();
             br.BaseStream.Position += 4;

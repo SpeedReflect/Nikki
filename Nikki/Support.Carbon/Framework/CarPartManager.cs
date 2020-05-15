@@ -617,6 +617,8 @@ namespace Nikki.Support.Carbon.Framework
 				collection.ResortNames();
 				db.ModelParts.Collections.Add(collection);
 			}
+
+			br.BaseStream.Position = position + size;
 		}
 	}
 }

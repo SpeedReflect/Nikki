@@ -317,8 +317,8 @@ namespace Nikki.Support.Underground2.Framework
 						goto default;
 
 					default:
-						int over = br.ReadInt32();
-						br.BaseStream.Position += over;
+						var skip = br.ReadInt32();
+						br.BaseStream.Position += skip;
 						break;
 				}
 			}
@@ -374,6 +374,7 @@ namespace Nikki.Support.Underground2.Framework
 		{
 			if (br.BaseStream.Position == max) return;
 			int size = br.ReadInt32() / 0x17C;
+			Map.PerfPartTable = new uint[10, 3, 4];
 
 			for (int a1 = 0; a1 < size; ++a1)
 			{
@@ -386,6 +387,8 @@ namespace Nikki.Support.Underground2.Framework
 					var Class = new PartPerformance(br, db, index, level, a2);
 					db.PartPerformances.Collections.Add(Class);
 				}
+				for (int a2 = total; a2 < 4; ++a2)
+					br.BaseStream.Position += 0x5C;
 			}
 		}
 
@@ -504,14 +507,16 @@ namespace Nikki.Support.Underground2.Framework
 		/// writes it with <see cref="BinaryWriter"/> provided.
 		/// </summary>
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		/// <param name="mark">Watermark to put in the strings block.</param>
 		/// <param name="db"><see cref="Database.Underground2"/> database with roots 
 		/// and collections.</param>
-		public static void Assemble(BinaryWriter bw, Database.Underground2 db)
+		public static void Assemble(BinaryWriter bw, string mark, Database.Underground2 db)
 		{
 			// Initialize string BinaryWriter
 			var ms = new MemoryStream();
 			var strw = new BinaryWriter(ms);
-			strw.WriteNullTermUTF8(Settings.Watermark);
+			strw.Write((int)0);
+			strw.WriteNullTermUTF8(mark);
 
 			// Get arrays of all blocks
 			var GCareerRacesBlock = WriteGCareerRaces(strw, db);
@@ -589,7 +594,7 @@ namespace Nikki.Support.Underground2.Framework
 
 			// Read and hash all strings
 			br.BaseStream.Position = PartOffsets[0];
-			using var ms = new MemoryStream(br.ReadInt32());
+			using var ms = new MemoryStream(br.ReadBytes(br.ReadInt32()));
 			using var strr = new BinaryReader(ms);
 			br.BaseStream.Position = PartOffsets[0];
 			ReadStrings(br);

@@ -166,7 +166,8 @@ namespace Nikki.Support.Underground2.Gameplay
 		public void Disassemble(BinaryReader br, BinaryReader strr)
 		{
 			// CollectionName
-			strr.BaseStream.Position = br.ReadUInt16();
+			var position = br.ReadUInt16();
+			strr.BaseStream.Position = position;
 			this._collection_name = strr.ReadNullTermUTF8();
 
 			// Unknown Yet Values

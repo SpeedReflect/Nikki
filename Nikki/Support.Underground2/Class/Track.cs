@@ -518,13 +518,13 @@ namespace Nikki.Support.Underground2.Class
 			bw.WriteNullTermUTF8(this.RegionName, 0x8);
 			bw.WriteNullTermUTF8(this.RegionDirectory, 0x20);
 			bw.Write(this.LocationIndex);
-			bw.Write(this.LocationDirectory);
+			bw.WriteNullTermUTF8(this.LocationDirectory, 0x10);
 
 			// Write race settings
 			bw.WriteEnum(this.LocationType);
 			bw.WriteEnum(this.DriftType);
 			bw.WriteEnum(this.IsValidRace);
-			bw.WriteEnum(this.IsLoopingRace == eBoolean.True ? (byte)0 : (byte)1);
+			bw.Write(this.IsLoopingRace == eBoolean.True ? (byte)0 : (byte)1);
 			bw.WriteEnum(this.ReverseVersionExists);
 			bw.Write((byte)0);
 			bw.WriteEnum(this.IsPerformanceTuning);

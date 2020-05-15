@@ -442,13 +442,13 @@ namespace Nikki.Database
 		/// </summary>
 		/// <param name="options"><see cref="Options"/> that are used to load data.</param>
 		/// <returns>True on success; false otherwise.</returns>
-		public override bool Load(Options options) => false;// Loader.Invoke(options, this);
+		public override bool Load(Options options) => Loader.Invoke(options, this);
 
 		/// <summary>
 		/// Saves all data in the database using options passed.
 		/// </summary>
 		/// <param name="options"><see cref="Options"/> that are used to save data.</param>
 		/// <returns>True on success; false otherwise.</returns>
-		public override bool Save(Options options) => false;// Saver.Invoke(options, this);
+		public override bool Save(Options options) => Saver.Invoke(options, this);
 	}
 }

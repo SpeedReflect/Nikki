@@ -374,7 +374,8 @@ namespace Nikki.Support.Underground2.Framework
 						goto default;
 
 					default:
-						br.BaseStream.Position += br.ReadInt32();
+						var skip = br.ReadInt32();
+						br.BaseStream.Position += skip;
 						break;
 				}
 			}
@@ -641,13 +642,14 @@ namespace Nikki.Support.Underground2.Framework
 				{
 					offset_dict.TryGetValue(temppart.AttribOffset, out var cpoff);
 					struct_dict.TryGetValue(temppart.StructOffset, out var cpstr);
+					var actual = (Parts.CarParts.CPStruct)((Parts.CarParts.CPStruct)cpstr)?.PlainCopy();
 					var realpart = new Parts.CarParts.RealCarPart(a1, cpoff?.AttribOffsets.Count ?? 0, collection)
 					{
 						PartLabel = temppart.PartNameHash.BinString(eLookupReturn.EMPTY),
 						DebugName = temppart.DebugName,
 						CarPartGroupID = temppart.CarPartGroupID,
 						UpgradeGroupID = temppart.UpgradeGroupID,
-						Struct = (Parts.CarParts.CPStruct)cpstr?.PlainCopy() ?? new Parts.CarParts.CPStruct()
+						Struct = actual ?? new Parts.CarParts.CPStruct()
 					};
 					foreach (var attroff in cpoff?.AttribOffsets ?? Enumerable.Empty<ushort>())
 					{
@@ -661,6 +663,8 @@ namespace Nikki.Support.Underground2.Framework
 				collection.ResortNames();
 				db.ModelParts.Collections.Add(collection);
 			}
+
+			br.BaseStream.Position = position + size;
 		}
 	}
 }

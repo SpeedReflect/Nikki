@@ -144,7 +144,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		public void Assemble(BinaryWriter bw)
 		{
 			bw.Write(this.CashValue);
-			bw.WriteEnum(this.InitiallyUnlocked);
+			bw.Write(this.InitiallyUnlocked == eBoolean.True ? (byte)0 : (byte)1);
 			bw.Write(this.BankIndex);
 			bw.Write(this.RequiredStagesCompleted);
 			bw.Write(this.BinKey);
@@ -157,7 +157,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		public void Disassemble(BinaryReader br)
 		{
 			this.CashValue = br.ReadUInt16();
-			this.InitiallyUnlocked = br.ReadEnum<eBoolean>();
+			this.InitiallyUnlocked = br.ReadByte() == 0 ? eBoolean.True : eBoolean.False;
 			this.BankIndex = br.ReadByte();
 			this.RequiredStagesCompleted = br.ReadInt32();
 			this._collection_name = br.ReadUInt32().BinString(eLookupReturn.EMPTY);

@@ -532,8 +532,8 @@ namespace Nikki.Support.Underground2.Class
         public override void Assemble(BinaryWriter bw)
         {
             // Write CollectionName and BaseModelName
-            bw.WriteNullTermUTF8(this._collection_name, 0x10);
-            bw.WriteNullTermUTF8(this._collection_name, 0x10);
+            bw.WriteNullTermUTF8(this._collection_name, 0x20);
+            bw.WriteNullTermUTF8(this._collection_name, 0x20);
 
             // Write GeometryFileName
             string path1 = Path.Combine("CARS", this.CollectionName, "GEOMETRY.BIN");
@@ -1081,17 +1081,17 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(this.MaxInstances4);
             bw.Write(this.MaxInstances5);
             bw.Write(this.KeepLoaded1);
-            bw.Write(this.KeepLoaded1);
-            bw.Write(this.KeepLoaded1);
-            bw.Write(this.KeepLoaded1);
-            bw.Write(this.KeepLoaded1);
+            bw.Write(this.KeepLoaded2);
+            bw.Write(this.KeepLoaded3);
+            bw.Write(this.KeepLoaded4);
+            bw.Write(this.KeepLoaded5);
             bw.Write((short)0);
             bw.Write(this.MinTimeBetweenUses1);
             bw.Write(this.MinTimeBetweenUses2);
             bw.Write(this.MinTimeBetweenUses3);
             bw.Write(this.MinTimeBetweenUses4);
             bw.Write(this.MinTimeBetweenUses5);
-            bw.Write(this.DefaultSkinNumber);
+            bw.Write((int)this.DefaultSkinNumber);
             bw.Write((int)0);
             bw.Write(this.ECAR.Cost);
             bw.Write(this.AvailableSkinNumbers01);
@@ -1119,7 +1119,7 @@ namespace Nikki.Support.Underground2.Class
 
             // Manufacturer name
             br.BaseStream.Position += 0xA0;
-            var name = br.ReadNullTermUTF8(0x10);
+            this.ManufacturerName = br.ReadNullTermUTF8(0x10);
 
             // Secondary Properties
             br.BaseStream.Position += 4;
@@ -1598,6 +1598,7 @@ namespace Nikki.Support.Underground2.Class
             // Secondary Properties
             this.Index = br.ReadInt32();
             this.UsageType = br.ReadEnum<eUsageType>();
+            br.BaseStream.Position += 4;
             this.DefaultBasePaint = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
             this.DefaultBasePaint2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
             this.MaxInstances1 = br.ReadByte();
@@ -1606,10 +1607,10 @@ namespace Nikki.Support.Underground2.Class
             this.MaxInstances4 = br.ReadByte();
             this.MaxInstances5 = br.ReadByte();
             this.KeepLoaded1 = br.ReadByte();
-            this.KeepLoaded1 = br.ReadByte();
-            this.KeepLoaded1 = br.ReadByte();
-            this.KeepLoaded1 = br.ReadByte();
-            this.KeepLoaded1 = br.ReadByte();
+            this.KeepLoaded2 = br.ReadByte();
+            this.KeepLoaded3 = br.ReadByte();
+            this.KeepLoaded4 = br.ReadByte();
+            this.KeepLoaded5 = br.ReadByte();
             br.BaseStream.Position += 2;
             this.MinTimeBetweenUses1 = br.ReadSingle();
             this.MinTimeBetweenUses2 = br.ReadSingle();
@@ -1629,7 +1630,7 @@ namespace Nikki.Support.Underground2.Class
             this.AvailableSkinNumbers08 = br.ReadByte();
             this.AvailableSkinNumbers09 = br.ReadByte();
             this.AvailableSkinNumbers10 = br.ReadByte();
-            this.IsSUV = (br.ReadByte() == 0)
+            this.IsSUV = (br.ReadInt16() == 0)
                 ? eBoolean.False
                 : eBoolean.True;
             this.IsSkinnable = (br.ReadInt32() == 0)

@@ -51,7 +51,7 @@ namespace Nikki.Support.Carbon.Framework
 		private static void WriteCarTypeInfos(BinaryWriter bw, Options options, Database.Carbon db)
 		{
 			WritePadding(bw, options.Watermark);
-			bw.Write(Global.CarTypeInfo);
+			bw.Write(Global.CarTypeInfos);
 			bw.Write(db.CarTypeInfos.Length * CarTypeInfo.BaseClassSize + 8);
 			bw.Write(0x1111111111111111);
 			foreach (var Class in db.CarTypeInfos.Collections)
@@ -105,10 +105,10 @@ namespace Nikki.Support.Carbon.Framework
 
 		private static void WriteSTRBlocks(BinaryWriter bw, Options options, Database.Carbon db)
 		{
-			Shared.Class.STRBlock.Watermark = options.Watermark;
 			foreach (var Class in db.STRBlocks.Collections)
 			{
 				WritePadding(bw, options.Watermark);
+				Class.Watermark = options.Watermark;
 				Class.Assemble(bw);
 			}
 		}
@@ -166,7 +166,7 @@ namespace Nikki.Support.Carbon.Framework
 						}
 						else goto default;
 
-					case Global.CarTypeInfo:
+					case Global.CarTypeInfos:
 						if (options.Flags.HasFlag(eOptFlags.CarTypeInfos))
 						{
 							WriteCarTypeInfos(bw, options, db);
@@ -210,6 +210,12 @@ namespace Nikki.Support.Carbon.Framework
 							break;
 						}
 						else goto default;
+
+					case Global.LimitsTable:
+					case Global.ELabGlobal:
+					case Global.Tracks:
+						WritePadding(bw, options.Watermark);
+						goto default;
 
 					case Global.FEngFiles:
 					case Global.FNGCompress:

@@ -150,7 +150,7 @@ namespace Nikki.Support.Carbon.Class
 			bw.Write(hash_offset);
 			bw.Write(text_offset);
 			bw.WriteNullTermUTF8(this._collection_name, 0x10);
-			bw.WriteNullTermUTF8(Settings.Watermark, 0x20);
+			bw.WriteNullTermUTF8(this.Watermark, 0x20);
 
 			int length = 0;
 			foreach (var info in this._stringinfo)

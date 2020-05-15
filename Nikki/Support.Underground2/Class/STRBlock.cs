@@ -152,7 +152,7 @@ namespace Nikki.Support.Underground2.Class
 			bw.Write(this.InfoLength);
 			bw.Write(hash_offset);
 			bw.Write(text_offset);
-			bw.WriteNullTermUTF8(Settings.Watermark, 0x20);
+			bw.WriteNullTermUTF8(this.Watermark, 0x20);
 			bw.Write(this._unk_data);
 
 			int length = 0;

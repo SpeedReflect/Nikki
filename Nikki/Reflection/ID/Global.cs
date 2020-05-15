@@ -32,7 +32,7 @@ namespace Nikki.Reflection.ID
         /// <summary>
         /// ID of <see cref="CarTypeInfo"/> block.
         /// </summary>
-        public const uint CarTypeInfo = 0x00034600;
+        public const uint CarTypeInfos = 0x00034600;
 
         /// <summary>
         /// ID of SlotTypes block.
@@ -40,7 +40,7 @@ namespace Nikki.Reflection.ID
         public const uint SlotTypes = 0x00034607;
 
         /// <summary>
-        /// ID of DBCarPart block.
+        /// ID of <see cref="DBModelPart"/> block.
         /// </summary>
         public const uint CarParts = 0x80034602;
 
@@ -65,7 +65,7 @@ namespace Nikki.Reflection.ID
         public const uint PresetSkins = 0x00030250;
 
         /// <summary>
-        /// ID of Collision Bounds block.
+        /// ID of <see cref="Collision"/> database block.
         /// </summary>
         public const uint Collisions = 0x8003B900;
 
@@ -108,5 +108,10 @@ namespace Nikki.Reflection.ID
         /// ID of some unknown float chunk.
         /// </summary>
         public const uint FloatChunk = 0x00E34009;
+        
+        /// <summary>
+        /// ID of Carbon limits table.
+        /// </summary>
+        public const uint LimitsTable = 0x8003CE0D;
     }
 }

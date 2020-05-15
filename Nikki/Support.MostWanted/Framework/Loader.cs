@@ -108,7 +108,7 @@ namespace Nikki.Support.MostWanted.Framework
 							ReadTPKBlock(br, db);
 						break;
 
-					case Global.CarTypeInfo:
+					case Global.CarTypeInfos:
 						if (options.Flags.HasFlag(eOptFlags.CarTypeInfos))
 							ReadCarTypeInfos(br, size, db);
 						break;

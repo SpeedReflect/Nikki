@@ -72,7 +72,7 @@ namespace Nikki.Support.MostWanted.Class
         /// <summary>
         /// Filename used for this <see cref="TPKBlock"/>. It is a default watermark.
         /// </summary>
-        public override string Filename => Settings.Watermark;
+        public override string Filename => this.Watermark;
 
         /// <summary>
         /// BinKey of the filename.
@@ -776,10 +776,10 @@ namespace Nikki.Support.MostWanted.Class
             bw.WriteNullTermUTF8(CName, 0x1C);
 
             // Write Filename
-            bw.WriteNullTermUTF8(this.Watermark, 0x40);
+            bw.WriteNullTermUTF8(this.Filename, 0x40);
 
             // Write all other settings
-            bw.Write(this.Watermark.BinHash());
+            bw.Write(this.FilenameHash);
             bw.Write(this.PermBlockByteOffset);
             bw.Write(this.PermBlockByteSize);
             bw.Write(this.EndianSwapped);
