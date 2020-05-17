@@ -11,7 +11,7 @@ using CoreExtensions.Conversions;
 
 
 
-namespace Nikki.Support.Underground2.Class
+namespace Nikki.Support.MostWanted.Class
 {
 	/// <summary>
 	/// <see cref="Track"/> is a collection of settings related to races and events.
@@ -44,17 +44,17 @@ namespace Nikki.Support.Underground2.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
-		public override GameINT GameINT => GameINT.Underground2;
+		public override GameINT GameINT => GameINT.MostWanted;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
-		public override string GameSTR => GameINT.Underground2.ToString();
+		public override string GameSTR => GameINT.MostWanted.ToString();
 
 		/// <summary>
 		/// Database to which the class belongs to.
 		/// </summary>
-		public Database.Underground2 Database { get; set; }
+		public Database.MostWanted Database { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
@@ -372,8 +372,8 @@ namespace Nikki.Support.Underground2.Class
 		/// Initializes new instance of <see cref="Track"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-		public Track(string CName, Database.Underground2 db)
+		/// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
+		public Track(string CName, Database.MostWanted db)
 		{
 			this.Database = db;
 			this.CollectionName = CName;
@@ -384,8 +384,8 @@ namespace Nikki.Support.Underground2.Class
 		/// Initializes new instance of <see cref="Track"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-		public Track(BinaryReader br, Database.Underground2 db)
+		/// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
+		public Track(BinaryReader br, Database.MostWanted db)
 		{
 			this.Database = db;
 			this.Disassemble(br);

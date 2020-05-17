@@ -11,7 +11,7 @@ using CoreExtensions.Conversions;
 
 
 
-namespace Nikki.Support.Underground2.Class
+namespace Nikki.Support.Carbon.Class
 {
 	/// <summary>
 	/// <see cref="Track"/> is a collection of settings related to races and events.
@@ -44,17 +44,17 @@ namespace Nikki.Support.Underground2.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
-		public override GameINT GameINT => GameINT.Underground2;
+		public override GameINT GameINT => GameINT.Carbon;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
-		public override string GameSTR => GameINT.Underground2.ToString();
+		public override string GameSTR => GameINT.Carbon.ToString();
 
 		/// <summary>
 		/// Database to which the class belongs to.
 		/// </summary>
-		public Database.Underground2 Database { get; set; }
+		public Database.Carbon Database { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
@@ -372,8 +372,8 @@ namespace Nikki.Support.Underground2.Class
 		/// Initializes new instance of <see cref="Track"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-		public Track(string CName, Database.Underground2 db)
+		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
+		public Track(string CName, Database.Carbon db)
 		{
 			this.Database = db;
 			this.CollectionName = CName;
@@ -384,8 +384,8 @@ namespace Nikki.Support.Underground2.Class
 		/// Initializes new instance of <see cref="Track"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-		public Track(BinaryReader br, Database.Underground2 db)
+		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
+		public Track(BinaryReader br, Database.Carbon db)
 		{
 			this.Database = db;
 			this.Disassemble(br);
@@ -446,15 +446,9 @@ namespace Nikki.Support.Underground2.Class
 			bw.Write((short)0);
 			bw.Write(this.TrackMapCalibrationZoomIn);
 
-			// Write difficulties and padding
+			// Write difficulties
 			bw.Write((int)this.DifficultyForward);
 			bw.Write((int)this.DifficultyReverse);
-			bw.Write(-1);
-			bw.Write(-1);
-			bw.Write(-1);
-			bw.Write(-1);
-			bw.Write(-1);
-			bw.Write(-1);
 			bw.Write(this.NumSecBeforeShorcutsAllowed);
 			bw.Write(this.DriftSecondsMin);
 			bw.Write(this.DriftSecondsMax);
@@ -537,7 +531,6 @@ namespace Nikki.Support.Underground2.Class
 			// Read difficulties and padding
 			this.DifficultyForward = (eTrackDifficulty)(br.ReadInt32());
 			this.DifficultyReverse = (eTrackDifficulty)(br.ReadInt32());
-			br.BaseStream.Position += 0x18;
 			this.NumSecBeforeShorcutsAllowed = br.ReadInt16();
 			this.DriftSecondsMin = br.ReadInt16();
 			this.DriftSecondsMax = br.ReadInt16();

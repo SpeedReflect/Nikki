@@ -150,5 +150,41 @@ namespace Nikki.Core
 			}
 			catch (Exception) { }
 		}
+	
+		/// <summary>
+		/// Loads all labels from a language file and hashes them.
+		/// </summary>
+		/// <param name="file">Language label file path.</param>
+		/// <param name="game"><see cref="GameINT"/> of the file.</param>
+		public static void LoadLangLabels(string file, GameINT game)
+		{
+			var options = new Options(file, eOptFlags.STRBlocks, String.Empty, false);
+
+			switch (game)
+			{
+				case GameINT.Carbon:
+				case GameINT.Prostreet:
+					var db_modern = new Database.Carbon(true);
+					db_modern.Load(options);
+					foreach (var str in db_modern.STRBlocks.Collections)
+					{
+						foreach (var record in str.GetRecords())
+							record.Text.BinHash();
+					}
+					break;
+
+				case GameINT.Underground1:
+				case GameINT.Underground2:
+				case GameINT.MostWanted:
+					var db_legacy = new Database.MostWanted(true);
+					db_legacy.Load(options);
+					foreach (var str in db_legacy.STRBlocks.Collections)
+					{
+						foreach (var record in str.GetRecords())
+							record.Text.BinHash();
+					}
+					break;
+			}
+		}
 	}
 }

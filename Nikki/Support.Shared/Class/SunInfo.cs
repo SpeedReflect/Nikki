@@ -5,6 +5,7 @@ using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 
 
+
 namespace Nikki.Support.Shared.Class
 {
     /// <summary>

@@ -196,6 +196,7 @@ namespace Nikki.Support.Carbon.Class
 				};
 				br.BaseStream.Position = broffset + textoffset + br.ReadInt32();
 				info.Text = br.ReadNullTermUTF8();
+				info.Label = info.Key.BinString(eLookupReturn.EMPTY);
 				this._stringinfo.Add(info);
 			}
 

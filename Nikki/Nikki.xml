@@ -143,6 +143,13 @@
             </summary>
             <param name="file">fe_attrib.bin file path.</param>
         </member>
+        <member name="M:Nikki.Core.Manager.LoadLangLabels(System.String,Nikki.Core.GameINT)">
+            <summary>
+            Loads all labels from a language file and hashes them.
+            </summary>
+            <param name="file">Language label file path.</param>
+            <param name="game"><see cref="T:Nikki.Core.GameINT"/> of the file.</param>
+        </member>
         <member name="T:Nikki.Core.Map">
             <summary>
             Represents all important maps of the library.
