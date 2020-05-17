@@ -93,38 +93,28 @@ namespace Nikki.Utils
         /// <param name="hashSize">Speed/Ratio tunable; use powers of 2. Results vary per file.</param>
         /// <param name="maxSearchDepth">Speed/Ratio tunable. Results vary per file.</param>
         /// <returns>JDLZ-compressed byte array.</returns>
-        public static byte[] Compress(byte[] input, int hashSize = 0x2000, int maxSearchDepth = 16)
+        public static unsafe byte[] Compress(byte[] input, int hashSize = 0x2000, int maxSearchDepth = 16)
         {
-            if (input == null)
-                return null;
-
-            const int MinMatchLength = 3;
+            if (input == null) return null;
 
             int inputBytes = input.Length;
-            byte[] output = new byte[inputBytes + ((inputBytes + 7) / 8) + 0x11];
+            byte[] output = new byte[inputBytes + ((inputBytes + 7) / 8) + 0x10 + 1];
             int[] hashPos = new int[hashSize];
             int[] hashChain = new int[inputBytes];
 
-            int outPos = 0;
+            int outPos = 0x10;
             int inPos = 0;
             byte flags1bit = 1;
             byte flags2bit = 1;
             byte flags1 = 0;
             byte flags2 = 0;
 
-            output[outPos++] = 0x4A; // 'J'
-            output[outPos++] = 0x44; // 'D'
-            output[outPos++] = 0x4C; // 'L'
-            output[outPos++] = 0x5A; // 'Z'
-            output[outPos++] = 0x02;
-            output[outPos++] = 0x10;
-            output[outPos++] = 0x00;
-            output[outPos++] = 0x00;
-            output[outPos++] = (byte)inputBytes;
-            output[outPos++] = (byte)(inputBytes >> 8);
-            output[outPos++] = (byte)(inputBytes >> 16);
-            output[outPos++] = (byte)(inputBytes >> 24);
-            outPos += 4;
+            fixed (byte* byteptr_t = &output[0])
+            {
+                *(int*)byteptr_t = 0x5A4C444A;
+                *(int*)(byteptr_t + 4) = 0x00001002;
+                *(int*)(byteptr_t + 8) = inputBytes;
+            }
 
             int flags1Pos = outPos++;
             int flags2Pos = outPos++;
@@ -135,10 +125,10 @@ namespace Nikki.Utils
 
             while (inputBytes > 0)
             {
-                int bestMatchLength = MinMatchLength - 1;
+                int bestMatchLength = 2;
                 int bestMatchDist = 0;
 
-                if (inputBytes >= MinMatchLength)
+                if (inputBytes >= 3)
                 {
                     int hash = (-0x1A1 * (input[inPos] ^ ((input[inPos + 1] ^ (input[inPos + 2] << 4)) << 4))) & (hashSize - 1);
                     int matchPos = hashPos[hash];
@@ -149,47 +139,32 @@ namespace Nikki.Utils
                     for (int i = 0; i < maxSearchDepth; i++)
                     {
                         int matchDist = inPos - matchPos;
-
-                        if (matchDist > 2064 || matchPos >= prevMatchPos)
-                        {
-                            break;
-                        }
-
+                        if (matchDist > 2064 || matchPos >= prevMatchPos) break;
                         int matchLengthLimit = matchDist <= 16 ? 4098 : 34;
                         int maxMatchLength = inputBytes;
-
-                        if (maxMatchLength > matchLengthLimit)
-                        {
-                            maxMatchLength = matchLengthLimit;
-                        }
-                        if (bestMatchLength >= maxMatchLength)
-                        {
-                            break;
-                        }
+                        if (maxMatchLength > matchLengthLimit) maxMatchLength = matchLengthLimit;
+                        if (bestMatchLength >= maxMatchLength) break;
 
                         int matchLength = 0;
                         while ((matchLength < maxMatchLength) && (input[inPos + matchLength] == input[matchPos + matchLength]))
-                        {
                             matchLength++;
-                        }
 
                         if (matchLength > bestMatchLength)
                         {
                             bestMatchLength = matchLength;
                             bestMatchDist = matchDist;
                         }
-
                         prevMatchPos = matchPos;
                         matchPos = hashChain[matchPos];
                     }
                 }
 
-                if (bestMatchLength >= MinMatchLength)
+                if (bestMatchLength >= 3)
                 {
                     flags1 |= flags1bit;
                     inPos += bestMatchLength;
                     inputBytes -= bestMatchLength;
-                    bestMatchLength -= MinMatchLength;
+                    bestMatchLength -= 3;
 
                     if (bestMatchDist < 17)
                     {
@@ -203,7 +178,6 @@ namespace Nikki.Utils
                         output[outPos++] = (byte)(bestMatchLength | ((bestMatchDist >> 3) & 0xE0));
                         output[outPos++] = (byte)bestMatchDist;
                     }
-
                     flags2bit <<= 1;
                 }
                 else
@@ -221,7 +195,6 @@ namespace Nikki.Utils
                     flags1Pos = outPos++;
                     flags1bit = 1;
                 }
-
                 if (flags2bit == 0)
                 {
                     output[flags2Pos] = flags2;
@@ -239,7 +212,6 @@ namespace Nikki.Utils
             {
                 outPos = flags2Pos;
             }
-
             if (flags1bit > 1)
             {
                 output[flags1Pos] = flags1;
@@ -249,10 +221,10 @@ namespace Nikki.Utils
                 outPos = flags1Pos;
             }
 
-            output[12] = (byte)outPos;
-            output[13] = (byte)(outPos >> 8);
-            output[14] = (byte)(outPos >> 16);
-            output[15] = (byte)(outPos >> 24);
+            fixed (byte* byteptr_t = &output[0xC])
+            {
+                *(int*)byteptr_t = outPos;
+            }
 
             Array.Resize(ref output, outPos);
             return output;

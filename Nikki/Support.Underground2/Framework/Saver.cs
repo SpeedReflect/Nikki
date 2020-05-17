@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Nikki.Core;
+using Nikki.Utils;
 using Nikki.Reflection.ID;
 using Nikki.Support.Underground2.Class;
 using CoreExtensions.IO;
@@ -84,7 +85,7 @@ namespace Nikki.Support.Underground2.Framework
 		{
 			WritePadding(bw, options.Watermark);
 			bw.Write(Global.SunInfos);
-			bw.Write(db.PresetRides.Length * SunInfo.BaseClassSize + 8);
+			bw.Write(db.SunInfos.Length * SunInfo.BaseClassSize + 8);
 			bw.Write(0x1111111111111111);
 			foreach (var Class in db.SunInfos.Collections)
 				Class.Assemble(bw);
@@ -140,7 +141,7 @@ namespace Nikki.Support.Underground2.Framework
 			if (db.Buffer == null) return false;
 
 			using var msr = new MemoryStream(db.Buffer);
-			using var msw = File.Open(options.File, FileMode.Create);
+			using var msw = new MemoryStream(db.Buffer.Length);
 
 			using var br = new BinaryReader(msr);
 			using var bw = new BinaryWriter(msw);
@@ -253,6 +254,7 @@ namespace Nikki.Support.Underground2.Framework
 
 					case Global.AcidEmmiters:
 					case Global.FloatChunk:
+					case Global.LimitsTable:
 					case Global.ELabGlobal:
 						WritePadding(bw, options.Watermark);
 						goto default;
@@ -290,6 +292,14 @@ namespace Nikki.Support.Underground2.Framework
 						bw.Write(br.ReadBytes(size));
 						break;
 				}
+			}
+
+			var buffer = msw.ToArray();
+			if (options.Compress) buffer = JDLZ.Compress(buffer);
+
+			using (var writer = new BinaryWriter(File.Open(options.File, FileMode.Create)))
+			{
+				writer.Write(buffer);
 			}
 
 			return true;

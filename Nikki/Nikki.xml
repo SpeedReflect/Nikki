@@ -205,6 +205,11 @@
             Optional flags that specify what collections to load.
             </summary>
         </member>
+        <member name="P:Nikki.Core.Options.Compress">
+            <summary>
+            True if compress on the output; false otherwise.
+            </summary>
+        </member>
         <member name="M:Nikki.Core.Options.#ctor">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Core.Options"/>.
@@ -240,6 +245,17 @@
             <param name="watermark">Watermark that is put in saved file.</param>
             <param name="message_show">True if messages should be showed in message 
             boxes; false if they should be printed to console.</param>
+        </member>
+        <member name="M:Nikki.Core.Options.#ctor(System.String,Nikki.Core.eOptFlags,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Core.Options"/>.
+            </summary>
+            <param name="file">File to load.</param>
+            <param name="flags">Flags that specify what collections to load.</param>
+            <param name="watermark">Watermark that is put in saved file.</param>
+            <param name="message_show">True if messages should be showed in message 
+            boxes; false if they should be printed to console.</param>
+            <param name="compress">True if compress on the output; false otherwise.</param>
         </member>
         <member name="T:Nikki.Database.Carbon">
             <summary>
@@ -277,6 +293,16 @@
             </summary>
         </member>
         <member name="P:Nikki.Database.Carbon.Collisions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Database.Carbon.SunInfos">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Database.Carbon.Tracks">
             <summary>
             
             </summary>
@@ -379,6 +405,16 @@
             </summary>
         </member>
         <member name="P:Nikki.Database.MostWanted.Collisions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Database.MostWanted.SunInfos">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Database.MostWanted.Tracks">
             <summary>
             
             </summary>
@@ -5873,6 +5909,136 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="T:Nikki.Support.Carbon.Class.SunInfo">
+            <summary>
+            <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/> is a collection of sun and daylight settings.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Carbon.Class.SunInfo.MaxCNameLength">
+            <summary>
+            Maximum length of the CollectionName.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Carbon.Class.SunInfo.CNameOffsetAt">
+            <summary>
+            Offset of the CollectionName in the data.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Carbon.Class.SunInfo.BaseClassSize">
+            <summary>
+            Base size of a unit collection.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SunInfo.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SunInfo.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SunInfo.Database">
+            <summary>
+            Database to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SunInfo.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SunInfo.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SunInfo.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SunInfo.SUNLAYER1">
+            <summary>
+            Sun layer 1.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SunInfo.SUNLAYER2">
+            <summary>
+            Sun layer 2.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SunInfo.SUNLAYER3">
+            <summary>
+            Sun layer 3.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SunInfo.SUNLAYER4">
+            <summary>
+            Sun layer 4.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SunInfo.SUNLAYER5">
+            <summary>
+            Sun layer 5.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SunInfo.SUNLAYER6">
+            <summary>
+            Sun layer 6.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SunInfo.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SunInfo.#ctor(System.String,Nikki.Database.Carbon)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="db"><see cref="T:Nikki.Database.Carbon"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SunInfo.#ctor(System.IO.BinaryReader,Nikki.Database.Carbon)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="db"><see cref="T:Nikki.Database.Carbon"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SunInfo.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SunInfo.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SunInfo.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SunInfo.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SunInfo.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
         <member name="T:Nikki.Support.Carbon.Class.Texture">
             <summary>
             <see cref="T:Nikki.Support.Carbon.Class.Texture"/> is a collection of dds image data used by the game.
@@ -6284,6 +6450,301 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
             <returns>Byte array of the partial 2 part2.</returns>
+        </member>
+        <member name="T:Nikki.Support.Carbon.Class.Track">
+            <summary>
+            <see cref="T:Nikki.Support.Carbon.Class.Track"/> is a collection of settings related to races and events.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Carbon.Class.Track.MaxCNameLength">
+            <summary>
+            Maximum length of the CollectionName.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Carbon.Class.Track.CNameOffsetAt">
+            <summary>
+            Offset of the CollectionName in the data.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Carbon.Class.Track.BaseClassSize">
+            <summary>
+            Base size of a unit collection.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.Database">
+            <summary>
+            Database to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.TrackID">
+            <summary>
+            Unique ID value of the track that is used ingame.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.RaceLength">
+            <summary>
+            Total length of the whole track
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.TimeLimitToBeatForward">
+            <summary>
+            Indicates maximum time allowed to complete the race in forward direction.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.TimeLimitToBeatReverse">
+            <summary>
+            Indicates maximum time allowed to complete the race in reverse direction.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.ScoreToBeatDriftForward">
+            <summary>
+            Indicates score needed to beat the drift race in forward direction.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.ScoreToBeatDriftReverse">
+            <summary>
+            Indicates score needed to beat the drift race in reverse direction.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.NumSecBeforeShorcutsAllowed">
+            <summary>
+            Indicates number of seconds that should pass before opponents can take first shortcut.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.DriftSecondsMin">
+            <summary>
+            Indicates minimum amount of seconds to drift.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.DriftSecondsMax">
+            <summary>
+            Indicates maximum amount of seconds to drift.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.CarRaceStartConfig">
+            <summary>
+            Indicates configuration settings of the car at the start.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.TrackMapCalibrationOffsetX">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.TrackMapCalibrationOffsetY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.TrackMapCalibrationWidth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.TrackMapCalibrationRotation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.TrackMapCalibrationZoomIn">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.TrackMapStartgridAngle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.TrackMapFinishlineAngle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.MenuMapZoomOffsetX">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.MenuMapZoomOffsetY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.MenuMapZoomWidth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.MenuMapStartZoomed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.MaxTrafficCars_0_0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.MaxTrafficCars_0_1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.MaxTrafficCars_1_0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.MaxTrafficCars_1_1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.MaxTrafficCars_2_0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.MaxTrafficCars_2_1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.MaxTrafficCars_3_0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.MaxTrafficCars_3_1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.TrafAllowedNearStartgrid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.TrafAllowedNearFinishline">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.TrafMinInitDistFromStart">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.TrafMinInitDistFromFinish">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.TrafMinInitDistInbetweenA">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.TrafMinInitDistInbetweenB">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.TrafOncomingFraction1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.TrafOncomingFraction2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.TrafOncomingFraction3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Track.TrafOncomingFraction4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Track.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.Track"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Track.#ctor(System.String,Nikki.Database.Carbon)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.Track"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="db"><see cref="T:Nikki.Database.Carbon"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Track.#ctor(System.IO.BinaryReader,Nikki.Database.Carbon)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.Track"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="db"><see cref="T:Nikki.Database.Carbon"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Track.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Track.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Carbon.Class.Track"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Carbon.Class.Track"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Track.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Carbon.Class.Track"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Carbon.Class.Track"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Track.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Track.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Carbon.Class.Track"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
         </member>
         <member name="T:Nikki.Support.Carbon.Framework.CarPartManager">
             <summary>
@@ -8482,6 +8943,136 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="T:Nikki.Support.MostWanted.Class.SunInfo">
+            <summary>
+            <see cref="T:Nikki.Support.MostWanted.Class.SunInfo"/> is a collection of sun and daylight settings.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.MostWanted.Class.SunInfo.MaxCNameLength">
+            <summary>
+            Maximum length of the CollectionName.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.MostWanted.Class.SunInfo.CNameOffsetAt">
+            <summary>
+            Offset of the CollectionName in the data.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.MostWanted.Class.SunInfo.BaseClassSize">
+            <summary>
+            Base size of a unit collection.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.SunInfo.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.SunInfo.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.SunInfo.Database">
+            <summary>
+            Database to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.SunInfo.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.SunInfo.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.SunInfo.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.SunInfo.SUNLAYER1">
+            <summary>
+            Sun layer 1.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.SunInfo.SUNLAYER2">
+            <summary>
+            Sun layer 2.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.SunInfo.SUNLAYER3">
+            <summary>
+            Sun layer 3.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.SunInfo.SUNLAYER4">
+            <summary>
+            Sun layer 4.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.SunInfo.SUNLAYER5">
+            <summary>
+            Sun layer 5.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.SunInfo.SUNLAYER6">
+            <summary>
+            Sun layer 6.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.SunInfo.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Class.SunInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.SunInfo.#ctor(System.String,Nikki.Database.MostWanted)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Class.SunInfo"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="db"><see cref="T:Nikki.Database.MostWanted"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.SunInfo.#ctor(System.IO.BinaryReader,Nikki.Database.MostWanted)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Class.SunInfo"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="db"><see cref="T:Nikki.Database.MostWanted"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.SunInfo.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.SunInfo.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.MostWanted.Class.SunInfo"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.MostWanted.Class.SunInfo"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.SunInfo.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.MostWanted.Class.SunInfo"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.MostWanted.Class.SunInfo"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.SunInfo.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.SunInfo.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.MostWanted.Class.SunInfo"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Class.Texture">
             <summary>
             <see cref="T:Nikki.Support.MostWanted.Class.Texture"/> is a collection of dds image data used by the game.
@@ -8908,6 +9499,301 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
             <returns>Byte array of the partial 2 part2.</returns>
+        </member>
+        <member name="T:Nikki.Support.MostWanted.Class.Track">
+            <summary>
+            <see cref="T:Nikki.Support.MostWanted.Class.Track"/> is a collection of settings related to races and events.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.MostWanted.Class.Track.MaxCNameLength">
+            <summary>
+            Maximum length of the CollectionName.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.MostWanted.Class.Track.CNameOffsetAt">
+            <summary>
+            Offset of the CollectionName in the data.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.MostWanted.Class.Track.BaseClassSize">
+            <summary>
+            Base size of a unit collection.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.Database">
+            <summary>
+            Database to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.TrackID">
+            <summary>
+            Unique ID value of the track that is used ingame.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.RaceLength">
+            <summary>
+            Total length of the whole track
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.TimeLimitToBeatForward">
+            <summary>
+            Indicates maximum time allowed to complete the race in forward direction.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.TimeLimitToBeatReverse">
+            <summary>
+            Indicates maximum time allowed to complete the race in reverse direction.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.ScoreToBeatDriftForward">
+            <summary>
+            Indicates score needed to beat the drift race in forward direction.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.ScoreToBeatDriftReverse">
+            <summary>
+            Indicates score needed to beat the drift race in reverse direction.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.NumSecBeforeShorcutsAllowed">
+            <summary>
+            Indicates number of seconds that should pass before opponents can take first shortcut.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.DriftSecondsMin">
+            <summary>
+            Indicates minimum amount of seconds to drift.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.DriftSecondsMax">
+            <summary>
+            Indicates maximum amount of seconds to drift.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.CarRaceStartConfig">
+            <summary>
+            Indicates configuration settings of the car at the start.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.TrackMapCalibrationOffsetX">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.TrackMapCalibrationOffsetY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.TrackMapCalibrationWidth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.TrackMapCalibrationRotation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.TrackMapCalibrationZoomIn">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.TrackMapStartgridAngle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.TrackMapFinishlineAngle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.MenuMapZoomOffsetX">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.MenuMapZoomOffsetY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.MenuMapZoomWidth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.MenuMapStartZoomed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.MaxTrafficCars_0_0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.MaxTrafficCars_0_1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.MaxTrafficCars_1_0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.MaxTrafficCars_1_1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.MaxTrafficCars_2_0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.MaxTrafficCars_2_1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.MaxTrafficCars_3_0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.MaxTrafficCars_3_1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.TrafAllowedNearStartgrid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.TrafAllowedNearFinishline">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.TrafMinInitDistFromStart">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.TrafMinInitDistFromFinish">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.TrafMinInitDistInbetweenA">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.TrafMinInitDistInbetweenB">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.TrafOncomingFraction1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.TrafOncomingFraction2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.TrafOncomingFraction3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.Track.TrafOncomingFraction4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.Track.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Class.Track"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.Track.#ctor(System.String,Nikki.Database.MostWanted)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Class.Track"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="db"><see cref="T:Nikki.Database.MostWanted"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.Track.#ctor(System.IO.BinaryReader,Nikki.Database.MostWanted)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Class.Track"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="db"><see cref="T:Nikki.Database.MostWanted"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.Track.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.Track.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.MostWanted.Class.Track"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.MostWanted.Class.Track"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.Track.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.MostWanted.Class.Track"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.MostWanted.Class.Track"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.Track.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.Track.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.MostWanted.Class.Track"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
         </member>
         <member name="T:Nikki.Support.MostWanted.Framework.CarPartManager">
             <summary>
@@ -10904,6 +11790,41 @@
             Vault memory hash of the collection name.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Shared.Class.SunInfo.Version">
+            <summary>
+            Version of the sun info.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.SunInfo.PositionX">
+            <summary>
+            Position X of the sun.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.SunInfo.PositionY">
+            <summary>
+            Position Y of the sun.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.SunInfo.PositionZ">
+            <summary>
+            Position Z of the sun.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.SunInfo.CarShadowPositionX">
+            <summary>
+            Position X of car's shadow.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.SunInfo.CarShadowPositionY">
+            <summary>
+            Position Y of car's shadow.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.SunInfo.CarShadowPositionZ">
+            <summary>
+            Position Z of car's shadow.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Shared.Class.SunInfo.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Shared.Class.SunInfo"/> into a byte array.
@@ -11354,6 +12275,135 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
             <returns>Byte array of the partial 2 part2.</returns>
+        </member>
+        <member name="T:Nikki.Support.Shared.Class.Track">
+            <summary>
+            <see cref="T:Nikki.Support.Shared.Class.Track"/> is a collection of settings related to races and events.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.IsValidRace">
+            <summary>
+            Indicates whether race is valid.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.IsLoopingRace">
+            <summary>
+            Indicates whether race is looping.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.ReverseVersionExists">
+            <summary>
+            Indicates whether reverse version of the race exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.IsPerformanceTuning">
+            <summary>
+            Indicates whether the race is used in performance tuning events.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.RaceDescription">
+            <summary>
+            Represents debug description of the race.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.RegionName">
+            <summary>
+            Represents region in which the track and its values are stored.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.TrackDirectory">
+            <summary>
+            Represents directory in which the track is stored.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.RegionDirectory">
+            <summary>
+            Represents directory in which track's region is stored.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.LocationIndex">
+            <summary>
+            Location index of the track.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.LocationDirectory">
+            <summary>
+            Location directory of the track.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.LocationType">
+            <summary>
+            Location type of the track.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.DriftType">
+            <summary>
+            Drift type of the track.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.RaceGameplayMode">
+            <summary>
+            Represents the race gameplay mode of the track.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.DifficultyForward">
+            <summary>
+            Difficulty of the track when it has a forward direction.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.DifficultyReverse">
+            <summary>
+            Difficulty of the track when it has a reverse direction.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Track.SunInfoName">
+            <summary>
+            Represents sun type during race.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.Track.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Shared.Class.Track"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Shared.Class.Track"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.Track.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Shared.Class.Track"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.Track"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.Track.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
         </member>
         <member name="T:Nikki.Support.Shared.Parts.BoundParts.CollisionBound">
             <summary>
@@ -12947,6 +13997,89 @@
             <param name="value">Value to set.</param>
             <param name="error">Error occured when trying to set value.</param>
             <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.SunParts.SunLayer">
+            <summary>
+            A unit <see cref="T:Nikki.Support.Shared.Parts.SunParts.SunLayer"/> used in sun info collections.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.SunParts.SunLayer.SunTextureType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.SunParts.SunLayer.SunAlphaType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.SunParts.SunLayer.IntensityScale">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.SunParts.SunLayer.Size">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.SunParts.SunLayer.OffsetX">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.SunParts.SunLayer.OffsetY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.SunParts.SunLayer.ColorAlpha">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.SunParts.SunLayer.ColorRed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.SunParts.SunLayer.ColorGreen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.SunParts.SunLayer.ColorBlue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.SunParts.SunLayer.Angle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.SunParts.SunLayer.SweepAngleAmount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.SunParts.SunLayer.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.SunParts.SunLayer.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.SunParts.SunLayer.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
         <member name="T:Nikki.Support.Shared.Parts.TPKParts.CompSlot">
             <summary>
@@ -14714,41 +15847,6 @@
             Vault memory hash of the collection name.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.SunInfo.Version">
-            <summary>
-            Version of the sun info.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.SunInfo.PositionX">
-            <summary>
-            Position X of the sun.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.SunInfo.PositionY">
-            <summary>
-            Position Y of the sun.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.SunInfo.PositionZ">
-            <summary>
-            Position Z of the sun.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.SunInfo.CarShadowPositionX">
-            <summary>
-            Position X of car's shadow.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.SunInfo.CarShadowPositionY">
-            <summary>
-            Position Y of car's shadow.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.SunInfo.CarShadowPositionZ">
-            <summary>
-            Position Z of car's shadow.
-            </summary>
-        </member>
         <member name="P:Nikki.Support.Underground2.Class.SunInfo.SUNLAYER1">
             <summary>
             Sun layer 1.
@@ -15309,86 +16407,6 @@
         <member name="P:Nikki.Support.Underground2.Class.Track.TrackID">
             <summary>
             Unique ID value of the track that is used ingame.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.Track.IsValidRace">
-            <summary>
-            Indicates whether race is valid.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.Track.IsLoopingRace">
-            <summary>
-            Indicates whether race is looping.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.Track.ReverseVersionExists">
-            <summary>
-            Indicates whether reverse version of the race exists.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.Track.IsPerformanceTuning">
-            <summary>
-            Indicates whether the race is used in performance tuning events.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.Track.RaceDescription">
-            <summary>
-            Represents debug description of the race.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.Track.RegionName">
-            <summary>
-            Represents region in which the track and its values are stored.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.Track.TrackDirectory">
-            <summary>
-            Represents directory in which the track is stored.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.Track.RegionDirectory">
-            <summary>
-            Represents directory in which track's region is stored.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.Track.LocationIndex">
-            <summary>
-            Location index of the track.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.Track.LocationDirectory">
-            <summary>
-            Location directory of the track.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.Track.LocationType">
-            <summary>
-            Location type of the track.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.Track.DriftType">
-            <summary>
-            Drift type of the track.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.Track.RaceGameplayMode">
-            <summary>
-            Represents the race gameplay mode of the track.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.Track.DifficultyForward">
-            <summary>
-            Difficulty of the track when it has a forward direction.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.Track.DifficultyReverse">
-            <summary>
-            Difficulty of the track when it has a reverse direction.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.Track.SunInfoName">
-            <summary>
-            Represents sun type during race.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Class.Track.RaceLength">
@@ -18228,89 +19246,6 @@
             Creates a plain copy of the objects that contains same values.
             </summary>
             <returns>Exact plain copy of the object.</returns>
-        </member>
-        <member name="T:Nikki.Support.Underground2.Parts.GameParts.SunLayer">
-            <summary>
-            A unit <see cref="T:Nikki.Support.Underground2.Parts.GameParts.SunLayer"/> used in sun info collections.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.GameParts.SunLayer.SunTextureType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.GameParts.SunLayer.SunAlphaType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.GameParts.SunLayer.IntensityScale">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.GameParts.SunLayer.Size">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.GameParts.SunLayer.OffsetX">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.GameParts.SunLayer.OffsetY">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.GameParts.SunLayer.ColorAlpha">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.GameParts.SunLayer.ColorRed">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.GameParts.SunLayer.ColorGreen">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.GameParts.SunLayer.ColorBlue">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.GameParts.SunLayer.Angle">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.GameParts.SunLayer.SweepAngleAmount">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.GameParts.SunLayer.PlainCopy">
-            <summary>
-            Creates a plain copy of the objects that contains same values.
-            </summary>
-            <returns>Exact plain copy of the object.</returns>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.GameParts.SunLayer.Read(System.IO.BinaryReader)">
-            <summary>
-            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.GameParts.SunLayer.Write(System.IO.BinaryWriter)">
-            <summary>
-            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
-            </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
         <member name="T:Nikki.Support.Underground2.Parts.InfoParts.Brakes">
             <summary>

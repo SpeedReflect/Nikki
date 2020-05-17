@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Nikki.Core;
+using Nikki.Utils;
 using Nikki.Reflection.ID;
 using Nikki.Support.Underground2.Class;
 
@@ -112,6 +113,8 @@ namespace Nikki.Support.Underground2.Framework
 			if (!File.Exists(options.File)) return false;
 			if (options.Flags.HasFlag(eOptFlags.None)) return false;
 			db.Buffer = File.ReadAllBytes(options.File);
+
+			db.Buffer = JDLZ.Decompress(db.Buffer);
 
 			using var ms = new MemoryStream(db.Buffer);
 			using var br = new BinaryReader(ms);

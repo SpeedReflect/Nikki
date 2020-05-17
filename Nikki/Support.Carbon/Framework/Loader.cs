@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Nikki.Core;
+using Nikki.Utils;
 using Nikki.Reflection.ID;
 using Nikki.Support.Carbon.Class;
 
@@ -74,6 +75,28 @@ namespace Nikki.Support.Carbon.Framework
 			}
 		}
 
+		private static void ReadSunInfos(BinaryReader br, int size, Database.Carbon db)
+		{
+			int len = size / SunInfo.BaseClassSize;
+
+			for (int a1 = 0; a1 < len; ++a1)
+			{
+				var Class = new SunInfo(br, db);
+				db.SunInfos.Collections.Add(Class);
+			}
+		}
+
+		private static void ReadTracks(BinaryReader br, int size, Database.Carbon db)
+		{
+			int len = size / Track.BaseClassSize;
+
+			for (int a1 = 0; a1 < len; ++a1)
+			{
+				var Class = new Track(br, db);
+				db.Tracks.Collections.Add(Class);
+			}
+		}
+
 		private static void ReadFNGroup(BinaryReader br, Database.Carbon db)
 		{
 			br.BaseStream.Position -= 8;
@@ -96,6 +119,8 @@ namespace Nikki.Support.Carbon.Framework
 			if (!File.Exists(options.File)) return false;
 			if (options.Flags.HasFlag(eOptFlags.None)) return false;
 			db.Buffer = File.ReadAllBytes(options.File);
+
+			db.Buffer = JDLZ.Decompress(db.Buffer);
 
 			using var ms = new MemoryStream(db.Buffer);
 			using var br = new BinaryReader(ms);
@@ -161,6 +186,22 @@ namespace Nikki.Support.Carbon.Framework
 						if (options.Flags.HasFlag(eOptFlags.Collisions))
 						{
 							ReadCollisions(br, size, db);
+							break;
+						}
+						else goto default;
+
+					case Global.SunInfos:
+						if (options.Flags.HasFlag(eOptFlags.SunInfos))
+						{
+							ReadSunInfos(br, size, db);
+							break;
+						}
+						else goto default;
+
+					case Global.Tracks:
+						if (options.Flags.HasFlag(eOptFlags.Tracks))
+						{
+							ReadTracks(br, size, db);
 							break;
 						}
 						else goto default;

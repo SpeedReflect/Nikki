@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Nikki.Core;
+using Nikki.Utils;
 using Nikki.Reflection.ID;
 using Nikki.Support.Carbon.Class;
 using CoreExtensions.IO;
@@ -83,19 +84,56 @@ namespace Nikki.Support.Carbon.Framework
 				Class.Assemble(bw);
 		}
 
-		private static void WriteCollisions(BinaryWriter bw, Database.Carbon db)
+		private static void WriteCollisions(BinaryWriter bw, Options options, Database.Carbon db)
 		{
+			long pos = 0;
+			long len = 0;
+
+			// Write Padding
+			bw.Write((int)0);
+			bw.Write((int)-1);
+			pos = bw.BaseStream.Position;
+			bw.Write(Global.Nikki);
+			bw.Write((int)0);
+			bw.WriteNullTermUTF8("Padding Block", 0x20);
+			bw.WriteNullTermUTF8(options.Watermark, 0x20);
+			bw.FillBuffer(8);
+			if (bw.BaseStream.Position % 0x10 == 0) bw.Write((long)0);
+			len = bw.BaseStream.Position;
+			bw.BaseStream.Position = pos - 4;
+			bw.Write((int)(len - pos));
+			bw.BaseStream.Position = len;
+
+			// Write Collisions
 			bw.Write(Global.Collisions);
 			bw.Write(-1); // temp size
-			var pos = bw.BaseStream.Position;
+			pos = bw.BaseStream.Position;
 
 			foreach (var Class in db.Collisions.Collections)
 				Class.Assemble(bw);
 
-			var len = bw.BaseStream.Position;
+			len = bw.BaseStream.Position;
 			bw.BaseStream.Position = pos - 4;
 			bw.Write((int)(len - pos));
 			bw.BaseStream.Position = len;
+		}
+
+		private static void WriteSunInfos(BinaryWriter bw, Options options, Database.Carbon db)
+		{
+			WritePadding(bw, options.Watermark);
+			bw.Write(Global.SunInfos);
+			bw.Write(db.SunInfos.Length * SunInfo.BaseClassSize);
+			foreach (var Class in db.SunInfos.Collections)
+				Class.Assemble(bw);
+		}
+
+		private static void WriteTracks(BinaryWriter bw, Options options, Database.Carbon db)
+		{
+			WritePadding(bw, options.Watermark);
+			bw.Write(Global.Tracks);
+			bw.Write(db.Tracks.Length * Track.BaseClassSize);
+			foreach (var Class in db.Tracks.Collections)
+				Class.Assemble(bw);
 		}
 
 		private static void WriteCarParts(BinaryWriter bw, Options options, Database.Carbon db) =>
@@ -129,7 +167,7 @@ namespace Nikki.Support.Carbon.Framework
 			if (db.Buffer == null) return false;
 
 			using var msr = new MemoryStream(db.Buffer);
-			using var msw = File.Open(options.File, FileMode.Create);
+			using var msw = new MemoryStream(db.Buffer.Length);
 
 			using var br = new BinaryReader(msr);
 			using var bw = new BinaryWriter(msw);
@@ -208,7 +246,25 @@ namespace Nikki.Support.Carbon.Framework
 					case Global.Collisions:
 						if (options.Flags.HasFlag(eOptFlags.Collisions))
 						{
-							WriteCollisions(bw, db);
+							WriteCollisions(bw, options, db);
+							br.BaseStream.Position += size;
+							break;
+						}
+						else goto default;
+
+					case Global.SunInfos:
+						if (options.Flags.HasFlag(eOptFlags.SunInfos))
+						{
+							WriteSunInfos(bw, options, db);
+							br.BaseStream.Position += size;
+							break;
+						}
+						else goto default;
+
+					case Global.Tracks:
+						if (options.Flags.HasFlag(eOptFlags.Tracks))
+						{
+							WriteTracks(bw, options, db);
 							br.BaseStream.Position += size;
 							break;
 						}
@@ -225,7 +281,6 @@ namespace Nikki.Support.Carbon.Framework
 
 					case Global.LimitsTable:
 					case Global.ELabGlobal:
-					case Global.Tracks:
 						WritePadding(bw, options.Watermark);
 						goto default;
 
@@ -262,6 +317,14 @@ namespace Nikki.Support.Carbon.Framework
 						bw.Write(br.ReadBytes(size));
 						break;
 				}
+			}
+
+			var buffer = msw.ToArray();
+			if (options.Compress) buffer = JDLZ.Compress(buffer);
+
+			using (var writer = new BinaryWriter(File.Open(options.File, FileMode.Create)))
+			{
+				writer.Write(buffer);
 			}
 
 			return true;
