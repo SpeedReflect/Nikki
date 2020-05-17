@@ -25,10 +25,12 @@ namespace Nikki.Database
         /// </summary>
         public override string GameSTR => GameINT.Carbon.ToString();
 
+		#region Roots
+
 		/// <summary>
 		/// 
 		/// </summary>
-        public Root<Material> Materials { get; set; }
+		public Root<Material> Materials { get; set; }
         
 		/// <summary>
 		/// 
@@ -49,7 +51,17 @@ namespace Nikki.Database
 		/// 
 		/// </summary>
 		public Root<Collision> Collisions { get; set; }
-        
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Root<SunInfo> SunInfos { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Root<Track> Tracks { get; set; }
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -75,10 +87,14 @@ namespace Nikki.Database
 		/// </summary>
 		public List<CPStruct> CarPartStructs { get; set; }
 
+		#endregion
+
+		#region Main
+
 		/// <summary>
 		/// Initializes new instance of <see cref="Carbon"/>.
 		/// </summary>
-        public Carbon() { }
+		public Carbon() { }
 
 		/// <summary>
 		/// Initializes new instance of <see cref="Carbon"/>.
@@ -105,6 +121,10 @@ namespace Nikki.Database
             this.STRBlocks = null;
 			this.ModelParts = null;
         }
+
+		#endregion
+
+		#region Methods
 
 		private void Initialize()
 		{
@@ -150,6 +170,24 @@ namespace Nikki.Database
 				-1,
 				true,
 				true,
+				this
+			);
+
+			this.SunInfos = new Root<SunInfo>
+			(
+				"SunInfos",
+				SunInfo.BaseClassSize,
+				true,
+				true,
+				this
+			);
+
+			this.Tracks = new Root<Track>
+			(
+				"Tracks",
+				Track.BaseClassSize,
+				true,
+				false,
 				this
 			);
 
@@ -212,11 +250,13 @@ namespace Nikki.Database
 			string collections = " collections.";
 			string info = this.ToString() + nl;
 			info += $"{this.CarTypeInfos.ThisName}{equals}{this.CarTypeInfos.Length}{collections}{nl}";
+			info += $"{this.Collisions.ThisName}{equals}{this.Collisions.Length}{collections}{nl}";
 			info += $"{this.Materials.ThisName}{equals}{this.Materials.Length}{collections}{nl}";
+			info += $"{this.ModelParts.ThisName}{equals}{this.ModelParts.Length}{collections}{nl}";
 			info += $"{this.PresetRides.ThisName}{equals}{this.PresetRides.Length}{collections}{nl}";
 			info += $"{this.PresetSkins.ThisName}{equals}{this.PresetSkins.Length}{collections}{nl}";
-			info += $"{this.Collisions.ThisName}{equals}{this.Collisions.Length}{collections}{nl}";
-			info += $"{this.ModelParts.ThisName}{equals}{this.ModelParts.Length}{collections}{nl}";
+			info += $"{this.SunInfos.ThisName}{equals}{this.SunInfos.Length}{collections}{nl}";
+			info += $"{this.Tracks.ThisName}{equals}{this.Tracks.Length}{collections}{nl}";
 			return info;
 		}
 
@@ -233,5 +273,7 @@ namespace Nikki.Database
 		/// <param name="options"><see cref="Options"/> that are used to save data.</param>
 		/// <returns>True on success; false otherwise.</returns>
 		public override bool Save(Options options) => Saver.Invoke(options, this);
+
+		#endregion
 	}
 }

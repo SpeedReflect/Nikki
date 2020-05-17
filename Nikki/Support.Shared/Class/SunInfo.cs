@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Attributes;
 
 
 
@@ -40,15 +41,68 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         public virtual uint VltKey => this.CollectionName.VltHash();
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region AccessModifiable Properties
 
-        /// <summary>
-        /// Assembles <see cref="SunInfo"/> into a byte array.
-        /// </summary>
-        /// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="SunInfo"/> with.</param>
-        public abstract void Assemble(BinaryWriter bw);
+		/// <summary>
+		/// Version of the sun info.
+		/// </summary>
+		[AccessModifiable()]
+		[StaticModifiable()]
+		public int Version { get; set; } = 2;
+
+		/// <summary>
+		/// Position X of the sun.
+		/// </summary>
+		[AccessModifiable()]
+		[StaticModifiable()]
+		public float PositionX { get; set; }
+
+		/// <summary>
+		/// Position Y of the sun.
+		/// </summary>
+		[AccessModifiable()]
+		[StaticModifiable()]
+		public float PositionY { get; set; }
+
+		/// <summary>
+		/// Position Z of the sun.
+		/// </summary>
+		[AccessModifiable()]
+		[StaticModifiable()]
+		public float PositionZ { get; set; }
+
+		/// <summary>
+		/// Position X of car's shadow.
+		/// </summary>
+		[AccessModifiable()]
+		[StaticModifiable()]
+		public float CarShadowPositionX { get; set; }
+
+		/// <summary>
+		/// Position Y of car's shadow.
+		/// </summary>
+		[AccessModifiable()]
+		[StaticModifiable()]
+		public float CarShadowPositionY { get; set; }
+
+		/// <summary>
+		/// Position Z of car's shadow.
+		/// </summary>
+		[AccessModifiable()]
+		[StaticModifiable()]
+		public float CarShadowPositionZ { get; set; }
+
+		#endregion
+
+		#region Methods
+
+		/// <summary>
+		/// Assembles <see cref="SunInfo"/> into a byte array.
+		/// </summary>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="SunInfo"/> with.</param>
+		public abstract void Assemble(BinaryWriter bw);
 
         /// <summary>
         /// Disassembles array into <see cref="SunInfo"/> properties.

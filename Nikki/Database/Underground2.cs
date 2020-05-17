@@ -24,10 +24,12 @@ namespace Nikki.Database
         /// </summary>
         public override string GameSTR => GameINT.Underground2.ToString();
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public Root<Material> Materials { get; set; }
+		#region Roots
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Root<Material> Materials { get; set; }
         
         /// <summary>
         /// 
@@ -139,6 +141,10 @@ namespace Nikki.Database
         /// </summary>
         public Root<DBModelPart> ModelParts { get; set; }
 
+		#endregion
+
+		#region Main
+
 		/// <summary>
 		/// Initializes new instance of <see cref="Underground2"/>.
 		/// </summary>
@@ -183,6 +189,10 @@ namespace Nikki.Database
             this.GCarUnlocks = null;
             this.AcidEffects = null;
         }
+
+		#endregion
+
+		#region Methods
 
 		private void Initialize()
 		{
@@ -450,5 +460,7 @@ namespace Nikki.Database
 		/// <param name="options"><see cref="Options"/> that are used to save data.</param>
 		/// <returns>True on success; false otherwise.</returns>
 		public override bool Save(Options options) => Saver.Invoke(options, this);
+
+		#endregion
 	}
 }

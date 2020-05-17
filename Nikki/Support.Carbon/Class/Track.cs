@@ -35,7 +35,7 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Base size of a unit collection.
 		/// </summary>
-		public const int BaseClassSize = 0x128;
+		public const int BaseClassSize = 0x110;
 
 		#endregion
 

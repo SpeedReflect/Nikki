@@ -7,7 +7,7 @@ using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.Underground2.Parts.GameParts
+namespace Nikki.Support.Shared.Parts.SunParts
 {
 	/// <summary>
 	/// A unit <see cref="SunLayer"/> used in sun info collections.
