@@ -23,7 +23,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <summary>
 		/// Collection of <see cref="CPAttribute"/> of this <see cref="RealCarPart"/>.
 		/// </summary>
-		public virtual List<CPAttribute> Attributes { get; set; }
+		public abstract List<CPAttribute> Attributes { get; set; }
 
 		/// <summary>
 		/// Total amount of <see cref="CPAttribute"/> in this <see cref="RealCarPart"/>.
@@ -40,22 +40,21 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// </summary>
 		/// <param name="key">Key of a <see cref="CPAttribute"/> to find.</param>
 		/// <returns>A <see cref="CPAttribute"/> with key provided.</returns>
-		public virtual CPAttribute GetAttribute(uint key) => this.Attributes.Find(_ => _.Key == key);
+		public abstract CPAttribute GetAttribute(uint key);
 
 		/// <summary>
 		/// Gets <see cref="CPAttribute"/> with the label provided.
 		/// </summary>
 		/// <param name="label">Label of a <see cref="CPAttribute"/> to find.</param>
 		/// <returns>A <see cref="CPAttribute"/> with label provided.</returns>
-		public virtual CPAttribute GetAttribute(string label) => this.GetAttribute(label.BinHash());
+		public abstract CPAttribute GetAttribute(string label);
 
 		/// <summary>
 		/// Gets <see cref="CPAttribute"/> at index specified.
 		/// </summary>
 		/// <param name="index">Index in the list of <see cref="CPAttribute"/>.</param>
 		/// <returns>A <see cref="CPAttribute"/> at index specified.</returns>
-		public virtual CPAttribute GetAttribute(int index) =>
-			(index >= 0 && index < this.Length) ? this.Attributes[index] : null;
+		public abstract CPAttribute GetAttribute(int index);
 
 		/// <summary>
 		/// Gets index of an attribute that has key provided.

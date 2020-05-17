@@ -261,28 +261,25 @@ namespace Nikki.Utils.EA
             {
                 GameINT.Carbon => index switch
                 {
-                    0 => "GLOBALMESSAGETEXTURES",
-                    1 => "GLOBALTEXTURES",
-                    2 => "FLARETEXTURES",
-                    3 => "GLOBALTEXTURESPC",
-                    4 => "EMITTER_SYSTEM_TEXTURE_PAGE",
-                    5 => "EMITTER_SYSTEM_NORMALMAPS_P",
-                    6 => "FLARE_TEXTURE_PAGE",
+                    0 => "GLOBALTEXTURES",
+                    1 => "FLARETEXTURES",
+                    2 => "GLOBALTEXTURESPC",
+                    3 => "EMITTER_SYSTEM_TEXTURE_PAGE",
+                    4 => "EMITTER_SYSTEM_NORMALMAPS_P",
+                    5 => "FLARE_TEXTURE_PAGE",
                     _ => String.Empty
                 },
                 GameINT.MostWanted => index switch
                 {
-                    0 => "GLOBALMESSAGE",
+                    0 => "GLOBAL",
                     1 => "GLOBAL",
                     2 => "GLOBAL",
-                    3 => "GLOBAL",
                     _ => String.Empty
                 },
                 GameINT.Underground2 => index switch
                 {
-                    0 => "GLOBALMESSAGE",
+                    0 => "GLOBAL",
                     1 => "GLOBAL",
-                    2 => "GLOBAL",
                     _ => String.Empty
                 },
                 _ => null,

@@ -422,6 +422,7 @@ namespace Nikki.Support.Underground2.Framework
 					eCarPartAttribType.Floating => new FloatAttribute(br, key),
 					eCarPartAttribType.String => new StringAttribute(br, str, key),
 					eCarPartAttribType.TwoString => new TwoStringAttribute(br, str, key),
+					eCarPartAttribType.Key => new KeyAttribute(br, key),
 					_ => new IntAttribute(br, key),
 				};
 				++count;

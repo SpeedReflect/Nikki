@@ -160,7 +160,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Returns attribute part label and its type as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() => base.ToString();
+		public override string ToString() => $"{this.AttribType} -> {this.Type}";
 
 		/// <summary>
 		/// Determines whether this instance and a specified object, which must also be a
@@ -232,6 +232,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 				eCarPartAttribType.Integer => new IntAttribute(this.Value1, this.BelongsTo),
 				eCarPartAttribType.String => new StringAttribute(this.Value1, this.BelongsTo),
 				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Value1, this.BelongsTo),
+				eCarPartAttribType.Key => new KeyAttribute(this.Value1, this.BelongsTo),
 				_ => this
 			};
 	}

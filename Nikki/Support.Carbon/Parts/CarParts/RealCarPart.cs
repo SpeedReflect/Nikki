@@ -88,6 +88,28 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 		}
 
 		/// <summary>
+		/// Gets <see cref="CPAttribute"/> with the key provided.
+		/// </summary>
+		/// <param name="key">Key of a <see cref="CPAttribute"/> to find.</param>
+		/// <returns>A <see cref="CPAttribute"/> with key provided.</returns>
+		public override CPAttribute GetAttribute(uint key) => this.Attributes.Find(_ => _.Key == key);
+
+		/// <summary>
+		/// Gets <see cref="CPAttribute"/> with the label provided.
+		/// </summary>
+		/// <param name="label">Label of a <see cref="CPAttribute"/> to find.</param>
+		/// <returns>A <see cref="CPAttribute"/> with label provided.</returns>
+		public override CPAttribute GetAttribute(string label) => this.GetAttribute(label.BinHash());
+
+		/// <summary>
+		/// Gets <see cref="CPAttribute"/> at index specified.
+		/// </summary>
+		/// <param name="index">Index in the list of <see cref="CPAttribute"/>.</param>
+		/// <returns>A <see cref="CPAttribute"/> at index specified.</returns>
+		public override CPAttribute GetAttribute(int index) =>
+			(index >= 0 && index < this.Length) ? this.Attributes[index] : null;
+
+		/// <summary>
 		/// Attempts to add <see cref="CPAttribute"/> with key provided.
 		/// </summary>
 		/// <param name="key">Key of the new <see cref="CPAttribute"/>.</param>
@@ -103,8 +125,10 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 				eCarPartAttribType.CarPartID => new PartIDAttribute((int)0, this),
 				eCarPartAttribType.String => new StringAttribute(String.Empty, this),
 				eCarPartAttribType.TwoString => new TwoStringAttribute(String.Empty, this),
+				eCarPartAttribType.Key => new KeyAttribute(String.Empty, this),
 				_ => new IntAttribute((int)0, this)
 			};
+			attribute.SetValue("Type", key);
 			this.Attributes.Add(attribute);
 			return true;
 		}
@@ -142,8 +166,10 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 				eCarPartAttribType.CarPartID => new PartIDAttribute((int)0, this),
 				eCarPartAttribType.String => new StringAttribute(String.Empty, this),
 				eCarPartAttribType.TwoString => new TwoStringAttribute(String.Empty, this),
+				eCarPartAttribType.Key => new KeyAttribute(String.Empty, this),
 				_ => new IntAttribute((int)0, this)
 			};
+			attribute.SetValue("Type", key);
 			this.Attributes.Add(attribute);
 			return true;
 		}

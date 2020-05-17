@@ -1462,11 +1462,6 @@
             All attribute types for <see cref="T:Nikki.Support.Shared.Parts.CarParts.IntAttribute"/>.
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.CV">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.RED">
             <summary>
             
@@ -1587,36 +1582,6 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.COLOR0ID">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.COLOR1ID">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.COLOR2ID">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.COLOR3ID">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MATNAMEA">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MATNAMEB">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.HUDINDEX">
             <summary>
             
@@ -1642,11 +1607,6 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.PAINTGROUP">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.NUMCOLOURS">
             <summary>
             
@@ -1667,22 +1627,7 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.TEXTUREHASH">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.TEXTURE_NAME">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.WHEELEMITTER">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.LANGUAGEHASH">
             <summary>
             
             </summary>
@@ -1697,37 +1642,12 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.SPECIFICCARNAME">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.GROUPLANGUAGEHASH">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.VINYLLANGUAGEHASH">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MODEL_TABLE_OFFSET">
             <summary>
             
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.PART_NAME_SELECTOR">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.PART_NAME_BASE_HASH">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.LOD_NAME_PREFIX_NAMEHASH">
             <summary>
             
             </summary>
@@ -1802,7 +1722,92 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0xEBB03E66">
+        <member name="T:Nikki.Reflection.Enum.CP.eAttribKey">
+            <summary>
+            All attribute types for <see cref="T:Nikki.Support.Shared.Parts.CarParts.KeyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.CV">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.COLOR0ID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.COLOR1ID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.COLOR2ID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.COLOR3ID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.MATNAMEA">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.MATNAMEB">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.PAINTGROUP">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.TEXTUREHASH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.TEXTURE_NAME">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.LANGUAGEHASH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.SPECIFICCARNAME">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.GROUPLANGUAGEHASH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.VINYLLANGUAGEHASH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.PART_NAME_BASE_HASH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.LOD_NAME_PREFIX_NAMEHASH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey._0xEBB03E66">
             <summary>
             
             </summary>
@@ -2095,6 +2100,11 @@
         <member name="F:Nikki.Reflection.Enum.eCarPartAttribType.CarPartID">
             <summary>
             Attribute with CarPartID.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eCarPartAttribType.Key">
+            <summary>
+            Attribute with BIN key stored that is represented as <see langword="string"/>.
             </summary>
         </member>
         <member name="T:Nikki.Reflection.Enum.eCarPartLabels">
@@ -4063,6 +4073,11 @@
         <member name="F:Nikki.Reflection.ID.Global.LimitsTable">
             <summary>
             ID of Carbon limits table.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.ID.Global.TPKSettings">
+            <summary>
+            ID of TPK settings.
             </summary>
         </member>
         <member name="T:Nikki.Reflection.ID.TPK">
@@ -6457,6 +6472,27 @@
             Returns the hash code for this <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/>.
             </summary>
             <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.GetAttribute(System.UInt32)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with the key provided.
+            </summary>
+            <param name="key">Key of a <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to find.</param>
+            <returns>A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.GetAttribute(System.String)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with the label provided.
+            </summary>
+            <param name="label">Label of a <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to find.</param>
+            <returns>A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.GetAttribute(System.Int32)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> at index specified.
+            </summary>
+            <param name="index">Index in the list of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> at index specified.</returns>
         </member>
         <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.TryAddAttribute(System.UInt32)">
             <summary>
@@ -9120,6 +9156,27 @@
             Returns the hash code for this <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
             </summary>
             <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.GetAttribute(System.UInt32)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with the key provided.
+            </summary>
+            <param name="key">Key of a <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to find.</param>
+            <returns>A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.GetAttribute(System.String)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with the label provided.
+            </summary>
+            <param name="label">Label of a <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to find.</param>
+            <returns>A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.GetAttribute(System.Int32)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> at index specified.
+            </summary>
+            <param name="index">Index in the list of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> at index specified.</returns>
         </member>
         <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.TryAddAttribute(System.UInt32)">
             <summary>
@@ -11997,6 +12054,120 @@
         <member name="M:Nikki.Support.Shared.Parts.CarParts.IntAttribute.ConvertTo(Nikki.Reflection.Enum.eCarPartAttribType)">
             <summary>
             Converts this <see cref="T:Nikki.Support.Shared.Parts.CarParts.IntAttribute"/> to an attribute of type provided.
+            </summary>
+            <param name="type">Type of a new attribute.</param>
+            <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.CarParts.KeyAttribute">
+            <summary>
+            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte signed integer value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.KeyAttribute.AttribType">
+            <summary>
+            <see cref="T:Nikki.Reflection.Enum.eCarPartAttribType"/> type of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.KeyAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.KeyAttribute.Type">
+            <summary>
+            Type of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.BoolAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.KeyAttribute.Key">
+            <summary>
+            Key of the part to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.KeyAttribute.Value">
+            <summary>
+            Attribute value.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.KeyAttribute.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.KeyAttribute"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.KeyAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.KeyAttribute"/> with value provided.
+            </summary>
+            <param name="value">Value to set.</param>
+            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.KeyAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.KeyAttribute"/> by reading data using 
+            <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="key">Key of the attribute's group.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.KeyAttribute.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Disassembles byte array into <see cref="T:Nikki.Support.Shared.Parts.CarParts.KeyAttribute"/> using <see cref="T:System.IO.BinaryReader"/> 
+            provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with. 
+            Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.KeyAttribute.Assemble(System.IO.BinaryWriter,System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Shared.Parts.CarParts.KeyAttribute"/> and writes it using <see cref="T:System.IO.BinaryWriter"/> 
+            provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
+            <param name="string_dict">Dictionary of string HashCodes and their offsets. 
+            Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.KeyAttribute.ToString">
+            <summary>
+            Returns attribute part label and its type as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.KeyAttribute.Equals(System.Object)">
+            <summary>
+            Determines whether this instance and a specified object, which must also be a
+            <see cref="T:Nikki.Support.Shared.Parts.CarParts.KeyAttribute"/> object, have the same value.
+            </summary>
+            <param name="obj">The <see cref="T:Nikki.Support.Shared.Parts.CarParts.KeyAttribute"/> to compare to this instance.</param>
+            <returns>True if obj is a <see cref="T:Nikki.Support.Shared.Parts.CarParts.KeyAttribute"/> and its value is the same as 
+            this instance; false otherwise. If obj is null, the method returns false.
+            </returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.KeyAttribute.GetHashCode">
+            <summary>
+            Returns the hash code for this <see cref="T:Nikki.Support.Shared.Parts.CarParts.KeyAttribute"/>.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.KeyAttribute.op_Equality(Nikki.Support.Shared.Parts.CarParts.KeyAttribute,Nikki.Support.Shared.Parts.CarParts.KeyAttribute)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Shared.Parts.CarParts.KeyAttribute"/> have the same value.
+            </summary>
+            <param name="at1">The first <see cref="T:Nikki.Support.Shared.Parts.CarParts.KeyAttribute"/> to compare, or null.</param>
+            <param name="at2">The second <see cref="T:Nikki.Support.Shared.Parts.CarParts.KeyAttribute"/> to compare, or null.</param>
+            <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.KeyAttribute.op_Inequality(Nikki.Support.Shared.Parts.CarParts.KeyAttribute,Nikki.Support.Shared.Parts.CarParts.KeyAttribute)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Shared.Parts.CarParts.KeyAttribute"/> have different values.
+            </summary>
+            <param name="at1">The first <see cref="T:Nikki.Support.Shared.Parts.CarParts.KeyAttribute"/> to compare, or null.</param>
+            <param name="at2">The second <see cref="T:Nikki.Support.Shared.Parts.CarParts.KeyAttribute"/> to compare, or null.</param>
+            <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.KeyAttribute.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.KeyAttribute.ConvertTo(Nikki.Reflection.Enum.eCarPartAttribType)">
+            <summary>
+            Converts this <see cref="T:Nikki.Support.Shared.Parts.CarParts.KeyAttribute"/> to an attribute of type provided.
             </summary>
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
@@ -17787,6 +17958,27 @@
             Returns the hash code for this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/>.
             </summary>
             <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.GetAttribute(System.UInt32)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with the key provided.
+            </summary>
+            <param name="key">Key of a <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to find.</param>
+            <returns>A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.GetAttribute(System.String)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with the label provided.
+            </summary>
+            <param name="label">Label of a <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to find.</param>
+            <returns>A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.GetAttribute(System.Int32)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> at index specified.
+            </summary>
+            <param name="index">Index in the list of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> at index specified.</returns>
         </member>
         <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.TryAddAttribute(System.UInt32)">
             <summary>

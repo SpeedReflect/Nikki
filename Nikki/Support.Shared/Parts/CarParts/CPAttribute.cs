@@ -65,6 +65,6 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Returns attribute part label and its type as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() => $"0x{this.Key:X8} | {this.AttribType}";
+		public override string ToString() => $"{this.AttribType} -> 0x{this.Key:X8}";
 	}
 }

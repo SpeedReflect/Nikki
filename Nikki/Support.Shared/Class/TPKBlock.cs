@@ -105,6 +105,8 @@ namespace Nikki.Support.Shared.Class
 
         internal string Watermark { get; set; } = String.Empty;
 
+        public byte[] SettingData { get; set; }
+
         #endregion
 
         #region Internal Methods

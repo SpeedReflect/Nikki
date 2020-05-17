@@ -34,5 +34,10 @@
 		/// Attribute with CarPartID.
 		/// </summary>
 		CarPartID = 6,
+
+		/// <summary>
+		/// Attribute with BIN key stored that is represented as <see langword="string"/>.
+		/// </summary>
+		Key = 7,
 	}
 }

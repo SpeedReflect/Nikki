@@ -17,11 +17,12 @@ namespace Nikki.Support.Underground2.Framework
 			db.Materials.Collections.Add(Class);
 		}
 
-		private static void ReadTPKBlock(BinaryReader br, Database.Underground2 db)
+		private static void ReadTPKBlock(BinaryReader br, byte[] settings, Database.Underground2 db)
 		{
 			br.BaseStream.Position -= 8;
 			var Class = new TPKBlock(db.TPKBlocks.Length, db);
 			Class.Disassemble(br);
+			Class.SettingData = settings;
 			db.TPKBlocks.Collections.Add(Class);
 		}
 
@@ -116,6 +117,7 @@ namespace Nikki.Support.Underground2.Framework
 			using var br = new BinaryReader(ms);
 
 			bool gcareer = !options.Flags.HasFlag(eOptFlags.GCareer);
+			byte[] tempbuf = null;
 
 			while (br.BaseStream.Position < br.BaseStream.Length)
 			{
@@ -126,62 +128,101 @@ namespace Nikki.Support.Underground2.Framework
 				{
 					case Global.Materials:
 						if (options.Flags.HasFlag(eOptFlags.Materials))
+						{
 							ReadMaterial(br, db);
-						break;
+							break;
+						}
+						else goto default;
 
 					case Global.TPKBlocks:
 						if (options.Flags.HasFlag(eOptFlags.TPKBlocks))
-							ReadTPKBlock(br, db);
-						break;
+						{
+							ReadTPKBlock(br, tempbuf, db);
+							break;
+						}
+						else goto default;
+
+					case Global.TPKSettings:
+						if (options.Flags.HasFlag(eOptFlags.TPKBlocks))
+						{
+							tempbuf = br.ReadBytes(size);
+							break;
+						}
+						else goto default;
 
 					case Global.CarTypeInfos:
 						if (options.Flags.HasFlag(eOptFlags.CarTypeInfos))
+						{
 							ReadCarTypeInfos(br, size, db);
-						break;
+							break;
+						}
+						else goto default;
 
 					case Global.PresetRides:
 						if (options.Flags.HasFlag(eOptFlags.PresetRides))
+						{
 							ReadPresetRides(br, size, db);
-						break;
+							break;
+						}
+						else goto default;
 
 					case Global.CareerInfo:
 						if (!gcareer)
 						{
 							ReadGCareer(br, size, db);
 							gcareer = true;
+							break;
 						}
-						break;
+						else goto default;
 
 					case Global.CarParts:
 						if (options.Flags.HasFlag(eOptFlags.DBModelParts))
+						{
 							ReadCarParts(br, size, db);
-						break;
+							break;
+						}
+						else goto default;
 
 					case Global.SunInfos:
 						if (options.Flags.HasFlag(eOptFlags.SunInfos))
+						{
 							ReadSunInfos(br, size, db);
-						break;
+							break;
+						}
+						else goto default;
 
 					case Global.Tracks:
 						if (options.Flags.HasFlag(eOptFlags.Tracks))
+						{
 							ReadTracks(br, size, db);
-						break;
+							break;
+						}
+						else goto default;
 
 					case Global.AcidEffects:
 						if (options.Flags.HasFlag(eOptFlags.AcidEffects))
+						{
 							ReadAcidEffects(br, size, db);
-						break;
+							break;
+						}
+						else goto default;
 
 					case Global.FEngFiles:
 					case Global.FNGCompress:
 						if (options.Flags.HasFlag(eOptFlags.FNGroups))
+						{
 							ReadFNGroup(br, db);
-						break;
+							break;
+						}
+						else goto default;
 
 					case Global.STRBlocks:
 						if (options.Flags.HasFlag(eOptFlags.STRBlocks))
+						{
 							ReadSTRBlock(br, db);
-						break;
+							break;
+						}
+						else goto default;
 
 					default:
 						br.BaseStream.Position += size;

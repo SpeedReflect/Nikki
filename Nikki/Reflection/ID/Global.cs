@@ -113,5 +113,10 @@ namespace Nikki.Reflection.ID
         /// ID of Carbon limits table.
         /// </summary>
         public const uint LimitsTable = 0x8003CE0D;
+
+        /// <summary>
+        /// ID of TPK settings.
+        /// </summary>
+        public const uint TPKSettings = 0x0003BD00;
     }
 }

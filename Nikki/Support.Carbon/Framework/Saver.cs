@@ -44,6 +44,13 @@ namespace Nikki.Support.Carbon.Framework
 			{
 				WritePadding(bw, options.Watermark);
 				Class.Watermark = options.Watermark;
+				if (Class.SettingData != null)
+				{
+					bw.Write(Global.TPKSettings);
+					bw.Write(Class.SettingData.Length);
+					bw.Write(Class.SettingData);
+					WritePadding(bw, options.Watermark);
+				}
 				Class.Assemble(bw);
 			}
 		}
@@ -159,12 +166,17 @@ namespace Nikki.Support.Carbon.Framework
 						else goto default;
 
 					case Global.TPKBlocks:
+					case Global.TPKSettings:
 						if (options.Flags.HasFlag(eOptFlags.TPKBlocks))
 						{
 							br.BaseStream.Position += size;
 							break;
 						}
-						else goto default;
+						else
+						{
+							WritePadding(bw, options.Watermark);
+							goto default;
+						}
 
 					case Global.CarTypeInfos:
 						if (options.Flags.HasFlag(eOptFlags.CarTypeInfos))
