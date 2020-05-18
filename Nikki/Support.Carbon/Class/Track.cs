@@ -417,7 +417,7 @@ namespace Nikki.Support.Carbon.Class
 			// Write race settings
 			bw.WriteEnum(this.LocationType);
 			bw.WriteEnum(this.DriftType);
-			bw.WriteEnum(this.IsValidRace);
+			bw.WriteEnum(this.IsValid);
 			bw.Write(this.IsLoopingRace == eBoolean.True ? (byte)0 : (byte)1);
 			bw.WriteEnum(this.ReverseVersionExists);
 			bw.Write((byte)0);
@@ -499,7 +499,7 @@ namespace Nikki.Support.Carbon.Class
 			// Read race settings
 			this.LocationType = br.ReadEnum<eLocationType>();
 			this.DriftType = br.ReadEnum<eDriftType>();
-			this.IsValidRace = br.ReadEnum<eBoolean>();
+			this.IsValid = br.ReadEnum<eBoolean>();
 			this.IsLoopingRace = br.ReadByte() == 0 ? eBoolean.True : eBoolean.False;
 			this.ReverseVersionExists = br.ReadEnum<eBoolean>();
 			br.BaseStream.Position += 1;
@@ -578,7 +578,7 @@ namespace Nikki.Support.Carbon.Class
 				DriftType = this.DriftType,
 				IsLoopingRace = this.IsLoopingRace,
 				IsPerformanceTuning = this.IsPerformanceTuning,
-				IsValidRace = this.IsValidRace,
+				IsValid = this.IsValid,
 				LocationDirectory = this.LocationDirectory,
 				LocationIndex = this.LocationIndex,
 				LocationType = this.LocationType,

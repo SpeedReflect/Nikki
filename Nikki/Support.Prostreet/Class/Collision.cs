@@ -13,7 +13,7 @@ using CoreExtensions.Conversions;
 
 
 
-namespace Nikki.Support.Prostreet.Class
+namespace Nikki.Support.Carbon.Class
 {
 	/// <summary>
 	/// <see cref="Collision"/> is a collection of settings related to a car's bounds.
@@ -33,17 +33,17 @@ namespace Nikki.Support.Prostreet.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
-		public override GameINT GameINT => GameINT.Prostreet;
+		public override GameINT GameINT => GameINT.Carbon;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
-		public override string GameSTR => GameINT.Prostreet.ToString();
+		public override string GameSTR => GameINT.Carbon.ToString();
 
 		/// <summary>
 		/// Database to which the class belongs to.
 		/// </summary>
-		public Database.Prostreet Database { get; set; }
+		public Database.Carbon Database { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
@@ -134,8 +134,8 @@ namespace Nikki.Support.Prostreet.Class
 		/// Initializes new instance of <see cref="Collision"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
-		public Collision(string CName, Database.Prostreet db)
+		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
+		public Collision(string CName, Database.Carbon db)
 		{
 			this.Database = db;
 			this.CollectionName = CName;
@@ -148,8 +148,8 @@ namespace Nikki.Support.Prostreet.Class
 		/// Initializes new instance of <see cref="Collision"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
-		public Collision(BinaryReader br, Database.Prostreet db)
+		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
+		public Collision(BinaryReader br, Database.Carbon db)
 		{
 			this.Database = db;
 			this.CollisionBounds = new List<CollisionBound>();

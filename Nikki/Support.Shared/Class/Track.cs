@@ -51,7 +51,7 @@ namespace Nikki.Support.Shared.Class
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
-		public eBoolean IsValidRace { get; set; }
+		public eBoolean IsValid { get; set; }
 
 		/// <summary>
 		/// Indicates whether race is looping.

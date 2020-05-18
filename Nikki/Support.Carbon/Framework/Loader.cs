@@ -78,6 +78,8 @@ namespace Nikki.Support.Carbon.Framework
 		private static void ReadSunInfos(BinaryReader br, int size, Database.Carbon db)
 		{
 			int len = size / SunInfo.BaseClassSize;
+			var dif = 0x10 - (br.BaseStream.Position % 0x10);
+			if (dif != 0x10) br.BaseStream.Position += dif;
 
 			for (int a1 = 0; a1 < len; ++a1)
 			{

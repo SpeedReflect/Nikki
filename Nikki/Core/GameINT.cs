@@ -34,5 +34,10 @@
         /// Need for Speed: Prostreet
         /// </summary>
         Prostreet = 5,
+
+        /// <summary>
+        /// Need for Speed: Undercover
+        /// </summary>
+        Undercover = 6,
     }
 }

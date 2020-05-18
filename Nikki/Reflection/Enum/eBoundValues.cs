@@ -6,6 +6,11 @@
     public enum eBoundValues : int
     {
         /// <summary>
+        /// Amount of cars in default Underground 1.
+        /// </summary>
+        MIN_INFO_UNDERGROUND1 = 35,
+
+        /// <summary>
         /// Amount of cars in default Underground 2.
         /// </summary>
         MIN_INFO_UNDERGROUND2 = 45,
@@ -19,5 +24,15 @@
         /// Amount of cars in default Carbon.
         /// </summary>
         MIN_INFO_CARBON = 94,
+
+        /// <summary>
+        /// Amount of cars in default Prostreet.
+        /// </summary>
+        MIN_INFO_PROSTREET = 76,
+
+        /// <summary>
+        /// Amount of cars in default Undercover.
+        /// </summary>
+        MIN_INFO_UNDERCOVER = 89,
     }
 }

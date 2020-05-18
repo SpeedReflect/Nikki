@@ -12306,7 +12306,7 @@
             Vault memory hash of the collection name.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Class.Track.IsValidRace">
+        <member name="P:Nikki.Support.Shared.Class.Track.IsValid">
             <summary>
             Indicates whether race is valid.
             </summary>
