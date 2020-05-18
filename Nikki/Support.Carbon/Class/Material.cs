@@ -24,7 +24,7 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Maximum length of the CollectionName.
         /// </summary>
-        public const int MaxCNameLength = 0x1B;
+        public const int MaxCNameLength = 0x3F;
 
         /// <summary>
         /// Offset of the CollectionName in the data.
@@ -91,266 +91,266 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float DisableReflection { get; set; }
+        public float SpecularPower { get; set; }
 
         /// <summary>
         /// Increment value of reflection colors of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float StrongerReflection { get; set; }
+        public float EnvmapPower { get; set; }
 
         /// <summary>
         /// Blend value of strong colors of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float BlendStrongColors { get; set; }
+        public float EnvmapClamp { get; set; }
 
         /// <summary>
         /// Disable value of strong colors of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float DisableStrongColors { get; set; }
+        public float EnvmapVinylScale { get; set; }
 
         /// <summary>
         /// Level value of the first bright color of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float BrightColor1Level { get; set; }
+        public float DiffuseMinLevel { get; set; }
 
         /// <summary>
         /// Red value of the first bright color of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float BrightColor1Red { get; set; }
+        public float DiffuseMinRed { get; set; }
 
         /// <summary>
         /// Green value of the first bright color of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float BrightColor1Green { get; set; }
+        public float DiffuseMinGreen { get; set; }
 
         /// <summary>
         /// Blue value of the first bright color of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float BrightColor1Blue { get; set; }
+        public float DiffuseMinBlue { get; set; }
 
         /// <summary>
         /// Level value of the second bright color of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float BrightColor2Level { get; set; }
+        public float DiffuseMaxLevel { get; set; }
 
         /// <summary>
         /// Red value of the second bright color of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float BrightColor2Red { get; set; }
+        public float DiffuseMaxRed { get; set; }
 
         /// <summary>
         /// Green value of the second bright color of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float BrightColor2Green { get; set; }
+        public float DiffuseMaxGreen { get; set; }
 
         /// <summary>
         /// Blue value of the second bright color of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float BrightColor2Blue { get; set; }
+        public float DiffuseMaxBlue { get; set; }
 
         /// <summary>
         /// Main grayscale value of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float Grayscale { get; set; }
+        public float DiffuseVinylScale { get; set; }
 
         /// <summary>
         /// Linear negativity of the material colors.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float LinearNegative { get; set; }
+        public float VinylLuminanceMinLevel { get; set; }
 
         /// <summary>
         /// Gradient negativity of the material colors.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float GradientNegative { get; set; }
+        public float VinylLuminanceMaxLevel { get; set; }
 
         /// <summary>
         /// Level value of the reflection color of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float ReflectionColorLevel { get; set; }
+        public float SpecularMaxLevel { get; set; }
 
         /// <summary>
         /// Red value of the reflection color of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float ReflectionColorRed { get; set; }
+        public float SpecularMaxRed { get; set; }
 
         /// <summary>
         /// Green value of the reflection color of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float ReflectionColorGreen { get; set; }
+        public float SpecularMaxGreen { get; set; }
 
         /// <summary>
         /// Blue value of the reflection color of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float ReflectionColorBlue { get; set; }
+        public float SpecularMaxBlue { get; set; }
 
         /// <summary>
         /// Outer radius of the shadow fading.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float ShadowOuterRadius { get; set; }
+        public float DiffusePower { get; set; }
 
         /// <summary>
         /// Value of the optimal light reflection on the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float OptimalLightReflection { get; set; }
+        public float DiffuseClamp { get; set; }
 
         /// <summary>
         /// Level value of the first strong color of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float StrongColor1Level { get; set; }
+        public float EnvmapMinLevel { get; set; }
 
         /// <summary>
         /// Red value of the first strong color of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float StrongColor1Red { get; set; }
+        public float EnvmapMinRed { get; set; }
 
         /// <summary>
         /// Green value of the first strong color of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float StrongColor1Green { get; set; }
+        public float EnvmapMinGreen { get; set; }
 
         /// <summary>
         /// Blue value of the first strong color of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float StrongColor1Blue { get; set; }
+        public float EnvmapMinBlue { get; set; }
 
         /// <summary>
         /// Level value of the second strong color of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float StrongColor2Level { get; set; }
+        public float EnvmapMaxLevel { get; set; }
 
         /// <summary>
         /// Red value of the second strong color of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float StrongColor2Red { get; set; }
+        public float EnvmapMaxRed { get; set; }
 
         /// <summary>
         /// Green value of the second strong color of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float StrongColor2Green { get; set; }
+        public float EnvmapMaxGreen { get; set; }
 
         /// <summary>
         /// Blue value of the second strong color of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float StrongColor2Blue { get; set; }
+        public float EnvmapMaxBlue { get; set; }
 
         /// <summary>
         /// First alpha value of the material colors.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float AlphaValue1 { get; set; }
+        public float DiffuseMinAlpha { get; set; }
 
         /// <summary>
         /// Second alpha value of the material colors.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float AlphaValue2 { get; set; }
+        public float DiffuseMaxAlpha { get; set; }
 
         /// <summary>
         /// Unknown 1 value of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float Unknown1 { get; set; }
+        public float DiffuseFlakes { get; set; }
 
         /// <summary>
         /// Unknown 2 value of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float Unknown2 { get; set; }
+        public float SpecularFlakes { get; set; }
 
         /// <summary>
         /// Unknown 3 value of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float Unknown3 { get; set; }
+        public float SpecularVinylScale { get; set; }
 
         /// <summary>
         /// Unknown 4 value of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float Unknown4 { get; set; }
+        public float SpecularMinLevel { get; set; }
 
         /// <summary>
         /// Unknown 5 value of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float Unknown5 { get; set; }
+        public float SpecularMinRed { get; set; }
 
         /// <summary>
         /// Unknown 6 value of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float Unknown6 { get; set; }
+        public float SpecularMinGreen { get; set; }
 
         /// <summary>
         /// Unknown 7 value of the material.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float Unknown7 { get; set; }
+        public float SpecularMinBlue { get; set; }
 
         #endregion
 
@@ -409,48 +409,47 @@ namespace Nikki.Support.Carbon.Class
             bw.Write(_Localizer);
 
             // Write CollectionName
-            bw.WriteNullTermUTF8(this._collection_name, 0x1C);
+            bw.WriteNullTermUTF8(this._collection_name, 0x40);
 
             // Write all settings
-            bw.WriteBytes(0x24);
-            bw.Write(this.ShadowOuterRadius);
-            bw.Write(this.OptimalLightReflection);
-            bw.Write(this.Unknown1);
-            bw.Write(this.Grayscale);
-            bw.Write(this.BrightColor1Level);
-            bw.Write(this.BrightColor1Red);
-            bw.Write(this.BrightColor1Green);
-            bw.Write(this.BrightColor1Blue);
-            bw.Write(this.BrightColor2Level);
-            bw.Write(this.BrightColor2Red);
-            bw.Write(this.BrightColor2Green);
-            bw.Write(this.BrightColor2Blue);
-            bw.Write(this.AlphaValue1);
-            bw.Write(this.AlphaValue2);
-            bw.Write(this.DisableReflection);
-            bw.Write(this.Unknown2);
-            bw.Write(this.Unknown3);
-            bw.Write(this.Unknown4);
-            bw.Write(this.Unknown5);
-            bw.Write(this.Unknown6);
-            bw.Write(this.Unknown7);
-            bw.Write(this.ReflectionColorLevel);
-            bw.Write(this.ReflectionColorRed);
-            bw.Write(this.ReflectionColorGreen);
-            bw.Write(this.ReflectionColorBlue);
-            bw.Write(this.StrongerReflection);
-            bw.Write(this.BlendStrongColors);
-            bw.Write(this.DisableStrongColors);
-            bw.Write(this.StrongColor1Level);
-            bw.Write(this.StrongColor1Red);
-            bw.Write(this.StrongColor1Green);
-            bw.Write(this.StrongColor1Blue);
-            bw.Write(this.StrongColor2Level);
-            bw.Write(this.StrongColor2Red);
-            bw.Write(this.StrongColor2Green);
-            bw.Write(this.StrongColor2Blue);
-            bw.Write(this.LinearNegative);
-            bw.Write(this.GradientNegative);
+            bw.Write(this.DiffusePower);
+            bw.Write(this.DiffuseClamp);
+            bw.Write(this.DiffuseFlakes);
+            bw.Write(this.DiffuseVinylScale);
+            bw.Write(this.DiffuseMinLevel);
+            bw.Write(this.DiffuseMinRed);
+            bw.Write(this.DiffuseMinGreen);
+            bw.Write(this.DiffuseMinBlue);
+            bw.Write(this.DiffuseMaxLevel);
+            bw.Write(this.DiffuseMaxRed);
+            bw.Write(this.DiffuseMaxGreen);
+            bw.Write(this.DiffuseMaxBlue);
+            bw.Write(this.DiffuseMinAlpha);
+            bw.Write(this.DiffuseMaxAlpha);
+            bw.Write(this.SpecularPower);
+            bw.Write(this.SpecularFlakes);
+            bw.Write(this.SpecularVinylScale);
+            bw.Write(this.SpecularMinLevel);
+            bw.Write(this.SpecularMinRed);
+            bw.Write(this.SpecularMinGreen);
+            bw.Write(this.SpecularMinBlue);
+            bw.Write(this.SpecularMaxLevel);
+            bw.Write(this.SpecularMaxRed);
+            bw.Write(this.SpecularMaxGreen);
+            bw.Write(this.SpecularMaxBlue);
+            bw.Write(this.EnvmapPower);
+            bw.Write(this.EnvmapClamp);
+            bw.Write(this.EnvmapVinylScale);
+            bw.Write(this.EnvmapMinLevel);
+            bw.Write(this.EnvmapMinRed);
+            bw.Write(this.EnvmapMinGreen);
+            bw.Write(this.EnvmapMinBlue);
+            bw.Write(this.EnvmapMaxLevel);
+            bw.Write(this.EnvmapMaxRed);
+            bw.Write(this.EnvmapMaxGreen);
+            bw.Write(this.EnvmapMaxBlue);
+            bw.Write(this.VinylLuminanceMinLevel);
+            bw.Write(this.VinylLuminanceMaxLevel);
         }
 
         /// <summary>
@@ -460,47 +459,46 @@ namespace Nikki.Support.Carbon.Class
         public override void Disassemble(BinaryReader br)
         {
             br.BaseStream.Position += 0x14;
-            this._collection_name = br.ReadNullTermUTF8(0x1C);
-            br.BaseStream.Position += 0x24;
+            this._collection_name = br.ReadNullTermUTF8(0x40);
 
-            this.ShadowOuterRadius = br.ReadSingle();
-            this.OptimalLightReflection = br.ReadSingle();
-            this.Unknown1 = br.ReadSingle();
-            this.Grayscale = br.ReadSingle();
-            this.BrightColor1Level = br.ReadSingle();
-            this.BrightColor1Red = br.ReadSingle();
-            this.BrightColor1Green = br.ReadSingle();
-            this.BrightColor1Blue = br.ReadSingle();
-            this.BrightColor2Level = br.ReadSingle();
-            this.BrightColor2Red = br.ReadSingle();
-            this.BrightColor2Green = br.ReadSingle();
-            this.BrightColor2Blue = br.ReadSingle();
-            this.AlphaValue1 = br.ReadSingle();
-            this.AlphaValue2 = br.ReadSingle();
-            this.DisableReflection = br.ReadSingle();
-            this.Unknown2 = br.ReadSingle();
-            this.Unknown3 = br.ReadSingle();
-            this.Unknown4 = br.ReadSingle();
-            this.Unknown5 = br.ReadSingle();
-            this.Unknown6 = br.ReadSingle();
-            this.Unknown7 = br.ReadSingle();
-            this.ReflectionColorLevel = br.ReadSingle();
-            this.ReflectionColorRed = br.ReadSingle();
-            this.ReflectionColorGreen = br.ReadSingle();
-            this.ReflectionColorBlue = br.ReadSingle();
-            this.StrongerReflection = br.ReadSingle();
-            this.BlendStrongColors = br.ReadSingle();
-            this.DisableStrongColors = br.ReadSingle();
-            this.StrongColor1Level = br.ReadSingle();
-            this.StrongColor1Red = br.ReadSingle();
-            this.StrongColor1Green = br.ReadSingle();
-            this.StrongColor1Blue = br.ReadSingle();
-            this.StrongColor2Level = br.ReadSingle();
-            this.StrongColor2Red = br.ReadSingle();
-            this.StrongColor2Green = br.ReadSingle();
-            this.StrongColor2Blue = br.ReadSingle();
-            this.LinearNegative = br.ReadSingle();
-            this.GradientNegative = br.ReadSingle();
+            this.DiffusePower = br.ReadSingle();
+            this.DiffuseClamp = br.ReadSingle();
+            this.DiffuseFlakes = br.ReadSingle();
+            this.DiffuseVinylScale = br.ReadSingle();
+            this.DiffuseMinLevel = br.ReadSingle();
+            this.DiffuseMinRed = br.ReadSingle();
+            this.DiffuseMinGreen = br.ReadSingle();
+            this.DiffuseMinBlue = br.ReadSingle();
+            this.DiffuseMaxLevel = br.ReadSingle();
+            this.DiffuseMaxRed = br.ReadSingle();
+            this.DiffuseMaxGreen = br.ReadSingle();
+            this.DiffuseMaxBlue = br.ReadSingle();
+            this.DiffuseMinAlpha = br.ReadSingle();
+            this.DiffuseMaxAlpha = br.ReadSingle();
+            this.SpecularPower = br.ReadSingle();
+            this.SpecularFlakes = br.ReadSingle();
+            this.SpecularVinylScale = br.ReadSingle();
+            this.SpecularMinLevel = br.ReadSingle();
+            this.SpecularMinRed = br.ReadSingle();
+            this.SpecularMinGreen = br.ReadSingle();
+            this.SpecularMinBlue = br.ReadSingle();
+            this.SpecularMaxLevel = br.ReadSingle();
+            this.SpecularMaxRed = br.ReadSingle();
+            this.SpecularMaxGreen = br.ReadSingle();
+            this.SpecularMaxBlue = br.ReadSingle();
+            this.EnvmapPower = br.ReadSingle();
+            this.EnvmapClamp = br.ReadSingle();
+            this.EnvmapVinylScale = br.ReadSingle();
+            this.EnvmapMinLevel = br.ReadSingle();
+            this.EnvmapMinRed = br.ReadSingle();
+            this.EnvmapMinGreen = br.ReadSingle();
+            this.EnvmapMinBlue = br.ReadSingle();
+            this.EnvmapMaxLevel = br.ReadSingle();
+            this.EnvmapMaxRed = br.ReadSingle();
+            this.EnvmapMaxGreen = br.ReadSingle();
+            this.EnvmapMaxBlue = br.ReadSingle();
+            this.VinylLuminanceMinLevel = br.ReadSingle();
+            this.VinylLuminanceMaxLevel = br.ReadSingle();
         }
 
         /// <summary>
@@ -512,44 +510,44 @@ namespace Nikki.Support.Carbon.Class
         {
             var result = new Material(CName, this.Database)
             {
-                ShadowOuterRadius = this.ShadowOuterRadius,
-                OptimalLightReflection = this.OptimalLightReflection,
-                DisableReflection = this.DisableReflection,
-                StrongerReflection = this.StrongerReflection,
-                BlendStrongColors = this.BlendStrongColors,
-                DisableStrongColors = this.DisableStrongColors,
-                StrongColor1Level = this.StrongColor1Level,
-                StrongColor1Red = this.StrongColor1Red,
-                StrongColor1Green = this.StrongColor1Green,
-                StrongColor1Blue = this.StrongColor1Blue,
-                StrongColor2Level = this.StrongColor2Level,
-                StrongColor2Red = this.StrongColor2Red,
-                StrongColor2Green = this.StrongColor2Green,
-                StrongColor2Blue = this.StrongColor2Blue,
-                BrightColor2Level = this.BrightColor2Level,
-                BrightColor2Red = this.BrightColor2Red,
-                BrightColor2Green = this.BrightColor2Green,
-                BrightColor2Blue = this.BrightColor2Blue,
-                BrightColor1Level = this.BrightColor1Level,
-                BrightColor1Red = this.BrightColor1Red,
-                BrightColor1Green = this.BrightColor1Green,
-                BrightColor1Blue = this.BrightColor1Blue,
-                Grayscale = this.Grayscale,
-                LinearNegative = this.LinearNegative,
-                GradientNegative = this.GradientNegative,
-                ReflectionColorLevel = this.ReflectionColorLevel,
-                ReflectionColorRed = this.ReflectionColorRed,
-                ReflectionColorGreen = this.ReflectionColorGreen,
-                ReflectionColorBlue = this.ReflectionColorBlue,
-                AlphaValue1 = this.AlphaValue1,
-                AlphaValue2 = this.AlphaValue2,
-                Unknown1 = this.Unknown1,
-                Unknown2 = this.Unknown2,
-                Unknown3 = this.Unknown3,
-                Unknown4 = this.Unknown4,
-                Unknown5 = this.Unknown5,
-                Unknown6 = this.Unknown6,
-                Unknown7 = this.Unknown7
+                DiffusePower = this.DiffusePower,
+                DiffuseClamp = this.DiffuseClamp,
+                SpecularPower = this.SpecularPower,
+                EnvmapPower = this.EnvmapPower,
+                EnvmapClamp = this.EnvmapClamp,
+                EnvmapVinylScale = this.EnvmapVinylScale,
+                EnvmapMinLevel = this.EnvmapMinLevel,
+                EnvmapMinRed = this.EnvmapMinRed,
+                EnvmapMinGreen = this.EnvmapMinGreen,
+                EnvmapMinBlue = this.EnvmapMinBlue,
+                EnvmapMaxLevel = this.EnvmapMaxLevel,
+                EnvmapMaxRed = this.EnvmapMaxRed,
+                EnvmapMaxGreen = this.EnvmapMaxGreen,
+                EnvmapMaxBlue = this.EnvmapMaxBlue,
+                DiffuseMaxLevel = this.DiffuseMaxLevel,
+                DiffuseMaxRed = this.DiffuseMaxRed,
+                DiffuseMaxGreen = this.DiffuseMaxGreen,
+                DiffuseMaxBlue = this.DiffuseMaxBlue,
+                DiffuseMinLevel = this.DiffuseMinLevel,
+                DiffuseMinRed = this.DiffuseMinRed,
+                DiffuseMinGreen = this.DiffuseMinGreen,
+                DiffuseMinBlue = this.DiffuseMinBlue,
+                DiffuseVinylScale = this.DiffuseVinylScale,
+                VinylLuminanceMinLevel = this.VinylLuminanceMinLevel,
+                VinylLuminanceMaxLevel = this.VinylLuminanceMaxLevel,
+                SpecularMaxLevel = this.SpecularMaxLevel,
+                SpecularMaxRed = this.SpecularMaxRed,
+                SpecularMaxGreen = this.SpecularMaxGreen,
+                SpecularMaxBlue = this.SpecularMaxBlue,
+                DiffuseMinAlpha = this.DiffuseMinAlpha,
+                DiffuseMaxAlpha = this.DiffuseMaxAlpha,
+                DiffuseFlakes = this.DiffuseFlakes,
+                SpecularFlakes = this.SpecularFlakes,
+                SpecularVinylScale = this.SpecularVinylScale,
+                SpecularMinLevel = this.SpecularMinLevel,
+                SpecularMinRed = this.SpecularMinRed,
+                SpecularMinGreen = this.SpecularMinGreen,
+                SpecularMinBlue = this.SpecularMinBlue
             };
 
             return result;

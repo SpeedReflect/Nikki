@@ -49,7 +49,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Unknown byte value.
 		/// </summary>
 		[AccessModifiable()]
-		public byte Unknown { get; set; }
+		public byte Level { get; set; }
 
 		/// <summary>
 		/// Part ID of this <see cref="PartIDAttribute"/>.
@@ -73,12 +73,12 @@ namespace Nikki.Support.Shared.Parts.CarParts
 			try
 			{
 				this.ID = (byte)value.ReinterpretCast(typeof(byte));
-				this.Unknown = 0;
+				this.Level = 0;
 			}
 			catch (Exception)
 			{
 				this.ID = 0;
-				this.Unknown = 0;
+				this.Level = 0;
 			}
 		}
 
@@ -103,7 +103,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
 		public override void Disassemble(BinaryReader br, BinaryReader str_reader)
 		{
-			this.Unknown = br.ReadByte();
+			this.Level = (byte)((br.ReadByte() >> 5) & 7);
 			this.ID = br.ReadByte();
 			br.ReadUInt16();
 		}
@@ -118,7 +118,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		public override void Assemble(BinaryWriter bw, Dictionary<int, int> string_dict)
 		{
 			bw.Write(this.Key);
-			bw.Write(this.Unknown);
+			bw.Write((byte)((this.Level & 7) << 5));
 			bw.Write(this.ID);
 			bw.Write((ushort)0);
 		}
@@ -145,7 +145,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// </summary>
 		/// <returns>A 32-bit signed integer hash code.</returns>
 		public override int GetHashCode() => 
-			Tuple.Create(this.Key, this.ID.ToString(), this.Unknown.ToString()).GetHashCode();
+			Tuple.Create(this.Key, this.ID.ToString(), this.Level.ToString()).GetHashCode();
 
 		/// <summary>
 		/// Determines whether two specified <see cref="PartIDAttribute"/> have the same value.
@@ -155,7 +155,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
 		public static bool operator ==(PartIDAttribute at1, PartIDAttribute at2) =>
 			at1 is null ? at2 is null : at2 is null ? false
-			: (at1.Key == at2.Key && at1.ID == at2.ID && at1.Unknown == at2.Unknown);
+			: (at1.Key == at2.Key && at1.ID == at2.ID && at1.Level == at2.Level);
 
 		/// <summary>
 		/// Determines whether two specified <see cref="PartIDAttribute"/> have different values.
@@ -175,7 +175,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 			{
 				Type = this.Type,
 				ID = this.ID,
-				Unknown = this.Unknown
+				Level = this.Level
 			};
 
 			return result;

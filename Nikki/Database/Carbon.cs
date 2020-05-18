@@ -120,6 +120,7 @@ namespace Nikki.Database
             this.TPKBlocks = null;
             this.STRBlocks = null;
 			this.ModelParts = null;
+			this.CarPartStructs = null;
         }
 
 		#endregion

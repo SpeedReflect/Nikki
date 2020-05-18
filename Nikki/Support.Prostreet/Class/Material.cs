@@ -10,7 +10,7 @@ using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.Underground2.Class
+namespace Nikki.Support.Prostreet.Class
 {
     /// <summary>
     /// <see cref="Material"/> is a collection of float attributes of shaders and materials.
@@ -20,12 +20,11 @@ namespace Nikki.Support.Underground2.Class
         #region Fields
 
         private string _collection_name;
-        private const uint _class_key = 0x0041440F;
 
         /// <summary>
         /// Maximum length of the CollectionName.
         /// </summary>
-        public const int MaxCNameLength = 0x1B;
+        public const int MaxCNameLength = 0x3F;
 
         /// <summary>
         /// Offset of the CollectionName in the data.
@@ -35,7 +34,7 @@ namespace Nikki.Support.Underground2.Class
         /// <summary>
         /// Base size of a unit collection.
         /// </summary>
-        public const int BaseClassSize = 0xA8;
+        public const int BaseClassSize = 0x124;
 
 		#endregion
 
@@ -44,17 +43,17 @@ namespace Nikki.Support.Underground2.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
-		public override GameINT GameINT => GameINT.Underground2;
+		public override GameINT GameINT => GameINT.Prostreet;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
-        public override string GameSTR => GameINT.Underground2.ToString();
+        public override string GameSTR => GameINT.Prostreet.ToString();
 
         /// <summary>
         /// Database to which the class belongs to.
         /// </summary>
-        public Database.Underground2 Database { get; set; }
+        public Database.Prostreet Database { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
@@ -88,200 +87,304 @@ namespace Nikki.Support.Underground2.Class
         public override uint VltKey => this._collection_name.VltHash();
 
         /// <summary>
-        /// Level value of the first bright color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
+        public float DiffusePower { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float DiffuseClamp { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float DiffuseFlakes { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float DiffuseVinylScale { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
         public float DiffuseMinLevel { get; set; }
 
         /// <summary>
-        /// Red value of the first bright color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
         public float DiffuseMinRed { get; set; }
 
         /// <summary>
-        /// Green value of the first bright color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
         public float DiffuseMinGreen { get; set; }
 
         /// <summary>
-        /// Blue value of the first bright color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
         public float DiffuseMinBlue { get; set; }
 
         /// <summary>
-        /// Level value of the second bright color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
         public float DiffuseMaxLevel { get; set; }
 
         /// <summary>
-        /// Red value of the second bright color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
         public float DiffuseMaxRed { get; set; }
 
         /// <summary>
-        /// Green value of the second bright color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
         public float DiffuseMaxGreen { get; set; }
 
         /// <summary>
-        /// Blue value of the second bright color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
         public float DiffuseMaxBlue { get; set; }
 
         /// <summary>
-        /// First alpha value of the material colors.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
         public float DiffuseMinAlpha { get; set; }
 
         /// <summary>
-        /// Second alpha value of the material colors.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
         public float DiffuseMaxAlpha { get; set; }
 
         /// <summary>
-        /// Level value of the first strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
-        public float SpecularMinLevel { get; set; }
+        public float Specular1Power { get; set; }
 
         /// <summary>
-        /// Red value of the first strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
-        public float SpecularMinRed { get; set; }
+        public float Specular1Flakes { get; set; }
 
         /// <summary>
-        /// Green value of the first strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
-        public float SpecularMinGreen { get; set; }
+        public float Specular1VinylScale { get; set; }
 
         /// <summary>
-        /// Blue value of the first strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
-        public float SpecularMinBlue { get; set; }
+        public float Specular1MinLevel { get; set; }
 
         /// <summary>
-        /// Level value of the second strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
-        public float SpecularMaxLevel { get; set; }
+        public float Specular1MinRed { get; set; }
 
         /// <summary>
-        /// Red value of the second strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
-        public float SpecularMaxRed { get; set; }
+        public float Specular1MinGreen { get; set; }
 
         /// <summary>
-        /// Green value of the second strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
-        public float SpecularMaxGreen { get; set; }
+        public float Specular1MinBlue { get; set; }
 
         /// <summary>
-        /// Blue value of the second strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
-        public float SpecularMaxBlue { get; set; }
+        public float Specular1MaxLevel { get; set; }
 
         /// <summary>
-        /// Level value of the third strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
+        public float Specular1MaxRed { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float Specular1MaxGreen { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float Specular1MaxBlue { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float Specular2Power { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float Specular2Flakes { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float Specular2VinylScale { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float Specular2MinLevel { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float Specular2MinRed { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float Specular2MinGreen { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float Specular2MinBlue { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float Specular2MaxLevel { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float Specular2MaxRed { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float Specular2MaxGreen { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float Specular2MaxBlue { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float EnvmapPower { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float EnvmapClamp { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float EnvmapVinylScale { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
         public float EnvmapMinLevel { get; set; }
 
         /// <summary>
-        /// Red value of the third strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
         public float EnvmapMinRed { get; set; }
 
         /// <summary>
-        /// Green value of the third strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
         public float EnvmapMinGreen { get; set; }
 
         /// <summary>
-        /// Blue value of the third strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
         public float EnvmapMinBlue { get; set; }
 
         /// <summary>
-        /// Level value of the fourth strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
         public float EnvmapMaxLevel { get; set; }
 
         /// <summary>
-        /// Red value of the fourth strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
         public float EnvmapMaxRed { get; set; }
 
         /// <summary>
-        /// Green value of the fourth strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
         public float EnvmapMaxGreen { get; set; }
 
         /// <summary>
-        /// Blue value of the fourth strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
         public float EnvmapMaxBlue { get; set; }
 
         /// <summary>
-        /// Ratio between first and second strong colors of the material
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
-        public float SpecularPower { get; set; }
+        public float VinylLuminanceMinLevel { get; set; }
 
         /// <summary>
-        /// Ratio between third and fourth strong colors of the material
+        /// 
         /// </summary>
         [AccessModifiable()]
-        [StaticModifiable()]
-        public float EnvmapPower { get; set; }
+        public float VinylLuminanceMaxLevel { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float MultiTextured { get; set; }
 
         #endregion
 
@@ -296,8 +399,8 @@ namespace Nikki.Support.Underground2.Class
         /// Initializes new instance of <see cref="Material"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-        public Material(string CName, Database.Underground2 db)
+        /// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
+        public Material(string CName, Database.Prostreet db)
         {
             this.Database = db;
             this.CollectionName = CName;
@@ -308,8 +411,8 @@ namespace Nikki.Support.Underground2.Class
         /// Initializes new instance of <see cref="Material"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-        /// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-        public unsafe Material(BinaryReader br, Database.Underground2 db)
+        /// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
+        public unsafe Material(BinaryReader br, Database.Prostreet db)
         {
             this.Database = db;
             this.Disassemble(br);
@@ -332,17 +435,21 @@ namespace Nikki.Support.Underground2.Class
         {
             // Write header of the material
             bw.Write(Global.Materials);
-            bw.Write((int)0xA0);
-            bw.Write(_class_key);
+            bw.Write((int)0x11C);
+            bw.Write(_Unknown0);
             bw.Write(_Localizer);
             bw.Write(_Localizer);
             bw.Write(this.BinKey);
             bw.Write(_Localizer);
 
             // Write CollectionName
-            bw.WriteNullTermUTF8(this._collection_name, 0x1C);
+            bw.WriteNullTermUTF8(this._collection_name, 0x40);
 
             // Write all settings
+            bw.Write(this.DiffusePower);
+            bw.Write(this.DiffuseClamp);
+            bw.Write(this.DiffuseFlakes);
+            bw.Write(this.DiffuseVinylScale);
             bw.Write(this.DiffuseMinLevel);
             bw.Write(this.DiffuseMinRed);
             bw.Write(this.DiffuseMinGreen);
@@ -353,16 +460,31 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(this.DiffuseMaxBlue);
             bw.Write(this.DiffuseMinAlpha);
             bw.Write(this.DiffuseMaxAlpha);
-            bw.Write(this.SpecularPower);
-            bw.Write(this.SpecularMinLevel);
-            bw.Write(this.SpecularMinRed);
-            bw.Write(this.SpecularMinGreen);
-            bw.Write(this.SpecularMinBlue);
-            bw.Write(this.SpecularMaxLevel);
-            bw.Write(this.SpecularMaxRed);
-            bw.Write(this.SpecularMaxGreen);
-            bw.Write(this.SpecularMaxBlue);
+            bw.Write(this.Specular1Power);
+            bw.Write(this.Specular1Flakes);
+            bw.Write(this.Specular1VinylScale);
+            bw.Write(this.Specular1MinLevel);
+            bw.Write(this.Specular1MinRed);
+            bw.Write(this.Specular1MinGreen);
+            bw.Write(this.Specular1MinBlue);
+            bw.Write(this.Specular1MaxLevel);
+            bw.Write(this.Specular1MaxRed);
+            bw.Write(this.Specular1MaxGreen);
+            bw.Write(this.Specular1MaxBlue);
+            bw.Write(this.Specular2Power);
+            bw.Write(this.Specular2Flakes);
+            bw.Write(this.Specular2VinylScale);
+            bw.Write(this.Specular2MinLevel);
+            bw.Write(this.Specular2MinRed);
+            bw.Write(this.Specular2MinGreen);
+            bw.Write(this.Specular2MinBlue);
+            bw.Write(this.Specular2MaxLevel);
+            bw.Write(this.Specular2MaxRed);
+            bw.Write(this.Specular2MaxGreen);
+            bw.Write(this.Specular2MaxBlue);
             bw.Write(this.EnvmapPower);
+            bw.Write(this.EnvmapClamp);
+            bw.Write(this.EnvmapVinylScale);
             bw.Write(this.EnvmapMinLevel);
             bw.Write(this.EnvmapMinRed);
             bw.Write(this.EnvmapMinGreen);
@@ -371,6 +493,9 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(this.EnvmapMaxRed);
             bw.Write(this.EnvmapMaxGreen);
             bw.Write(this.EnvmapMaxBlue);
+            bw.Write(this.VinylLuminanceMinLevel);
+            bw.Write(this.VinylLuminanceMaxLevel);
+            bw.Write(this.MultiTextured);
         }
 
         /// <summary>
@@ -380,8 +505,12 @@ namespace Nikki.Support.Underground2.Class
         public override void Disassemble(BinaryReader br)
         {
             br.BaseStream.Position += 0x14;
-            this._collection_name = br.ReadNullTermUTF8(0x1C);
+            this._collection_name = br.ReadNullTermUTF8(0x40);
 
+            this.DiffusePower = br.ReadSingle();
+            this.DiffuseClamp = br.ReadSingle();
+            this.DiffuseFlakes = br.ReadSingle();
+            this.DiffuseVinylScale = br.ReadSingle();
             this.DiffuseMinLevel = br.ReadSingle();
             this.DiffuseMinRed = br.ReadSingle();
             this.DiffuseMinGreen = br.ReadSingle();
@@ -392,16 +521,31 @@ namespace Nikki.Support.Underground2.Class
             this.DiffuseMaxBlue = br.ReadSingle();
             this.DiffuseMinAlpha = br.ReadSingle();
             this.DiffuseMaxAlpha = br.ReadSingle();
-            this.SpecularPower = br.ReadSingle();
-            this.SpecularMinLevel = br.ReadSingle();
-            this.SpecularMinRed = br.ReadSingle();
-            this.SpecularMinGreen = br.ReadSingle();
-            this.SpecularMinBlue = br.ReadSingle();
-            this.SpecularMaxLevel = br.ReadSingle();
-            this.SpecularMaxRed = br.ReadSingle();
-            this.SpecularMaxGreen = br.ReadSingle();
-            this.SpecularMaxBlue = br.ReadSingle();
+            this.Specular1Power = br.ReadSingle();
+            this.Specular1Flakes = br.ReadSingle();
+            this.Specular1VinylScale = br.ReadSingle();
+            this.Specular1MinLevel = br.ReadSingle();
+            this.Specular1MinRed = br.ReadSingle();
+            this.Specular1MinGreen = br.ReadSingle();
+            this.Specular1MinBlue = br.ReadSingle();
+            this.Specular1MaxLevel = br.ReadSingle();
+            this.Specular1MaxRed = br.ReadSingle();
+            this.Specular1MaxGreen = br.ReadSingle();
+            this.Specular1MaxBlue = br.ReadSingle();
+            this.Specular2Power = br.ReadSingle();
+            this.Specular2Flakes = br.ReadSingle();
+            this.Specular2VinylScale = br.ReadSingle();
+            this.Specular2MinLevel = br.ReadSingle();
+            this.Specular2MinRed = br.ReadSingle();
+            this.Specular2MinGreen = br.ReadSingle();
+            this.Specular2MinBlue = br.ReadSingle();
+            this.Specular2MaxLevel = br.ReadSingle();
+            this.Specular2MaxRed = br.ReadSingle();
+            this.Specular2MaxGreen = br.ReadSingle();
+            this.Specular2MaxBlue = br.ReadSingle();
             this.EnvmapPower = br.ReadSingle();
+            this.EnvmapClamp = br.ReadSingle();
+            this.EnvmapVinylScale = br.ReadSingle();
             this.EnvmapMinLevel = br.ReadSingle();
             this.EnvmapMinRed = br.ReadSingle();
             this.EnvmapMinGreen = br.ReadSingle();
@@ -410,6 +554,9 @@ namespace Nikki.Support.Underground2.Class
             this.EnvmapMaxRed = br.ReadSingle();
             this.EnvmapMaxGreen = br.ReadSingle();
             this.EnvmapMaxBlue = br.ReadSingle();
+            this.VinylLuminanceMinLevel = br.ReadSingle();
+            this.VinylLuminanceMaxLevel = br.ReadSingle();
+            this.MultiTextured = br.ReadSingle();
         }
 
         /// <summary>
@@ -421,6 +568,10 @@ namespace Nikki.Support.Underground2.Class
         {
             var result = new Material(CName, this.Database)
             {
+                DiffusePower = this.DiffusePower,
+                DiffuseClamp = this.DiffuseClamp,
+                DiffuseFlakes = this.DiffuseFlakes,
+                DiffuseVinylScale = this.DiffuseVinylScale,
                 DiffuseMinLevel = this.DiffuseMinLevel,
                 DiffuseMinRed = this.DiffuseMinRed,
                 DiffuseMinGreen = this.DiffuseMinGreen,
@@ -431,16 +582,31 @@ namespace Nikki.Support.Underground2.Class
                 DiffuseMaxBlue = this.DiffuseMaxBlue,
                 DiffuseMinAlpha = this.DiffuseMinAlpha,
                 DiffuseMaxAlpha = this.DiffuseMaxAlpha,
-                SpecularPower = this.SpecularPower,
-                SpecularMinLevel = this.SpecularMinLevel,
-                SpecularMinRed = this.SpecularMinRed,
-                SpecularMinGreen = this.SpecularMinGreen,
-                SpecularMinBlue = this.SpecularMinBlue,
-                SpecularMaxLevel = this.SpecularMaxLevel,
-                SpecularMaxRed = this.SpecularMaxRed,
-                SpecularMaxGreen = this.SpecularMaxGreen,
-                SpecularMaxBlue = this.SpecularMaxBlue,
+                Specular1Power = this.Specular1Power,
+                Specular1Flakes = this.Specular1Flakes,
+                Specular1VinylScale = this.Specular1VinylScale,
+                Specular1MinLevel = this.Specular1MinLevel,
+                Specular1MinRed = this.Specular1MinRed,
+                Specular1MinGreen = this.Specular1MinGreen,
+                Specular1MinBlue = this.Specular1MinBlue,
+                Specular1MaxLevel = this.Specular1MaxLevel,
+                Specular1MaxRed = this.Specular1MaxRed,
+                Specular1MaxGreen = this.Specular1MaxGreen,
+                Specular1MaxBlue = this.Specular1MaxBlue,
+                Specular2Power = this.Specular2Power,
+                Specular2Flakes = this.Specular2Flakes,
+                Specular2VinylScale = this.Specular2VinylScale,
+                Specular2MinLevel = this.Specular2MinLevel,
+                Specular2MinRed = this.Specular2MinRed,
+                Specular2MinGreen = this.Specular2MinGreen,
+                Specular2MinBlue = this.Specular2MinBlue,
+                Specular2MaxLevel = this.Specular2MaxLevel,
+                Specular2MaxRed = this.Specular2MaxRed,
+                Specular2MaxGreen = this.Specular2MaxGreen,
+                Specular2MaxBlue = this.Specular2MaxBlue,
                 EnvmapPower = this.EnvmapPower,
+                EnvmapClamp = this.EnvmapClamp,
+                EnvmapVinylScale = this.EnvmapVinylScale,
                 EnvmapMinLevel = this.EnvmapMinLevel,
                 EnvmapMinRed = this.EnvmapMinRed,
                 EnvmapMinGreen = this.EnvmapMinGreen,
@@ -449,6 +615,9 @@ namespace Nikki.Support.Underground2.Class
                 EnvmapMaxRed = this.EnvmapMaxRed,
                 EnvmapMaxGreen = this.EnvmapMaxGreen,
                 EnvmapMaxBlue = this.EnvmapMaxBlue,
+                VinylLuminanceMinLevel = this.VinylLuminanceMinLevel,
+                VinylLuminanceMaxLevel = this.VinylLuminanceMaxLevel,
+                MultiTextured = this.MultiTextured
             };
 
             return result;

@@ -16,8 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Support.Prostreet\Framework\" />
-    <Folder Include="Support.Prostreet\Parts\" />
     <Folder Include="Support.Undercover\Class\" />
     <Folder Include="Support.Undercover\Framework\" />
     <Folder Include="Support.Undercover\Parts\" />

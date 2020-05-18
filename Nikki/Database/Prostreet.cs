@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Reflection.Abstract;
 using Nikki.Support.Prostreet.Class;
 using Nikki.Support.Prostreet.Framework;
+using Nikki.Support.Prostreet.Parts.CarParts;
 
 
 
@@ -70,14 +72,19 @@ namespace Nikki.Database
         /// </summary>
         public Root<DBModelPart> ModelParts { get; set; }
 
-		#endregion
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<CPStruct> CarPartStructs { get; set; }
 
-		#region Main
+        #endregion
 
-		/// <summary>
-		/// Initializes new instance of <see cref="Prostreet"/>.
-		/// </summary>
-		public Prostreet() { }
+        #region Main
+
+        /// <summary>
+        /// Initializes new instance of <see cref="Prostreet"/>.
+        /// </summary>
+        public Prostreet() { }
 
         /// <summary>
         /// Initializes new instance of <see cref="Prostreet"/>.
@@ -101,6 +108,7 @@ namespace Nikki.Database
             this.TPKBlocks = null;
             this.STRBlocks = null;
             this.ModelParts = null;
+            this.CarPartStructs = null;
         }
 
         #endregion
@@ -189,7 +197,9 @@ namespace Nikki.Database
 				false,
 				this
 			);
-		}
+
+            this.CarPartStructs = new List<CPStruct>();
+        }
 
         /// <summary>
         /// Returns name of the database.
