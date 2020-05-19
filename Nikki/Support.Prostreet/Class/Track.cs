@@ -409,7 +409,7 @@ namespace Nikki.Support.Prostreet.Class
 			// Write all directories and locations
 			bw.WriteNullTermUTF8(this.RaceDescription, 0x40);
 			bw.WriteNullTermUTF8(this.TrackDirectory, 0x40);
-			bw.WriteNullTermUTF8(this.RegionName, 0x28);
+			bw.WriteNullTermUTF8(this.RegionName, 0x20);
 			bw.WriteNullTermUTF8(this.RegionDirectory, 0x40);
 			bw.Write(this.LocationIndex);
 			bw.WriteNullTermUTF8(this.LocationDirectory, 0x20);
@@ -491,7 +491,7 @@ namespace Nikki.Support.Prostreet.Class
 			// Read all directories and locations
 			this.RaceDescription = br.ReadNullTermUTF8(0x40);
 			this.TrackDirectory = br.ReadNullTermUTF8(0x40);
-			this.RegionName = br.ReadNullTermUTF8(0x28);
+			this.RegionName = br.ReadNullTermUTF8(0x20);
 			this.RegionDirectory = br.ReadNullTermUTF8(0x40);
 			this.LocationIndex = br.ReadInt32();
 			this.LocationDirectory = br.ReadNullTermUTF8(0x20);

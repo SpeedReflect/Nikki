@@ -1,4 +1,5 @@
-﻿using Nikki.Support.Shared.Parts.BoundParts;
+﻿using System;
+using Nikki.Support.Shared.Parts.BoundParts;
 
 
 
@@ -7,6 +8,7 @@ namespace Nikki.Reflection.Enum
     /// <summary>
     /// Enum of Bound flags that are used for <see cref="CollisionBound"/>.
     /// </summary>
+    [Flags()]
 	public enum eBoundFlags : short
 	{
         /// <summary>

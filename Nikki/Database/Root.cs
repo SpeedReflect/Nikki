@@ -7,6 +7,7 @@ using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.Reflection;
 using CoreExtensions.Management;
+using CoreExtensions.Conversions;
 
 
 
@@ -167,6 +168,196 @@ namespace Nikki.Database
 		{
 			collection = this.FindCollection(CName);
 			return collection != null;
+		}
+
+		#endregion
+
+		#region Collection Arrangement 
+
+		/// <summary>
+		/// Attempts to switch/swap two collections.
+		/// </summary>
+		/// <param name="name1">CollectionName of the first collection to switch.</param>
+		/// <param name="name2">CollectionName of the second collection to switch.</param>
+		/// <returns>True on success; false otherwise.</returns>
+		public bool SwitchCollections(string name1, string name2)
+		{
+			if (!this.TryGetCollectionIndex(name1, out int index1)) return false;
+			if (!this.TryGetCollectionIndex(name2, out int index2)) return false;
+			var temp1 = this[index1];
+			var temp2 = this[index2];
+			this.Collections[index1] = temp2;
+			this.Collections[index2] = temp1;
+			return true;
+		}
+
+		/// <summary>
+		/// Attempts to switch/swap two collections.
+		/// </summary>
+		/// <param name="name1">CollectionName of the first collection to switch.</param>
+		/// <param name="name2">CollectionName of the second collection to switch.</param>
+		/// <param name="error">Error occured when trying to switch collection.</param>
+		/// <returns>True on success; false otherwise.</returns>
+		public bool SwitchCollections(string name1, string name2, out string error)
+		{
+			error = null;
+			if (!this.TryGetCollectionIndex(name1, out int index1))
+			{
+				error = $"Collection named {name1} does not exist.";
+				return false;
+			}
+			if (!this.TryGetCollectionIndex(name2, out int index2))
+			{
+				error = $"Collection named {name2} does not exist.";
+				return false;
+			}
+			var temp1 = this[index1];
+			var temp2 = this[index2];
+			this.Collections[index1] = temp2;
+			this.Collections[index2] = temp1;
+			return true;
+		}
+
+		/// <summary>
+		/// Attempts to move collection one index up.
+		/// </summary>
+		/// <param name="name">CollectionName of the collection to move.</param>
+		/// <returns>True on success; false otherwise.</returns>
+		public bool MoveCollectionUp(string name)
+		{
+			if (!this.TryGetCollectionIndex(name, out int index)) return false;
+			var temp1 = this[index];
+			var temp2 = this[index + 1];
+			if (temp2 == null) return false;
+			this.Collections[index + 1] = temp1;
+			this.Collections[index] = temp2;
+			return true;
+		}
+
+		/// <summary>
+		/// Attempts to move collection one index up.
+		/// </summary>
+		/// <param name="name">CollectionName of the collection to move.</param>
+		/// <param name="error">Error occured when trying to move collection up.</param>
+		/// <returns>True on success; false otherwise.</returns>
+		public bool MoveCollectionUp(string name, out string error)
+		{
+			error = null;
+			if (!this.TryGetCollectionIndex(name, out int index))
+			{
+				error = $"Collection named {name} does not exist.";
+				return false;
+			}
+			var temp1 = this[index];
+			var temp2 = this[index + 1];
+			if (temp2 == null)
+			{
+				error = $"Unable to move collection up since it has the top collection.";
+				return false;
+			}
+			this.Collections[index + 1] = temp1;
+			this.Collections[index] = temp2;
+			return true;
+		}
+
+		/// <summary>
+		/// Attempts to move collection one index down.
+		/// </summary>
+		/// <param name="name">CollectionName of the collection to move.</param>
+		/// <returns>True on success; false otherwise.</returns>
+		public bool MoveCollectionDown(string name)
+		{
+			if (!this.TryGetCollectionIndex(name, out int index)) return false;
+			var temp1 = this[index];
+			var temp2 = this[index - 1];
+			if (temp2 == null) return false;
+			this.Collections[index - 1] = temp1;
+			this.Collections[index] = temp2;
+			return true;
+		}
+
+		/// <summary>
+		/// Attempts to move collection one index down.
+		/// </summary>
+		/// <param name="name">CollectionName of the collection to move.</param>
+		/// <param name="error">Error occured when trying to move collection down.</param>
+		/// <returns>True on success; false otherwise.</returns>
+		public bool MoveCollectionDown(string name, out string error)
+		{
+			error = null;
+			if (!this.TryGetCollectionIndex(name, out int index))
+			{
+				error = $"Collection named {name} does not exist.";
+				return false;
+			}
+			var temp1 = this[index];
+			var temp2 = this[index - 1];
+			if (temp2 == null)
+			{
+				error = $"Unable to move collection up since it has the lowest collection.";
+				return false;
+			}
+			this.Collections[index - 1] = temp1;
+			this.Collections[index] = temp2;
+			return true;
+		}
+
+		/// <summary>
+		/// Attempts to rearrange collections using list of CollectionNames passed.
+		/// </summary>
+		/// <param name="names">CollectionNames to sort based on.</param>
+		/// <returns>True on success; false otherwise.</returns>
+		public bool RearrangeCollections(List<string> names)
+		{
+			if (names.Count != this.Length) return false;
+			if (!names.AllUnique()) return false;
+			var list = new List<TypeID>(this.Length);
+			
+			for (int a1 = 0; a1 < this.Length; ++a1)
+			{
+				var collection = this[names[a1]];
+				if (collection == null) return false;
+				list.Add(collection);
+			}
+
+			this.Collections = list;
+			return true;
+		}
+
+		/// <summary>
+		/// Attempts to rearrange collections using list of CollectionNames passed.
+		/// </summary>
+		/// <param name="names">CollectionNames to sort based on.</param>
+		/// <param name="error">Error occured when trying to rearrange collections.</param>
+		/// <returns>True on success; false otherwise.</returns>
+		public bool RearrangeCollections(List<string> names, out string error)
+		{
+			error = null;
+			if (names.Count != this.Length)
+			{
+				error = $"Mismatch between amount of CollectionNames passed. Unable to sort.";
+				return false;
+			}
+			if (!names.AllUnique())
+			{
+				error = $"Not all CollectionNames are unique in the list passed. Unable to sort.";
+				return false;
+			}
+			var list = new List<TypeID>(this.Length);
+
+			for (int a1 = 0; a1 < this.Length; ++a1)
+			{
+				var collection = this[names[a1]];
+				if (collection == null)
+				{
+					error = $"Collection named {names[a1]} does not exist. Unable to sort.";
+					return false;
+				}
+				list.Add(collection);
+			}
+
+			this.Collections = list;
+			return true;
 		}
 
 		#endregion

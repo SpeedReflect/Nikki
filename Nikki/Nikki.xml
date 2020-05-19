@@ -114,6 +114,11 @@
             Need for Speed: Prostreet
             </summary>
         </member>
+        <member name="F:Nikki.Core.GameINT.Undercover">
+            <summary>
+            Need for Speed: Undercover
+            </summary>
+        </member>
         <member name="T:Nikki.Core.Manager">
             <summary>
             Static manager to load keys and various files.
@@ -481,6 +486,113 @@
             <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to save data.</param>
             <returns>True on success; false otherwise.</returns>
         </member>
+        <member name="T:Nikki.Database.Prostreet">
+            <summary>
+            Database of roots and collections for Need for Speed: Most Wanted.
+            </summary>
+        </member>
+        <member name="P:Nikki.Database.Prostreet.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Database.Prostreet.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Database.Prostreet.Materials">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Database.Prostreet.CarTypeInfos">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Database.Prostreet.Collisions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Database.Prostreet.SunInfos">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Database.Prostreet.Tracks">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Database.Prostreet.FNGroups">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Database.Prostreet.TPKBlocks">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Database.Prostreet.STRBlocks">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Database.Prostreet.ModelParts">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Database.Prostreet.CarPartStructs">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Nikki.Database.Prostreet.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Database.Prostreet"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Database.Prostreet.#ctor(System.Boolean)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Database.Prostreet"/>.
+            </summary>
+            <param name="initialize">True if all roots should be auto-initialized.</param>
+        </member>
+        <member name="M:Nikki.Database.Prostreet.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Database.Prostreet.ToString">
+            <summary>
+            Returns name of the database.
+            </summary>
+            <returns>Name of this database as a string value.</returns>
+        </member>
+        <member name="M:Nikki.Database.Prostreet.GetDatabaseInfo">
+            <summary>
+            Gets information about <see cref="T:Nikki.Database.Prostreet"/> database.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nikki.Database.Prostreet.Load(Nikki.Core.Options)">
+            <summary>
+            Loads all data in the database using options passed.
+            </summary>
+            <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to load data.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Database.Prostreet.Save(Nikki.Core.Options)">
+            <summary>
+            Saves all data in the database using options passed.
+            </summary>
+            <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to save data.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
         <member name="T:Nikki.Database.Root`1">
             <summary>
             A root of collections used in Database.
@@ -585,6 +697,68 @@
             <param name="CName">CollectionName of a class to search for.</param>
             <param name="collection">Collection with CollectionName specified in case it exists.</param>
             <returns>True if collection exists; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Database.Root`1.SwitchCollections(System.String,System.String)">
+            <summary>
+            Attempts to switch/swap two collections.
+            </summary>
+            <param name="name1">CollectionName of the first collection to switch.</param>
+            <param name="name2">CollectionName of the second collection to switch.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Database.Root`1.SwitchCollections(System.String,System.String,System.String@)">
+            <summary>
+            Attempts to switch/swap two collections.
+            </summary>
+            <param name="name1">CollectionName of the first collection to switch.</param>
+            <param name="name2">CollectionName of the second collection to switch.</param>
+            <param name="error">Error occured when trying to switch collection.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Database.Root`1.MoveCollectionUp(System.String)">
+            <summary>
+            Attempts to move collection one index up.
+            </summary>
+            <param name="name">CollectionName of the collection to move.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Database.Root`1.MoveCollectionUp(System.String,System.String@)">
+            <summary>
+            Attempts to move collection one index up.
+            </summary>
+            <param name="name">CollectionName of the collection to move.</param>
+            <param name="error">Error occured when trying to move collection up.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Database.Root`1.MoveCollectionDown(System.String)">
+            <summary>
+            Attempts to move collection one index down.
+            </summary>
+            <param name="name">CollectionName of the collection to move.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Database.Root`1.MoveCollectionDown(System.String,System.String@)">
+            <summary>
+            Attempts to move collection one index down.
+            </summary>
+            <param name="name">CollectionName of the collection to move.</param>
+            <param name="error">Error occured when trying to move collection down.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Database.Root`1.RearrangeCollections(System.Collections.Generic.List{System.String})">
+            <summary>
+            Attempts to rearrange collections using list of CollectionNames passed.
+            </summary>
+            <param name="names">CollectionNames to sort based on.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Database.Root`1.RearrangeCollections(System.Collections.Generic.List{System.String},System.String@)">
+            <summary>
+            Attempts to rearrange collections using list of CollectionNames passed.
+            </summary>
+            <param name="names">CollectionNames to sort based on.</param>
+            <param name="error">Error occured when trying to rearrange collections.</param>
+            <returns>True on success; false otherwise.</returns>
         </member>
         <member name="M:Nikki.Database.Root`1.TrySetStaticValue(System.String,System.String)">
             <summary>
@@ -2020,6 +2194,11 @@
             Enum of default numbers of cars in games.
             </summary>
         </member>
+        <member name="F:Nikki.Reflection.Enum.eBoundValues.MIN_INFO_UNDERGROUND1">
+            <summary>
+            Amount of cars in default Underground 1.
+            </summary>
+        </member>
         <member name="F:Nikki.Reflection.Enum.eBoundValues.MIN_INFO_UNDERGROUND2">
             <summary>
             Amount of cars in default Underground 2.
@@ -2033,6 +2212,16 @@
         <member name="F:Nikki.Reflection.Enum.eBoundValues.MIN_INFO_CARBON">
             <summary>
             Amount of cars in default Carbon.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBoundValues.MIN_INFO_PROSTREET">
+            <summary>
+            Amount of cars in default Prostreet.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBoundValues.MIN_INFO_UNDERCOVER">
+            <summary>
+            Amount of cars in default Undercover.
             </summary>
         </member>
         <member name="T:Nikki.Reflection.Enum.eCameraType">
@@ -4399,111 +4588,6 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="T:Nikki.Support.Carbon.Class.Collision">
-            <summary>
-            <see cref="T:Nikki.Support.Carbon.Class.Collision"/> is a collection of settings related to a car's bounds.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Class.Collision.GameINT">
-            <summary>
-            Game to which the class belongs to.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Class.Collision.GameSTR">
-            <summary>
-            Game string to which the class belongs to.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Class.Collision.Database">
-            <summary>
-            Database to which the class belongs to.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Class.Collision.CollectionName">
-            <summary>
-            Collection name of the variable.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Class.Collision.BinKey">
-            <summary>
-            Binary memory hash of the collection name.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Class.Collision.VltKey">
-            <summary>
-            Vault memory hash of the collection name.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Class.Collision.CollisionBounds">
-            <summary>
-            List of collision bounds.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Class.Collision.CollisionClouds">
-            <summary>
-            List of collision clouds.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Class.Collision.NumberOfBounds">
-            <summary>
-            Number of collision bounds.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Class.Collision.NumberOfClouds">
-            <summary>
-            Number of collision clouds.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Class.Collision.IsResolved">
-            <summary>
-            True if this <see cref="T:Nikki.Support.Carbon.Class.Collision"/> is resolved; false otherwise.
-            </summary>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Class.Collision.#ctor">
-            <summary>
-            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.Collision"/>.
-            </summary>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Class.Collision.#ctor(System.String,Nikki.Database.Carbon)">
-            <summary>
-            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.Collision"/>.
-            </summary>
-            <param name="CName">CollectionName of the new instance.</param>
-            <param name="db"><see cref="T:Nikki.Database.Carbon"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Class.Collision.#ctor(System.IO.BinaryReader,Nikki.Database.Carbon)">
-            <summary>
-            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.Collision"/>.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
-            <param name="db"><see cref="T:Nikki.Database.Carbon"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Class.Collision.Assemble(System.IO.BinaryWriter)">
-            <summary>
-            Assembles <see cref="T:Nikki.Support.Carbon.Class.Collision"/> into a byte array.
-            </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Carbon.Class.Collision"/> with.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Class.Collision.Disassemble(System.IO.BinaryReader)">
-            <summary>
-            Disassembles array into <see cref="T:Nikki.Support.Carbon.Class.Collision"/> properties.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Carbon.Class.Collision"/> with.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Class.Collision.MemoryCast(System.String)">
-            <summary>
-            Casts all attributes from this object to another one.
-            </summary>
-            <param name="CName">CollectionName of the new created object.</param>
-            <returns>Memory casted copy of the object.</returns>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Class.Collision.ToString">
-            <summary>
-            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Carbon.Class.Collision"/> 
-            as a string value.
-            </summary>
-            <returns>String value.</returns>
-        </member>
         <member name="T:Nikki.Support.Carbon.Class.DBModelPart">
             <summary>
             <see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> is a collection of car parts of a specific model.
@@ -4770,192 +4854,192 @@
             Vault memory hash of the collection name.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.DisableReflection">
+        <member name="P:Nikki.Support.Carbon.Class.Material.SpecularPower">
             <summary>
             Disable value of reflection colors of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.StrongerReflection">
+        <member name="P:Nikki.Support.Carbon.Class.Material.EnvmapPower">
             <summary>
             Increment value of reflection colors of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.BlendStrongColors">
+        <member name="P:Nikki.Support.Carbon.Class.Material.EnvmapClamp">
             <summary>
             Blend value of strong colors of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.DisableStrongColors">
+        <member name="P:Nikki.Support.Carbon.Class.Material.EnvmapVinylScale">
             <summary>
             Disable value of strong colors of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.BrightColor1Level">
+        <member name="P:Nikki.Support.Carbon.Class.Material.DiffuseMinLevel">
             <summary>
             Level value of the first bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.BrightColor1Red">
+        <member name="P:Nikki.Support.Carbon.Class.Material.DiffuseMinRed">
             <summary>
             Red value of the first bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.BrightColor1Green">
+        <member name="P:Nikki.Support.Carbon.Class.Material.DiffuseMinGreen">
             <summary>
             Green value of the first bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.BrightColor1Blue">
+        <member name="P:Nikki.Support.Carbon.Class.Material.DiffuseMinBlue">
             <summary>
             Blue value of the first bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.BrightColor2Level">
+        <member name="P:Nikki.Support.Carbon.Class.Material.DiffuseMaxLevel">
             <summary>
             Level value of the second bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.BrightColor2Red">
+        <member name="P:Nikki.Support.Carbon.Class.Material.DiffuseMaxRed">
             <summary>
             Red value of the second bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.BrightColor2Green">
+        <member name="P:Nikki.Support.Carbon.Class.Material.DiffuseMaxGreen">
             <summary>
             Green value of the second bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.BrightColor2Blue">
+        <member name="P:Nikki.Support.Carbon.Class.Material.DiffuseMaxBlue">
             <summary>
             Blue value of the second bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.Grayscale">
+        <member name="P:Nikki.Support.Carbon.Class.Material.DiffuseVinylScale">
             <summary>
             Main grayscale value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.LinearNegative">
+        <member name="P:Nikki.Support.Carbon.Class.Material.VinylLuminanceMinLevel">
             <summary>
             Linear negativity of the material colors.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.GradientNegative">
+        <member name="P:Nikki.Support.Carbon.Class.Material.VinylLuminanceMaxLevel">
             <summary>
             Gradient negativity of the material colors.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.ReflectionColorLevel">
+        <member name="P:Nikki.Support.Carbon.Class.Material.SpecularMaxLevel">
             <summary>
             Level value of the reflection color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.ReflectionColorRed">
+        <member name="P:Nikki.Support.Carbon.Class.Material.SpecularMaxRed">
             <summary>
             Red value of the reflection color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.ReflectionColorGreen">
+        <member name="P:Nikki.Support.Carbon.Class.Material.SpecularMaxGreen">
             <summary>
             Green value of the reflection color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.ReflectionColorBlue">
+        <member name="P:Nikki.Support.Carbon.Class.Material.SpecularMaxBlue">
             <summary>
             Blue value of the reflection color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.ShadowOuterRadius">
+        <member name="P:Nikki.Support.Carbon.Class.Material.DiffusePower">
             <summary>
             Outer radius of the shadow fading.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.OptimalLightReflection">
+        <member name="P:Nikki.Support.Carbon.Class.Material.DiffuseClamp">
             <summary>
             Value of the optimal light reflection on the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.StrongColor1Level">
+        <member name="P:Nikki.Support.Carbon.Class.Material.EnvmapMinLevel">
             <summary>
             Level value of the first strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.StrongColor1Red">
+        <member name="P:Nikki.Support.Carbon.Class.Material.EnvmapMinRed">
             <summary>
             Red value of the first strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.StrongColor1Green">
+        <member name="P:Nikki.Support.Carbon.Class.Material.EnvmapMinGreen">
             <summary>
             Green value of the first strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.StrongColor1Blue">
+        <member name="P:Nikki.Support.Carbon.Class.Material.EnvmapMinBlue">
             <summary>
             Blue value of the first strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.StrongColor2Level">
+        <member name="P:Nikki.Support.Carbon.Class.Material.EnvmapMaxLevel">
             <summary>
             Level value of the second strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.StrongColor2Red">
+        <member name="P:Nikki.Support.Carbon.Class.Material.EnvmapMaxRed">
             <summary>
             Red value of the second strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.StrongColor2Green">
+        <member name="P:Nikki.Support.Carbon.Class.Material.EnvmapMaxGreen">
             <summary>
             Green value of the second strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.StrongColor2Blue">
+        <member name="P:Nikki.Support.Carbon.Class.Material.EnvmapMaxBlue">
             <summary>
             Blue value of the second strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.AlphaValue1">
+        <member name="P:Nikki.Support.Carbon.Class.Material.DiffuseMinAlpha">
             <summary>
             First alpha value of the material colors.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.AlphaValue2">
+        <member name="P:Nikki.Support.Carbon.Class.Material.DiffuseMaxAlpha">
             <summary>
             Second alpha value of the material colors.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.Unknown1">
+        <member name="P:Nikki.Support.Carbon.Class.Material.DiffuseFlakes">
             <summary>
             Unknown 1 value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.Unknown2">
+        <member name="P:Nikki.Support.Carbon.Class.Material.SpecularFlakes">
             <summary>
             Unknown 2 value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.Unknown3">
+        <member name="P:Nikki.Support.Carbon.Class.Material.SpecularVinylScale">
             <summary>
             Unknown 3 value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.Unknown4">
+        <member name="P:Nikki.Support.Carbon.Class.Material.SpecularMinLevel">
             <summary>
             Unknown 4 value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.Unknown5">
+        <member name="P:Nikki.Support.Carbon.Class.Material.SpecularMinRed">
             <summary>
             Unknown 5 value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.Unknown6">
+        <member name="P:Nikki.Support.Carbon.Class.Material.SpecularMinGreen">
             <summary>
             Unknown 6 value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Material.Unknown7">
+        <member name="P:Nikki.Support.Carbon.Class.Material.SpecularMinBlue">
             <summary>
             Unknown 7 value of the material.
             </summary>
@@ -6746,6 +6830,111 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="T:Nikki.Support.Carbon.Class.Collision">
+            <summary>
+            <see cref="T:Nikki.Support.Carbon.Class.Collision"/> is a collection of settings related to a car's bounds.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Collision.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Collision.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Collision.Database">
+            <summary>
+            Database to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Collision.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Collision.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Collision.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Collision.CollisionBounds">
+            <summary>
+            List of collision bounds.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Collision.CollisionClouds">
+            <summary>
+            List of collision clouds.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Collision.NumberOfBounds">
+            <summary>
+            Number of collision bounds.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Collision.NumberOfClouds">
+            <summary>
+            Number of collision clouds.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.Collision.IsResolved">
+            <summary>
+            True if this <see cref="T:Nikki.Support.Carbon.Class.Collision"/> is resolved; false otherwise.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Collision.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.Collision"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Collision.#ctor(System.String,Nikki.Database.Carbon)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.Collision"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="db"><see cref="T:Nikki.Database.Carbon"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Collision.#ctor(System.IO.BinaryReader,Nikki.Database.Carbon)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.Collision"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="db"><see cref="T:Nikki.Database.Carbon"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Collision.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Carbon.Class.Collision"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Carbon.Class.Collision"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Collision.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Carbon.Class.Collision"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Carbon.Class.Collision"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Collision.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Collision.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Carbon.Class.Collision"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
         <member name="T:Nikki.Support.Carbon.Framework.CarPartManager">
             <summary>
             A static manager to assemble and disassemble <see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> collections.
@@ -7728,6 +7917,2184 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to read data with.</param>
         </member>
+        <member name="T:Nikki.Support.Prostreet.Class.Collision">
+            <summary>
+            <see cref="T:Nikki.Support.Prostreet.Class.Collision"/> is a collection of settings related to a car's bounds.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Collision.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Collision.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Collision.Database">
+            <summary>
+            Database to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Collision.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Collision.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Collision.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Collision.CollisionBounds">
+            <summary>
+            List of collision bounds.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Collision.CollisionClouds">
+            <summary>
+            List of collision clouds.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Collision.NumberOfBounds">
+            <summary>
+            Number of collision bounds.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Collision.NumberOfClouds">
+            <summary>
+            Number of collision clouds.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Collision.IsResolved">
+            <summary>
+            True if this <see cref="T:Nikki.Support.Prostreet.Class.Collision"/> is resolved; false otherwise.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Collision.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.Collision"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Collision.#ctor(System.String,Nikki.Database.Prostreet)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.Collision"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Collision.#ctor(System.IO.BinaryReader,Nikki.Database.Prostreet)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.Collision"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Collision.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Prostreet.Class.Collision"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Prostreet.Class.Collision"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Collision.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Prostreet.Class.Collision"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.Collision"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Collision.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Collision.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Prostreet.Class.Collision"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Prostreet.Class.CarTypeInfo">
+            <summary>
+            <see cref="T:Nikki.Support.Prostreet.Class.CarTypeInfo"/> is a collection of settings related to a car's basic information.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Prostreet.Class.CarTypeInfo.MaxCNameLength">
+            <summary>
+            Maximum length of the CollectionName.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Prostreet.Class.CarTypeInfo.CNameOffsetAt">
+            <summary>
+            Offset of the CollectionName in the data.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Prostreet.Class.CarTypeInfo.BaseClassSize">
+            <summary>
+            Base size of a unit collection.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.CarTypeInfo.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.CarTypeInfo.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.CarTypeInfo.Database">
+            <summary>
+            Database to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.CarTypeInfo.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.CarTypeInfo.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.CarTypeInfo.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.CarTypeInfo.ManufacturerName">
+            <summary>
+            Manufacturer name of the <see cref="T:Nikki.Support.Prostreet.Class.CarTypeInfo"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.CarTypeInfo.DefaultBasePaint">
+            <summary>
+            Default base paint of the <see cref="T:Nikki.Support.Prostreet.Class.CarTypeInfo"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.CarTypeInfo.MemoryType">
+            <summary>
+            Represents memory type of the <see cref="T:Nikki.Support.Prostreet.Class.CarTypeInfo"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.CarTypeInfo.Spoiler">
+            <summary>
+            Spoiler type of the <see cref="T:Nikki.Support.Prostreet.Class.CarTypeInfo"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.CarTypeInfo.SpoilerAS">
+            <summary>
+            Autosculpt spoiler type of the <see cref="T:Nikki.Support.Prostreet.Class.CarTypeInfo"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.CarTypeInfo.RoofScoop">
+            <summary>
+            RoofScoop type of the <see cref="T:Nikki.Support.Prostreet.Class.CarTypeInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.CarTypeInfo.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.CarTypeInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.CarTypeInfo.#ctor(System.String,Nikki.Database.Prostreet)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.CarTypeInfo"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.CarTypeInfo.#ctor(System.IO.BinaryReader,Nikki.Database.Prostreet)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.CarTypeInfo"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.CarTypeInfo.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.CarTypeInfo.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Prostreet.Class.CarTypeInfo"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Prostreet.Class.CarTypeInfo"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.CarTypeInfo.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Prostreet.Class.CarTypeInfo"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.CarTypeInfo"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.CarTypeInfo.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.CarTypeInfo.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Prostreet.Class.CarTypeInfo"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Prostreet.Class.DBModelPart">
+            <summary>
+            <see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> is a collection of car parts of a specific model.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.DBModelPart.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.DBModelPart.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.DBModelPart.Database">
+            <summary>
+            Database to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.DBModelPart.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.DBModelPart.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.DBModelPart.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.DBModelPart.ModelCarParts">
+            <summary>
+            List of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.#ctor(System.String,Nikki.Database.Prostreet)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.ResortNames">
+            <summary>
+            Resorts all names according to their indexed position.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.SwitchParts(System.String,System.String)">
+            <summary>
+            Switches two parts and their indexes.
+            </summary>
+            <param name="part1">First <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to switch.</param>
+            <param name="part2">Second <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to switch.</param>
+            <returns>True if switching was successful; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.SwitchParts(System.String,System.String,System.String@)">
+            <summary>
+            Switches two parts and their indexes.
+            </summary>
+            <param name="part1">First <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to switch.</param>
+            <param name="part2">Second <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to switch.</param>
+            <param name="error">Error occured while trying to switch.</param>
+            <returns>True if switching was successful; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.ReverseParts">
+            <summary>
+            Reverses all parts in this <see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.SortByProperty(System.String)">
+            <summary>
+            Sorts all parts by property name provided.
+            </summary>
+            <param name="property">Property to sort by.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.SortByProperty(System.String,System.String@)">
+            <summary>
+            Sorts all parts by property name provided.
+            </summary>
+            <param name="property">Property to sort by.</param>
+            <param name="error">Error occured while trying to switch.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.TryAddRealPart(System.String)">
+            <summary>
+            Attemps to add new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="name">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.TryAddRealPart(System.String@,System.String)">
+            <summary>
+            Attemps to add new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="error">Error occured while trying to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <param name="name">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.TryRemovePart(System.String)">
+            <summary>
+            Attemps to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="name">Name of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to remove.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.TryRemovePart(System.String,System.String@)">
+            <summary>
+            Attemps to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="name">Name of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to remove.</param>
+            <param name="error">Error occured while trying to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.TryClonePart(System.String,System.String)">
+            <summary>
+            Attemps to clone a <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="newname">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <param name="copyname">Name of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.TryClonePart(System.String,System.String,System.String@)">
+            <summary>
+            Attemps to clone a <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="newname">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <param name="copyname">Name of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to clone.</param>
+            <param name="error">Error occured while trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Prostreet.Class.FNGroup">
+            <summary>
+            <see cref="T:Nikki.Support.Prostreet.Class.FNGroup"/> is a collection of frontend group elements and scripts.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.FNGroup.Data">
+            <summary>
+            Actual data of this <see cref="T:Nikki.Support.Prostreet.Class.FNGroup"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.FNGroup.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.FNGroup.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.FNGroup.Database">
+            <summary>
+            Database to which the class belongs to.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.FNGroup.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.FNGroup"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.FNGroup.#ctor(System.IO.BinaryReader,Nikki.Database.Prostreet)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.FNGroup"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.FNGroup.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.FNGroup.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Prostreet.Class.FNGroup"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Prostreet.Class.FNGroup"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.FNGroup.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Prostreet.Class.FNGroup"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.FNGroup"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.FNGroup.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Prostreet.Class.FNGroup"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Prostreet.Class.Material">
+            <summary>
+            <see cref="T:Nikki.Support.Prostreet.Class.Material"/> is a collection of float attributes of shaders and materials.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Prostreet.Class.Material.MaxCNameLength">
+            <summary>
+            Maximum length of the CollectionName.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Prostreet.Class.Material.CNameOffsetAt">
+            <summary>
+            Offset of the CollectionName in the data.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Prostreet.Class.Material.BaseClassSize">
+            <summary>
+            Base size of a unit collection.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Database">
+            <summary>
+            Database to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.DiffusePower">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.DiffuseClamp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.DiffuseFlakes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.DiffuseVinylScale">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.DiffuseMinLevel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.DiffuseMinRed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.DiffuseMinGreen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.DiffuseMinBlue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.DiffuseMaxLevel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.DiffuseMaxRed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.DiffuseMaxGreen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.DiffuseMaxBlue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.DiffuseMinAlpha">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.DiffuseMaxAlpha">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular1Power">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular1Flakes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular1VinylScale">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular1MinLevel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular1MinRed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular1MinGreen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular1MinBlue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular1MaxLevel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular1MaxRed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular1MaxGreen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular1MaxBlue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular2Power">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular2Flakes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular2VinylScale">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular2MinLevel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular2MinRed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular2MinGreen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular2MinBlue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular2MaxLevel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular2MaxRed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular2MaxGreen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.Specular2MaxBlue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.EnvmapPower">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.EnvmapClamp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.EnvmapVinylScale">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.EnvmapMinLevel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.EnvmapMinRed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.EnvmapMinGreen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.EnvmapMinBlue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.EnvmapMaxLevel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.EnvmapMaxRed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.EnvmapMaxGreen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.EnvmapMaxBlue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.VinylLuminanceMinLevel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.VinylLuminanceMaxLevel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Material.MultiTextured">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Material.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.Material"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Material.#ctor(System.String,Nikki.Database.Prostreet)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.Material"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Material.#ctor(System.IO.BinaryReader,Nikki.Database.Prostreet)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.Material"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Material.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Material.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Prostreet.Class.Material"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Prostreet.Class.Material"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Material.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Prostreet.Class.Material"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.Material"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Material.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Material.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Prostreet.Class.Material"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Prostreet.Class.STRBlock">
+            <summary>
+            <see cref="T:Nikki.Support.Prostreet.Class.STRBlock"/> is a collection of language strings, hashes and labels.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Prostreet.Class.STRBlock.MaxCNameLength">
+            <summary>
+            Maximum length of the CollectionName.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Prostreet.Class.STRBlock.CNameOffsetAt">
+            <summary>
+            Offset of the CollectionName in the data.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Prostreet.Class.STRBlock.BaseClassSize">
+            <summary>
+            Base size of a unit collection.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.STRBlock.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.STRBlock.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.STRBlock.Database">
+            <summary>
+            Database to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.STRBlock.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.STRBlock.InfoLength">
+            <summary>
+            Length of the string information array.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.STRBlock"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.#ctor(System.String,Nikki.Database.Prostreet)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.STRBlock"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.#ctor(System.IO.BinaryReader,Nikki.Database.Prostreet)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.CarTypeInfo"/>.
+            </summary>
+            <param name="strbr"><see cref="T:System.IO.BinaryReader"/> to read text data with.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Prostreet.Class.STRBlock"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Prostreet.Class.STRBlock"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Prostreet.Class.STRBlock"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.STRBlock"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.GetRecord(System.UInt32)">
+            <summary>
+            Gets the <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> from the internal list.
+            </summary>
+            <param name="key">Key of the <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> to find.</param>
+            <returns>StringRecord is it exists; otherwise null;</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.GetRecords">
+            <summary>
+            Gets all <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> stored in <see cref="T:Nikki.Support.Prostreet.Class.STRBlock"/>.
+            </summary>
+            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/>.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.GetText(System.UInt32)">
+            <summary>
+            Gets text from the binary key of a label provided.
+            </summary>
+            <param name="key">Key of the string label.</param>
+            <returns>Text of the label as a string.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.TryAddRecord(System.String,System.String,System.String)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> in the <see cref="T:Nikki.Support.Prostreet.Class.STRBlock"/>.
+            </summary>
+            <param name="key">Key of the new <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/></param>
+            <param name="label">Label of the new <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/></param>
+            <param name="text">Text of the new <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/></param>
+            <returns>True if adding was successful; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.TryAddRecord(System.String,System.String,System.String,System.String@)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> in the <see cref="T:Nikki.Support.Prostreet.Class.STRBlock"/>.
+            </summary>
+            <param name="key">Key of the new <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/></param>
+            <param name="label">Label of the new <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/></param>
+            <param name="text">Text of the new <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/></param>
+            <param name="error">Error occured when trying to add the record.</param>
+            <returns>True if adding was successful; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.TryRemoveRecord(System.UInt32)">
+            <summary>
+            Removes <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> at the index specified.
+            </summary>
+            <param name="key">Key of the <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> to be removed.</param>
+            <returns>True if deleting was successful.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.TryRemoveRecord(System.String)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> with the key provided.
+            </summary>
+            <param name="key">Key of the <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> to be removed.</param>
+            <returns>True if removing was successful; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.TryRemoveRecord(System.UInt32,System.String@)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> with the key provided.
+            </summary>
+            <param name="key">Key of the <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> to be removed.</param>
+            <param name="error">Error occured when trying to remove the record.</param>
+            <returns>True if removing was successful; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.TryRemoveRecord(System.String,System.String@)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> with the key provided.
+            </summary>
+            <param name="key">Key of the <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> to be removed.</param>
+            <param name="error">Error occured when trying to remove the record.</param>
+            <returns>True if removing was successful; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.FindWithText(System.String)">
+            <summary>
+            Retrieves all <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> that have their texts containing text provided.
+            </summary>
+            <param name="text">Text that other <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> should match.</param>
+            <returns>Enumerable of records containing text provided.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Prostreet.Class.STRBlock"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Prostreet.Class.SunInfo">
+            <summary>
+            <see cref="T:Nikki.Support.Prostreet.Class.SunInfo"/> is a collection of sun and daylight settings.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Prostreet.Class.SunInfo.MaxCNameLength">
+            <summary>
+            Maximum length of the CollectionName.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Prostreet.Class.SunInfo.CNameOffsetAt">
+            <summary>
+            Offset of the CollectionName in the data.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Prostreet.Class.SunInfo.BaseClassSize">
+            <summary>
+            Base size of a unit collection.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.SunInfo.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.SunInfo.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.SunInfo.Database">
+            <summary>
+            Database to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.SunInfo.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.SunInfo.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.SunInfo.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.SunInfo.SUNLAYER1">
+            <summary>
+            Sun layer 1.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.SunInfo.SUNLAYER2">
+            <summary>
+            Sun layer 2.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.SunInfo.SUNLAYER3">
+            <summary>
+            Sun layer 3.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.SunInfo.SUNLAYER4">
+            <summary>
+            Sun layer 4.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.SunInfo.SUNLAYER5">
+            <summary>
+            Sun layer 5.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.SunInfo.SUNLAYER6">
+            <summary>
+            Sun layer 6.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.SunInfo.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.SunInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.SunInfo.#ctor(System.String,Nikki.Database.Prostreet)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.SunInfo"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.SunInfo.#ctor(System.IO.BinaryReader,Nikki.Database.Prostreet)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.SunInfo"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.SunInfo.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.SunInfo.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Prostreet.Class.SunInfo"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Prostreet.Class.SunInfo"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.SunInfo.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Prostreet.Class.SunInfo"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.SunInfo"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.SunInfo.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.SunInfo.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Prostreet.Class.SunInfo"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Prostreet.Class.Texture">
+            <summary>
+            <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> is a collection of dds image data used by the game.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Texture.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Texture.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Texture.Database">
+            <summary>
+            Database to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Texture.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Texture.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Texture.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Texture.Data">
+            <summary>
+            DDS data of the texture.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Texture.Compression">
+            <summary>
+            Compression type value of the texture.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Texture.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.Texture"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Texture.#ctor(System.String,System.String,Nikki.Database.Prostreet)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.Texture"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="_TPK"><see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> to which this texture belongs to.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Texture.#ctor(System.String,System.String,System.String,Nikki.Database.Prostreet)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.Texture"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="_TPK"><see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> to which this texture belongs to.</param>
+            <param name="filename">Filename of the texture to import.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Texture.#ctor(System.IO.BinaryReader,System.String,Nikki.Database.Prostreet)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.Texture"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="_TPK"><see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> to which this texture belongs to.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Texture.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Texture.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> header into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> header with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Texture.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> header properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> header with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Texture.GetDDSArray">
+            <summary>
+            Gets .dds data along with the .dds header.
+            </summary>
+            <returns>.dds texture as a byte array.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Texture.Initialize(System.String)">
+            <summary>
+            Initializes all properties of the new <see cref="T:Nikki.Support.Prostreet.Class.Texture"/>.
+            </summary>
+            <param name="filename">Filename of the .dds texture passed.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Texture.ReadData(System.IO.BinaryReader,System.Boolean)">
+            <summary>
+            Reads .dds data from the <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="forced">If forced, ignores internal offset and reads data 
+            starting at the pointer passed.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Texture.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Texture.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Prostreet.Class.TPKBlock">
+            <summary>
+            <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> is a collection of <see cref="T:Nikki.Support.Prostreet.Class.Texture"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.TPKBlock.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.TPKBlock.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.TPKBlock.Database">
+            <summary>
+            Database to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.TPKBlock.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.TPKBlock.Version">
+            <summary>
+            Version of this <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.TPKBlock.Filename">
+            <summary>
+            Filename used for this <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>. It is a default watermark.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.TPKBlock.FilenameHash">
+            <summary>
+            BinKey of the filename.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.TPKBlock.IsCompressed">
+            <summary>
+            If true, indicates that this <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> is compressed and 
+            should be saved as compressed on the output.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.TPKBlock.UseCurrentName">
+            <summary>
+            True if CollectionName specified should be used; false if hardcoded CollectionName 
+            should be used.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.TPKBlock.Textures">
+            <summary>
+            List of <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> in this <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.#ctor(System.String,Nikki.Database.Prostreet)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.#ctor(System.Int32,Nikki.Database.Prostreet)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>.
+            </summary>
+            <param name="index">Index of the instance in the database.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> with.</param>
+            <returns>Byte array of the tpk block.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles tpk block array into separate properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.FindTexture(System.UInt32,Nikki.Reflection.Enum.eKeyType)">
+            <summary>
+            Tries to find <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> based on the key passed.
+            </summary>
+            <param name="key">Key of the <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> Collection Name.</param>
+            <param name="type">Type of the key passed.</param>
+            <returns>Texture if it is found; null otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.SortTexturesByType(System.Boolean)">
+            <summary>
+            Sorts <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> by their CollectionNames or BinKeys.
+            </summary>
+            <param name="by_name">True if sort by name; false is sort by hash.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.GetTextures">
+            <summary>
+            Gets all textures of this <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>.
+            </summary>
+            <returns>Textures as an object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.GetTextureIndex(System.UInt32,Nikki.Reflection.Enum.eKeyType)">
+            <summary>
+            Gets index of the <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> in the <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>.
+            </summary>
+            <param name="key">Key of the Collection Name of the <see cref="T:Nikki.Support.Prostreet.Class.Texture"/>.</param>
+            <param name="type">Key type passed.</param>
+            <returns>Index number as an integer. If element does not exist, returns -1.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.TryAddTexture(System.String,System.String)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> to the <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> data.
+            </summary>
+            <param name="CName">Collection Name of the new <see cref="T:Nikki.Support.Prostreet.Class.Texture"/>.</param>
+            <param name="filename">Path of the texture to be imported.</param>
+            <returns>True if texture adding was successful, false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.TryAddTexture(System.String,System.String,System.String@)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> to the <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> data.
+            </summary>
+            <param name="CName">Collection Name of the new <see cref="T:Nikki.Support.Prostreet.Class.Texture"/>.</param>
+            <param name="filename">Path of the texture to be imported.</param>
+            <param name="error">Error occured when trying to add a texture.</param>
+            <returns>True if texture adding was successful, false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.TryRemoveTexture(System.UInt32,Nikki.Reflection.Enum.eKeyType)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> specified from <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> data.
+            </summary>
+            <param name="key">Key of the Collection Name of the <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> to be deleted.</param>
+            <param name="type">Type fo the key passed.</param>
+            <returns>True if texture removing was successful, false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.TryRemoveTexture(System.UInt32,Nikki.Reflection.Enum.eKeyType,System.String@)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> specified from <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> data.
+            </summary>
+            <param name="key">Key of the Collection Name of the <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> to be deleted.</param>
+            <param name="type">Type of the key passed.</param>
+            <param name="error">Error occured when trying to remove a texture.</param>
+            <returns>True if texture removing was successful, false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.TryCloneTexture(System.String,System.UInt32,Nikki.Reflection.Enum.eKeyType)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> specified in the <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> data.
+            </summary>
+            <param name="newname">Collection Name of the new <see cref="T:Nikki.Support.Prostreet.Class.Texture"/>.</param>
+            <param name="key">Key of the Collection Name of the <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> to clone.</param>
+            <param name="type">Type of the key passed.</param>
+            <returns>True if texture cloning was successful, false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.TryCloneTexture(System.String,System.UInt32,Nikki.Reflection.Enum.eKeyType,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> specified in the <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> data.
+            </summary>
+            <param name="newname">Collection Name of the new <see cref="T:Nikki.Support.Prostreet.Class.Texture"/>.</param>
+            <param name="key">Key of the Collection Name of the <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> to clone.</param>
+            <param name="type">Type of the key passed.</param>
+            <param name="error">Error occured when trying to clone a texture.</param>
+            <returns>True if texture cloning was successful, false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.TryReplaceTexture(System.UInt32,Nikki.Reflection.Enum.eKeyType,System.String)">
+            <summary>
+            Attemps to replace <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> specified in the <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> data with a new one.
+            </summary>
+            <param name="key">Key of the Collection Name of the <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> to be replaced.</param>
+            <param name="type">Type of the key passed.</param>
+            <param name="filename">Path of the texture that replaces the current one.</param>
+            <returns>True if texture replacing was successful, false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.TryReplaceTexture(System.UInt32,Nikki.Reflection.Enum.eKeyType,System.String,System.String@)">
+            <summary>
+            Attemps to replace <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> specified in the <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> data with a new one.
+            </summary>
+            <param name="key">Key of the Collection Name of the <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> to be replaced.</param>
+            <param name="type">Type of the key passed.</param>
+            <param name="filename">Path of the texture that replaces the current one.</param>
+            <param name="error">Error occured when trying to replace a texture.</param>
+            <returns>True if texture replacing was successful, false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.FindOffsets(System.IO.BinaryReader)">
+            <summary>
+            Finds offsets of all partials and its parts in the <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> with.</param>
+            <returns>Array of all offsets.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.GetTextureCount(System.IO.BinaryReader)">
+            <summary>
+            Gets amount of textures in the <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> with.</param>
+            <returns>Number of textures in the tpk block.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.GetHeaderInfo(System.IO.BinaryReader)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> header information.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.GetOffsetSlots(System.IO.BinaryReader)">
+            <summary>
+            Gets list of offset slots of the textures in the <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.GetTextureHeaders(System.IO.BinaryReader,System.Int32)">
+            <summary>
+            Gets list of offsets and sizes of the texture headers in the <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> with.</param>
+            <param name="count">Number of textures to read.</param>
+            <returns>Array of offsets and sizes of texture headers.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.ParseCompTexture(System.IO.BinaryReader,Nikki.Support.Shared.Parts.TPKParts.OffSlot)">
+            <summary>
+            Parses compressed texture and returns it on the output.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> with.</param>
+            <param name="offslot">Offslot of the texture to be parsed</param>
+            <returns>Decompressed texture valid to the current support.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.GetCompressionList(System.IO.BinaryReader)">
+            <summary>
+            Gets list of compressions of the textures in the tpk block array.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.Get1Part1(System.IO.BinaryWriter)">
+            <summary>
+            Assembles partial 1 part1 of the tpk block.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <returns>Byte array of the partial 1 part1.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.Get1Part2(System.IO.BinaryWriter)">
+            <summary>
+            Assembles partial 1 part2 of the tpk block.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <returns>Byte array of the partial 1 part2.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.Get1Part4(System.IO.BinaryWriter)">
+            <summary>
+            Assembles partial 1 part4 of the tpk block.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <returns>Byte array of the partial 1 part4.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.Get1Part5(System.IO.BinaryWriter)">
+            <summary>
+            Assembles partial 1 part5 of the tpk block.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <returns>Byte array of the partial 1 part5.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.Get2Part1(System.IO.BinaryWriter)">
+            <summary>
+            Assembles partial 2 part1 of the tpk block.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <returns>Byte array of the partial 2 part1.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.Get2Part2(System.IO.BinaryWriter)">
+            <summary>
+            Assembles partial 2 part2 of the tpk block.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <returns>Byte array of the partial 2 part2.</returns>
+        </member>
+        <member name="T:Nikki.Support.Prostreet.Class.Track">
+            <summary>
+            <see cref="T:Nikki.Support.Prostreet.Class.Track"/> is a collection of settings related to races and events.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Prostreet.Class.Track.MaxCNameLength">
+            <summary>
+            Maximum length of the CollectionName.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Prostreet.Class.Track.CNameOffsetAt">
+            <summary>
+            Offset of the CollectionName in the data.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Prostreet.Class.Track.BaseClassSize">
+            <summary>
+            Base size of a unit collection.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.Database">
+            <summary>
+            Database to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.TrackID">
+            <summary>
+            Unique ID value of the track that is used ingame.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.RaceLength">
+            <summary>
+            Total length of the whole track
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.TimeLimitToBeatForward">
+            <summary>
+            Indicates maximum time allowed to complete the race in forward direction.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.TimeLimitToBeatReverse">
+            <summary>
+            Indicates maximum time allowed to complete the race in reverse direction.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.ScoreToBeatDriftForward">
+            <summary>
+            Indicates score needed to beat the drift race in forward direction.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.ScoreToBeatDriftReverse">
+            <summary>
+            Indicates score needed to beat the drift race in reverse direction.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.NumSecBeforeShorcutsAllowed">
+            <summary>
+            Indicates number of seconds that should pass before opponents can take first shortcut.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.DriftSecondsMin">
+            <summary>
+            Indicates minimum amount of seconds to drift.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.DriftSecondsMax">
+            <summary>
+            Indicates maximum amount of seconds to drift.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.CarRaceStartConfig">
+            <summary>
+            Indicates configuration settings of the car at the start.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.TrackMapCalibrationOffsetX">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.TrackMapCalibrationOffsetY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.TrackMapCalibrationWidth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.TrackMapCalibrationRotation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.TrackMapCalibrationZoomIn">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.TrackMapStartgridAngle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.TrackMapFinishlineAngle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.MenuMapZoomOffsetX">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.MenuMapZoomOffsetY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.MenuMapZoomWidth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.MenuMapStartZoomed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.MaxTrafficCars_0_0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.MaxTrafficCars_0_1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.MaxTrafficCars_1_0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.MaxTrafficCars_1_1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.MaxTrafficCars_2_0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.MaxTrafficCars_2_1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.MaxTrafficCars_3_0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.MaxTrafficCars_3_1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.TrafAllowedNearStartgrid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.TrafAllowedNearFinishline">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.TrafMinInitDistFromStart">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.TrafMinInitDistFromFinish">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.TrafMinInitDistInbetweenA">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.TrafMinInitDistInbetweenB">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.TrafOncomingFraction1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.TrafOncomingFraction2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.TrafOncomingFraction3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.Track.TrafOncomingFraction4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Track.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.Track"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Track.#ctor(System.String,Nikki.Database.Prostreet)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.Track"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Track.#ctor(System.IO.BinaryReader,Nikki.Database.Prostreet)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.Track"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Track.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Track.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Prostreet.Class.Track"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Prostreet.Class.Track"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Track.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Prostreet.Class.Track"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.Track"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Track.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Track.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Prostreet.Class.Track"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Prostreet.Framework.CarPartManager">
+            <summary>
+            A static manager to assemble and disassemble <see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> collections.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.CarPartManager.Assemble(System.IO.BinaryWriter,System.String,Nikki.Database.Prostreet)">
+            <summary>
+            Assembles entire root of <see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> into a byte array and 
+            writes it with <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="mark">Watermark to put in the strings block.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> database with roots 
+            and collections.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.CarPartManager.Disassemble(System.IO.BinaryReader,System.Int32,Nikki.Database.Prostreet)">
+            <summary>
+            Disassembles entire car parts block using <see cref="T:System.IO.BinaryReader"/> provided 
+            into <see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> collections and stores them in 
+            <see cref="T:Nikki.Database.Prostreet"/> passed.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="size">Size of the car parts block.</param>
+            <param name="db"><see cref="T:Nikki.Database.Prostreet"/> where all collections 
+            should be stored.</param>
+        </member>
+        <member name="T:Nikki.Support.Prostreet.Parts.CarParts.CPStruct">
+            <summary>
+            A unit <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/> struct with geometry part names.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Parts.CarParts.CPStruct.Exists">
+            <summary>
+            Indicates whether this struct should exist in the database or not.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Parts.CarParts.CPStruct.Templated">
+            <summary>
+            If true, all strings are built using string block; otherwise they are stored as keys.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Parts.CarParts.CPStruct.Concatenator">
+            <summary>
+            String that is used to be concatenated in front of geometry names.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Parts.CarParts.CPStruct.ConcatenatorExists">
+            <summary>
+            True if concatenator string exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Parts.CarParts.CPStruct.GeometryName">
+            <summary>
+            Geometry names of the struct.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Parts.CarParts.CPStruct.GeometryExists">
+            <summary>
+            Indicates existing geometries in the struct.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Prostreet.Parts.CarParts.CPStruct.StructNamesSize">
+            <summary>
+            Amount of geometries stored in the struct.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.CPStruct.#ctor">
+            <summary>
+            Initialized new instance of <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.CPStruct"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.CPStruct.#ctor(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.CPStruct"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.CPStruct.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Disassembles byte array into <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.CPStruct"/> using <see cref="T:System.IO.BinaryReader"/> 
+            provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.CPStruct.Assemble(System.IO.BinaryWriter,System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.CPStruct"/> and writes it using <see cref="T:System.IO.BinaryWriter"/> 
+            provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
+            <param name="string_dict">Dictionary with string HashCodes and their offsets.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.CPStruct.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.CPStruct.ToString">
+            <summary>
+            Returns templated value and first geometry name as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.CPStruct.Equals(System.Object)">
+            <summary>
+            Determines whether this instance and a specified object, which must also be a
+            <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.CPStruct"/> object, have the same value.
+            </summary>
+            <param name="obj">The <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.CPStruct"/> to compare to this instance.</param>
+            <returns>True if obj is a <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.CPStruct"/> and its value is the same as 
+            this instance; false otherwise. If obj is null, the method returns false.
+            </returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.CPStruct.GetHashCode">
+            <summary>
+            Returns the hash code for this <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.CPStruct"/>.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.CPStruct.op_Equality(Nikki.Support.Prostreet.Parts.CarParts.CPStruct,Nikki.Support.Prostreet.Parts.CarParts.CPStruct)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.CPStruct"/> have the same value.
+            </summary>
+            <param name="cp1">The first <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.CPStruct"/> to compare, or null.</param>
+            <param name="cp2">The second <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.CPStruct"/> to compare, or null.</param>
+            <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.CPStruct.op_Inequality(Nikki.Support.Prostreet.Parts.CarParts.CPStruct,Nikki.Support.Prostreet.Parts.CarParts.CPStruct)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.CPStruct"/> have different values.
+            </summary>
+            <param name="cp1">The first <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.CPStruct"/> to compare, or null.</param>
+            <param name="cp2">The second <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.CPStruct"/> to compare, or null.</param>
+            <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
+        </member>
+        <member name="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart">
+            <summary>
+            A unit CarPart attribute of <see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.PartName">
+            <summary>
+            Name of this <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.Index">
+            <summary>
+            Index of <see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> to which this part belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.Attributes">
+            <summary>
+            Collection of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> of this <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.Model">
+            <summary>
+            <see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> to which this part belongs to.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.#ctor">
+            <summary>
+            Initialize new instance of <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.#ctor(System.Int32,Nikki.Support.Prostreet.Class.DBModelPart)">
+            <summary>
+            Initialize new instance of <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="index">Index of the <see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> in the database.</param>
+            <param name="model"><see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> to which this part belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.#ctor(System.Int32,System.Int32,Nikki.Support.Prostreet.Class.DBModelPart)">
+            <summary>
+            Initialize new instance of <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="index">Index of the <see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> in the database.</param>
+            <param name="capacity">Initial capacity of the attribute list.</param>
+            <param name="model"><see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> to which this part belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.ToString">
+            <summary>
+            Returns PartName, Attributes count and CarPartGroupID as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.GetHashCode">
+            <summary>
+            Returns the hash code for this <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.GetAttribute(System.UInt32)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with the key provided.
+            </summary>
+            <param name="key">Key of a <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to find.</param>
+            <returns>A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.GetAttribute(System.String)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with the label provided.
+            </summary>
+            <param name="label">Label of a <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to find.</param>
+            <returns>A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.GetAttribute(System.Int32)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> at index specified.
+            </summary>
+            <param name="index">Index in the list of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> at index specified.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.TryAddAttribute(System.UInt32)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="key">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.TryAddAttribute(System.String)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="label">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.TryAddAttribute(System.UInt32,System.String@)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="key">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="error">Error occured when trying to add new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.TryAddAttribute(System.String,System.String@)">
+            <summary>
+            Attempts to add <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="label">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="error">Error occured when trying to add new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.TryRemoveAttribute(System.UInt32)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="key">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to remove.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.TryRemoveAttribute(System.String)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="label">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to remove.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.TryRemoveAttribute(System.UInt32,System.String@)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="key">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to remove.</param>
+            <param name="error">Error occured when trying to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.TryRemoveAttribute(System.String,System.String@)">
+            <summary>
+            Attempts to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="label">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to remove.</param>
+            <param name="error">Error occured when trying to remove <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.TryCloneAttribute(System.UInt32,System.UInt32)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="newkey">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copykey">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.TryCloneAttribute(System.UInt32,System.String)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="newkey">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.TryCloneAttribute(System.String,System.UInt32)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copykey">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.TryCloneAttribute(System.String,System.String)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.TryCloneAttribute(System.UInt32,System.UInt32,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="newkey">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copykey">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <param name="error">Error occured when trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.TryCloneAttribute(System.UInt32,System.String,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="newkey">Key of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <param name="error">Error occured when trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.TryCloneAttribute(System.String,System.UInt32,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with key provided.
+            </summary>
+            <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copykey">Key of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <param name="error">Error occured when trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.TryCloneAttribute(System.String,System.String,System.String@)">
+            <summary>
+            Attempts to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with label provided.
+            </summary>
+            <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+            <param name="error">Error occured when trying to clone <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
+            <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="T:Nikki.Support.Prostreet.Parts.CarParts.TempPart">
+            <summary>
+            Represents temporary car part that is used to build <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Parts.CarParts.TempPart.Padding">
+            <summary>
+            Padding byte
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Parts.CarParts.TempPart.Index">
+            <summary>
+            Index of the model of the car.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Parts.CarParts.TempPart.AttribOffset">
+            <summary>
+            Attribute offset of the part.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.TempPart.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array of bytes into <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.TempPart"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Class.CarTypeInfo">
             <summary>
             <see cref="T:Nikki.Support.MostWanted.Class.CarTypeInfo"/> is a collection of settings related to a car's basic information.
@@ -8224,152 +10591,152 @@
             Vault memory hash of the collection name.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.BrightColor1Level">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.DiffuseMinLevel">
             <summary>
             Level value of the first bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.BrightColor1Red">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.DiffuseMinRed">
             <summary>
             Red value of the first bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.BrightColor1Green">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.DiffuseMinGreen">
             <summary>
             Green value of the first bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.BrightColor1Blue">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.DiffuseMinBlue">
             <summary>
             Blue value of the first bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.BrightColor2Level">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.DiffuseMaxLevel">
             <summary>
             Level value of the second bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.BrightColor2Red">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.DiffuseMaxRed">
             <summary>
             Red value of the second bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.BrightColor2Green">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.DiffuseMaxGreen">
             <summary>
             Green value of the second bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.BrightColor2Blue">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.DiffuseMaxBlue">
             <summary>
             Blue value of the second bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.LinearNegative">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.EnvmapMinPower">
             <summary>
             Linear negativity of the material colors.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.GradientNegative">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.EnvmapMaxPower">
             <summary>
             Gradient negativity of the material colors.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.ShadowLevel">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.ClampLevel">
             <summary>
             Shadow level value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.ChromeLevel">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.VinylScaleLevel">
             <summary>
             Chrome level value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.MatteLevel">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.FlakesLevel">
             <summary>
             Matte level value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.Reflection1">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.DiffuseMaxAlpha">
             <summary>
             First reflection value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.Reflection2">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.SpecularPower">
             <summary>
             Second reflection value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.Reflection3">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.SpecularMinLevel">
             <summary>
             Third reflection value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.StrongColor1Level">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.SpecularMaxLevel">
             <summary>
             Level value of the first strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.StrongColor1Red">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.SpecularMaxRed">
             <summary>
             Red value of the first strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.StrongColor1Green">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.SpecularMaxGreen">
             <summary>
             Green value of the first strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.StrongColor1Blue">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.SpecularMaxBlue">
             <summary>
             Blue value of the first strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.AlphaValue">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.DiffuseMinAlpha">
             <summary>
             Alpha value of the material colors.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown1">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.SpecularMinRed">
             <summary>
             Unknown 1 value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown2">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.SpecularMinGreen">
             <summary>
             Unknown 2 value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown3">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.SpecularMinBlue">
             <summary>
             Unknown 3 value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown4">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown0">
             <summary>
             Unknown 4 value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown5">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown1">
             <summary>
             Unknown 5 value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown6">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown2">
             <summary>
             Unknown 6 value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown7">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown3">
             <summary>
             Unknown 7 value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown8">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown4">
             <summary>
             Unknown 8 value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown9">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown5">
             <summary>
             Unknown 9 value of the material.
             </summary>
@@ -13249,7 +15616,7 @@
             Key of the part to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.CarParts.PartIDAttribute.Unknown">
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.PartIDAttribute.Level">
             <summary>
             Unknown byte value.
             </summary>
@@ -15073,142 +17440,142 @@
             Vault memory hash of the collection name.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.BrightColor1Level">
+        <member name="P:Nikki.Support.Underground2.Class.Material.DiffuseMinLevel">
             <summary>
             Level value of the first bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.BrightColor1Red">
+        <member name="P:Nikki.Support.Underground2.Class.Material.DiffuseMinRed">
             <summary>
             Red value of the first bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.BrightColor1Green">
+        <member name="P:Nikki.Support.Underground2.Class.Material.DiffuseMinGreen">
             <summary>
             Green value of the first bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.BrightColor1Blue">
+        <member name="P:Nikki.Support.Underground2.Class.Material.DiffuseMinBlue">
             <summary>
             Blue value of the first bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.BrightColor2Level">
+        <member name="P:Nikki.Support.Underground2.Class.Material.DiffuseMaxLevel">
             <summary>
             Level value of the second bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.BrightColor2Red">
+        <member name="P:Nikki.Support.Underground2.Class.Material.DiffuseMaxRed">
             <summary>
             Red value of the second bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.BrightColor2Green">
+        <member name="P:Nikki.Support.Underground2.Class.Material.DiffuseMaxGreen">
             <summary>
             Green value of the second bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.BrightColor2Blue">
+        <member name="P:Nikki.Support.Underground2.Class.Material.DiffuseMaxBlue">
             <summary>
             Blue value of the second bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.AlphaValue1">
+        <member name="P:Nikki.Support.Underground2.Class.Material.DiffuseMinAlpha">
             <summary>
             First alpha value of the material colors.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.AlphaValue2">
+        <member name="P:Nikki.Support.Underground2.Class.Material.DiffuseMaxAlpha">
             <summary>
             Second alpha value of the material colors.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.StrongColor1Level">
+        <member name="P:Nikki.Support.Underground2.Class.Material.SpecularMinLevel">
             <summary>
             Level value of the first strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.StrongColor1Red">
+        <member name="P:Nikki.Support.Underground2.Class.Material.SpecularMinRed">
             <summary>
             Red value of the first strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.StrongColor1Green">
+        <member name="P:Nikki.Support.Underground2.Class.Material.SpecularMinGreen">
             <summary>
             Green value of the first strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.StrongColor1Blue">
+        <member name="P:Nikki.Support.Underground2.Class.Material.SpecularMinBlue">
             <summary>
             Blue value of the first strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.StrongColor2Level">
+        <member name="P:Nikki.Support.Underground2.Class.Material.SpecularMaxLevel">
             <summary>
             Level value of the second strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.StrongColor2Red">
+        <member name="P:Nikki.Support.Underground2.Class.Material.SpecularMaxRed">
             <summary>
             Red value of the second strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.StrongColor2Green">
+        <member name="P:Nikki.Support.Underground2.Class.Material.SpecularMaxGreen">
             <summary>
             Green value of the second strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.StrongColor2Blue">
+        <member name="P:Nikki.Support.Underground2.Class.Material.SpecularMaxBlue">
             <summary>
             Blue value of the second strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.StrongColor3Level">
+        <member name="P:Nikki.Support.Underground2.Class.Material.EnvmapMinLevel">
             <summary>
             Level value of the third strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.StrongColor3Red">
+        <member name="P:Nikki.Support.Underground2.Class.Material.EnvmapMinRed">
             <summary>
             Red value of the third strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.StrongColor3Green">
+        <member name="P:Nikki.Support.Underground2.Class.Material.EnvmapMinGreen">
             <summary>
             Green value of the third strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.StrongColor3Blue">
+        <member name="P:Nikki.Support.Underground2.Class.Material.EnvmapMinBlue">
             <summary>
             Blue value of the third strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.StrongColor4Level">
+        <member name="P:Nikki.Support.Underground2.Class.Material.EnvmapMaxLevel">
             <summary>
             Level value of the fourth strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.StrongColor4Red">
+        <member name="P:Nikki.Support.Underground2.Class.Material.EnvmapMaxRed">
             <summary>
             Red value of the fourth strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.StrongColor4Green">
+        <member name="P:Nikki.Support.Underground2.Class.Material.EnvmapMaxGreen">
             <summary>
             Green value of the fourth strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.StrongColor4Blue">
+        <member name="P:Nikki.Support.Underground2.Class.Material.EnvmapMaxBlue">
             <summary>
             Blue value of the fourth strong color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.Strong1to2Ratio">
+        <member name="P:Nikki.Support.Underground2.Class.Material.SpecularPower">
             <summary>
             Ratio between first and second strong colors of the material
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.Material.Strong3to4Ratio">
+        <member name="P:Nikki.Support.Underground2.Class.Material.EnvmapPower">
             <summary>
             Ratio between third and fourth strong colors of the material
             </summary>

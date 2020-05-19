@@ -10,18 +10,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="CoreExtensions">
-      <HintPath>CoreExtensions.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Support.Undercover\Class\" />
     <Folder Include="Support.Undercover\Framework\" />
     <Folder Include="Support.Undercover\Parts\" />
     <Folder Include="Support.Underground1\Class\" />
     <Folder Include="Support.Underground1\Framework\" />
     <Folder Include="Support.Underground1\Parts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\Max\source\repos\CoreExtensions\CoreExtensions\CoreExtensions.csproj" />
   </ItemGroup>
 
 </Project>

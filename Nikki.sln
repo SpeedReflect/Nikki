@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nikki", "Nikki\Nikki.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreExtensions.CLI", "C:\Users\Max\source\repos\CoreExtensions\CoreExtensions.CLI\CoreExtensions.CLI.csproj", "{CAA4B61D-FDC1-4858-AA57-BAC0481953EB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreExtensions", "C:\Users\Max\source\repos\CoreExtensions\CoreExtensions\CoreExtensions.csproj", "{E8A987AA-E0CD-439A-8B75-643CA72333ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{CAA4B61D-FDC1-4858-AA57-BAC0481953EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAA4B61D-FDC1-4858-AA57-BAC0481953EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAA4B61D-FDC1-4858-AA57-BAC0481953EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8A987AA-E0CD-439A-8B75-643CA72333ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8A987AA-E0CD-439A-8B75-643CA72333ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8A987AA-E0CD-439A-8B75-643CA72333ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8A987AA-E0CD-439A-8B75-643CA72333ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

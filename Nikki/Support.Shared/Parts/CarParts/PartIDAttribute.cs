@@ -103,9 +103,9 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
 		public override void Disassemble(BinaryReader br, BinaryReader str_reader)
 		{
-			this.Level = (byte)((br.ReadByte() >> 5) & 7);
+			this.Level = br.ReadByte();
 			this.ID = br.ReadByte();
-			br.ReadUInt16();
+			br.BaseStream.Position += 2;
 		}
 
 		/// <summary>
@@ -118,7 +118,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		public override void Assemble(BinaryWriter bw, Dictionary<int, int> string_dict)
 		{
 			bw.Write(this.Key);
-			bw.Write((byte)((this.Level & 7) << 5));
+			bw.Write(this.Level);
 			bw.Write(this.ID);
 			bw.Write((ushort)0);
 		}
