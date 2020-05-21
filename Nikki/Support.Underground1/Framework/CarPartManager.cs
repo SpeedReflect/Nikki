@@ -6,13 +6,13 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.ID;
 using Nikki.Reflection.Enum;
-using Nikki.Support.MostWanted.Class;
+using Nikki.Support.Underground1.Class;
 using Nikki.Support.Shared.Parts.CarParts;
 using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.MostWanted.Framework
+namespace Nikki.Support.Underground1.Framework
 {
 	/// <summary>
 	/// A static manager to assemble and disassemble <see cref="DBModelPart"/> collections.
@@ -29,7 +29,7 @@ namespace Nikki.Support.MostWanted.Framework
 			using var bw = new BinaryWriter(ms);
 
 			bw.BaseStream.Position = 0x08;
-			bw.Write(6); // write MW version
+			bw.Write(6); // write UG2 version
 
 			bw.BaseStream.Position = 0x20;
 			bw.Write(attribcount); // write attribute count
@@ -46,7 +46,7 @@ namespace Nikki.Support.MostWanted.Framework
 			return result;
 		}
 
-		private static Dictionary<int, int> MakeStringList(Database.MostWanted db,
+		private static Dictionary<int, int> MakeStringList(Database.Underground2 db, 
 			string mark, out byte[] string_buffer)
 		{
 			// Prepare stack
@@ -101,6 +101,9 @@ namespace Nikki.Support.MostWanted.Framework
 						length = Inject(cpstr.GeometryName3, length);
 						length = Inject(cpstr.GeometryName4, length);
 						length = Inject(cpstr.GeometryName5, length);
+						length = Inject(cpstr.GeometryName6, length);
+						length = Inject(cpstr.GeometryName7, length);
+						length = Inject(cpstr.GeometryName8, length);
 					}
 
 					// Iterate through attributes
@@ -121,13 +124,15 @@ namespace Nikki.Support.MostWanted.Framework
 			}
 
 			// Return prepared dictionary
-			bw.FillBuffer(0x10);
+			var dif = 0x10 - ((int)ms.Length + 4) % 0x10;
+			if (dif != 0x10) bw.WriteBytes(dif);
+
 			string_buffer = ms.ToArray();
 			return string_dict;
 		}
 
 		private static Dictionary<int, int> MakeOffsetList(Dictionary<int, int> attrib_dict,
-			Database.MostWanted db, out byte[] offset_buffer)
+			Database.Underground2 db, out byte[] offset_buffer)
 		{
 			// Initialize stack
 			var offset_map = new Dictionary<int, int>();  // CPOffset to AttribOffset
@@ -184,7 +189,7 @@ namespace Nikki.Support.MostWanted.Framework
 		}
 
 		private static Dictionary<int, int> MakeAttribList(Dictionary<int, int> string_dict,
-			Database.MostWanted db, out byte[] attrib_buffer)
+			Database.Underground2 db, out byte[] attrib_buffer)
 		{
 			// Initialize stack
 			var attrib_list = new Dictionary<int, int>();
@@ -219,15 +224,13 @@ namespace Nikki.Support.MostWanted.Framework
 			}
 
 			// Return prepared dictionary
-			var dif = 0x10 - ((int)ms.Length + 8) % 0x10;
-			if (dif != 0x10) bw.WriteBytes(dif);
-
+			bw.FillBuffer(0x10);
 			attrib_buffer = ms.ToArray();
 			return attrib_list;
 		}
 
 		private static Dictionary<int, int> MakeStructList(Dictionary<int, int> string_dict,
-			Database.MostWanted db, out byte[] struct_buffer)
+			Database.Underground2 db, out byte[] struct_buffer)
 		{
 			// Initialize stack
 			var struct_dict = new Dictionary<int, int>();
@@ -257,14 +260,12 @@ namespace Nikki.Support.MostWanted.Framework
 			}
 
 			// Return prepared dictionary
-			var dif = 0x10 - ((int)ms.Length + 8) % 0x10;
-			if (dif != 0x10) bw.WriteBytes(dif);
-
+			bw.FillBuffer(0x10);
 			struct_buffer = ms.ToArray();
 			return struct_dict;
 		}
 
-		private static int MakeModelsList(Database.MostWanted db, out byte[] models_buffer)
+		private static int MakeModelsList(Database.Underground2 db, out byte[] models_buffer)
 		{
 			// Precalculate size; offset should be at 0xC
 			var size = db.ModelParts.Length * 4;
@@ -285,7 +286,7 @@ namespace Nikki.Support.MostWanted.Framework
 		}
 
 		private static int MakeCPPartList(Dictionary<int, int> string_dict, Dictionary<int, int> offset_dict,
-			Dictionary<int, int> struct_dict, Database.MostWanted db, out byte[] cppart_buffer)
+			Dictionary<int, int> struct_dict, Database.Underground2 db, out byte[] cppart_buffer)
 		{
 			// Initialize stack
 			cppart_buffer = null;
@@ -325,7 +326,7 @@ namespace Nikki.Support.MostWanted.Framework
 			}
 
 			// Return number of parts and buffer
-			var dif = 0x10 - ((int)ms.Length + 8) % 0x10;
+			var dif = 0x10 - ((int)ms.Length + 0xC) % 0x10;
 			if (dif != 0x10) bw.WriteBytes(dif);
 
 			cppart_buffer = ms.ToArray();
@@ -338,7 +339,7 @@ namespace Nikki.Support.MostWanted.Framework
 
 		private static long[] FindOffsets(BinaryReader br, int size)
 		{
-			var result = new long[7];
+			var result = new long[4];
 			var offset = br.BaseStream.Position;
 			while (br.BaseStream.Position < offset + size)
 			{
@@ -352,24 +353,12 @@ namespace Nikki.Support.MostWanted.Framework
 						result[1] = br.BaseStream.Position;
 						goto default;
 
-					case CarParts.DBCARPART_OFFSETS:
+					case CarParts.DBCARPART_ATTRIBS:
 						result[2] = br.BaseStream.Position;
 						goto default;
 
-					case CarParts.DBCARPART_ATTRIBS:
-						result[3] = br.BaseStream.Position;
-						goto default;
-
-					case CarParts.DBCARPART_STRUCTS:
-						result[4] = br.BaseStream.Position;
-						goto default;
-
-					case CarParts.DBCARPART_MODELS:
-						result[5] = br.BaseStream.Position;
-						goto default;
-
 					case CarParts.DBCARPART_ARRAY:
-						result[6] = br.BaseStream.Position;
+						result[3] = br.BaseStream.Position;
 						goto default;
 
 					default:
@@ -427,43 +416,6 @@ namespace Nikki.Support.MostWanted.Framework
 			return result;
 		}
 
-		private static Dictionary<int, CPStruct> ReadStructs(BinaryReader br,
-			BinaryReader str_reader, int maxlen)
-		{
-			var size = br.ReadInt32();
-			var offset = br.BaseStream.Position;
-			var result = new Dictionary<int, CPStruct>(size / 0x18); // set initial capacity
-
-			int count = 0;
-			while (count < maxlen && br.BaseStream.Position < offset + size)
-			{
-				var position = (int)(br.BaseStream.Position - offset);
-				var cpstr = new Parts.CarParts.CPStruct(br, str_reader);
-				result[position / 0x18] = cpstr;
-			}
-			return result;
-		}
-
-		private static string[] ReadModels(BinaryReader br, int maxlen)
-		{
-			var size = br.ReadInt32();
-			var offset = br.BaseStream.Position;
-			var count = size >> 2;
-
-			count = (count > maxlen) ? maxlen : count;
-
-			var result = new string[count];
-
-			for (int a1 = 0; a1 < count; ++a1)
-			{
-				var key = br.ReadUInt32();
-				result[a1] = key.BinString(eLookupReturn.EMPTY);
-				foreach (var part in Parts.CarParts.UsageType.PartName)
-					(result[a1] + part).BinHash();
-			}
-			return result;
-		}
-
 		private static List<Parts.CarParts.TempPart> ReadTempParts(BinaryReader br,
 			BinaryReader str_reader, int maxlen)
 		{
@@ -491,9 +443,9 @@ namespace Nikki.Support.MostWanted.Framework
 		/// </summary>
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		/// <param name="mark">Watermark to put in the strings block.</param>
-		/// <param name="db"><see cref="Database.MostWanted"/> database with roots 
+		/// <param name="db"><see cref="Database.Underground2"/> database with roots 
 		/// and collections.</param>
-		public static void Assemble(BinaryWriter bw, string mark, Database.MostWanted db)
+		public static void Assemble(BinaryWriter bw, string mark, Database.Underground2 db)
 		{
 			// Get string map
 			var string_dict = MakeStringList(db, mark, out var string_buffer);
@@ -569,85 +521,67 @@ namespace Nikki.Support.MostWanted.Framework
 		/// <summary>
 		/// Disassembles entire car parts block using <see cref="BinaryReader"/> provided 
 		/// into <see cref="DBModelPart"/> collections and stores them in 
-		/// <see cref="Database.MostWanted"/> passed.
+		/// <see cref="Database.Underground1"/> passed.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="size">Size of the car parts block.</param>
-		/// <param name="db"><see cref="Database.MostWanted"/> where all collections 
+		/// <param name="db"><see cref="Database.Underground1"/> where all collections 
 		/// should be stored.</param>
-		public static void Disassemble(BinaryReader br, int size, Database.MostWanted db)
+		public static void Disassemble(BinaryReader br, int size, Database.Underground1 db)
 		{
 			long position = br.BaseStream.Position;
 			var offsets = FindOffsets(br, size);
 
 			// We need to read part0 as well
-			br.BaseStream.Position = offsets[0] + 0x24;
+			br.BaseStream.Position = offsets[0] + 0x14;
 			int maxattrib = br.ReadInt32();
-			br.BaseStream.Position = offsets[0] + 0x2C;
-			int maxmodels = br.ReadInt32();
-			br.BaseStream.Position = offsets[0] + 0x34;
-			int maxstruct = br.ReadInt32();
-			br.BaseStream.Position = offsets[0] + 0x3C;
+			br.BaseStream.Position = offsets[0] + 0x1C;
 			int maxcparts = br.ReadInt32();
 
 			// Initialize stream over string block
 			br.BaseStream.Position = offsets[1];
-			var length = br.ReadInt32();
+			var length = br.ReadUInt32() != CarParts.DBCARPART_STRINGS ? 0 : br.ReadInt32();
 			var strarr = br.ReadBytes(length);
 			using var StrStream = new MemoryStream(strarr);
 			using var StrReader = new BinaryReader(StrStream);
 
-			// Read all attribute offsets
-			br.BaseStream.Position = offsets[2];
-			var offset_dict = ReadOffsets(br);
-
 			// Read all car part attributes
-			br.BaseStream.Position = offsets[3];
+			br.BaseStream.Position = offsets[2];
 			var attrib_list = ReadAttribs(br, StrReader, maxattrib);
 
-			// Read all models
-			br.BaseStream.Position = offsets[5];
-			var models_list = ReadModels(br, maxmodels);
-
-			// Read all car part structs
-			br.BaseStream.Position = offsets[4];
-			var struct_dict = ReadStructs(br, StrReader, maxstruct);
-
 			// Read all temporary parts
-			br.BaseStream.Position = offsets[6];
+			br.BaseStream.Position = offsets[3];
 			var temp_cparts = ReadTempParts(br, StrReader, maxcparts);
 
 			// Generate Model Collections
-			for (int a1 = 0; a1 < models_list.Length; ++a1)
+			int index = -1;
+			foreach (var group in temp_cparts.GroupBy(_ => _.CarNameHash))
 			{
-				if (String.IsNullOrEmpty(models_list[a1])) continue;
-				var collection = new DBModelPart(models_list[a1], db);
-				var tempparts = temp_cparts.FindAll(_ => _.Index == a1);
-
-				foreach (var temppart in tempparts)
+				++index;
+				var collection = new DBModelPart(group.Key.BinString(eLookupReturn.EMPTY), db);
+				foreach (var temppart in group)
 				{
-					offset_dict.TryGetValue(temppart.AttribOffset, out var cpoff);
-					struct_dict.TryGetValue(temppart.StructOffset, out var cpstr);
-					var actual = (Parts.CarParts.CPStruct)((Parts.CarParts.CPStruct)cpstr)?.PlainCopy();
-					var realpart = new Parts.CarParts.RealCarPart(a1, cpoff?.AttribOffsets.Count ?? 0, collection)
+					var realpart = new Parts.CarParts.RealCarPart(index, temppart.AttribEnd - temppart.AttribStart, collection)
 					{
 						PartLabel = temppart.PartNameHash.BinString(eLookupReturn.EMPTY),
+						BrandLabel = temppart.BrandNameHash.BinString(eLookupReturn.EMPTY),
 						DebugName = temppart.DebugName,
 						CarPartGroupID = temppart.CarPartGroupID,
 						UpgradeGroupID = temppart.UpgradeGroupID,
-						Struct = actual ?? new Parts.CarParts.CPStruct()
+						GeometryLodA = temppart.LodAHash.BinString(eLookupReturn.EMPTY),
+						GeometryLodB = temppart.LodBHash.BinString(eLookupReturn.EMPTY),
+						GeometryLodC = temppart.LodCHash.BinString(eLookupReturn.EMPTY),
+						GeometryLodD = temppart.LodDHash.BinString(eLookupReturn.EMPTY),
 					};
-					foreach (var attroff in cpoff?.AttribOffsets ?? Enumerable.Empty<ushort>())
+					for (int a1 = temppart.AttribStart; a1 < temppart.AttribEnd; ++a1)
 					{
-						if (attroff >= attrib_list.Length) continue;
-						var addon = attrib_list[attroff].PlainCopy();
+						if (temppart.AttribOffset + a1 >= attrib_list.Length) continue;
+						var addon = attrib_list[temppart.AttribOffset + a1].PlainCopy();
 						addon.BelongsTo = realpart;
 						realpart.Attributes.Add(addon);
 					}
 					collection.ModelCarParts.Add(realpart);
 				}
-				collection.ResortNames();
-				db.ModelParts.Collections.Add(collection);
 			}
 
 			br.BaseStream.Position = position + size;

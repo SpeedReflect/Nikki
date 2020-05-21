@@ -346,31 +346,31 @@ namespace Nikki.Support.Underground2.Framework
 				switch (br.ReadUInt32())
 				{
 					case CarParts.DBCARPART_HEADER:
-						result[0] = br.BaseStream.Position - 4;
+						result[0] = br.BaseStream.Position;
 						goto default;
 
 					case CarParts.DBCARPART_STRINGS:
-						result[1] = br.BaseStream.Position - 4;
+						result[1] = br.BaseStream.Position;
 						goto default;
 
 					case CarParts.DBCARPART_OFFSETS:
-						result[2] = br.BaseStream.Position - 4;
+						result[2] = br.BaseStream.Position;
 						goto default;
 
 					case CarParts.DBCARPART_ATTRIBS:
-						result[3] = br.BaseStream.Position - 4;
+						result[3] = br.BaseStream.Position;
 						goto default;
 
 					case CarParts.DBCARPART_STRUCTS:
-						result[4] = br.BaseStream.Position - 4;
+						result[4] = br.BaseStream.Position;
 						goto default;
 
 					case CarParts.DBCARPART_MODELS:
-						result[5] = br.BaseStream.Position - 4;
+						result[5] = br.BaseStream.Position;
 						goto default;
 
 					case CarParts.DBCARPART_ARRAY:
-						result[6] = br.BaseStream.Position - 4;
+						result[6] = br.BaseStream.Position;
 						goto default;
 
 					default:
@@ -385,9 +385,8 @@ namespace Nikki.Support.Underground2.Framework
 
 		private static Dictionary<int, CPOffset> ReadOffsets(BinaryReader br)
 		{
-			var offset = br.BaseStream.Position + 8;
-			if (br.ReadUInt32() != CarParts.DBCARPART_OFFSETS) return null;
 			var size = br.ReadInt32();
+			var offset = br.BaseStream.Position;
 			var result = new Dictionary<int, CPOffset>(size >> 3); // set initial capacity
 
 			while (br.BaseStream.Position < offset + size)
@@ -404,9 +403,8 @@ namespace Nikki.Support.Underground2.Framework
 
 		private static CPAttribute[] ReadAttribs(BinaryReader br, BinaryReader str, int maxlen)
 		{
-			var offset = br.BaseStream.Position + 8;
-			if (br.ReadUInt32() != CarParts.DBCARPART_ATTRIBS) return null;
 			var size = br.ReadInt32();
+			var offset = br.BaseStream.Position;
 			var result = new CPAttribute[size >> 3]; // set initial capacity
 
 			int count = 0;
@@ -433,9 +431,8 @@ namespace Nikki.Support.Underground2.Framework
 		private static Dictionary<int, CPStruct> ReadStructs(BinaryReader br,
 			BinaryReader str_reader, int maxlen)
 		{
-			var offset = br.BaseStream.Position + 8;
-			if (br.ReadUInt32() != CarParts.DBCARPART_STRUCTS) return null;
 			var size = br.ReadInt32();
+			var offset = br.BaseStream.Position;
 			var result = new Dictionary<int, CPStruct>(size / 0x24); // set initial capacity
 
 			int count = 0;
@@ -450,9 +447,8 @@ namespace Nikki.Support.Underground2.Framework
 
 		private static string[] ReadModels(BinaryReader br, int maxlen)
 		{
-			var offset = br.BaseStream.Position + 8;
-			if (br.ReadUInt32() != CarParts.DBCARPART_MODELS) return null;
 			var size = br.ReadInt32();
+			var offset = br.BaseStream.Position;
 			var count = size >> 2;
 
 			count = (count > maxlen) ? maxlen : count;
@@ -480,11 +476,9 @@ namespace Nikki.Support.Underground2.Framework
 		private static List<Parts.CarParts.TempPart> ReadTempParts(BinaryReader br,
 			BinaryReader str_reader, int maxlen)
 		{
-			var offset = br.BaseStream.Position + 8;
-			if (br.ReadUInt32() != CarParts.DBCARPART_ARRAY) return null;
-
 			// Remove padding at the very end
 			int size = br.ReadInt32(); // read current size
+			var offset = br.BaseStream.Position;
 			var result = new List<Parts.CarParts.TempPart>(maxlen); // initialize
 
 			int count = 0;
@@ -596,13 +590,13 @@ namespace Nikki.Support.Underground2.Framework
 			var offsets = FindOffsets(br, size);
 
 			// We need to read part0 as well
-			br.BaseStream.Position = offsets[0] + 0x28;
+			br.BaseStream.Position = offsets[0] + 0x24;
 			int maxattrib = br.ReadInt32();
-			br.BaseStream.Position = offsets[0] + 0x30;
+			br.BaseStream.Position = offsets[0] + 0x2C;
 			int maxmodels = br.ReadInt32();
-			br.BaseStream.Position = offsets[0] + 0x38;
+			br.BaseStream.Position = offsets[0] + 0x34;
 			int maxstruct = br.ReadInt32();
-			br.BaseStream.Position = offsets[0] + 0x40;
+			br.BaseStream.Position = offsets[0] + 0x3C;
 			int maxcparts = br.ReadInt32();
 
 			// Initialize stream over string block
