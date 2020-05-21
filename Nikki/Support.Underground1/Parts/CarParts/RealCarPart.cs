@@ -4,13 +4,13 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Attributes;
-using Nikki.Support.Underground2.Class;
+using Nikki.Support.Underground1.Class;
 using Nikki.Support.Shared.Parts.CarParts;
 using CoreExtensions.Conversions;
 
 
 
-namespace Nikki.Support.Underground2.Parts.CarParts
+namespace Nikki.Support.Underground1.Parts.CarParts
 {
 	/// <summary>
 	/// A unit CarPart attribute of <see cref="DBModelPart"/>.
@@ -33,21 +33,27 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		public override List<CPAttribute> Attributes { get; set; }
 
 		/// <summary>
-		/// A <see cref="CPStruct"/> of this <see cref="RealCarPart"/>.
-		/// </summary>
-		[Expandable("LodGeometry")]
-		public CPStruct Struct { get; set; }
-
-		/// <summary>
 		/// <see cref="DBModelPart"/> to which this part belongs to.
 		/// </summary>
 		public DBModelPart Model { get; set; }
 
 		/// <summary>
-		/// Label of the car part.
+		/// Debug name of this <see cref="RealCarPart"/>.
+		/// </summary>
+		[AccessModifiable()]
+		public string DebugName { get; set; }
+
+		/// <summary>
+		/// Part label of the car part.
 		/// </summary>
 		[AccessModifiable()]
 		public string PartLabel { get; set; } = String.Empty;
+
+		/// <summary>
+		/// Brand label of the car part.
+		/// </summary>
+		[AccessModifiable()]
+		public string BrandLabel { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Car Part ID Group to which this part belongs to.
@@ -62,10 +68,28 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		public ushort UpgradeGroupID { get; set; }
 
 		/// <summary>
-		/// Debug name of this <see cref="RealCarPart"/>.
+		/// Geometry Lod A label of the part.
 		/// </summary>
 		[AccessModifiable()]
-		public string DebugName { get; set; }
+		public string GeometryLodA { get; set; }
+
+		/// <summary>
+		/// Geometry Lod B label of the part.
+		/// </summary>
+		[AccessModifiable()]
+		public string GeometryLodB { get; set; }
+
+		/// <summary>
+		/// Geometry Lod C label of the part.
+		/// </summary>
+		[AccessModifiable()]
+		public string GeometryLodC { get; set; }
+
+		/// <summary>
+		/// Geometry Lod D label of the part.
+		/// </summary>
+		[AccessModifiable()]
+		public string GeometryLodD { get; set; }
 
 		/// <summary>
 		/// Initialize new instance of <see cref="RealCarPart"/>.
@@ -73,7 +97,6 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		public RealCarPart()
 		{
 			this.Attributes = new List<CPAttribute>();
-			this.Struct = new CPStruct();
 		}
 
 		/// <summary>
@@ -86,7 +109,6 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 			this.Index = index;
 			this.Model = model;
 			this.Attributes = new List<CPAttribute>();
-			this.Struct = new CPStruct();
 		}
 
 		/// <summary>
@@ -100,7 +122,6 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 			this.Index = index;
 			this.Model = model;
 			this.Attributes = new List<CPAttribute>(capacity);
-			this.Struct = new CPStruct();
 		}
 
 		/// <summary>
@@ -116,9 +137,10 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		/// <returns>A 32-bit signed integer hash code.</returns>
 		public override int GetHashCode()
 		{
-			int result = this.PartLabel?.GetHashCode() ?? String.Empty.GetHashCode();
+			int empty = String.Empty.GetHashCode();
+			int result = this.PartLabel?.GetHashCode() ?? empty;
 			result *= this.Index + 7;
-			result ^= this.Struct.GetHashCode();
+			result ^= this.BrandLabel?.GetHashCode() ?? empty;
 			return result;
 		}
 
@@ -370,12 +392,16 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		{
 			var result = new RealCarPart(this.Index, this.Length, this.Model)
 			{
-				CarPartGroupID = this.CarPartGroupID,
 				DebugName = this.DebugName,
 				PartName = this.PartName,
 				PartLabel = this.PartLabel,
+				BrandLabel = this.BrandLabel,
+				CarPartGroupID = this.CarPartGroupID,
 				UpgradeGroupID = this.UpgradeGroupID,
-				Struct = (CPStruct)this.Struct.PlainCopy()
+				GeometryLodA = this.GeometryLodA,
+				GeometryLodB = this.GeometryLodB,
+				GeometryLodC = this.GeometryLodC,
+				GeometryLodD = this.GeometryLodD,
 			};
 			foreach (var attrib in this.Attributes)
 				result.Attributes.Add(attrib.PlainCopy());

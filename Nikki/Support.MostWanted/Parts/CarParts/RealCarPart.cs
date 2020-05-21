@@ -161,6 +161,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 				eCarPartAttribType.String => new StringAttribute(String.Empty, this),
 				eCarPartAttribType.TwoString => new TwoStringAttribute(String.Empty, this),
 				eCarPartAttribType.Key => new KeyAttribute(String.Empty, this),
+				eCarPartAttribType.ModelTable => new ModelTableAttribute(eBoolean.False, this),
 				_ => new IntAttribute((int)0, this)
 			};
 			attribute.SetValue("Type", key);
@@ -202,6 +203,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 				eCarPartAttribType.String => new StringAttribute(String.Empty, this),
 				eCarPartAttribType.TwoString => new TwoStringAttribute(String.Empty, this),
 				eCarPartAttribType.Key => new KeyAttribute(String.Empty, this),
+				eCarPartAttribType.ModelTable => new ModelTableAttribute(eBoolean.False, this),
 				_ => new IntAttribute((int)0, this)
 			};
 			attribute.SetValue("Type", key);

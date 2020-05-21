@@ -140,84 +140,28 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
-		public ushort TrackID_Stage1 { get; set; }
+		public Stage STAGE1 { get; set; }
 
 		/// <summary>
 		/// Track number for stage 2.
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
-		public ushort TrackID_Stage2 { get; set; }
+		public Stage STAGE2 { get; set; }
 
 		/// <summary>
 		/// Track number for stage 3.
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
-		public ushort TrackID_Stage3 { get; set; }
+		public Stage STAGE3 { get; set; }
 
 		/// <summary>
 		/// Track number for stage 4.
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
-		public ushort TrackID_Stage4 { get; set; }
-
-		/// <summary>
-		/// Number of laps in stage 1.
-		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
-		public byte NumLaps_Stage1 { get; set; }
-
-		/// <summary>
-		/// Number of laps in stage 2.
-		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
-		public byte NumLaps_Stage2 { get; set; }
-
-		/// <summary>
-		/// Number of laps in stage 3.
-		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
-		public byte NumLaps_Stage3 { get; set; }
-
-		/// <summary>
-		/// Number of laps in stage 4.
-		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
-		public byte NumLaps_Stage4 { get; set; }
-
-		/// <summary>
-		/// True if stage 1 track is in reverse; false otherwise.
-		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
-		public eBoolean InReverseDirection_Stage1 { get; set; }
-
-		/// <summary>
-		/// True if stage 2 track is in reverse; false otherwise.
-		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
-		public eBoolean InReverseDirection_Stage2 { get; set; }
-
-		/// <summary>
-		/// True if stage 3 track is in reverse; false otherwise.
-		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
-		public eBoolean InReverseDirection_Stage3 { get; set; }
-
-		/// <summary>
-		/// True if stage 4 track is in reverse; false otherwise.
-		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
-		public eBoolean InReverseDirection_Stage4 { get; set; }
+		public Stage STAGE4 { get; set; }
 
 		/// <summary>
 		/// Respect being earned from winning the race.
@@ -341,23 +285,22 @@ namespace Nikki.Support.Underground2.Gameplay
 				if (this.EventBehaviorType != eEventBehaviorType.Drift)
 					return eDriftType.VS_AI;
 
-				var track1 = this.Database.Tracks.FindCollection($"Track_{this.TrackID_Stage1}");
-				var track2 = this.Database.Tracks.FindCollection($"Track_{this.TrackID_Stage2}");
-				var track3 = this.Database.Tracks.FindCollection($"Track_{this.TrackID_Stage3}");
-				var track4 = this.Database.Tracks.FindCollection($"Track_{this.TrackID_Stage4}");
+				var track1 = this.Database.Tracks.FindCollection($"Track_{this.STAGE1.TrackID}");
+				var track2 = this.Database.Tracks.FindCollection($"Track_{this.STAGE2.TrackID}");
+				var track3 = this.Database.Tracks.FindCollection($"Track_{this.STAGE3.TrackID}");
+				var track4 = this.Database.Tracks.FindCollection($"Track_{this.STAGE4.TrackID}");
 
 				var drift1 = (track1 != null) ? track1.DriftType : eDriftType.VS_AI;
 				var drift2 = (track2 != null) ? track2.DriftType : eDriftType.VS_AI;
 				var drift3 = (track3 != null) ? track3.DriftType : eDriftType.VS_AI;
 				var drift4 = (track4 != null) ? track4.DriftType : eDriftType.VS_AI;
 
-				if (drift1 == eDriftType.DOWNHILL ||
-					drift2 == eDriftType.DOWNHILL ||
-					drift3 == eDriftType.DOWNHILL ||
-					drift4 == eDriftType.DOWNHILL)
-					return eDriftType.DOWNHILL;
-				else
-					return eDriftType.VS_AI;
+				return drift1 == eDriftType.DOWNHILL ||
+					   drift2 == eDriftType.DOWNHILL ||
+					   drift3 == eDriftType.DOWNHILL ||
+					   drift4 == eDriftType.DOWNHILL
+						? eDriftType.DOWNHILL
+						: eDriftType.VS_AI;
 			}
 		}
 
@@ -414,6 +357,10 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.OPPONENT3 = new Opponent();
 			this.OPPONENT4 = new Opponent();
 			this.OPPONENT5 = new Opponent();
+			this.STAGE1 = new Stage();
+			this.STAGE2 = new Stage();
+			this.STAGE3 = new Stage();
+			this.STAGE4 = new Stage();
 			CName.BinHash();
 		}
 
@@ -431,6 +378,10 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.OPPONENT3 = new Opponent();
 			this.OPPONENT4 = new Opponent();
 			this.OPPONENT5 = new Opponent();
+			this.STAGE1 = new Stage();
+			this.STAGE2 = new Stage();
+			this.STAGE3 = new Stage();
+			this.STAGE4 = new Stage();
 			this.Disassemble(br, strr);
 		}
 
@@ -497,18 +448,10 @@ namespace Nikki.Support.Underground2.Gameplay
 			}
 
 			bw.Write(this.EarnableRespect);
-			bw.Write(this.TrackID_Stage1);
-			bw.WriteEnum(this.InReverseDirection_Stage1);
-			bw.Write(this.NumLaps_Stage1);
-			bw.Write(this.TrackID_Stage2);
-			bw.WriteEnum(this.InReverseDirection_Stage2);
-			bw.Write(this.NumLaps_Stage2);
-			bw.Write(this.TrackID_Stage3);
-			bw.WriteEnum(this.InReverseDirection_Stage3);
-			bw.Write(this.NumLaps_Stage3);
-			bw.Write(this.TrackID_Stage4);
-			bw.WriteEnum(this.InReverseDirection_Stage4);
-			bw.Write(this.NumLaps_Stage4);
+			this.STAGE1.Write(bw);
+			this.STAGE2.Write(bw);
+			this.STAGE3.Write(bw);
+			this.STAGE4.Write(bw);
 
 			bw.Write(this.EventTrigger.BinHash());
 			bw.Write(this.PlayerCarType.BinHash());
@@ -750,18 +693,11 @@ namespace Nikki.Support.Underground2.Gameplay
 			// Earnable Respect ?
 			this.EarnableRespect = br.ReadInt32();
 
-			this.TrackID_Stage1 = br.ReadUInt16();
-			this.InReverseDirection_Stage1 = (eBoolean)(br.ReadByte() % 2);
-			this.NumLaps_Stage1 = br.ReadByte();
-			this.TrackID_Stage2 = br.ReadUInt16();
-			this.InReverseDirection_Stage2 = (eBoolean)(br.ReadByte() % 2);
-			this.NumLaps_Stage2 = br.ReadByte();
-			this.TrackID_Stage3 = br.ReadUInt16();
-			this.InReverseDirection_Stage3 = (eBoolean)(br.ReadByte() % 2);
-			this.NumLaps_Stage3 = br.ReadByte();
-			this.TrackID_Stage4 = br.ReadUInt16();
-			this.InReverseDirection_Stage4 = (eBoolean)(br.ReadByte() % 2);
-			this.NumLaps_Stage4 = br.ReadByte();
+			// Stages
+			this.STAGE1.Read(br);
+			this.STAGE2.Read(br);
+			this.STAGE3.Read(br);
+			this.STAGE4.Read(br);
 
 			// PlayerCarType and CashValue
 			br.BaseStream.Position += 4;
@@ -919,18 +855,10 @@ namespace Nikki.Support.Underground2.Gameplay
 				RequiredURLWon = this.RequiredURLWon,
 				SponsorChosenToUnlock = this.SponsorChosenToUnlock,
 				EarnableRespect = this.EarnableRespect,
-				TrackID_Stage1 = this.TrackID_Stage1,
-				TrackID_Stage2 = this.TrackID_Stage2,
-				TrackID_Stage3 = this.TrackID_Stage3,
-				TrackID_Stage4 = this.TrackID_Stage4,
-				InReverseDirection_Stage1 = this.InReverseDirection_Stage1,
-				InReverseDirection_Stage2 = this.InReverseDirection_Stage2,
-				InReverseDirection_Stage3 = this.InReverseDirection_Stage3,
-				InReverseDirection_Stage4 = this.InReverseDirection_Stage4,
-				NumLaps_Stage1 = this.NumLaps_Stage1,
-				NumLaps_Stage2 = this.NumLaps_Stage2,
-				NumLaps_Stage3 = this.NumLaps_Stage3,
-				NumLaps_Stage4 = this.NumLaps_Stage4,
+				STAGE1 = this.STAGE1.PlainCopy(),
+				STAGE2 = this.STAGE2.PlainCopy(),
+				STAGE3 = this.STAGE3.PlainCopy(),
+				STAGE4 = this.STAGE4.PlainCopy(),
 				PlayerCarType = this.PlayerCarType,
 				CashValue = this.CashValue,
 				EventIconType = this.EventIconType,
