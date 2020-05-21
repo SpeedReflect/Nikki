@@ -13,7 +13,7 @@ using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.Underground2.Class
+namespace Nikki.Support.Underground1.Class
 {
     /// <summary>
     /// <see cref="Texture"/> is a collection of dds image data used by the game.
@@ -60,17 +60,17 @@ namespace Nikki.Support.Underground2.Class
         /// <summary>
         /// Game to which the class belongs to.
         /// </summary>
-        public override GameINT GameINT => GameINT.Underground2;
+        public override GameINT GameINT => GameINT.Underground1;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
-        public override string GameSTR => GameINT.Underground2.ToString();
+        public override string GameSTR => GameINT.Underground1.ToString();
 
         /// <summary>
         /// Database to which the class belongs to.
         /// </summary>
-        public Database.Underground2 Database { get; set; }
+        public Database.Underground1 Database { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
@@ -144,8 +144,8 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
         /// <param name="_TPK"><see cref="TPKBlock"/> to which this texture belongs to.</param>
-        /// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-        public Texture(string CName, string _TPK, Database.Underground2 db)
+        /// <param name="db"><see cref="Database.Underground1"/> to which this instance belongs to.</param>
+        public Texture(string CName, string _TPK, Database.Underground1 db)
         {
             this.Database = db;
             this._collection_name = CName;
@@ -161,8 +161,8 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="CName">CollectionName of the new instance.</param>
         /// <param name="_TPK"><see cref="TPKBlock"/> to which this texture belongs to.</param>
         /// <param name="filename">Filename of the texture to import.</param>
-        /// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-        public Texture(string CName, string _TPK, string filename, Database.Underground2 db)
+        /// <param name="db"><see cref="Database.Underground1"/> to which this instance belongs to.</param>
+        public Texture(string CName, string _TPK, string filename, Database.Underground1 db)
         {
             this.Database = db;
             this._collection_name = CName;
@@ -178,8 +178,8 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         /// <param name="_TPK"><see cref="TPKBlock"/> to which this texture belongs to.</param>
-        /// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-        public Texture(BinaryReader br, string _TPK, Database.Underground2 db)
+        /// <param name="db"><see cref="Database.Underground1"/> to which this instance belongs to.</param>
+        public Texture(BinaryReader br, string _TPK, Database.Underground1 db)
         {
             this.Database = db;
             this._parent_TPK = _TPK;

@@ -10,7 +10,7 @@ using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.Underground1.Class
+namespace Nikki.Support.Underground2.Class
 {
 	/// <summary>
 	/// <see cref="SunInfo"/> is a collection of sun and daylight settings.
@@ -43,17 +43,17 @@ namespace Nikki.Support.Underground1.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
-		public override GameINT GameINT => GameINT.Underground1;
+		public override GameINT GameINT => GameINT.Underground2;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
-		public override string GameSTR => GameINT.Underground1.ToString();
+		public override string GameSTR => GameINT.Underground2.ToString();
 
 		/// <summary>
 		/// Database to which the class belongs to.
 		/// </summary>
-		public Database.Underground1 Database { get; set; }
+		public Database.Underground2 Database { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
@@ -135,8 +135,8 @@ namespace Nikki.Support.Underground1.Class
 		/// Initializes new instance of <see cref="SunInfo"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Underground1"/> to which this instance belongs to.</param>
-		public SunInfo(string CName, Database.Underground1 db)
+		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
+		public SunInfo(string CName, Database.Underground2 db)
 		{
 			this.Database = db;
 			this.CollectionName = CName;
@@ -153,8 +153,8 @@ namespace Nikki.Support.Underground1.Class
 		/// Initializes new instance of <see cref="SunInfo"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Underground1"/> to which this instance belongs to.</param>
-		public SunInfo(BinaryReader br, Database.Underground1 db)
+		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
+		public SunInfo(BinaryReader br, Database.Underground2 db)
 		{
 			this.Database = db;
 			this.SUNLAYER1 = new SunLayer();
