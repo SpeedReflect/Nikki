@@ -139,7 +139,7 @@ namespace Nikki.Reflection.Abstract
         /// <param name="PropertyName">Field name to get the value from.</param>
         /// <returns>String value of a field name.</returns>
         public string GetValue(string PropertyName) 
-            => this.GetFastPropertyValue(PropertyName).ToString();
+            => this.GetFastPropertyValue(PropertyName)?.ToString();
 
         /// <summary>
         /// Sets value at a field specified.

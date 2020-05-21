@@ -332,11 +332,6 @@
             
             </summary>
         </member>
-        <member name="P:Nikki.Database.Carbon.CarPartStructs">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="M:Nikki.Database.Carbon.#ctor">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Database.Carbon"/>.
@@ -1619,6 +1614,41 @@
             
             </summary>
         </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0x1BC91595">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0x1BC91597">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0x1BC91598">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0x1BC9159A">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0x1BC9159B">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0x1BC915B5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0x1BC915BD">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Nikki.Reflection.Enum.CP.eAttribFloat">
             <summary>
             All attribute types for <see cref="T:Nikki.Support.Shared.Parts.CarParts.FloatAttribute"/>.
@@ -2029,6 +2059,16 @@
             
             </summary>
         </member>
+        <member name="T:Nikki.Reflection.Enum.CP.eAttribModelTable">
+            <summary>
+            All attribute types for <see cref="T:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribModelTable.MODEL_TABLE_OFFSET">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Nikki.Reflection.Enum.CP.eAttribPartID">
             <summary>
             All attribute types for <see cref="T:Nikki.Support.Shared.Parts.CarParts.PartIDAttribute"/>.
@@ -2337,6 +2377,11 @@
         <member name="F:Nikki.Reflection.Enum.eCarPartAttribType.Key">
             <summary>
             Attribute with BIN key stored that is represented as <see langword="string"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eCarPartAttribType.ModelTable">
+            <summary>
+            Attribute with in-built CPStruct in it.
             </summary>
         </member>
         <member name="T:Nikki.Reflection.Enum.eCarPartLabels">
@@ -15596,6 +15641,745 @@
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
         </member>
+        <member name="T:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute">
+            <summary>
+            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with in-built <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPStruct"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.AttribType">
+            <summary>
+            <see cref="T:Nikki.Reflection.Enum.eCarPartAttribType"/> type of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Type">
+            <summary>
+            Type of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.BoolAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Key">
+            <summary>
+            Key of the part to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Templated">
+            <summary>
+            If true, all names are places in the string block; otherwise, all 
+            hashes of the names are stored in the table.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Concatenator">
+            <summary>
+            Main concatenator string, if exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.ConcatenatorExists">
+            <summary>
+            True if concatenator string exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry0LodA">
+            <summary>
+            Geometry 0 Lod A value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry0LodB">
+            <summary>
+            Geometry 0 Lod B value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry0LodC">
+            <summary>
+            Geometry 0 Lod C value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry0LodD">
+            <summary>
+            Geometry 0 Lod D value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry0LodE">
+            <summary>
+            Geometry 0 Lod E value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry1LodA">
+            <summary>
+            Geometry 1 Lod A value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry1LodB">
+            <summary>
+            Geometry 1 Lod B value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry1LodC">
+            <summary>
+            Geometry 1 Lod C value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry1LodD">
+            <summary>
+            Geometry 1 Lod D value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry1LodE">
+            <summary>
+            Geometry 1 Lod E value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry2LodA">
+            <summary>
+            Geometry 2 Lod A value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry2LodB">
+            <summary>
+            Geometry 2 Lod B value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry2LodC">
+            <summary>
+            Geometry 2 Lod C value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry2LodD">
+            <summary>
+            Geometry 2 Lod D value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry2LodE">
+            <summary>
+            Geometry 2 Lod E value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry3LodA">
+            <summary>
+            Geometry 3 Lod A value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry3LodB">
+            <summary>
+            Geometry 3 Lod B value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry3LodC">
+            <summary>
+            Geometry 3 Lod C value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry3LodD">
+            <summary>
+            Geometry 3 Lod D value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry3LodE">
+            <summary>
+            Geometry 3 Lod E value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry4LodA">
+            <summary>
+            Geometry 4 Lod A value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry4LodB">
+            <summary>
+            Geometry 4 Lod B value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry4LodC">
+            <summary>
+            Geometry 4 Lod C value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry4LodD">
+            <summary>
+            Geometry 4 Lod D value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry4LodE">
+            <summary>
+            Geometry 4 Lod E value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry5LodA">
+            <summary>
+            Geometry 5 Lod A value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry5LodB">
+            <summary>
+            Geometry 5 Lod B value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry5LodC">
+            <summary>
+            Geometry 5 Lod C value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry5LodD">
+            <summary>
+            Geometry 5 Lod D value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry5LodE">
+            <summary>
+            Geometry 5 Lod E value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry6LodA">
+            <summary>
+            Geometry 6 Lod A value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry6LodB">
+            <summary>
+            Geometry 6 Lod B value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry6LodC">
+            <summary>
+            Geometry 6 Lod C value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry6LodD">
+            <summary>
+            Geometry 6 Lod D value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry6LodE">
+            <summary>
+            Geometry 6 Lod E value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry7LodA">
+            <summary>
+            Geometry 7 Lod A value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry7LodB">
+            <summary>
+            Geometry 7 Lod B value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry7LodC">
+            <summary>
+            Geometry 7 Lod C value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry7LodD">
+            <summary>
+            Geometry 7 Lod D value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry7LodE">
+            <summary>
+            Geometry 7 Lod E value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry8LodA">
+            <summary>
+            Geometry 8 Lod A value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry8LodB">
+            <summary>
+            Geometry 8 Lod B value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry8LodC">
+            <summary>
+            Geometry 8 Lod C value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry8LodD">
+            <summary>
+            Geometry 8 Lod D value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry8LodE">
+            <summary>
+            Geometry 8 Lod E value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry9LodA">
+            <summary>
+            Geometry 9 Lod A value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry9LodB">
+            <summary>
+            Geometry 9 Lod B value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry9LodC">
+            <summary>
+            Geometry 9 Lod C value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry9LodD">
+            <summary>
+            Geometry 9 Lod D value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry9LodE">
+            <summary>
+            Geometry 9 Lod E value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry10LodA">
+            <summary>
+            Geometry 10 Lod A value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry10LodB">
+            <summary>
+            Geometry 10 Lod B value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry10LodC">
+            <summary>
+            Geometry 10 Lod C value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry10LodD">
+            <summary>
+            Geometry 10 Lod D value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry10LodE">
+            <summary>
+            Geometry 10 Lod E value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry11LodA">
+            <summary>
+            Geometry 11 Lod A value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry11LodB">
+            <summary>
+            Geometry 11 Lod B value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry11LodC">
+            <summary>
+            Geometry 11 Lod C value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry11LodD">
+            <summary>
+            Geometry 11 Lod D value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry11LodE">
+            <summary>
+            Geometry 11 Lod E value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry0LodAExists">
+            <summary>
+            True if geometry 0 Lod A exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry0LodBExists">
+            <summary>
+            True if geometry 0 Lod B exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry0LodCExists">
+            <summary>
+            True if geometry 0 Lod C exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry0LodDExists">
+            <summary>
+            True if geometry 0 Lod D exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry0LodEExists">
+            <summary>
+            True if geometry 0 Lod E exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry1LodAExists">
+            <summary>
+            True if geometry 1 Lod A exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry1LodBExists">
+            <summary>
+            True if geometry 1 Lod B exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry1LodCExists">
+            <summary>
+            True if geometry 1 Lod C exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry1LodDExists">
+            <summary>
+            True if geometry 1 Lod D exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry1LodEExists">
+            <summary>
+            True if geometry 1 Lod E exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry2LodAExists">
+            <summary>
+            True if geometry 2 Lod A exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry2LodBExists">
+            <summary>
+            True if geometry 2 Lod B exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry2LodCExists">
+            <summary>
+            True if geometry 2 Lod C exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry2LodDExists">
+            <summary>
+            True if geometry 2 Lod D exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry2LodEExists">
+            <summary>
+            True if geometry 2 Lod E exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry3LodAExists">
+            <summary>
+            True if geometry 3 Lod A exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry3LodBExists">
+            <summary>
+            True if geometry 3 Lod B exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry3LodCExists">
+            <summary>
+            True if geometry 3 Lod C exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry3LodDExists">
+            <summary>
+            True if geometry 3 Lod D exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry3LodEExists">
+            <summary>
+            True if geometry 3 Lod E exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry4LodAExists">
+            <summary>
+            True if geometry 4 Lod A exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry4LodBExists">
+            <summary>
+            True if geometry 4 Lod B exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry4LodCExists">
+            <summary>
+            True if geometry 4 Lod C exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry4LodDExists">
+            <summary>
+            True if geometry 4 Lod D exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry4LodEExists">
+            <summary>
+            True if geometry 4 Lod E exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry5LodAExists">
+            <summary>
+            True if geometry 5 Lod A exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry5LodBExists">
+            <summary>
+            True if geometry 5 Lod B exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry5LodCExists">
+            <summary>
+            True if geometry 5 Lod C exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry5LodDExists">
+            <summary>
+            True if geometry 5 Lod D exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry5LodEExists">
+            <summary>
+            True if geometry 5 Lod E exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry6LodAExists">
+            <summary>
+            True if geometry 6 Lod A exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry6LodBExists">
+            <summary>
+            True if geometry 6 Lod B exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry6LodCExists">
+            <summary>
+            True if geometry 6 Lod C exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry6LodDExists">
+            <summary>
+            True if geometry 6 Lod D exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry6LodEExists">
+            <summary>
+            True if geometry 6 Lod E exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry7LodAExists">
+            <summary>
+            True if geometry 7 Lod A exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry7LodBExists">
+            <summary>
+            True if geometry 7 Lod B exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry7LodCExists">
+            <summary>
+            True if geometry 7 Lod C exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry7LodDExists">
+            <summary>
+            True if geometry 7 Lod D exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry7LodEExists">
+            <summary>
+            True if geometry 7 Lod E exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry8LodAExists">
+            <summary>
+            True if geometry 8 Lod A exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry8LodBExists">
+            <summary>
+            True if geometry 8 Lod B exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry8LodCExists">
+            <summary>
+            True if geometry 8 Lod C exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry8LodDExists">
+            <summary>
+            True if geometry 8 Lod D exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry8LodEExists">
+            <summary>
+            True if geometry 8 Lod E exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry9LodAExists">
+            <summary>
+            True if geometry 9 Lod A exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry9LodBExists">
+            <summary>
+            True if geometry 9 Lod B exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry9LodCExists">
+            <summary>
+            True if geometry 9 Lod C exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry9LodDExists">
+            <summary>
+            True if geometry 9 Lod D exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry9LodEExists">
+            <summary>
+            True if geometry 9 Lod E exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry10LodAExists">
+            <summary>
+            True if geometry 10 Lod A exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry10LodBExists">
+            <summary>
+            True if geometry 10 Lod B exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry10LodCExists">
+            <summary>
+            True if geometry 10 Lod C exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry10LodDExists">
+            <summary>
+            True if geometry 10 Lod D exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry10LodEExists">
+            <summary>
+            True if geometry 10 Lod E exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry11LodAExists">
+            <summary>
+            True if geometry 11 Lod A exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry11LodBExists">
+            <summary>
+            True if geometry 11 Lod B exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry11LodCExists">
+            <summary>
+            True if geometry 11 Lod C exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry11LodDExists">
+            <summary>
+            True if geometry 11 Lod D exists; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Geometry11LodEExists">
+            <summary>
+            True if geometry 11 Lod E exists; false otherwise.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute"/> with value provided.
+            </summary>
+            <param name="value">Value to set.</param>
+            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute"/> by reading data using 
+            <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="key">Key of the attribute's group.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Disassembles byte array into <see cref="T:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute"/> using <see cref="T:System.IO.BinaryReader"/> 
+            provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with. 
+            Since it is an Model Table Attribute, this value can be <see langword="null"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.ReadStruct(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Reads struct settings using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with model table with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Assemble(System.IO.BinaryWriter,System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute"/> and writes it using <see cref="T:System.IO.BinaryWriter"/> 
+            provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
+            <param name="string_dict">Dictionary of string HashCodes and their offsets. 
+            Since it is an Model Table Attribute, this value can be <see langword="null"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.WriteStruct(System.IO.BinaryWriter,System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+            <summary>
+            Writes struct settings using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with model table with.</param>
+            <param name="string_dict">Dictionary of string HashCodes and their offsets.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.ToString">
+            <summary>
+            Returns attribute part label and its type as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.Equals(System.Object)">
+            <summary>
+            Determines whether this instance and a specified object, which must also be a
+            <see cref="T:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute"/> object, have the same value.
+            </summary>
+            <param name="obj">The <see cref="T:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute"/> to compare to this instance.</param>
+            <returns>True if obj is a <see cref="T:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute"/> and its value is the same as 
+            this instance; false otherwise. If obj is null, the method returns false.
+            </returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.GetHashCode">
+            <summary>
+            Returns the hash code for this <see cref="T:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute"/>.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.op_Equality(Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute,Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute"/> have the same value.
+            </summary>
+            <param name="at1">The first <see cref="T:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute"/> to compare, or null.</param>
+            <param name="at2">The second <see cref="T:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute"/> to compare, or null.</param>
+            <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.op_Inequality(Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute,Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute"/> have different values.
+            </summary>
+            <param name="at1">The first <see cref="T:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute"/> to compare, or null.</param>
+            <param name="at2">The second <see cref="T:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute"/> to compare, or null.</param>
+            <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute.ConvertTo(Nikki.Reflection.Enum.eCarPartAttribType)">
+            <summary>
+            Converts this <see cref="T:Nikki.Support.Shared.Parts.CarParts.ModelTableAttribute"/> to an attribute of type provided.
+            </summary>
+            <param name="type">Type of a new attribute.</param>
+            <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
+        </member>
         <member name="T:Nikki.Support.Shared.Parts.CarParts.PartIDAttribute">
             <summary>
             A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with unknown byte and part ID values.
@@ -23335,6 +24119,25 @@
             <param name="type"><see cref="T:Nikki.Utils.eLookupReturn"/> type.</param>
             <returns>Resolved Vlt Key.</returns>
         </member>
+        <member name="T:Nikki.Utils.HUFF">
+            <summary>
+            Collection with HUFF compresssor and decompressor.
+            </summary>
+        </member>
+        <member name="M:Nikki.Utils.HUFF.Decompress(System.Byte[])">
+            <summary>
+            Attempts to decompress HUFF byte array. It is not precise when node table is missing.
+            </summary>
+            <param name="buffer">Byte buffer to decompress.</param>
+            <returns>Byte array of decompressed data.</returns>
+        </member>
+        <member name="M:Nikki.Utils.HUFF.Compress(System.Byte[])">
+            <summary>
+            Compresses byte array into HUFF-compressed one.
+            </summary>
+            <param name="buffer">Byte buffer to compress.</param>
+            <returns>HUFF-compressed byte array.</returns>
+        </member>
         <member name="T:Nikki.Utils.JDLZ">
             <summary>
             Collection with JDLZ compressor and decompressor.
@@ -23351,7 +24154,7 @@
             <summary>
             Compresses byte block into JDLZ-compressed one.
             </summary>
-            <param name="input">Array of bytes to be compressed.</param>
+            <param name="input">Byte buffer to compress.</param>
             <param name="hashSize">Speed/Ratio tunable; use powers of 2. Results vary per file.</param>
             <param name="maxSearchDepth">Speed/Ratio tunable. Results vary per file.</param>
             <returns>JDLZ-compressed byte array.</returns>

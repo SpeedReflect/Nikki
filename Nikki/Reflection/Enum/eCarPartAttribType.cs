@@ -39,5 +39,10 @@
 		/// Attribute with BIN key stored that is represented as <see langword="string"/>.
 		/// </summary>
 		Key = 7,
+
+		/// <summary>
+		/// Attribute with in-built CPStruct in it.
+		/// </summary>
+		ModelTable = 8,
 	}
 }

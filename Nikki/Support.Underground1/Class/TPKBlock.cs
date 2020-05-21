@@ -13,7 +13,7 @@ using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.Underground1.Class
+namespace Nikki.Support.Underground2.Class
 {
     /// <summary>
     /// <see cref="TPKBlock"/> is a collection of <see cref="Texture"/>.
@@ -32,17 +32,17 @@ namespace Nikki.Support.Underground1.Class
         /// <summary>
         /// Game to which the class belongs to.
         /// </summary>
-        public override GameINT GameINT => GameINT.Underground1;
+        public override GameINT GameINT => GameINT.Underground2;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
-        public override string GameSTR => GameINT.Underground1.ToString();
+        public override string GameSTR => GameINT.Underground2.ToString();
 
         /// <summary>
         /// Database to which the class belongs to.
         /// </summary>
-        public Database.Underground1 Database { get; set; }
+        public Database.Underground2 Database { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
@@ -67,7 +67,7 @@ namespace Nikki.Support.Underground1.Class
         /// <summary>
         /// Version of this <see cref="TPKBlock"/>.
         /// </summary>
-        public override eTPKVersion Version => eTPKVersion.Underground1;
+        public override eTPKVersion Version => eTPKVersion.Underground2;
 
         /// <summary>
         /// Filename used for this <see cref="TPKBlock"/>. It is a default watermark.
@@ -109,8 +109,8 @@ namespace Nikki.Support.Underground1.Class
         /// Initializes new instance of <see cref="TPKBlock"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="db"><see cref="Database.Underground1"/> to which this instance belongs to.</param>
-        public TPKBlock(string CName, Database.Underground1 db)
+        /// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
+        public TPKBlock(string CName, Database.Underground2 db)
         {
             this.Database = db;
             this.CollectionName = CName;
@@ -122,8 +122,8 @@ namespace Nikki.Support.Underground1.Class
         /// Initializes new instance of <see cref="TPKBlock"/>.
         /// </summary>
         /// <param name="index">Index of the instance in the database.</param>
-		/// <param name="db"><see cref="Database.Underground1"/> to which this instance belongs to.</param>
-        public TPKBlock(int index, Database.Underground1 db)
+		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
+        public TPKBlock(int index, Database.Underground2 db)
         {
             if (index < 0) this.UseCurrentName = eBoolean.True;
             this.Database = db;

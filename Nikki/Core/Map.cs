@@ -16,7 +16,96 @@ namespace Nikki.Core
 		/// </summary>
 		public static Dictionary<uint, string> BinKeys { get; set; } = new Dictionary<uint, string>()
 		{
-			{ 0, String.Empty }
+			{ 0, String.Empty },
+			{ 0x000004B8, "CV" },
+			{ 0x0000D99A, "RED" },
+			{ 0x00136707, "BLUE" },
+			{ 0x001C0D0C, "RED2" },
+			{ 0x00194031, "MAT0" },
+			{ 0x00194032, "MAT1" },
+			{ 0x00194033, "MAT2" },
+			{ 0x00194034, "MAT3" },
+			{ 0x00194035, "MAT4" },
+			{ 0x00194036, "MAT5" },
+			{ 0x00194037, "MAT6" },
+			{ 0x00194038, "MAT7" },
+			{ 0x0019CBC0, "NAME" },
+			{ 0x001CAD5A, "SIZE" },
+			{ 0x00BA7DC0, "DISPGREEN" },
+			{ 0x026E1AC5, "ALPHA" },
+			{ 0x02800544, "BLEND" },
+			{ 0x02804819, "BLUE2" },
+			{ 0x02DDC8F0, "GREEN" },
+			{ 0x02DAAB07, "GLOSS" },
+			{ 0x039DD714, "REMAP" },
+			{ 0x03B16390, "SHAPE" },
+			{ 0x03B83203, "STOCK" },
+			{ 0x06159D55, "TIREHUE" },
+			{ 0x0615AE61, "TIRELUM" },
+			{ 0x0615C99B, "TIRESAT" },
+			{ 0x07C4C1D7, "DISPBLUE" },
+			{ 0x09163F9F, "USEMARKER1" },
+			{ 0x09163FA0, "USEMARKER2" },
+			{ 0x0D128B87, "HOODRIGHT" },
+			{ 0x0D4B85C7, "HOODUNDER" },
+			{ 0x10C98090, "TEXTURE_NAME" },
+			{ 0x10CB799D, "MODEL_TABLE_OFFSET" },
+			{ 0x2850A03B, "MORPHTARGET_NUM" },
+			{ 0x29008B14, "GROUPLANGUAGEHASH" },
+			{ 0x311151F8, "HUDINDEX" },
+			{ 0x368A1A6A, "DISPRED" },
+			{ 0x38A30E75, "ANIMSTYLE" },
+			{ 0x3DA5ADAC, "VERTSPLIT" },
+			{ 0x46B79643, "LOD_CHARACTERS_OFFSET" },
+			{ 0x4732DA07, "LANGUAGEHASH" },
+			{ 0x48620C16, "DAMAGELEVEL" },
+			{ 0x50317397, "ALPHA2" },
+			{ 0x545C3440, "CENTER" },
+			{ 0x564B8CB6, "NUMCOLOURS" },
+			{ 0x5E96E722, "GREEN2" },
+			{ 0x6212682B, "NUMREMAPCOLOURS" },
+			{ 0x6223C6F9, "VINYLLANGUAGEHASH" },
+			{ 0x643DABEB, "LOD_NAME_PREFIX_SELECTOR" },
+			{ 0x6AB42ADF, "WHEELLEFT" },
+			{ 0x6B66D0E0, "FULLBODY" },
+			{ 0x6BFA56DA, "MIRROR" },
+			{ 0x6DB4AF51, "STOCK_MATERIAL" },
+			{ 0x70FBB1E4, "ONLINE" },
+			{ 0x721AFF7C, "CARBONFIBRE" },
+			{ 0x7822E22B, "HOODHUE" },
+			{ 0x7822F337, "HOODLUM" },
+			{ 0x78230E71, "HOODSAT" },
+			{ 0x796C0CB0, "KITNUMBER" },
+			{ 0x7AED5629, "SWATCH" },
+			{ 0x7C811574, "HOODLEFT" },
+			{ 0x7D65A926, "NAME_OFFSET" },
+			{ 0x8C185134, "TEXTUREHASH" },
+			{ 0x8E73B5DC, "SPECIFICCARNAME" },
+			{ 0x900449D3, "PART_NAME_BASE_HASH" },
+			{ 0x9239CF16, "PARTID_UPGRADE_GROUP" },
+			{ 0x927097F6, "PART_NAME_SELECTOR" },
+			{ 0x931FF82E, "SPINNER_TEXTURE" },
+			{ 0x956326AF, "LOD_NAME_PREFIX_NAMEHASH" },
+			{ 0xA0773FA5, "SPINNEROFFSET" },
+			{ 0xA77BDCFA, "NUM_DECALS" },
+			{ 0xBB318B8F, "PART_NAME_OFFSETS" },
+			{ 0xBCADE4C3, "HOODEMITTER" },
+			{ 0xC1A84E52, "WHEELRIGHT" },
+			{ 0xCDAB2874, "ISDECAL" },
+			{ 0xD90271FB, "COLOR0ID" },
+			{ 0xD902763C, "COLOR1ID" },
+			{ 0xD9027A7D, "COLOR2ID" },
+			{ 0xD9027EBE, "COLOR3ID" },
+			{ 0xD90F9423, "MAX_LOD" },
+			{ 0xEDB20048, "PAINTGROUP" },
+			{ 0xEDBF864E, "WHEELEMITTER" },
+			{ 0xF073C523, "MATNAMEA" },
+			{ 0xF073C524, "MATNAMEB" },
+			{ 0xF7933C86, "EXCLUDE_SUV" },
+			{ 0xF7934315, "EXCLUDE_UG1" },
+			{ 0xF7934316, "EXCLUDE_UG2" },
+			{ 0xFD35FE70, "TEXTURE" },
+			{ 0xFE613B98, "LOD_BASE_NAME" },
 		};
 
 		/// <summary>
@@ -54,6 +143,13 @@ namespace Nikki.Core
 			{ 0x09163FA0, eCarPartAttribType.Boolean }, // USEMARKER2
 			{ 0x87557E1E, eCarPartAttribType.Boolean }, // 0x87557E1E
 			{ 0xF9661A07, eCarPartAttribType.Boolean }, // 0xF9661A07
+			{ 0x1BC91595, eCarPartAttribType.Boolean }, // 0x1BC91595
+			{ 0x1BC91597, eCarPartAttribType.Boolean }, // 0x1BC91597
+			{ 0x1BC91598, eCarPartAttribType.Boolean }, // 0x1BC91598
+			{ 0x1BC9159A, eCarPartAttribType.Boolean }, // 0x1BC9159A
+			{ 0x1BC9159B, eCarPartAttribType.Boolean }, // 0x1BC9159B
+			{ 0x1BC915B5, eCarPartAttribType.Boolean }, // 0x1BC915B5
+			{ 0x1BC915BD, eCarPartAttribType.Boolean }, // 0x1BC915BD
 			{ 0x721AFF7C, eCarPartAttribType.Boolean }, // CARBONFIBRE
 			{ 0xF7933C86, eCarPartAttribType.Boolean }, // EXCLUDE_SUV
 			{ 0xF7934315, eCarPartAttribType.Boolean }, // EXCLUDE_UG1
@@ -83,6 +179,9 @@ namespace Nikki.Core
 
 			// PartID Attributes
 			{ 0x9239CF16, eCarPartAttribType.CarPartID }, // PARTID_UPGRADE_GROUP
+
+			// ModelTable Attributes
+			{ 0x10CB799D, eCarPartAttribType.ModelTable }, // MODEL_TABLE_OFFSET
 
 			// Key Attributes
 			{ 0x000004B8, eCarPartAttribType.Key }, // CV
@@ -140,7 +239,6 @@ namespace Nikki.Core
 			{ 0xEDBF864E, eCarPartAttribType.Integer }, // WHEELEMITTER
 			{ 0x6212682B, eCarPartAttribType.Integer }, // NUMREMAPCOLOURS
 			{ 0x2850A03B, eCarPartAttribType.Integer }, // MORPHTARGET_NUM
-			{ 0x10CB799D, eCarPartAttribType.Integer }, // MODEL_TABLE_OFFSET
 			{ 0x927097F6, eCarPartAttribType.Integer }, // PART_NAME_SELECTOR
 			{ 0x643DABEB, eCarPartAttribType.Integer }, // LOD_NAME_PREFIX_SELECTOR
 

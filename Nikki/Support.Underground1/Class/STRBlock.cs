@@ -13,7 +13,7 @@ using CoreExtensions.Text;
 
 
 
-namespace Nikki.Support.Underground1.Class
+namespace Nikki.Support.Underground2.Class
 {
 	/// <summary>
 	/// <see cref="STRBlock"/> is a collection of language strings, hashes and labels.
@@ -48,17 +48,17 @@ namespace Nikki.Support.Underground1.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
-		public override GameINT GameINT => GameINT.Underground1;
+		public override GameINT GameINT => GameINT.Underground2;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
-		public override string GameSTR => GameINT.Underground1.ToString();
+		public override string GameSTR => GameINT.Underground2.ToString();
 
 		/// <summary>
 		/// Database to which the class belongs to.
 		/// </summary>
-		public Database.Underground1 Database { get; set; }
+		public Database.Underground2 Database { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
@@ -99,8 +99,8 @@ namespace Nikki.Support.Underground1.Class
 		/// Initializes new instance of <see cref="STRBlock"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Underground1"/> to which this instance belongs to.</param>
-		public STRBlock(string CName, Database.Underground1 db)
+		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
+		public STRBlock(string CName, Database.Underground2 db)
 		{
 			this.Database = db;
 			this.CollectionName = CName;
@@ -111,8 +111,8 @@ namespace Nikki.Support.Underground1.Class
 		/// Initializes new instance of <see cref="CarTypeInfo"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read text data with.</param>
-		/// <param name="db"><see cref="Database.Underground1"/> to which this instance belongs to.</param>
-		public STRBlock(BinaryReader br, Database.Underground1 db)
+		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
+		public STRBlock(BinaryReader br, Database.Underground2 db)
 		{
 			this.Database = db;
 			this.Disassemble(br);

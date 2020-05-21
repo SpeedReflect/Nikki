@@ -21,6 +21,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="KeyAttribute"/>.
 		/// </summary>
+		[AccessModifiable()]
 		public override eCarPartAttribType AttribType
 		{
 			get => _type;
@@ -180,6 +181,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 				eCarPartAttribType.String => new StringAttribute(this.Value, this.BelongsTo),
 				eCarPartAttribType.TwoString => new TwoStringAttribute(this.Value, this.BelongsTo),
 				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Value, this.BelongsTo),
+				eCarPartAttribType.ModelTable => new ModelTableAttribute(this.Value, this.BelongsTo),
 				_ => this
 			};
 	}

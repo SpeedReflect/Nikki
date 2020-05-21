@@ -113,5 +113,40 @@ namespace Nikki.Reflection.Enum.CP
 		/// 
 		/// </summary>
 		_0xF9661A07 = 0xF9661A07,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		_0x1BC91595 = 0x1BC91595,
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		_0x1BC91597 = 0x1BC91597,
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		_0x1BC91598 = 0x1BC91598,
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		_0x1BC9159A = 0x1BC9159A,
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		_0x1BC9159B = 0x1BC9159B,
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		_0x1BC915B5 = 0x1BC915B5,
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		_0x1BC915BD = 0x1BC915BD,
 	}
 }

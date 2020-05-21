@@ -6,9 +6,11 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.ID;
 using Nikki.Reflection.Enum;
+using Nikki.Reflection.Enum.CP;
 using Nikki.Support.Prostreet.Class;
 using Nikki.Support.Shared.Parts.CarParts;
 using CoreExtensions.IO;
+using CoreExtensions.Reflection;
 
 
 
@@ -93,31 +95,46 @@ namespace Nikki.Support.Prostreet.Framework
 					{
 						// If attribute is a StringAttribute, write its value
 						if (attrib is StringAttribute str_attrib)
-							length = Inject(str_attrib.Value, length);
+						{
+							if (str_attrib.ValueExists == eBoolean.True)
+								length = Inject(str_attrib.Value, length);
+						}
 
 						// Else if attribute is a TwoStringAttribute, write its values
 						else if (attrib is TwoStringAttribute two_attrib)
 						{
-							length = Inject(two_attrib.Value1, length);
-							length = Inject(two_attrib.Value2, length);
+							if (two_attrib.Value1Exists == eBoolean.True)
+								length = Inject(two_attrib.Value1, length);
+							if (two_attrib.Value2Exists == eBoolean.True)
+								length = Inject(two_attrib.Value2, length);
+						}
+
+						// Else if attribute is a ModelTableAttribute, write its settings
+						else if (attrib is ModelTableAttribute table_attrib)
+						{
+							if (table_attrib.Templated == eBoolean.True)
+							{
+								if (table_attrib.ConcatenatorExists == eBoolean.True)
+									length = Inject(table_attrib.Concatenator, length);
+
+								for (int lod = (byte)'A'; lod <= (byte)'E'; ++lod)
+								{
+									for (int index = 0; index <= 11; ++index)
+									{
+										var lodname = $"Geometry{index}Lod{lod}";
+										var lodexists = $"{lodname}Exists";
+										if ((eBoolean)table_attrib.GetFastPropertyValue(lodexists) == eBoolean.True)
+											length = Inject(table_attrib.GetValue(lodname), length);
+									}
+								}
+							}
 						}
 					}
 				}
 			}
 
-			// Write struct geometry names if it is templated and exists
-			foreach (var str in db.CarPartStructs)
-			{
-				if (str.Exists == eBoolean.True && str.Templated == eBoolean.True)
-				{
-					for (int a1 = 0; a1 < Parts.CarParts.CPStruct.StructNamesSize; ++a1)
-						length = Inject(str.GeometryName[a1], length);
-				}
-			}
-
 			// Return prepared dictionary
-			var dif = 0x10 - ((ms.Length + 8) % 0x10);
-			if (dif != 0x10) bw.WriteBytes((int)dif);
+			bw.FillBuffer(0x10);
 			string_buffer = ms.ToArray();
 			return string_dict;
 		}
@@ -157,6 +174,7 @@ namespace Nikki.Support.Prostreet.Framework
 						offset.AttribOffsets.Add((ushort)index);       // add to CPOffset
 					}
 
+					offset.AttribOffsets.Sort();
 					key = offset.GetHashCode();
 					if (!offset_map.ContainsKey(key)) // if CPOffset exists, skip
 					{
@@ -225,30 +243,56 @@ namespace Nikki.Support.Prostreet.Framework
 		{
 			// Initialize stack
 			struct_buffer = null;
+			int count = 0;
+			var table_list = new Dictionary<int, int>(); // map of hashcodes to index
 
 			// Initialize streams
 			using var ms = new MemoryStream();
 			using var bw = new BinaryWriter(ms);
 
-			// Iterate through every struct
-			foreach (var str in db.CarPartStructs)
+			// Iterate through each model in the database
+			foreach (var model in db.ModelParts.Collections)
 			{
-				// If Struct should not be written, skip
-				if (str.Exists == eBoolean.False) continue;
-				str.Assemble(bw, string_dict);
+				// Iterate through each RealCarPart in a model
+				foreach (Parts.CarParts.RealCarPart realpart in model.ModelCarParts)
+				{
+					// If attribute count is 0, continue
+					if (realpart.Attributes.Count == 0) continue;
+
+					var temp_attr = realpart.GetAttribute((uint)eAttribModelTable.MODEL_TABLE_OFFSET);
+					if (temp_attr == null) continue; // if no ModelTableAttribute in the part
+
+					// If there is ModelTableAttribute
+					if (temp_attr is ModelTableAttribute table_attr)
+					{
+						var code = table_attr.GetHashCode(); // get hash code
+						if (!table_list.TryGetValue(code, out int index)) // check if it already exists
+						{
+							table_attr.Index = count; // if no, set new index, increment count
+							table_list[code] = count++;
+							table_attr.WriteStruct(bw, string_dict); // write struct
+						}
+						else
+						{
+							table_attr.Index = index; // if exists, set index in the attribute
+						}
+					}
+				}
 			}
 
 			// Return prepared dictionary
-			bw.FillBuffer(0x10);
+			var dif = 0x10 - ((int)ms.Length + 8) % 0x10;
+			if (dif != 0x10) bw.WriteBytes(dif);
+
 			struct_buffer = ms.ToArray();
-			return db.CarPartStructs.Count;
+			return count;
 		}
 		
 		private static int MakeModelsList(Database.Prostreet db, out byte[] models_buffer)
 		{
 			// Precalculate size; offset should be at 0xC
 			var size = db.ModelParts.Length * 4;
-			var dif = 0x10 - (size + 4) % 0x10;
+			var dif = 0x10 - (size + 8) % 0x10;
 			if (dif != 0x10) size += dif;
 			models_buffer = new byte[size];
 
@@ -291,15 +335,15 @@ namespace Nikki.Support.Prostreet.Framework
 					if (realpart.Attributes.Count == 0) bw.Write(negative);
 					else bw.Write((ushort)offset_dict[realpart.GetHashCode()]);
 
-					bw.WriteBytes(0xC);
-
 					++length;
 				}
 				++count;
 			}
 
 			// Return number of parts and buffer
-			bw.FillBuffer(0x10);
+			var dif = 0x10 - ((int)ms.Length + 8) % 0x10;
+			if (dif != 0x10) bw.WriteBytes(dif);
+
 			cppart_buffer = ms.ToArray();
 			return length;
 		}
@@ -317,31 +361,31 @@ namespace Nikki.Support.Prostreet.Framework
 				switch (br.ReadUInt32())
 				{
 					case CarParts.DBCARPART_HEADER:
-						result[0] = br.BaseStream.Position - 4;
+						result[0] = br.BaseStream.Position;
 						goto default;
 
 					case CarParts.DBCARPART_STRINGS:
-						result[1] = br.BaseStream.Position - 4;
+						result[1] = br.BaseStream.Position;
 						goto default;
 
 					case CarParts.DBCARPART_OFFSETS:
-						result[2] = br.BaseStream.Position - 4;
+						result[2] = br.BaseStream.Position;
 						goto default;
 
 					case CarParts.DBCARPART_ATTRIBS:
-						result[3] = br.BaseStream.Position - 4;
+						result[3] = br.BaseStream.Position;
 						goto default;
 
 					case CarParts.DBCARPART_STRUCTS:
-						result[4] = br.BaseStream.Position - 4;
+						result[4] = br.BaseStream.Position;
 						goto default;
 
 					case CarParts.DBCARPART_MODELS:
-						result[5] = br.BaseStream.Position - 4;
+						result[5] = br.BaseStream.Position;
 						goto default;
 
 					case CarParts.DBCARPART_ARRAY:
-						result[6] = br.BaseStream.Position - 4;
+						result[6] = br.BaseStream.Position;
 						goto default;
 
 					default:
@@ -356,9 +400,8 @@ namespace Nikki.Support.Prostreet.Framework
 
 		private static Dictionary<int, CPOffset> ReadOffsets(BinaryReader br)
 		{
-			var offset = br.BaseStream.Position + 8;
-			if (br.ReadUInt32() != CarParts.DBCARPART_OFFSETS) return null;
 			var size = br.ReadInt32();
+			var offset = br.BaseStream.Position;
 			var result = new Dictionary<int, CPOffset>(size >> 3); // set initial capacity
 
 			while (br.BaseStream.Position < offset + size)
@@ -375,9 +418,8 @@ namespace Nikki.Support.Prostreet.Framework
 
 		private static CPAttribute[] ReadAttribs(BinaryReader br, BinaryReader str, int maxlen)
 		{
-			var offset = br.BaseStream.Position + 8;
-			if (br.ReadUInt32() != CarParts.DBCARPART_ATTRIBS) return null;
 			var size = br.ReadInt32();
+			var offset = br.BaseStream.Position;
 			var result = new CPAttribute[size >> 3]; // set initial capacity
 
 			int count = 0;
@@ -394,6 +436,7 @@ namespace Nikki.Support.Prostreet.Framework
 					eCarPartAttribType.String => new StringAttribute(br, str, key),
 					eCarPartAttribType.TwoString => new TwoStringAttribute(br, str, key),
 					eCarPartAttribType.Key => new KeyAttribute(br, key),
+					eCarPartAttribType.ModelTable => new ModelTableAttribute(br, key),
 					_ => new IntAttribute(br, key),
 				};
 				++count;
@@ -401,27 +444,10 @@ namespace Nikki.Support.Prostreet.Framework
 			return result;
 		}
 
-		private static void ReadStructs(BinaryReader br, BinaryReader str_reader,
-			int maxlen, Database.Prostreet db)
-		{
-			var offset = br.BaseStream.Position + 8;
-			if (br.ReadUInt32() != CarParts.DBCARPART_STRUCTS) return;
-			var size = br.ReadInt32();
-
-			int count = 0;
-			while (count < maxlen && br.BaseStream.Position < offset + size)
-			{
-				var position = (int)(br.BaseStream.Position - offset);
-				var cpstr = new Parts.CarParts.CPStruct(br, str_reader);
-				db.CarPartStructs.Add(cpstr);
-			}
-		}
-
 		private static string[] ReadModels(BinaryReader br, int maxlen)
 		{
-			var offset = br.BaseStream.Position + 8;
-			if (br.ReadUInt32() != CarParts.DBCARPART_MODELS) return null;
 			var size = br.ReadInt32();
+			var offset = br.BaseStream.Position;
 			var count = size >> 2;
 
 			count = (count > maxlen) ? maxlen : count;
@@ -438,11 +464,9 @@ namespace Nikki.Support.Prostreet.Framework
 
 		private static List<Parts.CarParts.TempPart> ReadTempParts(BinaryReader br, int maxlen)
 		{
-			var offset = br.BaseStream.Position + 8;
-			if (br.ReadUInt32() != CarParts.DBCARPART_ARRAY) return null;
-
 			// Remove padding at the very end
 			int size = br.ReadInt32(); // read current size
+			var offset = br.BaseStream.Position;
 			var result = new List<Parts.CarParts.TempPart>(maxlen); // initialize
 
 			int count = 0;
@@ -554,19 +578,19 @@ namespace Nikki.Support.Prostreet.Framework
 			var offsets = FindOffsets(br, size);
 
 			// We need to read part0 as well
-			br.BaseStream.Position = offsets[0] + 0x28;
+			br.BaseStream.Position = offsets[0] + 0x24;
 			int maxattrib = br.ReadInt32();
-			br.BaseStream.Position = offsets[0] + 0x30;
+			br.BaseStream.Position = offsets[0] + 0x2C;
 			int maxmodels = br.ReadInt32();
-			br.BaseStream.Position = offsets[0] + 0x38;
+			br.BaseStream.Position = offsets[0] + 0x34;
 			int maxstruct = br.ReadInt32();
-			br.BaseStream.Position = offsets[0] + 0x40;
+			br.BaseStream.Position = offsets[0] + 0x3C;
 			int maxcparts = br.ReadInt32();
 
 			// Initialize stream over string block
 			br.BaseStream.Position = offsets[1];
-			var length = br.ReadUInt32() != CarParts.DBCARPART_STRINGS ? 0 : br.ReadInt32();
-			var strarr = br.ReadBytes(length);
+			var strlen = br.ReadInt32();
+			var strarr = br.ReadBytes(strlen);
 			using var StrStream = new MemoryStream(strarr);
 			using var StrReader = new BinaryReader(StrStream);
 
@@ -584,7 +608,10 @@ namespace Nikki.Support.Prostreet.Framework
 
 			// Read all car part structs
 			br.BaseStream.Position = offsets[4];
-			ReadStructs(br, StrReader, maxstruct, db);
+			var tablen = br.ReadInt32();
+			var tabarr = br.ReadBytes(tablen);
+			using var TabStream = new MemoryStream(tabarr);
+			using var TabReader = new BinaryReader(TabStream);
 
 			// Read all temporary parts
 			br.BaseStream.Position = offsets[6];
@@ -610,6 +637,10 @@ namespace Nikki.Support.Prostreet.Framework
 						if (attroff >= attrib_list.Length) continue;
 						var addon = attrib_list[attroff].PlainCopy();
 						addon.BelongsTo = realpart;
+
+						if (addon is ModelTableAttribute tableattr)
+							tableattr.ReadStruct(TabReader, StrReader);
+
 						realpart.Attributes.Add(addon);
 					}
 					collection.ModelCarParts.Add(realpart);

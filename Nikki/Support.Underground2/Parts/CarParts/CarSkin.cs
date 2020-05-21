@@ -23,6 +23,11 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		public string SkinDescription { get; set; } = String.Empty;
 
 		/// <summary>
+		/// Unknown integer value.
+		/// </summary>
+		public int Unknown { get; set; }
+
+		/// <summary>
 		/// Material used in this <see cref="CarSkin"/>.
 		/// </summary>
 		[AccessModifiable()]
@@ -43,6 +48,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 			var result = new CarSkin()
 			{
 				SkinDescription = this.SkinDescription,
+				Unknown = this.Unknown,
 				MaterialUsed = this.MaterialUsed,
 				SkinClassKey = this.SkinClassKey
 			};
@@ -61,7 +67,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 			id = br.ReadInt32();
 			index = br.ReadInt32();
 			this.SkinDescription = br.ReadNullTermUTF8(0x20);
-			br.BaseStream.Position += 4;
+			this.Unknown = br.ReadInt32();
 			this.MaterialUsed = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
 			this.SkinClassKey = br.ReadEnum<eCarSkinClass>();
 			br.BaseStream.Position += 0xC;
@@ -78,7 +84,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 			bw.Write(id);
 			bw.Write(index);
 			bw.WriteNullTermUTF8(this.SkinDescription, 0x20);
-			bw.Write((int)0);
+			bw.Write(this.Unknown);
 			bw.Write(this.MaterialUsed.BinHash());
 			bw.WriteEnum(this.SkinClassKey);
 			bw.Write((int)0);

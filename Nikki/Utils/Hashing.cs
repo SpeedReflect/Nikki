@@ -35,6 +35,10 @@ namespace Nikki.Utils
             }
 
             // Put into raider keys
+            if (Map.BinKeys.TryGetValue(result, out var str) && value != str)
+            {
+                System.Diagnostics.Debugger.Break();
+            }
             Map.BinKeys[result] = value;
             return result;
         }

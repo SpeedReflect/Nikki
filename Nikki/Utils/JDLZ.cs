@@ -89,7 +89,7 @@ namespace Nikki.Utils
         /// <summary>
         /// Compresses byte block into JDLZ-compressed one.
         /// </summary>
-        /// <param name="input">Array of bytes to be compressed.</param>
+        /// <param name="input">Byte buffer to compress.</param>
         /// <param name="hashSize">Speed/Ratio tunable; use powers of 2. Results vary per file.</param>
         /// <param name="maxSearchDepth">Speed/Ratio tunable. Results vary per file.</param>
         /// <returns>JDLZ-compressed byte array.</returns>

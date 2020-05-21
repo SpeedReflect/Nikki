@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Reflection.Abstract;
 using Nikki.Support.Carbon.Class;
 using Nikki.Support.Carbon.Framework;
-using Nikki.Support.Carbon.Parts.CarParts;
 
 
 
@@ -82,11 +80,6 @@ namespace Nikki.Database
 		/// </summary>
 		public Root<DBModelPart> ModelParts { get; set; }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public List<CPStruct> CarPartStructs { get; set; }
-
 		#endregion
 
 		#region Main
@@ -120,7 +113,6 @@ namespace Nikki.Database
             this.TPKBlocks = null;
             this.STRBlocks = null;
 			this.ModelParts = null;
-			this.CarPartStructs = null;
         }
 
 		#endregion
@@ -227,8 +219,6 @@ namespace Nikki.Database
 				false,
 				this
 			);
-
-			this.CarPartStructs = new List<CPStruct>();
 		}
 
 		/// <summary>

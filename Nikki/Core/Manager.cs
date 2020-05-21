@@ -164,6 +164,7 @@ namespace Nikki.Core
 			{
 				case GameINT.Carbon:
 				case GameINT.Prostreet:
+				case GameINT.Undercover:
 					var db_modern = new Database.Carbon(true);
 					db_modern.Load(options);
 					foreach (var str in db_modern.STRBlocks.Collections)

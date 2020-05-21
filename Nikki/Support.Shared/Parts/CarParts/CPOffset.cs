@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Nikki.Support.Shared.Class;
 
 
@@ -71,9 +70,9 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <returns>A 32-bit signed integer hash code.</returns>
 		public override int GetHashCode()
 		{
-			string result = String.Empty;
+			int result = 0x17;
 			for (int a1 = 0; a1 < this.AttribOffsets.Count; ++a1)
-				result += this.AttribOffsets[a1].ToString("X4");
+				result = result * 37 + this.AttribOffsets[a1] + 1;
 			return result.GetHashCode();
 		}
 

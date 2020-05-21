@@ -13,9 +13,8 @@
     <Folder Include="Support.Undercover\Class\" />
     <Folder Include="Support.Undercover\Framework\" />
     <Folder Include="Support.Undercover\Parts\" />
-    <Folder Include="Support.Underground1\Class\" />
     <Folder Include="Support.Underground1\Framework\" />
-    <Folder Include="Support.Underground1\Parts\" />
+    <Folder Include="Support.Underground1\Parts\CarParts\" />
   </ItemGroup>
 
   <ItemGroup>
