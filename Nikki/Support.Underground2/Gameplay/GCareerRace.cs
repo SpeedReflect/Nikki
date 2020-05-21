@@ -138,29 +138,25 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <summary>
 		/// Track number for stage 1.
 		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
+		[Expandable("Stages")]
 		public Stage STAGE1 { get; set; }
 
 		/// <summary>
 		/// Track number for stage 2.
 		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
+		[Expandable("Stages")]
 		public Stage STAGE2 { get; set; }
 
 		/// <summary>
 		/// Track number for stage 3.
 		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
+		[Expandable("Stages")]
 		public Stage STAGE3 { get; set; }
 
 		/// <summary>
 		/// Track number for stage 4.
 		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
+		[Expandable("Stages")]
 		public Stage STAGE4 { get; set; }
 
 		/// <summary>
@@ -473,165 +469,21 @@ namespace Nikki.Support.Underground2.Gameplay
 			// If none of the events are drift downhill, write opponent data based on number of the opponents
 			if (this.DriftTypeIfDriftRace != eDriftType.DOWNHILL)
 			{
-				if (this.NumOpponents > 0)
-				{
-					if (!String.IsNullOrEmpty(this.OPPONENT1.Name))
-					{
-						pointer = (ushort)strw.BaseStream.Position;
-						strw.WriteNullTermUTF8(this.OPPONENT1.Name);
-						bw.Write(pointer);
-					}
-					else bw.Write((ushort)0);
-					bw.Write(this.OPPONENT1.StatsMultiplier);
-					bw.Write(this.OPPONENT1.PresetRide.BinHash());
-					bw.Write(this.OPPONENT1.SkillEasy);
-					bw.Write(this.OPPONENT1.SkillMedium);
-					bw.Write(this.OPPONENT1.SkillHard);
-					bw.Write(this.OPPONENT1.CatchUp);
-				}
-				if (this.NumOpponents > 1)
-				{
-					if (!String.IsNullOrEmpty(this.OPPONENT2.Name))
-					{
-						pointer = (ushort)strw.BaseStream.Position;
-						strw.WriteNullTermUTF8(this.OPPONENT2.Name);
-						bw.Write(pointer);
-					}
-					else bw.Write((ushort)0);
-					bw.Write(this.OPPONENT2.StatsMultiplier);
-					bw.Write(this.OPPONENT2.PresetRide.BinHash());
-					bw.Write(this.OPPONENT2.SkillEasy);
-					bw.Write(this.OPPONENT2.SkillMedium);
-					bw.Write(this.OPPONENT2.SkillHard);
-					bw.Write(this.OPPONENT2.CatchUp);
-				}
-				if (this.NumOpponents > 2)
-				{
-					if (!String.IsNullOrEmpty(this.OPPONENT3.Name))
-					{
-						pointer = (ushort)strw.BaseStream.Position;
-						strw.WriteNullTermUTF8(this.OPPONENT3.Name);
-						bw.Write(pointer);
-					}
-					else bw.Write((ushort)0);
-					bw.Write(this.OPPONENT3.StatsMultiplier);
-					bw.Write(this.OPPONENT3.PresetRide.BinHash());
-					bw.Write(this.OPPONENT3.SkillEasy);
-					bw.Write(this.OPPONENT3.SkillMedium);
-					bw.Write(this.OPPONENT3.SkillHard);
-					bw.Write(this.OPPONENT3.CatchUp);
-				}
-				if (this.NumOpponents > 3)
-				{
-					if (!String.IsNullOrEmpty(this.OPPONENT4.Name))
-					{
-						pointer = (ushort)strw.BaseStream.Position;
-						strw.WriteNullTermUTF8(this.OPPONENT4.Name);
-						bw.Write(pointer);
-					}
-					else bw.Write((ushort)0);
-					bw.Write(this.OPPONENT4.StatsMultiplier);
-					bw.Write(this.OPPONENT4.PresetRide.BinHash());
-					bw.Write(this.OPPONENT4.SkillEasy);
-					bw.Write(this.OPPONENT4.SkillMedium);
-					bw.Write(this.OPPONENT4.SkillHard);
-					bw.Write(this.OPPONENT4.CatchUp);
-				}
-				if (this.NumOpponents > 4)
-				{
-					if (!String.IsNullOrEmpty(this.OPPONENT5.Name))
-					{
-						pointer = (ushort)strw.BaseStream.Position;
-						strw.WriteNullTermUTF8(this.OPPONENT5.Name);
-						bw.Write(pointer);
-					}
-					else bw.Write((ushort)0);
-					bw.Write(this.OPPONENT5.StatsMultiplier);
-					bw.Write(this.OPPONENT5.PresetRide.BinHash());
-					bw.Write(this.OPPONENT5.SkillEasy);
-					bw.Write(this.OPPONENT5.SkillMedium);
-					bw.Write(this.OPPONENT5.SkillHard);
-					bw.Write(this.OPPONENT5.CatchUp);
-				}
+				if (this.NumOpponents > 0) this.OPPONENT1.Write(bw, strw);
+				if (this.NumOpponents > 1) this.OPPONENT2.Write(bw, strw);
+				if (this.NumOpponents > 2) this.OPPONENT3.Write(bw, strw);
+				if (this.NumOpponents > 3) this.OPPONENT4.Write(bw, strw);
+				if (this.NumOpponents > 4) this.OPPONENT5.Write(bw, strw);
 			}
 
 			// If at least one of the events is drift downhill, write at least 3 opponents
 			else
 			{
-				if (!String.IsNullOrEmpty(this.OPPONENT1.Name))
-				{
-					pointer = (ushort)strw.BaseStream.Position;
-					strw.WriteNullTermUTF8(this.OPPONENT1.Name);
-					bw.Write(pointer);
-				}
-				else bw.Write((ushort)0);
-				bw.Write(this.OPPONENT1.StatsMultiplier);
-				bw.Write(this.OPPONENT1.PresetRide.BinHash());
-				bw.Write(this.OPPONENT1.SkillEasy);
-				bw.Write(this.OPPONENT1.SkillMedium);
-				bw.Write(this.OPPONENT1.SkillHard);
-				bw.Write(this.OPPONENT1.CatchUp);
-
-				if (!String.IsNullOrEmpty(this.OPPONENT2.Name))
-				{
-					pointer = (ushort)strw.BaseStream.Position;
-					strw.WriteNullTermUTF8(this.OPPONENT2.Name);
-					bw.Write(pointer);
-				}
-				else bw.Write((ushort)0);
-				bw.Write(this.OPPONENT2.StatsMultiplier);
-				bw.Write(this.OPPONENT2.PresetRide.BinHash());
-				bw.Write(this.OPPONENT2.SkillEasy);
-				bw.Write(this.OPPONENT2.SkillMedium);
-				bw.Write(this.OPPONENT2.SkillHard);
-				bw.Write(this.OPPONENT2.CatchUp);
-
-				if (!String.IsNullOrEmpty(this.OPPONENT3.Name))
-				{
-					pointer = (ushort)strw.BaseStream.Position;
-					strw.WriteNullTermUTF8(this.OPPONENT3.Name);
-					bw.Write(pointer);
-				}
-				else bw.Write((ushort)0);
-				bw.Write(this.OPPONENT3.StatsMultiplier);
-				bw.Write(this.OPPONENT3.PresetRide.BinHash());
-				bw.Write(this.OPPONENT3.SkillEasy);
-				bw.Write(this.OPPONENT3.SkillMedium);
-				bw.Write(this.OPPONENT3.SkillHard);
-				bw.Write(this.OPPONENT3.CatchUp);
-
-				if (this.NumOpponents > 3)
-				{
-					if (!String.IsNullOrEmpty(this.OPPONENT4.Name))
-					{
-						pointer = (ushort)strw.BaseStream.Position;
-						strw.WriteNullTermUTF8(this.OPPONENT4.Name);
-						bw.Write(pointer);
-					}
-					else bw.Write((ushort)0);
-					bw.Write(this.OPPONENT4.StatsMultiplier);
-					bw.Write(this.OPPONENT4.PresetRide.BinHash());
-					bw.Write(this.OPPONENT4.SkillEasy);
-					bw.Write(this.OPPONENT4.SkillMedium);
-					bw.Write(this.OPPONENT4.SkillHard);
-					bw.Write(this.OPPONENT4.CatchUp);
-				}
-				if (this.NumOpponents > 4)
-				{
-					if (!String.IsNullOrEmpty(this.OPPONENT5.Name))
-					{
-						pointer = (ushort)strw.BaseStream.Position;
-						strw.WriteNullTermUTF8(this.OPPONENT5.Name);
-						bw.Write(pointer);
-					}
-					else bw.Write((ushort)0);
-					bw.Write(this.OPPONENT5.StatsMultiplier);
-					bw.Write(this.OPPONENT5.PresetRide.BinHash());
-					bw.Write(this.OPPONENT5.SkillEasy);
-					bw.Write(this.OPPONENT5.SkillMedium);
-					bw.Write(this.OPPONENT5.SkillHard);
-					bw.Write(this.OPPONENT5.CatchUp);
-				}
+				this.OPPONENT1.Write(bw, strw);
+				this.OPPONENT2.Write(bw, strw);
+				this.OPPONENT3.Write(bw, strw);
+				if (this.NumOpponents > 3) this.OPPONENT4.Write(bw, strw);
+				if (this.NumOpponents > 4) this.OPPONENT5.Write(bw, strw);
 			}
 
 			bw.BaseStream.Position = position;
@@ -733,100 +585,21 @@ namespace Nikki.Support.Underground2.Gameplay
 			// If none of the events are drift downhill, read opponent data based on number of the opponents
 			if (this.DriftTypeIfDriftRace != eDriftType.DOWNHILL)
 			{
-				if (this.NumOpponents > 0)
-				{
-					position = br.ReadUInt16();
-					strr.BaseStream.Position = position;
-					this.OPPONENT1.Name = strr.ReadNullTermUTF8();
-					this.OPPONENT1.StatsMultiplier = br.ReadUInt16();
-					this.OPPONENT1.PresetRide = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-					this.OPPONENT1.SkillEasy = br.ReadByte();
-					this.OPPONENT1.SkillMedium = br.ReadByte();
-					this.OPPONENT1.SkillHard = br.ReadByte();
-					this.OPPONENT1.CatchUp = br.ReadByte();
-				}
-				if (this.NumOpponents > 1)
-				{
-					position = br.ReadUInt16();
-					strr.BaseStream.Position = position;
-					this.OPPONENT2.Name = strr.ReadNullTermUTF8();
-					this.OPPONENT2.StatsMultiplier = br.ReadUInt16();
-					this.OPPONENT2.PresetRide = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-					this.OPPONENT2.SkillEasy = br.ReadByte();
-					this.OPPONENT2.SkillMedium = br.ReadByte();
-					this.OPPONENT2.SkillHard = br.ReadByte();
-					this.OPPONENT2.CatchUp = br.ReadByte();
-				}
-				if (this.NumOpponents > 2)
-				{
-					position = br.ReadUInt16();
-					strr.BaseStream.Position = position;
-					this.OPPONENT3.Name = strr.ReadNullTermUTF8();
-					this.OPPONENT3.StatsMultiplier = br.ReadUInt16();
-					this.OPPONENT3.PresetRide = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-					this.OPPONENT3.SkillEasy = br.ReadByte();
-					this.OPPONENT3.SkillMedium = br.ReadByte();
-					this.OPPONENT3.SkillHard = br.ReadByte();
-					this.OPPONENT3.CatchUp = br.ReadByte();
-				}
-				if (this.NumOpponents > 3)
-				{
-					position = br.ReadUInt16();
-					strr.BaseStream.Position = position;
-					this.OPPONENT4.Name = strr.ReadNullTermUTF8();
-					this.OPPONENT4.StatsMultiplier = br.ReadUInt16();
-					this.OPPONENT4.PresetRide = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-					this.OPPONENT4.SkillEasy = br.ReadByte();
-					this.OPPONENT4.SkillMedium = br.ReadByte();
-					this.OPPONENT4.SkillHard = br.ReadByte();
-					this.OPPONENT4.CatchUp = br.ReadByte();
-				}
-				if (this.NumOpponents > 4)
-				{
-					position = br.ReadUInt16();
-					strr.BaseStream.Position = position;
-					this.OPPONENT5.Name = strr.ReadNullTermUTF8();
-					this.OPPONENT5.StatsMultiplier = br.ReadUInt16();
-					this.OPPONENT5.PresetRide = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-					this.OPPONENT5.SkillEasy = br.ReadByte();
-					this.OPPONENT5.SkillMedium = br.ReadByte();
-					this.OPPONENT5.SkillHard = br.ReadByte();
-					this.OPPONENT5.CatchUp = br.ReadByte();
-				}
+				if (this.NumOpponents > 0) this.OPPONENT1.Read(br, strr);
+				if (this.NumOpponents > 1) this.OPPONENT2.Read(br, strr);
+				if (this.NumOpponents > 2) this.OPPONENT3.Read(br, strr);
+				if (this.NumOpponents > 3) this.OPPONENT4.Read(br, strr);
+				if (this.NumOpponents > 4) this.OPPONENT5.Read(br, strr);
 			}
 
 			// If at least one of the events is downhill drift, read only 3 opponents
 			else
 			{
-				position = br.ReadUInt16();
-				strr.BaseStream.Position = position;
-				this.OPPONENT1.Name = strr.ReadNullTermUTF8();
-				this.OPPONENT1.StatsMultiplier = br.ReadUInt16();
-				this.OPPONENT1.PresetRide = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-				this.OPPONENT1.SkillEasy = br.ReadByte();
-				this.OPPONENT1.SkillMedium = br.ReadByte();
-				this.OPPONENT1.SkillHard = br.ReadByte();
-				this.OPPONENT1.CatchUp = br.ReadByte();
-
-				position = br.ReadUInt16();
-				strr.BaseStream.Position = position;
-				this.OPPONENT2.Name = strr.ReadNullTermUTF8();
-				this.OPPONENT2.StatsMultiplier = br.ReadUInt16();
-				this.OPPONENT2.PresetRide = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-				this.OPPONENT2.SkillEasy = br.ReadByte();
-				this.OPPONENT2.SkillMedium = br.ReadByte();
-				this.OPPONENT2.SkillHard = br.ReadByte();
-				this.OPPONENT2.CatchUp = br.ReadByte();
-
-				position = br.ReadUInt16();
-				strr.BaseStream.Position = position;
-				this.OPPONENT3.Name = strr.ReadNullTermUTF8();
-				this.OPPONENT3.StatsMultiplier = br.ReadUInt16();
-				this.OPPONENT3.PresetRide = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-				this.OPPONENT3.SkillEasy = br.ReadByte();
-				this.OPPONENT3.SkillMedium = br.ReadByte();
-				this.OPPONENT3.SkillHard = br.ReadByte();
-				this.OPPONENT3.CatchUp = br.ReadByte();
+				this.OPPONENT1.Read(br, strr);
+				this.OPPONENT2.Read(br, strr);
+				this.OPPONENT3.Read(br, strr);
+				if (this.NumOpponents > 3) this.OPPONENT4.Read(br, strr);
+				if (this.NumOpponents > 4) this.OPPONENT5.Read(br, strr);
 			}
 
 			br.BaseStream.Position = final;

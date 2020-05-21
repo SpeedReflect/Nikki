@@ -9,7 +9,7 @@ using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.Underground2.Parts.GameParts
+namespace Nikki.Support.Underground1.Parts.GameParts
 {
 	/// <summary>
 	/// A unit <see cref="Opponent"/> that is used in career races.
@@ -23,10 +23,10 @@ namespace Nikki.Support.Underground2.Parts.GameParts
 		public string Name { get; set; } = String.Empty;
 
 		/// <summary>
-		/// Opponent's performance stats multiplier.
+		/// Unknown integer value 1.
 		/// </summary>
 		[AccessModifiable()]
-		public ushort StatsMultiplier { get; set; }
+		public uint UnknownInt1 { get; set; }
 
 		/// <summary>
 		/// Preset ride of the opponent.
@@ -38,25 +38,31 @@ namespace Nikki.Support.Underground2.Parts.GameParts
 		/// Easy skill of the opponent.
 		/// </summary>
 		[AccessModifiable()]
-		public byte SkillEasy { get; set; }
+		public short SkillEasy { get; set; }
 
 		/// <summary>
 		/// Medium skill of the opponent.
 		/// </summary>
 		[AccessModifiable()]
-		public byte SkillMedium { get; set; }
+		public short SkillMedium { get; set; }
 
 		/// <summary>
 		/// Hard skill of the opponent.
 		/// </summary>
 		[AccessModifiable()]
-		public byte SkillHard { get; set; }
+		public short SkillHard { get; set; }
 
 		/// <summary>
-		/// Catch up of the opponent.
+		/// Catch up of the opponent, maybe?
 		/// </summary>
 		[AccessModifiable()]
-		public byte CatchUp { get; set; }
+		public short CatchUpMayb { get; set; }
+
+		/// <summary>
+		/// Unknown integer value 2.
+		/// </summary>
+		[AccessModifiable()]
+		public uint UnknownInt2 { get; set; }
 
 		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.
@@ -79,40 +85,32 @@ namespace Nikki.Support.Underground2.Parts.GameParts
 		/// Reads data using <see cref="BinaryReader"/> provided.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="strr"><see cref="BinaryReader"/> to read strings with.</param>
-		public void Read(BinaryReader br, BinaryReader strr)
+		public void Read(BinaryReader br)
 		{
-			var position = br.ReadUInt16();
-			strr.BaseStream.Position = position;
-			this.Name = strr.ReadNullTermUTF8();
-			this.StatsMultiplier = br.ReadUInt16();
+			this.Name = br.ReadNullTermUTF8(0x8);
+			this.UnknownInt1 = br.ReadUInt32();
 			this.PresetRide = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.SkillEasy = br.ReadByte();
-			this.SkillMedium = br.ReadByte();
-			this.SkillHard = br.ReadByte();
-			this.CatchUp = br.ReadByte();
+			this.SkillEasy = br.ReadInt16();
+			this.SkillMedium = br.ReadInt16();
+			this.SkillHard = br.ReadInt16();
+			this.CatchUpMayb = br.ReadInt16();
+			this.UnknownInt2 = br.ReadUInt32();
 		}
 
 		/// <summary>
 		/// Writes data using <see cref="BinaryWriter"/> provided.
 		/// </summary>
-		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
-		/// <param name="strw"><see cref="BinaryWriter"/> to write data with.</param>
-		public void Write(BinaryWriter bw, BinaryWriter strw)
+		/// <param name="bw"><see cref="BinaryWriter"/> to read data with.</param>
+		public void Write(BinaryWriter bw)
 		{
-			if (!String.IsNullOrEmpty(this.Name))
-			{
-				var pointer = (ushort)strw.BaseStream.Position;
-				strw.WriteNullTermUTF8(this.Name);
-				bw.Write(pointer);
-			}
-			else bw.Write((ushort)0);
-			bw.Write(this.StatsMultiplier);
+			bw.WriteNullTermUTF8(this.Name, 0x8);
+			bw.Write(this.UnknownInt1);
 			bw.Write(this.PresetRide.BinHash());
 			bw.Write(this.SkillEasy);
 			bw.Write(this.SkillMedium);
 			bw.Write(this.SkillHard);
-			bw.Write(this.CatchUp);
+			bw.Write(this.CatchUpMayb);
+			bw.Write(this.UnknownInt2);
 		}
 	}
 }

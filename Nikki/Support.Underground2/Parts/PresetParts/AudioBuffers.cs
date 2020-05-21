@@ -126,7 +126,7 @@ namespace Nikki.Support.Underground2.Parts.PresetParts
 		/// <summary>
 		/// Writes data using <see cref="BinaryWriter"/> provided.
 		/// </summary>
-		/// <param name="bw"><see cref="BinaryWriter"/> to read data with.</param>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		public void Write(BinaryWriter bw)
 		{
 			bw.Write(this.AudioCompSmall00.BinHash());

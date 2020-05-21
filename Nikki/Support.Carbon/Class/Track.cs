@@ -7,7 +7,6 @@ using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
-using CoreExtensions.Conversions;
 
 
 
@@ -65,12 +64,11 @@ namespace Nikki.Support.Carbon.Class
 			get => this._collection_name;
 			set
 			{
-				ushort id = 0;
 				if (string.IsNullOrWhiteSpace(value))
 					throw new ArgumentNullException("This value cannot be left empty.");
 				if (value.Contains(" "))
 					throw new Exception("CollectionName cannot contain whitespace.");
-				if (!value.StartsWith("Track_") && !value.GetFormattedValue("Track_{X}", out id))
+				if (!UInt16.TryParse(value, out ushort id))
 					throw new Exception("Unable to parse TrackID from the collection name provided.");
 				if (this.Database.Tracks.FindCollection(value) != null)
 					throw new CollectionExistenceException();
@@ -538,7 +536,7 @@ namespace Nikki.Support.Carbon.Class
 			br.BaseStream.Position += 1;
 			this.IsPerformanceTuning = br.ReadEnum<eBoolean>();
 			br.BaseStream.Position += 1;
-			this._collection_name = $"Track_{br.ReadUInt16()}";
+			this._collection_name = br.ReadUInt16().ToString();
 			this.TrackID = br.ReadUInt16();
 			br.BaseStream.Position += 2;
 
