@@ -95,6 +95,39 @@ namespace Nikki.Support.Underground2.Class
 		public ushort TrackID { get; private set; }
 
 		/// <summary>
+		/// Location index of the track.
+		/// </summary>
+		[AccessModifiable()]
+		public int LocationIndex { get; set; }
+
+		/// <summary>
+		/// Location directory of the track.
+		/// </summary>
+		[AccessModifiable()]
+		public string LocationDirectory { get; set; } = String.Empty;
+
+		/// <summary>
+		/// Indicates whether the race is used in performance tuning events.
+		/// </summary>
+		[AccessModifiable()]
+		[StaticModifiable()]
+		public eBoolean IsPerformanceTuning { get; set; }
+
+		/// <summary>
+		/// Location type of the track.
+		/// </summary>
+		[AccessModifiable()]
+		[StaticModifiable()]
+		public eLocationType LocationType { get; set; }
+
+		/// <summary>
+		/// Drift type of the track.
+		/// </summary>
+		[AccessModifiable()]
+		[StaticModifiable()]
+		public eDriftType DriftType { get; set; }
+
+		/// <summary>
 		/// Total length of the whole track
 		/// </summary>
 		[AccessModifiable()]

@@ -95,6 +95,12 @@ namespace Nikki.Support.Underground1.Class
 		public ushort TrackID { get; private set; }
 
 		/// <summary>
+		/// Second race description name.
+		/// </summary>
+		[AccessModifiable()]
+		public string RaceDescription2 { get; set; } = String.Empty;
+
+		/// <summary>
 		/// Total length of the whole track
 		/// </summary>
 		[AccessModifiable()]
@@ -189,13 +195,6 @@ namespace Nikki.Support.Underground1.Class
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
-		public float TrackMapCalibrationZoomIn { get; set; }
-
-		/// <summary>
-		/// 
-		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
 		public float TrackMapStartgridAngle { get; set; }
 
 		/// <summary>
@@ -204,34 +203,6 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		public float TrackMapFinishlineAngle { get; set; }
-
-		/// <summary>
-		/// 
-		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
-		public float MenuMapZoomOffsetX { get; set; }
-
-		/// <summary>
-		/// 
-		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
-		public float MenuMapZoomOffsetY { get; set; }
-
-		/// <summary>
-		/// 
-		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
-		public float MenuMapZoomWidth { get; set; }
-
-		/// <summary>
-		/// 
-		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
-		public int MenuMapStartZoomed { get; set; }
 
 		/// <summary>
 		/// 
@@ -331,34 +302,6 @@ namespace Nikki.Support.Underground1.Class
 		[StaticModifiable()]
 		public float TrafMinInitDistInbetweenB { get; set; }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
-		public float TrafOncomingFraction1 { get; set; }
-
-		/// <summary>
-		/// 
-		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
-		public float TrafOncomingFraction2 { get; set; }
-
-		/// <summary>
-		/// 
-		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
-		public float TrafOncomingFraction3 { get; set; }
-
-		/// <summary>
-		/// 
-		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
-		public float TrafOncomingFraction4 { get; set; }
-
 		#endregion
 
 		#region Main
@@ -411,21 +354,14 @@ namespace Nikki.Support.Underground1.Class
 			bw.WriteNullTermUTF8(this.TrackDirectory, 0x20);
 			bw.WriteNullTermUTF8(this.RegionName, 0x8);
 			bw.WriteNullTermUTF8(this.RegionDirectory, 0x20);
-			bw.Write(this.LocationIndex);
-			bw.WriteNullTermUTF8(this.LocationDirectory, 0x10);
 
 			// Write race settings
-			bw.WriteEnum(this.LocationType);
-			bw.WriteEnum(this.DriftType);
 			bw.WriteEnum(this.IsValid);
 			bw.Write(this.IsLoopingRace == eBoolean.True ? (byte)0 : (byte)1);
-			bw.WriteEnum(this.ReverseVersionExists);
-			bw.Write((byte)0);
-			bw.WriteEnum(this.IsPerformanceTuning);
+			bw.Write(this.ReverseVersionExists == eBoolean.True ? (byte)2 : (byte)0);
 			bw.Write((byte)0);
 			bw.Write(this.TrackID);
 			bw.Write(this.TrackID);
-			bw.Write((short)0);
 
 			// Write gameplay scores
 			bw.Write(this.SunInfoName.BinHash());
@@ -444,13 +380,10 @@ namespace Nikki.Support.Underground1.Class
 			bw.Write((ushort)(this.TrackMapStartgridAngle / 180 * 32768));
 			bw.Write((ushort)(this.TrackMapFinishlineAngle / 180 * 32768));
 			bw.Write((short)0);
-			bw.Write(this.TrackMapCalibrationZoomIn);
 
 			// Write difficulties and padding
 			bw.Write((int)this.DifficultyForward);
 			bw.Write((int)this.DifficultyReverse);
-			bw.Write(-1);
-			bw.Write(-1);
 			bw.Write(-1);
 			bw.Write(-1);
 			bw.Write(-1);
@@ -476,16 +409,9 @@ namespace Nikki.Support.Underground1.Class
 			bw.Write(this.TrafMinInitDistFromFinish);
 			bw.Write(this.TrafMinInitDistInbetweenA);
 			bw.Write(this.TrafMinInitDistInbetweenB);
-			bw.Write(this.TrafOncomingFraction1);
-			bw.Write(this.TrafOncomingFraction2);
-			bw.Write(this.TrafOncomingFraction3);
-			bw.Write(this.TrafOncomingFraction4);
 
-			// Write menu map settings
-			bw.Write(this.MenuMapZoomOffsetX);
-			bw.Write(this.MenuMapZoomOffsetY);
-			bw.Write(this.MenuMapZoomWidth);
-			bw.Write(this.MenuMapStartZoomed);
+			// Write second description name
+			bw.WriteNullTermUTF8(this.RaceDescription2, 0x20);
 		}
 
 		/// <summary>
@@ -499,21 +425,14 @@ namespace Nikki.Support.Underground1.Class
 			this.TrackDirectory = br.ReadNullTermUTF8(0x20);
 			this.RegionName = br.ReadNullTermUTF8(0x8);
 			this.RegionDirectory = br.ReadNullTermUTF8(0x20);
-			this.LocationIndex = br.ReadInt32();
-			this.LocationDirectory = br.ReadNullTermUTF8(0x10);
 
 			// Read race settings
-			this.LocationType = br.ReadEnum<eLocationType>();
-			this.DriftType = br.ReadEnum<eDriftType>();
 			this.IsValid = br.ReadEnum<eBoolean>();
 			this.IsLoopingRace = br.ReadByte() == 0 ? eBoolean.True : eBoolean.False;
-			this.ReverseVersionExists = br.ReadEnum<eBoolean>();
-			br.BaseStream.Position += 1;
-			this.IsPerformanceTuning = br.ReadEnum<eBoolean>();
+			this.ReverseVersionExists = br.ReadByte() == 2 ? eBoolean.True : eBoolean.False;
 			br.BaseStream.Position += 1;
 			this._collection_name = $"Track_{br.ReadUInt16()}";
 			this.TrackID = br.ReadUInt16();
-			br.BaseStream.Position += 2;
 
 			// Read gameplay scores
 			this.SunInfoName = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
@@ -532,12 +451,11 @@ namespace Nikki.Support.Underground1.Class
 			this.TrackMapStartgridAngle = ((float)br.ReadUInt16()) * 180 / 32768;
 			this.TrackMapFinishlineAngle = ((float)br.ReadUInt16()) * 180 / 32768;
 			br.BaseStream.Position += 2;
-			this.TrackMapCalibrationZoomIn = br.ReadSingle();
 
 			// Read difficulties and padding
 			this.DifficultyForward = (eTrackDifficulty)(br.ReadInt32());
 			this.DifficultyReverse = (eTrackDifficulty)(br.ReadInt32());
-			br.BaseStream.Position += 0x18;
+			br.BaseStream.Position += 0x10;
 			this.NumSecBeforeShorcutsAllowed = br.ReadInt16();
 			this.DriftSecondsMin = br.ReadInt16();
 			this.DriftSecondsMax = br.ReadInt16();
@@ -559,16 +477,9 @@ namespace Nikki.Support.Underground1.Class
 			this.TrafMinInitDistFromFinish = br.ReadSingle();
 			this.TrafMinInitDistInbetweenA = br.ReadSingle();
 			this.TrafMinInitDistInbetweenB = br.ReadSingle();
-			this.TrafOncomingFraction1 = br.ReadSingle();
-			this.TrafOncomingFraction2 = br.ReadSingle();
-			this.TrafOncomingFraction3 = br.ReadSingle();
-			this.TrafOncomingFraction4 = br.ReadSingle();
 
-			// Read menu map settings
-			this.MenuMapZoomOffsetX = br.ReadSingle();
-			this.MenuMapZoomOffsetY = br.ReadSingle();
-			this.MenuMapZoomWidth = br.ReadSingle();
-			this.MenuMapStartZoomed = br.ReadInt32();
+			// Read second race description
+			this.RaceDescription2 = br.ReadNullTermUTF8(0x20);
 		}
 
 		/// <summary>
@@ -582,14 +493,12 @@ namespace Nikki.Support.Underground1.Class
 			{
 				DifficultyForward = this.DifficultyForward,
 				DifficultyReverse = this.DifficultyReverse,
-				DriftType = this.DriftType,
 				IsLoopingRace = this.IsLoopingRace,
-				IsPerformanceTuning = this.IsPerformanceTuning,
 				IsValid = this.IsValid,
 				LocationDirectory = this.LocationDirectory,
 				LocationIndex = this.LocationIndex,
-				LocationType = this.LocationType,
 				RaceDescription = this.RaceDescription,
+				RaceDescription2 = this.RaceDescription2,
 				RegionDirectory = this.RegionDirectory,
 				RegionName = this.RegionName,
 				TrackDirectory = this.TrackDirectory,
@@ -609,13 +518,8 @@ namespace Nikki.Support.Underground1.Class
 				TrackMapCalibrationOffsetY = this.TrackMapCalibrationOffsetY,
 				TrackMapCalibrationRotation = this.TrackMapCalibrationRotation,
 				TrackMapCalibrationWidth = this.TrackMapCalibrationWidth,
-				TrackMapCalibrationZoomIn = this.TrackMapCalibrationZoomIn,
 				TrackMapFinishlineAngle = this.TrackMapFinishlineAngle,
 				TrackMapStartgridAngle = this.TrackMapStartgridAngle,
-				MenuMapStartZoomed = this.MenuMapStartZoomed,
-				MenuMapZoomOffsetX = this.MenuMapZoomOffsetX,
-				MenuMapZoomOffsetY = this.MenuMapZoomOffsetY,
-				MenuMapZoomWidth = this.MenuMapZoomWidth,
 				MaxTrafficCars_0_0 = this.MaxTrafficCars_0_0,
 				MaxTrafficCars_0_1 = this.MaxTrafficCars_0_1,
 				MaxTrafficCars_1_0 = this.MaxTrafficCars_1_0,
@@ -630,10 +534,6 @@ namespace Nikki.Support.Underground1.Class
 				TrafMinInitDistFromStart = this.TrafMinInitDistFromStart,
 				TrafMinInitDistInbetweenA = this.TrafMinInitDistInbetweenA,
 				TrafMinInitDistInbetweenB = this.TrafMinInitDistInbetweenB,
-				TrafOncomingFraction1 = this.TrafOncomingFraction1,
-				TrafOncomingFraction2 = this.TrafOncomingFraction2,
-				TrafOncomingFraction3 = this.TrafOncomingFraction3,
-				TrafOncomingFraction4 = this.TrafOncomingFraction4
 			};
 
 			return result;

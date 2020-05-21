@@ -68,13 +68,6 @@ namespace Nikki.Support.Shared.Class
 		public eBoolean ReverseVersionExists { get; set; }
 
 		/// <summary>
-		/// Indicates whether the race is used in performance tuning events.
-		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
-		public eBoolean IsPerformanceTuning { get; set; }
-
-		/// <summary>
 		/// Represents debug description of the race.
 		/// </summary>
 		[AccessModifiable()]
@@ -97,32 +90,6 @@ namespace Nikki.Support.Shared.Class
 		/// </summary>
 		[AccessModifiable()]
 		public string RegionDirectory { get; set; } = String.Empty;
-
-		/// <summary>
-		/// Location index of the track.
-		/// </summary>
-		[AccessModifiable()]
-		public int LocationIndex { get; set; }
-
-		/// <summary>
-		/// Location directory of the track.
-		/// </summary>
-		[AccessModifiable()]
-		public string LocationDirectory { get; set; } = String.Empty;
-
-		/// <summary>
-		/// Location type of the track.
-		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
-		public eLocationType LocationType { get; set; }
-
-		/// <summary>
-		/// Drift type of the track.
-		/// </summary>
-		[AccessModifiable()]
-		[StaticModifiable()]
-		public eDriftType DriftType { get; set; }
 
 		/// <summary>
 		/// Represents the race gameplay mode of the track.
@@ -178,6 +145,5 @@ namespace Nikki.Support.Shared.Class
         }
 
         #endregion
-
     }
 }
