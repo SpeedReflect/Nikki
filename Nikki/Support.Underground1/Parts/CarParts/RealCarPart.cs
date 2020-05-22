@@ -65,7 +65,13 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 		/// Upgrade group ID of this <see cref="RealCarPart"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public ushort UpgradeGroupID { get; set; }
+		public byte UpgradeGroupID { get; set; }
+
+		/// <summary>
+		/// Upgrade style of this <see cref="RealCarPart"/>.
+		/// </summary>
+		[AccessModifiable()]
+		public byte UpgradeStyle { get; set; }
 
 		/// <summary>
 		/// Geometry Lod A label of the part.

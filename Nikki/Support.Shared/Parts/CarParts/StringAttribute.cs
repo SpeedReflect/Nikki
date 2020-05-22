@@ -96,6 +96,29 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		}
 
 		/// <summary>
+		/// Initializes new instance of <see cref="StringAttribute"/> by reading data using 
+		/// <see cref="BinaryReader"/> provided.
+		/// </summary>
+		/// <param name="br"><see cref="BinaryReader"/> to read with.</param>
+		/// <param name="string_dict">Dictionary of offsets and strings.</param>
+		/// <param name="key">Key of the attribute's group.</param>
+		public StringAttribute(BinaryReader br, Dictionary<int, string> string_dict, uint key)
+		{
+			this.Key = key;
+			this.Disassemble(br, string_dict);
+		}
+
+		private void Disassemble(BinaryReader br, Dictionary<int, string> string_dict)
+		{
+			var position = br.ReadUInt32();
+			if (position < 0xFFFFFFFF && string_dict.TryGetValue((int)position, out var value))
+			{
+				this.Value = value;
+				this.ValueExists = eBoolean.True;
+			}
+		}
+
+		/// <summary>
 		/// Disassembles byte array into <see cref="StringAttribute"/> using <see cref="BinaryReader"/> 
 		/// provided.
 		/// </summary>
@@ -106,7 +129,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 			var position = br.ReadUInt32();
 			if (position < 0xFFFF)
 			{
-				str_reader.BaseStream.Position = position * 4;
+				str_reader.BaseStream.Position = position << 2;
 				this.Value = str_reader.ReadNullTermUTF8();
 				this.ValueExists = eBoolean.True;
 			}

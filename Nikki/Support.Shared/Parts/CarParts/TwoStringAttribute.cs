@@ -114,6 +114,36 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		}
 
 		/// <summary>
+		/// Initializes new instance of <see cref="StringAttribute"/> by reading data using 
+		/// <see cref="BinaryReader"/> provided.
+		/// </summary>
+		/// <param name="br"><see cref="BinaryReader"/> to read with.</param>
+		/// <param name="string_dict">Dictionary of offsets and strings.</param>
+		/// <param name="key">Key of the attribute's group.</param>
+		public TwoStringAttribute(BinaryReader br, Dictionary<int, string> string_dict, uint key)
+		{
+			this.Key = key;
+			this.Disassemble(br, string_dict);
+		}
+
+		private void Disassemble(BinaryReader br, Dictionary<int, string> string_dict)
+		{
+			ushort position;
+			position = br.ReadUInt16();
+			if (position < 0xFFFF && string_dict.TryGetValue(position, out var value1))
+			{
+				this.Value1 = value1;
+				this.Value1Exists = eBoolean.True;
+			}
+			position = br.ReadUInt16();
+			if (position < 0xFFFF && string_dict.TryGetValue(position, out var value2))
+			{
+				this.Value2 = value2;
+				this.Value2Exists = eBoolean.True;
+			}
+		}
+
+		/// <summary>
 		/// Disassembles byte array into <see cref="TwoStringAttribute"/> using <see cref="BinaryReader"/> 
 		/// provided.
 		/// </summary>
@@ -125,14 +155,14 @@ namespace Nikki.Support.Shared.Parts.CarParts
 			position = br.ReadUInt16();
 			if (position != 0xFFFF)
 			{
-				str_reader.BaseStream.Position = position * 4;
+				str_reader.BaseStream.Position = position << 2;
 				this.Value1 = str_reader.ReadNullTermUTF8();
 				this.Value1Exists = eBoolean.True;
 			}
 			position = br.ReadUInt16();
 			if (position != 0xFFFF)
 			{
-				str_reader.BaseStream.Position = position * 4;
+				str_reader.BaseStream.Position = position << 2;
 				this.Value2 = str_reader.ReadNullTermUTF8();
 				this.Value2Exists = eBoolean.True;
 			}
