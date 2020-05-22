@@ -31,10 +31,7 @@ namespace Nikki.Database
 		/// </summary>
 		public Root<Material> Materials { get; set; }
         
-        /// <summary>
-        /// 
-        /// </summary>
-        public Root<CarTypeInfo> CarTypeInfos { get; set; }
+        //public Root<CarTypeInfo> CarTypeInfos { get; set; }
         
         /// <summary>
         /// 
@@ -55,67 +52,7 @@ namespace Nikki.Database
         /// 
         /// </summary>
         public Root<GCareerRace> GCareerRaces { get; set; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public Root<WorldShop> WorldShops { get; set; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public Root<GCareerBrand> GCareerBrands { get; set; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public Root<PartPerformance> PartPerformances { get; set; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public Root<GShowcase> GShowcases { get; set; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public Root<SMSMessage> SMSMessages { get; set; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public Root<Sponsor> Sponsors { get; set; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public Root<GCareerStage> GCareerStages { get; set; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public Root<PerfSliderTuning> PerfSliderTunings { get; set; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public Root<WorldChallenge> WorldChallenges { get; set; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public Root<PartUnlockable> PartUnlockables { get; set; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public Root<BankTrigger> BankTriggers { get; set; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public Root<GCarUnlock> GCarUnlocks { get; set; }
-        
+                
         /// <summary>
         /// 
         /// </summary>
@@ -165,7 +102,7 @@ namespace Nikki.Database
 		~Underground1()
         {
 			this.Buffer = null;
-            this.CarTypeInfos = null;
+            //this.CarTypeInfos = null;
             this.FNGroups = null;
             this.Materials = null;
             this.PresetRides = null;
@@ -175,18 +112,6 @@ namespace Nikki.Database
             this.ModelParts = null;
             this.STRBlocks = null;
             this.GCareerRaces = null;
-            this.WorldShops = null;
-            this.GCareerBrands = null;
-            this.PartPerformances = null;
-            this.GShowcases = null;
-            this.SMSMessages = null;
-            this.Sponsors = null;
-            this.GCareerStages = null;
-            this.PerfSliderTunings = null;
-            this.WorldChallenges = null;
-            this.PartUnlockables = null;
-            this.BankTriggers = null;
-            this.GCarUnlocks = null;
             this.AcidEffects = null;
         }
 
@@ -205,14 +130,14 @@ namespace Nikki.Database
 				this
 			);
 
-			this.CarTypeInfos = new Root<CarTypeInfo>
-			(
-				"CarTypeInfos",
-				CarTypeInfo.BaseClassSize,
-				true,
-				true,
-				this
-			);
+			//this.CarTypeInfos = new Root<CarTypeInfo>
+			//(
+			//	"CarTypeInfos",
+			//	CarTypeInfo.BaseClassSize,
+			//	true,
+			//	true,
+			//	this
+			//);
 
 			this.PresetRides = new Root<PresetRide>
 			(
@@ -250,114 +175,6 @@ namespace Nikki.Database
 				this
 			);
 
-			this.WorldShops = new Root<WorldShop>
-			(
-				"WorldShops",
-				-1,
-				true,
-				false,
-				this
-			);
-
-			this.GCareerBrands = new Root<GCareerBrand>
-			(
-				"GCareerBrands",
-				-1,
-				true,
-				false,
-				this
-			);
-
-
-			this.PartPerformances = new Root<PartPerformance>
-			(
-				"PartPerformances",
-				-1,
-				true,
-				false,
-				this
-			);
-
-			this.GShowcases = new Root<GShowcase>
-			(
-				"GShowcases",
-				-1,
-				true,
-				false,
-				this
-			);
-
-			this.SMSMessages = new Root<SMSMessage>
-			(
-				"SMSMessages",
-				-1,
-				false,
-				false,
-				this
-			);
-
-			this.Sponsors = new Root<Sponsor>
-			(
-				"Sponsors",
-				-1,
-				true,
-				false,
-				this
-			);
-
-			this.GCareerStages = new Root<GCareerStage>
-			(
-				"GCareerStages",
-				-1,
-				false,
-				false,
-				this
-			);
-
-			this.PerfSliderTunings = new Root<PerfSliderTuning>
-			(
-				"PerfSliderTunings",
-				-1,
-				false,
-				false,
-				this
-			);
-
-			this.WorldChallenges = new Root<WorldChallenge>
-			(
-				"WorldChallenges",
-				-1,
-				true,
-				false,
-				this
-			);
-
-			this.PartUnlockables = new Root<PartUnlockable>
-			(
-				"PartUnlockables",
-				-1,
-				false,
-				false,
-				this
-			);
-
-			this.BankTriggers = new Root<BankTrigger>
-			(
-				"BankTriggers",
-				-1,
-				true,
-				true,
-				this
-			);
-
-			this.GCarUnlocks = new Root<GCarUnlock>
-			(
-				"GCarUnlocks",
-				-1,
-				true,
-				false,
-				this
-			);
 
 			this.AcidEffects = new Root<AcidEffect>
 			(
@@ -425,25 +242,13 @@ namespace Nikki.Database
 			string collections = " collections.";
 			string info = this.ToString() + nl;
 			info += $"{this.AcidEffects.ThisName}{equals}{this.AcidEffects.Length}{collections}{nl}";
-			info += $"{this.BankTriggers.ThisName}{equals}{this.BankTriggers.Length}{collections}{nl}";
-			info += $"{this.CarTypeInfos.ThisName}{equals}{this.CarTypeInfos.Length}{collections}{nl}";
-			info += $"{this.GCareerBrands.ThisName}{equals}{this.GCareerBrands.Length}{collections}{nl}";
+			//info += $"{this.CarTypeInfos.ThisName}{equals}{this.CarTypeInfos.Length}{collections}{nl}";
 			info += $"{this.GCareerRaces.ThisName}{equals}{this.GCareerRaces.Length}{collections}{nl}";
-			info += $"{this.GCareerStages.ThisName}{equals}{this.GCareerStages.Length}{collections}{nl}";
-			info += $"{this.GCarUnlocks.ThisName}{equals}{this.GCarUnlocks.Length}{collections}{nl}";
-			info += $"{this.GShowcases.ThisName}{equals}{this.GShowcases.Length}{collections}{nl}";
 			info += $"{this.Materials.ThisName}{equals}{this.Materials.Length}{collections}{nl}";
 			info += $"{this.ModelParts.ThisName}{equals}{this.ModelParts.Length}{collections}{nl}";
-			info += $"{this.PartPerformances.ThisName}{equals}{this.PartPerformances.Length}{collections}{nl}";
-			info += $"{this.PartUnlockables.ThisName}{equals}{this.PartUnlockables.Length}{collections}{nl}";
-			info += $"{this.PerfSliderTunings.ThisName}{equals}{this.PerfSliderTunings.Length}{collections}{nl}";
 			info += $"{this.PresetRides.ThisName}{equals}{this.PresetRides.Length}{collections}{nl}";
-			info += $"{this.SMSMessages.ThisName}{equals}{this.SMSMessages.Length}{collections}{nl}";
-			info += $"{this.Sponsors.ThisName}{equals}{this.Sponsors.Length}{collections}{nl}";
 			info += $"{this.SunInfos.ThisName}{equals}{this.SunInfos.Length}{collections}{nl}";
 			info += $"{this.Tracks.ThisName}{equals}{this.Tracks.Length}{collections}{nl}";
-			info += $"{this.WorldChallenges.ThisName}{equals}{this.WorldChallenges.Length}{collections}{nl}";
-			info += $"{this.WorldShops.ThisName}{equals}{this.WorldShops.Length}{collections}{nl}";
 			return info;
 		}
 
@@ -452,14 +257,14 @@ namespace Nikki.Database
 		/// </summary>
 		/// <param name="options"><see cref="Options"/> that are used to load data.</param>
 		/// <returns>True on success; false otherwise.</returns>
-		public override bool Load(Options options) => Loader.Invoke(options, this);
+		public override bool Load(Options options) => false;// Loader.Invoke(options, this);
 
 		/// <summary>
 		/// Saves all data in the database using options passed.
 		/// </summary>
 		/// <param name="options"><see cref="Options"/> that are used to save data.</param>
 		/// <returns>True on success; false otherwise.</returns>
-		public override bool Save(Options options) => Saver.Invoke(options, this);
+		public override bool Save(Options options) => false;// Saver.Invoke(options, this);
 
 		#endregion
 	}

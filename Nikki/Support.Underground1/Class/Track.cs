@@ -494,8 +494,6 @@ namespace Nikki.Support.Underground1.Class
 				DifficultyReverse = this.DifficultyReverse,
 				IsLoopingRace = this.IsLoopingRace,
 				IsValid = this.IsValid,
-				LocationDirectory = this.LocationDirectory,
-				LocationIndex = this.LocationIndex,
 				RaceDescription = this.RaceDescription,
 				RaceDescription2 = this.RaceDescription2,
 				RegionDirectory = this.RegionDirectory,

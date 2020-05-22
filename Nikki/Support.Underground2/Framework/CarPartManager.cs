@@ -601,7 +601,7 @@ namespace Nikki.Support.Underground2.Framework
 
 			// Initialize stream over string block
 			br.BaseStream.Position = offsets[1];
-			var length = br.ReadUInt32() != CarParts.DBCARPART_STRINGS ? 0 : br.ReadInt32();
+			var length = br.ReadInt32();
 			var strarr = br.ReadBytes(length);
 			using var StrStream = new MemoryStream(strarr);
 			using var StrReader = new BinaryReader(StrStream);

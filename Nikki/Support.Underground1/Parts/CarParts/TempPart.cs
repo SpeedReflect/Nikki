@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using CoreExtensions.IO;
+using System.Collections.Generic;
 
 
 
@@ -31,19 +31,24 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 		public uint BrandNameHash { get; set; }
 
 		/// <summary>
-		/// Group ID of the car.
+		/// Group ID of the part.
 		/// </summary>
 		public byte CarPartGroupID { get; set; }
 
 		/// <summary>
-		/// Unknown yet value.
+		/// Upgrade group ID of the part.
 		/// </summary>
 		public byte UpgradeGroupID { get; set; }
 
 		/// <summary>
+		/// Upgrade style of the part.
+		/// </summary>
+		public byte UpgradeStyle { get; set; }
+
+		/// <summary>
 		/// Padding align.
 		/// </summary>
-		public short Padding { get; set; }
+		public byte Padding { get; set; }
 
 		/// <summary>
 		/// Attribute offset of the part.
@@ -89,18 +94,21 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 		/// Disassembles array of bytes into <see cref="TempPart"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read with.</param>
-		/// <param name="str_reader"><see cref="BinaryReader"/> to read strings with.</param>
-		public void Disassemble(BinaryReader br, BinaryReader str_reader)
+		/// <param name="string_dict">Dictionary of offsets and strings.</param>
+		public void Disassemble(BinaryReader br, Dictionary<int, string> string_dict)
 		{
-			str_reader.BaseStream.Position = br.ReadInt32() << 2;
-			this.DebugName = str_reader.ReadNullTermUTF8();
+			var position = br.ReadUInt32();
+			if (position < 0xFFFFFFFF && string_dict.TryGetValue((int)position, out var value))
+				this.DebugName = value;
+
 			this.CarNameHash = br.ReadUInt32();
 			this.PartNameHash = br.ReadUInt32();
 			this.BrandNameHash = br.ReadUInt32();
 
 			this.CarPartGroupID = br.ReadByte();
 			this.UpgradeGroupID = br.ReadByte();
-			this.Padding = br.ReadInt16();
+			this.UpgradeStyle = br.ReadByte();
+			this.Padding = br.ReadByte();
 			this.AttribOffset = br.ReadInt32();
 			this.AttribStart = br.ReadInt32();
 			this.AttribEnd = br.ReadInt32();
@@ -109,6 +117,11 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 			this.LodBHash = br.ReadUInt32();
 			this.LodCHash = br.ReadUInt32();
 			this.LodDHash = br.ReadUInt32();
+
+			if (this.Padding != 0)
+			{
+				int oof = 0;
+			}
 		}
 	}
 }

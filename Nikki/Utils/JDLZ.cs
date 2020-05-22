@@ -70,7 +70,7 @@ namespace Nikki.Utils
                     }
 
                     WriterPosition += length;
-                    param2 /= 2;
+                    param2 >>= 2;
                 }
                 else
                 {
@@ -81,7 +81,7 @@ namespace Nikki.Utils
                         ++WriterPosition;
                     }
                 }
-                param1 /= 2;
+                param1 >>= 2;
             }
             return result;
         }
