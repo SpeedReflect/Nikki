@@ -653,22 +653,7 @@ namespace Nikki.Support.Underground2.Class
             bw.WriteBytes(0xC);
 
             // Base Suspension Performance
-            bw.Write(this.BASE_SUSPENSION.ShockStiffnessFront);
-            bw.Write(this.BASE_SUSPENSION.ShockExtStiffnessFront);
-            bw.Write(this.BASE_SUSPENSION.SpringProgressionFront);
-            bw.Write(this.BASE_SUSPENSION.ShockValvingFront);
-            bw.Write(this.BASE_SUSPENSION.SwayBarFront);
-            bw.Write(this.BASE_SUSPENSION.TrackWidthFront);
-            bw.Write(this.BASE_SUSPENSION.CounterBiasFront);
-            bw.Write(this.BASE_SUSPENSION.ShockDigressionFront);
-            bw.Write(this.BASE_SUSPENSION.ShockStiffnessRear);
-            bw.Write(this.BASE_SUSPENSION.ShockExtStiffnessRear);
-            bw.Write(this.BASE_SUSPENSION.SpringProgressionRear);
-            bw.Write(this.BASE_SUSPENSION.ShockValvingRear);
-            bw.Write(this.BASE_SUSPENSION.SwayBarRear);
-            bw.Write(this.BASE_SUSPENSION.TrackWidthRear);
-            bw.Write(this.BASE_SUSPENSION.CounterBiasRear);
-            bw.Write(this.BASE_SUSPENSION.ShockDigressionRear);
+            this.BASE_SUSPENSION.Write(bw);
 
             // Base Transmission Performance
             bw.Write(this.BASE_TRANSMISSION.ClutchSlip);
@@ -961,22 +946,7 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(this.TOP_BRAKES.SteeringRatio);
 
             // Top Suspension Performance
-            bw.Write(this.TOP_SUSPENSION.ShockStiffnessFront);
-            bw.Write(this.TOP_SUSPENSION.ShockExtStiffnessFront);
-            bw.Write(this.TOP_SUSPENSION.SpringProgressionFront);
-            bw.Write(this.TOP_SUSPENSION.ShockValvingFront);
-            bw.Write(this.TOP_SUSPENSION.SwayBarFront);
-            bw.Write(this.TOP_SUSPENSION.TrackWidthFront);
-            bw.Write(this.TOP_SUSPENSION.CounterBiasFront);
-            bw.Write(this.TOP_SUSPENSION.ShockDigressionFront);
-            bw.Write(this.TOP_SUSPENSION.ShockStiffnessRear);
-            bw.Write(this.TOP_SUSPENSION.ShockExtStiffnessRear);
-            bw.Write(this.TOP_SUSPENSION.SpringProgressionRear);
-            bw.Write(this.TOP_SUSPENSION.ShockValvingRear);
-            bw.Write(this.TOP_SUSPENSION.SwayBarRear);
-            bw.Write(this.TOP_SUSPENSION.TrackWidthRear);
-            bw.Write(this.TOP_SUSPENSION.CounterBiasRear);
-            bw.Write(this.TOP_SUSPENSION.ShockDigressionRear);
+            this.TOP_SUSPENSION.Write(bw);
 
             bw.Write(this.ECAR.HandlingBuffer);
             bw.Write(this.ECAR.TopSuspFrontHeightReduce);
@@ -987,68 +957,20 @@ namespace Nikki.Support.Underground2.Class
             bw.Write((long)0);
 
             // Player Cameras
-            bw.Write((short)eCameraType.FAR);
-            bw.Write((short)(this.PLAYER_CAMERA_FAR.CameraAngle / 180 * 32768));
-            bw.Write(this.PLAYER_CAMERA_FAR.CameraLag);
-            bw.Write(this.PLAYER_CAMERA_FAR.CameraHeight);
-            bw.Write(this.PLAYER_CAMERA_FAR.CameraLatOffset);
-            bw.Write((short)eCameraType.CLOSE);
-            bw.Write((short)(this.PLAYER_CAMERA_CLOSE.CameraAngle / 180 * 32768));
-            bw.Write(this.PLAYER_CAMERA_CLOSE.CameraLag);
-            bw.Write(this.PLAYER_CAMERA_CLOSE.CameraHeight);
-            bw.Write(this.PLAYER_CAMERA_CLOSE.CameraLatOffset);
-            bw.Write((short)eCameraType.BUMPER);
-            bw.Write((short)(this.PLAYER_CAMERA_BUMPER.CameraAngle / 180 * 32768));
-            bw.Write(this.PLAYER_CAMERA_BUMPER.CameraLag);
-            bw.Write(this.PLAYER_CAMERA_BUMPER.CameraHeight);
-            bw.Write(this.PLAYER_CAMERA_BUMPER.CameraLatOffset);
-            bw.Write((short)eCameraType.DRIVER);
-            bw.Write((short)(this.PLAYER_CAMERA_DRIVER.CameraAngle / 180 * 32768));
-            bw.Write(this.PLAYER_CAMERA_DRIVER.CameraLag);
-            bw.Write(this.PLAYER_CAMERA_DRIVER.CameraHeight);
-            bw.Write(this.PLAYER_CAMERA_DRIVER.CameraLatOffset);
-            bw.Write((short)eCameraType.HOOD);
-            bw.Write((short)(this.PLAYER_CAMERA_HOOD.CameraAngle / 180 * 32768));
-            bw.Write(this.PLAYER_CAMERA_HOOD.CameraLag);
-            bw.Write(this.PLAYER_CAMERA_HOOD.CameraHeight);
-            bw.Write(this.PLAYER_CAMERA_HOOD.CameraLatOffset);
-            bw.Write((short)eCameraType.DRIFT);
-            bw.Write((short)(this.PLAYER_CAMERA_DRIFT.CameraAngle / 180 * 32768));
-            bw.Write(this.PLAYER_CAMERA_DRIFT.CameraLag);
-            bw.Write(this.PLAYER_CAMERA_DRIFT.CameraHeight);
-            bw.Write(this.PLAYER_CAMERA_DRIFT.CameraLatOffset);
+            this.PLAYER_CAMERA_FAR.Write(bw);
+            this.PLAYER_CAMERA_CLOSE.Write(bw);
+            this.PLAYER_CAMERA_BUMPER.Write(bw);
+            this.PLAYER_CAMERA_DRIVER.Write(bw);
+            this.PLAYER_CAMERA_HOOD.Write(bw);
+            this.PLAYER_CAMERA_DRIFT.Write(bw);
 
             // AI Cameras
-            bw.Write((short)eCameraType.FAR);
-            bw.Write((short)(this.AI_CAMERA_FAR.CameraAngle / 180 * 32768));
-            bw.Write(this.AI_CAMERA_FAR.CameraLag);
-            bw.Write(this.AI_CAMERA_FAR.CameraHeight);
-            bw.Write(this.AI_CAMERA_FAR.CameraLatOffset);
-            bw.Write((short)eCameraType.CLOSE);
-            bw.Write((short)(this.AI_CAMERA_CLOSE.CameraAngle / 180 * 32768));
-            bw.Write(this.AI_CAMERA_CLOSE.CameraLag);
-            bw.Write(this.AI_CAMERA_CLOSE.CameraHeight);
-            bw.Write(this.AI_CAMERA_CLOSE.CameraLatOffset);
-            bw.Write((short)eCameraType.BUMPER);
-            bw.Write((short)(this.AI_CAMERA_BUMPER.CameraAngle / 180 * 32768));
-            bw.Write(this.AI_CAMERA_BUMPER.CameraLag);
-            bw.Write(this.AI_CAMERA_BUMPER.CameraHeight);
-            bw.Write(this.AI_CAMERA_BUMPER.CameraLatOffset);
-            bw.Write((short)eCameraType.DRIVER);
-            bw.Write((short)(this.AI_CAMERA_DRIVER.CameraAngle / 180 * 32768));
-            bw.Write(this.AI_CAMERA_DRIVER.CameraLag);
-            bw.Write(this.AI_CAMERA_DRIVER.CameraHeight);
-            bw.Write(this.AI_CAMERA_DRIVER.CameraLatOffset);
-            bw.Write((short)eCameraType.HOOD);
-            bw.Write((short)(this.AI_CAMERA_HOOD.CameraAngle / 180 * 32768));
-            bw.Write(this.AI_CAMERA_HOOD.CameraLag);
-            bw.Write(this.AI_CAMERA_HOOD.CameraHeight);
-            bw.Write(this.AI_CAMERA_HOOD.CameraLatOffset);
-            bw.Write((short)eCameraType.DRIFT);
-            bw.Write((short)(this.AI_CAMERA_DRIFT.CameraAngle / 180 * 32768));
-            bw.Write(this.AI_CAMERA_DRIFT.CameraLag);
-            bw.Write(this.AI_CAMERA_DRIFT.CameraHeight);
-            bw.Write(this.AI_CAMERA_DRIFT.CameraLatOffset);
+            this.AI_CAMERA_FAR.Write(bw);
+            this.AI_CAMERA_CLOSE.Write(bw);
+            this.AI_CAMERA_BUMPER.Write(bw);
+            this.AI_CAMERA_DRIVER.Write(bw);
+            this.AI_CAMERA_HOOD.Write(bw);
+            this.AI_CAMERA_DRIFT.Write(bw);
 
             // Rigid Controls (if an added car, or usagetype modified, or rigid controls are missing or broken
             if (this.Deletable || this._rigid_controls == null || this._rigid_controls.Length != 40)
@@ -1228,22 +1150,7 @@ namespace Nikki.Support.Underground2.Class
             br.BaseStream.Position += 0xC;
 
             // Base Suspension Performance
-            this.BASE_SUSPENSION.ShockStiffnessFront = br.ReadSingle();
-            this.BASE_SUSPENSION.ShockExtStiffnessFront = br.ReadSingle();
-            this.BASE_SUSPENSION.SpringProgressionFront = br.ReadSingle();
-            this.BASE_SUSPENSION.ShockValvingFront = br.ReadSingle();
-            this.BASE_SUSPENSION.SwayBarFront = br.ReadSingle();
-            this.BASE_SUSPENSION.TrackWidthFront = br.ReadSingle();
-            this.BASE_SUSPENSION.CounterBiasFront = br.ReadSingle();
-            this.BASE_SUSPENSION.ShockDigressionFront = br.ReadSingle();
-            this.BASE_SUSPENSION.ShockStiffnessRear = br.ReadSingle();
-            this.BASE_SUSPENSION.ShockExtStiffnessRear = br.ReadSingle();
-            this.BASE_SUSPENSION.SpringProgressionRear = br.ReadSingle();
-            this.BASE_SUSPENSION.ShockValvingRear = br.ReadSingle();
-            this.BASE_SUSPENSION.SwayBarRear = br.ReadSingle();
-            this.BASE_SUSPENSION.TrackWidthRear = br.ReadSingle();
-            this.BASE_SUSPENSION.CounterBiasRear = br.ReadSingle();
-            this.BASE_SUSPENSION.ShockDigressionRear = br.ReadSingle();
+            this.BASE_SUSPENSION.Read(br);
 
             // Base Transmission Performance
             this.BASE_TRANSMISSION.ClutchSlip = br.ReadSingle();
@@ -1500,22 +1407,7 @@ namespace Nikki.Support.Underground2.Class
             this.TOP_BRAKES.SteeringRatio = br.ReadSingle();
 
             // Top Suspension Performance
-            this.TOP_SUSPENSION.ShockStiffnessFront = br.ReadSingle();
-            this.TOP_SUSPENSION.ShockExtStiffnessFront = br.ReadSingle();
-            this.TOP_SUSPENSION.SpringProgressionFront = br.ReadSingle();
-            this.TOP_SUSPENSION.ShockValvingFront = br.ReadSingle();
-            this.TOP_SUSPENSION.SwayBarFront = br.ReadSingle();
-            this.TOP_SUSPENSION.TrackWidthFront = br.ReadSingle();
-            this.TOP_SUSPENSION.CounterBiasFront = br.ReadSingle();
-            this.TOP_SUSPENSION.ShockDigressionFront = br.ReadSingle();
-            this.TOP_SUSPENSION.ShockStiffnessRear = br.ReadSingle();
-            this.TOP_SUSPENSION.ShockExtStiffnessRear = br.ReadSingle();
-            this.TOP_SUSPENSION.SpringProgressionRear = br.ReadSingle();
-            this.TOP_SUSPENSION.ShockValvingRear = br.ReadSingle();
-            this.TOP_SUSPENSION.SwayBarRear = br.ReadSingle();
-            this.TOP_SUSPENSION.TrackWidthRear = br.ReadSingle();
-            this.TOP_SUSPENSION.CounterBiasRear = br.ReadSingle();
-            this.TOP_SUSPENSION.ShockDigressionRear = br.ReadSingle();
+            this.TOP_SUSPENSION.Read(br);
 
             // Ecar values
             this.ECAR.HandlingBuffer = br.ReadSingle();
@@ -1527,68 +1419,60 @@ namespace Nikki.Support.Underground2.Class
             br.BaseStream.Position += 8;
 
             // Player Cameras
-            br.BaseStream.Position += 2;
-            this.PLAYER_CAMERA_FAR.CameraAngle = ((float)br.ReadInt16()) * 180 / 32768;
-            this.PLAYER_CAMERA_FAR.CameraLag = br.ReadSingle();
-            this.PLAYER_CAMERA_FAR.CameraHeight = br.ReadSingle();
-            this.PLAYER_CAMERA_FAR.CameraLatOffset = br.ReadSingle();
-            br.BaseStream.Position += 2;
-            this.PLAYER_CAMERA_CLOSE.CameraAngle = ((float)br.ReadInt16()) * 180 / 32768;
-            this.PLAYER_CAMERA_CLOSE.CameraLag = br.ReadSingle();
-            this.PLAYER_CAMERA_CLOSE.CameraHeight = br.ReadSingle();
-            this.PLAYER_CAMERA_CLOSE.CameraLatOffset = br.ReadSingle();
-            br.BaseStream.Position += 2;
-            this.PLAYER_CAMERA_BUMPER.CameraAngle = ((float)br.ReadInt16()) * 180 / 32768;
-            this.PLAYER_CAMERA_BUMPER.CameraLag = br.ReadSingle();
-            this.PLAYER_CAMERA_BUMPER.CameraHeight = br.ReadSingle();
-            this.PLAYER_CAMERA_BUMPER.CameraLatOffset = br.ReadSingle();
-            br.BaseStream.Position += 2;
-            this.PLAYER_CAMERA_DRIVER.CameraAngle = ((float)br.ReadInt16()) * 180 / 32768;
-            this.PLAYER_CAMERA_DRIVER.CameraLag = br.ReadSingle();
-            this.PLAYER_CAMERA_DRIVER.CameraHeight = br.ReadSingle();
-            this.PLAYER_CAMERA_DRIVER.CameraLatOffset = br.ReadSingle();
-            br.BaseStream.Position += 2;
-            this.PLAYER_CAMERA_HOOD.CameraAngle = ((float)br.ReadInt16()) * 180 / 32768;
-            this.PLAYER_CAMERA_HOOD.CameraLag = br.ReadSingle();
-            this.PLAYER_CAMERA_HOOD.CameraHeight = br.ReadSingle();
-            this.PLAYER_CAMERA_HOOD.CameraLatOffset = br.ReadSingle();
-            br.BaseStream.Position += 2;
-            this.PLAYER_CAMERA_DRIFT.CameraAngle = ((float)br.ReadInt16()) * 180 / 32768;
-            this.PLAYER_CAMERA_DRIFT.CameraLag = br.ReadSingle();
-            this.PLAYER_CAMERA_DRIFT.CameraHeight = br.ReadSingle();
-            this.PLAYER_CAMERA_DRIFT.CameraLatOffset = br.ReadSingle();
+            for (int a1 = 0; a1 < 6; ++a1)
+            {
+                var camera = new Camera();
+                camera.Read(br);
+                switch (camera.CameraType)
+                {
+                    case eCameraType.CLOSE:
+                        this.PLAYER_CAMERA_CLOSE = camera;
+                        break;
+                    case eCameraType.BUMPER:
+                        this.PLAYER_CAMERA_BUMPER = camera;
+                        break;
+                    case eCameraType.DRIVER:
+                        this.PLAYER_CAMERA_DRIVER = camera;
+                        break;
+                    case eCameraType.HOOD:
+                        this.PLAYER_CAMERA_HOOD = camera;
+                        break;
+                    case eCameraType.DRIFT:
+                        this.PLAYER_CAMERA_DRIFT = camera;
+                        break;
+                    default:
+                        this.PLAYER_CAMERA_FAR = camera;
+                        break;
+                }
+            }
 
             // AI Cameras
-            br.BaseStream.Position += 2;
-            this.AI_CAMERA_FAR.CameraAngle = ((float)br.ReadInt16()) * 180 / 32768;
-            this.AI_CAMERA_FAR.CameraLag = br.ReadSingle();
-            this.AI_CAMERA_FAR.CameraHeight = br.ReadSingle();
-            this.AI_CAMERA_FAR.CameraLatOffset = br.ReadSingle();
-            br.BaseStream.Position += 2;
-            this.AI_CAMERA_CLOSE.CameraAngle = ((float)br.ReadInt16()) * 180 / 32768;
-            this.AI_CAMERA_CLOSE.CameraLag = br.ReadSingle();
-            this.AI_CAMERA_CLOSE.CameraHeight = br.ReadSingle();
-            this.AI_CAMERA_CLOSE.CameraLatOffset = br.ReadSingle();
-            br.BaseStream.Position += 2;
-            this.AI_CAMERA_BUMPER.CameraAngle = ((float)br.ReadInt16()) * 180 / 32768;
-            this.AI_CAMERA_BUMPER.CameraLag = br.ReadSingle();
-            this.AI_CAMERA_BUMPER.CameraHeight = br.ReadSingle();
-            this.AI_CAMERA_BUMPER.CameraLatOffset = br.ReadSingle();
-            br.BaseStream.Position += 2;
-            this.AI_CAMERA_DRIVER.CameraAngle = ((float)br.ReadInt16()) * 180 / 32768;
-            this.AI_CAMERA_DRIVER.CameraLag = br.ReadSingle();
-            this.AI_CAMERA_DRIVER.CameraHeight = br.ReadSingle();
-            this.AI_CAMERA_DRIVER.CameraLatOffset = br.ReadSingle();
-            br.BaseStream.Position += 2;
-            this.AI_CAMERA_HOOD.CameraAngle = ((float)br.ReadInt16()) * 180 / 32768;
-            this.AI_CAMERA_HOOD.CameraLag = br.ReadSingle();
-            this.AI_CAMERA_HOOD.CameraHeight = br.ReadSingle();
-            this.AI_CAMERA_HOOD.CameraLatOffset = br.ReadSingle();
-            br.BaseStream.Position += 2;
-            this.AI_CAMERA_DRIFT.CameraAngle = ((float)br.ReadInt16()) * 180 / 32768;
-            this.AI_CAMERA_DRIFT.CameraLag = br.ReadSingle();
-            this.AI_CAMERA_DRIFT.CameraHeight = br.ReadSingle();
-            this.AI_CAMERA_DRIFT.CameraLatOffset = br.ReadSingle();
+            for (int a1 = 0; a1 < 6; ++a1)
+            {
+                var camera = new Camera();
+                camera.Read(br);
+                switch (camera.CameraType)
+                {
+                    case eCameraType.CLOSE:
+                        this.AI_CAMERA_CLOSE = camera;
+                        break;
+                    case eCameraType.BUMPER:
+                        this.AI_CAMERA_BUMPER = camera;
+                        break;
+                    case eCameraType.DRIVER:
+                        this.AI_CAMERA_DRIVER = camera;
+                        break;
+                    case eCameraType.HOOD:
+                        this.AI_CAMERA_HOOD = camera;
+                        break;
+                    case eCameraType.DRIFT:
+                        this.AI_CAMERA_DRIFT = camera;
+                        break;
+                    default:
+                        this.AI_CAMERA_FAR = camera;
+                        break;
+                }
+            }
 
             // Rigid Controls
             this._rigid_controls = new ushort[40];

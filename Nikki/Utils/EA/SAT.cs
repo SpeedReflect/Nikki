@@ -22,7 +22,7 @@ namespace Nikki.Utils.EA
 
             byte[] InterData = new byte[fng.Length - 4];
             Buffer.BlockCopy(fng, 4, InterData, 0, fng.Length - 4);
-            var result = JDLZ.Decompress(InterData);
+            var result = Interop.Decompress(InterData);
 
             return result;
         }

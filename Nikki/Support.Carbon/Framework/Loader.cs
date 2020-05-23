@@ -122,7 +122,7 @@ namespace Nikki.Support.Carbon.Framework
 			if (options.Flags.HasFlag(eOptFlags.None)) return false;
 			db.Buffer = File.ReadAllBytes(options.File);
 
-			db.Buffer = JDLZ.Decompress(db.Buffer);
+			db.Buffer = Interop.Decompress(db.Buffer);
 
 			using var ms = new MemoryStream(db.Buffer);
 			using var br = new BinaryReader(ms);

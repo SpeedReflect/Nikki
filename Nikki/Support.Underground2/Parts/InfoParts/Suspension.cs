@@ -1,4 +1,5 @@
-﻿using Nikki.Reflection.Abstract;
+﻿using System.IO;
+using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 
@@ -128,5 +129,53 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
             }
             return result;
         }
-    }
+
+		/// <summary>
+		/// Reads data using <see cref="BinaryReader"/> provided.
+		/// </summary>
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		public void Read(BinaryReader br)
+		{
+			this.ShockStiffnessFront = br.ReadSingle();
+			this.ShockExtStiffnessFront = br.ReadSingle();
+			this.SpringProgressionFront = br.ReadSingle();
+			this.ShockValvingFront = br.ReadSingle();
+			this.SwayBarFront = br.ReadSingle();
+			this.TrackWidthFront = br.ReadSingle();
+			this.CounterBiasFront = br.ReadSingle();
+			this.ShockDigressionFront = br.ReadSingle();
+			this.ShockStiffnessRear = br.ReadSingle();
+			this.ShockExtStiffnessRear = br.ReadSingle();
+			this.SpringProgressionRear = br.ReadSingle();
+			this.ShockValvingRear = br.ReadSingle();
+			this.SwayBarRear = br.ReadSingle();
+			this.TrackWidthRear = br.ReadSingle();
+			this.CounterBiasRear = br.ReadSingle();
+			this.ShockDigressionRear = br.ReadSingle();
+		}
+
+		/// <summary>
+		/// Writes data using <see cref="BinaryWriter"/> provided.
+		/// </summary>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		public void Write(BinaryWriter bw)
+		{
+			bw.Write(this.ShockStiffnessFront);
+			bw.Write(this.ShockExtStiffnessFront);
+			bw.Write(this.SpringProgressionFront);
+			bw.Write(this.ShockValvingFront);
+			bw.Write(this.SwayBarFront);
+			bw.Write(this.TrackWidthFront);
+			bw.Write(this.CounterBiasFront);
+			bw.Write(this.ShockDigressionFront);
+			bw.Write(this.ShockStiffnessRear);
+			bw.Write(this.ShockExtStiffnessRear);
+			bw.Write(this.SpringProgressionRear);
+			bw.Write(this.ShockValvingRear);
+			bw.Write(this.SwayBarRear);
+			bw.Write(this.TrackWidthRear);
+			bw.Write(this.CounterBiasRear);
+			bw.Write(this.ShockDigressionRear);
+		}
+	}
 }

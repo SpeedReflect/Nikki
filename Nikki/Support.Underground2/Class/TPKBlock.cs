@@ -716,7 +716,7 @@ namespace Nikki.Support.Underground2.Class
             // Decompress all data excluding 0x18 byte header
             br.BaseStream.Position += 0x14;
             var data = br.ReadBytes(offslot.CompressedSize - 0x18);
-            data = JDLZ.Decompress(data);
+            data = Interop.Decompress(data);
 
             using var ms = new MemoryStream(data);
             using var reader = new BinaryReader(ms);

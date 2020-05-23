@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Utils.EA;
+using Nikki.Utils.LZC;
 using Nikki.Reflection.ID;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
@@ -716,7 +717,7 @@ namespace Nikki.Support.MostWanted.Class
             // Decompress all data excluding 0x18 byte header
             br.BaseStream.Position += 0x14;
             var data = br.ReadBytes(offslot.CompressedSize - 0x18);
-            data = JDLZ.Decompress(data);
+            data = Interop.Decompress(data);
 
             using var ms = new MemoryStream(data);
             using var reader = new BinaryReader(ms);

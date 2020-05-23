@@ -3246,6 +3246,31 @@
             Debug.
             </summary>
         </member>
+        <member name="T:Nikki.Reflection.Enum.eLZCompressionType">
+            <summary>
+            LZC Compression type of the buffer.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eLZCompressionType.RAWW">
+            <summary>
+            RAWW compression: requires usage of <see cref="T:Nikki.Utils.LZC.RAWW"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eLZCompressionType.JDLZ">
+            <summary>
+            JDLZ compression: requires usage of <see cref="T:Nikki.Utils.LZC.JDLZ"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eLZCompressionType.HUFF">
+            <summary>
+            HUFF compression: requires usage of <see cref="T:Nikki.Utils.LZC.HUFF"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eLZCompressionType.COMP">
+            <summary>
+            COMP compression: requires usage of <see cref="T:Nikki.Utils.LZC.COMP"/>.
+            </summary>
+        </member>
         <member name="T:Nikki.Reflection.Enum.eMemoryType">
             <summary>
             Enum of car memory types.
@@ -25933,6 +25958,11 @@
             A unit <see cref="T:Nikki.Support.Underground2.Parts.InfoParts.Camera"/> used in car performance.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Underground2.Parts.InfoParts.Camera.CameraType">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Underground2.Parts.InfoParts.Camera.CameraAngle">
             <summary>
             
@@ -25963,6 +25993,18 @@
             Creates a plain copy of the objects that contains same values.
             </summary>
             <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.InfoParts.Camera.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.InfoParts.Camera.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
         <member name="T:Nikki.Support.Underground2.Parts.InfoParts.CarInfoWheel">
             <summary>
@@ -26508,6 +26550,18 @@
             Creates a plain copy of the objects that contains same values.
             </summary>
             <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.InfoParts.Suspension.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.InfoParts.Suspension.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
         <member name="T:Nikki.Support.Underground2.Parts.InfoParts.Tires">
             <summary>
@@ -27605,30 +27659,79 @@
         </member>
         <member name="M:Nikki.Utils.Interop.Decompress(System.Byte[])">
             <summary>
-            Decompresses JDLZ or HUFF compression using LZCompressLib library.
+            Decompresses buffer based on its header.
             </summary>
             <param name="input">Array to decompress.</param>
             <returns>Decompressed data.</returns>
         </member>
-        <member name="T:Nikki.Utils.JDLZ">
+        <member name="M:Nikki.Utils.Interop.Compress(System.Byte[],Nikki.Reflection.Enum.eLZCompressionType)">
+            <summary>
+            Compresses buffer based on compression type passed.
+            </summary>
+            <param name="input">Array to compress.</param>
+            <param name="type"><see cref="T:Nikki.Reflection.Enum.eLZCompressionType"/> of the compression.</param>
+            <returns>Compressed data.</returns>
+        </member>
+        <member name="T:Nikki.Utils.LZC.COMP">
+            <summary>
+            Collection with COMP decompressor.
+            </summary>
+        </member>
+        <member name="M:Nikki.Utils.LZC.COMP.Decompress(System.Byte[])">
+            <summary>
+            Decompresses COMP byte array.
+            </summary>
+            <param name="input">Byte array to be decompressed.</param>
+            <returns>Byte array of decompressed data.</returns>
+        </member>
+        <member name="T:Nikki.Utils.LZC.HUFF">
+            <summary>
+            Collection with HUFF decompressor.
+            </summary>
+        </member>
+        <member name="M:Nikki.Utils.LZC.HUFF.Decompress(System.Byte[])">
+            <summary>
+            Decompresses HUFF byte array.
+            </summary>
+            <param name="input">Byte array to be decompressed.</param>
+            <returns>Byte array of decompressed data.</returns>
+        </member>
+        <member name="T:Nikki.Utils.LZC.JDLZ">
             <summary>
             Collection with JDLZ compressor and decompressor.
             </summary>
         </member>
-        <member name="M:Nikki.Utils.JDLZ.Decompress(System.Byte[])">
+        <member name="M:Nikki.Utils.LZC.JDLZ.Decompress(System.Byte[])">
             <summary>
             Decompresses JDLZ byte array.
             </summary>
-            <param name="block">Byte array to be decompressed.</param>
+            <param name="input">Byte array to be decompressed.</param>
             <returns>Byte array of decompressed data.</returns>
         </member>
-        <member name="M:Nikki.Utils.JDLZ.Compress(System.Byte[],System.Int32,System.Int32)">
+        <member name="M:Nikki.Utils.LZC.JDLZ.Compress(System.Byte[])">
             <summary>
             Compresses byte block into JDLZ-compressed one.
             </summary>
             <param name="input">Byte buffer to compress.</param>
-            <param name="hashSize">Speed/Ratio tunable; use powers of 2. Results vary per file.</param>
-            <param name="maxSearchDepth">Speed/Ratio tunable. Results vary per file.</param>
+            <returns>JDLZ-compressed byte array.</returns>
+        </member>
+        <member name="T:Nikki.Utils.LZC.RAWW">
+            <summary>
+            Collection with RAWW decompressor.
+            </summary>
+        </member>
+        <member name="M:Nikki.Utils.LZC.RAWW.Decompress(System.Byte[])">
+            <summary>
+            Decompresses RAWW byte array.
+            </summary>
+            <param name="input">Byte array to be decompressed.</param>
+            <returns>Byte array of decompressed data.</returns>
+        </member>
+        <member name="M:Nikki.Utils.LZC.RAWW.Compress(System.Byte[])">
+            <summary>
+            Compresses byte block into RAWW-compressed one.
+            </summary>
+            <param name="input">Byte buffer to compress.</param>
             <returns>JDLZ-compressed byte array.</returns>
         </member>
         <member name="T:Nikki.Utils.MemoryUnlock">

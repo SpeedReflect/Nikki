@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Runtime.InteropServices;
+using Nikki.Utils.LZC;
+using Nikki.Reflection.Enum;
 
 
 
@@ -10,26 +11,47 @@ namespace Nikki.Utils
 	/// </summary>
 	public static class Interop
 	{
-		[DllImport("LZCompressLib.dll", EntryPoint = "BlockDecompress", CallingConvention = CallingConvention.Cdecl)]
-		private static extern int PrivateDecode([In] byte[] input, int insize, [Out] byte[] output, int outsize);
-
 		/// <summary>
-		/// Decompresses JDLZ or HUFF compression using LZCompressLib library.
+		/// Decompresses buffer based on its header.
 		/// </summary>
 		/// <param name="input">Array to decompress.</param>
 		/// <returns>Decompressed data.</returns>
 		public static byte[] Decompress(byte[] input)
 		{
 			if (input == null || input.Length < 0x10) return null;
-			var type = BitConverter.ToUInt32(input, 0);
-			if (type != 0x5A4C444A && type != 0x46465548) return null;
-			var insize = input.Length;
-			var outsize = BitConverter.ToInt32(input, 8);
-			var output = new byte[outsize];
+			var type = (eLZCompressionType)BitConverter.ToUInt32(input, 0);
 
-			int result = PrivateDecode(input, insize, output, outsize);
+			return type switch
+			{
+				eLZCompressionType.RAWW => RAWW.Decompress(input),
+				eLZCompressionType.JDLZ => JDLZ.Decompress(input),
+				eLZCompressionType.HUFF => HUFF.Decompress(input),
+				eLZCompressionType.COMP => COMP.Decompress(input),
+				_ => null,
+			};
+		}
+	
+		/// <summary>
+		/// Compresses buffer based on compression type passed.
+		/// </summary>
+		/// <param name="input">Array to compress.</param>
+		/// <param name="type"><see cref="eLZCompressionType"/> of the compression.</param>
+		/// <returns>Compressed data.</returns>
+		public static byte[] Compress(byte[] input, eLZCompressionType type)
+		{
+			if (input == null) return null;
 
-			return output;
+			switch (type)
+			{
+				case eLZCompressionType.RAWW:
+					return RAWW.Compress(input);
+
+				case eLZCompressionType.JDLZ:
+					return JDLZ.Compress(input);
+
+				default:
+					return null;
+			}
 		}
 	}
 }

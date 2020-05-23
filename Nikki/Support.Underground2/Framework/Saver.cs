@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.ID;
+using Nikki.Reflection.Enum;
 using Nikki.Support.Underground2.Class;
 using CoreExtensions.IO;
 
@@ -295,7 +296,7 @@ namespace Nikki.Support.Underground2.Framework
 			}
 
 			var buffer = msw.ToArray();
-			if (options.Compress) buffer = JDLZ.Compress(buffer);
+			if (options.Compress) buffer = Interop.Compress(buffer, eLZCompressionType.JDLZ);
 
 			using (var writer = new BinaryWriter(File.Open(options.File, FileMode.Create)))
 			{
