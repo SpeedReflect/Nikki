@@ -214,6 +214,7 @@ namespace Nikki.Support.Carbon.Class
 
             if (PartOffsets[2] != max)
             {
+                this.IsCompressed = eBoolean.True;
                 for (int a1 = 0; a1 < TextureCount; ++a1)
                 {
                     br.BaseStream.Position = Start;
@@ -653,9 +654,11 @@ namespace Nikki.Support.Carbon.Class
                 {
                     Key = br.ReadUInt32(),
                     AbsoluteOffset = br.ReadInt32(),
-                    CompressedSize = br.ReadInt32(),
-                    ActualSize = br.ReadInt32(),
-                    ToHeaderOffset = br.ReadInt32(),
+                    EncodedSize = br.ReadInt32(),
+                    DecodedSize = br.ReadInt32(),
+                    UserFlags = br.ReadByte(),
+                    Flags = br.ReadByte(),
+                    RefCount = br.ReadInt16(),
                     UnknownInt32 = br.ReadInt32()
                 };
             }
@@ -695,23 +698,115 @@ namespace Nikki.Support.Carbon.Class
         /// <returns>Decompressed texture valid to the current support.</returns>
         protected override void ParseCompTexture(BinaryReader br, OffSlot offslot)
         {
+            const int headersize = 0x7C + 0x18; // texture header size + comp slot size
             br.BaseStream.Position += offslot.AbsoluteOffset;
-            if (br.ReadUInt32() != TPK.COMPRESSED_TEXTURE) return; // if not a compressed texture
+            var offset = br.BaseStream.Position; // save this position
 
-            // Decompress all data excluding 0x18 byte header
-            br.BaseStream.Position += 0x14;
-            var data = br.ReadBytes(offslot.CompressedSize - 0x18);
-            data = Interop.Decompress(data);
+            // Read data in the entire pack and make list of data
+            var datalist = new List<byte[]>();
+            byte[] header = null; // data array that contain header of the texture
+            while (br.BaseStream.Position < offset + offslot.EncodedSize)
+            {
+                // We read till we find magic compressed block number
+                if (br.ReadUInt32() != TPK.COMPRESSED_TEXTURE) continue;
+                var relative = br.BaseStream.Position - 4; // save relative position
+                
+                // Read size of the compressed block
+                br.BaseStream.Position += 0x4;
+                var blocksize = br.ReadInt32();
 
-            using var ms = new MemoryStream(data);
-            using var reader = new BinaryReader(ms);
+                // Considering it is a compressed texture, we can read its size in the header
+                br.BaseStream.Position += 0x18; // advance position
+                var datasize = br.ReadInt32();  // read compressed data size
+                br.BaseStream.Position -= 0x10; // move position back
 
-            // In compressed textures, their header lies right in the end (0x7C + 0x18 bytes)
-            reader.BaseStream.Position = reader.BaseStream.Length - 0x7C - 0x18;
-            var tex = new Texture(reader, this.CollectionName, this.Database);
-            reader.BaseStream.Position = 0;
-            tex.ReadData(reader, true);
-            this.Textures.Add(tex);
+                // Read data with size read + size of lz header
+                var array = Interop.Decompress(br.ReadBytes(datasize + 0x10));
+
+                // Check if array read is short than current header array
+                // If yes, then swap, otherwise leave as it is
+                header = header?.Length > array.Length ? array : header ?? array;
+
+                // Add array read to the list
+                datalist.Add(array);
+
+                // Advance position in the stream
+                br.BaseStream.Position = relative + blocksize;
+            }
+
+            // If no data was read, we return
+            if (datalist.Count == 0) return;
+
+            // Find header in the list. By definition, it is an array of the smallest size.
+            using var ms = new MemoryStream(header);
+            using var texr = new BinaryReader(ms);
+
+            // Texture header is located at the end of data
+            int headlength = header.Length - headersize;
+            texr.BaseStream.Position = headlength;
+
+            // Create new texture based on header found
+            var texture = new Texture(texr, this.CollectionName, this.Database);
+
+            // We can skip dds type struct since it is defined in the header.
+
+            // Calculate total length of the texture data
+            int length = 0;
+            datalist.ForEach(arr => length += arr.Length == header.Length
+                    ? headlength // exclude header size
+                    : arr.Length); // else include entire length
+
+            // Initialize stack for data
+            texture.Data = new byte[length];
+            length = 0; // reset
+
+            // Put header at the front
+            var last = datalist[^1];
+            datalist.Remove(last);
+            datalist = datalist.Prepend(last).ToList();
+
+            // Header goes last, so we have to move everything that is behind it to the front
+            // Format as follows:
+            // 1 -> 2 -> H -> 3 -> 4
+            // 4 -> 1 -> 2 -> H -> 3
+            // 3 -> 4 -> 1 -> 2 -> H
+            var sortedlist = new List<byte[]>(datalist.Count);
+            int indexof = datalist.IndexOf(header);
+
+            for (int loop = indexof + 1; loop < datalist.Count; ++loop) // move back to front
+            {
+                sortedlist.Add(datalist[loop]);
+            }
+            for (int loop = 0; loop < indexof; ++loop) // move front to back
+            {
+                sortedlist.Add(datalist[loop]);
+            }
+            sortedlist.Add(header); // append header
+
+            // BlockCopy all data to the texture's storage
+            foreach (var arr in datalist)
+            {
+                if (arr.Length == header.Length)
+                {
+                    if (arr.Length == headersize)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        Buffer.BlockCopy(arr, 0, texture.Data, length, headlength);
+                        length += headlength;
+                    }
+                }
+                else
+                {
+                    Buffer.BlockCopy(arr, 0, texture.Data, length, arr.Length);
+                    length += arr.Length;
+                }
+            }
+
+            // Add texture to this TPK
+            this.Textures.Add(texture);
         }
 
         /// <summary>

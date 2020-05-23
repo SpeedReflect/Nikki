@@ -6430,11 +6430,6 @@
             Vault memory hash of the collection name.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.Texture.Data">
-            <summary>
-            DDS data of the texture.
-            </summary>
-        </member>
         <member name="P:Nikki.Support.Carbon.Class.Texture.Compression">
             <summary>
             Compression type value of the texture.
@@ -9344,11 +9339,6 @@
             Vault memory hash of the collection name.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Prostreet.Class.Texture.Data">
-            <summary>
-            DDS data of the texture.
-            </summary>
-        </member>
         <member name="P:Nikki.Support.Prostreet.Class.Texture.Compression">
             <summary>
             Compression type value of the texture.
@@ -11795,11 +11785,6 @@
         <member name="P:Nikki.Support.MostWanted.Class.Texture.VltKey">
             <summary>
             Vault memory hash of the collection name.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Texture.Data">
-            <summary>
-            DDS data of the texture.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Class.Texture.Compression">
@@ -14647,6 +14632,11 @@
         <member name="P:Nikki.Support.Shared.Class.Texture.TileableUV">
             <summary>
             Represents tileable level of the texture.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Texture.Data">
+            <summary>
+            DDS data of this <see cref="T:Nikki.Support.Shared.Class.Texture"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Shared.Class.Texture.Assemble(System.IO.BinaryWriter)">
@@ -17567,19 +17557,29 @@
             Data offset relative to beginning of the <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.TPKParts.OffSlot.CompressedSize">
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.OffSlot.EncodedSize">
             <summary>
             Compressed data size.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.TPKParts.OffSlot.ActualSize">
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.OffSlot.DecodedSize">
             <summary>
             Decompressed data size.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.TPKParts.OffSlot.ToHeaderOffset">
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.OffSlot.UserFlags">
             <summary>
-            Data offset relative to this offslot.
+            User flags defined.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.OffSlot.Flags">
+            <summary>
+            Flags that define compression. Set to 2 since CompressedInPlace.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.OffSlot.RefCount">
+            <summary>
+            Reference count.
             </summary>
         </member>
         <member name="P:Nikki.Support.Shared.Parts.TPKParts.OffSlot.UnknownInt32">
@@ -18895,11 +18895,6 @@
         <member name="P:Nikki.Support.Underground1.Class.Texture.VltKey">
             <summary>
             Vault memory hash of the collection name.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground1.Class.Texture.Data">
-            <summary>
-            DDS data of the texture.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground1.Class.Texture.Compression">
@@ -22573,11 +22568,6 @@
         <member name="P:Nikki.Support.Underground2.Class.Texture.VltKey">
             <summary>
             Vault memory hash of the collection name.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.Texture.Data">
-            <summary>
-            DDS data of the texture.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Class.Texture.Compression">

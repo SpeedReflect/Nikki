@@ -100,6 +100,7 @@ namespace Nikki.Support.Shared.Class
         /// <summary>
         /// Represents mipmap bias type of the texture.
         /// </summary>
+        [AccessModifiable()]
         public eTextureMipmapBiasType MipmapBiasType { get; protected set; }
 
         /// <summary>
@@ -107,6 +108,11 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         public byte TileableUV { get; set; }
+
+        /// <summary>
+        /// DDS data of this <see cref="Texture"/>.
+        /// </summary>
+        public byte[] Data { get; set; }
 
         #endregion
 

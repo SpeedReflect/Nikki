@@ -671,9 +671,11 @@ namespace Nikki.Support.MostWanted.Class
                 {
                     Key = br.ReadUInt32(),
                     AbsoluteOffset = br.ReadInt32(),
-                    CompressedSize = br.ReadInt32(),
-                    ActualSize = br.ReadInt32(),
-                    ToHeaderOffset = br.ReadInt32(),
+                    EncodedSize = br.ReadInt32(),
+                    DecodedSize = br.ReadInt32(),
+                    UserFlags = br.ReadByte(),
+                    Flags = br.ReadByte(),
+                    RefCount = br.ReadInt16(),
                     UnknownInt32 = br.ReadInt32()
                 };
             }
@@ -716,7 +718,7 @@ namespace Nikki.Support.MostWanted.Class
 
             // Decompress all data excluding 0x18 byte header
             br.BaseStream.Position += 0x14;
-            var data = br.ReadBytes(offslot.CompressedSize - 0x18);
+            var data = br.ReadBytes(offslot.EncodedSize - 0x18);
             data = Interop.Decompress(data);
 
             using var ms = new MemoryStream(data);

@@ -24,17 +24,27 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 		/// <summary>
 		/// Compressed data size.
 		/// </summary>
-		public int CompressedSize { get; set; }
+		public int EncodedSize { get; set; }
 
 		/// <summary>
 		/// Decompressed data size.
 		/// </summary>
-		public int ActualSize { get; set; }
+		public int DecodedSize { get; set; }
 
 		/// <summary>
-		/// Data offset relative to this offslot.
+		/// User flags defined.
 		/// </summary>
-		public int ToHeaderOffset { get; set; }
+		public byte UserFlags { get; set; }
+
+		/// <summary>
+		/// Flags that define compression. Set to 2 since CompressedInPlace.
+		/// </summary>
+		public byte Flags { get; set; }
+
+		/// <summary>
+		/// Reference count.
+		/// </summary>
+		public short RefCount { get; set; }
 
 		/// <summary>
 		/// Unknown 4-byte signed integer value.

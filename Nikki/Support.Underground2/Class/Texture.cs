@@ -106,11 +106,6 @@ namespace Nikki.Support.Underground2.Class
         public override uint VltKey => this._collection_name.VltHash();
 
         /// <summary>
-        /// DDS data of the texture.
-        /// </summary>
-        public byte[] Data { get; private set; }
-
-        /// <summary>
         /// Compression type value of the texture.
         /// </summary>
         public override string Compression => Comp.GetString(this._compression);
