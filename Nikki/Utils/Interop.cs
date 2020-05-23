@@ -27,7 +27,7 @@ namespace Nikki.Utils
 				eLZCompressionType.JDLZ => JDLZ.Decompress(input),
 				eLZCompressionType.HUFF => HUFF.Decompress(input),
 				eLZCompressionType.COMP => COMP.Decompress(input),
-				_ => null,
+				_ => input,
 			};
 		}
 	
@@ -39,19 +39,14 @@ namespace Nikki.Utils
 		/// <returns>Compressed data.</returns>
 		public static byte[] Compress(byte[] input, eLZCompressionType type)
 		{
-			if (input == null) return null;
-
-			switch (type)
+			return input == null
+				? null
+				: (type switch
 			{
-				case eLZCompressionType.RAWW:
-					return RAWW.Compress(input);
-
-				case eLZCompressionType.JDLZ:
-					return JDLZ.Compress(input);
-
-				default:
-					return null;
-			}
+				eLZCompressionType.RAWW => RAWW.Compress(input),
+				eLZCompressionType.JDLZ => JDLZ.Compress(input),
+				_ => null,
+			});
 		}
 	}
 }
