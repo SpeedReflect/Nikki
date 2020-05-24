@@ -9,7 +9,7 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 	/// Represents collection of <see cref="Texture"/> in compressed <see cref="TPKBlock"/>.
 	/// </summary>
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Size = 0x18)]
-	public struct OffSlot
+	public class OffSlot
 	{
 		/// <summary>
 		/// Key of the <see cref="Texture"/>.

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 
 
@@ -26,9 +27,10 @@ namespace Nikki.Utils.LZC
             int outpos = 0;
 
             var outsize = BitConverter.ToInt32(input, 8);
+            var insize = BitConverter.ToInt32(input, 12);
             var output = new byte[outsize];
 
-            while ((inpos < input.Length) && (outpos < output.Length))
+            while ((inpos < insize) && (outpos < outsize))
             {
                 if (flags1 == 1) flags1 = input[inpos++] | 0x100;
                 if (flags2 == 1) flags2 = input[inpos++] | 0x100;
@@ -56,7 +58,7 @@ namespace Nikki.Utils.LZC
                 }
                 else
                 {
-                    if (outpos < output.Length) output[outpos++] = input[inpos++];
+                    if (outpos < outsize) output[outpos++] = input[inpos++];
                 }
                 flags1 >>= 1;
             }
@@ -73,162 +75,289 @@ namespace Nikki.Utils.LZC
         {
             if (input == null) return null;
 
-            int inputBytes = input.Length;
-            byte[] output = new byte[inputBytes + ((inputBytes + 7) / 8) + 0x10 + 1];
-            int[] hashPos = new int[0x2000];
-            int[] hashChain = new int[inputBytes];
+            var insize = input.Length;
+            var output = new byte[insize + (insize + 7) / 8 + 16];
 
-            int outpos = 0;
-            int inpos = 0;
-            byte flags1bit = 1;
-            byte flags2bit = 1;
-            byte flags1 = 0;
-            byte flags2 = 0;
-
-            output[outpos++] = 0x4A; // 'J'
-            output[outpos++] = 0x44; // 'D'
-            output[outpos++] = 0x4C; // 'L'
-            output[outpos++] = 0x5A; // 'Z'
-            output[outpos++] = 0x02;
-            output[outpos++] = 0x10;
-            output[outpos++] = 0x00;
-            output[outpos++] = 0x00;
-            output[outpos++] = (byte)inputBytes;
-            output[outpos++] = (byte)(inputBytes >> 8);
-            output[outpos++] = (byte)(inputBytes >> 16);
-            output[outpos++] = (byte)(inputBytes >> 24);
-            outpos += 4;
-
-            int flags1Pos = outpos++;
-            int flags2Pos = outpos++;
-
-            flags1bit <<= 1;
-            output[outpos++] = input[inpos++];
-            inputBytes--;
-
-            while (inputBytes > 0)
+            unsafe
             {
-                int bestMatchLength = 2;
-                int bestMatchDist = 0;
-
-                if (inputBytes >= 3)
+                fixed (byte* ptr = &input[0])
                 {
-                    int hash = (-0x1A1 * (input[inpos] ^ ((input[inpos + 1] ^ (input[inpos + 2] << 4)) << 4))) & 0x1FFF;
-                    int matchPos = hashPos[hash];
-                    hashPos[hash] = inpos;
-                    hashChain[inpos] = matchPos;
-                    int prevMatchPos = inpos;
-
-                    for (int i = 0; i < 0x10; i++)
-                    {
-                        int matchDist = inpos - matchPos;
-
-                        if (matchDist > 2064 || matchPos >= prevMatchPos)
-                        {
-                            break;
-                        }
-
-                        int matchLengthLimit = matchDist <= 16 ? 4098 : 34;
-                        int maxMatchLength = inputBytes;
-
-                        if (maxMatchLength > matchLengthLimit)
-                        {
-                            maxMatchLength = matchLengthLimit;
-                        }
-                        if (bestMatchLength >= maxMatchLength)
-                        {
-                            break;
-                        }
-
-                        int matchLength = 0;
-                        while ((matchLength < maxMatchLength) && (input[inpos + matchLength] == input[matchPos + matchLength]))
-                        {
-                            matchLength++;
-                        }
-
-                        if (matchLength > bestMatchLength)
-                        {
-                            bestMatchLength = matchLength;
-                            bestMatchDist = matchDist;
-                        }
-
-                        prevMatchPos = matchPos;
-                        matchPos = hashChain[matchPos];
-                    }
-                }
-
-                if (bestMatchLength >= 3)
-                {
-                    flags1 |= flags1bit;
-                    inpos += bestMatchLength;
-                    inputBytes -= bestMatchLength;
-                    bestMatchLength -= 3;
-
-                    if (bestMatchDist < 17)
-                    {
-                        flags2 |= flags2bit;
-                        output[outpos++] = (byte)((bestMatchDist - 1) | ((bestMatchLength >> 4) & 0xF0));
-                        output[outpos++] = (byte)bestMatchLength;
-                    }
-                    else
-                    {
-                        bestMatchDist -= 17;
-                        output[outpos++] = (byte)(bestMatchLength | ((bestMatchDist >> 3) & 0xE0));
-                        output[outpos++] = (byte)bestMatchDist;
-                    }
-
-                    flags2bit <<= 1;
-                }
-                else
-                {
-                    output[outpos++] = input[inpos++];
-                    inputBytes--;
-                }
-
-                flags1bit <<= 1;
-
-                if (flags1bit == 0)
-                {
-                    output[flags1Pos] = flags1;
-                    flags1 = 0;
-                    flags1Pos = outpos++;
-                    flags1bit = 1;
-                }
-
-                if (flags2bit == 0)
-                {
-                    output[flags2Pos] = flags2;
-                    flags2 = 0;
-                    flags2Pos = outpos++;
-                    flags2bit = 1;
+                    var outsize = BlockCompress(ptr, insize, output);
+                    Array.Resize(ref output, outsize);
                 }
             }
 
-            if (flags2bit > 1)
-            {
-                output[flags2Pos] = flags2;
-            }
-            else if (flags2Pos == outpos - 1)
-            {
-                outpos = flags2Pos;
-            }
-
-            if (flags1bit > 1)
-            {
-                output[flags1Pos] = flags1;
-            }
-            else if (flags1Pos == outpos - 1)
-            {
-                outpos = flags1Pos;
-            }
-
-            output[0x0C] = (byte)outpos;
-            output[0x0D] = (byte)(outpos >> 8);
-            output[0x0E] = (byte)(outpos >> 16);
-            output[0x0F] = (byte)(outpos >> 24);
-
-            Array.Resize(ref output, outpos);
             return output;
+        }
+
+        /// <summary>
+        /// Compresses byte block into JDLZ-compressed one.
+        /// </summary>
+        /// <param name="input">Byte buffer to compress.</param>
+        /// <param name="start">Start index of compression.</param>
+        /// <param name="count">Number of bytes to compress.</param>
+        /// <returns>JDLZ-compressed byte array.</returns>
+        public static byte[] Compress(byte[] input, int start, int count)
+        {
+            if (input == null) return null;
+            if (start < 0 || count <= 0) return null;
+            if (start + count > input.Length) return null;
+
+            var output = new byte[count + (count + 7) / 8 + 16];
+
+            unsafe
+            {
+                fixed (byte* ptr = &input[start])
+                {
+                    var outsize = BlockCompress(ptr, count, output);
+                    Array.Resize(ref output, outsize);
+                }
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Special thanks to heyitsleo for making this JDLZ compressor.
+        /// It is based on the real compressor in the NFS executables.
+        /// Compressed data output size if almost identical to original
+        /// compressed files with about 1-5% difference.
+        /// </summary>
+        private static unsafe int BlockCompress(byte* src, int srcSize, Span<byte> dst)
+        {
+            var newSize = 0;
+            var afterHeaderWriteIndex = 16;
+            var dataIndex = 18;
+            var offset = 0;
+
+            var hashPool = new JLZHashPool();
+
+            uint flags1 = 0xFF00;
+            uint flags2 = 0xFF00;
+            var indexFlags2 = 17;
+            var dwSize = srcSize;
+
+            if (dwSize >= 0)
+                while (true)
+                {
+                    var bytesRemaining = Math.Min(dwSize, 4098);
+                    var hashPoolHeadIndex = hashPool.GetHashOffsetBase(src + offset) & 0x1FFF;
+                    var byteRepeatCount = 2;
+                    var currentHash = hashPool.HashHead[hashPoolHeadIndex];
+                    var savedCurrentHash = currentHash;
+                    var doShortUpdate = currentHash == null;
+
+                    if (currentHash != null)
+                    {
+                        do
+                        {
+                            if (byteRepeatCount >= 4098) break;
+
+                            var compareIndex = 0;
+
+                            if (bytesRemaining > 3)
+                            {
+                                var hashCheckBlock = src + offset;
+
+                                while (compareIndex < bytesRemaining)
+                                {
+                                    var value1 = *(int*)hashCheckBlock;
+                                    var value2 = *(int*)(src + currentHash.Offset + compareIndex);
+
+                                    if (value1 != value2) break;
+
+                                    hashCheckBlock += 4;
+                                    compareIndex += 4;
+                                }
+                            }
+
+                            while (compareIndex < bytesRemaining)
+                            {
+                                if (src[currentHash.Offset + compareIndex] != src[offset + compareIndex]) break;
+
+                                compareIndex++;
+                            }
+
+                            if (compareIndex > byteRepeatCount &&
+                                (compareIndex <= 34 || offset - currentHash.Offset < 16 ||
+                                 byteRepeatCount <= 34))
+                            {
+                                byteRepeatCount = compareIndex;
+                                savedCurrentHash = currentHash;
+                            }
+
+                            currentHash = currentHash.Next;
+                        } while (currentHash != null);
+
+                        if (byteRepeatCount > 2)
+                        {
+                            flags1 >>= 1;
+                            var backtrack = offset - savedCurrentHash.Offset - 1;
+                            byte backtrackCode;
+                            if (backtrack < 16)
+                            {
+                                flags2 >>= 1;
+                                backtrackCode = (byte)(backtrack | (((byteRepeatCount - 3) >> 4) & 0xF0));
+                                dst[dataIndex + 1] = (byte)(byteRepeatCount - 3);
+                            }
+                            else
+                            {
+                                byteRepeatCount = Math.Min(byteRepeatCount, 34);
+                                flags2 = (flags2 >> 1) & 0x7F7F;
+                                backtrackCode = (byte)((byteRepeatCount - 3) |
+                                                        (((offset - savedCurrentHash.Offset - 17) >> 3) & 0xE0));
+                                dst[dataIndex + 1] = (byte)(offset - (savedCurrentHash.Offset & 0xFF) - 17);
+                            }
+
+                            dst[dataIndex] = backtrackCode;
+                            dataIndex += 2;
+                            dwSize -= byteRepeatCount;
+
+                            do
+                            {
+                                hashPool.Update(src + offset, offset);
+                                --byteRepeatCount;
+                                offset++;
+                            } while (byteRepeatCount != 0);
+
+                            newSize = dwSize;
+                        }
+                        else
+                        {
+                            doShortUpdate = true;
+                        }
+                    }
+
+                    if (doShortUpdate)
+                    {
+                        hashPool.Update(src + offset, offset);
+                        dst[dataIndex++] = src[offset];
+                        offset++;
+                        newSize = dwSize - 1;
+                        flags1 = (flags1 >> 1) & 0x7F7F;
+                        --dwSize;
+                    }
+
+                    var sf1 = unchecked((ushort)flags1);
+                    var sf2 = unchecked((ushort)flags2);
+
+                    if (sf1 < 0x100)
+                    {
+                        dst[afterHeaderWriteIndex] = (byte)sf1;
+                        afterHeaderWriteIndex = dataIndex++;
+                        flags1 = 0xFF00;
+                    }
+
+                    if (sf2 < 0x100)
+                    {
+                        dst[indexFlags2] = (byte)sf2;
+                        indexFlags2 = dataIndex++;
+                        flags2 = 0xFF00;
+                    }
+
+                    if (newSize < 0)
+                        break;
+                }
+
+            for (; (flags1 & 0xFF00) != 0; flags1 >>= 1)
+            {
+            }
+
+            for (dst[afterHeaderWriteIndex] = (byte)flags1; (flags2 & 0xFF00) != 0; flags2 >>= 1)
+            {
+            }
+
+            dst[indexFlags2] = (byte)flags2;
+
+            dst[0] = 0x4a;
+            dst[1] = 0x44;
+            dst[2] = 0x4c;
+            dst[3] = 0x5a;
+            dst[4] = 0x2;
+            dst[5] = 0x10;
+            dst[8] = (byte)(srcSize & 0xff);
+            dst[9] = (byte)((srcSize >> 8) & 0xff);
+            dst[10] = (byte)((srcSize >> 16) & 0xff);
+            dst[11] = (byte)((srcSize >> 24) & 0xff);
+            dst[12] = (byte)(dataIndex & 0xff);
+            dst[13] = (byte)((dataIndex >> 8) & 0xff);
+            dst[14] = (byte)((dataIndex >> 16) & 0xff);
+            dst[15] = (byte)((dataIndex >> 24) & 0xff);
+
+            return dataIndex;
+        }
+
+        private class JLZHash
+        {
+            public bool IsComplete { get; set; }
+            public int ComputedHash { get; set; }
+            public int Offset { get; set; }
+
+            public JLZHash Next { get; set; }
+            public JLZHash Previous { get; set; }
+        }
+
+        private class JLZHashPool
+        {
+            private readonly int _poolSize;
+
+            public JLZHashPool(int poolSize = 0x810)
+            {
+                this._poolSize = poolSize;
+                for (var i = 0; i < poolSize; i++)
+                {
+                    var jlzHash = new JLZHash();
+                    this.HashPool.Add(jlzHash);
+                }
+
+                for (var i = 0; i < 8192; i++) this.HashHead.Add(null);
+            }
+
+            public List<JLZHash> HashPool { get; } = new List<JLZHash>();
+            public List<JLZHash> HashHead { get; } = new List<JLZHash>();
+
+            public unsafe short GetHashOffsetBase(byte* data)
+            {
+                return (short)(-417 * (data[0] ^ (16 * (data[1] ^ (16 * data[2])))));
+            }
+
+            public unsafe JLZHash Update(byte* data, int offset)
+            {
+                if (offset < 0)
+                    throw new ArgumentException("value < 0", nameof(offset));
+
+                var hashOffset = offset % this._poolSize;
+                var hash = this.HashPool[hashOffset];
+
+                if (hash.IsComplete)
+                {
+                    // if this hash has already been defined, move everything around
+                    var nextHash = hash.Next;
+
+                    if (nextHash != null) nextHash.Previous = hash.Previous;
+
+                    var previousHash = hash.Previous;
+
+                    if (previousHash != null) previousHash.Next = hash.Next;
+
+                    var hashIndex = hash.ComputedHash;
+                    if (ReferenceEquals(this.HashHead[hashIndex], hash)) this.HashHead[hashIndex] = hash.Next;
+                }
+
+                var alignedNewOffset = this.GetHashOffsetBase(data) & 0x1FFF;
+
+                hash.Offset = offset;
+                hash.Previous = null;
+                hash.Next = this.HashHead[alignedNewOffset];
+                hash.ComputedHash = alignedNewOffset;
+                hash.IsComplete = true;
+
+                this.HashHead[alignedNewOffset] = hash;
+
+                if (hash.Next != null) hash.Next.Previous = hash;
+
+                return hash.Next;
+            }
         }
     }
 }

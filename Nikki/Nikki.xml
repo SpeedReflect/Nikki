@@ -6765,42 +6765,50 @@
             Assembles partial 1 part1 of the tpk block.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-            <returns>Byte array of the partial 1 part1.</returns>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.TPKBlock.Get1Part2(System.IO.BinaryWriter)">
             <summary>
             Assembles partial 1 part2 of the tpk block.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-            <returns>Byte array of the partial 1 part2.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.TPKBlock.Get1Part3(System.IO.BinaryWriter,System.Collections.Generic.List{Nikki.Support.Shared.Parts.TPKParts.OffSlot})">
+            <summary>
+            Assembles partial 1 part3 of the tpk block.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="offslots">List of <see cref="T:Nikki.Support.Shared.Parts.TPKParts.OffSlot"/> to write.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.TPKBlock.Get1Part4(System.IO.BinaryWriter)">
             <summary>
             Assembles partial 1 part4 of the tpk block.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-            <returns>Byte array of the partial 1 part4.</returns>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.TPKBlock.Get1Part5(System.IO.BinaryWriter)">
             <summary>
             Assembles partial 1 part5 of the tpk block.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-            <returns>Byte array of the partial 1 part5.</returns>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.TPKBlock.Get2Part1(System.IO.BinaryWriter)">
             <summary>
             Assembles partial 2 part1 of the tpk block.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-            <returns>Byte array of the partial 2 part1.</returns>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.TPKBlock.Get2Part2(System.IO.BinaryWriter)">
             <summary>
             Assembles partial 2 part2 of the tpk block.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-            <returns>Byte array of the partial 2 part2.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.TPKBlock.Get2CompressedPart2(System.IO.BinaryWriter,System.Int32)">
+            <summary>
+            Assembles partial 2 part2 as compressed block and return all offslots generated.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="thisOffset">Offset of this TPK in BinaryWriter passed.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.Track">
             <summary>
@@ -14740,6 +14748,16 @@
             as compressed; false otherwise.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Shared.Class.TPKBlock.CompressionType">
+            <summary>
+            Compression type of this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.TPKBlock.SettingData">
+            <summary>
+            Settings data related to this <seealso cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Shared.Class.TPKBlock.CollectionName">
             <summary>
             Collection name of the variable.
@@ -17541,6 +17559,68 @@
             <summary>
             Compression of the <see cref="T:Nikki.Support.Shared.Class.Texture"/>.
             </summary>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.TPKParts.MagicHeader">
+            <summary>
+            A class that contains settings about Compressed-In-Place texture blocks.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.MagicHeader.Magic">
+            <summary>
+            Magic ID number 0x55441122.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.MagicHeader.DecodedSize">
+            <summary>
+            Size of decoded/decompressed data.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.MagicHeader.EncodedSize">
+            <summary>
+            Size of encoded/compressed data.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.MagicHeader.DecodedDataPosition">
+            <summary>
+            Position of the decoded/decompressed data on loading.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.MagicHeader.EncodedDataPosition">
+            <summary>
+            Position of the encoded/compressed data on saving.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.MagicHeader.PaddingPtr">
+            <summary>
+            Padding pointer that is used in the game.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.MagicHeader.Data">
+            <summary>
+            Compressed data that this header contains.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.MagicHeader.Length">
+            <summary>
+            Length of the compressed data.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.TPKParts.MagicHeader.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.TPKParts.MagicHeader"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.TPKParts.MagicHeader.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.TPKParts.MagicHeader.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
         <member name="T:Nikki.Support.Shared.Parts.TPKParts.OffSlot">
             <summary>
@@ -27662,6 +27742,16 @@
             <param name="type"><see cref="T:Nikki.Reflection.Enum.eLZCompressionType"/> of the compression.</param>
             <returns>Compressed data.</returns>
         </member>
+        <member name="M:Nikki.Utils.Interop.Compress(System.Byte[],Nikki.Reflection.Enum.eLZCompressionType,System.Int32,System.Int32)">
+            <summary>
+            Compresses buffer based on compression type passed.
+            </summary>
+            <param name="input">Array to compress.</param>
+            <param name="type"><see cref="T:Nikki.Reflection.Enum.eLZCompressionType"/> of the compression.</param>
+            <param name="start">Start index of compression.</param>
+            <param name="count">Number of bytes to compress.</param>
+            <returns>Compressed data.</returns>
+        </member>
         <member name="T:Nikki.Utils.LZC.COMP">
             <summary>
             Collection with COMP decompressor.
@@ -27705,6 +27795,23 @@
             <param name="input">Byte buffer to compress.</param>
             <returns>JDLZ-compressed byte array.</returns>
         </member>
+        <member name="M:Nikki.Utils.LZC.JDLZ.Compress(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Compresses byte block into JDLZ-compressed one.
+            </summary>
+            <param name="input">Byte buffer to compress.</param>
+            <param name="start">Start index of compression.</param>
+            <param name="count">Number of bytes to compress.</param>
+            <returns>JDLZ-compressed byte array.</returns>
+        </member>
+        <member name="M:Nikki.Utils.LZC.JDLZ.BlockCompress(System.Byte*,System.Int32,System.Span{System.Byte})">
+            <summary>
+            Special thanks to heyitsleo for making this JDLZ compressor.
+            It is based on the real compressor in the NFS executables.
+            Compressed data output size if almost identical to original
+            compressed files with about 1-5% difference.
+            </summary>
+        </member>
         <member name="T:Nikki.Utils.LZC.RAWW">
             <summary>
             Collection with RAWW decompressor.
@@ -27722,6 +27829,15 @@
             Compresses byte block into RAWW-compressed one.
             </summary>
             <param name="input">Byte buffer to compress.</param>
+            <returns>JDLZ-compressed byte array.</returns>
+        </member>
+        <member name="M:Nikki.Utils.LZC.RAWW.Compress(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Compresses byte block into RAWW-compressed one.
+            </summary>
+            <param name="input">Byte buffer to compress.</param>
+            <param name="start">Start index of compression.</param>
+            <param name="count">Number of bytes to compress.</param>
             <returns>JDLZ-compressed byte array.</returns>
         </member>
         <member name="T:Nikki.Utils.MemoryUnlock">

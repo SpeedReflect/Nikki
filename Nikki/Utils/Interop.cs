@@ -48,5 +48,25 @@ namespace Nikki.Utils
 				_ => null,
 			});
 		}
+
+		/// <summary>
+		/// Compresses buffer based on compression type passed.
+		/// </summary>
+		/// <param name="input">Array to compress.</param>
+		/// <param name="type"><see cref="eLZCompressionType"/> of the compression.</param>
+		/// <param name="start">Start index of compression.</param>
+		/// <param name="count">Number of bytes to compress.</param>
+		/// <returns>Compressed data.</returns>
+		public static byte[] Compress(byte[] input, eLZCompressionType type, int start, int count)
+		{
+			return input == null
+				? null
+				: (type switch
+			{
+				eLZCompressionType.RAWW => RAWW.Compress(input, start, count),
+				eLZCompressionType.JDLZ => JDLZ.Compress(input, start, count),
+				_ => null,
+			});
+		}
 	}
 }
