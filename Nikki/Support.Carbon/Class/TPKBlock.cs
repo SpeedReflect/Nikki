@@ -771,6 +771,7 @@ namespace Nikki.Support.Carbon.Class
                 magic.Read(br);
 
                 magiclist.Add(magic);
+
             }
 
             // If no data was read, we return; else if magic count is more than 1, sort by positions
@@ -1049,7 +1050,7 @@ namespace Nikki.Support.Carbon.Class
                 // Calculate header length. Header consists of leftover dds data got by 
                 // dividing it in blocks of 0x8000 bytes + size of texture header + 
                 // size of dds info header
-                var numParts = texture.Data.Length / 0x8000 + 1;
+                var numParts = texture.Data.Length / maxBlockSize + 1;
                 var magiclist = new List<MagicHeader>(numParts);
                 for (int loop = 0; loop < numParts; ++loop)
                 {
@@ -1076,9 +1077,7 @@ namespace Nikki.Support.Carbon.Class
                         CalculateNextOffset(texture.Data.Length);
 
                         // Save compressed data to MagicHeader
-                        // Leave texture header compressed as RAWW so user can edit 
-                        // them via hex-editors
-                        magic.Data = Interop.Compress(head, eLZCompressionType.RAWW);
+                        magic.Data = Interop.Compress(head, eLZCompressionType.BEST);
                         magic.DecodedSize = difference + texHeaderSize;
                     }
 
@@ -1086,7 +1085,7 @@ namespace Nikki.Support.Carbon.Class
                     else
                     {
                         // Use compression type passed
-                        magic.Data = Interop.Compress(texture.Data, this.CompressionType, texOffset, maxBlockSize);
+                        magic.Data = Interop.Compress(texture.Data, texOffset, maxBlockSize, eLZCompressionType.BEST);
                         texOffset += maxBlockSize;
                         magic.DecodedSize = maxBlockSize;
                     }
@@ -1122,18 +1121,18 @@ namespace Nikki.Support.Carbon.Class
                         var size = magic.Length + headerSize;
                         var difference = 4 - size % 4;
                         if (difference != 4) size += difference;
-
+                
                         // Manage settings about decoded data
                         magic.DecodedDataPosition = decodeOffset;
                         decodeOffset += magic.DecodedSize;
                         offslot.DecodedSize += magic.DecodedSize;
-
+                
                         // Manage settings about encoded data
                         magic.EncodedSize = size;
                         magic.EncodedDataPosition = encodeOffset;
                         encodeOffset += size;
                         offslot.EncodedSize += size;
-
+                
                         magic.Write(bw);
                     }
                 }
@@ -1144,15 +1143,15 @@ namespace Nikki.Support.Carbon.Class
                     var size = magic.Length + headerSize;
                     var difference = 4 - size % 4;
                     if (difference != 4) size += difference;
-
+                
                     // Manage settings about decoded data
                     offslot.DecodedSize += magic.DecodedSize;
-
+                
                     // Manage settings about encoded data
                     magic.EncodedSize = size;
                     magic.EncodedDataPosition = encodeOffset;
                     offslot.EncodedSize += size;
-
+                
                     magic.Write(bw);
                 }
 

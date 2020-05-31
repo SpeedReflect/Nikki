@@ -70,11 +70,6 @@ namespace Nikki.Support.Shared.Class
         public abstract eBoolean IsCompressed { get; set; }
 
         /// <summary>
-        /// Compression type of this <see cref="TPKBlock"/>.
-        /// </summary>
-        public eLZCompressionType CompressionType { get; set; }
-
-        /// <summary>
         /// Settings data related to this <seealso cref="TPKBlock"/>.
         /// </summary>
         public byte[] SettingData { get; set; }

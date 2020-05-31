@@ -3,26 +3,31 @@
 	/// <summary>
 	/// LZC Compression type of the buffer.
 	/// </summary>
-	public enum eLZCompressionType : uint
+	public enum eLZCompressionType : int
 	{
 		/// <summary>
-		/// RAWW compression: requires usage of <see cref="Utils.LZC.RAWW"/>.
+		/// Use RAWW compression.
 		/// </summary>
 		RAWW = 0x57574152,
 
 		/// <summary>
-		/// JDLZ compression: requires usage of <see cref="Utils.LZC.JDLZ"/>.
+		/// Use JDLZ compression.
 		/// </summary>
 		JDLZ = 0x5A4C444A,
 
 		/// <summary>
-		/// HUFF compression: requires usage of <see cref="Utils.LZC.HUFF"/>.
+		/// Use HUFF compression.
 		/// </summary>
 		HUFF = 0x46465548,
 
 		/// <summary>
-		/// COMP compression: requires usage of <see cref="Utils.LZC.COMP"/>.
+		/// Use COMP compression.
 		/// </summary>
 		COMP = 0x504D4F43,
+
+		/// <summary>
+		/// Use BEST compression (system chooses which one depending on the smallest size). 
+		/// </summary>
+		BEST = 0x54534542,
 	}
 }

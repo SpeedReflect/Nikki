@@ -187,7 +187,7 @@ namespace Nikki.Support.Carbon.Class
             bw.Write(this.BinKey);
             bw.Write(this._class);
             bw.Write((uint)this.Offset);
-            bw.Write((uint)this.PaletteOffset);
+            bw.Write(this._compression == EAComp.P8_08 ? this.PaletteOffset : -1);
             bw.Write(this.Size);
             bw.Write(this.PaletteSize);
             bw.Write(this._area);

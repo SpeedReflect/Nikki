@@ -75,8 +75,12 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 			this.EncodedDataPosition = br.ReadInt32();
 
 			// Skip PaddingPtr, and read compressed data size
-			br.BaseStream.Position += HEADER_SIZE;
-			int size = br.ReadInt32() + HEADER_SIZE;
+			br.BaseStream.Position += 8;
+			var version = br.ReadByte();
+			br.BaseStream.Position += 7;
+
+			int size = br.ReadInt32();
+			size += version == 2 ? 0 : HEADER_SIZE;
 
 			// Return back to texture header
 			br.BaseStream.Position -= HEADER_SIZE;

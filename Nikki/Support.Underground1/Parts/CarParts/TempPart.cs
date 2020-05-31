@@ -117,11 +117,6 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 			this.LodBHash = br.ReadUInt32();
 			this.LodCHash = br.ReadUInt32();
 			this.LodDHash = br.ReadUInt32();
-
-			if (this.Padding != 0)
-			{
-				int oof = 0;
-			}
 		}
 	}
 }

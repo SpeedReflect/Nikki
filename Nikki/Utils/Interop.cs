@@ -1,5 +1,5 @@
 ﻿using System;
-using Nikki.Utils.LZC;
+using System.Runtime.InteropServices;
 using Nikki.Reflection.Enum;
 
 
@@ -11,6 +11,18 @@ namespace Nikki.Utils
 	/// </summary>
 	public static class Interop
 	{
+		[DllImport("LZCompressLib.dll", EntryPoint = "BlockDecompress", CallingConvention = CallingConvention.Cdecl)]
+		private static extern int PrivateDecode([In] byte[] input, int insize, [Out] byte[] output);
+
+		[DllImport("LZCompressLib.dll", EntryPoint = "BlockCompress", CallingConvention = CallingConvention.Cdecl)]
+		private static extern int PrivateEncode([In] byte[] input, int insize, [Out] byte[] output, int comp);
+
+		[DllImport("LZCompressLib.dll", EntryPoint = "BlockDecompress", CallingConvention = CallingConvention.Cdecl)]
+		private static extern unsafe int PrivateDecode(byte* input, int insize, byte* output);
+
+		[DllImport("LZCompressLib.dll", EntryPoint = "BlockCompress", CallingConvention = CallingConvention.Cdecl)]
+		private static extern unsafe int PrivateEncode(byte* input, int insize, byte* output, int comp);
+
 		/// <summary>
 		/// Decompresses buffer based on its header.
 		/// </summary>
@@ -19,54 +31,64 @@ namespace Nikki.Utils
 		public static byte[] Decompress(byte[] input)
 		{
 			if (input == null || input.Length < 0x10) return null;
-			var type = (eLZCompressionType)BitConverter.ToUInt32(input, 0);
 
-			return type switch
-			{
-				eLZCompressionType.RAWW => RAWW.Decompress(input),
-				eLZCompressionType.JDLZ => JDLZ.Decompress(input),
-				eLZCompressionType.HUFF => HUFF.Decompress(input),
-				eLZCompressionType.COMP => COMP.Decompress(input),
-				_ => input,
-			};
+			var type = BitConverter.ToInt32(input, 0);
+			if (!Enum.IsDefined(typeof(eLZCompressionType), type)) return input;
+
+			var outsize = BitConverter.ToInt32(input, 8);
+			var output = new byte[outsize];
+
+			PrivateDecode(input, input.Length, output);
+			return output;
 		}
 	
 		/// <summary>
 		/// Compresses buffer based on compression type passed.
 		/// </summary>
 		/// <param name="input">Array to compress.</param>
-		/// <param name="type"><see cref="eLZCompressionType"/> of the compression.</param>
+		/// <param name="type">Type of the compression.</param>
 		/// <returns>Compressed data.</returns>
 		public static byte[] Compress(byte[] input, eLZCompressionType type)
 		{
-			return input == null
-				? null
-				: (type switch
-			{
-				eLZCompressionType.RAWW => RAWW.Compress(input),
-				eLZCompressionType.JDLZ => JDLZ.Compress(input),
-				_ => null,
-			});
+			if (input == null) return null;
+
+			var output = new byte[input.Length << 1];
+			var outsize = PrivateEncode(input, input.Length, output, (int)type);
+
+			Array.Resize(ref output, outsize);
+			return output;
 		}
 
 		/// <summary>
 		/// Compresses buffer based on compression type passed.
 		/// </summary>
 		/// <param name="input">Array to compress.</param>
-		/// <param name="type"><see cref="eLZCompressionType"/> of the compression.</param>
 		/// <param name="start">Start index of compression.</param>
 		/// <param name="count">Number of bytes to compress.</param>
+		/// <param name="type">Type of the compression.</param>
 		/// <returns>Compressed data.</returns>
-		public static byte[] Compress(byte[] input, eLZCompressionType type, int start, int count)
+		public static byte[] Compress(byte[] input, int start, int count, eLZCompressionType type)
 		{
-			return input == null
-				? null
-				: (type switch
+			if (input == null) return null;
+			if (start < 0 || count <= 0) return null;
+			if (start + count > input.Length) return null;
+
+			var output = new byte[count << 1];
+			int outsize = 0;
+
+			unsafe
 			{
-				eLZCompressionType.RAWW => RAWW.Compress(input, start, count),
-				eLZCompressionType.JDLZ => JDLZ.Compress(input, start, count),
-				_ => null,
-			});
+				fixed (byte* inptr = &input[start])
+				{
+					fixed (byte* outptr = &output[0])
+					{
+						outsize = PrivateEncode(inptr, count, outptr, (int)type);
+					}
+				}
+			}
+
+			Array.Resize(ref output, outsize);
+			return output;
 		}
 	}
 }

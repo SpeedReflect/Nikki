@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Utils.EA;
-using Nikki.Utils.LZC;
 using Nikki.Reflection.ID;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
