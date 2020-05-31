@@ -17,6 +17,8 @@ namespace Nikki.Support.Underground2.Framework
 
 		private static void WritePadding(BinaryWriter bw, string mark)
 		{
+			if (bw.BaseStream.Position == 0) return;
+
 			int padding = 0x80 - (((int)bw.BaseStream.Length + 0x50) % 0x80);
 			if (padding == 0x80) padding = 0;
 

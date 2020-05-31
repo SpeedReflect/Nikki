@@ -105,13 +105,6 @@ namespace Nikki.Support.Carbon.Class
             using var ms = new MemoryStream(this.Data);
             using var reader = new BinaryReader(ms);
 
-            // For some reason it can be a HUFF compressed block. If so, destroy.
-            if (reader.ReadUInt32() == 0x46465548)
-            {
-                this.Destroy = true;
-                return;
-            }
-
             reader.BaseStream.Position = 0x28;
             this.CollectionName = reader.ReadNullTermUTF8();
             if (this.CollectionName.EndsWith(".fng"))

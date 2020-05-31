@@ -1155,27 +1155,6 @@ namespace Nikki.Support.Carbon.Class
                     magic.Write(bw);
                 }
 
-                // Write every MagicHeader in the order it occurs
-                //foreach (var magic in magiclist)
-                //{
-                //    var size = magic.Length + headerSize;
-                //    var difference = 4 - size % 4;
-                //    if (difference != 4) size += difference;
-                //
-                //    // Manage settings about decoded data
-                //    magic.DecodedDataPosition = decodeOffset;
-                //    decodeOffset += magic.DecodedSize;
-                //    offslot.DecodedSize += magic.DecodedSize;
-                //
-                //    // Manage settings about encoded data
-                //    magic.EncodedSize = size;
-                //    magic.EncodedDataPosition = encodeOffset;
-                //    encodeOffset += size;
-                //    offslot.EncodedSize += size;
-                //
-                //    magic.Write(bw);
-                //}
-
                 // Fill buffer till offset % 0x40
                 bw.FillBuffer(0x40);
 

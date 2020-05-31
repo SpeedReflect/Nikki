@@ -2,6 +2,7 @@
 using Nikki.Reflection.ID;
 
 
+
 namespace Nikki.Utils.EA
 {
     /// <summary>
@@ -17,11 +18,11 @@ namespace Nikki.Utils.EA
         /// <returns>Decompressed FEng file as a byte array.</returns>
         public static unsafe byte[] Decompress(byte[] fng, uint ID)
         {
-            if (ID == Global.FEngFiles) // return if already decompressed
-                return fng;
+            // return if already decompressed
+            if (ID == Global.FEngFiles) return fng;
 
             byte[] InterData = new byte[fng.Length - 4];
-            Buffer.BlockCopy(fng, 4, InterData, 0, fng.Length - 4);
+            Array.Copy(fng, 4, InterData, 0, fng.Length - 4);
             var result = Interop.Decompress(InterData);
 
             return result;
