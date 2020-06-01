@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Nikki.Utils;
-using Nikki.Reflection.Interface;
+using Nikki.Reflection.Abstract;
 using Nikki.Support.Shared.Class;
 
 
@@ -10,7 +10,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 	/// <summary>
 	/// A unit CarPart attribute of <see cref="DBModelPart"/>.
 	/// </summary>
-	public abstract class RealCarPart : ICopyable<RealCarPart>
+	public abstract class RealCarPart : ASubPart
 	{
 		/// <summary>
 		/// Name of this <see cref="RealCarPart"/>.
@@ -130,6 +130,6 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public virtual RealCarPart PlainCopy() { return null; }
+		public override ASubPart PlainCopy() { return null; }
 	}
 }

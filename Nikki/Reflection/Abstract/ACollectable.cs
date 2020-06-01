@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Reflection.Exception;
@@ -212,5 +213,50 @@ namespace Nikki.Reflection.Abstract
         /// <param name="CName">CollectionName of the new created object.</param>
         /// <returns>Memory casted copy of the object.</returns>
         public abstract ACollectable MemoryCast(string CName);
+    
+        /// <summary>
+        /// Casts all memory of one object to another, considering they are of the same type.
+        /// </summary>
+        /// <param name="from"><see cref="ACollectable"/> to cast memory from.</param>
+        /// <param name="to"><see cref="ACollectable"/> to cast memory to.</param>
+        public virtual void MemoryCast(ACollectable from, ACollectable to)
+        {
+            var flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic;
+
+            foreach (var property in from.GetType().GetProperties(flags))
+            {
+
+                // If property has a MemoryCastable attribute, simply set same value
+                if (Attribute.IsDefined(property, typeof(MemoryCastableAttribute)))
+                {
+
+                    property.SetValue(to, property.GetValue(from));
+
+                }
+
+                // Else if property has an Expandable attribute, set its plain copy
+                else if (Attribute.IsDefined(property, typeof(ExpandableAttribute)))
+                {
+
+                    var node = property.GetValue(from) as ASubPart;
+                    property.SetValue(to, node.PlainCopy());
+
+                }
+
+            }
+
+            foreach (var field in from.GetType().GetFields(flags))
+            {
+
+                // If field has a MemoryCastable attribute, simply set same value
+                if (Attribute.IsDefined(field, typeof(MemoryCastableAttribute)))
+                {
+
+                    field.SetValue(to, field.GetValue(from));
+
+                }
+
+            }
+        }
     }
 }

@@ -51,6 +51,7 @@ namespace Nikki.Support.Shared.Class
         /// Represents manufacturer name of the cartypeinfo.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public abstract string ManufacturerName { get; set; }
 
         /// <summary>
@@ -62,6 +63,7 @@ namespace Nikki.Support.Shared.Class
         /// Represents usage type of the <see cref="CarTypeInfo"/>.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public eUsageType UsageType { get; set; }
 
         /// <summary>
@@ -69,6 +71,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public eBoolean IsSkinnable { get; set; }
 
         /// <summary>
@@ -76,6 +79,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public abstract string DefaultBasePaint { get; set; }
 
         /// <summary>
@@ -83,6 +87,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float HeadlightFOV { get; set; }
 
         /// <summary>
@@ -90,6 +95,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte PadHighPerformance { get; set; }
 
         /// <summary>
@@ -97,6 +103,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte NumAvailableSkinNumbers { get; set; }
 
         /// <summary>
@@ -104,6 +111,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte WhatGame { get; set; }
 
         /// <summary>
@@ -111,6 +119,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte ConvertibleFlag { get; set; }
 
         /// <summary>
@@ -118,6 +127,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte WheelOuterRadius { get; set; }
 
         /// <summary>
@@ -125,6 +135,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte WheelInnerRadiusMin { get; set; }
 
         /// <summary>
@@ -132,6 +143,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte WheelInnerRadiusMax { get; set; }
 
         /// <summary>
@@ -139,6 +151,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float HeadlightPositionX { get; set; }
 
         /// <summary>
@@ -146,6 +159,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float HeadlightPositionY { get; set; }
 
         /// <summary>
@@ -153,6 +167,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float HeadlightPositionZ { get; set; }
 
         /// <summary>
@@ -160,6 +175,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float HeadlightPositionW { get; set; }
 
         /// <summary>
@@ -167,6 +183,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float DriverRenderingOffsetX { get; set; }
 
         /// <summary>
@@ -174,6 +191,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float DriverRenderingOffsetY { get; set; }
 
         /// <summary>
@@ -181,6 +199,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float DriverRenderingOffsetZ { get; set; }
 
         /// <summary>
@@ -188,6 +207,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float DriverRenderingOffsetW { get; set; }
 
         /// <summary>
@@ -195,6 +215,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float SteeringWheelRenderingX { get; set; }
 
         /// <summary>
@@ -202,6 +223,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float SteeringWheelRenderingY { get; set; }
 
         /// <summary>
@@ -209,6 +231,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float SteeringWheelRenderingZ { get; set; }
 
         /// <summary>
@@ -216,6 +239,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float SteeringWheelRenderingW { get; set; }
 
         /// <summary>
@@ -223,6 +247,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte MaxInstances1 { get; set; }
 
         /// <summary>
@@ -230,6 +255,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte MaxInstances2 { get; set; }
 
         /// <summary>
@@ -237,6 +263,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte MaxInstances3 { get; set; }
 
         /// <summary>
@@ -244,6 +271,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte MaxInstances4 { get; set; }
 
         /// <summary>
@@ -251,6 +279,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte MaxInstances5 { get; set; }
 
         /// <summary>
@@ -258,6 +287,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte KeepLoaded1 { get; set; }
 
         /// <summary>
@@ -265,6 +295,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte KeepLoaded2 { get; set; }
 
         /// <summary>
@@ -272,6 +303,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte KeepLoaded3 { get; set; }
 
         /// <summary>
@@ -279,6 +311,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte KeepLoaded4 { get; set; }
 
         /// <summary>
@@ -286,6 +319,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte KeepLoaded5 { get; set; }
 
         /// <summary>
@@ -293,6 +327,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float MinTimeBetweenUses1 { get; set; }
 
         /// <summary>
@@ -300,6 +335,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float MinTimeBetweenUses2 { get; set; }
 
         /// <summary>
@@ -307,6 +343,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float MinTimeBetweenUses3 { get; set; }
 
         /// <summary>
@@ -314,6 +351,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float MinTimeBetweenUses4 { get; set; }
 
         /// <summary>
@@ -321,6 +359,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float MinTimeBetweenUses5 { get; set; }
 
         /// <summary>
@@ -328,6 +367,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte AvailableSkinNumbers01 { get; set; }
 
         /// <summary>
@@ -335,6 +375,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte AvailableSkinNumbers02 { get; set; }
 
         /// <summary>
@@ -342,6 +383,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte AvailableSkinNumbers03 { get; set; }
 
         /// <summary>
@@ -349,6 +391,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte AvailableSkinNumbers04 { get; set; }
 
         /// <summary>
@@ -356,6 +399,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte AvailableSkinNumbers05 { get; set; }
 
         /// <summary>
@@ -363,6 +407,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte AvailableSkinNumbers06 { get; set; }
 
         /// <summary>
@@ -370,6 +415,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte AvailableSkinNumbers07 { get; set; }
 
         /// <summary>
@@ -377,6 +423,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte AvailableSkinNumbers08 { get; set; }
 
         /// <summary>
@@ -384,6 +431,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte AvailableSkinNumbers09 { get; set; }
 
         /// <summary>
@@ -391,6 +439,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte AvailableSkinNumbers10 { get; set; }
 
         /// <summary>
@@ -398,6 +447,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte DefaultSkinNumber { get; set; }
 
         #endregion

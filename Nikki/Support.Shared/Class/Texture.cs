@@ -46,21 +46,25 @@ namespace Nikki.Support.Shared.Class
         /// <summary>
         /// Represents data offset of the block in Global data.
         /// </summary>
+        [MemoryCastable()]
         public int Offset { get; set; } = 0;
 
         /// <summary>
         /// Represents data size of the block in Global data.
         /// </summary>
+        [MemoryCastable()]
         public int Size { get; protected set; } = 0;
 
         /// <summary>
         /// Represents palette offset of the block in Global data.
         /// </summary>
+        [MemoryCastable()]
         public int PaletteOffset { get; set; } = 0;
 
         /// <summary>
         /// Represents palette size of the block in Global data.
         /// </summary>
+        [MemoryCastable()]
         public int PaletteSize { get; protected set; } = 0;
 
         #endregion
@@ -76,11 +80,13 @@ namespace Nikki.Support.Shared.Class
         /// <summary>
         /// Represents height in pixels of the texture.
         /// </summary>
+        [MemoryCastable()]
         public short Width { get; protected set; }
 
         /// <summary>
         /// Represents height in pixels of the texture.
         /// </summary>
+        [MemoryCastable()]
         public short Height { get; protected set; }
 
         /// <summary>
@@ -96,18 +102,21 @@ namespace Nikki.Support.Shared.Class
         /// <summary>
         /// Represents number of mipmaps in the texture.
         /// </summary>
+        [MemoryCastable()]
         public byte Mipmaps { get; protected set; }
 
         /// <summary>
         /// Represents mipmap bias type of the texture.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public eTextureMipmapBiasType MipmapBiasType { get; set; }
 
         /// <summary>
         /// Represents tileable level of the texture.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public byte TileableUV { get; set; }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace Nikki.Reflection.Abstract
     /// This class has to have any <see cref="AccessModifiableAttribute"/> properties
     /// so it can be declared modifiable from outside.
     /// </summary>
-    public abstract class ASubPart : IReflective
+    public abstract class ASubPart : IReflective, ICopyable<ASubPart>
     {
         /// <summary>
         /// Gets <see cref="IEnumerable{T}"/> of all properties with 
@@ -82,5 +82,11 @@ namespace Nikki.Reflection.Abstract
 
             }
         }
+
+        /// <summary>
+        /// Creates a plain copy of the objects that contains same values.
+        /// </summary>
+        /// <returns>Exact plain copy of the object.</returns>
+        public abstract ASubPart PlainCopy();
     }
 }

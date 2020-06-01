@@ -96,8 +96,7 @@ namespace Nikki.Support.Shared.Class
 		/// </summary>
 		/// <param name="part1">First <see cref="RealCarPart"/> to switch.</param>
 		/// <param name="part2">Second <see cref="RealCarPart"/> to switch.</param>
-		/// <returns>True if switching was successful; false otherwise.</returns>
-		public abstract bool SwitchParts(string part1, string part2);
+		public abstract void SwitchParts(string part1, string part2);
 
 		/// <summary>
 		/// Reverses all parts in this <see cref="DBModelPart"/>.
@@ -108,30 +107,25 @@ namespace Nikki.Support.Shared.Class
 		/// Sorts all parts by property name provided.
 		/// </summary>
 		/// <param name="property">Property to sort by.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool SortByProperty(string property);
+		public abstract void SortByProperty(string property);
 
 		/// <summary>
-		/// Attemps to add new <see cref="RealCarPart"/>.
+		/// Adds new <see cref="RealCarPart"/>.
 		/// </summary>
-		/// <param name="name">Name of the new <see cref="RealCarPart"/>.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryAddRealPart(string name);
+		public abstract void AddRealPart();
 
 		/// <summary>
-		/// Attemps to remove <see cref="RealCarPart"/>.
+		/// Removes <see cref="RealCarPart"/>.
 		/// </summary>
 		/// <param name="name">Name of the <see cref="RealCarPart"/> to remove.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryRemovePart(string name);
+		public abstract void RemovePart(string name);
 
 		/// <summary>
-		/// Attemps to clone a <see cref="RealCarPart"/>.
+		/// Clones a <see cref="RealCarPart"/>.
 		/// </summary>
 		/// <param name="newname">Name of the new <see cref="RealCarPart"/>.</param>
 		/// <param name="copyname">Name of <see cref="RealCarPart"/> to clone.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryClonePart(string newname, string copyname);
+		public abstract void ClonePart(string newname, string copyname);
 
 		#endregion
 	}

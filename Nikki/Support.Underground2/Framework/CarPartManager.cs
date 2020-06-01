@@ -649,7 +649,7 @@ namespace Nikki.Support.Underground2.Framework
 					foreach (var attroff in cpoff?.AttribOffsets ?? Enumerable.Empty<ushort>())
 					{
 						if (attroff >= attrib_list.Length) continue;
-						var addon = attrib_list[attroff].PlainCopy();
+						var addon = (CPAttribute)attrib_list[attroff].PlainCopy();
 						addon.BelongsTo = realpart;
 						realpart.Attributes.Add(addon);
 					}

@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Collections.Generic;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Interface;
 using Nikki.Support.Shared.Class;
 using Nikki.Reflection.Attributes;
 
@@ -12,7 +11,7 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 	/// <summary>
 	/// <see cref="CollisionCloud"/> is a unit bound for <see cref="Collision"/>.
 	/// </summary>
-	public class CollisionCloud : ASubPart, ICopyable<CollisionCloud>
+	public class CollisionCloud : ASubPart
 	{
 		/// <summary>
 		/// Indicates amount of vertices in this <see cref="CollisionCloud"/>.
@@ -30,14 +29,20 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public CollisionCloud PlainCopy()
+		public override ASubPart PlainCopy()
 		{
 			var result = new CollisionCloud()
 			{
 				NumberOfVertices = this.NumberOfVertices
 			};
-			for (int a1 = 0; a1 < this.Vertices.Count; ++a1)
-				result.Vertices.Add(this.Vertices[a1].PlainCopy());
+
+			for (int loop = 0; loop < this.Vertices.Count; ++loop)
+			{
+
+				result.Vertices.Add((CollisionVertex)this.Vertices[loop].PlainCopy());
+
+			}
+
 			return result;
 		}
 

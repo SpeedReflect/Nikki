@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 
 
@@ -10,7 +9,7 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 	/// <summary>
 	/// <see cref="CollisionVertex"/> is a unit vertex for <see cref="CollisionCloud"/>.
 	/// </summary>
-	public class CollisionVertex : ASubPart, ICopyable<CollisionVertex>
+	public class CollisionVertex : ASubPart
 	{
 		/// <summary>
 		/// X coordinate value of this <see cref="CollisionVertex"/>.
@@ -40,7 +39,7 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public CollisionVertex PlainCopy()
+		public override ASubPart PlainCopy()
 		{
 			var result = new CollisionVertex()
 			{
@@ -49,6 +48,7 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 				CoordinateZ = this.CoordinateZ,
 				CoordinateW = this.CoordinateW
 			};
+
 			return result;
 		}
 

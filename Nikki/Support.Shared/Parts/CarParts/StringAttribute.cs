@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Enum.CP;
+using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
 using CoreExtensions.Conversions;
@@ -206,7 +207,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override CPAttribute PlainCopy()
+		public override ASubPart PlainCopy()
 		{
 			var result = new StringAttribute
 			{

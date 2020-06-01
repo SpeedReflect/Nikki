@@ -51,18 +51,21 @@ namespace Nikki.Support.Shared.Class
         /// Indicates amount of bounds in this <see cref="Collision"/>.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public abstract int NumberOfBounds { get; set; }
 
         /// <summary>
         /// True if this <see cref="Collision"/> is resolved; false otherwise.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public abstract eBoolean IsResolved { get; set; }
 
         /// <summary>
         /// Indicates amount of clouds in this <see cref="Collision"/>.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public abstract int NumberOfClouds { get; set; }
 
         #endregion

@@ -154,5 +154,21 @@ namespace Nikki.Support.Shared.Parts.STRParts
 					throw new InfoAccessException(PropertyName);
 			}
 		}
+
+		/// <summary>
+		/// Creates a plain copy of the objects that contains same values.
+		/// </summary>
+		/// <returns>Exact plain copy of the object.</returns>
+		public override ASubPart PlainCopy()
+		{
+			var result = new StringRecord(this.ThisSTRBlock)
+			{
+				Key = this.Key,
+				Label = this.Label,
+				Text = this.Text
+			};
+
+			return result;
+		}
 	}
 }

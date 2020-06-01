@@ -409,7 +409,7 @@ namespace Nikki.Support.Underground1.Framework
 					{
 						if (temppart.AttribOffset + a1 >= attrib_list.Length) continue;
 						var tempattrib = attrib_list[temppart.AttribOffset + a1];
-						var addon = attrib_list[temppart.AttribOffset + a1].PlainCopy();
+						var addon = (CPAttribute)attrib_list[temppart.AttribOffset + a1].PlainCopy();
 						addon.BelongsTo = realpart;
 						realpart.Attributes.Add(addon);
 					}

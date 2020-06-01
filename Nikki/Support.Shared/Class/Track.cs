@@ -52,6 +52,7 @@ namespace Nikki.Support.Shared.Class
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public eBoolean IsValid { get; set; }
 
 		/// <summary>
@@ -59,6 +60,7 @@ namespace Nikki.Support.Shared.Class
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public eBoolean IsLoopingRace { get; set; }
 
 		/// <summary>
@@ -66,36 +68,42 @@ namespace Nikki.Support.Shared.Class
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public eBoolean ReverseVersionExists { get; set; }
 
 		/// <summary>
 		/// Represents debug description of the race.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string RaceDescription { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Represents region in which the track and its values are stored.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string RegionName { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Represents directory in which the track is stored.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string TrackDirectory { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Represents directory in which track's region is stored.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string RegionDirectory { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Represents the race gameplay mode of the track.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public eRaceGameplayMode RaceGameplayMode { get; set; }
 
 		/// <summary>
@@ -103,6 +111,7 @@ namespace Nikki.Support.Shared.Class
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public eTrackDifficulty DifficultyForward { get; set; }
 
 		/// <summary>
@@ -110,6 +119,7 @@ namespace Nikki.Support.Shared.Class
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public eTrackDifficulty DifficultyReverse { get; set; }
 
 		/// <summary>
@@ -117,6 +127,7 @@ namespace Nikki.Support.Shared.Class
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public string SunInfoName { get; set; }
 
 		#endregion

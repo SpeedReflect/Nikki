@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
 
@@ -12,7 +11,7 @@ namespace Nikki.Support.Shared.Parts.SunParts
 	/// <summary>
 	/// A unit <see cref="SunLayer"/> used in sun info collections.
 	/// </summary>
-	public class SunLayer : ASubPart, ICopyable<SunLayer>
+	public class SunLayer : ASubPart
 	{
 		/// <summary>
 		/// 
@@ -90,16 +89,18 @@ namespace Nikki.Support.Shared.Parts.SunParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public SunLayer PlainCopy()
+		public override ASubPart PlainCopy()
 		{
 			var result = new SunLayer();
-			var ThisType = this.GetType();
-			var ResultType = result.GetType();
-			foreach (var ThisProperty in ThisType.GetProperties())
+
+
+			foreach (var property in this.GetType().GetProperties())
 			{
-				var ResultField = ResultType.GetProperty(ThisProperty.Name);
-				ResultField.SetValue(result, ThisProperty.GetValue(this));
+
+				property.SetValue(result, property.GetValue(this));
+
 			}
+
 			return result;
 		}
 

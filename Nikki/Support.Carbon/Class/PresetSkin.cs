@@ -70,7 +70,7 @@ namespace Nikki.Support.Carbon.Class
                 if (value.Length > MaxCNameLength)
                     throw new ArgumentLengthException(MaxCNameLength);
                 if (this.Database.PresetSkins.FindCollection(value) != null)
-                    throw new CollectionExistenceException();
+                    throw new CollectionExistenceException(value);
                 this._collection_name = value;
             }
         }
@@ -90,12 +90,14 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public string GenericVinyl { get; set; } = String.Empty;
 
         /// <summary>
         /// Vector vinyl value of the preset skin.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string VectorVinyl { get; set; } = String.Empty;
 
         /// <summary>
@@ -103,6 +105,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public short PositionY { get; set; } = 0;
 
         /// <summary>
@@ -110,6 +113,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public short PositionX { get; set; } = 0;
 
         /// <summary>
@@ -117,6 +121,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public sbyte Rotation { get; set; } = 0;
 
         /// <summary>
@@ -124,6 +129,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public sbyte Skew { get; set; } = 0;
 
         /// <summary>
@@ -131,6 +137,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public sbyte ScaleY { get; set; } = 0;
 
         /// <summary>
@@ -138,6 +145,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public sbyte ScaleX { get; set; } = 0;
 
         /// <summary>
@@ -145,6 +153,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public string SwatchColor1 { get; set; } = String.Empty;
 
         /// <summary>
@@ -152,6 +161,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public string SwatchColor2 { get; set; } = String.Empty;
 
         /// <summary>
@@ -159,6 +169,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public string SwatchColor3 { get; set; } = String.Empty;
 
         /// <summary>
@@ -166,6 +177,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public string SwatchColor4 { get; set; } = String.Empty;
 
         /// <summary>
@@ -173,6 +185,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte Saturation1 { get; set; } = 0;
 
         /// <summary>
@@ -180,6 +193,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte Saturation2 { get; set; } = 0;
 
         /// <summary>
@@ -187,6 +201,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte Saturation3 { get; set; } = 0;
 
         /// <summary>
@@ -194,6 +209,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte Saturation4 { get; set; } = 0;
 
         /// <summary>
@@ -201,6 +217,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte Brightness1 { get; set; } = 0;
 
         /// <summary>
@@ -208,6 +225,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte Brightness2 { get; set; } = 0;
 
         /// <summary>
@@ -215,6 +233,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte Brightness3 { get; set; } = 0;
 
         /// <summary>
@@ -222,6 +241,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public byte Brightness4 { get; set; } = 0;
 
         #endregion
@@ -363,34 +383,8 @@ namespace Nikki.Support.Carbon.Class
         /// <returns>Memory casted copy of the object.</returns>
         public override ACollectable MemoryCast(string CName)
         {
-            var result = new PresetSkin(CName, this.Database)
-            {
-                PositionY = this.PositionY,
-                PositionX = this.PositionX,
-                Rotation = this.Rotation,
-                Skew = this.Skew,
-                ScaleY = this.ScaleY,
-                ScaleX = this.ScaleX,
-                Saturation1 = this.Saturation1,
-                Saturation2 = this.Saturation2,
-                Saturation3 = this.Saturation3,
-                Saturation4 = this.Saturation4,
-                Brightness1 = this.Brightness1,
-                Brightness2 = this.Brightness2,
-                Brightness3 = this.Brightness3,
-                Brightness4 = this.Brightness4,
-                SwatchColor1 = this.SwatchColor1,
-                SwatchColor2 = this.SwatchColor2,
-                SwatchColor3 = this.SwatchColor3,
-                SwatchColor4 = this.SwatchColor4,
-                GenericVinyl = this.GenericVinyl,
-                VectorVinyl = this.VectorVinyl,
-                PaintSwatch = this.PaintSwatch,
-                PaintBrightness = this.PaintBrightness,
-                PaintSaturation = this.PaintSaturation,
-                PaintType = this.PaintType
-            };
-
+            var result = new PresetSkin(CName, this.Database);
+            base.MemoryCast(this, result);
             return result;
         }
 

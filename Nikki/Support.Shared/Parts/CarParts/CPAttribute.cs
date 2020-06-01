@@ -1,12 +1,8 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Collections.Generic;
-using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Support.Shared.Class;
-using Nikki.Reflection.Interface;
-using CoreExtensions.Reflection;
 
 
 
@@ -15,7 +11,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 	/// <summary>
 	/// A <see cref="DBModelPart"/> unit attribute.
 	/// </summary>
-	public abstract class CPAttribute : ASubPart, ICopyable<CPAttribute>
+	public abstract class CPAttribute : ASubPart
 	{
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="CPAttribute"/>.
@@ -59,7 +55,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public virtual CPAttribute PlainCopy() { return null; }
+		public override ASubPart PlainCopy() { return null; }
 
 		/// <summary>
 		/// Returns attribute part label and its type as a string value.

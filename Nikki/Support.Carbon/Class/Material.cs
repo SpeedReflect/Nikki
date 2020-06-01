@@ -71,7 +71,7 @@ namespace Nikki.Support.Carbon.Class
                 if (value.Length > MaxCNameLength)
                     throw new ArgumentLengthException(MaxCNameLength);
                 if (this.Database.Materials.FindCollection(value) != null)
-                    throw new CollectionExistenceException();
+                    throw new CollectionExistenceException(value);
                 this._collection_name = value;
             }
         }
@@ -91,6 +91,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float SpecularPower { get; set; }
 
         /// <summary>
@@ -98,6 +99,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float EnvmapPower { get; set; }
 
         /// <summary>
@@ -105,6 +107,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float EnvmapClamp { get; set; }
 
         /// <summary>
@@ -112,6 +115,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float EnvmapVinylScale { get; set; }
 
         /// <summary>
@@ -119,6 +123,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float DiffuseMinLevel { get; set; }
 
         /// <summary>
@@ -126,6 +131,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float DiffuseMinRed { get; set; }
 
         /// <summary>
@@ -133,6 +139,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float DiffuseMinGreen { get; set; }
 
         /// <summary>
@@ -140,6 +147,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float DiffuseMinBlue { get; set; }
 
         /// <summary>
@@ -147,6 +155,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float DiffuseMaxLevel { get; set; }
 
         /// <summary>
@@ -154,6 +163,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float DiffuseMaxRed { get; set; }
 
         /// <summary>
@@ -161,6 +171,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float DiffuseMaxGreen { get; set; }
 
         /// <summary>
@@ -168,6 +179,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float DiffuseMaxBlue { get; set; }
 
         /// <summary>
@@ -175,6 +187,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float DiffuseVinylScale { get; set; }
 
         /// <summary>
@@ -182,6 +195,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float VinylLuminanceMinLevel { get; set; }
 
         /// <summary>
@@ -189,6 +203,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float VinylLuminanceMaxLevel { get; set; }
 
         /// <summary>
@@ -196,6 +211,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float SpecularMaxLevel { get; set; }
 
         /// <summary>
@@ -203,6 +219,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float SpecularMaxRed { get; set; }
 
         /// <summary>
@@ -210,6 +227,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float SpecularMaxGreen { get; set; }
 
         /// <summary>
@@ -217,6 +235,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float SpecularMaxBlue { get; set; }
 
         /// <summary>
@@ -224,6 +243,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float DiffusePower { get; set; }
 
         /// <summary>
@@ -231,6 +251,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float DiffuseClamp { get; set; }
 
         /// <summary>
@@ -238,6 +259,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float EnvmapMinLevel { get; set; }
 
         /// <summary>
@@ -245,6 +267,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float EnvmapMinRed { get; set; }
 
         /// <summary>
@@ -252,6 +275,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float EnvmapMinGreen { get; set; }
 
         /// <summary>
@@ -259,6 +283,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float EnvmapMinBlue { get; set; }
 
         /// <summary>
@@ -266,6 +291,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float EnvmapMaxLevel { get; set; }
 
         /// <summary>
@@ -273,6 +299,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float EnvmapMaxRed { get; set; }
 
         /// <summary>
@@ -280,6 +307,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float EnvmapMaxGreen { get; set; }
 
         /// <summary>
@@ -287,6 +315,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float EnvmapMaxBlue { get; set; }
 
         /// <summary>
@@ -294,6 +323,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float DiffuseMinAlpha { get; set; }
 
         /// <summary>
@@ -301,6 +331,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float DiffuseMaxAlpha { get; set; }
 
         /// <summary>
@@ -308,6 +339,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float DiffuseFlakes { get; set; }
 
         /// <summary>
@@ -315,6 +347,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float SpecularFlakes { get; set; }
 
         /// <summary>
@@ -322,6 +355,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float SpecularVinylScale { get; set; }
 
         /// <summary>
@@ -329,6 +363,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float SpecularMinLevel { get; set; }
 
         /// <summary>
@@ -336,6 +371,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float SpecularMinRed { get; set; }
 
         /// <summary>
@@ -343,6 +379,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float SpecularMinGreen { get; set; }
 
         /// <summary>
@@ -350,6 +387,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float SpecularMinBlue { get; set; }
 
         #endregion
@@ -508,48 +546,8 @@ namespace Nikki.Support.Carbon.Class
         /// <returns>Memory casted copy of the object.</returns>
         public override ACollectable MemoryCast(string CName)
         {
-            var result = new Material(CName, this.Database)
-            {
-                DiffusePower = this.DiffusePower,
-                DiffuseClamp = this.DiffuseClamp,
-                SpecularPower = this.SpecularPower,
-                EnvmapPower = this.EnvmapPower,
-                EnvmapClamp = this.EnvmapClamp,
-                EnvmapVinylScale = this.EnvmapVinylScale,
-                EnvmapMinLevel = this.EnvmapMinLevel,
-                EnvmapMinRed = this.EnvmapMinRed,
-                EnvmapMinGreen = this.EnvmapMinGreen,
-                EnvmapMinBlue = this.EnvmapMinBlue,
-                EnvmapMaxLevel = this.EnvmapMaxLevel,
-                EnvmapMaxRed = this.EnvmapMaxRed,
-                EnvmapMaxGreen = this.EnvmapMaxGreen,
-                EnvmapMaxBlue = this.EnvmapMaxBlue,
-                DiffuseMaxLevel = this.DiffuseMaxLevel,
-                DiffuseMaxRed = this.DiffuseMaxRed,
-                DiffuseMaxGreen = this.DiffuseMaxGreen,
-                DiffuseMaxBlue = this.DiffuseMaxBlue,
-                DiffuseMinLevel = this.DiffuseMinLevel,
-                DiffuseMinRed = this.DiffuseMinRed,
-                DiffuseMinGreen = this.DiffuseMinGreen,
-                DiffuseMinBlue = this.DiffuseMinBlue,
-                DiffuseVinylScale = this.DiffuseVinylScale,
-                VinylLuminanceMinLevel = this.VinylLuminanceMinLevel,
-                VinylLuminanceMaxLevel = this.VinylLuminanceMaxLevel,
-                SpecularMaxLevel = this.SpecularMaxLevel,
-                SpecularMaxRed = this.SpecularMaxRed,
-                SpecularMaxGreen = this.SpecularMaxGreen,
-                SpecularMaxBlue = this.SpecularMaxBlue,
-                DiffuseMinAlpha = this.DiffuseMinAlpha,
-                DiffuseMaxAlpha = this.DiffuseMaxAlpha,
-                DiffuseFlakes = this.DiffuseFlakes,
-                SpecularFlakes = this.SpecularFlakes,
-                SpecularVinylScale = this.SpecularVinylScale,
-                SpecularMinLevel = this.SpecularMinLevel,
-                SpecularMinRed = this.SpecularMinRed,
-                SpecularMinGreen = this.SpecularMinGreen,
-                SpecularMinBlue = this.SpecularMinBlue
-            };
-
+            var result = new Material(CName, this.Database);
+            base.MemoryCast(this, result);
             return result;
         }
 

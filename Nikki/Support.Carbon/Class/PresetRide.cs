@@ -71,7 +71,7 @@ namespace Nikki.Support.Carbon.Class
                 if (value.Length > MaxCNameLength)
                     throw new ArgumentLengthException(MaxCNameLength);
                 if (this.Database.PresetRides.FindCollection(value) != null)
-                    throw new CollectionExistenceException();
+                    throw new CollectionExistenceException(value);
                 this._collection_name = value;
             }
         }
@@ -90,330 +90,385 @@ namespace Nikki.Support.Carbon.Class
         /// Model that this <see cref="PresetRide"/> uses.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public override string MODEL { get; set; } = String.Empty;
 
         /// <summary>
         /// Frontend value of this <see cref="PresetRide"/>.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Frontend { get; set; } = String.Empty;
 
         /// <summary>
         /// Pvehicle value of this <see cref="PresetRide"/>.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Pvehicle { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Base { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string AftermarketBodykit { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string FrontBrake { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string FrontRotor { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string FrontLeftWindow { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string FrontRightWindow { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string FrontWindow { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Interior { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string LeftBrakelight { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string LeftBrakelightGlass { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string LeftHeadlight { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string LeftHeadlightGlass { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string LeftSideMirror { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string RearBrake { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string RearRotor { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string RearLeftWindow { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string RearRightWindow { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string RearWindow { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string RightBrakelight { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string RightBrakelightGlass { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string RightHeadlight { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string RightHeadlightGlass { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string RightSideMirror { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Driver { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string SteeringWheel { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Exhaust { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Spoiler { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string UniversalSpoilerBase { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string AutosculptFrontBumper { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string FrontBumperBadgingSet { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string AutosculptRearBumper { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string RearBumperBadgingSet { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string RoofTop { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string RoofScoop { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Hood { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string AutosculptSkirt { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Headlight { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Brakelight { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string DoorLeft { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string DoorRight { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string FrontWheel { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string RearWheel { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string LicensePlate { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Doorline { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string DecalFrontWindow { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string DecalRearWindow { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string WindshieldTint { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string CustomHUD { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string CV { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Misc { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public byte ChopTopSizeValue { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public byte ExhaustSizeValue { get; set; }
 
         /// <summary>
@@ -935,97 +990,8 @@ namespace Nikki.Support.Carbon.Class
         /// <returns>Memory casted copy of the object.</returns>
         public override ACollectable MemoryCast(string CName)
         {
-            var result = new PresetRide(CName, this.Database)
-            {
-                AftermarketBodykit = this.AftermarketBodykit,
-                ATTACHMENTS = this.ATTACHMENTS.PlainCopy(),
-                AutosculptFrontBumper = this.AutosculptFrontBumper,
-                AutosculptRearBumper = this.AutosculptRearBumper,
-                AutosculptSkirt = this.AutosculptSkirt,
-                Base = this.Base,
-                Brakelight = this.Brakelight,
-                ChopTopSizeValue = this.ChopTopSizeValue,
-                CustomHUD = this.CustomHUD,
-                CV = this.CV,
-                DecalFrontWindow = this.DecalFrontWindow,
-                DecalRearWindow = this.DecalRearWindow,
-                DoorLeft = this.DoorLeft,
-                DoorRight = this.DoorRight,
-                Doorline = this.Doorline,
-                Driver = this.Driver,
-                Exhaust = this.Exhaust,
-                ExhaustSizeValue = this.ExhaustSizeValue,
-                FrontBrake = this.FrontBrake,
-                FRONTBUMPER = this.FRONTBUMPER.PlainCopy(),
-                FrontBumperBadgingSet = this.FrontBumperBadgingSet,
-                Frontend = this.Frontend,
-                FrontLeftWindow = this.FrontLeftWindow,
-                FrontRightWindow = this.FrontRightWindow,
-                FrontRotor = this.FrontRotor,
-                FrontWheel = this.FrontWheel,
-                FrontWindow = this.FrontWindow,
-                Headlight = this.Headlight,
-                HOOD = this.HOOD.PlainCopy(),
-                Hood = this.Hood,
-                Interior = this.Interior,
-                KIT_DAMAGES = this.KIT_DAMAGES.PlainCopy(),
-                LeftBrakelight = this.LeftBrakelight,
-                LeftBrakelightGlass = this.LeftBrakelightGlass,
-                LeftHeadlight = this.LeftHeadlight,
-                LeftHeadlightGlass = this.LeftHeadlightGlass,
-                LeftSideMirror = this.LeftSideMirror,
-                LicensePlate = this.LicensePlate,
-                Misc = this.Misc,
-                MODEL = this.MODEL,
-                PAINT_VALUES = this.PAINT_VALUES.PlainCopy(),
-                Pvehicle = this.Pvehicle,
-                RearBrake = this.RearBrake,
-                REARBUMPER = this.REARBUMPER.PlainCopy(),
-                RearBumperBadgingSet = this.RearBumperBadgingSet,
-                RearLeftWindow = this.RearLeftWindow,
-                RearRightWindow = this.RearRightWindow,
-                RearRotor = this.RearRotor,
-                RearWheel = this.RearWheel,
-                RearWindow = this.RearWindow,
-                RightBrakelight = this.RightBrakelight,
-                RightBrakelightGlass = this.RightBrakelightGlass,
-                RightHeadlight = this.RightHeadlight,
-                RightHeadlightGlass = this.RightHeadlightGlass,
-                RightSideMirror = this.RightSideMirror,
-                ROOFSCOOP = this.ROOFSCOOP.PlainCopy(),
-                RoofScoop = this.RoofScoop,
-                RoofTop = this.RoofTop,
-                SKIRT = this.SKIRT.PlainCopy(),
-                Spoiler = this.Spoiler,
-                SPOILER = this.SPOILER.PlainCopy(),
-                SteeringWheel = this.SteeringWheel,
-                UniversalSpoilerBase = this.UniversalSpoilerBase,
-                WindshieldTint = this.WindshieldTint,
-                VISUAL_SETS = this.VISUAL_SETS.PlainCopy(),
-                WHEELS = this.WHEELS.PlainCopy(),
-                ZERO_DAMAGES = this.ZERO_DAMAGES.PlainCopy(),
-                VINYL01 = this.VINYL01.PlainCopy(),
-                VINYL02 = this.VINYL02.PlainCopy(),
-                VINYL03 = this.VINYL03.PlainCopy(),
-                VINYL04 = this.VINYL04.PlainCopy(),
-                VINYL05 = this.VINYL05.PlainCopy(),
-                VINYL06 = this.VINYL06.PlainCopy(),
-                VINYL07 = this.VINYL07.PlainCopy(),
-                VINYL08 = this.VINYL08.PlainCopy(),
-                VINYL09 = this.VINYL09.PlainCopy(),
-                VINYL10 = this.VINYL10.PlainCopy(),
-                VINYL11 = this.VINYL11.PlainCopy(),
-                VINYL12 = this.VINYL12.PlainCopy(),
-                VINYL13 = this.VINYL13.PlainCopy(),
-                VINYL14 = this.VINYL14.PlainCopy(),
-                VINYL15 = this.VINYL15.PlainCopy(),
-                VINYL16 = this.VINYL16.PlainCopy(),
-                VINYL17 = this.VINYL17.PlainCopy(),
-                VINYL18 = this.VINYL18.PlainCopy(),
-                VINYL19 = this.VINYL19.PlainCopy(),
-                VINYL20 = this.VINYL20.PlainCopy(),
-            };
-
+            var result = new PresetRide(CName, this.Database);
+            base.MemoryCast(this, result);
             return result;
         }
 

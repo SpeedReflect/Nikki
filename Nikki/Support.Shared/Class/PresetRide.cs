@@ -46,6 +46,7 @@ namespace Nikki.Support.Shared.Class
         /// Represents model of the preset ride.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public abstract string MODEL { get; set; }
 
         #endregion

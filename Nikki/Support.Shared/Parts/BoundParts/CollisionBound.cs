@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Interface;
 using Nikki.Support.Shared.Class;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
@@ -13,7 +12,7 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 	/// <summary>
 	/// <see cref="CollisionBound"/> is a unit bound for <see cref="Collision"/>.
 	/// </summary>
-	public class CollisionBound : ASubPart, ICopyable<CollisionBound>
+	public class CollisionBound : ASubPart
 	{
 		/// <summary>
 		/// X value of the orientation of this <see cref="CollisionBound"/>.
@@ -139,16 +138,17 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public CollisionBound PlainCopy()
+		public override ASubPart PlainCopy()
 		{
 			var result = new CollisionBound();
-			var ThisType = this.GetType();
-			var ResultType = result.GetType();
-			foreach (var ThisProperty in ThisType.GetProperties())
+
+			foreach (var property in this.GetType().GetProperties())
 			{
-				var ResultField = ResultType.GetProperty(ThisProperty.Name);
-				ResultField.SetValue(result, ThisProperty.GetValue(this));
+
+				property.SetValue(result, property.GetValue(this));
+			
 			}
+
 			return result;
 		}
 

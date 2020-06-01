@@ -107,15 +107,20 @@ namespace Nikki.Support.Carbon.Class
 
             reader.BaseStream.Position = 0x28;
             this.CollectionName = reader.ReadNullTermUTF8();
+
             if (this.CollectionName.EndsWith(".fng"))
             {
+            
                 this.CollectionName.GetFormattedValue("{X}.fng", out string name);
                 this.CollectionName = name;
+            
             }
 
             reader.BaseStream.Position = 0x28;
+            
             while (reader.BaseStream.Position < reader.BaseStream.Length)
             {
+            
                 byte b1 = reader.ReadByte();
                 byte b2 = reader.ReadByte();
                 byte b3 = reader.ReadByte();
@@ -125,14 +130,17 @@ namespace Nikki.Support.Carbon.Class
                 if ((b1 == 'S' && b2 == 'A') || (b1 == Byte.MaxValue && b2 == Byte.MaxValue && 
                      b3 == Byte.MaxValue && b4 == Byte.MaxValue))
                 {
+                
                     uint Offset = (uint)reader.BaseStream.Position;
                     uint Blue = reader.ReadUInt32();
                     uint Green = reader.ReadUInt32();
                     uint Red = reader.ReadUInt32();
                     uint Alpha = reader.ReadUInt32();
+                    
                     if (Blue <= Byte.MaxValue && Green <= Byte.MaxValue && 
                         Red <= Byte.MaxValue && Alpha <= Byte.MaxValue)
                     {
+                    
                         var color = new FEngColor(this)
                         {
                             Offset = Offset,
@@ -141,9 +149,13 @@ namespace Nikki.Support.Carbon.Class
                             Red = (byte)Red,
                             Alpha = (byte)Alpha
                         };
+                        
                         this._colorinfo.Add(color);
+                    
                     }
+                
                 }
+            
             }
         }
 

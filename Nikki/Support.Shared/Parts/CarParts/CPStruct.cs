@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
-using Nikki.Reflection.Interface;
+using Nikki.Reflection.Abstract;
 
 
 
@@ -10,7 +10,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 	/// <summary>
 	/// A unit <see cref="RealCarPart"/> struct with geometry part names.
 	/// </summary>
-	public abstract class CPStruct : ICopyable<CPStruct>
+	public abstract class CPStruct : ASubPart
 	{
 		/// <summary>
 		/// Indicates whether this struct should exist in the database or not.
@@ -48,6 +48,6 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public virtual CPStruct PlainCopy() { return null; }
+		public override ASubPart PlainCopy() { return null; }
 	}
 }

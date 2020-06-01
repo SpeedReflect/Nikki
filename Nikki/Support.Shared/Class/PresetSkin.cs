@@ -51,6 +51,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public string PaintType { get; set; } = String.Empty;
 
         /// <summary>
@@ -58,6 +59,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public string PaintSwatch { get; set; } = String.Empty;
 
         /// <summary>
@@ -65,6 +67,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float PaintSaturation { get; set; }
 
         /// <summary>
@@ -72,6 +75,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float PaintBrightness { get; set; }
 
         #endregion

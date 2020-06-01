@@ -38,26 +38,31 @@ namespace Nikki.Support.Shared.Class
         /// <summary>
         /// 
         /// </summary>
+        [MemoryCastable()]
         public uint PermBlockByteOffset { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
+        [MemoryCastable()]
         public uint PermBlockByteSize { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
+        [MemoryCastable()]
         public int EndianSwapped { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
+        [MemoryCastable()]
         public int TexturePack { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
+        [MemoryCastable()]
         public int TextureIndexEntryTable { get; set; } = 0;
 
         /// <summary>
@@ -70,6 +75,7 @@ namespace Nikki.Support.Shared.Class
         /// as compressed; false otherwise.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public abstract eBoolean IsCompressed { get; set; }
 
         /// <summary>
