@@ -205,14 +205,16 @@ namespace Nikki.Utils.EA
         {
             using (var OpenReader = new BinaryReader(File.Open(filename, FileMode.Open, FileAccess.Read)))
             {
-                string name = Path.GetFileNameWithoutExtension(filename);
+
                 if (OpenReader.BaseStream.Length < 0x80) return false;
                 if (OpenReader.ReadUInt32() != DDS_MAIN.MAGIC) return false;
                 OpenReader.BaseStream.Position = 0x50;
                 uint num1 = OpenReader.ReadUInt32();
                 uint num2 = OpenReader.ReadUInt32();
                 if (!IsComp(num2) && (num1 != (uint)DDS_TYPE.RGBA)) return false;
+            
             }
+            
             return true;
         }
 
@@ -297,18 +299,22 @@ namespace Nikki.Utils.EA
             byte[] result;
             int difference = start_at - (length % start_at);
             if (difference == start_at) difference = -1;
+            
             switch (difference)
             {
                 case -1:
                     result = new byte[0];
                     return result;
+
                 case 4:
                     result = new byte[4 + start_at];
                     result[4] = (byte)(start_at - 4);
                     return result;
+                
                 case 8:
                     result = new byte[8];
                     return result;
+                
                 default:
                     result = new byte[difference];
                     result[4] = (byte)(difference - 8);

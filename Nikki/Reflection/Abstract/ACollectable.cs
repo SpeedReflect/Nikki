@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Nikki.Core;
+using Nikki.Reflection.Exception;
 using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.Reflection;
-using CoreExtensions.Management;
 using CoreExtensions.Conversions;
 
 
@@ -48,8 +48,14 @@ namespace Nikki.Reflection.Abstract
         {
             foreach (var property in this.GetType().GetProperties())
             {
+
                 if (Attribute.IsDefined(property, typeof(AccessModifiableAttribute)))
+                {
+
                     yield return property.Name;
+
+                }
+            
             }
         }
 
@@ -64,11 +70,15 @@ namespace Nikki.Reflection.Abstract
         {
             var property = this.GetFastProperty(name);
             if (property == null) return null;
+            
             foreach (var obj in property.GetCustomAttributes(typeof(ExpandableAttribute), true))
             {
+            
                 var attrib = obj as ExpandableAttribute;
                 if (attrib.Name == node) return (ASubPart)property.GetValue(this);
+            
             }
+            
             return null;
         }
 
@@ -85,15 +95,22 @@ namespace Nikki.Reflection.Abstract
             part = null;
             var property = this.GetFastProperty(name);
             if (property == null) return false;
+            
             foreach (var obj in property.GetCustomAttributes(typeof(ExpandableAttribute), true))
             {
+            
                 var attrib = obj as ExpandableAttribute;
+                
                 if (attrib.Name == node)
                 {
+                
                     part = (ASubPart)property.GetValue(this);
                     return true;
+                
                 }
+            
             }
+            
             return false;
         }
 
@@ -104,20 +121,30 @@ namespace Nikki.Reflection.Abstract
         public virtual List<VirtualNode> GetAllNodes()
         {
             var list = new List<VirtualNode>();
+
             foreach (var property in this.GetType().GetProperties())
             {
+            
                 foreach (var obj in property.GetCustomAttributes(typeof(ExpandableAttribute), true))
                 {
+                
                     var attrib = obj as ExpandableAttribute;
                     var node = list.Find(c => c.NodeName == attrib.Name);
+                    
                     if (node == null)
                     {
+                    
                         node = new VirtualNode(attrib.Name);
                         list.Add(node);
+                    
                     }
+                    
                     node.SubNodes.Add(new VirtualNode(property.Name));
+                
                 }
+            
             }
+            
             list.Sort((x, y) => x.NodeName.CompareTo(y.NodeName));
             return list;
         }
@@ -138,8 +165,8 @@ namespace Nikki.Reflection.Abstract
         /// </summary>
         /// <param name="PropertyName">Field name to get the value from.</param>
         /// <returns>String value of a field name.</returns>
-        public string GetValue(string PropertyName) 
-            => this.GetFastPropertyValue(PropertyName)?.ToString();
+        public string GetValue(string PropertyName) =>
+            this.GetFastPropertyValue(PropertyName)?.ToString() ?? String.Empty;
 
         /// <summary>
         /// Sets value at a field specified.
@@ -147,53 +174,35 @@ namespace Nikki.Reflection.Abstract
         /// <param name="PropertyName">Name of the field to be modified.</param>
         /// <param name="value">Value to be set at the field specified.</param>
         /// <returns>True on success; false otherwise.</returns>
-        public bool SetValue(string PropertyName, object value)
+        public void SetValue(string PropertyName, object value)
         {
-            try
-            {
-                var property = this.GetFastProperty(PropertyName);
-                if (property == null) return false;
-                if (!Attribute.IsDefined(property, typeof(AccessModifiableAttribute)))
-                    throw new FieldAccessException("This field is either non-modifiable or non-accessible");
-                if (property.PropertyType.IsEnum)
-                    property.SetValue(this, System.Enum.Parse(property.PropertyType, value.ToString()));
-                else
-                    property.SetValue(this, value.ReinterpretCast(property.PropertyType));
-                return true;
-            }
-            catch (System.Exception) { return false; }
-        }
+            var property = this.GetFastProperty(PropertyName);
 
-        /// <summary>
-        /// Sets value at a field specified.
-        /// </summary>
-        /// <param name="PropertyName">Name of the field to be modified.</param>
-        /// <param name="value">Value to be set at the field specified.</param>
-        /// <param name="error">Error occured when trying to set value.</param>
-        /// <returns>True on success; false otherwise.</returns>
-        public bool SetValue(string PropertyName, object value, out string error)
-        {
-            error = null;
-            try
+            if (property == null)
             {
-                var property = this.GetFastProperty(PropertyName);
-                if (property == null)
-                {
-                    error = $"Field named {PropertyName} does not exist.";
-                    return false;
-                }
-                if (!Attribute.IsDefined(property, typeof(AccessModifiableAttribute)))
-                    throw new FieldAccessException("This field is either non-modifiable or non-accessible");
-                if (property.PropertyType.IsEnum)
-                    property.SetValue(this, System.Enum.Parse(property.PropertyType, value.ToString()));
-                else
-                    property.SetValue(this, value.ReinterpretCast(property.PropertyType));
-                return true;
+
+                throw new InfoAccessException(PropertyName);
+
             }
-            catch (System.Exception e)
+
+            if (!Attribute.IsDefined(property, typeof(AccessModifiableAttribute)))
             {
-                error = e.GetLowestMessage();
-                return false;
+
+                throw new InfoAccessException(PropertyName);
+
+            }
+
+            if (property.PropertyType.IsEnum)
+            {
+
+                property.SetValue(this, System.Enum.Parse(property.PropertyType, value.ToString()));
+
+            }
+            else
+            {
+
+                property.SetValue(this, value.ReinterpretCast(property.PropertyType));
+
             }
         }
 

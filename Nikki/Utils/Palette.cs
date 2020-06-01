@@ -21,19 +21,31 @@ namespace Nikki.Utils
 
             fixed (byte* byteptr_t = &data[0])
             {
+
                 // Load palette into memory for access
-                for (int a1 = 0; a1 < 0x100; ++a1)
-                    palette[a1] = *(uint*)(byteptr_t + a1 * 4);
+                for (int loop = 0; loop < 0x100; ++loop)
+                {
+
+                    palette[loop] = *(uint*)(byteptr_t + loop * 4);
+
+                }
+            
             }
+
             fixed (byte* byteptr_t = &result[0])
             {
+
                 // Write result data based on palette
-                for (int a1 = 0, a2 = 0; a1 < data.Length - 0x400; ++a1, a2 += 4)
+                for (int loop = 0, index = 0; loop < data.Length - 0x400; ++loop, index += 4)
                 {
-                    var color = palette[data[a1 + 0x400]];
-                    *(uint*)(byteptr_t + a2) = color;
+
+                    var color = palette[data[loop + 0x400]];
+                    *(uint*)(byteptr_t + index) = color;
+                
                 }
+            
             }
+
             return result;
         }
 
@@ -51,14 +63,22 @@ namespace Nikki.Utils
 
             fixed (byte* byteptr_t = &data[0])
             {
+
                 // Marshal through RGBA data
                 for (int offset = 0, mapoff = 0, dataoff = 0x400; offset < data.Length; offset += 4)
                 {
+                
                     uint color = *(uint*)(byteptr_t + offset);
+
                     if (map.TryGetValue(color, out byte index))
+                    {
+
                         result[dataoff++] = index;
+
+                    }
                     else
                     {
+
                         if (used == 0x100) return null; // return null if palette is over
                         map[color] = (byte)used; // add palette to the dictionary
                         result[mapoff++] = data[offset + 0];
@@ -66,9 +86,13 @@ namespace Nikki.Utils
                         result[mapoff++] = data[offset + 2];
                         result[mapoff++] = data[offset + 3];
                         result[dataoff++] = (byte)used++;
+                    
                     }
+                
                 }
+            
             }
+            
             return result;
         }
 
@@ -84,22 +108,34 @@ namespace Nikki.Utils
 
             fixed (byte* byteptr_t = &data[0])
             {
+
                 // Load palette into memory for access
                 for (int a1 = 0; a1 < 0x10; ++a1)
+                {
+
                     palette[a1] = *(uint*)(byteptr_t + a1 * 4);
+                
+                }
+            
             }
+
             fixed (byte* byteptr_t = &result[0])
             {
-                // Write result data based on palette
-                for (int a1 = 0, a2 = 0; a1 < data.Length - 0x40; ++a1, a2 += 8)
-                {
-                    var bit1 = data[a1 + 0x40] >> 4; // first 4 bits in the byte being read
-                    var bit2 = data[a1 + 0x40] & 0x0F; // second 4 bits in the byte being read
 
-                    *(uint*)(byteptr_t + a2) = palette[bit1];
-                    *(uint*)(byteptr_t + a2 + 4) = palette[bit2];
+                // Write result data based on palette
+                for (int loop = 0, index = 0; loop < data.Length - 0x40; ++loop, index += 8)
+                {
+                
+                    var bit1 = data[loop + 0x40] >> 4; // first 4 bits in the byte being read
+                    var bit2 = data[loop + 0x40] & 0x0F; // second 4 bits in the byte being read
+
+                    *(uint*)(byteptr_t + index) = palette[bit1];
+                    *(uint*)(byteptr_t + index + 4) = palette[bit2];
+                
                 }
+            
             }
+            
             return result;
         }
 
@@ -117,14 +153,17 @@ namespace Nikki.Utils
 
             fixed (byte* byteptr_t = &data[0])
             {
+                
                 // Marshal through RGBA data
                 for (int offset = 0, mapoff = 0, dataoff = 0x40; offset < data.Length; offset += 8)
                 {
+                
                     uint color1 = *(uint*)(byteptr_t + offset);
                     uint color2 = *(uint*)(byteptr_t + offset + 4);
 
                     if (!map.TryGetValue(color1, out byte bit1))
                     {
+                    
                         if (used == 0x10) return null; // return null if palette is over
                         bit1 = used; // assign current color index
                         map[color1] = used++; // add palette to the dictionary
@@ -134,9 +173,12 @@ namespace Nikki.Utils
                         result[mapoff++] = data[offset + 1];
                         result[mapoff++] = data[offset + 2];
                         result[mapoff++] = data[offset + 3];
+                    
                     }
+                    
                     if (!map.TryGetValue(color2, out byte bit2))
                     {
+                    
                         if (used == 0x10) return null; // return null if palette is over
                         bit2 = used; // assign current color index
                         map[color2] = used++; // add palette to the dictionary
@@ -146,11 +188,15 @@ namespace Nikki.Utils
                         result[mapoff++] = data[offset + 5];
                         result[mapoff++] = data[offset + 6];
                         result[mapoff++] = data[offset + 7];
+                    
                     }
 
                     result[dataoff++] = (byte)((bit1 << 4) | bit2);
+                
                 }
+            
             }
+            
             return result;
         }
     }

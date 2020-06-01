@@ -78,13 +78,19 @@ namespace Nikki.Utils
 
 			unsafe
 			{
+
 				fixed (byte* inptr = &input[start])
 				{
+				
 					fixed (byte* outptr = &output[0])
 					{
+					
 						outsize = PrivateEncode(inptr, count, outptr, (int)type);
+					
 					}
+				
 				}
+
 			}
 
 			Array.Resize(ref output, outsize);

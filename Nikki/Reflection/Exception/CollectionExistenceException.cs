@@ -11,14 +11,14 @@
         /// with default message.
         /// </summary>
         public CollectionExistenceException()
-            : base("Class with the collection name provided already exists.") { }
+            : base("Collection with name provided already exists") { }
 
         /// <summary>
         /// Initializes new instance of <see cref="CollectionExistenceException"/> 
         /// with custom message passed.
         /// </summary>
-        /// <param name="message">Custom message.</param>
-        public CollectionExistenceException(string message)
-            : base(message) { }
+        /// <param name="CName">CollectionName that caused exception.</param>
+        public CollectionExistenceException(string CName)
+            : base($"Collection named {CName} already exists") { }
     }
 }

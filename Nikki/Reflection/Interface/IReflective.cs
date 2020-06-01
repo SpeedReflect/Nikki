@@ -15,7 +15,7 @@ namespace Nikki.Reflection.Interface
         /// <see cref="AccessModifiableAttribute"/> attribute.
         /// </summary>
         /// <returns><see cref="IEnumerable{T}"/> of strings.</returns>
-        public abstract IEnumerable<string> GetAccessibles();
+        IEnumerable<string> GetAccessibles();
 
         /// <summary>
         /// Returns the value of a field name provided.
@@ -30,15 +30,6 @@ namespace Nikki.Reflection.Interface
         /// <param name="PropertyName">Name of the field to be modified.</param>
         /// <param name="value">Value to be set at the field specified.</param>
         /// <returns>True on success; false otherwise.</returns>
-        bool SetValue(string PropertyName, object value);
-
-        /// <summary>
-        /// Sets value at a field specified.
-        /// </summary>
-        /// <param name="PropertyName">Name of the field to be modified.</param>
-        /// <param name="value">Value to be set at the field specified.</param>
-        /// <param name="error">Error occured when trying to set value.</param>
-        /// <returns>True on success; false otherwise.</returns>
-        bool SetValue(string PropertyName, object value, out string error);
+        void SetValue(string PropertyName, object value);
     }
 }

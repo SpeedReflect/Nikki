@@ -10,6 +10,11 @@ namespace Nikki.Reflection.ID
     public static class EAComp
     {
         /// <summary>
+        /// PAL4 Compression = 0x4
+        /// </summary>
+        public const byte P4_08 = (byte)Enum.eTextureCompressionType.TEXCOMP_4BIT;
+
+        /// <summary>
         /// PAL8 Compression = 0x8
         /// </summary>
         public const byte P8_08 = (byte)Enum.eTextureCompressionType.TEXCOMP_8BIT;
