@@ -53,27 +53,27 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		}
 
 		/// <summary>
-		/// Assembles <see cref="CollisionBound"/> into a byte array.
-		/// </summary>
-		/// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="CollisionBound"/> with.</param>
-		public void Assemble(BinaryWriter bw)
-		{
-			bw.Write(this.CoordinateX);
-			bw.Write(this.CoordinateY);
-			bw.Write(this.CoordinateZ);
-			bw.Write(this.CoordinateW);
-		}
-
-		/// <summary>
 		/// Disassembles array into <see cref="CollisionBound"/> properties.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="CollisionBound"/> with.</param>
-		public void Disassemble(BinaryReader br)
+		public void Read(BinaryReader br)
 		{
 			this.CoordinateX = br.ReadSingle();
 			this.CoordinateY = br.ReadSingle();
 			this.CoordinateZ = br.ReadSingle();
 			this.CoordinateW = br.ReadSingle();
+		}
+
+		/// <summary>
+		/// Assembles <see cref="CollisionBound"/> into a byte array.
+		/// </summary>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="CollisionBound"/> with.</param>
+		public void Write(BinaryWriter bw)
+		{
+			bw.Write(this.CoordinateX);
+			bw.Write(this.CoordinateY);
+			bw.Write(this.CoordinateZ);
+			bw.Write(this.CoordinateW);
 		}
 	}
 }

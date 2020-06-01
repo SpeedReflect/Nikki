@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 
 
@@ -12,7 +13,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="PresetRide"/> is a collection of specific settings of a ride.
     /// </summary>
-    public abstract class PresetRide : ACollectable
+    public abstract class PresetRide : ACollectable, IAssemblable
     {
         #region Main Properties
 

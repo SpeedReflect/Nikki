@@ -865,50 +865,72 @@ namespace Nikki.Support.Shared.Parts.CarParts
 
 			// Read data
 			this.Templated = br.ReadInt16() == 0 ? eBoolean.False : eBoolean.True;
+
 			if (this.Templated == eBoolean.True)
 			{
+
 				// Read concatenator
 				long position = br.ReadUInt16();
+				
 				if (position != 0xFFFF)
 				{
+				
 					str_reader.BaseStream.Position = position << 2;
 					this.Concatenator = str_reader.ReadNullTermUTF8();
 					this.ConcatenatorExists = eBoolean.True;
+				
 				}
 
 				for (int lod = (byte)'A'; lod <= (byte)'E'; ++lod)
 				{
+				
 					for (int index = 0; index <= 11; ++index)
 					{
+					
 						position = br.ReadUInt32();
+						
 						if (position != negative)
 						{
+						
 							str_reader.BaseStream.Position = position << 2;
 							var lodname = $"Geometry{index}Lod{(char)lod}";
 							var lodexists = $"{lodname}Exists";
 							this.GetFastProperty(lodname).SetValue(this, str_reader.ReadNullTermUTF8());
 							this.GetFastProperty(lodexists).SetValue(this, eBoolean.True);
+						
 						}
+					
 					}
+				
 				}
+			
 			}
 			else
 			{
 				br.BaseStream.Position += 2; // skip concatenator
+				
 				for (int lod = (byte)'A'; lod <= (byte)'E'; ++lod)
 				{
+					
 					for (int index = 0; index <= 11; ++index)
 					{
+					
 						var key = br.ReadUInt32();
+						
 						if (key != negative)
 						{
+						
 							var lodname = $"Geometry{index}Lod{(char)lod}";
 							var lodexists = $"{lodname}Exists";
 							this.GetFastProperty(lodname).SetValue(this, key.BinString(eLookupReturn.EMPTY));
 							this.GetFastProperty(lodexists).SetValue(this, eBoolean.True);
+						
 						}
+					
 					}
+				
 				}
+			
 			}
 		}
 
@@ -938,6 +960,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 
 			if (this.Templated == eBoolean.True)
 			{
+				
 				bw.Write((ushort)1);
 				bw.Write(this.ConcatenatorExists == eBoolean.False
 					? (ushort)negint32
@@ -945,8 +968,10 @@ namespace Nikki.Support.Shared.Parts.CarParts
 
 				for (int lod = (byte)'A'; lod <= (byte)'E'; ++lod)
 				{
+				
 					for (int index = 0; index <= 11; ++index)
 					{
+					
 						var name = $"Geometry{index}Lod{(char)lod}";
 						var lodname = (string)this.GetFastPropertyValue(name);
 						var lodexists = (eBoolean)this.GetFastPropertyValue($"{name}Exists");
@@ -954,16 +979,23 @@ namespace Nikki.Support.Shared.Parts.CarParts
 							? negint32
 							: string_dict[lodname?.GetHashCode() ?? empty]);
 
+					
 					}
+				
 				}
+			
 			}
 			else
 			{
+			
 				bw.Write(0xFFFF0000);
+				
 				for (int lod = (byte)'A'; lod <= (byte)'E'; ++lod)
 				{
+				
 					for (int index = 0; index <= 11; ++index)
 					{
+					
 						var name = $"Geometry{index}Lod{(char)lod}";
 						var lodname = (string)this.GetFastPropertyValue(name);
 						var lodexists = (eBoolean)this.GetFastPropertyValue($"{name}Exists");
@@ -972,7 +1004,9 @@ namespace Nikki.Support.Shared.Parts.CarParts
 							: lodname.BinHash());
 
 					}
+				
 				}
+			
 			}
 		}
 
@@ -980,7 +1014,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Returns attribute part label and its type as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() => $"{this.AttribType} -> {this.Type}";
+		public override string ToString() => $"Attribute: {this.AttribType} | Type: {this.Type} | Templated: {this.Templated}";
 
 		/// <summary>
 		/// Determines whether this instance and a specified object, which must also be a
@@ -1001,8 +1035,13 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		{
 			uint result = 0x25;
 			var properties = this.GetAccessibles();
+
 			foreach (var property in properties)
+			{
+			
 				result = result * 29 + this.GetValue(property).BinHash();
+
+			}
 
 			return (int)result;
 		}
@@ -1054,12 +1093,15 @@ namespace Nikki.Support.Shared.Parts.CarParts
 			};
 
 			var properties = this.GetAccessibles();
+			
 			foreach (var property in properties)
 			{
+			
 				if (!property.StartsWith("Geometry")) continue;
 				var resprop = result.GetFastProperty(property);
 				var value = this.GetFastPropertyValue(property);
 				resprop.SetValue(result, value);
+			
 			}
 
 			return result;

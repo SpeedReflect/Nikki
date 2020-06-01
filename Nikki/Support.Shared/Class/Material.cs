@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Interface;
 
 
 
@@ -11,7 +12,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="Material"/> is a collection of float attributes of shaders and materials.
     /// </summary>
-    public abstract class Material : ACollectable
+    public abstract class Material : ACollectable, IAssemblable
     {
         #region Private Fields
 

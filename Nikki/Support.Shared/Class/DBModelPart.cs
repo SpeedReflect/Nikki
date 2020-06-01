@@ -100,15 +100,6 @@ namespace Nikki.Support.Shared.Class
 		public abstract bool SwitchParts(string part1, string part2);
 
 		/// <summary>
-		/// Switches two parts and their indexes.
-		/// </summary>
-		/// <param name="part1">First <see cref="RealCarPart"/> to switch.</param>
-		/// <param name="part2">Second <see cref="RealCarPart"/> to switch.</param>
-		/// <param name="error">Error occured while trying to switch.</param>
-		/// <returns>True if switching was successful; false otherwise.</returns>
-		public abstract bool SwitchParts(string part1, string part2, out string error);
-
-		/// <summary>
 		/// Reverses all parts in this <see cref="DBModelPart"/>.
 		/// </summary>
 		public abstract void ReverseParts();
@@ -121,27 +112,11 @@ namespace Nikki.Support.Shared.Class
 		public abstract bool SortByProperty(string property);
 
 		/// <summary>
-		/// Sorts all parts by property name provided.
-		/// </summary>
-		/// <param name="property">Property to sort by.</param>
-		/// <param name="error">Error occured while trying to switch.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool SortByProperty(string property, out string error);
-
-		/// <summary>
 		/// Attemps to add new <see cref="RealCarPart"/>.
 		/// </summary>
 		/// <param name="name">Name of the new <see cref="RealCarPart"/>.</param>
 		/// <returns>True on success; false otherwise.</returns>
 		public abstract bool TryAddRealPart(string name);
-
-		/// <summary>
-		/// Attemps to add new <see cref="RealCarPart"/>.
-		/// </summary>
-		/// <param name="error">Error occured while trying to add <see cref="RealCarPart"/>.</param>
-		/// <param name="name">Name of the new <see cref="RealCarPart"/>.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryAddRealPart(out string error, string name);
 
 		/// <summary>
 		/// Attemps to remove <see cref="RealCarPart"/>.
@@ -151,29 +126,12 @@ namespace Nikki.Support.Shared.Class
 		public abstract bool TryRemovePart(string name);
 
 		/// <summary>
-		/// Attemps to remove <see cref="RealCarPart"/>.
-		/// </summary>
-		/// <param name="name">Name of the <see cref="RealCarPart"/> to remove.</param>
-		/// <param name="error">Error occured while trying to remove <see cref="RealCarPart"/>.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryRemovePart(string name, out string error);
-
-		/// <summary>
 		/// Attemps to clone a <see cref="RealCarPart"/>.
 		/// </summary>
 		/// <param name="newname">Name of the new <see cref="RealCarPart"/>.</param>
 		/// <param name="copyname">Name of <see cref="RealCarPart"/> to clone.</param>
 		/// <returns>True on success; false otherwise.</returns>
 		public abstract bool TryClonePart(string newname, string copyname);
-
-		/// <summary>
-		/// Attemps to clone a <see cref="RealCarPart"/>.
-		/// </summary>
-		/// <param name="newname">Name of the new <see cref="RealCarPart"/>.</param>
-		/// <param name="copyname">Name of <see cref="RealCarPart"/> to clone.</param>
-		/// <param name="error">Error occured while trying to clone <see cref="RealCarPart"/>.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryClonePart(string newname, string copyname, out string error);
 
 		#endregion
 	}

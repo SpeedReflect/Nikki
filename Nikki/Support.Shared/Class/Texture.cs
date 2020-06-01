@@ -4,6 +4,7 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 
 
@@ -13,7 +14,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="Texture"/> is a collection of dds image data used by the game.
     /// </summary>
-    public abstract class Texture : ACollectable
+    public abstract class Texture : ACollectable, IAssemblable
     {
         #region Main Properties
 
@@ -101,7 +102,7 @@ namespace Nikki.Support.Shared.Class
         /// Represents mipmap bias type of the texture.
         /// </summary>
         [AccessModifiable()]
-        public eTextureMipmapBiasType MipmapBiasType { get; protected set; }
+        public eTextureMipmapBiasType MipmapBiasType { get; set; }
 
         /// <summary>
         /// Represents tileable level of the texture.

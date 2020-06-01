@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Interface;
 using Nikki.Support.Shared.Parts.STRParts;
 using CoreExtensions.Text;
 
@@ -14,7 +15,7 @@ namespace Nikki.Support.Shared.Class
 	/// <summary>
 	/// <see cref="STRBlock"/> is a collection of language strings, hashes and labels.
 	/// </summary>
-	public abstract class STRBlock : ACollectable
+	public abstract class STRBlock : ACollectable, IAssemblable
 	{
 		#region Main Properties
 
@@ -114,53 +115,24 @@ namespace Nikki.Support.Shared.Class
 		public virtual string GetText(string key) => this.GetRecord(key)?.Text;
 
 		/// <summary>
-		/// Attempts to add <see cref="StringRecord"/> in the <see cref="STRBlock"/>.
+		/// Adds <see cref="StringRecord"/> in the <see cref="STRBlock"/>.
 		/// </summary>
 		/// <param name="key">Key of the new <see cref="StringRecord"/></param>
 		/// <param name="label">Label of the new <see cref="StringRecord"/></param>
 		/// <param name="text">Text of the new <see cref="StringRecord"/></param>
-		/// <returns>True if adding was successful; false otherwise.</returns>
-		public abstract bool TryAddRecord(string key, string label, string text);
+		public abstract void AddRecord(string key, string label, string text);
 
 		/// <summary>
-		/// Attempts to add <see cref="StringRecord"/> in the <see cref="STRBlock"/>.
-		/// </summary>
-		/// <param name="key">Key of the new <see cref="StringRecord"/></param>
-		/// <param name="label">Label of the new <see cref="StringRecord"/></param>
-		/// <param name="text">Text of the new <see cref="StringRecord"/></param>
-		/// <param name="error">Error occured when trying to add the record.</param>
-		/// <returns>True if adding was successful; false otherwise.</returns>
-		public abstract bool TryAddRecord(string key, string label, string text, out string error);
-
-		/// <summary>
-		/// Attempts to remove <see cref="StringRecord"/> with the key provided.
+		/// Removes <see cref="StringRecord"/> with the key provided.
 		/// </summary>
 		/// <param name="key">Key of the <see cref="StringRecord"/> to be removed.</param>
-		/// <returns>True if removing was successful; false otherwise.</returns>
-		public abstract bool TryRemoveRecord(uint key);
+		public abstract void RemoveRecord(uint key);
 
 		/// <summary>
-		/// Attempts to remove <see cref="StringRecord"/> with the key provided.
+		/// Removes <see cref="StringRecord"/> with the key provided.
 		/// </summary>
 		/// <param name="key">Key of the <see cref="StringRecord"/> to be removed.</param>
-		/// <returns>True if removing was successful; false otherwise.</returns>
-		public abstract bool TryRemoveRecord(string key);
-
-		/// <summary>
-		/// Attempts to remove <see cref="StringRecord"/> with the key provided.
-		/// </summary>
-		/// <param name="key">Key of the <see cref="StringRecord"/> to be removed.</param>
-		/// <param name="error">Error occured when trying to remove the record.</param>
-		/// <returns>True if removing was successful; false otherwise.</returns>
-		public abstract bool TryRemoveRecord(uint key, out string error);
-
-		/// <summary>
-		/// Attempts to remove <see cref="StringRecord"/> with the key provided.
-		/// </summary>
-		/// <param name="key">Key of the <see cref="StringRecord"/> to be removed.</param>
-		/// <param name="error">Error occured when trying to remove the record.</param>
-		/// <returns>True if removing was successful; false otherwise.</returns>
-		public abstract bool TryRemoveRecord(string key, out string error);
+		public abstract void RemoveRecord(string key);
 
 		/// <summary>
 		/// Retrieves all <see cref="StringRecord"/> that have their texts containing text provided.

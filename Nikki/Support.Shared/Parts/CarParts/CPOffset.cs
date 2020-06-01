@@ -71,8 +71,14 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		public override int GetHashCode()
 		{
 			int result = 0x17;
-			for (int a1 = 0; a1 < this.AttribOffsets.Count; ++a1)
-				result = result * 37 + this.AttribOffsets[a1] + 1;
+
+			for (int loop = 0; loop < this.AttribOffsets.Count; ++loop)
+			{
+			
+				result = result * 37 + this.AttribOffsets[loop] + 1;
+			
+			}
+
 			return result.GetHashCode();
 		}
 
@@ -88,11 +94,19 @@ namespace Nikki.Support.Shared.Parts.CarParts
 			if (off2 is null) return false;
 
 			if (off1.AttribOffsets.Count != off2.AttribOffsets.Count) return false;
-			for (int a1 = 0; a1 < off1.AttribOffsets.Count; ++a1)
+
+			for (int loop = 0; loop < off1.AttribOffsets.Count; ++loop)
 			{
-				if (off1.AttribOffsets[a1] != off2.AttribOffsets[a1])
+			
+				if (off1.AttribOffsets[loop] != off2.AttribOffsets[loop])
+				{
+
 					return false;
+
+				}
+			
 			}
+
 			return true;
 		}
 

@@ -153,39 +153,10 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		}
 
 		/// <summary>
-		/// Assembles <see cref="CollisionBound"/> into a byte array.
-		/// </summary>
-		/// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="CollisionBound"/> with.</param>
-		public void Assemble(BinaryWriter bw)
-		{
-			bw.Write(this.OrientationX);
-			bw.Write(this.OrientationY);
-			bw.Write(this.OrientationZ);
-			bw.Write(this.OrientationW);
-			bw.Write(this.PositionX);
-			bw.Write(this.PositionY);
-			bw.Write(this.PositionZ);
-			bw.WriteEnum(this.BoundType);
-			bw.Write(this.HalfDimensionX);
-			bw.Write(this.HalfDimensionY);
-			bw.Write(this.HalfDimensionZ);
-			bw.Write(this.NumberOfChildren);
-			bw.Write(this.CollisionCloudIndex);
-			bw.Write(this.PivotX);
-			bw.Write(this.PivotY);
-			bw.Write(this.PivotZ);
-			bw.Write(this.ChildrenIndex);
-			bw.Write(this.AttributeName);
-			bw.Write(this.SurfaceName);
-			bw.Write(this.NameHash);
-			bw.Write((int)0);
-		}
-
-		/// <summary>
 		/// Disassembles array into <see cref="CollisionBound"/> properties.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="CollisionBound"/> with.</param>
-		public void Disassemble(BinaryReader br)
+		public void Read(BinaryReader br)
 		{
 			this.OrientationX = br.ReadInt16();
 			this.OrientationY = br.ReadInt16();
@@ -208,6 +179,35 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 			this.SurfaceName = br.ReadUInt32();
 			this.NameHash = br.ReadUInt32();
 			br.BaseStream.Position += 4;
+		}
+
+		/// <summary>
+		/// Assembles <see cref="CollisionBound"/> into a byte array.
+		/// </summary>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="CollisionBound"/> with.</param>
+		public void Write(BinaryWriter bw)
+		{
+			bw.Write(this.OrientationX);
+			bw.Write(this.OrientationY);
+			bw.Write(this.OrientationZ);
+			bw.Write(this.OrientationW);
+			bw.Write(this.PositionX);
+			bw.Write(this.PositionY);
+			bw.Write(this.PositionZ);
+			bw.WriteEnum(this.BoundType);
+			bw.Write(this.HalfDimensionX);
+			bw.Write(this.HalfDimensionY);
+			bw.Write(this.HalfDimensionZ);
+			bw.Write(this.NumberOfChildren);
+			bw.Write(this.CollisionCloudIndex);
+			bw.Write(this.PivotX);
+			bw.Write(this.PivotY);
+			bw.Write(this.PivotZ);
+			bw.Write(this.ChildrenIndex);
+			bw.Write(this.AttributeName);
+			bw.Write(this.SurfaceName);
+			bw.Write(this.NameHash);
+			bw.Write((int)0);
 		}
 	}
 }

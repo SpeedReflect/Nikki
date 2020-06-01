@@ -130,16 +130,23 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		{
 			ushort position;
 			position = br.ReadUInt16();
+			
 			if (position < 0xFFFF && string_dict.TryGetValue(position, out var value1))
 			{
+			
 				this.Value1 = value1;
 				this.Value1Exists = eBoolean.True;
+			
 			}
+			
 			position = br.ReadUInt16();
+			
 			if (position < 0xFFFF && string_dict.TryGetValue(position, out var value2))
 			{
+			
 				this.Value2 = value2;
 				this.Value2Exists = eBoolean.True;
+			
 			}
 		}
 
@@ -153,18 +160,25 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		{
 			ushort position;
 			position = br.ReadUInt16();
+			
 			if (position != 0xFFFF)
 			{
+			
 				str_reader.BaseStream.Position = position << 2;
 				this.Value1 = str_reader.ReadNullTermUTF8();
 				this.Value1Exists = eBoolean.True;
+			
 			}
+			
 			position = br.ReadUInt16();
+			
 			if (position != 0xFFFF)
 			{
+			
 				str_reader.BaseStream.Position = position << 2;
 				this.Value2 = str_reader.ReadNullTermUTF8();
 				this.Value2Exists = eBoolean.True;
+			
 			}
 		}
 
@@ -179,9 +193,11 @@ namespace Nikki.Support.Shared.Parts.CarParts
 			var result1 = this.Value1Exists == eBoolean.False
 				? 0xFFFF
 				: (ushort)string_dict[this.Value1.GetHashCode()];
+			
 			var result2 = this.Value2Exists == eBoolean.False
 				? 0xFFFF
 				: (ushort)string_dict[this.Value2.GetHashCode()];
+			
 			bw.Write(this.Key);
 			bw.Write((ushort)result1);
 			bw.Write((ushort)result2);
@@ -191,7 +207,8 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Returns attribute part label and its type as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() => $"{this.AttribType} -> {this.Type}";
+		public override string ToString() =>
+			$"Attribute: {this.AttribType} | Type: {this.Type} | Value1: {this.Value1} | Value2: {this.Value2}";
 
 		/// <summary>
 		/// Determines whether this instance and a specified object, which must also be a

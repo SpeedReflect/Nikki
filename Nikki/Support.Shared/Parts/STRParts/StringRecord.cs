@@ -1,5 +1,6 @@
 ﻿using System;
 using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Exception;
 using Nikki.Support.Shared.Class;
 using CoreExtensions.Text;
 
@@ -112,69 +113,45 @@ namespace Nikki.Support.Shared.Parts.STRParts
 		}
 
 		/// <summary>
-		/// Tries to set value provided at the <see cref="StringRecord"/> property specified. 
+		/// Sets value provided at the <see cref="StringRecord"/> property specified. 
 		/// </summary>
 		/// <param name="PropertyName">Property of the <see cref="StringRecord"/>. Range: 
 		/// Key, Label, Text.</param>
 		/// <param name="value">Value to set.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public bool TrySetValue(string PropertyName, string value)
+		public void SetValue(string PropertyName, string value)
 		{
-			switch (PropertyName)
-			{
-				case key:
-					if (!value.IsHexString()) return false;
-					var hash = Convert.ToUInt32(value, 16);
-					if (this.ThisSTRBlock.GetRecord(hash) != null) return false;
-					this.Key = hash;
-					return true;
-				case label:
-					this.Label = value;
-					return true;
-				case text:
-					this.Text = value;
-					return true;
-				default:
-					return false;
-			}
-		}
-
-		/// <summary>
-		/// Tries to set value provided at the <see cref="StringRecord"/> property specified. 
-		/// </summary>
-		/// <param name="PropertyName">Property of the <see cref="StringRecord"/>. Range: 
-		/// Key, Label, Text.</param>
-		/// <param name="value">Value to set.</param>
-		/// <param name="error">Error occured when trying to set value.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public bool TrySetValue(string PropertyName, string value, out string error)
-		{
-			error = null;
 			switch (PropertyName)
 			{
 				case key:
 					if (!value.IsHexString())
 					{
-						error = $"Unable to convert key passed to a hex-hash, or it equals 0.";
-						return false;
+
+						throw new ArgumentException("Unable to convert key passed to a hex-hash, or it equals 0");
+
 					}
+
 					var hash = Convert.ToUInt32(value, 16);
+
 					if (this.ThisSTRBlock.GetRecord(hash) != null)
 					{
-						error = $"StringRecord with key {value} already exist.";
-						return false;
+
+						throw new ArgumentException($"StringRecord with key {value} already exist");
+
 					}
+
 					this.Key = hash;
-					return true;
+					return;
+
 				case label:
 					this.Label = value;
-					return true;
+					return;
+
 				case text:
 					this.Text = value;
-					return true;
+					return;
+
 				default:
-					error = $"Field named {PropertyName} does not exist.";
-					return false;
+					throw new InfoAccessException(PropertyName);
 			}
 		}
 	}

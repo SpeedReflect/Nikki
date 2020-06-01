@@ -116,7 +116,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Returns attribute part label and its type as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() => $"{this.AttribType} -> {this.Type}";
+		public override string ToString() => $"Attribute: {this.AttribType} | Type: {this.Type} | Value: {this.Value}";
 
 		/// <summary>
 		/// Determines whether this instance and a specified object, which must also be a

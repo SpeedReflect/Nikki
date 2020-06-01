@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 
 
@@ -12,7 +13,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="PresetSkin"/> is a collection of settings related to car skins.
     /// </summary>
-    public abstract class PresetSkin : ACollectable
+    public abstract class PresetSkin : ACollectable, IAssemblable
     {
         #region Main Properties
 

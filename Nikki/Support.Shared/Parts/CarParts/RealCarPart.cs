@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Nikki.Core;
+﻿using System.Collections.Generic;
 using Nikki.Utils;
-using Nikki.Reflection.Enum;
 using Nikki.Reflection.Interface;
 using Nikki.Support.Shared.Class;
 
@@ -78,132 +75,56 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		public virtual int GetIndex(CPAttribute attrib) => this.Attributes.IndexOf(attrib);
 
 		/// <summary>
-		/// Attempts to add <see cref="CPAttribute"/> with key provided.
+		/// Adds <see cref="CPAttribute"/> with key provided.
 		/// </summary>
 		/// <param name="key">Key of the new <see cref="CPAttribute"/>.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryAddAttribute(uint key);
+		public abstract void AddAttribute(uint key);
 
 		/// <summary>
-		/// Attempts to add <see cref="CPAttribute"/> with label provided.
+		/// Adds <see cref="CPAttribute"/> with label provided.
 		/// </summary>
 		/// <param name="label">Label of the new <see cref="CPAttribute"/>.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryAddAttribute(string label);
+		public abstract void AddAttribute(string label);
 
 		/// <summary>
-		/// Attempts to add <see cref="CPAttribute"/> with key provided.
-		/// </summary>
-		/// <param name="key">Key of the new <see cref="CPAttribute"/>.</param>
-		/// <param name="error">Error occured when trying to add new <see cref="CPAttribute"/>.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryAddAttribute(uint key, out string error);
-
-		/// <summary>
-		/// Attempts to add <see cref="CPAttribute"/> with label provided.
-		/// </summary>
-		/// <param name="label">Label of the new <see cref="CPAttribute"/>.</param>
-		/// <param name="error">Error occured when trying to add new <see cref="CPAttribute"/>.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryAddAttribute(string label, out string error);
-
-		/// <summary>
-		/// Attempts to remove <see cref="CPAttribute"/> with key provided.
+		/// Removes <see cref="CPAttribute"/> with key provided.
 		/// </summary>
 		/// <param name="key">Key of the <see cref="CPAttribute"/> to remove.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryRemoveAttribute(uint key);
+		public abstract void RemoveAttribute(uint key);
 
 		/// <summary>
-		/// Attempts to remove <see cref="CPAttribute"/> with key provided.
+		/// Removes <see cref="CPAttribute"/> with key provided.
 		/// </summary>
 		/// <param name="label">Label of the <see cref="CPAttribute"/> to remove.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryRemoveAttribute(string label);
+		public abstract void RemoveAttribute(string label);
 
 		/// <summary>
-		/// Attempts to remove <see cref="CPAttribute"/> with key provided.
-		/// </summary>
-		/// <param name="key">Key of the <see cref="CPAttribute"/> to remove.</param>
-		/// <param name="error">Error occured when trying to remove <see cref="CPAttribute"/>.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryRemoveAttribute(uint key, out string error);
-
-		/// <summary>
-		/// Attempts to remove <see cref="CPAttribute"/> with label provided.
-		/// </summary>
-		/// <param name="label">Label of the <see cref="CPAttribute"/> to remove.</param>
-		/// <param name="error">Error occured when trying to remove <see cref="CPAttribute"/>.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryRemoveAttribute(string label, out string error);
-
-		/// <summary>
-		/// Attempts to clone <see cref="CPAttribute"/> with key provided.
+		/// Clones <see cref="CPAttribute"/> with key provided.
 		/// </summary>
 		/// <param name="newkey">Key of the new <see cref="CPAttribute"/>.</param>
 		/// <param name="copykey">Key of the <see cref="CPAttribute"/> to clone.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryCloneAttribute(uint newkey, uint copykey);
+		public abstract void CloneAttribute(uint newkey, uint copykey);
 
 		/// <summary>
-		/// Attempts to clone <see cref="CPAttribute"/> with label provided.
+		/// Clones <see cref="CPAttribute"/> with label provided.
 		/// </summary>
 		/// <param name="newkey">Key of the new <see cref="CPAttribute"/>.</param>
 		/// <param name="copylabel">Label of the <see cref="CPAttribute"/> to clone.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryCloneAttribute(uint newkey, string copylabel);
+		public abstract void CloneAttribute(uint newkey, string copylabel);
 
 		/// <summary>
-		/// Attempts to clone <see cref="CPAttribute"/> with key provided.
+		/// Clones <see cref="CPAttribute"/> with key provided.
 		/// </summary>
 		/// <param name="newlabel">Label of the new <see cref="CPAttribute"/>.</param>
 		/// <param name="copykey">Key of the <see cref="CPAttribute"/> to clone.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryCloneAttribute(string newlabel, uint copykey);
+		public abstract void CloneAttribute(string newlabel, uint copykey);
 
 		/// <summary>
-		/// Attempts to clone <see cref="CPAttribute"/> with label provided.
+		/// Clones <see cref="CPAttribute"/> with label provided.
 		/// </summary>
 		/// <param name="newlabel">Label of the new <see cref="CPAttribute"/>.</param>
 		/// <param name="copylabel">Label of the <see cref="CPAttribute"/> to clone.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryCloneAttribute(string newlabel, string copylabel);
-
-		/// <summary>
-		/// Attempts to clone <see cref="CPAttribute"/> with key provided.
-		/// </summary>
-		/// <param name="newkey">Key of the new <see cref="CPAttribute"/>.</param>
-		/// <param name="copykey">Key of the <see cref="CPAttribute"/> to clone.</param>
-		/// <param name="error">Error occured when trying to clone <see cref="CPAttribute"/>.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryCloneAttribute(uint newkey, uint copykey, out string error);
-
-		/// <summary>
-		/// Attempts to clone <see cref="CPAttribute"/> with label provided.
-		/// </summary>
-		/// <param name="newkey">Key of the new <see cref="CPAttribute"/>.</param>
-		/// <param name="copylabel">Label of the <see cref="CPAttribute"/> to clone.</param>
-		/// <param name="error">Error occured when trying to clone <see cref="CPAttribute"/>.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryCloneAttribute(uint newkey, string copylabel, out string error);
-
-		/// <summary>
-		/// Attempts to clone <see cref="CPAttribute"/> with key provided.
-		/// </summary>
-		/// <param name="newlabel">Label of the new <see cref="CPAttribute"/>.</param>
-		/// <param name="copykey">Key of the <see cref="CPAttribute"/> to clone.</param>
-		/// <param name="error">Error occured when trying to clone <see cref="CPAttribute"/>.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryCloneAttribute(string newlabel, uint copykey, out string error);
-
-		/// <summary>
-		/// Attempts to clone <see cref="CPAttribute"/> with label provided.
-		/// </summary>
-		/// <param name="newlabel">Label of the new <see cref="CPAttribute"/>.</param>
-		/// <param name="copylabel">Label of the <see cref="CPAttribute"/> to clone.</param>
-		/// <param name="error">Error occured when trying to clone <see cref="CPAttribute"/>.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public abstract bool TryCloneAttribute(string newlabel, string copylabel, out string error);
+		public abstract void CloneAttribute(string newlabel, string copylabel);
 
 		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.

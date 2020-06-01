@@ -76,7 +76,7 @@ namespace Nikki.Support.Shared.Parts.FNGParts
         /// <param name="c1">The first <see cref="FEngColor"/> to compare, or null.</param>
         /// <param name="c2">The second <see cref="FEngColor"/> to compare, or null.</param>
         /// <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
-        public static bool operator== (FEngColor c1, FEngColor c2) => 
+        public static bool operator ==(FEngColor c1, FEngColor c2) => 
             c1 is null ? c2 is null : c2 is null ? false : c1.Red == c2.Red 
                 && c1.Green == c2.Green && c1.Blue == c2.Blue;
 

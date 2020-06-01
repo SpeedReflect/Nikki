@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 
 
@@ -12,7 +13,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="SunInfo"/> is a collection of sun and daylight settings.
     /// </summary>
-	public abstract class SunInfo : ACollectable
+	public abstract class SunInfo : ACollectable, IAssemblable
 	{
         #region Main Properties
 

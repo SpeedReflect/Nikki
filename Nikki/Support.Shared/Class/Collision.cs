@@ -4,6 +4,7 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 
 
@@ -13,7 +14,7 @@ namespace Nikki.Support.Shared.Class
 	/// <summary>
 	/// <see cref="Collision"/> is a collection of settings related to a car's bounds.
 	/// </summary>
-	public abstract class Collision : ACollectable
+	public abstract class Collision : ACollectable, IAssemblable
 	{
 		#region Main Properties
 

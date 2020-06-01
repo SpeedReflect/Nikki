@@ -4,6 +4,7 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 
 
@@ -13,7 +14,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
 	/// <see cref="Track"/> is a collection of settings related to races and events.
     /// </summary>
-	public abstract class Track : ACollectable
+	public abstract class Track : ACollectable, IAssemblable
 	{
         #region Main Properties
 

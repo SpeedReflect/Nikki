@@ -111,10 +111,13 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		private void Disassemble(BinaryReader br, Dictionary<int, string> string_dict)
 		{
 			var position = br.ReadUInt32();
+
 			if (position < 0xFFFFFFFF && string_dict.TryGetValue((int)position, out var value))
 			{
+			
 				this.Value = value;
 				this.ValueExists = eBoolean.True;
+			
 			}
 		}
 
@@ -127,11 +130,14 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		public override void Disassemble(BinaryReader br, BinaryReader str_reader)
 		{
 			var position = br.ReadUInt32();
+			
 			if (position < 0xFFFF)
 			{
+			
 				str_reader.BaseStream.Position = position << 2;
 				this.Value = str_reader.ReadNullTermUTF8();
 				this.ValueExists = eBoolean.True;
+			
 			}
 		}
 
@@ -146,6 +152,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 			var result = String.IsNullOrEmpty(this.Value)
 				? -1
 				: string_dict[this.Value.GetHashCode()];
+			
 			bw.Write(this.Key);
 			bw.Write(result);
 		}
@@ -154,7 +161,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Returns attribute part label and its type as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() => $"{this.AttribType} -> {this.Type}";
+		public override string ToString() => $"Attribute: {this.AttribType} | Type: {this.Type} | Value: {this.Value}";
 
 		/// <summary>
 		/// Determines whether this instance and a specified object, which must also be a

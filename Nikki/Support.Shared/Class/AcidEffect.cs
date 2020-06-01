@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Interface;
 
 
 
@@ -11,7 +12,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="AcidEffect"/> is a collection of vectors and attributes related to acids and xenons.
     /// </summary>
-    public abstract class AcidEffect : ACollectable
+    public abstract class AcidEffect : ACollectable, IAssemblable
     {
         #region Private Fields
 

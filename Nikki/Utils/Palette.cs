@@ -5,7 +5,7 @@
 namespace Nikki.Utils
 {
     /// <summary>
-    /// Collection of P8 compression and decompression functions.
+    /// Collection of DDS palette compression and decompression functions.
     /// </summary>
     public static class Palette
     {

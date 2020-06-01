@@ -5,6 +5,8 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Interface;
+using Nikki.Reflection.Attributes;
 using Nikki.Support.Shared.Parts.TPKParts;
 
 
@@ -14,7 +16,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="TPKBlock"/> is a collection of <see cref="Texture"/>.
     /// </summary>
-    public abstract class TPKBlock : ACollectable
+    public abstract class TPKBlock : ACollectable, IAssemblable
     {
         #region Primary Properties
 
@@ -67,6 +69,7 @@ namespace Nikki.Support.Shared.Class
         /// True if <see cref="TPKBlock"/> is compressed and should be saved 
         /// as compressed; false otherwise.
         /// </summary>
+        [AccessModifiable()]
         public abstract eBoolean IsCompressed { get; set; }
 
         /// <summary>
@@ -166,76 +169,34 @@ namespace Nikki.Support.Shared.Class
         public abstract int GetTextureIndex(uint key, eKeyType type);
 
         /// <summary>
-        /// Attempts to add <see cref="Texture"/> to the <see cref="TPKBlock"/> data.
+        /// Adds <see cref="Texture"/> to the <see cref="TPKBlock"/> data.
         /// </summary>
         /// <param name="CName">Collection Name of the new <see cref="Texture"/>.</param>
         /// <param name="filename">Path of the texture to be imported.</param>
-        /// <returns>True if texture adding was successful, false otherwise.</returns>
-        public abstract bool TryAddTexture(string CName, string filename);
+        public abstract void AddTexture(string CName, string filename);
 
         /// <summary>
-        /// Attempts to add <see cref="Texture"/> to the <see cref="TPKBlock"/> data.
-        /// </summary>
-        /// <param name="CName">Collection Name of the new <see cref="Texture"/>.</param>
-        /// <param name="filename">Path of the texture to be imported.</param>
-        /// <param name="error">Error occured when trying to add a texture.</param>
-        /// <returns>True if texture adding was successful, false otherwise.</returns>
-        public abstract bool TryAddTexture(string CName, string filename, out string error);
-
-        /// <summary>
-        /// Attempts to remove <see cref="Texture"/> specified from <see cref="TPKBlock"/> data.
+        /// Removes <see cref="Texture"/> specified from <see cref="TPKBlock"/> data.
         /// </summary>
         /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to be deleted.</param>
         /// <param name="type">Type fo the key passed.</param>
-        /// <returns>True if texture removing was successful, false otherwise.</returns>
-        public abstract bool TryRemoveTexture(uint key, eKeyType type);
+        public abstract void RemoveTexture(uint key, eKeyType type);
 
         /// <summary>
-        /// Attempts to remove <see cref="Texture"/> specified from <see cref="TPKBlock"/> data.
-        /// </summary>
-        /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to be deleted.</param>
-        /// <param name="type">Type of the key passed.</param>
-        /// <param name="error">Error occured when trying to remove a texture.</param>
-        /// <returns>True if texture removing was successful, false otherwise.</returns>
-        public abstract bool TryRemoveTexture(uint key, eKeyType type, out string error);
-
-        /// <summary>
-        /// Attempts to clone <see cref="Texture"/> specified in the <see cref="TPKBlock"/> data.
+        /// Clones <see cref="Texture"/> specified in the <see cref="TPKBlock"/> data.
         /// </summary>
         /// <param name="newname">Collection Name of the new <see cref="Texture"/>.</param>
         /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to clone.</param>
         /// <param name="type">Type of the key passed.</param>
-        /// <returns>True if texture cloning was successful, false otherwise.</returns>
-        public abstract bool TryCloneTexture(string newname, uint key, eKeyType type);
+        public abstract void CloneTexture(string newname, uint key, eKeyType type);
 
         /// <summary>
-        /// Attempts to clone <see cref="Texture"/> specified in the <see cref="TPKBlock"/> data.
-        /// </summary>
-        /// <param name="newname">Collection Name of the new <see cref="Texture"/>.</param>
-        /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to clone.</param>
-        /// <param name="type">Type of the key passed.</param>
-        /// <param name="error">Error occured when trying to clone a texture.</param>
-        /// <returns>True if texture cloning was successful, false otherwise.</returns>
-        public abstract bool TryCloneTexture(string newname, uint key, eKeyType type, out string error);
-
-        /// <summary>
-        /// Attemps to replace <see cref="Texture"/> specified in the <see cref="TPKBlock"/> data with a new one.
+        /// Replaces <see cref="Texture"/> specified in the <see cref="TPKBlock"/> data with a new one.
         /// </summary>
         /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to be replaced.</param>
         /// <param name="type">Type of the key passed.</param>
         /// <param name="filename">Path of the texture that replaces the current one.</param>
-        /// <returns>True if texture replacing was successful, false otherwise.</returns>
-        public abstract bool TryReplaceTexture(uint key, eKeyType type, string filename);
-
-        /// <summary>
-        /// Attemps to replace <see cref="Texture"/> specified in the <see cref="TPKBlock"/> data with a new one.
-        /// </summary>
-        /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to be replaced.</param>
-        /// <param name="type">Type of the key passed.</param>
-        /// <param name="filename">Path of the texture that replaces the current one.</param>
-        /// <param name="error">Error occured when trying to replace a texture.</param>
-        /// <returns>True if texture replacing was successful, false otherwise.</returns>
-        public abstract bool TryReplaceTexture(uint key, eKeyType type, string filename, out string error);
+        public abstract void ReplaceTexture(uint key, eKeyType type, string filename);
 
         #endregion
 

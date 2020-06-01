@@ -42,31 +42,39 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		}
 
 		/// <summary>
+		/// Disassembles array into <see cref="CollisionBound"/> properties.
+		/// </summary>
+		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="CollisionBound"/> with.</param>
+		public void Read(BinaryReader br)
+		{
+			this.NumberOfVertices = br.ReadInt32();
+			br.BaseStream.Position += 12;
+
+			for (int loop = 0; loop < this.NumberOfVertices; ++loop)
+			{
+
+				var vertex = new CollisionVertex();
+				vertex.Read(br);
+				this.Vertices.Add(vertex);
+			
+			}
+		}
+
+		/// <summary>
 		/// Assembles <see cref="CollisionBound"/> into a byte array.
 		/// </summary>
 		/// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="CollisionBound"/> with.</param>
-		public void Assemble(BinaryWriter bw)
+		public void Write(BinaryWriter bw)
 		{
 			bw.Write(this.NumberOfVertices);
 			bw.Write((int)0);
 			bw.Write((long)0);
-			for (int a1 = 0; a1 < this.Vertices.Count; ++a1)
-				this.Vertices[a1].Assemble(bw);
-		}
 
-		/// <summary>
-		/// Disassembles array into <see cref="CollisionBound"/> properties.
-		/// </summary>
-		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="CollisionBound"/> with.</param>
-		public void Disassemble(BinaryReader br)
-		{
-			this.NumberOfVertices = br.ReadInt32();
-			br.BaseStream.Position += 12;
-			for (int a1 = 0; a1 < this.NumberOfVertices; ++a1)
+			for (int loop = 0; loop < this.Vertices.Count; ++loop)
 			{
-				var vertex = new CollisionVertex();
-				vertex.Disassemble(br);
-				this.Vertices.Add(vertex);
+
+				this.Vertices[loop].Write(bw);
+
 			}
 		}
 	}
