@@ -105,8 +105,12 @@ namespace Nikki.Support.Carbon.Class
 		/// </summary>
 		public override void ResortNames()
 		{
-			for (int a1 = 0; a1 < this.ModelCarParts.Count; ++a1)
-				this.ModelCarParts[a1].PartName = $"{this._collection_name}_PART_{a1}";
+			for (int loop = 0; loop < this.ModelCarParts.Count; ++loop)
+			{
+
+				this.ModelCarParts[loop].PartName = $"{this._collection_name}_PART_{loop}";
+
+			}
 		}
 
 		/// <summary>
@@ -189,7 +193,7 @@ namespace Nikki.Support.Carbon.Class
 			foreach (var part in this.ModelCarParts)
 			{
 
-				result.ModelCarParts.Add(part.PlainCopy());
+				result.ModelCarParts.Add((RealCarPart)part.PlainCopy());
 
 			}
 
@@ -241,7 +245,7 @@ namespace Nikki.Support.Carbon.Class
 			}
 
 
-			this.ModelCarParts.Add(part.PlainCopy());
+			this.ModelCarParts.Add((RealCarPart)part.PlainCopy());
 			this.ResortNames();
 		}
 

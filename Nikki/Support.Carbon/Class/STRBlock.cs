@@ -109,12 +109,12 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Initializes new instance of <see cref="CarTypeInfo"/>.
 		/// </summary>
-		/// <param name="strbr"><see cref="BinaryReader"/> to read text data with.</param>
+		/// <param name="br"><see cref="BinaryReader"/> to read text data with.</param>
 		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-		public STRBlock(BinaryReader strbr, Database.Carbon db)
+		public STRBlock(BinaryReader br, Database.Carbon db)
 		{
 			this.Database = db;
-			this.Disassemble(strbr);
+			this.Disassemble(br);
 		}
 
 		/// <summary>

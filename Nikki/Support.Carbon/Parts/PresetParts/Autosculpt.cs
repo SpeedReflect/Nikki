@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 
 
@@ -10,7 +9,7 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
     /// <summary>
     /// A unit <see cref="Autosculpt"/> used in preset rides.
     /// </summary>
-    public class Autosculpt : ASubPart, ICopyable<Autosculpt>
+    public class Autosculpt : ASubPart
     {
         /// <summary>
         /// 
@@ -70,16 +69,17 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
         /// Creates a plain copy of the objects that contains same values.
         /// </summary>
         /// <returns>Exact plain copy of the object.</returns>
-        public Autosculpt PlainCopy()
+        public override ASubPart PlainCopy()
         {
             var result = new Autosculpt();
-            var ThisType = this.GetType();
-            var ResultType = result.GetType();
-            foreach (var ThisProperty in ThisType.GetProperties())
+
+            foreach (var property in this.GetType().GetProperties())
             {
-                var ResultField = ResultType.GetProperty(ThisProperty.Name);
-                ResultField.SetValue(result, ThisProperty.GetValue(this));
+
+                property.SetValue(result, property.GetValue(this));
+
             }
+
             return result;
         }
 

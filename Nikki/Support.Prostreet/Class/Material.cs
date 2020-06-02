@@ -71,7 +71,7 @@ namespace Nikki.Support.Prostreet.Class
                 if (value.Length > MaxCNameLength)
                     throw new ArgumentLengthException(MaxCNameLength);
                 if (this.Database.Materials.FindCollection(value) != null)
-                    throw new CollectionExistenceException();
+                    throw new CollectionExistenceException(value);
                 this._collection_name = value;
             }
         }
@@ -90,300 +90,350 @@ namespace Nikki.Support.Prostreet.Class
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float DiffusePower { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float DiffuseClamp { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float DiffuseFlakes { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float DiffuseVinylScale { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float DiffuseMinLevel { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float DiffuseMinRed { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float DiffuseMinGreen { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float DiffuseMinBlue { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float DiffuseMaxLevel { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float DiffuseMaxRed { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float DiffuseMaxGreen { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float DiffuseMaxBlue { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float DiffuseMinAlpha { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float DiffuseMaxAlpha { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular1Power { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular1Flakes { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular1VinylScale { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular1MinLevel { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular1MinRed { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular1MinGreen { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular1MinBlue { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular1MaxLevel { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular1MaxRed { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular1MaxGreen { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular1MaxBlue { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular2Power { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular2Flakes { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular2VinylScale { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular2MinLevel { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular2MinRed { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular2MinGreen { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular2MinBlue { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular2MaxLevel { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular2MaxRed { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular2MaxGreen { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float Specular2MaxBlue { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float EnvmapPower { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float EnvmapClamp { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float EnvmapVinylScale { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float EnvmapMinLevel { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float EnvmapMinRed { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float EnvmapMinGreen { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float EnvmapMinBlue { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float EnvmapMaxLevel { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float EnvmapMaxRed { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float EnvmapMaxGreen { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float EnvmapMaxBlue { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float VinylLuminanceMinLevel { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float VinylLuminanceMaxLevel { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public float MultiTextured { get; set; }
 
         #endregion
@@ -566,60 +616,8 @@ namespace Nikki.Support.Prostreet.Class
         /// <returns>Memory casted copy of the object.</returns>
         public override ACollectable MemoryCast(string CName)
         {
-            var result = new Material(CName, this.Database)
-            {
-                DiffusePower = this.DiffusePower,
-                DiffuseClamp = this.DiffuseClamp,
-                DiffuseFlakes = this.DiffuseFlakes,
-                DiffuseVinylScale = this.DiffuseVinylScale,
-                DiffuseMinLevel = this.DiffuseMinLevel,
-                DiffuseMinRed = this.DiffuseMinRed,
-                DiffuseMinGreen = this.DiffuseMinGreen,
-                DiffuseMinBlue = this.DiffuseMinBlue,
-                DiffuseMaxLevel = this.DiffuseMaxLevel,
-                DiffuseMaxRed = this.DiffuseMaxRed,
-                DiffuseMaxGreen = this.DiffuseMaxGreen,
-                DiffuseMaxBlue = this.DiffuseMaxBlue,
-                DiffuseMinAlpha = this.DiffuseMinAlpha,
-                DiffuseMaxAlpha = this.DiffuseMaxAlpha,
-                Specular1Power = this.Specular1Power,
-                Specular1Flakes = this.Specular1Flakes,
-                Specular1VinylScale = this.Specular1VinylScale,
-                Specular1MinLevel = this.Specular1MinLevel,
-                Specular1MinRed = this.Specular1MinRed,
-                Specular1MinGreen = this.Specular1MinGreen,
-                Specular1MinBlue = this.Specular1MinBlue,
-                Specular1MaxLevel = this.Specular1MaxLevel,
-                Specular1MaxRed = this.Specular1MaxRed,
-                Specular1MaxGreen = this.Specular1MaxGreen,
-                Specular1MaxBlue = this.Specular1MaxBlue,
-                Specular2Power = this.Specular2Power,
-                Specular2Flakes = this.Specular2Flakes,
-                Specular2VinylScale = this.Specular2VinylScale,
-                Specular2MinLevel = this.Specular2MinLevel,
-                Specular2MinRed = this.Specular2MinRed,
-                Specular2MinGreen = this.Specular2MinGreen,
-                Specular2MinBlue = this.Specular2MinBlue,
-                Specular2MaxLevel = this.Specular2MaxLevel,
-                Specular2MaxRed = this.Specular2MaxRed,
-                Specular2MaxGreen = this.Specular2MaxGreen,
-                Specular2MaxBlue = this.Specular2MaxBlue,
-                EnvmapPower = this.EnvmapPower,
-                EnvmapClamp = this.EnvmapClamp,
-                EnvmapVinylScale = this.EnvmapVinylScale,
-                EnvmapMinLevel = this.EnvmapMinLevel,
-                EnvmapMinRed = this.EnvmapMinRed,
-                EnvmapMinGreen = this.EnvmapMinGreen,
-                EnvmapMinBlue = this.EnvmapMinBlue,
-                EnvmapMaxLevel = this.EnvmapMaxLevel,
-                EnvmapMaxRed = this.EnvmapMaxRed,
-                EnvmapMaxGreen = this.EnvmapMaxGreen,
-                EnvmapMaxBlue = this.EnvmapMaxBlue,
-                VinylLuminanceMinLevel = this.VinylLuminanceMinLevel,
-                VinylLuminanceMaxLevel = this.VinylLuminanceMaxLevel,
-                MultiTextured = this.MultiTextured
-            };
-
+            var result = new Material(CName, this.Database);
+            base.MemoryCast(this, result);
             return result;
         }
 

@@ -2,7 +2,6 @@
 using System.IO;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 
 
@@ -12,7 +11,7 @@ namespace Nikki.Support.MostWanted.Parts.PresetParts
 	/// <summary>
 	/// A unit <see cref="VisualSets"/> used in preset rides.
 	/// </summary>
-	public class VisualSets : ASubPart, ICopyable<VisualSets>
+	public class VisualSets : ASubPart
 	{
 		/// <summary>
 		/// 
@@ -60,16 +59,17 @@ namespace Nikki.Support.MostWanted.Parts.PresetParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public VisualSets PlainCopy()
+		public override ASubPart PlainCopy()
 		{
 			var result = new VisualSets();
-			var ThisType = this.GetType();
-			var ResultType = result.GetType();
-			foreach (var ThisField in ThisType.GetProperties())
+
+			foreach (var property in this.GetType().GetProperties())
 			{
-				var ResultField = ResultType.GetProperty(ThisField.Name);
-				ResultField.SetValue(result, ThisField.GetValue(this));
+
+				property.SetValue(result, property.GetValue(this));
+
 			}
+
 			return result;
 		}
 

@@ -2,7 +2,6 @@
 using System.IO;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 
 
@@ -12,7 +11,7 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
     /// <summary>
     /// A unit <see cref="Vinyl"/> used in preset rides.
     /// </summary>
-    public class Vinyl : ASubPart, ICopyable<Vinyl>
+    public class Vinyl : ASubPart
     {
         /// <summary>
         /// 
@@ -132,16 +131,17 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
         /// Creates a plain copy of the objects that contains same values.
         /// </summary>
         /// <returns>Exact plain copy of the object.</returns>
-        public Vinyl PlainCopy()
+        public override ASubPart PlainCopy()
         {
             var result = new Vinyl();
-            var ThisType = this.GetType();
-            var ResultType = result.GetType();
-            foreach (var ThisProperty in ThisType.GetProperties())
+
+            foreach (var property in this.GetType().GetProperties())
             {
-                var ResultField = ResultType.GetProperty(ThisProperty.Name);
-                ResultField.SetValue(result, ThisProperty.GetValue(this));
+
+                property.SetValue(result, property.GetValue(this));
+
             }
+
             return result;
         }
 

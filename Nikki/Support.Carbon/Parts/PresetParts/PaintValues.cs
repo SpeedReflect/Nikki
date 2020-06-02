@@ -3,7 +3,6 @@ using System.IO;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 
 
@@ -13,7 +12,7 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
 	/// <summary>
 	/// A unit <see cref="PaintValues"/> used in preset rides.
 	/// </summary>
-	public class PaintValues : ASubPart, ICopyable<PaintValues>
+	public class PaintValues : ASubPart
 	{
 		/// <summary>
 		/// 
@@ -49,7 +48,7 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public PaintValues PlainCopy()
+		public override ASubPart PlainCopy()
 		{
 			var result = new PaintValues()
 			{

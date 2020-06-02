@@ -322,8 +322,14 @@ namespace Nikki.Support.MostWanted.Class
 		{
 			foreach (var record in this._stringinfo)
 			{
+			
 				if (record.Text?.Contains(text) ?? false)
+				{
+
 					yield return record;
+
+				}
+			
 			}
 		}
 

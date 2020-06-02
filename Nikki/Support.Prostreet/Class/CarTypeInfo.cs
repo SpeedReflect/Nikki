@@ -73,7 +73,7 @@ namespace Nikki.Support.Prostreet.Class
                 if (value.Length > MaxCNameLength)
                     throw new ArgumentLengthException(MaxCNameLength);
                 if (this.Database.CarTypeInfos.FindCollection(value) != null)
-                    throw new CollectionExistenceException();
+                    throw new CollectionExistenceException(value);
                 this._collection_name = value;
             }
         }
@@ -92,36 +92,42 @@ namespace Nikki.Support.Prostreet.Class
         /// Manufacturer name of the <see cref="CarTypeInfo"/>.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public override string ManufacturerName { get; set; } = String.Empty;
 
         /// <summary>
         /// Default base paint of the <see cref="CarTypeInfo"/>.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public override string DefaultBasePaint { get; set; } = String.Empty;
 
         /// <summary>
         /// Represents memory type of the <see cref="CarTypeInfo"/>.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public eMemoryType MemoryType { get; set; }
 
         /// <summary>
         /// Spoiler type of the <see cref="CarTypeInfo"/>.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Spoiler { get; set; } = String.Empty;
 
         /// <summary>
         /// Autosculpt spoiler type of the <see cref="CarTypeInfo"/>.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string SpoilerAS { get; set; } = String.Empty;
 
         /// <summary>
         /// RoofScoop type of the <see cref="CarTypeInfo"/>.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string RoofScoop { get; set; } = String.Empty;
 
         #endregion
@@ -161,8 +167,13 @@ namespace Nikki.Support.Prostreet.Class
         {
             this.Database = db;
             this.Disassemble(br);
+            
             if (this.Index <= (int)eBoundValues.MIN_INFO_PROSTREET)
+            {
+
                 this.Deletable = false;
+
+            }
         }
 
         /// <summary>
@@ -339,64 +350,8 @@ namespace Nikki.Support.Prostreet.Class
         /// <returns>Memory casted copy of the object.</returns>
         public override ACollectable MemoryCast(string CName)
         {
-            var result = new CarTypeInfo(CName, this.Database)
-            {
-                Spoiler = this.Spoiler,
-                SpoilerAS = this.SpoilerAS,
-                RoofScoop = this.RoofScoop,
-                UsageType = this.UsageType,
-                MemoryType = this.MemoryType,
-                IsSkinnable = this.IsSkinnable,
-                ManufacturerName = this.ManufacturerName,
-                DefaultBasePaint = this.DefaultBasePaint,
-                HeadlightFOV = this.HeadlightFOV,
-                PadHighPerformance = this.PadHighPerformance,
-                NumAvailableSkinNumbers = this.NumAvailableSkinNumbers,
-                WhatGame = this.WhatGame,
-                ConvertibleFlag = this.ConvertibleFlag,
-                WheelOuterRadius = this.WheelOuterRadius,
-                WheelInnerRadiusMin = this.WheelInnerRadiusMin,
-                WheelInnerRadiusMax = this.WheelInnerRadiusMax,
-                HeadlightPositionX = this.HeadlightPositionX,
-                HeadlightPositionY = this.HeadlightPositionY,
-                HeadlightPositionZ = this.HeadlightPositionZ,
-                HeadlightPositionW = this.HeadlightPositionW,
-                DriverRenderingOffsetX = this.DriverRenderingOffsetX,
-                DriverRenderingOffsetY = this.DriverRenderingOffsetY,
-                DriverRenderingOffsetZ = this.DriverRenderingOffsetZ,
-                DriverRenderingOffsetW = this.DriverRenderingOffsetW,
-                SteeringWheelRenderingX = this.SteeringWheelRenderingX,
-                SteeringWheelRenderingY = this.SteeringWheelRenderingY,
-                SteeringWheelRenderingZ = this.SteeringWheelRenderingZ,
-                SteeringWheelRenderingW = this.SteeringWheelRenderingW,
-                MaxInstances1 = this.MaxInstances1,
-                MaxInstances2 = this.MaxInstances2,
-                MaxInstances3 = this.MaxInstances3,
-                MaxInstances4 = this.MaxInstances4,
-                MaxInstances5 = this.MaxInstances5,
-                KeepLoaded1 = this.KeepLoaded1,
-                KeepLoaded2 = this.KeepLoaded2,
-                KeepLoaded3 = this.KeepLoaded3,
-                KeepLoaded4 = this.KeepLoaded4,
-                KeepLoaded5 = this.KeepLoaded5,
-                MinTimeBetweenUses1 = this.MinTimeBetweenUses1,
-                MinTimeBetweenUses2 = this.MinTimeBetweenUses2,
-                MinTimeBetweenUses3 = this.MinTimeBetweenUses3,
-                MinTimeBetweenUses4 = this.MinTimeBetweenUses4,
-                MinTimeBetweenUses5 = this.MinTimeBetweenUses5,
-                AvailableSkinNumbers01 = this.AvailableSkinNumbers01,
-                AvailableSkinNumbers02 = this.AvailableSkinNumbers02,
-                AvailableSkinNumbers03 = this.AvailableSkinNumbers03,
-                AvailableSkinNumbers04 = this.AvailableSkinNumbers04,
-                AvailableSkinNumbers05 = this.AvailableSkinNumbers05,
-                AvailableSkinNumbers06 = this.AvailableSkinNumbers06,
-                AvailableSkinNumbers07 = this.AvailableSkinNumbers07,
-                AvailableSkinNumbers08 = this.AvailableSkinNumbers08,
-                AvailableSkinNumbers09 = this.AvailableSkinNumbers09,
-                AvailableSkinNumbers10 = this.AvailableSkinNumbers10,
-                DefaultSkinNumber = this.DefaultSkinNumber
-            };
-
+            var result = new CarTypeInfo(CName, this.Database);
+            base.MemoryCast(this, result);
             return result;
         }
 

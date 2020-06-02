@@ -348,6 +348,7 @@ namespace Nikki.Support.Carbon.Class
             };
             
             DDSHeader.dwFlags += (uint)DDS_HEADER_FLAGS.MIPMAP;
+            
             if (this._compression == EAComp.RGBA_08 || this._compression == EAComp.P8_08)
             {
 
