@@ -1,6 +1,5 @@
 ﻿using System;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 
 
@@ -10,7 +9,7 @@ namespace Nikki.Support.Underground2.Parts.PresetParts
 	/// <summary>
 	/// A unit <see cref="PaintTypes"/> used in preset rides.
 	/// </summary>
-	public class PaintTypes : ASubPart, ICopyable<PaintTypes>
+	public class PaintTypes : ASubPart
 	{
 		/// <summary>
 		/// 
@@ -76,16 +75,17 @@ namespace Nikki.Support.Underground2.Parts.PresetParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public PaintTypes PlainCopy()
+		public override ASubPart PlainCopy()
 		{
 			var result = new PaintTypes();
-			var ThisType = this.GetType();
-			var ResultType = result.GetType();
-			foreach (var ThisField in ThisType.GetProperties())
+
+			foreach (var property in this.GetType().GetProperties())
 			{
-				var ResultField = ResultType.GetProperty(ThisField.Name);
-				ResultField.SetValue(result, ThisField.GetValue(this));
+
+				property.SetValue(result, property.GetValue(this));
+
 			}
+
 			return result;
 		}
 	}

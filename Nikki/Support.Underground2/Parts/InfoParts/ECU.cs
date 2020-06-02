@@ -1,5 +1,5 @@
-﻿using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Interface;
+﻿using System.IO;
+using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 
 
@@ -9,7 +9,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
     /// <summary>
     /// A unit <see cref="ECU"/> used in car performance.
     /// </summary>
-    public class ECU : ASubPart, ICopyable<ECU>
+    public class ECU : ASubPart
 	{
         /// <summary>
         /// 
@@ -92,17 +92,58 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
         /// Creates a plain copy of the objects that contains same values.
         /// </summary>
         /// <returns>Exact plain copy of the object.</returns>
-        public ECU PlainCopy()
+        public override ASubPart PlainCopy()
         {
             var result = new ECU();
-            var ThisType = this.GetType();
-            var ResultType = result.GetType();
-            foreach (var ThisProperty in ThisType.GetProperties())
+
+            foreach (var property in this.GetType().GetProperties())
             {
-                var ResultField = ResultType.GetProperty(ThisProperty.Name);
-                ResultField.SetValue(result, ThisProperty.GetValue(this));
+
+                property.SetValue(result, property.GetValue(this));
+
             }
+
             return result;
+        }
+
+        /// <summary>
+        /// Reads data using <see cref="BinaryReader"/> provided.
+        /// </summary>
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        public void Read(BinaryReader br)
+        {
+            this.ECUx1000Add = br.ReadSingle();
+            this.ECUx2000Add = br.ReadSingle();
+            this.ECUx3000Add = br.ReadSingle();
+            this.ECUx4000Add = br.ReadSingle();
+            this.ECUx5000Add = br.ReadSingle();
+            this.ECUx6000Add = br.ReadSingle();
+            this.ECUx7000Add = br.ReadSingle();
+            this.ECUx8000Add = br.ReadSingle();
+            this.ECUx9000Add = br.ReadSingle();
+            this.ECUx10000Add = br.ReadSingle();
+            this.ECUx11000Add = br.ReadSingle();
+            this.ECUx12000Add = br.ReadSingle();
+        }
+
+        /// <summary>
+        /// Writes data using <see cref="BinaryWriter"/> provided.
+        /// </summary>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(this.ECUx1000Add);
+            bw.Write(this.ECUx2000Add);
+            bw.Write(this.ECUx3000Add);
+            bw.Write(this.ECUx4000Add);
+            bw.Write(this.ECUx5000Add);
+            bw.Write(this.ECUx6000Add);
+            bw.Write(this.ECUx7000Add);
+            bw.Write(this.ECUx8000Add);
+            bw.Write(this.ECUx9000Add);
+            bw.Write(this.ECUx10000Add);
+            bw.Write(this.ECUx11000Add);
+            bw.Write(this.ECUx12000Add);
         }
     }
 }

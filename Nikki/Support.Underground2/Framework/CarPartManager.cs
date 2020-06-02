@@ -96,14 +96,14 @@ namespace Nikki.Support.Underground2.Framework
 					{
 						var cpstr = realpart.Struct;
 						length = Inject(cpstr.Concatenator, length);
-						length = Inject(cpstr.GeometryName1, length);
-						length = Inject(cpstr.GeometryName2, length);
-						length = Inject(cpstr.GeometryName3, length);
-						length = Inject(cpstr.GeometryName4, length);
-						length = Inject(cpstr.GeometryName5, length);
-						length = Inject(cpstr.GeometryName6, length);
-						length = Inject(cpstr.GeometryName7, length);
-						length = Inject(cpstr.GeometryName8, length);
+						length = Inject(cpstr.Geometry0LodA, length);
+						length = Inject(cpstr.Geometry0LodB, length);
+						length = Inject(cpstr.Geometry0LodC, length);
+						length = Inject(cpstr.Geometry0LodD, length);
+						length = Inject(cpstr.Geometry1LodA, length);
+						length = Inject(cpstr.Geometry1LodB, length);
+						length = Inject(cpstr.Geometry1LodC, length);
+						length = Inject(cpstr.Geometry1LodD, length);
 					}
 
 					// Iterate through attributes

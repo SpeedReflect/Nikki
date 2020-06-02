@@ -156,15 +156,22 @@ namespace Nikki.Support.MostWanted.Class
 			bw.Write(this._unk_data);
 
 			int length = 0;
+			
 			foreach (var info in this._stringinfo)
 			{
+			
 				bw.Write(info.Key);
 				bw.Write(length);
 				length += info.NulledTextLength;
+			
 			}
 
 			foreach (var info in this._stringinfo)
+			{
+
 				bw.WriteNullTermUTF8(info.Text);
+
+			}
 
 			bw.FillBuffer(0x10);
 			bw.BaseStream.Position = position - 4;
@@ -196,17 +203,21 @@ namespace Nikki.Support.MostWanted.Class
 			this._unk_data = br.ReadBytes(unksize);
 
 			// Begin reading through string records
-			for (int a1 = 0; a1 < numentries; ++a1)
+			for (int loop = 0; loop < numentries; ++loop)
 			{
-				br.BaseStream.Position = broffset + hashoffset + a1 * 8;
+				
+				br.BaseStream.Position = broffset + hashoffset + loop * 8;
+				
 				var info = new StringRecord(this)
 				{
 					Key = br.ReadUInt32()
 				};
+				
 				br.BaseStream.Position = broffset + textoffset + br.ReadInt32();
 				info.Text = br.ReadNullTermUTF8();
 				info.Label = info.Key.BinString(eLookupReturn.EMPTY);
 				this._stringinfo.Add(info);
+			
 			}
 
 			// Set position to end

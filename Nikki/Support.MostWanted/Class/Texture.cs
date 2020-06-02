@@ -125,7 +125,7 @@ namespace Nikki.Support.MostWanted.Class
                 var key = value.BinHash();
                 var type = eKeyType.BINKEY;
                 if (tpk.GetTextureIndex(key, type) != -1)
-                    throw new CollectionExistenceException();
+                    throw new CollectionExistenceException(value);
                 this._collection_name = value;
                 this.BinKey = key;
             }
@@ -338,8 +338,10 @@ namespace Nikki.Support.MostWanted.Class
 
             if (this._compression == EAComp.SECRET)
             {
+
                 this._compression = EAComp.P8_08;
                 this._secretp8 = true;
+            
             }
         }
 
@@ -516,6 +518,7 @@ namespace Nikki.Support.MostWanted.Class
             // Initialize data
             int total = this.PaletteSize + this.Size;
             this.Data = new byte[total];
+            
             if (forced)
             {
 

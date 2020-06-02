@@ -71,7 +71,7 @@ namespace Nikki.Support.Underground2.Class
 				if (value.Length > MaxCNameLength)
 					throw new ArgumentLengthException(MaxCNameLength);
 				if (this.Database.SunInfos.FindCollection(value) != null)
-					throw new CollectionExistenceException();
+					throw new CollectionExistenceException(value);
 				this._collection_name = value;
 			}
 		}
@@ -238,23 +238,8 @@ namespace Nikki.Support.Underground2.Class
 		/// <returns>Memory casted copy of the object.</returns>
 		public override ACollectable MemoryCast(string CName)
 		{
-			var result = new SunInfo(CName, this.Database)
-			{
-				Version = this.Version,
-				PositionX = this.PositionX,
-				PositionY = this.PositionY,
-				PositionZ = this.PositionZ,
-				CarShadowPositionX = this.CarShadowPositionX,
-				CarShadowPositionY = this.CarShadowPositionY,
-				CarShadowPositionZ = this.CarShadowPositionZ,
-				SUNLAYER1 = this.SUNLAYER1.PlainCopy(),
-				SUNLAYER2 = this.SUNLAYER2.PlainCopy(),
-				SUNLAYER3 = this.SUNLAYER3.PlainCopy(),
-				SUNLAYER4 = this.SUNLAYER4.PlainCopy(),
-				SUNLAYER5 = this.SUNLAYER5.PlainCopy(),
-				SUNLAYER6 = this.SUNLAYER6.PlainCopy()
-			};
-
+			var result = new SunInfo(CName, this.Database);
+			base.MemoryCast(this, result);
 			return result;
 		}
 

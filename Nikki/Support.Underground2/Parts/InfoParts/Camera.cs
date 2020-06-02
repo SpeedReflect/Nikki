@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
 
@@ -12,12 +11,12 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
 	/// <summary>
 	/// A unit <see cref="Camera"/> used in car performance.
 	/// </summary>
-	public class Camera : ASubPart, ICopyable<Camera>
+	public class Camera : ASubPart
 	{
 		/// <summary>
 		/// 
 		/// </summary>
-		public eCameraType CameraType { get; set; }
+		internal eCameraType CameraType { get; set; }
 
 		/// <summary>
 		/// 
@@ -52,16 +51,17 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public Camera PlainCopy()
+		public override ASubPart PlainCopy()
 		{
 			var result = new Camera();
-			var ThisType = this.GetType();
-			var ResultType = result.GetType();
-			foreach (var ThisProperty in ThisType.GetProperties())
+
+			foreach (var property in this.GetType().GetProperties())
 			{
-				var ResultField = ResultType.GetProperty(ThisProperty.Name);
-				ResultField.SetValue(result, ThisProperty.GetValue(this));
+
+				property.SetValue(result, property.GetValue(this));
+
 			}
+
 			return result;
 		}
 

@@ -82,7 +82,7 @@ namespace Nikki.Support.Underground2.Class
                 if (value.Length > MaxCNameLength)
                     throw new ArgumentLengthException(MaxCNameLength);
                 if (this.Database.CarTypeInfos.FindCollection(value) != null)
-                    throw new CollectionExistenceException();
+                    throw new CollectionExistenceException(value);
                 this._collection_name = value;
             }
         }
@@ -100,37 +100,50 @@ namespace Nikki.Support.Underground2.Class
         /// <summary>
         /// Manufacturer name of the <see cref="CarTypeInfo"/>.
         /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
         public override string ManufacturerName { get; set; }
 
         /// <summary>
         /// Default base paint of the <see cref="CarTypeInfo"/>.
         /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
         public override string DefaultBasePaint { get; set; } = String.Empty;
 
         /// <summary>
         /// Second default base paint of the <see cref="CarTypeInfo"/>.
         /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
         public string DefaultBasePaint2 { get; set; } = String.Empty;
 
         /// <summary>
         /// Spoiler type of the <see cref="CarTypeInfo"/>.
         /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
         public string Spoiler { get; set; } = String.Empty;
 
         /// <summary>
         /// RoofScoop type of the <see cref="CarTypeInfo"/>.
         /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
         public string RoofScoop { get; set; } = String.Empty;
 
         /// <summary>
         /// Mirrors typ of the <see cref="CarTypeInfo"/>.
         /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
         public string Mirrors { get; set; } = String.Empty;
 
         /// <summary>
         /// Defines whether the car is an SUV.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public eBoolean IsSUV { get; set; }
 
         /// <summary>
@@ -138,28 +151,32 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float UnknownVectorValX { get; set; }
+        [MemoryCastable()]
+        public float AerodynamicsForceX { get; set; }
 
         /// <summary>
         /// Y value of unknown vector.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float UnknownVectorValY { get; set; }
+        [MemoryCastable()]
+        public float AerodynamicsForceY { get; set; }
 
         /// <summary>
         /// Z value of unknown vector.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float UnknownVectorValZ { get; set; }
+        [MemoryCastable()]
+        public float AerodynamicsForceZ { get; set; }
 
         /// <summary>
         /// W value of unknown vector.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
-        public float UnknownVectorValW { get; set; }
+        [MemoryCastable()]
+        public float AerodynamicsForceW { get; set; }
 
         /// <summary>
         /// Car skin 1.
@@ -512,8 +529,13 @@ namespace Nikki.Support.Underground2.Class
             this.Database = db;
             this.Initialize();
             this.Disassemble(br);
+
             if (this.Index <= (int)eBoundValues.MIN_INFO_UNDERGROUND2)
+            {
+
                 this.Deletable = false;
+
+            }
         }
 
         /// <summary>
@@ -570,72 +592,19 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(this.SteeringWheelRenderingY);
             bw.Write(this.SteeringWheelRenderingZ);
             bw.Write(this.SteeringWheelRenderingW);
-            bw.Write(this.UnknownVectorValX);
-            bw.Write(this.UnknownVectorValY);
-            bw.Write(this.UnknownVectorValZ);
-            bw.Write(this.UnknownVectorValW);
+            bw.Write(this.AerodynamicsForceX);
+            bw.Write(this.AerodynamicsForceY);
+            bw.Write(this.AerodynamicsForceZ);
+            bw.Write(this.AerodynamicsForceW);
 
-            // Front Left Wheel
-            bw.Write(this.WHEEL_FRONT_LEFT.XValue);
-            bw.Write(this.WHEEL_FRONT_LEFT.Springs);
-            bw.Write(this.WHEEL_FRONT_LEFT.RideHeight);
-            bw.Write(this.WHEEL_FRONT_LEFT.UnknownVal);
-            bw.Write(this.WHEEL_FRONT_LEFT.Diameter);
-            bw.Write(this.WHEEL_FRONT_LEFT.TireSkidWidth);
-            bw.Write(this.WHEEL_FRONT_LEFT.WheelID);
-            bw.Write(this.WHEEL_FRONT_LEFT.YValue);
-            bw.Write(this.WHEEL_FRONT_LEFT.WideBodyYValue);
-            bw.WriteBytes(0xC);
-
-            // Front Left Wheel
-            bw.Write(this.WHEEL_FRONT_RIGHT.XValue);
-            bw.Write(this.WHEEL_FRONT_RIGHT.Springs);
-            bw.Write(this.WHEEL_FRONT_RIGHT.RideHeight);
-            bw.Write(this.WHEEL_FRONT_RIGHT.UnknownVal);
-            bw.Write(this.WHEEL_FRONT_RIGHT.Diameter);
-            bw.Write(this.WHEEL_FRONT_RIGHT.TireSkidWidth);
-            bw.Write(this.WHEEL_FRONT_RIGHT.WheelID);
-            bw.Write(this.WHEEL_FRONT_RIGHT.YValue);
-            bw.Write(this.WHEEL_FRONT_RIGHT.WideBodyYValue);
-            bw.WriteBytes(0xC);
-
-            // Front Left Wheel
-            bw.Write(this.WHEEL_REAR_RIGHT.XValue);
-            bw.Write(this.WHEEL_REAR_RIGHT.Springs);
-            bw.Write(this.WHEEL_REAR_RIGHT.RideHeight);
-            bw.Write(this.WHEEL_REAR_RIGHT.UnknownVal);
-            bw.Write(this.WHEEL_REAR_RIGHT.Diameter);
-            bw.Write(this.WHEEL_REAR_RIGHT.TireSkidWidth);
-            bw.Write(this.WHEEL_REAR_RIGHT.WheelID);
-            bw.Write(this.WHEEL_REAR_RIGHT.YValue);
-            bw.Write(this.WHEEL_REAR_RIGHT.WideBodyYValue);
-            bw.WriteBytes(0xC);
-
-            // Front Left Wheel
-            bw.Write(this.WHEEL_REAR_LEFT.XValue);
-            bw.Write(this.WHEEL_REAR_LEFT.Springs);
-            bw.Write(this.WHEEL_REAR_LEFT.RideHeight);
-            bw.Write(this.WHEEL_REAR_LEFT.UnknownVal);
-            bw.Write(this.WHEEL_REAR_LEFT.Diameter);
-            bw.Write(this.WHEEL_REAR_LEFT.TireSkidWidth);
-            bw.Write(this.WHEEL_REAR_LEFT.WheelID);
-            bw.Write(this.WHEEL_REAR_LEFT.YValue);
-            bw.Write(this.WHEEL_REAR_LEFT.WideBodyYValue);
-            bw.WriteBytes(0xC);
+            // Car Wheels
+            this.WHEEL_FRONT_LEFT.Write(bw);
+            this.WHEEL_FRONT_RIGHT.Write(bw);
+            this.WHEEL_REAR_RIGHT.Write(bw);
+            this.WHEEL_REAR_LEFT.Write(bw);
 
             // Base Tires Performance
-            bw.Write(this.BASE_TIRES.StaticGripScale);
-            bw.Write(this.BASE_TIRES.YawSpeedScale);
-            bw.Write(this.BASE_TIRES.SteeringAmplifier);
-            bw.Write(this.BASE_TIRES.DynamicGripScale);
-            bw.Write(this.BASE_TIRES.SteeringResponse);
-            bw.WriteBytes(0xC);
-            bw.Write(this.BASE_TIRES.DriftYawControl);
-            bw.Write(this.BASE_TIRES.DriftCounterSteerBuildUp);
-            bw.Write(this.BASE_TIRES.DriftCounterSteerReduction);
-            bw.Write(this.BASE_TIRES.PowerSlideBreakThru1);
-            bw.Write(this.BASE_TIRES.PowerSlideBreakThru2);
-            bw.WriteBytes(0xC);
+            this.BASE_TIRES.Write(bw);
 
             // Pvehicle Values
             bw.Write(this.PVEHICLE.Massx1000Multiplier);
@@ -656,54 +625,16 @@ namespace Nikki.Support.Underground2.Class
             this.BASE_SUSPENSION.Write(bw);
 
             // Base Transmission Performance
-            bw.Write(this.BASE_TRANSMISSION.ClutchSlip);
-            bw.Write(this.BASE_TRANSMISSION.OptimalShift);
-            bw.Write(this.BASE_TRANSMISSION.FinalDriveRatio);
-            bw.Write(this.BASE_TRANSMISSION.FinalDriveRatio2);
-            bw.Write(this.BASE_TRANSMISSION.TorqueSplit);
-            bw.Write(this.BASE_TRANSMISSION.BurnoutStrength);
-            bw.Write(this.BASE_TRANSMISSION.NumberOfGears);
-            bw.Write(this.BASE_TRANSMISSION.GearEfficiency);
-            bw.Write(this.BASE_TRANSMISSION.GearRatioR);
-            bw.Write(this.BASE_TRANSMISSION.GearRatioN);
-            bw.Write(this.BASE_TRANSMISSION.GearRatio1);
-            bw.Write(this.BASE_TRANSMISSION.GearRatio2);
-            bw.Write(this.BASE_TRANSMISSION.GearRatio3);
-            bw.Write(this.BASE_TRANSMISSION.GearRatio4);
-            bw.Write(this.BASE_TRANSMISSION.GearRatio5);
-            bw.Write(this.BASE_TRANSMISSION.GearRatio6);
+            this.BASE_TRANSMISSION.Write(bw);
 
             // Base RPM Performance
-            bw.Write(this.BASE_RPM.IdleRPMAdd);
-            bw.Write(this.BASE_RPM.RedLineRPMAdd);
-            bw.Write(this.BASE_RPM.MaxRPMAdd);
+            this.BASE_RPM.Write(bw);
 
             // Base Engine Performance
-            bw.Write(this.BASE_ENGINE.SpeedRefreshRate);
-            bw.Write(this.BASE_ENGINE.EngineTorque1);
-            bw.Write(this.BASE_ENGINE.EngineTorque2);
-            bw.Write(this.BASE_ENGINE.EngineTorque3);
-            bw.Write(this.BASE_ENGINE.EngineTorque4);
-            bw.Write(this.BASE_ENGINE.EngineTorque5);
-            bw.Write(this.BASE_ENGINE.EngineTorque6);
-            bw.Write(this.BASE_ENGINE.EngineTorque7);
-            bw.Write(this.BASE_ENGINE.EngineTorque8);
-            bw.Write(this.BASE_ENGINE.EngineTorque9);
-            bw.Write(this.BASE_ENGINE.EngineBraking1);
-            bw.Write(this.BASE_ENGINE.EngineBraking2);
-            bw.Write(this.BASE_ENGINE.EngineBraking3);
+            this.BASE_ENGINE.Write(bw);
 
             // Base Turbo Performance
-            bw.Write(this.BASE_TURBO.TurboBraking);
-            bw.Write(this.BASE_TURBO.TurboVacuum);
-            bw.Write(this.BASE_TURBO.TurboHeatHigh);
-            bw.Write(this.BASE_TURBO.TurboHeatLow);
-            bw.Write(this.BASE_TURBO.TurboHighBoost);
-            bw.Write(this.BASE_TURBO.TurboLowBoost);
-            bw.Write(this.BASE_TURBO.TurboSpool);
-            bw.Write(this.BASE_TURBO.TurboSpoolTimeDown);
-            bw.Write(this.BASE_TURBO.TurboSpoolTimeUp);
-            bw.WriteBytes(0xC);
+            this.BASE_TURBO.Write(bw);
 
             // Base Brakes Performance
             bw.Write(this.PVEHICLE.TopSpeedUnderflow);
@@ -724,14 +655,7 @@ namespace Nikki.Support.Underground2.Class
             bw.WriteBytes(0x1C);
 
             // DriftAdditionalYawControl Performance
-            bw.Write(this.DRIFT_ADD_CONTROL.DriftAdditionalYawControl1);
-            bw.Write(this.DRIFT_ADD_CONTROL.DriftAdditionalYawControl2);
-            bw.Write(this.DRIFT_ADD_CONTROL.DriftAdditionalYawControl3);
-            bw.Write(this.DRIFT_ADD_CONTROL.DriftAdditionalYawControl4);
-            bw.Write(this.DRIFT_ADD_CONTROL.DriftAdditionalYawControl5);
-            bw.Write(this.DRIFT_ADD_CONTROL.DriftAdditionalYawControl6);
-            bw.Write(this.DRIFT_ADD_CONTROL.DriftAdditionalYawControl7);
-            bw.Write(this.DRIFT_ADD_CONTROL.DriftAdditionalYawControl8);
+            this.DRIFT_ADD_CONTROL.Write(bw);
 
             // Skip Street + Pro Engine and Street Turbo, 0x03E0 - 0x0450
             bw.Write(this.TOP_ENGINE.EngineTorque1 / 3);
@@ -764,166 +688,47 @@ namespace Nikki.Support.Underground2.Class
             bw.Write((int)0);
 
             // Top Weight Reduction Performance
-            bw.Write(this.TOP_WEIGHT_REDUCTION.WeightReductionMassMultiplier);
-            bw.Write(this.TOP_WEIGHT_REDUCTION.WeightReductionGripAddon);
-            bw.Write(this.TOP_WEIGHT_REDUCTION.WeightReductionHandlingRating);
-            bw.Write((int)0);
+            this.TOP_WEIGHT_REDUCTION.Write(bw);
 
             // Street Transmission Performance
-            bw.Write(this.STREET_TRANSMISSION.ClutchSlip);
-            bw.Write(this.STREET_TRANSMISSION.OptimalShift);
-            bw.Write(this.STREET_TRANSMISSION.FinalDriveRatio);
-            bw.Write(this.STREET_TRANSMISSION.FinalDriveRatio2);
-            bw.Write(this.STREET_TRANSMISSION.TorqueSplit);
-            bw.Write(this.STREET_TRANSMISSION.BurnoutStrength);
-            bw.Write(this.STREET_TRANSMISSION.NumberOfGears);
-            bw.Write(this.STREET_TRANSMISSION.GearEfficiency);
-            bw.Write(this.STREET_TRANSMISSION.GearRatioR);
-            bw.Write(this.STREET_TRANSMISSION.GearRatioN);
-            bw.Write(this.STREET_TRANSMISSION.GearRatio1);
-            bw.Write(this.STREET_TRANSMISSION.GearRatio2);
-            bw.Write(this.STREET_TRANSMISSION.GearRatio3);
-            bw.Write(this.STREET_TRANSMISSION.GearRatio4);
-            bw.Write(this.STREET_TRANSMISSION.GearRatio5);
-            bw.Write(this.STREET_TRANSMISSION.GearRatio6);
+            this.STREET_TRANSMISSION.Write(bw);
 
             // Pro Transmission Performance
-            bw.Write(this.PRO_TRANSMISSION.ClutchSlip);
-            bw.Write(this.PRO_TRANSMISSION.OptimalShift);
-            bw.Write(this.PRO_TRANSMISSION.FinalDriveRatio);
-            bw.Write(this.PRO_TRANSMISSION.FinalDriveRatio2);
-            bw.Write(this.PRO_TRANSMISSION.TorqueSplit);
-            bw.Write(this.PRO_TRANSMISSION.BurnoutStrength);
-            bw.Write(this.PRO_TRANSMISSION.NumberOfGears);
-            bw.Write(this.PRO_TRANSMISSION.GearEfficiency);
-            bw.Write(this.PRO_TRANSMISSION.GearRatioR);
-            bw.Write(this.PRO_TRANSMISSION.GearRatioN);
-            bw.Write(this.PRO_TRANSMISSION.GearRatio1);
-            bw.Write(this.PRO_TRANSMISSION.GearRatio2);
-            bw.Write(this.PRO_TRANSMISSION.GearRatio3);
-            bw.Write(this.PRO_TRANSMISSION.GearRatio4);
-            bw.Write(this.PRO_TRANSMISSION.GearRatio5);
-            bw.Write(this.PRO_TRANSMISSION.GearRatio6);
+            this.PRO_TRANSMISSION.Write(bw);
 
             // Top Transmission Performance
-            bw.Write(this.TOP_TRANSMISSION.ClutchSlip);
-            bw.Write(this.TOP_TRANSMISSION.OptimalShift);
-            bw.Write(this.TOP_TRANSMISSION.FinalDriveRatio);
-            bw.Write(this.TOP_TRANSMISSION.FinalDriveRatio2);
-            bw.Write(this.TOP_TRANSMISSION.TorqueSplit);
-            bw.Write(this.TOP_TRANSMISSION.BurnoutStrength);
-            bw.Write(this.TOP_TRANSMISSION.NumberOfGears);
-            bw.Write(this.TOP_TRANSMISSION.GearEfficiency);
-            bw.Write(this.TOP_TRANSMISSION.GearRatioR);
-            bw.Write(this.TOP_TRANSMISSION.GearRatioN);
-            bw.Write(this.TOP_TRANSMISSION.GearRatio1);
-            bw.Write(this.TOP_TRANSMISSION.GearRatio2);
-            bw.Write(this.TOP_TRANSMISSION.GearRatio3);
-            bw.Write(this.TOP_TRANSMISSION.GearRatio4);
-            bw.Write(this.TOP_TRANSMISSION.GearRatio5);
-            bw.Write(this.TOP_TRANSMISSION.GearRatio6);
+            this.TOP_TRANSMISSION.Write(bw);
 
             // Top Engine Performance
             bw.WriteBytes(0xC);
-            bw.Write(this.TOP_ENGINE.SpeedRefreshRate);
-            bw.Write(this.TOP_ENGINE.EngineTorque1);
-            bw.Write(this.TOP_ENGINE.EngineTorque2);
-            bw.Write(this.TOP_ENGINE.EngineTorque3);
-            bw.Write(this.TOP_ENGINE.EngineTorque4);
-            bw.Write(this.TOP_ENGINE.EngineTorque5);
-            bw.Write(this.TOP_ENGINE.EngineTorque6);
-            bw.Write(this.TOP_ENGINE.EngineTorque7);
-            bw.Write(this.TOP_ENGINE.EngineTorque8);
-            bw.Write(this.TOP_ENGINE.EngineTorque9);
-            bw.Write(this.TOP_ENGINE.EngineBraking1);
-            bw.Write(this.TOP_ENGINE.EngineBraking2);
-            bw.Write(this.TOP_ENGINE.EngineBraking3);
+            this.TOP_ENGINE.Write(bw);
 
             // Street RPM Performance
-            bw.Write(this.STREET_RPM.IdleRPMAdd);
-            bw.Write(this.STREET_RPM.RedLineRPMAdd);
-            bw.Write(this.STREET_RPM.MaxRPMAdd);
+            this.STREET_RPM.Write(bw);
             bw.Write(this.TOP_ENGINE.SpeedRefreshRate / 3);
 
             // Street ECU Performance
-            bw.Write(this.STREET_ECU.ECUx1000Add);
-            bw.Write(this.STREET_ECU.ECUx2000Add);
-            bw.Write(this.STREET_ECU.ECUx3000Add);
-            bw.Write(this.STREET_ECU.ECUx4000Add);
-            bw.Write(this.STREET_ECU.ECUx5000Add);
-            bw.Write(this.STREET_ECU.ECUx6000Add);
-            bw.Write(this.STREET_ECU.ECUx7000Add);
-            bw.Write(this.STREET_ECU.ECUx8000Add);
-            bw.Write(this.STREET_ECU.ECUx9000Add);
-            bw.Write(this.STREET_ECU.ECUx10000Add);
-            bw.Write(this.STREET_ECU.ECUx11000Add);
-            bw.Write(this.STREET_ECU.ECUx12000Add);
+            this.STREET_ECU.Write(bw);
 
             // Pro RPM Performance
-            bw.Write(this.PRO_RPM.IdleRPMAdd);
-            bw.Write(this.PRO_RPM.RedLineRPMAdd);
-            bw.Write(this.PRO_RPM.MaxRPMAdd);
+            this.PRO_RPM.Write(bw);
             bw.Write(this.TOP_ENGINE.SpeedRefreshRate * 2 / 3);
 
             // Pro ECU Performance
-            bw.Write(this.PRO_ECU.ECUx1000Add);
-            bw.Write(this.PRO_ECU.ECUx2000Add);
-            bw.Write(this.PRO_ECU.ECUx3000Add);
-            bw.Write(this.PRO_ECU.ECUx4000Add);
-            bw.Write(this.PRO_ECU.ECUx5000Add);
-            bw.Write(this.PRO_ECU.ECUx6000Add);
-            bw.Write(this.PRO_ECU.ECUx7000Add);
-            bw.Write(this.PRO_ECU.ECUx8000Add);
-            bw.Write(this.PRO_ECU.ECUx9000Add);
-            bw.Write(this.PRO_ECU.ECUx10000Add);
-            bw.Write(this.PRO_ECU.ECUx11000Add);
-            bw.Write(this.PRO_ECU.ECUx12000Add);
+            this.PRO_ECU.Write(bw);
 
             // Top RPM Performance
-            bw.Write(this.TOP_RPM.IdleRPMAdd);
-            bw.Write(this.TOP_RPM.RedLineRPMAdd);
-            bw.Write(this.TOP_RPM.MaxRPMAdd);
+            this.TOP_RPM.Write(bw);
             bw.Write(this.TOP_ENGINE.SpeedRefreshRate);
 
             // Top ECU Performance
-            bw.Write(this.TOP_ECU.ECUx1000Add);
-            bw.Write(this.TOP_ECU.ECUx2000Add);
-            bw.Write(this.TOP_ECU.ECUx3000Add);
-            bw.Write(this.TOP_ECU.ECUx4000Add);
-            bw.Write(this.TOP_ECU.ECUx5000Add);
-            bw.Write(this.TOP_ECU.ECUx6000Add);
-            bw.Write(this.TOP_ECU.ECUx7000Add);
-            bw.Write(this.TOP_ECU.ECUx8000Add);
-            bw.Write(this.TOP_ECU.ECUx9000Add);
-            bw.Write(this.TOP_ECU.ECUx10000Add);
-            bw.Write(this.TOP_ECU.ECUx11000Add);
-            bw.Write(this.TOP_ECU.ECUx12000Add);
+            this.TOP_ECU.Write(bw);
 
             // Top Turbo Performance
-            bw.Write(this.TOP_TURBO.TurboBraking);
-            bw.Write(this.TOP_TURBO.TurboVacuum);
-            bw.Write(this.TOP_TURBO.TurboHeatHigh);
-            bw.Write(this.TOP_TURBO.TurboHeatLow);
-            bw.Write(this.TOP_TURBO.TurboHighBoost);
-            bw.Write(this.TOP_TURBO.TurboLowBoost);
-            bw.Write(this.TOP_TURBO.TurboSpool);
-            bw.Write(this.TOP_TURBO.TurboSpoolTimeDown);
-            bw.Write(this.TOP_TURBO.TurboSpoolTimeUp);
-            bw.WriteBytes(0xC);
+            this.TOP_TURBO.Write(bw);
 
             // Top Tires Performance
-            bw.Write(this.TOP_TIRES.StaticGripScale);
-            bw.Write(this.TOP_TIRES.YawSpeedScale);
-            bw.Write(this.TOP_TIRES.SteeringAmplifier);
-            bw.Write(this.TOP_TIRES.DynamicGripScale);
-            bw.Write(this.TOP_TIRES.SteeringResponse);
-            bw.WriteBytes(0xC);
-            bw.Write(this.TOP_TIRES.DriftYawControl);
-            bw.Write(this.TOP_TIRES.DriftCounterSteerBuildUp);
-            bw.Write(this.TOP_TIRES.DriftCounterSteerReduction);
-            bw.Write(this.TOP_TIRES.PowerSlideBreakThru1);
-            bw.Write(this.TOP_TIRES.PowerSlideBreakThru2);
-            bw.WriteBytes(0xC);
+            this.TOP_TIRES.Write(bw);
 
             // Top Nitrous Performance
             bw.Write(this.TOP_NITROUS.NOSCapacity);
@@ -975,22 +780,43 @@ namespace Nikki.Support.Underground2.Class
             // Rigid Controls (if an added car, or usagetype modified, or rigid controls are missing or broken
             if (this.Deletable || this._rigid_controls == null || this._rigid_controls.Length != 40)
             {
+
                 if (this.UsageType == eUsageType.Traffic)
                 {
-                    for (int a1 = 0; a1 < 40; ++a1)
-                        bw.Write(RigidControls.RigidTrafControls[a1]);
+
+                    for (int loop = 0; loop < 40; ++loop)
+                    {
+
+                        bw.Write(RigidControls.RigidTrafControls[loop]);
+
+                    }
+
                 }
                 else
                 {
-                    for (int a1 = 0; a1 < 40; ++a1)
-                        bw.Write(RigidControls.RigidRacerControls[a1]);
+
+                    for (int loop = 0; loop < 40; ++loop)
+                    {
+
+                        bw.Write(RigidControls.RigidRacerControls[loop]);
+
+                    }
+
                 }
+            
             }
             else
             {
-                for (int a1 = 0; a1 < 40; ++a1)
-                    bw.Write(this._rigid_controls[a1]);
+                
+                for (int loop = 0; loop < 40; ++loop)
+                {
+
+                    bw.Write(this._rigid_controls[loop]);
+
+                }
+            
             }
+
             // Secondary Properties
             bw.Write(this.Index);
             bw.WriteEnum(this.UsageType);
@@ -1068,72 +894,42 @@ namespace Nikki.Support.Underground2.Class
             this.SteeringWheelRenderingY = br.ReadSingle();
             this.SteeringWheelRenderingZ = br.ReadSingle();
             this.SteeringWheelRenderingW = br.ReadSingle();
-            this.UnknownVectorValX = br.ReadSingle();
-            this.UnknownVectorValY = br.ReadSingle();
-            this.UnknownVectorValZ = br.ReadSingle();
-            this.UnknownVectorValW = br.ReadSingle();
+            this.AerodynamicsForceX = br.ReadSingle();
+            this.AerodynamicsForceY = br.ReadSingle();
+            this.AerodynamicsForceZ = br.ReadSingle();
+            this.AerodynamicsForceW = br.ReadSingle();
 
-            // Front Left Wheel
-            this.WHEEL_FRONT_LEFT.XValue = br.ReadSingle();
-            this.WHEEL_FRONT_LEFT.Springs = br.ReadSingle();
-            this.WHEEL_FRONT_LEFT.RideHeight = br.ReadSingle();
-            this.WHEEL_FRONT_LEFT.UnknownVal = br.ReadSingle();
-            this.WHEEL_FRONT_LEFT.Diameter = br.ReadSingle();
-            this.WHEEL_FRONT_LEFT.TireSkidWidth = br.ReadSingle();
-            this.WHEEL_FRONT_LEFT.WheelID = br.ReadInt32();
-            this.WHEEL_FRONT_LEFT.YValue = br.ReadSingle();
-            this.WHEEL_FRONT_LEFT.WideBodyYValue = br.ReadSingle();
-            br.BaseStream.Position += 0xC;
+            // Car Wheels
+            for (int loop = 0; loop < 4; ++loop)
+            {
 
-            // Front Left Wheel
-            this.WHEEL_FRONT_RIGHT.XValue = br.ReadSingle();
-            this.WHEEL_FRONT_RIGHT.Springs = br.ReadSingle();
-            this.WHEEL_FRONT_RIGHT.RideHeight = br.ReadSingle();
-            this.WHEEL_FRONT_RIGHT.UnknownVal = br.ReadSingle();
-            this.WHEEL_FRONT_RIGHT.Diameter = br.ReadSingle();
-            this.WHEEL_FRONT_RIGHT.TireSkidWidth = br.ReadSingle();
-            this.WHEEL_FRONT_RIGHT.WheelID = br.ReadInt32();
-            this.WHEEL_FRONT_RIGHT.YValue = br.ReadSingle();
-            this.WHEEL_FRONT_RIGHT.WideBodyYValue = br.ReadSingle();
-            br.BaseStream.Position += 0xC;
+                var wheel = new CarInfoWheel();
+                wheel.Read(br);
 
-            // Front Left Wheel
-            this.WHEEL_REAR_RIGHT.XValue = br.ReadSingle();
-            this.WHEEL_REAR_RIGHT.Springs = br.ReadSingle();
-            this.WHEEL_REAR_RIGHT.RideHeight = br.ReadSingle();
-            this.WHEEL_REAR_RIGHT.UnknownVal = br.ReadSingle();
-            this.WHEEL_REAR_RIGHT.Diameter = br.ReadSingle();
-            this.WHEEL_REAR_RIGHT.TireSkidWidth = br.ReadSingle();
-            this.WHEEL_REAR_RIGHT.WheelID = br.ReadInt32();
-            this.WHEEL_REAR_RIGHT.YValue = br.ReadSingle();
-            this.WHEEL_REAR_RIGHT.WideBodyYValue = br.ReadSingle();
-            br.BaseStream.Position += 0xC;
+                switch (wheel.WheelID)
+                {
+                    case eCarWheelType.FRONT_RIGHT:
+                        this.WHEEL_FRONT_RIGHT = wheel;
+                        break;
 
-            // Front Left Wheel
-            this.WHEEL_REAR_LEFT.XValue = br.ReadSingle();
-            this.WHEEL_REAR_LEFT.Springs = br.ReadSingle();
-            this.WHEEL_REAR_LEFT.RideHeight = br.ReadSingle();
-            this.WHEEL_REAR_LEFT.UnknownVal = br.ReadSingle();
-            this.WHEEL_REAR_LEFT.Diameter = br.ReadSingle();
-            this.WHEEL_REAR_LEFT.TireSkidWidth = br.ReadSingle();
-            this.WHEEL_REAR_LEFT.WheelID = br.ReadInt32();
-            this.WHEEL_REAR_LEFT.YValue = br.ReadSingle();
-            this.WHEEL_REAR_LEFT.WideBodyYValue = br.ReadSingle();
-            br.BaseStream.Position += 0xC;
+                    case eCarWheelType.REAR_RIGHT:
+                        this.WHEEL_REAR_RIGHT = wheel;
+                        break;
+
+                    case eCarWheelType.REAR_LEFT:
+                        this.WHEEL_REAR_LEFT = wheel;
+                        break;
+
+                    default:
+                        this.WHEEL_FRONT_LEFT = wheel;
+                        break;
+
+                }
+
+            }
 
             // Base Tires Performance
-            this.BASE_TIRES.StaticGripScale = br.ReadSingle();
-            this.BASE_TIRES.YawSpeedScale = br.ReadSingle();
-            this.BASE_TIRES.SteeringAmplifier = br.ReadSingle();
-            this.BASE_TIRES.DynamicGripScale = br.ReadSingle();
-            this.BASE_TIRES.SteeringResponse = br.ReadSingle();
-            br.BaseStream.Position += 0xC;
-            this.BASE_TIRES.DriftYawControl = br.ReadSingle();
-            this.BASE_TIRES.DriftCounterSteerBuildUp = br.ReadSingle();
-            this.BASE_TIRES.DriftCounterSteerReduction = br.ReadSingle();
-            this.BASE_TIRES.PowerSlideBreakThru1 = br.ReadSingle();
-            this.BASE_TIRES.PowerSlideBreakThru2 = br.ReadSingle();
-            br.BaseStream.Position += 0xC;
+            this.BASE_TIRES.Read(br);
 
             // Pvehicle and Ecar Values
             this.PVEHICLE.Massx1000Multiplier = br.ReadSingle();
@@ -1153,54 +949,16 @@ namespace Nikki.Support.Underground2.Class
             this.BASE_SUSPENSION.Read(br);
 
             // Base Transmission Performance
-            this.BASE_TRANSMISSION.ClutchSlip = br.ReadSingle();
-            this.BASE_TRANSMISSION.OptimalShift = br.ReadSingle();
-            this.BASE_TRANSMISSION.FinalDriveRatio = br.ReadSingle();
-            this.BASE_TRANSMISSION.FinalDriveRatio2 = br.ReadSingle();
-            this.BASE_TRANSMISSION.TorqueSplit = br.ReadSingle();
-            this.BASE_TRANSMISSION.BurnoutStrength = br.ReadSingle();
-            this.BASE_TRANSMISSION.NumberOfGears = br.ReadInt32();
-            this.BASE_TRANSMISSION.GearEfficiency = br.ReadSingle();
-            this.BASE_TRANSMISSION.GearRatioR = br.ReadSingle();
-            this.BASE_TRANSMISSION.GearRatioN = br.ReadSingle();
-            this.BASE_TRANSMISSION.GearRatio1 = br.ReadSingle();
-            this.BASE_TRANSMISSION.GearRatio2 = br.ReadSingle();
-            this.BASE_TRANSMISSION.GearRatio3 = br.ReadSingle();
-            this.BASE_TRANSMISSION.GearRatio4 = br.ReadSingle();
-            this.BASE_TRANSMISSION.GearRatio5 = br.ReadSingle();
-            this.BASE_TRANSMISSION.GearRatio6 = br.ReadSingle();
+            this.BASE_TRANSMISSION.Read(br);
 
             // Base RPM Performance
-            this.BASE_RPM.IdleRPMAdd = br.ReadSingle();
-            this.BASE_RPM.RedLineRPMAdd = br.ReadSingle();
-            this.BASE_RPM.MaxRPMAdd = br.ReadSingle();
+            this.BASE_RPM.Read(br);
 
             // Base Engine Performance
-            this.BASE_ENGINE.SpeedRefreshRate = br.ReadSingle();
-            this.BASE_ENGINE.EngineTorque1 = br.ReadSingle();
-            this.BASE_ENGINE.EngineTorque2 = br.ReadSingle();
-            this.BASE_ENGINE.EngineTorque3 = br.ReadSingle();
-            this.BASE_ENGINE.EngineTorque4 = br.ReadSingle();
-            this.BASE_ENGINE.EngineTorque5 = br.ReadSingle();
-            this.BASE_ENGINE.EngineTorque6 = br.ReadSingle();
-            this.BASE_ENGINE.EngineTorque7 = br.ReadSingle();
-            this.BASE_ENGINE.EngineTorque8 = br.ReadSingle();
-            this.BASE_ENGINE.EngineTorque9 = br.ReadSingle();
-            this.BASE_ENGINE.EngineBraking1 = br.ReadSingle();
-            this.BASE_ENGINE.EngineBraking2 = br.ReadSingle();
-            this.BASE_ENGINE.EngineBraking3 = br.ReadSingle();
+            this.BASE_ENGINE.Read(br);
 
             // Base Turbo Performance
-            this.BASE_TURBO.TurboBraking = br.ReadSingle();
-            this.BASE_TURBO.TurboVacuum = br.ReadSingle();
-            this.BASE_TURBO.TurboHeatHigh = br.ReadSingle();
-            this.BASE_TURBO.TurboHeatLow = br.ReadSingle();
-            this.BASE_TURBO.TurboHighBoost = br.ReadSingle();
-            this.BASE_TURBO.TurboLowBoost = br.ReadSingle();
-            this.BASE_TURBO.TurboSpool = br.ReadSingle();
-            this.BASE_TURBO.TurboSpoolTimeDown = br.ReadSingle();
-            this.BASE_TURBO.TurboSpoolTimeUp = br.ReadSingle();
-            br.BaseStream.Position += 0xC;
+            this.BASE_TURBO.Read(br);
 
             // Base Brakes Performance
             this.PVEHICLE.TopSpeedUnderflow = br.ReadSingle();
@@ -1216,179 +974,53 @@ namespace Nikki.Support.Underground2.Class
             br.BaseStream.Position += 0x1C;
 
             // DriftAdditionalYawControl Performance
-            this.DRIFT_ADD_CONTROL.DriftAdditionalYawControl1 = br.ReadSingle();
-            this.DRIFT_ADD_CONTROL.DriftAdditionalYawControl2 = br.ReadSingle();
-            this.DRIFT_ADD_CONTROL.DriftAdditionalYawControl3 = br.ReadSingle();
-            this.DRIFT_ADD_CONTROL.DriftAdditionalYawControl4 = br.ReadSingle();
-            this.DRIFT_ADD_CONTROL.DriftAdditionalYawControl5 = br.ReadSingle();
-            this.DRIFT_ADD_CONTROL.DriftAdditionalYawControl6 = br.ReadSingle();
-            this.DRIFT_ADD_CONTROL.DriftAdditionalYawControl7 = br.ReadSingle();
-            this.DRIFT_ADD_CONTROL.DriftAdditionalYawControl8 = br.ReadSingle();
+            this.DRIFT_ADD_CONTROL.Read(br);
 
             // Skip Street + Pro Engine and Street Turbo, 0x03E0 - 0x0450
             br.BaseStream.Position += 0x70;
 
             // Top Weight Reduction Performance
-            this.TOP_WEIGHT_REDUCTION.WeightReductionMassMultiplier = br.ReadSingle();
-            this.TOP_WEIGHT_REDUCTION.WeightReductionGripAddon = br.ReadSingle();
-            this.TOP_WEIGHT_REDUCTION.WeightReductionHandlingRating = br.ReadSingle();
-            br.BaseStream.Position += 4;
+            this.TOP_WEIGHT_REDUCTION.Read(br);
 
             // Street Transmission Performance
-            this.STREET_TRANSMISSION.ClutchSlip = br.ReadSingle();
-            this.STREET_TRANSMISSION.OptimalShift = br.ReadSingle();
-            this.STREET_TRANSMISSION.FinalDriveRatio = br.ReadSingle();
-            this.STREET_TRANSMISSION.FinalDriveRatio2 = br.ReadSingle();
-            this.STREET_TRANSMISSION.TorqueSplit = br.ReadSingle();
-            this.STREET_TRANSMISSION.BurnoutStrength = br.ReadSingle();
-            this.STREET_TRANSMISSION.NumberOfGears = br.ReadInt32();
-            this.STREET_TRANSMISSION.GearEfficiency = br.ReadSingle();
-            this.STREET_TRANSMISSION.GearRatioR = br.ReadSingle();
-            this.STREET_TRANSMISSION.GearRatioN = br.ReadSingle();
-            this.STREET_TRANSMISSION.GearRatio1 = br.ReadSingle();
-            this.STREET_TRANSMISSION.GearRatio2 = br.ReadSingle();
-            this.STREET_TRANSMISSION.GearRatio3 = br.ReadSingle();
-            this.STREET_TRANSMISSION.GearRatio4 = br.ReadSingle();
-            this.STREET_TRANSMISSION.GearRatio5 = br.ReadSingle();
-            this.STREET_TRANSMISSION.GearRatio6 = br.ReadSingle();
+            this.STREET_TRANSMISSION.Read(br);
 
             // Pro Transmission Performance
-            this.PRO_TRANSMISSION.ClutchSlip = br.ReadSingle();
-            this.PRO_TRANSMISSION.OptimalShift = br.ReadSingle();
-            this.PRO_TRANSMISSION.FinalDriveRatio = br.ReadSingle();
-            this.PRO_TRANSMISSION.FinalDriveRatio2 = br.ReadSingle();
-            this.PRO_TRANSMISSION.TorqueSplit = br.ReadSingle();
-            this.PRO_TRANSMISSION.BurnoutStrength = br.ReadSingle();
-            this.PRO_TRANSMISSION.NumberOfGears = br.ReadInt32();
-            this.PRO_TRANSMISSION.GearEfficiency = br.ReadSingle();
-            this.PRO_TRANSMISSION.GearRatioR = br.ReadSingle();
-            this.PRO_TRANSMISSION.GearRatioN = br.ReadSingle();
-            this.PRO_TRANSMISSION.GearRatio1 = br.ReadSingle();
-            this.PRO_TRANSMISSION.GearRatio2 = br.ReadSingle();
-            this.PRO_TRANSMISSION.GearRatio3 = br.ReadSingle();
-            this.PRO_TRANSMISSION.GearRatio4 = br.ReadSingle();
-            this.PRO_TRANSMISSION.GearRatio5 = br.ReadSingle();
-            this.PRO_TRANSMISSION.GearRatio6 = br.ReadSingle();
+            this.PRO_TRANSMISSION.Read(br);
 
             // Top Transmission Performance
-            this.TOP_TRANSMISSION.ClutchSlip = br.ReadSingle();
-            this.TOP_TRANSMISSION.OptimalShift = br.ReadSingle();
-            this.TOP_TRANSMISSION.FinalDriveRatio = br.ReadSingle();
-            this.TOP_TRANSMISSION.FinalDriveRatio2 = br.ReadSingle();
-            this.TOP_TRANSMISSION.TorqueSplit = br.ReadSingle();
-            this.TOP_TRANSMISSION.BurnoutStrength = br.ReadSingle();
-            this.TOP_TRANSMISSION.NumberOfGears = br.ReadInt32();
-            this.TOP_TRANSMISSION.GearEfficiency = br.ReadSingle();
-            this.TOP_TRANSMISSION.GearRatioR = br.ReadSingle();
-            this.TOP_TRANSMISSION.GearRatioN = br.ReadSingle();
-            this.TOP_TRANSMISSION.GearRatio1 = br.ReadSingle();
-            this.TOP_TRANSMISSION.GearRatio2 = br.ReadSingle();
-            this.TOP_TRANSMISSION.GearRatio3 = br.ReadSingle();
-            this.TOP_TRANSMISSION.GearRatio4 = br.ReadSingle();
-            this.TOP_TRANSMISSION.GearRatio5 = br.ReadSingle();
-            this.TOP_TRANSMISSION.GearRatio6 = br.ReadSingle();
+            this.TOP_TRANSMISSION.Read(br);
 
             // Top Engine Performance
             br.BaseStream.Position += 0xC;
-            this.TOP_ENGINE.SpeedRefreshRate = br.ReadSingle();
-            this.TOP_ENGINE.EngineTorque1 = br.ReadSingle();
-            this.TOP_ENGINE.EngineTorque2 = br.ReadSingle();
-            this.TOP_ENGINE.EngineTorque3 = br.ReadSingle();
-            this.TOP_ENGINE.EngineTorque4 = br.ReadSingle();
-            this.TOP_ENGINE.EngineTorque5 = br.ReadSingle();
-            this.TOP_ENGINE.EngineTorque6 = br.ReadSingle();
-            this.TOP_ENGINE.EngineTorque7 = br.ReadSingle();
-            this.TOP_ENGINE.EngineTorque8 = br.ReadSingle();
-            this.TOP_ENGINE.EngineTorque9 = br.ReadSingle();
-            this.TOP_ENGINE.EngineBraking1 = br.ReadSingle();
-            this.TOP_ENGINE.EngineBraking2 = br.ReadSingle();
-            this.TOP_ENGINE.EngineBraking3 = br.ReadSingle();
+            this.TOP_ENGINE.Read(br);
 
             // Street RPM Performance
-            this.STREET_RPM.IdleRPMAdd = br.ReadSingle();
-            this.STREET_RPM.RedLineRPMAdd = br.ReadSingle();
-            this.STREET_RPM.MaxRPMAdd = br.ReadSingle();
+            this.STREET_RPM.Read(br);
             br.BaseStream.Position += 4;
 
             // Street ECU Performance
-            this.STREET_ECU.ECUx1000Add = br.ReadSingle();
-            this.STREET_ECU.ECUx2000Add = br.ReadSingle();
-            this.STREET_ECU.ECUx3000Add = br.ReadSingle();
-            this.STREET_ECU.ECUx4000Add = br.ReadSingle();
-            this.STREET_ECU.ECUx5000Add = br.ReadSingle();
-            this.STREET_ECU.ECUx6000Add = br.ReadSingle();
-            this.STREET_ECU.ECUx7000Add = br.ReadSingle();
-            this.STREET_ECU.ECUx8000Add = br.ReadSingle();
-            this.STREET_ECU.ECUx9000Add = br.ReadSingle();
-            this.STREET_ECU.ECUx10000Add = br.ReadSingle();
-            this.STREET_ECU.ECUx11000Add = br.ReadSingle();
-            this.STREET_ECU.ECUx12000Add = br.ReadSingle();
+            this.STREET_ECU.Read(br);
 
             // Pro RPM Performance
-            this.PRO_RPM.IdleRPMAdd = br.ReadSingle();
-            this.PRO_RPM.RedLineRPMAdd = br.ReadSingle();
-            this.PRO_RPM.MaxRPMAdd = br.ReadSingle();
+            this.PRO_RPM.Read(br);
             br.BaseStream.Position += 4;
 
             // Pro ECU Performance
-            this.PRO_ECU.ECUx1000Add = br.ReadSingle();
-            this.PRO_ECU.ECUx2000Add = br.ReadSingle();
-            this.PRO_ECU.ECUx3000Add = br.ReadSingle();
-            this.PRO_ECU.ECUx4000Add = br.ReadSingle();
-            this.PRO_ECU.ECUx5000Add = br.ReadSingle();
-            this.PRO_ECU.ECUx6000Add = br.ReadSingle();
-            this.PRO_ECU.ECUx7000Add = br.ReadSingle();
-            this.PRO_ECU.ECUx8000Add = br.ReadSingle();
-            this.PRO_ECU.ECUx9000Add = br.ReadSingle();
-            this.PRO_ECU.ECUx10000Add = br.ReadSingle();
-            this.PRO_ECU.ECUx11000Add = br.ReadSingle();
-            this.PRO_ECU.ECUx12000Add = br.ReadSingle();
+            this.PRO_ECU.Read(br);
 
             // Top RPM Performance
-            this.TOP_RPM.IdleRPMAdd = br.ReadSingle();
-            this.TOP_RPM.RedLineRPMAdd = br.ReadSingle();
-            this.TOP_RPM.MaxRPMAdd = br.ReadSingle();
+            this.TOP_RPM.Read(br);
             br.BaseStream.Position += 4;
 
             // Top ECU Performance
-            this.TOP_ECU.ECUx1000Add = br.ReadSingle();
-            this.TOP_ECU.ECUx2000Add = br.ReadSingle();
-            this.TOP_ECU.ECUx3000Add = br.ReadSingle();
-            this.TOP_ECU.ECUx4000Add = br.ReadSingle();
-            this.TOP_ECU.ECUx5000Add = br.ReadSingle();
-            this.TOP_ECU.ECUx6000Add = br.ReadSingle();
-            this.TOP_ECU.ECUx7000Add = br.ReadSingle();
-            this.TOP_ECU.ECUx8000Add = br.ReadSingle();
-            this.TOP_ECU.ECUx9000Add = br.ReadSingle();
-            this.TOP_ECU.ECUx10000Add = br.ReadSingle();
-            this.TOP_ECU.ECUx11000Add = br.ReadSingle();
-            this.TOP_ECU.ECUx12000Add = br.ReadSingle();
+            this.TOP_ECU.Read(br);
 
             // Top Turbo Performance
-            this.TOP_TURBO.TurboBraking = br.ReadSingle();
-            this.TOP_TURBO.TurboVacuum = br.ReadSingle();
-            this.TOP_TURBO.TurboHeatHigh = br.ReadSingle();
-            this.TOP_TURBO.TurboHeatLow = br.ReadSingle();
-            this.TOP_TURBO.TurboHighBoost = br.ReadSingle();
-            this.TOP_TURBO.TurboLowBoost = br.ReadSingle();
-            this.TOP_TURBO.TurboSpool = br.ReadSingle();
-            this.TOP_TURBO.TurboSpoolTimeDown = br.ReadSingle();
-            this.TOP_TURBO.TurboSpoolTimeUp = br.ReadSingle();
-            br.BaseStream.Position += 0xC;
+            this.TOP_TURBO.Read(br);
 
             // Top Tires Performance
-            this.TOP_TIRES.StaticGripScale = br.ReadSingle();
-            this.TOP_TIRES.YawSpeedScale = br.ReadSingle();
-            this.TOP_TIRES.SteeringAmplifier = br.ReadSingle();
-            this.TOP_TIRES.DynamicGripScale = br.ReadSingle();
-            this.TOP_TIRES.SteeringResponse = br.ReadSingle();
-            br.BaseStream.Position += 0xC;
-            this.TOP_TIRES.DriftYawControl = br.ReadSingle();
-            this.TOP_TIRES.DriftCounterSteerBuildUp = br.ReadSingle();
-            this.TOP_TIRES.DriftCounterSteerReduction = br.ReadSingle();
-            this.TOP_TIRES.PowerSlideBreakThru1 = br.ReadSingle();
-            this.TOP_TIRES.PowerSlideBreakThru2 = br.ReadSingle();
-            br.BaseStream.Position += 0xC;
+            this.TOP_TIRES.Read(br);
 
             // Top Nitrous Performance
             this.TOP_NITROUS.NOSCapacity = br.ReadSingle();
@@ -1419,65 +1051,88 @@ namespace Nikki.Support.Underground2.Class
             br.BaseStream.Position += 8;
 
             // Player Cameras
-            for (int a1 = 0; a1 < 6; ++a1)
+            for (int loop = 0; loop < 6; ++loop)
             {
+
                 var camera = new Camera();
                 camera.Read(br);
+                
                 switch (camera.CameraType)
                 {
                     case eCameraType.CLOSE:
                         this.PLAYER_CAMERA_CLOSE = camera;
                         break;
+                
                     case eCameraType.BUMPER:
                         this.PLAYER_CAMERA_BUMPER = camera;
                         break;
+                    
                     case eCameraType.DRIVER:
                         this.PLAYER_CAMERA_DRIVER = camera;
                         break;
+                    
                     case eCameraType.HOOD:
                         this.PLAYER_CAMERA_HOOD = camera;
                         break;
+                    
                     case eCameraType.DRIFT:
                         this.PLAYER_CAMERA_DRIFT = camera;
                         break;
+                    
                     default:
                         this.PLAYER_CAMERA_FAR = camera;
                         break;
+                
                 }
+            
             }
 
             // AI Cameras
-            for (int a1 = 0; a1 < 6; ++a1)
+            for (int loop = 0; loop < 6; ++loop)
             {
+                
                 var camera = new Camera();
                 camera.Read(br);
+                
                 switch (camera.CameraType)
                 {
                     case eCameraType.CLOSE:
                         this.AI_CAMERA_CLOSE = camera;
                         break;
+                    
                     case eCameraType.BUMPER:
                         this.AI_CAMERA_BUMPER = camera;
                         break;
+                    
                     case eCameraType.DRIVER:
                         this.AI_CAMERA_DRIVER = camera;
                         break;
+                    
                     case eCameraType.HOOD:
                         this.AI_CAMERA_HOOD = camera;
                         break;
+                    
                     case eCameraType.DRIFT:
                         this.AI_CAMERA_DRIFT = camera;
                         break;
+                    
                     default:
                         this.AI_CAMERA_FAR = camera;
                         break;
+                
                 }
+            
             }
 
             // Rigid Controls
             this._rigid_controls = new ushort[40];
-            for (int a1 = 0; a1 < 40; ++a1)
-                this._rigid_controls[a1] = br.ReadUInt16();
+            
+            for (int loop = 0; loop < 40; ++loop)
+            {
+
+                this._rigid_controls[loop] = br.ReadUInt16();
+            
+            }
 
             // Secondary Properties
             this.Index = br.ReadInt32();
@@ -1529,121 +1184,8 @@ namespace Nikki.Support.Underground2.Class
         /// <returns>Memory casted copy of the object.</returns>
         public override ACollectable MemoryCast(string CName)
         {
-            var result = new CarTypeInfo(CName, this.Database)
-            {
-                Spoiler = this.Spoiler,
-                Mirrors = this.Mirrors,
-                RoofScoop = this.RoofScoop,
-                UsageType = this.UsageType,
-                IsSkinnable = this.IsSkinnable,
-                ManufacturerName = this.ManufacturerName,
-                DefaultBasePaint = this.DefaultBasePaint,
-                DefaultBasePaint2 = this.DefaultBasePaint2,
-                IsSUV = this.IsSUV,
-                HeadlightFOV = this.HeadlightFOV,
-                PadHighPerformance = this.PadHighPerformance,
-                NumAvailableSkinNumbers = this.NumAvailableSkinNumbers,
-                WhatGame = this.WhatGame,
-                ConvertibleFlag = this.ConvertibleFlag,
-                WheelOuterRadius = this.WheelOuterRadius,
-                WheelInnerRadiusMin = this.WheelInnerRadiusMin,
-                WheelInnerRadiusMax = this.WheelInnerRadiusMax,
-                HeadlightPositionX = this.HeadlightPositionX,
-                HeadlightPositionY = this.HeadlightPositionY,
-                HeadlightPositionZ = this.HeadlightPositionZ,
-                HeadlightPositionW = this.HeadlightPositionW,
-                DriverRenderingOffsetX = this.DriverRenderingOffsetX,
-                DriverRenderingOffsetY = this.DriverRenderingOffsetY,
-                DriverRenderingOffsetZ = this.DriverRenderingOffsetZ,
-                DriverRenderingOffsetW = this.DriverRenderingOffsetW,
-                SteeringWheelRenderingX = this.SteeringWheelRenderingX,
-                SteeringWheelRenderingY = this.SteeringWheelRenderingY,
-                SteeringWheelRenderingZ = this.SteeringWheelRenderingZ,
-                SteeringWheelRenderingW = this.SteeringWheelRenderingW,
-                UnknownVectorValX = this.UnknownVectorValX,
-                UnknownVectorValY = this.UnknownVectorValY,
-                UnknownVectorValZ = this.UnknownVectorValZ,
-                UnknownVectorValW = this.UnknownVectorValW,
-                MaxInstances1 = this.MaxInstances1,
-                MaxInstances2 = this.MaxInstances2,
-                MaxInstances3 = this.MaxInstances3,
-                MaxInstances4 = this.MaxInstances4,
-                MaxInstances5 = this.MaxInstances5,
-                KeepLoaded1 = this.KeepLoaded1,
-                KeepLoaded2 = this.KeepLoaded2,
-                KeepLoaded3 = this.KeepLoaded3,
-                KeepLoaded4 = this.KeepLoaded4,
-                KeepLoaded5 = this.KeepLoaded5,
-                MinTimeBetweenUses1 = this.MinTimeBetweenUses1,
-                MinTimeBetweenUses2 = this.MinTimeBetweenUses2,
-                MinTimeBetweenUses3 = this.MinTimeBetweenUses3,
-                MinTimeBetweenUses4 = this.MinTimeBetweenUses4,
-                MinTimeBetweenUses5 = this.MinTimeBetweenUses5,
-                AvailableSkinNumbers01 = this.AvailableSkinNumbers01,
-                AvailableSkinNumbers02 = this.AvailableSkinNumbers02,
-                AvailableSkinNumbers03 = this.AvailableSkinNumbers03,
-                AvailableSkinNumbers04 = this.AvailableSkinNumbers04,
-                AvailableSkinNumbers05 = this.AvailableSkinNumbers05,
-                AvailableSkinNumbers06 = this.AvailableSkinNumbers06,
-                AvailableSkinNumbers07 = this.AvailableSkinNumbers07,
-                AvailableSkinNumbers08 = this.AvailableSkinNumbers08,
-                AvailableSkinNumbers09 = this.AvailableSkinNumbers09,
-                AvailableSkinNumbers10 = this.AvailableSkinNumbers10,
-                DefaultSkinNumber = this.DefaultSkinNumber,
-                AI_CAMERA_BUMPER = this.AI_CAMERA_BUMPER.PlainCopy(),
-                AI_CAMERA_CLOSE = this.AI_CAMERA_CLOSE.PlainCopy(),
-                AI_CAMERA_DRIFT = this.AI_CAMERA_DRIFT.PlainCopy(),
-                AI_CAMERA_DRIVER = this.AI_CAMERA_DRIVER.PlainCopy(),
-                AI_CAMERA_FAR = this.AI_CAMERA_FAR.PlainCopy(),
-                AI_CAMERA_HOOD = this.AI_CAMERA_HOOD.PlainCopy(),
-                PLAYER_CAMERA_BUMPER = this.PLAYER_CAMERA_BUMPER.PlainCopy(),
-                PLAYER_CAMERA_CLOSE = this.PLAYER_CAMERA_CLOSE.PlainCopy(),
-                PLAYER_CAMERA_DRIFT = this.PLAYER_CAMERA_DRIFT.PlainCopy(),
-                PLAYER_CAMERA_DRIVER = this.PLAYER_CAMERA_DRIVER.PlainCopy(),
-                PLAYER_CAMERA_FAR = this.PLAYER_CAMERA_FAR.PlainCopy(),
-                PLAYER_CAMERA_HOOD = this.PLAYER_CAMERA_HOOD.PlainCopy(),
-                BASE_BRAKES = this.BASE_BRAKES.PlainCopy(),
-                BASE_ENGINE = this.BASE_ENGINE.PlainCopy(),
-                BASE_RPM = this.BASE_RPM.PlainCopy(),
-                BASE_SUSPENSION = this.BASE_SUSPENSION.PlainCopy(),
-                BASE_TIRES = this.BASE_TIRES.PlainCopy(),
-                BASE_TRANSMISSION = this.BASE_TRANSMISSION.PlainCopy(),
-                BASE_TURBO = this.BASE_TURBO.PlainCopy(),
-                DRIFT_ADD_CONTROL = this.DRIFT_ADD_CONTROL.PlainCopy(),
-                ECAR = this.ECAR.PlainCopy(),
-                PVEHICLE = this.PVEHICLE.PlainCopy(),
-                PRO_ECU = this.PRO_ECU.PlainCopy(),
-                PRO_RPM = this.PRO_RPM.PlainCopy(),
-                PRO_TRANSMISSION = this.PRO_TRANSMISSION.PlainCopy(),
-                STREET_ECU = this.STREET_ECU.PlainCopy(),
-                STREET_RPM = this.STREET_RPM.PlainCopy(),
-                STREET_TRANSMISSION = this.STREET_TRANSMISSION.PlainCopy(),
-                TOP_BRAKES = this.TOP_BRAKES.PlainCopy(),
-                TOP_ECU = this.TOP_ECU.PlainCopy(),
-                TOP_ENGINE = this.TOP_ENGINE.PlainCopy(),
-                TOP_NITROUS = this.TOP_NITROUS.PlainCopy(),
-                TOP_RPM = this.TOP_RPM.PlainCopy(),
-                TOP_SUSPENSION = this.TOP_SUSPENSION.PlainCopy(),
-                TOP_TIRES = this.TOP_TIRES.PlainCopy(),
-                TOP_TRANSMISSION = this.TOP_TRANSMISSION.PlainCopy(),
-                TOP_TURBO = this.TOP_TURBO.PlainCopy(),
-                TOP_WEIGHT_REDUCTION = this.TOP_WEIGHT_REDUCTION.PlainCopy(),
-                WHEEL_FRONT_LEFT = this.WHEEL_FRONT_LEFT.PlainCopy(),
-                WHEEL_FRONT_RIGHT = this.WHEEL_FRONT_RIGHT.PlainCopy(),
-                WHEEL_REAR_LEFT = this.WHEEL_REAR_LEFT.PlainCopy(),
-                WHEEL_REAR_RIGHT = this.WHEEL_REAR_RIGHT.PlainCopy(),
-                CARSKIN01 = this.CARSKIN01.PlainCopy(),
-                CARSKIN02 = this.CARSKIN02.PlainCopy(),
-                CARSKIN03 = this.CARSKIN03.PlainCopy(),
-                CARSKIN04 = this.CARSKIN04.PlainCopy(),
-                CARSKIN05 = this.CARSKIN05.PlainCopy(),
-                CARSKIN06 = this.CARSKIN06.PlainCopy(),
-                CARSKIN07 = this.CARSKIN07.PlainCopy(),
-                CARSKIN08 = this.CARSKIN08.PlainCopy(),
-                CARSKIN09 = this.CARSKIN09.PlainCopy(),
-                CARSKIN10 = this.CARSKIN10.PlainCopy(),
-            };
-
+            var result = new CarTypeInfo(CName, this.Database);
+            base.MemoryCast(this, result);
             return result;
         }
 

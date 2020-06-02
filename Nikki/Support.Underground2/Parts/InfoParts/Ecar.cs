@@ -1,5 +1,4 @@
 ﻿using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 
 
@@ -9,7 +8,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
     /// <summary>
     /// A unit <see cref="Ecar"/> used in car performance.
     /// </summary>
-    public class Ecar : ASubPart, ICopyable<Ecar>
+    public class Ecar : ASubPart
 	{
         /// <summary>
         /// 
@@ -68,16 +67,17 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
         /// Creates a plain copy of the objects that contains same values.
         /// </summary>
         /// <returns>Exact plain copy of the object.</returns>
-        public Ecar PlainCopy()
+        public override ASubPart PlainCopy()
         {
             var result = new Ecar();
-            var ThisType = this.GetType();
-            var ResultType = result.GetType();
-            foreach (var ThisProperty in ThisType.GetProperties())
+
+            foreach (var property in this.GetType().GetProperties())
             {
-                var ResultField = ResultType.GetProperty(ThisProperty.Name);
-                ResultField.SetValue(result, ThisProperty.GetValue(this));
+
+                property.SetValue(result, property.GetValue(this));
+
             }
+
             return result;
         }
     }

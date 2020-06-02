@@ -1,6 +1,7 @@
-﻿using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Interface;
+﻿using System.IO;
+using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using CoreExtensions.IO;
 
 
 
@@ -9,7 +10,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
     /// <summary>
     /// A unit <see cref="Tires"/> used in car performance.
     /// </summary>
-    public class Tires : ASubPart, ICopyable<Tires>
+    public class Tires : ASubPart
 	{
         /// <summary>
         /// 
@@ -80,17 +81,58 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
         /// Creates a plain copy of the objects that contains same values.
         /// </summary>
         /// <returns>Exact plain copy of the object.</returns>
-        public Tires PlainCopy()
+        public override ASubPart PlainCopy()
         {
             var result = new Tires();
-            var ThisType = this.GetType();
-            var ResultType = result.GetType();
-            foreach (var ThisProperty in ThisType.GetProperties())
+
+            foreach (var property in this.GetType().GetProperties())
             {
-                var ResultField = ResultType.GetProperty(ThisProperty.Name);
-                ResultField.SetValue(result, ThisProperty.GetValue(this));
+
+                property.SetValue(result, property.GetValue(this));
+
             }
+
             return result;
+        }
+
+        /// <summary>
+        /// Reads data using <see cref="BinaryReader"/> provided.
+        /// </summary>
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        public void Read(BinaryReader br)
+        {
+            this.StaticGripScale = br.ReadSingle();
+            this.YawSpeedScale = br.ReadSingle();
+            this.SteeringAmplifier = br.ReadSingle();
+            this.DynamicGripScale = br.ReadSingle();
+            this.SteeringResponse = br.ReadSingle();
+            br.BaseStream.Position += 0xC;
+            this.DriftYawControl = br.ReadSingle();
+            this.DriftCounterSteerBuildUp = br.ReadSingle();
+            this.DriftCounterSteerReduction = br.ReadSingle();
+            this.PowerSlideBreakThru1 = br.ReadSingle();
+            this.PowerSlideBreakThru2 = br.ReadSingle();
+            br.BaseStream.Position += 0xC;
+        }
+
+        /// <summary>
+        /// Writes data using <see cref="BinaryWriter"/> provided.
+        /// </summary>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(this.StaticGripScale);
+            bw.Write(this.YawSpeedScale);
+            bw.Write(this.SteeringAmplifier);
+            bw.Write(this.DynamicGripScale);
+            bw.Write(this.SteeringResponse);
+            bw.WriteBytes(0xC);
+            bw.Write(this.DriftYawControl);
+            bw.Write(this.DriftCounterSteerBuildUp);
+            bw.Write(this.DriftCounterSteerReduction);
+            bw.Write(this.PowerSlideBreakThru1);
+            bw.Write(this.PowerSlideBreakThru2);
+            bw.WriteBytes(0xC);
         }
     }
 }

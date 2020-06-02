@@ -55,7 +55,7 @@ namespace Nikki.Support.Underground2.Class
 				if (value.Contains(" "))
 					throw new Exception("CollectionName cannot contain whitespace.");
 				if (this.Database.ModelParts.FindCollection(value) != null)
-					throw new CollectionExistenceException();
+					throw new CollectionExistenceException(value);
 				this._collection_name = value;
 			}
 		}
@@ -105,8 +105,12 @@ namespace Nikki.Support.Underground2.Class
 		/// </summary>
 		public override void ResortNames()
 		{
-			for (int a1 = 0; a1 < this.ModelCarParts.Count; ++a1)
-				this.ModelCarParts[a1].PartName = $"{this._collection_name}_PART_{a1}";
+			for (int loop = 0; loop < this.ModelCarParts.Count; ++loop)
+			{
+
+				this.ModelCarParts[loop].PartName = $"{this._collection_name}_PART_{loop}";
+
+			}
 		}
 
 		/// <summary>
@@ -114,48 +118,30 @@ namespace Nikki.Support.Underground2.Class
 		/// </summary>
 		/// <param name="part1">First <see cref="RealCarPart"/> to switch.</param>
 		/// <param name="part2">Second <see cref="RealCarPart"/> to switch.</param>
-		/// <returns>True if switching was successful; false otherwise.</returns>
-		public override bool SwitchParts(string part1, string part2)
+		public override void SwitchParts(string part1, string part2)
 		{
 			var index1 = this.ModelCarParts.FindIndex(_ => _.PartName == part1);
 			var index2 = this.ModelCarParts.FindIndex(_ => _.PartName == part2);
-			if (index1 == -1 || index2 == -1) return false;
-			var temp1 = this.GetRealPart(index1);
-			var temp2 = this.GetRealPart(index2);
-			this.ModelCarParts[index2] = temp1;
-			this.ModelCarParts[index1] = temp2;
-			this.ResortNames();
-			return true;
-		}
 
-		/// <summary>
-		/// Switches two parts and their indexes.
-		/// </summary>
-		/// <param name="part1">First <see cref="RealCarPart"/> to switch.</param>
-		/// <param name="part2">Second <see cref="RealCarPart"/> to switch.</param>
-		/// <param name="error">Error occured while trying to switch.</param>
-		/// <returns>True if switching was successful; false otherwise.</returns>
-		public override bool SwitchParts(string part1, string part2, out string error)
-		{
-			error = null;
-			var index1 = this.ModelCarParts.FindIndex(_ => _.PartName == part1);
-			var index2 = this.ModelCarParts.FindIndex(_ => _.PartName == part2);
 			if (index1 == -1)
 			{
-				error = $"Part named {part1} does not exist.";
-				return false;
+
+				throw new InfoAccessException($"Part named {part1} does not exist");
+
 			}
+
 			if (index2 == -1)
 			{
-				error = $"Part named {part2} does not exist.";
-				return false;
+
+				throw new InfoAccessException($"Part named {part2} does not exist");
+
 			}
+
 			var temp1 = this.GetRealPart(index1);
 			var temp2 = this.GetRealPart(index2);
 			this.ModelCarParts[index2] = temp1;
 			this.ModelCarParts[index1] = temp2;
 			this.ResortNames();
-			return true;
 		}
 
 		/// <summary>
@@ -172,43 +158,27 @@ namespace Nikki.Support.Underground2.Class
 		/// </summary>
 		/// <param name="property">Property to sort by.</param>
 		/// <returns>True on success; false otherwise.</returns>
-		public override bool SortByProperty(string property)
+		public override void SortByProperty(string property)
 		{
 			var field = typeof(Parts.CarParts.RealCarPart).GetProperty(property);
-			if (field == null) return false;
-			this.ModelCarParts.Sort((x, y) =>
-			{
-				var valueX = x.GetFastPropertyValue(property) as IComparable;
-				var valueY = y.GetFastPropertyValue(property) as IComparable;
-				return valueX.CompareTo(valueY);
-			});
-			this.ResortNames();
-			return true;
-		}
 
-		/// <summary>
-		/// Sorts all parts by property name provided.
-		/// </summary>
-		/// <param name="property">Property to sort by.</param>
-		/// <param name="error">Error occured while trying to switch.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public override bool SortByProperty(string property, out string error)
-		{
-			error = null;
-			var field = typeof(Parts.CarParts.RealCarPart).GetProperty(property);
 			if (field == null)
 			{
-				error = $"Property named {property} does not exist in car parts.";
-				return false;
+
+				throw new InfoAccessException($"Property named {property} does not exist");
+
 			}
+
 			this.ModelCarParts.Sort((x, y) =>
 			{
+
 				var valueX = x.GetFastPropertyValue(property) as IComparable;
 				var valueY = y.GetFastPropertyValue(property) as IComparable;
 				return valueX.CompareTo(valueY);
+
 			});
+
 			this.ResortNames();
-			return true;
 		}
 
 		/// <summary>
@@ -219,78 +189,42 @@ namespace Nikki.Support.Underground2.Class
 		public override ACollectable MemoryCast(string CName)
 		{
 			var result = new DBModelPart(CName, this.Database);
+
 			foreach (var part in this.ModelCarParts)
-				result.ModelCarParts.Add(part.PlainCopy());
+			{
+
+				result.ModelCarParts.Add((RealCarPart)part.PlainCopy());
+
+			}
 
 			return result;
 		}
 
 		/// <summary>
-		/// Attemps to add new <see cref="RealCarPart"/>.
+		/// Adds new <see cref="RealCarPart"/>.
 		/// </summary>
-		/// <param name="name">Name of the new <see cref="RealCarPart"/>.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public override bool TryAddRealPart(string name = null)
+		public override void AddRealPart()
 		{
 			this.ModelCarParts.Add(new Parts.CarParts.RealCarPart(this.Index, this));
 			this.ResortNames();
-			return true;
 		}
 
 		/// <summary>
-		/// Attemps to add new <see cref="RealCarPart"/>.
-		/// </summary>
-		/// <param name="error">Error occured while trying to add <see cref="RealCarPart"/>.</param>
-		/// <param name="name">Name of the new <see cref="RealCarPart"/>.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public override bool TryAddRealPart(out string error, string name)
-		{
-			error = null;
-			this.ModelCarParts.Add(new Parts.CarParts.RealCarPart(this.Index, this));
-			this.ResortNames();
-			return true;
-		}
-
-		/// <summary>
-		/// Attemps to remove <see cref="RealCarPart"/>.
+		/// Removes <see cref="RealCarPart"/>.
 		/// </summary>
 		/// <param name="name">Name of the <see cref="RealCarPart"/> to remove.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public override bool TryRemovePart(string name)
+		public override void RemovePart(string name)
 		{
 			var result = this.ModelCarParts.RemoveWith(_ => _.PartName == name);
-			if (result) this.ResortNames();
-			return result;
-		}
 
-		/// <summary>
-		/// Attemps to remove <see cref="RealCarPart"/>.
-		/// </summary>
-		/// <param name="name">Name of the <see cref="RealCarPart"/> to remove.</param>
-		/// <param name="error">Error occured while trying to remove <see cref="RealCarPart"/>.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public override bool TryRemovePart(string name, out string error)
-		{
-			error = null;
-			var result = this.TryRemovePart(name);
-			if (!result) error = $"Part named {name} does not exist.";
-			else this.ResortNames();
-			return result;
-		}
+			if (!result)
+			{
 
-		/// <summary>
-		/// Attemps to clone a <see cref="RealCarPart"/>.
-		/// </summary>
-		/// <param name="newname">Name of the new <see cref="RealCarPart"/>.</param>
-		/// <param name="copyname">Name of <see cref="RealCarPart"/> to clone.</param>
-		/// <returns>True on success; false otherwise.</returns>
-		public override bool TryClonePart(string newname, string copyname)
-		{
-			var part = this.GetRealPart(copyname);
-			if (part == null) return false;
-			this.ModelCarParts.Add(part.PlainCopy());
+				throw new InfoAccessException($"Part named {name} does not exist");
+
+			}
+
 			this.ResortNames();
-			return true;
 		}
 
 		/// <summary>
@@ -298,20 +232,21 @@ namespace Nikki.Support.Underground2.Class
 		/// </summary>
 		/// <param name="newname">Name of the new <see cref="RealCarPart"/>.</param>
 		/// <param name="copyname">Name of <see cref="RealCarPart"/> to clone.</param>
-		/// <param name="error">Error occured while trying to clone <see cref="RealCarPart"/>.</param>
 		/// <returns>True on success; false otherwise.</returns>
-		public override bool TryClonePart(string newname, string copyname, out string error)
+		public override void ClonePart(string newname, string copyname)
 		{
-			error = null;
 			var part = this.GetRealPart(copyname);
+
 			if (part == null)
 			{
-				error = $"Part named {copyname} does not exist.";
-				return false;
+
+				throw new InfoAccessException($"Part named {copyname} does not exist");
+
 			}
-			this.ModelCarParts.Add(part.PlainCopy());
+
+
+			this.ModelCarParts.Add((RealCarPart)part.PlainCopy());
 			this.ResortNames();
-			return true;
 		}
 
 		/// <summary>

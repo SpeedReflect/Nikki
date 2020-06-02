@@ -466,6 +466,7 @@ namespace Nikki.Support.Prostreet.Class
             // Initialize data
             int total = this.PaletteSize + this.Size;
             this.Data = new byte[total];
+            
             if (forced)
             {
 

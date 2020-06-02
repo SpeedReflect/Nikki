@@ -70,7 +70,7 @@ namespace Nikki.Support.Underground2.Class
                 if (value.Length > MaxCNameLength)
                     throw new ArgumentLengthException(MaxCNameLength);
                 if (this.Database.AcidEffects.FindCollection(value) != null)
-                    throw new CollectionExistenceException();
+                    throw new CollectionExistenceException(value);
                 this._collection_name = value;
             }
         }
@@ -90,6 +90,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public uint ClassKey { get; set; }
 
         /// <summary>
@@ -97,6 +98,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public uint Flags { get; set; }
 
         /// <summary>
@@ -104,6 +106,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public ushort NumEmitters { get; set; }
 
         /// <summary>
@@ -111,6 +114,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public ushort SectionNumber { get; set; }
 
         /// <summary>
@@ -118,6 +122,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public string InheritanceKey { get; set; } = String.Empty;
 
         /// <summary>
@@ -125,6 +130,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float FarClip { get; set; }
 
         /// <summary>
@@ -132,6 +138,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float Intensity { get; set; }
 
         /// <summary>
@@ -139,6 +146,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float LastPositionX { get; set; }
 
         /// <summary>
@@ -146,6 +154,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float LastPositionY { get; set; }
 
         /// <summary>
@@ -153,6 +162,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float LastPositionZ { get; set; }
 
         /// <summary>
@@ -160,6 +170,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float LastPositionW { get; set; }
 
         /// <summary>
@@ -167,6 +178,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public uint NumZeroParticleFrames { get; set; }
 
         /// <summary>
@@ -174,6 +186,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public uint CreationTimeStamp { get; set; }
 
         /// <summary>
@@ -181,6 +194,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float LocalWorld_Vec1_X { get; set; }
 
         /// <summary>
@@ -188,6 +202,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float LocalWorld_Vec1_Y { get; set; }
 
         /// <summary>
@@ -195,6 +210,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float LocalWorld_Vec1_Z { get; set; }
 
         /// <summary>
@@ -202,6 +218,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float LocalWorld_Vec1_W { get; set; }
 
         /// <summary>
@@ -209,6 +226,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float LocalWorld_Vec2_X { get; set; }
 
         /// <summary>
@@ -216,6 +234,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float LocalWorld_Vec2_Y { get; set; }
 
         /// <summary>
@@ -223,6 +242,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float LocalWorld_Vec2_Z { get; set; }
 
         /// <summary>
@@ -230,6 +250,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float LocalWorld_Vec2_W { get; set; }
 
         /// <summary>
@@ -237,6 +258,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float LocalWorld_Vec3_X { get; set; }
 
         /// <summary>
@@ -244,6 +266,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float LocalWorld_Vec3_Y { get; set; }
 
         /// <summary>
@@ -251,6 +274,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float LocalWorld_Vec3_Z { get; set; }
 
         /// <summary>
@@ -258,6 +282,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float LocalWorld_Vec3_W { get; set; }
 
         /// <summary>
@@ -265,6 +290,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float LocalWorld_Vec4_X { get; set; }
 
         /// <summary>
@@ -272,6 +298,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float LocalWorld_Vec4_Y { get; set; }
 
         /// <summary>
@@ -279,6 +306,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float LocalWorld_Vec4_Z { get; set; }
 
         /// <summary>
@@ -286,6 +314,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         public float LocalWorld_Vec4_W { get; set; }
 
         #endregion
@@ -430,39 +459,8 @@ namespace Nikki.Support.Underground2.Class
         /// <returns>Memory casted copy of the object.</returns>
         public override ACollectable MemoryCast(string CName)
         {
-            var result = new AcidEffect(CName, this.Database)
-            {
-                ClassKey = this.ClassKey,
-                Flags = this.Flags,
-                NumEmitters = this.NumEmitters,
-                SectionNumber = this.SectionNumber,
-                LocalWorld_Vec1_X = this.LocalWorld_Vec1_X,
-                LocalWorld_Vec1_Y = this.LocalWorld_Vec1_Y,
-                LocalWorld_Vec1_Z = this.LocalWorld_Vec1_Z,
-                LocalWorld_Vec1_W = this.LocalWorld_Vec1_W,
-                LocalWorld_Vec2_X = this.LocalWorld_Vec2_X,
-                LocalWorld_Vec2_Y = this.LocalWorld_Vec2_Y,
-                LocalWorld_Vec2_Z = this.LocalWorld_Vec2_Z,
-                LocalWorld_Vec2_W = this.LocalWorld_Vec2_W,
-                LocalWorld_Vec3_X = this.LocalWorld_Vec3_X,
-                LocalWorld_Vec3_Y = this.LocalWorld_Vec3_Y,
-                LocalWorld_Vec3_Z = this.LocalWorld_Vec3_Z,
-                LocalWorld_Vec3_W = this.LocalWorld_Vec3_W,
-                LocalWorld_Vec4_X = this.LocalWorld_Vec4_X,
-                LocalWorld_Vec4_Y = this.LocalWorld_Vec4_Y,
-                LocalWorld_Vec4_Z = this.LocalWorld_Vec4_Z,
-                LocalWorld_Vec4_W = this.LocalWorld_Vec4_W,
-                InheritanceKey = this.InheritanceKey,
-                FarClip = this.FarClip,
-                Intensity = this.Intensity,
-                LastPositionX = this.LastPositionX,
-                LastPositionY = this.LastPositionY,
-                LastPositionZ = this.LastPositionZ,
-                LastPositionW = this.LastPositionW,
-                NumZeroParticleFrames = this.NumZeroParticleFrames,
-                CreationTimeStamp = this.CreationTimeStamp
-            };
-
+            var result = new AcidEffect(CName, this.Database);
+            base.MemoryCast(this, result);
             return result;
         }
 

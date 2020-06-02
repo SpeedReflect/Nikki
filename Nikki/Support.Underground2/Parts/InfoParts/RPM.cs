@@ -1,5 +1,5 @@
-﻿using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Interface;
+﻿using System.IO;
+using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 
 
@@ -9,7 +9,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
 	/// <summary>
 	/// A unit <see cref="RPM"/> used in car performance.
 	/// </summary>
-	public class RPM : ASubPart, ICopyable<RPM>
+	public class RPM : ASubPart
 	{
 		/// <summary>
 		/// 
@@ -38,17 +38,38 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public RPM PlainCopy()
+		public override ASubPart PlainCopy()
 		{
-			var result = new RPM();
-			var ThisType = this.GetType();
-			var ResultType = result.GetType();
-			foreach (var ThisProperty in ThisType.GetProperties())
+			var result = new RPM()
 			{
-				var ResultField = ResultType.GetProperty(ThisProperty.Name);
-				ResultField.SetValue(result, ThisProperty.GetValue(this));
-			}
+				IdleRPMAdd = this.IdleRPMAdd,
+				MaxRPMAdd = this.MaxRPMAdd,
+				RedLineRPMAdd = this.RedLineRPMAdd
+			};
+
 			return result;
+		}
+
+		/// <summary>
+		/// Reads data using <see cref="BinaryReader"/> provided.
+		/// </summary>
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		public void Read(BinaryReader br)
+		{
+			this.IdleRPMAdd = br.ReadSingle();
+			this.RedLineRPMAdd = br.ReadSingle();
+			this.MaxRPMAdd = br.ReadSingle();
+		}
+
+		/// <summary>
+		/// Writes data using <see cref="BinaryWriter"/> provided.
+		/// </summary>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		public void Write(BinaryWriter bw)
+		{
+			bw.Write(this.IdleRPMAdd);
+			bw.Write(this.RedLineRPMAdd);
+			bw.Write(this.MaxRPMAdd);
 		}
 	}
 }

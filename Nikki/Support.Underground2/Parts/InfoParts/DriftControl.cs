@@ -1,5 +1,5 @@
-﻿using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Interface;
+﻿using System.IO;
+using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 
 
@@ -9,7 +9,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
     /// <summary>
     /// A unit <see cref="DriftControl"/> used in car performance.
     /// </summary>
-    public class DriftControl : ASubPart, ICopyable<DriftControl>
+    public class DriftControl : ASubPart
     {
         /// <summary>
         /// 
@@ -68,17 +68,50 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
         /// Creates a plain copy of the objects that contains same values.
         /// </summary>
         /// <returns>Exact plain copy of the object.</returns>
-        public DriftControl PlainCopy()
+        public override ASubPart PlainCopy()
         {
             var result = new DriftControl();
-            var ThisType = this.GetType();
-            var ResultType = result.GetType();
-            foreach (var ThisProperty in ThisType.GetProperties())
+
+            foreach (var property in this.GetType().GetProperties())
             {
-                var ResultField = ResultType.GetProperty(ThisProperty.Name);
-                ResultField.SetValue(result, ThisProperty.GetValue(this));
+
+                property.SetValue(result, property.GetValue(this));
+
             }
+
             return result;
+        }
+
+        /// <summary>
+        /// Reads data using <see cref="BinaryReader"/> provided.
+        /// </summary>
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        public void Read(BinaryReader br)
+        {
+            this.DriftAdditionalYawControl1 = br.ReadSingle();
+            this.DriftAdditionalYawControl2 = br.ReadSingle();
+            this.DriftAdditionalYawControl3 = br.ReadSingle();
+            this.DriftAdditionalYawControl4 = br.ReadSingle();
+            this.DriftAdditionalYawControl5 = br.ReadSingle();
+            this.DriftAdditionalYawControl6 = br.ReadSingle();
+            this.DriftAdditionalYawControl7 = br.ReadSingle();
+            this.DriftAdditionalYawControl8 = br.ReadSingle();
+        }
+
+        /// <summary>
+        /// Writes data using <see cref="BinaryWriter"/> provided.
+        /// </summary>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(this.DriftAdditionalYawControl1);
+            bw.Write(this.DriftAdditionalYawControl2);
+            bw.Write(this.DriftAdditionalYawControl3);
+            bw.Write(this.DriftAdditionalYawControl4);
+            bw.Write(this.DriftAdditionalYawControl5);
+            bw.Write(this.DriftAdditionalYawControl6);
+            bw.Write(this.DriftAdditionalYawControl7);
+            bw.Write(this.DriftAdditionalYawControl8);
         }
     }
 }

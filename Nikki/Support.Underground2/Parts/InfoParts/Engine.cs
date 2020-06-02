@@ -1,5 +1,5 @@
-﻿using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Interface;
+﻿using System.IO;
+using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 
 
@@ -9,7 +9,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
 	/// <summary>
 	/// A unit <see cref="Engine"/> used in car performance.
 	/// </summary>
-	public class Engine : ASubPart, ICopyable<Engine>
+	public class Engine : ASubPart
 	{
 		/// <summary>
 		/// 
@@ -98,17 +98,60 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public Engine PlainCopy()
+		public override ASubPart PlainCopy()
 		{
 			var result = new Engine();
-			var ThisType = this.GetType();
-			var ResultType = result.GetType();
-			foreach (var ThisProperty in ThisType.GetProperties())
+
+			foreach (var property in this.GetType().GetProperties())
 			{
-				var ResultField = ResultType.GetProperty(ThisProperty.Name);
-				ResultField.SetValue(result, ThisProperty.GetValue(this));
+
+				property.SetValue(result, property.GetValue(this));
+
 			}
+
 			return result;
+		}
+
+		/// <summary>
+		/// Reads data using <see cref="BinaryReader"/> provided.
+		/// </summary>
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		public void Read(BinaryReader br)
+		{
+			this.SpeedRefreshRate = br.ReadSingle();
+			this.EngineTorque1 = br.ReadSingle();
+			this.EngineTorque2 = br.ReadSingle();
+			this.EngineTorque3 = br.ReadSingle();
+			this.EngineTorque4 = br.ReadSingle();
+			this.EngineTorque5 = br.ReadSingle();
+			this.EngineTorque6 = br.ReadSingle();
+			this.EngineTorque7 = br.ReadSingle();
+			this.EngineTorque8 = br.ReadSingle();
+			this.EngineTorque9 = br.ReadSingle();
+			this.EngineBraking1 = br.ReadSingle();
+			this.EngineBraking2 = br.ReadSingle();
+			this.EngineBraking3 = br.ReadSingle();
+		}
+
+		/// <summary>
+		/// Writes data using <see cref="BinaryWriter"/> provided.
+		/// </summary>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		public void Write(BinaryWriter bw)
+		{
+			bw.Write(this.SpeedRefreshRate);
+			bw.Write(this.EngineTorque1);
+			bw.Write(this.EngineTorque2);
+			bw.Write(this.EngineTorque3);
+			bw.Write(this.EngineTorque4);
+			bw.Write(this.EngineTorque5);
+			bw.Write(this.EngineTorque6);
+			bw.Write(this.EngineTorque7);
+			bw.Write(this.EngineTorque8);
+			bw.Write(this.EngineTorque9);
+			bw.Write(this.EngineBraking1);
+			bw.Write(this.EngineBraking2);
+			bw.Write(this.EngineBraking3);
 		}
 	}
 }
