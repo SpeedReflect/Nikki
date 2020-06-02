@@ -386,7 +386,7 @@ namespace Nikki.Support.Prostreet.Class
             this._scroll_type = 0;
             this._used_flag = 0;
             this._apply_alpha_sort = 0;
-            this._alpha_usage_type = (byte)eAlphaUsageType.TEXUSAGE_MODULATED;
+            this._alpha_usage_type = (byte)eTextureAlphaUsageType.TEXUSAGE_MODULATED;
             this._alpha_blend_type = (byte)eTextureAlphaBlendType.TEXBLEND_BLEND;
             this._flags = 0;
             this.MipmapBiasType = (byte)eTextureMipmapBiasType.TEXBIAS_DEFAULT;

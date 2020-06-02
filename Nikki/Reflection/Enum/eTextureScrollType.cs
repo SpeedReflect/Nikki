@@ -3,7 +3,7 @@
     /// <summary>
     /// Enum of texture scroll types.
     /// </summary>
-    public enum eTextureScrollType : int
+    public enum eTextureScrollType : byte
     {
         /// <summary>
         /// 

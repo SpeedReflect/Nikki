@@ -3,7 +3,7 @@
     /// <summary>
     /// 
     /// </summary>
-    public enum eAlphaUsageType : int
+    public enum eTextureAlphaUsageType : byte
     {
         /// <summary>
         /// 

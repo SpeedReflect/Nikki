@@ -76,7 +76,7 @@ namespace Nikki.Support.MostWanted.Class
 				if (value.Length > MaxCNameLength)
 					throw new ArgumentLengthException(MaxCNameLength);
 				if (this.Database.STRBlocks.FindCollection(value) != null)
-					throw new CollectionExistenceException();
+					throw new CollectionExistenceException(value);
 				this._collection_name = value;
 			}
 		}
@@ -235,108 +235,60 @@ namespace Nikki.Support.MostWanted.Class
 		public override string GetText(uint key) => base.GetText(key);
 
 		/// <summary>
-		/// Attempts to add <see cref="StringRecord"/> in the <see cref="STRBlock"/>.
+		/// Adds <see cref="StringRecord"/> in the <see cref="STRBlock"/>.
 		/// </summary>
 		/// <param name="key">Key of the new <see cref="StringRecord"/></param>
 		/// <param name="label">Label of the new <see cref="StringRecord"/></param>
 		/// <param name="text">Text of the new <see cref="StringRecord"/></param>
-		/// <returns>True if adding was successful; false otherwise.</returns>
-		public override bool TryAddRecord(string key, string label, string text)
+		public override void AddRecord(string key, string label, string text)
 		{
 			uint hash = key == BaseArguments.AUTO
 				? label.BinHash()
 				: label.IsHexString()
 					? Convert.ToUInt32(label, 16)
 					: 0;
-			if (hash == 0) return false;
-			if (this.GetRecord(hash) != null) return false;
-			this._stringinfo.Add(new StringRecord(this)
-			{
-				Key = hash,
-				Label = label,
-				Text = text
-			});
-			return true;
-		}
 
-		/// <summary>
-		/// Attempts to add <see cref="StringRecord"/> in the <see cref="STRBlock"/>.
-		/// </summary>
-		/// <param name="key">Key of the new <see cref="StringRecord"/></param>
-		/// <param name="label">Label of the new <see cref="StringRecord"/></param>
-		/// <param name="text">Text of the new <see cref="StringRecord"/></param>
-		/// <param name="error">Error occured when trying to add the record.</param>
-		/// <returns>True if adding was successful; false otherwise.</returns>
-		public override bool TryAddRecord(string key, string label, string text, out string error)
-		{
-			error = null;
-			uint hash = key == BaseArguments.AUTO
-				? label.BinHash()
-				: label.IsHexString()
-					? Convert.ToUInt32(label, 16)
-					: 0;
 			if (hash == 0)
 			{
-				error = $"Unable to convert string to a hexadecimal hash or hash equals 0.";
-				return false;
+
+				throw new ArgumentException("Unable to convert string to a hexadecimal key or it equals 0");
+
 			}
+
 			if (this.GetRecord(hash) != null)
 			{
-				error = $"StringRecord with key 0x{hash:X8} already exist.";
-				return false;
+
+				throw new InfoAccessException($"String record with key 0x{hash:X8} already exists");
+
 			}
+
 			this._stringinfo.Add(new StringRecord(this)
 			{
 				Key = hash,
 				Label = label,
 				Text = text
 			});
-			return true;
 		}
 
 		/// <summary>
 		/// Removes <see cref="StringRecord"/> at the index specified.
 		/// </summary>
 		/// <param name="key">Key of the <see cref="StringRecord"/> to be removed.</param>
-		/// <returns>True if deleting was successful.</returns>
-		public override bool TryRemoveRecord(uint key)
+		public override void RemoveRecord(uint key)
 		{
 			var record = this.GetRecord(key);
-			if (record == null) return false;
-			else
-			{
-				this._stringinfo.Remove(record);
-				return true;
-			}
-		}
 
-		/// <summary>
-		/// Attempts to remove <see cref="StringRecord"/> with the key provided.
-		/// </summary>
-		/// <param name="key">Key of the <see cref="StringRecord"/> to be removed.</param>
-		/// <returns>True if removing was successful; false otherwise.</returns>
-		public override bool TryRemoveRecord(string key) =>
-			key.IsHexString() ? this.TryRemoveRecord(Convert.ToUInt32(key, 16)) : false;
-
-		/// <summary>
-		/// Attempts to remove <see cref="StringRecord"/> with the key provided.
-		/// </summary>
-		/// <param name="key">Key of the <see cref="StringRecord"/> to be removed.</param>
-		/// <param name="error">Error occured when trying to remove the record.</param>
-		/// <returns>True if removing was successful; false otherwise.</returns>
-		public override bool TryRemoveRecord(uint key, out string error)
-		{
-			error = null;
-			var record = this.GetRecord(key);
 			if (record == null)
 			{
-				error = $"StringRecord with key 0x{key:X8} does not exist.";
-				return false;
+
+				throw new InfoAccessException($"String record with key 0x{key:X8} does not exist");
+
 			}
 			else
 			{
+
 				this._stringinfo.Remove(record);
-				return true;
+
 			}
 		}
 
@@ -344,17 +296,21 @@ namespace Nikki.Support.MostWanted.Class
 		/// Attempts to remove <see cref="StringRecord"/> with the key provided.
 		/// </summary>
 		/// <param name="key">Key of the <see cref="StringRecord"/> to be removed.</param>
-		/// <param name="error">Error occured when trying to remove the record.</param>
 		/// <returns>True if removing was successful; false otherwise.</returns>
-		public override bool TryRemoveRecord(string key, out string error)
+		public override void RemoveRecord(string key)
 		{
-			error = null;
 			if (!key.IsHexString())
 			{
-				error = $"String {key} is cannot be converted to a hexadecimal hash.";
-				return false;
+
+				throw new ArgumentException($"Value {key} is not a hexadecimal key");
+
 			}
-			return this.TryRemoveRecord(Convert.ToUInt32(key, 16), out error);
+			else
+			{
+
+				this.RemoveRecord(Convert.ToUInt32(key, 16));
+
+			}
 		}
 
 		/// <summary>

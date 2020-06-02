@@ -26,19 +26,7 @@ namespace Nikki.Support.Carbon.Class
 
         [MemoryCastable()]
         private byte _compression = EAComp.RGBA_08;
-
-        [MemoryCastable()]
-        private uint _class = 0x001A93CF;
-        
-        [MemoryCastable()]
-        private byte _apply_alpha_sort = 0;
-        
-        [MemoryCastable()]
-        private byte _alpha_usage_type = 2;
-        
-        [MemoryCastable()]
-        private byte _alpha_blend_type = 1;
-        
+                
         [MemoryCastable()]
         private int _area = 0;
         
@@ -50,13 +38,7 @@ namespace Nikki.Support.Carbon.Class
         
         [MemoryCastable()]
         private uint _cube_environment = 0;
-        
-        [MemoryCastable()]
-        private byte _bias_level = 0;
-        
-        [MemoryCastable()]
-        private byte _rendering_order = 5;
-        
+                
         [MemoryCastable()]
         private byte _used_flag = 0;
         
@@ -77,9 +59,6 @@ namespace Nikki.Support.Carbon.Class
         
         [MemoryCastable()]
         private short _scaleT = 0;
-        
-        [MemoryCastable()]
-        private byte _scroll_type = 0;
         
         [MemoryCastable()]
         private short _scroll_timestep = 0;
@@ -236,7 +215,7 @@ namespace Nikki.Support.Carbon.Class
             bw.Write(this._cube_environment);
             bw.Write((long)0);
             bw.Write(this.BinKey);
-            bw.Write(this._class);
+            bw.Write(this.ClassKey);
             bw.Write((uint)this.Offset);
             bw.Write(this._compression == EAComp.P8_08 ? this.PaletteOffset : -1);
             bw.Write(this.Size);
@@ -251,13 +230,13 @@ namespace Nikki.Support.Carbon.Class
             bw.Write(this._num_palettes);
             bw.Write(this.Mipmaps);
             bw.Write(this.TileableUV);
-            bw.Write(this._bias_level);
-            bw.Write(this._rendering_order);
-            bw.Write(this._scroll_type);
+            bw.Write(this.BiasLevel);
+            bw.Write(this.RenderingOrder);
+            bw.WriteEnum(this.ScrollType);
             bw.Write(this._used_flag);
-            bw.Write(this._apply_alpha_sort);
-            bw.Write(this._alpha_usage_type);
-            bw.Write(this._alpha_blend_type);
+            bw.Write(this.ApplyAlphaSort);
+            bw.WriteEnum(this.AlphaUsageType);
+            bw.WriteEnum(this.AlphaBlendType);
             bw.Write(this._flags);
             bw.WriteEnum(this.MipmapBiasType);
             bw.Write(this._padding);
@@ -294,7 +273,7 @@ namespace Nikki.Support.Carbon.Class
             this._cube_environment = br.ReadUInt32();
             br.BaseStream.Position += 8;
             this.BinKey = br.ReadUInt32();
-            this._class = br.ReadUInt32();
+            this.ClassKey = br.ReadUInt32();
             this.Offset = br.ReadInt32();
             this.PaletteOffset = br.ReadInt32();
             this.Size = br.ReadInt32();
@@ -308,13 +287,13 @@ namespace Nikki.Support.Carbon.Class
             this._num_palettes = br.ReadInt16();
             this.Mipmaps = br.ReadByte();
             this.TileableUV = br.ReadByte();
-            this._bias_level = br.ReadByte();
-            this._rendering_order = br.ReadByte();
-            this._scroll_type = br.ReadByte();
+            this.BiasLevel = br.ReadByte();
+            this.RenderingOrder = br.ReadByte();
+            this.ScrollType = br.ReadEnum<eTextureScrollType>();
             this._used_flag = br.ReadByte();
-            this._apply_alpha_sort = br.ReadByte();
-            this._alpha_usage_type = br.ReadByte();
-            this._alpha_blend_type = br.ReadByte();
+            this.ApplyAlphaSort = br.ReadByte();
+            this.AlphaUsageType = br.ReadEnum<eTextureAlphaUsageType>();
+            this.AlphaBlendType = br.ReadEnum<eTextureAlphaBlendType>();
             this._flags = br.ReadByte();
             this.MipmapBiasType = br.ReadEnum<eTextureMipmapBiasType>();
             this._padding = br.ReadByte();
@@ -460,16 +439,8 @@ namespace Nikki.Support.Carbon.Class
 
             // Default all other values
             this._num_palettes = 0;
-            this.TileableUV = 0;
-            this._bias_level = 0;
-            this._rendering_order = 5;
-            this._scroll_type = 0;
             this._used_flag = 0;
-            this._apply_alpha_sort = 0;
-            this._alpha_usage_type = (byte)eAlphaUsageType.TEXUSAGE_MODULATED;
-            this._alpha_blend_type = (byte)eTextureAlphaBlendType.TEXBLEND_BLEND;
             this._flags = 0;
-            this.MipmapBiasType = (byte)eTextureMipmapBiasType.TEXBIAS_DEFAULT;
             this._scroll_timestep = 0;
             this._scroll_speedS = 0;
             this._scroll_speedT = 0;

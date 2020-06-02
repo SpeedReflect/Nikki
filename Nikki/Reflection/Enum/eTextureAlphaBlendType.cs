@@ -3,7 +3,7 @@
     /// <summary>
     /// Enum of alpha blend types for textures.
     /// </summary>
-    public enum eTextureAlphaBlendType : int
+    public enum eTextureAlphaBlendType : byte
     {
         /// <summary>
         /// 

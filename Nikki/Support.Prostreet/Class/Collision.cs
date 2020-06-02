@@ -13,7 +13,7 @@ using CoreExtensions.Conversions;
 
 
 
-namespace Nikki.Support.Carbon.Class
+namespace Nikki.Support.Prostreet.Class
 {
 	/// <summary>
 	/// <see cref="Collision"/> is a collection of settings related to a car's bounds.
@@ -23,7 +23,11 @@ namespace Nikki.Support.Carbon.Class
 		#region Fields
 
 		private string _collection_name;
+		
+		[MemoryCastable()]
 		private int _number_of_bounds;
+		
+		[MemoryCastable()]
 		private int _number_of_clouds;
 
 		#endregion
@@ -33,17 +37,17 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
-		public override GameINT GameINT => GameINT.Carbon;
+		public override GameINT GameINT => GameINT.Prostreet;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
-		public override string GameSTR => GameINT.Carbon.ToString();
+		public override string GameSTR => GameINT.Prostreet.ToString();
 
 		/// <summary>
 		/// Database to which the class belongs to.
 		/// </summary>
-		public Database.Carbon Database { get; set; }
+		public Database.Prostreet Database { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
@@ -59,7 +63,7 @@ namespace Nikki.Support.Carbon.Class
 				if (value.Contains(" "))
 					throw new Exception("CollectionName cannot contain whitespace.");
 				if (this.Database.Collisions.FindCollection(value) != null)
-					throw new CollectionExistenceException();
+					throw new CollectionExistenceException(value);
 				this._collection_name = value;
 			}
 		}
@@ -115,6 +119,8 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// True if this <see cref="Collision"/> is resolved; false otherwise.
 		/// </summary>
+		[AccessModifiable()]
+		[MemoryCastable()]
 		public override eBoolean IsResolved { get; set; }
 
 		#endregion
@@ -134,8 +140,8 @@ namespace Nikki.Support.Carbon.Class
 		/// Initializes new instance of <see cref="Collision"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-		public Collision(string CName, Database.Carbon db)
+		/// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
+		public Collision(string CName, Database.Prostreet db)
 		{
 			this.Database = db;
 			this.CollectionName = CName;
@@ -148,8 +154,8 @@ namespace Nikki.Support.Carbon.Class
 		/// Initializes new instance of <see cref="Collision"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-		public Collision(BinaryReader br, Database.Carbon db)
+		/// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
+		public Collision(BinaryReader br, Database.Prostreet db)
 		{
 			this.Database = db;
 			this.CollisionBounds = new List<CollisionBound>();
@@ -169,8 +175,12 @@ namespace Nikki.Support.Carbon.Class
 		{
 			// Precalculate size
 			int size = 0x28 + this._number_of_bounds * 0x30; // 0x28 = alignment (8) + headers
-			for (int a1 = 0; a1 < this._number_of_clouds; ++a1)
-				size += 0x10 + this.CollisionClouds[a1].NumberOfVertices * 0x10;
+			for (int loop = 0; loop < this._number_of_clouds; ++loop)
+			{
+
+				size += 0x10 + this.CollisionClouds[loop].NumberOfVertices * 0x10;
+
+			}
 
 			// Write data
 			bw.Write(CarParts.CollisionBound);
@@ -181,15 +191,23 @@ namespace Nikki.Support.Carbon.Class
 			bw.Write(this.IsResolved == eBoolean.False ? (int)0 : (int)1);
 			bw.Write((int)0);
 
-			for (int a1 = 0; a1 < this._number_of_bounds; ++a1)
-				this.CollisionBounds[a1].Assemble(bw);
+			for (int loop = 0; loop < this._number_of_bounds; ++loop)
+			{
+
+				this.CollisionBounds[loop].Write(bw);
+
+			}
 
 			bw.Write(this._number_of_clouds);
 			bw.Write((int)0);
 			bw.Write((long)0);
 
-			for (int a1 = 0; a1 < this._number_of_clouds; ++a1)
-				this.CollisionClouds[a1].Assemble(bw);
+			for (int loop = 0; loop < this._number_of_clouds; ++loop)
+			{
+
+				this.CollisionClouds[loop].Write(bw);
+
+			}
 		}
 
 		/// <summary>
@@ -204,14 +222,22 @@ namespace Nikki.Support.Carbon.Class
 			this.IsResolved = br.ReadInt32() == 0 ? eBoolean.False : eBoolean.True;
 			br.BaseStream.Position += 4;
 
-			for (int a1 = 0; a1 < this._number_of_bounds; ++a1)
-				this.CollisionBounds[a1].Disassemble(br);
+			for (int loop = 0; loop < this._number_of_bounds; ++loop)
+			{
+
+				this.CollisionBounds[loop].Read(br);
+
+			}
 
 			this.NumberOfClouds = br.ReadInt32();
 			br.BaseStream.Position += 12;
 
-			for (int a1 = 0; a1 < this._number_of_clouds; ++a1)
-				this.CollisionClouds[a1].Disassemble(br);
+			for (int loop = 0; loop < this._number_of_clouds; ++loop)
+			{
+
+				this.CollisionClouds[loop].Read(br);
+
+			}
 		}
 
 		/// <summary>
@@ -228,11 +254,19 @@ namespace Nikki.Support.Carbon.Class
 				IsResolved = this.IsResolved
 			};
 
-			for (int a1 = 0; a1 < this._number_of_bounds; ++a1)
-				result.CollisionBounds[a1] = this.CollisionBounds[a1].PlainCopy();
+			for (int loop = 0; loop < this._number_of_bounds; ++loop)
+			{
 
-			for (int a1 = 0; a1 < this._number_of_clouds; ++a1)
-				result.CollisionClouds[a1] = this.CollisionClouds[a1].PlainCopy();
+				result.CollisionBounds[loop] = (CollisionBound)this.CollisionBounds[loop].PlainCopy();
+
+			}
+
+			for (int loop = 0; loop < this._number_of_clouds; ++loop)
+			{
+
+				result.CollisionClouds[loop] = (CollisionCloud)this.CollisionClouds[loop].PlainCopy();
+
+			}
 
 			return result;
 		}

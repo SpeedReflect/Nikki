@@ -106,11 +106,60 @@ namespace Nikki.Support.Shared.Class
         public byte Mipmaps { get; protected set; }
 
         /// <summary>
+        /// Represents class key of the texture.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public uint ClassKey { get; set; } = 0x001A93CF;
+
+        /// <summary>
         /// Represents mipmap bias type of the texture.
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
         public eTextureMipmapBiasType MipmapBiasType { get; set; }
+
+        /// <summary>
+        /// Represents bias level of the texture.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public byte BiasLevel { get; set; }
+
+        /// <summary>
+        /// Represents alpha usage type of the texture.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public eTextureAlphaUsageType AlphaUsageType { get; set; } = eTextureAlphaUsageType.TEXUSAGE_MODULATED;
+
+        /// <summary>
+        /// Represents alpha blend type of the texture.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public eTextureAlphaBlendType AlphaBlendType { get; set; } = eTextureAlphaBlendType.TEXBLEND_BLEND;
+
+        /// <summary>
+        /// Represents type of applying alpha sort of the texture.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public byte ApplyAlphaSort { get; set; }
+
+        /// <summary>
+        /// Represents scroll type of the texture.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public eTextureScrollType ScrollType { get; set; }
+
+        /// <summary>
+        /// Represents rendering order of the texture.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public byte RenderingOrder { get; set; } = 5;
 
         /// <summary>
         /// Represents tileable level of the texture.

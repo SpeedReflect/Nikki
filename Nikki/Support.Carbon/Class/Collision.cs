@@ -9,7 +9,6 @@ using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Shared.Parts.BoundParts;
-using CoreExtensions.Conversions;
 
 
 
@@ -93,6 +92,7 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Number of collision bounds.
 		/// </summary>
+		[AccessModifiable()]
 		public override int NumberOfBounds
 		{
 			get => this._number_of_bounds;
@@ -106,6 +106,7 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Number of collision clouds.
 		/// </summary>
+		[AccessModifiable()]
 		public override int NumberOfClouds
 		{
 			get => this._number_of_clouds;
@@ -119,6 +120,7 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// True if this <see cref="Collision"/> is resolved; false otherwise.
 		/// </summary>
+		[AccessModifiable()]
 		[MemoryCastable()]
 		public override eBoolean IsResolved { get; set; }
 
@@ -175,10 +177,10 @@ namespace Nikki.Support.Carbon.Class
 			// Precalculate size
 			int size = 0x28 + this._number_of_bounds * 0x30; // 0x28 = alignment (8) + headers
 			
-			for (int a1 = 0; a1 < this._number_of_clouds; ++a1)
+			for (int loop = 0; loop < this._number_of_clouds; ++loop)
 			{
 
-				size += 0x10 + this.CollisionClouds[a1].NumberOfVertices * 0x10;
+				size += 0x10 + this.CollisionClouds[loop].NumberOfVertices * 0x10;
 
 			}
 
@@ -191,10 +193,10 @@ namespace Nikki.Support.Carbon.Class
 			bw.Write(this.IsResolved == eBoolean.False ? (int)0 : (int)1);
 			bw.Write((int)0);
 
-			for (int a1 = 0; a1 < this._number_of_bounds; ++a1)
+			for (int loop = 0; loop < this._number_of_bounds; ++loop)
 			{
 
-				this.CollisionBounds[a1].Write(bw);
+				this.CollisionBounds[loop].Write(bw);
 
 			}
 
@@ -202,10 +204,10 @@ namespace Nikki.Support.Carbon.Class
 			bw.Write((int)0);
 			bw.Write((long)0);
 
-			for (int a1 = 0; a1 < this._number_of_clouds; ++a1)
+			for (int loop = 0; loop < this._number_of_clouds; ++loop)
 			{
 
-				this.CollisionClouds[a1].Write(bw);
+				this.CollisionClouds[loop].Write(bw);
 
 			}
 		}
@@ -222,20 +224,20 @@ namespace Nikki.Support.Carbon.Class
 			this.IsResolved = br.ReadInt32() == 0 ? eBoolean.False : eBoolean.True;
 			br.BaseStream.Position += 4;
 
-			for (int a1 = 0; a1 < this._number_of_bounds; ++a1)
+			for (int loop = 0; loop < this._number_of_bounds; ++loop)
 			{
 
-				this.CollisionBounds[a1].Read(br);
+				this.CollisionBounds[loop].Read(br);
 
 			}
 
 			this.NumberOfClouds = br.ReadInt32();
 			br.BaseStream.Position += 12;
 
-			for (int a1 = 0; a1 < this._number_of_clouds; ++a1)
+			for (int loop = 0; loop < this._number_of_clouds; ++loop)
 			{
 
-				this.CollisionClouds[a1].Read(br);
+				this.CollisionClouds[loop].Read(br);
 
 			}
 		}
@@ -257,14 +259,14 @@ namespace Nikki.Support.Carbon.Class
 			for (int loop = 0; loop < this._number_of_bounds; ++loop)
 			{
 
-				result.CollisionBounds[loop] = this.CollisionBounds[loop].PlainCopy();
+				result.CollisionBounds[loop] = (CollisionBound)this.CollisionBounds[loop].PlainCopy();
 
 			}
 
 			for (int loop = 0; loop < this._number_of_clouds; ++loop)
 			{
 
-				result.CollisionClouds[loop] = this.CollisionClouds[loop].PlainCopy();
+				result.CollisionClouds[loop] = (CollisionCloud)this.CollisionClouds[loop].PlainCopy();
 
 			}
 
