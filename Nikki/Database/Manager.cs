@@ -1,0 +1,1093 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using Nikki.Reflection.Enum;
+using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Exception;
+using CoreExtensions.Management;
+
+
+
+namespace Nikki.Database
+{
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	public class Manager<T> : 
+		IList<T>, IEnumerable<T>, ICollection<T>, IList, IEnumerable, ICollection
+		where T : ACollectable, new()
+	{
+		#region Fields
+
+		private T[] _collections;
+		private int _size = 0;
+		private T[] _empty = new T[0];
+		private int _capacity => this._collections.Length;
+		private int _extender = 1;
+
+		#endregion
+
+		#region Main
+
+		/// <summary>
+		/// Initializes new instance of <see cref="Manager{T}"/> with default initial capacity.
+		/// </summary>
+		public Manager()
+		{
+			this._collections = this._empty;
+		}
+
+		/// <summary>
+		/// Initializes new instance of <see cref="Manager{T}"/> with initial capacity specified.
+		/// </summary>
+		/// <param name="capacity">The number of elements that the new manager can initially store.</param>
+		public Manager(int capacity)
+		{
+			this._collections = capacity <= 0 ? this._empty : (new T[capacity]);
+		}
+
+		/// <summary>
+		/// Initializes new instance of <see cref="Manager{T}"/> with initial capacity specified.
+		/// </summary>
+		/// <param name="capacity">The number of elements that the new manager can initially store.</param>
+		/// <param name="extender">Specifies by how much elements capacity should be extended when 
+		/// it reaches its limit. If extender is 0 or negative, this <see cref="Manager{T}"/> 
+		/// will have a fixed capacity.</param>
+		public Manager(int capacity, int extender) : this(capacity)
+		{
+			this.Extender = extender;
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Manager{T}"/> class that contains 
+		/// elements copied from the specified collection and has sufficient capacity to 
+		/// accommodate the number of elements copied.
+		/// </summary>
+		/// <param name="collection">The collection whose elements are copied to the new list.</param>
+		public Manager(IEnumerable<T> collection)
+		{
+			if (collection == null)
+			{
+
+				throw new ArgumentNullException(nameof(collection));
+
+			}
+			else
+			{
+
+				if (collection is ICollection<T> elements)
+				{
+
+					if (elements.Count == 0)
+					{
+
+						this._collections = this._empty;
+						return;
+
+					}
+					else
+					{
+
+						this._collections = new T[elements.Count];
+						elements.CopyTo(this._collections, 0);
+						this._size = elements.Count;
+
+					}
+
+				}
+				else
+				{
+
+					this._collections = this._empty;
+
+					foreach (var element in collection)
+					{
+
+						this.Add(element);
+
+					}
+
+				}
+
+			}
+
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Manager{T}"/> class that contains 
+		/// elements copied from the specified collection and has sufficient capacity to 
+		/// accommodate the number of elements copied.
+		/// </summary>
+		/// <param name="collection">The collection whose elements are copied to the new list.</param>
+		/// <param name="extender">Specifies by how much elements capacity should be extended when 
+		/// it reaches its limit. If extender is 0 or negative, this <see cref="Manager{T}"/> 
+		/// will have a fixed capacity.</param>
+		public Manager(IEnumerable<T> collection, int extender) : this(collection)
+		{
+			this.Extender = extender;
+		}
+
+		#endregion
+
+		#region This
+
+		/// <summary>
+		/// Gets or sets the collection at the specified index.
+		/// </summary>
+		/// <param name="index">The zero-based index of the collection to get or set.</param>
+		/// <returns>The collection at the specified index.</returns>
+		public T this[int index]
+		{
+			get
+			{
+				if (index < 0 || index > this._size)
+				{
+
+					throw new IndexOutOfRangeException();
+
+				}
+				else
+				{
+
+					return this._collections[index];
+
+				}
+			}
+			set
+			{
+				if (index < 0 || index > this._size)
+				{
+
+					throw new IndexOutOfRangeException();
+
+				}
+				else
+				{
+
+					if (this.Contains(value.CollectionName))
+					{
+
+						throw new CollectionExistenceException(value.CollectionName);
+
+					}
+
+					this._collections[index] = value;
+
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the collection at the specified index.
+		/// </summary>
+		/// <param name="index">The zero-based index of the collection to get or set.</param>
+		/// <returns>The collection at the specified index.</returns>
+		object IList.this[int index]
+		{
+			get
+			{
+				return this[index];
+			}
+			set
+			{
+				if (value is T obj)
+				{
+
+					this[index] = obj;
+
+				}
+				else
+				{
+
+					throw new ArgumentException("Value passed is of invalid type");
+
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets the collection with CollectionName specified.
+		/// </summary>
+		/// <param name="cname">CollectionName to match.</param>
+		/// <returns>The collection with CollectionName specified, if exists; null otherwise.</returns>
+		public T this[string cname] => this.Find(cname);
+
+		#endregion
+
+		#region Properties
+
+		/// <summary>
+		/// Gets the number of elements contained in the <see cref="IList"/>.
+		/// </summary>
+		public int Count => this._size;
+
+		/// <summary>
+		/// Gets or sets the total number of elements the internal data structure can 
+		/// hold without resizing.
+		/// </summary>
+		public int Capacity
+		{
+			get
+			{
+				return this._collections.Length;
+			}
+			set
+			{
+				if (this._size == 0 && value == 0)
+				{
+
+					this._collections = this._empty;
+					return;
+
+				}
+
+				if (value <= this._size || value == this._collections.Length)
+				{
+
+					return;
+
+				}
+				else
+				{
+					var data = new T[value];
+
+					for (int i = 0; i < this._size; ++i)
+					{
+
+						data[i] = this._collections[i];
+
+					}
+
+					this._collections = data;
+					ForcedX.GCCollect();
+
+				}
+			}
+		}
+
+		/// <summary>
+		/// Specifies by how much elements capacity should be expanded when it reaches its limit. 
+		/// If Extender is 0, this <see cref="Manager{T}"/> will have a fixed capacity and adding 
+		/// elements beyond its capacity will not be possible, unless Extender becomes positive.
+		/// </summary>
+		public int Extender
+		{
+			get => this._extender;
+			set => this._extender = value <= 0 ? 0 : value;
+		}
+
+		/// <summary>
+		/// True if this <see cref="IList"/> is read-only; otherwise, false.
+		/// </summary>
+		public bool IsReadOnly => false;
+
+		/// <summary>
+		/// True if this <see cref="IList"/> is of fixed size; otherwise, false.
+		/// </summary>
+		public bool IsFixedSize => this._extender == 0;
+
+		/// <summary>
+		/// Database to which this <see cref="Manager{T}"/> belongs to.
+		/// </summary>
+		public ABasicBase Database { get; set; }
+
+		/// <summary>
+		/// Gets a value indicating whether access to the <see cref="ICollection"/> is 
+		/// synchronized (thread safe).
+		/// </summary>
+		/// <returns>True if access to the <see cref="ICollection"/> is synchronized 
+		/// (thread safe); otherwise, false..</returns>
+		public bool IsSynchronized => throw new NotImplementedException();
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public object SyncRoot => throw new NotImplementedException();
+
+		#endregion
+
+		#region Add
+
+		/// <summary>
+		/// Adds a new collection to the end of the <see cref="Manager{T}"/> with CollectionName 
+		/// provided. Throws exception in case of failure.
+		/// </summary>
+		/// <param name="cname">CollectionName of a new created collection.</param>
+		public void Add(string cname)
+		{
+			var result = this.CreationCheck(cname);
+
+			switch (result)
+			{
+				case eCollectionAddResult.NULL_EMPTY:
+					throw new ArgumentNullException("CollectionName cannot be null, empty or whitespace");
+
+				case eCollectionAddResult.WHITESPACE:
+					throw new ArgumentException("CollectionName cannot contain whitespace");
+
+				case eCollectionAddResult.LONGLENGTH:
+					throw new ArgumentLengthException("CollectionName passed exceeds maximum character length allowed");
+
+				case eCollectionAddResult.INVALID_CN:
+					throw new ArgumentException("CollectionName passed is not of a valid type or pattern");
+
+				case eCollectionAddResult.MINSTANCES:
+					throw new CollectionExistenceException($"Collection named {cname} already exists");
+
+				default:
+					break;
+
+			}
+
+			if (this._size == this._capacity)
+			{
+
+				if (this.IsFixedSize)
+				{
+
+					throw new ArgumentException("Unable to add collection to a non-resizable manager");
+
+				}
+				else
+				{
+
+					this.Capacity += this.Extender;
+
+				}
+
+			}
+
+			var ctor = typeof(T).GetConstructor(new Type[] { typeof(string), this.Database.GetType() });
+			var instance = (T)ctor.Invoke(new object[] { cname, this.Database });
+			this._collections[this._size++] = instance;
+		}
+
+		/// <summary>
+		/// Adds an object to the end of the <see cref="Manager{T}"/>. Throws exception in case 
+		/// of failure.
+		/// </summary>
+		/// <param name="item">The object to be added to the end of the <see cref="Manager{T}"/>.</param>
+		public void Add(T item)
+		{
+			if (this.Contains(item.CollectionName))
+			{
+
+				throw new CollectionExistenceException(item.CollectionName);
+
+			}
+
+			if (this._size == this._capacity)
+			{
+
+				if (this.IsFixedSize)
+				{
+
+					throw new ArgumentException("Unable to add collection to a non-resizable manager");
+
+				}
+				else
+				{
+
+					this.Capacity += this.Extender;
+
+				}
+
+			}
+
+			this._collections[this._size++] = item;
+
+		}
+
+		/// <summary>
+		/// Adds an item to the <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="value">The object to add to the <see cref="Manager{T}"/>.</param>
+		/// <returns>The position into which the new collection was inserted.</returns>
+		public int Add(object value)
+		{
+			if (value is T obj)
+			{
+
+				this.Add(obj);
+				return this._size - 1;
+
+			}
+			else
+			{
+
+				throw new ArgumentException("Value passed is of invalid type");
+
+			}
+		}
+
+		#endregion
+
+		#region Contains
+
+		/// <summary>
+		/// Determines whether a collection with CollectionName specified exists in 
+		/// the <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="cname">CollectionName to find.</param>
+		/// <returns>True if collection with CollectionName specified exists; otherwise, false.</returns>
+		public bool Contains(string cname)
+		{
+			for (int loop = 0; loop < this._size; ++loop)
+			{
+
+				if (this._collections[loop].CollectionName == cname)
+				{
+
+					return true;
+
+				}
+
+			}
+
+			return false;
+		}
+
+		/// <summary>
+		/// Determines whether a collection is in the <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="item">The collection to locate in this <see cref="Manager{T}"/>.</param>
+		/// <returns>True if collection is in this <see cref="Manager{T}"/>; otherwise, false.</returns>
+		public bool Contains(T item) => item == null ? false : this.Contains(item.CollectionName);
+
+		/// <summary>
+		/// Determines whether an object is in the <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="value">The object to locate in this <see cref="Manager{T}"/>.</param>
+		/// <returns>True if object is in this <see cref="Manager{T}"/>; otherwise, false.</returns>
+		public bool Contains(object value)
+		{
+			if (value is string cname)
+			{
+
+				return this.Contains(cname);
+
+			}
+			else if (value is T obj)
+			{
+
+				return this.Contains(obj.CollectionName);
+
+			}
+			else
+			{
+
+				throw new ArgumentException("Value passed is of invalid type");
+
+			}
+		}
+
+		#endregion
+
+		#region CopyTo
+
+		/// <summary>
+		/// Copies elements of the <see cref="Manager{T}"/> to an <see cref="Array"/>, 
+		/// starting at a particular <see cref="Array"/> index.
+		/// </summary>
+		/// <param name="array">The one-dimensional <see cref="Array"/> that is the destination 
+		/// of the elements copied from this <see cref="Manager{T}"/>.</param>
+		public void CopyTo(T[] array) => this.CopyTo(array, 0);
+
+		/// <summary>
+		/// Copies elements of the <see cref="Manager{T}"/> to an <see cref="Array"/>, 
+		/// starting at a particular <see cref="Array"/> index.
+		/// </summary>
+		/// <param name="array">The one-dimensional <see cref="Array"/> that is the destination 
+		/// of the elements copied from this <see cref="Manager{T}"/>.</param>
+		/// <param name="index">The zero-based index in <see cref="Array"/> at which copying begins.</param>
+		public void CopyTo(T[] array, int index) =>
+			Array.Copy(this._collections, 0, array, index, this._size);
+
+		/// <summary>
+		/// Copies the elements of the <see cref="Manager{T}"/> to an <see cref="Array"/>.
+		/// </summary>
+		/// <param name="array">The one-dimensional <see cref="Array"/> that is the destination 
+		/// of the elements copied from this <see cref="Manager{T}"/>.</param>
+		public void CopyTo(Array array) => this.CopyTo(array, 0);
+
+		/// <summary>
+		/// Copies the elements of the <see cref="Manager{T}"/> to an <see cref="Array"/>, 
+		/// starting at a particular <see cref="Array"/> index.
+		/// </summary>
+		/// <param name="array">The one-dimensional <see cref="Array"/> that is the destination 
+		/// of the elements copied from this <see cref="Manager{T}"/>.</param>
+		/// <param name="index">The zero-based index in <see cref="Array"/> at which copying begins.</param>
+		public void CopyTo(Array array, int index)
+		{
+			if (array == null)
+			{
+
+				throw new ArgumentNullException(nameof(array));
+
+			}
+			else if (array.Rank != 1)
+			{
+
+				throw new ArgumentException("Array passed should be one-dimensional");
+
+			}
+
+			Array.Copy(this._collections, 0, array, index, this._size);
+		}
+
+		#endregion
+
+		#region Enumerator
+
+		/// <summary>
+		/// Enumerates collections of a <see cref="Manager{T}"/>.
+		/// </summary>
+		public struct Enumerator : IEnumerator<T>, IDisposable, IEnumerator
+		{
+			private Manager<T> _manager;
+			private int _index;
+			private T _current;
+
+			internal Enumerator(Manager<T> manager)
+			{
+				this._manager = manager;
+				this._index = 0;
+				this._current = null;
+			}
+
+			/// <summary>
+			/// Gets the element at the current position of the enumerator.
+			/// </summary>
+			public T Current => this._current;
+
+			/// <summary>
+			/// Gets the element at the current position of the enumerator.
+			/// </summary>
+			object IEnumerator.Current
+			{
+				get
+				{
+					if (this._index == 0 || this._index == this._manager._size + 1)
+					{
+
+						throw new InvalidOperationException();
+
+					}
+
+					return this._current;
+				}
+			}
+
+			/// <summary>
+			/// Releases all resources used by the <see cref="Enumerator"/>.
+			/// </summary>
+			public void Dispose() { }
+
+			/// <summary>
+			/// Advances the enumerator to the next element of the <see cref="Manager{T}"/>.
+			/// </summary>
+			/// <returns>True if the enumerator was successfully advanced to the next element; 
+			/// false if the enumerator has passed the end of the collection.</returns>
+			public bool MoveNext()
+			{
+				if (this._index < this._manager._size)
+				{
+					
+					this._current = this._manager._collections[this._index++];
+					return true;
+
+				}
+
+				this._index = this._manager._size + 1;
+				this._current = null;
+				return false;
+			}
+
+			/// <summary>
+			/// Sets the enumerator to its initial position, which is before the first element 
+			/// in the collection.
+			/// </summary>
+			public void Reset()
+			{
+				this._index = 0;
+				this._current = null;
+			}
+		}
+
+		/// <summary>
+		/// Returns an enumerator that iterates through a collection.
+		/// </summary>
+		/// <returns>An <see cref="IEnumerator{T}"/> that can be used to iterate through 
+		/// the collection.</returns>
+		public IEnumerator<T> GetEnumerator() => new Enumerator(this);
+
+		/// <summary>
+		/// Returns an enumerator that iterates through a collection.
+		/// </summary>
+		/// <returns>An <see cref="IEnumerator"/> that can be used to iterate through 
+		/// the collection.</returns>
+		IEnumerator IEnumerable.GetEnumerator() => new Enumerator(this);
+
+		#endregion
+
+		#region IndexOf
+
+		/// <summary>
+		/// Searches for the collection with CollectionName specified and returns the 
+		/// zero-based index of the first occurrence within the entire <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="cname">CollectionName to match.</param>
+		/// <returns>The zero-based index of the first occurence of collection within 
+		/// the entire <see cref="Manager{T}"/>.</returns>
+		public int IndexOf(string cname)
+		{
+			for (int loop = 0; loop < this._size; ++loop)
+			{
+
+				if (this._collections[loop].CollectionName == cname) return loop;
+
+			}
+
+			return -1;
+		}
+
+		/// <summary>
+		/// Searches for the specified collection and returns the zero-based index of the 
+		/// first occurrence within the entire <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="item">The collection to locate in the <see cref="Manager{T}"/>.</param>
+		/// <returns>The zero-based index of the first occurence of collection within 
+		/// the entire <see cref="Manager{T}"/>.</returns>
+		public int IndexOf(T item) => item == null ? -1 : this.IndexOf(item.CollectionName);
+
+		/// <summary>
+		/// Searches for the specified object and returns the zero-based index of the first 
+		/// occurrence within the entire <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="value">The object to locate in the <see cref="Manager{T}"/>.</param>
+		/// <returns>The zero-based index of the first occurrence of object within 
+		/// the entire <see cref="Manager{T}"/>.</returns>
+		public int IndexOf(object value)
+		{
+			if (value is string cname)
+			{
+
+				return this.IndexOf(cname);
+
+			}
+			else if (value is T obj)
+			{
+
+				return this.IndexOf(obj.CollectionName);
+
+			}
+			else
+			{
+
+				throw new ArgumentException("Value passed is of invalid type");
+
+			}
+		}
+
+		#endregion
+
+		#region Find
+
+		/// <summary>
+		/// Searches for a collection that has CollectionName specified within the entire 
+		/// <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="cname">CollectionName to match.</param>
+		/// <returns>Collection with CollectionName specified, if found; null otherwise.</returns>
+		public T Find(string cname)
+		{
+			for (int loop = 0; loop < this._size; ++loop)
+			{
+
+				if (this._collections[loop].CollectionName == cname)
+				{
+
+					return this._collections[loop];
+
+				}
+
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Searches for a collection that matches the conditions defined by the specified 
+		/// predicate, and returns the first occurrence within the entire <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="predicate">The <see cref="Predicate{T}"/> delegate that defines 
+		/// the conditions of the collection to search for.</param>
+		/// <returns>The first collection that matches the conditions defined by the specified 
+		/// predicate, if found; null otherwise.</returns>
+		public T Find(Predicate<T> predicate)
+		{
+			if (predicate == null)
+			{
+
+				throw new ArgumentNullException(nameof(predicate));
+
+			}
+			else
+			{
+
+				for (int loop = 0; loop < this._size; ++loop)
+				{
+
+					if (predicate(this._collections[loop]))
+					{
+
+						return this._collections[loop];
+
+					}
+
+				}
+
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Searches for a collection that has CollectionName specified, and returns the 
+		/// zero-based index of its first occurence within this <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="cname">CollectionName to match.</param>
+		/// <returns>The zero-based index of the collection with CollectionName specified, 
+		/// if found; otherwise -1.</returns>
+		public int FindIndex(string cname)
+		{
+			for (int loop = 0; loop < this._size; ++loop)
+			{
+
+				if (this._collections[loop].CollectionName == cname) return loop;
+
+			}
+
+			return -1;
+		}
+
+		/// <summary>
+		/// Searches for a collection that matches the conditions defined by the specified 
+		/// predicate, and returns the zero-based index of its first occurrence within 
+		/// this <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="predicate">The <see cref="Predicate{T}"/> delegate that defines 
+		/// the conditions of the collection to search for.</param>
+		/// <returns>The zero-based index of the first occurrence of an element that 
+		/// matches the conditions defined by <see cref="Predicate{T}"/>, 
+		/// if found; otherwise, -1.</returns>
+		public int FindIndex(Predicate<T> predicate)
+		{
+			if (predicate == null)
+			{
+
+				throw new ArgumentNullException(nameof(predicate));
+
+			}
+			else
+			{
+
+				for (int loop = 0; loop < this._size; ++loop)
+				{
+
+					if (predicate(this._collections[loop])) return loop;
+
+				}
+
+			}
+
+			return -1;
+		}
+
+		#endregion
+
+		#region Insert
+
+		/// <summary>
+		/// Inserts new collection with CollectionName provided at the index specified in this 
+		/// <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="index">The zero-based index at which collection should be inserted.</param>
+		/// <param name="cname">CollectionName of a new collection to insert.</param>
+		public void Insert(int index, string cname)
+		{
+			if (index < 0 || index > this._size)
+			{
+
+				throw new ArgumentOutOfRangeException(nameof(index));
+
+			}
+
+			var result = this.CreationCheck(cname);
+
+			switch (result)
+			{
+				case eCollectionAddResult.NULL_EMPTY:
+					throw new ArgumentNullException("CollectionName cannot be null, empty or whitespace");
+
+				case eCollectionAddResult.WHITESPACE:
+					throw new ArgumentException("CollectionName cannot contain whitespace");
+
+				case eCollectionAddResult.LONGLENGTH:
+					throw new ArgumentLengthException("CollectionName passed exceeds maximum character length allowed");
+
+				case eCollectionAddResult.INVALID_CN:
+					throw new ArgumentException("CollectionName passed is not of a valid type or pattern");
+
+				case eCollectionAddResult.MINSTANCES:
+					throw new CollectionExistenceException($"Collection named {cname} already exists");
+
+				default:
+					break;
+
+			}
+
+			if (this._size == this._capacity)
+			{
+
+				if (this.IsFixedSize)
+				{
+
+					throw new ArgumentException("Unable to add collection to a non-resizable manager");
+
+				}
+				else
+				{
+
+					this.Capacity += this.Extender;
+
+				}
+
+			}
+
+			if (index < this._size)
+			{
+
+				Array.Copy(this._collections, index, this._collections, index + 1, this._size - index);
+
+			}
+
+			var ctor = typeof(T).GetConstructor(new Type[] { typeof(string), this.Database.GetType() });
+			var instance = (T)ctor.Invoke(new object[] { cname, this.Database });
+			this._collections[index] = instance;
+			++this._size;
+		}
+
+		/// <summary>
+		/// Inserts a collection into the <see cref="Manager{T}"/> at the specified index.
+		/// </summary>
+		/// <param name="index">The zero-based index at which collection should be inserted.</param>
+		/// <param name="item">The collection to insert.</param>
+		public void Insert(int index, T item)
+		{
+			if (index < 0 || index > this._size)
+			{
+
+				throw new ArgumentOutOfRangeException(nameof(index));
+
+			}
+
+			if (this.Contains(item.CollectionName))
+			{
+
+				throw new CollectionExistenceException(item.CollectionName);
+
+			}
+
+			if (this._size == this._capacity)
+			{
+
+				if (this.IsFixedSize)
+				{
+
+					throw new ArgumentException("Unable to add collection to a non-resizable manager");
+
+				}
+				else
+				{
+
+					this.Capacity += this.Extender;
+
+				}
+
+			}
+
+			if (index < this._size)
+			{
+
+				Array.Copy(this._collections, index, this._collections, index + 1, this._size - index);
+
+			}
+
+			this._collections[index] = item;
+			++this._size;
+		}
+
+		/// <summary>
+		/// Inserts an element into the <see cref="Manager{T}"/> at the specified index.
+		/// </summary>
+		/// <param name="index">The zero-based index at which element should be inserted.</param>
+		/// <param name="value">The object to insert.</param>
+		public void Insert(int index, object value)
+		{
+			if (value is T obj)
+			{
+
+				this.Insert(index, obj);
+
+			}
+			else
+			{
+
+				throw new ArgumentException("Value passed is of invalid type");
+
+			}
+		}
+
+		#endregion
+
+		#region Remove
+
+		/// <summary>
+		/// Removes the first occurence of a collection with CollectionName specified from 
+		/// the <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="cname">CollectionName to match.</param>
+		public void Remove(string cname)
+		{
+			for (int loop = 0; loop < this._size; ++loop)
+			{
+
+				if (this._collections[loop].CollectionName == cname)
+				{
+
+					this.RemoveAt(loop);
+
+				}
+
+			}
+
+			throw new ArgumentException($"Collection named {cname} does not exist");
+		}
+
+		/// <summary>
+		/// Removes the first occurrence of a specific collection from the <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="item">The collection to remove from the <see cref="Manager{T}"/>.</param>
+		/// <returns>True is successfully removed; otherwise, false.</returns>
+		public bool Remove(T item)
+		{
+			int index = this.IndexOf(item);
+			
+			if (index != -1)
+			{
+
+				this.RemoveAt(index);
+				return true;
+
+			}
+
+			return false;
+		}
+
+		/// <summary>
+		/// Removes the first occurrence of a specific object from the <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="value">The object to remove from the <see cref="Manager{T}"/>.</param>
+		public void Remove(object value)
+		{
+			if (value is T obj)
+			{
+
+				this.Remove(obj.CollectionName);
+
+			}
+			else
+			{
+
+				throw new ArgumentException("Value passed is of invalid type");
+
+			}
+		}
+
+		#endregion
+
+		#region Misc
+
+		/// <summary>
+		/// Removes the element at the specified index of the <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="index">The zero-based index of the element to remove.</param>
+		public void RemoveAt(int index)
+		{
+			if (index >= this._size || index < 0)
+			{
+
+				throw new ArgumentOutOfRangeException(nameof(index));
+
+			}
+
+			--this._size;
+
+			if (index < this._size)
+			{
+
+				Array.Copy(this._collections, index + 1, this._collections, index, this._size - index);
+
+			}
+
+			this._collections[this._size] = null;
+		}
+
+		/// <summary>
+		/// Removes all elements from the <see cref="Manager{T}"/>.
+		/// </summary>
+		public void Clear()
+		{
+			if (this._size > 0)
+			{
+
+				Array.Clear(this._collections, 0, this._size);
+				this._size = 0;
+
+			}
+		}
+
+		/// <summary>
+		/// Performs the specified action on each collection of the <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="action">The <see cref="Action"/> delegate to perform on each 
+		/// collection of the <see cref="Manager{T}"/>.</param>
+		public void ForEach(Action<T> action)
+		{
+			if (action == null)
+			{
+
+				throw new ArgumentNullException(nameof(action));
+
+			}
+			else
+			{
+
+				for (int loop = 0; loop < this._size; ++loop)
+				{
+
+					action(this._collections[loop]);
+
+				}
+
+			}
+		}
+
+		#endregion
+
+		internal Func<string, eCollectionAddResult> CreationCheck { get; set; }
+
+	}
+}

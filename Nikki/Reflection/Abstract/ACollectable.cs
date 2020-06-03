@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Collections.Generic;
 using Nikki.Core;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
