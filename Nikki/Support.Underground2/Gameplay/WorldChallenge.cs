@@ -20,6 +20,8 @@ namespace Nikki.Support.Underground2.Gameplay
 		#region Fields
 
 		private string _collection_name;
+
+		[MemoryCastable()]
 		private byte _padding0;
 
 		#endregion
@@ -55,7 +57,7 @@ namespace Nikki.Support.Underground2.Gameplay
 				if (value.Contains(" "))
 					throw new Exception("CollectionName cannot contain whitespace.");
 				if (this.Database.WorldChallenges.FindCollection(value) != null)
-					throw new CollectionExistenceException();
+					throw new CollectionExistenceException(value);
 				this._collection_name = value;
 			}
 		}
@@ -74,6 +76,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Event trigger of this <see cref="WorldChallenge"/>.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string WorldChallengeTrigger { get; set; } = String.Empty;
 
 		/// <summary>
@@ -81,6 +84,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte BelongsToStage { get; set; }
 
 		/// <summary>
@@ -89,6 +93,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public eBoolean UseOutrunsAsReqRaces { get; set; }
 
 		/// <summary>
@@ -96,18 +101,21 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte RequiredRacesWon { get; set; }
 
 		/// <summary>
 		/// Label of the SMS sent when challenge is unlocked.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string ChallengeSMSLabel { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Parent, or destination in this <see cref="WorldChallenge"/>.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string ChallengeParent { get; set; } = String.Empty;
 		
 		/// <summary>
@@ -115,30 +123,35 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public int TimeLimit { get; set; }
 
 		/// <summary>
 		/// Type of the challenge.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public eWorldChallengeType WorldChallengeType { get; set; }
 
 		/// <summary>
 		/// Index of the first unique part that gets unlocked upon completion.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte UnlockablePart1_Index { get; set; }
 
 		/// <summary>
 		/// Index of the second unique part that gets unlocked upon completion.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte UnlockablePart2_Index { get; set; }
 
 		/// <summary>
 		/// Index of the third unique part that gets unlocked upon completion.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte UnlockablePart3_Index { get; set; }
 
 		#endregion
@@ -258,22 +271,8 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <returns>Memory casted copy of the object.</returns>
 		public override ACollectable MemoryCast(string CName)
 		{
-			var result = new WorldChallenge(CName, this.Database)
-			{
-				WorldChallengeTrigger = this.WorldChallengeTrigger,
-				UseOutrunsAsReqRaces = this.UseOutrunsAsReqRaces,
-				ChallengeSMSLabel = this.ChallengeSMSLabel,
-				WorldChallengeType = this.WorldChallengeType,
-				ChallengeParent = this.ChallengeParent,
-				UnlockablePart1_Index = this.UnlockablePart1_Index,
-				UnlockablePart2_Index = this.UnlockablePart2_Index,
-				UnlockablePart3_Index = this.UnlockablePart3_Index,
-				RequiredRacesWon = this.RequiredRacesWon,
-				BelongsToStage = this.BelongsToStage,
-				TimeLimit = this.TimeLimit,
-				_padding0 = this._padding0
-			};
-
+			var result = new WorldChallenge(CName, this.Database);
+			base.MemoryCast(this, result);
 			return result;
 		}
 

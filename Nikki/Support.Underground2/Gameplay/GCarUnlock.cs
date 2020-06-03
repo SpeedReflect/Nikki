@@ -52,7 +52,7 @@ namespace Nikki.Support.Underground2.Gameplay
 				if (value.Contains(" "))
 					throw new Exception("CollectionName cannot contain whitespace.");
 				if (this.Database.GCarUnlocks.FindCollection(value) != null)
-					throw new CollectionExistenceException();
+					throw new CollectionExistenceException(value);
 				this._collection_name = value;
 			}
 		}
@@ -72,6 +72,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public string ReqEventCompleted1 { get; set; }
 
 		/// <summary>
@@ -79,6 +80,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public string ReqEventCompleted2 { get; set; }
 
 		#endregion

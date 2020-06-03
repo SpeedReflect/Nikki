@@ -6,7 +6,6 @@ using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using Nikki.Reflection.Exception;
-using CoreExtensions.IO;
 
 
 
@@ -54,7 +53,7 @@ namespace Nikki.Support.Underground2.Gameplay
 				if (value.Contains(" "))
 					throw new Exception("CollectionName cannot contain whitespace.");
 				if (this.Database.BankTriggers.FindCollection(value) != null)
-					throw new CollectionExistenceException();
+					throw new CollectionExistenceException(value);
 				this._collection_name = value;
 			}
 		}
@@ -74,6 +73,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public ushort CashValue { get; set; }
 
 		/// <summary>
@@ -81,12 +81,14 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public eBoolean InitiallyUnlocked { get; set; }
 
 		/// <summary>
 		/// Index of the trigger.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte BankIndex { get; set; }
 
 		/// <summary>
@@ -94,6 +96,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public int RequiredStagesCompleted { get; set; }
 
 		#endregion

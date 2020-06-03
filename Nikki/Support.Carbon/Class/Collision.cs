@@ -9,6 +9,7 @@ using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Shared.Parts.BoundParts;
+using CoreExtensions.Conversions;
 
 
 
@@ -141,8 +142,8 @@ namespace Nikki.Support.Carbon.Class
 		/// Initializes new instance of <see cref="Collision"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
-		public Collision(string CName, Database.Prostreet db)
+		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
+		public Collision(string CName, Database.Carbon db)
 		{
 			this.Database = db;
 			this.CollectionName = CName;
@@ -155,8 +156,8 @@ namespace Nikki.Support.Carbon.Class
 		/// Initializes new instance of <see cref="Collision"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
-		public Collision(BinaryReader br, Database.Prostreet db)
+		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
+		public Collision(BinaryReader br, Database.Carbon db)
 		{
 			this.Database = db;
 			this.CollisionBounds = new List<CollisionBound>();

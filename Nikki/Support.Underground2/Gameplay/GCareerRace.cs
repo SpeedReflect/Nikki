@@ -21,9 +21,17 @@ namespace Nikki.Support.Underground2.Gameplay
 		#region Fields
 
 		private string _collection_name;
+
+		[MemoryCastable()]
 		private byte _padding0 = 0;
+
+		[MemoryCastable()]
 		private byte _padding1 = 0;
+
+		[MemoryCastable()]
 		private int _padding2 = 0;
+
+		[MemoryCastable()]
 		private int _padding3 = 0;
 
 		#endregion
@@ -59,7 +67,7 @@ namespace Nikki.Support.Underground2.Gameplay
 				if (value.Contains(" "))
 					throw new Exception("CollectionName cannot contain whitespace.");
 				if (this.Database.GCareerRaces.FindCollection(value) != null)
-					throw new CollectionExistenceException();
+					throw new CollectionExistenceException(value);
 				this._collection_name = value;
 			}
 		}
@@ -78,6 +86,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Engage trigger of this <see cref="GCareerRace"/>.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string EventTrigger { get; set; } = String.Empty;
 
 		/// <summary>
@@ -85,6 +94,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public eUnlockCondition UnlockMethod { get; set; }
 
 		/// <summary>
@@ -92,12 +102,14 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public eBoolean IsSUVRace { get; set; }
 
 		/// <summary>
 		/// Event type.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public eEventBehaviorType EventBehaviorType { get; set; }
 
 		/// <summary>
@@ -105,6 +117,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public string RequiredSpecificRaceWon { get; set; } = String.Empty;
 
 		/// <summary>
@@ -112,6 +125,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte RequiredSpecificURLWon { get; set; }
 
 		/// <summary>
@@ -119,6 +133,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte SponsorChosenToUnlock { get; set; }
 
 		/// <summary>
@@ -126,6 +141,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte RequiredRacesWon { get; set; }
 
 		/// <summary>
@@ -133,6 +149,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte RequiredURLWon { get; set; }
 
 		/// <summary>
@@ -164,6 +181,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public int EarnableRespect { get; set; }
 
 		/// <summary>
@@ -171,6 +189,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public string PlayerCarType { get; set; } = String.Empty;
 
 		/// <summary>
@@ -178,6 +197,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public int CashValue { get; set; }
 
 		/// <summary>
@@ -185,12 +205,14 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public eEventIconType EventIconType { get; set; }
 
 		/// <summary>
 		/// True if the race is a GPS race; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public eBoolean IsDriveToGPS { get; set; }
 
 		/// <summary>
@@ -198,6 +220,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public eTrackDifficulty DifficultyLevel { get; set; }
 
 		/// <summary>
@@ -205,6 +228,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte BelongsToStage { get; set; }
 
 		/// <summary>
@@ -212,6 +236,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte NumOpponents { get; set; }
 
 		/// <summary>
@@ -219,6 +244,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte UnknownDragValue { get; set; }
 
 		/// <summary>
@@ -226,6 +252,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte NumStages { get; set; }
 
 		/// <summary>
@@ -233,42 +260,49 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public eBoolean IsHiddenEvent { get; set; }
 
 		/// <summary>
 		/// Movie shown pre-race.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string IntroMovie { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Movie shown post-race.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string OutroMovie { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Number of map items during the race flow.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte NumMapItems { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x3A.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x3A { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x3B.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x3B { get; set; }
 
 		/// <summary>
 		/// GPS destination trigger if the race is a GPS event.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string GPSDestination { get; set; } = String.Empty;
 
 		/// <summary>
@@ -405,25 +439,31 @@ namespace Nikki.Support.Underground2.Gameplay
 
 			if (!String.IsNullOrEmpty(this.IntroMovie))
 			{
+				
 				pointer = (ushort)strw.BaseStream.Position;
 				strw.WriteNullTermUTF8(this.IntroMovie);
 				bw.Write(pointer);
+			
 			}
 			else bw.Write((ushort)0);
 
 			if (!String.IsNullOrEmpty(this.OutroMovie))
 			{
+			
 				pointer = (ushort)strw.BaseStream.Position;
 				strw.WriteNullTermUTF8(this.OutroMovie);
 				bw.Write(pointer);
+			
 			}
 			else bw.Write((ushort)0);
 
 			if (!String.IsNullOrEmpty(this.EventTrigger))
 			{
+			
 				pointer = (ushort)strw.BaseStream.Position;
 				strw.WriteNullTermUTF8(this.EventTrigger);
 				bw.Write(pointer);
+			
 			}
 			else bw.Write((ushort)0);
 
@@ -434,13 +474,19 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.WriteEnum(this.EventBehaviorType);
 
 			if (this.UnlockMethod == eUnlockCondition.SPECIFIC_RACE_WON)
+			{
+
 				bw.Write(this.RequiredSpecificRaceWon.BinHash());
+
+			}
 			else
 			{
+			
 				bw.Write(this.RequiredSpecificURLWon);
 				bw.Write(this.SponsorChosenToUnlock);
 				bw.Write(this.RequiredRacesWon);
 				bw.Write(this.RequiredURLWon);
+			
 			}
 
 			bw.Write(this.EarnableRespect);
@@ -469,21 +515,25 @@ namespace Nikki.Support.Underground2.Gameplay
 			// If none of the events are drift downhill, write opponent data based on number of the opponents
 			if (this.DriftTypeIfDriftRace != eDriftType.DOWNHILL)
 			{
+
 				if (this.NumOpponents > 0) this.OPPONENT1.Write(bw, strw);
 				if (this.NumOpponents > 1) this.OPPONENT2.Write(bw, strw);
 				if (this.NumOpponents > 2) this.OPPONENT3.Write(bw, strw);
 				if (this.NumOpponents > 3) this.OPPONENT4.Write(bw, strw);
 				if (this.NumOpponents > 4) this.OPPONENT5.Write(bw, strw);
+			
 			}
 
 			// If at least one of the events is drift downhill, write at least 3 opponents
 			else
 			{
+
 				this.OPPONENT1.Write(bw, strw);
 				this.OPPONENT2.Write(bw, strw);
 				this.OPPONENT3.Write(bw, strw);
 				if (this.NumOpponents > 3) this.OPPONENT4.Write(bw, strw);
 				if (this.NumOpponents > 4) this.OPPONENT5.Write(bw, strw);
+			
 			}
 
 			bw.BaseStream.Position = position;
@@ -533,13 +583,19 @@ namespace Nikki.Support.Underground2.Gameplay
 
 			// Unlock conditions
 			if (this.UnlockMethod == eUnlockCondition.SPECIFIC_RACE_WON)
+			{
+
 				this.RequiredSpecificRaceWon = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+
+			}
 			else
 			{
+
 				this.RequiredSpecificURLWon = br.ReadByte();
 				this.SponsorChosenToUnlock = br.ReadByte();
 				this.RequiredRacesWon = br.ReadByte();
 				this.RequiredURLWon = br.ReadByte();
+			
 			}
 
 			// Earnable Respect ?
@@ -585,21 +641,25 @@ namespace Nikki.Support.Underground2.Gameplay
 			// If none of the events are drift downhill, read opponent data based on number of the opponents
 			if (this.DriftTypeIfDriftRace != eDriftType.DOWNHILL)
 			{
+
 				if (this.NumOpponents > 0) this.OPPONENT1.Read(br, strr);
 				if (this.NumOpponents > 1) this.OPPONENT2.Read(br, strr);
 				if (this.NumOpponents > 2) this.OPPONENT3.Read(br, strr);
 				if (this.NumOpponents > 3) this.OPPONENT4.Read(br, strr);
 				if (this.NumOpponents > 4) this.OPPONENT5.Read(br, strr);
+			
 			}
 
 			// If at least one of the events is downhill drift, read only 3 opponents
 			else
 			{
+
 				this.OPPONENT1.Read(br, strr);
 				this.OPPONENT2.Read(br, strr);
 				this.OPPONENT3.Read(br, strr);
 				if (this.NumOpponents > 3) this.OPPONENT4.Read(br, strr);
 				if (this.NumOpponents > 4) this.OPPONENT5.Read(br, strr);
+			
 			}
 
 			br.BaseStream.Position = final;
@@ -612,49 +672,8 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <returns>Memory casted copy of the object.</returns>
 		public override ACollectable MemoryCast(string CName)
 		{
-			var result = new GCareerRace(CName, this.Database)
-			{
-				IntroMovie = this.IntroMovie,
-				OutroMovie = this.OutroMovie,
-				EventTrigger = this.EventTrigger,
-				UnlockMethod = this.UnlockMethod,
-				IsSUVRace = this.IsSUVRace,
-				IsHiddenEvent = this.IsHiddenEvent,
-				IsDriveToGPS = this.IsDriveToGPS,
-				EventBehaviorType = this.EventBehaviorType,
-				RequiredSpecificRaceWon = this.RequiredSpecificRaceWon,
-				RequiredRacesWon = this.RequiredRacesWon,
-				RequiredSpecificURLWon = this.RequiredSpecificURLWon,
-				RequiredURLWon = this.RequiredURLWon,
-				SponsorChosenToUnlock = this.SponsorChosenToUnlock,
-				EarnableRespect = this.EarnableRespect,
-				STAGE1 = this.STAGE1.PlainCopy(),
-				STAGE2 = this.STAGE2.PlainCopy(),
-				STAGE3 = this.STAGE3.PlainCopy(),
-				STAGE4 = this.STAGE4.PlainCopy(),
-				PlayerCarType = this.PlayerCarType,
-				CashValue = this.CashValue,
-				EventIconType = this.EventIconType,
-				DifficultyLevel = this.DifficultyLevel,
-				BelongsToStage = this.BelongsToStage,
-				NumMapItems = this.NumMapItems,
-				Unknown0x3A = this.Unknown0x3A,
-				Unknown0x3B = this.Unknown0x3B,
-				NumOpponents = this.NumOpponents,
-				NumStages = this.NumStages,
-				UnknownDragValue = this.UnknownDragValue,
-				GPSDestination = this.GPSDestination,
-				OPPONENT1 = this.OPPONENT1.PlainCopy(),
-				OPPONENT2 = this.OPPONENT2.PlainCopy(),
-				OPPONENT3 = this.OPPONENT3.PlainCopy(),
-				OPPONENT4 = this.OPPONENT4.PlainCopy(),
-				OPPONENT5 = this.OPPONENT5.PlainCopy(),
-				_padding0 = this._padding0,
-				_padding1 = this._padding1,
-				_padding2 = this._padding2,
-				_padding3 = this._padding3
-			};
-
+			var result = new GCareerRace(CName, this.Database);
+			base.MemoryCast(this, result);
 			return result;
 		}
 

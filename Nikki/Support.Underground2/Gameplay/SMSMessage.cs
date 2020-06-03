@@ -19,15 +19,35 @@ namespace Nikki.Support.Underground2.Gameplay
 		#region Fields
 
 		private string _collection_name;
+
+		[MemoryCastable()]
 		private byte b0x02;
+
+		[MemoryCastable()]
 		private byte b0x03;
+
+		[MemoryCastable()]
 		private byte b0x04;
+
+		[MemoryCastable()]
 		private byte b0x05;
+
+		[MemoryCastable()]
 		private byte b0x06;
+
+		[MemoryCastable()]
 		private byte b0x07;
+
+		[MemoryCastable()]
 		private byte b0x08;
+
+		[MemoryCastable()]
 		private byte b0x09;
+
+		[MemoryCastable()]
 		private byte b0x0A;
+
+		[MemoryCastable()]
 		private byte b0x0B;
 
 		#endregion
@@ -63,7 +83,7 @@ namespace Nikki.Support.Underground2.Gameplay
 				if (value.Contains(" "))
 					throw new Exception("CollectionName cannot contain whitespace.");
 				if (this.Database.SMSMessages.FindCollection(value) != null)
-					throw new CollectionExistenceException();
+					throw new CollectionExistenceException(value);
 				this._collection_name = value;
 			}
 		}
@@ -83,12 +103,14 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public int CashValue { get; set; }
 
 		/// <summary>
 		/// String label of the sender of the message.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string MessageSenderLabel { get; set; } = String.Empty;
 
 		#endregion
@@ -194,22 +216,8 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <returns>Memory casted copy of the object.</returns>
 		public override ACollectable MemoryCast(string CName)
 		{
-			var result = new SMSMessage(CName, this.Database)
-			{
-				b0x02 = this.b0x02,
-				b0x03 = this.b0x03,
-				b0x04 = this.b0x04,
-				b0x05 = this.b0x05,
-				b0x06 = this.b0x06,
-				b0x07 = this.b0x07,
-				b0x08 = this.b0x08,
-				b0x09 = this.b0x09,
-				b0x0A = this.b0x0A,
-				b0x0B = this.b0x0B,
-				CashValue = this.CashValue,
-				MessageSenderLabel = this.MessageSenderLabel
-			};
-
+			var result = new SMSMessage(CName, this.Database);
+			base.MemoryCast(this, result);
 			return result;
 		}
 

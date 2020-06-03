@@ -55,7 +55,7 @@ namespace Nikki.Support.Underground2.Gameplay
 				if (value.Length > 0x1F)
 					throw new ArgumentLengthException("Length of the value should not exceed 31 character.");
 				if (this.Database.GCareerBrands.FindCollection(value) != null)
-					throw new CollectionExistenceException();
+					throw new CollectionExistenceException(value);
 				this._collection_name = value;
 			}
 		}
@@ -74,6 +74,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// In-Game name of this <see cref="GCareerBrand"/>.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string IngameBrandName { get; set; } = String.Empty;
 
 		#endregion

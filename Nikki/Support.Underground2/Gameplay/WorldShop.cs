@@ -56,7 +56,7 @@ namespace Nikki.Support.Underground2.Gameplay
 				if (value.Length > 0x1F)
 					throw new ArgumentLengthException(0x1F);
 				if (this.Database.WorldShops.FindCollection(value) != null)
-					throw new CollectionExistenceException();
+					throw new CollectionExistenceException(value);
 				this._collection_name = value;
 			}
 		}
@@ -75,18 +75,21 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Filename of shop in-game textures.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string ShopFilename { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Movie shown when first-time entering shop.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string IntroMovie { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Event trigger of this <see cref="WorldShop"/>.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string ShopTrigger { get; set; } = String.Empty;
 
 		/// <summary>
@@ -94,6 +97,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public eWorldShopType ShopType { get; set; }
 
 		/// <summary>
@@ -102,6 +106,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public eBoolean InitiallyHidden { get; set; }
 
 		/// <summary>
@@ -109,6 +114,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public eBoolean RequiresEventCompleted { get; set; }
 
 		/// <summary>
@@ -116,6 +122,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte BelongsToStage { get; set; }
 
 		/// <summary>
@@ -123,6 +130,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public string EventToBeCompleted { get; set; } = String.Empty;
 
 		#endregion
@@ -247,18 +255,8 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <returns>Memory casted copy of the object.</returns>
 		public override ACollectable MemoryCast(string CName)
 		{
-			var result = new WorldShop(CName, this.Database)
-			{
-				EventToBeCompleted = this.EventToBeCompleted,
-				InitiallyHidden = this.InitiallyHidden,
-				IntroMovie = this.IntroMovie,
-				ShopFilename = this.ShopFilename,
-				ShopTrigger = this.ShopTrigger,
-				ShopType = this.ShopType,
-				RequiresEventCompleted = this.RequiresEventCompleted,
-				BelongsToStage = this.BelongsToStage
-			};
-
+			var result = new WorldShop(CName, this.Database);
+			base.MemoryCast(this, result);
 			return result;
 		}
 

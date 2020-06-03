@@ -57,7 +57,7 @@ namespace Nikki.Support.Underground2.Gameplay
 				if (value.Length != 10 && !value.IsHexString())
 					throw new Exception("Unable to parse value provided as a hexadecimal containing tuning settings.");
 				if (this.Database.PerfSliderTunings.FindCollection(value) != null)
-					throw new CollectionExistenceException();
+					throw new CollectionExistenceException(value);
 				this._collection_name = value;
 			}
 		}
@@ -77,6 +77,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public float MinSliderValueRatio { get; set; }
 
 		/// <summary>
@@ -84,6 +85,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public float MaxSliderValueRatio { get; set; }
 
 		/// <summary>
@@ -91,6 +93,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public float ValueSpread1 { get; set; }
 
 		/// <summary>
@@ -98,6 +101,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public float ValueSpread2 { get; set; }
 
 		#endregion
@@ -192,14 +196,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		public override ACollectable MemoryCast(string CName)
 		{
 			var result = new PerfSliderTuning(CName, this.Database);
-			uint maxkey = 0;
-			foreach (var slider in this.Database.PerfSliderTunings.Collections)
-				if (slider.BinKey > maxkey) maxkey = slider.BinKey;
-			result._collection_name = (maxkey + 1).ToString();
-			result.MaxSliderValueRatio = this.MaxSliderValueRatio;
-			result.MinSliderValueRatio = this.MinSliderValueRatio;
-			result.ValueSpread1 = this.ValueSpread1;
-			result.ValueSpread2 = this.ValueSpread2;
+			base.MemoryCast(this, result);
 			return result;
 		}
 

@@ -56,7 +56,7 @@ namespace Nikki.Support.Underground2.Gameplay
 				if (value.Length > 0x1F)
 					throw new ArgumentLengthException(0x1F);
 				if (this.Database.GShowcases.FindCollection(value) != null)
-					throw new CollectionExistenceException();
+					throw new CollectionExistenceException(value);
 				this._collection_name = value;
 			}
 		}
@@ -75,18 +75,21 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Description string for the showcase message.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string DescStringLabel { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Destination trigger of the showcase.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string DestinationPoint { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Descriptive attribute of the showcase.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string DescAttrib { get; set; } = String.Empty;
 
 		/// <summary>
@@ -94,6 +97,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public eTakePhotoMethod TakePhotoMethod { get; set; }
 
 		/// <summary>
@@ -101,6 +105,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte BelongsToStage { get; set; }
 
 		/// <summary>
@@ -108,6 +113,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public short CashValue { get; set; }
 
 		/// <summary>
@@ -115,18 +121,21 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public float RequiredVisualRating { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x34.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x34 { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x35.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x35 { get; set; }
 
 		#endregion
@@ -227,19 +236,8 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <returns>Memory casted copy of the object.</returns>
 		public override ACollectable MemoryCast(string CName)
 		{
-			var result = new GShowcase(CName, this.Database)
-			{
-				DescAttrib = this.DescAttrib,
-				DescStringLabel = this.DescStringLabel,
-				DestinationPoint = this.DestinationPoint,
-				TakePhotoMethod = this.TakePhotoMethod,
-				BelongsToStage = this.BelongsToStage,
-				CashValue = this.CashValue,
-				RequiredVisualRating = this.RequiredVisualRating,
-				Unknown0x34 = this.Unknown0x34,
-				Unknown0x35 = this.Unknown0x35
-			};
-
+			var result = new GShowcase(CName, this.Database);
+			base.MemoryCast(this, result);
 			return result;
 		}
 

@@ -58,7 +58,7 @@ namespace Nikki.Support.Underground2.Gameplay
 				if (value.Contains(" "))
 					throw new Exception("CollectionName cannot contain whitespace.");
 				if (this.Database.PartPerformances.FindCollection(value) != null)
-					throw new CollectionExistenceException();
+					throw new CollectionExistenceException(value);
 				this._collection_name = value;
 				if (this._cname_is_set)
 					Map.PerfPartTable[(int)this._part_perf_type, this._upgrade_level, this._upgrade_part_index] = Convert.ToUInt32(value, 16);
@@ -80,6 +80,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public int PerfPartCost { get; set; }
 
 		/// <summary>
@@ -87,6 +88,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public float PerfPartAmplifierFraction { get; set; }
 
 		/// <summary>
@@ -94,6 +96,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public float PerfPartRangeX { get; set; } = -1;
 
 		/// <summary>
@@ -101,6 +104,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public float PerfPartRangeY { get; set; } = -1;
 
 		/// <summary>
@@ -108,18 +112,21 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public float PerfPartRangeZ { get; set; } = -1;
 
 		/// <summary>
 		/// First part index by which this <see cref="PartPerformance"/> can be replaced.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public int BeingReplacedByIndex1 { get; set; } = -1;
 
 		/// <summary>
 		/// Second part index by which this <see cref="PartPerformance"/> can be replaced.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public int BeingReplacedByIndex2 { get; set; } = -1;
 
 		/// <summary>
@@ -127,6 +134,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public int NumberOfBrands { get; set; }
 
 		/// <summary>
@@ -134,6 +142,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public string PerfPartBrand1 { get; set; } = String.Empty;
 
 		/// <summary>
@@ -141,6 +150,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public string PerfPartBrand2 { get; set; } = String.Empty;
 
 		/// <summary>
@@ -148,6 +158,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public string PerfPartBrand3 { get; set; } = String.Empty;
 
 		/// <summary>
@@ -155,6 +166,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public string PerfPartBrand4 { get; set; } = String.Empty;
 
 		/// <summary>
@@ -162,6 +174,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public string PerfPartBrand5 { get; set; } = String.Empty;
 
 		/// <summary>
@@ -169,6 +182,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public string PerfPartBrand6 { get; set; } = String.Empty;
 
 		/// <summary>
@@ -176,6 +190,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public string PerfPartBrand7 { get; set; } = String.Empty;
 
 		/// <summary>
@@ -183,6 +198,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public string PerfPartBrand8 { get; set; } = String.Empty;
 
 		/// <summary>
@@ -195,11 +211,24 @@ namespace Nikki.Support.Underground2.Gameplay
 			set
 			{
 				if (!Enum.IsDefined(typeof(ePerformanceType), value))
+				{
+
 					throw new MappingFailException();
+
+				}
+
 				if (this.CheckIfTypeCanBeSwitched(value))
+				{
+
 					this.SwitchPerfType(value);
+
+				}
 				else
+				{
+
 					throw new Exception("Unable to set: no available perf part slots in this group exist.");
+
+				}
 			}
 		}
 
@@ -213,10 +242,19 @@ namespace Nikki.Support.Underground2.Gameplay
 			set
 			{
 				--value;
+
 				if (this.CheckIfLevelCanBeSwitched(value))
+				{
+
 					this.SwitchUpgradeLevel(value);
+
+				}
 				else
+				{
+
 					throw new Exception("Unable to set: no available perf part slots in this level exist.");
+
+				}
 			}
 		}
 
@@ -230,9 +268,17 @@ namespace Nikki.Support.Underground2.Gameplay
 			set
 			{
 				if (this.CheckIfIndexCanBeSwitched(value))
+				{
+
 					this.SwitchUpgradePartIndex(value);
+
+				}
 				else
+				{
+
 					throw new Exception("Unable to set: the perf slot is already taken by a different part.");
+
+				}
 			}
 		}
 
@@ -247,9 +293,16 @@ namespace Nikki.Support.Underground2.Gameplay
 			{
 				foreach (var cla in this.Database.PartPerformances.Collections)
 				{
+
 					if (cla.PartIndex == value)
+					{
+
 						throw new Exception("Performance Part with the same PartIndex already exists.");
+
+					}
+				
 				}
+
 				this._part_index = value;
 			}
 		}
@@ -276,8 +329,9 @@ namespace Nikki.Support.Underground2.Gameplay
 			int index = 0;
 			foreach (var cla in db.PartPerformances.Collections)
 			{
-				if (cla.PartIndex > index)
-					index = cla.PartIndex;
+
+				if (cla.PartIndex > index) index = cla.PartIndex;
+			
 			}
 			this._part_index = index + 1;
 			this._cname_is_set = true;
@@ -403,26 +457,8 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <returns>Memory casted copy of the object.</returns>
 		public override ACollectable MemoryCast(string CName)
 		{
-			var result = new PartPerformance(CName, this.Database)
-			{
-				PerfPartBrand1 = this.PerfPartBrand1,
-				PerfPartBrand2 = this.PerfPartBrand2,
-				PerfPartBrand3 = this.PerfPartBrand3,
-				PerfPartBrand4 = this.PerfPartBrand4,
-				PerfPartBrand5 = this.PerfPartBrand5,
-				PerfPartBrand6 = this.PerfPartBrand6,
-				PerfPartBrand7 = this.PerfPartBrand7,
-				PerfPartBrand8 = this.PerfPartBrand8,
-				BeingReplacedByIndex1 = this.BeingReplacedByIndex1,
-				BeingReplacedByIndex2 = this.BeingReplacedByIndex2,
-				NumberOfBrands = this.NumberOfBrands,
-				PerfPartAmplifierFraction = this.PerfPartAmplifierFraction,
-				PerfPartCost = this.PerfPartCost,
-				PerfPartRangeX = this.PerfPartRangeX,
-				PerfPartRangeY = this.PerfPartRangeY,
-				PerfPartRangeZ = this.PerfPartRangeZ
-			};
-
+			var result = new PartPerformance(CName, this.Database);
+			base.MemoryCast(this, result);
 			return result;
 		}
 
@@ -431,8 +467,13 @@ namespace Nikki.Support.Underground2.Gameplay
 			int index = (int)this._part_perf_type;
 			int level = this._upgrade_level;
 			int value = this._upgrade_part_index;
+
 			if (Map.PerfPartTable[index, level, value] == this.BinKey)
+			{
+
 				Map.PerfPartTable[index, level, value] = 0;
+
+			}
 		}
 
 		private bool CheckIfIndexCanBeSwitched(int value)
@@ -444,25 +485,32 @@ namespace Nikki.Support.Underground2.Gameplay
 		private bool CheckIfLevelCanBeSwitched(int level)
 		{
 			int index = (int)this._part_perf_type;
-			for (int a1 = 0; a1 < 4; ++a1)
+			
+			for (int loop = 0; loop < 4; ++loop)
 			{
-				if (Map.PerfPartTable[index, level, a1] == 0)
-					return true;
+
+				if (Map.PerfPartTable[index, level, loop] == 0) return true;
+			
 			}
+
 			return false;
 		}
 
 		private bool CheckIfTypeCanBeSwitched(ePerformanceType perftype)
 		{
 			int index = (int)perftype;
-			for (int a1 = 0; a1 < 3; ++a1)
+
+			for (int loop = 0; loop < 3; ++loop)
 			{
-				for (int a2 = 0; a2 < 4; ++a2)
+
+				for (int i = 0; i < 4; ++i)
 				{
-					if (Map.PerfPartTable[index, a1, a2] == 0)
-						return true;
+
+					if (Map.PerfPartTable[index, loop, i] == 0) return true;
 				}
+			
 			}
+			
 			return false;
 		}
 
@@ -470,20 +518,28 @@ namespace Nikki.Support.Underground2.Gameplay
 		{
 			for (int a1 = 0; a1 < 10; ++a1)
 			{
+
 				for (int a2 = 0; a2 < 3; ++a2)
 				{
+					
 					for (int a3 = 0; a3 < 4; ++a3)
 					{
+						
 						if (Map.PerfPartTable[a1, a2, a3] == 0)
 						{
+						
 							this._part_perf_type = (ePerformanceType)a1;
 							this._upgrade_level = a2;
 							this._upgrade_part_index = a3;
 							Map.PerfPartTable[a1, a2, a3] = this.BinKey;
 							return;
+						
 						}
+					
 					}
+				
 				}
+			
 			}
 		}
 
@@ -495,18 +551,25 @@ namespace Nikki.Support.Underground2.Gameplay
 			// Move to another
 			this._part_perf_type = perftype;
 			int index = (int)perftype;
+			
 			for (int a1 = 0; a1 < 3; ++a1)
 			{
+			
 				for (int a2 = 0; a2 < 4; ++a2)
 				{
+				
 					if (Map.PerfPartTable[index, a1, a2] == 0)
 					{
+					
 						Map.PerfPartTable[index, a1, a2] = this.BinKey;
 						this._upgrade_level = a1;
 						this._upgrade_part_index = a2;
 						return;
+					
 					}
+				
 				}
+			
 			}
 		}
 
@@ -518,14 +581,19 @@ namespace Nikki.Support.Underground2.Gameplay
 
 			// Move to another
 			this._upgrade_level = level;
+			
 			for (int a1 = 0; a1 < 4; ++a1)
 			{
+			
 				if (Map.PerfPartTable[index, level, a1] == 0)
 				{
+				
 					Map.PerfPartTable[index, level, a1] = this.BinKey;
 					this._upgrade_part_index = a1;
 					return;
+				
 				}
+			
 			}
 		}
 

@@ -54,7 +54,7 @@ namespace Nikki.Support.Underground2.Gameplay
 				if (value.Contains(" "))
 					throw new Exception("CollectionName cannot contain whitespace.");
 				if (this.Database.Sponsors.FindCollection(value) != null)
-					throw new CollectionExistenceException();
+					throw new CollectionExistenceException(value);
 				this._collection_name = value;
 			}
 		}
@@ -74,6 +74,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public eSponsorRaceType ReqSponsorRace1 { get; set; }
 
 		/// <summary>
@@ -81,6 +82,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public eSponsorRaceType ReqSponsorRace2 { get; set; }
 
 		/// <summary>
@@ -88,6 +90,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public eSponsorRaceType ReqSponsorRace3 { get; set; }
 
 		/// <summary>
@@ -95,6 +98,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public short CashValuePerWin { get; set; }
 
 		/// <summary>
@@ -102,6 +106,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public short SignCashBonus { get; set; }
 
 		/// <summary>
@@ -109,6 +114,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public short PotentialCashBonus { get; set; }
 
 		#endregion
@@ -206,16 +212,8 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <returns>Memory casted copy of the object.</returns>
 		public override ACollectable MemoryCast(string CName)
 		{
-			var result = new Sponsor(CName, this.Database)
-			{
-				CashValuePerWin = this.CashValuePerWin,
-				SignCashBonus = this.SignCashBonus,
-				PotentialCashBonus = this.PotentialCashBonus,
-				ReqSponsorRace1 = this.ReqSponsorRace1,
-				ReqSponsorRace2 = this.ReqSponsorRace2,
-				ReqSponsorRace3 = this.ReqSponsorRace3
-			};
-
+			var result = new Sponsor(CName, this.Database);
+			base.MemoryCast(this, result);
 			return result;
 		}
 

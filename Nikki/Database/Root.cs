@@ -372,18 +372,31 @@ namespace Nikki.Database
 		/// <returns>True on success; false otherwise.</returns>
 		public bool TrySetStaticValue(string field, string value)
 		{
-			// Works only for Collectable and StaticModifiable properties
-			var property = typeof(TypeID).GetProperty(field);
-			if (property == null) return false;
-			if (!Attribute.IsDefined(property, typeof(StaticModifiableAttribute)))
-				return false;
-
-			foreach (var collection in this.Collections)
+			try
 			{
-				bool pass = collection.SetValue(field, value);
-				if (!pass) return false;
+
+				// Works only for Collectable and StaticModifiable properties
+				var property = typeof(TypeID).GetProperty(field);
+				if (property == null) return false;
+
+				if (!Attribute.IsDefined(property, typeof(StaticModifiableAttribute)))
+				{
+
+					return false;
+
+				}
+
+				foreach (var collection in this.Collections)
+				{
+
+					collection.SetValue(field, value);
+
+				}
+
+				return true;
+			
 			}
-			return true;
+			catch (Exception) { return false; }
 		}
 
 		/// <summary>
@@ -396,23 +409,43 @@ namespace Nikki.Database
 		public bool TrySetStaticValue(string field, string value, out string error)
 		{
 			error = null;
-			var property = typeof(TypeID).GetProperty(field);
-			if (property == null)
+
+			try
 			{
-				error = $"Field named {field} does not exist.";
+
+				var property = typeof(TypeID).GetProperty(field);
+				
+				if (property == null)
+				{
+					error = $"Field named {field} does not exist.";
+					return false;
+				}
+				
+				if (!Attribute.IsDefined(property, typeof(StaticModifiableAttribute)))
+				{
+				
+					error = $"Field named {field} is not a static-modifiable field.";
+					return false;
+				
+				}
+				
+				foreach (var collection in this.Collections)
+				{
+				
+					collection.SetValue(field, value);
+
+				}
+			
+				return true;
+			
+			}
+			catch (Exception e)
+			{
+
+				error = e.GetLowestMessage();
 				return false;
+			
 			}
-			if (!Attribute.IsDefined(property, typeof(StaticModifiableAttribute)))
-			{
-				error = $"Field named {field} is not a static-modifiable field.";
-				return false;
-			}
-			foreach (var collection in this.Collections)
-			{
-				bool pass = collection.SetValue(field, value, out error);
-				if (!pass) return false;
-			}
-			return true;
 		}
 
 		#endregion

@@ -157,6 +157,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public short VisualRating_Level1 { get; set; }
 
 		/// <summary>
@@ -164,6 +165,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public short VisualRating_Level2 { get; set; }
 
 		/// <summary>
@@ -171,6 +173,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public short VisualRating_Level3 { get; set; }
 
 		/// <summary>
@@ -178,6 +181,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public short PartPrice_Level1 { get; set; }
 
 		/// <summary>
@@ -185,6 +189,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public short PartPrice_Level2 { get; set; }
 
 		/// <summary>
@@ -192,6 +197,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public short PartPrice_Level3 { get; set; }
 
 		/// <summary>
@@ -199,6 +205,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public ePartUnlockReq UnlockMethod_Level1 { get; set; }
 
 		/// <summary>
@@ -206,6 +213,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public ePartUnlockReq UnlockMethod_Level2 { get; set; }
 
 		/// <summary>
@@ -213,6 +221,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public ePartUnlockReq UnlockMethod_Level3 { get; set; }
 
 		/// <summary>
@@ -220,6 +229,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public string UnlocksInShop_Level1 { get; set; } = String.Empty;
 
 		/// <summary>
@@ -227,6 +237,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public string UnlocksInShop_Level2 { get; set; } = String.Empty;
 
 		/// <summary>
@@ -234,6 +245,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public string UnlocksInShop_Level3 { get; set; } = String.Empty;
 
 		/// <summary>
@@ -241,6 +253,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte RequiredRacesWon_Level1 { get; set; }
 
 		/// <summary>
@@ -248,6 +261,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte RequiredRacesWon_Level2 { get; set; }
 
 		/// <summary>
@@ -255,6 +269,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte RequiredRacesWon_Level3 { get; set; }
 
 		/// <summary>
@@ -262,6 +277,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte BelongsToStage_Level1 { get; set; }
 
 		/// <summary>
@@ -269,6 +285,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte BelongsToStage_Level2 { get; set; }
 
 		/// <summary>
@@ -276,6 +293,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte BelongsToStage_Level3 { get; set; }
 
 		#endregion
@@ -334,12 +352,19 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.WriteEnum(this.UnlockMethod_Level1);
 			bw.Write((byte)1);
 			bw.Write((short)0);
+			
 			if (this.UnlockMethod_Level1 == ePartUnlockReq.SPECIFIC_SHOP_FOUND)
+			{
+
 				bw.Write(this.UnlocksInShop_Level1.BinHash());
+
+			}
 			else
 			{
+
 				bw.Write((short)this.RequiredRacesWon_Level1);
 				bw.Write((short)this.BelongsToStage_Level1);
+			
 			}
 
 			// Write level 2 settings
@@ -348,12 +373,19 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.WriteEnum(this.UnlockMethod_Level2);
 			bw.Write((byte)2);
 			bw.Write((short)0);
+
 			if (this.UnlockMethod_Level2 == ePartUnlockReq.SPECIFIC_SHOP_FOUND)
+			{
+
 				bw.Write(this.UnlocksInShop_Level2.BinHash());
+
+			}
 			else
 			{
+			
 				bw.Write((short)this.RequiredRacesWon_Level2);
 				bw.Write((short)this.BelongsToStage_Level2);
+			
 			}
 
 			// Write level 3 settings
@@ -362,12 +394,19 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.WriteEnum(this.UnlockMethod_Level3);
 			bw.Write((byte)3);
 			bw.Write((short)0);
+
 			if (this.UnlockMethod_Level3 == ePartUnlockReq.SPECIFIC_SHOP_FOUND)
+			{
+
 				bw.Write(this.UnlocksInShop_Level3.BinHash());
+
+			}
 			else
 			{
+
 				bw.Write((short)this.RequiredRacesWon_Level3);
 				bw.Write((short)this.BelongsToStage_Level3);
+			
 			}
 		}
 
@@ -385,14 +424,21 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.PartPrice_Level1 = br.ReadInt16();
 			this.UnlockMethod_Level1 = br.ReadEnum<ePartUnlockReq>();
 			br.BaseStream.Position += 3;
+
 			if (this.UnlockMethod_Level1 == ePartUnlockReq.SPECIFIC_SHOP_FOUND)
+			{
+
 				this.UnlocksInShop_Level1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+
+			}
 			else
 			{
+
 				this.RequiredRacesWon_Level1 = br.ReadByte();
 				++br.BaseStream.Position;
 				this.BelongsToStage_Level1 = br.ReadByte();
 				++br.BaseStream.Position;
+			
 			}
 
 			// Read level 2 settings
@@ -400,14 +446,21 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.PartPrice_Level2 = br.ReadInt16();
 			this.UnlockMethod_Level2 = br.ReadEnum<ePartUnlockReq>();
 			br.BaseStream.Position += 3;
+
 			if (this.UnlockMethod_Level2 == ePartUnlockReq.SPECIFIC_SHOP_FOUND)
+			{
+
 				this.UnlocksInShop_Level2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+
+			}
 			else
 			{
+
 				this.RequiredRacesWon_Level2 = br.ReadByte();
 				++br.BaseStream.Position;
 				this.BelongsToStage_Level2 = br.ReadByte();
 				++br.BaseStream.Position;
+			
 			}
 
 			// Read level 3 settings
@@ -415,14 +468,21 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.PartPrice_Level3 = br.ReadInt16();
 			this.UnlockMethod_Level3 = br.ReadEnum<ePartUnlockReq>();
 			br.BaseStream.Position += 3;
+
 			if (this.UnlockMethod_Level3 == ePartUnlockReq.SPECIFIC_SHOP_FOUND)
+			{
+
 				this.UnlocksInShop_Level3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+
+			}
 			else
 			{
+
 				this.RequiredRacesWon_Level3 = br.ReadByte();
 				++br.BaseStream.Position;
 				this.BelongsToStage_Level3 = br.ReadByte();
 				++br.BaseStream.Position;
+			
 			}
 		}
 
@@ -433,28 +493,8 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <returns>Memory casted copy of the object.</returns>
 		public override ACollectable MemoryCast(string CName)
 		{
-			var result = new PartUnlockable(CName, this.Database)
-			{
-				UnlockMethod_Level1 = this.UnlockMethod_Level1,
-				UnlockMethod_Level2 = this.UnlockMethod_Level2,
-				UnlockMethod_Level3 = this.UnlockMethod_Level3,
-				UnlocksInShop_Level1 = this.UnlocksInShop_Level1,
-				UnlocksInShop_Level2 = this.UnlocksInShop_Level2,
-				UnlocksInShop_Level3 = this.UnlocksInShop_Level3,
-				BelongsToStage_Level1 = this.BelongsToStage_Level1,
-				BelongsToStage_Level2 = this.BelongsToStage_Level2,
-				BelongsToStage_Level3 = this.BelongsToStage_Level3,
-				PartPrice_Level1 = this.PartPrice_Level1,
-				PartPrice_Level2 = this.PartPrice_Level2,
-				PartPrice_Level3 = this.PartPrice_Level3,
-				RequiredRacesWon_Level1 = this.RequiredRacesWon_Level1,
-				RequiredRacesWon_Level2 = this.RequiredRacesWon_Level2,
-				RequiredRacesWon_Level3 = this.RequiredRacesWon_Level3,
-				VisualRating_Level1 = this.VisualRating_Level1,
-				VisualRating_Level2 = this.VisualRating_Level2,
-				VisualRating_Level3 = this.VisualRating_Level3
-			};
-
+			var result = new PartUnlockable(CName, this.Database);
+			base.MemoryCast(this, result);
 			return result;
 		}
 

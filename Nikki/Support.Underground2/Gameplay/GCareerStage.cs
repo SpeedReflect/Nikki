@@ -55,7 +55,7 @@ namespace Nikki.Support.Underground2.Gameplay
 				if (!value.StartsWith("STAGE_") && !value.GetFormattedValue("STAGE_{X}", out byte _))
 					throw new Exception("Unable to parse stage number from CollectionName.");
 				if (this.Database.GCareerStages.FindCollection(value) != null)
-					throw new CollectionExistenceException();
+					throw new CollectionExistenceException(value);
 				this._collection_name = value;
 			}
 		}
@@ -75,12 +75,14 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public short OutrunCashValue { get; set; }
 
 		/// <summary>
 		/// Last career event in the stage.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string LastStageEvent { get; set; }
 
 		/// <summary>
@@ -88,6 +90,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte MaxCircuitsShownOnMap { get; set; }
 
 		/// <summary>
@@ -95,6 +98,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte MaxDragsShownOnMap { get; set; }
 
 		/// <summary>
@@ -102,6 +106,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte MaxStreetXShownOnMap { get; set; }
 
 		/// <summary>
@@ -109,6 +114,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte MaxDriftsShownOnMap { get; set; }
 
 		/// <summary>
@@ -116,6 +122,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte MaxSprintsShownOnMap { get; set; }
 
 		/// <summary>
@@ -123,36 +130,42 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte MaxOutrunEvents { get; set; }
 
 		/// <summary>
 		/// Sponsor 1.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string StageSponsor1 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Sponsor 2.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string StageSponsor2 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Sponsor 3.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string StageSponsor3 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Sponsor 4.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string StageSponsor4 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Sponsor 5.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string StageSponsor5 { get; set; } = String.Empty;
 
 		/// <summary>
@@ -160,6 +173,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public byte NumberOfSponsorsToChoose { get; set; }
 
 		/// <summary>
@@ -167,6 +181,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public short AttribSponsor1 { get; set; }
 
 		/// <summary>
@@ -174,6 +189,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public short AttribSponsor2 { get; set; }
 
 		/// <summary>
@@ -181,6 +197,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public short AttribSponsor3 { get; set; }
 
 		/// <summary>
@@ -188,6 +205,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public short AttribSponsor4 { get; set; }
 
 		/// <summary>
@@ -195,150 +213,175 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public short AttribSponsor5 { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x04.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public short Unknown0x04 { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x06.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public short Unknown0x06 { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x26.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public short Unknown0x26 { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x2C.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x2C { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x2D.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x2D { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x2E.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x2E { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x2F.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x2F { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x35.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x35 { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x36.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x36 { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x37.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x37 { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x38.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x38 { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x39.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x39 { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x3A.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x3A { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x3B.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x3B { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x3C.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x3C { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x3D.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x3D { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x3E.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x3E { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x3F.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x3F { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x41.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x41 { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x42
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x42 { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x43
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public byte Unknown0x43 { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x44.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public float Unknown0x44 { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x48.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public float Unknown0x48 { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x4C.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public float Unknown0x4C { get; set; }
 
 		#endregion
@@ -512,52 +555,8 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <returns>Memory casted copy of the object.</returns>
 		public override ACollectable MemoryCast(string CName)
 		{
-			var result = new GCareerStage(CName, this.Database)
-			{
-				StageSponsor1 = this.StageSponsor1,
-				StageSponsor2 = this.StageSponsor2,
-				StageSponsor3 = this.StageSponsor3,
-				StageSponsor4 = this.StageSponsor4,
-				StageSponsor5 = this.StageSponsor5,
-				LastStageEvent = this.LastStageEvent,
-				AttribSponsor1 = this.AttribSponsor1,
-				AttribSponsor2 = this.AttribSponsor2,
-				AttribSponsor3 = this.AttribSponsor3,
-				AttribSponsor4 = this.AttribSponsor4,
-				AttribSponsor5 = this.AttribSponsor5,
-				OutrunCashValue = this.OutrunCashValue,
-				MaxCircuitsShownOnMap = this.MaxCircuitsShownOnMap,
-				MaxDragsShownOnMap = this.MaxDragsShownOnMap,
-				MaxStreetXShownOnMap = this.MaxStreetXShownOnMap,
-				MaxDriftsShownOnMap = this.MaxDriftsShownOnMap,
-				MaxSprintsShownOnMap = this.MaxSprintsShownOnMap,
-				MaxOutrunEvents = this.MaxOutrunEvents,
-				Unknown0x04 = this.Unknown0x04,
-				Unknown0x06 = this.Unknown0x06,
-				Unknown0x26 = this.Unknown0x26,
-				Unknown0x2C = this.Unknown0x2C,
-				Unknown0x2D = this.Unknown0x2D,
-				Unknown0x2E = this.Unknown0x2E,
-				Unknown0x2F = this.Unknown0x2F,
-				Unknown0x35 = this.Unknown0x35,
-				Unknown0x36 = this.Unknown0x36,
-				Unknown0x37 = this.Unknown0x37,
-				Unknown0x38 = this.Unknown0x38,
-				Unknown0x39 = this.Unknown0x39,
-				Unknown0x3A = this.Unknown0x3A,
-				Unknown0x3B = this.Unknown0x3B,
-				Unknown0x3C = this.Unknown0x3C,
-				Unknown0x3D = this.Unknown0x3D,
-				Unknown0x3E = this.Unknown0x3E,
-				Unknown0x3F = this.Unknown0x3F,
-				Unknown0x41 = this.Unknown0x41,
-				Unknown0x42 = this.Unknown0x42,
-				Unknown0x43 = this.Unknown0x43,
-				Unknown0x44 = this.Unknown0x44,
-				Unknown0x48 = this.Unknown0x48,
-				Unknown0x4C = this.Unknown0x4C
-			};
-
+			var result = new GCareerStage(CName, this.Database);
+			base.MemoryCast(this, result);
 			return result;
 		}
 
