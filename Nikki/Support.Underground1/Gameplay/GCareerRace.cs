@@ -57,7 +57,7 @@ namespace Nikki.Support.Underground1.Gameplay
 				if (!Byte.TryParse(value, out byte id))
 					throw new Exception("Unable to parse event ID from CollectionName provided.");
 				if (this.Database.GCareerRaces.FindCollection(value) != null)
-					throw new CollectionExistenceException();
+					throw new CollectionExistenceException(value);
 				this._collection_name = value;
 				this.ID = id;
 			}
@@ -82,78 +82,91 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// Career race behavior.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public eCareerRaceBehavior RaceBehavior { get; set; }
 
 		/// <summary>
 		/// Career race type.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public eCareerRaceType RaceType { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x0C.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public int Unknown0x0C { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x10.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public int Unknown0x10 { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x14.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public int Unknown0x14 { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x18.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public int Unknown0x18 { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x1C.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public int Unknown0x1C { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x20.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public int Unknown0x20 { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x24.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public int Unknown0x24 { get; set; }
 
 		/// <summary>
 		/// Key of the first opponent.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public uint Opponent1Key { get; set; }
 
 		/// <summary>
 		/// Key of the second opponent.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public uint Opponent2Key { get; set; }
 
 		/// <summary>
 		/// Key of the third opponent.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public uint Opponent3Key { get; set; }
 
 		/// <summary>
 		/// Some switch value at offset 0x34.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public int SwitchValue { get; set; }
 
 		/// <summary>
@@ -239,6 +252,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public int NumberOfUnlocks { get; set; }
 
 		/// <summary>
@@ -246,24 +260,28 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public int NumberOfStages { get; set; }
 
 		/// <summary>
 		/// Race ID which unlocks this race.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public int UnlockedByRace { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0xA0.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public int Unknown0xA0 { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0xA4.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public int Unknown0xA4 { get; set; }
 
 		/// <summary>
@@ -271,30 +289,35 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public eBoolean IsValidEvent { get; set; }
 
 		/// <summary>
 		/// True if initially locked; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public eBoolean InitiallyLockedMayb { get; set; }
 
 		/// <summary>
 		/// Intro movie shown at the beginning of the race.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string IntroMovie { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Inter movie shown in the middle of the race.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string InterMovie { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Outro movie shown at the end of the race.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public string OutroMovie { get; set; } = String.Empty;
 
 		/// <summary>
@@ -302,6 +325,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public string PlayerCarType { get; set; } = String.Empty;
 
 		/// <summary>
@@ -327,54 +351,63 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[StaticModifiable()]
+		[MemoryCastable()]
 		public int NumberOfOpponents { get; set; }
 
 		/// <summary>
 		/// Unknown float value at offset 0x12C.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public float Unknown0x12C { get; set; }
 
 		/// <summary>
 		/// Some key value at offset 0x130.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public uint SomeKey { get; set; }
 
 		/// <summary>
 		/// Allows traffic.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public int AllowTrafficMayb { get; set; }
 
 		/// <summary>
 		/// Unknown integer value at offset 0x138.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public int Unknown0x138 { get; set; }
 
 		/// <summary>
 		/// Unknown float value at offset 0x13C.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public float Unknown0x13C { get; set; }
 
 		/// <summary>
 		/// Unknown float value at offset 0x140.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public float Unknown0x140 { get; set; }
 
 		/// <summary>
 		/// Unknown float value at offset 0x144.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public float Unknown0x144 { get; set; }
 
 		/// <summary>
 		/// Unknown integer value at offset 0x148.
 		/// </summary>
 		[AccessModifiable()]
+		[MemoryCastable()]
 		public int Unknown0x148 { get; set; }
 
 		#endregion
@@ -546,59 +579,8 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// <returns>Memory casted copy of the object.</returns>
 		public override ACollectable MemoryCast(string CName)
 		{
-			var result = new GCareerRace(CName, this.Database)
-			{
-				AllowTrafficMayb = this.AllowTrafficMayb,
-				InitiallyLockedMayb = this.InitiallyLockedMayb,
-				InterMovie = this.InterMovie,
-				IntroMovie = this.IntroMovie,
-				IsValidEvent = this.IsValidEvent,
-				NumberOfOpponents = this.NumberOfOpponents,
-				NumberOfStages = this.NumberOfStages,
-				NumberOfUnlocks = this.NumberOfUnlocks,
-				Opponent1Key = this.Opponent1Key,
-				Opponent2Key = this.Opponent2Key,
-				Opponent3Key = this.Opponent3Key,
-				OutroMovie = this.OutroMovie,
-				PlayerCarType = this.PlayerCarType,
-				RaceBehavior = this.RaceBehavior,
-				RaceType = this.RaceType,
-				SomeKey = this.SomeKey,
-				SwitchValue = this.SwitchValue,
-				UnlockedByRace = this.UnlockedByRace,
-				Unknown0x0C = this.Unknown0x0C,
-				Unknown0x10 = this.Unknown0x10,
-				Unknown0x14 = this.Unknown0x14,
-				Unknown0x18 = this.Unknown0x18,
-				Unknown0x1C = this.Unknown0x1C,
-				Unknown0x20 = this.Unknown0x20,
-				Unknown0x24 = this.Unknown0x24,
-				Unknown0xA0 = this.Unknown0xA0,
-				Unknown0xA4 = this.Unknown0xA4,
-				Unknown0x12C = this.Unknown0x12C,
-				Unknown0x138 = this.Unknown0x138,
-				Unknown0x13C = this.Unknown0x13C,
-				Unknown0x140 = this.Unknown0x140,
-				Unknown0x144 = this.Unknown0x144,
-				Unknown0x148 = this.Unknown0x148,
-				OPPONENT1 = this.OPPONENT1.PlainCopy(),
-				OPPONENT2 = this.OPPONENT2.PlainCopy(),
-				OPPONENT3 = this.OPPONENT3.PlainCopy(),
-				STAGE1 = this.STAGE1.PlainCopy(),
-				STAGE2 = this.STAGE2.PlainCopy(),
-				STAGE3 = this.STAGE3.PlainCopy(),
-				STAGE4 = this.STAGE4.PlainCopy(),
-				STAGE5 = this.STAGE5.PlainCopy(),
-				STAGE6 = this.STAGE6.PlainCopy(),
-				STAGE7 = this.STAGE7.PlainCopy(),
-				STAGE8 = this.STAGE8.PlainCopy(),
-				UNLOCK1 = this.UNLOCK1.PlainCopy(),
-				UNLOCK2 = this.UNLOCK2.PlainCopy(),
-				UNLOCK3 = this.UNLOCK3.PlainCopy(),
-				UNLOCK4 = this.UNLOCK4.PlainCopy(),
-				UNLOCK5 = this.UNLOCK5.PlainCopy(),
-			};
-
+			var result = new GCareerRace(CName, this.Database);
+			base.MemoryCast(this, result);
 			return result;
 		}
 

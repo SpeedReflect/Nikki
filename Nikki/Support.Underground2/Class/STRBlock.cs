@@ -108,7 +108,7 @@ namespace Nikki.Support.Underground2.Class
 		}
 
 		/// <summary>
-		/// Initializes new instance of <see cref="CarTypeInfo"/>.
+		/// Initializes new instance of <see cref="STRBlock"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read text data with.</param>
 		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>

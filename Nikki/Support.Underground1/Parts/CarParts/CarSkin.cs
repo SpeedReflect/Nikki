@@ -3,7 +3,6 @@ using System.IO;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
 
@@ -14,7 +13,7 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 	/// <summary>
 	/// A unit <see cref="CarSkin"/> used in cartypeinfo collections.
 	/// </summary>
-	public class CarSkin : ASubPart, ICopyable<CarSkin>
+	public class CarSkin : ASubPart
 	{
 		/// <summary>
 		/// Description of the skin.
@@ -25,6 +24,7 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 		/// <summary>
 		/// Unknown integer value.
 		/// </summary>
+		[AccessModifiable()]
 		public int Unknown { get; set; }
 
 		/// <summary>
@@ -43,7 +43,7 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public CarSkin PlainCopy()
+		public override ASubPart PlainCopy()
 		{
 			var result = new CarSkin()
 			{

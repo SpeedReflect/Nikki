@@ -98,8 +98,13 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 		public void Disassemble(BinaryReader br, Dictionary<int, string> string_dict)
 		{
 			var position = br.ReadUInt32();
+
 			if (position < 0xFFFFFFFF && string_dict.TryGetValue((int)position, out var value))
+			{
+
 				this.DebugName = value;
+
+			}
 
 			this.CarNameHash = br.ReadUInt32();
 			this.PartNameHash = br.ReadUInt32();

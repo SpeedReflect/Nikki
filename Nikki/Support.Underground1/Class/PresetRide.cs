@@ -20,8 +20,6 @@ namespace Nikki.Support.Underground1.Class
         #region Fields
 
         private string _collection_name;
-        private uint _unknown1 = 0;
-        private uint _unknown2 = 0;
 
         /// <summary>
         /// Maximum length of the CollectionName.
@@ -73,7 +71,7 @@ namespace Nikki.Support.Underground1.Class
                 if (value.Length > MaxCNameLength)
                     throw new ArgumentLengthException(MaxCNameLength);
                 if (this.Database.PresetRides.FindCollection(value) != null)
-                    throw new CollectionExistenceException();
+                    throw new CollectionExistenceException(value);
                 this._collection_name = value;
             }
         }
@@ -92,156 +90,196 @@ namespace Nikki.Support.Underground1.Class
         /// Model that this <see cref="PresetRide"/> uses.
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public override string MODEL { get; set; } = String.Empty;
+
+        /// <summary>
+        /// Unknown key 1.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public int UnknownKey1 { get; set; }
+
+        /// <summary>
+        /// Unknown key 2.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public int UnknownKey2 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Base { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string AutosculptFrontBumper { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string AutosculptRearBumper { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string AutosculptSkirt { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string LeftSideMirror { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string RightSideMirror { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Body { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string AftermarketBodykit { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string RoofScoop { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Hood { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Trunk { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Spoiler { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Engine { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Headlight { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Brakelight { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Exhaust { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Brake { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Wheel { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string LicensePlate { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string DecalTex { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string WindshieldTint { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string NeonBody { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string CV { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string WheelManufacturer { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
+        [MemoryCastable()]
         public string Misc { get; set; } = String.Empty;
 
         /// <summary>
@@ -355,8 +393,8 @@ namespace Nikki.Support.Underground1.Class
         public override void Assemble(BinaryWriter bw)
         {
             // Write unknown value
-            bw.Write(this._unknown1);
-            bw.Write(this._unknown2);
+            bw.Write(this.UnknownKey1);
+            bw.Write(this.UnknownKey2);
 
             // MODEL
             bw.WriteNullTermUTF8(this.MODEL, 0x20);
@@ -496,8 +534,8 @@ namespace Nikki.Support.Underground1.Class
         public override void Disassemble(BinaryReader br)
         {
             // Read unknown values
-            this._unknown1 = br.ReadUInt32();
-            this._unknown2 = br.ReadUInt32();
+            this.UnknownKey1 = br.ReadInt32();
+            this.UnknownKey2 = br.ReadInt32();
 
             // MODEL
             this.MODEL = br.ReadNullTermUTF8(0x20);
@@ -618,10 +656,15 @@ namespace Nikki.Support.Underground1.Class
             this.DECALS_RIGHT_QUARTER.Read(br);
 
             // Finish reading parts
+            br.BaseStream.Position += 4;
             this.WindshieldTint = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            br.BaseStream.Position += 4;
             this.NeonBody = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            br.BaseStream.Position += 4;
             this.CV = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            br.BaseStream.Position += 4;
             this.WheelManufacturer = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            br.BaseStream.Position += 4;
             this.Misc = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
         }
 
@@ -632,46 +675,8 @@ namespace Nikki.Support.Underground1.Class
         /// <returns>Memory casted copy of the object.</returns>
         public override ACollectable MemoryCast(string CName)
         {
-            var result = new PresetRide(CName, this.Database)
-            {
-                AftermarketBodykit = this.AftermarketBodykit,
-                AutosculptFrontBumper = this.AutosculptFrontBumper,
-                AutosculptRearBumper = this.AutosculptRearBumper,
-                AutosculptSkirt = this.AutosculptSkirt,
-                Base = this.Base,
-                Body = this.Body,
-                Brake = this.Brake,
-                Brakelight = this.Brakelight,
-                CV = this.CV,
-                DecalTex = this.DecalTex,
-                DECALS_FRONT_WINDOW = this.DECALS_FRONT_WINDOW.PlainCopy(),
-                DECALS_HOOD = this.DECALS_HOOD.PlainCopy(),
-                DECALS_LEFT_DOOR = this.DECALS_LEFT_DOOR.PlainCopy(),
-                DECALS_LEFT_QUARTER = this.DECALS_LEFT_QUARTER.PlainCopy(),
-                DECALS_REAR_WINDOW = this.DECALS_REAR_WINDOW.PlainCopy(),
-                DECALS_RIGHT_DOOR = this.DECALS_RIGHT_DOOR.PlainCopy(),
-                DECALS_RIGHT_QUARTER = this.DECALS_RIGHT_QUARTER.PlainCopy(),
-                DECAL_SIZES = this.DECAL_SIZES.PlainCopy(),
-                Engine = this.Engine,
-                Exhaust = this.Exhaust,
-                Headlight = this.Headlight,
-                Hood = this.Hood,
-                LeftSideMirror = this.LeftSideMirror,
-                LicensePlate = this.LicensePlate,
-                Misc = this.Misc,
-                MODEL = this.MODEL,
-                NeonBody = this.NeonBody,
-                PAINT_TYPES = this.PAINT_TYPES.PlainCopy(),
-                RightSideMirror = this.RightSideMirror,
-                RoofScoop = this.RoofScoop,
-                Spoiler = this.Spoiler,
-                Trunk = this.Trunk,
-                VINYL_SETS = this.VINYL_SETS.PlainCopy(),
-                WheelManufacturer = this.WheelManufacturer,
-                Wheel = this.Wheel,
-                WindshieldTint = this.WindshieldTint,
-            };
-
+            var result = new PresetRide(CName, this.Database);
+            base.MemoryCast(this, result);
             return result;
         }
 

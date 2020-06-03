@@ -23,34 +23,70 @@ namespace Nikki.Support.Underground1.Class
         #region Fields
 
         private string _collection_name;
+
+        [MemoryCastable()]
         private byte _compression = EAComp.RGBA_08;
-        private bool _secretp8 = false; // true of _compression = 0x81 at disassembly
-        private uint _class = 0x001A93CF;
-        private byte _apply_alpha_sort = 0;
-        private byte _alpha_usage_type = 2;
-        private byte _alpha_blend_type = 1;
+
+        [MemoryCastable()]
+        private bool _secretp8 = false; // true if _compression = 0x81 at disassembly
+
+        [MemoryCastable()]
         private int _area = 0;
+
+        [MemoryCastable()]
         private short _num_palettes = 0;
+
+        [MemoryCastable()]
         private byte _pal_comp = 0;
-        private byte _bias_level = 0;
-        private byte _rendering_order = 5;
+
+        [MemoryCastable()]
         private byte _used_flag = 0;
+
+        [MemoryCastable()]
         private byte _flags = 0;
+
+        [MemoryCastable()]
         private byte _padding = 0;
+
+        [MemoryCastable()]
         private short _offsetS = 0;
+
+        [MemoryCastable()]
         private short _offsetT = 0x100;
+
+        [MemoryCastable()]
         private short _scaleS = 0x100;
+
+        [MemoryCastable()]
         private short _scaleT = 0;
-        private byte _scroll_type = 0;
+
+        [MemoryCastable()]
         private short _scroll_timestep = 0;
+
+        [MemoryCastable()]
         private short _scroll_speedS = 0;
+
+        [MemoryCastable()]
         private short _scroll_speedT = 0;
+
+        [MemoryCastable()]
         private int _unknown0 = 0;
+
+        [MemoryCastable()]
         private int _unknown1 = 0;
+
+        [MemoryCastable()]
         private int _unknown2 = 0;
+
+        [MemoryCastable()]
         private int _unknown3 = 0;
+
+        [MemoryCastable()]
         private int _unknown4 = 0;
+
+        [MemoryCastable()]
         private int _unknown5 = 0;
+
         private string _parent_TPK;
 
         #endregion
@@ -89,7 +125,7 @@ namespace Nikki.Support.Underground1.Class
                 var key = value.BinHash();
                 var type = eKeyType.BINKEY;
                 if (tpk.GetTextureIndex(key, type) != -1)
-                    throw new CollectionExistenceException();
+                    throw new CollectionExistenceException(value);
                 this._collection_name = value;
                 this.BinKey = key;
             }
@@ -113,17 +149,23 @@ namespace Nikki.Support.Underground1.Class
         /// <summary>
         /// Used in TPK compression blocks.
         /// </summary>
-        public int CompVal1 { get; set; } = 1;
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public int CompressionValue1 { get; set; } = 1;
 
         /// <summary>
         /// Used in TPK compression blocks.
         /// </summary>
-        public int CompVal2 { get; set; } = 5;
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public int CompressionValue2 { get; set; } = 5;
 
         /// <summary>
         /// Used in TPK compression blocks.
         /// </summary>
-        public int CompVal3 { get; set; } = 6;
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public int CompressionValue3 { get; set; } = 6;
 
         #endregion
 
@@ -149,7 +191,7 @@ namespace Nikki.Support.Underground1.Class
             this.PaletteOffset = 0;
             this._padding = 1;
         }
-        
+
         /// <summary>
         /// Initializes new instance of <see cref="Texture"/>.
         /// </summary>
@@ -205,10 +247,10 @@ namespace Nikki.Support.Underground1.Class
 
             // Write all settings
             bw.Write(this.BinKey);
-            bw.Write(this._class);
+            bw.Write(this.ClassKey);
             bw.Write(this._unknown0);
-            bw.Write((uint)this.Offset);
-            bw.Write((uint)this.PaletteOffset);
+            bw.Write(this.Offset);
+            bw.Write(this._compression == EAComp.P8_08 ? this.PaletteOffset : -1);
             bw.Write(this.Size);
             bw.Write(this.PaletteSize);
             bw.Write(this._area);
@@ -221,13 +263,13 @@ namespace Nikki.Support.Underground1.Class
             bw.Write(this._num_palettes);
             bw.Write(this.Mipmaps);
             bw.Write(this.TileableUV);
-            bw.Write(this._bias_level);
-            bw.Write(this._rendering_order);
-            bw.Write(this._scroll_type);
+            bw.Write(this.BiasLevel);
+            bw.Write(this.RenderingOrder);
+            bw.WriteEnum(this.ScrollType);
             bw.Write(this._used_flag);
-            bw.Write(this._apply_alpha_sort);
-            bw.Write(this._alpha_usage_type);
-            bw.Write(this._alpha_blend_type);
+            bw.Write(this.ApplyAlphaSort);
+            bw.WriteEnum(this.AlphaUsageType);
+            bw.WriteEnum(this.AlphaBlendType);
             bw.Write(this._flags);
             bw.WriteEnum(this.MipmapBiasType);
             bw.Write(this._padding);
@@ -256,7 +298,7 @@ namespace Nikki.Support.Underground1.Class
             this._collection_name = br.ReadNullTermUTF8(0x18);
 
             this.BinKey = br.ReadUInt32();
-            this._class = br.ReadUInt32();
+            this.ClassKey = br.ReadUInt32();
             this._unknown0 = br.ReadInt32();
             this.Offset = br.ReadInt32();
             this.PaletteOffset = br.ReadInt32();
@@ -271,13 +313,13 @@ namespace Nikki.Support.Underground1.Class
             this._num_palettes = br.ReadInt16();
             this.Mipmaps = br.ReadByte();
             this.TileableUV = br.ReadByte();
-            this._bias_level = br.ReadByte();
-            this._rendering_order = br.ReadByte();
-            this._scroll_type = br.ReadByte();
+            this.BiasLevel = br.ReadByte();
+            this.RenderingOrder = br.ReadByte();
+            this.ScrollType = br.ReadEnum<eTextureScrollType>();
             this._used_flag = br.ReadByte();
-            this._apply_alpha_sort = br.ReadByte();
-            this._alpha_usage_type = br.ReadByte();
-            this._alpha_blend_type = br.ReadByte();
+            this.ApplyAlphaSort = br.ReadByte();
+            this.AlphaUsageType = br.ReadEnum<eTextureAlphaUsageType>();
+            this.AlphaBlendType = br.ReadEnum<eTextureAlphaBlendType>();
             this._flags = br.ReadByte();
             this.MipmapBiasType = br.ReadEnum<eTextureMipmapBiasType>();
             this._padding = br.ReadByte();
@@ -296,8 +338,10 @@ namespace Nikki.Support.Underground1.Class
 
             if (this._compression == EAComp.SECRET)
             {
+
                 this._compression = EAComp.P8_08;
                 this._secretp8 = true;
+
             }
         }
 
@@ -308,16 +352,21 @@ namespace Nikki.Support.Underground1.Class
         public override byte[] GetDDSArray()
         {
             byte[] data;
+
             if (this._compression == EAComp.P8_08)
             {
+
                 data = new byte[this.Size * 4 + 0x80];
                 var copy = Palette.P8toRGBA(this.Data);
                 Buffer.BlockCopy(copy, 0, data, 0x80, copy.Length);
+
             }
             else
             {
+
                 data = new byte[this.Data.Length + 0x80];
                 Buffer.BlockCopy(this.Data, 0, data, 0x80, this.Data.Length);
+
             }
 
             // Initialize header first
@@ -329,16 +378,26 @@ namespace Nikki.Support.Underground1.Class
                 dwMipMapCount = (uint)this.Mipmaps,
                 dwFlags = (uint)DDS_HEADER_FLAGS.TEXTURE
             };
+
             DDSHeader.dwFlags += (uint)DDS_HEADER_FLAGS.MIPMAP;
+
             if (this._compression == EAComp.RGBA_08 || this._compression == EAComp.P8_08)
+            {
+
                 DDSHeader.dwFlags += (uint)DDS_HEADER_FLAGS.PITCH; // add pitch for uncompressed
+
+            }
             else
+            {
+
                 DDSHeader.dwFlags += (uint)DDS_HEADER_FLAGS.LINEARSIZE; // add linearsize for compressed
+
+            }
 
             Comp.GetPixelFormat(DDSHeader.ddspf, this._compression);
             DDSHeader.dwCaps = (uint)DDS_SURFACE.SURFACE_FLAGS_TEXTURE; // by default is a texture
             DDSHeader.dwCaps += (uint)DDS_SURFACE.SURFACE_FLAGS_MIPMAP; // mipmaps should be included
-            DDSHeader.dwPitchOrLinearSize = Comp.PitchLinearSize(this._compression, this.Width, 
+            DDSHeader.dwPitchOrLinearSize = Comp.PitchLinearSize(this._compression, this.Width,
                 this.Height, DDSHeader.ddspf.dwRGBBitCount);
 
             using var ms = new MemoryStream(data);
@@ -352,8 +411,14 @@ namespace Nikki.Support.Underground1.Class
             bw.Write(DDSHeader.dwPitchOrLinearSize);
             bw.Write(DDSHeader.dwDepth);
             bw.Write(DDSHeader.dwMipMapCount);
-            for (int a1 = 0; a1 < 11; ++a1)
-                bw.Write(DDSHeader.dwReserved1[a1]);
+
+            for (int loop = 0; loop < 11; ++loop)
+            {
+
+                bw.Write(DDSHeader.dwReserved1[loop]);
+
+            }
+
             bw.Write(DDSHeader.ddspf.dwSize);
             bw.Write(DDSHeader.ddspf.dwFlags);
             bw.Write(DDSHeader.ddspf.dwFourCC);
@@ -392,45 +457,47 @@ namespace Nikki.Support.Underground1.Class
 
             if (br.ReadUInt32() == (uint)DDS_TYPE.RGBA)
             {
+
                 var cdata = Palette.RGBAtoP8(data);
+
                 if (cdata == null)
                 {
+
                     this._compression = EAComp.RGBA_08;
                     this._area = this.Width * this.Height * 4;
                     this.PaletteSize = 0;
                     this.Data = new byte[this.Size];
                     Buffer.BlockCopy(data, 0x80, this.Data, 0, this.Size);
+
                 }
                 else
                 {
+
                     this._compression = EAComp.P8_08;
                     this._area = this.Width * this.Height * 4;
                     this.Size = (data.Length - 0x80) / 4;
                     this.PaletteSize = 0x400;
                     this.Data = new byte[cdata.Length];
                     Buffer.BlockCopy(cdata, 0, this.Data, 0, cdata.Length);
+
                 }
+
             }
             else
             {
+
                 this._compression = Comp.GetByte(br.ReadUInt32());
                 this._area = Comp.FlipToBase(this.Size);
                 br.BaseStream.Position = 0x80;
                 this.Data = br.ReadBytes(this.Size);
+
             }
 
             // Default all other values
             this._num_palettes = (short)(this.PaletteSize / 4);
             this.TileableUV = 0;
-            this._bias_level = 0;
-            this._rendering_order = 5;
-            this._scroll_type = 0;
             this._used_flag = 0;
-            this._apply_alpha_sort = 0;
-            this._alpha_usage_type = (byte)eTextureAlphaUsageType.TEXUSAGE_MODULATED;
-            this._alpha_blend_type = (byte)eTextureAlphaBlendType.TEXBLEND_BLEND;
             this._flags = 0;
-            this.MipmapBiasType = (byte)eTextureMipmapBiasType.TEXBIAS_DEFAULT;
             this._scroll_timestep = 0;
             this._scroll_speedS = 0;
             this._scroll_speedT = 0;
@@ -451,15 +518,22 @@ namespace Nikki.Support.Underground1.Class
             // Initialize data
             int total = this.PaletteSize + this.Size;
             this.Data = new byte[total];
+
             if (forced)
+            {
+
                 this.Data = br.ReadBytes(total);
+
+            }
             else
             {
+
                 var offset = br.BaseStream.Position;
                 br.BaseStream.Position = offset + this.PaletteOffset;
                 Buffer.BlockCopy(br.ReadBytes(this.PaletteSize), 0, this.Data, 0, this.PaletteSize);
                 br.BaseStream.Position = offset + this.Offset;
                 Buffer.BlockCopy(br.ReadBytes(this.Size), 0, this.Data, this.PaletteSize, this.Size);
+
             }
         }
 
@@ -470,51 +544,9 @@ namespace Nikki.Support.Underground1.Class
         /// <returns>Memory casted copy of the object.</returns>
         public override ACollectable MemoryCast(string CName)
         {
-            var result = new Texture(CName, this._parent_TPK, this.Database)
-            {
-                _offsetS = this._offsetS,
-                _offsetT = this._offsetT,
-                _scaleS = this._scaleS,
-                _scaleT = this._scaleT,
-                _scroll_type = this._scroll_type,
-                _scroll_timestep = this._scroll_timestep,
-                _scroll_speedS = this._scroll_speedS,
-                _scroll_speedT = this._scroll_speedT,
-                _area = this._area,
-                _num_palettes = this._num_palettes,
-                _apply_alpha_sort = this._apply_alpha_sort,
-                _alpha_usage_type = this._alpha_usage_type,
-                _alpha_blend_type = this._alpha_blend_type,
-                _bias_level = this._bias_level,
-                _rendering_order = this._rendering_order,
-                _used_flag = this._used_flag,
-                _flags = this._flags,
-                _padding = this._padding,
-                _secretp8 = this._secretp8,
-                _unknown0 = this._unknown0,
-                _unknown1 = this._unknown1,
-                _unknown2 = this._unknown2,
-                _unknown3 = this._unknown3,
-                _unknown4 = this._unknown4,
-                _unknown5 = this._unknown5,
-                _class = this._class,
-                _compression = this._compression,
-                _pal_comp = this._pal_comp,
-                Mipmaps = this.Mipmaps,
-                MipmapBiasType = this.MipmapBiasType,
-                Height = this.Height,
-                Width = this.Width,
-                TileableUV = this.TileableUV,
-                Offset = this.Offset,
-                Size = this.Size,
-                PaletteOffset = this.PaletteOffset,
-                PaletteSize = this.PaletteSize,
-                CompVal1 = this.CompVal1,
-                CompVal2 = this.CompVal2,
-                CompVal3 = this.CompVal3,
-                Data = new byte[this.Data.Length]
-            };
-
+            var result = new Texture(CName, this._parent_TPK, this.Database);
+            base.MemoryCast(this, result);
+            result.Data = new byte[this.Data.Length];
             Buffer.BlockCopy(this.Data, 0, result.Data, 0, this.Data.Length);
             return result;
         }

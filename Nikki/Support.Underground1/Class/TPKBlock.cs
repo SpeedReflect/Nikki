@@ -8,6 +8,7 @@ using Nikki.Utils.EA;
 using Nikki.Reflection.ID;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
+using Nikki.Reflection.Attributes;
 using Nikki.Support.Shared.Parts.TPKParts;
 using CoreExtensions.IO;
 
@@ -59,7 +60,7 @@ namespace Nikki.Support.Underground1.Class
                 if (this.UseCurrentName == eBoolean.True && value.Length > 0x1B)
                     throw new ArgumentLengthException(0x1B);
                 if (this.Database.TPKBlocks.FindCollection(value) != null)
-                    throw new CollectionExistenceException();
+                    throw new CollectionExistenceException(value);
                 this._collection_name = value;
             }
         }
@@ -83,6 +84,7 @@ namespace Nikki.Support.Underground1.Class
         /// If true, indicates that this <see cref="TPKBlock"/> is compressed and 
         /// should be saved as compressed on the output.
         /// </summary>
+        [AccessModifiable()]
         public override eBoolean IsCompressed { get; set; }
 
         /// <summary>
@@ -96,14 +98,14 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         public List<Texture> Textures { get; set; } = new List<Texture>();
 
-		#endregion
+        #endregion
 
-		#region Main
+        #region Main
 
-		/// <summary>
-		/// Initializes new instance of <see cref="TPKBlock"/>.
-		/// </summary>
-		public TPKBlock() => this.UseCurrentName = eBoolean.True;
+        /// <summary>
+        /// Initializes new instance of <see cref="TPKBlock"/>.
+        /// </summary>
+        public TPKBlock() => this.UseCurrentName = eBoolean.True;
 
         /// <summary>
         /// Initializes new instance of <see cref="TPKBlock"/>.
@@ -141,9 +143,15 @@ namespace Nikki.Support.Underground1.Class
         /// <returns>Byte array of the tpk block.</returns>
         public override void Assemble(BinaryWriter bw)
         {
-            // TPK Check
+            // TPK Sort
             this.SortTexturesByType(false);
 
+            if (this.IsCompressed == eBoolean.True) this.AssembleCompressed(bw);
+            else this.AssembleDecompressed(bw);
+        }
+
+        private void AssembleDecompressed(BinaryWriter bw)
+        {
             // Write main
             bw.Write(TPK.MAINID);
             bw.Write(-1); // write temp size
@@ -175,6 +183,62 @@ namespace Nikki.Support.Underground1.Class
             this.Get2Part2(bw);
             bw.BaseStream.Position = position_2 - 4;
             bw.Write((int)(bw.BaseStream.Length - position_2));
+
+            // Write final size
+            bw.BaseStream.Position = position_0 - 4;
+            bw.Write((int)(bw.BaseStream.Length - position_0));
+            bw.BaseStream.Position = bw.BaseStream.Length;
+        }
+
+        private void AssembleCompressed(BinaryWriter bw)
+        {
+            var start = (int)bw.BaseStream.Position;
+
+            bw.Write(TPK.MAINID);
+            bw.Write(-1); // write temp size
+            var position_0 = bw.BaseStream.Position;
+            bw.Write((int)0);
+            bw.Write(0x30);
+            bw.WriteBytes(0x30);
+
+            // Partial 1 Block
+            bw.Write(TPK.INFO_BLOCKID);
+            bw.Write(-1);
+            var position_1 = bw.BaseStream.Position;
+            this.Get1Part1(bw);
+            this.Get1Part2(bw);
+
+            // Write temporary Part3
+            var position_3 = bw.BaseStream.Position;
+            bw.Write((long)0);
+
+            for (int a1 = 0; a1 < this.Textures.Count; ++a1)
+            {
+
+                bw.WriteBytes(0x18);
+
+            }
+
+            // Write partial 1 size
+            bw.BaseStream.Position = position_1 - 4;
+            bw.Write((int)(bw.BaseStream.Length - position_1));
+            bw.BaseStream.Position = bw.BaseStream.Length;
+
+            // Write padding
+            bw.Write(Comp.GetPaddingArray((int)bw.BaseStream.Position, 0x80));
+
+            // Partial 2 Block
+            bw.Write(TPK.DATA_BLOCKID);
+            bw.Write(-1);
+            var position_2 = bw.BaseStream.Position;
+            this.Get2Part1(bw);
+            var offslots = this.Get2CompressedPart2(bw, start);
+            bw.BaseStream.Position = position_2 - 4;
+            bw.Write((int)(bw.BaseStream.Length - position_2));
+
+            // Write offslots
+            bw.BaseStream.Position = position_3;
+            this.Get1Part3(bw, offslots);
 
             // Write final size
             bw.BaseStream.Position = position_0 - 4;
@@ -218,40 +282,55 @@ namespace Nikki.Support.Underground1.Class
 
             if (PartOffsets[2] != max)
             {
+
                 for (int a1 = 0; a1 < TextureCount; ++a1)
                 {
+
                     int count = this.Textures.Count;
                     br.BaseStream.Position = Start;
                     this.ParseCompTexture(br, offslot_list[a1]);
+
                     if (this.Textures.Count > count) // if texture was added
                     {
-                        this.Textures[^1].CompVal1 = compslot_list[a1].Var1;
-                        this.Textures[^1].CompVal2 = compslot_list[a1].Var2;
-                        this.Textures[^1].CompVal3 = compslot_list[a1].Var3;
+
+                        this.Textures[^1].CompressionValue1 = compslot_list[a1].Var1;
+                        this.Textures[^1].CompressionValue2 = compslot_list[a1].Var2;
+                        this.Textures[^1].CompressionValue3 = compslot_list[a1].Var3;
+
                     }
+
                 }
+
             }
             else
             {
+
                 // Add textures to the list
                 for (int a1 = 0; a1 < TextureCount; ++a1)
                 {
+
                     br.BaseStream.Position = texture_list[a1];
+
                     var tex = new Texture(br, this.CollectionName, this.Database)
                     {
-                        CompVal1 = compslot_list[a1].Var1,
-                        CompVal2 = compslot_list[a1].Var2,
-                        CompVal3 = compslot_list[a1].Var3
+                        CompressionValue1 = compslot_list[a1].Var1,
+                        CompressionValue2 = compslot_list[a1].Var2,
+                        CompressionValue3 = compslot_list[a1].Var3
                     };
+
                     this.Textures.Add(tex);
+
                 }
 
                 // Finally, build all .dds files
                 for (int a1 = 0; a1 < TextureCount; ++a1)
                 {
+
                     br.BaseStream.Position = PartOffsets[6] + 0x7C;
                     this.Textures[a1].ReadData(br, false);
+
                 }
+
             }
 
             br.BaseStream.Position = Final;
@@ -299,16 +378,20 @@ namespace Nikki.Support.Underground1.Class
             switch (type)
             {
                 case eKeyType.BINKEY:
-                    for (int a1 = 0; a1 < this.Textures.Count; ++a1)
+                    for (int loop = 0; loop < this.Textures.Count; ++loop)
                     {
-                        if (this.Textures[a1].BinKey == key) return a1;
+
+                        if (this.Textures[loop].BinKey == key) return loop;
+
                     }
                     break;
 
                 case eKeyType.VLTKEY:
-                    for (int a1 = 0; a1 < this.Textures.Count; ++a1)
+                    for (int loop = 0; loop < this.Textures.Count; ++loop)
                     {
-                        if (this.Textures[a1].VltKey == key) return a1;
+
+                        if (this.Textures[loop].VltKey == key) return loop;
+
                     }
                     break;
 
@@ -322,192 +405,116 @@ namespace Nikki.Support.Underground1.Class
         }
 
         /// <summary>
-        /// Attempts to add <see cref="Texture"/> to the <see cref="TPKBlock"/> data.
+        /// Adds <see cref="Texture"/> to the <see cref="TPKBlock"/> data.
         /// </summary>
         /// <param name="CName">Collection Name of the new <see cref="Texture"/>.</param>
         /// <param name="filename">Path of the texture to be imported.</param>
-        /// <returns>True if texture adding was successful, false otherwise.</returns>
-        public override bool TryAddTexture(string CName, string filename)
+        public override void AddTexture(string CName, string filename)
         {
-            if (string.IsNullOrWhiteSpace(CName)) return false;
-
-            if (this.FindTexture(CName.BinHash(), eKeyType.BINKEY) != null)
-                return false;
-
-            if (!Comp.IsDDSTexture(filename))
-                return false;
-
-            var texture = new Texture(CName, this.CollectionName, filename, this.Database);
-            this.Textures.Add(texture);
-            return true;
-        }
-
-        /// <summary>
-        /// Attempts to add <see cref="Texture"/> to the <see cref="TPKBlock"/> data.
-        /// </summary>
-        /// <param name="CName">Collection Name of the new <see cref="Texture"/>.</param>
-        /// <param name="filename">Path of the texture to be imported.</param>
-        /// <param name="error">Error occured when trying to add a texture.</param>
-        /// <returns>True if texture adding was successful, false otherwise.</returns>
-        public override bool TryAddTexture(string CName, string filename, out string error)
-        {
-            error = null;
             if (string.IsNullOrWhiteSpace(CName))
             {
-                error = $"Collection Name cannot be empty or whitespace.";
-                return false;
+
+                throw new ArgumentNullException($"Collection Name cannot be empty or whitespace");
+
             }
 
             if (this.FindTexture(CName.BinHash(), eKeyType.BINKEY) != null)
             {
-                error = $"Texture named {CName} already exists.";
-                return false;
+
+                throw new CollectionExistenceException($"Texture named ${CName} already exists");
+
             }
 
             if (!Comp.IsDDSTexture(filename))
             {
-                error = $"Texture passed is not a DDS texture.";
-                return false;
+
+                throw new ArgumentException($"File {filename} is not of supported DDS format");
+
             }
 
             var texture = new Texture(CName, this.CollectionName, filename, this.Database);
             this.Textures.Add(texture);
-            return true;
         }
 
         /// <summary>
-        /// Attempts to remove <see cref="Texture"/> specified from <see cref="TPKBlock"/> data.
+        /// Removes <see cref="Texture"/> specified from <see cref="TPKBlock"/> data.
         /// </summary>
         /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to be deleted.</param>
         /// <param name="type">Type fo the key passed.</param>
-        /// <returns>True if texture removing was successful, false otherwise.</returns>
-        public override bool TryRemoveTexture(uint key, eKeyType type)
+        public override void RemoveTexture(uint key, eKeyType type)
         {
             var index = this.GetTextureIndex(key, type);
-            if (index == -1) return false;
-            this.Textures.RemoveAt(index);
-            return true;
-        }
 
-        /// <summary>
-        /// Attempts to remove <see cref="Texture"/> specified from <see cref="TPKBlock"/> data.
-        /// </summary>
-        /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to be deleted.</param>
-        /// <param name="type">Type of the key passed.</param>
-        /// <param name="error">Error occured when trying to remove a texture.</param>
-        /// <returns>True if texture removing was successful, false otherwise.</returns>
-        public override bool TryRemoveTexture(uint key, eKeyType type, out string error)
-        {
-            error = null;
-            var index = this.GetTextureIndex(key, type);
             if (index == -1)
             {
-                error = $"Texture with key 0x{key:X8} does not exist.";
-                return false;
+
+                throw new InfoAccessException($"Texture with key 0x{key:X8} does not exist");
+
             }
+
             this.Textures.RemoveAt(index);
-            return true;
         }
 
         /// <summary>
-        /// Attempts to clone <see cref="Texture"/> specified in the <see cref="TPKBlock"/> data.
+        /// Clones <see cref="Texture"/> specified in the <see cref="TPKBlock"/> data.
         /// </summary>
         /// <param name="newname">Collection Name of the new <see cref="Texture"/>.</param>
         /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to clone.</param>
         /// <param name="type">Type of the key passed.</param>
-        /// <returns>True if texture cloning was successful, false otherwise.</returns>
-        public override bool TryCloneTexture(string newname, uint key, eKeyType type)
+        public override void CloneTexture(string newname, uint key, eKeyType type)
         {
-            if (string.IsNullOrWhiteSpace(newname)) return false;
-
-            if (this.FindTexture(newname.BinHash(), type) != null)
-                return false;
-
-            var copyfrom = (Texture)this.FindTexture(key, type);
-            if (copyfrom == null) return false;
-
-            var texture = (Texture)copyfrom.MemoryCast(newname);
-            this.Textures.Add(texture);
-            return true;
-        }
-
-        /// <summary>
-        /// Attempts to clone <see cref="Texture"/> specified in the <see cref="TPKBlock"/> data.
-        /// </summary>
-        /// <param name="newname">Collection Name of the new <see cref="Texture"/>.</param>
-        /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to clone.</param>
-        /// <param name="type">Type of the key passed.</param>
-        /// <param name="error">Error occured when trying to clone a texture.</param>
-        /// <returns>True if texture cloning was successful, false otherwise.</returns>
-        public override bool TryCloneTexture(string newname, uint key, eKeyType type, out string error)
-        {
-            error = null;
             if (string.IsNullOrWhiteSpace(newname))
             {
-                error = $"CollectionName cannot be empty or whitespace.";
-                return false;
+
+                throw new ArgumentNullException($"Collection Name cannot be empty or whitespace");
+
             }
 
             if (this.FindTexture(newname.BinHash(), type) != null)
             {
-                error = $"Texture with CollectionName {newname} already exists.";
-                return false;
+
+                throw new CollectionExistenceException($"Texture named {newname} already exists");
+
             }
 
             var copyfrom = (Texture)this.FindTexture(key, type);
+
             if (copyfrom == null)
             {
-                error = $"Texture with key 0x{key:X8} does not exist.";
-                return false;
+
+                throw new InfoAccessException($"Texture named {copyfrom} does not exist");
+
             }
 
             var texture = (Texture)copyfrom.MemoryCast(newname);
             this.Textures.Add(texture);
-            return true;
         }
 
         /// <summary>
-        /// Attemps to replace <see cref="Texture"/> specified in the <see cref="TPKBlock"/> data with a new one.
+        /// Replaces <see cref="Texture"/> specified in the <see cref="TPKBlock"/> data with a new one.
         /// </summary>
         /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to be replaced.</param>
         /// <param name="type">Type of the key passed.</param>
         /// <param name="filename">Path of the texture that replaces the current one.</param>
-        /// <returns>True if texture replacing was successful, false otherwise.</returns>
-        public override bool TryReplaceTexture(uint key, eKeyType type, string filename)
+        public override void ReplaceTexture(uint key, eKeyType type, string filename)
         {
             var tex = (Texture)this.FindTexture(key, type);
-            if (tex == null) return false;
-            if (!Comp.IsDDSTexture(filename)) return false;
-            tex.Reload(filename);
-            return true;
-        }
 
-        /// <summary>
-        /// Attemps to replace <see cref="Texture"/> specified in the <see cref="TPKBlock"/> data with a new one.
-        /// </summary>
-        /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to be replaced.</param>
-        /// <param name="type">Type of the key passed.</param>
-        /// <param name="filename">Path of the texture that replaces the current one.</param>
-        /// <param name="error">Error occured when trying to replace a texture.</param>
-        /// <returns>True if texture replacing was successful, false otherwise.</returns>
-        public override bool TryReplaceTexture(uint key, eKeyType type, string filename, out string error)
-        {
-            error = null;
-            var tex = (Texture)this.FindTexture(key, type);
             if (tex == null)
             {
-                error = $"Texture with key 0x{key:X8} does not exist.";
-                return false;
+
+                throw new InfoAccessException($"Texture with key 0x{key:X8} does not exist");
+
             }
 
             if (!Comp.IsDDSTexture(filename))
             {
-                error = $"File {filename} is not a valid DDS texture.";
-                return false;
+
+                throw new ArgumentException($"File {filename} is not of supported DDS format");
+
             }
 
             tex.Reload(filename);
-            return true;
         }
 
         /// <summary>
@@ -540,16 +547,26 @@ namespace Nikki.Support.Underground1.Class
 
             while (ReaderID != TPK.INFO_BLOCKID)
             {
+
                 ReaderID = br.ReadUInt32();
                 InfoBlockSize = br.ReadInt32();
+
                 if (ReaderID != TPK.INFO_BLOCKID)
+                {
+
                     br.BaseStream.Position += InfoBlockSize;
+
+                }
+
             }
 
             ReaderOffset = br.BaseStream.Position;
+
             while (br.BaseStream.Position < ReaderOffset + InfoBlockSize)
             {
+
                 ReaderID = br.ReadUInt32();
+
                 switch (ReaderID)
                 {
                     case TPK.INFO_PART1_BLOCKID:
@@ -576,21 +593,33 @@ namespace Nikki.Support.Underground1.Class
                         int size = br.ReadInt32();
                         br.BaseStream.Position += size;
                         break;
+
                 }
+
             }
 
             while (ReaderID != TPK.DATA_BLOCKID)
             {
+
                 ReaderID = br.ReadUInt32();
                 DataBlockSize = br.ReadInt32();
+
                 if (ReaderID != TPK.DATA_BLOCKID)
+                {
+
                     br.BaseStream.Position += DataBlockSize;
+
+                }
+
             }
 
             ReaderOffset = br.BaseStream.Position; // relative offset
+
             while (br.BaseStream.Position < ReaderOffset + DataBlockSize)
             {
+
                 ReaderID = br.ReadUInt32();
+
                 switch (ReaderID)
                 {
                     case TPK.DATA_PART1_BLOCKID:
@@ -609,7 +638,9 @@ namespace Nikki.Support.Underground1.Class
                         int size = br.ReadInt32();
                         br.BaseStream.Position += size;
                         break;
+
                 }
+
             }
 
             return offsets;
@@ -632,7 +663,7 @@ namespace Nikki.Support.Underground1.Class
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="TPKBlock"/> with.</param>
         protected override void GetHeaderInfo(BinaryReader br)
         {
-            if (br.BaseStream.Position == max) return;  // if Part1 does not exist
+            if (br.BaseStream.Position == max) return; // check if Part1 even exists
 
             if (br.ReadInt32() != 0x7C) return; // check header size
 
@@ -640,9 +671,7 @@ namespace Nikki.Support.Underground1.Class
             if (br.ReadInt32() != (int)this.Version) return; // return if versions does not match
 
             // Get CollectionName
-            this.CollectionName = this.UseCurrentName == eBoolean.True
-                ? br.ReadNullTermUTF8(0x1C)
-                : this.Index.ToString() + "_" + Comp.GetTPKName(this.Index, this.GameINT);
+            this.CollectionName = br.ReadNullTermUTF8(0x1C);
 
             // Get the rest of the settings
             br.BaseStream.Position += 0x44;
@@ -664,8 +693,10 @@ namespace Nikki.Support.Underground1.Class
 
             int ReaderSize = br.ReadInt32();
             var ReaderOffset = br.BaseStream.Position;
+
             while (br.BaseStream.Position < ReaderOffset + ReaderSize)
             {
+
                 yield return new OffSlot
                 {
                     Key = br.ReadUInt32(),
@@ -677,6 +708,7 @@ namespace Nikki.Support.Underground1.Class
                     RefCount = br.ReadInt16(),
                     UnknownInt32 = br.ReadInt32()
                 };
+
             }
         }
 
@@ -695,10 +727,13 @@ namespace Nikki.Support.Underground1.Class
             var result = new long[count];
 
             int len = 0;
+
             while (len < count && br.BaseStream.Position < ReaderOffset + ReaderSize)
             {
+
                 result[len++] = br.BaseStream.Position; // add offset
                 br.BaseStream.Position += 0x7C;
+
             }
 
             return result;
@@ -712,23 +747,99 @@ namespace Nikki.Support.Underground1.Class
         /// <returns>Decompressed texture valid to the current support.</returns>
         protected override void ParseCompTexture(BinaryReader br, OffSlot offslot)
         {
+            const int headersize = 0x7C + 0x18; // texture header size + comp slot size
             br.BaseStream.Position += offslot.AbsoluteOffset;
-            if (br.ReadUInt32() != TPK.COMPRESSED_TEXTURE) return; // if not a compressed texture
+            var offset = br.BaseStream.Position; // save this position
 
-            // Decompress all data excluding 0x18 byte header
-            br.BaseStream.Position += 0x14;
-            var data = br.ReadBytes(offslot.EncodedSize - 0x18);
-            data = Interop.Decompress(data);
+            // Magic list that contains MagicHeaders
+            var magiclist = new List<MagicHeader>(offslot.EncodedSize / 0x4000 + 1);
 
-            using var ms = new MemoryStream(data);
-            using var reader = new BinaryReader(ms);
+            // Read while position in the stream is less than encoded size specified
+            while (br.BaseStream.Position < offset + offslot.EncodedSize)
+            {
 
-            // In compressed textures, their header lies right in the end (0x7C + 0x18 bytes)
-            reader.BaseStream.Position = reader.BaseStream.Length - 0x7C - 0x18;
-            var tex = new Texture(reader, this.CollectionName, this.Database);
-            reader.BaseStream.Position = 0;
-            tex.ReadData(reader, true);
-            this.Textures.Add(tex);
+                // We read till we find magic compressed block number
+                if (br.ReadUInt32() != TPK.COMPRESSED_TEXTURE) continue;
+
+                var magic = new MagicHeader();
+                magic.Read(br);
+
+                magiclist.Add(magic);
+
+            }
+
+            // If no data was read, we return; else if magic count is more than 1, sort by positions
+            if (magiclist.Count == 0)
+            {
+
+                return;
+
+            }
+            else if (magiclist.Count > 1)
+            {
+
+                magiclist.Sort((x, y) => x.DecodedDataPosition.CompareTo(y.DecodedDataPosition));
+
+            }
+
+            // Header is always located at the end of data, meaning last MagicHeader
+            var header = magiclist[^1];
+            using var ms = new MemoryStream(header.Data);
+            using var texr = new BinaryReader(ms);
+
+            // Texture header is located at the end of data
+            int headlength = header.Length - headersize;
+            texr.BaseStream.Position = headlength;
+
+            // Create new texture based on header found
+            var texture = new Texture(texr, this.CollectionName, this.Database);
+
+            // We can skip dds type struct since it is defined in the header.
+
+            // Calculate total length of the texture data
+            int length = 0;
+            magiclist.ForEach(arr => length += arr.Length == header.Length
+                    ? headlength // exclude header size
+                    : arr.Length); // else include entire length
+
+            // Initialize stack for data
+            texture.Data = new byte[length];
+            length = 0; // reset
+
+            // BlockCopy all data to the texture's storage
+            foreach (var magic in magiclist)
+            {
+
+                if (magic.Length == header.Length)
+                {
+
+                    if (magic.Length == headersize)
+                    {
+
+                        continue;
+
+                    }
+                    else
+                    {
+
+                        Array.Copy(magic.Data, 0, texture.Data, length, headlength);
+                        length += headlength;
+
+                    }
+
+                }
+                else
+                {
+
+                    Array.Copy(magic.Data, 0, texture.Data, length, magic.Length);
+                    length += magic.Length;
+
+                }
+
+            }
+
+            // Add texture to this TPK
+            this.Textures.Add(texture);
         }
 
         /// <summary>
@@ -741,9 +852,12 @@ namespace Nikki.Support.Underground1.Class
 
             int ReaderSize = br.ReadInt32();
             var ReaderOffset = br.BaseStream.Position;
+
             while (br.BaseStream.Position < ReaderOffset + ReaderSize)
             {
+
                 br.BaseStream.Position += 8;
+
                 yield return new CompSlot
                 {
                     Var1 = br.ReadInt32(),
@@ -751,7 +865,9 @@ namespace Nikki.Support.Underground1.Class
                     Var3 = br.ReadInt32(),
                     Comp = br.ReadUInt32(),
                 };
+
                 br.BaseStream.Position += 8;
+
             }
         }
 
@@ -771,11 +887,7 @@ namespace Nikki.Support.Underground1.Class
             bw.WriteEnum(this.Version);
 
             // Write CollectionName
-            string CName = string.Empty;
-            CName = this.UseCurrentName == eBoolean.True
-                ? this.CollectionName
-                : this.CollectionName[2..];
-            bw.WriteNullTermUTF8(CName, 0x1C);
+            bw.WriteNullTermUTF8(this._collection_name, 0x1C);
 
             // Write Filename
             bw.WriteNullTermUTF8(this.Filename, 0x40);
@@ -799,10 +911,38 @@ namespace Nikki.Support.Underground1.Class
         {
             bw.Write(TPK.INFO_PART2_BLOCKID); // write ID
             bw.Write(this.Textures.Count * 8); // write size
-            for (int a1 = 0; a1 < this.Textures.Count; ++a1)
+
+            for (int loop = 0; loop < this.Textures.Count; ++loop)
             {
-                bw.Write(this.Textures[a1].BinKey);
+
+                bw.Write(this.Textures[loop].BinKey);
                 bw.Write((int)0);
+
+            }
+        }
+
+        /// <summary>
+        /// Assembles partial 1 part3 of the tpk block.
+        /// </summary>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        /// <param name="offslots">List of <see cref="OffSlot"/> to write.</param>
+        protected void Get1Part3(BinaryWriter bw, List<OffSlot> offslots)
+        {
+            bw.Write(TPK.INFO_PART3_BLOCKID); // write ID
+            bw.Write(this.Textures.Count * 0x18); // write size
+
+            foreach (var offslot in offslots)
+            {
+
+                bw.Write(offslot.Key);
+                bw.Write(offslot.AbsoluteOffset);
+                bw.Write(offslot.EncodedSize);
+                bw.Write(offslot.DecodedSize);
+                bw.Write(offslot.UserFlags);
+                bw.Write(offslot.Flags);
+                bw.Write(offslot.RefCount);
+                bw.Write(offslot.UnknownInt32);
+
             }
         }
 
@@ -817,14 +957,17 @@ namespace Nikki.Support.Underground1.Class
             using var writer = new BinaryWriter(ms);
 
             int length = 0;
+
             foreach (var tex in this.Textures)
             {
+
                 tex.PaletteOffset = length;
                 tex.Offset = length + tex.PaletteSize;
                 tex.Assemble(writer);
                 length += tex.PaletteSize + tex.Size;
                 var pad = 0x80 - length % 0x80;
                 if (pad != 0x80) length += pad;
+
             }
 
             var data = ms.ToArray();
@@ -842,14 +985,17 @@ namespace Nikki.Support.Underground1.Class
         {
             bw.Write(TPK.INFO_PART5_BLOCKID); // write ID
             bw.Write(this.Textures.Count * 0x20); // write size
-            for (int a1 = 0; a1 < this.Textures.Count; ++a1)
+
+            for (int loop = 0; loop < this.Textures.Count; ++loop)
             {
+
                 bw.Write((long)0);
-                bw.Write(this.Textures[a1].CompVal1);
-                bw.Write(this.Textures[a1].CompVal2);
-                bw.Write(this.Textures[a1].CompVal3);
-                bw.Write(Comp.GetInt(this.Textures[a1].Compression));
+                bw.Write(this.Textures[loop].CompressionValue1);
+                bw.Write(this.Textures[loop].CompressionValue2);
+                bw.Write(this.Textures[loop].CompressionValue3);
+                bw.Write(Comp.GetInt(this.Textures[loop].Compression));
                 bw.Write((long)0);
+
             }
         }
 
@@ -882,17 +1028,232 @@ namespace Nikki.Support.Underground1.Class
             bw.Write(-1); // write size
             var position = bw.BaseStream.Position;
 
-            for (int a1 = 0; a1 < 30; ++a1)
-                bw.Write(0x11111111);
-            for (int a1 = 0; a1 < this.Textures.Count; ++a1)
+            for (int loop = 0; loop < 30; ++loop)
             {
-                bw.Write(this.Textures[a1].Data);
+
+                bw.Write(0x11111111);
+
+            }
+
+            for (int loop = 0; loop < this.Textures.Count; ++loop)
+            {
+
+                bw.Write(this.Textures[loop].Data);
                 bw.FillBuffer(0x80);
+
             }
 
             bw.BaseStream.Position = position - 4;
             bw.Write((int)(bw.BaseStream.Length - position));
             bw.BaseStream.Position = bw.BaseStream.Length;
+        }
+
+        /// <summary>
+        /// Assembles partial 2 part2 as compressed block and return all offslots generated.
+        /// </summary>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        /// <param name="thisOffset">Offset of this TPK in BinaryWriter passed.</param>
+        protected List<OffSlot> Get2CompressedPart2(BinaryWriter bw, int thisOffset)
+        {
+            // Initialize result offslot list
+            var result = new List<OffSlot>(this.Textures.Count);
+
+            // Save position and write ID with temporary size
+            bw.Write(TPK.DATA_PART2_BLOCKID);
+            bw.Write(0xFFFFFFFF);
+            var start = bw.BaseStream.Position;
+
+            // Write padding alignment
+            for (int loop = 0; loop < 30; ++loop)
+            {
+
+                bw.Write(0x11111111);
+
+            }
+
+            // Precalculate initial capacity for the stream
+            int capacity = this.Textures.Count << 16; // count * 0x8000
+            int totalTexSize = 0; // to keep track of total texture data length
+
+            // Action delegate to calculate next texture offset
+            var CalculateNextOffset = new Action<int>((texlen) =>
+            {
+
+                totalTexSize += texlen;
+                var dif = 0x80 - totalTexSize % 0x80;
+                if (dif != 0x80) totalTexSize += dif;
+
+            });
+
+            // Action delegate to write texture header and dds info header
+            var WriteHeader = new Action<Texture, BinaryWriter>((texture, writer) =>
+            {
+
+                texture.PaletteOffset = totalTexSize;
+                texture.Offset = totalTexSize + texture.PaletteSize;
+                var nextPos = writer.BaseStream.Position + 0x7C;
+                texture.Assemble(writer);
+                writer.BaseStream.Position = nextPos;
+                writer.Write((int)0);
+                writer.Write((long)0);
+                writer.Write(Comp.GetInt(texture.Compression));
+                writer.Write((long)0);
+
+            });
+
+            // Iterate through every texture. Each iteration creates an OffSlot class 
+            // that is yield returned to IEnumerable output. AbsoluteOffset of each 
+            // OffSlot initially is offset from the beginning of part 2 + 0x78 bytes 
+            // for padding. Those offsets will later be changed while writing Part 1-3.
+            foreach (var texture in this.Textures)
+            {
+
+                int texOffset = 0; // to keep track of offset in dds data of the texture
+
+                const int headerSize = 0x18; // header size is constant for all compressions
+                const int maxBlockSize = 0x8000; // maximum block size of data
+                const int texHeaderSize = 0x7C + 0x18; // size of texture header + dds info header
+
+                // Calculate header length. Header consists of leftover dds data got by 
+                // dividing it in blocks of 0x8000 bytes + size of texture header + 
+                // size of dds info header
+                var numParts = texture.Data.Length / maxBlockSize + 1;
+                var magiclist = new List<MagicHeader>(numParts);
+
+                for (int loop = 0; loop < numParts; ++loop)
+                {
+
+                    var magic = new MagicHeader();
+
+                    // If we are at the leftover/last part
+                    if (loop == numParts - 1)
+                    {
+
+                        var difference = texture.Data.Length - texOffset;
+                        var head = new byte[difference + texHeaderSize];
+
+                        if (difference != 0)
+                        {
+
+                            Array.Copy(texture.Data, texOffset, head, 0, difference);
+
+                        }
+
+                        texOffset = texture.Data.Length;
+
+                        // Initialize new stream over header and set position at the end
+                        using var strMemory = new MemoryStream(head);
+                        using var strWriter = new BinaryWriter(strMemory);
+                        strWriter.BaseStream.Position = strWriter.BaseStream.Length - texHeaderSize;
+
+                        // Write header data and calculate next offset
+                        WriteHeader(texture, strWriter);
+                        CalculateNextOffset(texture.Data.Length);
+
+                        // Save compressed data to MagicHeader
+                        magic.Data = Interop.Compress(head, eLZCompressionType.BEST);
+                        magic.DecodedSize = difference + texHeaderSize;
+
+                    }
+
+                    // Else compress data and save as MagicHeader
+                    else
+                    {
+
+                        // Use compression type passed
+                        magic.Data = Interop.Compress(texture.Data, texOffset, maxBlockSize, eLZCompressionType.BEST);
+                        texOffset += maxBlockSize;
+                        magic.DecodedSize = maxBlockSize;
+
+                    }
+
+                    magiclist.Add(magic);
+                }
+
+                // Create new Offslot that will be yield returned
+                var offslot = new OffSlot()
+                {
+                    Key = texture.BinKey,
+                    AbsoluteOffset = (int)(bw.BaseStream.Position - thisOffset),
+                    DecodedSize = 0,
+                    EncodedSize = 0,
+                    UserFlags = 0,
+                    Flags = 2,
+                    RefCount = 0,
+                    UnknownInt32 = 0,
+                };
+
+                // Make new offsets to keep track of positions
+                //int decodeOffset = 0;
+                int decodeOffset = magiclist[0].DecodedSize;
+                int encodeOffset = 0;
+
+                // If there are more than 1 subparts
+                if (magiclist.Count > 1)
+                {
+
+                    // Iterate through every part starting with index 1
+                    for (int loop = 1; loop < magiclist.Count; ++loop)
+                    {
+
+                        var magic = magiclist[loop];
+                        var size = magic.Length + headerSize;
+                        var difference = 4 - size % 4;
+                        if (difference != 4) size += difference;
+
+                        // Manage settings about decoded data
+                        magic.DecodedDataPosition = decodeOffset;
+                        decodeOffset += magic.DecodedSize;
+                        offslot.DecodedSize += magic.DecodedSize;
+
+                        // Manage settings about encoded data
+                        magic.EncodedSize = size;
+                        magic.EncodedDataPosition = encodeOffset;
+                        encodeOffset += size;
+                        offslot.EncodedSize += size;
+
+                        magic.Write(bw);
+
+                    }
+
+                }
+
+                // Write very first subpart at the end
+                {
+
+                    var magic = magiclist[0];
+                    var size = magic.Length + headerSize;
+                    var difference = 4 - size % 4;
+                    if (difference != 4) size += difference;
+
+                    // Manage settings about decoded data
+                    offslot.DecodedSize += magic.DecodedSize;
+
+                    // Manage settings about encoded data
+                    magic.EncodedSize = size;
+                    magic.EncodedDataPosition = encodeOffset;
+                    offslot.EncodedSize += size;
+
+                    magic.Write(bw);
+
+                }
+
+                // Fill buffer till offset % 0x40
+                bw.FillBuffer(0x40);
+
+                // Yield return OffSlot made
+                result.Add(offslot);
+
+            }
+
+            // Finally, fix size at the beginning of the block
+            var final = bw.BaseStream.Position;
+            bw.BaseStream.Position = start - 4;
+            bw.Write((int)(final - start));
+            bw.BaseStream.Position = final;
+
+            // Return result list
+            return result;
         }
 
         #endregion
