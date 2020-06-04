@@ -14,7 +14,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="CarTypeInfo"/> is a collection of settings related to a car's basic information.
     /// </summary>
-    public abstract class CarTypeInfo : ACollectable, IAssemblable
+    public abstract class CarTypeInfo : ACollectable, IAssembly
     {
 		#region Main Properties
 

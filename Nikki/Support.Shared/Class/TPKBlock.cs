@@ -16,7 +16,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="TPKBlock"/> is a collection of <see cref="Texture"/>.
     /// </summary>
-    public abstract class TPKBlock : ACollectable, IAssemblable
+    public abstract class TPKBlock : ACollectable, IAssembly
     {
         #region Primary Properties
 

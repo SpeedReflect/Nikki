@@ -15,7 +15,7 @@ namespace Nikki.Support.Shared.Class
 	/// <summary>
 	/// <see cref="STRBlock"/> is a collection of language strings, hashes and labels.
 	/// </summary>
-	public abstract class STRBlock : ACollectable, IAssemblable
+	public abstract class STRBlock : ACollectable, IAssembly
 	{
 		#region Main Properties
 

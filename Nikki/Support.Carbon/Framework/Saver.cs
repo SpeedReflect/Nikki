@@ -140,7 +140,7 @@ namespace Nikki.Support.Carbon.Framework
 		}
 
 		private static void WriteCarParts(BinaryWriter bw, Options options, Database.Carbon db) =>
-			CarPartManager.Assemble(bw, options.Watermark, db);
+			DBModelPartManager.Assemble(bw, options.Watermark, db);
 
 		private static void WriteFNGroups(BinaryWriter bw, Options options, Database.Carbon db)
 		{

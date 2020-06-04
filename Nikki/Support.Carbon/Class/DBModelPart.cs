@@ -5,6 +5,7 @@ using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Carbon.Framework;
 using Nikki.Support.Shared.Parts.CarParts;
 using CoreExtensions.Reflection;
 using CoreExtensions.Conversions;
@@ -39,7 +40,7 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Database to which the class belongs to.
 		/// </summary>
-		public Database.Carbon Database { get; set; }
+		public DBModelPartManager Manager { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
@@ -50,12 +51,7 @@ namespace Nikki.Support.Carbon.Class
 			get => this._collection_name;
 			set
 			{
-				if (String.IsNullOrWhiteSpace(value))
-					throw new ArgumentNullException("This value cannot be left empty.");
-				if (value.Contains(" "))
-					throw new Exception("CollectionName cannot contain whitespace.");
-				if (this.Database.ModelParts.FindCollection(value) != null)
-					throw new CollectionExistenceException(value);
+				this.Manager.CreationCheck(value);
 				this._collection_name = value;
 			}
 		}
@@ -88,10 +84,10 @@ namespace Nikki.Support.Carbon.Class
 		/// Initializes new instance of <see cref="DBModelPart"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-		public DBModelPart(string CName, Database.Carbon db)
+		/// <param name="manager"><see cref="DBModelPartManager"/> to which this instance belongs to.</param>
+		public DBModelPart(string CName, DBModelPartManager manager)
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.CollectionName = CName;
 			this.ModelCarParts = new List<RealCarPart>();
 		}
@@ -188,7 +184,7 @@ namespace Nikki.Support.Carbon.Class
 		/// <returns>Memory casted copy of the object.</returns>
 		public override ACollectable MemoryCast(string CName)
 		{
-			var result = new DBModelPart(CName, this.Database);
+			var result = new DBModelPart(CName, this.Manager);
 
 			foreach (var part in this.ModelCarParts)
 			{

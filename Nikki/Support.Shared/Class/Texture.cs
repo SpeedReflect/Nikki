@@ -14,7 +14,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="Texture"/> is a collection of dds image data used by the game.
     /// </summary>
-    public abstract class Texture : ACollectable, IAssemblable
+    public abstract class Texture : ACollectable, IAssembly
     {
         #region Main Properties
 

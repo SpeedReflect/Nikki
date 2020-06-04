@@ -14,7 +14,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
 	/// <see cref="Track"/> is a collection of settings related to races and events.
     /// </summary>
-	public abstract class Track : ACollectable, IAssemblable
+	public abstract class Track : ACollectable, IAssembly
 	{
         #region Main Properties
 

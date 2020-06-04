@@ -12,7 +12,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="AcidEffect"/> is a collection of vectors and attributes related to acids and xenons.
     /// </summary>
-    public abstract class AcidEffect : ACollectable, IAssemblable
+    public abstract class AcidEffect : ACollectable, IAssembly
     {
         #region Private Fields
 

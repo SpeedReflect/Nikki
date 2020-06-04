@@ -6,6 +6,7 @@ using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Carbon.Framework;
 using CoreExtensions.IO;
 
 
@@ -53,7 +54,7 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Database to which the class belongs to.
         /// </summary>
-        public Database.Carbon Database { get; set; }
+        public CarTypeInfoManager Manager { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
@@ -64,16 +65,7 @@ namespace Nikki.Support.Carbon.Class
             get => this._collection_name;
             set
             {
-                if (!this.Deletable)
-                    throw new Exception("CollectionName of a non-addon car cannot be changed.");
-                if (String.IsNullOrWhiteSpace(value))
-                    throw new ArgumentNullException("This value cannot be left empty.");
-                if (value.Contains(" "))
-                    throw new Exception("CollectionName cannot contain whitespace.");
-                if (value.Length > MaxCNameLength)
-                    throw new ArgumentLengthException(MaxCNameLength);
-                if (this.Database.CarTypeInfos.FindCollection(value) != null)
-                    throw new CollectionExistenceException(value);
+                this.Manager.CreationCheck(value);
                 this._collection_name = value;
             }
         }
@@ -143,10 +135,10 @@ namespace Nikki.Support.Carbon.Class
         /// Initializes new instance of <see cref="CarTypeInfo"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-        public CarTypeInfo(string CName, Database.Carbon db)
+        /// <param name="manager"><see cref="CarTypeInfoManager"/> to which this instance belongs to.</param>
+        public CarTypeInfo(string CName, CarTypeInfoManager manager)
         {
-            this.Database = db;
+            this.Manager = manager;
             this.CollectionName = CName;
             this.ManufacturerName = "GENERIC";
             this.Deletable = true;
@@ -162,17 +154,11 @@ namespace Nikki.Support.Carbon.Class
         /// Initializes new instance of <see cref="CarTypeInfo"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-        /// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-        public CarTypeInfo(BinaryReader br, Database.Carbon db)
+        /// <param name="manager"><see cref="CarTypeInfoManager"/> to which this instance belongs to.</param>
+        public CarTypeInfo(BinaryReader br, CarTypeInfoManager manager)
         {
-            this.Database = db;
+            this.Manager = manager;
             this.Disassemble(br);
-            if (this.Index <= (int)eBoundValues.MIN_INFO_CARBON)
-            {
-
-                this.Deletable = false;
-
-            }
         }
 
         /// <summary>
@@ -349,7 +335,7 @@ namespace Nikki.Support.Carbon.Class
         /// <returns>Memory casted copy of the object.</returns>
         public override ACollectable MemoryCast(string CName)
         {
-            var result = new CarTypeInfo(CName, this.Database);
+            var result = new CarTypeInfo(CName, this.Manager);
             base.MemoryCast(this, result);
             return result;
         }

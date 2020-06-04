@@ -13,7 +13,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="PresetRide"/> is a collection of specific settings of a ride.
     /// </summary>
-    public abstract class PresetRide : ACollectable, IAssemblable
+    public abstract class PresetRide : ACollectable, IAssembly
     {
         #region Main Properties
 

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Interface;
 using Nikki.Reflection.Exception;
+using Nikki.Reflection.Attributes;
 using CoreExtensions.Management;
 
 
@@ -14,9 +16,7 @@ namespace Nikki.Database
 	/// 
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public class Manager<T> : 
-		IList<T>, IEnumerable<T>, ICollection<T>, IList, IEnumerable, ICollection
-		where T : ACollectable, new()
+	public abstract class Manager<T> : IManager, IList<T> where T : ACollectable, new()
 	{
 		#region Fields
 
@@ -218,7 +218,12 @@ namespace Nikki.Database
 		#region Properties
 
 		/// <summary>
-		/// Gets the number of elements contained in the <see cref="IList"/>.
+		/// Name of this <see cref="Manager{T}"/>.
+		/// </summary>
+		public abstract string Name { get; }
+
+		/// <summary>
+		/// Gets the number of elements contained in the <see cref="Manager{T}"/>.
 		/// </summary>
 		public int Count => this._size;
 
@@ -234,32 +239,33 @@ namespace Nikki.Database
 			}
 			set
 			{
-				if (this._size == 0 && value == 0)
-				{
-
-					this._collections = this._empty;
-					return;
-
-				}
-
-				if (value <= this._size || value == this._collections.Length)
+				if (value < this._size || value == this._collections.Length)
 				{
 
 					return;
 
 				}
-				else
+				
+				if (value > 0)
 				{
+
 					var data = new T[value];
 
-					for (int i = 0; i < this._size; ++i)
+					for (int loop = 0; loop < this._size; ++loop)
 					{
 
-						data[i] = this._collections[i];
+						data[loop] = this._collections[loop];
 
 					}
 
 					this._collections = data;
+					ForcedX.GCCollect();
+
+				}
+				else
+				{
+
+					this._collections = this._empty;
 					ForcedX.GCCollect();
 
 				}
@@ -278,19 +284,14 @@ namespace Nikki.Database
 		}
 
 		/// <summary>
-		/// True if this <see cref="IList"/> is read-only; otherwise, false.
+		/// True if this <see cref="Manager{T}"/> is read-only; otherwise, false.
 		/// </summary>
 		public bool IsReadOnly => false;
 
 		/// <summary>
-		/// True if this <see cref="IList"/> is of fixed size; otherwise, false.
+		/// True if this <see cref="Manager{T}"/> is of fixed size; otherwise, false.
 		/// </summary>
 		public bool IsFixedSize => this._extender == 0;
-
-		/// <summary>
-		/// Database to which this <see cref="Manager{T}"/> belongs to.
-		/// </summary>
-		public ABasicBase Database { get; set; }
 
 		/// <summary>
 		/// Gets a value indicating whether access to the <see cref="ICollection"/> is 
@@ -301,9 +302,14 @@ namespace Nikki.Database
 		public bool IsSynchronized => throw new NotImplementedException();
 
 		/// <summary>
-		/// 
+		/// Throws <see cref="NotImplementedException"/>.
 		/// </summary>
 		public object SyncRoot => throw new NotImplementedException();
+
+		/// <summary>
+		/// Database to which this <see cref="Manager{T}"/> belongs to.
+		/// </summary>
+		public FileBase Database { get; set; }
 
 		#endregion
 
@@ -316,29 +322,7 @@ namespace Nikki.Database
 		/// <param name="cname">CollectionName of a new created collection.</param>
 		public void Add(string cname)
 		{
-			var result = this.CreationCheck(cname);
-
-			switch (result)
-			{
-				case eCollectionAddResult.NULL_EMPTY:
-					throw new ArgumentNullException("CollectionName cannot be null, empty or whitespace");
-
-				case eCollectionAddResult.WHITESPACE:
-					throw new ArgumentException("CollectionName cannot contain whitespace");
-
-				case eCollectionAddResult.LONGLENGTH:
-					throw new ArgumentLengthException("CollectionName passed exceeds maximum character length allowed");
-
-				case eCollectionAddResult.INVALID_CN:
-					throw new ArgumentException("CollectionName passed is not of a valid type or pattern");
-
-				case eCollectionAddResult.MINSTANCES:
-					throw new CollectionExistenceException($"Collection named {cname} already exists");
-
-				default:
-					break;
-
-			}
+			this.CreationCheck(cname);
 
 			if (this._size == this._capacity)
 			{
@@ -411,6 +395,78 @@ namespace Nikki.Database
 
 				this.Add(obj);
 				return this._size - 1;
+
+			}
+			else
+			{
+
+				throw new ArgumentException("Value passed is of invalid type");
+
+			}
+		}
+
+		#endregion
+
+		#region Clone
+
+		/// <summary>
+		/// Clones collection and casts all of its memory to a new one.
+		/// </summary>
+		/// <param name="to">CollectionName of a new created collection.</param>
+		/// <param name="from">CollectionName of a collection to copy.</param>
+		public void Clone(string to, string from)
+		{
+			var copy = this.Find(from);
+
+			if (copy == null)
+			{
+
+				throw new ArgumentException($"Collection named {from} does not exist");
+
+			}
+
+			this.CreationCheck(to);
+
+			if (this._size == this._capacity)
+			{
+
+				if (this.IsFixedSize)
+				{
+
+					throw new ArgumentException("Unable to add collection to a non-resizable manager");
+
+				}
+				else
+				{
+
+					this.Capacity += this.Extender;
+
+				}
+
+			}
+
+			var instance = (T)copy.MemoryCast(to);
+			this._collections[this._size++] = instance;
+		}
+
+		/// <summary>
+		/// Clones collection and casts all of its memory to a new one.
+		/// </summary>
+		/// <param name="to">CollectionName of a new created collection.</param>
+		/// <param name="from">Collection to copy.</param>
+		public void Clone(string to, T from) => this.Clone(to, from.CollectionName);
+
+		/// <summary>
+		/// Clones collection and casts all of its memory to a new one.
+		/// </summary>
+		/// <param name="to">CollectionName of a new created collection.</param>
+		/// <param name="from">Object from which to cast all memory.</param>
+		public void Clone(string to, object from)
+		{
+			if (from is T obj)
+			{
+
+				this.Clone(to, obj.CollectionName);
 
 			}
 			else
@@ -631,6 +687,112 @@ namespace Nikki.Database
 
 		#endregion
 
+		#region Export
+
+		/// <summary>
+		/// Exports collection with CollectionName specified to a filename provided.
+		/// </summary>
+		/// <param name="cname">CollectionName of a collection to export.</param>
+		/// <param name="filename">Filename where collection should be exported.</param>
+		public void Export(string cname, string filename)
+		{
+			var export = this.Find(cname);
+
+			if (export == null)
+			{
+
+				throw new ArgumentException($"Collection named {cname} does not exist");
+
+			}
+
+
+			if (export is IAssembly asm)
+			{
+
+				using var bw = new BinaryWriter(File.Open(filename, FileMode.Create, FileAccess.Write));
+				asm.Assemble(bw);
+
+			}
+			else
+			{
+
+				throw new ArgumentException($"Collection {cname} is not exportable");
+
+			}
+		}
+
+		/// <summary>
+		/// Exports collection to a filename specified.
+		/// </summary>
+		/// <param name="item">Collection to export.</param>
+		/// <param name="filename">Filename where collection should be exported.</param>
+		public void Export(T item, string filename)
+		{
+
+			if (item is IAssembly asm)
+			{
+
+				using var bw = new BinaryWriter(File.Open(filename, FileMode.Create, FileAccess.Write));
+				asm.Assemble(bw);
+
+			}
+			else
+			{
+
+				throw new ArgumentException($"Collection {item.CollectionName} is not exportable");
+
+			}
+		}
+
+		/// <summary>
+		/// Exports object to a filename specified.
+		/// </summary>
+		/// <param name="value">Object to export.</param>
+		/// <param name="filename">Filename where object should be exported.</param>
+		public void Export(object value, string filename)
+		{
+			if (value is T obj)
+			{
+
+				this.Export(obj, filename);
+
+			}
+			else
+			{
+
+				throw new ArgumentException("Value passed is of invalid type");
+
+			}
+		}
+
+		#endregion
+
+		#region Import
+
+		/// <summary>
+		/// Imports collection from file provided and attempts to add it to the end of 
+		/// this <see cref="Manager{T}"/> in case it does not exist.
+		/// </summary>
+		/// <param name="filename">Filename with collection to import.</param>
+		public void Import(string filename)
+		{
+			if (!typeof(IAssembly).IsAssignableFrom(typeof(T)))
+			{
+
+				throw new ArgumentException($"Collection of this type are not importable");
+
+			}
+
+			using var br = new BinaryReader(File.Open(filename, FileMode.Open, FileAccess.Read));
+
+			var ctor = typeof(T).GetConstructor(new Type[] { typeof(BinaryReader), this.Database.GetType() });
+			var instance = (T)ctor.Invoke(new object[] { br, this.Database });
+
+			this.Add(instance);
+		}
+
+		#endregion
+
 		#region IndexOf
 
 		/// <summary>
@@ -824,29 +986,7 @@ namespace Nikki.Database
 
 			}
 
-			var result = this.CreationCheck(cname);
-
-			switch (result)
-			{
-				case eCollectionAddResult.NULL_EMPTY:
-					throw new ArgumentNullException("CollectionName cannot be null, empty or whitespace");
-
-				case eCollectionAddResult.WHITESPACE:
-					throw new ArgumentException("CollectionName cannot contain whitespace");
-
-				case eCollectionAddResult.LONGLENGTH:
-					throw new ArgumentLengthException("CollectionName passed exceeds maximum character length allowed");
-
-				case eCollectionAddResult.INVALID_CN:
-					throw new ArgumentException("CollectionName passed is not of a valid type or pattern");
-
-				case eCollectionAddResult.MINSTANCES:
-					throw new CollectionExistenceException($"Collection named {cname} already exists");
-
-				default:
-					break;
-
-			}
+			this.CreationCheck(cname);
 
 			if (this._size == this._capacity)
 			{
@@ -1018,6 +1158,137 @@ namespace Nikki.Database
 
 		#endregion
 
+		#region Static
+
+		/// <summary>
+		/// Sets value passed statically through all collections in this <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="property">Property to be edited.</param>
+		/// <param name="value">Value to set.</param>
+		public void Static(string property, string value)
+		{
+			var proper = typeof(T).GetProperty(property);
+
+			if (proper == null)
+			{
+
+				throw new ArgumentException($"Property named {property} does not exist");
+
+			}
+
+			if (!Attribute.IsDefined(proper, typeof(StaticModifiableAttribute)))
+			{
+
+				throw new ArgumentException($"Property named {property} is not statically modifiable");
+
+			}
+
+			for (int loop = 0; loop < this._size; ++loop)
+			{
+
+				proper.SetValue(this._collections[loop], value);
+
+			}
+		}
+
+		#endregion
+
+		#region Switch
+
+		/// <summary>
+		/// Switches two collections in place using their CollectionNames provided.
+		/// </summary>
+		/// <param name="cname1">CollectionName of the first collection to switch.</param>
+		/// <param name="cname2">CollectionName of the second collection to switch.</param>
+		public void Switch(string cname1, string cname2)
+		{
+			var index1 = this.IndexOf(cname1);
+			var index2 = this.IndexOf(cname2);
+
+			if (index1 == -1)
+			{
+
+				throw new ArgumentException($"Collection named {cname1} does not exist");
+
+			}
+
+			if (index2 == -1)
+			{
+
+				throw new ArgumentException($"Collection named {cname2} does not exist");
+
+			}
+
+			var temp = this._collections[index1];
+			this._collections[index1] = this._collections[index2];
+			this._collections[index2] = temp;
+		}
+
+		/// <summary>
+		/// Switches two collections in place using their indexes provided.
+		/// </summary>
+		/// <param name="index1">Index of the first collection to switch.</param>
+		/// <param name="index2">Index of the second collection to switch.</param>
+		public void Switch(int index1, int index2)
+		{
+			if (index1 < 0 || index1 >= this._size)
+			{
+
+				throw new ArgumentOutOfRangeException(nameof(index1));
+
+			}
+
+			if (index2 < 0 || index2 >= this._size)
+			{
+
+				throw new ArgumentOutOfRangeException(nameof(index2));
+			
+			}
+
+			var temp = this._collections[index1];
+			this._collections[index1] = this._collections[index2];
+			this._collections[index2] = temp;
+		}
+
+		/// <summary>
+		/// Switches two collections in place.
+		/// </summary>
+		/// <param name="item1">First collection to switch.</param>
+		/// <param name="item2">Second collection to switch.</param>
+		public void Switch(T item1, T item2) =>
+			this.Switch(item1.CollectionName, item2.CollectionName);
+
+		/// <summary>
+		/// Switches two objects in place.
+		/// </summary>
+		/// <param name="value1">First object to switch.</param>
+		/// <param name="value2">Second object to switch.</param>
+		public void Switch(object value1, object value2)
+		{
+			var index1 = this.IndexOf(value1);
+			var index2 = this.IndexOf(value2);
+
+			if (index1 == -1)
+			{
+
+				throw new ArgumentException($"Object {nameof(value1)} does not exist");
+
+			}
+
+			if (index2 == -1)
+			{
+
+				throw new ArgumentException($"Object {nameof(value2)} does not exist");
+
+			}
+
+			var temp = this._collections[index1];
+			this._collections[index1] = this._collections[index2];
+			this._collections[index2] = temp;
+		}
+
+		#endregion
+
 		#region Misc
 
 		/// <summary>
@@ -1085,9 +1356,54 @@ namespace Nikki.Database
 			}
 		}
 
+		/// <summary>
+		/// Performance the specified action on each collection of the <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="action">The <see cref="Action"/> delegate to perform on each 
+		/// collection of the <see cref="Manager{T}"/>.</param>
+		public void ForEach(Action<object> action)
+		{
+			if (action == null)
+			{
+
+				throw new ArgumentNullException(nameof(action));
+
+			}
+			else
+			{
+
+				for (int loop = 0; loop < this._size; ++loop)
+				{
+
+					action(this._collections[loop]);
+
+				}
+
+			}
+		}
+
 		#endregion
 
-		internal Func<string, eCollectionAddResult> CreationCheck { get; set; }
+		#region Assembly
 
+		/// <summary>
+		/// Checks whether CollectionName provided allows creation of a new collection.
+		/// </summary>
+		/// <param name="cname">CollectionName to check.</param>
+		internal abstract void CreationCheck(string cname);
+
+		/// <summary>
+		/// Assembles all collections in this <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		public abstract void Assemble(BinaryWriter bw);
+
+		/// <summary>
+		/// Disassembles data into separate collections in this <see cref="Manager{T}"/>.
+		/// </summary>
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		public abstract void Disassemble(BinaryReader br);
+
+		#endregion
 	}
 }

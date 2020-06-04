@@ -12,7 +12,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="Material"/> is a collection of float attributes of shaders and materials.
     /// </summary>
-    public abstract class Material : ACollectable, IAssemblable
+    public abstract class Material : ACollectable, IAssembly
     {
         #region Private Fields
 

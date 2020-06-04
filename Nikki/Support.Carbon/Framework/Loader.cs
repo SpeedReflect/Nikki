@@ -40,7 +40,7 @@ namespace Nikki.Support.Carbon.Framework
 		}
 
 		private static void ReadCarParts(BinaryReader br, int size, Database.Carbon db) =>
-			CarPartManager.Disassemble(br, size, db);
+			DBModelPartManager.Disassemble(br, size, db);
 
 		private static void ReadPresetRides(BinaryReader br, int size, Database.Carbon db)
 		{

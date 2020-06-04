@@ -1,17 +1,18 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 using Nikki.Core;
-using Nikki.Database;
+using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Interface;
 
 
 
-namespace Nikki.Reflection.Abstract
+namespace Nikki.Database
 {
     /// <summary>
     /// Very base class of any database.
     /// </summary>
-	public abstract class ABasicBase : IOperative
+	public class FileBase : IOperative
 	{
         /// <summary>
         /// File buffer.
@@ -21,26 +22,49 @@ namespace Nikki.Reflection.Abstract
         /// <summary>
         /// Game to which the class belongs to.
         /// </summary>
-        public abstract GameINT GameINT { get; }
+        public GameINT GameINT { get; }
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
-        public abstract string GameSTR { get; }
+        public string GameSTR => this.GameINT.ToString();
+
+        /// <summary>
+        /// List of <see cref="IManager"/> types that are used by this <see cref="FileBase"/>.
+        /// </summary>
+        public List<IManager> Managers { get; set; }
+
+
+        public FileBase(GameINT game)
+        {
+            this.GameINT = game;
+        }
+
+
+
 
         /// <summary>
         /// Loads all data in the database using options passed.
         /// </summary>
         /// <param name="options"><see cref="Options"/> that are used to load data.</param>
         /// <returns>True on success; false otherwise.</returns>
-        public abstract bool Load(Options options);
+        public bool Load(Options options)
+        {
+
+            return true;
+        }
 
         /// <summary>
         /// Saves all data in the database using options passed.
         /// </summary>
         /// <param name="options"><see cref="Options"/> that are used to save data.</param>
         /// <returns>True on success; false otherwise.</returns>
-        public abstract bool Save(Options options);
+        public bool Save(Options options)
+        {
+
+
+            return true;
+        }
 
         /// <summary>
         /// Gets a <see cref="ACollectable"/> class from CollectionName and root provided.
@@ -48,14 +72,10 @@ namespace Nikki.Reflection.Abstract
         /// <param name="CName">CollectionName of <see cref="ACollectable"/> to find.</param>
         /// <param name="root">Root collection of the class.</param>
         /// <returns><see cref="ACollectable"/> class.</returns>
-        public virtual ACollectable GetCollection(string CName, string root)
+        public ACollectable GetCollection(string CName, string root)
         {
-            var property = this.GetType().GetProperty(root);
-            return property == null
-                ? null
-                : (ACollectable)property.PropertyType
-                    .GetMethod("FindCollection", new Type[] { typeof(string) })
-                    .Invoke(property.GetValue(this), new object[] { CName });
+
+            return null;
         }
 
         /// <summary>
@@ -65,7 +85,7 @@ namespace Nikki.Reflection.Abstract
         /// <param name="root">Root collection of the class.</param>
         /// <param name="collection"><see cref="ACollectable"/> class that is to return.</param>
         /// <returns>True if collection exists and can be returned; false otherwise.</returns>
-        public virtual bool TryGetCollection(string CName, string root, out ACollectable collection)
+        public bool TryGetCollection(string CName, string root, out ACollectable collection)
         {
             collection = null;
             try
@@ -446,9 +466,13 @@ namespace Nikki.Reflection.Abstract
         }
 
         /// <summary>
-        /// Gets information about <see cref="ABasicBase"/> database.
+        /// Gets information about <see cref="FileBase"/> database.
         /// </summary>
         /// <returns></returns>
-        public abstract string GetDatabaseInfo();
+        public string GetDatabaseInfo()
+        {
+
+            return String.Empty;
+        }
     }
 }

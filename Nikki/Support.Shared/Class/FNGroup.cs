@@ -14,7 +14,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="FNGroup"/> is a collection of frontend group elements and scripts.
     /// </summary>
-    public abstract class FNGroup : ACollectable, IAssemblable
+    public abstract class FNGroup : ACollectable, IAssembly
     {
         #region Main Properties
 

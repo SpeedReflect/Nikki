@@ -14,7 +14,7 @@ namespace Nikki.Support.Shared.Class
 	/// <summary>
 	/// <see cref="Collision"/> is a collection of settings related to a car's bounds.
 	/// </summary>
-	public abstract class Collision : ACollectable, IAssemblable
+	public abstract class Collision : ACollectable, IAssembly
 	{
 		#region Main Properties
 

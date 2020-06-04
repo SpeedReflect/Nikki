@@ -13,7 +13,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="PresetSkin"/> is a collection of settings related to car skins.
     /// </summary>
-    public abstract class PresetSkin : ACollectable, IAssemblable
+    public abstract class PresetSkin : ACollectable, IAssembly
     {
         #region Main Properties
 

@@ -13,7 +13,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="SunInfo"/> is a collection of sun and daylight settings.
     /// </summary>
-	public abstract class SunInfo : ACollectable, IAssemblable
+	public abstract class SunInfo : ACollectable, IAssembly
 	{
         #region Main Properties
 

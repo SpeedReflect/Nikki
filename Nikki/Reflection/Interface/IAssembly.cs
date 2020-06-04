@@ -8,7 +8,7 @@ namespace Nikki.Reflection.Interface
 	/// Interface with methods of assembling and disassembling classes and structs using 
 	/// binary streams.
 	/// </summary>
-	public interface IAssemblable
+	public interface IAssembly
 	{
 		/// <summary>
 		/// Assembles class or struct into a byte array.
