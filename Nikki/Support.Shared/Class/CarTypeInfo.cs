@@ -14,7 +14,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="CarTypeInfo"/> is a collection of settings related to a car's basic information.
     /// </summary>
-    public abstract class CarTypeInfo : ACollectable, IAssembly
+    public abstract class CarTypeInfo : Collectable, IAssembly
     {
 		#region Main Properties
 
@@ -471,7 +471,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         /// <param name="CName">CollectionName of the new created object.</param>
         /// <returns>Memory casted copy of the object.</returns>
-        public override ACollectable MemoryCast(string CName)
+        public override Collectable MemoryCast(string CName)
         {
             throw new NotImplementedException();
         }

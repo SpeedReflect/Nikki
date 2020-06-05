@@ -12,7 +12,7 @@ namespace Nikki.Support.Shared.Class
 	/// <summary>
 	/// <see cref="DBModelPart"/> is a collection of car parts of a specific model.
 	/// </summary>
-	public abstract class DBModelPart : ACollectable
+	public abstract class DBModelPart : Collectable
 	{
 		#region Main Properties
 
@@ -65,7 +65,7 @@ namespace Nikki.Support.Shared.Class
 		/// </summary>
 		/// <param name="CName">CollectionName of the new created object.</param>
 		/// <returns>Memory casted copy of the object.</returns>
-		public override ACollectable MemoryCast(string CName)
+		public override Collectable MemoryCast(string CName)
 		{
 			throw new NotImplementedException();
 		}

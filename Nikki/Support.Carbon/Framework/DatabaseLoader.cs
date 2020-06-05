@@ -1,19 +1,17 @@
 ﻿using System.IO;
 using Nikki.Core;
 using Nikki.Utils;
-using Nikki.Database;
 using Nikki.Reflection.Enum;
-using Nikki.Reflection.Interface;
 using CoreExtensions.IO;
 
 
 
 namespace Nikki.Support.Carbon.Framework
 {
-	internal class DatabaseLoader : IInvokable
+	internal class DatabaseLoader
 	{
 		private readonly Options _options = Options.Default;
-		private readonly FileBase _db;
+		private readonly Datamap _db;
 
 		private Block materials;
 		private Block tpkblocks;
@@ -28,7 +26,7 @@ namespace Nikki.Support.Carbon.Framework
 		private Block strblocks;
 		private Block slottypes;
 
-		public DatabaseLoader(Options options, FileBase db)
+		public DatabaseLoader(Options options, Datamap db)
 		{
 			this._options = options;
 			this._db = db;
@@ -70,11 +68,6 @@ namespace Nikki.Support.Carbon.Framework
 			return true;
 		}
 
-		private void InternalDataHandle(BinaryReader br, int size)
-		{
-			// nothing here yet
-		}
-
 		private void ReadBlockOffsets(BinaryReader br)
 		{
 			while (br.BaseStream.Position < br.BaseStream.Length)
@@ -86,19 +79,6 @@ namespace Nikki.Support.Carbon.Framework
 
 				switch (id)
 				{
-					case eBlockID.Padding:
-						var check = br.ReadEnum<eBlockID>();
-						br.BaseStream.Position -= 4;
-
-						if (check == eBlockID.Nikki)
-						{
-
-							this.InternalDataHandle(br, size);
-							break;
-
-						}
-						else goto default;
-
 					case eBlockID.Materials:
 						this.materials.Offsets.Add(off);
 						goto default;

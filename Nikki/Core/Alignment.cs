@@ -1,4 +1,4 @@
-﻿namespace Nikki.Database
+﻿namespace Nikki.Core
 {
 	/// <summary>
 	/// Represents data alignment type for <see cref="Manager{T}"/>.

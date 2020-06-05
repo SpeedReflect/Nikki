@@ -11,7 +11,7 @@ namespace Nikki.Support.Shared.Parts.STRParts
 	/// <summary>
 	/// Represents unit string record, which consists of key, label and text.
 	/// </summary>
-	public class StringRecord : ASubPart
+	public class StringRecord : SubPart
 	{
 		/// <summary>
 		/// Key of the label as a BinHash.
@@ -159,7 +159,7 @@ namespace Nikki.Support.Shared.Parts.STRParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new StringRecord(this.ThisSTRBlock)
 			{

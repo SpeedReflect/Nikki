@@ -9,7 +9,7 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 	/// <summary>
 	/// <see cref="CollisionVertex"/> is a unit vertex for <see cref="CollisionCloud"/>.
 	/// </summary>
-	public class CollisionVertex : ASubPart
+	public class CollisionVertex : SubPart
 	{
 		/// <summary>
 		/// X coordinate value of this <see cref="CollisionVertex"/>.
@@ -39,7 +39,7 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new CollisionVertex()
 			{

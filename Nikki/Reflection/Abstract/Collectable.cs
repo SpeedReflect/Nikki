@@ -14,12 +14,12 @@ using CoreExtensions.Conversions;
 namespace Nikki.Reflection.Abstract
 {
     /// <summary>
-    /// <see cref="ACollectable"/> class is a default collection of properties and fields of any 
+    /// <see cref="Collectable"/> class is a default collection of properties and fields of any 
     /// global type, which information can be accessed and modified through those properties. 
     /// It inherits from <see cref="IReflective"/> class and <see cref="ICastable{TypeID}"/> 
     /// interface and implements/overrides most of their methods.
     /// </summary>
-	public abstract class ACollectable : IReflective, ICastable<ACollectable>
+	public abstract class Collectable : IReflective, ICastable<Collectable>
 	{
         /// <summary>
         /// Collection name of the variable.
@@ -62,13 +62,13 @@ namespace Nikki.Reflection.Abstract
         }
 
         /// <summary>
-        /// Gets <see cref="ASubPart"/> in the collection.
+        /// Gets <see cref="SubPart"/> in the collection.
         /// </summary>
-        /// <param name="name">Name of the <see cref="ASubPart"/>.</param>
+        /// <param name="name">Name of the <see cref="SubPart"/>.</param>
         /// <param name="node">Node to which subpart belongs to, mainly Name of 
         /// the <see cref="ExpandableAttribute"/>.</param>
-        /// <returns><see cref="ASubPart"/> of the collection if exists; null otherwise.</returns>
-        public ASubPart GetSubPart(string name, string node)
+        /// <returns><see cref="SubPart"/> of the collection if exists; null otherwise.</returns>
+        public SubPart GetSubPart(string name, string node)
         {
             var property = this.GetFastProperty(name);
             if (property == null) return null;
@@ -77,7 +77,7 @@ namespace Nikki.Reflection.Abstract
             {
             
                 var attrib = obj as ExpandableAttribute;
-                if (attrib.Name == node) return (ASubPart)property.GetValue(this);
+                if (attrib.Name == node) return (SubPart)property.GetValue(this);
             
             }
             
@@ -85,14 +85,14 @@ namespace Nikki.Reflection.Abstract
         }
 
         /// <summary>
-        /// Attempts to get <see cref="ASubPart"/> in the collection.
+        /// Attempts to get <see cref="SubPart"/> in the collection.
         /// </summary>
-        /// <param name="name">Name of the <see cref="ASubPart"/>.</param>
+        /// <param name="name">Name of the <see cref="SubPart"/>.</param>
         /// <param name="node">Node to which subpart belongs to, mainly Name of
         /// the <see cref="ExpandableAttribute"/>.</param>
-        /// <param name="part"><see cref="ASubPart"/> in case exists; null otherwise.</param>
-        /// <returns>True if <see cref="ASubPart"/> exists; false otherwise.</returns>
-        public bool GetSubPart(string name, string node, out ASubPart part)
+        /// <param name="part"><see cref="SubPart"/> in case exists; null otherwise.</param>
+        /// <returns>True if <see cref="SubPart"/> exists; false otherwise.</returns>
+        public bool GetSubPart(string name, string node, out SubPart part)
         {
             part = null;
             var property = this.GetFastProperty(name);
@@ -106,7 +106,7 @@ namespace Nikki.Reflection.Abstract
                 if (attrib.Name == node)
                 {
                 
-                    part = (ASubPart)property.GetValue(this);
+                    part = (SubPart)property.GetValue(this);
                     return true;
                 
                 }
@@ -213,14 +213,14 @@ namespace Nikki.Reflection.Abstract
         /// </summary>
         /// <param name="CName">CollectionName of the new created object.</param>
         /// <returns>Memory casted copy of the object.</returns>
-        public abstract ACollectable MemoryCast(string CName);
+        public abstract Collectable MemoryCast(string CName);
     
         /// <summary>
         /// Casts all memory of one object to another, considering they are of the same type.
         /// </summary>
-        /// <param name="from"><see cref="ACollectable"/> to cast memory from.</param>
-        /// <param name="to"><see cref="ACollectable"/> to cast memory to.</param>
-        public virtual void MemoryCast(ACollectable from, ACollectable to)
+        /// <param name="from"><see cref="Collectable"/> to cast memory from.</param>
+        /// <param name="to"><see cref="Collectable"/> to cast memory to.</param>
+        public virtual void MemoryCast(Collectable from, Collectable to)
         {
             var flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic;
 
@@ -239,7 +239,7 @@ namespace Nikki.Reflection.Abstract
                 else if (Attribute.IsDefined(property, typeof(ExpandableAttribute)))
                 {
 
-                    var node = property.GetValue(from) as ASubPart;
+                    var node = property.GetValue(from) as SubPart;
                     property.SetValue(to, node.PlainCopy());
 
                 }

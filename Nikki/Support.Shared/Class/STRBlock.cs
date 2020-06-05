@@ -15,7 +15,7 @@ namespace Nikki.Support.Shared.Class
 	/// <summary>
 	/// <see cref="STRBlock"/> is a collection of language strings, hashes and labels.
 	/// </summary>
-	public abstract class STRBlock : ACollectable, IAssembly
+	public abstract class STRBlock : Collectable, IAssembly
 	{
 		#region Main Properties
 
@@ -62,7 +62,7 @@ namespace Nikki.Support.Shared.Class
 		/// </summary>
 		/// <param name="CName">CollectionName of the new created object.</param>
 		/// <returns>Memory casted copy of the object.</returns>
-		public override ACollectable MemoryCast(string CName)
+		public override Collectable MemoryCast(string CName)
 		{
 			throw new NotImplementedException();
 		}

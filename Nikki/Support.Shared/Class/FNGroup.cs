@@ -14,7 +14,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="FNGroup"/> is a collection of frontend group elements and scripts.
     /// </summary>
-    public abstract class FNGroup : ACollectable, IAssembly
+    public abstract class FNGroup : Collectable, IAssembly
     {
         #region Main Properties
 
@@ -67,7 +67,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         /// <param name="CName">CollectionName of the new created object.</param>
         /// <returns>Memory casted copy of the object.</returns>
-        public override ACollectable MemoryCast(string CName)
+        public override Collectable MemoryCast(string CName)
         {
             throw new NotImplementedException();
         }

@@ -14,7 +14,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="Texture"/> is a collection of dds image data used by the game.
     /// </summary>
-    public abstract class Texture : ACollectable, IAssembly
+    public abstract class Texture : Collectable, IAssembly
     {
         #region Main Properties
 
@@ -220,7 +220,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         /// <param name="CName">CollectionName of the new created object.</param>
         /// <returns>Memory casted copy of the object.</returns>
-        public override ACollectable MemoryCast(string CName)
+        public override Collectable MemoryCast(string CName)
         {
             throw new NotImplementedException();
         }

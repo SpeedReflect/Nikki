@@ -230,7 +230,7 @@ namespace Nikki.Support.Carbon.Class
 		/// </summary>
 		/// <param name="CName">CollectionName of the new created object.</param>
 		/// <returns>Memory casted copy of the object.</returns>
-		public override ACollectable MemoryCast(string CName)
+		public override Collectable MemoryCast(string CName)
 		{
 			var result = new SunInfo(CName, this.Manager);
 			base.MemoryCast(this, result);

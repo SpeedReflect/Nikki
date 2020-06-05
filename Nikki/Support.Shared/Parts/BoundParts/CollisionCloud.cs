@@ -11,7 +11,7 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 	/// <summary>
 	/// <see cref="CollisionCloud"/> is a unit bound for <see cref="Collision"/>.
 	/// </summary>
-	public class CollisionCloud : ASubPart
+	public class CollisionCloud : SubPart
 	{
 		/// <summary>
 		/// Indicates amount of vertices in this <see cref="CollisionCloud"/>.
@@ -29,7 +29,7 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new CollisionCloud()
 			{

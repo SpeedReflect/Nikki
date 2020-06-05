@@ -16,7 +16,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="TPKBlock"/> is a collection of <see cref="Texture"/>.
     /// </summary>
-    public abstract class TPKBlock : ACollectable, IAssembly
+    public abstract class TPKBlock : Collectable, IAssembly
     {
         #region Primary Properties
 
@@ -128,7 +128,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         /// <param name="CName">CollectionName of the new created object.</param>
         /// <returns>Memory casted copy of the object.</returns>
-        public override ACollectable MemoryCast(string CName)
+        public override Collectable MemoryCast(string CName)
         {
             throw new NotImplementedException();
         }

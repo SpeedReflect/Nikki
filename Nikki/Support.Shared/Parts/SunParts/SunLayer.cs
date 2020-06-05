@@ -11,7 +11,7 @@ namespace Nikki.Support.Shared.Parts.SunParts
 	/// <summary>
 	/// A unit <see cref="SunLayer"/> used in sun info collections.
 	/// </summary>
-	public class SunLayer : ASubPart
+	public class SunLayer : SubPart
 	{
 		/// <summary>
 		/// 
@@ -89,7 +89,7 @@ namespace Nikki.Support.Shared.Parts.SunParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new SunLayer();
 

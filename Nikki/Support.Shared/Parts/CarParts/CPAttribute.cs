@@ -11,7 +11,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 	/// <summary>
 	/// A <see cref="DBModelPart"/> unit attribute.
 	/// </summary>
-	public abstract class CPAttribute : ASubPart
+	public abstract class CPAttribute : SubPart
 	{
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="CPAttribute"/>.
@@ -55,7 +55,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy() { return null; }
+		public override SubPart PlainCopy() { return null; }
 
 		/// <summary>
 		/// Returns attribute part label and its type as a string value.

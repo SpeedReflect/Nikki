@@ -11,7 +11,7 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
 	/// <summary>
 	/// A unit <see cref="VisualSets"/> used in preset rides.
 	/// </summary>
-	public class VisualSets : ASubPart
+	public class VisualSets : SubPart
 	{
 		/// <summary>
 		/// 
@@ -89,7 +89,7 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new VisualSets();
 

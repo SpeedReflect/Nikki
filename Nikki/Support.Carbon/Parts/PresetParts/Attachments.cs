@@ -11,7 +11,7 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
 	/// <summary>
 	/// A unit <see cref="Attachments"/> used in preset rides.
 	/// </summary>
-	public class Attachments : ASubPart
+	public class Attachments : SubPart
 	{
 		/// <summary>
 		/// 
@@ -113,7 +113,7 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new Attachments();
 

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
-using Nikki.Database;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Enum.CP;
 using Nikki.Reflection.Exception;
@@ -41,8 +40,8 @@ namespace Nikki.Support.Carbon.Framework
 		/// <summary>
 		/// Initializes new instance of <see cref="DBModelPartManager"/>.
 		/// </summary>
-		/// <param name="db"><see cref="FileBase"/> to which this manager belongs to.</param>
-		public DBModelPartManager(FileBase db)
+		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>
+		public DBModelPartManager(Datamap db)
 		{
 			this.Database = db;
 			this.Extender = 5;
@@ -815,7 +814,7 @@ namespace Nikki.Support.Carbon.Framework
 		/// </summary>
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		/// <param name="mark">Watermark to put in the padding blocks.</param>
-		internal void Assemble(BinaryWriter bw, string mark)
+		internal override void Assemble(BinaryWriter bw, string mark)
 		{
 			bw.GeneratePadding(mark, this.Alignment);
 			this.Encode(bw, mark);
@@ -826,7 +825,7 @@ namespace Nikki.Support.Carbon.Framework
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="block"><see cref="Block"/> with offsets.</param>
-		internal void Disassemble(BinaryReader br, Block block)
+		internal override void Disassemble(BinaryReader br, Block block)
 		{
 			if (Block.IsNullOrEmpty(block)) return;
 			if (block.BlockID != eBlockID.DBCarParts) return;

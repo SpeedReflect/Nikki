@@ -10,7 +10,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 	/// <summary>
 	/// A unit <see cref="RealCarPart"/> struct with geometry part names.
 	/// </summary>
-	public abstract class CPStruct : ASubPart
+	public abstract class CPStruct : SubPart
 	{
 		/// <summary>
 		/// Indicates whether this struct should exist in the database or not.
@@ -48,6 +48,6 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy() { return null; }
+		public override SubPart PlainCopy() { return null; }
 	}
 }

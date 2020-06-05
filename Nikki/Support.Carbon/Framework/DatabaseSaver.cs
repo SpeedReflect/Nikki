@@ -3,7 +3,6 @@ using System.IO;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
-using Nikki.Database;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Interface;
 using CoreExtensions.IO;
@@ -12,11 +11,10 @@ using CoreExtensions.IO;
 
 namespace Nikki.Support.Carbon.Framework
 {
-	internal class DatabaseSaver : IInvokable
+	internal class DatabaseSaver
 	{
 		private readonly Options _options = Options.Default;
-		private readonly FileBase _db;
-		private List<Block> _blocks;
+		private readonly Datamap _db;
 
 
 
@@ -40,7 +38,6 @@ namespace Nikki.Support.Carbon.Framework
 			using var br = new BinaryReader(ms);
 			using var bw = new BinaryWriter(File.Open(this._options.File, FileMode.Create));
 
-			this.ProcessMaterials(bw);
 
 
 			
@@ -48,13 +45,43 @@ namespace Nikki.Support.Carbon.Framework
 			return true;
 		}
 
-		private void ProcessMaterials(BinaryWriter bw)
+		private void ProcessMaterials(BinaryWriter bw, BinaryReader br, eBlockID id, int size)
 		{
+			if (this._options.Flags.HasFlag(eOptFlags.Materials))
+			{
 
+				this._db.Materials?.Assemble(bw, this._options.Watermark);
+				br.BaseStream.Position += size;
 
+			}
+			else
+			{
 
+				bw.WriteEnum(id);
+				bw.Write(size);
+				bw.Write(br.ReadBytes(size));
+
+			}
 		}
 
+		private void ProcessTPKBlocks(BinaryWriter bw, BinaryReader br, eBlockID id, int size)
+		{
+			if (this._options.Flags.HasFlag(eOptFlags.TPKBlocks))
+			{
+
+				this._db.TPKBlocks?.Assemble(bw, this._options.Watermark);
+				br.BaseStream.Position += size;
+
+			}
+			else
+			{
+
+				bw.WriteEnum(id);
+				bw.Write(size);
+				bw.Write(br.ReadBytes(size));
+
+			}
+		}
 
 
 	}

@@ -14,7 +14,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
 	/// <see cref="Track"/> is a collection of settings related to races and events.
     /// </summary>
-	public abstract class Track : ACollectable, IAssembly
+	public abstract class Track : Collectable, IAssembly
 	{
         #region Main Properties
 
@@ -151,7 +151,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         /// <param name="CName">CollectionName of the new created object.</param>
         /// <returns>Memory casted copy of the object.</returns>
-        public override ACollectable MemoryCast(string CName)
+        public override Collectable MemoryCast(string CName)
         {
             throw new NotImplementedException();
         }

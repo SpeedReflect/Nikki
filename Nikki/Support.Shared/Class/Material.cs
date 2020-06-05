@@ -12,7 +12,7 @@ namespace Nikki.Support.Shared.Class
     /// <summary>
     /// <see cref="Material"/> is a collection of float attributes of shaders and materials.
     /// </summary>
-    public abstract class Material : ACollectable, IAssembly
+    public abstract class Material : Collectable, IAssembly
     {
         #region Private Fields
 
@@ -81,7 +81,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         /// <param name="CName">CollectionName of the new created object.</param>
         /// <returns>Memory casted copy of the object.</returns>
-        public override ACollectable MemoryCast(string CName)
+        public override Collectable MemoryCast(string CName)
         {
             throw new NotImplementedException();
         }

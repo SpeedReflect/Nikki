@@ -4,7 +4,7 @@ using Nikki.Reflection.Enum;
 
 
 
-namespace Nikki.Database
+namespace Nikki.Core
 {
 	/// <summary>
 	/// A piece of binary data in a file.
