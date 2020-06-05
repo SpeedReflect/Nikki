@@ -4,7 +4,6 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Carbon.Framework;
 using CoreExtensions.IO;
@@ -52,7 +51,7 @@ namespace Nikki.Support.Carbon.Class
         public override string GameSTR => GameINT.Carbon.ToString();
 
         /// <summary>
-        /// Database to which the class belongs to.
+        /// Manager to which the class belongs to.
         /// </summary>
         public CarTypeInfoManager Manager { get; set; }
 
@@ -106,21 +105,28 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
-        public string Spoiler { get; set; } = String.Empty;
+        public string Spoiler { get; set; } = "SPOILER";
 
         /// <summary>
         /// Autosculpt spoiler type of the <see cref="CarTypeInfo"/>.
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
-        public string SpoilerAS { get; set; } = String.Empty;
+        public string SpoilerAS { get; set; } = "SPOILER_AS2";
 
         /// <summary>
         /// RoofScoop type of the <see cref="CarTypeInfo"/>.
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
-        public string RoofScoop { get; set; } = String.Empty;
+        public string RoofScoop { get; set; } = "ROOF";
+
+        /// <summary>
+        /// Autosculpt roof scoop type of this <see cref="CarTypeInfo"/>.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public string RoofScoopAS { get; set; } = "ROOF_AS2";
 
         #endregion
 

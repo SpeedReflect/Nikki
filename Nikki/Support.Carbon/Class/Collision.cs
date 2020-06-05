@@ -1,14 +1,13 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
-using Nikki.Reflection.ID;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Carbon.Framework;
 using Nikki.Support.Shared.Parts.BoundParts;
+using CoreExtensions.IO;
 using CoreExtensions.Conversions;
 
 
@@ -45,9 +44,9 @@ namespace Nikki.Support.Carbon.Class
 		public override string GameSTR => GameINT.Carbon.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// Manager to which the class belongs to.
 		/// </summary>
-		public Database.Carbon Database { get; set; }
+		public CollisionManager Manager { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
@@ -58,12 +57,7 @@ namespace Nikki.Support.Carbon.Class
 			get => this._collection_name;
 			set
 			{
-				if (String.IsNullOrWhiteSpace(value))
-					throw new ArgumentNullException("This value cannot be left empty.");
-				if (value.Contains(" "))
-					throw new Exception("CollectionName cannot contain whitespace.");
-				if (this.Database.Collisions.FindCollection(value) != null)
-					throw new CollectionExistenceException(value);
+				this.Manager.CreationCheck(value);
 				this._collection_name = value;
 			}
 		}
@@ -142,10 +136,10 @@ namespace Nikki.Support.Carbon.Class
 		/// Initializes new instance of <see cref="Collision"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-		public Collision(string CName, Database.Carbon db)
+		/// <param name="manager"><see cref="CollisionManager"/> to which this instance belongs to.</param>
+		public Collision(string CName, CollisionManager manager)
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.CollectionName = CName;
 			this.CollisionBounds = new List<CollisionBound>();
 			this.CollisionClouds = new List<CollisionCloud>();
@@ -156,10 +150,10 @@ namespace Nikki.Support.Carbon.Class
 		/// Initializes new instance of <see cref="Collision"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-		public Collision(BinaryReader br, Database.Carbon db)
+		/// <param name="manager"><see cref="CollisionManager"/> to which this instance belongs to.</param>
+		public Collision(BinaryReader br, CollisionManager manager)
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.CollisionBounds = new List<CollisionBound>();
 			this.CollisionClouds = new List<CollisionCloud>();
 			this.Disassemble(br);
@@ -186,9 +180,10 @@ namespace Nikki.Support.Carbon.Class
 			}
 
 			// Write data
-			bw.Write(CarParts.CollisionBound);
+			bw.WriteEnum(eBlockID.Collision);
 			bw.Write(size);
-			bw.Write(0x1111111111111111);
+			bw.Write(0x11111111);
+			bw.Write(0x11111111);
 			bw.Write(this.VltKey);
 			bw.Write(this._number_of_bounds);
 			bw.Write(this.IsResolved == eBoolean.False ? (int)0 : (int)1);
@@ -250,7 +245,7 @@ namespace Nikki.Support.Carbon.Class
 		/// <returns>Memory casted copy of the object.</returns>
 		public override ACollectable MemoryCast(string CName)
 		{
-			var result = new Collision(CName, this.Database)
+			var result = new Collision(CName, this.Manager)
 			{
 				NumberOfBounds = this.NumberOfBounds,
 				NumberOfClouds = this.NumberOfClouds,

@@ -1,25 +1,27 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Enum.CP;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Shared.Parts.CarParts;
 using CoreExtensions.Conversions;
 
 
 
-namespace Nikki.Support.Shared.Parts.CarParts
+namespace Nikki.Support.Underground1.Attributes
 {
 	/// <summary>
-	/// A <see cref="CPAttribute"/> with 4-byte boolean value.
+	/// A <see cref="CPAttribute"/> with 4-byte signed integer value.
 	/// </summary>
-	public class BoolAttribute : CPAttribute
+	public class KeyAttribute : CPAttribute
 	{
-		private const eCarPartAttribType _type = eCarPartAttribType.Boolean;
+		private const eCarPartAttribType _type = eCarPartAttribType.Key;
 
 		/// <summary>
-		/// <see cref="eCarPartAttribType"/> type of this <see cref="BoolAttribute"/>.
+		/// <see cref="eCarPartAttribType"/> type of this <see cref="KeyAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
 		public override eCarPartAttribType AttribType
@@ -36,7 +38,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Type of this <see cref="BoolAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public eAttribBool Type { get; set; }
+		public eAttribKey Type { get; set; }
 
 		/// <summary>
 		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
@@ -44,73 +46,71 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		public override uint Key
 		{
 			get => (uint)this.Type;
-			set => this.Type = (eAttribBool)value;
+			set => this.Type = (eAttribKey)value;
 		}
 
 		/// <summary>
 		/// Attribute value.
 		/// </summary>
 		[AccessModifiable()]
-		public eBoolean Value { get; set; }
+		public string Value { get; set; }
 
 		/// <summary>
-		/// Initializes new instance of <see cref="BoolAttribute"/>.
+		/// Initializes new instance of <see cref="KeyAttribute"/>.
 		/// </summary>
-		public BoolAttribute() { }
+		public KeyAttribute() { }
 
 		/// <summary>
-		/// Initializes new instance of <see cref="BoolAttribute"/> with value provided.
+		/// Initializes new instance of <see cref="KeyAttribute"/> with value provided.
 		/// </summary>
 		/// <param name="value">Value to set.</param>
 		/// <param name="part"><see cref="RealCarPart"/> to which this part belongs to.</param>
-		public BoolAttribute(object value, RealCarPart part)
+		public KeyAttribute(object value, RealCarPart part)
 		{
 			this.BelongsTo = part;
 			try
 			{
-				this.Value = (int)value.ReinterpretCast(typeof(int)) == 0
-					? eBoolean.False
-					: eBoolean.True;
+				this.Value = (string)value.ReinterpretCast(typeof(string));
 			}
 			catch (Exception)
 			{
-				this.Value = eBoolean.False;
+				this.Value = String.Empty;
 			}
 		}
 
 		/// <summary>
-		/// Initializes new instance of <see cref="BoolAttribute"/> by reading data using 
+		/// Initializes new instance of <see cref="KeyAttribute"/> by reading data using 
 		/// <see cref="BinaryReader"/> provided.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read with.</param>
 		/// <param name="key">Key of the attribute's group.</param>
-		public BoolAttribute(BinaryReader br, uint key)
+		public KeyAttribute(BinaryReader br, uint key)
 		{
 			this.Key = key;
 			this.Disassemble(br, null);
 		}
 
 		/// <summary>
-		/// Disassembles byte array into <see cref="BoolAttribute"/> using <see cref="BinaryReader"/> 
+		/// Disassembles byte array into <see cref="KeyAttribute"/> using <see cref="BinaryReader"/> 
 		/// provided.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read with.</param>
 		/// <param name="str_reader"><see cref="BinaryReader"/> to read strings with. 
 		/// Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
-		public override void Disassemble(BinaryReader br, BinaryReader str_reader) => 
-			this.Value = br.ReadInt32() == 0 ? eBoolean.False : eBoolean.True;
+		public override void Disassemble(BinaryReader br, BinaryReader str_reader)
+			=> this.Value = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
 
 		/// <summary>
-		/// Assembles <see cref="BoolAttribute"/> and writes it using <see cref="BinaryWriter"/> 
+		/// Assembles <see cref="KeyAttribute"/> and writes it using <see cref="BinaryWriter"/> 
 		/// provided.
 		/// </summary>
 		/// <param name="bw"><see cref="BinaryWriter"/> to write with.</param>
 		/// <param name="string_dict">Dictionary of string HashCodes and their offsets. 
-		/// Since it is an Boolean Attribute, this value can be <see langword="null"/>.</param>
+		/// Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
 		public override void Assemble(BinaryWriter bw, Dictionary<int, int> string_dict)
 		{
 			bw.Write(this.Key);
-			bw.Write(this.Value == eBoolean.False ? 0 : 1);
+			bw.Write(this.Value.BinHash());
 		}
 
 		/// <summary>
@@ -121,39 +121,38 @@ namespace Nikki.Support.Shared.Parts.CarParts
 
 		/// <summary>
 		/// Determines whether this instance and a specified object, which must also be a
-		/// <see cref="BoolAttribute"/> object, have the same value.
+		/// <see cref="KeyAttribute"/> object, have the same value.
 		/// </summary>
-		/// <param name="obj">The <see cref="BoolAttribute"/> to compare to this instance.</param>
-		/// <returns>True if obj is a <see cref="BoolAttribute"/> and its value is the same as 
+		/// <param name="obj">The <see cref="KeyAttribute"/> to compare to this instance.</param>
+		/// <returns>True if obj is a <see cref="KeyAttribute"/> and its value is the same as 
 		/// this instance; false otherwise. If obj is null, the method returns false.
 		/// </returns>
 		public override bool Equals(object obj) =>
-			obj is BoolAttribute && this == (BoolAttribute)obj;
+			obj is KeyAttribute && this == (KeyAttribute)obj;
 
 		/// <summary>
-		/// Returns the hash code for this <see cref="BoolAttribute"/>.
+		/// Returns the hash code for this <see cref="KeyAttribute"/>.
 		/// </summary>
 		/// <returns>A 32-bit signed integer hash code.</returns>
-		public override int GetHashCode() =>
-			Tuple.Create(this.Key, this.Value.ToString()).GetHashCode();
+		public override int GetHashCode() => Tuple.Create(this.Key, this.Value).GetHashCode();
 
 		/// <summary>
-		/// Determines whether two specified <see cref="BoolAttribute"/> have the same value.
+		/// Determines whether two specified <see cref="KeyAttribute"/> have the same value.
 		/// </summary>
-		/// <param name="at1">The first <see cref="BoolAttribute"/> to compare, or null.</param>
-		/// <param name="at2">The second <see cref="BoolAttribute"/> to compare, or null.</param>
+		/// <param name="at1">The first <see cref="KeyAttribute"/> to compare, or null.</param>
+		/// <param name="at2">The second <see cref="KeyAttribute"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
-		public static bool operator ==(BoolAttribute at1, BoolAttribute at2) =>
+		public static bool operator ==(KeyAttribute at1, KeyAttribute at2) =>
 			at1 is null ? at2 is null : at2 is null ? false
 			: (at1.Key == at2.Key && at1.Value == at2.Value);
 
 		/// <summary>
-		/// Determines whether two specified <see cref="BoolAttribute"/> have different values.
+		/// Determines whether two specified <see cref="KeyAttribute"/> have different values.
 		/// </summary>
-		/// <param name="at1">The first <see cref="BoolAttribute"/> to compare, or null.</param>
-		/// <param name="at2">The second <see cref="BoolAttribute"/> to compare, or null.</param>
+		/// <param name="at1">The first <see cref="KeyAttribute"/> to compare, or null.</param>
+		/// <param name="at2">The second <see cref="KeyAttribute"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
-		public static bool operator !=(BoolAttribute at1, BoolAttribute at2) => !(at1 == at2);
+		public static bool operator !=(KeyAttribute at1, KeyAttribute at2) => !(at1 == at2);
 
 		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.
@@ -161,7 +160,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <returns>Exact plain copy of the object.</returns>
 		public override ASubPart PlainCopy()
 		{
-			var result = new BoolAttribute
+			var result = new KeyAttribute
 			{
 				Type = this.Type,
 				Value = this.Value
@@ -171,20 +170,19 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		}
 
 		/// <summary>
-		/// Converts this <see cref="BoolAttribute"/> to an attribute of type provided.
+		/// Converts this <see cref="KeyAttribute"/> to an attribute of type provided.
 		/// </summary>
 		/// <param name="type">Type of a new attribute.</param>
 		/// <returns>New <see cref="CPAttribute"/>.</returns>
 		public override CPAttribute ConvertTo(eCarPartAttribType type) =>
 			type switch
 			{
+				eCarPartAttribType.Boolean => new BoolAttribute(this.Value, this.BelongsTo),
 				eCarPartAttribType.Floating => new FloatAttribute(this.Value, this.BelongsTo),
 				eCarPartAttribType.Integer => new IntAttribute(this.Value, this.BelongsTo),
 				eCarPartAttribType.String => new StringAttribute(this.Value, this.BelongsTo),
 				eCarPartAttribType.TwoString => new TwoStringAttribute(this.Value, this.BelongsTo),
 				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Value, this.BelongsTo),
-				eCarPartAttribType.Key => new KeyAttribute(this.Value, this.BelongsTo),
-				eCarPartAttribType.ModelTable => new ModelTableAttribute(this.Value, this.BelongsTo),
 				_ => this
 			};
 	}

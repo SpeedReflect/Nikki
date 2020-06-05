@@ -5,21 +5,22 @@ using Nikki.Reflection.Enum;
 using Nikki.Reflection.Enum.CP;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Shared.Parts.CarParts;
 using CoreExtensions.Conversions;
 
 
 
-namespace Nikki.Support.Shared.Parts.CarParts
+namespace Nikki.Support.Underground1.Attributes
 {
 	/// <summary>
-	/// A <see cref="CPAttribute"/> with 4-byte floating point value.
+	/// A <see cref="CPAttribute"/> with 4-byte signed integer value.
 	/// </summary>
-	public class FloatAttribute : CPAttribute
+	public class IntAttribute : CPAttribute
 	{
-		private const eCarPartAttribType _type = eCarPartAttribType.Floating;
+		private const eCarPartAttribType _type = eCarPartAttribType.Integer;
 
 		/// <summary>
-		/// <see cref="eCarPartAttribType"/> type of this <see cref="FloatAttribute"/>.
+		/// <see cref="eCarPartAttribType"/> type of this <see cref="IntAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
 		public override eCarPartAttribType AttribType
@@ -36,7 +37,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Type of this <see cref="BoolAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public eAttribFloat Type { get; set; }
+		public eAttribInt Type { get; set; }
 
 		/// <summary>
 		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
@@ -44,31 +45,31 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		public override uint Key
 		{
 			get => (uint)this.Type;
-			set => this.Type = (eAttribFloat)value;
+			set => this.Type = (eAttribInt)value;
 		}
 
 		/// <summary>
 		/// Attribute value.
 		/// </summary>
 		[AccessModifiable()]
-		public float Value { get; set; }
+		public uint Value { get; set; }
 
 		/// <summary>
-		/// Initializes new instance of <see cref="CPAttribute"/>.
+		/// Initializes new instance of <see cref="IntAttribute"/>.
 		/// </summary>
-		public FloatAttribute() { }
+		public IntAttribute() { }
 
 		/// <summary>
-		/// Initializes new instance of <see cref="FloatAttribute"/> with value provided.
+		/// Initializes new instance of <see cref="IntAttribute"/> with value provided.
 		/// </summary>
 		/// <param name="value">Value to set.</param>
 		/// <param name="part"><see cref="RealCarPart"/> to which this part belongs to.</param>
-		public FloatAttribute(object value, RealCarPart part)
+		public IntAttribute(object value, RealCarPart part)
 		{
 			this.BelongsTo = part;
 			try
 			{
-				this.Value = (float)value.ReinterpretCast(typeof(float));
+				this.Value = (uint)value.ReinterpretCast(typeof(uint));
 			}
 			catch (Exception)
 			{
@@ -77,34 +78,34 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		}
 
 		/// <summary>
-		/// Initializes new instance of <see cref="FloatAttribute"/> by reading data using 
+		/// Initializes new instance of <see cref="IntAttribute"/> by reading data using 
 		/// <see cref="BinaryReader"/> provided.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read with.</param>
 		/// <param name="key">Key of the attribute's group.</param>
-		public FloatAttribute(BinaryReader br, uint key)
+		public IntAttribute(BinaryReader br, uint key)
 		{
 			this.Key = key;
 			this.Disassemble(br, null);
 		}
 
 		/// <summary>
-		/// Disassembles byte array into <see cref="FloatAttribute"/> using <see cref="BinaryReader"/>  
+		/// Disassembles byte array into <see cref="IntAttribute"/> using <see cref="BinaryReader"/> 
 		/// provided.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read with.</param>
 		/// <param name="str_reader"><see cref="BinaryReader"/> to read strings with. 
-		/// Since it is a Floating Attribute, this value can be <see langword="null"/>.</param>
+		/// Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
 		public override void Disassemble(BinaryReader br, BinaryReader str_reader)
-			=> this.Value = br.ReadSingle();
+			=> this.Value = br.ReadUInt32();
 
 		/// <summary>
-		/// Assembles <see cref="FloatAttribute"/> and writes it using <see cref="BinaryWriter"/> 
+		/// Assembles <see cref="IntAttribute"/> and writes it using <see cref="BinaryWriter"/> 
 		/// provided.
 		/// </summary>
 		/// <param name="bw"><see cref="BinaryWriter"/> to write with.</param>
 		/// <param name="string_dict">Dictionary of string HashCodes and their offsets. 
-		/// Since it is a Floating Attribute, this value can be <see langword="null"/>.</param>
+		/// Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
 		public override void Assemble(BinaryWriter bw, Dictionary<int, int> string_dict)
 		{
 			bw.Write(this.Key);
@@ -119,38 +120,38 @@ namespace Nikki.Support.Shared.Parts.CarParts
 
 		/// <summary>
 		/// Determines whether this instance and a specified object, which must also be a
-		/// <see cref="FloatAttribute"/> object, have the same value.
+		/// <see cref="IntAttribute"/> object, have the same value.
 		/// </summary>
-		/// <param name="obj">The <see cref="FloatAttribute"/> to compare to this instance.</param>
-		/// <returns>True if obj is a <see cref="FloatAttribute"/> and its value is the same as 
+		/// <param name="obj">The <see cref="IntAttribute"/> to compare to this instance.</param>
+		/// <returns>True if obj is a <see cref="IntAttribute"/> and its value is the same as 
 		/// this instance; false otherwise. If obj is null, the method returns false.
 		/// </returns>
 		public override bool Equals(object obj) =>
-			obj is FloatAttribute && this == (FloatAttribute)obj;
+			obj is IntAttribute && this == (IntAttribute)obj;
 
 		/// <summary>
-		/// Returns the hash code for this <see cref="FloatAttribute"/>.
+		/// Returns the hash code for this <see cref="IntAttribute"/>.
 		/// </summary>
 		/// <returns>A 32-bit signed integer hash code.</returns>
 		public override int GetHashCode() => Tuple.Create(this.Key, this.Value).GetHashCode();
 
 		/// <summary>
-		/// Determines whether two specified <see cref="FloatAttribute"/> have the same value.
+		/// Determines whether two specified <see cref="IntAttribute"/> have the same value.
 		/// </summary>
-		/// <param name="at1">The first <see cref="FloatAttribute"/> to compare, or null.</param>
-		/// <param name="at2">The second <see cref="FloatAttribute"/> to compare, or null.</param>
+		/// <param name="at1">The first <see cref="IntAttribute"/> to compare, or null.</param>
+		/// <param name="at2">The second <see cref="IntAttribute"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
-		public static bool operator ==(FloatAttribute at1, FloatAttribute at2) =>
+		public static bool operator ==(IntAttribute at1, IntAttribute at2) =>
 			at1 is null ? at2 is null : at2 is null ? false
 			: (at1.Key == at2.Key && at1.Value == at2.Value);
 
 		/// <summary>
-		/// Determines whether two specified <see cref="FloatAttribute"/> have different values.
+		/// Determines whether two specified <see cref="IntAttribute"/> have different values.
 		/// </summary>
-		/// <param name="at1">The first <see cref="FloatAttribute"/> to compare, or null.</param>
-		/// <param name="at2">The second <see cref="FloatAttribute"/> to compare, or null.</param>
+		/// <param name="at1">The first <see cref="IntAttribute"/> to compare, or null.</param>
+		/// <param name="at2">The second <see cref="IntAttribute"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
-		public static bool operator !=(FloatAttribute at1, FloatAttribute at2) => !(at1 == at2);
+		public static bool operator !=(IntAttribute at1, IntAttribute at2) => !(at1 == at2);
 
 		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.
@@ -158,7 +159,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <returns>Exact plain copy of the object.</returns>
 		public override ASubPart PlainCopy()
 		{
-			var result = new FloatAttribute
+			var result = new IntAttribute
 			{
 				Type = this.Type,
 				Value = this.Value
@@ -168,7 +169,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		}
 
 		/// <summary>
-		/// Converts this <see cref="FloatAttribute"/> to an attribute of type provided.
+		/// Converts this <see cref="IntAttribute"/> to an attribute of type provided.
 		/// </summary>
 		/// <param name="type">Type of a new attribute.</param>
 		/// <returns>New <see cref="CPAttribute"/>.</returns>
@@ -176,12 +177,11 @@ namespace Nikki.Support.Shared.Parts.CarParts
 			type switch
 			{
 				eCarPartAttribType.Boolean => new BoolAttribute(this.Value, this.BelongsTo),
-				eCarPartAttribType.Integer => new IntAttribute(this.Value, this.BelongsTo),
+				eCarPartAttribType.Floating => new FloatAttribute(this.Value, this.BelongsTo),
 				eCarPartAttribType.String => new StringAttribute(this.Value, this.BelongsTo),
 				eCarPartAttribType.TwoString => new TwoStringAttribute(this.Value, this.BelongsTo),
 				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Value, this.BelongsTo),
 				eCarPartAttribType.Key => new KeyAttribute(this.Value, this.BelongsTo),
-				eCarPartAttribType.ModelTable => new ModelTableAttribute(this.Value, this.BelongsTo),
 				_ => this
 			};
 	}

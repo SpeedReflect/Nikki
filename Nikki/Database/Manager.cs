@@ -223,6 +223,11 @@ namespace Nikki.Database
 		public abstract string Name { get; }
 
 		/// <summary>
+		/// Indicates required alighment when this <see cref="IManager"/> is being serialized.
+		/// </summary>
+		public abstract Alignment Alignment { get; }
+
+		/// <summary>
 		/// Gets the number of elements contained in the <see cref="Manager{T}"/>.
 		/// </summary>
 		public int Count => this._size;
@@ -286,7 +291,7 @@ namespace Nikki.Database
 		/// <summary>
 		/// True if this <see cref="Manager{T}"/> is read-only; otherwise, false.
 		/// </summary>
-		public bool IsReadOnly => false;
+		public abstract bool IsReadOnly { get; }
 
 		/// <summary>
 		/// True if this <see cref="Manager{T}"/> is of fixed size; otherwise, false.
@@ -322,6 +327,7 @@ namespace Nikki.Database
 		/// <param name="cname">CollectionName of a new created collection.</param>
 		public void Add(string cname)
 		{
+			this.ReadOnlyThrow();
 			this.CreationCheck(cname);
 
 			if (this._size == this._capacity)
@@ -354,6 +360,8 @@ namespace Nikki.Database
 		/// <param name="item">The object to be added to the end of the <see cref="Manager{T}"/>.</param>
 		public void Add(T item)
 		{
+			this.ReadOnlyThrow();
+
 			if (this.Contains(item.CollectionName))
 			{
 
@@ -416,6 +424,7 @@ namespace Nikki.Database
 		/// <param name="from">CollectionName of a collection to copy.</param>
 		public void Clone(string to, string from)
 		{
+			this.ReadOnlyThrow();
 			var copy = this.Find(from);
 
 			if (copy == null)
@@ -979,6 +988,8 @@ namespace Nikki.Database
 		/// <param name="cname">CollectionName of a new collection to insert.</param>
 		public void Insert(int index, string cname)
 		{
+			this.ReadOnlyThrow();
+
 			if (index < 0 || index > this._size)
 			{
 
@@ -1026,6 +1037,8 @@ namespace Nikki.Database
 		/// <param name="item">The collection to insert.</param>
 		public void Insert(int index, T item)
 		{
+			this.ReadOnlyThrow();
+
 			if (index < 0 || index > this._size)
 			{
 
@@ -1101,6 +1114,8 @@ namespace Nikki.Database
 		/// <param name="cname">CollectionName to match.</param>
 		public void Remove(string cname)
 		{
+			this.ReadOnlyThrow();
+
 			for (int loop = 0; loop < this._size; ++loop)
 			{
 
@@ -1123,6 +1138,7 @@ namespace Nikki.Database
 		/// <returns>True is successfully removed; otherwise, false.</returns>
 		public bool Remove(T item)
 		{
+			this.ReadOnlyThrow();
 			int index = this.IndexOf(item);
 			
 			if (index != -1)
@@ -1297,6 +1313,8 @@ namespace Nikki.Database
 		/// <param name="index">The zero-based index of the element to remove.</param>
 		public void RemoveAt(int index)
 		{
+			this.ReadOnlyThrow();
+
 			if (index >= this._size || index < 0)
 			{
 
@@ -1321,6 +1339,8 @@ namespace Nikki.Database
 		/// </summary>
 		public void Clear()
 		{
+			this.ReadOnlyThrow();
+
 			if (this._size > 0)
 			{
 
@@ -1387,22 +1407,23 @@ namespace Nikki.Database
 		#region Assembly
 
 		/// <summary>
+		/// Throws exception if this <see cref="Manager{T}"/> is read-only.
+		/// </summary>
+		private void ReadOnlyThrow()
+		{
+			if (this.IsReadOnly)
+			{
+
+				throw new Exception("Unable to add collection because manager is read-only");
+
+			}
+		}
+
+		/// <summary>
 		/// Checks whether CollectionName provided allows creation of a new collection.
 		/// </summary>
 		/// <param name="cname">CollectionName to check.</param>
 		internal abstract void CreationCheck(string cname);
-
-		/// <summary>
-		/// Assembles all collections in this <see cref="Manager{T}"/>.
-		/// </summary>
-		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
-		public abstract void Assemble(BinaryWriter bw);
-
-		/// <summary>
-		/// Disassembles data into separate collections in this <see cref="Manager{T}"/>.
-		/// </summary>
-		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		public abstract void Disassemble(BinaryReader br);
 
 		#endregion
 	}

@@ -9,6 +9,7 @@ using Nikki.Reflection.ID;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Carbon.Framework;
 using Nikki.Support.Shared.Parts.TPKParts;
 using CoreExtensions.IO;
 
@@ -41,9 +42,9 @@ namespace Nikki.Support.Carbon.Class
         public override string GameSTR => GameINT.Carbon.ToString();
 
         /// <summary>
-        /// Database to which the class belongs to.
+        /// Manager to which the class belongs to.
         /// </summary>
-        public Database.Carbon Database { get; set; }
+        public TPKBlockManager Manager { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
@@ -53,14 +54,7 @@ namespace Nikki.Support.Carbon.Class
             get => this._collection_name;
             set
             {
-                if (String.IsNullOrWhiteSpace(value))
-                    throw new ArgumentNullException("This value cannot be left empty.");
-                if (value.Contains(" "))
-                    throw new Exception("CollectionName cannot contain whitespace.");
-                if (this.UseCurrentName == eBoolean.True && value.Length > 0x1B)
-                    throw new ArgumentLengthException(0x1B);
-                if (this.Database.TPKBlocks.FindCollection(value) != null)
-                    throw new CollectionExistenceException(value);
+                this.Manager.CreationCheck(value);
                 this._collection_name = value;
             }
         }
@@ -88,48 +82,40 @@ namespace Nikki.Support.Carbon.Class
         public override eBoolean IsCompressed { get; set; }
 
         /// <summary>
-        /// True if CollectionName specified should be used; false if hardcoded CollectionName 
-        /// should be used.
-        /// </summary>
-        public eBoolean UseCurrentName { get; set; }
-
-        /// <summary>
         /// List of <see cref="Texture"/> in this <see cref="TPKBlock"/>.
         /// </summary>
         public List<Texture> Textures { get; set; } = new List<Texture>();
 
-		#endregion
+        #endregion
 
-		#region Main
+        #region Main
 
-		/// <summary>
-		/// Initializes new instance of <see cref="TPKBlock"/>.
-		/// </summary>
-		public TPKBlock() => this.UseCurrentName = eBoolean.True;
+        /// <summary>
+        /// Initializes new instance of <see cref="TPKBlock"/>.
+        /// </summary>
+        public TPKBlock() { }
 
         /// <summary>
         /// Initializes new instance of <see cref="TPKBlock"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-        public TPKBlock(string CName, Database.Carbon db)
+        /// <param name="manager"><see cref="TPKBlockManager"/> to which this instance belongs to.</param>
+        public TPKBlock(string CName, TPKBlockManager manager)
         {
-            this.Database = db;
+            this.Manager = manager;
             this.CollectionName = CName;
-            this.UseCurrentName = eBoolean.True;
             CName.BinHash();
         }
 
         /// <summary>
         /// Initializes new instance of <see cref="TPKBlock"/>.
         /// </summary>
-        /// <param name="index">Index of the instance in the database.</param>
-		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-        public TPKBlock(int index, Database.Carbon db)
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		/// <param name="manager"><see cref="TPKBlockManager"/> to which this instance belongs to.</param>
+        public TPKBlock(BinaryReader br, TPKBlockManager manager)
         {
-            if (index < 0) this.UseCurrentName = eBoolean.True;
-            this.Database = db;
-            this.Index = index;
+            this.Manager = manager;
+            this.Disassemble(br);
         }
 
         #endregion
@@ -299,7 +285,7 @@ namespace Nikki.Support.Carbon.Class
                 {
                 
                     br.BaseStream.Position = texture_list[a1];
-                    var tex = new Texture(br, this.CollectionName, this.Database);
+                    var tex = new Texture(br, this);
                     this.Textures.Add(tex);
                 
                 }
@@ -414,7 +400,7 @@ namespace Nikki.Support.Carbon.Class
 
             }
 
-            var texture = new Texture(CName, this.CollectionName, filename, this.Database);
+            var texture = new Texture(CName, filename, this);
             this.Textures.Add(texture);
         }
 
@@ -652,10 +638,31 @@ namespace Nikki.Support.Carbon.Class
             if (br.ReadInt32() != (int)this.Version) return; // return if versions does not match
 
             // Get CollectionName
-            this.CollectionName = br.ReadNullTermUTF8(0x1C);
+            var cname = br.ReadNullTermUTF8(0x1C);
+            var fname = br.ReadNullTermUTF8(0x40);
+
+            if (fname.EndsWith(".tpk"))
+            {
+            
+                fname = Path.GetFileNameWithoutExtension(fname).ToUpper();
+
+                this._collection_name = !this.Manager.Contains(fname)
+                    ? fname : !this.Manager.Contains(cname)
+                    ? cname : this.Manager.Count.ToString();
+
+            }
+            else
+            {
+
+                this._collection_name = !this.Manager.Contains(cname)
+                    ? cname :
+                    this.Manager.Count.ToString();
+
+            }
+
 
             // Get the rest of the settings
-            br.BaseStream.Position += 0x44;
+            br.BaseStream.Position += 4;
             this.PermBlockByteOffset = br.ReadUInt32();
             this.PermBlockByteSize = br.ReadUInt32();
             this.EndianSwapped = br.ReadInt32();
@@ -775,7 +782,7 @@ namespace Nikki.Support.Carbon.Class
             texr.BaseStream.Position = headlength;
 
             // Create new texture based on header found
-            var texture = new Texture(texr, this.CollectionName, this.Database);
+            var texture = new Texture(texr, this);
 
             // We can skip dds type struct since it is defined in the header.
 
@@ -850,10 +857,10 @@ namespace Nikki.Support.Carbon.Class
             bw.WriteNullTermUTF8(this._collection_name, 0x1C);
 
             // Write Filename
-            bw.WriteNullTermUTF8(this.Filename, 0x40);
+            bw.WriteNullTermUTF8(this._collection_name, 0x40);
 
             // Write all other settings
-            bw.Write(this.FilenameHash);
+            bw.Write(this.BinKey);
             bw.Write(this.PermBlockByteOffset);
             bw.Write(this.PermBlockByteSize);
             bw.Write(this.EndianSwapped);

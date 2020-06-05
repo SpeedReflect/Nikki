@@ -38,7 +38,7 @@ namespace Nikki.Support.Carbon.Class
 		public override string GameSTR => GameINT.Carbon.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// Manager to which the class belongs to.
 		/// </summary>
 		public DBModelPartManager Manager { get; set; }
 

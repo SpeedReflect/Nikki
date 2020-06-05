@@ -2,6 +2,8 @@
 using System.IO;
 using System.Collections.Generic;
 using Nikki.Utils;
+using Nikki.Database;
+using Nikki.Support.Shared.Class;
 using CoreExtensions.IO;
 
 
@@ -159,32 +161,19 @@ namespace Nikki.Core
 		public static void LoadLangLabels(string file, GameINT game)
 		{
 			var options = new Options(file, eOptFlags.STRBlocks, String.Empty, false);
+			var fb = new FileBase(game);
+			fb.Load(options);
 
-			switch (game)
+			foreach (STRBlock str in fb.GetManager("STRBlocks"))
 			{
-				case GameINT.Carbon:
-				case GameINT.Prostreet:
-				case GameINT.Undercover:
-					var db_modern = new Database.Carbon(true);
-					db_modern.Load(options);
-					foreach (var str in db_modern.STRBlocks.Collections)
-					{
-						foreach (var record in str.GetRecords())
-							record.Text.BinHash();
-					}
-					break;
 
-				case GameINT.Underground1:
-				case GameINT.Underground2:
-				case GameINT.MostWanted:
-					var db_legacy = new Database.MostWanted(true);
-					db_legacy.Load(options);
-					foreach (var str in db_legacy.STRBlocks.Collections)
-					{
-						foreach (var record in str.GetRecords())
-							record.Text.BinHash();
-					}
-					break;
+				foreach (var record in str.GetRecords())
+				{
+
+					record.Text.BinHash();
+
+				}
+
 			}
 		}
 	}

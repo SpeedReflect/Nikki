@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Collections;
+using Nikki.Database;
 
 
 
@@ -8,7 +10,7 @@ namespace Nikki.Reflection.Interface
 	/// <summary>
 	/// Interface with methods and properties designed for managing collection types.
 	/// </summary>
-	public interface IManager : IAssembly, IList
+	public interface IManager : IList
 	{
 		#region Properties
 
@@ -29,6 +31,11 @@ namespace Nikki.Reflection.Interface
 		/// elements beyond its capacity will not be possible, unless Extender becomes positive.
 		/// </summary>
 		int Extender { get; set; }
+
+		/// <summary>
+		/// Indicates required alighment when this <see cref="IManager"/> is being serialized.
+		/// </summary>
+		Alignment Alignment { get; }
 
 		#endregion
 
@@ -107,49 +114,49 @@ namespace Nikki.Reflection.Interface
 		/// </summary>
 		/// <param name="index">The zero-based index at which collection should be inserted.</param>
 		/// <param name="cname">CollectionName of a new collection to insert.</param>
-		public void Insert(int index, string cname);
+		void Insert(int index, string cname);
 
 		/// <summary>
 		/// Removes the first occurence of a collection with CollectionName specified from 
 		/// the <see cref="IManager"/>.
 		/// </summary>
 		/// <param name="cname">CollectionName to match.</param>
-		public void Remove(string cname);
+		void Remove(string cname);
 
 		/// <summary>
 		/// Sets value passed statically through all collections in this <see cref="IManager"/>.
 		/// </summary>
 		/// <param name="property">Property to be edited.</param>
 		/// <param name="value">Value to set.</param>
-		public void Static(string property, string value);
+		void Static(string property, string value);
 
 		/// <summary>
 		/// Switches two collections in place using their CollectionNames provided.
 		/// </summary>
 		/// <param name="cname1">CollectionName of the first collection to switch.</param>
 		/// <param name="cname2">CollectionName of the second collection to switch.</param>
-		public void Switch(string cname1, string cname2);
+		void Switch(string cname1, string cname2);
 
 		/// <summary>
 		/// Switches two collections in place using their indexes provided.
 		/// </summary>
 		/// <param name="index1">Index of the first collection to switch.</param>
 		/// <param name="index2">Index of the second collection to switch.</param>
-		public void Switch(int index1, int index2);
+		void Switch(int index1, int index2);
 
 		/// <summary>
 		/// Switches two objects in place.
 		/// </summary>
 		/// <param name="value1">First object to switch.</param>
 		/// <param name="value2">Second object to switch.</param>
-		public void Switch(object value1, object value2);
+		void Switch(object value1, object value2);
 
 		/// <summary>
 		/// Performance the specified action on each collection of the <see cref="IManager"/>.
 		/// </summary>
 		/// <param name="action">The <see cref="Action"/> delegate to perform on each 
 		/// collection of the <see cref="IManager"/>.</param>
-		public void ForEach(Action<object> action);
+		void ForEach(Action<object> action);
 
 		#endregion
 	}

@@ -5,21 +5,20 @@ using Nikki.Database;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
 using Nikki.Support.Carbon.Class;
-using CoreExtensions.IO;
 
 
 
 namespace Nikki.Support.Carbon.Framework
 {
 	/// <summary>
-	/// A <see cref="Manager{T}"/> for <see cref="CarTypeInfo"/> collections.
+	/// A <see cref="Manager{T}"/> for <see cref="STRBlock"/> collections.
 	/// </summary>
-	public class CarTypeInfoManager : Manager<CarTypeInfo>
+	public class STRBlockManager : Manager<STRBlock>
 	{
 		/// <summary>
-		/// Name of this <see cref="CarTypeInfoManager"/>.
+		/// Name of this <see cref="STRBlockManager"/>.
 		/// </summary>
-		public override string Name => "CarTypeInfos";
+		public override string Name => "STRBlocks";
 
 		/// <summary>
 		/// True if this <see cref="Manager{T}"/> is read-only; otherwise, false.
@@ -32,16 +31,15 @@ namespace Nikki.Support.Carbon.Framework
 		public override Alignment Alignment { get; }
 
 		/// <summary>
-		/// Initializes new instance of <see cref="CarTypeInfoManager"/>.
+		/// Initializes new instance of <see cref="STRBlockManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="FileBase"/> to which this manager belongs to.</param>
-		public CarTypeInfoManager(FileBase db)
+		public STRBlockManager(FileBase db)
 		{
 			this.Database = db;
 			this.Extender = 5;
 			this.Alignment = Alignment.Default;
 		}
-
 
 		/// <summary>
 		/// Assembles collection data into byte buffers.
@@ -50,48 +48,33 @@ namespace Nikki.Support.Carbon.Framework
 		/// <param name="mark">Watermark to put in the padding blocks.</param>
 		internal void Assemble(BinaryWriter bw, string mark)
 		{
-			bw.GeneratePadding(mark, this.Alignment);
-
-			bw.WriteEnum(eBlockID.CarTypeInfos);
-			bw.Write(this.Count * CarTypeInfo.BaseClassSize + 8);
-			bw.Write(0x11111111);
-			bw.Write(0x11111111);
-
 			foreach (var collection in this)
 			{
 
+				bw.GeneratePadding(mark, this.Alignment);
 				collection.Assemble(bw);
 
 			}
 		}
 
 		/// <summary>
-		/// Disassembles data into separate collections in this <see cref="CarTypeInfoManager"/>.
+		/// Disassembles data into separate collections in this <see cref="STRBlockManager"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="block"><see cref="Block"/> with offsets.</param>
 		internal void Disassemble(BinaryReader br, Block block)
 		{
 			if (Block.IsNullOrEmpty(block)) return;
-			if (block.BlockID != eBlockID.CarTypeInfos) return;
+			if (block.BlockID != eBlockID.STRBlocks) return;
+
+			this.Capacity = block.Offsets.Count;
 
 			for (int loop = 0; loop < block.Offsets.Count; ++loop)
 			{
 
-				br.BaseStream.Position = block.Offsets[loop] + 4;
-				var size = br.ReadInt32();
-				br.BaseStream.Position += 8;
-
-				int count = (size - 8) / CarTypeInfo.BaseClassSize;
-				this.Capacity += count;
-				
-				for (int i = 0; i < count; ++i)
-				{
-
-					var collection = new CarTypeInfo(br, this);
-					this.Add(collection);
-
-				}
+				br.BaseStream.Position = block.Offsets[loop];
+				var collection = new STRBlock(br, this);
+				this.Add(collection);
 
 			}
 		}
@@ -116,10 +99,10 @@ namespace Nikki.Support.Carbon.Framework
 
 			}
 
-			if (cname.Length > CarTypeInfo.MaxCNameLength)
+			if (cname.Length > STRBlock.MaxCNameLength)
 			{
 
-				throw new ArgumentLengthException(CarTypeInfo.MaxCNameLength);
+				throw new ArgumentLengthException(STRBlock.MaxCNameLength);
 
 			}
 

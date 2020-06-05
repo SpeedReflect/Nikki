@@ -12,7 +12,7 @@ namespace Nikki.Core
 		/// <summary>
 		/// Default options.
 		/// </summary>
-		public static Options Default = new Options()
+		public static readonly Options Default = new Options()
 		{
 			File = String.Empty,
 			Watermark = $"Nikki by MaxHwoy | {DateTime.Today:MM/dd/yyyy}",

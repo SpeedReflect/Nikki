@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
 using Nikki.Reflection.Enum;
 
 
@@ -8,36 +9,52 @@ namespace Nikki.Database
 	/// <summary>
 	/// A piece of binary data in a file.
 	/// </summary>
-	public class Block
+	internal class Block
 	{
 		/// <summary>
 		/// ID of this block.
 		/// </summary>
-		internal eBlockID BlockID { get; set; }
+		public eBlockID BlockID { get; set; }
+
+		/// <summary>
+		/// Watermark of the database.
+		/// </summary>
+		public string Watermark { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Offset of this <see cref="Block"/> in the buffer.
 		/// </summary>
-		public long Offset { get; set; }
+		public List<long> Offsets { get; set; }
 
 		/// <summary>
-		/// Size of this <see cref="Block"/>.
+		/// Initializes new instance of <see cref="Block"/>.
 		/// </summary>
-		public long Size { get; set; }
+		/// <param name="id"><see cref="eBlockID"/> of this block.</param>
+		public Block(eBlockID id)
+		{
+			this.BlockID = id;
+			this.Offsets = new List<long>();
+		}
 
 		/// <summary>
-		/// Start data offset at which data starts in this <see cref="Block"/>.
+		/// Combines offsets of <see cref="Block"/> passed with this <see cref="Block"/>.
 		/// </summary>
-		public long Start => this.Offset + 8;
+		/// <param name="other"><see cref="Block"/> to combine with.</param>
+		public void Combine(Block other) => this.Offsets.AddRange(other.Offsets);
 
 		/// <summary>
-		/// Final data offset at which data ends in this <see cref="Block"/>.
+		/// Determines whether <see cref="Block"/> is null or its offset count is empty.
 		/// </summary>
-		public long Final => this.Start + this.Size;
+		/// <param name="block"><see cref="Block"/> to check.</param>
+		/// <returns>True if <see cref="Block"/> is null or its offset count is 0; 
+		/// false otherwise.</returns>
+		public static bool IsNullOrEmpty(Block block) =>
+			block == null ? true : block.Offsets.Count == 0;
 
 		/// <summary>
-		/// Next <see cref="Block"/> that comes after this one.
+		/// Returns <see cref="eBlockID"/> and offset count as a string value.
 		/// </summary>
-		public Block Next { get; set; }
+		/// <returns>String value.</returns>
+		public override string ToString() => $"ID: {this.BlockID} | Count: {this.Offsets.Count}";
 	}
 }

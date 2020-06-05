@@ -6,6 +6,7 @@ using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Carbon.Framework;
 using CoreExtensions.IO;
 
 
@@ -51,9 +52,9 @@ namespace Nikki.Support.Carbon.Class
 		public override string GameSTR => GameINT.Carbon.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// Manager to which the class belongs to.
 		/// </summary>
-		public Database.Carbon Database { get; set; }
+		public TrackManager Manager { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
@@ -64,16 +65,8 @@ namespace Nikki.Support.Carbon.Class
 			get => this._collection_name;
 			set
 			{
-				if (string.IsNullOrWhiteSpace(value))
-					throw new ArgumentNullException("This value cannot be left empty.");
-				if (value.Contains(" "))
-					throw new Exception("CollectionName cannot contain whitespace.");
-				if (!UInt16.TryParse(value, out ushort id))
-					throw new Exception("Unable to parse TrackID from the collection name provided.");
-				if (this.Database.Tracks.FindCollection(value) != null)
-					throw new CollectionExistenceException(value);
+				this.Manager.CreationCheck(value);
 				this._collection_name = value;
-				this.TrackID = id;
 			}
 		}
 
@@ -86,11 +79,6 @@ namespace Nikki.Support.Carbon.Class
 		/// Vault memory hash of the collection name.
 		/// </summary>
 		public override uint VltKey => this._collection_name.VltHash();
-
-		/// <summary>
-		/// Unique ID value of the track that is used ingame.
-		/// </summary>
-		public ushort TrackID { get; private set; }
 
 		/// <summary>
 		/// Location index of the track.
@@ -446,10 +434,10 @@ namespace Nikki.Support.Carbon.Class
 		/// Initializes new instance of <see cref="Track"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-		public Track(string CName, Database.Carbon db)
+		/// <param name="manager"><see cref="TrackManager"/> to which this instance belongs to.</param>
+		public Track(string CName, TrackManager manager)
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.CollectionName = CName;
 			CName.BinHash();
 		}
@@ -458,10 +446,10 @@ namespace Nikki.Support.Carbon.Class
 		/// Initializes new instance of <see cref="Track"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-		public Track(BinaryReader br, Database.Carbon db)
+		/// <param name="manager"><see cref="TrackManager"/> to which this instance belongs to.</param>
+		public Track(BinaryReader br, TrackManager manager)
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.Disassemble(br);
 		}
 
@@ -497,8 +485,8 @@ namespace Nikki.Support.Carbon.Class
 			bw.Write((byte)0);
 			bw.WriteEnum(this.IsPerformanceTuning);
 			bw.Write((byte)0);
-			bw.Write(this.TrackID);
-			bw.Write(this.TrackID);
+			bw.Write(UInt16.Parse(this._collection_name));
+			bw.Write(UInt16.Parse(this._collection_name));
 			bw.Write((short)0);
 
 			// Write gameplay scores
@@ -580,8 +568,7 @@ namespace Nikki.Support.Carbon.Class
 			this.IsPerformanceTuning = br.ReadEnum<eBoolean>();
 			br.BaseStream.Position += 1;
 			this._collection_name = br.ReadUInt16().ToString();
-			this.TrackID = br.ReadUInt16();
-			br.BaseStream.Position += 2;
+			br.BaseStream.Position += 4;
 
 			// Read gameplay scores
 			this.SunInfoName = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
@@ -645,7 +632,7 @@ namespace Nikki.Support.Carbon.Class
 		/// <returns>Memory casted copy of the object.</returns>
 		public override ACollectable MemoryCast(string CName)
 		{
-			var result = new Track(CName, this.Database);
+			var result = new Track(CName, this.Manager);
 			base.MemoryCast(this, result);
 			return result;
 		}

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -11,10 +11,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Support.Undercover\Class\" />
-    <Folder Include="Support.Undercover\Framework\" />
-    <Folder Include="Support.Undercover\Parts\" />
-    <Folder Include="Support.Underground1\Parts\InfoParts\" />
+    <Compile Remove="Support.MostWanted\**" />
+    <Compile Remove="Support.Prostreet\**" />
+    <Compile Remove="Support.Undercover\**" />
+    <Compile Remove="Support.Underground1\**" />
+    <Compile Remove="Support.Underground2\**" />
+    <EmbeddedResource Remove="Support.MostWanted\**" />
+    <EmbeddedResource Remove="Support.Prostreet\**" />
+    <EmbeddedResource Remove="Support.Undercover\**" />
+    <EmbeddedResource Remove="Support.Underground1\**" />
+    <EmbeddedResource Remove="Support.Underground2\**" />
+    <None Remove="Support.MostWanted\**" />
+    <None Remove="Support.Prostreet\**" />
+    <None Remove="Support.Undercover\**" />
+    <None Remove="Support.Underground1\**" />
+    <None Remove="Support.Underground2\**" />
   </ItemGroup>
 
   <ItemGroup>

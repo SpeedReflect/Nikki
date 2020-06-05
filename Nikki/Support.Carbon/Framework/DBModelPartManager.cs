@@ -9,6 +9,7 @@ using Nikki.Reflection.Enum;
 using Nikki.Reflection.Enum.CP;
 using Nikki.Reflection.Exception;
 using Nikki.Support.Carbon.Class;
+using Nikki.Support.Carbon.Attributes;
 using Nikki.Support.Shared.Parts.CarParts;
 using CoreExtensions.IO;
 using CoreExtensions.Reflection;
@@ -27,7 +28,26 @@ namespace Nikki.Support.Carbon.Framework
 		/// </summary>
 		public override string Name => "DBModelParts";
 
-		private string Mark { get; set; }
+		/// <summary>
+		/// True if this <see cref="Manager{T}"/> is read-only; otherwise, false.
+		/// </summary>
+		public override bool IsReadOnly => false;
+
+		/// <summary>
+		/// Indicates required alighment when this <see cref="CollisionManager"/> is being serialized.
+		/// </summary>
+		public override Alignment Alignment { get; }
+
+		/// <summary>
+		/// Initializes new instance of <see cref="DBModelPartManager"/>.
+		/// </summary>
+		/// <param name="db"><see cref="FileBase"/> to which this manager belongs to.</param>
+		public DBModelPartManager(FileBase db)
+		{
+			this.Database = db;
+			this.Extender = 5;
+			this.Alignment = new Alignment(0xC, Alignment.eAlignType.Actual);
+		}
 
 		#region Private Assemble
 
@@ -56,7 +76,7 @@ namespace Nikki.Support.Carbon.Framework
 			return result;
 		}
 
-		private Dictionary<int, int> MakeStringList(out byte[] string_buffer)
+		private Dictionary<int, int> MakeStringList(string mark, out byte[] string_buffer)
 		{
 			// Prepare stack
 			var string_dict = new Dictionary<int, int>();
@@ -73,7 +93,7 @@ namespace Nikki.Support.Carbon.Framework
 			length += 0x28;
 			bw.Write(0);
 			bw.Write(0);
-			bw.WriteNullTermUTF8(this.Mark, 0x20);
+			bw.WriteNullTermUTF8(mark, 0x20);
 
 			// Function to write strings to dictionary and return its length
 			var Inject = new Func<string, int, int>((value, len) =>
@@ -453,34 +473,36 @@ namespace Nikki.Support.Carbon.Framework
 			
 			while (br.BaseStream.Position < offset + size)
 			{
-			
-				switch (br.ReadUInt32())
+
+				var id = br.ReadEnum<eBlockID>();
+
+				switch (id)
 				{
-					case (uint)eBlockID.DBCarParts_Header:
+					case eBlockID.DBCarParts_Header:
 						result[0] = br.BaseStream.Position;
 						goto default;
 
-					case (uint)eBlockID.DBCarParts_Strings:
+					case eBlockID.DBCarParts_Strings:
 						result[1] = br.BaseStream.Position;
 						goto default;
 
-					case (uint)eBlockID.DBCarParts_Offsets:
+					case eBlockID.DBCarParts_Offsets:
 						result[2] = br.BaseStream.Position;
 						goto default;
 
-					case (uint)eBlockID.DBCarParts_Attribs:
+					case eBlockID.DBCarParts_Attribs:
 						result[3] = br.BaseStream.Position;
 						goto default;
 
-					case (uint)eBlockID.DBCarParts_Structs:
+					case eBlockID.DBCarParts_Structs:
 						result[4] = br.BaseStream.Position;
 						goto default;
 
-					case (uint)eBlockID.DBCarParts_Models:
+					case eBlockID.DBCarParts_Models:
 						result[5] = br.BaseStream.Position;
 						goto default;
 
-					case (uint)eBlockID.DBCarParts_Array:
+					case eBlockID.DBCarParts_Array:
 						result[6] = br.BaseStream.Position;
 						goto default;
 
@@ -610,10 +632,11 @@ namespace Nikki.Support.Carbon.Framework
 		/// writes it with <see cref="BinaryWriter"/> provided.
 		/// </summary>
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
-		public override void Assemble(BinaryWriter bw)
+		/// <param name="mark">Watermark written when saving.</param>
+		private void Encode(BinaryWriter bw, string mark)
 		{
 			// Get string map
-			var string_dict = this.MakeStringList(out var string_buffer);
+			var string_dict = this.MakeStringList(mark, out var string_buffer);
 
 			// Get struct map
 			var numstructs = this.MakeStructList(string_dict, out var struct_buffer);
@@ -688,18 +711,9 @@ namespace Nikki.Support.Carbon.Framework
 		/// into <see cref="DBModelPart"/> collections.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		public override void Disassemble(BinaryReader br)
+		/// <param name="size">Size of the block.</param>
+		private void Decode(BinaryReader br, int size)
 		{
-			var id = br.ReadUInt32();
-			var size = br.ReadInt32();
-
-			if (id != (uint)eBlockID.DBCarParts)
-			{
-
-				throw new InvalidDataException("Processed block has invalid ID");
-
-			}
-
 			long position = br.BaseStream.Position;
 			var offsets = this.FindOffsets(br, size);
 
@@ -794,6 +808,37 @@ namespace Nikki.Support.Carbon.Framework
 			}
 
 			br.BaseStream.Position = position + size;
+		}
+
+		/// <summary>
+		/// Assembles collection data into byte buffers.
+		/// </summary>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		/// <param name="mark">Watermark to put in the padding blocks.</param>
+		internal void Assemble(BinaryWriter bw, string mark)
+		{
+			bw.GeneratePadding(mark, this.Alignment);
+			this.Encode(bw, mark);
+		}
+
+		/// <summary>
+		/// Disassembles data into separate collections in this <see cref="DBModelPartManager"/>.
+		/// </summary>
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		/// <param name="block"><see cref="Block"/> with offsets.</param>
+		internal void Disassemble(BinaryReader br, Block block)
+		{
+			if (Block.IsNullOrEmpty(block)) return;
+			if (block.BlockID != eBlockID.DBCarParts) return;
+
+			for (int loop = 0; loop < block.Offsets.Count; ++loop)
+			{
+
+				br.BaseStream.Position = block.Offsets[loop] + 4;
+				var size = br.ReadInt32();
+				this.Decode(br, size);
+
+			}
 		}
 
 		/// <summary>

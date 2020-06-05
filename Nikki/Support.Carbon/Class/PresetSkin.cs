@@ -3,8 +3,8 @@ using System.IO;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Carbon.Framework;
 using CoreExtensions.IO;
 
 
@@ -50,9 +50,9 @@ namespace Nikki.Support.Carbon.Class
         public override string GameSTR => GameINT.Carbon.ToString();
 
         /// <summary>
-        /// Database to which the class belongs to.
+        /// Manager to which the class belongs to.
         /// </summary>
-        public Database.Carbon Database { get; set; }
+        public PresetSkinManager Manager { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
@@ -63,14 +63,7 @@ namespace Nikki.Support.Carbon.Class
             get => this._collection_name;
             set
             {
-                if (String.IsNullOrWhiteSpace(value))
-                    throw new ArgumentNullException("This value cannot be left empty.");
-                if (value.Contains(" "))
-                    throw new Exception("CollectionName cannot contain whitespace.");
-                if (value.Length > MaxCNameLength)
-                    throw new ArgumentLengthException(MaxCNameLength);
-                if (this.Database.PresetSkins.FindCollection(value) != null)
-                    throw new CollectionExistenceException(value);
+                this.Manager.CreationCheck(value);
                 this._collection_name = value;
             }
         }
@@ -257,10 +250,10 @@ namespace Nikki.Support.Carbon.Class
         /// Initializes new instance of <see cref="PresetSkin"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-        public PresetSkin(string CName, Database.Carbon db)
+        /// <param name="manager"><see cref="PresetSkinManager"/> to which this instance belongs to.</param>
+        public PresetSkin(string CName, PresetSkinManager manager)
         {
-            this.Database = db;
+            this.Manager = manager;
             this.CollectionName = CName;
             CName.BinHash();
         }
@@ -269,10 +262,10 @@ namespace Nikki.Support.Carbon.Class
         /// Initializes new instance of <see cref="PresetSkin"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-        /// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-        public unsafe PresetSkin(BinaryReader br, Database.Carbon db)
+        /// <param name="manager"><see cref="PresetSkinManager"/> to which this instance belongs to.</param>
+        public PresetSkin(BinaryReader br, PresetSkinManager manager)
         {
-            this.Database = db;
+            this.Manager = manager;
             this.Disassemble(br);
         }
 
@@ -383,7 +376,7 @@ namespace Nikki.Support.Carbon.Class
         /// <returns>Memory casted copy of the object.</returns>
         public override ACollectable MemoryCast(string CName)
         {
-            var result = new PresetSkin(CName, this.Database);
+            var result = new PresetSkin(CName, this.Manager);
             base.MemoryCast(this, result);
             return result;
         }

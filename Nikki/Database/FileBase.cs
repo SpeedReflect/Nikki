@@ -34,14 +34,15 @@ namespace Nikki.Database
         /// </summary>
         public List<IManager> Managers { get; set; }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="game"></param>
         public FileBase(GameINT game)
         {
             this.GameINT = game;
+            this.Managers = new List<IManager>();
         }
-
-
-
 
         /// <summary>
         /// Loads all data in the database using options passed.
@@ -50,8 +51,22 @@ namespace Nikki.Database
         /// <returns>True on success; false otherwise.</returns>
         public bool Load(Options options)
         {
+            if (!File.Exists(options.File)) return false;
+            if (options.Flags.HasFlag(eOptFlags.None)) return false;
+            this.Buffer = File.ReadAllBytes(options.File);
 
-            return true;
+            IInvokable loader;
+
+            switch (this.GameINT)
+            {
+                case GameINT.Carbon:
+                    loader = new Support.Carbon.Framework.DatabaseLoader(options, this);
+                    return loader.Invoke();
+
+                default:
+                    return false;
+
+            }
         }
 
         /// <summary>
@@ -61,9 +76,31 @@ namespace Nikki.Database
         /// <returns>True on success; false otherwise.</returns>
         public bool Save(Options options)
         {
+            return false;
+        }
 
+        /// <summary>
+        /// Gets <see cref="IManager"/> with name specified.
+        /// </summary>
+        /// <param name="name">Name of <see cref="IManager"/> to get.</param>
+        /// <returns><see cref="IManager"/>, if exists; null otherwise.</returns>
+        public IManager GetManager(string name) => this.Managers.Find(_ => _.Name == name);
 
-            return true;
+        /// <summary>
+        /// Gets <see cref="IManager"/> with type specified.
+        /// </summary>
+        /// <param name="type"><see cref="Type"/> of <see cref="IManager"/> to get.</param>
+        /// <returns><see cref="IManager"/>, if exists; null otherwise.</returns>
+        public IManager GetManager(Type type)
+        {
+            foreach (var manager in this.Managers)
+            {
+
+                if (manager.GetType() == type) return manager;
+
+            }
+
+            return null;
         }
 
         /// <summary>

@@ -5,11 +5,14 @@ using Nikki.Reflection.Enum;
 using Nikki.Reflection.Enum.CP;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using Nikki.Reflection.Enum.SlotID;
+using Nikki.Support.Shared.Parts.CarParts;
+using CoreExtensions.IO;
 using CoreExtensions.Conversions;
 
 
 
-namespace Nikki.Support.Shared.Parts.CarParts
+namespace Nikki.Support.Carbon.Attributes
 {
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with unknown byte and part ID values.
@@ -57,7 +60,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Part ID of this <see cref="PartIDAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public byte ID { get; set; }
+		public eSlotCarbon ID { get; set; }
 
 		/// <summary>
 		/// Initializes new instance of <see cref="PartIDAttribute"/>.
@@ -74,12 +77,12 @@ namespace Nikki.Support.Shared.Parts.CarParts
 			this.BelongsTo = part;
 			try
 			{
-				this.ID = (byte)value.ReinterpretCast(typeof(byte));
-				this.Level = 0;
+				this.Level = (byte)value.ReinterpretCast(typeof(byte));
+				this.ID = eSlotCarbon.BASE;
 			}
 			catch (Exception)
 			{
-				this.ID = 0;
+				this.ID = eSlotCarbon.BASE;
 				this.Level = 0;
 			}
 		}
@@ -106,7 +109,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		public override void Disassemble(BinaryReader br, BinaryReader str_reader)
 		{
 			this.Level = br.ReadByte();
-			this.ID = br.ReadByte();
+			this.ID = br.ReadEnum<eSlotCarbon>();
 			br.BaseStream.Position += 2;
 		}
 
@@ -121,7 +124,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		{
 			bw.Write(this.Key);
 			bw.Write(this.Level);
-			bw.Write(this.ID);
+			bw.WriteEnum(this.ID);
 			bw.Write((ushort)0);
 		}
 
@@ -147,7 +150,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Returns the hash code for this <see cref="PartIDAttribute"/>.
 		/// </summary>
 		/// <returns>A 32-bit signed integer hash code.</returns>
-		public override int GetHashCode() => 
+		public override int GetHashCode() =>
 			Tuple.Create(this.Key, this.ID.ToString(), this.Level.ToString()).GetHashCode();
 
 		/// <summary>

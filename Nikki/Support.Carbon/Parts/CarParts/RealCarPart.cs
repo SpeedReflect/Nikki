@@ -6,6 +6,7 @@ using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Support.Carbon.Class;
+using Nikki.Support.Carbon.Attributes;
 using Nikki.Support.Shared.Parts.CarParts;
 using CoreExtensions.Conversions;
 

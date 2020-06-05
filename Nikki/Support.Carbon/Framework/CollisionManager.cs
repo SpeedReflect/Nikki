@@ -12,14 +12,14 @@ using CoreExtensions.IO;
 namespace Nikki.Support.Carbon.Framework
 {
 	/// <summary>
-	/// A <see cref="Manager{T}"/> for <see cref="CarTypeInfo"/> collections.
+	/// A <see cref="Manager{T}"/> for <see cref="Collision"/> collections.
 	/// </summary>
-	public class CarTypeInfoManager : Manager<CarTypeInfo>
+	public class CollisionManager : Manager<Collision>
 	{
 		/// <summary>
-		/// Name of this <see cref="CarTypeInfoManager"/>.
+		/// Name of this <see cref="CollisionManager"/>.
 		/// </summary>
-		public override string Name => "CarTypeInfos";
+		public override string Name => "Collisions";
 
 		/// <summary>
 		/// True if this <see cref="Manager{T}"/> is read-only; otherwise, false.
@@ -32,14 +32,14 @@ namespace Nikki.Support.Carbon.Framework
 		public override Alignment Alignment { get; }
 
 		/// <summary>
-		/// Initializes new instance of <see cref="CarTypeInfoManager"/>.
+		/// Initializes new instance of <see cref="CollisionManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="FileBase"/> to which this manager belongs to.</param>
-		public CarTypeInfoManager(FileBase db)
+		public CollisionManager(FileBase db)
 		{
 			this.Database = db;
 			this.Extender = 5;
-			this.Alignment = Alignment.Default;
+			this.Alignment = new Alignment(0x8, Alignment.eAlignType.Actual);
 		}
 
 
@@ -52,10 +52,9 @@ namespace Nikki.Support.Carbon.Framework
 		{
 			bw.GeneratePadding(mark, this.Alignment);
 
-			bw.WriteEnum(eBlockID.CarTypeInfos);
-			bw.Write(this.Count * CarTypeInfo.BaseClassSize + 8);
-			bw.Write(0x11111111);
-			bw.Write(0x11111111);
+			bw.WriteEnum(eBlockID.DBCarBounds);
+			bw.Write(-1);
+			var start = bw.BaseStream.Position;
 
 			foreach (var collection in this)
 			{
@@ -63,6 +62,11 @@ namespace Nikki.Support.Carbon.Framework
 				collection.Assemble(bw);
 
 			}
+
+			var end = bw.BaseStream.Position;
+			bw.BaseStream.Position = start - 4;
+			bw.Write((int)(end - start));
+			bw.BaseStream.Position = end;
 		}
 
 		/// <summary>
@@ -73,22 +77,20 @@ namespace Nikki.Support.Carbon.Framework
 		internal void Disassemble(BinaryReader br, Block block)
 		{
 			if (Block.IsNullOrEmpty(block)) return;
-			if (block.BlockID != eBlockID.CarTypeInfos) return;
+			if (block.BlockID != eBlockID.DBCarBounds) return;
 
 			for (int loop = 0; loop < block.Offsets.Count; ++loop)
 			{
 
 				br.BaseStream.Position = block.Offsets[loop] + 4;
 				var size = br.ReadInt32();
-				br.BaseStream.Position += 8;
+				var offset = br.BaseStream.Position;
+				this.Capacity = size / 0x320;
 
-				int count = (size - 8) / CarTypeInfo.BaseClassSize;
-				this.Capacity += count;
-				
-				for (int i = 0; i < count; ++i)
+				while (br.BaseStream.Position < offset + size)
 				{
 
-					var collection = new CarTypeInfo(br, this);
+					var collection = new Collision(br, this);
 					this.Add(collection);
 
 				}
@@ -113,13 +115,6 @@ namespace Nikki.Support.Carbon.Framework
 			{
 
 				throw new ArgumentException("CollectionName cannot contain whitespace");
-
-			}
-
-			if (cname.Length > CarTypeInfo.MaxCNameLength)
-			{
-
-				throw new ArgumentLengthException(CarTypeInfo.MaxCNameLength);
 
 			}
 

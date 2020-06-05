@@ -5,12 +5,13 @@ using Nikki.Reflection.Enum;
 using Nikki.Reflection.Enum.CP;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Shared.Parts.CarParts;
 using CoreExtensions.IO;
 using CoreExtensions.Conversions;
 
 
 
-namespace Nikki.Support.Shared.Parts.CarParts
+namespace Nikki.Support.Carbon.Attributes
 {
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with two null-terminated string values.

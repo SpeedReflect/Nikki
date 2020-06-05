@@ -7,6 +7,7 @@ using Nikki.Reflection;
 using Nikki.Reflection.ID;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Carbon.Framework;
 using Nikki.Support.Shared.Parts.STRParts;
 using CoreExtensions.IO;
 using CoreExtensions.Text;
@@ -55,9 +56,9 @@ namespace Nikki.Support.Carbon.Class
 		public override string GameSTR => GameINT.Carbon.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// Manager to which the class belongs to.
 		/// </summary>
-		public Database.Carbon Database { get; set; }
+		public STRBlockManager Manager { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
@@ -68,14 +69,7 @@ namespace Nikki.Support.Carbon.Class
 			get => this._collection_name;
 			set
 			{
-				if (String.IsNullOrWhiteSpace(value))
-					throw new ArgumentNullException("This value cannot be left empty.");
-				if (value.Contains(" "))
-					throw new Exception("CollectionName cannot contain whitespace.");
-				if (value.Length > MaxCNameLength)
-					throw new ArgumentLengthException(MaxCNameLength);
-				if (this.Database.STRBlocks.FindCollection(value) != null)
-					throw new CollectionExistenceException(value);
+				this.Manager.CreationCheck(value);
 				this._collection_name = value;
 			}
 		}
@@ -98,10 +92,10 @@ namespace Nikki.Support.Carbon.Class
 		/// Initializes new instance of <see cref="STRBlock"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-		public STRBlock(string CName, Database.Carbon db)
+		/// <param name="manager"><see cref="STRBlockManager"/> to which this instance belongs to.</param>
+		public STRBlock(string CName, STRBlockManager manager)
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.CollectionName = CName;
 			CName.BinHash();
 		}
@@ -110,10 +104,10 @@ namespace Nikki.Support.Carbon.Class
 		/// Initializes new instance of <see cref="STRBlock"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read text data with.</param>
-		/// <param name="db"><see cref="Database.Carbon"/> to which this instance belongs to.</param>
-		public STRBlock(BinaryReader br, Database.Carbon db)
+		/// <param name="manager"><see cref="STRBlockManager"/> to which this instance belongs to.</param>
+		public STRBlock(BinaryReader br, STRBlockManager manager)
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.Disassemble(br);
 		}
 
@@ -182,6 +176,7 @@ namespace Nikki.Support.Carbon.Class
 		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="STRBlock"/> with.</param>
 		public override void Disassemble(BinaryReader br)
 		{
+			br.BaseStream.Position += 8;
 			uint ReaderID = br.ReadUInt32();
 			int BlockSize = br.ReadInt32();
 			var broffset = br.BaseStream.Position;
