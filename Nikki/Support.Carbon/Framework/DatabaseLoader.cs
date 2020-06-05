@@ -57,12 +57,13 @@ namespace Nikki.Support.Carbon.Framework
 			this.ProcessMaterials(br);
 			this.ProcessTPKBlocks(br);
 			this.ProcessCarTypeInfos(br);
+			this.ProcessSlotTypes(br);
 			this.ProcessDBModelParts(br);
+			this.ProcessTracks(br);
+			this.ProcessSunInfos(br);
 			this.ProcessCollisions(br);
 			this.ProcessPresetRides(br);
 			this.ProcessPresetSkins(br);
-			this.ProcessSunInfos(br);
-			this.ProcessTracks(br);
 			this.ProcessFNGroups(br);
 
 			return true;
@@ -139,52 +140,12 @@ namespace Nikki.Support.Carbon.Framework
 			}
 		}
 
-		private void ProcessMaterials(BinaryReader br)
-		{
-			if (!this._options.Flags.HasFlag(eOptFlags.Materials)) return;
-
-			var manager = new MaterialManager(this._db);
-			manager.Disassemble(br, this.materials);
-
-			this._db.Managers.Add(manager);
-		}
-
-		private void ProcessTPKBlocks(BinaryReader br)
-		{
-			if (!this._options.Flags.HasFlag(eOptFlags.TPKBlocks)) return;
-
-			var manager = new TPKBlockManager(this._db);
-			manager.Disassemble(br, this.tpkblocks);
-
-			this._db.Managers.Add(manager);
-		}
-
 		private void ProcessCarTypeInfos(BinaryReader br)
 		{
 			if (!this._options.Flags.HasFlag(eOptFlags.CarTypeInfos)) return;
 
 			var manager = new CarTypeInfoManager(this._db);
 			manager.Disassemble(br, this.cartypeinfos);
-
-			this._db.Managers.Add(manager);
-		}
-
-		private void ProcessPresetRides(BinaryReader br)
-		{
-			if (!this._options.Flags.HasFlag(eOptFlags.PresetRides)) return;
-
-			var manager = new PresetRideManager(this._db);
-			manager.Disassemble(br, this.presetrides);
-
-			this._db.Managers.Add(manager);
-		}
-
-		private void ProcessPresetSkins(BinaryReader br)
-		{
-			if (!this._options.Flags.HasFlag(eOptFlags.PresetSkins)) return;
-
-			var manager = new PresetSkinManager(this._db);
-			manager.Disassemble(br, this.presetskins);
 
 			this._db.Managers.Add(manager);
 		}
@@ -209,26 +170,6 @@ namespace Nikki.Support.Carbon.Framework
 			this._db.Managers.Add(manager);
 		}
 
-		private void ProcessSunInfos(BinaryReader br)
-		{
-			if (!this._options.Flags.HasFlag(eOptFlags.SunInfos)) return;
-
-			var manager = new SunInfoManager(this._db);
-			manager.Disassemble(br, this.suninfos);
-
-			this._db.Managers.Add(manager);
-		}
-
-		private void ProcessTracks(BinaryReader br)
-		{
-			if (!this._options.Flags.HasFlag(eOptFlags.Tracks)) return;
-
-			var manager = new TrackManager(this._db);
-			manager.Disassemble(br, this.tracks);
-
-			this._db.Managers.Add(manager);
-		}
-
 		private void ProcessFNGroups(BinaryReader br)
 		{
 			if (!this._options.Flags.HasFlag(eOptFlags.FNGroups)) return;
@@ -239,12 +180,77 @@ namespace Nikki.Support.Carbon.Framework
 			this._db.Managers.Add(manager);
 		}
 
+		private void ProcessMaterials(BinaryReader br)
+		{
+			if (!this._options.Flags.HasFlag(eOptFlags.Materials)) return;
+
+			var manager = new MaterialManager(this._db);
+			manager.Disassemble(br, this.materials);
+
+			this._db.Managers.Add(manager);
+		}
+
+		private void ProcessPresetRides(BinaryReader br)
+		{
+			if (!this._options.Flags.HasFlag(eOptFlags.PresetRides)) return;
+
+			var manager = new PresetRideManager(this._db);
+			manager.Disassemble(br, this.presetrides);
+
+			this._db.Managers.Add(manager);
+		}
+
+		private void ProcessPresetSkins(BinaryReader br)
+		{
+			if (!this._options.Flags.HasFlag(eOptFlags.PresetSkins)) return;
+
+			var manager = new PresetSkinManager(this._db);
+			manager.Disassemble(br, this.presetskins);
+
+			this._db.Managers.Add(manager);
+		}
+
+		private void ProcessSlotTypes(BinaryReader br)
+		{
+
+		}
+
 		private void ProcessSTRBlocks(BinaryReader br)
 		{
 			if (!this._options.Flags.HasFlag(eOptFlags.STRBlocks)) return;
 
 			var manager = new STRBlockManager(this._db);
 			manager.Disassemble(br, this.strblocks);
+
+			this._db.Managers.Add(manager);
+		}
+
+		private void ProcessSunInfos(BinaryReader br)
+		{
+			if (!this._options.Flags.HasFlag(eOptFlags.SunInfos)) return;
+
+			var manager = new SunInfoManager(this._db);
+			manager.Disassemble(br, this.suninfos);
+
+			this._db.Managers.Add(manager);
+		}
+
+		private void ProcessTPKBlocks(BinaryReader br)
+		{
+			if (!this._options.Flags.HasFlag(eOptFlags.TPKBlocks)) return;
+
+			var manager = new TPKBlockManager(this._db);
+			manager.Disassemble(br, this.tpkblocks);
+
+			this._db.Managers.Add(manager);
+		}
+
+		private void ProcessTracks(BinaryReader br)
+		{
+			if (!this._options.Flags.HasFlag(eOptFlags.Tracks)) return;
+
+			var manager = new TrackManager(this._db);
+			manager.Disassemble(br, this.tracks);
 
 			this._db.Managers.Add(manager);
 		}

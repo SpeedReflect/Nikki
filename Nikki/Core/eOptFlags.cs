@@ -79,5 +79,10 @@ namespace Nikki.Core
 		/// Load GCareerRace classes.
 		/// </summary>
 		GCareer = 0x2000,
+
+		/// <summary>
+		/// Load SlotType classes.
+		/// </summary>
+		SlotTypes = 0x4000,
 	}
 }
