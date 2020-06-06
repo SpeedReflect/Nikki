@@ -38,7 +38,7 @@ namespace Nikki.Utils
 			{
 
 				var start = bw.BaseStream.Position;
-				var difference = alignment.Align - ((start + 0x70) % alignment.Align);
+				var difference = alignment.Align - ((start + 0x50) % alignment.Align);
 
 				if (difference == alignment.Align) difference = 0;
 

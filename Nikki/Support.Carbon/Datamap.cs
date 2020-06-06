@@ -164,14 +164,22 @@ namespace Nikki.Support.Carbon
 		/// </summary>
 		/// <param name="options"><see cref="Options"/> that are used to load data.</param>
 		/// <returns>True on success; false otherwise.</returns>
-		public override bool Load(Options options) => throw new System.NotImplementedException();
+		public override bool Load(Options options)
+		{
+			var loader = new DatabaseLoader(options, this);
+			return loader.Invoke();
+		}
 
 		/// <summary>
 		/// Saves all data in the database using options passed.
 		/// </summary>
 		/// <param name="options"><see cref="Options"/> that are used to save data.</param>
 		/// <returns>True on success; false otherwise.</returns>
-		public override bool Save(Options options) => throw new System.NotImplementedException();
+		public override bool Save(Options options)
+		{
+			var saver = new DatabaseSaver(options, this);
+			return saver.Invoke();
+		}
 
 		/// <summary>
 		/// Gets information about <see cref="Datamap"/> database.

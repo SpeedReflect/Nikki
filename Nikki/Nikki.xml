@@ -62,11 +62,6 @@
             ID of this block.
             </summary>
         </member>
-        <member name="P:Nikki.Core.Block.Watermark">
-            <summary>
-            Watermark of the database.
-            </summary>
-        </member>
         <member name="P:Nikki.Core.Block.Offsets">
             <summary>
             Offset of this <see cref="T:Nikki.Core.Block"/> in the buffer.
@@ -7161,7 +7156,7 @@
         </member>
         <member name="P:Nikki.Support.Carbon.Attributes.ModelTableAttribute.Type">
             <summary>
-            Type of this <see cref="T:Nikki.Support.Carbon.Attributes.BoolAttribute"/>.
+            Type of this <see cref="T:Nikki.Support.Carbon.Attributes.ModelTableAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Attributes.ModelTableAttribute.Key">

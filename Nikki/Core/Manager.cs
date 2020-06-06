@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using Nikki.Reflection.Abstract;
@@ -16,6 +17,7 @@ namespace Nikki.Core
 	/// 
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
+	[DebuggerDisplay("Name = {Name} | Count = {Count}")]
 	public abstract class Manager<T> : IManager, IList<T> where T : Collectable, new()
 	{
 		#region Fields

@@ -46,6 +46,8 @@ namespace Nikki.Support.Carbon.Framework
 
 		public bool Invoke()
 		{
+			if (!File.Exists(this._options.File)) return false;
+			this._db.Buffer = File.ReadAllBytes(this._options.File);
 			this._db.Buffer = Interop.Decompress(this._db.Buffer);
 
 			using var ms = new MemoryStream(this._db.Buffer);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Diagnostics;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Reflection.Enum;
@@ -19,6 +20,7 @@ namespace Nikki.Reflection.Abstract
     /// It inherits from <see cref="IReflective"/> class and <see cref="ICastable{TypeID}"/> 
     /// interface and implements/overrides most of their methods.
     /// </summary>
+    [DebuggerDisplay("CollectionName = {CollectionName}")]
 	public abstract class Collectable : IReflective, ICastable<Collectable>
 	{
         /// <summary>

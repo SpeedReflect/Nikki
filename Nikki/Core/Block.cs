@@ -17,11 +17,6 @@ namespace Nikki.Core
 		public eBlockID BlockID { get; set; }
 
 		/// <summary>
-		/// Watermark of the database.
-		/// </summary>
-		public string Watermark { get; set; } = String.Empty;
-
-		/// <summary>
 		/// Offset of this <see cref="Block"/> in the buffer.
 		/// </summary>
 		public List<long> Offsets { get; set; }

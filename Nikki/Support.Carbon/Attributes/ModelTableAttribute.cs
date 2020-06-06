@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
@@ -37,7 +38,7 @@ namespace Nikki.Support.Carbon.Attributes
 		}
 
 		/// <summary>
-		/// Type of this <see cref="BoolAttribute"/>.
+		/// Type of this <see cref="ModelTableAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
 		public eAttribModelTable Type { get; set; }
@@ -60,7 +61,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// hashes of the names are stored in the table.
 		/// </summary>
 		[AccessModifiable()]
-		public eBoolean Templated { get; set; }
+		public eBoolean Templated { get; set; } = eBoolean.False;
 
 		/// <summary>
 		/// Main concatenator string, if exists.
@@ -1035,17 +1036,18 @@ namespace Nikki.Support.Carbon.Attributes
 		/// <returns>A 32-bit signed integer hash code.</returns>
 		public override int GetHashCode()
 		{
-			uint result = 0x25;
-			var properties = this.GetAccessibles();
+			int result = 0x25;
+			var properties = this.GetAccessibles().ToList();
+			properties.Sort();
 
 			foreach (var property in properties)
 			{
 			
-				result = result * 29 + this.GetValue(property).BinHash();
+				result = result * 29 + this.GetValue(property).GetHashCode();
 
 			}
 
-			return (int)result;
+			return result;
 		}
 
 		private bool ValueEquals(ModelTableAttribute other)
