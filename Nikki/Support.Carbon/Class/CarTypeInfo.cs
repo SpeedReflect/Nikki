@@ -182,6 +182,9 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="CarTypeInfo"/> with.</param>
         public override void Assemble(BinaryWriter bw)
         {
+            // First, set index
+            this.Index = this.Manager == null ? -1 : this.Manager.IndexOf(this);
+
             // Write CollectionName and BaseModelName
             bw.WriteNullTermUTF8(this._collection_name, 0x10);
             bw.WriteNullTermUTF8(this._collection_name, 0x10);

@@ -971,7 +971,7 @@ namespace Nikki.Support.Carbon.Class
             bw.Write(0x18); // write size
             bw.Write((long)0);
             bw.Write(1);
-            bw.Write(this.Watermark.BinHash());
+            bw.Write(this.BinKey);
             bw.Write((long)0);
             bw.Write(0);
             bw.Write(0x50);

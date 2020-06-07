@@ -786,11 +786,6 @@
             True if messages should be showed as message boxes; false if output to console.
             </summary>
         </member>
-        <member name="P:Nikki.Core.Options.Flags">
-            <summary>
-            Optional flags that specify what collections to load.
-            </summary>
-        </member>
         <member name="P:Nikki.Core.Options.Compress">
             <summary>
             True if compress on the output; false otherwise.
@@ -807,37 +802,27 @@
             </summary>
             <param name="file">File to load.</param>
         </member>
-        <member name="M:Nikki.Core.Options.#ctor(System.String,Nikki.Core.eOptFlags)">
+        <member name="M:Nikki.Core.Options.#ctor(System.String,System.String)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Core.Options"/>.
             </summary>
             <param name="file">File to load.</param>
-            <param name="flags">Flags that specify what collections to load.</param>
-        </member>
-        <member name="M:Nikki.Core.Options.#ctor(System.String,Nikki.Core.eOptFlags,System.String)">
-            <summary>
-            Initializes new instance of <see cref="T:Nikki.Core.Options"/>.
-            </summary>
-            <param name="file">File to load.</param>
-            <param name="flags">Flags that specify what collections to load.</param>
             <param name="watermark">Watermark that is put in saved file.</param>
         </member>
-        <member name="M:Nikki.Core.Options.#ctor(System.String,Nikki.Core.eOptFlags,System.String,System.Boolean)">
+        <member name="M:Nikki.Core.Options.#ctor(System.String,System.String,System.Boolean)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Core.Options"/>.
             </summary>
             <param name="file">File to load.</param>
-            <param name="flags">Flags that specify what collections to load.</param>
             <param name="watermark">Watermark that is put in saved file.</param>
             <param name="message_show">True if messages should be showed in message 
             boxes; false if they should be printed to console.</param>
         </member>
-        <member name="M:Nikki.Core.Options.#ctor(System.String,Nikki.Core.eOptFlags,System.String,System.Boolean,System.Boolean)">
+        <member name="M:Nikki.Core.Options.#ctor(System.String,System.String,System.Boolean,System.Boolean)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Core.Options"/>.
             </summary>
             <param name="file">File to load.</param>
-            <param name="flags">Flags that specify what collections to load.</param>
             <param name="watermark">Watermark that is put in saved file.</param>
             <param name="message_show">True if messages should be showed in message 
             boxes; false if they should be printed to console.</param>
@@ -8266,6 +8251,131 @@
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
         </member>
+        <member name="T:Nikki.Support.Carbon.Class.CarSlotInfo">
+            <summary>
+            <see cref="T:Nikki.Support.Carbon.Class.CarSlotInfo"/> is a collection of settings related to car's slot overrides.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Carbon.Class.CarSlotInfo.MaxCNameLength">
+            <summary>
+            Maximum length of the CollectionName.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Carbon.Class.CarSlotInfo.CNameOffsetAt">
+            <summary>
+            Offset of the CollectionName in the data.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Carbon.Class.CarSlotInfo.BaseClassSize">
+            <summary>
+            Base size of a unit collection.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.CarSlotInfo.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.CarSlotInfo.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.CarSlotInfo.Manager">
+            <summary>
+            Manager to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.CarSlotInfo.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.CarSlotInfo.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.CarSlotInfo.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.CarSlotInfo.InfoOverrideGroup2">
+            <summary>
+            Group 2 info override entry of this <see cref="T:Nikki.Support.Carbon.Class.CarSlotInfo"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.CarSlotInfo.InfoOverrideGroup3">
+            <summary>
+            Group 3 info override entry of this <see cref="T:Nikki.Support.Carbon.Class.CarSlotInfo"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.CarSlotInfo.InfoOverrideGroup4">
+            <summary>
+            Group 4 info override entry of this <see cref="T:Nikki.Support.Carbon.Class.CarSlotInfo"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.CarSlotInfo.InfoOverrideGroup5">
+            <summary>
+            Group 5 info override entry of this <see cref="T:Nikki.Support.Carbon.Class.CarSlotInfo"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.CarSlotInfo.InfoOverrideGroup6">
+            <summary>
+            Group 6 info override entry of this <see cref="T:Nikki.Support.Carbon.Class.CarSlotInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.CarSlotInfo.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.CarSlotInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.CarSlotInfo.#ctor(System.String,Nikki.Support.Carbon.Framework.CarSlotInfoManager)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.CarSlotInfo"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="manager"><see cref="T:Nikki.Support.Carbon.Framework.CarSlotInfoManager"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.CarSlotInfo.#ctor(System.IO.BinaryReader,Nikki.Support.Carbon.Framework.CarSlotInfoManager)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.CarSlotInfo"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="manager"><see cref="T:Nikki.Support.Carbon.Framework.CarSlotInfoManager"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.CarSlotInfo.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.CarSlotInfo.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Carbon.Class.SlotType"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Carbon.Class.SlotType"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.CarSlotInfo.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Carbon.Class.SlotType"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Carbon.Class.SlotType"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.CarSlotInfo.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.CarSlotInfo.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Carbon.Class.SlotType"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
         <member name="T:Nikki.Support.Carbon.Class.CarTypeInfo">
             <summary>
             <see cref="T:Nikki.Support.Carbon.Class.CarTypeInfo"/> is a collection of settings related to a car's basic information.
@@ -9701,6 +9811,136 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="T:Nikki.Support.Carbon.Class.SlotType">
+            <summary>
+            <see cref="T:Nikki.Support.Carbon.Class.SlotType"/> is a collection of settings related to a parts and slot information.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Carbon.Class.SlotType.MaxCNameLength">
+            <summary>
+            Maximum length of the CollectionName.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Carbon.Class.SlotType.CNameOffsetAt">
+            <summary>
+            Offset of the CollectionName in the data.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Carbon.Class.SlotType.BaseClassSize">
+            <summary>
+            Base size of a unit collection.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SlotType.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SlotType.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SlotType.Manager">
+            <summary>
+            Manager to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SlotType.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SlotType.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SlotType.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SlotType.Index">
+            <summary>
+            Current index of this <see cref="T:Nikki.Support.Carbon.Class.SlotType"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SlotType.SlotOverrideGroup2">
+            <summary>
+            Group 2 slot override entry of this <see cref="T:Nikki.Support.Carbon.Class.SlotType"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SlotType.SlotOverrideGroup3">
+            <summary>
+            Group 3 slot override entry of this <see cref="T:Nikki.Support.Carbon.Class.SlotType"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SlotType.SlotOverrideGroup4">
+            <summary>
+            Group 4 slot override entry of this <see cref="T:Nikki.Support.Carbon.Class.SlotType"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SlotType.SlotOverrideGroup5">
+            <summary>
+            Group 5 slot override entry of this <see cref="T:Nikki.Support.Carbon.Class.SlotType"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.SlotType.SlotOverrideGroup6">
+            <summary>
+            Group 6 slot override entry of this <see cref="T:Nikki.Support.Carbon.Class.SlotType"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SlotType.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.SlotType"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SlotType.#ctor(System.String,Nikki.Support.Carbon.Framework.SlotTypeManager)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.SlotType"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="manager"><see cref="T:Nikki.Support.Carbon.Framework.SlotTypeManager"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SlotType.#ctor(System.IO.BinaryReader,Nikki.Support.Carbon.Framework.SlotTypeManager)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.SlotType"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="manager"><see cref="T:Nikki.Support.Carbon.Framework.SlotTypeManager"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SlotType.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SlotType.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Carbon.Class.SlotType"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Carbon.Class.SlotType"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SlotType.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Carbon.Class.SlotType"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Carbon.Class.SlotType"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SlotType.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SlotType.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Carbon.Class.SlotType"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
         <member name="T:Nikki.Support.Carbon.Class.STRBlock">
             <summary>
             <see cref="T:Nikki.Support.Carbon.Class.STRBlock"/> is a collection of language strings, hashes and labels.
@@ -10666,6 +10906,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Datamap"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Carbon.Datamap.CarSlotInfos">
+            <summary>
+            <see cref="T:Nikki.Core.Manager`1"/> that manages <see cref="T:Nikki.Support.Carbon.Class.CarSlotInfo"/>.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Carbon.Datamap.CarTypeInfos">
             <summary>
             <see cref="T:Nikki.Core.Manager`1"/> that manages <see cref="T:Nikki.Support.Carbon.Class.CarTypeInfo"/>.
@@ -10699,6 +10944,11 @@
         <member name="P:Nikki.Support.Carbon.Datamap.PresetSkins">
             <summary>
             <see cref="T:Nikki.Core.Manager`1"/> that manages <see cref="T:Nikki.Support.Carbon.Class.PresetSkin"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Datamap.SlotTypes">
+            <summary>
+            <see cref="T:Nikki.Core.Manager`1"/> that manages <see cref="T:Nikki.Support.Carbon.Class.SlotType"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Datamap.STRBlocks">
@@ -10740,6 +10990,52 @@
             Gets information about <see cref="T:Nikki.Support.Carbon.Datamap"/> database.
             </summary>
             <returns>Info about this database as a string value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Carbon.Framework.CarSlotInfoManager">
+            <summary>
+            A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.Carbon.Class.CarSlotInfo"/> collections.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Framework.CarSlotInfoManager.Name">
+            <summary>
+            Name of this <see cref="T:Nikki.Support.Carbon.Framework.CarTypeInfoManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Framework.CarSlotInfoManager.IsReadOnly">
+            <summary>
+            True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Framework.CarSlotInfoManager.Alignment">
+            <summary>
+            Indicates required alighment when this <see cref="T:Nikki.Support.Carbon.Framework.CarSlotInfoManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.CarSlotInfoManager.#ctor(Nikki.Support.Carbon.Datamap)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Framework.CarSlotInfoManager"/>.
+            </summary>
+            <param name="db"><see cref="T:Nikki.Support.Carbon.Datamap"/> to which this manager belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.CarSlotInfoManager.Assemble(System.IO.BinaryWriter,System.String)">
+            <summary>
+            Assembles collection data into byte buffers.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="mark">Watermark to put in the padding blocks.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.CarSlotInfoManager.Disassemble(System.IO.BinaryReader,Nikki.Core.Block)">
+            <summary>
+            Disassembles data into separate collections in this <see cref="T:Nikki.Support.Carbon.Framework.CarTypeInfoManager"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="block"><see cref="T:Nikki.Core.Block"/> with offsets.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.CarSlotInfoManager.CreationCheck(System.String)">
+            <summary>
+            Checks whether CollectionName provided allows creation of a new collection.
+            </summary>
+            <param name="cname">CollectionName to check.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Framework.CarTypeInfoManager">
             <summary>
@@ -11074,6 +11370,52 @@
             <param name="block"><see cref="T:Nikki.Core.Block"/> with offsets.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Framework.PresetSkinManager.CreationCheck(System.String)">
+            <summary>
+            Checks whether CollectionName provided allows creation of a new collection.
+            </summary>
+            <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="T:Nikki.Support.Carbon.Framework.SlotTypeManager">
+            <summary>
+            A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.Carbon.Class.SlotType"/> collections.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Framework.SlotTypeManager.Name">
+            <summary>
+            Name of this <see cref="T:Nikki.Support.Carbon.Framework.CarTypeInfoManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Framework.SlotTypeManager.IsReadOnly">
+            <summary>
+            True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Framework.SlotTypeManager.Alignment">
+            <summary>
+            Indicates required alighment when this <see cref="T:Nikki.Support.Carbon.Framework.SlotTypeManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.SlotTypeManager.#ctor(Nikki.Support.Carbon.Datamap)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Framework.SlotTypeManager"/>.
+            </summary>
+            <param name="db"><see cref="T:Nikki.Support.Carbon.Datamap"/> to which this manager belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.SlotTypeManager.Assemble(System.IO.BinaryWriter,System.String)">
+            <summary>
+            Assembles collection data into byte buffers.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="mark">Watermark to put in the padding blocks.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.SlotTypeManager.Disassemble(System.IO.BinaryReader,Nikki.Core.Block)">
+            <summary>
+            Disassembles data into separate collections in this <see cref="T:Nikki.Support.Carbon.Framework.CarTypeInfoManager"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="block"><see cref="T:Nikki.Core.Block"/> with offsets.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.SlotTypeManager.CreationCheck(System.String)">
             <summary>
             Checks whether CollectionName provided allows creation of a new collection.
             </summary>
@@ -12085,6 +12427,60 @@
             <param name="CName">CollectionName of the new created object.</param>
             <returns>Memory casted copy of the object.</returns>
         </member>
+        <member name="T:Nikki.Support.Shared.Class.CarSlotInfo">
+            <summary>
+            <see cref="T:Nikki.Support.Shared.Class.CarSlotInfo"/> is a collection of settings related to car's slot overrides.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.CarSlotInfo.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.CarSlotInfo.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.CarSlotInfo.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.CarSlotInfo.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.CarSlotInfo.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.CarSlotInfo.InfoMainOverride">
+            <summary>
+            Main override entry of this <see cref="T:Nikki.Support.Shared.Class.CarSlotInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.CarSlotInfo.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Shared.Class.CarSlotInfo"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Shared.Class.CarSlotInfo"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.CarSlotInfo.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Shared.Class.CarSlotInfo"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.CarSlotInfo"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.CarSlotInfo.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
         <member name="T:Nikki.Support.Shared.Class.CarTypeInfo">
             <summary>
             <see cref="T:Nikki.Support.Shared.Class.CarTypeInfo"/> is a collection of settings related to a car's basic information.
@@ -12834,6 +13230,70 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.PresetSkin"/> with.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.PresetSkin.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="T:Nikki.Support.Shared.Class.SlotType">
+            <summary>
+            <see cref="T:Nikki.Support.Shared.Class.SlotType"/> is a collection of settings related to a parts and slot information.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.SlotType.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.SlotType.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.SlotType.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.SlotType.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.SlotType.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.SlotType.SlotStockOverride">
+            <summary>
+            Stock override entry of this <see cref="T:Nikki.Support.Shared.Class.SlotType"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.SlotType.SlotMainOverride">
+            <summary>
+            Main override entry of this <see cref="T:Nikki.Support.Shared.Class.SlotType"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.SlotType.PrimaryAnimation">
+            <summary>
+            Animation type of this <see cref="T:Nikki.Support.Shared.Class.SlotType"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.SlotType.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Shared.Class.SlotType"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Shared.Class.SlotType"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.SlotType.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Shared.Class.SlotType"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.SlotType"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.SlotType.MemoryCast(System.String)">
             <summary>
             Casts all attributes from this object to another one.
             </summary>

@@ -25,7 +25,34 @@ namespace Nikki.Support.Carbon
 		/// <summary>
 		/// Initializes new instance of <see cref="Datamap"/>.
 		/// </summary>
-		public Datamap() : base() { }
+		public Datamap() : base()
+		{
+			this.Managers.Add(new CarSlotInfoManager(this));
+			this.Managers.Add(new CarTypeInfoManager(this));
+			this.Managers.Add(new CollisionManager(this));
+			this.Managers.Add(new DBModelPartManager(this));
+			this.Managers.Add(new FNGroupManager(this));
+			this.Managers.Add(new MaterialManager(this));
+			this.Managers.Add(new PresetRideManager(this));
+			this.Managers.Add(new PresetSkinManager(this));
+			this.Managers.Add(new SlotTypeManager(this));
+			this.Managers.Add(new STRBlockManager(this));
+			this.Managers.Add(new SunInfoManager(this));
+			this.Managers.Add(new TPKBlockManager(this));
+			this.Managers.Add(new TrackManager(this));
+		}
+
+		/// <summary>
+		/// <see cref="Manager{T}"/> that manages <see cref="CarSlotInfo"/>.
+		/// </summary>
+		public CarSlotInfoManager CarSlotInfos
+		{
+			get
+			{
+				var manager = this.GetManager(typeof(CarSlotInfoManager));
+				return manager == null ? null : manager as CarSlotInfoManager;
+			}
+		}
 
 		/// <summary>
 		/// <see cref="Manager{T}"/> that manages <see cref="CarTypeInfo"/>.
@@ -108,6 +135,18 @@ namespace Nikki.Support.Carbon
 			{
 				var manager = this.GetManager(typeof(PresetSkinManager));
 				return manager == null ? null : manager as PresetSkinManager;
+			}
+		}
+
+		/// <summary>
+		/// <see cref="Manager{T}"/> that manages <see cref="SlotType"/>.
+		/// </summary>
+		public SlotTypeManager SlotTypes
+		{
+			get
+			{
+				var manager = this.GetManager(typeof(SlotTypeManager));
+				return manager == null ? null : manager as SlotTypeManager;
 			}
 		}
 

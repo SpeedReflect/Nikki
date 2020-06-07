@@ -3,7 +3,6 @@ using System.IO;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
-using Nikki.Reflection.Exception;
 using Nikki.Support.Carbon.Class;
 using CoreExtensions.IO;
 
@@ -12,30 +11,32 @@ using CoreExtensions.IO;
 namespace Nikki.Support.Carbon.Framework
 {
 	/// <summary>
-	/// A <see cref="Manager{T}"/> for <see cref="Track"/> collections.
+	/// A <see cref="Manager{T}"/> for <see cref="SlotType"/> collections.
 	/// </summary>
-	public class TrackManager : Manager<Track>
+	public class SlotTypeManager : Manager<SlotType>
 	{
+		private bool _is_read_only = true;
+
 		/// <summary>
-		/// Name of this <see cref="TrackManager"/>.
+		/// Name of this <see cref="CarTypeInfoManager"/>.
 		/// </summary>
-		public override string Name => "Tracks";
+		public override string Name => "SlotTypes";
 
 		/// <summary>
 		/// True if this <see cref="Manager{T}"/> is read-only; otherwise, false.
 		/// </summary>
-		public override bool IsReadOnly => false;
+		public override bool IsReadOnly => this._is_read_only;
 
 		/// <summary>
-		/// Indicates required alighment when this <see cref="CollisionManager"/> is being serialized.
+		/// Indicates required alighment when this <see cref="SlotTypeManager"/> is being serialized.
 		/// </summary>
 		public override Alignment Alignment { get; }
 
 		/// <summary>
-		/// Initializes new instance of <see cref="TrackManager"/>.
+		/// Initializes new instance of <see cref="SlotTypeManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>
-		public TrackManager(Datamap db)
+		public SlotTypeManager(Datamap db)
 		{
 			this.Database = db;
 			this.Extender = 5;
@@ -53,10 +54,46 @@ namespace Nikki.Support.Carbon.Framework
 
 			bw.GeneratePadding(mark, this.Alignment);
 
-			bw.WriteEnum(eBlockID.Tracks);
-			bw.Write(this.Count * Track.BaseClassSize);
+			// Write CarInfo Animation Hookups
+			var dif = 4 - this.Count % 4;
+			if (dif == 4) dif = 0;
 
+			bw.WriteEnum(eBlockID.CarInfoAnimHookup);
+			bw.Write(this.Count + dif);
+
+			// Write Animations
 			foreach (var collection in this)
+			{
+
+				bw.WriteEnum(collection.PrimaryAnimation);
+
+			}
+
+			bw.WriteBytes(dif);
+
+			// Write CarInfo Animation Hideups
+			bw.WriteEnum(eBlockID.CarInfoAnimHideup);
+			bw.Write(0x100);
+			for (int loop = 0; loop < 0x40; ++loop) bw.Write(0xFFFFFFFF);
+
+			// Precalculate size
+			var manager = this.Database.GetManager(typeof(CarSlotInfoManager)) as CarSlotInfoManager;
+			var size = this.Count * SlotType.BaseClassSize;
+			size += manager.Count * CarSlotInfo.BaseClassSize;
+
+			bw.WriteEnum(eBlockID.SlotTypes);
+			bw.Write(size);
+
+			// Write SlotTypes
+			foreach (var collection in this)
+			{
+
+				collection.Assemble(bw);
+
+			}
+
+			// Write CarSlotInfos
+			foreach (var collection in manager)
 			{
 
 				collection.Assemble(bw);
@@ -65,14 +102,16 @@ namespace Nikki.Support.Carbon.Framework
 		}
 
 		/// <summary>
-		/// Disassembles data into separate collections in this <see cref="TrackManager"/>.
+		/// Disassembles data into separate collections in this <see cref="CarTypeInfoManager"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="block"><see cref="Block"/> with offsets.</param>
 		internal override void Disassemble(BinaryReader br, Block block)
 		{
 			if (Block.IsNullOrEmpty(block)) return;
-			if (block.BlockID != eBlockID.Tracks) return;
+			if (block.BlockID != eBlockID.SlotTypes) return;
+
+			this._is_read_only = false;
 
 			for (int loop = 0; loop < block.Offsets.Count; ++loop)
 			{
@@ -80,18 +119,27 @@ namespace Nikki.Support.Carbon.Framework
 				br.BaseStream.Position = block.Offsets[loop] + 4;
 				var size = br.ReadInt32();
 
-				int count = size / Track.BaseClassSize;
+				if (size < 0xB98)
+				{
+
+					throw new InvalidDataException("SlotTypes block is corrupted or has invalid data");
+
+				}
+
+				var count = 0xB98 / SlotType.BaseClassSize;
 				this.Capacity += count;
 
 				for (int i = 0; i < count; ++i)
 				{
 
-					var collection = new Track(br, this);
+					var collection = new SlotType(br, this);
 					this.Add(collection);
 
 				}
 
 			}
+
+			this._is_read_only = true;
 		}
 
 		/// <summary>
@@ -100,33 +148,7 @@ namespace Nikki.Support.Carbon.Framework
 		/// <param name="cname">CollectionName to check.</param>
 		internal override void CreationCheck(string cname)
 		{
-			if (String.IsNullOrWhiteSpace(cname))
-			{
-
-				throw new ArgumentNullException("CollectionName cannot be null, empty or whitespace");
-
-			}
-
-			if (cname.Contains(" "))
-			{
-
-				throw new ArgumentException("CollectionName cannot contain whitespace");
-
-			}
-
-			if (!UInt16.TryParse(cname, out var id))
-			{
-
-				throw new ArgumentException("Unable to parse CollectionName as a TrackID");
-
-			}
-
-			if (this.Find(cname) != null)
-			{
-
-				throw new CollectionExistenceException(cname);
-
-			}
+			throw new ArgumentException("CollectionName of SlotTypes cannot be changed");
 		}
 	}
 }

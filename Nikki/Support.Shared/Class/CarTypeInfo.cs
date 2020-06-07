@@ -57,7 +57,7 @@ namespace Nikki.Support.Shared.Class
         /// <summary>
         /// Represents index of the <see cref="CarTypeInfo"/> in Global data.
         /// </summary>
-        public int Index { get; set; }
+        internal int Index { get; set; }
 
         /// <summary>
         /// Represents usage type of the <see cref="CarTypeInfo"/>.

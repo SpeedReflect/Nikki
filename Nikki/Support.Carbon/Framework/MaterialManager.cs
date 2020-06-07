@@ -48,6 +48,8 @@ namespace Nikki.Support.Carbon.Framework
 		/// <param name="mark">Watermark to put in the padding blocks.</param>
 		internal override void Assemble(BinaryWriter bw, string mark)
 		{
+			if (this.Count == 0) return;
+
 			bw.GeneratePadding(mark, this.Alignment);
 
 			foreach (var collection in this)

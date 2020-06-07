@@ -18,7 +18,6 @@ namespace Nikki.Core
 			Watermark = $"Nikki by MaxHwoy | {DateTime.Today:MM/dd/yyyy}",
 			MessageShow = false,
 			Compress = false,
-			Flags = eOptFlags.None
 		};
 
 		/// <summary>
@@ -35,11 +34,6 @@ namespace Nikki.Core
 		/// True if messages should be showed as message boxes; false if output to console.
 		/// </summary>
 		public bool MessageShow { get; set; }
-
-		/// <summary>
-		/// Optional flags that specify what collections to load.
-		/// </summary>
-		public eOptFlags Flags { get; set; }
 
 		/// <summary>
 		/// True if compress on the output; false otherwise.
@@ -61,23 +55,10 @@ namespace Nikki.Core
 		/// Initializes new instance of <see cref="Options"/>.
 		/// </summary>
 		/// <param name="file">File to load.</param>
-		/// <param name="flags">Flags that specify what collections to load.</param>
-		public Options(string file, eOptFlags flags)
-		{
-			this.File = file ?? String.Empty;
-			this.Flags = flags;
-		}
-
-		/// <summary>
-		/// Initializes new instance of <see cref="Options"/>.
-		/// </summary>
-		/// <param name="file">File to load.</param>
-		/// <param name="flags">Flags that specify what collections to load.</param>
 		/// <param name="watermark">Watermark that is put in saved file.</param>
-		public Options(string file, eOptFlags flags, string watermark)
+		public Options(string file, string watermark)
 		{
 			this.File = file ?? String.Empty;
-			this.Flags = flags;
 			this.Watermark = watermark ?? String.Empty;
 		}
 
@@ -85,14 +66,12 @@ namespace Nikki.Core
 		/// Initializes new instance of <see cref="Options"/>.
 		/// </summary>
 		/// <param name="file">File to load.</param>
-		/// <param name="flags">Flags that specify what collections to load.</param>
 		/// <param name="watermark">Watermark that is put in saved file.</param>
 		/// <param name="message_show">True if messages should be showed in message 
 		/// boxes; false if they should be printed to console.</param>
-		public Options(string file, eOptFlags flags, string watermark, bool message_show)
+		public Options(string file, string watermark, bool message_show)
 		{
 			this.File = file ?? String.Empty;
-			this.Flags = flags;
 			this.Watermark = watermark ?? String.Empty;
 			this.MessageShow = message_show;
 		}
@@ -101,15 +80,13 @@ namespace Nikki.Core
 		/// Initializes new instance of <see cref="Options"/>.
 		/// </summary>
 		/// <param name="file">File to load.</param>
-		/// <param name="flags">Flags that specify what collections to load.</param>
 		/// <param name="watermark">Watermark that is put in saved file.</param>
 		/// <param name="message_show">True if messages should be showed in message 
 		/// boxes; false if they should be printed to console.</param>
 		/// <param name="compress">True if compress on the output; false otherwise.</param>
-		public Options(string file, eOptFlags flags, string watermark, bool message_show, bool compress)
+		public Options(string file, string watermark, bool message_show, bool compress)
 		{
 			this.File = file ?? String.Empty;
-			this.Flags = flags;
 			this.Watermark = watermark ?? String.Empty;
 			this.MessageShow = message_show;
 			this.Compress = compress;
