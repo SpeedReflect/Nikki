@@ -51,7 +51,7 @@ namespace Nikki.Support.Carbon.Class
 			get => this._collection_name;
 			set
 			{
-				this.Manager.CreationCheck(value);
+				this.Manager?.CreationCheck(value);
 				this._collection_name = value;
 			}
 		}
@@ -78,7 +78,7 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Initializes new instance of <see cref="DBModelPart"/>.
 		/// </summary>
-		public DBModelPart() { }
+		public DBModelPart() => this.ModelCarParts = new List<RealCarPart>();
 
 		/// <summary>
 		/// Initializes new instance of <see cref="DBModelPart"/>.

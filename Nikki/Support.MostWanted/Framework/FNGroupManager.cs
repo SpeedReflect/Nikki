@@ -4,40 +4,42 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
-using Nikki.Support.Carbon.Class;
+using Nikki.Support.MostWanted.Class;
 
 
 
-namespace Nikki.Support.Carbon.Framework
+namespace Nikki.Support.MostWanted.Framework
 {
 	/// <summary>
-	/// A <see cref="Manager{T}"/> for <see cref="STRBlock"/> collections.
+	/// A <see cref="Manager{T}"/> for <see cref="FNGroup"/> collections.
 	/// </summary>
-	public class STRBlockManager : Manager<STRBlock>
+	public class FNGroupManager : Manager<FNGroup>
 	{
+		private bool _is_read_only = true;
+
 		/// <summary>
-		/// Name of this <see cref="STRBlockManager"/>.
+		/// Name of this <see cref="FNGroupManager"/>.
 		/// </summary>
-		public override string Name => "STRBlocks";
+		public override string Name => "FNGroups";
 
 		/// <summary>
 		/// True if this <see cref="Manager{T}"/> is read-only; otherwise, false.
 		/// </summary>
-		public override bool IsReadOnly => false;
+		public override bool IsReadOnly => this._is_read_only;
 
 		/// <summary>
-		/// Indicates required alighment when this <see cref="STRBlockManager"/> is being serialized.
+		/// Indicates required alighment when this <see cref="FNGroupManager"/> is being serialized.
 		/// </summary>
 		public override Alignment Alignment { get; }
 
 		/// <summary>
-		/// Initializes new instance of <see cref="STRBlockManager"/>.
+		/// Initializes new instance of <see cref="FNGroupManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>
-		public STRBlockManager(Datamap db)
+		public FNGroupManager(Datamap db)
 		{
 			this.Database = db;
-			this.Extender = 5;
+			this.Extender = 0;
 			this.Alignment = Alignment.Default;
 		}
 
@@ -50,6 +52,8 @@ namespace Nikki.Support.Carbon.Framework
 		{
 			if (this.Count == 0) return;
 
+			bw.GeneratePadding(mark, this.Alignment);
+
 			foreach (var collection in this)
 			{
 
@@ -60,25 +64,28 @@ namespace Nikki.Support.Carbon.Framework
 		}
 
 		/// <summary>
-		/// Disassembles data into separate collections in this <see cref="STRBlockManager"/>.
+		/// Disassembles data into separate collections in this <see cref="FNGroupManager"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="block"><see cref="Block"/> with offsets.</param>
 		internal override void Disassemble(BinaryReader br, Block block)
 		{
 			if (Block.IsNullOrEmpty(block)) return;
-			if (block.BlockID != eBlockID.STRBlocks) return;
+			if (block.BlockID != eBlockID.FEngFiles) return;
 
+			this._is_read_only = false;
 			this.Capacity = block.Offsets.Count;
 
 			for (int loop = 0; loop < block.Offsets.Count; ++loop)
 			{
 
 				br.BaseStream.Position = block.Offsets[loop];
-				var collection = new STRBlock(br, this);
+				var collection = new FNGroup(br, this);
 				this.Add(collection);
 
 			}
+
+			this._is_read_only = true;
 		}
 
 		/// <summary>
@@ -98,13 +105,6 @@ namespace Nikki.Support.Carbon.Framework
 			{
 
 				throw new ArgumentException("CollectionName cannot contain whitespace");
-
-			}
-
-			if (cname.Length > STRBlock.MaxCNameLength)
-			{
-
-				throw new ArgumentLengthException(STRBlock.MaxCNameLength);
 
 			}
 

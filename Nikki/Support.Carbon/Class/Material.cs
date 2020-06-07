@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Nikki.Core;
 using Nikki.Utils;
-using Nikki.Reflection.ID;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Carbon.Framework;
@@ -63,7 +63,7 @@ namespace Nikki.Support.Carbon.Class
             get => this._collection_name;
             set
             {
-                this.Manager.CreationCheck(value);
+                this.Manager?.CreationCheck(value);
                 this._collection_name = value;
             }
         }
@@ -430,7 +430,7 @@ namespace Nikki.Support.Carbon.Class
         public override void Assemble(BinaryWriter bw)
         {
             // Write header of the material
-            bw.Write(Global.Materials);
+            bw.WriteEnum(eBlockID.Materials);
             bw.Write((int)0xEC);
             bw.Write(_Unknown0);
             bw.Write(_Localizer);

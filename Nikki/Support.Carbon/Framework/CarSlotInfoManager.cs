@@ -16,7 +16,7 @@ namespace Nikki.Support.Carbon.Framework
 	public class CarSlotInfoManager : Manager<CarSlotInfo>
 	{
 		/// <summary>
-		/// Name of this <see cref="CarTypeInfoManager"/>.
+		/// Name of this <see cref="CarSlotInfoManager"/>.
 		/// </summary>
 		public override string Name => "CarSlotInfos";
 

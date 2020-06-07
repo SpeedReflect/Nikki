@@ -11,17 +11,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Support.MostWanted\**" />
     <Compile Remove="Support.Prostreet\**" />
     <Compile Remove="Support.Undercover\**" />
     <Compile Remove="Support.Underground1\**" />
     <Compile Remove="Support.Underground2\**" />
-    <EmbeddedResource Remove="Support.MostWanted\**" />
     <EmbeddedResource Remove="Support.Prostreet\**" />
     <EmbeddedResource Remove="Support.Undercover\**" />
     <EmbeddedResource Remove="Support.Underground1\**" />
     <EmbeddedResource Remove="Support.Underground2\**" />
-    <None Remove="Support.MostWanted\**" />
     <None Remove="Support.Prostreet\**" />
     <None Remove="Support.Undercover\**" />
     <None Remove="Support.Underground1\**" />

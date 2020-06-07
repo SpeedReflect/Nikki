@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection;
-using Nikki.Reflection.ID;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.MostWanted.Framework;
 using Nikki.Support.Shared.Parts.STRParts;
 using CoreExtensions.IO;
 using CoreExtensions.Text;
@@ -56,9 +57,9 @@ namespace Nikki.Support.MostWanted.Class
 		public override string GameSTR => GameINT.MostWanted.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// Manager to which the class belongs to.
 		/// </summary>
-		public Database.MostWanted Database { get; set; }
+		public STRBlockManager Manager { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
@@ -69,14 +70,7 @@ namespace Nikki.Support.MostWanted.Class
 			get => this._collection_name;
 			set
 			{
-				if (String.IsNullOrWhiteSpace(value))
-					throw new ArgumentNullException("This value cannot be left empty.");
-				if (value.Contains(" "))
-					throw new Exception("CollectionName cannot contain whitespace.");
-				if (value.Length > MaxCNameLength)
-					throw new ArgumentLengthException(MaxCNameLength);
-				if (this.Database.STRBlocks.FindCollection(value) != null)
-					throw new CollectionExistenceException(value);
+				this.Manager?.CreationCheck(value);
 				this._collection_name = value;
 			}
 		}
@@ -99,10 +93,10 @@ namespace Nikki.Support.MostWanted.Class
 		/// Initializes new instance of <see cref="STRBlock"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
-		public STRBlock(string CName, Database.MostWanted db)
+		/// <param name="manager"><see cref="STRBlockManager"/> to which this instance belongs to.</param>
+		public STRBlock(string CName, STRBlockManager manager)
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.CollectionName = CName;
 			CName.BinHash();
 		}
@@ -111,10 +105,10 @@ namespace Nikki.Support.MostWanted.Class
 		/// Initializes new instance of <see cref="STRBlock"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read text data with.</param>
-		/// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
-		public STRBlock(BinaryReader br, Database.MostWanted db)
+		/// <param name="manager"><see cref="STRBlockManager"/> to which this instance belongs to.</param>
+		public STRBlock(BinaryReader br, STRBlockManager manager)
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.Disassemble(br);
 		}
 
@@ -133,7 +127,7 @@ namespace Nikki.Support.MostWanted.Class
 		/// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="STRBlock"/> with.</param>
 		public override void Assemble(BinaryWriter bw)
 		{
-			var udat_offset = 0x30;
+			var udat_offset = 0x20;
 			var hash_offset = udat_offset + this._unk_data.Length;
 			var text_offset = hash_offset + this.InfoLength * 8;
 
@@ -141,7 +135,7 @@ namespace Nikki.Support.MostWanted.Class
 			this._stringinfo.Sort((a, b) => a.Key.CompareTo(b.Key));
 
 			// Write ID and temporary size
-			bw.Write(Global.STRBlocks);
+			bw.WriteEnum(eBlockID.STRBlocks);
 			bw.Write(-1);
 
 			// Save position
@@ -152,7 +146,7 @@ namespace Nikki.Support.MostWanted.Class
 			bw.Write(this.InfoLength);
 			bw.Write(hash_offset);
 			bw.Write(text_offset);
-			bw.WriteNullTermUTF8(this.Watermark, 0x20);
+			bw.WriteNullTermUTF8(this._collection_name, 0x10);
 			bw.Write(this._unk_data);
 
 			int length = 0;
@@ -195,7 +189,20 @@ namespace Nikki.Support.MostWanted.Class
 			int textoffset = br.ReadInt32();
 
 			// Read CollectionName
-			this._collection_name = "GLOBAL"; // since there exists only one at a time
+			// Since CollectionNames do not exist in vanilla files, but they do exist
+			// in saved files using this library, they are supposed to be located at 
+			// offset 0x10, while unknown data at offset 0x20
+			int count = this.Manager?.Count ?? 0;
+			this._collection_name = $"GLOBAL{count}"; // since there exists only one at a time
+
+			if (udatoffset > 0x10 && hashoffset > 0x10 && textoffset > 0x10)
+			{
+
+				br.BaseStream.Position = 0x10;
+				var cname = br.ReadNullTermUTF8();
+				if (!String.IsNullOrEmpty(cname)) this._collection_name = cname;
+
+			}
 
 			// Read unknown data
 			var unksize = hashoffset - udatoffset;

@@ -4,11 +4,11 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
-using Nikki.Support.Carbon.Class;
+using Nikki.Support.MostWanted.Class;
 
 
 
-namespace Nikki.Support.Carbon.Framework
+namespace Nikki.Support.MostWanted.Framework
 {
 	/// <summary>
 	/// A <see cref="Manager{T}"/> for <see cref="STRBlock"/> collections.

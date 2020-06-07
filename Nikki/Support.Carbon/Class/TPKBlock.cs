@@ -54,7 +54,7 @@ namespace Nikki.Support.Carbon.Class
             get => this._collection_name;
             set
             {
-                this.Manager.CreationCheck(value);
+                this.Manager?.CreationCheck(value);
                 this._collection_name = value;
             }
         }
@@ -67,7 +67,7 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Filename used for this <see cref="TPKBlock"/>. It is a default watermark.
         /// </summary>
-        public override string Filename => this.Watermark;
+        public override string Filename => $"{this.CollectionName}.tpk";
 
         /// <summary>
         /// BinKey of the filename.
@@ -641,14 +641,14 @@ namespace Nikki.Support.Carbon.Class
             var cname = br.ReadNullTermUTF8(0x1C);
             var fname = br.ReadNullTermUTF8(0x40);
 
-            if (fname.EndsWith(".tpk"))
+            if (fname.EndsWith(".tpk") || fname.EndsWith(".TPK"))
             {
             
                 fname = Path.GetFileNameWithoutExtension(fname).ToUpper();
 
                 this._collection_name = !this.Manager.Contains(fname)
                     ? fname : !this.Manager.Contains(cname)
-                    ? cname : this.Manager.Count.ToString();
+                    ? cname : $"TPK{this.Manager.Count}";
 
             }
             else
@@ -656,7 +656,7 @@ namespace Nikki.Support.Carbon.Class
 
                 this._collection_name = !this.Manager.Contains(cname)
                     ? cname :
-                    this.Manager.Count.ToString();
+                    $"TPK{this.Manager.Count}";
 
             }
 
@@ -857,10 +857,10 @@ namespace Nikki.Support.Carbon.Class
             bw.WriteNullTermUTF8(this._collection_name, 0x1C);
 
             // Write Filename
-            bw.WriteNullTermUTF8(this._collection_name, 0x40);
+            bw.WriteNullTermUTF8(this.Filename, 0x40);
 
             // Write all other settings
-            bw.Write(this.BinKey);
+            bw.Write(this.FilenameHash);
             bw.Write(this.PermBlockByteOffset);
             bw.Write(this.PermBlockByteSize);
             bw.Write(this.EndianSwapped);
@@ -971,7 +971,7 @@ namespace Nikki.Support.Carbon.Class
             bw.Write(0x18); // write size
             bw.Write((long)0);
             bw.Write(1);
-            bw.Write(this.BinKey);
+            bw.Write(this.FilenameHash);
             bw.Write((long)0);
             bw.Write(0);
             bw.Write(0x50);

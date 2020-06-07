@@ -64,7 +64,7 @@ namespace Nikki.Support.Carbon.Class
             get => this._collection_name;
             set
             {
-                this.Manager.CreationCheck(value);
+                this.Manager?.CreationCheck(value);
                 this._collection_name = value;
             }
         }
@@ -147,7 +147,6 @@ namespace Nikki.Support.Carbon.Class
             this.Manager = manager;
             this.CollectionName = CName;
             this.ManufacturerName = "GENERIC";
-            this.Deletable = true;
             this.WhatGame = 1;
             this.WheelOuterRadius = 26;
             this.WheelInnerRadiusMin = 17;

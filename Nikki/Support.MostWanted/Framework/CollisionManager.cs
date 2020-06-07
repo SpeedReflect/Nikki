@@ -4,21 +4,22 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
-using Nikki.Support.Carbon.Class;
+using Nikki.Support.MostWanted.Class;
+using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.Carbon.Framework
+namespace Nikki.Support.MostWanted.Framework
 {
 	/// <summary>
-	/// A <see cref="Manager{T}"/> for <see cref="STRBlock"/> collections.
+	/// A <see cref="Manager{T}"/> for <see cref="Collision"/> collections.
 	/// </summary>
-	public class STRBlockManager : Manager<STRBlock>
+	public class CollisionManager : Manager<Collision>
 	{
 		/// <summary>
-		/// Name of this <see cref="STRBlockManager"/>.
+		/// Name of this <see cref="CollisionManager"/>.
 		/// </summary>
-		public override string Name => "STRBlocks";
+		public override string Name => "Collisions";
 
 		/// <summary>
 		/// True if this <see cref="Manager{T}"/> is read-only; otherwise, false.
@@ -26,19 +27,19 @@ namespace Nikki.Support.Carbon.Framework
 		public override bool IsReadOnly => false;
 
 		/// <summary>
-		/// Indicates required alighment when this <see cref="STRBlockManager"/> is being serialized.
+		/// Indicates required alighment when this <see cref="CollisionManager"/> is being serialized.
 		/// </summary>
 		public override Alignment Alignment { get; }
 
 		/// <summary>
-		/// Initializes new instance of <see cref="STRBlockManager"/>.
+		/// Initializes new instance of <see cref="CollisionManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>
-		public STRBlockManager(Datamap db)
+		public CollisionManager(Datamap db)
 		{
 			this.Database = db;
 			this.Extender = 5;
-			this.Alignment = Alignment.Default;
+			this.Alignment = new Alignment(0x8, Alignment.eAlignType.Actual);
 		}
 
 		/// <summary>
@@ -50,33 +51,50 @@ namespace Nikki.Support.Carbon.Framework
 		{
 			if (this.Count == 0) return;
 
+			bw.GeneratePadding(mark, this.Alignment);
+
+			bw.WriteEnum(eBlockID.DBCarBounds);
+			bw.Write(-1);
+			var start = bw.BaseStream.Position;
+
 			foreach (var collection in this)
 			{
 
-				bw.GeneratePadding(mark, this.Alignment);
 				collection.Assemble(bw);
 
 			}
+
+			var end = bw.BaseStream.Position;
+			bw.BaseStream.Position = start - 4;
+			bw.Write((int)(end - start));
+			bw.BaseStream.Position = end;
 		}
 
 		/// <summary>
-		/// Disassembles data into separate collections in this <see cref="STRBlockManager"/>.
+		/// Disassembles data into separate collections in this <see cref="CollisionManager"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="block"><see cref="Block"/> with offsets.</param>
 		internal override void Disassemble(BinaryReader br, Block block)
 		{
 			if (Block.IsNullOrEmpty(block)) return;
-			if (block.BlockID != eBlockID.STRBlocks) return;
-
-			this.Capacity = block.Offsets.Count;
+			if (block.BlockID != eBlockID.DBCarBounds) return;
 
 			for (int loop = 0; loop < block.Offsets.Count; ++loop)
 			{
 
-				br.BaseStream.Position = block.Offsets[loop];
-				var collection = new STRBlock(br, this);
-				this.Add(collection);
+				br.BaseStream.Position = block.Offsets[loop] + 4;
+				var size = br.ReadInt32();
+				var offset = br.BaseStream.Position;
+				this.Capacity = size / 0x320;
+
+				while (br.BaseStream.Position < offset + size)
+				{
+
+					var collection = new Collision(br, this);
+					this.Add(collection);
+
+				}
 
 			}
 		}
@@ -98,13 +116,6 @@ namespace Nikki.Support.Carbon.Framework
 			{
 
 				throw new ArgumentException("CollectionName cannot contain whitespace");
-
-			}
-
-			if (cname.Length > STRBlock.MaxCNameLength)
-			{
-
-				throw new ArgumentLengthException(STRBlock.MaxCNameLength);
 
 			}
 

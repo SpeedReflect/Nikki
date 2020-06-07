@@ -124,7 +124,7 @@ namespace Nikki.Support.Carbon.Class
                 var key = value.BinHash();
                 var type = eKeyType.BINKEY;
 
-                if (this.TPK.GetTextureIndex(key, type) != -1)
+                if (this.TPK?.GetTextureIndex(key, type) != -1)
                 {
 
                     throw new CollectionExistenceException(value);

@@ -4,21 +4,22 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
-using Nikki.Support.Carbon.Class;
+using Nikki.Support.MostWanted.Class;
+using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.Carbon.Framework
+namespace Nikki.Support.MostWanted.Framework
 {
 	/// <summary>
-	/// A <see cref="Manager{T}"/> for <see cref="STRBlock"/> collections.
+	/// A <see cref="Manager{T}"/> for <see cref="SunInfo"/> collections.
 	/// </summary>
-	public class STRBlockManager : Manager<STRBlock>
+	public class SunInfoManager : Manager<SunInfo>
 	{
 		/// <summary>
-		/// Name of this <see cref="STRBlockManager"/>.
+		/// Name of this <see cref="SunInfoManager"/>.
 		/// </summary>
-		public override string Name => "STRBlocks";
+		public override string Name => "SunInfos";
 
 		/// <summary>
 		/// True if this <see cref="Manager{T}"/> is read-only; otherwise, false.
@@ -26,19 +27,19 @@ namespace Nikki.Support.Carbon.Framework
 		public override bool IsReadOnly => false;
 
 		/// <summary>
-		/// Indicates required alighment when this <see cref="STRBlockManager"/> is being serialized.
+		/// Indicates required alighment when this <see cref="SunInfoManager"/> is being serialized.
 		/// </summary>
 		public override Alignment Alignment { get; }
 
 		/// <summary>
-		/// Initializes new instance of <see cref="STRBlockManager"/>.
+		/// Initializes new instance of <see cref="SunInfoManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>
-		public STRBlockManager(Datamap db)
+		public SunInfoManager(Datamap db)
 		{
 			this.Database = db;
 			this.Extender = 5;
-			this.Alignment = Alignment.Default;
+			this.Alignment = new Alignment(0x8, Alignment.eAlignType.Actual);
 		}
 
 		/// <summary>
@@ -50,33 +51,45 @@ namespace Nikki.Support.Carbon.Framework
 		{
 			if (this.Count == 0) return;
 
+			bw.GeneratePadding(mark, this.Alignment);
+
+			bw.WriteEnum(eBlockID.SunInfos);
+			bw.Write(this.Count * SunInfo.BaseClassSize);
+
 			foreach (var collection in this)
 			{
 
-				bw.GeneratePadding(mark, this.Alignment);
 				collection.Assemble(bw);
 
 			}
 		}
 
 		/// <summary>
-		/// Disassembles data into separate collections in this <see cref="STRBlockManager"/>.
+		/// Disassembles data into separate collections in this <see cref="SunInfoManager"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="block"><see cref="Block"/> with offsets.</param>
 		internal override void Disassemble(BinaryReader br, Block block)
 		{
 			if (Block.IsNullOrEmpty(block)) return;
-			if (block.BlockID != eBlockID.STRBlocks) return;
-
-			this.Capacity = block.Offsets.Count;
+			if (block.BlockID != eBlockID.SunInfos) return;
 
 			for (int loop = 0; loop < block.Offsets.Count; ++loop)
 			{
 
-				br.BaseStream.Position = block.Offsets[loop];
-				var collection = new STRBlock(br, this);
-				this.Add(collection);
+				br.BaseStream.Position = block.Offsets[loop] + 4;
+				var size = br.ReadInt32();
+
+				int count = size / SunInfo.BaseClassSize;
+				this.Capacity += count;
+
+				for (int i = 0; i < count; ++i)
+				{
+
+					var collection = new SunInfo(br, this);
+					this.Add(collection);
+
+				}
 
 			}
 		}
@@ -101,10 +114,10 @@ namespace Nikki.Support.Carbon.Framework
 
 			}
 
-			if (cname.Length > STRBlock.MaxCNameLength)
+			if (cname.Length > SunInfo.MaxCNameLength)
 			{
 
-				throw new ArgumentLengthException(STRBlock.MaxCNameLength);
+				throw new ArgumentLengthException(SunInfo.MaxCNameLength);
 
 			}
 

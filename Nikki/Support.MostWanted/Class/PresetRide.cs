@@ -3,8 +3,8 @@ using System.IO;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.MostWanted.Framework;
 using Nikki.Support.MostWanted.Parts.PresetParts;
 using CoreExtensions.IO;
 
@@ -51,9 +51,9 @@ namespace Nikki.Support.MostWanted.Class
         public override string GameSTR => GameINT.MostWanted.ToString();
 
         /// <summary>
-        /// Database to which the class belongs to.
+        /// Manager to which the class belongs to.
         /// </summary>
-        public Database.MostWanted Database { get; set; }
+        public PresetRideManager Manager { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
@@ -64,14 +64,7 @@ namespace Nikki.Support.MostWanted.Class
             get => this._collection_name;
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentNullException("This value cannot be left empty.");
-                if (value.Contains(" "))
-                    throw new Exception("CollectionName cannot contain whitespace.");
-                if (value.Length > MaxCNameLength)
-                    throw new ArgumentLengthException(MaxCNameLength);
-                if (this.Database.PresetRides.FindCollection(value) != null)
-                    throw new CollectionExistenceException(value);
+                this.Manager?.CreationCheck(value);
                 this._collection_name = value;
             }
         }
@@ -438,16 +431,16 @@ namespace Nikki.Support.MostWanted.Class
         /// <summary>
         /// Initializes new instance of <see cref="PresetRide"/>.
         /// </summary>
-        public PresetRide() { }
+        public PresetRide() => this.Initialize();
 
         /// <summary>
         /// Initializes new instance of <see cref="PresetRide"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-        public PresetRide(string CName, Database.MostWanted db)
+        /// <param name="manager"><see cref="PresetRideManager"/> to which this instance belongs to.</param>
+        public PresetRide(string CName, PresetRideManager manager)
         {
-            this.Database = db;
+            this.Manager = manager;
             this.CollectionName = CName;
             this.MODEL = "SUPRA";
             this.Frontend = "supra";
@@ -460,10 +453,10 @@ namespace Nikki.Support.MostWanted.Class
         /// Initializes new instance of <see cref="PresetRide"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-        /// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-        public PresetRide(BinaryReader br, Database.MostWanted db)
+        /// <param name="manager"><see cref="PresetRideManager"/> to which this instance belongs to.</param>
+        public PresetRide(BinaryReader br, PresetRideManager manager)
         {
-            this.Database = db;
+            this.Manager = manager;
             this.Initialize();
             this.Disassemble(br);
         }
@@ -672,9 +665,9 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         /// <param name="CName">CollectionName of the new created object.</param>
         /// <returns>Memory casted copy of the object.</returns>
-        public override ACollectable MemoryCast(string CName)
+        public override Collectable MemoryCast(string CName)
         {
-            var result = new PresetRide(CName, this.Database);
+            var result = new PresetRide(CName, this.Manager);
             base.MemoryCast(this, result);
             return result;
         }

@@ -4,7 +4,6 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Carbon.Framework;
 using CoreExtensions.IO;
@@ -65,7 +64,7 @@ namespace Nikki.Support.Carbon.Class
 			get => this._collection_name;
 			set
 			{
-				this.Manager.CreationCheck(value);
+				this.Manager?.CreationCheck(value);
 				this._collection_name = value;
 			}
 		}

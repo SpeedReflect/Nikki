@@ -71,7 +71,7 @@ namespace Nikki.Support.Carbon.Framework
 		}
 
 		/// <summary>
-		/// Disassembles data into separate collections in this <see cref="CarTypeInfoManager"/>.
+		/// Disassembles data into separate collections in this <see cref="CollisionManager"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="block"><see cref="Block"/> with offsets.</param>

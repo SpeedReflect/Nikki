@@ -1,10 +1,9 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.MostWanted.Framework;
 using Nikki.Support.Shared.Parts.SunParts;
 using CoreExtensions.IO;
 
@@ -51,9 +50,9 @@ namespace Nikki.Support.MostWanted.Class
 		public override string GameSTR => GameINT.MostWanted.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// Manager to which the class belongs to.
 		/// </summary>
-		public Database.MostWanted Database { get; set; }
+		public SunInfoManager Manager { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
@@ -64,14 +63,7 @@ namespace Nikki.Support.MostWanted.Class
 			get => this._collection_name;
 			set
 			{
-				if (string.IsNullOrWhiteSpace(value))
-					throw new ArgumentNullException("This value cannot be left empty.");
-				if (value.Contains(" "))
-					throw new Exception("CollectionName cannot contain whitespace.");
-				if (value.Length > MaxCNameLength)
-					throw new ArgumentLengthException(MaxCNameLength);
-				if (this.Database.SunInfos.FindCollection(value) != null)
-					throw new CollectionExistenceException(value);
+				this.Manager?.CreationCheck(value);
 				this._collection_name = value;
 			}
 		}
@@ -129,23 +121,18 @@ namespace Nikki.Support.MostWanted.Class
 		/// <summary>
 		/// Initializes new instance of <see cref="SunInfo"/>.
 		/// </summary>
-		public SunInfo() { }
+		public SunInfo() => this.Initialize();
 
 		/// <summary>
 		/// Initializes new instance of <see cref="SunInfo"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
-		public SunInfo(string CName, Database.MostWanted db)
+		/// <param name="manager"><see cref="SunInfoManager"/> to which this instance belongs to.</param>
+		public SunInfo(string CName, SunInfoManager manager)
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.CollectionName = CName;
-			this.SUNLAYER1 = new SunLayer();
-			this.SUNLAYER2 = new SunLayer();
-			this.SUNLAYER3 = new SunLayer();
-			this.SUNLAYER4 = new SunLayer();
-			this.SUNLAYER5 = new SunLayer();
-			this.SUNLAYER6 = new SunLayer();
+			this.Initialize();
 			CName.BinHash();
 		}
 
@@ -153,16 +140,11 @@ namespace Nikki.Support.MostWanted.Class
 		/// Initializes new instance of <see cref="SunInfo"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
-		public SunInfo(BinaryReader br, Database.MostWanted db)
+		/// <param name="manager"><see cref="SunInfoManager"/> to which this instance belongs to.</param>
+		public SunInfo(BinaryReader br, SunInfoManager manager)
 		{
-			this.Database = db;
-			this.SUNLAYER1 = new SunLayer();
-			this.SUNLAYER2 = new SunLayer();
-			this.SUNLAYER3 = new SunLayer();
-			this.SUNLAYER4 = new SunLayer();
-			this.SUNLAYER5 = new SunLayer();
-			this.SUNLAYER6 = new SunLayer();
+			this.Manager = manager;
+			this.Initialize();
 			this.Disassemble(br);
 		}
 
@@ -236,11 +218,21 @@ namespace Nikki.Support.MostWanted.Class
 		/// </summary>
 		/// <param name="CName">CollectionName of the new created object.</param>
 		/// <returns>Memory casted copy of the object.</returns>
-		public override ACollectable MemoryCast(string CName)
+		public override Collectable MemoryCast(string CName)
 		{
-			var result = new SunInfo(CName, this.Database);
+			var result = new SunInfo(CName, this.Manager);
 			base.MemoryCast(this, result);
 			return result;
+		}
+
+		private void Initialize()
+		{
+			this.SUNLAYER1 = new SunLayer();
+			this.SUNLAYER2 = new SunLayer();
+			this.SUNLAYER3 = new SunLayer();
+			this.SUNLAYER4 = new SunLayer();
+			this.SUNLAYER5 = new SunLayer();
+			this.SUNLAYER6 = new SunLayer();
 		}
 
 		/// <summary>

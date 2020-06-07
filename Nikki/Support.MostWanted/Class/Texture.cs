@@ -104,9 +104,9 @@ namespace Nikki.Support.MostWanted.Class
         public override string GameSTR => GameINT.MostWanted.ToString();
 
         /// <summary>
-        /// Database to which the class belongs to.
+        /// <see cref="TPKBlock"/> to which the class belongs to.
         /// </summary>
-        public Database.MostWanted Database { get; set; }
+        public TPKBlock TPK { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
@@ -118,14 +118,30 @@ namespace Nikki.Support.MostWanted.Class
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
+                {
+
                     throw new ArgumentNullException("This value cannot be left empty.");
+
+                }
+
                 if (value.Contains(" "))
+                {
+
                     throw new Exception("CollectionName cannot contain whitespace.");
-                var tpk = this.Database.TPKBlocks.FindCollection(this._parent_TPK);
+
+
+                }
+
                 var key = value.BinHash();
                 var type = eKeyType.BINKEY;
-                if (tpk.GetTextureIndex(key, type) != -1)
+
+                if (this.TPK?.GetTextureIndex(key, type) != -1)
+                {
+
                     throw new CollectionExistenceException(value);
+
+                }
+
                 this._collection_name = value;
                 this.BinKey = key;
             }
@@ -180,13 +196,11 @@ namespace Nikki.Support.MostWanted.Class
         /// Initializes new instance of <see cref="Texture"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="_TPK"><see cref="TPKBlock"/> to which this texture belongs to.</param>
-        /// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
-        public Texture(string CName, string _TPK, Database.MostWanted db)
+        /// <param name="tpk"><see cref="TPKBlock"/> to which this instance belongs to.</param>
+        public Texture(string CName, TPKBlock tpk)
         {
-            this.Database = db;
+            this.TPK = tpk;
             this._collection_name = CName;
-            this._parent_TPK = _TPK;
             this.BinKey = CName.BinHash();
             this.PaletteOffset = 0;
             this._padding = 1;
@@ -196,14 +210,12 @@ namespace Nikki.Support.MostWanted.Class
         /// Initializes new instance of <see cref="Texture"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="_TPK"><see cref="TPKBlock"/> to which this texture belongs to.</param>
         /// <param name="filename">Filename of the texture to import.</param>
-        /// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
-        public Texture(string CName, string _TPK, string filename, Database.MostWanted db)
+        /// <param name="tpk"><see cref="TPKBlock"/> to which this instance belongs to.</param>
+        public Texture(string CName, string filename, TPKBlock tpk)
         {
-            this.Database = db;
+            this.TPK = tpk;
             this._collection_name = CName;
-            this._parent_TPK = _TPK;
             this.BinKey = CName.BinHash();
             this.PaletteOffset = 0;
             this._padding = 1;
@@ -214,12 +226,10 @@ namespace Nikki.Support.MostWanted.Class
         /// Initializes new instance of <see cref="Texture"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-        /// <param name="_TPK"><see cref="TPKBlock"/> to which this texture belongs to.</param>
-        /// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
-        public Texture(BinaryReader br, string _TPK, Database.MostWanted db)
+        /// <param name="tpk"><see cref="TPKBlock"/> to which this instance belongs to.</param>
+        public Texture(BinaryReader br, TPKBlock tpk)
         {
-            this.Database = db;
-            this._parent_TPK = _TPK;
+            this.TPK = tpk;
             this.Disassemble(br);
         }
 
@@ -542,9 +552,9 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         /// <param name="CName">CollectionName of the new created object.</param>
         /// <returns>Memory casted copy of the object.</returns>
-        public override ACollectable MemoryCast(string CName)
+        public override Collectable MemoryCast(string CName)
         {
-            var result = new Texture(CName, this._parent_TPK, this.Database);
+            var result = new Texture(CName, this.TPK);
             base.MemoryCast(this, result);
             result.Data = new byte[this.Data.Length];
             Buffer.BlockCopy(this.Data, 0, result.Data, 0, this.Data.Length);

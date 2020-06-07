@@ -29,11 +29,6 @@ namespace Nikki.Reflection.Abstract
         public abstract string CollectionName { get; set; }
 
         /// <summary>
-        /// True if collection can be deleted from the database; false otherwise.
-        /// </summary>
-        public virtual bool Deletable { get; set; } = true;
-
-        /// <summary>
         /// Game to which the class belongs to.
         /// </summary>
         public abstract GameINT GameINT { get; }

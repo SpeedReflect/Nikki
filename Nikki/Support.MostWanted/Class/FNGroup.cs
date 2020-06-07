@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Core;
 using Nikki.Utils.EA;
 using Nikki.Reflection.ID;
+using Nikki.Support.MostWanted.Framework;
 using Nikki.Support.Shared.Parts.FNGParts;
 using CoreExtensions.IO;
 using CoreExtensions.Conversions;
@@ -34,9 +35,9 @@ namespace Nikki.Support.MostWanted.Class
         public override string GameSTR => GameINT.MostWanted.ToString();
 
         /// <summary>
-        /// Database to which the class belongs to.
+        /// Manager to which the class belongs to.
         /// </summary>
-        public Database.MostWanted Database { get; set; }
+        public FNGroupManager Manager { get; set; }
 
         #endregion
 
@@ -51,10 +52,10 @@ namespace Nikki.Support.MostWanted.Class
         /// Initializes new instance of <see cref="FNGroup"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-        /// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
-        public FNGroup(BinaryReader br, Database.MostWanted db)
+        /// <param name="manager"><see cref="FNGroupManager"/> to which this instance belongs to.</param>
+        public FNGroup(BinaryReader br, FNGroupManager manager)
         {
-            this.Database = db;
+            this.Manager = manager;
             this.Disassemble(br);
         }
 
@@ -108,12 +109,12 @@ namespace Nikki.Support.MostWanted.Class
             using var reader = new BinaryReader(ms);
 
             reader.BaseStream.Position = 0x28;
-            this.CollectionName = reader.ReadNullTermUTF8();
+            this.CollectionName = reader.ReadNullTermUTF8().ToUpper();
             
-            if (this.CollectionName.EndsWith(".fng"))
+            if (this.CollectionName.EndsWith(".FNG"))
             {
             
-                this.CollectionName.GetFormattedValue("{X}.fng", out string name);
+                this.CollectionName.GetFormattedValue("{X}.FNG", out string name);
                 this.CollectionName = name;
             
             }

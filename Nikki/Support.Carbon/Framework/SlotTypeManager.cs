@@ -18,7 +18,7 @@ namespace Nikki.Support.Carbon.Framework
 		private bool _is_read_only = true;
 
 		/// <summary>
-		/// Name of this <see cref="CarTypeInfoManager"/>.
+		/// Name of this <see cref="SlotTypeManager"/>.
 		/// </summary>
 		public override string Name => "SlotTypes";
 
@@ -102,7 +102,7 @@ namespace Nikki.Support.Carbon.Framework
 		}
 
 		/// <summary>
-		/// Disassembles data into separate collections in this <see cref="CarTypeInfoManager"/>.
+		/// Disassembles data into separate collections in this <see cref="SlotTypeManager"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="block"><see cref="Block"/> with offsets.</param>

@@ -9,6 +9,7 @@ using Nikki.Reflection.ID;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.MostWanted.Framework;
 using Nikki.Support.Shared.Parts.TPKParts;
 using CoreExtensions.IO;
 
@@ -41,9 +42,9 @@ namespace Nikki.Support.MostWanted.Class
         public override string GameSTR => GameINT.MostWanted.ToString();
 
         /// <summary>
-        /// Database to which the class belongs to.
+        /// Manager to which the class belongs to.
         /// </summary>
-        public Database.MostWanted Database { get; set; }
+        public TPKBlockManager Manager { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
@@ -53,14 +54,7 @@ namespace Nikki.Support.MostWanted.Class
             get => this._collection_name;
             set
             {
-                if (String.IsNullOrWhiteSpace(value))
-                    throw new ArgumentNullException("This value cannot be left empty.");
-                if (value.Contains(" "))
-                    throw new Exception("CollectionName cannot contain whitespace.");
-                if (this.UseCurrentName == eBoolean.True && value.Length > 0x1B)
-                    throw new ArgumentLengthException(0x1B);
-                if (this.Database.TPKBlocks.FindCollection(value) != null)
-                    throw new CollectionExistenceException(value);
+                this.Manager?.CreationCheck(value);
                 this._collection_name = value;
             }
         }
@@ -73,7 +67,7 @@ namespace Nikki.Support.MostWanted.Class
         /// <summary>
         /// Filename used for this <see cref="TPKBlock"/>. It is a default watermark.
         /// </summary>
-        public override string Filename => this.Watermark;
+        public override string Filename => $"{this.CollectionName}.tpk";
 
         /// <summary>
         /// BinKey of the filename.
@@ -88,12 +82,6 @@ namespace Nikki.Support.MostWanted.Class
         public override eBoolean IsCompressed { get; set; }
 
         /// <summary>
-        /// True if CollectionName specified should be used; false if hardcoded CollectionName 
-        /// should be used.
-        /// </summary>
-        public eBoolean UseCurrentName { get; set; }
-
-        /// <summary>
         /// List of <see cref="Texture"/> in this <see cref="TPKBlock"/>.
         /// </summary>
         public List<Texture> Textures { get; set; } = new List<Texture>();
@@ -105,18 +93,17 @@ namespace Nikki.Support.MostWanted.Class
 		/// <summary>
 		/// Initializes new instance of <see cref="TPKBlock"/>.
 		/// </summary>
-		public TPKBlock() => this.UseCurrentName = eBoolean.True;
+		public TPKBlock() { }
 
         /// <summary>
         /// Initializes new instance of <see cref="TPKBlock"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
-        public TPKBlock(string CName, Database.MostWanted db)
+        /// <param name="manager"><see cref="TPKBlockManager"/> to which this instance belongs to.</param>
+        public TPKBlock(string CName, TPKBlockManager manager)
         {
-            this.Database = db;
+            this.Manager = manager;
             this.CollectionName = CName;
-            this.UseCurrentName = eBoolean.True;
             CName.BinHash();
         }
 
@@ -124,11 +111,10 @@ namespace Nikki.Support.MostWanted.Class
         /// Initializes new instance of <see cref="TPKBlock"/>.
         /// </summary>
         /// <param name="index">Index of the instance in the database.</param>
-		/// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
-        public TPKBlock(int index, Database.MostWanted db)
+		/// <param name="manager"><see cref="TPKBlockManager"/> to which this instance belongs to.</param>
+        public TPKBlock(int index, TPKBlockManager manager)
         {
-            if (index < 0) this.UseCurrentName = eBoolean.True;
-            this.Database = db;
+            this.Manager = manager;
             this.Index = index;
         }
 
@@ -310,8 +296,8 @@ namespace Nikki.Support.MostWanted.Class
                 {
                 
                     br.BaseStream.Position = texture_list[a1];
-                    
-                    var tex = new Texture(br, this.CollectionName, this.Database)
+
+                    var tex = new Texture(br, this)
                     {
                         CompressionValue1 = compslot_list[a1].Var1,
                         CompressionValue2 = compslot_list[a1].Var2,
@@ -432,7 +418,7 @@ namespace Nikki.Support.MostWanted.Class
 
             }
 
-            var texture = new Texture(CName, this.CollectionName, filename, this.Database);
+            var texture = new Texture(CName, filename, this);
             this.Textures.Add(texture);
         }
 
@@ -671,7 +657,27 @@ namespace Nikki.Support.MostWanted.Class
             if (br.ReadInt32() != (int)this.Version) return; // return if versions does not match
 
             // Get CollectionName
-            this.CollectionName = br.ReadNullTermUTF8(0x1C);
+            var cname = br.ReadNullTermUTF8(0x1C);
+            var fname = br.ReadNullTermUTF8(0x40);
+
+            if (fname.EndsWith(".tpk") || fname.EndsWith(".TPK"))
+            {
+
+                fname = Path.GetFileNameWithoutExtension(fname).ToUpper();
+
+                this._collection_name = !this.Manager.Contains(fname)
+                    ? fname : !this.Manager.Contains(cname)
+                    ? cname : $"TPK{this.Manager.Count}";
+
+            }
+            else
+            {
+
+                this._collection_name = !this.Manager.Contains(cname)
+                    ? cname :
+                    $"TPK{this.Manager.Count}";
+
+            }
 
             // Get the rest of the settings
             br.BaseStream.Position += 0x44;
@@ -792,7 +798,7 @@ namespace Nikki.Support.MostWanted.Class
             texr.BaseStream.Position = headlength;
 
             // Create new texture based on header found
-            var texture = new Texture(texr, this.CollectionName, this.Database);
+            var texture = new Texture(texr, this);
 
             // We can skip dds type struct since it is defined in the header.
 
@@ -1010,7 +1016,7 @@ namespace Nikki.Support.MostWanted.Class
             bw.Write(0x18); // write size
             bw.Write((long)0);
             bw.Write(1);
-            bw.Write(this.Watermark.BinHash());
+            bw.Write(this.FilenameHash);
             bw.Write((long)0);
             bw.Write(0);
             bw.Write(0x50);

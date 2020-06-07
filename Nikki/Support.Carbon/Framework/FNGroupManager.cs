@@ -28,7 +28,7 @@ namespace Nikki.Support.Carbon.Framework
 		public override bool IsReadOnly => this._is_read_only;
 
 		/// <summary>
-		/// Indicates required alighment when this <see cref="CollisionManager"/> is being serialized.
+		/// Indicates required alighment when this <see cref="FNGroupManager"/> is being serialized.
 		/// </summary>
 		public override Alignment Alignment { get; }
 

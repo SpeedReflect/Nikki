@@ -27,7 +27,7 @@ namespace Nikki.Support.Carbon.Framework
 		public override bool IsReadOnly => false;
 
 		/// <summary>
-		/// Indicates required alighment when this <see cref="CollisionManager"/> is being serialized.
+		/// Indicates required alighment when this <see cref="TPKBlockManager"/> is being serialized.
 		/// </summary>
 		public override Alignment Alignment { get; }
 
@@ -71,7 +71,7 @@ namespace Nikki.Support.Carbon.Framework
 		}
 
 		/// <summary>
-		/// Disassembles data into separate collections in this <see cref="PresetRideManager"/>.
+		/// Disassembles data into separate collections in this <see cref="TPKBlockManager"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="block"><see cref="Block"/> with offsets.</param>

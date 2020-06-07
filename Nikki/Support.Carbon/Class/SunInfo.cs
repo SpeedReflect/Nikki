@@ -1,9 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Carbon.Framework;
 using Nikki.Support.Shared.Parts.SunParts;
@@ -65,7 +63,7 @@ namespace Nikki.Support.Carbon.Class
 			get => this._collection_name;
 			set
 			{
-				this.Manager.CreationCheck(value);
+				this.Manager?.CreationCheck(value);
 				this._collection_name = value;
 			}
 		}
@@ -134,12 +132,7 @@ namespace Nikki.Support.Carbon.Class
 		{
 			this.Manager = manager;
 			this.CollectionName = CName;
-			this.SUNLAYER1 = new SunLayer();
-			this.SUNLAYER2 = new SunLayer();
-			this.SUNLAYER3 = new SunLayer();
-			this.SUNLAYER4 = new SunLayer();
-			this.SUNLAYER5 = new SunLayer();
-			this.SUNLAYER6 = new SunLayer();
+			this.Initialize();
 			CName.BinHash();
 		}
 
@@ -151,12 +144,7 @@ namespace Nikki.Support.Carbon.Class
 		public SunInfo(BinaryReader br, SunInfoManager manager)
 		{
 			this.Manager = manager;
-			this.SUNLAYER1 = new SunLayer();
-			this.SUNLAYER2 = new SunLayer();
-			this.SUNLAYER3 = new SunLayer();
-			this.SUNLAYER4 = new SunLayer();
-			this.SUNLAYER5 = new SunLayer();
-			this.SUNLAYER6 = new SunLayer();
+			this.Initialize();
 			this.Disassemble(br);
 		}
 
@@ -235,6 +223,16 @@ namespace Nikki.Support.Carbon.Class
 			var result = new SunInfo(CName, this.Manager);
 			base.MemoryCast(this, result);
 			return result;
+		}
+
+		private void Initialize()
+		{
+			this.SUNLAYER1 = new SunLayer();
+			this.SUNLAYER2 = new SunLayer();
+			this.SUNLAYER3 = new SunLayer();
+			this.SUNLAYER4 = new SunLayer();
+			this.SUNLAYER5 = new SunLayer();
+			this.SUNLAYER6 = new SunLayer();
 		}
 
 		/// <summary>

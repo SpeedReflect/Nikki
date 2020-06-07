@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection;
-using Nikki.Reflection.ID;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Carbon.Framework;
@@ -69,7 +69,7 @@ namespace Nikki.Support.Carbon.Class
 			get => this._collection_name;
 			set
 			{
-				this.Manager.CreationCheck(value);
+				this.Manager?.CreationCheck(value);
 				this._collection_name = value;
 			}
 		}
@@ -133,7 +133,7 @@ namespace Nikki.Support.Carbon.Class
 			this._stringinfo.Sort((a, b) => a.Key.CompareTo(b.Key));
 
 			// Write ID and temporary size
-			bw.Write(Global.STRBlocks);
+			bw.WriteEnum(eBlockID.STRBlocks);
 			bw.Write(-1);
 
 			// Save position

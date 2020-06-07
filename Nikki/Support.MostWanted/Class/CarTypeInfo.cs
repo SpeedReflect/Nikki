@@ -4,8 +4,8 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.MostWanted.Framework;
 using CoreExtensions.IO;
 
 
@@ -51,9 +51,9 @@ namespace Nikki.Support.MostWanted.Class
         public override string GameSTR => GameINT.MostWanted.ToString();
 
         /// <summary>
-        /// Database to which the class belongs to.
+        /// Manager to which the class belongs to.
         /// </summary>
-        public Database.MostWanted Database { get; set; }
+        public CarTypeInfoManager Manager { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
@@ -64,16 +64,7 @@ namespace Nikki.Support.MostWanted.Class
             get => this._collection_name;
             set
             {
-                if (!this.Deletable)
-                    throw new CollectionExistenceException("CollectionName of a non-addon car cannot be changed.");
-                if (String.IsNullOrWhiteSpace(value))
-                    throw new ArgumentNullException("This value cannot be left empty.");
-                if (value.Contains(" "))
-                    throw new Exception("CollectionName cannot contain whitespace.");
-                if (value.Length > MaxCNameLength)
-                    throw new ArgumentLengthException(MaxCNameLength);
-                if (this.Database.CarTypeInfos.FindCollection(value) != null)
-                    throw new CollectionExistenceException(value);
+                this.Manager?.CreationCheck(value);
                 this._collection_name = value;
             }
         }
@@ -136,13 +127,12 @@ namespace Nikki.Support.MostWanted.Class
         /// Initializes new instance of <see cref="CarTypeInfo"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
-        public CarTypeInfo(string CName, Database.MostWanted db)
+        /// <param name="manager"><see cref="CarTypeInfoManager"/> to which this instance belongs to.</param>
+        public CarTypeInfo(string CName, CarTypeInfoManager manager)
         {
-            this.Database = db;
+            this.Manager = manager;
             this.CollectionName = CName;
             this.ManufacturerName = "GENERIC";
-            this.Deletable = true;
             this.WhatGame = 1;
             this.WheelOuterRadius = 26;
             this.WheelInnerRadiusMin = 17;
@@ -155,13 +145,11 @@ namespace Nikki.Support.MostWanted.Class
         /// Initializes new instance of <see cref="CarTypeInfo"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-        /// <param name="db"><see cref="Database.MostWanted"/> to which this instance belongs to.</param>
-        public CarTypeInfo(BinaryReader br, Database.MostWanted db)
+        /// <param name="manager"><see cref="CarTypeInfoManager"/> to which this instance belongs to.</param>
+        public CarTypeInfo(BinaryReader br, CarTypeInfoManager manager)
         {
-            this.Database = db;
+            this.Manager = manager;
             this.Disassemble(br);
-            if (this.Index <= (int)eBoundValues.MIN_INFO_MOSTWANTED)
-                this.Deletable = false;
         }
 
         /// <summary>
@@ -179,6 +167,9 @@ namespace Nikki.Support.MostWanted.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="CarTypeInfo"/> with.</param>
         public override void Assemble(BinaryWriter bw)
         {
+            // First, set index
+            this.Index = this.Manager == null ? -1 : this.Manager.IndexOf(this);
+
             // Write CollectionName and BaseModelName
             bw.WriteNullTermUTF8(this._collection_name, 0x10);
             bw.WriteNullTermUTF8(this._collection_name, 0x10);
@@ -336,9 +327,9 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         /// <param name="CName">CollectionName of the new created object.</param>
         /// <returns>Memory casted copy of the object.</returns>
-        public override ACollectable MemoryCast(string CName)
+        public override Collectable MemoryCast(string CName)
         {
-            var result = new CarTypeInfo(CName, this.Database);
+            var result = new CarTypeInfo(CName, this.Manager);
             base.MemoryCast(this, result);
             return result;
         }
