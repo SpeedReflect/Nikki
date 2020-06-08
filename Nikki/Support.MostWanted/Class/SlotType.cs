@@ -5,20 +5,22 @@ using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using Nikki.Reflection.Enum.SlotID;
-using Nikki.Support.Carbon.Framework;
+using Nikki.Support.MostWanted.Framework;
+using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.Carbon.Class
+namespace Nikki.Support.MostWanted.Class
 {
     /// <summary>
-    /// <see cref="CarSlotInfo"/> is a collection of settings related to car's slot overrides.
+    /// <see cref="SlotType"/> is a collection of settings related to a parts and slot information.
     /// </summary>
-    public class CarSlotInfo : Shared.Class.CarSlotInfo
+    public class SlotType : Shared.Class.SlotType
     {
         #region Fields
 
         private string _collection_name;
+        private static int _index;
 
         /// <summary>
         /// Maximum length of the CollectionName.
@@ -33,7 +35,7 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Base size of a unit collection.
         /// </summary>
-        public const int BaseClassSize = 0x24;
+        public const int BaseClassSize = 0x8;
 
         #endregion
 
@@ -42,17 +44,17 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Game to which the class belongs to.
         /// </summary>
-        public override GameINT GameINT => GameINT.Carbon;
+        public override GameINT GameINT => GameINT.MostWanted;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
-        public override string GameSTR => GameINT.Carbon.ToString();
+        public override string GameSTR => GameINT.MostWanted.ToString();
 
         /// <summary>
         /// Manager to which the class belongs to.
         /// </summary>
-        public CarSlotInfoManager Manager { get; set; }
+        public SlotTypeManager Manager { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
@@ -79,55 +81,29 @@ namespace Nikki.Support.Carbon.Class
         public override uint VltKey => this._collection_name.VltHash();
 
         /// <summary>
-        /// Group 2 info override entry of this <see cref="CarSlotInfo"/>.
+        /// Current index of this <see cref="SlotType"/>.
         /// </summary>
-        [AccessModifiable()]
-        [MemoryCastable()]
-        public string InfoOverrideGroup2 { get; set; }
-
-        /// <summary>
-        /// Group 3 info override entry of this <see cref="CarSlotInfo"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [MemoryCastable()]
-        public string InfoOverrideGroup3 { get; set; }
-
-        /// <summary>
-        /// Group 4 info override entry of this <see cref="CarSlotInfo"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [MemoryCastable()]
-        public string InfoOverrideGroup4 { get; set; }
-
-        /// <summary>
-        /// Group 5 info override entry of this <see cref="CarSlotInfo"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [MemoryCastable()]
-        public string InfoOverrideGroup5 { get; set; }
-
-        /// <summary>
-        /// Group 6 info override entry of this <see cref="CarSlotInfo"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [MemoryCastable()]
-        public string InfoOverrideGroup6 { get; set; }
+        private static int Index
+        {
+            get => _index;
+            set => _index = value > Enum.GetNames(typeof(eSlotMostWanted)).Length ? 0 : value;
+        }
 
         #endregion
 
         #region Main
 
         /// <summary>
-        /// Initializes new instance of <see cref="CarSlotInfo"/>.
+        /// Initializes new instance of <see cref="SlotType"/>.
         /// </summary>
-        public CarSlotInfo() { }
+        public SlotType() { }
 
         /// <summary>
-        /// Initializes new instance of <see cref="CarSlotInfo"/>.
+        /// Initializes new instance of <see cref="SlotType"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="manager"><see cref="CarSlotInfoManager"/> to which this instance belongs to.</param>
-        public CarSlotInfo(string CName, CarSlotInfoManager manager)
+        /// <param name="manager"><see cref="SlotTypeManager"/> to which this instance belongs to.</param>
+        public SlotType(string CName, SlotTypeManager manager)
         {
             this.Manager = manager;
             this.CollectionName = CName;
@@ -135,11 +111,11 @@ namespace Nikki.Support.Carbon.Class
         }
 
         /// <summary>
-        /// Initializes new instance of <see cref="CarSlotInfo"/>.
+        /// Initializes new instance of <see cref="SlotType"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-        /// <param name="manager"><see cref="CarSlotInfoManager"/> to which this instance belongs to.</param>
-        public CarSlotInfo(BinaryReader br, CarSlotInfoManager manager)
+        /// <param name="manager"><see cref="SlotTypeManager"/> to which this instance belongs to.</param>
+        public SlotType(BinaryReader br, SlotTypeManager manager)
         {
             this.Manager = manager;
             this.Disassemble(br);
@@ -148,7 +124,7 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Destroys current instance.
         /// </summary>
-        ~CarSlotInfo() { }
+        ~SlotType() { }
 
         #endregion
 
@@ -160,18 +136,10 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="SlotType"/> with.</param>
         public override void Assemble(BinaryWriter bw)
         {
-            var keys = this._collection_name.Split("_PART_", 2, StringSplitOptions.None);
-            var id = (eSlotCarbon)Enum.Parse(typeof(eSlotCarbon), keys[1]);
-
-            bw.Write(keys[0].BinHash());
-            bw.Write((int)id);
-            bw.Write(keys[0].BinHash());
-            bw.Write(this.InfoMainOverride.BinHash());
-            bw.Write(this.InfoOverrideGroup2.BinHash());
-            bw.Write(this.InfoOverrideGroup3.BinHash());
-            bw.Write(this.InfoOverrideGroup4.BinHash());
-            bw.Write(this.InfoOverrideGroup5.BinHash());
-            bw.Write(this.InfoOverrideGroup6.BinHash());
+            bw.Write(String.IsNullOrEmpty(this.SlotStockOverride)
+                ? 0xFFFFFFFF
+                : this.SlotStockOverride.BinHash());
+            bw.Write(this.SlotMainOverride.BinHash());
         }
 
         /// <summary>
@@ -180,17 +148,15 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="SlotType"/> with.</param>
         public override void Disassemble(BinaryReader br)
         {
-            var key = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            var id = (eSlotCarbon)br.ReadInt32();
-            br.BaseStream.Position += 4;
-            this._collection_name = $"{key}_PART_{id}";
+            this._collection_name = ((eSlotMostWanted)(Index++)).ToString();
 
-            this.InfoMainOverride = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.InfoOverrideGroup2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.InfoOverrideGroup3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.InfoOverrideGroup4 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.InfoOverrideGroup5 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.InfoOverrideGroup6 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            uint key = 0;
+            const uint empty = 0xFFFFFFFF;
+
+            key = br.ReadUInt32();
+            this.SlotStockOverride = key == empty ? String.Empty : key.BinString(eLookupReturn.EMPTY);
+
+            this.SlotMainOverride = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
         }
 
         /// <summary>
@@ -200,13 +166,13 @@ namespace Nikki.Support.Carbon.Class
         /// <returns>Memory casted copy of the object.</returns>
         public override Collectable MemoryCast(string CName)
         {
-            var result = new CarSlotInfo(CName, this.Manager);
+            var result = new SlotType(CName, this.Manager);
             base.MemoryCast(this, result);
             return result;
         }
 
         /// <summary>
-        /// Returns CollectionName, BinKey and GameSTR of this <see cref="CarSlotInfo"/> 
+        /// Returns CollectionName, BinKey and GameSTR of this <see cref="SlotType"/> 
         /// as a string value.
         /// </summary>
         /// <returns>String value.</returns>

@@ -7,6 +7,7 @@ using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.MostWanted.Class;
+using Nikki.Support.MostWanted.Attributes;
 using Nikki.Support.Shared.Parts.CarParts;
 using CoreExtensions.Conversions;
 
@@ -174,7 +175,6 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 				eCarPartAttribType.String => new StringAttribute(String.Empty, this),
 				eCarPartAttribType.TwoString => new TwoStringAttribute(String.Empty, this),
 				eCarPartAttribType.Key => new KeyAttribute(String.Empty, this),
-				eCarPartAttribType.ModelTable => new ModelTableAttribute(eBoolean.False, this),
 				_ => new IntAttribute((int)0, this)
 			};
 
@@ -275,7 +275,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new RealCarPart(this.Index, this.Length, this.Model)
 			{

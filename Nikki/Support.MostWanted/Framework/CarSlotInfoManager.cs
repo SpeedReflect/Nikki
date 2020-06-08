@@ -1,35 +1,34 @@
 ﻿using System;
 using System.IO;
 using Nikki.Core;
-using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
-using Nikki.Support.Carbon.Class;
-using CoreExtensions.IO;
+using Nikki.Reflection.Enum.SlotID;
+using Nikki.Support.MostWanted.Class;
 
 
 
-namespace Nikki.Support.Carbon.Framework
+namespace Nikki.Support.MostWanted.Framework
 {
 	/// <summary>
-	/// A <see cref="Manager{T}"/> for <see cref="PresetSkin"/> collections.
+	/// A <see cref="Manager{T}"/> for <see cref="CarSlotInfo"/> collections.
 	/// </summary>
-	public class PresetSkinManager : Manager<PresetSkin>
+	public class CarSlotInfoManager : Manager<CarSlotInfo>
 	{
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
-		public override GameINT GameINT => GameINT.Carbon;
+		public override GameINT GameINT => GameINT.MostWanted;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
-		public override string GameSTR => GameINT.Carbon.ToString();
+		public override string GameSTR => GameINT.MostWanted.ToString();
 
 		/// <summary>
-		/// Name of this <see cref="PresetSkinManager"/>.
+		/// Name of this <see cref="CarSlotInfoManager"/>.
 		/// </summary>
-		public override string Name => "PresetSkins";
+		public override string Name => "CarSlotInfos";
 
 		/// <summary>
 		/// True if this <see cref="Manager{T}"/> is read-only; otherwise, false.
@@ -37,15 +36,15 @@ namespace Nikki.Support.Carbon.Framework
 		public override bool IsReadOnly => false;
 
 		/// <summary>
-		/// Indicates required alighment when this <see cref="PresetSkinManager"/> is being serialized.
+		/// Indicates required alighment when this <see cref="CarSlotInfoManager"/> is being serialized.
 		/// </summary>
 		public override Alignment Alignment { get; }
 
 		/// <summary>
-		/// Initializes new instance of <see cref="PresetSkinManager"/>.
+		/// Initializes new instance of <see cref="CarSlotInfoManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>
-		public PresetSkinManager(Datamap db)
+		public CarSlotInfoManager(Datamap db)
 		{
 			this.Database = db;
 			this.Extender = 5;
@@ -61,11 +60,6 @@ namespace Nikki.Support.Carbon.Framework
 		{
 			if (this.Count == 0) return;
 
-			bw.GeneratePadding(mark, this.Alignment);
-
-			bw.WriteEnum(eBlockID.PresetSkins);
-			bw.Write(this.Count * PresetSkin.BaseClassSize);
-
 			foreach (var collection in this)
 			{
 
@@ -75,14 +69,16 @@ namespace Nikki.Support.Carbon.Framework
 		}
 
 		/// <summary>
-		/// Disassembles data into separate collections in this <see cref="PresetSkinManager"/>.
+		/// Disassembles data into separate collections in this <see cref="CarTypeInfoManager"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="block"><see cref="Block"/> with offsets.</param>
 		internal override void Disassemble(BinaryReader br, Block block)
 		{
 			if (Block.IsNullOrEmpty(block)) return;
-			if (block.BlockID != eBlockID.PresetSkins) return;
+			if (block.BlockID != eBlockID.SlotTypes) return;
+
+			const int maxslotsize = 0x458;
 
 			for (int loop = 0; loop < block.Offsets.Count; ++loop)
 			{
@@ -90,13 +86,16 @@ namespace Nikki.Support.Carbon.Framework
 				br.BaseStream.Position = block.Offsets[loop] + 4;
 				var size = br.ReadInt32();
 
-				int count = size / PresetSkin.BaseClassSize;
-				this.Capacity += count;
+				if (size <= maxslotsize) continue;
+				else br.BaseStream.Position += maxslotsize;
 
+				int count = (size - maxslotsize) / CarSlotInfo.BaseClassSize;
+				this.Capacity += count;
+				
 				for (int i = 0; i < count; ++i)
 				{
 
-					var collection = new PresetSkin(br, this);
+					var collection = new CarSlotInfo(br, this);
 					this.Add(collection);
 
 				}
@@ -124,17 +123,27 @@ namespace Nikki.Support.Carbon.Framework
 
 			}
 
-			if (cname.Length > PresetSkin.MaxCNameLength)
-			{
-
-				throw new ArgumentLengthException(PresetSkin.MaxCNameLength);
-
-			}
-
 			if (this.Find(cname) != null)
 			{
 
 				throw new CollectionExistenceException(cname);
+
+			}
+
+			var keys = cname.Split("_PART_", 2, StringSplitOptions.None);
+
+			if (keys == null || keys.Length != 2 || String.IsNullOrEmpty(keys[0]))
+			{
+
+				throw new ArgumentException($"CollectionName passed is of invalid format. Valid " +
+					$"format is \"CARNAME_PART_SLOTTYPE\"");
+
+			}
+			else if (!Enum.TryParse(keys[1], out eSlotMostWanted _))
+			{
+
+				throw new ArgumentException($"CollectionName passed is of invalid format. Valid " +
+					$"format is \"CARNAME_PART_SLOTTYPE\"");
 
 			}
 		}

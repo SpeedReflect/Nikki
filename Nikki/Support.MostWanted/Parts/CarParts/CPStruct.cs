@@ -340,7 +340,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new CPStruct();
 

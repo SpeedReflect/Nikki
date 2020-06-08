@@ -23,6 +23,16 @@ namespace Nikki.Support.Carbon.Framework
 	public class DBModelPartManager : Manager<DBModelPart>
 	{
 		/// <summary>
+		/// Game to which the class belongs to.
+		/// </summary>
+		public override GameINT GameINT => GameINT.Carbon;
+
+		/// <summary>
+		/// Game string to which the class belongs to.
+		/// </summary>
+		public override string GameSTR => GameINT.Carbon.ToString();
+
+		/// <summary>
 		/// Name of this <see cref="DBModelPartManager"/>.
 		/// </summary>
 		public override string Name => "DBModelParts";

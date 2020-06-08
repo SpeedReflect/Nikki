@@ -3,7 +3,6 @@ using System.IO;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
-using Nikki.Reflection.Exception;
 using Nikki.Support.MostWanted.Class;
 using CoreExtensions.IO;
 
@@ -12,10 +11,12 @@ using CoreExtensions.IO;
 namespace Nikki.Support.MostWanted.Framework
 {
 	/// <summary>
-	/// A <see cref="Manager{T}"/> for <see cref="SunInfo"/> collections.
+	/// A <see cref="Manager{T}"/> for <see cref="SlotType"/> collections.
 	/// </summary>
-	public class SunInfoManager : Manager<SunInfo>
+	public class SlotTypeManager : Manager<SlotType>
 	{
+		private bool _is_read_only = true;
+
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
@@ -27,29 +28,29 @@ namespace Nikki.Support.MostWanted.Framework
 		public override string GameSTR => GameINT.MostWanted.ToString();
 
 		/// <summary>
-		/// Name of this <see cref="SunInfoManager"/>.
+		/// Name of this <see cref="SlotTypeManager"/>.
 		/// </summary>
-		public override string Name => "SunInfos";
+		public override string Name => "SlotTypes";
 
 		/// <summary>
 		/// True if this <see cref="Manager{T}"/> is read-only; otherwise, false.
 		/// </summary>
-		public override bool IsReadOnly => false;
+		public override bool IsReadOnly => this._is_read_only;
 
 		/// <summary>
-		/// Indicates required alighment when this <see cref="SunInfoManager"/> is being serialized.
+		/// Indicates required alighment when this <see cref="SlotTypeManager"/> is being serialized.
 		/// </summary>
 		public override Alignment Alignment { get; }
 
 		/// <summary>
-		/// Initializes new instance of <see cref="SunInfoManager"/>.
+		/// Initializes new instance of <see cref="SlotTypeManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>
-		public SunInfoManager(Datamap db)
+		public SlotTypeManager(Datamap db)
 		{
 			this.Database = db;
 			this.Extender = 5;
-			this.Alignment = new Alignment(0x8, Alignment.eAlignType.Actual);
+			this.Alignment = Alignment.Default;
 		}
 
 		/// <summary>
@@ -63,10 +64,46 @@ namespace Nikki.Support.MostWanted.Framework
 
 			bw.GeneratePadding(mark, this.Alignment);
 
-			bw.WriteEnum(eBlockID.SunInfos);
-			bw.Write(this.Count * SunInfo.BaseClassSize);
+			// Write CarInfo Animation Hookups
+			var dif = 4 - this.Count % 4;
+			if (dif == 4) dif = 0;
 
+			bw.WriteEnum(eBlockID.CarInfoAnimHookup);
+			bw.Write(this.Count + dif);
+
+			// Write Animations
 			foreach (var collection in this)
+			{
+
+				bw.WriteEnum(collection.PrimaryAnimation);
+
+			}
+
+			bw.WriteBytes(dif);
+
+			// Write CarInfo Animation Hideups
+			bw.WriteEnum(eBlockID.CarInfoAnimHideup);
+			bw.Write(0x100);
+			for (int loop = 0; loop < 0x40; ++loop) bw.Write(0xFFFFFFFF);
+
+			// Precalculate size
+			var manager = this.Database.GetManager(typeof(CarSlotInfoManager)) as CarSlotInfoManager;
+			var size = this.Count * SlotType.BaseClassSize;
+			size += manager.Count * CarSlotInfo.BaseClassSize;
+
+			bw.WriteEnum(eBlockID.SlotTypes);
+			bw.Write(size);
+
+			// Write SlotTypes
+			foreach (var collection in this)
+			{
+
+				collection.Assemble(bw);
+
+			}
+
+			// Write CarSlotInfos
+			foreach (var collection in manager)
 			{
 
 				collection.Assemble(bw);
@@ -75,33 +112,45 @@ namespace Nikki.Support.MostWanted.Framework
 		}
 
 		/// <summary>
-		/// Disassembles data into separate collections in this <see cref="SunInfoManager"/>.
+		/// Disassembles data into separate collections in this <see cref="SlotTypeManager"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="block"><see cref="Block"/> with offsets.</param>
 		internal override void Disassemble(BinaryReader br, Block block)
 		{
 			if (Block.IsNullOrEmpty(block)) return;
-			if (block.BlockID != eBlockID.SunInfos) return;
+			if (block.BlockID != eBlockID.SlotTypes) return;
+
+			this._is_read_only = false;
 
 			for (int loop = 0; loop < block.Offsets.Count; ++loop)
 			{
 
 				br.BaseStream.Position = block.Offsets[loop] + 4;
 				var size = br.ReadInt32();
+				const int maxslotsize = 0x458;
 
-				int count = size / SunInfo.BaseClassSize;
+				if (size < maxslotsize)
+				{
+
+					throw new InvalidDataException("SlotTypes block is corrupted or has invalid data");
+
+				}
+
+				var count = maxslotsize / SlotType.BaseClassSize;
 				this.Capacity += count;
 
 				for (int i = 0; i < count; ++i)
 				{
 
-					var collection = new SunInfo(br, this);
+					var collection = new SlotType(br, this);
 					this.Add(collection);
 
 				}
 
 			}
+
+			this._is_read_only = true;
 		}
 
 		/// <summary>
@@ -110,33 +159,7 @@ namespace Nikki.Support.MostWanted.Framework
 		/// <param name="cname">CollectionName to check.</param>
 		internal override void CreationCheck(string cname)
 		{
-			if (String.IsNullOrWhiteSpace(cname))
-			{
-
-				throw new ArgumentNullException("CollectionName cannot be null, empty or whitespace");
-
-			}
-
-			if (cname.Contains(" "))
-			{
-
-				throw new ArgumentException("CollectionName cannot contain whitespace");
-
-			}
-
-			if (cname.Length > SunInfo.MaxCNameLength)
-			{
-
-				throw new ArgumentLengthException(SunInfo.MaxCNameLength);
-
-			}
-
-			if (this.Find(cname) != null)
-			{
-
-				throw new CollectionExistenceException(cname);
-
-			}
+			throw new ArgumentException("CollectionName of SlotTypes cannot be changed");
 		}
 	}
 }

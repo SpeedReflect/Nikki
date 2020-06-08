@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Utils.EA;
-using Nikki.Reflection.ID;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
@@ -139,7 +138,7 @@ namespace Nikki.Support.Carbon.Class
         private void AssembleDecompressed(BinaryWriter bw)
         {
             // Write main
-            bw.Write(TPK.MAINID);
+            bw.WriteEnum(eBlockID.TPKBlocks);
             bw.Write(-1); // write temp size
             var position_0 = bw.BaseStream.Position;
             bw.Write((int)0);
@@ -147,7 +146,7 @@ namespace Nikki.Support.Carbon.Class
             bw.WriteBytes(0x30);
 
             // Partial 1 Block
-            bw.Write(TPK.INFO_BLOCKID);
+            bw.WriteEnum(eBlockID.TPK_InfoBlock);
             bw.Write(-1);
             var position_1 = bw.BaseStream.Position;
             this.Get1Part1(bw);
@@ -162,7 +161,7 @@ namespace Nikki.Support.Carbon.Class
             bw.Write(Comp.GetPaddingArray((int)bw.BaseStream.Position, 0x80));
 
             // Partial 2 Block
-            bw.Write(TPK.DATA_BLOCKID);
+            bw.WriteEnum(eBlockID.TPK_DataBlock);
             bw.Write(-1);
             var position_2 = bw.BaseStream.Position;
             this.Get2Part1(bw);
@@ -180,7 +179,7 @@ namespace Nikki.Support.Carbon.Class
         {
             var start = (int)bw.BaseStream.Position;
 
-            bw.Write(TPK.MAINID);
+            bw.WriteEnum(eBlockID.TPKBlocks);
             bw.Write(-1); // write temp size
             var position_0 = bw.BaseStream.Position;
             bw.Write((int)0);
@@ -188,7 +187,7 @@ namespace Nikki.Support.Carbon.Class
             bw.WriteBytes(0x30);
 
             // Partial 1 Block
-            bw.Write(TPK.INFO_BLOCKID);
+            bw.WriteEnum(eBlockID.TPK_InfoBlock);
             bw.Write(-1);
             var position_1 = bw.BaseStream.Position;
             this.Get1Part1(bw);
@@ -214,7 +213,7 @@ namespace Nikki.Support.Carbon.Class
             bw.Write(Comp.GetPaddingArray((int)bw.BaseStream.Position, 0x80));
 
             // Partial 2 Block
-            bw.Write(TPK.DATA_BLOCKID);
+            bw.WriteEnum(eBlockID.TPK_DataBlock);
             bw.Write(-1);
             var position_2 = bw.BaseStream.Position;
             this.Get2Part1(bw);
@@ -508,18 +507,18 @@ namespace Nikki.Support.Carbon.Class
         protected override long[] FindOffsets(BinaryReader br)
         {
             var offsets = new long[8] { max, max, max, max, max, max, max, max };
-            long ReaderOffset = 0;
-            uint ReaderID = 0;
+            var ReaderID = eBlockID.Padding;
             int InfoBlockSize = 0;
             int DataBlockSize = 0;
+            long ReaderOffset = 0;
 
-            while (ReaderID != TPK.INFO_BLOCKID)
+            while (ReaderID != eBlockID.TPK_InfoBlock)
             {
-                
-                ReaderID = br.ReadUInt32();
+
+                ReaderID = br.ReadEnum<eBlockID>();
                 InfoBlockSize = br.ReadInt32();
 
-                if (ReaderID != TPK.INFO_BLOCKID)
+                if (ReaderID != eBlockID.TPK_InfoBlock)
                 {
 
                     br.BaseStream.Position += InfoBlockSize;
@@ -533,27 +532,27 @@ namespace Nikki.Support.Carbon.Class
             while (br.BaseStream.Position < ReaderOffset + InfoBlockSize)
             {
             
-                ReaderID = br.ReadUInt32();
+                ReaderID = br.ReadEnum<eBlockID>();
                 
                 switch (ReaderID)
                 {
-                    case TPK.INFO_PART1_BLOCKID:
+                    case eBlockID.TPK_InfoPart1:
                         offsets[0] = br.BaseStream.Position;
                         goto default;
 
-                    case TPK.INFO_PART2_BLOCKID:
+                    case eBlockID.TPK_InfoPart2:
                         offsets[1] = br.BaseStream.Position;
                         goto default;
 
-                    case TPK.INFO_PART3_BLOCKID:
+                    case eBlockID.TPK_InfoPart3:
                         offsets[2] = br.BaseStream.Position;
                         goto default;
 
-                    case TPK.INFO_PART4_BLOCKID:
+                    case eBlockID.TPK_InfoPart4:
                         offsets[3] = br.BaseStream.Position;
                         goto default;
 
-                    case TPK.INFO_PART5_BLOCKID:
+                    case eBlockID.TPK_InfoPart5:
                         offsets[4] = br.BaseStream.Position;
                         goto default;
 
@@ -566,13 +565,13 @@ namespace Nikki.Support.Carbon.Class
             
             }
 
-            while (ReaderID != TPK.DATA_BLOCKID)
+            while (ReaderID != eBlockID.TPK_DataBlock)
             {
             
-                ReaderID = br.ReadUInt32();
+                ReaderID = br.ReadEnum<eBlockID>();
                 DataBlockSize = br.ReadInt32();
 
-                if (ReaderID != TPK.DATA_BLOCKID)
+                if (ReaderID != eBlockID.TPK_DataBlock)
                 {
 
                     br.BaseStream.Position += DataBlockSize;
@@ -586,19 +585,19 @@ namespace Nikki.Support.Carbon.Class
             while (br.BaseStream.Position < ReaderOffset + DataBlockSize)
             {
             
-                ReaderID = br.ReadUInt32();
+                ReaderID = br.ReadEnum<eBlockID>();
                 
                 switch (ReaderID)
                 {
-                    case TPK.DATA_PART1_BLOCKID:
+                    case eBlockID.TPK_DataPart1:
                         offsets[5] = br.BaseStream.Position;
                         goto default;
 
-                    case TPK.DATA_PART2_BLOCKID:
+                    case eBlockID.TPK_DataPart2:
                         offsets[6] = br.BaseStream.Position;
                         goto default;
 
-                    case TPK.DATA_PART3_BLOCKID:
+                    case eBlockID.TPK_DataPart3:
                         offsets[7] = br.BaseStream.Position;
                         goto default;
 
@@ -747,9 +746,9 @@ namespace Nikki.Support.Carbon.Class
             // Read while position in the stream is less than encoded size specified
             while (br.BaseStream.Position < offset + offslot.EncodedSize)
             {
-                
+
                 // We read till we find magic compressed block number
-                if (br.ReadUInt32() != TPK.COMPRESSED_TEXTURE) continue;
+                if (br.ReadEnum<eBlockID>() != eBlockID.CompressedTex) continue;
 
                 var magic = new MagicHeader();
                 magic.Read(br);
@@ -849,7 +848,7 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         protected override void Get1Part1(BinaryWriter bw)
         {
-            bw.Write(TPK.INFO_PART1_BLOCKID); // write ID
+            bw.WriteEnum(eBlockID.TPK_InfoPart1); // write ID
             bw.Write(0x7C); // write size
             bw.WriteEnum(this.Version);
 
@@ -875,7 +874,7 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         protected override void Get1Part2(BinaryWriter bw)
         {
-            bw.Write(TPK.INFO_PART2_BLOCKID); // write ID
+            bw.WriteEnum(eBlockID.TPK_InfoPart2); // write ID
             bw.Write(this.Textures.Count * 8); // write size
             
             for (int loop = 0; loop < this.Textures.Count; ++loop)
@@ -894,7 +893,7 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="offslots">List of <see cref="OffSlot"/> to write.</param>
         protected void Get1Part3(BinaryWriter bw, List<OffSlot> offslots)
         {
-            bw.Write(TPK.INFO_PART3_BLOCKID); // write ID
+            bw.WriteEnum(eBlockID.TPK_InfoPart3); // write ID
             bw.Write(this.Textures.Count * 0x18); // write size
             
             foreach (var offslot in offslots)
@@ -936,7 +935,7 @@ namespace Nikki.Support.Carbon.Class
             }
 
             var data = ms.ToArray();
-            bw.Write(TPK.INFO_PART4_BLOCKID); // write ID
+            bw.WriteEnum(eBlockID.TPK_InfoPart4); // write ID
             bw.Write(data.Length); // write size
             bw.Write(data);
         }
@@ -947,7 +946,7 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         protected override void Get1Part5(BinaryWriter bw)
         {
-            bw.Write(TPK.INFO_PART5_BLOCKID); // write ID
+            bw.WriteEnum(eBlockID.TPK_InfoPart5); // write ID
             bw.Write(this.Textures.Count * 0x18); // write size
             
             for (int loop = 0; loop < this.Textures.Count; ++loop)
@@ -967,7 +966,7 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         protected override void Get2Part1(BinaryWriter bw)
         {
-            bw.Write(TPK.DATA_PART1_BLOCKID); // write ID
+            bw.WriteEnum(eBlockID.TPK_DataPart1); // write ID
             bw.Write(0x18); // write size
             bw.Write((long)0);
             bw.Write(1);
@@ -984,7 +983,7 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         protected override void Get2Part2(BinaryWriter bw)
         {
-            bw.Write(TPK.DATA_PART2_BLOCKID); // write ID
+            bw.WriteEnum(eBlockID.TPK_DataPart2); // write ID
             bw.Write(-1); // write size
             var position = bw.BaseStream.Position;
 
@@ -1019,7 +1018,7 @@ namespace Nikki.Support.Carbon.Class
             var result = new List<OffSlot>(this.Textures.Count);
 
             // Save position and write ID with temporary size
-            bw.Write(TPK.DATA_PART2_BLOCKID);
+            bw.WriteEnum(eBlockID.TPK_DataPart2);
             bw.Write(0xFFFFFFFF);
             var start = bw.BaseStream.Position;
 

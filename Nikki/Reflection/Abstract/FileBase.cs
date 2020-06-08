@@ -1,8 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
 using Nikki.Core;
-using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Interface;
 
 
@@ -12,7 +10,7 @@ namespace Nikki.Reflection.Abstract
     /// <summary>
     /// Very base class of any database.
     /// </summary>
-	public abstract class FileBase
+	public abstract class FileBase : IGameSelectable
 	{
         /// <summary>
         /// File buffer.

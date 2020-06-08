@@ -17,6 +17,16 @@ namespace Nikki.Support.MostWanted.Framework
 	public class CarTypeInfoManager : Manager<CarTypeInfo>
 	{
 		/// <summary>
+		/// Game to which the class belongs to.
+		/// </summary>
+		public override GameINT GameINT => GameINT.MostWanted;
+
+		/// <summary>
+		/// Game string to which the class belongs to.
+		/// </summary>
+		public override string GameSTR => GameINT.MostWanted.ToString();
+
+		/// <summary>
 		/// Name of this <see cref="CarTypeInfoManager"/>.
 		/// </summary>
 		public override string Name => "CarTypeInfos";

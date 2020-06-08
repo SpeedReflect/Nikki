@@ -1,11 +1,7 @@
-﻿using Nikki.Support.Shared.Parts.CarParts;
-
-
-
-namespace Nikki.Reflection.Enum.CP
+﻿namespace Nikki.Reflection.Enum.CP
 {
 	/// <summary>
-	/// All attribute types for <see cref="KeyAttribute"/>.
+	/// All attribute types for KeyAttribute.
 	/// </summary>
 	public enum eAttribKey : uint
 	{

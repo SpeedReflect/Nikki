@@ -21,7 +21,7 @@ namespace Nikki.Reflection.Abstract
     /// interface and implements/overrides most of their methods.
     /// </summary>
     [DebuggerDisplay("CollectionName = {CollectionName}")]
-	public abstract class Collectable : IReflective, ICastable<Collectable>
+	public abstract class Collectable : IGameSelectable, IReflective, ICastable<Collectable>
 	{
         /// <summary>
         /// Collection name of the variable.

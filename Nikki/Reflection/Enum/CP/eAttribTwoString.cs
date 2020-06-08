@@ -1,11 +1,7 @@
-﻿using Nikki.Support.Shared.Parts.CarParts;
-
-
-
-namespace Nikki.Reflection.Enum.CP
+﻿namespace Nikki.Reflection.Enum.CP
 {
 	/// <summary>
-	/// All attribute types for <see cref="TwoStringAttribute"/>.
+	/// All attribute types for TwoStringAttribute.
 	/// </summary>
 	public enum eAttribTwoString : uint
 	{

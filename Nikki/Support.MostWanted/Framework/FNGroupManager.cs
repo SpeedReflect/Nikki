@@ -18,6 +18,16 @@ namespace Nikki.Support.MostWanted.Framework
 		private bool _is_read_only = true;
 
 		/// <summary>
+		/// Game to which the class belongs to.
+		/// </summary>
+		public override GameINT GameINT => GameINT.MostWanted;
+
+		/// <summary>
+		/// Game string to which the class belongs to.
+		/// </summary>
+		public override string GameSTR => GameINT.MostWanted.ToString();
+
+		/// <summary>
 		/// Name of this <see cref="FNGroupManager"/>.
 		/// </summary>
 		public override string Name => "FNGroups";

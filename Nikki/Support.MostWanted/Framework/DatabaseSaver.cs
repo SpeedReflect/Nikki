@@ -6,7 +6,7 @@ using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.Carbon.Framework
+namespace Nikki.Support.MostWanted.Framework
 {
 	internal class DatabaseSaver
 	{
@@ -40,7 +40,6 @@ namespace Nikki.Support.Carbon.Framework
 			this._db.SunInfos.Assemble(bw, this._options.Watermark);
 			this._db.Collisions.Assemble(bw, this._options.Watermark);
 			this._db.PresetRides.Assemble(bw, this._options.Watermark);
-			this._db.PresetSkins.Assemble(bw, this._options.Watermark);
 			this._db.FNGroups.Assemble(bw, this._options.Watermark);
 
 			return true;
@@ -62,7 +61,6 @@ namespace Nikki.Support.Carbon.Framework
 			this._db.SunInfos.Assemble(bw, this._options.Watermark);
 			this._db.Collisions.Assemble(bw, this._options.Watermark);
 			this._db.PresetRides.Assemble(bw, this._options.Watermark);
-			this._db.PresetSkins.Assemble(bw, this._options.Watermark);
 			this._db.FNGroups.Assemble(bw, this._options.Watermark);
 
 			this.WriteBlockOffsets(bw, br);
@@ -104,7 +102,6 @@ namespace Nikki.Support.Carbon.Framework
 					case eBlockID.DBCarBounds:
 					case eBlockID.FNGCompress:
 					case eBlockID.PresetRides:
-					case eBlockID.PresetSkins:
 					case eBlockID.TPKSettings:
 					case eBlockID.CarTypeInfos:
 					case eBlockID.CarInfoAnimHideup:

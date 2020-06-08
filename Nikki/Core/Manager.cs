@@ -220,6 +220,16 @@ namespace Nikki.Core
 		#region Properties
 
 		/// <summary>
+		/// Game to which the class belongs to.
+		/// </summary>
+		public abstract GameINT GameINT { get; }
+
+		/// <summary>
+		/// Game string to which the class belongs to.
+		/// </summary>
+		public abstract string GameSTR { get; }
+
+		/// <summary>
 		/// Name of this <see cref="Manager{T}"/>.
 		/// </summary>
 		public abstract string Name { get; }

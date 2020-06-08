@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Collections;
 using Nikki.Core;
 
@@ -10,7 +9,7 @@ namespace Nikki.Reflection.Interface
 	/// <summary>
 	/// Interface with methods and properties designed for managing collection types.
 	/// </summary>
-	public interface IManager : IList
+	public interface IManager : IGameSelectable, IList
 	{
 		#region Properties
 

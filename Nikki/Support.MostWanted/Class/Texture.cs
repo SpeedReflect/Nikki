@@ -86,8 +86,6 @@ namespace Nikki.Support.MostWanted.Class
 
         [MemoryCastable()]
         private int _unknown5 = 0;
-        
-        private string _parent_TPK;
 
         #endregion
 

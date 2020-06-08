@@ -1,11 +1,7 @@
-﻿using Nikki.Support.Shared.Parts.CarParts;
-
-
-
-namespace Nikki.Reflection.Enum.CP
+﻿namespace Nikki.Reflection.Enum.CP
 {
 	/// <summary>
-	/// All attribute types for <see cref="ModelTableAttribute"/>.
+	/// All attribute types for ModelTableAttribute.
 	/// </summary>
 	public enum eAttribModelTable : uint
 	{
