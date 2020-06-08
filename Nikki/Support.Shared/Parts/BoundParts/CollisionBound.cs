@@ -209,5 +209,11 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 			bw.Write(this.NameHash);
 			bw.Write((int)0);
 		}
+
+		/// <summary>
+		/// Returns CollisionBound string value.
+		/// </summary>
+		/// <returns>String value.</returns>
+		public override string ToString() => "CollisionBound";
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
@@ -52,6 +53,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public string PaintType { get; set; } = String.Empty;
 
         /// <summary>
@@ -60,6 +62,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public string PaintSwatch { get; set; } = String.Empty;
 
         /// <summary>
@@ -68,6 +71,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public float PaintSaturation { get; set; }
 
         /// <summary>
@@ -76,6 +80,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public float PaintBrightness { get; set; }
 
         #endregion

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Nikki.Reflection.Abstract;
 using Nikki.Support.Shared.Class;
 using Nikki.Reflection.Attributes;
+using CoreExtensions.Conversions;
 
 
 
@@ -17,7 +18,11 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		/// Indicates amount of vertices in this <see cref="CollisionCloud"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public int NumberOfVertices { get; set; }
+		public int NumberOfVertices
+		{
+			get => this.Vertices.Count;
+			set => this.Vertices.Resize(value);
+		}
 
 		/// <summary>
 		/// List of <see cref="CollisionVertex"/> in this <see cref="CollisionCloud"/>.
@@ -39,7 +44,7 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 			for (int loop = 0; loop < this.Vertices.Count; ++loop)
 			{
 
-				result.Vertices.Add((CollisionVertex)this.Vertices[loop].PlainCopy());
+				result.Vertices[loop] = (CollisionVertex)this.Vertices[loop].PlainCopy();
 
 			}
 
@@ -58,9 +63,7 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 			for (int loop = 0; loop < this.NumberOfVertices; ++loop)
 			{
 
-				var vertex = new CollisionVertex();
-				vertex.Read(br);
-				this.Vertices.Add(vertex);
+				this.Vertices[loop].Read(br);
 			
 			}
 		}
@@ -82,5 +85,11 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 
 			}
 		}
+
+		/// <summary>
+		/// Returns CollisionCloud string value.
+		/// </summary>
+		/// <returns>String value.</returns>
+		public override string ToString() => "CollisionCloud";
 	}
 }

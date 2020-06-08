@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
@@ -47,24 +48,28 @@ namespace Nikki.Support.Shared.Class
         /// Represents data offset of the block in Global data.
         /// </summary>
         [MemoryCastable()]
+        [Browsable(false)]
         public int Offset { get; set; } = 0;
 
         /// <summary>
         /// Represents data size of the block in Global data.
         /// </summary>
         [MemoryCastable()]
+        [Browsable(false)]
         public int Size { get; protected set; } = 0;
 
         /// <summary>
         /// Represents palette offset of the block in Global data.
         /// </summary>
         [MemoryCastable()]
+        [Browsable(false)]
         public int PaletteOffset { get; set; } = 0;
 
         /// <summary>
         /// Represents palette size of the block in Global data.
         /// </summary>
         [MemoryCastable()]
+        [Browsable(false)]
         public int PaletteSize { get; protected set; } = 0;
 
         #endregion
@@ -81,28 +86,33 @@ namespace Nikki.Support.Shared.Class
         /// Represents height in pixels of the texture.
         /// </summary>
         [MemoryCastable()]
+        [Category("Primary")]
         public short Width { get; protected set; }
 
         /// <summary>
         /// Represents height in pixels of the texture.
         /// </summary>
         [MemoryCastable()]
+        [Category("Primary")]
         public short Height { get; protected set; }
 
         /// <summary>
         /// Represents base 2 value of the width of the texture.
         /// </summary>
+        [Browsable(false)]
         public byte Log_2_Width => (byte)Math.Log(this.Width, 2);
 
         /// <summary>
         /// Represents base 2 value of the height of the texture.
         /// </summary>
+        [Browsable(false)]
         public byte Log_2_Height => (byte)Math.Log(this.Height, 2);
 
         /// <summary>
         /// Represents number of mipmaps in the texture.
         /// </summary>
         [MemoryCastable()]
+        [Category("Primary")]
         public byte Mipmaps { get; protected set; }
 
         /// <summary>
@@ -110,6 +120,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public uint ClassKey { get; set; } = 0x001A93CF;
 
         /// <summary>
@@ -117,6 +128,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public eTextureMipmapBiasType MipmapBiasType { get; set; }
 
         /// <summary>
@@ -124,6 +136,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte BiasLevel { get; set; }
 
         /// <summary>
@@ -131,6 +144,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public eTextureAlphaUsageType AlphaUsageType { get; set; } = eTextureAlphaUsageType.TEXUSAGE_MODULATED;
 
         /// <summary>
@@ -138,6 +152,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public eTextureAlphaBlendType AlphaBlendType { get; set; } = eTextureAlphaBlendType.TEXBLEND_BLEND;
 
         /// <summary>
@@ -145,6 +160,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte ApplyAlphaSort { get; set; }
 
         /// <summary>
@@ -152,6 +168,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public eTextureScrollType ScrollType { get; set; }
 
         /// <summary>
@@ -159,6 +176,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte RenderingOrder { get; set; } = 5;
 
         /// <summary>
@@ -166,11 +184,13 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte TileableUV { get; set; }
 
         /// <summary>
         /// DDS data of this <see cref="Texture"/>.
         /// </summary>
+        [Browsable(false)]
         public byte[] Data { get; set; }
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
@@ -7,6 +8,7 @@ using Nikki.Reflection.Attributes;
 using Nikki.Support.Carbon.Framework;
 using Nikki.Support.Carbon.Parts.PresetParts;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -43,22 +45,26 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Game to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override GameINT GameINT => GameINT.Carbon;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override string GameSTR => GameINT.Carbon.ToString();
 
         /// <summary>
         /// Manager to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public PresetRideManager Manager { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
         /// </summary>
         [AccessModifiable()]
+        [Category("Main")]
         public override string CollectionName
         {
             get => this._collection_name;
@@ -72,11 +78,15 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Binary memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint BinKey => this._collection_name.BinHash();
 
         /// <summary>
         /// Vault memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint VltKey => this._collection_name.VltHash();
 
         /// <summary>
@@ -84,6 +94,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public override string MODEL { get; set; } = String.Empty;
 
         /// <summary>
@@ -91,6 +102,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public string Frontend { get; set; } = String.Empty;
 
         /// <summary>
@@ -98,6 +110,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public string Pvehicle { get; set; } = String.Empty;
 
         /// <summary>
@@ -105,6 +118,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Base { get; set; } = String.Empty;
 
         /// <summary>
@@ -112,6 +126,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string AftermarketBodykit { get; set; } = String.Empty;
 
         /// <summary>
@@ -119,6 +134,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string FrontBrake { get; set; } = String.Empty;
 
         /// <summary>
@@ -126,6 +142,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string FrontRotor { get; set; } = String.Empty;
 
         /// <summary>
@@ -133,6 +150,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string FrontLeftWindow { get; set; } = String.Empty;
 
         /// <summary>
@@ -140,6 +158,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string FrontRightWindow { get; set; } = String.Empty;
 
         /// <summary>
@@ -147,6 +166,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string FrontWindow { get; set; } = String.Empty;
 
         /// <summary>
@@ -154,6 +174,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Interior { get; set; } = String.Empty;
 
         /// <summary>
@@ -161,6 +182,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string LeftBrakelight { get; set; } = String.Empty;
 
         /// <summary>
@@ -168,6 +190,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string LeftBrakelightGlass { get; set; } = String.Empty;
 
         /// <summary>
@@ -175,6 +198,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string LeftHeadlight { get; set; } = String.Empty;
 
         /// <summary>
@@ -182,6 +206,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string LeftHeadlightGlass { get; set; } = String.Empty;
 
         /// <summary>
@@ -189,6 +214,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string LeftSideMirror { get; set; } = String.Empty;
 
         /// <summary>
@@ -196,6 +222,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RearBrake { get; set; } = String.Empty;
 
         /// <summary>
@@ -203,6 +230,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RearRotor { get; set; } = String.Empty;
 
         /// <summary>
@@ -210,6 +238,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RearLeftWindow { get; set; } = String.Empty;
 
         /// <summary>
@@ -217,6 +246,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RearRightWindow { get; set; } = String.Empty;
 
         /// <summary>
@@ -224,6 +254,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RearWindow { get; set; } = String.Empty;
 
         /// <summary>
@@ -231,6 +262,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RightBrakelight { get; set; } = String.Empty;
 
         /// <summary>
@@ -238,6 +270,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RightBrakelightGlass { get; set; } = String.Empty;
 
         /// <summary>
@@ -245,6 +278,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RightHeadlight { get; set; } = String.Empty;
 
         /// <summary>
@@ -252,6 +286,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RightHeadlightGlass { get; set; } = String.Empty;
 
         /// <summary>
@@ -259,6 +294,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RightSideMirror { get; set; } = String.Empty;
 
         /// <summary>
@@ -266,6 +302,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Driver { get; set; } = String.Empty;
 
         /// <summary>
@@ -273,6 +310,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string SteeringWheel { get; set; } = String.Empty;
 
         /// <summary>
@@ -280,6 +318,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Exhaust { get; set; } = String.Empty;
 
         /// <summary>
@@ -287,6 +326,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Spoiler { get; set; } = String.Empty;
 
         /// <summary>
@@ -294,6 +334,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string UniversalSpoilerBase { get; set; } = String.Empty;
 
         /// <summary>
@@ -301,6 +342,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string AutosculptFrontBumper { get; set; } = String.Empty;
 
         /// <summary>
@@ -308,6 +350,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string FrontBumperBadgingSet { get; set; } = String.Empty;
 
         /// <summary>
@@ -315,6 +358,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string AutosculptRearBumper { get; set; } = String.Empty;
 
         /// <summary>
@@ -322,6 +366,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RearBumperBadgingSet { get; set; } = String.Empty;
 
         /// <summary>
@@ -329,6 +374,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RoofTop { get; set; } = String.Empty;
 
         /// <summary>
@@ -336,6 +382,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RoofScoop { get; set; } = String.Empty;
 
         /// <summary>
@@ -343,6 +390,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Hood { get; set; } = String.Empty;
 
         /// <summary>
@@ -350,6 +398,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string AutosculptSkirt { get; set; } = String.Empty;
 
         /// <summary>
@@ -357,6 +406,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Headlight { get; set; } = String.Empty;
 
         /// <summary>
@@ -364,6 +414,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Brakelight { get; set; } = String.Empty;
 
         /// <summary>
@@ -371,6 +422,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string DoorLeft { get; set; } = String.Empty;
 
         /// <summary>
@@ -378,6 +430,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string DoorRight { get; set; } = String.Empty;
 
         /// <summary>
@@ -385,6 +438,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string FrontWheel { get; set; } = String.Empty;
 
         /// <summary>
@@ -392,6 +446,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RearWheel { get; set; } = String.Empty;
 
         /// <summary>
@@ -399,6 +454,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string LicensePlate { get; set; } = String.Empty;
 
         /// <summary>
@@ -406,6 +462,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Doorline { get; set; } = String.Empty;
 
         /// <summary>
@@ -413,6 +470,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string DecalFrontWindow { get; set; } = String.Empty;
 
         /// <summary>
@@ -420,6 +478,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string DecalRearWindow { get; set; } = String.Empty;
 
         /// <summary>
@@ -427,6 +486,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string WindshieldTint { get; set; } = String.Empty;
 
         /// <summary>
@@ -434,6 +494,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string CustomHUD { get; set; } = String.Empty;
 
         /// <summary>
@@ -441,6 +502,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string CV { get; set; } = String.Empty;
 
         /// <summary>
@@ -448,6 +510,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Misc { get; set; } = String.Empty;
 
         /// <summary>
@@ -455,6 +518,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte ChopTopSizeValue { get; set; }
 
         /// <summary>
@@ -462,198 +526,231 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte ExhaustSizeValue { get; set; }
 
         /// <summary>
         /// Damage attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("BaseKit")]
+        [Browsable(false)]
         public Damages KIT_DAMAGES { get; set; }
 
         /// <summary>
         /// Zero damage attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("BaseKit")]
+        [Browsable(false)]
         public ZeroDamage ZERO_DAMAGES { get; set; }
 
         /// <summary>
         /// Attachment attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("BaseKit")]
+        [Browsable(false)]
         public Attachments ATTACHMENTS { get; set; }
 
         /// <summary>
         /// Visual attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Visuals")]
+        [Browsable(false)]
         public VisualSets VISUAL_SETS { get; set; }
 
         /// <summary>
         /// Paint attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Visuals")]
+        [Browsable(false)]
         public PaintValues PAINT_VALUES { get; set; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
+        [Browsable(false)]
         public Vinyl VINYL01 { get; set; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
+        [Browsable(false)]
         public Vinyl VINYL02 { get; set; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
+        [Browsable(false)]
         public Vinyl VINYL03 { get; set; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
+        [Browsable(false)]
         public Vinyl VINYL04 { get; set; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
+        [Browsable(false)]
         public Vinyl VINYL05 { get; set; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
+        [Browsable(false)]
         public Vinyl VINYL06 { get; set; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
+        [Browsable(false)]
         public Vinyl VINYL07 { get; set; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
+        [Browsable(false)]
         public Vinyl VINYL08 { get; set; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
+        [Browsable(false)]
         public Vinyl VINYL09 { get; set; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
+        [Browsable(false)]
         public Vinyl VINYL10 { get; set; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
+        [Browsable(false)]
         public Vinyl VINYL11 { get; set; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
+        [Browsable(false)]
         public Vinyl VINYL12 { get; set; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
+        [Browsable(false)]
         public Vinyl VINYL13 { get; set; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
+        [Browsable(false)]
         public Vinyl VINYL14 { get; set; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
+        [Browsable(false)]
         public Vinyl VINYL15 { get; set; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
+        [Browsable(false)]
         public Vinyl VINYL16 { get; set; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
+        [Browsable(false)]
         public Vinyl VINYL17 { get; set; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
+        [Browsable(false)]
         public Vinyl VINYL18 { get; set; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
+        [Browsable(false)]
         public Vinyl VINYL19 { get; set; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
+        [Browsable(false)]
         public Vinyl VINYL20 { get; set; }
 
         /// <summary>
         /// Autosculpt Front Bumper attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Autosculpt")]
+        [Browsable(false)]
         public Autosculpt FRONTBUMPER { get; set; }
 
         /// <summary>
         /// Autosculpt Rear Bumper attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Autosculpt")]
+        [Browsable(false)]
         public Autosculpt REARBUMPER { get; set; }
 
         /// <summary>
         /// Autosculpt Skirt attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Autosculpt")]
+        [Browsable(false)]
         public Autosculpt SKIRT { get; set; }
 
         /// <summary>
         /// Autosculpt Wheels attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Autosculpt")]
+        [Browsable(false)]
         public Autosculpt WHEELS { get; set; }
 
         /// <summary>
         /// Autosculpt Hood attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Autosculpt")]
+        [Browsable(false)]
         public Autosculpt HOOD { get; set; }
 
         /// <summary>
         /// Autosculpt Spoiler attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Autosculpt")]
+        [Browsable(false)]
         public Autosculpt SPOILER { get; set; }
 
         /// <summary>
         /// Autosculpt RoofScoop attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Autosculpt")]
+        [Browsable(false)]
         public Autosculpt ROOFSCOOP { get; set; }
 
         #endregion

@@ -75,5 +75,11 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 			bw.Write(this.CoordinateZ);
 			bw.Write(this.CoordinateW);
 		}
+
+		/// <summary>
+		/// Returns CollisionVertex string value.
+		/// </summary>
+		/// <returns>String value.</returns>
+		public override string ToString() => "CollisionVertex";
 	}
 }

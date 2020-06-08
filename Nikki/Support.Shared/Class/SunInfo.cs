@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
@@ -52,6 +53,7 @@ namespace Nikki.Support.Shared.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public int Version { get; set; } = 2;
 
 		/// <summary>
@@ -60,6 +62,7 @@ namespace Nikki.Support.Shared.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public float PositionX { get; set; }
 
 		/// <summary>
@@ -68,6 +71,7 @@ namespace Nikki.Support.Shared.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public float PositionY { get; set; }
 
 		/// <summary>
@@ -76,6 +80,7 @@ namespace Nikki.Support.Shared.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public float PositionZ { get; set; }
 
 		/// <summary>
@@ -84,6 +89,7 @@ namespace Nikki.Support.Shared.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public float CarShadowPositionX { get; set; }
 
 		/// <summary>
@@ -92,6 +98,7 @@ namespace Nikki.Support.Shared.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public float CarShadowPositionY { get; set; }
 
 		/// <summary>
@@ -100,6 +107,7 @@ namespace Nikki.Support.Shared.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public float CarShadowPositionZ { get; set; }
 
 		#endregion

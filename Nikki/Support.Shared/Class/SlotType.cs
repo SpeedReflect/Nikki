@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
@@ -52,6 +53,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public string SlotStockOverride { get; set; } = String.Empty;
 
         /// <summary>
@@ -59,6 +61,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public string SlotMainOverride { get; set; } = String.Empty;
 
         /// <summary>
@@ -66,6 +69,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public eCarAnimLocation PrimaryAnimation { get; set; }
 
 		#endregion

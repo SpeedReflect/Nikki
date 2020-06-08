@@ -8461,26 +8461,6 @@
             Represents memory type of the <see cref="T:Nikki.Support.Carbon.Class.CarTypeInfo"/>.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.CarTypeInfo.Spoiler">
-            <summary>
-            Spoiler type of the <see cref="T:Nikki.Support.Carbon.Class.CarTypeInfo"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Class.CarTypeInfo.SpoilerAS">
-            <summary>
-            Autosculpt spoiler type of the <see cref="T:Nikki.Support.Carbon.Class.CarTypeInfo"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Class.CarTypeInfo.RoofScoop">
-            <summary>
-            RoofScoop type of the <see cref="T:Nikki.Support.Carbon.Class.CarTypeInfo"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Class.CarTypeInfo.RoofScoopAS">
-            <summary>
-            Autosculpt roof scoop type of this <see cref="T:Nikki.Support.Carbon.Class.CarTypeInfo"/>.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Carbon.Class.CarTypeInfo.#ctor">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.CarTypeInfo"/>.
@@ -18945,6 +18925,12 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Shared.Parts.BoundParts.CollisionBound"/> with.</param>
         </member>
+        <member name="M:Nikki.Support.Shared.Parts.BoundParts.CollisionBound.ToString">
+            <summary>
+            Returns CollisionBound string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
         <member name="T:Nikki.Support.Shared.Parts.BoundParts.CollisionCloud">
             <summary>
             <see cref="T:Nikki.Support.Shared.Parts.BoundParts.CollisionCloud"/> is a unit bound for <see cref="T:Nikki.Support.Shared.Class.Collision"/>.
@@ -18977,6 +18963,12 @@
             Assembles <see cref="T:Nikki.Support.Shared.Parts.BoundParts.CollisionBound"/> into a byte array.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Shared.Parts.BoundParts.CollisionBound"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.BoundParts.CollisionCloud.ToString">
+            <summary>
+            Returns CollisionCloud string value.
+            </summary>
+            <returns>String value.</returns>
         </member>
         <member name="T:Nikki.Support.Shared.Parts.BoundParts.CollisionVertex">
             <summary>
@@ -19020,6 +19012,12 @@
             Assembles <see cref="T:Nikki.Support.Shared.Parts.BoundParts.CollisionBound"/> into a byte array.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Shared.Parts.BoundParts.CollisionBound"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.BoundParts.CollisionVertex.ToString">
+            <summary>
+            Returns CollisionVertex string value.
+            </summary>
+            <returns>String value.</returns>
         </member>
         <member name="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute">
             <summary>

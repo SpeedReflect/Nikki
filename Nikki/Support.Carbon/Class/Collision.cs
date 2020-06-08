@@ -90,12 +90,8 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		public override int NumberOfBounds
 		{
-			get => this._number_of_bounds;
-			set
-			{
-				this.CollisionBounds.Resize(value);
-				this._number_of_bounds = value;
-			}
+			get => this.CollisionBounds.Count;
+			set => this.CollisionBounds.Resize(value);
 		}
 
 		/// <summary>
@@ -104,12 +100,8 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		public override int NumberOfClouds
 		{
-			get => this._number_of_clouds;
-			set
-			{
-				this.CollisionClouds.Resize(value);
-				this._number_of_clouds = value;
-			}
+			get => this.CollisionClouds.Count;
+			set => this.CollisionClouds.Resize(value);
 		}
 
 		/// <summary>
@@ -185,22 +177,22 @@ namespace Nikki.Support.Carbon.Class
 			bw.Write(0x11111111);
 			bw.Write(0x11111111);
 			bw.Write(this.VltKey);
-			bw.Write(this._number_of_bounds);
+			bw.Write(this.NumberOfBounds);
 			bw.Write(this.IsResolved == eBoolean.False ? (int)0 : (int)1);
 			bw.Write((int)0);
 
-			for (int loop = 0; loop < this._number_of_bounds; ++loop)
+			for (int loop = 0; loop < this.NumberOfBounds; ++loop)
 			{
 
 				this.CollisionBounds[loop].Write(bw);
 
 			}
 
-			bw.Write(this._number_of_clouds);
+			bw.Write(this.NumberOfClouds);
 			bw.Write((int)0);
 			bw.Write((long)0);
 
-			for (int loop = 0; loop < this._number_of_clouds; ++loop)
+			for (int loop = 0; loop < this.NumberOfClouds; ++loop)
 			{
 
 				this.CollisionClouds[loop].Write(bw);
@@ -220,7 +212,7 @@ namespace Nikki.Support.Carbon.Class
 			this.IsResolved = br.ReadInt32() == 0 ? eBoolean.False : eBoolean.True;
 			br.BaseStream.Position += 4;
 
-			for (int loop = 0; loop < this._number_of_bounds; ++loop)
+			for (int loop = 0; loop < this.NumberOfBounds; ++loop)
 			{
 
 				this.CollisionBounds[loop].Read(br);
@@ -230,7 +222,7 @@ namespace Nikki.Support.Carbon.Class
 			this.NumberOfClouds = br.ReadInt32();
 			br.BaseStream.Position += 12;
 
-			for (int loop = 0; loop < this._number_of_clouds; ++loop)
+			for (int loop = 0; loop < this.NumberOfClouds; ++loop)
 			{
 
 				this.CollisionClouds[loop].Read(br);
@@ -252,14 +244,14 @@ namespace Nikki.Support.Carbon.Class
 				IsResolved = this.IsResolved
 			};
 
-			for (int loop = 0; loop < this._number_of_bounds; ++loop)
+			for (int loop = 0; loop < this.NumberOfBounds; ++loop)
 			{
 
 				result.CollisionBounds[loop] = (CollisionBound)this.CollisionBounds[loop].PlainCopy();
 
 			}
 
-			for (int loop = 0; loop < this._number_of_clouds; ++loop)
+			for (int loop = 0; loop < this.NumberOfClouds; ++loop)
 			{
 
 				result.CollisionClouds[loop] = (CollisionCloud)this.CollisionClouds[loop].PlainCopy();
@@ -277,7 +269,7 @@ namespace Nikki.Support.Carbon.Class
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
 
 		#endregion

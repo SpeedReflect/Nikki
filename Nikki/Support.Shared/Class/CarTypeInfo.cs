@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
@@ -64,6 +65,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public eUsageType UsageType { get; set; }
 
         /// <summary>
@@ -72,6 +74,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public eBoolean IsSkinnable { get; set; }
 
         /// <summary>
@@ -88,6 +91,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float HeadlightFOV { get; set; }
 
         /// <summary>
@@ -96,6 +100,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte PadHighPerformance { get; set; }
 
         /// <summary>
@@ -104,6 +109,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte NumAvailableSkinNumbers { get; set; }
 
         /// <summary>
@@ -112,6 +118,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte WhatGame { get; set; }
 
         /// <summary>
@@ -120,6 +127,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte ConvertibleFlag { get; set; }
 
         /// <summary>
@@ -128,6 +136,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte WheelOuterRadius { get; set; }
 
         /// <summary>
@@ -136,6 +145,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte WheelInnerRadiusMin { get; set; }
 
         /// <summary>
@@ -144,6 +154,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte WheelInnerRadiusMax { get; set; }
 
         /// <summary>
@@ -152,6 +163,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float HeadlightPositionX { get; set; }
 
         /// <summary>
@@ -160,6 +172,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float HeadlightPositionY { get; set; }
 
         /// <summary>
@@ -168,6 +181,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float HeadlightPositionZ { get; set; }
 
         /// <summary>
@@ -176,6 +190,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float HeadlightPositionW { get; set; }
 
         /// <summary>
@@ -184,6 +199,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float DriverRenderingOffsetX { get; set; }
 
         /// <summary>
@@ -192,6 +208,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float DriverRenderingOffsetY { get; set; }
 
         /// <summary>
@@ -200,6 +217,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float DriverRenderingOffsetZ { get; set; }
 
         /// <summary>
@@ -208,6 +226,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float DriverRenderingOffsetW { get; set; }
 
         /// <summary>
@@ -216,6 +235,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float SteeringWheelRenderingX { get; set; }
 
         /// <summary>
@@ -224,6 +244,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float SteeringWheelRenderingY { get; set; }
 
         /// <summary>
@@ -232,6 +253,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float SteeringWheelRenderingZ { get; set; }
 
         /// <summary>
@@ -240,6 +262,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float SteeringWheelRenderingW { get; set; }
 
         /// <summary>
@@ -248,6 +271,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte MaxInstances1 { get; set; }
 
         /// <summary>
@@ -256,6 +280,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte MaxInstances2 { get; set; }
 
         /// <summary>
@@ -264,6 +289,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte MaxInstances3 { get; set; }
 
         /// <summary>
@@ -272,6 +298,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte MaxInstances4 { get; set; }
 
         /// <summary>
@@ -280,6 +307,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte MaxInstances5 { get; set; }
 
         /// <summary>
@@ -288,6 +316,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte KeepLoaded1 { get; set; }
 
         /// <summary>
@@ -296,6 +325,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte KeepLoaded2 { get; set; }
 
         /// <summary>
@@ -304,6 +334,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte KeepLoaded3 { get; set; }
 
         /// <summary>
@@ -312,6 +343,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte KeepLoaded4 { get; set; }
 
         /// <summary>
@@ -320,6 +352,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte KeepLoaded5 { get; set; }
 
         /// <summary>
@@ -328,6 +361,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float MinTimeBetweenUses1 { get; set; }
 
         /// <summary>
@@ -336,6 +370,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float MinTimeBetweenUses2 { get; set; }
 
         /// <summary>
@@ -344,6 +379,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float MinTimeBetweenUses3 { get; set; }
 
         /// <summary>
@@ -360,6 +396,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float MinTimeBetweenUses5 { get; set; }
 
         /// <summary>
@@ -368,6 +405,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte AvailableSkinNumbers01 { get; set; }
 
         /// <summary>
@@ -376,6 +414,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte AvailableSkinNumbers02 { get; set; }
 
         /// <summary>
@@ -384,6 +423,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte AvailableSkinNumbers03 { get; set; }
 
         /// <summary>
@@ -392,6 +432,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte AvailableSkinNumbers04 { get; set; }
 
         /// <summary>
@@ -400,6 +441,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte AvailableSkinNumbers05 { get; set; }
 
         /// <summary>
@@ -408,6 +450,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte AvailableSkinNumbers06 { get; set; }
 
         /// <summary>
@@ -416,6 +459,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte AvailableSkinNumbers07 { get; set; }
 
         /// <summary>
@@ -424,6 +468,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte AvailableSkinNumbers08 { get; set; }
 
         /// <summary>
@@ -432,6 +477,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte AvailableSkinNumbers09 { get; set; }
 
         /// <summary>
@@ -440,6 +486,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte AvailableSkinNumbers10 { get; set; }
 
         /// <summary>
@@ -448,6 +495,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public byte DefaultSkinNumber { get; set; }
 
         #endregion

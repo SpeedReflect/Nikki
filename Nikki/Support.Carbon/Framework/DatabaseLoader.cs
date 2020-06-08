@@ -84,6 +84,8 @@ namespace Nikki.Support.Carbon.Framework
 				var id = br.ReadEnum<eBlockID>();
 				var size = br.ReadInt32();
 
+				System.Console.WriteLine($"0x{off:X8} ---> {id}");
+
 				switch (id)
 				{
 					case eBlockID.Materials:

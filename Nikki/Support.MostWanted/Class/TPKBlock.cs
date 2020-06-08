@@ -764,7 +764,7 @@ namespace Nikki.Support.MostWanted.Class
             {
                 
                 // We read till we find magic compressed block number
-                if (br.ReadEnum<eBlockID>() != eBlockID.CompressedTex) continue;
+                if (br.ReadEnum<eBlockID>() != eBlockID.LZCompressed) continue;
 
                 var magic = new MagicHeader();
                 magic.Read(br);
