@@ -12,7 +12,8 @@ using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
 using CoreExtensions.Conversions;
-using System.ComponentModel.DataAnnotations;
+
+
 
 namespace Nikki.Support.Carbon.Class
 {
@@ -24,6 +25,7 @@ namespace Nikki.Support.Carbon.Class
         #region Fields
 
         private string _collection_name;
+        private uint _binkey;
 
         [MemoryCastable()]
         private byte _compression = EAComp.RGBA_08;
@@ -137,7 +139,7 @@ namespace Nikki.Support.Carbon.Class
                 }
 
                 this._collection_name = value;
-                this.BinKey = key;
+                this._binkey = key;
             }
         }
 
@@ -146,15 +148,13 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [Category("Main")]
         [TypeConverter(typeof(HexConverter))]
-        [Editable(false)]
-        public override uint BinKey { get; set; }
+        public override uint BinKey => this._binkey;
 
         /// <summary>
         /// Vault memory hash of the collection name.
         /// </summary>
         [Category("Main")]
         [TypeConverter(typeof(HexConverter))]
-        [Editable(false)]
         public override uint VltKey => this._collection_name.VltHash();
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace Nikki.Support.Carbon.Class
         {
             this.TPK = tpk;
             this._collection_name = CName;
-            this.BinKey = CName.BinHash();
+            this._binkey = CName.BinHash();
             this.PaletteOffset = -1;
             this._padding = 0;
         }
@@ -196,7 +196,7 @@ namespace Nikki.Support.Carbon.Class
         {
             this.TPK = tpk;
             this._collection_name = CName;
-            this.BinKey = CName.BinHash();
+            this._binkey = CName.BinHash();
             this.PaletteOffset = -1;
             this._padding = 0;
             this.Initialize(filename);
@@ -234,7 +234,7 @@ namespace Nikki.Support.Carbon.Class
             // Write all settings
             bw.Write(this._cube_environment);
             bw.Write((long)0);
-            bw.Write(this.BinKey);
+            bw.Write(this._binkey);
             bw.Write(this.ClassKey);
             bw.Write((uint)this.Offset);
             bw.Write(this._compression == EAComp.P8_08 ? this.PaletteOffset : -1);
@@ -292,7 +292,7 @@ namespace Nikki.Support.Carbon.Class
         {
             this._cube_environment = br.ReadUInt32();
             br.BaseStream.Position += 8;
-            this.BinKey = br.ReadUInt32();
+            this._binkey = br.ReadUInt32();
             this.ClassKey = br.ReadUInt32();
             this.Offset = br.ReadInt32();
             this.PaletteOffset = br.ReadInt32();
@@ -527,7 +527,7 @@ namespace Nikki.Support.Carbon.Class
         public override string ToString()
         {
             return $"Collection Name: {this.CollectionName} | " +
-                   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+                   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
         }
 
         #endregion

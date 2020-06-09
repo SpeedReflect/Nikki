@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
@@ -6,6 +7,7 @@ using Nikki.Reflection.Attributes;
 using Nikki.Support.Carbon.Framework;
 using Nikki.Support.Shared.Parts.SunParts;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -42,22 +44,26 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override GameINT GameINT => GameINT.Carbon;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override string GameSTR => GameINT.Carbon.ToString();
 
 		/// <summary>
 		/// Manager to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public SunInfoManager Manager { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
@@ -71,11 +77,15 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Binary memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint BinKey => this._collection_name.BinHash();
 
 		/// <summary>
 		/// Vault memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint VltKey => this._collection_name.VltHash();
 
 		/// <summary>
@@ -243,7 +253,7 @@ namespace Nikki.Support.Carbon.Class
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
 
 		#endregion

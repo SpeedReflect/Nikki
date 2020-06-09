@@ -1,11 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Carbon.Framework;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -42,22 +44,26 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
-		public override GameINT GameINT => GameINT.Carbon;
+		[Browsable(false)]
+        public override GameINT GameINT => GameINT.Carbon;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override string GameSTR => GameINT.Carbon.ToString();
 
         /// <summary>
         /// Manager to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public PresetSkinManager Manager { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
         /// </summary>
         [AccessModifiable()]
+        [Category("Main")]
         public override string CollectionName
         {
             get => this._collection_name;
@@ -71,11 +77,15 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Binary memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint BinKey => this._collection_name.BinHash();
 
         /// <summary>
         /// Vault memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint VltKey => this._collection_name.VltHash();
 
         /// <summary>
@@ -84,6 +94,7 @@ namespace Nikki.Support.Carbon.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public string GenericVinyl { get; set; } = String.Empty;
 
         /// <summary>
@@ -91,6 +102,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string VectorVinyl { get; set; } = String.Empty;
 
         /// <summary>
@@ -99,6 +111,7 @@ namespace Nikki.Support.Carbon.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public short PositionY { get; set; } = 0;
 
         /// <summary>
@@ -107,6 +120,7 @@ namespace Nikki.Support.Carbon.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public short PositionX { get; set; } = 0;
 
         /// <summary>
@@ -115,6 +129,7 @@ namespace Nikki.Support.Carbon.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public sbyte Rotation { get; set; } = 0;
 
         /// <summary>
@@ -123,6 +138,7 @@ namespace Nikki.Support.Carbon.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public sbyte Skew { get; set; } = 0;
 
         /// <summary>
@@ -131,6 +147,7 @@ namespace Nikki.Support.Carbon.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public sbyte ScaleY { get; set; } = 0;
 
         /// <summary>
@@ -139,6 +156,7 @@ namespace Nikki.Support.Carbon.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public sbyte ScaleX { get; set; } = 0;
 
         /// <summary>
@@ -147,7 +165,8 @@ namespace Nikki.Support.Carbon.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        public string SwatchColor1 { get; set; } = String.Empty;
+        [Category("Secondary")]
+        public string SwatchFillEffect { get; set; } = String.Empty;
 
         /// <summary>
         /// Swatch color value of the second color of the vector vinyl of the preset skin.
@@ -155,7 +174,8 @@ namespace Nikki.Support.Carbon.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        public string SwatchColor2 { get; set; } = String.Empty;
+        [Category("Secondary")]
+        public string SwatchStrokeEffect { get; set; } = String.Empty;
 
         /// <summary>
         /// Swatch color value of the third color of the vector vinyl of the preset skin.
@@ -163,7 +183,8 @@ namespace Nikki.Support.Carbon.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        public string SwatchColor3 { get; set; } = String.Empty;
+        [Category("Secondary")]
+        public string SwatchInnerShadow { get; set; } = String.Empty;
 
         /// <summary>
         /// Swatch color value of the fourth color of the vector vinyl of the preset skin.
@@ -171,7 +192,8 @@ namespace Nikki.Support.Carbon.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        public string SwatchColor4 { get; set; } = String.Empty;
+        [Category("Secondary")]
+        public string SwatchInnerGlow { get; set; } = String.Empty;
 
         /// <summary>
         /// Saturation value of the first color of the vector vinyl of the preset skin.
@@ -179,7 +201,8 @@ namespace Nikki.Support.Carbon.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        public byte Saturation1 { get; set; } = 0;
+        [Category("Secondary")]
+        public byte SaturationFillEffect { get; set; } = 0;
 
         /// <summary>
         /// Saturation value of the second color of the vector vinyl of the preset skin.
@@ -187,7 +210,8 @@ namespace Nikki.Support.Carbon.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        public byte Saturation2 { get; set; } = 0;
+        [Category("Secondary")]
+        public byte SaturationStrokeEffect { get; set; } = 0;
 
         /// <summary>
         /// Saturation value of the third color of the vector vinyl of the preset skin.
@@ -195,7 +219,8 @@ namespace Nikki.Support.Carbon.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        public byte Saturation3 { get; set; } = 0;
+        [Category("Secondary")]
+        public byte SaturationInnerShadow { get; set; } = 0;
 
         /// <summary>
         /// Saturation value of the fourth color of the vector vinyl of the preset skin.
@@ -203,7 +228,8 @@ namespace Nikki.Support.Carbon.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        public byte Saturation4 { get; set; } = 0;
+        [Category("Secondary")]
+        public byte SaturationInnerGlow { get; set; } = 0;
 
         /// <summary>
         /// Brightness value of the first color of the vector vinyl of the preset skin.
@@ -211,7 +237,8 @@ namespace Nikki.Support.Carbon.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        public byte Brightness1 { get; set; } = 0;
+        [Category("Secondary")]
+        public byte BrightnessFillEffect { get; set; } = 0;
 
         /// <summary>
         /// Brightness value of the second color of the vector vinyl of the preset skin.
@@ -219,7 +246,8 @@ namespace Nikki.Support.Carbon.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        public byte Brightness2 { get; set; } = 0;
+        [Category("Secondary")]
+        public byte BrightnessStrokeEffect { get; set; } = 0;
 
         /// <summary>
         /// Brightness value of the third color of the vector vinyl of the preset skin.
@@ -227,7 +255,8 @@ namespace Nikki.Support.Carbon.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        public byte Brightness3 { get; set; } = 0;
+        [Category("Secondary")]
+        public byte BrightnessInnerShadow { get; set; } = 0;
 
         /// <summary>
         /// Brightness value of the fourth color of the vector vinyl of the preset skin.
@@ -235,7 +264,8 @@ namespace Nikki.Support.Carbon.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        public byte Brightness4 { get; set; } = 0;
+        [Category("Secondary")]
+        public byte BrightnessInnerGlow { get; set; } = 0;
 
         #endregion
 
@@ -305,21 +335,21 @@ namespace Nikki.Support.Carbon.Class
             bw.Write((byte)this.Skew);
             bw.Write((byte)this.ScaleY);
             bw.Write((byte)this.ScaleX);
-            bw.Write(this.SwatchColor1.BinHash());
-            bw.Write(this.Saturation1);
-            bw.Write(this.Brightness1);
+            bw.Write(this.SwatchFillEffect.BinHash());
+            bw.Write(this.SaturationFillEffect);
+            bw.Write(this.BrightnessFillEffect);
             bw.Write((short)0);
-            bw.Write(this.SwatchColor2.BinHash());
-            bw.Write(this.Saturation2);
-            bw.Write(this.Brightness2);
+            bw.Write(this.SwatchStrokeEffect.BinHash());
+            bw.Write(this.SaturationStrokeEffect);
+            bw.Write(this.BrightnessStrokeEffect);
             bw.Write((short)0);
-            bw.Write(this.SwatchColor3.BinHash());
-            bw.Write(this.Saturation3);
-            bw.Write(this.Brightness3);
+            bw.Write(this.SwatchInnerShadow.BinHash());
+            bw.Write(this.SaturationInnerShadow);
+            bw.Write(this.BrightnessInnerShadow);
             bw.Write((short)0);
-            bw.Write(this.SwatchColor4.BinHash());
-            bw.Write(this.Saturation4);
-            bw.Write(this.Brightness4);
+            bw.Write(this.SwatchInnerGlow.BinHash());
+            bw.Write(this.SaturationInnerGlow);
+            bw.Write(this.BrightnessInnerGlow);
             bw.Write((short)0);
         }
 
@@ -351,21 +381,21 @@ namespace Nikki.Support.Carbon.Class
             this.Skew = br.ReadSByte();
             this.ScaleY = br.ReadSByte();
             this.ScaleX = br.ReadSByte();
-            this.SwatchColor1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Saturation1 = br.ReadByte();
-            this.Brightness1 = br.ReadByte();
+            this.SwatchFillEffect = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.SaturationFillEffect = br.ReadByte();
+            this.BrightnessFillEffect = br.ReadByte();
             br.BaseStream.Position += 2;
-            this.SwatchColor2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Saturation2 = br.ReadByte();
-            this.Brightness2 = br.ReadByte();
+            this.SwatchStrokeEffect = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.SaturationStrokeEffect = br.ReadByte();
+            this.BrightnessStrokeEffect = br.ReadByte();
             br.BaseStream.Position += 2;
-            this.SwatchColor3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Saturation3 = br.ReadByte();
-            this.Brightness3 = br.ReadByte();
+            this.SwatchInnerShadow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.SaturationInnerShadow = br.ReadByte();
+            this.BrightnessInnerShadow = br.ReadByte();
             br.BaseStream.Position += 2;
-            this.SwatchColor4 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Saturation4 = br.ReadByte();
-            this.Brightness4 = br.ReadByte();
+            this.SwatchInnerGlow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.SaturationInnerGlow = br.ReadByte();
+            this.BrightnessInnerGlow = br.ReadByte();
             br.BaseStream.Position += 2;
         }
 
@@ -389,7 +419,7 @@ namespace Nikki.Support.Carbon.Class
         public override string ToString()
         {
             return $"Collection Name: {this.CollectionName} | " +
-                   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+                   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
         }
 
         #endregion

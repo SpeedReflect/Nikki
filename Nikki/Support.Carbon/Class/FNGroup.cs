@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils.EA;
 using Nikki.Reflection.ID;
@@ -22,21 +23,25 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Actual data of this <see cref="FNGroup"/>.
         /// </summary>
-		public byte[] Data { get; private set; }
+		[Browsable(false)]
+        public byte[] Data { get; private set; }
 
         /// <summary>
         /// Game to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override GameINT GameINT => GameINT.Carbon;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override string GameSTR => GameINT.Carbon.ToString();
 
         /// <summary>
         /// Manager to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public FNGroupManager Manager { get; set; }
 
         #endregion
@@ -168,7 +173,7 @@ namespace Nikki.Support.Carbon.Class
         public override string ToString()
         {
             return $"Collection Name: {this.CollectionName} | " +
-                   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+                   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
         }
 
         #endregion

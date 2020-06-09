@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
@@ -43,16 +44,19 @@ namespace Nikki.Support.MostWanted.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override GameINT GameINT => GameINT.MostWanted;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override string GameSTR => GameINT.MostWanted.ToString();
 
 		/// <summary>
 		/// Manager to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public TrackManager Manager { get; set; }
 
 		/// <summary>

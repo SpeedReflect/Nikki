@@ -37,7 +37,7 @@ namespace Nikki.Support.Shared.Class
         /// <summary>
         /// Binary memory hash of the collection name.
         /// </summary>
-        public virtual uint BinKey { get; set; }
+        public virtual uint BinKey => this.CollectionName.BinHash();
 
         /// <summary>
         /// Vault memory hash of the collection name.

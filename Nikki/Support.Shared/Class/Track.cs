@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
@@ -53,6 +54,7 @@ namespace Nikki.Support.Shared.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public eBoolean IsValid { get; set; }
 
 		/// <summary>
@@ -61,6 +63,7 @@ namespace Nikki.Support.Shared.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public eBoolean IsLoopingRace { get; set; }
 
 		/// <summary>
@@ -69,6 +72,7 @@ namespace Nikki.Support.Shared.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public eBoolean ReverseVersionExists { get; set; }
 
 		/// <summary>
@@ -76,6 +80,7 @@ namespace Nikki.Support.Shared.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public string RaceDescription { get; set; } = String.Empty;
 
 		/// <summary>
@@ -83,6 +88,7 @@ namespace Nikki.Support.Shared.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public string RegionName { get; set; } = String.Empty;
 
 		/// <summary>
@@ -90,6 +96,7 @@ namespace Nikki.Support.Shared.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public string TrackDirectory { get; set; } = String.Empty;
 
 		/// <summary>
@@ -97,6 +104,7 @@ namespace Nikki.Support.Shared.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public string RegionDirectory { get; set; } = String.Empty;
 
 		/// <summary>
@@ -104,6 +112,7 @@ namespace Nikki.Support.Shared.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public eRaceGameplayMode RaceGameplayMode { get; set; }
 
 		/// <summary>
@@ -112,6 +121,7 @@ namespace Nikki.Support.Shared.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public eTrackDifficulty DifficultyForward { get; set; }
 
 		/// <summary>
@@ -120,6 +130,7 @@ namespace Nikki.Support.Shared.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public eTrackDifficulty DifficultyReverse { get; set; }
 
 		/// <summary>
@@ -128,6 +139,7 @@ namespace Nikki.Support.Shared.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public string SunInfoName { get; set; }
 
 		#endregion

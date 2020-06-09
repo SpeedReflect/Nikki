@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
@@ -33,21 +34,25 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Game to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override GameINT GameINT => GameINT.Carbon;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override string GameSTR => GameINT.Carbon.ToString();
 
         /// <summary>
         /// Manager to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public TPKBlockManager Manager { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
         /// </summary>
+        [Category("Main")]
         public override string CollectionName
         {
             get => this._collection_name;
@@ -61,16 +66,19 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Version of this <see cref="TPKBlock"/>.
         /// </summary>
+        [Browsable(false)]
         public override eTPKVersion Version => eTPKVersion.Carbon;
 
         /// <summary>
         /// Filename used for this <see cref="TPKBlock"/>. It is a default watermark.
         /// </summary>
+        [Browsable(false)]
         public override string Filename => $"{this.CollectionName}.tpk";
 
         /// <summary>
         /// BinKey of the filename.
         /// </summary>
+        [Browsable(false)]
         public override uint FilenameHash => this.Filename.BinHash();
 
         /// <summary>
@@ -78,11 +86,13 @@ namespace Nikki.Support.Carbon.Class
         /// should be saved as compressed on the output.
         /// </summary>
         [AccessModifiable()]
+        [Category("Primary")]
         public override eBoolean IsCompressed { get; set; }
 
         /// <summary>
         /// List of <see cref="Texture"/> in this <see cref="TPKBlock"/>.
         /// </summary>
+        [Browsable(false)]
         public List<Texture> Textures { get; set; } = new List<Texture>();
 
         #endregion
@@ -492,7 +502,7 @@ namespace Nikki.Support.Carbon.Class
         public override string ToString()
         {
             return $"Collection Name: {this.CollectionName} | " +
-                   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+                   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
         }
 
         #endregion

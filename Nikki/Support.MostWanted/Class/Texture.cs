@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Utils.EA;
@@ -23,6 +24,7 @@ namespace Nikki.Support.MostWanted.Class
         #region Fields
 
         private string _collection_name;
+        private uint _binkey;
         
         [MemoryCastable()]
         private byte _compression = EAComp.RGBA_08;
@@ -141,14 +143,14 @@ namespace Nikki.Support.MostWanted.Class
                 }
 
                 this._collection_name = value;
-                this.BinKey = key;
+                this._binkey = key;
             }
         }
 
         /// <summary>
         /// Binary memory hash of the collection name.
         /// </summary>
-        public override uint BinKey { get; set; }
+        public override uint BinKey => this._binkey;
 
         /// <summary>
         /// Vault memory hash of the collection name.
@@ -199,7 +201,7 @@ namespace Nikki.Support.MostWanted.Class
         {
             this.TPK = tpk;
             this._collection_name = CName;
-            this.BinKey = CName.BinHash();
+            this._binkey = CName.BinHash();
             this.PaletteOffset = 0;
             this._padding = 1;
         }
@@ -214,7 +216,7 @@ namespace Nikki.Support.MostWanted.Class
         {
             this.TPK = tpk;
             this._collection_name = CName;
-            this.BinKey = CName.BinHash();
+            this._binkey = CName.BinHash();
             this.PaletteOffset = 0;
             this._padding = 1;
             this.Initialize(filename);
@@ -254,7 +256,7 @@ namespace Nikki.Support.MostWanted.Class
             bw.WriteNullTermUTF8(this._collection_name, 0x18);
 
             // Write all settings
-            bw.Write(this.BinKey);
+            bw.Write(this._binkey);
             bw.Write(this.ClassKey);
             bw.Write(this._unknown0);
             bw.Write(this.Offset);
@@ -305,7 +307,7 @@ namespace Nikki.Support.MostWanted.Class
             br.BaseStream.Position += 0xC;
             this._collection_name = br.ReadNullTermUTF8(0x18);
 
-            this.BinKey = br.ReadUInt32();
+            this._binkey = br.ReadUInt32();
             this.ClassKey = br.ReadUInt32();
             this._unknown0 = br.ReadInt32();
             this.Offset = br.ReadInt32();
@@ -567,7 +569,7 @@ namespace Nikki.Support.MostWanted.Class
         public override string ToString()
         {
             return $"Collection Name: {this.CollectionName} | " +
-                   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+                   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
         }
 
         #endregion

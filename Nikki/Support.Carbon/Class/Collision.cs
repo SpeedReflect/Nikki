@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
@@ -23,12 +24,6 @@ namespace Nikki.Support.Carbon.Class
 
 		private string _collection_name;
 
-		[MemoryCastable()]
-		private int _number_of_bounds;
-
-		[MemoryCastable()]
-		private int _number_of_clouds;
-
 		#endregion
 
 		#region Properties
@@ -36,22 +31,26 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override GameINT GameINT => GameINT.Carbon;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override string GameSTR => GameINT.Carbon.ToString();
 
 		/// <summary>
 		/// Manager to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public CollisionManager Manager { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
@@ -65,29 +64,34 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Binary memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint BinKey => this._collection_name.BinHash();
 
 		/// <summary>
 		/// Vault memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint VltKey => this._collection_name.VltHash();
 
 		/// <summary>
 		/// List of collision bounds.
 		/// </summary>
-		[Listable("Bounds", "COLLISION_BOUND")]
+		[Category("Secondary")]
 		public List<CollisionBound> CollisionBounds { get; set; }
 		
 		/// <summary>
 		/// List of collision clouds.
 		/// </summary>
-		[Listable("Clouds", "COLLISION_CLOUD")]
+		[Category("Secondary")]
 		public List<CollisionCloud> CollisionClouds { get; set; }
 
 		/// <summary>
 		/// Number of collision bounds.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Primary")]
 		public override int NumberOfBounds
 		{
 			get => this.CollisionBounds.Count;
@@ -98,6 +102,7 @@ namespace Nikki.Support.Carbon.Class
 		/// Number of collision clouds.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Primary")]
 		public override int NumberOfClouds
 		{
 			get => this.CollisionClouds.Count;
@@ -109,6 +114,7 @@ namespace Nikki.Support.Carbon.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public override eBoolean IsResolved { get; set; }
 
 		#endregion
@@ -162,9 +168,9 @@ namespace Nikki.Support.Carbon.Class
 		public override void Assemble(BinaryWriter bw)
 		{
 			// Precalculate size
-			int size = 0x28 + this._number_of_bounds * 0x30; // 0x28 = alignment (8) + headers
+			int size = 0x28 + this.NumberOfBounds * 0x30; // 0x28 = alignment (8) + headers
 			
-			for (int loop = 0; loop < this._number_of_clouds; ++loop)
+			for (int loop = 0; loop < this.NumberOfClouds; ++loop)
 			{
 
 				size += 0x10 + this.CollisionClouds[loop].NumberOfVertices * 0x10;

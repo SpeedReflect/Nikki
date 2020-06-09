@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
@@ -8,6 +9,7 @@ using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Shared.Parts.TPKParts;
+using CoreExtensions.Conversions;
 
 
 
@@ -39,35 +41,42 @@ namespace Nikki.Support.Shared.Class
         /// 
         /// </summary>
         [MemoryCastable()]
+        [Browsable(false)]
         public uint PermBlockByteOffset { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
         [MemoryCastable()]
+        [Browsable(false)]
         public uint PermBlockByteSize { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
         [MemoryCastable()]
+        [Browsable(false)]
         public int EndianSwapped { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
         [MemoryCastable()]
+        [Browsable(false)]
         public int TexturePack { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
         [MemoryCastable()]
+        [Browsable(false)]
         public int TextureIndexEntryTable { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
+        [MemoryCastable()]
+        [Browsable(false)]
         public int TextureStreamEntryTable { get; set; } = 0;
 
         /// <summary>
@@ -76,11 +85,13 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public abstract eBoolean IsCompressed { get; set; }
 
         /// <summary>
         /// Settings data related to this <seealso cref="TPKBlock"/>.
         /// </summary>
+        [Browsable(false)]
         public byte[] SettingData { get; set; }
 
         #endregion
@@ -105,16 +116,21 @@ namespace Nikki.Support.Shared.Class
         /// <summary>
         /// Binary memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public uint BinKey => this.CollectionName.BinHash();
 
         /// <summary>
         /// Vault memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public uint VltKey => this.CollectionName.VltHash();
 
         /// <summary>
         /// Index of the <see cref="TPKBlock"/> in the Global data.
         /// </summary>
+        [Browsable(false)]
         public int Index { get; set; }
 
         internal string Watermark { get; set; } = String.Empty;

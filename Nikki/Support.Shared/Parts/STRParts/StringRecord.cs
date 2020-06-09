@@ -109,7 +109,7 @@ namespace Nikki.Support.Shared.Parts.STRParts
 		/// <returns>String value.</returns>
 		public override string ToString()
 		{
-			return $"Bin{key}: {this.Key.ToString("X8")} | {label}: {this.Label} | {text}: {this.Text}";
+			return $"{key}: 0x{this.Key:X8} | {label}: {this.Label} | {text}: {this.Text}";
 		}
 
 		/// <summary>

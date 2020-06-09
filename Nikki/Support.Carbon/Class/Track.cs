@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
@@ -7,6 +8,7 @@ using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Carbon.Framework;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -43,22 +45,26 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override GameINT GameINT => GameINT.Carbon;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override string GameSTR => GameINT.Carbon.ToString();
 
 		/// <summary>
 		/// Manager to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public TrackManager Manager { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
@@ -72,11 +78,15 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Binary memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint BinKey => this._collection_name.BinHash();
 
 		/// <summary>
 		/// Vault memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint VltKey => this._collection_name.VltHash();
 
 		/// <summary>
@@ -84,6 +94,7 @@ namespace Nikki.Support.Carbon.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public int LocationIndex { get; set; }
 
 		/// <summary>
@@ -91,6 +102,7 @@ namespace Nikki.Support.Carbon.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public string LocationDirectory { get; set; } = String.Empty;
 
 		/// <summary>
@@ -99,6 +111,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public eBoolean IsPerformanceTuning { get; set; }
 
 		/// <summary>
@@ -107,6 +120,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public eLocationType LocationType { get; set; }
 
 		/// <summary>
@@ -115,6 +129,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public eDriftType DriftType { get; set; }
 
 		/// <summary>
@@ -122,6 +137,7 @@ namespace Nikki.Support.Carbon.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public uint RaceLength { get; set; }
 
 		/// <summary>
@@ -130,6 +146,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TimeLimitToBeatForward { get; set; }
 
 		/// <summary>
@@ -138,6 +155,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TimeLimitToBeatReverse { get; set; }
 
 		/// <summary>
@@ -146,6 +164,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int ScoreToBeatDriftForward { get; set; }
 
 		/// <summary>
@@ -154,6 +173,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int ScoreToBeatDriftReverse { get; set; }
 
 		/// <summary>
@@ -162,6 +182,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short NumSecBeforeShorcutsAllowed { get; set; }
 
 		/// <summary>
@@ -170,6 +191,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short DriftSecondsMin { get; set; }
 
 		/// <summary>
@@ -178,6 +200,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short DriftSecondsMax { get; set; }
 
 		/// <summary>
@@ -186,6 +209,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short CarRaceStartConfig { get; set; }
 
 		/// <summary>
@@ -194,6 +218,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrackMapCalibrationOffsetX { get; set; }
 
 		/// <summary>
@@ -202,6 +227,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrackMapCalibrationOffsetY { get; set; }
 
 		/// <summary>
@@ -210,6 +236,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrackMapCalibrationWidth { get; set; }
 
 		/// <summary>
@@ -218,6 +245,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrackMapCalibrationRotation { get; set; }
 
 		/// <summary>
@@ -226,6 +254,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrackMapCalibrationZoomIn { get; set; }
 
 		/// <summary>
@@ -234,6 +263,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrackMapStartgridAngle { get; set; }
 
 		/// <summary>
@@ -242,6 +272,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrackMapFinishlineAngle { get; set; }
 
 		/// <summary>
@@ -250,6 +281,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float MenuMapZoomOffsetX { get; set; }
 
 		/// <summary>
@@ -258,6 +290,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float MenuMapZoomOffsetY { get; set; }
 
 		/// <summary>
@@ -266,6 +299,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float MenuMapZoomWidth { get; set; }
 
 		/// <summary>
@@ -274,6 +308,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int MenuMapStartZoomed { get; set; }
 
 		/// <summary>
@@ -282,6 +317,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_0_0 { get; set; }
 
 		/// <summary>
@@ -290,6 +326,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_0_1 { get; set; }
 
 		/// <summary>
@@ -298,6 +335,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_1_0 { get; set; }
 
 		/// <summary>
@@ -306,6 +344,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_1_1 { get; set; }
 
 		/// <summary>
@@ -314,6 +353,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_2_0 { get; set; }
 
 		/// <summary>
@@ -322,6 +362,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_2_1 { get; set; }
 
 		/// <summary>
@@ -330,6 +371,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_3_0 { get; set; }
 
 		/// <summary>
@@ -338,6 +380,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_3_1 { get; set; }
 
 		/// <summary>
@@ -346,6 +389,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte TrafAllowedNearStartgrid { get; set; }
 
 		/// <summary>
@@ -354,6 +398,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte TrafAllowedNearFinishline { get; set; }
 
 		/// <summary>
@@ -362,6 +407,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrafMinInitDistFromStart { get; set; }
 
 		/// <summary>
@@ -370,6 +416,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrafMinInitDistFromFinish { get; set; }
 
 		/// <summary>
@@ -378,6 +425,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrafMinInitDistInbetweenA { get; set; }
 
 		/// <summary>
@@ -386,6 +434,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrafMinInitDistInbetweenB { get; set; }
 
 		/// <summary>
@@ -394,6 +443,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrafOncomingFraction1 { get; set; }
 
 		/// <summary>
@@ -402,6 +452,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrafOncomingFraction2 { get; set; }
 
 		/// <summary>
@@ -410,6 +461,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrafOncomingFraction3 { get; set; }
 
 		/// <summary>
@@ -418,6 +470,7 @@ namespace Nikki.Support.Carbon.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrafOncomingFraction4 { get; set; }
 
 		#endregion
@@ -644,7 +697,7 @@ namespace Nikki.Support.Carbon.Class
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
 
 		#endregion

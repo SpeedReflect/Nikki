@@ -9701,62 +9701,62 @@
             X-Scale value of the vector vinyl of the preset skin.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.SwatchColor1">
+        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.SwatchFillEffect">
             <summary>
             Swatch color value of the first color of the vector vinyl of the preset skin.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.SwatchColor2">
+        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.SwatchStrokeEffect">
             <summary>
             Swatch color value of the second color of the vector vinyl of the preset skin.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.SwatchColor3">
+        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.SwatchInnerShadow">
             <summary>
             Swatch color value of the third color of the vector vinyl of the preset skin.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.SwatchColor4">
+        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.SwatchInnerGlow">
             <summary>
             Swatch color value of the fourth color of the vector vinyl of the preset skin.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.Saturation1">
+        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.SaturationFillEffect">
             <summary>
             Saturation value of the first color of the vector vinyl of the preset skin.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.Saturation2">
+        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.SaturationStrokeEffect">
             <summary>
             Saturation value of the second color of the vector vinyl of the preset skin.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.Saturation3">
+        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.SaturationInnerShadow">
             <summary>
             Saturation value of the third color of the vector vinyl of the preset skin.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.Saturation4">
+        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.SaturationInnerGlow">
             <summary>
             Saturation value of the fourth color of the vector vinyl of the preset skin.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.Brightness1">
+        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.BrightnessFillEffect">
             <summary>
             Brightness value of the first color of the vector vinyl of the preset skin.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.Brightness2">
+        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.BrightnessStrokeEffect">
             <summary>
             Brightness value of the second color of the vector vinyl of the preset skin.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.Brightness3">
+        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.BrightnessInnerShadow">
             <summary>
             Brightness value of the third color of the vector vinyl of the preset skin.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.Brightness4">
+        <member name="P:Nikki.Support.Carbon.Class.PresetSkin.BrightnessInnerGlow">
             <summary>
             Brightness value of the fourth color of the vector vinyl of the preset skin.
             </summary>

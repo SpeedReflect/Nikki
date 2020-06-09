@@ -27,7 +27,6 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		/// <summary>
 		/// List of <see cref="CollisionVertex"/> in this <see cref="CollisionCloud"/>.
 		/// </summary>
-		[Listable("Vertices", "VERTEX")]
 		public List<CollisionVertex> Vertices { get; set; } = new List<CollisionVertex>();
 
 		/// <summary>
