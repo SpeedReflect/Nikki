@@ -12,6 +12,7 @@ using Nikki.Support.Carbon.Framework;
 using Nikki.Support.Shared.Parts.STRParts;
 using CoreExtensions.IO;
 using CoreExtensions.Text;
+using CoreExtensions.Conversions;
 
 
 
@@ -78,6 +79,20 @@ namespace Nikki.Support.Carbon.Class
 				this._collection_name = value;
 			}
 		}
+
+		/// <summary>
+		/// Binary memory hash of the collection name.
+		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
+		public override uint BinKey => this._collection_name.BinHash();
+
+		/// <summary>
+		/// Vault memory hash of the collection name.
+		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
+		public override uint VltKey => this._collection_name.VltHash();
 
 		/// <summary>
 		/// Length of the string information array.
@@ -344,7 +359,7 @@ namespace Nikki.Support.Carbon.Class
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
 
 		#endregion

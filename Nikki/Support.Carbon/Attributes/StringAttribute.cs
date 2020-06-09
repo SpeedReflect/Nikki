@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Diagnostics;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Enum.CP;
@@ -16,6 +18,7 @@ namespace Nikki.Support.Carbon.Attributes
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with null-terminated string value.
 	/// </summary>
+	[DebuggerDisplay("Attribute: {AttribType} | Type: {Type} | Value: {Value}")]
 	public class StringAttribute : CPAttribute
 	{
 		private const eCarPartAttribType _type = eCarPartAttribType.String;
@@ -43,6 +46,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// <summary>
 		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -98,32 +102,6 @@ namespace Nikki.Support.Carbon.Attributes
 		}
 
 		/// <summary>
-		/// Initializes new instance of <see cref="StringAttribute"/> by reading data using 
-		/// <see cref="BinaryReader"/> provided.
-		/// </summary>
-		/// <param name="br"><see cref="BinaryReader"/> to read with.</param>
-		/// <param name="string_dict">Dictionary of offsets and strings.</param>
-		/// <param name="key">Key of the attribute's group.</param>
-		public StringAttribute(BinaryReader br, Dictionary<int, string> string_dict, uint key)
-		{
-			this.Key = key;
-			this.Disassemble(br, string_dict);
-		}
-
-		private void Disassemble(BinaryReader br, Dictionary<int, string> string_dict)
-		{
-			var position = br.ReadUInt32();
-
-			if (position < 0xFFFFFFFF && string_dict.TryGetValue((int)position, out var value))
-			{
-			
-				this.Value = value;
-				this.ValueExists = eBoolean.True;
-			
-			}
-		}
-
-		/// <summary>
 		/// Disassembles byte array into <see cref="StringAttribute"/> using <see cref="BinaryReader"/> 
 		/// provided.
 		/// </summary>
@@ -163,7 +141,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// Returns attribute part label and its type as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() => $"Attribute: {this.AttribType} | Type: {this.Type} | Value: {this.Value}";
+		public override string ToString() => this.Type.ToString();
 
 		/// <summary>
 		/// Determines whether this instance and a specified object, which must also be a
@@ -174,7 +152,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// this instance; false otherwise. If obj is null, the method returns false.
 		/// </returns>
 		public override bool Equals(object obj) =>
-			obj is StringAttribute && this == (StringAttribute)obj;
+			obj is StringAttribute attribute && this == attribute;
 
 		/// <summary>
 		/// Returns the hash code for this <see cref="StringAttribute"/>.
@@ -193,8 +171,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// <param name="at2">The second <see cref="StringAttribute"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
 		public static bool operator ==(StringAttribute at1, StringAttribute at2) =>
-			at1 is null ? at2 is null : at2 is null ? false
-			: (at1.Key == at2.Key && at1.Value == at2.Value);
+			at1 is null ? at2 is null : !(at2 is null) && at1.Key == at2.Key && at1.Value == at2.Value;
 
 		/// <summary>
 		/// Determines whether two specified <see cref="StringAttribute"/> have different values.

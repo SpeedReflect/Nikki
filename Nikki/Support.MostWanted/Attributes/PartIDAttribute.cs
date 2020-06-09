@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Diagnostics;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Enum.CP;
@@ -17,6 +19,7 @@ namespace Nikki.Support.MostWanted.Attributes
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with unknown byte and part ID values.
 	/// </summary>
+	[DebuggerDisplay("Attribute: {AttribType} | Type: {Type} | ID: {ID} | Level: {Level}")]
 	public class PartIDAttribute : CPAttribute
 	{
 		private const eCarPartAttribType _type = eCarPartAttribType.CarPartID;
@@ -44,6 +47,7 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// <summary>
 		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -132,8 +136,7 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// Returns attribute part label and its type as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() =>
-			$"Attribute: {this.AttribType} | Type: {this.Type} | ID: {this.ID} | Level: {this.Level}";
+		public override string ToString() => this.Type.ToString();
 
 		/// <summary>
 		/// Determines whether this instance and a specified object, which must also be a
@@ -144,7 +147,7 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// this instance; false otherwise. If obj is null, the method returns false.
 		/// </returns>
 		public override bool Equals(object obj) =>
-			obj is PartIDAttribute && this == (PartIDAttribute)obj;
+			obj is PartIDAttribute attribute && this == attribute;
 
 		/// <summary>
 		/// Returns the hash code for this <see cref="PartIDAttribute"/>.
@@ -159,9 +162,11 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// <param name="at1">The first <see cref="PartIDAttribute"/> to compare, or null.</param>
 		/// <param name="at2">The second <see cref="PartIDAttribute"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
-		public static bool operator ==(PartIDAttribute at1, PartIDAttribute at2) =>
-			at1 is null ? at2 is null : at2 is null ? false
-			: (at1.Key == at2.Key && at1.ID == at2.ID && at1.Level == at2.Level);
+		public static bool operator ==(PartIDAttribute at1, PartIDAttribute at2)
+		{
+			bool v = !(at2 is null) && at1.Key == at2.Key;
+			return at1 is null ? at2 is null : v && at1.ID == at2.ID && at1.Level == at2.Level;
+		}
 
 		/// <summary>
 		/// Determines whether two specified <see cref="PartIDAttribute"/> have different values.

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
@@ -23,12 +24,6 @@ namespace Nikki.Support.MostWanted.Class
 
 		private string _collection_name;
 
-		[MemoryCastable()]
-		private int _number_of_bounds;
-
-		[MemoryCastable()]
-		private int _number_of_clouds;
-
 		#endregion
 
 		#region Properties
@@ -36,22 +31,26 @@ namespace Nikki.Support.MostWanted.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override GameINT GameINT => GameINT.MostWanted;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override string GameSTR => GameINT.MostWanted.ToString();
 
 		/// <summary>
 		/// Manager to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public CollisionManager Manager { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
@@ -65,51 +64,49 @@ namespace Nikki.Support.MostWanted.Class
 		/// <summary>
 		/// Binary memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint BinKey => this._collection_name.BinHash();
 
 		/// <summary>
 		/// Vault memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint VltKey => this._collection_name.VltHash();
 
 		/// <summary>
 		/// List of collision bounds.
 		/// </summary>
-		[Listable("Bounds", "COLLISION_BOUND")]
+		[Category("Secondary")]
 		public List<CollisionBound> CollisionBounds { get; set; }
 		
 		/// <summary>
 		/// List of collision clouds.
 		/// </summary>
-		[Listable("Clouds", "COLLISION_CLOUD")]
+		[Category("Secondary")]
 		public List<CollisionCloud> CollisionClouds { get; set; }
 
 		/// <summary>
 		/// Number of collision bounds.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Primary")]
 		public override int NumberOfBounds
 		{
-			get => this._number_of_bounds;
-			set
-			{
-				this.CollisionBounds.Resize(value);
-				this._number_of_bounds = value;
-			}
+			get => this.CollisionBounds.Count;
+			set => this.CollisionBounds.Resize(value);
 		}
 
 		/// <summary>
 		/// Number of collision clouds.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Primary")]
 		public override int NumberOfClouds
 		{
-			get => this._number_of_clouds;
-			set
-			{
-				this.CollisionClouds.Resize(value);
-				this._number_of_clouds = value;
-			}
+			get => this.CollisionClouds.Count;
+			set => this.CollisionClouds.Resize(value);
 		}
 
 		/// <summary>
@@ -117,6 +114,7 @@ namespace Nikki.Support.MostWanted.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public override eBoolean IsResolved { get; set; }
 
 		#endregion
@@ -170,9 +168,9 @@ namespace Nikki.Support.MostWanted.Class
 		public override void Assemble(BinaryWriter bw)
 		{
 			// Precalculate size
-			int size = 0x28 + this._number_of_bounds * 0x30; // 0x28 = alignment (8) + headers
+			int size = 0x28 + this.NumberOfBounds * 0x30; // 0x28 = alignment (8) + headers
 
-			for (int loop = 0; loop < this._number_of_clouds; ++loop)
+			for (int loop = 0; loop < this.NumberOfClouds; ++loop)
 			{
 
 				size += 0x10 + this.CollisionClouds[loop].NumberOfVertices * 0x10;
@@ -185,22 +183,22 @@ namespace Nikki.Support.MostWanted.Class
 			bw.Write(0x11111111);
 			bw.Write(0x11111111);
 			bw.Write(this.VltKey);
-			bw.Write(this._number_of_bounds);
+			bw.Write(this.NumberOfBounds);
 			bw.Write(this.IsResolved == eBoolean.False ? (int)0 : (int)1);
 			bw.Write((int)0);
 
-			for (int loop = 0; loop < this._number_of_bounds; ++loop)
+			for (int loop = 0; loop < this.NumberOfBounds; ++loop)
 			{
 
 				this.CollisionBounds[loop].Write(bw);
 
 			}
 
-			bw.Write(this._number_of_clouds);
+			bw.Write(this.NumberOfClouds);
 			bw.Write((int)0);
 			bw.Write((long)0);
 
-			for (int loop = 0; loop < this._number_of_clouds; ++loop)
+			for (int loop = 0; loop < this.NumberOfClouds; ++loop)
 			{
 
 				this.CollisionClouds[loop].Write(bw);
@@ -220,7 +218,7 @@ namespace Nikki.Support.MostWanted.Class
 			this.IsResolved = br.ReadInt32() == 0 ? eBoolean.False : eBoolean.True;
 			br.BaseStream.Position += 4;
 
-			for (int loop = 0; loop < this._number_of_bounds; ++loop)
+			for (int loop = 0; loop < this.NumberOfBounds; ++loop)
 			{
 
 				this.CollisionBounds[loop].Read(br);
@@ -230,7 +228,7 @@ namespace Nikki.Support.MostWanted.Class
 			this.NumberOfClouds = br.ReadInt32();
 			br.BaseStream.Position += 12;
 
-			for (int loop = 0; loop < this._number_of_clouds; ++loop)
+			for (int loop = 0; loop < this.NumberOfClouds; ++loop)
 			{
 
 				this.CollisionClouds[loop].Read(br);
@@ -252,14 +250,14 @@ namespace Nikki.Support.MostWanted.Class
 				IsResolved = this.IsResolved
 			};
 
-			for (int loop = 0; loop < this._number_of_bounds; ++loop)
+			for (int loop = 0; loop < this.NumberOfBounds; ++loop)
 			{
 
 				result.CollisionBounds[loop] = (CollisionBound)this.CollisionBounds[loop].PlainCopy();
 
 			}
 
-			for (int loop = 0; loop < this._number_of_clouds; ++loop)
+			for (int loop = 0; loop < this.NumberOfClouds; ++loop)
 			{
 
 				result.CollisionClouds[loop] = (CollisionCloud)this.CollisionClouds[loop].PlainCopy();
@@ -277,7 +275,7 @@ namespace Nikki.Support.MostWanted.Class
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
 
 		#endregion

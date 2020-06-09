@@ -92,36 +92,42 @@ namespace Nikki.Support.Carbon.Class
 		/// Sun layer 1.
 		/// </summary>
 		[Expandable("SunLayers")]
+		[Browsable(false)]
 		public SunLayer SUNLAYER1 { get; set; }
 
 		/// <summary>
 		/// Sun layer 2.
 		/// </summary>
 		[Expandable("SunLayers")]
+		[Browsable(false)]
 		public SunLayer SUNLAYER2 { get; set; }
 
 		/// <summary>
 		/// Sun layer 3.
 		/// </summary>
 		[Expandable("SunLayers")]
+		[Browsable(false)]
 		public SunLayer SUNLAYER3 { get; set; }
 
 		/// <summary>
 		/// Sun layer 4.
 		/// </summary>
 		[Expandable("SunLayers")]
+		[Browsable(false)]
 		public SunLayer SUNLAYER4 { get; set; }
 
 		/// <summary>
 		/// Sun layer 5.
 		/// </summary>
 		[Expandable("SunLayers")]
+		[Browsable(false)]
 		public SunLayer SUNLAYER5 { get; set; }
 
 		/// <summary>
 		/// Sun layer 6.
 		/// </summary>
 		[Expandable("SunLayers")]
+		[Browsable(false)]
 		public SunLayer SUNLAYER6 { get; set; }
 
 		#endregion

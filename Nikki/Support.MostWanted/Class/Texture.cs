@@ -11,6 +11,7 @@ using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -96,22 +97,26 @@ namespace Nikki.Support.MostWanted.Class
         /// <summary>
         /// Game to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override GameINT GameINT => GameINT.MostWanted;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override string GameSTR => GameINT.MostWanted.ToString();
 
         /// <summary>
         /// <see cref="TPKBlock"/> to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public TPKBlock TPK { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
         /// </summary>
         [AccessModifiable()]
+        [Category("Main")]
         public override string CollectionName
         {
             get => this._collection_name;
@@ -150,16 +155,21 @@ namespace Nikki.Support.MostWanted.Class
         /// <summary>
         /// Binary memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint BinKey => this._binkey;
 
         /// <summary>
         /// Vault memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint VltKey => this._collection_name.VltHash();
 
         /// <summary>
         /// Compression type value of the texture.
         /// </summary>
+        [Category("Primary")]
         public override string Compression => Comp.GetString(this._compression);
 
         /// <summary>
@@ -167,6 +177,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public int CompressionValue1 { get; set; } = 1;
 
         /// <summary>
@@ -174,6 +185,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public int CompressionValue2 { get; set; } = 5;
 
         /// <summary>
@@ -181,6 +193,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public int CompressionValue3 { get; set; } = 6;
 
         #endregion

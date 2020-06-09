@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
@@ -7,6 +8,7 @@ using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.MostWanted.Framework;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -43,22 +45,26 @@ namespace Nikki.Support.MostWanted.Class
         /// <summary>
         /// Game to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override GameINT GameINT => GameINT.MostWanted;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override string GameSTR => GameINT.MostWanted.ToString();
 
         /// <summary>
         /// Manager to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public CarTypeInfoManager Manager { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
         /// </summary>
         [AccessModifiable()]
+        [Category("Main")]
         public override string CollectionName
         {
             get => this._collection_name;
@@ -72,11 +78,15 @@ namespace Nikki.Support.MostWanted.Class
         /// <summary>
         /// Binary memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint BinKey => this._collection_name.BinHash();
 
         /// <summary>
         /// Vault memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint VltKey => this._collection_name.VltHash();
 
         /// <summary>
@@ -84,6 +94,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public override string ManufacturerName { get; set; }
 
         /// <summary>
@@ -91,6 +102,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public override string DefaultBasePaint { get; set; } = String.Empty;
 
         /// <summary>
@@ -98,21 +110,8 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public eMemoryType MemoryType { get; set; }
-
-        /// <summary>
-        /// Spoiler type of the <see cref="CarTypeInfo"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [MemoryCastable()]
-        public string Spoiler { get; set; } = String.Empty;
-
-        /// <summary>
-        /// RoofScoop type of the <see cref="CarTypeInfo"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [MemoryCastable()]
-        public string RoofScoop { get; set; } = String.Empty;
 
         #endregion
 
@@ -342,7 +341,7 @@ namespace Nikki.Support.MostWanted.Class
         public override string ToString()
         {
             return $"Collection Name: {this.CollectionName} | " +
-                   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+                   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
         }
 
         #endregion

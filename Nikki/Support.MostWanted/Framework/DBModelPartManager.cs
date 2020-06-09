@@ -136,10 +136,10 @@ namespace Nikki.Support.MostWanted.Framework
 					length = Inject(realpart.DebugName, length);
 
 					// Write struct geometry names if it is templated
-					if (realpart.Struct.Exists == eBoolean.True && realpart.Struct.Templated == eBoolean.True)
+					if (realpart.LodStruct.Exists == eBoolean.True && realpart.LodStruct.Templated == eBoolean.True)
 					{
 					
-						var cpstr = realpart.Struct;
+						var cpstr = realpart.LodStruct;
 						length = Inject(cpstr.Concatenator, length);
 						length = Inject(cpstr.GeometryLodA, length);
 						length = Inject(cpstr.GeometryLodB, length);
@@ -325,15 +325,15 @@ namespace Nikki.Support.MostWanted.Framework
 				{
 				
 					// If Struct should not be written, skip
-					if (realpart.Struct.Exists == eBoolean.False) continue;
+					if (realpart.LodStruct.Exists == eBoolean.False) continue;
 
-					int key = realpart.Struct.GetHashCode(); // get HashCode of the struct
+					int key = realpart.LodStruct.GetHashCode(); // get HashCode of the struct
 					
 					if (!struct_dict.ContainsKey(key))       // if it exists, skip
 					{
 					
 						struct_dict[key] = length++; // add to dictionary
-						realpart.Struct.Assemble(bw, string_dict);
+						realpart.LodStruct.Assemble(bw, string_dict);
 					
 					}
 				
@@ -398,7 +398,7 @@ namespace Nikki.Support.MostWanted.Framework
 				
 					// Write main properties
 					bw.Write(realpart.PartLabel.BinHash());
-					bw.Write(realpart.CarPartGroupID);
+					bw.WriteEnum(realpart.CarPartGroupID);
 					bw.Write(realpart.UpgradeGroupID);
 					bw.Write(count);
 
@@ -409,8 +409,8 @@ namespace Nikki.Support.MostWanted.Framework
 					if (realpart.Attributes.Count == 0) bw.Write(negative);
 					else bw.Write((ushort)offset_dict[realpart.GetHashCode()]);
 					
-					if (realpart.Struct.Exists == eBoolean.False) bw.Write(negative);
-					else bw.Write((ushort)struct_dict[realpart.Struct.GetHashCode()]);
+					if (realpart.LodStruct.Exists == eBoolean.False) bw.Write(negative);
+					else bw.Write((ushort)struct_dict[realpart.LodStruct.GetHashCode()]);
 
 					++length;
 				
@@ -770,7 +770,7 @@ namespace Nikki.Support.MostWanted.Framework
 						DebugName = temppart.DebugName,
 						CarPartGroupID = temppart.CarPartGroupID,
 						UpgradeGroupID = temppart.UpgradeGroupID,
-						Struct = actual ?? new Parts.CarParts.CPStruct()
+						LodStruct = actual ?? new Parts.CarParts.CPStruct()
 					};
 					
 					foreach (var attroff in cpoff?.AttribOffsets ?? Enumerable.Empty<ushort>())

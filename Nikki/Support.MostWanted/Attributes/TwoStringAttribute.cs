@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Diagnostics;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Enum.CP;
@@ -16,6 +18,7 @@ namespace Nikki.Support.MostWanted.Attributes
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with two null-terminated string values.
 	/// </summary>
+	[DebuggerDisplay("Attribute: {AttribType} | Type: {Type} | Value1: {Value1} | Value2: {Value2}")]
 	public class TwoStringAttribute : CPAttribute
 	{
 		private const eCarPartAttribType _type = eCarPartAttribType.TwoString;
@@ -43,6 +46,7 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// <summary>
 		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -116,43 +120,6 @@ namespace Nikki.Support.MostWanted.Attributes
 		}
 
 		/// <summary>
-		/// Initializes new instance of <see cref="StringAttribute"/> by reading data using 
-		/// <see cref="BinaryReader"/> provided.
-		/// </summary>
-		/// <param name="br"><see cref="BinaryReader"/> to read with.</param>
-		/// <param name="string_dict">Dictionary of offsets and strings.</param>
-		/// <param name="key">Key of the attribute's group.</param>
-		public TwoStringAttribute(BinaryReader br, Dictionary<int, string> string_dict, uint key)
-		{
-			this.Key = key;
-			this.Disassemble(br, string_dict);
-		}
-
-		private void Disassemble(BinaryReader br, Dictionary<int, string> string_dict)
-		{
-			ushort position;
-			position = br.ReadUInt16();
-			
-			if (position < 0xFFFF && string_dict.TryGetValue(position, out var value1))
-			{
-			
-				this.Value1 = value1;
-				this.Value1Exists = eBoolean.True;
-			
-			}
-			
-			position = br.ReadUInt16();
-			
-			if (position < 0xFFFF && string_dict.TryGetValue(position, out var value2))
-			{
-			
-				this.Value2 = value2;
-				this.Value2Exists = eBoolean.True;
-			
-			}
-		}
-
-		/// <summary>
 		/// Disassembles byte array into <see cref="TwoStringAttribute"/> using <see cref="BinaryReader"/> 
 		/// provided.
 		/// </summary>
@@ -209,8 +176,7 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// Returns attribute part label and its type as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() =>
-			$"Attribute: {this.AttribType} | Type: {this.Type} | Value1: {this.Value1} | Value2: {this.Value2}";
+		public override string ToString() => this.Type.ToString();
 
 		/// <summary>
 		/// Determines whether this instance and a specified object, which must also be a
@@ -221,7 +187,7 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// this instance; false otherwise. If obj is null, the method returns false.
 		/// </returns>
 		public override bool Equals(object obj) =>
-			obj is TwoStringAttribute && this == (TwoStringAttribute)obj;
+			obj is TwoStringAttribute attribute && this == attribute;
 
 		/// <summary>
 		/// Returns the hash code for this <see cref="TwoStringAttribute"/>.
@@ -239,9 +205,11 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// <param name="at1">The first <see cref="TwoStringAttribute"/> to compare, or null.</param>
 		/// <param name="at2">The second <see cref="TwoStringAttribute"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
-		public static bool operator ==(TwoStringAttribute at1, TwoStringAttribute at2) =>
-			at1 is null ? at2 is null : at2 is null ? false
-			: (at1.Key == at2.Key && at1.Value1 == at2.Value1 && at1.Value2 == at2.Value2);
+		public static bool operator ==(TwoStringAttribute at1, TwoStringAttribute at2)
+		{
+			bool v = !(at2 is null) && at1.Key == at2.Key && at1.Value1 == at2.Value1;
+			return at1 is null ? at2 is null : v && at1.Value2 == at2.Value2;
+		}
 
 		/// <summary>
 		/// Determines whether two specified <see cref="TwoStringAttribute"/> have different values.

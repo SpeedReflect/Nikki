@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Diagnostics;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
@@ -19,6 +21,7 @@ namespace Nikki.Support.Carbon.Attributes
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with in-built <see cref="CPStruct"/>.
 	/// </summary>
+	[DebuggerDisplay("Attribute: {AttribType} | Type: {Type} | Templated: {Templated}")]
 	public class ModelTableAttribute : CPAttribute
 	{
 		private const eCarPartAttribType _type = eCarPartAttribType.ModelTable;
@@ -46,6 +49,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// <summary>
 		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -1017,7 +1021,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// Returns attribute part label and its type as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() => $"Attribute: {this.AttribType} | Type: {this.Type} | Templated: {this.Templated}";
+		public override string ToString() => this.Type.ToString();
 
 		/// <summary>
 		/// Determines whether this instance and a specified object, which must also be a
@@ -1028,7 +1032,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// this instance; false otherwise. If obj is null, the method returns false.
 		/// </returns>
 		public override bool Equals(object obj) =>
-			obj is ModelTableAttribute && this == (ModelTableAttribute)obj;
+			obj is ModelTableAttribute attribute && this == attribute;
 
 		/// <summary>
 		/// Returns the hash code for this <see cref="ModelTableAttribute"/>.
@@ -1071,7 +1075,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// <param name="at2">The second <see cref="ModelTableAttribute"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
 		public static bool operator ==(ModelTableAttribute at1, ModelTableAttribute at2) =>
-			at1 is null ? at2 is null : at2 is null ? false : at1.ValueEquals(at2);
+			at1 is null ? at2 is null : !(at2 is null) && at1.ValueEquals(at2);
 
 		/// <summary>
 		/// Determines whether two specified <see cref="ModelTableAttribute"/> have different values.

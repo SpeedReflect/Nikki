@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
@@ -6,6 +8,7 @@ using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Reflection.Enum.SlotID;
 using Nikki.Support.MostWanted.Class;
 using Nikki.Support.MostWanted.Attributes;
 using Nikki.Support.Shared.Parts.CarParts;
@@ -18,16 +21,19 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 	/// <summary>
 	/// A unit CarPart attribute of <see cref="DBModelPart"/>.
 	/// </summary>
+	[DebuggerDisplay("PartName: {PartName} | AttribCount: {Attributes.Count} | GroupID: {CarPartGroupID}")]
 	public class RealCarPart : Shared.Parts.CarParts.RealCarPart
 	{
 		/// <summary>
 		/// Name of this <see cref="RealCarPart"/>.
 		/// </summary>
+		[Browsable(false)]
 		public override string PartName { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Index of <see cref="DBModelPart"/> to which this part belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override int Index { get; set; }
 
 		/// <summary>
@@ -38,12 +44,14 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// <summary>
 		/// A <see cref="CPStruct"/> of this <see cref="RealCarPart"/>.
 		/// </summary>
-		[Expandable("LodGeometry")]
-		public CPStruct Struct { get; set; }
+		[EditorBrowsable(EditorBrowsableState.Always)]
+		[TypeConverter(typeof(ExpandableObjectConverter))]
+		public CPStruct LodStruct { get; set; }
 
 		/// <summary>
 		/// <see cref="DBModelPart"/> to which this part belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public DBModelPart Model { get; set; }
 
 		/// <summary>
@@ -56,7 +64,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// Car Part ID Group to which this part belongs to.
 		/// </summary>
 		[AccessModifiable()]
-		public byte CarPartGroupID { get; set; }
+		public eSlotMostWanted CarPartGroupID { get; set; }
 
 		/// <summary>
 		/// Upgrade group ID of this <see cref="RealCarPart"/>.
@@ -76,7 +84,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		public RealCarPart()
 		{
 			this.Attributes = new List<CPAttribute>();
-			this.Struct = new CPStruct();
+			this.LodStruct = new CPStruct();
 		}
 
 		/// <summary>
@@ -89,7 +97,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 			this.Index = index;
 			this.Model = model;
 			this.Attributes = new List<CPAttribute>();
-			this.Struct = new CPStruct();
+			this.LodStruct = new CPStruct();
 		}
 
 		/// <summary>
@@ -103,15 +111,14 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 			this.Index = index;
 			this.Model = model;
 			this.Attributes = new List<CPAttribute>(capacity);
-			this.Struct = new CPStruct();
+			this.LodStruct = new CPStruct();
 		}
 
 		/// <summary>
 		/// Returns PartName, Attributes count and CarPartGroupID as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() =>
-			$"PartName: {this.PartName} | AttribCount: {this.Attributes.Count} | GroupID: {this.CarPartGroupID}";
+		public override string ToString() => this.PartName;
 
 		/// <summary>
 		/// Returns the hash code for this <see cref="RealCarPart"/>.
@@ -121,7 +128,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		{
 			int result = this.PartLabel?.GetHashCode() ?? String.Empty.GetHashCode();
 			result *= this.Index + 7;
-			result ^= this.Struct.GetHashCode();
+			result ^= this.LodStruct.GetHashCode();
 			return result;
 		}
 
@@ -284,7 +291,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 				PartName = this.PartName,
 				PartLabel = this.PartLabel,
 				UpgradeGroupID = this.UpgradeGroupID,
-				Struct = (CPStruct)this.Struct.PlainCopy()
+				LodStruct = (CPStruct)this.LodStruct.PlainCopy()
 			};
 
 			foreach (var attrib in this.Attributes)

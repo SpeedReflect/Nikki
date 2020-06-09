@@ -8058,15 +8058,6 @@
             <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
             <param name="key">Key of the attribute's group.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Attributes.StringAttribute.#ctor(System.IO.BinaryReader,System.Collections.Generic.Dictionary{System.Int32,System.String},System.UInt32)">
-            <summary>
-            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.StringAttribute"/> by reading data using 
-            <see cref="T:System.IO.BinaryReader"/> provided.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
-            <param name="string_dict">Dictionary of offsets and strings.</param>
-            <param name="key">Key of the attribute's group.</param>
-        </member>
         <member name="M:Nikki.Support.Carbon.Attributes.StringAttribute.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
             <summary>
             Disassembles byte array into <see cref="T:Nikki.Support.Carbon.Attributes.StringAttribute"/> using <see cref="T:System.IO.BinaryReader"/> 
@@ -8193,15 +8184,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
             <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
-            <param name="key">Key of the attribute's group.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Attributes.TwoStringAttribute.#ctor(System.IO.BinaryReader,System.Collections.Generic.Dictionary{System.Int32,System.String},System.UInt32)">
-            <summary>
-            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.StringAttribute"/> by reading data using 
-            <see cref="T:System.IO.BinaryReader"/> provided.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
-            <param name="string_dict">Dictionary of offsets and strings.</param>
             <param name="key">Key of the attribute's group.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Attributes.TwoStringAttribute.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
@@ -9979,6 +9961,16 @@
         <member name="P:Nikki.Support.Carbon.Class.STRBlock.CollectionName">
             <summary>
             Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.STRBlock.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.STRBlock.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Class.STRBlock.InfoLength">
@@ -12289,62 +12281,62 @@
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.Saturation1">
+        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.SaturationFillEffect">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.Brightness1">
+        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.BrightnessFillEffect">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.Saturation2">
+        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.SaturationStrokeEffect">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.Brightness2">
+        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.BrightnessStrokeEffect">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.Saturation3">
+        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.SaturationInnerShadow">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.Brightness3">
+        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.BrightnessInnerShadow">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.Saturation4">
+        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.SaturationInnerGlow">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.Brightness4">
+        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.BrightnessInnerGlow">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.SwatchColor1">
+        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.SwatchFillEffect">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.SwatchColor2">
+        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.SwatchStrokeEffect">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.SwatchColor3">
+        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.SwatchInnerShadow">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.SwatchColor4">
+        <member name="P:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.SwatchInnerGlow">
             <summary>
             
             </summary>
@@ -13129,15 +13121,6 @@
             <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
             <param name="key">Key of the attribute's group.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Attributes.StringAttribute.#ctor(System.IO.BinaryReader,System.Collections.Generic.Dictionary{System.Int32,System.String},System.UInt32)">
-            <summary>
-            Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Attributes.StringAttribute"/> by reading data using 
-            <see cref="T:System.IO.BinaryReader"/> provided.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
-            <param name="string_dict">Dictionary of offsets and strings.</param>
-            <param name="key">Key of the attribute's group.</param>
-        </member>
         <member name="M:Nikki.Support.MostWanted.Attributes.StringAttribute.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
             <summary>
             Disassembles byte array into <see cref="T:Nikki.Support.MostWanted.Attributes.StringAttribute"/> using <see cref="T:System.IO.BinaryReader"/> 
@@ -13264,15 +13247,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
             <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
-            <param name="key">Key of the attribute's group.</param>
-        </member>
-        <member name="M:Nikki.Support.MostWanted.Attributes.TwoStringAttribute.#ctor(System.IO.BinaryReader,System.Collections.Generic.Dictionary{System.Int32,System.String},System.UInt32)">
-            <summary>
-            Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Attributes.StringAttribute"/> by reading data using 
-            <see cref="T:System.IO.BinaryReader"/> provided.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
-            <param name="string_dict">Dictionary of offsets and strings.</param>
             <param name="key">Key of the attribute's group.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Attributes.TwoStringAttribute.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
@@ -13505,16 +13479,6 @@
         <member name="P:Nikki.Support.MostWanted.Class.CarTypeInfo.MemoryType">
             <summary>
             Represents memory type of the <see cref="T:Nikki.Support.MostWanted.Class.CarTypeInfo"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.MostWanted.Class.CarTypeInfo.Spoiler">
-            <summary>
-            Spoiler type of the <see cref="T:Nikki.Support.MostWanted.Class.CarTypeInfo"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.MostWanted.Class.CarTypeInfo.RoofScoop">
-            <summary>
-            RoofScoop type of the <see cref="T:Nikki.Support.MostWanted.Class.CarTypeInfo"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.CarTypeInfo.#ctor">
@@ -14014,32 +13978,32 @@
         </member>
         <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown0">
             <summary>
-            Unknown 4 value of the material.
+            Unknown 0 value of the material.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown1">
             <summary>
-            Unknown 5 value of the material.
+            Unknown 1 value of the material.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown2">
             <summary>
-            Unknown 6 value of the material.
+            Unknown 2 value of the material.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown3">
             <summary>
-            Unknown 7 value of the material.
+            Unknown 3 value of the material.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown4">
             <summary>
-            Unknown 8 value of the material.
+            Unknown 4 value of the material.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown5">
             <summary>
-            Unknown 9 value of the material.
+            Unknown 5 value of the material.
             </summary>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.Material.#ctor">
@@ -14590,6 +14554,16 @@
         <member name="P:Nikki.Support.MostWanted.Class.STRBlock.CollectionName">
             <summary>
             Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.STRBlock.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.STRBlock.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Class.STRBlock.InfoLength">
@@ -16473,7 +16447,7 @@
             Collection of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> of this <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.Struct">
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.LodStruct">
             <summary>
             A <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/> of this <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
             </summary>

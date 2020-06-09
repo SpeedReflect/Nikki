@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Nikki.Reflection.Enum.SlotID;
 using CoreExtensions.IO;
 
 
@@ -18,7 +19,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// <summary>
 		/// Group ID of the car.
 		/// </summary>
-		public byte CarPartGroupID { get; set; }
+		public eSlotMostWanted CarPartGroupID { get; set; }
 
 		/// <summary>
 		/// Unknown yet value.
@@ -53,7 +54,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		public void Disassemble(BinaryReader br, BinaryReader str_reader)
 		{
 			this.PartNameHash = br.ReadUInt32();
-			this.CarPartGroupID = br.ReadByte();
+			this.CarPartGroupID = br.ReadEnum<eSlotMostWanted>();
 			this.UpgradeGroupID = br.ReadUInt16();
 			this.Index = br.ReadByte();
 

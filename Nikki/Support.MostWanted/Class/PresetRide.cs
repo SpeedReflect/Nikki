@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
@@ -7,6 +8,7 @@ using Nikki.Reflection.Attributes;
 using Nikki.Support.MostWanted.Framework;
 using Nikki.Support.MostWanted.Parts.PresetParts;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -43,22 +45,26 @@ namespace Nikki.Support.MostWanted.Class
         /// <summary>
         /// Game to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override GameINT GameINT => GameINT.MostWanted;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override string GameSTR => GameINT.MostWanted.ToString();
 
         /// <summary>
         /// Manager to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public PresetRideManager Manager { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
         /// </summary>
         [AccessModifiable()]
+        [Category("Main")]
         public override string CollectionName
         {
             get => this._collection_name;
@@ -72,11 +78,15 @@ namespace Nikki.Support.MostWanted.Class
         /// <summary>
         /// Binary memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint BinKey => this._collection_name.BinHash();
 
         /// <summary>
         /// Vault memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint VltKey => this._collection_name.VltHash();
 
         /// <summary>
@@ -84,6 +94,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public override string MODEL { get; set; } = String.Empty;
 
         /// <summary>
@@ -91,6 +102,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public string Frontend { get; set; } = String.Empty;
 
         /// <summary>
@@ -98,6 +110,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public string Pvehicle { get; set; } = String.Empty;
 
         /// <summary>
@@ -105,6 +118,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Base { get; set; } = String.Empty;
 
         /// <summary>
@@ -112,6 +126,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string AftermarketBodykit { get; set; } = String.Empty;
 
         /// <summary>
@@ -119,6 +134,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string FrontBrake { get; set; } = String.Empty;
 
         /// <summary>
@@ -126,6 +142,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string FrontLeftWindow { get; set; } = String.Empty;
 
         /// <summary>
@@ -133,6 +150,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string FrontRightWindow { get; set; } = String.Empty;
 
         /// <summary>
@@ -140,6 +158,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string FrontWindow { get; set; } = String.Empty;
 
         /// <summary>
@@ -147,6 +166,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Interior { get; set; } = String.Empty;
 
         /// <summary>
@@ -154,6 +174,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string LeftBrakelight { get; set; } = String.Empty;
 
         /// <summary>
@@ -161,6 +182,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string LeftBrakelightGlass { get; set; } = String.Empty;
 
         /// <summary>
@@ -168,6 +190,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string LeftHeadlight { get; set; } = String.Empty;
 
         /// <summary>
@@ -175,6 +198,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string LeftHeadlightGlass { get; set; } = String.Empty;
 
         /// <summary>
@@ -182,6 +206,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string LeftSideMirror { get; set; } = String.Empty;
 
         /// <summary>
@@ -189,6 +214,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RearBrake { get; set; } = String.Empty;
 
         /// <summary>
@@ -196,6 +222,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RearLeftWindow { get; set; } = String.Empty;
 
         /// <summary>
@@ -203,6 +230,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RearRightWindow { get; set; } = String.Empty;
 
         /// <summary>
@@ -210,6 +238,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RearWindow { get; set; } = String.Empty;
 
         /// <summary>
@@ -217,6 +246,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RightBrakelight { get; set; } = String.Empty;
 
         /// <summary>
@@ -224,6 +254,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RightBrakelightGlass { get; set; } = String.Empty;
 
         /// <summary>
@@ -231,6 +262,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RightHeadlight { get; set; } = String.Empty;
 
         /// <summary>
@@ -238,6 +270,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RightHeadlightGlass { get; set; } = String.Empty;
 
         /// <summary>
@@ -245,6 +278,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RightSideMirror { get; set; } = String.Empty;
 
         /// <summary>
@@ -252,6 +286,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Driver { get; set; } = String.Empty;
 
         /// <summary>
@@ -259,6 +294,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Spoiler { get; set; } = String.Empty;
 
         /// <summary>
@@ -266,6 +302,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string UniversalSpoilerBase { get; set; } = String.Empty;
 
         /// <summary>
@@ -273,6 +310,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RoofScoop { get; set; } = String.Empty;
 
         /// <summary>
@@ -280,6 +318,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Hood { get; set; } = String.Empty;
 
         /// <summary>
@@ -287,6 +326,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Headlight { get; set; } = String.Empty;
 
         /// <summary>
@@ -294,6 +334,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Brakelight { get; set; } = String.Empty;
 
         /// <summary>
@@ -301,6 +342,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string FrontWheel { get; set; } = String.Empty;
 
         /// <summary>
@@ -308,6 +350,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RearWheel { get; set; } = String.Empty;
 
         /// <summary>
@@ -315,6 +358,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Spinner { get; set; } = String.Empty;
 
         /// <summary>
@@ -322,6 +366,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string LicensePlate { get; set; } = String.Empty;
 
         /// <summary>
@@ -329,6 +374,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string WindshieldTint { get; set; } = String.Empty;
 
         /// <summary>
@@ -336,6 +382,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string CV { get; set; } = String.Empty;
 
         /// <summary>
@@ -343,6 +390,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string WheelManufacturer { get; set; } = String.Empty;
 
         /// <summary>
@@ -350,78 +398,91 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Misc { get; set; } = String.Empty;
 
         /// <summary>
         /// Damage attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("BaseKit")]
+        [Browsable(false)]
         public Damages KIT_DAMAGES { get; set; }
 
         /// <summary>
         /// Zero damage attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("BaseKit")]
+        [Browsable(false)]
         public ZeroDamage ZERO_DAMAGES { get; set; }
 
         /// <summary>
         /// Attachment attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("BaseKit")]
+        [Browsable(false)]
         public Attachments ATTACHMENTS { get; set; }
 
         /// <summary>
         /// Decal size attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("BaseKit")]
+        [Browsable(false)]
         public DecalSize DECAL_SIZES { get; set; }
 
         /// <summary>
         /// Group of paints and vinyls in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Visuals")]
+        [Browsable(false)]
         public VisualSets VISUAL_SETS { get; set; }
 
         /// <summary>
         /// Set of front window decals in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Decals")]
+        [Browsable(false)]
         public DecalArray DECALS_FRONT_WINDOW { get; set; }
 
         /// <summary>
         /// Set of rear window decals in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Decals")]
+        [Browsable(false)]
         public DecalArray DECALS_REAR_WINDOW { get; set; }
 
         /// <summary>
         /// Set of left door decals in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Decals")]
+        [Browsable(false)]
         public DecalArray DECALS_LEFT_DOOR { get; set; }
 
         /// <summary>
         /// Set of right door decals in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Decals")]
+        [Browsable(false)]
         public DecalArray DECALS_RIGHT_DOOR { get; set; }
 
         /// <summary>
         /// Set of left quarter decals in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Decals")]
+        [Browsable(false)]
         public DecalArray DECALS_LEFT_QUARTER { get; set; }
 
         /// <summary>
         /// Set of right quarter decals in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Decals")]
+        [Browsable(false)]
         public DecalArray DECALS_RIGHT_QUARTER { get; set; }
 
         /// <summary>
         /// Set of HUD elements in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Visuals")]
+        [Browsable(false)]
         public HUDStyle HUD { get; set; }
 
         #endregion
@@ -696,7 +757,7 @@ namespace Nikki.Support.MostWanted.Class
         public override string ToString()
         {
             return $"Collection Name: {this.CollectionName} | " +
-                   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+                   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
         }
 
         #endregion

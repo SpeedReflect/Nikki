@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Diagnostics;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
@@ -16,6 +18,7 @@ namespace Nikki.Support.Carbon.Attributes
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with 4-byte signed integer value.
 	/// </summary>
+	[DebuggerDisplay("Attribute: {AttribType} | Type: {Type} | Value: {Value}")]
 	public class KeyAttribute : CPAttribute
 	{
 		private const eCarPartAttribType _type = eCarPartAttribType.Key;
@@ -43,6 +46,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// <summary>
 		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -117,7 +121,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// Returns attribute part label and its type as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() => $"Attribute: {this.AttribType} | Type: {this.Type} | Value: {this.Value}";
+		public override string ToString() => this.Type.ToString();
 
 		/// <summary>
 		/// Determines whether this instance and a specified object, which must also be a
@@ -128,7 +132,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// this instance; false otherwise. If obj is null, the method returns false.
 		/// </returns>
 		public override bool Equals(object obj) =>
-			obj is KeyAttribute && this == (KeyAttribute)obj;
+			obj is KeyAttribute attribute && this == attribute;
 
 		/// <summary>
 		/// Returns the hash code for this <see cref="KeyAttribute"/>.
@@ -143,8 +147,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// <param name="at2">The second <see cref="KeyAttribute"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
 		public static bool operator ==(KeyAttribute at1, KeyAttribute at2) =>
-			at1 is null ? at2 is null : at2 is null ? false
-			: (at1.Key == at2.Key && at1.Value == at2.Value);
+			at1 is null ? at2 is null : !(at2 is null) && at1.Key == at2.Key && at1.Value == at2.Value;
 
 		/// <summary>
 		/// Determines whether two specified <see cref="KeyAttribute"/> have different values.

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Diagnostics;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
@@ -14,6 +16,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 	/// <summary>
 	/// A unit <see cref="RealCarPart"/> struct with geometry part names.
 	/// </summary>
+	[DebuggerDisplay("Templated: {Templated} | Concatenator: {Concatenator}")]
 	public class CPStruct : Shared.Parts.CarParts.CPStruct
 	{
 		/// <summary>
@@ -358,7 +361,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// Returns templated value and first geometry name as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() => $"Templated: {this.Templated} | Concatenator: {this.Concatenator}";
+		public override string ToString() => $"LodStruct";
 
 		private bool ValueEquals(CPStruct other)
 		{

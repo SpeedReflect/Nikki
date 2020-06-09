@@ -62,7 +62,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <returns>True if obj is a <see cref="CPOffset"/> and its value is the same as 
 		/// this instance; false otherwise. If obj is null, the method returns false.
 		/// </returns>
-		public override bool Equals(object obj) => obj is CPOffset && this == (CPOffset)obj;
+		public override bool Equals(object obj) => obj is CPOffset offset && this == offset;
 
 		/// <summary>
 		/// Returns the hash code for this <see cref="CPOffset"/>.
@@ -72,10 +72,13 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		{
 			int result = 0x17;
 
-			for (int loop = 0; loop < this.AttribOffsets.Count; ++loop)
+			var sortlist = new List<ushort>(this.AttribOffsets);
+			sortlist.Sort();
+
+			for (int loop = 0; loop < sortlist.Count; ++loop)
 			{
 			
-				result = result * 37 + this.AttribOffsets[loop] + 1;
+				result = result * 37 + sortlist[loop] + 1;
 			
 			}
 

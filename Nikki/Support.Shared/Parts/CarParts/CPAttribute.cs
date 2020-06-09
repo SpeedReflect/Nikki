@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using System.Diagnostics;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
@@ -11,6 +13,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 	/// <summary>
 	/// A <see cref="DBModelPart"/> unit attribute.
 	/// </summary>
+	[DebuggerDisplay("Attribute: {AttribType} | Key: 0x{Key:X8}")]
 	public abstract class CPAttribute : SubPart
 	{
 		/// <summary>
@@ -26,6 +29,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <summary>
 		/// <see cref="RealCarPart"/> to which this <see cref="CPAttribute"/> belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public RealCarPart BelongsTo { get; set; }
 
 		/// <summary>
@@ -61,6 +65,6 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Returns attribute part label and its type as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() => $"Attribute: {this.AttribType} | Key: 0x{this.Key:X8}";
+		public override string ToString() => $"0x{this.Key:X8}";
 	}
 }

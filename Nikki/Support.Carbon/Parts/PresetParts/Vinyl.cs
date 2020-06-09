@@ -59,73 +59,73 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
         /// 
         /// </summary>
         [AccessModifiable()]
-        public byte Saturation1 { get; set; } = 0;
+        public byte SaturationFillEffect { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
-        public byte Brightness1 { get; set; } = 0;
+        public byte BrightnessFillEffect { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
-        public byte Saturation2 { get; set; } = 0;
+        public byte SaturationStrokeEffect { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
-        public byte Brightness2 { get; set; } = 0;
+        public byte BrightnessStrokeEffect { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
-        public byte Saturation3 { get; set; } = 0;
+        public byte SaturationInnerShadow { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
-        public byte Brightness3 { get; set; } = 0;
+        public byte BrightnessInnerShadow { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
-        public byte Saturation4 { get; set; } = 0;
+        public byte SaturationInnerGlow { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
-        public byte Brightness4 { get; set; } = 0;
+        public byte BrightnessInnerGlow { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
-        public string SwatchColor1 { get; set; } = String.Empty;
+        public string SwatchFillEffect { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
-        public string SwatchColor2 { get; set; } = String.Empty;
+        public string SwatchStrokeEffect { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
-        public string SwatchColor3 { get; set; } = String.Empty;
+        public string SwatchInnerShadow { get; set; } = String.Empty;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
-        public string SwatchColor4 { get; set; } = String.Empty;
+        public string SwatchInnerGlow { get; set; } = String.Empty;
 
         /// <summary>
         /// Creates a plain copy of the objects that contains same values.
@@ -158,21 +158,21 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
             this.Skew = br.ReadSByte();
             this.ScaleY = br.ReadSByte();
             this.ScaleX = br.ReadSByte();
-            this.SwatchColor1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Saturation1 = br.ReadByte();
-            this.Brightness1 = br.ReadByte();
+            this.SwatchFillEffect = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.SaturationFillEffect = br.ReadByte();
+            this.BrightnessFillEffect = br.ReadByte();
             br.BaseStream.Position += 2;
-            this.SwatchColor2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Saturation2 = br.ReadByte();
-            this.Brightness2 = br.ReadByte();
+            this.SwatchStrokeEffect = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.SaturationStrokeEffect = br.ReadByte();
+            this.BrightnessStrokeEffect = br.ReadByte();
             br.BaseStream.Position += 2;
-            this.SwatchColor3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Saturation3 = br.ReadByte();
-            this.Brightness3 = br.ReadByte();
+            this.SwatchInnerShadow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.SaturationInnerShadow = br.ReadByte();
+            this.BrightnessInnerShadow = br.ReadByte();
             br.BaseStream.Position += 2;
-            this.SwatchColor4 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Saturation4 = br.ReadByte();
-            this.Brightness4 = br.ReadByte();
+            this.SwatchInnerGlow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.SaturationInnerGlow = br.ReadByte();
+            this.BrightnessInnerGlow = br.ReadByte();
             br.BaseStream.Position += 2;
         }
 
@@ -189,21 +189,21 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
             bw.Write(this.Skew);
             bw.Write(this.ScaleY);
             bw.Write(this.ScaleX);
-            bw.Write(this.SwatchColor1.BinHash());
-            bw.Write(this.Saturation1);
-            bw.Write(this.Brightness1);
+            bw.Write(this.SwatchFillEffect.BinHash());
+            bw.Write(this.SaturationFillEffect);
+            bw.Write(this.BrightnessFillEffect);
             bw.Write((short)0);
-            bw.Write(this.SwatchColor2.BinHash());
-            bw.Write(this.Saturation2);
-            bw.Write(this.Brightness2);
+            bw.Write(this.SwatchStrokeEffect.BinHash());
+            bw.Write(this.SaturationStrokeEffect);
+            bw.Write(this.BrightnessStrokeEffect);
             bw.Write((short)0);
-            bw.Write(this.SwatchColor3.BinHash());
-            bw.Write(this.Saturation3);
-            bw.Write(this.Brightness3);
+            bw.Write(this.SwatchInnerShadow.BinHash());
+            bw.Write(this.SaturationInnerShadow);
+            bw.Write(this.BrightnessInnerShadow);
             bw.Write((short)0);
-            bw.Write(this.SwatchColor4.BinHash());
-            bw.Write(this.Saturation4);
-            bw.Write(this.Brightness4);
+            bw.Write(this.SwatchInnerGlow.BinHash());
+            bw.Write(this.SaturationInnerGlow);
+            bw.Write(this.BrightnessInnerGlow);
             bw.Write((short)0);
         }
     }

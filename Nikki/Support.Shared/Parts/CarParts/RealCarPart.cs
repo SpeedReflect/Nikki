@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.ComponentModel;
+using System.Collections.Generic;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Support.Shared.Class;
@@ -25,6 +26,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <summary>
 		/// Total amount of <see cref="CPAttribute"/> in this <see cref="RealCarPart"/>.
 		/// </summary>
+		[DisplayName("AttributeCount")]
 		public virtual int Length => this.Attributes.Count;
 
 		/// <summary>
