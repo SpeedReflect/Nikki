@@ -277,22 +277,15 @@ namespace Nikki.Support.MostWanted.Class
 
             if (PartOffsets[2] != max)
             {
-                
+
+                this.IsCompressed = eBoolean.True;
+
                 for (int a1 = 0; a1 < TextureCount; ++a1)
                 {
                 
                     int count = this.Textures.Count;
                     br.BaseStream.Position = Start;
                     this.ParseCompTexture(br, offslot_list[a1]);
-                    
-                    if (this.Textures.Count > count) // if texture was added
-                    {
-                    
-                        this.Textures[^1].CompressionValue1 = compslot_list[a1].Var1;
-                        this.Textures[^1].CompressionValue2 = compslot_list[a1].Var2;
-                        this.Textures[^1].CompressionValue3 = compslot_list[a1].Var3;
-                    
-                    }
                 
                 }
             
@@ -762,96 +755,34 @@ namespace Nikki.Support.MostWanted.Class
         /// <returns>Decompressed texture valid to the current support.</returns>
         protected override void ParseCompTexture(BinaryReader br, OffSlot offslot)
         {
-            const int headersize = 0x7C + 0x18; // texture header size + comp slot size
+            const int headersize = 0x7C + 0x20; // texture header size + comp slot size
             br.BaseStream.Position += offslot.AbsoluteOffset;
             var offset = br.BaseStream.Position; // save this position
 
-            // Magic list that contains MagicHeaders
-            var magiclist = new List<MagicHeader>(offslot.EncodedSize / 0x4000 + 1);
-
-            // Read while position in the stream is less than encoded size specified
-            while (br.BaseStream.Position < offset + offslot.EncodedSize)
-            {
-                
-                // We read till we find magic compressed block number
-                if (br.ReadEnum<eBlockID>() != eBlockID.LZCompressed) continue;
-
-                var magic = new MagicHeader();
-                magic.Read(br);
-
-                magiclist.Add(magic);
-
-            }
-
-            // If no data was read, we return; else if magic count is more than 1, sort by positions
-            if (magiclist.Count == 0)
-            {
-
-                return;
-            
-            }
-            else if (magiclist.Count > 1)
-            {
-            
-                magiclist.Sort((x, y) => x.DecodedDataPosition.CompareTo(y.DecodedDataPosition));
-            
-            }
+            // Textures are as one, meaning we read once and it is compressed block itself
+            var array = br.ReadBytes(offslot.EncodedSize);
+            array = Interop.Decompress(array);
 
             // Header is always located at the end of data, meaning last MagicHeader
-            var header = magiclist[^1];
-            using var ms = new MemoryStream(header.Data);
+            using var ms = new MemoryStream(array);
             using var texr = new BinaryReader(ms);
 
             // Texture header is located at the end of data
-            int headlength = header.Length - headersize;
-            texr.BaseStream.Position = headlength;
+            int datalength = array.Length - headersize;
+            texr.BaseStream.Position = datalength;
 
             // Create new texture based on header found
             var texture = new Texture(texr, this);
 
-            // We can skip dds type struct since it is defined in the header.
+            // Read compression values right after
+            texr.BaseStream.Position += 8;
+            texture.CompressionValue1 = texr.ReadInt32();
+            texture.CompressionValue2 = texr.ReadInt32();
+            texture.CompressionValue3 = texr.ReadInt32();
 
-            // Calculate total length of the texture data
-            int length = 0;
-            magiclist.ForEach(arr => length += arr.Length == header.Length
-                    ? headlength // exclude header size
-                    : arr.Length); // else include entire length
-
-            // Initialize stack for data
-            texture.Data = new byte[length];
-            length = 0; // reset
-
-            // BlockCopy all data to the texture's storage
-            foreach (var magic in magiclist)
-            {
-                
-                if (magic.Length == header.Length)
-                {
-                
-                    if (magic.Length == headersize)
-                    {
-                    
-                        continue;
-                    
-                    }
-                    else
-                    {
-                    
-                        Array.Copy(magic.Data, 0, texture.Data, length, headlength);
-                        length += headlength;
-                    
-                    }
-                
-                }
-                else
-                {
-                
-                    Array.Copy(magic.Data, 0, texture.Data, length, magic.Length);
-                    length += magic.Length;
-                
-                }
-            
-            }
+            // Initialize stack for data and copy it
+            texture.Data = new byte[datalength];
+            Array.Copy(array, 0, texture.Data, 0, datalength);
 
             // Add texture to this TPK
             this.Textures.Add(texture);
@@ -1109,8 +1040,10 @@ namespace Nikki.Support.MostWanted.Class
                 var nextPos = writer.BaseStream.Position + 0x7C;
                 texture.Assemble(writer);
                 writer.BaseStream.Position = nextPos;
-                writer.Write((int)0);
                 writer.Write((long)0);
+                writer.Write(texture.CompressionValue1);
+                writer.Write(texture.CompressionValue2);
+                writer.Write(texture.CompressionValue3);
                 writer.Write(Comp.GetInt(texture.Compression));
                 writer.Write((long)0);
 
@@ -1123,135 +1056,40 @@ namespace Nikki.Support.MostWanted.Class
             foreach (var texture in this.Textures)
             {
 
-                int texOffset = 0; // to keep track of offset in dds data of the texture
+                const int texHeaderSize = 0x7C + 0x20; // size of texture header + dds info header
 
-                const int headerSize = 0x18; // header size is constant for all compressions
-                const int maxBlockSize = 0x8000; // maximum block size of data
-                const int texHeaderSize = 0x7C + 0x18; // size of texture header + dds info header
+                // Initialize array of texture data and header, write it
+                var array = new byte[texture.Data.Length + texHeaderSize];
+                Array.Copy(texture.Data, 0, array, 0, texture.Data.Length);
 
-                // Calculate header length. Header consists of leftover dds data got by 
-                // dividing it in blocks of 0x8000 bytes + size of texture header + 
-                // size of dds info header
-                var numParts = texture.Data.Length / maxBlockSize + 1;
-                var magiclist = new List<MagicHeader>(numParts);
-
-                for (int loop = 0; loop < numParts; ++loop)
+                using (var strMemory = new MemoryStream(array))
+                using (var strWriter = new BinaryWriter(strMemory))
                 {
 
-                    var magic = new MagicHeader();
+                    strWriter.BaseStream.Position = texture.Data.Length;
+                    WriteHeader(texture, strWriter);
+                    CalculateNextOffset(texture.Data.Length);
 
-                    // If we are at the leftover/last part
-                    if (loop == numParts - 1)
-                    {
-
-                        var difference = texture.Data.Length - texOffset;
-                        var head = new byte[difference + texHeaderSize];
-
-                        if (difference != 0)
-                        {
-
-                            Array.Copy(texture.Data, texOffset, head, 0, difference);
-
-                        }
-
-                        texOffset = texture.Data.Length;
-
-                        // Initialize new stream over header and set position at the end
-                        using var strMemory = new MemoryStream(head);
-                        using var strWriter = new BinaryWriter(strMemory);
-                        strWriter.BaseStream.Position = strWriter.BaseStream.Length - texHeaderSize;
-
-                        // Write header data and calculate next offset
-                        WriteHeader(texture, strWriter);
-                        CalculateNextOffset(texture.Data.Length);
-
-                        // Save compressed data to MagicHeader
-                        magic.Data = Interop.Compress(head, eLZCompressionType.BEST);
-                        magic.DecodedSize = difference + texHeaderSize;
-
-                    }
-
-                    // Else compress data and save as MagicHeader
-                    else
-                    {
-
-                        // Use compression type passed
-                        magic.Data = Interop.Compress(texture.Data, texOffset, maxBlockSize, eLZCompressionType.BEST);
-                        texOffset += maxBlockSize;
-                        magic.DecodedSize = maxBlockSize;
-
-                    }
-
-                    magiclist.Add(magic);
                 }
+
+                // Compress texture data with the best compression
+                array = Interop.Compress(array, eLZCompressionType.BEST);
 
                 // Create new Offslot that will be yield returned
                 var offslot = new OffSlot()
                 {
                     Key = texture.BinKey,
                     AbsoluteOffset = (int)(bw.BaseStream.Position - thisOffset),
-                    DecodedSize = 0,
-                    EncodedSize = 0,
+                    DecodedSize = texture.Data.Length + texHeaderSize,
+                    EncodedSize = array.Length,
                     UserFlags = 0,
-                    Flags = 2,
+                    Flags = 1,
                     RefCount = 0,
                     UnknownInt32 = 0,
                 };
 
-                // Make new offsets to keep track of positions
-                //int decodeOffset = 0;
-                int decodeOffset = magiclist[0].DecodedSize;
-                int encodeOffset = 0;
-
-                // If there are more than 1 subparts
-                if (magiclist.Count > 1)
-                {
-
-                    // Iterate through every part starting with index 1
-                    for (int loop = 1; loop < magiclist.Count; ++loop)
-                    {
-
-                        var magic = magiclist[loop];
-                        var size = magic.Length + headerSize;
-                        var difference = 4 - size % 4;
-                        if (difference != 4) size += difference;
-
-                        // Manage settings about decoded data
-                        magic.DecodedDataPosition = decodeOffset;
-                        decodeOffset += magic.DecodedSize;
-                        offslot.DecodedSize += magic.DecodedSize;
-
-                        // Manage settings about encoded data
-                        magic.EncodedSize = size;
-                        magic.EncodedDataPosition = encodeOffset;
-                        encodeOffset += size;
-                        offslot.EncodedSize += size;
-
-                        magic.Write(bw);
-
-                    }
-
-                }
-
-                // Write very first subpart at the end
-                {
-
-                    var magic = magiclist[0];
-                    var size = magic.Length + headerSize;
-                    var difference = 4 - size % 4;
-                    if (difference != 4) size += difference;
-
-                    // Manage settings about decoded data
-                    offslot.DecodedSize += magic.DecodedSize;
-
-                    // Manage settings about encoded data
-                    magic.EncodedSize = size;
-                    magic.EncodedDataPosition = encodeOffset;
-                    offslot.EncodedSize += size;
-
-                    magic.Write(bw);
-
-                }
+                // Write compressed data
+                bw.Write(array);
 
                 // Fill buffer till offset % 0x40
                 bw.FillBuffer(0x40);
