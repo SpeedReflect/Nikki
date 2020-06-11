@@ -12,9 +12,9 @@ using Nikki.Reflection.Attributes;
 namespace Nikki.Support.Shared.Class
 {
 	/// <summary>
-	/// <see cref="CarSlotInfo"/> is a collection of settings related to car's slot overrides.
+	/// <see cref="SlotOverride"/> is a collection of settings related to car's slot overrides.
 	/// </summary>
-	public abstract class CarSlotInfo : Collectable, IAssembly
+	public abstract class SlotOverride : Collectable, IAssembly
 	{
         #region Main Properties
 
@@ -48,7 +48,7 @@ namespace Nikki.Support.Shared.Class
         #region AccessModifiable Properties
 
         /// <summary>
-        /// Main override entry of this <see cref="CarSlotInfo"/>.
+        /// Main override entry of this <see cref="SlotOverride"/>.
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
@@ -60,15 +60,15 @@ namespace Nikki.Support.Shared.Class
         #region Methods
 
         /// <summary>
-        /// Assembles <see cref="CarSlotInfo"/> into a byte array.
+        /// Assembles <see cref="SlotOverride"/> into a byte array.
         /// </summary>
-        /// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="CarSlotInfo"/> with.</param>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="SlotOverride"/> with.</param>
         public abstract void Assemble(BinaryWriter bw);
 
         /// <summary>
-        /// Disassembles array into <see cref="CarSlotInfo"/> properties.
+        /// Disassembles array into <see cref="SlotOverride"/> properties.
         /// </summary>
-        /// <param name="br"><see cref="BinaryReader"/> to read <see cref="CarSlotInfo"/> with.</param>
+        /// <param name="br"><see cref="BinaryReader"/> to read <see cref="SlotOverride"/> with.</param>
         public abstract void Disassemble(BinaryReader br);
 
         /// <summary>

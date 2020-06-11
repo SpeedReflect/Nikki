@@ -1,22 +1,20 @@
 ﻿using System;
 using System.IO;
 using Nikki.Core;
-using Nikki.Utils;
 using Nikki.Reflection.Enum;
+using Nikki.Reflection.Exception;
+using Nikki.Reflection.Enum.SlotID;
 using Nikki.Support.MostWanted.Class;
-using CoreExtensions.IO;
 
 
 
 namespace Nikki.Support.MostWanted.Framework
 {
 	/// <summary>
-	/// A <see cref="Manager{T}"/> for <see cref="SlotType"/> collections.
+	/// A <see cref="Manager{T}"/> for <see cref="SlotOverride"/> collections.
 	/// </summary>
-	public class SlotTypeManager : Manager<SlotType>
+	public class SlotOverrideManager : Manager<SlotOverride>
 	{
-		private bool _is_read_only = true;
-
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
@@ -28,28 +26,28 @@ namespace Nikki.Support.MostWanted.Framework
 		public override string GameSTR => GameINT.MostWanted.ToString();
 
 		/// <summary>
-		/// Name of this <see cref="SlotTypeManager"/>.
+		/// Name of this <see cref="SlotOverrideManager"/>.
 		/// </summary>
-		public override string Name => "SlotTypes";
+		public override string Name => "SlotOverrides";
 
 		/// <summary>
 		/// True if this <see cref="Manager{T}"/> is read-only; otherwise, false.
 		/// </summary>
-		public override bool IsReadOnly => this._is_read_only;
+		public override bool IsReadOnly => false;
 
 		/// <summary>
-		/// Indicates required alighment when this <see cref="SlotTypeManager"/> is being serialized.
+		/// Indicates required alighment when this <see cref="SlotOverrideManager"/> is being serialized.
 		/// </summary>
 		public override Alignment Alignment { get; }
 
 		/// <summary>
-		/// Initializes new instance of <see cref="SlotTypeManager"/>.
+		/// Initializes new instance of <see cref="SlotOverrideManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>
-		public SlotTypeManager(Datamap db)
+		public SlotOverrideManager(Datamap db)
 		{
 			this.Database = db;
-			this.Extender = 0;
+			this.Extender = 5;
 			this.Alignment = Alignment.Default;
 		}
 
@@ -62,48 +60,7 @@ namespace Nikki.Support.MostWanted.Framework
 		{
 			if (this.Count == 0) return;
 
-			bw.GeneratePadding(mark, this.Alignment);
-
-			// Write CarInfo Animation Hookups
-			var dif = 4 - this.Count % 4;
-			if (dif == 4) dif = 0;
-
-			bw.WriteEnum(eBlockID.CarInfoAnimHookup);
-			bw.Write(this.Count + dif);
-
-			// Write Animations
 			foreach (var collection in this)
-			{
-
-				bw.WriteEnum(collection.PrimaryAnimation);
-
-			}
-
-			bw.WriteBytes(dif);
-
-			// Write CarInfo Animation Hideups
-			bw.WriteEnum(eBlockID.CarInfoAnimHideup);
-			bw.Write(0x100);
-			for (int loop = 0; loop < 0x40; ++loop) bw.Write(0xFFFFFFFF);
-
-			// Precalculate size
-			var manager = this.Database.GetManager(typeof(SlotOverrideManager)) as SlotOverrideManager;
-			var size = this.Count * SlotType.BaseClassSize;
-			size += manager.Count * SlotOverride.BaseClassSize;
-
-			bw.WriteEnum(eBlockID.SlotTypes);
-			bw.Write(size);
-
-			// Write SlotTypes
-			foreach (var collection in this)
-			{
-
-				collection.Assemble(bw);
-
-			}
-
-			// Write CarSlotInfos
-			foreach (var collection in manager)
 			{
 
 				collection.Assemble(bw);
@@ -112,7 +69,7 @@ namespace Nikki.Support.MostWanted.Framework
 		}
 
 		/// <summary>
-		/// Disassembles data into separate collections in this <see cref="SlotTypeManager"/>.
+		/// Disassembles data into separate collections in this <see cref="SlotOverrideManager"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="block"><see cref="Block"/> with offsets.</param>
@@ -121,36 +78,29 @@ namespace Nikki.Support.MostWanted.Framework
 			if (Block.IsNullOrEmpty(block)) return;
 			if (block.BlockID != eBlockID.SlotTypes) return;
 
-			this._is_read_only = false;
+			const int maxslotsize = 0x458;
 
 			for (int loop = 0; loop < block.Offsets.Count; ++loop)
 			{
 
 				br.BaseStream.Position = block.Offsets[loop] + 4;
 				var size = br.ReadInt32();
-				const int maxslotsize = 0x458;
 
-				if (size < maxslotsize)
-				{
+				if (size <= maxslotsize) continue;
+				else br.BaseStream.Position += maxslotsize;
 
-					throw new InvalidDataException("SlotTypes block is corrupted or has invalid data");
-
-				}
-
-				var count = maxslotsize / SlotType.BaseClassSize;
+				int count = (size - maxslotsize) / SlotOverride.BaseClassSize;
 				this.Capacity += count;
-
+				
 				for (int i = 0; i < count; ++i)
 				{
 
-					var collection = new SlotType(br, this);
+					var collection = new SlotOverride(br, this);
 					this.Add(collection);
 
 				}
 
 			}
-
-			this._is_read_only = true;
 		}
 
 		/// <summary>
@@ -159,7 +109,43 @@ namespace Nikki.Support.MostWanted.Framework
 		/// <param name="cname">CollectionName to check.</param>
 		internal override void CreationCheck(string cname)
 		{
-			throw new ArgumentException("CollectionName of SlotTypes cannot be changed");
+			if (String.IsNullOrWhiteSpace(cname))
+			{
+
+				throw new ArgumentNullException("CollectionName cannot be null, empty or whitespace");
+
+			}
+
+			if (cname.Contains(" "))
+			{
+
+				throw new ArgumentException("CollectionName cannot contain whitespace");
+
+			}
+
+			if (this.Find(cname) != null)
+			{
+
+				throw new CollectionExistenceException(cname);
+
+			}
+
+			var keys = cname.Split("_PART_", 2, StringSplitOptions.None);
+
+			if (keys == null || keys.Length != 2 || String.IsNullOrEmpty(keys[0]))
+			{
+
+				throw new ArgumentException($"CollectionName passed is of invalid format. Valid " +
+					$"format is \"CARNAME_PART_SLOTTYPE\"");
+
+			}
+			else if (!Enum.TryParse(keys[1], out eSlotMostWanted _))
+			{
+
+				throw new ArgumentException($"CollectionName passed is of invalid format. Valid " +
+					$"format is \"CARNAME_PART_SLOTTYPE\"");
+
+			}
 		}
 	}
 }

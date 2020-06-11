@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
@@ -6,6 +8,7 @@ using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Support.Prostreet.Class;
+using Nikki.Support.Prostreet.Attributes;
 using Nikki.Support.Shared.Parts.CarParts;
 using CoreExtensions.Conversions;
 
@@ -16,16 +19,19 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 	/// <summary>
 	/// A unit CarPart attribute of <see cref="DBModelPart"/>.
 	/// </summary>
+	[DebuggerDisplay("PartName: {PartName} | AttribCount: {Attributes.Count}")]
 	public class RealCarPart : Shared.Parts.CarParts.RealCarPart
 	{
 		/// <summary>
 		/// Name of this <see cref="RealCarPart"/>.
 		/// </summary>
+		[Browsable(false)]
 		public override string PartName { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Index of <see cref="DBModelPart"/> to which this part belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override int Index { get; set; }
 
 		/// <summary>
@@ -36,6 +42,7 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 		/// <summary>
 		/// <see cref="DBModelPart"/> to which this part belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public DBModelPart Model { get; set; }
 
 		/// <summary>
@@ -75,8 +82,7 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 		/// Returns PartName, Attributes count and CarPartGroupID as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() =>
-			$"PartName: {this.PartName} | AttribCount: {this.Attributes.Count}";
+		public override string ToString() => this.PartName;
 
 		/// <summary>
 		/// Returns the hash code for this <see cref="RealCarPart"/>.
@@ -240,7 +246,7 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new RealCarPart(this.Index, this.Length, this.Model);
 

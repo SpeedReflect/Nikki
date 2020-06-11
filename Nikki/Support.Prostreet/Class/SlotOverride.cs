@@ -6,17 +6,18 @@ using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using Nikki.Reflection.Enum.SlotID;
-using Nikki.Support.Carbon.Framework;
+using Nikki.Support.Prostreet.Framework;
 using CoreExtensions.Conversions;
+using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.Carbon.Class
+namespace Nikki.Support.Prostreet.Class
 {
     /// <summary>
-    /// <see cref="CarSlotInfo"/> is a collection of settings related to car's slot overrides.
+    /// <see cref="SlotOverride"/> is a collection of settings related to car's slot overrides.
     /// </summary>
-    public class CarSlotInfo : Shared.Class.CarSlotInfo
+    public class SlotOverride : Shared.Class.SlotOverride
     {
         #region Fields
 
@@ -35,7 +36,7 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Base size of a unit collection.
         /// </summary>
-        public const int BaseClassSize = 0x24;
+        public const int BaseClassSize = 0x88;
 
         #endregion
 
@@ -45,19 +46,19 @@ namespace Nikki.Support.Carbon.Class
         /// Game to which the class belongs to.
         /// </summary>
         [Browsable(false)]
-        public override GameINT GameINT => GameINT.Carbon;
+        public override GameINT GameINT => GameINT.Prostreet;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
         [Browsable(false)]
-        public override string GameSTR => GameINT.Carbon.ToString();
+        public override string GameSTR => GameINT.Prostreet.ToString();
 
         /// <summary>
         /// Manager to which the class belongs to.
         /// </summary>
         [Browsable(false)]
-        public CarSlotInfoManager Manager { get; set; }
+        public SlotOverrideManager Manager { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
@@ -89,55 +90,118 @@ namespace Nikki.Support.Carbon.Class
         public override uint VltKey => this._collection_name.VltHash();
 
         /// <summary>
-        /// Group 2 info override entry of this <see cref="CarSlotInfo"/>.
+        /// Group 2 info override entry of this <see cref="SlotOverride"/>.
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
         public string InfoOverrideGroup2 { get; set; }
 
         /// <summary>
-        /// Group 3 info override entry of this <see cref="CarSlotInfo"/>.
+        /// Group 3 info override entry of this <see cref="SlotOverride"/>.
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
         public string InfoOverrideGroup3 { get; set; }
 
         /// <summary>
-        /// Group 4 info override entry of this <see cref="CarSlotInfo"/>.
+        /// Group 4 info override entry of this <see cref="SlotOverride"/>.
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
         public string InfoOverrideGroup4 { get; set; }
 
         /// <summary>
-        /// Group 5 info override entry of this <see cref="CarSlotInfo"/>.
+        /// Group 5 info override entry of this <see cref="SlotOverride"/>.
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
         public string InfoOverrideGroup5 { get; set; }
 
         /// <summary>
-        /// Group 6 info override entry of this <see cref="CarSlotInfo"/>.
+        /// Group 6 info override entry of this <see cref="SlotOverride"/>.
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
         public string InfoOverrideGroup6 { get; set; }
+
+        /// <summary>
+        /// Group 7 info override entry of this <see cref="SlotOverride"/>.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public string InfoOverrideGroup7 { get; set; }
+
+        /// <summary>
+        /// Group 8 info override entry of this <see cref="SlotOverride"/>.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public string InfoOverrideGroup8 { get; set; }
+
+        /// <summary>
+        /// Group 9 info override entry of this <see cref="SlotOverride"/>.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public string InfoOverrideGroup9 { get; set; }
+
+        /// <summary>
+        /// Group 10 info override entry of this <see cref="SlotOverride"/>.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public string InfoOverrideGroup10 { get; set; }
+
+        /// <summary>
+        /// Group 11 info override entry of this <see cref="SlotOverride"/>.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public string InfoOverrideGroup11 { get; set; }
+
+        /// <summary>
+        /// Group 12 info override entry of this <see cref="SlotOverride"/>.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public string InfoOverrideGroup12 { get; set; }
+
+        /// <summary>
+        /// Group 13 info override entry of this <see cref="SlotOverride"/>.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public string InfoOverrideGroup13 { get; set; }
+
+        /// <summary>
+        /// Group 14 info override entry of this <see cref="SlotOverride"/>.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public string InfoOverrideGroup14 { get; set; }
+
+        /// <summary>
+        /// Group 15 info override entry of this <see cref="SlotOverride"/>.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        public string InfoOverrideGroup15 { get; set; }
 
         #endregion
 
         #region Main
 
         /// <summary>
-        /// Initializes new instance of <see cref="CarSlotInfo"/>.
+        /// Initializes new instance of <see cref="SlotOverride"/>.
         /// </summary>
-        public CarSlotInfo() { }
+        public SlotOverride() { }
 
         /// <summary>
-        /// Initializes new instance of <see cref="CarSlotInfo"/>.
+        /// Initializes new instance of <see cref="SlotOverride"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="manager"><see cref="CarSlotInfoManager"/> to which this instance belongs to.</param>
-        public CarSlotInfo(string CName, CarSlotInfoManager manager)
+        /// <param name="manager"><see cref="SlotOverrideManager"/> to which this instance belongs to.</param>
+        public SlotOverride(string CName, SlotOverrideManager manager)
         {
             this.Manager = manager;
             this.CollectionName = CName;
@@ -145,11 +209,11 @@ namespace Nikki.Support.Carbon.Class
         }
 
         /// <summary>
-        /// Initializes new instance of <see cref="CarSlotInfo"/>.
+        /// Initializes new instance of <see cref="SlotOverride"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-        /// <param name="manager"><see cref="CarSlotInfoManager"/> to which this instance belongs to.</param>
-        public CarSlotInfo(BinaryReader br, CarSlotInfoManager manager)
+        /// <param name="manager"><see cref="SlotOverrideManager"/> to which this instance belongs to.</param>
+        public SlotOverride(BinaryReader br, SlotOverrideManager manager)
         {
             this.Manager = manager;
             this.Disassemble(br);
@@ -158,7 +222,7 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Destroys current instance.
         /// </summary>
-        ~CarSlotInfo() { }
+        ~SlotOverride() { }
 
         #endregion
 
@@ -171,17 +235,26 @@ namespace Nikki.Support.Carbon.Class
         public override void Assemble(BinaryWriter bw)
         {
             var keys = this._collection_name.Split("_PART_", 2, StringSplitOptions.None);
-            var id = (eSlotCarbon)Enum.Parse(typeof(eSlotCarbon), keys[1]);
+            var id = (eSlotProstreet)Enum.Parse(typeof(eSlotProstreet), keys[1]);
 
             bw.Write(keys[0].BinHash());
             bw.Write((int)id);
-            bw.Write(keys[0].BinHash());
             bw.Write(this.InfoMainOverride.BinHash());
             bw.Write(this.InfoOverrideGroup2.BinHash());
             bw.Write(this.InfoOverrideGroup3.BinHash());
             bw.Write(this.InfoOverrideGroup4.BinHash());
             bw.Write(this.InfoOverrideGroup5.BinHash());
             bw.Write(this.InfoOverrideGroup6.BinHash());
+            bw.Write(this.InfoOverrideGroup7.BinHash());
+            bw.Write(this.InfoOverrideGroup8.BinHash());
+            bw.Write(this.InfoOverrideGroup9.BinHash());
+            bw.Write(this.InfoOverrideGroup10.BinHash());
+            bw.Write(this.InfoOverrideGroup11.BinHash());
+            bw.Write(this.InfoOverrideGroup12.BinHash());
+            bw.Write(this.InfoOverrideGroup13.BinHash());
+            bw.Write(this.InfoOverrideGroup14.BinHash());
+            bw.Write(this.InfoOverrideGroup15.BinHash());
+            bw.WriteBytes(0x44);
         }
 
         /// <summary>
@@ -191,8 +264,7 @@ namespace Nikki.Support.Carbon.Class
         public override void Disassemble(BinaryReader br)
         {
             var key = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            var id = (eSlotCarbon)br.ReadInt32();
-            br.BaseStream.Position += 4;
+            var id = (eSlotProstreet)br.ReadInt32();
             this._collection_name = $"{key}_PART_{id}";
 
             this.InfoMainOverride = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
@@ -201,6 +273,16 @@ namespace Nikki.Support.Carbon.Class
             this.InfoOverrideGroup4 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
             this.InfoOverrideGroup5 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
             this.InfoOverrideGroup6 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.InfoOverrideGroup7 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.InfoOverrideGroup8 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.InfoOverrideGroup9 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.InfoOverrideGroup10 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.InfoOverrideGroup11 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.InfoOverrideGroup12 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.InfoOverrideGroup13 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.InfoOverrideGroup14 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.InfoOverrideGroup15 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            br.BaseStream.Position += 0x44;
         }
 
         /// <summary>
@@ -210,13 +292,13 @@ namespace Nikki.Support.Carbon.Class
         /// <returns>Memory casted copy of the object.</returns>
         public override Collectable MemoryCast(string CName)
         {
-            var result = new CarSlotInfo(CName, this.Manager);
+            var result = new SlotOverride(CName, this.Manager);
             base.MemoryCast(this, result);
             return result;
         }
 
         /// <summary>
-        /// Returns CollectionName, BinKey and GameSTR of this <see cref="CarSlotInfo"/> 
+        /// Returns CollectionName, BinKey and GameSTR of this <see cref="SlotOverride"/> 
         /// as a string value.
         /// </summary>
         /// <returns>String value.</returns>

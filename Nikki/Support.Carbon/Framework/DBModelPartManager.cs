@@ -212,6 +212,7 @@ namespace Nikki.Support.Carbon.Framework
 					}
 				
 				}
+			
 			}
 
 			// Return prepared dictionary
@@ -392,6 +393,15 @@ namespace Nikki.Support.Carbon.Framework
 					}
 				
 				}
+			}
+
+			// If no ModelOffsetAttributes, return empty array
+			if (count == 0)
+			{
+
+				struct_buffer = new byte[0];
+				return count;
+
 			}
 
 			// Return prepared dictionary
@@ -786,7 +796,7 @@ namespace Nikki.Support.Carbon.Framework
 					
 					var realpart = new Parts.CarParts.RealCarPart(a1, cpoff?.AttribOffsets.Count ?? 0, collection)
 					{
-						PartName = $"{models_list[a1]}_PART_{count++.ToString()}"
+						PartName = $"{models_list[a1]}_PART_{count++}"
 					};
 					
 					foreach (var attroff in cpoff?.AttribOffsets ?? Enumerable.Empty<ushort>())

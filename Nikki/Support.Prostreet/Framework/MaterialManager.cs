@@ -1,34 +1,34 @@
 ﻿using System;
 using System.IO;
 using Nikki.Core;
+using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
-using Nikki.Support.Carbon.Class;
-using Nikki.Reflection.Enum.SlotID;
+using Nikki.Support.Prostreet.Class;
 
 
 
-namespace Nikki.Support.Carbon.Framework
+namespace Nikki.Support.Prostreet.Framework
 {
 	/// <summary>
-	/// A <see cref="Manager{T}"/> for <see cref="CarSlotInfo"/> collections.
+	/// A <see cref="Manager{T}"/> for <see cref="Material"/> collections.
 	/// </summary>
-	public class CarSlotInfoManager : Manager<CarSlotInfo>
+	public class MaterialManager : Manager<Material>
 	{
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
-		public override GameINT GameINT => GameINT.Carbon;
+		public override GameINT GameINT => GameINT.Prostreet;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
-		public override string GameSTR => GameINT.Carbon.ToString();
+		public override string GameSTR => GameINT.Prostreet.ToString();
 
 		/// <summary>
-		/// Name of this <see cref="CarSlotInfoManager"/>.
+		/// Name of this <see cref="MaterialManager"/>.
 		/// </summary>
-		public override string Name => "CarSlotInfos";
+		public override string Name => "Materials";
 
 		/// <summary>
 		/// True if this <see cref="Manager{T}"/> is read-only; otherwise, false.
@@ -36,15 +36,15 @@ namespace Nikki.Support.Carbon.Framework
 		public override bool IsReadOnly => false;
 
 		/// <summary>
-		/// Indicates required alighment when this <see cref="CarSlotInfoManager"/> is being serialized.
+		/// Indicates required alighment when this <see cref="MaterialManager"/> is being serialized.
 		/// </summary>
 		public override Alignment Alignment { get; }
 
 		/// <summary>
-		/// Initializes new instance of <see cref="CarSlotInfoManager"/>.
+		/// Initializes new instance of <see cref="MaterialManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>
-		public CarSlotInfoManager(Datamap db)
+		public MaterialManager(Datamap db)
 		{
 			this.Database = db;
 			this.Extender = 5;
@@ -60,6 +60,8 @@ namespace Nikki.Support.Carbon.Framework
 		{
 			if (this.Count == 0) return;
 
+			bw.GeneratePadding(mark, this.Alignment);
+
 			foreach (var collection in this)
 			{
 
@@ -69,34 +71,23 @@ namespace Nikki.Support.Carbon.Framework
 		}
 
 		/// <summary>
-		/// Disassembles data into separate collections in this <see cref="CarTypeInfoManager"/>.
+		/// Disassembles data into separate collections in this <see cref="MaterialManager"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="block"><see cref="Block"/> with offsets.</param>
 		internal override void Disassemble(BinaryReader br, Block block)
 		{
 			if (Block.IsNullOrEmpty(block)) return;
-			if (block.BlockID != eBlockID.SlotTypes) return;
+			if (block.BlockID != eBlockID.Materials) return;
+
+			this.Capacity = block.Offsets.Count;
 
 			for (int loop = 0; loop < block.Offsets.Count; ++loop)
 			{
 
-				br.BaseStream.Position = block.Offsets[loop] + 4;
-				var size = br.ReadInt32();
-
-				if (size <= 0xB98) continue;
-				else br.BaseStream.Position += 0xB98;
-
-				int count = (size - 0xB98) / CarSlotInfo.BaseClassSize;
-				this.Capacity += count;
-				
-				for (int i = 0; i < count; ++i)
-				{
-
-					var collection = new CarSlotInfo(br, this);
-					this.Add(collection);
-
-				}
+				br.BaseStream.Position = block.Offsets[loop];
+				var collection = new Material(br, this);
+				this.Add(collection);
 
 			}
 		}
@@ -121,27 +112,17 @@ namespace Nikki.Support.Carbon.Framework
 
 			}
 
+			if (cname.Length > Material.MaxCNameLength)
+			{
+
+				throw new ArgumentLengthException(Material.MaxCNameLength);
+
+			}
+
 			if (this.Find(cname) != null)
 			{
 
 				throw new CollectionExistenceException(cname);
-
-			}
-
-			var keys = cname.Split("_PART_", 2, StringSplitOptions.None);
-
-			if (keys == null || keys.Length != 2 || String.IsNullOrEmpty(keys[0]))
-			{
-
-				throw new ArgumentException($"CollectionName passed is of invalid format. Valid " +
-					$"format is \"CARNAME_PART_SLOTTYPE\"");
-
-			}
-			else if (!Enum.TryParse(keys[1], out eSlotCarbon _))
-			{
-
-				throw new ArgumentException($"CollectionName passed is of invalid format. Valid " +
-					$"format is \"CARNAME_PART_SLOTTYPE\"");
 
 			}
 		}

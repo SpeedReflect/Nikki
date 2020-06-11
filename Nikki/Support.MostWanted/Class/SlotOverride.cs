@@ -14,9 +14,9 @@ using CoreExtensions.Conversions;
 namespace Nikki.Support.MostWanted.Class
 {
     /// <summary>
-    /// <see cref="CarSlotInfo"/> is a collection of settings related to car's slot overrides.
+    /// <see cref="SlotOverride"/> is a collection of settings related to car's slot overrides.
     /// </summary>
-    public class CarSlotInfo : Shared.Class.CarSlotInfo
+    public class SlotOverride : Shared.Class.SlotOverride
     {
         #region Fields
 
@@ -57,7 +57,7 @@ namespace Nikki.Support.MostWanted.Class
         /// Manager to which the class belongs to.
         /// </summary>
         [Browsable(false)]
-        public CarSlotInfoManager Manager { get; set; }
+        public SlotOverrideManager Manager { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
@@ -93,16 +93,16 @@ namespace Nikki.Support.MostWanted.Class
         #region Main
 
         /// <summary>
-        /// Initializes new instance of <see cref="CarSlotInfo"/>.
+        /// Initializes new instance of <see cref="SlotOverride"/>.
         /// </summary>
-        public CarSlotInfo() { }
+        public SlotOverride() { }
 
         /// <summary>
-        /// Initializes new instance of <see cref="CarSlotInfo"/>.
+        /// Initializes new instance of <see cref="SlotOverride"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="manager"><see cref="CarSlotInfoManager"/> to which this instance belongs to.</param>
-        public CarSlotInfo(string CName, CarSlotInfoManager manager)
+        /// <param name="manager"><see cref="SlotOverrideManager"/> to which this instance belongs to.</param>
+        public SlotOverride(string CName, SlotOverrideManager manager)
         {
             this.Manager = manager;
             this.CollectionName = CName;
@@ -110,11 +110,11 @@ namespace Nikki.Support.MostWanted.Class
         }
 
         /// <summary>
-        /// Initializes new instance of <see cref="CarSlotInfo"/>.
+        /// Initializes new instance of <see cref="SlotOverride"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-        /// <param name="manager"><see cref="CarSlotInfoManager"/> to which this instance belongs to.</param>
-        public CarSlotInfo(BinaryReader br, CarSlotInfoManager manager)
+        /// <param name="manager"><see cref="SlotOverrideManager"/> to which this instance belongs to.</param>
+        public SlotOverride(BinaryReader br, SlotOverrideManager manager)
         {
             this.Manager = manager;
             this.Disassemble(br);
@@ -123,7 +123,7 @@ namespace Nikki.Support.MostWanted.Class
         /// <summary>
         /// Destroys current instance.
         /// </summary>
-        ~CarSlotInfo() { }
+        ~SlotOverride() { }
 
         #endregion
 
@@ -165,13 +165,13 @@ namespace Nikki.Support.MostWanted.Class
         /// <returns>Memory casted copy of the object.</returns>
         public override Collectable MemoryCast(string CName)
         {
-            var result = new CarSlotInfo(CName, this.Manager);
+            var result = new SlotOverride(CName, this.Manager);
             base.MemoryCast(this, result);
             return result;
         }
 
         /// <summary>
-        /// Returns CollectionName, BinKey and GameSTR of this <see cref="CarSlotInfo"/> 
+        /// Returns CollectionName, BinKey and GameSTR of this <see cref="SlotOverride"/> 
         /// as a string value.
         /// </summary>
         /// <returns>String value.</returns>

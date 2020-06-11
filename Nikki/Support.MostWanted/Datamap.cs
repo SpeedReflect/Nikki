@@ -27,7 +27,7 @@ namespace Nikki.Support.MostWanted
 		/// </summary>
 		public Datamap() : base()
 		{
-			this.Managers.Add(new CarSlotInfoManager(this));
+			this.Managers.Add(new SlotOverrideManager(this));
 			this.Managers.Add(new CarTypeInfoManager(this));
 			this.Managers.Add(new CollisionManager(this));
 			this.Managers.Add(new DBModelPartManager(this));
@@ -42,14 +42,14 @@ namespace Nikki.Support.MostWanted
 		}
 
 		/// <summary>
-		/// <see cref="Manager{T}"/> that manages <see cref="CarSlotInfo"/>.
+		/// <see cref="Manager{T}"/> that manages <see cref="SlotOverride"/>.
 		/// </summary>
-		public CarSlotInfoManager CarSlotInfos
+		public SlotOverrideManager CarSlotInfos
 		{
 			get
 			{
-				var manager = this.GetManager(typeof(CarSlotInfoManager));
-				return manager == null ? null : manager as CarSlotInfoManager;
+				var manager = this.GetManager(typeof(SlotOverrideManager));
+				return manager == null ? null : manager as SlotOverrideManager;
 			}
 		}
 
