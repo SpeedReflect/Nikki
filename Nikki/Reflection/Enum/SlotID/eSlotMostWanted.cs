@@ -699,5 +699,10 @@
 		/// 
 		/// </summary>
 		MISC = 0x8A,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		INVALID = 0xFF,
 	}
 }

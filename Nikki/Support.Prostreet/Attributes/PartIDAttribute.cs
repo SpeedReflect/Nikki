@@ -14,7 +14,7 @@ using CoreExtensions.Conversions;
 
 
 
-namespace Nikki.Support.Carbon.Attributes
+namespace Nikki.Support.Prostreet.Attributes
 {
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with unknown byte and part ID values.
@@ -64,7 +64,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// Part ID of this <see cref="PartIDAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public eSlotCarbon ID { get; set; } = eSlotCarbon.INVALID;
+		public eSlotProstreet ID { get; set; }
 
 		/// <summary>
 		/// Initializes new instance of <see cref="PartIDAttribute"/>.
@@ -82,11 +82,11 @@ namespace Nikki.Support.Carbon.Attributes
 			try
 			{
 				this.Level = (byte)value.ReinterpretCast(typeof(byte));
-				this.ID = eSlotCarbon.INVALID;
+				this.ID = eSlotProstreet.INVALID;
 			}
 			catch (Exception)
 			{
-				this.ID = eSlotCarbon.INVALID;
+				this.ID = eSlotProstreet.INVALID;
 				this.Level = 0;
 			}
 		}
@@ -113,7 +113,7 @@ namespace Nikki.Support.Carbon.Attributes
 		public override void Disassemble(BinaryReader br, BinaryReader str_reader)
 		{
 			this.Level = br.ReadByte();
-			this.ID = br.ReadEnum<eSlotCarbon>();
+			this.ID = br.ReadEnum<eSlotProstreet>();
 			br.BaseStream.Position += 2;
 		}
 

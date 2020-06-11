@@ -1,14 +1,15 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Utils.EA;
-using Nikki.Reflection.ID;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Prostreet.Framework;
 using Nikki.Support.Shared.Parts.TPKParts;
 using CoreExtensions.IO;
 
@@ -33,34 +34,31 @@ namespace Nikki.Support.Prostreet.Class
         /// <summary>
         /// Game to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override GameINT GameINT => GameINT.Prostreet;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override string GameSTR => GameINT.Prostreet.ToString();
 
         /// <summary>
-        /// Database to which the class belongs to.
+        /// Manager to which the class belongs to.
         /// </summary>
-        public Database.Prostreet Database { get; set; }
+        [Browsable(false)]
+        public TPKBlockManager Manager { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
         /// </summary>
+        [Category("Main")]
         public override string CollectionName
         {
             get => this._collection_name;
             set
             {
-                if (String.IsNullOrWhiteSpace(value))
-                    throw new ArgumentNullException("This value cannot be left empty.");
-                if (value.Contains(" "))
-                    throw new Exception("CollectionName cannot contain whitespace.");
-                if (this.UseCurrentName == eBoolean.True && value.Length > 0x1B)
-                    throw new ArgumentLengthException(0x1B);
-                if (this.Database.TPKBlocks.FindCollection(value) != null)
-                    throw new CollectionExistenceException(value);
+                this.Manager?.CreationCheck(value);
                 this._collection_name = value;
             }
         }
@@ -68,16 +66,19 @@ namespace Nikki.Support.Prostreet.Class
         /// <summary>
         /// Version of this <see cref="TPKBlock"/>.
         /// </summary>
+        [Browsable(false)]
         public override eTPKVersion Version => eTPKVersion.Prostreet;
 
         /// <summary>
         /// Filename used for this <see cref="TPKBlock"/>. It is a default watermark.
         /// </summary>
-        public override string Filename => this.Watermark;
+        [Browsable(false)]
+        public override string Filename => $"{this.CollectionName}.tpk";
 
         /// <summary>
         /// BinKey of the filename.
         /// </summary>
+        [Browsable(false)]
         public override uint FilenameHash => this.Filename.BinHash();
 
         /// <summary>
@@ -85,17 +86,13 @@ namespace Nikki.Support.Prostreet.Class
         /// should be saved as compressed on the output.
         /// </summary>
         [AccessModifiable()]
+        [Category("Primary")]
         public override eBoolean IsCompressed { get; set; }
-
-        /// <summary>
-        /// True if CollectionName specified should be used; false if hardcoded CollectionName 
-        /// should be used.
-        /// </summary>
-        public eBoolean UseCurrentName { get; set; }
 
         /// <summary>
         /// List of <see cref="Texture"/> in this <see cref="TPKBlock"/>.
         /// </summary>
+        [Browsable(false)]
         public List<Texture> Textures { get; set; } = new List<Texture>();
 
         #endregion
@@ -105,31 +102,29 @@ namespace Nikki.Support.Prostreet.Class
         /// <summary>
         /// Initializes new instance of <see cref="TPKBlock"/>.
         /// </summary>
-        public TPKBlock() => this.UseCurrentName = eBoolean.True;
+        public TPKBlock() { }
 
         /// <summary>
         /// Initializes new instance of <see cref="TPKBlock"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
-        public TPKBlock(string CName, Database.Prostreet db)
+        /// <param name="manager"><see cref="TPKBlockManager"/> to which this instance belongs to.</param>
+        public TPKBlock(string CName, TPKBlockManager manager)
         {
-            this.Database = db;
+            this.Manager = manager;
             this.CollectionName = CName;
-            this.UseCurrentName = eBoolean.True;
             CName.BinHash();
         }
 
         /// <summary>
         /// Initializes new instance of <see cref="TPKBlock"/>.
         /// </summary>
-        /// <param name="index">Index of the instance in the database.</param>
-		/// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
-        public TPKBlock(int index, Database.Prostreet db)
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		/// <param name="manager"><see cref="TPKBlockManager"/> to which this instance belongs to.</param>
+        public TPKBlock(BinaryReader br, TPKBlockManager manager)
         {
-            if (index < 0) this.UseCurrentName = eBoolean.True;
-            this.Database = db;
-            this.Index = index;
+            this.Manager = manager;
+            this.Disassemble(br);
         }
 
         #endregion
@@ -153,7 +148,7 @@ namespace Nikki.Support.Prostreet.Class
         private void AssembleDecompressed(BinaryWriter bw)
         {
             // Write main
-            bw.Write(TPK.MAINID);
+            bw.WriteEnum(eBlockID.TPKBlocks);
             bw.Write(-1); // write temp size
             var position_0 = bw.BaseStream.Position;
             bw.Write((int)0);
@@ -161,7 +156,7 @@ namespace Nikki.Support.Prostreet.Class
             bw.WriteBytes(0x30);
 
             // Partial 1 Block
-            bw.Write(TPK.INFO_BLOCKID);
+            bw.WriteEnum(eBlockID.TPK_InfoBlock);
             bw.Write(-1);
             var position_1 = bw.BaseStream.Position;
             this.Get1Part1(bw);
@@ -176,7 +171,7 @@ namespace Nikki.Support.Prostreet.Class
             bw.Write(Comp.GetPaddingArray((int)bw.BaseStream.Position, 0x80));
 
             // Partial 2 Block
-            bw.Write(TPK.DATA_BLOCKID);
+            bw.WriteEnum(eBlockID.TPK_DataBlock);
             bw.Write(-1);
             var position_2 = bw.BaseStream.Position;
             this.Get2Part1(bw);
@@ -194,7 +189,7 @@ namespace Nikki.Support.Prostreet.Class
         {
             var start = (int)bw.BaseStream.Position;
 
-            bw.Write(TPK.MAINID);
+            bw.WriteEnum(eBlockID.TPKBlocks);
             bw.Write(-1); // write temp size
             var position_0 = bw.BaseStream.Position;
             bw.Write((int)0);
@@ -202,7 +197,7 @@ namespace Nikki.Support.Prostreet.Class
             bw.WriteBytes(0x30);
 
             // Partial 1 Block
-            bw.Write(TPK.INFO_BLOCKID);
+            bw.WriteEnum(eBlockID.TPK_InfoBlock);
             bw.Write(-1);
             var position_1 = bw.BaseStream.Position;
             this.Get1Part1(bw);
@@ -228,7 +223,7 @@ namespace Nikki.Support.Prostreet.Class
             bw.Write(Comp.GetPaddingArray((int)bw.BaseStream.Position, 0x80));
 
             // Partial 2 Block
-            bw.Write(TPK.DATA_BLOCKID);
+            bw.WriteEnum(eBlockID.TPK_DataBlock);
             bw.Write(-1);
             var position_2 = bw.BaseStream.Position;
             this.Get2Part1(bw);
@@ -299,7 +294,7 @@ namespace Nikki.Support.Prostreet.Class
                 {
 
                     br.BaseStream.Position = texture_list[a1];
-                    var tex = new Texture(br, this.CollectionName, this.Database);
+                    var tex = new Texture(br, this);
                     this.Textures.Add(tex);
 
                 }
@@ -414,7 +409,7 @@ namespace Nikki.Support.Prostreet.Class
 
             }
 
-            var texture = new Texture(CName, this.CollectionName, filename, this.Database);
+            var texture = new Texture(CName, filename, this);
             this.Textures.Add(texture);
         }
 
@@ -507,7 +502,7 @@ namespace Nikki.Support.Prostreet.Class
         public override string ToString()
         {
             return $"Collection Name: {this.CollectionName} | " +
-                   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+                   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
         }
 
         #endregion
@@ -522,18 +517,18 @@ namespace Nikki.Support.Prostreet.Class
         protected override long[] FindOffsets(BinaryReader br)
         {
             var offsets = new long[8] { max, max, max, max, max, max, max, max };
-            long ReaderOffset = 0;
-            uint ReaderID = 0;
+            var ReaderID = eBlockID.Padding;
             int InfoBlockSize = 0;
             int DataBlockSize = 0;
+            long ReaderOffset = 0;
 
-            while (ReaderID != TPK.INFO_BLOCKID)
+            while (ReaderID != eBlockID.TPK_InfoBlock)
             {
 
-                ReaderID = br.ReadUInt32();
+                ReaderID = br.ReadEnum<eBlockID>();
                 InfoBlockSize = br.ReadInt32();
 
-                if (ReaderID != TPK.INFO_BLOCKID)
+                if (ReaderID != eBlockID.TPK_InfoBlock)
                 {
 
                     br.BaseStream.Position += InfoBlockSize;
@@ -547,27 +542,27 @@ namespace Nikki.Support.Prostreet.Class
             while (br.BaseStream.Position < ReaderOffset + InfoBlockSize)
             {
 
-                ReaderID = br.ReadUInt32();
+                ReaderID = br.ReadEnum<eBlockID>();
 
                 switch (ReaderID)
                 {
-                    case TPK.INFO_PART1_BLOCKID:
+                    case eBlockID.TPK_InfoPart1:
                         offsets[0] = br.BaseStream.Position;
                         goto default;
 
-                    case TPK.INFO_PART2_BLOCKID:
+                    case eBlockID.TPK_InfoPart2:
                         offsets[1] = br.BaseStream.Position;
                         goto default;
 
-                    case TPK.INFO_PART3_BLOCKID:
+                    case eBlockID.TPK_InfoPart3:
                         offsets[2] = br.BaseStream.Position;
                         goto default;
 
-                    case TPK.INFO_PART4_BLOCKID:
+                    case eBlockID.TPK_InfoPart4:
                         offsets[3] = br.BaseStream.Position;
                         goto default;
 
-                    case TPK.INFO_PART5_BLOCKID:
+                    case eBlockID.TPK_InfoPart5:
                         offsets[4] = br.BaseStream.Position;
                         goto default;
 
@@ -580,13 +575,13 @@ namespace Nikki.Support.Prostreet.Class
 
             }
 
-            while (ReaderID != TPK.DATA_BLOCKID)
+            while (ReaderID != eBlockID.TPK_DataBlock)
             {
 
-                ReaderID = br.ReadUInt32();
+                ReaderID = br.ReadEnum<eBlockID>();
                 DataBlockSize = br.ReadInt32();
 
-                if (ReaderID != TPK.DATA_BLOCKID)
+                if (ReaderID != eBlockID.TPK_DataBlock)
                 {
 
                     br.BaseStream.Position += DataBlockSize;
@@ -600,19 +595,19 @@ namespace Nikki.Support.Prostreet.Class
             while (br.BaseStream.Position < ReaderOffset + DataBlockSize)
             {
 
-                ReaderID = br.ReadUInt32();
+                ReaderID = br.ReadEnum<eBlockID>();
 
                 switch (ReaderID)
                 {
-                    case TPK.DATA_PART1_BLOCKID:
+                    case eBlockID.TPK_DataPart1:
                         offsets[5] = br.BaseStream.Position;
                         goto default;
 
-                    case TPK.DATA_PART2_BLOCKID:
+                    case eBlockID.TPK_DataPart2:
                         offsets[6] = br.BaseStream.Position;
                         goto default;
 
-                    case TPK.DATA_PART3_BLOCKID:
+                    case eBlockID.TPK_DataPart3:
                         offsets[7] = br.BaseStream.Position;
                         goto default;
 
@@ -652,10 +647,31 @@ namespace Nikki.Support.Prostreet.Class
             if (br.ReadInt32() != (int)this.Version) return; // return if versions does not match
 
             // Get CollectionName
-            this.CollectionName = br.ReadNullTermUTF8(0x1C);
+            var cname = br.ReadNullTermUTF8(0x1C);
+            var fname = br.ReadNullTermUTF8(0x40);
+
+            if (fname.EndsWith(".tpk") || fname.EndsWith(".TPK"))
+            {
+
+                fname = Path.GetFileNameWithoutExtension(fname).ToUpper();
+
+                this._collection_name = !this.Manager.Contains(fname)
+                    ? fname : !this.Manager.Contains(cname)
+                    ? cname : $"TPK{this.Manager.Count}";
+
+            }
+            else
+            {
+
+                this._collection_name = !this.Manager.Contains(cname)
+                    ? cname :
+                    $"TPK{this.Manager.Count}";
+
+            }
+
 
             // Get the rest of the settings
-            br.BaseStream.Position += 0x44;
+            br.BaseStream.Position += 4;
             this.PermBlockByteOffset = br.ReadUInt32();
             this.PermBlockByteSize = br.ReadUInt32();
             this.EndianSwapped = br.ReadInt32();
@@ -742,7 +758,7 @@ namespace Nikki.Support.Prostreet.Class
             {
 
                 // We read till we find magic compressed block number
-                if (br.ReadUInt32() != TPK.COMPRESSED_TEXTURE) continue;
+                if (br.ReadEnum<eBlockID>() != eBlockID.LZCompressed) continue;
 
                 var magic = new MagicHeader();
                 magic.Read(br);
@@ -775,7 +791,7 @@ namespace Nikki.Support.Prostreet.Class
             texr.BaseStream.Position = headlength;
 
             // Create new texture based on header found
-            var texture = new Texture(texr, this.CollectionName, this.Database);
+            var texture = new Texture(texr, this);
 
             // We can skip dds type struct since it is defined in the header.
 
@@ -842,7 +858,7 @@ namespace Nikki.Support.Prostreet.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         protected override void Get1Part1(BinaryWriter bw)
         {
-            bw.Write(TPK.INFO_PART1_BLOCKID); // write ID
+            bw.WriteEnum(eBlockID.TPK_InfoPart1); // write ID
             bw.Write(0x7C); // write size
             bw.WriteEnum(this.Version);
 
@@ -868,7 +884,7 @@ namespace Nikki.Support.Prostreet.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         protected override void Get1Part2(BinaryWriter bw)
         {
-            bw.Write(TPK.INFO_PART2_BLOCKID); // write ID
+            bw.WriteEnum(eBlockID.TPK_InfoPart2); // write ID
             bw.Write(this.Textures.Count * 8); // write size
 
             for (int loop = 0; loop < this.Textures.Count; ++loop)
@@ -887,7 +903,7 @@ namespace Nikki.Support.Prostreet.Class
         /// <param name="offslots">List of <see cref="OffSlot"/> to write.</param>
         protected void Get1Part3(BinaryWriter bw, List<OffSlot> offslots)
         {
-            bw.Write(TPK.INFO_PART3_BLOCKID); // write ID
+            bw.WriteEnum(eBlockID.TPK_InfoPart3); // write ID
             bw.Write(this.Textures.Count * 0x18); // write size
 
             foreach (var offslot in offslots)
@@ -929,7 +945,7 @@ namespace Nikki.Support.Prostreet.Class
             }
 
             var data = ms.ToArray();
-            bw.Write(TPK.INFO_PART4_BLOCKID); // write ID
+            bw.WriteEnum(eBlockID.TPK_InfoPart4); // write ID
             bw.Write(data.Length); // write size
             bw.Write(data);
         }
@@ -940,7 +956,7 @@ namespace Nikki.Support.Prostreet.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         protected override void Get1Part5(BinaryWriter bw)
         {
-            bw.Write(TPK.INFO_PART5_BLOCKID); // write ID
+            bw.WriteEnum(eBlockID.TPK_InfoPart5); // write ID
             bw.Write(this.Textures.Count * 0x18); // write size
 
             for (int loop = 0; loop < this.Textures.Count; ++loop)
@@ -960,11 +976,11 @@ namespace Nikki.Support.Prostreet.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         protected override void Get2Part1(BinaryWriter bw)
         {
-            bw.Write(TPK.DATA_PART1_BLOCKID); // write ID
+            bw.WriteEnum(eBlockID.TPK_DataPart1); // write ID
             bw.Write(0x18); // write size
             bw.Write((long)0);
             bw.Write(1);
-            bw.Write(this.Watermark.BinHash());
+            bw.Write(this.FilenameHash);
             bw.Write((long)0);
             bw.Write(0);
             bw.Write(0x50);
@@ -977,7 +993,7 @@ namespace Nikki.Support.Prostreet.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         protected override void Get2Part2(BinaryWriter bw)
         {
-            bw.Write(TPK.DATA_PART2_BLOCKID); // write ID
+            bw.WriteEnum(eBlockID.TPK_DataPart2); // write ID
             bw.Write(-1); // write size
             var position = bw.BaseStream.Position;
 
@@ -1006,13 +1022,13 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         /// <param name="thisOffset">Offset of this TPK in BinaryWriter passed.</param>
-        protected List<OffSlot> Get2CompressedPart2(BinaryWriter bw, int thisOffset)
+        protected override List<OffSlot> Get2CompressedPart2(BinaryWriter bw, int thisOffset)
         {
             // Initialize result offslot list
             var result = new List<OffSlot>(this.Textures.Count);
 
             // Save position and write ID with temporary size
-            bw.Write(TPK.DATA_PART2_BLOCKID);
+            bw.WriteEnum(eBlockID.TPK_DataPart2);
             bw.Write(0xFFFFFFFF);
             var start = bw.BaseStream.Position;
 

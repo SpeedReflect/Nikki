@@ -1,14 +1,14 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
-using Nikki.Reflection.ID;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Prostreet.Framework;
 using Nikki.Support.Shared.Parts.BoundParts;
+using CoreExtensions.IO;
 using CoreExtensions.Conversions;
 
 
@@ -23,12 +23,6 @@ namespace Nikki.Support.Prostreet.Class
 		#region Fields
 
 		private string _collection_name;
-		
-		[MemoryCastable()]
-		private int _number_of_bounds;
-		
-		[MemoryCastable()]
-		private int _number_of_clouds;
 
 		#endregion
 
@@ -37,33 +31,32 @@ namespace Nikki.Support.Prostreet.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override GameINT GameINT => GameINT.Prostreet;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override string GameSTR => GameINT.Prostreet.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// Manager to which the class belongs to.
 		/// </summary>
-		public Database.Prostreet Database { get; set; }
+		[Browsable(false)]
+		public CollisionManager Manager { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
 			set
 			{
-				if (String.IsNullOrWhiteSpace(value))
-					throw new ArgumentNullException("This value cannot be left empty.");
-				if (value.Contains(" "))
-					throw new Exception("CollectionName cannot contain whitespace.");
-				if (this.Database.Collisions.FindCollection(value) != null)
-					throw new CollectionExistenceException(value);
+				this.Manager?.CreationCheck(value);
 				this._collection_name = value;
 			}
 		}
@@ -71,49 +64,49 @@ namespace Nikki.Support.Prostreet.Class
 		/// <summary>
 		/// Binary memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint BinKey => this._collection_name.BinHash();
 
 		/// <summary>
 		/// Vault memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint VltKey => this._collection_name.VltHash();
 
 		/// <summary>
 		/// List of collision bounds.
 		/// </summary>
-		[Listable("Bounds", "COLLISION_BOUND")]
+		[Category("Secondary")]
 		public List<CollisionBound> CollisionBounds { get; set; }
-		
+
 		/// <summary>
 		/// List of collision clouds.
 		/// </summary>
-		[Listable("Clouds", "COLLISION_CLOUD")]
+		[Category("Secondary")]
 		public List<CollisionCloud> CollisionClouds { get; set; }
 
 		/// <summary>
 		/// Number of collision bounds.
 		/// </summary>
+		[AccessModifiable()]
+		[Category("Primary")]
 		public override int NumberOfBounds
 		{
-			get => this._number_of_bounds;
-			set
-			{
-				this.CollisionBounds.Resize(value);
-				this._number_of_bounds = value;
-			}
+			get => this.CollisionBounds.Count;
+			set => this.CollisionBounds.Resize(value);
 		}
 
 		/// <summary>
 		/// Number of collision clouds.
 		/// </summary>
+		[AccessModifiable()]
+		[Category("Primary")]
 		public override int NumberOfClouds
 		{
-			get => this._number_of_clouds;
-			set
-			{
-				this.CollisionClouds.Resize(value);
-				this._number_of_clouds = value;
-			}
+			get => this.CollisionClouds.Count;
+			set => this.CollisionClouds.Resize(value);
 		}
 
 		/// <summary>
@@ -121,6 +114,7 @@ namespace Nikki.Support.Prostreet.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public override eBoolean IsResolved { get; set; }
 
 		#endregion
@@ -140,10 +134,10 @@ namespace Nikki.Support.Prostreet.Class
 		/// Initializes new instance of <see cref="Collision"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
-		public Collision(string CName, Database.Prostreet db)
+		/// <param name="manager"><see cref="CollisionManager"/> to which this instance belongs to.</param>
+		public Collision(string CName, CollisionManager manager)
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.CollectionName = CName;
 			this.CollisionBounds = new List<CollisionBound>();
 			this.CollisionClouds = new List<CollisionCloud>();
@@ -154,10 +148,10 @@ namespace Nikki.Support.Prostreet.Class
 		/// Initializes new instance of <see cref="Collision"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
-		public Collision(BinaryReader br, Database.Prostreet db)
+		/// <param name="manager"><see cref="CollisionManager"/> to which this instance belongs to.</param>
+		public Collision(BinaryReader br, CollisionManager manager)
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.CollisionBounds = new List<CollisionBound>();
 			this.CollisionClouds = new List<CollisionCloud>();
 			this.Disassemble(br);
@@ -174,8 +168,9 @@ namespace Nikki.Support.Prostreet.Class
 		public override void Assemble(BinaryWriter bw)
 		{
 			// Precalculate size
-			int size = 0x28 + this._number_of_bounds * 0x30; // 0x28 = alignment (8) + headers
-			for (int loop = 0; loop < this._number_of_clouds; ++loop)
+			int size = 0x28 + this.NumberOfBounds * 0x30; // 0x28 = alignment (8) + headers
+
+			for (int loop = 0; loop < this.NumberOfClouds; ++loop)
 			{
 
 				size += 0x10 + this.CollisionClouds[loop].NumberOfVertices * 0x10;
@@ -183,26 +178,27 @@ namespace Nikki.Support.Prostreet.Class
 			}
 
 			// Write data
-			bw.Write(CarParts.CollisionBound);
+			bw.WriteEnum(eBlockID.Collision);
 			bw.Write(size);
-			bw.Write(0x1111111111111111);
+			bw.Write(0x11111111);
+			bw.Write(0x11111111);
 			bw.Write(this.VltKey);
-			bw.Write(this._number_of_bounds);
+			bw.Write(this.NumberOfBounds);
 			bw.Write(this.IsResolved == eBoolean.False ? (int)0 : (int)1);
 			bw.Write((int)0);
 
-			for (int loop = 0; loop < this._number_of_bounds; ++loop)
+			for (int loop = 0; loop < this.NumberOfBounds; ++loop)
 			{
 
 				this.CollisionBounds[loop].Write(bw);
 
 			}
 
-			bw.Write(this._number_of_clouds);
+			bw.Write(this.NumberOfClouds);
 			bw.Write((int)0);
 			bw.Write((long)0);
 
-			for (int loop = 0; loop < this._number_of_clouds; ++loop)
+			for (int loop = 0; loop < this.NumberOfClouds; ++loop)
 			{
 
 				this.CollisionClouds[loop].Write(bw);
@@ -222,7 +218,7 @@ namespace Nikki.Support.Prostreet.Class
 			this.IsResolved = br.ReadInt32() == 0 ? eBoolean.False : eBoolean.True;
 			br.BaseStream.Position += 4;
 
-			for (int loop = 0; loop < this._number_of_bounds; ++loop)
+			for (int loop = 0; loop < this.NumberOfBounds; ++loop)
 			{
 
 				this.CollisionBounds[loop].Read(br);
@@ -232,7 +228,7 @@ namespace Nikki.Support.Prostreet.Class
 			this.NumberOfClouds = br.ReadInt32();
 			br.BaseStream.Position += 12;
 
-			for (int loop = 0; loop < this._number_of_clouds; ++loop)
+			for (int loop = 0; loop < this.NumberOfClouds; ++loop)
 			{
 
 				this.CollisionClouds[loop].Read(br);
@@ -245,23 +241,23 @@ namespace Nikki.Support.Prostreet.Class
 		/// </summary>
 		/// <param name="CName">CollectionName of the new created object.</param>
 		/// <returns>Memory casted copy of the object.</returns>
-		public override ACollectable MemoryCast(string CName)
+		public override Collectable MemoryCast(string CName)
 		{
-			var result = new Collision(CName, this.Database)
+			var result = new Collision(CName, this.Manager)
 			{
 				NumberOfBounds = this.NumberOfBounds,
 				NumberOfClouds = this.NumberOfClouds,
 				IsResolved = this.IsResolved
 			};
 
-			for (int loop = 0; loop < this._number_of_bounds; ++loop)
+			for (int loop = 0; loop < this.NumberOfBounds; ++loop)
 			{
 
 				result.CollisionBounds[loop] = (CollisionBound)this.CollisionBounds[loop].PlainCopy();
 
 			}
 
-			for (int loop = 0; loop < this._number_of_clouds; ++loop)
+			for (int loop = 0; loop < this.NumberOfClouds; ++loop)
 			{
 
 				result.CollisionClouds[loop] = (CollisionCloud)this.CollisionClouds[loop].PlainCopy();
@@ -279,7 +275,7 @@ namespace Nikki.Support.Prostreet.Class
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
 
 		#endregion

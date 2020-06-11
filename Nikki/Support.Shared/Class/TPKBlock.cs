@@ -318,6 +318,13 @@ namespace Nikki.Support.Shared.Class
         /// <returns>Byte array of the partial 2 part2.</returns>
         protected abstract void Get2Part2(BinaryWriter bw);
 
+        /// <summary>
+        /// Assembles partial 2 part2 as compressed block and return all offslots generated.
+        /// </summary>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        /// <param name="thisOffset">Offset of this TPK in BinaryWriter passed.</param>
+        protected abstract List<OffSlot> Get2CompressedPart2(BinaryWriter bw, int thisOffset);
+
         #endregion
     }
 }

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Prostreet.Framework;
 using Nikki.Support.Shared.Parts.CarParts;
 using CoreExtensions.Reflection;
 using CoreExtensions.Conversions;
@@ -29,33 +31,32 @@ namespace Nikki.Support.Prostreet.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override GameINT GameINT => GameINT.Prostreet;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override string GameSTR => GameINT.Prostreet.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// Manager to which the class belongs to.
 		/// </summary>
-		public Database.Prostreet Database { get; set; }
+		[Browsable(false)]
+		public DBModelPartManager Manager { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
 			set
 			{
-				if (String.IsNullOrWhiteSpace(value))
-					throw new ArgumentNullException("This value cannot be left empty.");
-				if (value.Contains(" "))
-					throw new Exception("CollectionName cannot contain whitespace.");
-				if (this.Database.ModelParts.FindCollection(value) != null)
-					throw new CollectionExistenceException(value);
+				this.Manager?.CreationCheck(value);
 				this._collection_name = value;
 			}
 		}
@@ -63,16 +64,21 @@ namespace Nikki.Support.Prostreet.Class
 		/// <summary>
 		/// Binary memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint BinKey => this._collection_name.BinHash();
 
 		/// <summary>
 		/// Vault memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint VltKey => this._collection_name.VltHash();
 
 		/// <summary>
 		/// List of <see cref="RealCarPart"/>.
 		/// </summary>
+		[Browsable(false)]
 		public override List<RealCarPart> ModelCarParts { get; set; }
 
 		#endregion
@@ -88,10 +94,10 @@ namespace Nikki.Support.Prostreet.Class
 		/// Initializes new instance of <see cref="DBModelPart"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
-		public DBModelPart(string CName, Database.Prostreet db)
+		/// <param name="manager"><see cref="DBModelPartManager"/> to which this instance belongs to.</param>
+		public DBModelPart(string CName, DBModelPartManager manager)
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.CollectionName = CName;
 			this.ModelCarParts = new List<RealCarPart>();
 		}
@@ -186,9 +192,9 @@ namespace Nikki.Support.Prostreet.Class
 		/// </summary>
 		/// <param name="CName">CollectionName of the new created object.</param>
 		/// <returns>Memory casted copy of the object.</returns>
-		public override ACollectable MemoryCast(string CName)
+		public override Collectable MemoryCast(string CName)
 		{
-			var result = new DBModelPart(CName, this.Database);
+			var result = new DBModelPart(CName, this.Manager);
 
 			foreach (var part in this.ModelCarParts)
 			{
@@ -257,7 +263,7 @@ namespace Nikki.Support.Prostreet.Class
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
 
 		#endregion

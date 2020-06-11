@@ -64,7 +64,7 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// Part ID of this <see cref="PartIDAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public eSlotMostWanted ID { get; set; }
+		public eSlotMostWanted ID { get; set; } = eSlotMostWanted.INVALID;
 
 		/// <summary>
 		/// Initializes new instance of <see cref="PartIDAttribute"/>.
@@ -82,11 +82,11 @@ namespace Nikki.Support.MostWanted.Attributes
 			try
 			{
 				this.Level = (byte)value.ReinterpretCast(typeof(byte));
-				this.ID = eSlotMostWanted.BASE;
+				this.ID = eSlotMostWanted.INVALID;
 			}
 			catch (Exception)
 			{
-				this.ID = eSlotMostWanted.BASE;
+				this.ID = eSlotMostWanted.INVALID;
 				this.Level = 0;
 			}
 		}

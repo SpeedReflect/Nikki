@@ -1,12 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -43,17 +44,20 @@ namespace Nikki.Support.Prostreet.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override GameINT GameINT => GameINT.Prostreet;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override string GameSTR => GameINT.Prostreet.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// Manager to which the class belongs to.
 		/// </summary>
-		public Database.Prostreet Database { get; set; }
+		[Browsable(false)]
+		public TrackManager Manager { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
@@ -64,39 +68,31 @@ namespace Nikki.Support.Prostreet.Class
 			get => this._collection_name;
 			set
 			{
-				if (string.IsNullOrWhiteSpace(value))
-					throw new ArgumentNullException("This value cannot be left empty.");
-				if (value.Contains(" "))
-					throw new Exception("CollectionName cannot contain whitespace.");
-				if (!UInt16.TryParse(value, out ushort id))
-					throw new Exception("Unable to parse TrackID from the collection name provided.");
-				if (this.Database.Tracks.FindCollection(value) != null)
-					throw new CollectionExistenceException(value);
+				this.Manager?.CreationCheck(value);
 				this._collection_name = value;
-				this.TrackID = id;
 			}
 		}
 
 		/// <summary>
 		/// Binary memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint BinKey => this._collection_name.BinHash();
 
 		/// <summary>
 		/// Vault memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint VltKey => this._collection_name.VltHash();
-
-		/// <summary>
-		/// Unique ID value of the track that is used ingame.
-		/// </summary>
-		public ushort TrackID { get; private set; }
 
 		/// <summary>
 		/// Location index of the track.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public int LocationIndex { get; set; }
 
 		/// <summary>
@@ -104,6 +100,7 @@ namespace Nikki.Support.Prostreet.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public string LocationDirectory { get; set; } = String.Empty;
 
 		/// <summary>
@@ -112,6 +109,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public eBoolean IsPerformanceTuning { get; set; }
 
 		/// <summary>
@@ -120,6 +118,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public eLocationType LocationType { get; set; }
 
 		/// <summary>
@@ -128,6 +127,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public eDriftType DriftType { get; set; }
 
 		/// <summary>
@@ -135,6 +135,7 @@ namespace Nikki.Support.Prostreet.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public uint RaceLength { get; set; }
 
 		/// <summary>
@@ -143,6 +144,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TimeLimitToBeatForward { get; set; }
 
 		/// <summary>
@@ -151,6 +153,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TimeLimitToBeatReverse { get; set; }
 
 		/// <summary>
@@ -159,6 +162,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int ScoreToBeatDriftForward { get; set; }
 
 		/// <summary>
@@ -167,6 +171,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int ScoreToBeatDriftReverse { get; set; }
 
 		/// <summary>
@@ -175,6 +180,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short NumSecBeforeShorcutsAllowed { get; set; }
 
 		/// <summary>
@@ -183,6 +189,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short DriftSecondsMin { get; set; }
 
 		/// <summary>
@@ -191,6 +198,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short DriftSecondsMax { get; set; }
 
 		/// <summary>
@@ -199,6 +207,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short CarRaceStartConfig { get; set; }
 
 		/// <summary>
@@ -207,6 +216,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrackMapCalibrationOffsetX { get; set; }
 
 		/// <summary>
@@ -215,6 +225,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrackMapCalibrationOffsetY { get; set; }
 
 		/// <summary>
@@ -223,6 +234,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrackMapCalibrationWidth { get; set; }
 
 		/// <summary>
@@ -231,6 +243,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrackMapCalibrationRotation { get; set; }
 
 		/// <summary>
@@ -239,6 +252,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrackMapCalibrationZoomIn { get; set; }
 
 		/// <summary>
@@ -247,6 +261,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrackMapStartgridAngle { get; set; }
 
 		/// <summary>
@@ -255,6 +270,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrackMapFinishlineAngle { get; set; }
 
 		/// <summary>
@@ -263,6 +279,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float MenuMapZoomOffsetX { get; set; }
 
 		/// <summary>
@@ -271,6 +288,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float MenuMapZoomOffsetY { get; set; }
 
 		/// <summary>
@@ -279,6 +297,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float MenuMapZoomWidth { get; set; }
 
 		/// <summary>
@@ -287,6 +306,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int MenuMapStartZoomed { get; set; }
 
 		/// <summary>
@@ -295,6 +315,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_0_0 { get; set; }
 
 		/// <summary>
@@ -303,6 +324,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_0_1 { get; set; }
 
 		/// <summary>
@@ -311,6 +333,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_1_0 { get; set; }
 
 		/// <summary>
@@ -319,6 +342,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_1_1 { get; set; }
 
 		/// <summary>
@@ -327,6 +351,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_2_0 { get; set; }
 
 		/// <summary>
@@ -335,6 +360,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_2_1 { get; set; }
 
 		/// <summary>
@@ -343,6 +369,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_3_0 { get; set; }
 
 		/// <summary>
@@ -351,6 +378,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_3_1 { get; set; }
 
 		/// <summary>
@@ -359,6 +387,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte TrafAllowedNearStartgrid { get; set; }
 
 		/// <summary>
@@ -367,6 +396,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte TrafAllowedNearFinishline { get; set; }
 
 		/// <summary>
@@ -375,6 +405,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrafMinInitDistFromStart { get; set; }
 
 		/// <summary>
@@ -383,6 +414,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrafMinInitDistFromFinish { get; set; }
 
 		/// <summary>
@@ -391,6 +423,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrafMinInitDistInbetweenA { get; set; }
 
 		/// <summary>
@@ -399,6 +432,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrafMinInitDistInbetweenB { get; set; }
 
 		/// <summary>
@@ -407,6 +441,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrafOncomingFraction1 { get; set; }
 
 		/// <summary>
@@ -415,6 +450,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrafOncomingFraction2 { get; set; }
 
 		/// <summary>
@@ -423,6 +459,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrafOncomingFraction3 { get; set; }
 
 		/// <summary>
@@ -431,6 +468,7 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrafOncomingFraction4 { get; set; }
 
 		#endregion
@@ -446,10 +484,10 @@ namespace Nikki.Support.Prostreet.Class
 		/// Initializes new instance of <see cref="Track"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
-		public Track(string CName, Database.Prostreet db)
+		/// <param name="manager"><see cref="TrackManager"/> to which this instance belongs to.</param>
+		public Track(string CName, TrackManager manager)
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.CollectionName = CName;
 			CName.BinHash();
 		}
@@ -458,10 +496,10 @@ namespace Nikki.Support.Prostreet.Class
 		/// Initializes new instance of <see cref="Track"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
-		public Track(BinaryReader br, Database.Prostreet db)
+		/// <param name="manager"><see cref="TrackManager"/> to which this instance belongs to.</param>
+		public Track(BinaryReader br, TrackManager manager)
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.Disassemble(br);
 		}
 
@@ -497,8 +535,8 @@ namespace Nikki.Support.Prostreet.Class
 			bw.Write((byte)0);
 			bw.WriteEnum(this.IsPerformanceTuning);
 			bw.Write((byte)0);
-			bw.Write(this.TrackID);
-			bw.Write(this.TrackID);
+			bw.Write(UInt16.Parse(this._collection_name));
+			bw.Write(UInt16.Parse(this._collection_name));
 			bw.Write((short)0);
 
 			// Write gameplay scores
@@ -580,8 +618,7 @@ namespace Nikki.Support.Prostreet.Class
 			this.IsPerformanceTuning = br.ReadEnum<eBoolean>();
 			br.BaseStream.Position += 1;
 			this._collection_name = br.ReadUInt16().ToString();
-			this.TrackID = br.ReadUInt16();
-			br.BaseStream.Position += 2;
+			br.BaseStream.Position += 4;
 
 			// Read gameplay scores
 			this.SunInfoName = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
@@ -643,9 +680,9 @@ namespace Nikki.Support.Prostreet.Class
 		/// </summary>
 		/// <param name="CName">CollectionName of the new created object.</param>
 		/// <returns>Memory casted copy of the object.</returns>
-		public override ACollectable MemoryCast(string CName)
+		public override Collectable MemoryCast(string CName)
 		{
-			var result = new Track(CName, this.Database);
+			var result = new Track(CName, this.Manager);
 			base.MemoryCast(this, result);
 			return result;
 		}
@@ -658,7 +695,7 @@ namespace Nikki.Support.Prostreet.Class
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
 
 		#endregion

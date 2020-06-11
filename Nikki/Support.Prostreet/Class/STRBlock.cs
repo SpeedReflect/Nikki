@@ -1,15 +1,18 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection;
-using Nikki.Reflection.ID;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Prostreet.Framework;
 using Nikki.Support.Shared.Parts.STRParts;
 using CoreExtensions.IO;
 using CoreExtensions.Text;
+using CoreExtensions.Conversions;
 
 
 
@@ -47,42 +50,54 @@ namespace Nikki.Support.Prostreet.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override GameINT GameINT => GameINT.Prostreet;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override string GameSTR => GameINT.Prostreet.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// Manager to which the class belongs to.
 		/// </summary>
-		public Database.Prostreet Database { get; set; }
+		[Browsable(false)]
+		public STRBlockManager Manager { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
 			set
 			{
-				if (String.IsNullOrWhiteSpace(value))
-					throw new ArgumentNullException("This value cannot be left empty.");
-				if (value.Contains(" "))
-					throw new Exception("CollectionName cannot contain whitespace.");
-				if (value.Length > MaxCNameLength)
-					throw new ArgumentLengthException(MaxCNameLength);
-				if (this.Database.STRBlocks.FindCollection(value) != null)
-					throw new CollectionExistenceException(value);
+				this.Manager?.CreationCheck(value);
 				this._collection_name = value;
 			}
 		}
 
 		/// <summary>
+		/// Binary memory hash of the collection name.
+		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
+		public override uint BinKey => this._collection_name.BinHash();
+
+		/// <summary>
+		/// Vault memory hash of the collection name.
+		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
+		public override uint VltKey => this._collection_name.VltHash();
+
+		/// <summary>
 		/// Length of the string information array.
 		/// </summary>
+		[Category("Primary")]
 		public override int InfoLength => this._stringinfo.Count;
 
 		#endregion
@@ -98,10 +113,10 @@ namespace Nikki.Support.Prostreet.Class
 		/// Initializes new instance of <see cref="STRBlock"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
-		public STRBlock(string CName, Database.Prostreet db)
+		/// <param name="manager"><see cref="STRBlockManager"/> to which this instance belongs to.</param>
+		public STRBlock(string CName, STRBlockManager manager)
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.CollectionName = CName;
 			CName.BinHash();
 		}
@@ -110,10 +125,10 @@ namespace Nikki.Support.Prostreet.Class
 		/// Initializes new instance of <see cref="STRBlock"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read text data with.</param>
-		/// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
-		public STRBlock(BinaryReader br, Database.Prostreet db)
+		/// <param name="manager"><see cref="STRBlockManager"/> to which this instance belongs to.</param>
+		public STRBlock(BinaryReader br, STRBlockManager manager)
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.Disassemble(br);
 		}
 
@@ -139,7 +154,7 @@ namespace Nikki.Support.Prostreet.Class
 			this._stringinfo.Sort((a, b) => a.Key.CompareTo(b.Key));
 
 			// Write ID and temporary size
-			bw.Write(Global.STRBlocks);
+			bw.WriteEnum(eBlockID.STRBlocks);
 			bw.Write(-1);
 
 			// Save position
@@ -182,6 +197,7 @@ namespace Nikki.Support.Prostreet.Class
 		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="STRBlock"/> with.</param>
 		public override void Disassemble(BinaryReader br)
 		{
+			br.BaseStream.Position += 8;
 			uint ReaderID = br.ReadUInt32();
 			int BlockSize = br.ReadInt32();
 			var broffset = br.BaseStream.Position;
@@ -343,7 +359,7 @@ namespace Nikki.Support.Prostreet.Class
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
 
 		#endregion

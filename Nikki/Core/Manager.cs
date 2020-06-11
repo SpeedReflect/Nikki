@@ -360,8 +360,8 @@ namespace Nikki.Core
 
 			}
 
-			var ctor = typeof(T).GetConstructor(new Type[] { typeof(string), this.Database.GetType() });
-			var instance = (T)ctor.Invoke(new object[] { cname, this.Database });
+			var ctor = typeof(T).GetConstructor(new Type[] { typeof(string), this.GetType() });
+			var instance = (T)ctor.Invoke(new object[] { cname, this });
 			this._collections[this._size++] = instance;
 		}
 
@@ -806,8 +806,8 @@ namespace Nikki.Core
 
 			using var br = new BinaryReader(File.Open(filename, FileMode.Open, FileAccess.Read));
 
-			var ctor = typeof(T).GetConstructor(new Type[] { typeof(BinaryReader), this.Database.GetType() });
-			var instance = (T)ctor.Invoke(new object[] { br, this.Database });
+			var ctor = typeof(T).GetConstructor(new Type[] { typeof(BinaryReader), this.GetType() });
+			var instance = (T)ctor.Invoke(new object[] { br, this });
 
 			this.Add(instance);
 		}
@@ -1036,8 +1036,8 @@ namespace Nikki.Core
 
 			}
 
-			var ctor = typeof(T).GetConstructor(new Type[] { typeof(string), this.Database.GetType() });
-			var instance = (T)ctor.Invoke(new object[] { cname, this.Database });
+			var ctor = typeof(T).GetConstructor(new Type[] { typeof(string), this.GetType() });
+			var instance = (T)ctor.Invoke(new object[] { cname, this });
 			this._collections[index] = instance;
 			++this._size;
 		}

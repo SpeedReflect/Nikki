@@ -999,7 +999,7 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         /// <param name="thisOffset">Offset of this TPK in BinaryWriter passed.</param>
-        protected List<OffSlot> Get2CompressedPart2(BinaryWriter bw, int thisOffset)
+        protected override List<OffSlot> Get2CompressedPart2(BinaryWriter bw, int thisOffset)
         {
             // Initialize result offslot list
             var result = new List<OffSlot>(this.Textures.Count);

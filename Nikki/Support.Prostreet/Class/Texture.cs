@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Utils.EA;
@@ -10,6 +11,7 @@ using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -23,6 +25,7 @@ namespace Nikki.Support.Prostreet.Class
         #region Fields
 
         private string _collection_name;
+        private uint _binkey;
 
         [MemoryCastable()]
         private byte _compression = EAComp.RGBA_08;
@@ -78,8 +81,6 @@ namespace Nikki.Support.Prostreet.Class
         [MemoryCastable()]
         private int _unknown3 = 0;
 
-        private string _parent_TPK;
-
         #endregion
 
         #region Properties
@@ -87,54 +88,79 @@ namespace Nikki.Support.Prostreet.Class
         /// <summary>
         /// Game to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override GameINT GameINT => GameINT.Prostreet;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override string GameSTR => GameINT.Prostreet.ToString();
 
         /// <summary>
-        /// Database to which the class belongs to.
+        /// <see cref="TPKBlock"/> to which the class belongs to.
         /// </summary>
-        public Database.Prostreet Database { get; set; }
+        [Browsable(false)]
+        public TPKBlock TPK { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
         /// </summary>
         [AccessModifiable()]
+        [Category("Main")]
         public override string CollectionName
         {
             get => this._collection_name;
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
+                {
+
                     throw new ArgumentNullException("This value cannot be left empty.");
+
+                }
+
                 if (value.Contains(" "))
+                {
+
                     throw new Exception("CollectionName cannot contain whitespace.");
-                var tpk = this.Database.TPKBlocks.FindCollection(this._parent_TPK);
+
+
+                }
+
                 var key = value.BinHash();
                 var type = eKeyType.BINKEY;
-                if (tpk.GetTextureIndex(key, type) != -1)
+
+                if (this.TPK?.GetTextureIndex(key, type) != -1)
+                {
+
                     throw new CollectionExistenceException(value);
+
+                }
+
                 this._collection_name = value;
-                this.BinKey = key;
+                this._binkey = key;
             }
         }
 
         /// <summary>
         /// Binary memory hash of the collection name.
         /// </summary>
-        public override uint BinKey { get; set; }
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
+        public override uint BinKey => this._binkey;
 
         /// <summary>
         /// Vault memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint VltKey => this._collection_name.VltHash();
 
         /// <summary>
         /// Compression type value of the texture.
         /// </summary>
+        [Category("Primary")]
         public override string Compression => Comp.GetString(this._compression);
 
         #endregion
@@ -150,14 +176,12 @@ namespace Nikki.Support.Prostreet.Class
         /// Initializes new instance of <see cref="Texture"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="_TPK"><see cref="TPKBlock"/> to which this texture belongs to.</param>
-        /// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
-        public Texture(string CName, string _TPK, Database.Prostreet db)
+        /// <param name="tpk"><see cref="TPKBlock"/> to which this instance belongs to.</param>
+        public Texture(string CName, TPKBlock tpk)
         {
-            this.Database = db;
+            this.TPK = tpk;
             this._collection_name = CName;
-            this._parent_TPK = _TPK;
-            this.BinKey = CName.BinHash();
+            this._binkey = CName.BinHash();
             this.PaletteOffset = -1;
             this._padding = 0;
         }
@@ -166,15 +190,13 @@ namespace Nikki.Support.Prostreet.Class
         /// Initializes new instance of <see cref="Texture"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="_TPK"><see cref="TPKBlock"/> to which this texture belongs to.</param>
         /// <param name="filename">Filename of the texture to import.</param>
-        /// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
-        public Texture(string CName, string _TPK, string filename, Database.Prostreet db)
+        /// <param name="tpk"><see cref="TPKBlock"/> to which this instance belongs to.</param>
+        public Texture(string CName, string filename, TPKBlock tpk)
         {
-            this.Database = db;
+            this.TPK = tpk;
             this._collection_name = CName;
-            this._parent_TPK = _TPK;
-            this.BinKey = CName.BinHash();
+            this._binkey = CName.BinHash();
             this.PaletteOffset = -1;
             this._padding = 0;
             this.Initialize(filename);
@@ -184,12 +206,10 @@ namespace Nikki.Support.Prostreet.Class
         /// Initializes new instance of <see cref="Texture"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-        /// <param name="_TPK"><see cref="TPKBlock"/> to which this texture belongs to.</param>
-        /// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
-        public Texture(BinaryReader br, string _TPK, Database.Prostreet db)
+        /// <param name="tpk"><see cref="TPKBlock"/> to which this instance belongs to.</param>
+        public Texture(BinaryReader br, TPKBlock tpk)
         {
-            this.Database = db;
-            this._parent_TPK = _TPK;
+            this.TPK = tpk;
             this.Disassemble(br);
         }
 
@@ -214,7 +234,7 @@ namespace Nikki.Support.Prostreet.Class
             // Write all settings
             bw.Write(this._cube_environment);
             bw.Write((long)0);
-            bw.Write(this.BinKey);
+            bw.Write(this._binkey);
             bw.Write(this.ClassKey);
             bw.Write((uint)this.Offset);
             bw.Write(this._compression == EAComp.P8_08 ? this.PaletteOffset : -1);
@@ -272,7 +292,7 @@ namespace Nikki.Support.Prostreet.Class
         {
             this._cube_environment = br.ReadUInt32();
             br.BaseStream.Position += 8;
-            this.BinKey = br.ReadUInt32();
+            this._binkey = br.ReadUInt32();
             this.ClassKey = br.ReadUInt32();
             this.Offset = br.ReadInt32();
             this.PaletteOffset = br.ReadInt32();
@@ -348,7 +368,7 @@ namespace Nikki.Support.Prostreet.Class
             };
 
             DDSHeader.dwFlags += (uint)DDS_HEADER_FLAGS.MIPMAP;
-            
+
             if (this._compression == EAComp.RGBA_08 || this._compression == EAComp.P8_08)
             {
 
@@ -466,7 +486,7 @@ namespace Nikki.Support.Prostreet.Class
             // Initialize data
             int total = this.PaletteSize + this.Size;
             this.Data = new byte[total];
-            
+
             if (forced)
             {
 
@@ -490,9 +510,9 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         /// <param name="CName">CollectionName of the new created object.</param>
         /// <returns>Memory casted copy of the object.</returns>
-        public override ACollectable MemoryCast(string CName)
+        public override Collectable MemoryCast(string CName)
         {
-            var result = new Texture(CName, this._parent_TPK, this.Database);
+            var result = new Texture(CName, this.TPK);
             base.MemoryCast(this, result);
             result.Data = new byte[this.Data.Length];
             Buffer.BlockCopy(this.Data, 0, result.Data, 0, this.Data.Length);
@@ -507,7 +527,7 @@ namespace Nikki.Support.Prostreet.Class
         public override string ToString()
         {
             return $"Collection Name: {this.CollectionName} | " +
-                   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+                   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
         }
 
         #endregion

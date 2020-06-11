@@ -1,12 +1,13 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Prostreet.Framework;
 using Nikki.Support.Shared.Parts.SunParts;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -43,35 +44,32 @@ namespace Nikki.Support.Prostreet.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override GameINT GameINT => GameINT.Prostreet;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override string GameSTR => GameINT.Prostreet.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// Manager to which the class belongs to.
 		/// </summary>
-		public Database.Prostreet Database { get; set; }
+		[Browsable(false)]
+		public SunInfoManager Manager { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
 			set
 			{
-				if (string.IsNullOrWhiteSpace(value))
-					throw new ArgumentNullException("This value cannot be left empty.");
-				if (value.Contains(" "))
-					throw new Exception("CollectionName cannot contain whitespace.");
-				if (value.Length > MaxCNameLength)
-					throw new ArgumentLengthException(MaxCNameLength);
-				if (this.Database.SunInfos.FindCollection(value) != null)
-					throw new CollectionExistenceException(value);
+				this.Manager?.CreationCheck(value);
 				this._collection_name = value;
 			}
 		}
@@ -79,47 +77,57 @@ namespace Nikki.Support.Prostreet.Class
 		/// <summary>
 		/// Binary memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint BinKey => this._collection_name.BinHash();
 
 		/// <summary>
 		/// Vault memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint VltKey => this._collection_name.VltHash();
 
 		/// <summary>
 		/// Sun layer 1.
 		/// </summary>
 		[Expandable("SunLayers")]
+		[Browsable(false)]
 		public SunLayer SUNLAYER1 { get; set; }
 
 		/// <summary>
 		/// Sun layer 2.
 		/// </summary>
 		[Expandable("SunLayers")]
+		[Browsable(false)]
 		public SunLayer SUNLAYER2 { get; set; }
 
 		/// <summary>
 		/// Sun layer 3.
 		/// </summary>
 		[Expandable("SunLayers")]
+		[Browsable(false)]
 		public SunLayer SUNLAYER3 { get; set; }
 
 		/// <summary>
 		/// Sun layer 4.
 		/// </summary>
 		[Expandable("SunLayers")]
+		[Browsable(false)]
 		public SunLayer SUNLAYER4 { get; set; }
 
 		/// <summary>
 		/// Sun layer 5.
 		/// </summary>
 		[Expandable("SunLayers")]
+		[Browsable(false)]
 		public SunLayer SUNLAYER5 { get; set; }
 
 		/// <summary>
 		/// Sun layer 6.
 		/// </summary>
 		[Expandable("SunLayers")]
+		[Browsable(false)]
 		public SunLayer SUNLAYER6 { get; set; }
 
 		#endregion
@@ -135,17 +143,12 @@ namespace Nikki.Support.Prostreet.Class
 		/// Initializes new instance of <see cref="SunInfo"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
-		public SunInfo(string CName, Database.Prostreet db)
+		/// <param name="manager"><see cref="SunInfoManager"/> to which this instance belongs to.</param>
+		public SunInfo(string CName, SunInfoManager manager)
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.CollectionName = CName;
-			this.SUNLAYER1 = new SunLayer();
-			this.SUNLAYER2 = new SunLayer();
-			this.SUNLAYER3 = new SunLayer();
-			this.SUNLAYER4 = new SunLayer();
-			this.SUNLAYER5 = new SunLayer();
-			this.SUNLAYER6 = new SunLayer();
+			this.Initialize();
 			CName.BinHash();
 		}
 
@@ -153,16 +156,11 @@ namespace Nikki.Support.Prostreet.Class
 		/// Initializes new instance of <see cref="SunInfo"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
-		public SunInfo(BinaryReader br, Database.Prostreet db)
+		/// <param name="manager"><see cref="SunInfoManager"/> to which this instance belongs to.</param>
+		public SunInfo(BinaryReader br, SunInfoManager manager)
 		{
-			this.Database = db;
-			this.SUNLAYER1 = new SunLayer();
-			this.SUNLAYER2 = new SunLayer();
-			this.SUNLAYER3 = new SunLayer();
-			this.SUNLAYER4 = new SunLayer();
-			this.SUNLAYER5 = new SunLayer();
-			this.SUNLAYER6 = new SunLayer();
+			this.Manager = manager;
+			this.Initialize();
 			this.Disassemble(br);
 		}
 
@@ -236,11 +234,21 @@ namespace Nikki.Support.Prostreet.Class
 		/// </summary>
 		/// <param name="CName">CollectionName of the new created object.</param>
 		/// <returns>Memory casted copy of the object.</returns>
-		public override ACollectable MemoryCast(string CName)
+		public override Collectable MemoryCast(string CName)
 		{
-			var result = new SunInfo(CName, this.Database);
+			var result = new SunInfo(CName, this.Manager);
 			base.MemoryCast(this, result);
 			return result;
+		}
+
+		private void Initialize()
+		{
+			this.SUNLAYER1 = new SunLayer();
+			this.SUNLAYER2 = new SunLayer();
+			this.SUNLAYER3 = new SunLayer();
+			this.SUNLAYER4 = new SunLayer();
+			this.SUNLAYER5 = new SunLayer();
+			this.SUNLAYER6 = new SunLayer();
 		}
 
 		/// <summary>
@@ -251,7 +259,7 @@ namespace Nikki.Support.Prostreet.Class
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
 
 		#endregion

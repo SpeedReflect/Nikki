@@ -1,12 +1,13 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.ID;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Prostreet.Framework;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -43,35 +44,32 @@ namespace Nikki.Support.Prostreet.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
-		public override GameINT GameINT => GameINT.Prostreet;
+		[Browsable(false)]
+        public override GameINT GameINT => GameINT.Prostreet;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override string GameSTR => GameINT.Prostreet.ToString();
 
         /// <summary>
-        /// Database to which the class belongs to.
+        /// Manager to which the class belongs to.
         /// </summary>
-        public Database.Prostreet Database { get; set; }
+        [Browsable(false)]
+        public MaterialManager Manager { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
         /// </summary>
         [AccessModifiable()]
+        [Category("Main")]
         public override string CollectionName
         {
             get => this._collection_name;
             set
             {
-                if (String.IsNullOrWhiteSpace(value))
-                    throw new ArgumentNullException("This value cannot be left empty.");
-                if (value.Contains(" "))
-                    throw new Exception("CollectionName cannot contain whitespace.");
-                if (value.Length > MaxCNameLength)
-                    throw new ArgumentLengthException(MaxCNameLength);
-                if (this.Database.Materials.FindCollection(value) != null)
-                    throw new CollectionExistenceException(value);
+                this.Manager?.CreationCheck(value);
                 this._collection_name = value;
             }
         }
@@ -79,11 +77,15 @@ namespace Nikki.Support.Prostreet.Class
         /// <summary>
         /// Binary memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint BinKey => this._collection_name.BinHash();
 
         /// <summary>
         /// Vault memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint VltKey => this._collection_name.VltHash();
 
         /// <summary>
@@ -91,6 +93,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Diffuse")]
         public float DiffusePower { get; set; }
 
         /// <summary>
@@ -98,6 +101,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Diffuse")]
         public float DiffuseClamp { get; set; }
 
         /// <summary>
@@ -105,6 +109,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Diffuse")]
         public float DiffuseFlakes { get; set; }
 
         /// <summary>
@@ -112,6 +117,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Diffuse")]
         public float DiffuseVinylScale { get; set; }
 
         /// <summary>
@@ -119,6 +125,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Diffuse")]
         public float DiffuseMinLevel { get; set; }
 
         /// <summary>
@@ -126,6 +133,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Diffuse")]
         public float DiffuseMinRed { get; set; }
 
         /// <summary>
@@ -133,6 +141,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Diffuse")]
         public float DiffuseMinGreen { get; set; }
 
         /// <summary>
@@ -140,6 +149,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Diffuse")]
         public float DiffuseMinBlue { get; set; }
 
         /// <summary>
@@ -147,6 +157,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Diffuse")]
         public float DiffuseMaxLevel { get; set; }
 
         /// <summary>
@@ -154,6 +165,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Diffuse")]
         public float DiffuseMaxRed { get; set; }
 
         /// <summary>
@@ -161,6 +173,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Diffuse")]
         public float DiffuseMaxGreen { get; set; }
 
         /// <summary>
@@ -168,6 +181,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Diffuse")]
         public float DiffuseMaxBlue { get; set; }
 
         /// <summary>
@@ -175,6 +189,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public float DiffuseMinAlpha { get; set; }
 
         /// <summary>
@@ -182,6 +197,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public float DiffuseMaxAlpha { get; set; }
 
         /// <summary>
@@ -189,6 +205,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular1")]
         public float Specular1Power { get; set; }
 
         /// <summary>
@@ -196,6 +213,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular1")]
         public float Specular1Flakes { get; set; }
 
         /// <summary>
@@ -203,6 +221,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular1")]
         public float Specular1VinylScale { get; set; }
 
         /// <summary>
@@ -210,6 +229,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular1")]
         public float Specular1MinLevel { get; set; }
 
         /// <summary>
@@ -217,6 +237,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular1")]
         public float Specular1MinRed { get; set; }
 
         /// <summary>
@@ -224,6 +245,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular1")]
         public float Specular1MinGreen { get; set; }
 
         /// <summary>
@@ -231,6 +253,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular1")]
         public float Specular1MinBlue { get; set; }
 
         /// <summary>
@@ -238,6 +261,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular1")]
         public float Specular1MaxLevel { get; set; }
 
         /// <summary>
@@ -245,6 +269,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular1")]
         public float Specular1MaxRed { get; set; }
 
         /// <summary>
@@ -252,6 +277,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular1")]
         public float Specular1MaxGreen { get; set; }
 
         /// <summary>
@@ -259,6 +285,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular1")]
         public float Specular1MaxBlue { get; set; }
 
         /// <summary>
@@ -266,6 +293,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular2")]
         public float Specular2Power { get; set; }
 
         /// <summary>
@@ -273,6 +301,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular2")]
         public float Specular2Flakes { get; set; }
 
         /// <summary>
@@ -280,6 +309,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular2")]
         public float Specular2VinylScale { get; set; }
 
         /// <summary>
@@ -287,6 +317,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular2")]
         public float Specular2MinLevel { get; set; }
 
         /// <summary>
@@ -294,6 +325,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular2")]
         public float Specular2MinRed { get; set; }
 
         /// <summary>
@@ -301,6 +333,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular2")]
         public float Specular2MinGreen { get; set; }
 
         /// <summary>
@@ -308,6 +341,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular2")]
         public float Specular2MinBlue { get; set; }
 
         /// <summary>
@@ -315,6 +349,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular2")]
         public float Specular2MaxLevel { get; set; }
 
         /// <summary>
@@ -322,6 +357,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular2")]
         public float Specular2MaxRed { get; set; }
 
         /// <summary>
@@ -329,6 +365,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular2")]
         public float Specular2MaxGreen { get; set; }
 
         /// <summary>
@@ -336,6 +373,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Specular2")]
         public float Specular2MaxBlue { get; set; }
 
         /// <summary>
@@ -343,6 +381,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Envmap")]
         public float EnvmapPower { get; set; }
 
         /// <summary>
@@ -350,6 +389,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Envmap")]
         public float EnvmapClamp { get; set; }
 
         /// <summary>
@@ -357,6 +397,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Envmap")]
         public float EnvmapVinylScale { get; set; }
 
         /// <summary>
@@ -364,6 +405,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Envmap")]
         public float EnvmapMinLevel { get; set; }
 
         /// <summary>
@@ -371,6 +413,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Envmap")]
         public float EnvmapMinRed { get; set; }
 
         /// <summary>
@@ -378,6 +421,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Envmap")]
         public float EnvmapMinGreen { get; set; }
 
         /// <summary>
@@ -385,6 +429,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Envmap")]
         public float EnvmapMinBlue { get; set; }
 
         /// <summary>
@@ -392,6 +437,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Envmap")]
         public float EnvmapMaxLevel { get; set; }
 
         /// <summary>
@@ -399,6 +445,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Envmap")]
         public float EnvmapMaxRed { get; set; }
 
         /// <summary>
@@ -406,6 +453,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Envmap")]
         public float EnvmapMaxGreen { get; set; }
 
         /// <summary>
@@ -413,6 +461,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Envmap")]
         public float EnvmapMaxBlue { get; set; }
 
         /// <summary>
@@ -420,6 +469,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public float VinylLuminanceMinLevel { get; set; }
 
         /// <summary>
@@ -427,6 +477,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public float VinylLuminanceMaxLevel { get; set; }
 
         /// <summary>
@@ -434,6 +485,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public float MultiTextured { get; set; }
 
         #endregion
@@ -449,10 +501,10 @@ namespace Nikki.Support.Prostreet.Class
         /// Initializes new instance of <see cref="Material"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
-        public Material(string CName, Database.Prostreet db)
+        /// <param name="manager"><see cref="MaterialManager"/> to which this instance belongs to.</param>
+        public Material(string CName, MaterialManager manager)
         {
-            this.Database = db;
+            this.Manager = manager;
             this.CollectionName = CName;
             CName.BinHash();
         }
@@ -461,10 +513,10 @@ namespace Nikki.Support.Prostreet.Class
         /// Initializes new instance of <see cref="Material"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-        /// <param name="db"><see cref="Database.Prostreet"/> to which this instance belongs to.</param>
-        public unsafe Material(BinaryReader br, Database.Prostreet db)
+        /// <param name="manager"><see cref="MaterialManager"/> to which this instance belongs to.</param>
+        public unsafe Material(BinaryReader br, MaterialManager manager)
         {
-            this.Database = db;
+            this.Manager = manager;
             this.Disassemble(br);
         }
 
@@ -554,7 +606,7 @@ namespace Nikki.Support.Prostreet.Class
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="Material"/> with.</param>
         public override void Disassemble(BinaryReader br)
         {
-            br.BaseStream.Position += 0x14;
+            br.BaseStream.Position += 0x1C;
             this._collection_name = br.ReadNullTermUTF8(0x40);
 
             this.DiffusePower = br.ReadSingle();
@@ -614,9 +666,9 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         /// <param name="CName">CollectionName of the new created object.</param>
         /// <returns>Memory casted copy of the object.</returns>
-        public override ACollectable MemoryCast(string CName)
+        public override Collectable MemoryCast(string CName)
         {
-            var result = new Material(CName, this.Database);
+            var result = new Material(CName, this.Manager);
             base.MemoryCast(this, result);
             return result;
         }
@@ -629,7 +681,7 @@ namespace Nikki.Support.Prostreet.Class
         public override string ToString()
         {
             return $"Collection Name: {this.CollectionName} | " +
-                   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+                   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
         }
 
         #endregion

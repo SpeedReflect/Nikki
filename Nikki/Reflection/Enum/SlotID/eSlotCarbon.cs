@@ -534,5 +534,10 @@
         /// 
         /// </summary>
         MISC = 0x69,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        INVALID = 0xFF,
     }
 }
