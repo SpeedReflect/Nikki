@@ -68,9 +68,12 @@ namespace Nikki.Support.Carbon.Framework
 			bw.Write(0x11111111);
 			bw.Write(0x11111111);
 
+			int count = 0;
+
 			foreach (var collection in this)
 			{
 
+				collection.Index = count++;
 				collection.Assemble(bw);
 
 			}

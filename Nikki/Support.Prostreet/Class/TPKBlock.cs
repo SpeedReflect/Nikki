@@ -73,7 +73,7 @@ namespace Nikki.Support.Prostreet.Class
         /// Filename used for this <see cref="TPKBlock"/>. It is a default watermark.
         /// </summary>
         [Browsable(false)]
-        public override string Filename => $"{this.CollectionName}.tpk";
+        public override string Filename => $"{this.CollectionName}.xml";
 
         /// <summary>
         /// BinKey of the filename.
@@ -650,7 +650,7 @@ namespace Nikki.Support.Prostreet.Class
             var cname = br.ReadNullTermUTF8(0x1C);
             var fname = br.ReadNullTermUTF8(0x40);
 
-            if (fname.EndsWith(".tpk") || fname.EndsWith(".TPK"))
+            if (fname.EndsWith(".xml") || fname.EndsWith(".XML"))
             {
 
                 fname = Path.GetFileNameWithoutExtension(fname).ToUpper();

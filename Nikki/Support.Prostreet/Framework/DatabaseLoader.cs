@@ -6,7 +6,7 @@ using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.Carbon.Framework
+namespace Nikki.Support.Prostreet.Framework
 {
 	internal class DatabaseLoader
 	{
@@ -19,8 +19,6 @@ namespace Nikki.Support.Carbon.Framework
 		private Block dbmodelparts;
 		private Block fngroups;
 		private Block materials;
-		private Block presetrides;
-		private Block presetskins;
 		private Block slottypes;
 		private Block strblocks;
 		private Block suninfos;
@@ -34,8 +32,6 @@ namespace Nikki.Support.Carbon.Framework
 			this.materials = new Block(eBlockID.Materials);
 			this.tpkblocks = new Block(eBlockID.TPKBlocks);
 			this.cartypeinfos = new Block(eBlockID.CarTypeInfos);
-			this.presetrides = new Block(eBlockID.PresetRides);
-			this.presetskins = new Block(eBlockID.PresetSkins);
 			this.collisions = new Block(eBlockID.DBCarBounds);
 			this.dbmodelparts = new Block(eBlockID.DBCarParts);
 			this.suninfos = new Block(eBlockID.SunInfos);
@@ -65,8 +61,6 @@ namespace Nikki.Support.Carbon.Framework
 			this._db.Tracks.Disassemble(br, this.tracks);
 			this._db.SunInfos.Disassemble(br, this.suninfos);
 			this._db.Collisions.Disassemble(br, this.collisions);
-			this._db.PresetRides.Disassemble(br, this.presetrides);
-			this._db.PresetSkins.Disassemble(br, this.presetskins);
 			this._db.FNGroups.Disassemble(br, this.fngroups);
 			this._db.SlotTypes.Disassemble(br, this.slottypes);
 			this._db.SlotOverrides.Disassemble(br, this.slottypes);
@@ -99,14 +93,6 @@ namespace Nikki.Support.Carbon.Framework
 
 					case eBlockID.CarTypeInfos:
 						this.cartypeinfos.Offsets.Add(off);
-						goto default;
-
-					case eBlockID.PresetRides:
-						this.presetrides.Offsets.Add(off);
-						goto default;
-
-					case eBlockID.PresetSkins:
-						this.presetskins.Offsets.Add(off);
 						goto default;
 
 					case eBlockID.DBCarBounds:

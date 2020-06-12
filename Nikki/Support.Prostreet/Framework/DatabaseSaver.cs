@@ -6,7 +6,7 @@ using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.MostWanted.Framework
+namespace Nikki.Support.Prostreet.Framework
 {
 	internal class DatabaseSaver
 	{
@@ -39,7 +39,6 @@ namespace Nikki.Support.MostWanted.Framework
 			this._db.Tracks.Assemble(bw, this._options.Watermark);
 			this._db.SunInfos.Assemble(bw, this._options.Watermark);
 			this._db.Collisions.Assemble(bw, this._options.Watermark);
-			this._db.PresetRides.Assemble(bw, this._options.Watermark);
 			this._db.FNGroups.Assemble(bw, this._options.Watermark);
 
 			return true;
@@ -60,7 +59,6 @@ namespace Nikki.Support.MostWanted.Framework
 			this._db.Tracks.Assemble(bw, this._options.Watermark);
 			this._db.SunInfos.Assemble(bw, this._options.Watermark);
 			this._db.Collisions.Assemble(bw, this._options.Watermark);
-			this._db.PresetRides.Assemble(bw, this._options.Watermark);
 			this._db.FNGroups.Assemble(bw, this._options.Watermark);
 
 			this.WriteBlockOffsets(bw, br);
@@ -102,7 +100,6 @@ namespace Nikki.Support.MostWanted.Framework
 					case eBlockID.DBCarParts:
 					case eBlockID.DBCarBounds:
 					case eBlockID.FNGCompress:
-					case eBlockID.PresetRides:
 					case eBlockID.TPKSettings:
 					case eBlockID.CarTypeInfos:
 					case eBlockID.CarInfoAnimHideup:
@@ -124,7 +121,7 @@ namespace Nikki.Support.MostWanted.Framework
 						break;
 
 				}
-
+			
 			}
 		}
 	}

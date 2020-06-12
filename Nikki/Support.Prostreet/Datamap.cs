@@ -1,21 +1,21 @@
 ﻿using Nikki.Core;
 using Nikki.Reflection.Abstract;
-using Nikki.Support.Carbon.Class;
-using Nikki.Support.Carbon.Framework;
+using Nikki.Support.Prostreet.Class;
+using Nikki.Support.Prostreet.Framework;
 
 
 
-namespace Nikki.Support.Carbon
+namespace Nikki.Support.Prostreet
 {
 	/// <summary>
-	/// <see cref="Datamap"/> is an extension of <see cref="FileBase"/> for Carbon support.
+	/// <see cref="Datamap"/> is an extension of <see cref="FileBase"/> for Prostreet support.
 	/// </summary>
 	public class Datamap : FileBase
 	{
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
-		public override GameINT GameINT => GameINT.Carbon;
+		public override GameINT GameINT => GameINT.Prostreet;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
@@ -33,8 +33,6 @@ namespace Nikki.Support.Carbon
 			this.Managers.Add(new DBModelPartManager(this));
 			this.Managers.Add(new FNGroupManager(this));
 			this.Managers.Add(new MaterialManager(this));
-			this.Managers.Add(new PresetRideManager(this));
-			this.Managers.Add(new PresetSkinManager(this));
 			this.Managers.Add(new SlotTypeManager(this));
 			this.Managers.Add(new STRBlockManager(this));
 			this.Managers.Add(new SunInfoManager(this));
@@ -99,30 +97,6 @@ namespace Nikki.Support.Carbon
 			{
 				var manager = this.GetManager(typeof(MaterialManager));
 				return manager == null ? null : manager as MaterialManager;
-			}
-		}
-
-		/// <summary>
-		/// <see cref="Manager{T}"/> that manages <see cref="PresetRide"/>.
-		/// </summary>
-		public PresetRideManager PresetRides
-		{
-			get
-			{
-				var manager = this.GetManager(typeof(PresetRideManager));
-				return manager == null ? null : manager as PresetRideManager;
-			}
-		}
-
-		/// <summary>
-		/// <see cref="Manager{T}"/> that manages <see cref="PresetSkin"/>.
-		/// </summary>
-		public PresetSkinManager PresetSkins
-		{
-			get
-			{
-				var manager = this.GetManager(typeof(PresetSkinManager));
-				return manager == null ? null : manager as PresetSkinManager;
 			}
 		}
 

@@ -124,7 +124,7 @@ namespace Nikki.Core
 		/// <summary>
 		/// Map of all car part labels to <see cref="eCarPartAttribType"/>.
 		/// </summary>
-		public static Dictionary<uint, eCarPartAttribType> CarPartKeys { get; set; } = new Dictionary<uint, eCarPartAttribType>()
+		public static Dictionary<uint, eCarPartAttribType> CarPartKeys => new Dictionary<uint, eCarPartAttribType>()
 		{
 			// Boolean Attributes
 			{ 0x03B83203, eCarPartAttribType.Boolean }, // STOCK
@@ -256,6 +256,58 @@ namespace Nikki.Core
 			{ 0xD68A7BAB, eCarPartAttribType.Integer }, // 0xD68A7BAB
 			{ 0xE80A3B62, eCarPartAttribType.Integer }, // 0xE80A3B62
 			{ 0xEB0101E2, eCarPartAttribType.Integer }, // 0xEB0101E2
+		};
+
+		/// <summary>
+		/// Map of all block to alignments.
+		/// </summary>
+		internal static Dictionary<eBlockID, Alignment> BlockToAlignment => new Dictionary<eBlockID, Alignment>()
+		{
+			{ eBlockID.FEngFont,          Alignment.Default },
+			{ eBlockID.FEngFiles,         Alignment.Default },
+			{ eBlockID.FNGCompress,       Alignment.Default },
+			{ eBlockID.PresetRides,       Alignment.Default },
+			{ eBlockID.Magazines,         Alignment.Default },
+			{ eBlockID.WideDecals,        Alignment.Default },
+			{ eBlockID.PresetSkins,       Alignment.Default },
+			{ eBlockID.Tracks,            Alignment.Default },
+			{ eBlockID.CarTypeInfos,      Alignment.Default },
+			{ eBlockID.CarSkins,          Alignment.Default },
+			{ eBlockID.CarInfoAnimHookup, Alignment.Default },
+			{ eBlockID.StyleMomentsInfo,  new Alignment(0x80, Alignment.eAlignType.Modular) },
+			{ eBlockID.DifficultyInfo,    new Alignment(0x80, Alignment.eAlignType.Modular) },
+			{ eBlockID.AcidEffects,       new Alignment(0x80, Alignment.eAlignType.Modular) },
+			{ eBlockID.AcidEmmiters,      new Alignment(0x80, Alignment.eAlignType.Modular) },
+			{ eBlockID.STRBlocks,         Alignment.Default },
+			{ eBlockID.Subtitles,         Alignment.Default },
+			{ eBlockID.MovieCatalog,      new Alignment(0x80, Alignment.eAlignType.Modular) },
+			{ eBlockID.ICECatalog,        new Alignment(0x80, Alignment.eAlignType.Modular) },
+			{ eBlockID.TPKSettings,       new Alignment(0x80, Alignment.eAlignType.Modular) },
+			{ eBlockID.SkinRegionDB,      Alignment.Default },
+			{ eBlockID.VinylMetaData,     Alignment.Default },
+			{ eBlockID.Materials,         Alignment.Default },
+			{ eBlockID.EAGLSkeleton,      new Alignment(0x80, Alignment.eAlignType.Modular) },
+			{ eBlockID.EAGLAnimations,    Alignment.Default },
+			{ eBlockID.DDSTexture,        new Alignment(0x80, Alignment.eAlignType.Modular) },
+			{ eBlockID.PCAWater0,         new Alignment(0x80, Alignment.eAlignType.Modular) },
+			{ eBlockID.ColorCube,         Alignment.Default },
+			{ eBlockID.GCareer,           new Alignment(0x80, Alignment.eAlignType.Modular) },
+			{ eBlockID.AnimDirectory,     Alignment.Default },
+			{ eBlockID.IceCameraPart0,    Alignment.Default },
+			{ eBlockID.IceCameraPart1,    Alignment.Default },
+			{ eBlockID.IceCameraPart2,    Alignment.Default },
+			{ eBlockID.IceCameraPart3,    Alignment.Default },
+			{ eBlockID.IceCameraPart4,    Alignment.Default },
+			{ eBlockID.IceSettings,       Alignment.Default },
+			{ eBlockID.SoundStichs,       Alignment.Default },
+			{ eBlockID.EventSequence,     new Alignment(0x08, Alignment.eAlignType.Actual) },
+			{ eBlockID.DBCarBounds,       new Alignment(0x08, Alignment.eAlignType.Actual) },
+			{ eBlockID.VinylSystem,       new Alignment(0x800, Alignment.eAlignType.Modular) },
+			{ eBlockID.LimitsTable,       Alignment.Default },
+			{ eBlockID.Geometry,          new Alignment(0x80, Alignment.eAlignType.Modular) },
+			{ eBlockID.SpecialEffects,    new Alignment(0x80, Alignment.eAlignType.Modular) },
+			{ eBlockID.PCAWeights,        new Alignment(0x80, Alignment.eAlignType.Modular) },
+			{ eBlockID.TPKBlocks,         new Alignment(0x80, Alignment.eAlignType.Modular) },
 		};
 	}
 }

@@ -42,18 +42,6 @@ namespace Nikki.Support.MostWanted
 		}
 
 		/// <summary>
-		/// <see cref="Manager{T}"/> that manages <see cref="SlotOverride"/>.
-		/// </summary>
-		public SlotOverrideManager CarSlotInfos
-		{
-			get
-			{
-				var manager = this.GetManager(typeof(SlotOverrideManager));
-				return manager == null ? null : manager as SlotOverrideManager;
-			}
-		}
-
-		/// <summary>
 		/// <see cref="Manager{T}"/> that manages <see cref="CarTypeInfo"/>.
 		/// </summary>
 		public CarTypeInfoManager CarTypeInfos
@@ -122,6 +110,18 @@ namespace Nikki.Support.MostWanted
 			{
 				var manager = this.GetManager(typeof(PresetRideManager));
 				return manager == null ? null : manager as PresetRideManager;
+			}
+		}
+
+		/// <summary>
+		/// <see cref="Manager{T}"/> that manages <see cref="SlotOverride"/>.
+		/// </summary>
+		public SlotOverrideManager SlotOverrides
+		{
+			get
+			{
+				var manager = this.GetManager(typeof(SlotOverrideManager));
+				return manager == null ? null : manager as SlotOverrideManager;
 			}
 		}
 

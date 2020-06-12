@@ -205,7 +205,7 @@ namespace Nikki.Support.Prostreet.Class
             bw.Write(this.SteeringWheelRenderingZ);
             bw.Write(this.SteeringWheelRenderingW);
 
-            bw.Write(this.Index);
+            bw.Write(this.BinKey);
             bw.WriteEnum(this.UsageType);
             bw.WriteEnum(this.MemoryType);
 
@@ -282,7 +282,7 @@ namespace Nikki.Support.Prostreet.Class
             this.SteeringWheelRenderingZ = br.ReadSingle();
             this.SteeringWheelRenderingW = br.ReadSingle();
 
-            this.Index = br.ReadInt32();
+            br.BaseStream.Position += 4;
             this.UsageType = br.ReadEnum<eUsageType>();
             this.MemoryType = br.ReadEnum<eMemoryType>();
 

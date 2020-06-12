@@ -78,13 +78,14 @@ namespace Nikki.Support.Carbon.Framework
 				var size = br.ReadInt32();
 				var next = eBlockID.Padding;
 
-				if (br.BaseStream.Position < br.BaseStream.Length)
+				if (br.BaseStream.Position + 4 < br.BaseStream.Length)
 				{
 
 					next = br.ReadEnum<eBlockID>();
 					br.BaseStream.Position -= 4;
 
 				}
+				else next = 0;
 
 				switch (id)
 				{
@@ -112,33 +113,21 @@ namespace Nikki.Support.Carbon.Framework
 						br.BaseStream.Position += size;
 						break;
 
-					case eBlockID.Geometry:
-					case eBlockID.PCAWeight:
-					case eBlockID.DDSTexture:
-					case eBlockID.SpecialEffects:
-						BinarySaver.GeneratePadding(bw, this._options.Watermark,
-							new Alignment(0x80, Alignment.eAlignType.Modular));
-						goto default;
-
-					case eBlockID.ColorCube:
-					case eBlockID.LimitsTable:
-						BinarySaver.GeneratePadding(bw, this._options.Watermark,
-							new Alignment(0x10, Alignment.eAlignType.Modular));
-						goto default;
-
-					case eBlockID.EventSequence:
-						BinarySaver.GeneratePadding(bw, this._options.Watermark,
-							new Alignment(0x8, Alignment.eAlignType.Actual));
-						goto default;
-
 					default:
+						if (Map.BlockToAlignment.TryGetValue(id, out var align))
+						{
+
+							BinarySaver.GeneratePadding(bw, this._options.Watermark, align);
+
+						}
+
 						bw.WriteEnum(id);
 						bw.Write(size);
 						bw.Write(br.ReadBytes(size));
 						break;
 
 				}
-			
+
 			}
 		}
 	}

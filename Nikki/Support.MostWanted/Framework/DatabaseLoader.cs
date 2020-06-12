@@ -66,7 +66,7 @@ namespace Nikki.Support.MostWanted.Framework
 			this._db.PresetRides.Disassemble(br, this.presetrides);
 			this._db.FNGroups.Disassemble(br, this.fngroups);
 			this._db.SlotTypes.Disassemble(br, this.slottypes);
-			this._db.CarSlotInfos.Disassemble(br, this.slottypes);
+			this._db.SlotOverrides.Disassemble(br, this.slottypes);
 			this.ProcessCarAnimations(br);
 
 			return true;
