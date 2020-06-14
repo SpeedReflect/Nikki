@@ -319,6 +319,7 @@ namespace Nikki.Support.MostWanted.Class
             // Get texture name
             br.BaseStream.Position += 0xC;
             this._collection_name = br.ReadNullTermUTF8(0x18);
+            this._collection_name.BinHash();
 
             this._binkey = br.ReadUInt32();
             this.ClassKey = br.ReadUInt32();

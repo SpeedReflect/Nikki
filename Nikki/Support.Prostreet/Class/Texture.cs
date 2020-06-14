@@ -331,6 +331,7 @@ namespace Nikki.Support.Prostreet.Class
             // Get texture name
             int len = br.ReadByte();
             this._collection_name = br.ReadNullTermUTF8(len);
+            this._collection_name.BinHash();
         }
 
         /// <summary>

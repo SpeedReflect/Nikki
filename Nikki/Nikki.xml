@@ -25403,6 +25403,11 @@
             Settings data related to this <seealso cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Shared.Class.TPKBlock.Animations">
+            <summary>
+            Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/> of this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Shared.Class.TPKBlock.CollectionName">
             <summary>
             Collection name of the variable.
@@ -25426,11 +25431,6 @@
         <member name="P:Nikki.Support.Shared.Class.TPKBlock.VltKey">
             <summary>
             Vault memory hash of the collection name.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Shared.Class.TPKBlock.Index">
-            <summary>
-            Index of the <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> in the Global data.
             </summary>
         </member>
         <member name="M:Nikki.Support.Shared.Class.TPKBlock.MemoryCast(System.String)">
@@ -25559,6 +25559,12 @@
             <param name="offslot">Offslot of the texture to be parsed</param>
             <returns>Decompressed texture valid to the current support.</returns>
         </member>
+        <member name="M:Nikki.Support.Shared.Class.TPKBlock.GetAnimations(System.IO.BinaryReader)">
+            <summary>
+            Gets list of all animations in the <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="M:Nikki.Support.Shared.Class.TPKBlock.Get1Part1(System.IO.BinaryWriter)">
             <summary>
             Assembles partial 1 part1 of the tpk block.
@@ -25607,6 +25613,12 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
             <param name="thisOffset">Offset of this TPK in BinaryWriter passed.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.TPKBlock.Get1PartAnim(System.IO.BinaryWriter)">
+            <summary>
+            Assembles partial 1 animation block.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
         <member name="T:Nikki.Support.Shared.Class.Track">
             <summary>
@@ -26499,6 +26511,59 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Parts.SunParts.SunLayer.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot">
+            <summary>
+            A unit animation block for <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.AnimSlot.Name">
+            <summary>
+            Name of this <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.AnimSlot.BinKey">
+            <summary>
+            Binary memory hash of the name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.AnimSlot.FramesPerSecond">
+            <summary>
+            Number of frames shown per second.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.AnimSlot.TimeBase">
+            <summary>
+            Time base of this <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.AnimSlot.FrameTextures">
+            <summary>
+            Frame textures of this <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.TPKParts.AnimSlot.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.TPKParts.AnimSlot.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.TPKParts.AnimSlot.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.TPKParts.AnimSlot.Write(System.IO.BinaryWriter)">
             <summary>
             Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
             </summary>

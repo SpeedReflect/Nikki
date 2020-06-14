@@ -85,7 +85,7 @@
         DBCarParts         = 0x80034602, // varies
         GCareer            = 0x80034A10, // 0x80 Modular
         AnimDirectory      = 0x80037050, // 0x10 Modular
-        QuickSpline        = 0x8003B000, // ????
+        QuickSpline        = 0x8003B000, // 0x80 Modular
         IceCameraPart0     = 0x8003B200, // 0x10 Modular
         IceCameraPart1     = 0x8003B201, // 0x10 Modular
         IceCameraPart2     = 0x8003B202, // 0x10 Modular

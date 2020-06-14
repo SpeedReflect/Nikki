@@ -163,6 +163,7 @@ namespace Nikki.Support.MostWanted.Class
             this.Get1Part2(bw);
             this.Get1Part4(bw);
             this.Get1Part5(bw);
+            this.Get1PartAnim(bw);
             bw.BaseStream.Position = position_1 - 4;
             bw.Write((int)(bw.BaseStream.Length - position_1));
             bw.BaseStream.Position = bw.BaseStream.Length;
@@ -320,6 +321,14 @@ namespace Nikki.Support.MostWanted.Class
                 }
             
             }
+
+            if (PartOffsets[8] != max)
+			{
+
+                br.BaseStream.Position = PartOffsets[8];
+                this.GetAnimations(br);
+
+			}
 
             br.BaseStream.Position = Final;
         }
@@ -527,7 +536,7 @@ namespace Nikki.Support.MostWanted.Class
         /// <returns>Array of all offsets.</returns>
         protected override long[] FindOffsets(BinaryReader br)
         {
-            var offsets = new long[8] { max, max, max, max, max, max, max, max };
+            var offsets = new long[9] { max, max, max, max, max, max, max, max, max };
             var ReaderID = eBlockID.Padding;
             int InfoBlockSize = 0;
             int DataBlockSize = 0;
@@ -575,6 +584,10 @@ namespace Nikki.Support.MostWanted.Class
 
                     case eBlockID.TPK_InfoPart5:
                         offsets[4] = br.BaseStream.Position;
+                        goto default;
+
+                    case eBlockID.TPK_BinData:
+                        offsets[8] = br.BaseStream.Position;
                         goto default;
 
                     default:

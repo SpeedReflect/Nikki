@@ -9,6 +9,7 @@ using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Shared.Parts.TPKParts;
+using CoreExtensions.IO;
 using CoreExtensions.Conversions;
 
 
@@ -94,6 +95,12 @@ namespace Nikki.Support.Shared.Class
         [Browsable(false)]
         public byte[] SettingData { get; set; }
 
+        /// <summary>
+        /// Represents all <see cref="AnimSlot"/> of this <see cref="TPKBlock"/>.
+        /// </summary>
+        [Category("Primary")]
+        public List<AnimSlot> Animations { get; set; } = new List<AnimSlot>();
+
         #endregion
 
         #region Main Properties
@@ -126,14 +133,6 @@ namespace Nikki.Support.Shared.Class
         [Category("Main")]
         [TypeConverter(typeof(HexConverter))]
         public uint VltKey => this.CollectionName.VltHash();
-
-        /// <summary>
-        /// Index of the <see cref="TPKBlock"/> in the Global data.
-        /// </summary>
-        [Browsable(false)]
-        public int Index { get; set; }
-
-        internal string Watermark { get; set; } = String.Empty;
 
         #endregion
 
@@ -272,6 +271,40 @@ namespace Nikki.Support.Shared.Class
         /// <returns>Decompressed texture valid to the current support.</returns>
         protected abstract void ParseCompTexture(BinaryReader br, OffSlot offslot);
 
+        /// <summary>
+        /// Gets list of all animations in the <see cref="TPKBlock"/>.
+        /// </summary>
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        protected virtual void GetAnimations(BinaryReader br)
+		{
+            var size = br.ReadInt32();
+            var offset = br.BaseStream.Position;
+
+            while (br.BaseStream.Position < offset + size)
+			{
+
+                var id = br.ReadEnum<eBlockID>();
+                var to = br.ReadInt32();
+
+                if (id != eBlockID.TPK_AnimBlock)
+				{
+
+                    br.BaseStream.Position += to;
+                    continue;
+
+				}
+                else
+				{
+
+                    var anim = new AnimSlot();
+                    anim.Read(br);
+                    this.Animations.Add(anim);
+
+				}
+
+			}
+		}
+
         #endregion
 
         #region Writing Methods
@@ -324,6 +357,31 @@ namespace Nikki.Support.Shared.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         /// <param name="thisOffset">Offset of this TPK in BinaryWriter passed.</param>
         protected abstract List<OffSlot> Get2CompressedPart2(BinaryWriter bw, int thisOffset);
+
+        /// <summary>
+        /// Assembles partial 1 animation block.
+        /// </summary>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        protected virtual void Get1PartAnim(BinaryWriter bw)
+		{
+
+            if (this.Animations.Count == 0) return;
+            bw.WriteEnum(eBlockID.TPK_BinData);
+            bw.Write(-1);
+            var start = bw.BaseStream.Position;
+
+            foreach (var anim in this.Animations)
+			{
+
+                anim.Write(bw);
+
+			}
+
+            var end = bw.BaseStream.Position;
+            bw.BaseStream.Position = start - 4;
+            bw.Write((int)(end - start));
+            bw.BaseStream.Position = end;
+		}
 
         #endregion
     }
