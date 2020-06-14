@@ -1,5 +1,5 @@
 ﻿using System;
-using Nikki.Reflection.ID;
+using Nikki.Reflection.Enum;
 
 
 
@@ -19,7 +19,7 @@ namespace Nikki.Utils.EA
         public static unsafe byte[] Decompress(byte[] fng, uint ID)
         {
             // return if already decompressed
-            if (ID == Global.FEngFiles) return fng;
+            if (ID == (uint)eBlockID.FEngFiles) return fng;
 
             byte[] InterData = new byte[fng.Length - 4];
             Array.Copy(fng, 4, InterData, 0, fng.Length - 4);

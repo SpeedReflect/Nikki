@@ -7,7 +7,7 @@ using Nikki.Reflection.Enum;
 using Nikki.Reflection.Enum.CP;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
-using Nikki.Reflection.Enum.SlotID;
+using Nikki.Reflection.Enum.PartID;
 using Nikki.Support.Shared.Parts.CarParts;
 using CoreExtensions.IO;
 using CoreExtensions.Conversions;
@@ -64,7 +64,7 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// Part ID of this <see cref="PartIDAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public eSlotProstreet ID { get; set; }
+		public ePartProstreet ID { get; set; }
 
 		/// <summary>
 		/// Initializes new instance of <see cref="PartIDAttribute"/>.
@@ -82,11 +82,11 @@ namespace Nikki.Support.Prostreet.Attributes
 			try
 			{
 				this.Level = (byte)value.ReinterpretCast(typeof(byte));
-				this.ID = eSlotProstreet.INVALID;
+				this.ID = ePartProstreet.INVALID;
 			}
 			catch (Exception)
 			{
-				this.ID = eSlotProstreet.INVALID;
+				this.ID = ePartProstreet.INVALID;
 				this.Level = 0;
 			}
 		}
@@ -113,7 +113,7 @@ namespace Nikki.Support.Prostreet.Attributes
 		public override void Disassemble(BinaryReader br, BinaryReader str_reader)
 		{
 			this.Level = br.ReadByte();
-			this.ID = br.ReadEnum<eSlotProstreet>();
+			this.ID = br.ReadEnum<ePartProstreet>();
 			br.BaseStream.Position += 2;
 		}
 

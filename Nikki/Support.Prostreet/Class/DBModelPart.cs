@@ -78,7 +78,7 @@ namespace Nikki.Support.Prostreet.Class
 		/// <summary>
 		/// List of <see cref="RealCarPart"/>.
 		/// </summary>
-		//[Browsable(false)]
+		[Browsable(false)]
 		public override List<RealCarPart> ModelCarParts { get; set; }
 
 		#endregion

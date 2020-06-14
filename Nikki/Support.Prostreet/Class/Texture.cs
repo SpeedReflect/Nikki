@@ -5,7 +5,7 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Utils.EA;
 using Nikki.Utils.DDS;
-using Nikki.Reflection.ID;
+using Nikki.Reflection;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;

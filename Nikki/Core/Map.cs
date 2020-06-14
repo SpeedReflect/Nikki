@@ -267,7 +267,7 @@ namespace Nikki.Core
 			{ eBlockID.FEngFiles,         Alignment.Default },
 			{ eBlockID.FNGCompress,       Alignment.Default },
 			{ eBlockID.PresetRides,       Alignment.Default },
-			{ eBlockID.Magazines,         Alignment.Default },
+			{ eBlockID.MagazinesFrontend,         Alignment.Default },
 			{ eBlockID.WideDecals,        Alignment.Default },
 			{ eBlockID.PresetSkins,       Alignment.Default },
 			{ eBlockID.Tracks,            Alignment.Default },

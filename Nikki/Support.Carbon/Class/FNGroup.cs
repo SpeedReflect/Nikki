@@ -3,7 +3,7 @@ using System.IO;
 using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils.EA;
-using Nikki.Reflection.ID;
+using Nikki.Reflection.Enum;
 using Nikki.Support.Carbon.Framework;
 using Nikki.Support.Shared.Parts.FNGParts;
 using CoreExtensions.IO;
@@ -82,7 +82,7 @@ namespace Nikki.Support.Carbon.Class
             using var ms = new MemoryStream(this.Data);
             using var writer = new BinaryWriter(ms);
 
-            bw.Write(Global.FEngFiles);
+            bw.WriteEnum(eBlockID.FEngFiles);
             bw.Write(this.Data.Length);
 
             foreach (var color in this._colorinfo)

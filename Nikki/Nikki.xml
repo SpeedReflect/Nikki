@@ -1221,6 +1221,71 @@
             VINYL_L1_COLOR01 as a string.
             </summary>
         </member>
+        <member name="T:Nikki.Reflection.EAComp">
+            <summary>
+            Class of IDs related to <see cref="T:Nikki.Support.Shared.Class.Texture"/> compressions.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.EAComp.P4_08">
+            <summary>
+            PAL4 Compression = 0x4
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.EAComp.P8_08">
+            <summary>
+            PAL8 Compression = 0x8
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.EAComp.RGBA_08">
+            <summary>
+            RGBA Compression = 0x20
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.EAComp.DXT1_08">
+            <summary>
+            DXT1 Compression = 0x22
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.EAComp.DXT3_08">
+            <summary>
+            DXT3 Compression = 0x24
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.EAComp.DXT5_08">
+            <summary>
+            DXT5 Compression = 0x26
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.EAComp.SECRET">
+            <summary>
+            PAL8-64 Compression = 0x81
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.EAComp.P8_32">
+            <summary>
+            PAL8 Compression identifier in Part 5 of <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.EAComp.RGBA_32">
+            <summary>
+            RGBA Compression identifier in Part 5 of <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.EAComp.DXT1_32">
+            <summary>
+            DXT1 Compression identifier in Part 5 of <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.EAComp.DXT3_32">
+            <summary>
+            DXT3 Compression identifier in Part 5 of <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.EAComp.DXT5_32">
+            <summary>
+            DXT5 Compression identifier in Part 5 of <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
+            </summary>
+        </member>
         <member name="T:Nikki.Reflection.Enum.CP.eAttribBool">
             <summary>
             All attribute types for BoolAttribute.
@@ -1951,41 +2016,6 @@
             
             </summary>
         </member>
-        <member name="T:Nikki.Reflection.Enum.eBoundValues">
-            <summary>
-            Enum of default numbers of cars in games.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundValues.MIN_INFO_UNDERGROUND1">
-            <summary>
-            Amount of cars in default Underground 1.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundValues.MIN_INFO_UNDERGROUND2">
-            <summary>
-            Amount of cars in default Underground 2.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundValues.MIN_INFO_MOSTWANTED">
-            <summary>
-            Amount of cars in default Most Wanted.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundValues.MIN_INFO_CARBON">
-            <summary>
-            Amount of cars in default Carbon.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundValues.MIN_INFO_PROSTREET">
-            <summary>
-            Amount of cars in default Prostreet.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundValues.MIN_INFO_UNDERCOVER">
-            <summary>
-            Amount of cars in default Undercover.
-            </summary>
-        </member>
         <member name="T:Nikki.Reflection.Enum.eCameraType">
             <summary>
             Enum of camera types.
@@ -2054,46 +2084,6 @@
         <member name="F:Nikki.Reflection.Enum.eCarAnimLocation.CARANIM_NUM">
             <summary>
             Multiple animations.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eCarbonPaint">
-            <summary>
-            Enum of default paints in Carbon.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarbonPaint.GLOSS">
-            <summary>
-            Gloss paint.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarbonPaint.METALLIC">
-            <summary>
-            Metallic paint.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarbonPaint.CHROME">
-            <summary>
-            Chrome paint.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarbonPaint.CANDY">
-            <summary>
-            Candy paint.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarbonPaint.PEARL">
-            <summary>
-            Pearl paint.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarbonPaint.MATTE">
-            <summary>
-            Matte paint.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarbonPaint.IRIDESCENT">
-            <summary>
-            Iridescent paint.
             </summary>
         </member>
         <member name="T:Nikki.Reflection.Enum.eCareerRaceBehavior">
@@ -2221,511 +2211,6 @@
             Attribute with in-built CPStruct in it.
             </summary>
         </member>
-        <member name="T:Nikki.Reflection.Enum.eCarPartLabels">
-            <summary>
-            Enum of all car part labels.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels._0x04B39858">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels._0x10C98090">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels._0x1B0EA1A9">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels._0x5412A1D9">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels._0x6509EC92">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels._0x65F58556">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels._0x6BA02C05">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels._0x87557E1E">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels._0xB5548ED7">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels._0xCE7D8DB5">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels._0xD68A7BAB">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels._0xE80A3B62">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels._0xEB0101E2">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels._0xEBB03E66">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.ALPHA">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.ALPHA2">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.ANIMSTYLE">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.BLEND">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.BLUE">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.BLUE2">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.CARBONFIBRE">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.CENTER">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.COLOR0ID">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.COLOR1ID">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.COLOR2ID">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.COLOR3ID">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.CV">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.DAMAGELEVEL">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.DISPBLUE">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.DISPGREEN">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.DISPRED">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.EXCLUDE_SUV">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.EXCLUDE_UG1">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.EXCLUDE_UG2">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.FULLBODY">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.GLOSS">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.GREEN">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.GREEN2">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.GROUPLANGUAGEHASH">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.HOODEMITTER">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.HOODHUE">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.HOODLEFT">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.HOODLUM">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.HOODRIGHT">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.HOODSAT">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.HOODUNDER">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.HUDINDEX">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.KITNUMBER">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.LANGUAGEHASH">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.LOD_BASE_NAME">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.LOD_CHARACTERS_OFFSET">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.LOD_NAME_PREFIX_NAMEHASH">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.LOD_NAME_PREFIX_SELECTOR">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.MAT0">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.MAT1">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.MAT2">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.MAT3">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.MAT4">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.MAT5">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.MAT6">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.MAT7">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.MATNAMEA">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.MATNAMEB">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.MAX_LOD">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.MIRROR">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.MODEL_TABLE_OFFSET">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.MORPHTARGET_NUM">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.NAME">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.NAME_OFFSET">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.NUM_DECALS">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.NUMCOLOURS">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.NUMREMAPCOLOURS">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.ONLINE">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.PAINTGROUP">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.PART_NAME_BASE_HASH">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.PART_NAME_OFFSETS">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.PART_NAME_SELECTOR">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.PARTID_UPGRADE_GROUP">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.RED">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.RED2">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.REMAP">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.SHAPE">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.SIZE">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.SPECIFICCARNAME">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.SPINNER_TEXTURE">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.SPINNEROFFSET">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.STOCK">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.STOCK_MATERIAL">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.SWATCH">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.TEXTURE">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.TIREHUE">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.TIRELUM">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.TIRESAT">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.USEMARKER1">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.USEMARKER2">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.VERTSPLIT">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.VINYLLANGUAGEHASH">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.WHEELEMITTER">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.WHEELLEFT">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarPartLabels.WHEELRIGHT">
-             <summary>
-            
-             </summary>
-        </member>
         <member name="T:Nikki.Reflection.Enum.eCarSkinClass">
             <summary>
             Enum of CarSkin types in Underground 2.
@@ -2764,26 +2249,6 @@
         <member name="F:Nikki.Reflection.Enum.eCarWheelType.REAR_LEFT">
             <summary>
             Rear left wheel id
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eDecalType">
-            <summary>
-            Enum of applied decal types.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eDecalType.NONE">
-            <summary>
-            No decals.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eDecalType.MEDIUM">
-            <summary>
-            Medium decals.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eDecalType.SMALL">
-            <summary>
-            Small decals.
             </summary>
         </member>
         <member name="T:Nikki.Reflection.Enum.eDriftType">
@@ -2991,41 +2456,6 @@
             HugeTraffic Memory Type.
             </summary>
         </member>
-        <member name="T:Nikki.Reflection.Enum.eMirrorTypes">
-            <summary>
-            Enum of all mirror types in Underground 2.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eMirrorTypes.MIRRORS">
-            <summary>
-            Regular mirrors.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eMirrorTypes.MIRRORS_BODY">
-            <summary>
-            Mirrors for cars with wide body.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eMirrorTypes.MIRRORS_POST">
-            <summary>
-            Special mirrors.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eMirrorTypes.MIRRORS_SUV">
-            <summary>
-            Murrors for SUV cars.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eMirrorTypes.MIRRORS_HUMMER">
-            <summary>
-            Mirrors for hummer cars.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eMirrorTypes.MIRRORS_NONE">
-            <summary>
-            No mirrors.
-            </summary>
-        </member>
         <member name="T:Nikki.Reflection.Enum.ePartUnlockReq">
             <summary>
             Enum of part unlock requirements in Underground 2.
@@ -3186,76 +2616,6 @@
             
             </summary>
         </member>
-        <member name="T:Nikki.Reflection.Enum.eSpoiler">
-            <summary>
-            Enum of possible spoiler types.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSpoiler.SPOILER">
-            <summary>
-            Regular spoilers.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSpoiler.SPOILER_HATCH">
-            <summary>
-            Spoilers for hatchbacks.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSpoiler.SPOILER_PORSCHES">
-            <summary>
-            Spoilers for cars with porsche-like trunks.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSpoiler.SPOILER_CARRERA">
-            <summary>
-            Spoilers for cars with wide trunks.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSpoiler.SPOILER_SUV">
-            <summary>
-            Spoilers for SUV cars.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSpoiler.SPOILER_NONE">
-            <summary>
-            No spoilers.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eSpoilerAS2">
-            <summary>
-            Enum of possible autosculpt spoiler types.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSpoilerAS2.SPOILER_AS2">
-            <summary>
-            Regular autosculpt spoilers.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSpoilerAS2.SPOILER_HATCH_AS2">
-            <summary>
-            Autosculpt spoilers for hatchbacks.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSpoilerAS2.SPOILER_PORSCHES_AS2">
-            <summary>
-            Autosculpt spoilers for cars with porsche-like trunks.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSpoilerAS2.SPOILER_CARRERA_AS2">
-            <summary>
-            Autosculpt spoilers for cars with wide trunks.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSpoilerAS2.SPOILER_SUV_AS2">
-            <summary>
-            Autosculpt spoilers for SUV cars.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSpoilerAS2.SPOILER_NONE_AS2">
-            <summary>
-            No autosculpt spoilers.
-            </summary>
-        </member>
         <member name="T:Nikki.Reflection.Enum.eSponsorRaceType">
             <summary>
             Enum of sponsor race types in Underground 2.
@@ -3289,46 +2649,6 @@
         <member name="F:Nikki.Reflection.Enum.eSponsorRaceType.StreetX">
             <summary>
             
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eSTypes">
-            <summary>
-            Enum of possible spoilers for preset rides.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSTypes.NULL">
-            <summary>
-            Nullified spoiler.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSTypes.STOCK">
-            <summary>
-            Stock spoiler.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSTypes.BASE">
-            <summary>
-            Regular spoiler.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSTypes._HATCH">
-            <summary>
-            Hatchback-type spoiler.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSTypes._PORSCHES">
-            <summary>
-            Porsche-type spoiler.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSTypes._CARRERA">
-            <summary>
-            Carrera-type spoiler.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSTypes._SUV">
-            <summary>
-            SUV-type spoiler.
             </summary>
         </member>
         <member name="T:Nikki.Reflection.Enum.eSunAlpha">
@@ -3811,36 +3131,6 @@
             
             </summary>
         </member>
-        <member name="T:Nikki.Reflection.Enum.eWideDecalType">
-            <summary>
-            Enum of wide decal types.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eWideDecalType.NONE">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eWideDecalType.WIDE1">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eWideDecalType.WIDE2">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eWideDecalType.WIDE3">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eWideDecalType.WIDE4">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Nikki.Reflection.Enum.eWorldChallengeType">
             <summary>
             Enum of world challenge types in Underground 2.
@@ -3899,6 +3189,2691 @@
         <member name="F:Nikki.Reflection.Enum.eWorldShopType.UNIQUE">
             <summary>
             Uniques shop.
+            </summary>
+        </member>
+        <member name="T:Nikki.Reflection.Enum.PartID.ePartCarbon">
+            <summary>
+            Part IDs enum for Carbon support.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.BASE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_FRONT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_BODY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_COP_LIGHTS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_COP_SPOILER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_FRONT_WHEEL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_LEFT_BRAKELIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_RIGHT_BRAKELIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_LEFT_HEADLIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_RIGHT_HEADLIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_HOOD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_BUSHGUARD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_FRONT_BUMPER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_RIGHT_DOOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_RIGHT_REAR_DOOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_TRUNK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_REAR_BUMPER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_REAR_LEFT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_FRONT_LEFT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_FRONT_RIGHT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_REAR_RIGHT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_LEFT_DOOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_0_LEFT_REAR_DOOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.BODY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.FRONT_BRAKE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.FRONT_ROTOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.FRONT_LEFT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.FRONT_RIGHT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.FRONT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.INTERIOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.LEFT_BRAKELIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.LEFT_BRAKELIGHT_GLASS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.LEFT_HEADLIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.LEFT_HEADLIGHT_GLASS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.LEFT_SIDE_MIRROR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.REAR_BRAKE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.REAR_ROTOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.REAR_LEFT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.REAR_RIGHT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.REAR_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.RIGHT_BRAKELIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.RIGHT_BRAKELIGHT_GLASS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.RIGHT_HEADLIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.RIGHT_HEADLIGHT_GLASS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.RIGHT_SIDE_MIRROR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DRIVER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.STEERINGWHEEL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.EXHAUST">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.SPOILER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.UNIVERSAL_SPOILER_BASE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_FRONT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_FRONT_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_FRONT_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_REAR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_REAR_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DAMAGE_REAR_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.ATTACHMENT0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.ATTACHMENT1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.ATTACHMENT2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.ATTACHMENT3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.ATTACHMENT4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.ATTACHMENT5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.ATTACHMENT6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.ATTACHMENT7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.ATTACHMENT8">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.ATTACHMENT9">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.ATTACHMENT10">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.ATTACHMENT11">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.ATTACHMENT12">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.ATTACHMENT13">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.ATTACHMENT14">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.ATTACHMENT15">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.FRONT_BUMPER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.FRONT_BUMPER_BADGING_SET">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.REAR_BUMPER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.REAR_BUMPER_BADGING_SET">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.ROOF">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.ROOFSCOOP">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.HOOD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.SKIRT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.HEADLIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.BRAKELIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DOOR_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DOOR_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.FRONT_WHEEL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.REAR_WHEEL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.LICENSE_PLATE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DOORLINE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DECAL_FRONT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DECAL_REAR_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.BASE_PAINT">
+            <summary>
+            
+            </summary>     
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.BODY_PAINT_GROUP">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.BODY_PAINT_SWATCH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.VINYL_SPECIFIC">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.VINYL_GENERIC">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.VECTORVINYL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.PAINT_RIM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.WHEEL_PAINT_GROUP">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.WHEEL_PAINT_SWATCH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.VINYL_COLOUR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DECAL_FRONT_WINDOW_TEX0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DECAL_REAR_WINDOW_TEX0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.WINDSHIELD_TINT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.CUSTOM_HUD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.CV">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.MISC">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.INVALID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Nikki.Reflection.Enum.PartID.ePartMostWanted">
+            <summary>
+            Part IDs enum for MostWanted support.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.BASE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_FRONT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_BODY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_COP_LIGHTS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_COP_SPOILER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_FRONT_WHEEL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_LEFT_BRAKELIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_RIGHT_BRAKELIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_LEFT_HEADLIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_RIGHT_HEADLIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_HOOD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_BUSHGUARD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_FRONT_BUMPER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_RIGHT_DOOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_RIGHT_REAR_DOOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_TRUNK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_REAR_BUMPER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_REAR_LEFT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_FRONT_LEFT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_FRONT_RIGHT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_REAR_RIGHT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_LEFT_DOOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE_LEFT_REAR_DOOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.BODY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.FRONT_BRAKE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.FRONT_LEFT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.FRONT_RIGHT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.FRONT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.INTERIOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.LEFT_BRAKELIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.LEFT_BRAKELIGHT_GLASS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.LEFT_HEADLIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.LEFT_HEADLIGHT_GLASS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.LEFT_SIDE_MIRROR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.REAR_BRAKE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.REAR_LEFT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.REAR_RIGHT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.REAR_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.RIGHT_BRAKELIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.RIGHT_BRAKELIGHT_GLASS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.RIGHT_HEADLIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.RIGHT_HEADLIGHT_GLASS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.RIGHT_SIDE_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DRIVER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.SPOILER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.UNIVERSAL_SPOILER_BASE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE0_FRONT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE0_FRONTLEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE0_FRONTRIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE0_REAR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE0_REARLEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DAMAGE0_REARRIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.ATTACHMENT0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.ATTACHMENT1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.ATTACHMENT2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.ATTACHMENT3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.ATTACHMENT4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.ATTACHMENT5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.ATTACHMENT6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.ATTACHMENT7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.ATTACHMENT8">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.ATTACHMENT9">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.ROOF">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.HOOD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.HEADLIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.BRAKELIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.FRONT_WHEEL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.REAR_WHEEL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.SPINNERS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.LICENSE_PLATE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_FRONT_WINDOW_WIDE_MEDIUM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_REAR_WINDOW_WIDE_MEDIUM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_LEFT_DOOR_RECT_MEDIUM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_RIGHT_DOOR_RECT_MEDIUM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_LEFT_QUARTER_RECT_MEDIUM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_RIGHT_QUARTER_RECT_MEDIUM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.BASE_PAINT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.VINYL_LAYER0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.PAINT_RIM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.VINYL_COLOUR0_0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.VINYL_COLOUR0_1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.VINYL_COLOUR0_2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.VINYL_COLOUR0_3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_FRONT_WINDOW_TEX0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_FRONT_WINDOW_TEX1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_FRONT_WINDOW_TEX2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_FRONT_WINDOW_TEX3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_FRONT_WINDOW_TEX4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_FRONT_WINDOW_TEX5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_FRONT_WINDOW_TEX6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_FRONT_WINDOW_TEX7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_REAR_WINDOW_TEX0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_REAR_WINDOW_TEX1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_REAR_WINDOW_TEX2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_REAR_WINDOW_TEX3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_REAR_WINDOW_TEX4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_REAR_WINDOW_TEX5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_REAR_WINDOW_TEX6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_REAR_WINDOW_TEX7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_LEFT_DOOR_TEX0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_LEFT_DOOR_TEX1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_LEFT_DOOR_TEX2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_LEFT_DOOR_TEX3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_LEFT_DOOR_TEX4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_LEFT_DOOR_TEX5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_LEFT_DOOR_TEX6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_LEFT_DOOR_TEX7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_RIGHT_DOOR_TEX0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_RIGHT_DOOR_TEX1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_RIGHT_DOOR_TEX2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_RIGHT_DOOR_TEX3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_RIGHT_DOOR_TEX4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_RIGHT_DOOR_TEX5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_RIGHT_DOOR_TEX6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_RIGHT_DOOR_TEX7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_LEFT_QUARTER_TEX0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_LEFT_QUARTER_TEX1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_LEFT_QUARTER_TEX2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_LEFT_QUARTER_TEX3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_LEFT_QUARTER_TEX4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_LEFT_QUARTER_TEX5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_LEFT_QUARTER_TEX6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_LEFT_QUARTER_TEX7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_RIGHT_QUARTER_TEX0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_RIGHT_QUARTER_TEX1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_RIGHT_QUARTER_TEX2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_RIGHT_QUARTER_TEX3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_RIGHT_QUARTER_TEX4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_RIGHT_QUARTER_TEX5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_RIGHT_QUARTER_TEX6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.DECAL_RIGHT_QUARTER_TEX7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.WINDOW_TINT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.CUSTOM_HUD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.HUD_BACKING_COLOUR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.HUD_NEEDLE_COLOUR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.HUD_CHARACTER_COLOUR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.CV">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.WHEEL_MANUFACTURER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.MISC">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartMostWanted.INVALID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Nikki.Reflection.Enum.PartID.ePartProstreet">
+            <summary>
+            Part IDs enum for Prostreet support.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BADGING_BUMPER_SET_FRONT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BADGING_BUMPER_SET_REAR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BADGING_FENDER_FRONT_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BADGING_FENDER_FRONT_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BADGING_FENDER_REAR_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BADGING_FENDER_REAR_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BADGING_TRUNK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BASE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BODY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BODY_DOORLINE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BRAKE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BRAKELIGHT_GLASS_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BRAKELIGHT_GLASS_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BRAKELIGHT_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BRAKELIGHT_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BRAKEROTOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BUMPER_FRONT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BUMPER_FRONT_EXTRA">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BUMPER_REAR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BUMPER_REAR_EXTRA">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_BODY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_BRAKELIGHT_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_BRAKELIGHT_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_BUMPER_FRONT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_BUMPER_REAR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_DOOR_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_DOOR_REAR_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_DOOR_REAR_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_DOOR_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_FENDER_FRONT_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_FENDER_FRONT_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_HEADLIGHT_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_HEADLIGHT_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_HOOD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_SIDEMIRROR_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_SIDEMIRROR_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_TRUNK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_WINDOW_FRONT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_WINDOW_FRONT_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_WINDOW_FRONT_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_WINDOW_REAR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_WINDOW_REAR_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE_WINDOW_REAR_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE0_FRONT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE0_FRONTLEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE0_FRONTRIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE0_REAR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE0_REARLEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DAMAGE0_REARRIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DECAL_FRONT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DECAL_REAR_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DOOR_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DOOR_REAR_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DOOR_REAR_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DOOR_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DOORHANDLE_FRONT_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DOORHANDLE_FRONT_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DOORHANDLE_REAR_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DOORHANDLE_REAR_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DRIVER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.ENGINE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.EXHAUST">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.FENDER_FRONT_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.FENDER_FRONT_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.HEADLIGHT_GLASS_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.HEADLIGHT_GLASS_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.HEADLIGHT_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.HEADLIGHT_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.HOOD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.INTERIOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.PLATES">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.ROLL_CAGE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.ROOF">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.ROOF_INSIDE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.ROOFSCOOP">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.SEAT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.SIDEMIRROR_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.SIDEMIRROR_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.SKIRT_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.SKIRT_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.SPOILER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.STEERINGWHEEL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.TRUNK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.UNIVERSAL_SPOILER_BASE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.WHEEL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.WHEEL_REAR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.WINDOW_FRONT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.WINDOW_FRONT_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.WINDOW_FRONT_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.WINDOW_REAR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.WINDOW_REAR_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.WINDOW_REAR_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.WINDTUNNEL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.BODY_PAINT_GROUP">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.CHASSIS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.DRIVETRAIN_PACKAGE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.ENGINE_PACKAGE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.FORCED_INDUCTION_PACKAGE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.LIVERY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.NITROUS_PACKAGE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.PAINT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.PAINT_SWATCH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.RIM_PAINT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.ROLLCAGE_PAINT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.ROLLCAGE_PAINT_GROUP">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.SUSPENSION_PACKAGE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.TIRE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.TIRE_PACKAGE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.VECTORVINYL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.VINYL_PAINT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.WHEEL_PAINT_GROUP">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.WINDOW_TINT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.WINDOW_TINT_GROUP">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.NUM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartProstreet.INVALID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Nikki.Reflection.Enum.PartID.ePartUnderground2">
+            <summary>
+            Part IDs enum for Underground2 support.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.BASE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.FRONT_BUMPER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.REAR_BUMPER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.LEFT_SIDE_MIRROR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.RIGHT_SIDE_MIRROR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.BODY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.WIDE_BODY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.ROOF">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.TOP">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.HOOD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.TRUNK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.SKIRT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.SPOILER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.ENGINE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.HEADLIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.BRAKELIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.EXHAUST">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DOOR_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DOOR_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DOOR_PANEL_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DOOR_PANEL_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DOOR_SILL_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DOOR_SILL_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.FENDER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.QUARTER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.HOOD_UNDER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.TRUNK_UNDER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.FRONT_BRAKE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.REAR_BRAKE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.FRONT_WHEEL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.REAR_WHEEL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.SPINNER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.WING_MIRROR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.LICENSE_PLATE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.TRUNK_AUDIO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.TRUNK_AUDIO_COMP_0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.TRUNK_AUDIO_COMP_1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.TRUNK_AUDIO_COMP_2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.TRUNK_AUDIO_COMP_3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.TRUNK_AUDIO_COMP_4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.TRUNK_AUDIO_COMP_5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.TRUNK_AUDIO_COMP_6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.TRUNK_AUDIO_COMP_7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.TRUNK_AUDIO_COMP_8">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.TRUNK_AUDIO_COMP_9">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.TRUNK_AUDIO_COMP_10">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.TRUNK_AUDIO_COMP_11">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DAMAGE_FRONT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DAMAGE_REAR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DAMAGE_LEFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DAMAGE_RIGHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DAMAGE_TOP">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_HOOD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_FRONT_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_REAR_WINDOW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_LEFT_DOOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_RIGHT_DOOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_LEFT_QUARTER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_RIGHT_QUARTER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.WIDEBODY_DECAL_LEFT_DOOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.WIDEBODY_DECAL_RIGHT_DOOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.WIDEBODY_DECAL_LEFT_QUARTER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.WIDEBODY_DECAL_RIGHT_QUARTER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.BASE_PAINT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.VINYL_LAYER0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.VINYL_LAYER1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.VINYL_LAYER2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.VINYL_LAYER3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.PAINT_ENGINE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.PAINT_SPOILER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.PAINT_BRAKE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.PAINT_EXHAUST">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.PAINT_AUDIO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.PAINT_RIM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.PAINT_SPINNER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.PAINT_ROOF">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.PAINT_MIRROR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.VINYL_COLOUR0_0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.VINYL_COLOUR0_1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.VINYL_COLOUR0_2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.VINYL_COLOUR0_3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.VINYL_COLOUR1_0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.VINYL_COLOUR1_1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.VINYL_COLOUR1_2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.VINYL_COLOUR1_3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.VINYL_COLOUR2_0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.VINYL_COLOUR2_1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.VINYL_COLOUR2_2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.VINYL_COLOUR2_3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.VINYL_COLOUR3_0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.VINYL_COLOUR3_1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.VINYL_COLOUR3_2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.VINYL_COLOUR3_3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.KIT_CARBON">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.HOOD_CARBON">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DOOR_CARBON">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.TRUNK_CARBON">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_HOOD_TEX0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_HOOD_TEX1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_HOOD_TEX2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_HOOD_TEX3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_HOOD_TEX4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_HOOD_TEX5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_HOOD_TEX6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_HOOD_TEX7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_FRONT_WINDOW_TEX0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_FRONT_WINDOW_TEX1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_FRONT_WINDOW_TEX2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_FRONT_WINDOW_TEX3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_FRONT_WINDOW_TEX4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_FRONT_WINDOW_TEX5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_FRONT_WINDOW_TEX6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_FRONT_WINDOW_TEX7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_REAR_WINDOW_TEX0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_REAR_WINDOW_TEX1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_REAR_WINDOW_TEX2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_REAR_WINDOW_TEX3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_REAR_WINDOW_TEX4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_REAR_WINDOW_TEX5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_REAR_WINDOW_TEX6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_REAR_WINDOW_TEX7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_LEFT_DOOR_TEX0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_LEFT_DOOR_TEX1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_LEFT_DOOR_TEX2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_LEFT_DOOR_TEX3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_LEFT_DOOR_TEX4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_LEFT_DOOR_TEX5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_LEFT_DOOR_TEX6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_LEFT_DOOR_TEX7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_RIGHT_DOOR_TEX0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_RIGHT_DOOR_TEX1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_RIGHT_DOOR_TEX2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_RIGHT_DOOR_TEX3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_RIGHT_DOOR_TEX4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_RIGHT_DOOR_TEX5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_RIGHT_DOOR_TEX6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_RIGHT_DOOR_TEX7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_LEFT_QUARTER_TEX0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_LEFT_QUARTER_TEX1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_LEFT_QUARTER_TEX2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_LEFT_QUARTER_TEX3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_LEFT_QUARTER_TEX4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_LEFT_QUARTER_TEX5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_LEFT_QUARTER_TEX6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_LEFT_QUARTER_TEX7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_RIGHT_QUARTER_TEX0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_RIGHT_QUARTER_TEX1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_RIGHT_QUARTER_TEX2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_RIGHT_QUARTER_TEX3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_RIGHT_QUARTER_TEX4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_RIGHT_QUARTER_TEX5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_RIGHT_QUARTER_TEX6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DECAL_RIGHT_QUARTER_TEX7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.WINDOW_TINT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.NEON">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.NEON_ENGINE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.NEON_CABIN">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.NEON_TRUNK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.CABIN_NEON_FRAME">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.HEADLIGHT_BULB">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.DOOR_STYLE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.HYDRALICS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.NOS_PURGE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.CUSTOM_HUD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.HUD_BACKING_COLOUR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.HUD_NEEDLE_COLOUR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.HUD_CHARACTER_COLOUR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.CV">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.WHEEL_MANUFACTURER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.MISC">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartUnderground2.INVALID">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Nikki.Reflection.Enum.SlotID.eSlotCarbon">
@@ -6927,401 +8902,6 @@
             with custom message passed.
             </summary>
             <param name="message">Custom message.</param>
-        </member>
-        <member name="T:Nikki.Reflection.ID.CareerInfo">
-            <summary>
-            Class of IDs related to Underground 2 GCareer.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CareerInfo.MAINID">
-            <summary>
-            Main ID
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CareerInfo.STRING_BLOCK">
-            <summary>
-            ID of the string block of GCareer.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CareerInfo.EVENT_BLOCK">
-            <summary>
-            ID of the event block of GCareer.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CareerInfo.SHOP_BLOCK">
-            <summary>
-            ID of the shop block of GCareer.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CareerInfo.BRAND_BLOCK">
-            <summary>
-            ID of the brand block of GCareer.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CareerInfo.PERF_PACK_BLOCK">
-            <summary>
-            ID of the performance packs of GCareer.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CareerInfo.SHOWCASE_BLOCK">
-            <summary>
-            ID of the showcase block of GCareer.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CareerInfo.SMS_MESSAGE_BLOCK">
-            <summary>
-            ID of the sms message block of GCareer.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CareerInfo.STAGE_BLOCK">
-            <summary>
-            ID of the stage block of GCareer.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CareerInfo.SPONSOR_BLOCK">
-            <summary>
-            ID of the sponsor block of GCareer.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CareerInfo.TUNING_PERF_BLOCK">
-            <summary>
-            ID of the performance tuning block of GCareer.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CareerInfo.WORLD_CHAL_BLOCK">
-            <summary>
-            ID of the world challenges block of GCareer.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CareerInfo.PART_UNLOCKS_BLOCK">
-            <summary>
-            ID of part unlocks block of GCareer.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CareerInfo.BANK_TRIGS_BLOCK">
-            <summary>
-            ID of bank triggers of GCareer.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CareerInfo.CAR_UNLOCKS_BLOCK">
-            <summary>
-            ID of car unlocks block of GCareer.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.ID.CarParts">
-            <summary>
-            Class of IDs related to CarPart database.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CarParts.CollisionBound">
-            <summary>
-            ID of a unit collision bound.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CarParts.MAINID">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CarParts.DBCARPART_HEADER">
-            <summary>
-            ID of the header of CarPart database.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CarParts.DBCARPART_ARRAY">
-            <summary>
-            ID of the main array of carparts of CarPart database.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CarParts.DBCARPART_ATTRIBS">
-            <summary>
-            ID of the attributes table of CarPart database.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CarParts.DBCARPART_STRINGS">
-            <summary>
-            ID of the strings block of CarPart database.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CarParts.DBCARPART_STRUCTS">
-            <summary>
-            ID of the model structs table of CarPart database.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CarParts.DBCARPART_MODELS">
-            <summary>
-            ID of the model table of CarPart database.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.CarParts.DBCARPART_OFFSETS">
-            <summary>
-            ID of the attribute offset table of CarPart database.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.ID.EAComp">
-            <summary>
-            Class of IDs related to <see cref="T:Nikki.Support.Shared.Class.Texture"/> compressions.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.EAComp.P4_08">
-            <summary>
-            PAL4 Compression = 0x4
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.EAComp.P8_08">
-            <summary>
-            PAL8 Compression = 0x8
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.EAComp.RGBA_08">
-            <summary>
-            RGBA Compression = 0x20
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.EAComp.DXT1_08">
-            <summary>
-            DXT1 Compression = 0x22
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.EAComp.DXT3_08">
-            <summary>
-            DXT3 Compression = 0x24
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.EAComp.DXT5_08">
-            <summary>
-            DXT5 Compression = 0x26
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.EAComp.SECRET">
-            <summary>
-            PAL8-64 Compression = 0x81
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.EAComp.P8_32">
-            <summary>
-            PAL8 Compression identifier in Part 5 of <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.EAComp.RGBA_32">
-            <summary>
-            RGBA Compression identifier in Part 5 of <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.EAComp.DXT1_32">
-            <summary>
-            DXT1 Compression identifier in Part 5 of <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.EAComp.DXT3_32">
-            <summary>
-            DXT3 Compression identifier in Part 5 of <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.EAComp.DXT5_32">
-            <summary>
-            DXT5 Compression identifier in Part 5 of <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.ID.Global">
-            <summary>
-            Class of IDs related to all global blocks.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.Nikki">
-            <summary>
-            Special Nikki block ID
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.STRBlocks">
-            <summary>
-            ID of <see cref="T:Nikki.Support.Shared.Class.STRBlock"/> block.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.Materials">
-            <summary>
-            ID of <see cref="T:Nikki.Support.Shared.Class.Material"/> block.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.TPKBlocks">
-            <summary>
-            ID of <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> block.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.CarTypeInfos">
-            <summary>
-            ID of <see cref="T:Nikki.Support.Shared.Class.CarTypeInfo"/> block.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.SlotTypes">
-            <summary>
-            ID of SlotTypes block.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.CarParts">
-            <summary>
-            ID of <see cref="T:Nikki.Support.Shared.Class.DBModelPart"/> block.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.SunInfos">
-            <summary>
-            ID of <see cref="T:Nikki.Support.Shared.Class.SunInfo"/> block.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.Tracks">
-            <summary>
-            ID of Tracks block.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.PresetRides">
-            <summary>
-            ID of <see cref="T:Nikki.Support.Shared.Class.PresetRide"/> block.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.PresetSkins">
-            <summary>
-            ID of <see cref="T:Nikki.Support.Shared.Class.PresetSkin"/> block.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.Collisions">
-            <summary>
-            ID of <see cref="T:Nikki.Support.Shared.Class.Collision"/> database block.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.CareerInfo">
-            <summary>
-            ID of Underground 2 GCareer block.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.CarSkins">
-            <summary>
-            ID of Underground 2 CarSkins block.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.FNGCompress">
-            <summary>
-            ID of compressed <see cref="T:Nikki.Support.Shared.Class.FNGroup"/> block.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.FEngFiles">
-            <summary>
-            ID of decompressed <see cref="T:Nikki.Support.Shared.Class.FNGroup"/> block.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.ELabGlobal">
-            <summary>
-            ID of ELabGlobal block.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.AcidEmmiters">
-            <summary>
-            ID of AcidEmmiters block.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.AcidEffects">
-            <summary>
-            ID of <see cref="T:Nikki.Support.Shared.Class.AcidEffect"/> block.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.FloatChunk">
-            <summary>
-            ID of some unknown float chunk.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.LimitsTable">
-            <summary>
-            ID of Carbon limits table.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.Global.TPKSettings">
-            <summary>
-            ID of TPK settings.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.ID.TPK">
-            <summary>
-            Class of IDs related to <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.TPK.MAINID">
-            <summary>
-            Main ID
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.TPK.INFO_BLOCKID">
-            <summary>
-            Info block ID
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.TPK.DATA_BLOCKID">
-            <summary>
-            Data block ID
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.TPK.INFO_PART1_BLOCKID">
-            <summary>
-            Part 1 ID of Info block
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.TPK.INFO_PART2_BLOCKID">
-            <summary>
-            Part 2 ID of Info block
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.TPK.INFO_PART3_BLOCKID">
-            <summary>
-            Part 3 ID of Info block
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.TPK.INFO_PART4_BLOCKID">
-            <summary>
-            Part 4 ID of Info block
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.TPK.INFO_PART5_BLOCKID">
-            <summary>
-            Part 5 ID of Info block
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.TPK.BINDATA_BLOCKID">
-            <summary>
-            Binary data block ID
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.TPK.ANIM_BLOCKID">
-            <summary>
-            Anim block ID
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.TPK.ANIMPART1_BLOCKID">
-            <summary>
-            Part 1 ID of Anim block
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.TPK.ANIMPART2_BLOCKID">
-            <summary>
-            Part 2 ID of Anim block
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.TPK.DATA_PART1_BLOCKID">
-            <summary>
-            Part 1 ID of Data block
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.TPK.DATA_PART2_BLOCKID">
-            <summary>
-            Part 2 ID of Data block
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.TPK.DATA_PART3_BLOCKID">
-            <summary>
-            Part 3 ID of Data block
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.ID.TPK.COMPRESSED_TEXTURE">
-            <summary>
-            Compressed texture identifier.
-            </summary>
         </member>
         <member name="T:Nikki.Reflection.Interface.IAssembly">
             <summary>

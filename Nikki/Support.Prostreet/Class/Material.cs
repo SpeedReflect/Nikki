@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
-using Nikki.Reflection.ID;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Prostreet.Framework;
@@ -536,7 +536,7 @@ namespace Nikki.Support.Prostreet.Class
         public override void Assemble(BinaryWriter bw)
         {
             // Write header of the material
-            bw.Write(Global.Materials);
+            bw.WriteEnum(eBlockID.Materials);
             bw.Write((int)0x11C);
             bw.Write(_Unknown0);
             bw.Write(_Localizer);

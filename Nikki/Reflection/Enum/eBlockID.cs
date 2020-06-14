@@ -10,7 +10,8 @@
         FEngFiles          = 0x00030203, // 0x10 Modular
         FNGCompress        = 0x00030210, // 0x10 Modular
         PresetRides        = 0x00030220, // 0x10 Modular
-        Magazines          = 0x00030230, // 0x10 Modular
+        MagazinesFrontend  = 0x00030230, // 0x10 Modular
+        MagazinesShowcase  = 0x00030231, // 0x10 Modular
         WideDecals         = 0x00030240, // 0x10 Modular
         PresetSkins        = 0x00030250, // 0x08 Actual
         Tracks             = 0x00034201, // 0x10 Modular

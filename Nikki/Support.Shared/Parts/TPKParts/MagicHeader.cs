@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using Nikki.Utils;
-using Nikki.Reflection.ID;
+using Nikki.Reflection.Enum;
 using CoreExtensions.IO;
 
 
@@ -15,7 +15,7 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 		/// <summary>
 		/// Magic ID number 0x55441122.
 		/// </summary>
-		public uint Magic => TPK.COMPRESSED_TEXTURE;
+		public uint Magic => (uint)eBlockID.LZCompressed;
 
 		/// <summary>
 		/// Size of decoded/decompressed data.

@@ -2,7 +2,7 @@
 
 
 
-namespace Nikki.Reflection.ID
+namespace Nikki.Reflection
 {
     /// <summary>
     /// Class of IDs related to <see cref="Texture"/> compressions.
