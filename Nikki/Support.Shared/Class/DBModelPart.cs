@@ -1,8 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Interface;
 using Nikki.Support.Shared.Parts.CarParts;
 
 
@@ -12,7 +14,7 @@ namespace Nikki.Support.Shared.Class
 	/// <summary>
 	/// <see cref="DBModelPart"/> is a collection of car parts of a specific model.
 	/// </summary>
-	public abstract class DBModelPart : Collectable
+	public abstract class DBModelPart : Collectable, IAssembly
 	{
 		#region Main Properties
 
@@ -59,6 +61,30 @@ namespace Nikki.Support.Shared.Class
 		#endregion
 
 		#region Methods
+
+		/// <summary>
+		/// Assembles <see cref="CarTypeInfo"/> into a byte array.
+		/// </summary>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="CarTypeInfo"/> with.</param>
+		public virtual void Assemble(BinaryWriter bw) => throw new NotImplementedException();
+
+		/// <summary>
+		/// Disassembles array into <see cref="CarTypeInfo"/> properties.
+		/// </summary>
+		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="CarTypeInfo"/> with.</param>
+		public virtual void Disassemble(BinaryReader br) => throw new NotImplementedException();
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		/// <param name="filename">File to write data to.</param>
+		public abstract void Serialize(string filename);
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		/// <param name="filename">File to read data from.</param>
+		public abstract void Deserialize(string filename);
 
 		/// <summary>
 		/// Casts all attributes from this object to another one.

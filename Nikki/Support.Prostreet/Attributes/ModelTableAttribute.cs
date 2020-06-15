@@ -1132,5 +1132,84 @@ namespace Nikki.Support.Prostreet.Attributes
 				eCarPartAttribType.Key => new KeyAttribute(this.Templated, this.BelongsTo),
 				_ => this
 			};
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public override void Serialize(BinaryWriter bw)
+		{
+			bw.Write(this.Key);
+			bw.WriteEnum(this.Templated);
+			bw.WriteEnum(this.ConcatenatorExists);
+
+			if (this.ConcatenatorExists == eBoolean.True)
+			{
+
+				bw.WriteNullTermUTF8(this.Concatenator);
+
+			}
+
+			for (int lod = (byte)'A'; lod <= (byte)'E'; ++lod)
+			{
+
+				for (int index = 0; index <= 11; ++index)
+				{
+
+					var name = $"Geometry{index}Lod{(char)lod}";
+					var lodname = (string)this.GetFastPropertyValue(name);
+					var lodexists = (eBoolean)this.GetFastPropertyValue($"{name}Exists");
+
+					bw.WriteEnum(lodexists);
+
+					if (lodexists == eBoolean.True)
+					{
+
+						bw.WriteNullTermUTF8(lodname);
+
+					}
+
+				}
+
+			}
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public override void Deserialize(BinaryReader br)
+		{
+			this.Templated = br.ReadEnum<eBoolean>();
+			this.ConcatenatorExists = br.ReadEnum<eBoolean>();
+
+			if (this.ConcatenatorExists == eBoolean.True)
+			{
+
+				this.Concatenator = br.ReadNullTermUTF8();
+
+			}
+
+			for (int lod = (byte)'A'; lod <= (byte)'E'; ++lod)
+			{
+
+				for (int index = 0; index <= 11; ++index)
+				{
+
+					var name = $"Geometry{index}Lod{(char)lod}";
+					var lodexists = this.GetFastProperty($"{name}Exists");
+
+					var exists = br.ReadEnum<eBoolean>();
+					lodexists.SetValue(this, exists);
+
+					if (exists == eBoolean.True)
+					{
+
+						this.GetFastProperty(name).SetValue(this, br.ReadNullTermUTF8());
+
+					}
+
+				}
+
+			}
+		}
 	}
 }

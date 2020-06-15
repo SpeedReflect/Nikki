@@ -345,5 +345,27 @@ namespace Nikki.Support.Prostreet.Class
         }
 
         #endregion
+
+        #region Serialization
+
+        /// <summary>
+        /// Serializes instance into a byte array and stores it in the file provided.
+        /// </summary>
+        /// <param name="filename">File to write data to.</param>
+        public override void Serialize(string filename)
+        {
+
+        }
+
+        /// <summary>
+        /// Deserializes byte array into an instance by loading data from the file provided.
+        /// </summary>
+        /// <param name="filename">File to read data from.</param>
+        public override void Deserialize(string filename)
+        {
+
+        }
+
+        #endregion
     }
 }

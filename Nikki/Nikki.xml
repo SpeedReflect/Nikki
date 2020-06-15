@@ -8921,6 +8921,18 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
+        <member name="M:Nikki.Reflection.Interface.IAssembly.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Reflection.Interface.IAssembly.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="T:Nikki.Reflection.Interface.ICastable`1">
             <summary>
             Interface with a method of casting memory of one object to another of the same type.
@@ -9247,6 +9259,16 @@
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
         </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.BoolAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.BoolAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.Carbon.Attributes.FloatAttribute">
             <summary>
             A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte floating point value.
@@ -9360,6 +9382,16 @@
             </summary>
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.FloatAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.FloatAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
         </member>
         <member name="T:Nikki.Support.Carbon.Attributes.IntAttribute">
             <summary>
@@ -9475,6 +9507,16 @@
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
         </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.IntAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.IntAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.Carbon.Attributes.KeyAttribute">
             <summary>
             A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte signed integer value.
@@ -9588,6 +9630,16 @@
             </summary>
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.KeyAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.KeyAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
         </member>
         <member name="T:Nikki.Support.Carbon.Attributes.ModelTableAttribute">
             <summary>
@@ -10328,6 +10380,16 @@
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
         </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.ModelTableAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.ModelTableAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.Carbon.Attributes.PartIDAttribute">
             <summary>
             A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with unknown byte and part ID values.
@@ -10447,6 +10509,16 @@
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
         </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.PartIDAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.PartIDAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.Carbon.Attributes.StringAttribute">
             <summary>
             A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with null-terminated string value.
@@ -10564,6 +10636,16 @@
             </summary>
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.StringAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.StringAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
         </member>
         <member name="T:Nikki.Support.Carbon.Attributes.TwoStringAttribute">
             <summary>
@@ -10693,6 +10775,16 @@
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
         </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.TwoStringAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.TwoStringAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.Carbon.Class.CarTypeInfo">
             <summary>
             <see cref="T:Nikki.Support.Carbon.Class.CarTypeInfo"/> is a collection of settings related to a car's basic information.
@@ -10808,6 +10900,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Carbon.Class.CarTypeInfo.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.CarTypeInfo.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="T:Nikki.Support.Carbon.Class.Collision">
             <summary>
             <see cref="T:Nikki.Support.Carbon.Class.Collision"/> is a collection of settings related to a car's bounds.
@@ -10912,6 +11016,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Collision.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Collision.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.DBModelPart">
             <summary>
@@ -11022,6 +11138,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="T:Nikki.Support.Carbon.Class.FNGroup">
             <summary>
             <see cref="T:Nikki.Support.Carbon.Class.FNGroup"/> is a collection of frontend group elements and scripts.
@@ -11082,6 +11210,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.FNGroup.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.FNGroup.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.Material">
             <summary>
@@ -11372,6 +11512,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Material.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Material.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.PresetRide">
             <summary>
@@ -11908,6 +12060,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Carbon.Class.PresetRide.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.PresetRide.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="T:Nikki.Support.Carbon.Class.PresetSkin">
             <summary>
             <see cref="T:Nikki.Support.Carbon.Class.PresetSkin"/> is a collection of settings related to car skins.
@@ -12108,6 +12272,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Carbon.Class.PresetSkin.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.PresetSkin.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="T:Nikki.Support.Carbon.Class.SlotOverride">
             <summary>
             <see cref="T:Nikki.Support.Carbon.Class.SlotOverride"/> is a collection of settings related to car's slot overrides.
@@ -12232,6 +12408,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SlotOverride.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SlotOverride.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.SlotType">
             <summary>
@@ -12362,6 +12550,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SlotType.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SlotType.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.STRBlock">
             <summary>
@@ -12509,6 +12709,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Carbon.Class.STRBlock.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.STRBlock.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="T:Nikki.Support.Carbon.Class.SunInfo">
             <summary>
             <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/> is a collection of sun and daylight settings.
@@ -12639,6 +12851,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Carbon.Class.SunInfo.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.SunInfo.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="T:Nikki.Support.Carbon.Class.Texture">
             <summary>
             <see cref="T:Nikki.Support.Carbon.Class.Texture"/> is a collection of dds image data used by the game.
@@ -12756,6 +12980,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Texture.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Texture.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.TPKBlock">
             <summary>
@@ -13002,6 +13238,18 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
             <param name="thisOffset">Offset of this TPK in BinaryWriter passed.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.TPKBlock.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.TPKBlock.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.Track">
             <summary>
@@ -13317,6 +13565,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Track.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.Track.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Datamap">
             <summary>
@@ -15049,6 +15309,16 @@
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.BoolAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.BoolAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Attributes.FloatAttribute">
             <summary>
             A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte floating point value.
@@ -15162,6 +15432,16 @@
             </summary>
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.FloatAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.FloatAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
         </member>
         <member name="T:Nikki.Support.MostWanted.Attributes.IntAttribute">
             <summary>
@@ -15277,6 +15557,16 @@
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.IntAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.IntAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Attributes.KeyAttribute">
             <summary>
             A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte signed integer value.
@@ -15390,6 +15680,16 @@
             </summary>
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.KeyAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.KeyAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
         </member>
         <member name="T:Nikki.Support.MostWanted.Attributes.PartIDAttribute">
             <summary>
@@ -15510,6 +15810,16 @@
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.PartIDAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.PartIDAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Attributes.StringAttribute">
             <summary>
             A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with null-terminated string value.
@@ -15627,6 +15937,16 @@
             </summary>
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.StringAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.StringAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
         </member>
         <member name="T:Nikki.Support.MostWanted.Attributes.TwoStringAttribute">
             <summary>
@@ -15756,6 +16076,16 @@
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.TwoStringAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.TwoStringAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Class.CarTypeInfo">
             <summary>
             <see cref="T:Nikki.Support.MostWanted.Class.CarTypeInfo"/> is a collection of settings related to a car's basic information.
@@ -15871,6 +16201,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Class.CarTypeInfo.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.CarTypeInfo.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Class.Collision">
             <summary>
             <see cref="T:Nikki.Support.MostWanted.Class.Collision"/> is a collection of settings related to a car's bounds.
@@ -15975,6 +16317,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.Collision.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.Collision.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.DBModelPart">
             <summary>
@@ -16085,6 +16439,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Class.FNGroup">
             <summary>
             <see cref="T:Nikki.Support.MostWanted.Class.FNGroup"/> is a collection of frontend group elements and scripts.
@@ -16145,6 +16511,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.FNGroup.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.FNGroup.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.Material">
             <summary>
@@ -16395,6 +16773,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.Material.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.Material.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.PresetRide">
             <summary>
@@ -16751,6 +17141,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Class.PresetRide.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.PresetRide.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Class.SlotOverride">
             <summary>
             <see cref="T:Nikki.Support.MostWanted.Class.SlotOverride"/> is a collection of settings related to car's slot overrides.
@@ -16850,6 +17252,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.SlotOverride.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.SlotOverride.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.SlotType">
             <summary>
@@ -16955,6 +17369,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.SlotType.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.SlotType.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.STRBlock">
             <summary>
@@ -17102,6 +17528,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Class.STRBlock.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.STRBlock.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Class.SunInfo">
             <summary>
             <see cref="T:Nikki.Support.MostWanted.Class.SunInfo"/> is a collection of sun and daylight settings.
@@ -17231,6 +17669,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.SunInfo.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.SunInfo.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.Texture">
             <summary>
@@ -17364,6 +17814,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.Texture.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.Texture.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.TPKBlock">
             <summary>
@@ -17616,6 +18078,18 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
             <param name="thisOffset">Offset of this TPK in BinaryWriter passed.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.TPKBlock.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.TPKBlock.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.Track">
             <summary>
@@ -17931,6 +18405,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.Track.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.Track.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Datamap">
             <summary>
@@ -19665,6 +20151,16 @@
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.BoolAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.BoolAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Attributes.FloatAttribute">
             <summary>
             A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte floating point value.
@@ -19778,6 +20274,16 @@
             </summary>
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.FloatAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.FloatAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
         </member>
         <member name="T:Nikki.Support.Prostreet.Attributes.IntAttribute">
             <summary>
@@ -19893,6 +20399,16 @@
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.IntAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.IntAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Attributes.KeyAttribute">
             <summary>
             A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte signed integer value.
@@ -20006,6 +20522,16 @@
             </summary>
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.KeyAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.KeyAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
         </member>
         <member name="T:Nikki.Support.Prostreet.Attributes.ModelTableAttribute">
             <summary>
@@ -20746,6 +21272,16 @@
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.ModelTableAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.ModelTableAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Attributes.PartIDAttribute">
             <summary>
             A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with unknown byte and part ID values.
@@ -20865,6 +21401,16 @@
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.PartIDAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.PartIDAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Attributes.StringAttribute">
             <summary>
             A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with null-terminated string value.
@@ -20982,6 +21528,16 @@
             </summary>
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.StringAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.StringAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
         </member>
         <member name="T:Nikki.Support.Prostreet.Attributes.TwoStringAttribute">
             <summary>
@@ -21111,6 +21667,16 @@
             <param name="type">Type of a new attribute.</param>
             <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.TwoStringAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.TwoStringAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Class.CarTypeInfo">
             <summary>
             <see cref="T:Nikki.Support.Prostreet.Class.CarTypeInfo"/> is a collection of settings related to a car's basic information.
@@ -21226,6 +21792,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Class.CarTypeInfo.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.CarTypeInfo.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Class.Collision">
             <summary>
             <see cref="T:Nikki.Support.Prostreet.Class.Collision"/> is a collection of settings related to a car's bounds.
@@ -21330,6 +21908,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Collision.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Collision.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Class.DBModelPart">
             <summary>
@@ -21440,6 +22030,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Class.FNGroup">
             <summary>
             <see cref="T:Nikki.Support.Prostreet.Class.FNGroup"/> is a collection of frontend group elements and scripts.
@@ -21500,6 +22102,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.FNGroup.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.FNGroup.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Class.Material">
             <summary>
@@ -21851,6 +22465,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Material.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Material.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Class.SlotOverride">
             <summary>
             <see cref="T:Nikki.Support.Prostreet.Class.SlotOverride"/> is a collection of settings related to car's slot overrides.
@@ -22020,6 +22646,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.SlotOverride.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.SlotOverride.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Class.SlotType">
             <summary>
@@ -22196,6 +22834,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Class.SlotType.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.SlotType.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Class.STRBlock">
             <summary>
             <see cref="T:Nikki.Support.Prostreet.Class.STRBlock"/> is a collection of language strings, hashes and labels.
@@ -22342,6 +22992,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Class.SunInfo">
             <summary>
             <see cref="T:Nikki.Support.Prostreet.Class.SunInfo"/> is a collection of sun and daylight settings.
@@ -22472,6 +23134,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Class.SunInfo.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.SunInfo.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Class.Texture">
             <summary>
             <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> is a collection of dds image data used by the game.
@@ -22589,6 +23263,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Texture.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Texture.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Class.TPKBlock">
             <summary>
@@ -22835,6 +23521,18 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
             <param name="thisOffset">Offset of this TPK in BinaryWriter passed.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Class.Track">
             <summary>
@@ -23150,6 +23848,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Track.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.Track.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Datamap">
             <summary>
@@ -24087,6 +24797,18 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.AcidEffect"/> with.</param>
         </member>
+        <member name="M:Nikki.Support.Shared.Class.AcidEffect.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.AcidEffect.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="M:Nikki.Support.Shared.Class.AcidEffect.MemoryCast(System.String)">
             <summary>
             Casts all attributes from this object to another one.
@@ -24391,6 +25113,18 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.CarTypeInfo"/> with.</param>
         </member>
+        <member name="M:Nikki.Support.Shared.Class.CarTypeInfo.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.CarTypeInfo.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="M:Nikki.Support.Shared.Class.CarTypeInfo.MemoryCast(System.String)">
             <summary>
             Casts all attributes from this object to another one.
@@ -24455,6 +25189,18 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.Collision"/> with.</param>
         </member>
+        <member name="M:Nikki.Support.Shared.Class.Collision.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.Collision.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="M:Nikki.Support.Shared.Class.Collision.MemoryCast(System.String)">
             <summary>
             Casts all attributes from this object to another one.
@@ -24506,6 +25252,30 @@
             <summary>
             Total amount of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> in this <see cref="T:Nikki.Support.Shared.Class.DBModelPart"/>.
             </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Shared.Class.CarTypeInfo"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Shared.Class.CarTypeInfo"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Shared.Class.CarTypeInfo"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.CarTypeInfo"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.DBModelPart.MemoryCast(System.String)">
             <summary>
@@ -24633,6 +25403,18 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.FNGroup"/> with.</param>
         </member>
+        <member name="M:Nikki.Support.Shared.Class.FNGroup.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.FNGroup.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="M:Nikki.Support.Shared.Class.FNGroup.GetColor(System.Int32)">
             <summary>
             Gets <see cref="T:Nikki.Support.Shared.Parts.FNGParts.FEngColor"/> from a specific index.
@@ -24719,6 +25501,18 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.Material"/> with.</param>
         </member>
+        <member name="M:Nikki.Support.Shared.Class.Material.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.Material.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="M:Nikki.Support.Shared.Class.Material.MemoryCast(System.String)">
             <summary>
             Casts all attributes from this object to another one.
@@ -24772,6 +25566,18 @@
             Disassembles array into <see cref="T:Nikki.Support.Shared.Class.PresetRide"/> properties.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.PresetRide"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.PresetRide.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.PresetRide.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.PresetRide.MemoryCast(System.String)">
             <summary>
@@ -24842,6 +25648,18 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.PresetSkin"/> with.</param>
         </member>
+        <member name="M:Nikki.Support.Shared.Class.PresetSkin.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.PresetSkin.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="M:Nikki.Support.Shared.Class.PresetSkin.MemoryCast(System.String)">
             <summary>
             Casts all attributes from this object to another one.
@@ -24895,6 +25713,18 @@
             Disassembles array into <see cref="T:Nikki.Support.Shared.Class.SlotOverride"/> properties.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.SlotOverride"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.SlotOverride.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.SlotOverride.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.SlotOverride.MemoryCast(System.String)">
             <summary>
@@ -24960,6 +25790,18 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.SlotType"/> with.</param>
         </member>
+        <member name="M:Nikki.Support.Shared.Class.SlotType.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.SlotType.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
+        </member>
         <member name="M:Nikki.Support.Shared.Class.SlotType.MemoryCast(System.String)">
             <summary>
             Casts all attributes from this object to another one.
@@ -25020,6 +25862,18 @@
             Disassembles array into <see cref="T:Nikki.Support.Shared.Class.STRBlock"/> properties.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.STRBlock"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.STRBlock.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.STRBlock.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.STRBlock.GetRecord(System.UInt32)">
             <summary>
@@ -25158,6 +26012,18 @@
             Disassembles array into <see cref="T:Nikki.Support.Shared.Class.SunInfo"/> properties.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.SunInfo"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.SunInfo.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.SunInfo.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.SunInfo.MemoryCast(System.String)">
             <summary>
@@ -25308,6 +26174,18 @@
             Disassembles array into <see cref="T:Nikki.Support.Shared.Class.Texture"/> header properties.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.Texture"/> header with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.Texture.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.Texture.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.Texture.GetDDSArray">
             <summary>
@@ -25464,6 +26342,18 @@
             Disassembles <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> array into separate properties.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.TPKBlock.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.TPKBlock.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.TPKBlock.FindTexture(System.UInt32,Nikki.Reflection.Enum.eKeyType)">
             <summary>
@@ -25716,6 +26606,18 @@
             Disassembles array into <see cref="T:Nikki.Support.Shared.Class.Track"/> properties.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.Track"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.Track.Serialize(System.String)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="filename">File to write data to.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.Track.Deserialize(System.String)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="filename">File to read data from.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.Track.MemoryCast(System.String)">
             <summary>
@@ -25976,6 +26878,16 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
             <param name="string_dict">Dictionary of string HashCodes and their offsets.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CPAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CPAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
         </member>
         <member name="M:Nikki.Support.Shared.Parts.CarParts.CPAttribute.ConvertTo(Nikki.Reflection.Enum.eCarPartAttribType)">
             <summary>

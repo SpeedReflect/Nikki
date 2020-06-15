@@ -188,5 +188,20 @@ namespace Nikki.Support.MostWanted.Attributes
 				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Value, this.BelongsTo),
 				_ => this
 			};
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public override void Serialize(BinaryWriter bw)
+		{
+			bw.Write(this.Key);
+			bw.Write(this.Value.BinHash());
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public override void Deserialize(BinaryReader br) =>
+			this.Value = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
 	}
 }

@@ -80,6 +80,18 @@ namespace Nikki.Support.Shared.Class
 		public abstract void Disassemble(BinaryReader br);
 
 		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		/// <param name="filename">File to write data to.</param>
+		public abstract void Serialize(string filename);
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		/// <param name="filename">File to read data from.</param>
+		public abstract void Deserialize(string filename);
+
+		/// <summary>
 		/// Gets the <see cref="StringRecord"/> from the internal list.
 		/// </summary>
 		/// <param name="key">Key of the <see cref="StringRecord"/> to find.</param>

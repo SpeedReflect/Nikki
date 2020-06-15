@@ -49,6 +49,16 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		public abstract void Assemble(BinaryWriter bw, Dictionary<int, int> string_dict);
 
 		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public abstract void Serialize(BinaryWriter bw);
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public abstract void Deserialize(BinaryReader br);
+
+		/// <summary>
 		/// Converts this <see cref="CPAttribute"/> to an attribute of type provided.
 		/// </summary>
 		/// <param name="type">Type of a new attribute.</param>

@@ -2,6 +2,7 @@
 using System.IO;
 using System.ComponentModel;
 using Nikki.Core;
+using Nikki.Utils;
 using Nikki.Utils.EA;
 using Nikki.Reflection.Enum;
 using Nikki.Support.Carbon.Framework;
@@ -174,6 +175,82 @@ namespace Nikki.Support.Carbon.Class
         {
             return $"Collection Name: {this.CollectionName} | " +
                    $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
+        }
+
+        #endregion
+
+        #region Serialization
+
+        /// <summary>
+        /// Serializes instance into a byte array and stores it in the file provided.
+        /// </summary>
+        /// <param name="filename">File to write data to.</param>
+        public override void Serialize(string filename)
+        {
+            byte[] array;
+            using (var ms = new MemoryStream(this.InfoLength << 3 + 4))
+            using (var bw = new BinaryWriter(ms))
+			{
+
+                bw.Write(this.InfoLength);
+
+                foreach (var color in this._colorinfo)
+				{
+
+                    bw.Write(color.Offset);
+                    bw.Write(color.Alpha);
+                    bw.Write(color.Red);
+                    bw.Write(color.Green);
+                    bw.Write(color.Blue);
+
+				}
+
+                array = ms.ToArray();
+
+			}
+
+            array = Interop.Compress(array, eLZCompressionType.BEST);
+
+            using (var bw = new BinaryWriter(File.Open(filename, FileMode.Create)))
+            {
+
+                bw.Write(array);
+
+            }
+        }
+
+        /// <summary>
+        /// Deserializes byte array into an instance by loading data from the file provided.
+        /// </summary>
+        /// <param name="filename">File to read data from.</param>
+        public override void Deserialize(string filename)
+        {
+            var array = File.ReadAllBytes(filename);
+
+            array = Interop.Decompress(array);
+
+            using var ms = new MemoryStream(array);
+            using var br = new BinaryReader(ms);
+
+            var size = br.ReadInt32();
+            this._colorinfo.Capacity = size;
+
+            for (int loop = 0; loop < size; ++loop)
+			{
+
+				var color = new FEngColor(this)
+				{
+					Offset = br.ReadUInt32(),
+					Alpha = br.ReadByte(),
+					Red = br.ReadByte(),
+					Green = br.ReadByte(),
+					Blue = br.ReadByte()
+				};
+
+                this._colorinfo.Add(color);
+
+			}
+
         }
 
         #endregion

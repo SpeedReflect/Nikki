@@ -209,5 +209,24 @@ namespace Nikki.Support.Carbon.Attributes
 				eCarPartAttribType.ModelTable => new ModelTableAttribute(this.ID, this.BelongsTo),
 				_ => this
 			};
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public override void Serialize(BinaryWriter bw)
+		{
+			bw.Write(this.Key);
+			bw.Write(this.Level);
+			bw.WriteEnum(this.ID);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public override void Deserialize(BinaryReader br)
+		{
+			this.Level = br.ReadByte();
+			this.ID = br.ReadEnum<ePartCarbon>();
+		}
 	}
 }

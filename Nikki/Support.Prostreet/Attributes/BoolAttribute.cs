@@ -8,6 +8,7 @@ using Nikki.Reflection.Enum.CP;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Shared.Parts.CarParts;
+using CoreExtensions.IO;
 using CoreExtensions.Conversions;
 
 
@@ -194,5 +195,20 @@ namespace Nikki.Support.Prostreet.Attributes
 				eCarPartAttribType.ModelTable => new ModelTableAttribute(this.Value, this.BelongsTo),
 				_ => this
 			};
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public override void Serialize(BinaryWriter bw)
+		{
+			bw.Write(this.Key);
+			bw.WriteEnum(this.Value);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public override void Deserialize(BinaryReader br) =>
+			this.Value = br.ReadEnum<eBoolean>();
 	}
 }

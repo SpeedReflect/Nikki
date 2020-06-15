@@ -158,12 +158,24 @@ namespace Nikki.Support.Shared.Class
 		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="Track"/> with.</param>
         public abstract void Disassemble(BinaryReader br);
 
-        /// <summary>
-        /// Casts all attributes from this object to another one.
-        /// </summary>
-        /// <param name="CName">CollectionName of the new created object.</param>
-        /// <returns>Memory casted copy of the object.</returns>
-        public override Collectable MemoryCast(string CName)
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		/// <param name="filename">File to write data to.</param>
+		public abstract void Serialize(string filename);
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		/// <param name="filename">File to read data from.</param>
+		public abstract void Deserialize(string filename);
+
+		/// <summary>
+		/// Casts all attributes from this object to another one.
+		/// </summary>
+		/// <param name="CName">CollectionName of the new created object.</param>
+		/// <returns>Memory casted copy of the object.</returns>
+		public override Collectable MemoryCast(string CName)
         {
             throw new NotImplementedException();
         }

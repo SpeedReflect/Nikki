@@ -1,15 +1,19 @@
 ﻿using System;
+using System.IO;
 using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Carbon.Framework;
+using Nikki.Support.Carbon.Attributes;
 using Nikki.Support.Shared.Parts.CarParts;
 using CoreExtensions.Reflection;
 using CoreExtensions.Conversions;
+
 
 
 
@@ -264,6 +268,112 @@ namespace Nikki.Support.Carbon.Class
 		{
 			return $"Collection Name: {this.CollectionName} | " +
 				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
+		}
+
+		#endregion
+
+		#region Serialization
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		/// <param name="filename">File to write data to.</param>
+		public override void Serialize(string filename)
+		{
+			byte[] array;
+			using (var ms = new MemoryStream(this.Length << 5))
+			using (var bw = new BinaryWriter(ms))
+			{
+
+				bw.Write(this.Length);
+
+				for (int loop = 0; loop < this.Length; ++loop)
+				{
+
+					var part = this.ModelCarParts[loop];
+					bw.Write(part.Attributes.Count);
+
+					for (int i = 0; i < part.Attributes.Count; ++i)
+					{
+
+						part.Attributes[i].Serialize(bw);
+
+					}
+
+				}
+
+				array = ms.ToArray();
+
+			}
+
+			array = Interop.Compress(array, eLZCompressionType.BEST);
+
+			using (var bw = new BinaryWriter(File.Open(filename, FileMode.Create)))
+			{
+
+				bw.Write(array);
+
+			}
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		/// <param name="filename">File to read data from.</param>
+		public override void Deserialize(string filename)
+		{
+			var array = File.ReadAllBytes(filename);
+
+			array = Interop.Decompress(array);
+
+			using var ms = new MemoryStream(array);
+			using var br = new BinaryReader(ms);
+
+			var size = br.ReadInt32();
+			this.ModelCarParts.Capacity = size;
+
+			for (int loop = 0; loop < size; ++loop)
+			{
+
+				var num = br.ReadInt32();
+				var part = new Parts.CarParts.RealCarPart(0, num, this);
+
+				for (int i = 0; i < num; ++i)
+				{
+
+					var key = br.ReadUInt32();
+
+					if (!Map.CarPartKeys.TryGetValue(key, out var type))
+					{
+
+						type = eCarPartAttribType.Integer;
+
+					}
+
+					CPAttribute attrib = type switch
+					{
+						eCarPartAttribType.Boolean => new BoolAttribute(),
+						eCarPartAttribType.CarPartID => new PartIDAttribute(),
+						eCarPartAttribType.Floating => new FloatAttribute(),
+						eCarPartAttribType.String => new StringAttribute(),
+						eCarPartAttribType.TwoString => new TwoStringAttribute(),
+						eCarPartAttribType.Key => new KeyAttribute(),
+						eCarPartAttribType.ModelTable => new ModelTableAttribute(),
+						_ => new IntAttribute(),
+					};
+
+					attrib.Key = key;
+					attrib.BelongsTo = part;
+					attrib.Deserialize(br);
+					part.Attributes.Add(attrib);
+
+				}
+
+				this.ModelCarParts.Add(part);
+
+			}
+
+			this.ResortNames();
 		}
 
 		#endregion

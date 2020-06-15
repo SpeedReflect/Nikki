@@ -279,5 +279,100 @@ namespace Nikki.Support.Carbon.Class
 		}
 
 		#endregion
+
+		#region Serialization
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		/// <param name="filename">File to write data to.</param>
+		public override void Serialize(string filename)
+		{
+			byte[] array;
+			using (var ms = new MemoryStream(0x300))
+			using (var bw = new BinaryWriter(ms))
+			{
+
+				bw.Write(this.NumberOfBounds);
+				bw.Write(this.NumberOfClouds);
+
+				for (int loop = 0; loop < this.NumberOfBounds; ++loop)
+				{
+
+					this.CollisionBounds[loop].Write(bw);
+
+				}
+
+				for (int loop = 0; loop < this.NumberOfClouds; ++loop)
+				{
+
+					bw.Write(this.CollisionClouds[loop].NumberOfVertices);
+
+					for (int i = 0; i < this.CollisionClouds[loop].NumberOfVertices; ++i)
+					{
+
+						this.CollisionClouds[loop].Vertices[i].Write(bw);
+
+					}
+
+				}
+
+				bw.WriteEnum(this.IsResolved);
+
+				array = ms.ToArray();
+
+			}
+
+			array = Interop.Compress(array, eLZCompressionType.BEST);
+
+			using (var bw = new BinaryWriter(File.Open(filename, FileMode.Create)))
+			{
+
+				bw.Write(array);
+
+			}
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		/// <param name="filename">File to read data from.</param>
+		public override void Deserialize(string filename)
+		{
+			var array = File.ReadAllBytes(filename);
+
+			array = Interop.Decompress(array);
+
+			using var ms = new MemoryStream(array);
+			using var br = new BinaryReader(ms);
+
+			this.NumberOfBounds = br.ReadInt32();
+			this.NumberOfClouds = br.ReadInt32();
+
+			for (int loop = 0; loop < this.NumberOfBounds; ++loop)
+			{
+
+				this.CollisionBounds[loop].Read(br);
+
+			}
+
+			for (int loop = 0; loop < this.NumberOfClouds; ++loop)
+			{
+
+				this.CollisionClouds[loop].NumberOfVertices = br.ReadInt32();
+
+				for (int i = 0; i < this.CollisionClouds[loop].NumberOfVertices; ++i)
+				{
+
+					this.CollisionClouds[loop].Vertices[i].Read(br);
+
+				}
+
+			}
+
+			this.IsResolved = br.ReadEnum<eBoolean>();
+		}
+
+		#endregion
 	}
 }

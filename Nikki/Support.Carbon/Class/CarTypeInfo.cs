@@ -345,5 +345,164 @@ namespace Nikki.Support.Carbon.Class
         }
 
         #endregion
+
+        #region Serialization
+
+        /// <summary>
+        /// Serializes instance into a byte array and stores it in the file provided.
+        /// </summary>
+        /// <param name="filename">File to write data to.</param>
+        public override void Serialize(string filename)
+		{
+            byte[] array;
+            using (var ms = new MemoryStream(0xA0))
+            using (var bw = new BinaryWriter(ms))
+			{
+
+                bw.WriteNullTermUTF8(this.ManufacturerName);
+
+                bw.Write(this.HeadlightFOV);
+                bw.Write(this.PadHighPerformance);
+                bw.Write(this.NumAvailableSkinNumbers);
+                bw.Write(this.WhatGame);
+                bw.Write(this.ConvertibleFlag);
+                bw.Write(this.WheelOuterRadius);
+                bw.Write(this.WheelInnerRadiusMin);
+                bw.Write(this.WheelInnerRadiusMax);
+
+                bw.Write(this.HeadlightPositionX);
+                bw.Write(this.HeadlightPositionY);
+                bw.Write(this.HeadlightPositionZ);
+                bw.Write(this.HeadlightPositionW);
+                bw.Write(this.DriverRenderingOffsetX);
+                bw.Write(this.DriverRenderingOffsetY);
+                bw.Write(this.DriverRenderingOffsetZ);
+                bw.Write(this.DriverRenderingOffsetW);
+                bw.Write(this.SteeringWheelRenderingX);
+                bw.Write(this.SteeringWheelRenderingY);
+                bw.Write(this.SteeringWheelRenderingZ);
+                bw.Write(this.SteeringWheelRenderingW);
+
+                bw.WriteEnum(this.UsageType);
+                bw.WriteEnum(this.MemoryType);
+
+                bw.Write(this.MaxInstances1);
+                bw.Write(this.MaxInstances2);
+                bw.Write(this.MaxInstances3);
+                bw.Write(this.MaxInstances4);
+                bw.Write(this.MaxInstances5);
+                bw.Write(this.KeepLoaded1);
+                bw.Write(this.KeepLoaded2);
+                bw.Write(this.KeepLoaded3);
+                bw.Write(this.KeepLoaded4);
+                bw.Write(this.KeepLoaded5);
+
+                bw.Write(this.MinTimeBetweenUses1);
+                bw.Write(this.MinTimeBetweenUses2);
+                bw.Write(this.MinTimeBetweenUses3);
+                bw.Write(this.MinTimeBetweenUses4);
+                bw.Write(this.MinTimeBetweenUses5);
+                bw.Write(this.AvailableSkinNumbers01);
+                bw.Write(this.AvailableSkinNumbers02);
+                bw.Write(this.AvailableSkinNumbers03);
+                bw.Write(this.AvailableSkinNumbers04);
+                bw.Write(this.AvailableSkinNumbers05);
+                bw.Write(this.AvailableSkinNumbers06);
+                bw.Write(this.AvailableSkinNumbers07);
+                bw.Write(this.AvailableSkinNumbers08);
+                bw.Write(this.AvailableSkinNumbers09);
+                bw.Write(this.AvailableSkinNumbers10);
+
+                bw.Write(this.DefaultSkinNumber);
+                bw.WriteEnum(this.IsSkinnable);
+                bw.Write(this.DefaultBasePaint.BinHash());
+
+                array = ms.ToArray();
+
+            }
+
+            array = Interop.Compress(array, eLZCompressionType.BEST);
+
+            using (var bw = new BinaryWriter(File.Open(filename, FileMode.Create)))
+			{
+
+                bw.Write(array);
+
+			}
+		}
+
+        /// <summary>
+        /// Deserializes byte array into an instance by loading data from the file provided.
+        /// </summary>
+        /// <param name="filename">File to read data from.</param>
+        public override void Deserialize(string filename)
+		{
+            var array = File.ReadAllBytes(filename);
+
+            array = Interop.Decompress(array);
+
+			using var ms = new MemoryStream(array);
+			using var br = new BinaryReader(ms);
+
+			this.ManufacturerName = br.ReadNullTermUTF8();
+
+            this.HeadlightFOV = br.ReadSingle();
+            this.PadHighPerformance = br.ReadByte();
+            this.NumAvailableSkinNumbers = br.ReadByte();
+            this.WhatGame = br.ReadByte();
+            this.ConvertibleFlag = br.ReadByte();
+            this.WheelOuterRadius = br.ReadByte();
+            this.WheelInnerRadiusMin = br.ReadByte();
+            this.WheelInnerRadiusMax = br.ReadByte();
+
+            this.HeadlightPositionX = br.ReadSingle();
+            this.HeadlightPositionY = br.ReadSingle();
+            this.HeadlightPositionZ = br.ReadSingle();
+            this.HeadlightPositionW = br.ReadSingle();
+            this.DriverRenderingOffsetX = br.ReadSingle();
+            this.DriverRenderingOffsetY = br.ReadSingle();
+            this.DriverRenderingOffsetZ = br.ReadSingle();
+            this.DriverRenderingOffsetW = br.ReadSingle();
+            this.SteeringWheelRenderingX = br.ReadSingle();
+            this.SteeringWheelRenderingY = br.ReadSingle();
+            this.SteeringWheelRenderingZ = br.ReadSingle();
+            this.SteeringWheelRenderingW = br.ReadSingle();
+
+            this.UsageType = br.ReadEnum<eUsageType>();
+            this.MemoryType = br.ReadEnum<eMemoryType>();
+
+            this.MaxInstances1 = br.ReadByte();
+            this.MaxInstances2 = br.ReadByte();
+            this.MaxInstances3 = br.ReadByte();
+            this.MaxInstances4 = br.ReadByte();
+            this.MaxInstances5 = br.ReadByte();
+            this.KeepLoaded1 = br.ReadByte();
+            this.KeepLoaded2 = br.ReadByte();
+            this.KeepLoaded3 = br.ReadByte();
+            this.KeepLoaded4 = br.ReadByte();
+            this.KeepLoaded5 = br.ReadByte();
+
+            this.MinTimeBetweenUses1 = br.ReadSingle();
+            this.MinTimeBetweenUses2 = br.ReadSingle();
+            this.MinTimeBetweenUses3 = br.ReadSingle();
+            this.MinTimeBetweenUses4 = br.ReadSingle();
+            this.MinTimeBetweenUses5 = br.ReadSingle();
+            this.AvailableSkinNumbers01 = br.ReadByte();
+            this.AvailableSkinNumbers02 = br.ReadByte();
+            this.AvailableSkinNumbers03 = br.ReadByte();
+            this.AvailableSkinNumbers04 = br.ReadByte();
+            this.AvailableSkinNumbers05 = br.ReadByte();
+            this.AvailableSkinNumbers06 = br.ReadByte();
+            this.AvailableSkinNumbers07 = br.ReadByte();
+            this.AvailableSkinNumbers08 = br.ReadByte();
+            this.AvailableSkinNumbers09 = br.ReadByte();
+            this.AvailableSkinNumbers10 = br.ReadByte();
+
+            this.DefaultSkinNumber = br.ReadByte();
+            this.IsSkinnable = br.ReadEnum<eBoolean>();
+            this.DefaultBasePaint = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+        }
+
+        #endregion
     }
 }

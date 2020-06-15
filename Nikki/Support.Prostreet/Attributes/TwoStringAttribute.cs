@@ -254,5 +254,52 @@ namespace Nikki.Support.Prostreet.Attributes
 				eCarPartAttribType.ModelTable => new ModelTableAttribute(this.Value1, this.BelongsTo),
 				_ => this
 			};
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public override void Serialize(BinaryWriter bw)
+		{
+			bw.Write(this.Key);
+			bw.WriteEnum(this.Value1Exists);
+			bw.WriteEnum(this.Value2Exists);
+
+			if (this.Value1Exists == eBoolean.True)
+			{
+
+				bw.WriteNullTermUTF8(this.Value1);
+
+			}
+
+			if (this.Value2Exists == eBoolean.True)
+			{
+
+				bw.WriteNullTermUTF8(this.Value2);
+
+			}
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public override void Deserialize(BinaryReader br)
+		{
+			this.Value1Exists = br.ReadEnum<eBoolean>();
+			this.Value2Exists = br.ReadEnum<eBoolean>();
+
+			if (this.Value1Exists == eBoolean.True)
+			{
+
+				this.Value1 = br.ReadNullTermUTF8();
+
+			}
+
+			if (this.Value2Exists == eBoolean.True)
+			{
+
+				this.Value2 = br.ReadNullTermUTF8();
+
+			}
+		}
 	}
 }
