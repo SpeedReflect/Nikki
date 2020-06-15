@@ -3,10 +3,12 @@ using System.IO;
 using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using Nikki.Reflection.Enum.SlotID;
 using Nikki.Support.Carbon.Framework;
+using CoreExtensions.IO;
 using CoreExtensions.Conversions;
 
 
@@ -251,7 +253,32 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="filename">File to write data to.</param>
         public override void Serialize(string filename)
         {
+            byte[] array;
+            using (var ms = new MemoryStream(0x40))
+            using (var bw = new BinaryWriter(ms))
+            {
 
+                bw.WriteNullTermUTF8(this.SlotStockOverride);
+                bw.WriteNullTermUTF8(this.SlotMainOverride);
+                bw.WriteNullTermUTF8(this.SlotOverrideGroup2);
+                bw.WriteNullTermUTF8(this.SlotOverrideGroup3);
+                bw.WriteNullTermUTF8(this.SlotOverrideGroup4);
+                bw.WriteNullTermUTF8(this.SlotOverrideGroup5);
+                bw.WriteNullTermUTF8(this.SlotOverrideGroup6);
+                bw.WriteEnum(this.PrimaryAnimation);
+
+                array = ms.ToArray();
+
+            }
+
+            array = Interop.Compress(array, eLZCompressionType.BEST);
+
+            using (var bw = new BinaryWriter(File.Open(filename, FileMode.Create)))
+            {
+
+                bw.Write(array);
+
+            }
         }
 
         /// <summary>
@@ -260,7 +287,21 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="filename">File to read data from.</param>
         public override void Deserialize(string filename)
         {
+            var array = File.ReadAllBytes(filename);
 
+            array = Interop.Decompress(array);
+
+            using var ms = new MemoryStream(array);
+            using var br = new BinaryReader(ms);
+
+            this.SlotStockOverride = br.ReadNullTermUTF8();
+            this.SlotMainOverride = br.ReadNullTermUTF8();
+            this.SlotOverrideGroup2 = br.ReadNullTermUTF8();
+            this.SlotOverrideGroup3 = br.ReadNullTermUTF8();
+            this.SlotOverrideGroup4 = br.ReadNullTermUTF8();
+            this.SlotOverrideGroup5 = br.ReadNullTermUTF8();
+            this.SlotOverrideGroup6 = br.ReadNullTermUTF8();
+            this.PrimaryAnimation = br.ReadEnum<eCarAnimLocation>();
         }
 
         #endregion

@@ -197,7 +197,6 @@ namespace Nikki.Support.Carbon.Class
 		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="STRBlock"/> with.</param>
 		public override void Disassemble(BinaryReader br)
 		{
-			br.BaseStream.Position += 8;
 			uint ReaderID = br.ReadUInt32();
 			int BlockSize = br.ReadInt32();
 			var broffset = br.BaseStream.Position;
@@ -372,7 +371,33 @@ namespace Nikki.Support.Carbon.Class
 		/// <param name="filename">File to write data to.</param>
 		public override void Serialize(string filename)
 		{
+			byte[] array;
+			using (var ms = new MemoryStream(this.InfoLength << 5))
+			using (var bw = new BinaryWriter(ms))
+			{
 
+				bw.Write(this.InfoLength);
+
+				for (int loop = 0; loop < this.InfoLength; ++loop)
+				{
+
+					bw.WriteNullTermUTF8(this._stringinfo[loop].Label);
+					bw.WriteNullTermUTF8(this._stringinfo[loop].Text);
+
+				}
+
+				array = ms.ToArray();
+
+			}
+
+			array = Interop.Compress(array, eLZCompressionType.BEST);
+
+			using (var bw = new BinaryWriter(File.Open(filename, FileMode.Create)))
+			{
+
+				bw.Write(array);
+
+			}
 		}
 
 		/// <summary>
@@ -381,7 +406,30 @@ namespace Nikki.Support.Carbon.Class
 		/// <param name="filename">File to read data from.</param>
 		public override void Deserialize(string filename)
 		{
+			var array = File.ReadAllBytes(filename);
 
+			array = Interop.Decompress(array);
+
+			using var ms = new MemoryStream(array);
+			using var br = new BinaryReader(ms);
+
+			this._stringinfo.Clear();
+			var size = br.ReadInt32();
+			this._stringinfo.Capacity = size;
+
+			for (int loop = 0; loop < size; ++loop)
+			{
+
+				var info = new StringRecord(this)
+				{
+					Label = br.ReadNullTermUTF8(),
+					Text = br.ReadNullTermUTF8()
+				};
+
+				info.Key = info.Label.BinHash();
+				this._stringinfo.Add(info);
+
+			}
 		}
 
 		#endregion

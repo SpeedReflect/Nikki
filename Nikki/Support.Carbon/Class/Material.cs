@@ -608,6 +608,62 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="filename">File to write data to.</param>
         public override void Serialize(string filename)
         {
+            byte[] array;
+            using (var ms = new MemoryStream(0x98))
+            using (var bw = new BinaryWriter(ms))
+            {
+
+                bw.Write(this.DiffusePower);
+                bw.Write(this.DiffuseClamp);
+                bw.Write(this.DiffuseFlakes);
+                bw.Write(this.DiffuseVinylScale);
+                bw.Write(this.DiffuseMinLevel);
+                bw.Write(this.DiffuseMinRed);
+                bw.Write(this.DiffuseMinGreen);
+                bw.Write(this.DiffuseMinBlue);
+                bw.Write(this.DiffuseMaxLevel);
+                bw.Write(this.DiffuseMaxRed);
+                bw.Write(this.DiffuseMaxGreen);
+                bw.Write(this.DiffuseMaxBlue);
+                bw.Write(this.DiffuseMinAlpha);
+                bw.Write(this.DiffuseMaxAlpha);
+                bw.Write(this.SpecularPower);
+                bw.Write(this.SpecularFlakes);
+                bw.Write(this.SpecularVinylScale);
+                bw.Write(this.SpecularMinLevel);
+                bw.Write(this.SpecularMinRed);
+                bw.Write(this.SpecularMinGreen);
+                bw.Write(this.SpecularMinBlue);
+                bw.Write(this.SpecularMaxLevel);
+                bw.Write(this.SpecularMaxRed);
+                bw.Write(this.SpecularMaxGreen);
+                bw.Write(this.SpecularMaxBlue);
+                bw.Write(this.EnvmapPower);
+                bw.Write(this.EnvmapClamp);
+                bw.Write(this.EnvmapVinylScale);
+                bw.Write(this.EnvmapMinLevel);
+                bw.Write(this.EnvmapMinRed);
+                bw.Write(this.EnvmapMinGreen);
+                bw.Write(this.EnvmapMinBlue);
+                bw.Write(this.EnvmapMaxLevel);
+                bw.Write(this.EnvmapMaxRed);
+                bw.Write(this.EnvmapMaxGreen);
+                bw.Write(this.EnvmapMaxBlue);
+                bw.Write(this.VinylLuminanceMinLevel);
+                bw.Write(this.VinylLuminanceMaxLevel);
+
+                array = ms.ToArray();
+
+            }
+
+            array = Interop.Compress(array, eLZCompressionType.BEST);
+
+            using (var bw = new BinaryWriter(File.Open(filename, FileMode.Create)))
+            {
+
+                bw.Write(array);
+
+            }
 
         }
 
@@ -617,7 +673,51 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="filename">File to read data from.</param>
         public override void Deserialize(string filename)
         {
+            var array = File.ReadAllBytes(filename);
 
+            array = Interop.Decompress(array);
+
+            using var ms = new MemoryStream(array);
+            using var br = new BinaryReader(ms);
+
+            this.DiffusePower = br.ReadSingle();
+            this.DiffuseClamp = br.ReadSingle();
+            this.DiffuseFlakes = br.ReadSingle();
+            this.DiffuseVinylScale = br.ReadSingle();
+            this.DiffuseMinLevel = br.ReadSingle();
+            this.DiffuseMinRed = br.ReadSingle();
+            this.DiffuseMinGreen = br.ReadSingle();
+            this.DiffuseMinBlue = br.ReadSingle();
+            this.DiffuseMaxLevel = br.ReadSingle();
+            this.DiffuseMaxRed = br.ReadSingle();
+            this.DiffuseMaxGreen = br.ReadSingle();
+            this.DiffuseMaxBlue = br.ReadSingle();
+            this.DiffuseMinAlpha = br.ReadSingle();
+            this.DiffuseMaxAlpha = br.ReadSingle();
+            this.SpecularPower = br.ReadSingle();
+            this.SpecularFlakes = br.ReadSingle();
+            this.SpecularVinylScale = br.ReadSingle();
+            this.SpecularMinLevel = br.ReadSingle();
+            this.SpecularMinRed = br.ReadSingle();
+            this.SpecularMinGreen = br.ReadSingle();
+            this.SpecularMinBlue = br.ReadSingle();
+            this.SpecularMaxLevel = br.ReadSingle();
+            this.SpecularMaxRed = br.ReadSingle();
+            this.SpecularMaxGreen = br.ReadSingle();
+            this.SpecularMaxBlue = br.ReadSingle();
+            this.EnvmapPower = br.ReadSingle();
+            this.EnvmapClamp = br.ReadSingle();
+            this.EnvmapVinylScale = br.ReadSingle();
+            this.EnvmapMinLevel = br.ReadSingle();
+            this.EnvmapMinRed = br.ReadSingle();
+            this.EnvmapMinGreen = br.ReadSingle();
+            this.EnvmapMinBlue = br.ReadSingle();
+            this.EnvmapMaxLevel = br.ReadSingle();
+            this.EnvmapMaxRed = br.ReadSingle();
+            this.EnvmapMaxGreen = br.ReadSingle();
+            this.EnvmapMaxBlue = br.ReadSingle();
+            this.VinylLuminanceMinLevel = br.ReadSingle();
+            this.VinylLuminanceMaxLevel = br.ReadSingle();
         }
 
         #endregion

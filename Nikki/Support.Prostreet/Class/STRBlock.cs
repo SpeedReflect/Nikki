@@ -197,7 +197,6 @@ namespace Nikki.Support.Prostreet.Class
 		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="STRBlock"/> with.</param>
 		public override void Disassemble(BinaryReader br)
 		{
-			br.BaseStream.Position += 8;
 			uint ReaderID = br.ReadUInt32();
 			int BlockSize = br.ReadInt32();
 			var broffset = br.BaseStream.Position;

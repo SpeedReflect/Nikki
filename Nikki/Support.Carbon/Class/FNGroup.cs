@@ -232,6 +232,7 @@ namespace Nikki.Support.Carbon.Class
             using var ms = new MemoryStream(array);
             using var br = new BinaryReader(ms);
 
+            this._colorinfo.Clear();
             var size = br.ReadInt32();
             this._colorinfo.Capacity = size;
 

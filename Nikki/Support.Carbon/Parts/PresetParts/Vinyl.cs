@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using CoreExtensions.IO;
 
 
 
@@ -205,6 +206,58 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
             bw.Write(this.SaturationInnerGlow);
             bw.Write(this.BrightnessInnerGlow);
             bw.Write((short)0);
+        }
+
+        /// <summary>
+        /// Serializes instance into a byte array and stores it in the file provided.
+        /// </summary>
+        public void Serialize(BinaryWriter bw)
+        {
+            bw.WriteNullTermUTF8(this.VectorVinyl);
+            bw.Write(this.PositionY);
+            bw.Write(this.PositionX);
+            bw.Write(this.Rotation);
+            bw.Write(this.Skew);
+            bw.Write(this.ScaleY);
+            bw.Write(this.ScaleX);
+            bw.WriteNullTermUTF8(this.SwatchFillEffect);
+            bw.Write(this.SaturationFillEffect);
+            bw.Write(this.BrightnessFillEffect);
+            bw.WriteNullTermUTF8(this.SwatchStrokeEffect);
+            bw.Write(this.SaturationStrokeEffect);
+            bw.Write(this.BrightnessStrokeEffect);
+            bw.WriteNullTermUTF8(this.SwatchInnerShadow);
+            bw.Write(this.SaturationInnerShadow);
+            bw.Write(this.BrightnessInnerShadow);
+            bw.WriteNullTermUTF8(this.SwatchInnerGlow);
+            bw.Write(this.SaturationInnerGlow);
+            bw.Write(this.BrightnessInnerGlow);
+        }
+
+        /// <summary>
+        /// Deserializes byte array into an instance by loading data from the file provided.
+        /// </summary>
+        public void Deserialize(BinaryReader br)
+        {
+            this.VectorVinyl = br.ReadNullTermUTF8();
+            this.PositionY = br.ReadInt16();
+            this.PositionX = br.ReadInt16();
+            this.Rotation = br.ReadSByte();
+            this.Skew = br.ReadSByte();
+            this.ScaleY = br.ReadSByte();
+            this.ScaleX = br.ReadSByte();
+            this.SwatchFillEffect = br.ReadNullTermUTF8();
+            this.SaturationFillEffect = br.ReadByte();
+            this.BrightnessFillEffect = br.ReadByte();
+            this.SwatchStrokeEffect = br.ReadNullTermUTF8();
+            this.SaturationStrokeEffect = br.ReadByte();
+            this.BrightnessStrokeEffect = br.ReadByte();
+            this.SwatchInnerShadow = br.ReadNullTermUTF8();
+            this.SaturationInnerShadow = br.ReadByte();
+            this.BrightnessInnerShadow = br.ReadByte();
+            this.SwatchInnerGlow = br.ReadNullTermUTF8();
+            this.SaturationInnerGlow = br.ReadByte();
+            this.BrightnessInnerGlow = br.ReadByte();
         }
     }
 }

@@ -3,10 +3,12 @@ using System.IO;
 using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using Nikki.Reflection.Enum.SlotID;
 using Nikki.Support.Carbon.Framework;
+using CoreExtensions.IO;
 using CoreExtensions.Conversions;
 
 
@@ -236,7 +238,30 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="filename">File to write data to.</param>
         public override void Serialize(string filename)
         {
+            byte[] array;
+            using (var ms = new MemoryStream(0x40))
+            using (var bw = new BinaryWriter(ms))
+            {
 
+                bw.WriteNullTermUTF8(this.InfoMainOverride);
+                bw.WriteNullTermUTF8(this.InfoOverrideGroup2);
+                bw.WriteNullTermUTF8(this.InfoOverrideGroup3);
+                bw.WriteNullTermUTF8(this.InfoOverrideGroup4);
+                bw.WriteNullTermUTF8(this.InfoOverrideGroup5);
+                bw.WriteNullTermUTF8(this.InfoOverrideGroup6);
+
+                array = ms.ToArray();
+
+            }
+
+            array = Interop.Compress(array, eLZCompressionType.BEST);
+
+            using (var bw = new BinaryWriter(File.Open(filename, FileMode.Create)))
+            {
+
+                bw.Write(array);
+
+            }
         }
 
         /// <summary>
@@ -245,7 +270,19 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="filename">File to read data from.</param>
         public override void Deserialize(string filename)
         {
+            var array = File.ReadAllBytes(filename);
 
+            array = Interop.Decompress(array);
+
+            using var ms = new MemoryStream(array);
+            using var br = new BinaryReader(ms);
+
+            this.InfoMainOverride = br.ReadNullTermUTF8();
+            this.InfoOverrideGroup2 = br.ReadNullTermUTF8();
+            this.InfoOverrideGroup3 = br.ReadNullTermUTF8();
+            this.InfoOverrideGroup4 = br.ReadNullTermUTF8();
+            this.InfoOverrideGroup5 = br.ReadNullTermUTF8();
+            this.InfoOverrideGroup6 = br.ReadNullTermUTF8();
         }
 
         #endregion

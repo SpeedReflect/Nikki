@@ -3,6 +3,7 @@ using System.IO;
 using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Carbon.Framework;
@@ -432,7 +433,53 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="filename">File to write data to.</param>
         public override void Serialize(string filename)
         {
+            byte[] array;
+            using (var ms = new MemoryStream(0x60))
+            using (var bw = new BinaryWriter(ms))
+            {
 
+                // Write all main settings
+                bw.WriteNullTermUTF8(this.PaintType);
+                bw.WriteNullTermUTF8(this.PaintSwatch);
+                bw.Write(this.PaintSaturation);
+                bw.Write(this.PaintBrightness);
+
+                // Write Generic Vinyl
+                bw.WriteNullTermUTF8(this.GenericVinyl);
+
+                // Write Vector Vinyl
+                bw.WriteNullTermUTF8(this.VectorVinyl);
+                bw.Write(this.PositionY);
+                bw.Write(this.PositionX);
+                bw.Write((byte)this.Rotation);
+                bw.Write((byte)this.Skew);
+                bw.Write((byte)this.ScaleY);
+                bw.Write((byte)this.ScaleX);
+                bw.WriteNullTermUTF8(this.SwatchFillEffect);
+                bw.Write(this.SaturationFillEffect);
+                bw.Write(this.BrightnessFillEffect);
+                bw.WriteNullTermUTF8(this.SwatchStrokeEffect);
+                bw.Write(this.SaturationStrokeEffect);
+                bw.Write(this.BrightnessStrokeEffect);
+                bw.WriteNullTermUTF8(this.SwatchInnerShadow);
+                bw.Write(this.SaturationInnerShadow);
+                bw.Write(this.BrightnessInnerShadow);
+                bw.WriteNullTermUTF8(this.SwatchInnerGlow);
+                bw.Write(this.SaturationInnerGlow);
+                bw.Write(this.BrightnessInnerGlow);
+
+                array = ms.ToArray();
+
+            }
+
+            array = Interop.Compress(array, eLZCompressionType.BEST);
+
+            using (var bw = new BinaryWriter(File.Open(filename, FileMode.Create)))
+            {
+
+                bw.Write(array);
+
+            }
         }
 
         /// <summary>
@@ -441,7 +488,42 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="filename">File to read data from.</param>
         public override void Deserialize(string filename)
         {
+            var array = File.ReadAllBytes(filename);
 
+            array = Interop.Decompress(array);
+
+            using var ms = new MemoryStream(array);
+            using var br = new BinaryReader(ms);
+
+            // Read paint settings
+            this.PaintType = br.ReadNullTermUTF8();
+            this.PaintSwatch = br.ReadNullTermUTF8();
+            this.PaintSaturation = br.ReadSingle();
+            this.PaintBrightness = br.ReadSingle();
+
+            // Generic vinyl
+            this.GenericVinyl = br.ReadNullTermUTF8();
+
+            // Vinyl
+            this.VectorVinyl = br.ReadNullTermUTF8();
+            this.PositionY = br.ReadInt16();
+            this.PositionX = br.ReadInt16();
+            this.Rotation = br.ReadSByte();
+            this.Skew = br.ReadSByte();
+            this.ScaleY = br.ReadSByte();
+            this.ScaleX = br.ReadSByte();
+            this.SwatchFillEffect = br.ReadNullTermUTF8();
+            this.SaturationFillEffect = br.ReadByte();
+            this.BrightnessFillEffect = br.ReadByte();
+            this.SwatchStrokeEffect = br.ReadNullTermUTF8();
+            this.SaturationStrokeEffect = br.ReadByte();
+            this.BrightnessStrokeEffect = br.ReadByte();
+            this.SwatchInnerShadow = br.ReadNullTermUTF8();
+            this.SaturationInnerShadow = br.ReadByte();
+            this.BrightnessInnerShadow = br.ReadByte();
+            this.SwatchInnerGlow = br.ReadNullTermUTF8();
+            this.SaturationInnerGlow = br.ReadByte();
+            this.BrightnessInnerGlow = br.ReadByte();
         }
 
         #endregion

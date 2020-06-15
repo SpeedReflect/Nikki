@@ -329,6 +329,7 @@ namespace Nikki.Support.Carbon.Class
 			using var ms = new MemoryStream(array);
 			using var br = new BinaryReader(ms);
 
+			this.ModelCarParts.Clear();
 			var size = br.ReadInt32();
 			this.ModelCarParts.Capacity = size;
 

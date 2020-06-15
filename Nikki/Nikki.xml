@@ -14692,6 +14692,16 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Parts.PresetParts.Attachments.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.PresetParts.Attachments.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.Carbon.Parts.PresetParts.Autosculpt">
             <summary>
             A unit <see cref="T:Nikki.Support.Carbon.Parts.PresetParts.Autosculpt"/> used in preset rides.
@@ -14893,6 +14903,16 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to read data with.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Parts.PresetParts.Damages.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.PresetParts.Damages.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.Carbon.Parts.PresetParts.PaintValues">
             <summary>
             A unit <see cref="T:Nikki.Support.Carbon.Parts.PresetParts.PaintValues"/> used in preset rides.
@@ -14940,6 +14960,16 @@
             Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.PresetParts.PaintValues.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.PresetParts.PaintValues.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
         </member>
         <member name="T:Nikki.Support.Carbon.Parts.PresetParts.Vinyl">
             <summary>
@@ -15059,6 +15089,16 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.PresetParts.Vinyl.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.Carbon.Parts.PresetParts.VisualSets">
             <summary>
             A unit <see cref="T:Nikki.Support.Carbon.Parts.PresetParts.VisualSets"/> used in preset rides.
@@ -15142,6 +15182,16 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Parts.PresetParts.VisualSets.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.PresetParts.VisualSets.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.Carbon.Parts.PresetParts.ZeroDamage">
             <summary>
             A unit <see cref="T:Nikki.Support.Carbon.Parts.PresetParts.ZeroDamage"/> used in preset rides.
@@ -15194,6 +15244,16 @@
             Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.PresetParts.ZeroDamage.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.PresetParts.ZeroDamage.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
         </member>
         <member name="T:Nikki.Support.MostWanted.Attributes.BoolAttribute">
             <summary>

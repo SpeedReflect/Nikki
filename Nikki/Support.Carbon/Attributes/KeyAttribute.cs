@@ -9,6 +9,7 @@ using Nikki.Reflection.Enum.CP;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Shared.Parts.CarParts;
+using CoreExtensions.IO;
 using CoreExtensions.Conversions;
 
 
@@ -196,13 +197,13 @@ namespace Nikki.Support.Carbon.Attributes
 		public override void Serialize(BinaryWriter bw)
 		{
 			bw.Write(this.Key);
-			bw.Write(this.Value.BinHash());
+			bw.WriteNullTermUTF8(this.Value);
 		}
 
 		/// <summary>
 		/// Deserializes byte array into an instance by loading data from the file provided.
 		/// </summary>
 		public override void Deserialize(BinaryReader br) =>
-			this.Value = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.Value = br.ReadNullTermUTF8();
 	}
 }

@@ -4,6 +4,7 @@ using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using CoreExtensions.IO;
 
 
 
@@ -86,6 +87,30 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
 			bw.Write(this.PaintSwatch.BinHash());
 			bw.Write(this.Saturation);
 			bw.Write(this.Brightness);
+		}
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public void Serialize(BinaryWriter bw)
+		{
+			bw.WriteEnum(this.IsCarbonStyle);
+			bw.WriteNullTermUTF8(this.PaintGroup);
+			bw.WriteNullTermUTF8(this.PaintSwatch);
+			bw.Write(this.Saturation);
+			bw.Write(this.Brightness);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public void Deserialize(BinaryReader br)
+		{
+			this.IsCarbonStyle = br.ReadEnum<eBoolean>();
+			this.PaintGroup = br.ReadNullTermUTF8();
+			this.PaintSwatch = br.ReadNullTermUTF8();
+			this.Saturation = br.ReadSingle();
+			this.Brightness = br.ReadSingle();
 		}
 	}
 }

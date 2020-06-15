@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using CoreExtensions.IO;
 
 
 
@@ -141,6 +142,44 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
 			bw.Write(this.VinylColor.BinHash());
 			bw.Write(this.DecalFront.BinHash());
 			bw.Write(this.DecalRear.BinHash());
+		}
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public void Serialize(BinaryWriter bw)
+		{
+			bw.WriteNullTermUTF8(this.BasePaintType);
+			bw.WriteNullTermUTF8(this.BasePaintGroup);
+			bw.WriteNullTermUTF8(this.BasePaintSwatch);
+			bw.WriteNullTermUTF8(this.VinylSpecific);
+			bw.WriteNullTermUTF8(this.VinylGeneric);
+			bw.WriteNullTermUTF8(this.VectorVinyl);
+			bw.WriteNullTermUTF8(this.RimsPaintType);
+			bw.WriteNullTermUTF8(this.RimsPaintGroup);
+			bw.WriteNullTermUTF8(this.RimsPaintSwatch);
+			bw.WriteNullTermUTF8(this.VinylColor);
+			bw.WriteNullTermUTF8(this.DecalFront);
+			bw.WriteNullTermUTF8(this.DecalRear);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public void Deserialize(BinaryReader br)
+		{
+			this.BasePaintType = br.ReadNullTermUTF8();
+			this.BasePaintGroup = br.ReadNullTermUTF8();
+			this.BasePaintSwatch = br.ReadNullTermUTF8();
+			this.VinylSpecific = br.ReadNullTermUTF8();
+			this.VinylGeneric = br.ReadNullTermUTF8();
+			this.VectorVinyl = br.ReadNullTermUTF8();
+			this.RimsPaintType = br.ReadNullTermUTF8();
+			this.RimsPaintGroup = br.ReadNullTermUTF8();
+			this.RimsPaintSwatch = br.ReadNullTermUTF8();
+			this.VinylColor = br.ReadNullTermUTF8();
+			this.DecalFront = br.ReadNullTermUTF8();
+			this.DecalRear = br.ReadNullTermUTF8();
 		}
 	}
 }

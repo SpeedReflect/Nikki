@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using CoreExtensions.IO;
 
 
 
@@ -149,7 +150,6 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
 			this.Attachment13 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
 			this.Attachment14 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
 			this.Attachment15 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-
 		}
 
 		/// <summary>
@@ -174,6 +174,52 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
 			bw.Write(this.Attachment13.BinHash());
 			bw.Write(this.Attachment14.BinHash());
 			bw.Write(this.Attachment15.BinHash());
+		}
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public void Serialize(BinaryWriter bw)
+		{
+			bw.WriteNullTermUTF8(this.Attachment0);
+			bw.WriteNullTermUTF8(this.Attachment1);
+			bw.WriteNullTermUTF8(this.Attachment2);
+			bw.WriteNullTermUTF8(this.Attachment3);
+			bw.WriteNullTermUTF8(this.Attachment4);
+			bw.WriteNullTermUTF8(this.Attachment5);
+			bw.WriteNullTermUTF8(this.Attachment6);
+			bw.WriteNullTermUTF8(this.Attachment7);
+			bw.WriteNullTermUTF8(this.Attachment8);
+			bw.WriteNullTermUTF8(this.Attachment9);
+			bw.WriteNullTermUTF8(this.Attachment10);
+			bw.WriteNullTermUTF8(this.Attachment11);
+			bw.WriteNullTermUTF8(this.Attachment12);
+			bw.WriteNullTermUTF8(this.Attachment13);
+			bw.WriteNullTermUTF8(this.Attachment14);
+			bw.WriteNullTermUTF8(this.Attachment15);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public void Deserialize(BinaryReader br)
+		{
+			this.Attachment0 = br.ReadNullTermUTF8();
+			this.Attachment1 = br.ReadNullTermUTF8();
+			this.Attachment2 = br.ReadNullTermUTF8();
+			this.Attachment3 = br.ReadNullTermUTF8();
+			this.Attachment4 = br.ReadNullTermUTF8();
+			this.Attachment5 = br.ReadNullTermUTF8();
+			this.Attachment6 = br.ReadNullTermUTF8();
+			this.Attachment7 = br.ReadNullTermUTF8();
+			this.Attachment8 = br.ReadNullTermUTF8();
+			this.Attachment9 = br.ReadNullTermUTF8();
+			this.Attachment10 = br.ReadNullTermUTF8();
+			this.Attachment11 = br.ReadNullTermUTF8();
+			this.Attachment12 = br.ReadNullTermUTF8();
+			this.Attachment13 = br.ReadNullTermUTF8();
+			this.Attachment14 = br.ReadNullTermUTF8();
+			this.Attachment15 = br.ReadNullTermUTF8();
 		}
 	}
 }

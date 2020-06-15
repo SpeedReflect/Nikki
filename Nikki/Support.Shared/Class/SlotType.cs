@@ -70,7 +70,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [MemoryCastable()]
         [Category("Primary")]
-        public eCarAnimLocation PrimaryAnimation { get; set; }
+        public eCarAnimLocation PrimaryAnimation { get; set; } = eCarAnimLocation.CARANIM_NONE;
 
 		#endregion
 
