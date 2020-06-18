@@ -102,14 +102,14 @@ namespace Nikki.Support.Shared.Class
         /// <summary>
         /// Serializes instance into a byte array and stores it in the file provided.
         /// </summary>
-        /// <param name="filename">File to write data to.</param>
-        public abstract void Serialize(string filename);
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        public abstract void Serialize(BinaryWriter bw);
 
         /// <summary>
         /// Deserializes byte array into an instance by loading data from the file provided.
         /// </summary>
-        /// <param name="filename">File to read data from.</param>
-        public abstract void Deserialize(string filename);
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        public abstract void Deserialize(BinaryReader br);
 
         /// <summary>
         /// Casts all attributes from this object to another one.

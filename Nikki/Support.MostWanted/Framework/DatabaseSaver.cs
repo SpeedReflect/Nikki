@@ -3,6 +3,7 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using CoreExtensions.IO;
+using CoreExtensions.Management;
 
 
 
@@ -21,9 +22,9 @@ namespace Nikki.Support.MostWanted.Framework
 
 		public bool Invoke()
 		{
-			return this._db.Buffer == null || this._db.Buffer.Length == 0
-				? this.WriteUnique()
-				: this.WriteBuffered();
+			return File.Exists(this._options.File)
+				? this.WriteBuffered()
+				: this.WriteUnique();
 		}
 
 		public bool WriteUnique()
@@ -47,7 +48,10 @@ namespace Nikki.Support.MostWanted.Framework
 
 		public bool WriteBuffered()
 		{
-			using var ms = new MemoryStream(this._db.Buffer);
+			var buffer = File.ReadAllBytes(this._options.File);
+			buffer = Interop.Decompress(buffer);
+
+			using var ms = new MemoryStream(buffer);
 			using var br = new BinaryReader(ms);
 			using var bw = new BinaryWriter(File.Open(this._options.File, FileMode.Create));
 
@@ -64,6 +68,8 @@ namespace Nikki.Support.MostWanted.Framework
 			this._db.FNGroups.Assemble(bw, this._options.Watermark);
 
 			this.WriteBlockOffsets(bw, br);
+			buffer = null;
+			ForcedX.GCCollect();
 			return true;
 		}
 

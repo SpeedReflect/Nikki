@@ -22,21 +22,11 @@ namespace Nikki.Support.MostWanted.Attributes
 	[DebuggerDisplay("Attribute: {AttribType} | Type: {Type} | ID: {ID} | Level: {Level}")]
 	public class PartIDAttribute : CPAttribute
 	{
-		private const eCarPartAttribType _type = eCarPartAttribType.CarPartID;
-
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="PartIDAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public override eCarPartAttribType AttribType
-		{
-			get => _type;
-			set
-			{
-				var index = this.BelongsTo.GetIndex(this);
-				this.BelongsTo.Attributes[index] = this.ConvertTo(value);
-			}
-		}
+		public override eCarPartAttribType AttribType => eCarPartAttribType.CarPartID;
 
 		/// <summary>
 		/// Type of this <see cref="BoolAttribute"/>.

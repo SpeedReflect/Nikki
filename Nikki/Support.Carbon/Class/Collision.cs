@@ -285,39 +285,40 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Serializes instance into a byte array and stores it in the file provided.
 		/// </summary>
-		/// <param name="filename">File to write data to.</param>
-		public override void Serialize(string filename)
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		public override void Serialize(BinaryWriter bw)
 		{
 			byte[] array;
 			using (var ms = new MemoryStream(0x300))
-			using (var bw = new BinaryWriter(ms))
+			using (var writer = new BinaryWriter(ms))
 			{
 
-				bw.Write(this.NumberOfBounds);
-				bw.Write(this.NumberOfClouds);
+				writer.WriteNullTermUTF8(this._collection_name);
+				writer.Write(this.NumberOfBounds);
+				writer.Write(this.NumberOfClouds);
 
 				for (int loop = 0; loop < this.NumberOfBounds; ++loop)
 				{
 
-					this.CollisionBounds[loop].Write(bw);
+					this.CollisionBounds[loop].Write(writer);
 
 				}
 
 				for (int loop = 0; loop < this.NumberOfClouds; ++loop)
 				{
 
-					bw.Write(this.CollisionClouds[loop].NumberOfVertices);
+					writer.Write(this.CollisionClouds[loop].NumberOfVertices);
 
 					for (int i = 0; i < this.CollisionClouds[loop].NumberOfVertices; ++i)
 					{
 
-						this.CollisionClouds[loop].Vertices[i].Write(bw);
+						this.CollisionClouds[loop].Vertices[i].Write(writer);
 
 					}
 
 				}
 
-				bw.WriteEnum(this.IsResolved);
+				writer.WriteEnum(this.IsResolved);
 
 				array = ms.ToArray();
 
@@ -325,52 +326,52 @@ namespace Nikki.Support.Carbon.Class
 
 			array = Interop.Compress(array, eLZCompressionType.BEST);
 
-			using (var bw = new BinaryWriter(File.Open(filename, FileMode.Create)))
-			{
-
-				bw.Write(array);
-
-			}
+			var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+			header.Write(bw);
+			bw.Write(array.Length);
+			bw.Write(array);
 		}
 
 		/// <summary>
 		/// Deserializes byte array into an instance by loading data from the file provided.
 		/// </summary>
-		/// <param name="filename">File to read data from.</param>
-		public override void Deserialize(string filename)
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		public override void Deserialize(BinaryReader br)
 		{
-			var array = File.ReadAllBytes(filename);
+			int size = br.ReadInt32();
+			var array = br.ReadBytes(size);
 
 			array = Interop.Decompress(array);
 
 			using var ms = new MemoryStream(array);
-			using var br = new BinaryReader(ms);
+			using var reader = new BinaryReader(ms);
 
-			this.NumberOfBounds = br.ReadInt32();
-			this.NumberOfClouds = br.ReadInt32();
+			this._collection_name = reader.ReadNullTermUTF8();
+			this.NumberOfBounds = reader.ReadInt32();
+			this.NumberOfClouds = reader.ReadInt32();
 
 			for (int loop = 0; loop < this.NumberOfBounds; ++loop)
 			{
 
-				this.CollisionBounds[loop].Read(br);
+				this.CollisionBounds[loop].Read(reader);
 
 			}
 
 			for (int loop = 0; loop < this.NumberOfClouds; ++loop)
 			{
 
-				this.CollisionClouds[loop].NumberOfVertices = br.ReadInt32();
+				this.CollisionClouds[loop].NumberOfVertices = reader.ReadInt32();
 
 				for (int i = 0; i < this.CollisionClouds[loop].NumberOfVertices; ++i)
 				{
 
-					this.CollisionClouds[loop].Vertices[i].Read(br);
+					this.CollisionClouds[loop].Vertices[i].Read(reader);
 
 				}
 
 			}
 
-			this.IsResolved = br.ReadEnum<eBoolean>();
+			this.IsResolved = reader.ReadEnum<eBoolean>();
 		}
 
 		#endregion

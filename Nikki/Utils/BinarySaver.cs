@@ -58,6 +58,5 @@ namespace Nikki.Utils
 
 			}
 		}
-
 	}
 }

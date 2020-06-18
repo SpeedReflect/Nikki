@@ -628,7 +628,7 @@ namespace Nikki.Support.MostWanted.Framework
 		/// </summary>
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		/// <param name="mark">Watermark written when saving.</param>
-		public void Encode(BinaryWriter bw, string mark)
+		private void Encode(BinaryWriter bw, string mark)
 		{
 			// Get string map
 			var string_dict = this.MakeStringList(mark, out var string_buffer);
@@ -707,7 +707,7 @@ namespace Nikki.Support.MostWanted.Framework
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="size">Size of the car parts block.</param>
-		public void Decode(BinaryReader br, int size)
+		private void Decode(BinaryReader br, int size)
 		{
 			long position = br.BaseStream.Position;
 			var offsets = this.FindOffsets(br, size);
@@ -852,6 +852,27 @@ namespace Nikki.Support.MostWanted.Framework
 				throw new CollectionExistenceException(cname);
 
 			}
+		}
+
+		/// <summary>
+		/// Exports collection with CollectionName specified to a filename provided.
+		/// </summary>
+		/// <param name="cname">CollectionName of a collection to export.</param>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		public override void Export(string cname, BinaryWriter bw)
+		{
+
+		}
+
+		/// <summary>
+		/// Imports collection from file provided and attempts to add it to the end of 
+		/// this <see cref="Manager{T}"/> in case it does not exist.
+		/// </summary>
+		/// <param name="type">Type of serialization of a collection.</param>
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		public override void Import(eSerializeType type, BinaryReader br)
+		{
+
 		}
 	}
 }

@@ -20,21 +20,11 @@ namespace Nikki.Support.Carbon.Attributes
 	[DebuggerDisplay("Attribute: {AttribType} | Type: {Type} | Value: {Value}")]
 	public class FloatAttribute : CPAttribute
 	{
-		private const eCarPartAttribType _type = eCarPartAttribType.Floating;
-
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="FloatAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public override eCarPartAttribType AttribType
-		{
-			get => _type;
-			set
-			{
-				var index = this.BelongsTo.GetIndex(this);
-				this.BelongsTo.Attributes[index] = this.ConvertTo(value);
-			}
-		}
+		public override eCarPartAttribType AttribType => eCarPartAttribType.Floating;
 
 		/// <summary>
 		/// Type of this <see cref="BoolAttribute"/>.

@@ -3,6 +3,7 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using CoreExtensions.IO;
+using CoreExtensions.Management;
 
 
 
@@ -49,10 +50,10 @@ namespace Nikki.Support.Carbon.Framework
 		public bool Invoke()
 		{
 			if (!File.Exists(this._options.File)) return false;
-			this._db.Buffer = File.ReadAllBytes(this._options.File);
-			this._db.Buffer = Interop.Decompress(this._db.Buffer);
+			var buffer = File.ReadAllBytes(this._options.File);
+			buffer = Interop.Decompress(buffer);
 
-			using var ms = new MemoryStream(this._db.Buffer);
+			using var ms = new MemoryStream(buffer);
 			using var br = new BinaryReader(ms);
 
 			this.ReadBlockOffsets(br);
@@ -72,6 +73,8 @@ namespace Nikki.Support.Carbon.Framework
 			this._db.SlotOverrides.Disassemble(br, this.slottypes);
 			this.ProcessCarAnimations(br);
 
+			buffer = null;
+			ForcedX.GCCollect();
 			return true;
 		}
 

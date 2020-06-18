@@ -1245,19 +1245,126 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Serializes instance into a byte array and stores it in the file provided.
         /// </summary>
-        /// <param name="filename">File to write data to.</param>
-        public override void Serialize(string filename)
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        public override void Serialize(BinaryWriter bw)
         {
+            byte[] array;
+            using (var ms = new MemoryStream(this.Textures.Count << 16))
+            using (var writer = new BinaryWriter(ms))
+			{
 
+                writer.WriteNullTermUTF8(this._collection_name);
+                writer.WriteEnum(this.IsCompressed);
+                writer.Write(this.Animations.Count);
+                writer.Write(this.Textures.Count);
+                
+                for (int loop = 0; loop < this.Animations.Count; ++loop)
+				{
+
+                    var anim = this.Animations[loop];
+                    writer.WriteNullTermUTF8(anim.Name);
+                    writer.Write(anim.BinKey);
+                    writer.Write(anim.FramesPerSecond);
+                    writer.Write(anim.TimeBase);
+                    writer.Write((byte)anim.FrameTextures.Count);
+
+                    for (int i = 0; i < anim.FrameTextures.Count; ++i)
+					{
+
+                        writer.WriteNullTermUTF8(anim.FrameTextures[i].Name);
+
+					}
+
+				}
+
+                for (int loop = 0; loop < this.Textures.Count; ++loop)
+				{
+
+                    this.Textures[loop].Serialize(writer);
+
+				}
+
+                array = ms.ToArray();
+
+			}
+
+            array = Interop.Compress(array, eLZCompressionType.BEST);
+
+            var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+            header.Write(bw);
+            bw.Write(array.Length);
+            bw.Write(array);
         }
 
         /// <summary>
         /// Deserializes byte array into an instance by loading data from the file provided.
         /// </summary>
-        /// <param name="filename">File to read data from.</param>
-        public override void Deserialize(string filename)
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        public override void Deserialize(BinaryReader br)
         {
+            int size = br.ReadInt32();
+            var array = br.ReadBytes(size);
 
+            array = Interop.Decompress(array);
+
+            using var ms = new MemoryStream(array);
+            using var reader = new BinaryReader(ms);
+
+            this._collection_name = reader.ReadNullTermUTF8();
+            this.IsCompressed = reader.ReadEnum<eBoolean>();
+            int animcount = reader.ReadInt32();
+            int textcount = reader.ReadInt32();
+            this.Animations.Capacity = animcount;
+            this.Textures.Capacity = textcount;
+
+            for (int loop = 0; loop < animcount; ++loop)
+			{
+
+                var anim = new AnimSlot()
+                {
+                    Name = reader.ReadNullTermUTF8(),
+                    BinKey = reader.ReadUInt32(),
+                    FramesPerSecond = reader.ReadByte(),
+                    TimeBase = reader.ReadByte(),
+                };
+
+                var count = reader.ReadByte();
+                anim.FrameTextures.Capacity = count;
+
+                for (int i = 0; i < count; ++i)
+				{
+
+                    var frame = new FrameEntry()
+                    {
+                        Name = reader.ReadNullTermUTF8()
+                    };
+
+                    anim.FrameTextures.Add(frame);
+
+				}
+
+			}
+
+            for (int loop = 0; loop < textcount; ++loop)
+			{
+
+                var texture = new Texture()
+                {
+                    TPK = this
+                };
+
+                var header = new SerializationHeader();
+                header.Read(reader);
+
+                // Check for consistency
+                if (header.ID != eBlockID.Nikki) break;
+                if (header.Game != this.GameINT) break;
+                if (header.Name != this.Manager.Name) break;
+
+                texture.Deserialize(reader);
+                this.Textures.Add(texture);
+
+			}
         }
 
         #endregion

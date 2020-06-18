@@ -21,21 +21,11 @@ namespace Nikki.Support.MostWanted.Attributes
 	[DebuggerDisplay("Attribute: {AttribType} | Type: {Type} | Value1: {Value1} | Value2: {Value2}")]
 	public class TwoStringAttribute : CPAttribute
 	{
-		private const eCarPartAttribType _type = eCarPartAttribType.TwoString;
-
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="StringAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public override eCarPartAttribType AttribType
-		{
-			get => _type;
-			set
-			{
-				var index = this.BelongsTo.GetIndex(this);
-				this.BelongsTo.Attributes[index] = this.ConvertTo(value);
-			}
-		}
+		public override eCarPartAttribType AttribType => eCarPartAttribType.TwoString;
 
 		/// <summary>
 		/// Type of this <see cref="BoolAttribute"/>.

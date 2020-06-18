@@ -1,11 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Interface;
 using Nikki.Support.Shared.Parts.FNGParts;
+using CoreExtensions.Conversions;
 
 
 
@@ -21,6 +23,8 @@ namespace Nikki.Support.Shared.Class
         /// <summary>
         /// Collection Name of the class.
         /// </summary>
+        [ReadOnly(true)]
+        [Category("Main")]
         public override string CollectionName { get; set; }
 
         /// <summary>
@@ -36,16 +40,21 @@ namespace Nikki.Support.Shared.Class
         /// <summary>
         /// Binary memory hash of the Collection Name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public virtual uint BinKey => this.CollectionName.BinHash();
 
         /// <summary>
         /// Vault memory hash of the Collection Name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public virtual uint VltKey => this.CollectionName.VltHash();
 
         /// <summary>
         /// Indicates whether current instance can be destroyed.
         /// </summary>
+        [Browsable(false)]
         public bool Destroy { get; set; }
 
         /// <summary>
@@ -87,14 +96,14 @@ namespace Nikki.Support.Shared.Class
         /// <summary>
         /// Serializes instance into a byte array and stores it in the file provided.
         /// </summary>
-        /// <param name="filename">File to write data to.</param>
-        public abstract void Serialize(string filename);
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        public abstract void Serialize(BinaryWriter bw);
 
         /// <summary>
         /// Deserializes byte array into an instance by loading data from the file provided.
         /// </summary>
-        /// <param name="filename">File to read data from.</param>
-        public abstract void Deserialize(string filename);
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        public abstract void Deserialize(BinaryReader br);
 
         /// <summary>
         /// Gets <see cref="FEngColor"/> from a specific index.

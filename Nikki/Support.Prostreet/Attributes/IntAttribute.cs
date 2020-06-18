@@ -20,21 +20,11 @@ namespace Nikki.Support.Prostreet.Attributes
 	[DebuggerDisplay("Attribute: {AttribType} | Type: {Type} | Value: {Value}")]
 	public class IntAttribute : CPAttribute
 	{
-		private const eCarPartAttribType _type = eCarPartAttribType.Integer;
-
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="IntAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public override eCarPartAttribType AttribType
-		{
-			get => _type;
-			set
-			{
-				var index = this.BelongsTo.GetIndex(this);
-				this.BelongsTo.Attributes[index] = this.ConvertTo(value);
-			}
-		}
+		public override eCarPartAttribType AttribType => eCarPartAttribType.Integer;
 
 		/// <summary>
 		/// Type of this <see cref="BoolAttribute"/>.

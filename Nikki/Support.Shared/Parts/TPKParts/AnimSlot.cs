@@ -19,7 +19,6 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 	public class AnimSlot : SubPart
 	{
 		private string _name = String.Empty;
-		private uint _binkey;
 
 		/// <summary>
 		/// Name of this <see cref="AnimSlot"/>.
@@ -31,7 +30,7 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 			set
 			{
 				this._name = value;
-				this._binkey = value.BinHash();
+				this.BinKey = value.BinHash();
 			}
 		}
 
@@ -39,8 +38,9 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 		/// Binary memory hash of the name.
 		/// </summary>
 		[Category("Main")]
+		[ReadOnly(true)]
 		[TypeConverter(typeof(HexConverter))]
-		public uint BinKey => this._binkey;
+		public uint BinKey { get; set; }
 
 		/// <summary>
 		/// Number of frames shown per second.
@@ -58,12 +58,12 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 		/// Frame textures of this <see cref="AnimSlot"/>.
 		/// </summary>
 		[Category("Primary")]
-		public List<string> FrameTextures { get; set; }
+		public List<FrameEntry> FrameTextures { get; set; }
 
 		/// <summary>
 		/// Initializes new instance of <see cref="AnimSlot"/>.
 		/// </summary>
-		public AnimSlot() => this.FrameTextures = new List<string>();
+		public AnimSlot() => this.FrameTextures = new List<FrameEntry>();
 
 		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.
@@ -71,12 +71,17 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 		/// <returns>Exact plain copy of the object.</returns>
 		public override SubPart PlainCopy()
 		{
-			var result = new AnimSlot();
+			var result = new AnimSlot()
+			{
+				FramesPerSecond = this.FramesPerSecond,
+				TimeBase = this.TimeBase,
+				Name = this.Name
+			};
 
-			foreach (var property in this.GetType().GetProperties())
+			foreach (var entry in this.FrameTextures)
 			{
 
-				property.SetValue(result, property.GetValue(this));
+				result.FrameTextures.Add(new FrameEntry() { Name = entry.Name });
 
 			}
 
@@ -93,7 +98,7 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 			br.BaseStream.Position += 0xC; // I guess we trust size stated?
 
 			this._name = br.ReadNullTermUTF8(0x10);
-			this._binkey = br.ReadUInt32();
+			this.BinKey = br.ReadUInt32();
 
 			this.FrameTextures.Capacity = br.ReadByte();
 			this.FramesPerSecond = br.ReadByte();
@@ -106,7 +111,12 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 			for (int loop = 0; loop < size; ++loop)
 			{
 
-				this.FrameTextures.Add(br.ReadUInt32().BinString(eLookupReturn.EMPTY));
+				var entry = new FrameEntry()
+				{
+					Name = br.ReadUInt32().BinString(eLookupReturn.EMPTY)
+				};
+
+				this.FrameTextures.Add(entry);
 				br.BaseStream.Position += 8;
 
 			}
@@ -128,7 +138,7 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 			bw.Write(0x2C);
 			bw.Write((long)0);
 			bw.WriteNullTermUTF8(this._name, 0x10);
-			bw.Write(this._binkey);
+			bw.Write(this.BinKey);
 			bw.Write((byte)this.FrameTextures.Count);
 			bw.Write(this.FramesPerSecond);
 			bw.Write(this.TimeBase);
@@ -141,10 +151,16 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 			for (int loop = 0; loop < this.FrameTextures.Count; ++loop)
 			{
 
-				bw.Write(this.FrameTextures[loop].BinHash());
+				bw.Write(this.FrameTextures[loop].BinKey);
 				bw.Write((long)0);
 
 			}
 		}
+
+		/// <summary>
+		/// Name of the animation slot.
+		/// </summary>
+		/// <returns>Name of the slot as a string value.</returns>
+		public override string ToString() => this.Name;
 	}
 }

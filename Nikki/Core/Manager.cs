@@ -3,6 +3,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Interface;
 using Nikki.Reflection.Exception;
@@ -714,68 +715,20 @@ namespace Nikki.Core
 		/// Exports collection with CollectionName specified to a filename provided.
 		/// </summary>
 		/// <param name="cname">CollectionName of a collection to export.</param>
-		/// <param name="filename">Filename where collection should be exported.</param>
-		public void Export(string cname, string filename)
-		{
-			var export = this.Find(cname);
-
-			if (export == null)
-			{
-
-				throw new ArgumentException($"Collection named {cname} does not exist");
-
-			}
-
-
-			if (export is IAssembly asm)
-			{
-
-				using var bw = new BinaryWriter(File.Open(filename, FileMode.Create, FileAccess.Write));
-				asm.Assemble(bw);
-
-			}
-			else
-			{
-
-				throw new ArgumentException($"Collection {cname} is not exportable");
-
-			}
-		}
-
-		/// <summary>
-		/// Exports collection to a filename specified.
-		/// </summary>
-		/// <param name="item">Collection to export.</param>
-		/// <param name="filename">Filename where collection should be exported.</param>
-		public void Export(T item, string filename)
-		{
-
-			if (item is IAssembly asm)
-			{
-
-				using var bw = new BinaryWriter(File.Open(filename, FileMode.Create, FileAccess.Write));
-				asm.Assemble(bw);
-
-			}
-			else
-			{
-
-				throw new ArgumentException($"Collection {item.CollectionName} is not exportable");
-
-			}
-		}
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		public abstract void Export(string cname, BinaryWriter bw);
 
 		/// <summary>
 		/// Exports object to a filename specified.
 		/// </summary>
 		/// <param name="value">Object to export.</param>
-		/// <param name="filename">Filename where object should be exported.</param>
-		public void Export(object value, string filename)
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		public void Export(object value, BinaryWriter bw)
 		{
 			if (value is T obj)
 			{
 
-				this.Export(obj, filename);
+				this.Export(obj.CollectionName, bw);
 
 			}
 			else
@@ -794,23 +747,9 @@ namespace Nikki.Core
 		/// Imports collection from file provided and attempts to add it to the end of 
 		/// this <see cref="Manager{T}"/> in case it does not exist.
 		/// </summary>
-		/// <param name="filename">Filename with collection to import.</param>
-		public void Import(string filename)
-		{
-			if (!typeof(IAssembly).IsAssignableFrom(typeof(T)))
-			{
-
-				throw new ArgumentException($"Collection of this type are not importable");
-
-			}
-
-			using var br = new BinaryReader(File.Open(filename, FileMode.Open, FileAccess.Read));
-
-			var ctor = typeof(T).GetConstructor(new Type[] { typeof(BinaryReader), this.GetType() });
-			var instance = (T)ctor.Invoke(new object[] { br, this });
-
-			this.Add(instance);
-		}
+		/// <param name="type">Type of serialization of a collection.</param>
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		public abstract void Import(eSerializeType type, BinaryReader br);
 
 		#endregion
 

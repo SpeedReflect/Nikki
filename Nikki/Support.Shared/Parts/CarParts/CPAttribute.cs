@@ -19,7 +19,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="CPAttribute"/>.
 		/// </summary>
-		public abstract eCarPartAttribType AttribType { get; set; }
+		public abstract eCarPartAttribType AttribType { get; }
 
 		/// <summary>
 		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.

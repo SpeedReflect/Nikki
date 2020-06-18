@@ -21,21 +21,11 @@ namespace Nikki.Support.Carbon.Attributes
 	[DebuggerDisplay("Attribute: {AttribType} | Type: {Type} | Value: {Value}")]
 	public class BoolAttribute : CPAttribute
 	{
-		private const eCarPartAttribType _type = eCarPartAttribType.Boolean;
-
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="BoolAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public override eCarPartAttribType AttribType
-		{
-			get => _type;
-			set
-			{
-				var index = this.BelongsTo.GetIndex(this);
-				this.BelongsTo.Attributes[index] = this.ConvertTo(value);
-			}
-		}
+		public override eCarPartAttribType AttribType => eCarPartAttribType.Boolean;
 
 		/// <summary>
 		/// Type of this <see cref="BoolAttribute"/>.

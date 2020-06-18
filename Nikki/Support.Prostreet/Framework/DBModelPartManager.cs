@@ -889,5 +889,26 @@ namespace Nikki.Support.Prostreet.Framework
 
 			}
 		}
+
+		/// <summary>
+		/// Exports collection with CollectionName specified to a filename provided.
+		/// </summary>
+		/// <param name="cname">CollectionName of a collection to export.</param>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		public override void Export(string cname, BinaryWriter bw)
+		{
+
+		}
+
+		/// <summary>
+		/// Imports collection from file provided and attempts to add it to the end of 
+		/// this <see cref="Manager{T}"/> in case it does not exist.
+		/// </summary>
+		/// <param name="type">Type of serialization of a collection.</param>
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		public override void Import(eSerializeType type, BinaryReader br)
+		{
+
+		}
 	}
 }

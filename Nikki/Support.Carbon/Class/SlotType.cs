@@ -250,22 +250,23 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Serializes instance into a byte array and stores it in the file provided.
         /// </summary>
-        /// <param name="filename">File to write data to.</param>
-        public override void Serialize(string filename)
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        public override void Serialize(BinaryWriter bw)
         {
             byte[] array;
-            using (var ms = new MemoryStream(0x40))
-            using (var bw = new BinaryWriter(ms))
+            using (var ms = new MemoryStream(0x60))
+            using (var writer = new BinaryWriter(ms))
             {
 
-                bw.WriteNullTermUTF8(this.SlotStockOverride);
-                bw.WriteNullTermUTF8(this.SlotMainOverride);
-                bw.WriteNullTermUTF8(this.SlotOverrideGroup2);
-                bw.WriteNullTermUTF8(this.SlotOverrideGroup3);
-                bw.WriteNullTermUTF8(this.SlotOverrideGroup4);
-                bw.WriteNullTermUTF8(this.SlotOverrideGroup5);
-                bw.WriteNullTermUTF8(this.SlotOverrideGroup6);
-                bw.WriteEnum(this.PrimaryAnimation);
+                writer.WriteNullTermUTF8(this._collection_name);
+                writer.WriteNullTermUTF8(this.SlotStockOverride);
+                writer.WriteNullTermUTF8(this.SlotMainOverride);
+                writer.WriteNullTermUTF8(this.SlotOverrideGroup2);
+                writer.WriteNullTermUTF8(this.SlotOverrideGroup3);
+                writer.WriteNullTermUTF8(this.SlotOverrideGroup4);
+                writer.WriteNullTermUTF8(this.SlotOverrideGroup5);
+                writer.WriteNullTermUTF8(this.SlotOverrideGroup6);
+                writer.WriteEnum(this.PrimaryAnimation);
 
                 array = ms.ToArray();
 
@@ -273,35 +274,35 @@ namespace Nikki.Support.Carbon.Class
 
             array = Interop.Compress(array, eLZCompressionType.BEST);
 
-            using (var bw = new BinaryWriter(File.Open(filename, FileMode.Create)))
-            {
-
-                bw.Write(array);
-
-            }
+            var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+            header.Write(bw);
+            bw.Write(array.Length);
+            bw.Write(array);
         }
 
         /// <summary>
         /// Deserializes byte array into an instance by loading data from the file provided.
         /// </summary>
-        /// <param name="filename">File to read data from.</param>
-        public override void Deserialize(string filename)
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        public override void Deserialize(BinaryReader br)
         {
-            var array = File.ReadAllBytes(filename);
+            int size = br.ReadInt32();
+            var array = br.ReadBytes(size);
 
             array = Interop.Decompress(array);
 
             using var ms = new MemoryStream(array);
-            using var br = new BinaryReader(ms);
+            using var reader = new BinaryReader(ms);
 
-            this.SlotStockOverride = br.ReadNullTermUTF8();
-            this.SlotMainOverride = br.ReadNullTermUTF8();
-            this.SlotOverrideGroup2 = br.ReadNullTermUTF8();
-            this.SlotOverrideGroup3 = br.ReadNullTermUTF8();
-            this.SlotOverrideGroup4 = br.ReadNullTermUTF8();
-            this.SlotOverrideGroup5 = br.ReadNullTermUTF8();
-            this.SlotOverrideGroup6 = br.ReadNullTermUTF8();
-            this.PrimaryAnimation = br.ReadEnum<eCarAnimLocation>();
+            this._collection_name = reader.ReadNullTermUTF8();
+            this.SlotStockOverride = reader.ReadNullTermUTF8();
+            this.SlotMainOverride = reader.ReadNullTermUTF8();
+            this.SlotOverrideGroup2 = reader.ReadNullTermUTF8();
+            this.SlotOverrideGroup3 = reader.ReadNullTermUTF8();
+            this.SlotOverrideGroup4 = reader.ReadNullTermUTF8();
+            this.SlotOverrideGroup5 = reader.ReadNullTermUTF8();
+            this.SlotOverrideGroup6 = reader.ReadNullTermUTF8();
+            this.PrimaryAnimation = reader.ReadEnum<eCarAnimLocation>();
         }
 
         #endregion

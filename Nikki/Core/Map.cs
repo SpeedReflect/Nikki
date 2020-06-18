@@ -280,6 +280,7 @@ namespace Nikki.Core
 			{ eBlockID.AcidEffects,       new Alignment(0x80, Alignment.eAlignType.Modular) },
 			{ eBlockID.AcidEmmiters,      new Alignment(0x80, Alignment.eAlignType.Modular) },
 			{ eBlockID.STRBlocks,         Alignment.Default },
+			{ eBlockID.LangFont,          Alignment.Default },
 			{ eBlockID.Subtitles,         Alignment.Default },
 			{ eBlockID.MovieCatalog,      new Alignment(0x80, Alignment.eAlignType.Modular) },
 			{ eBlockID.ICECatalog,        new Alignment(0x80, Alignment.eAlignType.Modular) },

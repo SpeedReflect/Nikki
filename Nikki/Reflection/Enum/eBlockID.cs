@@ -47,6 +47,7 @@
         AcidEffects        = 0x00035020, // 0x80 Modular
         AcidEmmiters       = 0x00035021, // 0x80 Modular
         STRBlocks          = 0x00039000, // 0x10 Modular
+        LangFont           = 0x00039001, // 0x10 Modular
         Subtitles          = 0x00039010, // 0x10 Modular
         MovieCatalog       = 0x00039020, // 0x80 Modular
         ICECatalog         = 0x0003B200, // 0x80 Modular

@@ -13,11 +13,6 @@ namespace Nikki.Reflection.Abstract
 	public abstract class FileBase : IGameSelectable
 	{
         /// <summary>
-        /// File buffer.
-        /// </summary>
-		public byte[] Buffer { get; set; }
-
-        /// <summary>
         /// Game to which the class belongs to.
         /// </summary>
         public abstract GameINT GameINT { get; }
@@ -73,60 +68,6 @@ namespace Nikki.Reflection.Abstract
             }
 
             return null;
-        }
-
-        /// <summary>
-        /// Gets a <see cref="Collectable"/> class from CollectionName and root provided.
-        /// </summary>
-        /// <param name="CName">CollectionName of <see cref="Collectable"/> to find.</param>
-        /// <param name="root">Root collection of the class.</param>
-        /// <returns><see cref="Collectable"/> class.</returns>
-        public Collectable GetCollection(string CName, string root)
-        {
-
-            return null;
-        }
-
-        /// <summary>
-        /// Attempts to get <see cref="Collectable"/> class from CollectionName and root provided.
-        /// </summary>
-        /// <param name="CName">CollectionName of <see cref="Collectable"/> to find.</param>
-        /// <param name="root">Root collection of the class.</param>
-        /// <param name="collection"><see cref="Collectable"/> class that is to return.</param>
-        /// <returns>True if collection exists and can be returned; false otherwise.</returns>
-        public bool TryGetCollection(string CName, string root, out Collectable collection)
-        {
-            collection = null;
-            try
-            {
-                collection = this.GetCollection(CName, root);
-                return collection != null;
-            }
-            catch (System.Exception)
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Gets a <see cref="IReflective"/> class from the path provided.
-        /// </summary>
-        /// <param name="path">Path of the <see cref="IReflective"/> class to find.</param>
-        /// <returns><see cref="IReflective"/> class.</returns>
-        public virtual IReflective GetPrimitive(params string[] path)
-        {
-            switch (path.Length)
-            {
-                case 2:
-                    return this.GetCollection(path[1], path[0]);
-
-                case 4:
-                    var collection = this.GetCollection(path[1], path[0]);
-                    return collection.GetSubPart(path[3], path[2]);
-
-                default:
-                    return null;
-            }
         }
 
         /// <summary>

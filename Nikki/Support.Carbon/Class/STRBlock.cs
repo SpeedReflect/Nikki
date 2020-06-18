@@ -368,21 +368,22 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Serializes instance into a byte array and stores it in the file provided.
 		/// </summary>
-		/// <param name="filename">File to write data to.</param>
-		public override void Serialize(string filename)
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		public override void Serialize(BinaryWriter bw)
 		{
 			byte[] array;
 			using (var ms = new MemoryStream(this.InfoLength << 5))
-			using (var bw = new BinaryWriter(ms))
+			using (var writer = new BinaryWriter(ms))
 			{
 
-				bw.Write(this.InfoLength);
+				writer.WriteNullTermUTF8(this._collection_name);
+				writer.Write(this.InfoLength);
 
 				for (int loop = 0; loop < this.InfoLength; ++loop)
 				{
 
-					bw.WriteNullTermUTF8(this._stringinfo[loop].Label);
-					bw.WriteNullTermUTF8(this._stringinfo[loop].Text);
+					writer.WriteNullTermUTF8(this._stringinfo[loop].Label);
+					writer.WriteNullTermUTF8(this._stringinfo[loop].Text);
 
 				}
 
@@ -392,38 +393,37 @@ namespace Nikki.Support.Carbon.Class
 
 			array = Interop.Compress(array, eLZCompressionType.BEST);
 
-			using (var bw = new BinaryWriter(File.Open(filename, FileMode.Create)))
-			{
-
-				bw.Write(array);
-
-			}
+			var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+			header.Write(bw);
+			bw.Write(array.Length);
+			bw.Write(array);
 		}
 
 		/// <summary>
 		/// Deserializes byte array into an instance by loading data from the file provided.
 		/// </summary>
-		/// <param name="filename">File to read data from.</param>
-		public override void Deserialize(string filename)
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		public override void Deserialize(BinaryReader br)
 		{
-			var array = File.ReadAllBytes(filename);
+			int size = br.ReadInt32();
+			var array = br.ReadBytes(size);
 
 			array = Interop.Decompress(array);
 
 			using var ms = new MemoryStream(array);
-			using var br = new BinaryReader(ms);
+			using var reader = new BinaryReader(ms);
 
-			this._stringinfo.Clear();
-			var size = br.ReadInt32();
-			this._stringinfo.Capacity = size;
+			this._collection_name = reader.ReadNullTermUTF8();
+			var count = reader.ReadInt32();
+			this._stringinfo.Capacity = count;
 
-			for (int loop = 0; loop < size; ++loop)
+			for (int loop = 0; loop < count; ++loop)
 			{
 
 				var info = new StringRecord(this)
 				{
-					Label = br.ReadNullTermUTF8(),
-					Text = br.ReadNullTermUTF8()
+					Label = reader.ReadNullTermUTF8(),
+					Text = reader.ReadNullTermUTF8()
 				};
 
 				info.Key = info.Label.BinHash();

@@ -11,9 +11,9 @@ using Nikki.Reflection.Attributes;
 using Nikki.Support.Carbon.Framework;
 using Nikki.Support.Carbon.Attributes;
 using Nikki.Support.Shared.Parts.CarParts;
+using CoreExtensions.IO;
 using CoreExtensions.Reflection;
 using CoreExtensions.Conversions;
-
 
 
 
@@ -277,26 +277,27 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Serializes instance into a byte array and stores it in the file provided.
 		/// </summary>
-		/// <param name="filename">File to write data to.</param>
-		public override void Serialize(string filename)
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		public override void Serialize(BinaryWriter bw)
 		{
 			byte[] array;
 			using (var ms = new MemoryStream(this.Length << 5))
-			using (var bw = new BinaryWriter(ms))
+			using (var writer = new BinaryWriter(ms))
 			{
 
-				bw.Write(this.Length);
+				writer.WriteNullTermUTF8(this._collection_name);
+				writer.Write(this.Length);
 
 				for (int loop = 0; loop < this.Length; ++loop)
 				{
 
 					var part = this.ModelCarParts[loop];
-					bw.Write(part.Attributes.Count);
+					writer.Write(part.Attributes.Count);
 
 					for (int i = 0; i < part.Attributes.Count; ++i)
 					{
 
-						part.Attributes[i].Serialize(bw);
+						part.Attributes[i].Serialize(writer);
 
 					}
 
@@ -308,41 +309,40 @@ namespace Nikki.Support.Carbon.Class
 
 			array = Interop.Compress(array, eLZCompressionType.BEST);
 
-			using (var bw = new BinaryWriter(File.Open(filename, FileMode.Create)))
-			{
-
-				bw.Write(array);
-
-			}
+			var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+			header.Write(bw);
+			bw.Write(array.Length);
+			bw.Write(array);
 		}
 
 		/// <summary>
 		/// Deserializes byte array into an instance by loading data from the file provided.
 		/// </summary>
-		/// <param name="filename">File to read data from.</param>
-		public override void Deserialize(string filename)
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		public override void Deserialize(BinaryReader br)
 		{
-			var array = File.ReadAllBytes(filename);
+			int size = br.ReadInt32();
+			var array = br.ReadBytes(size);
 
 			array = Interop.Decompress(array);
 
 			using var ms = new MemoryStream(array);
-			using var br = new BinaryReader(ms);
+			using var reader = new BinaryReader(ms);
 
-			this.ModelCarParts.Clear();
-			var size = br.ReadInt32();
-			this.ModelCarParts.Capacity = size;
+			this._collection_name = reader.ReadNullTermUTF8();
+			var count = reader.ReadInt32();
+			this.ModelCarParts.Capacity = count;
 
-			for (int loop = 0; loop < size; ++loop)
+			for (int loop = 0; loop < count; ++loop)
 			{
 
-				var num = br.ReadInt32();
+				var num = reader.ReadInt32();
 				var part = new Parts.CarParts.RealCarPart(0, num, this);
 
 				for (int i = 0; i < num; ++i)
 				{
 
-					var key = br.ReadUInt32();
+					var key = reader.ReadUInt32();
 
 					if (!Map.CarPartKeys.TryGetValue(key, out var type))
 					{
@@ -365,7 +365,7 @@ namespace Nikki.Support.Carbon.Class
 
 					attrib.Key = key;
 					attrib.BelongsTo = part;
-					attrib.Deserialize(br);
+					attrib.Deserialize(reader);
 					part.Attributes.Add(attrib);
 
 				}

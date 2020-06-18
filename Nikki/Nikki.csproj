@@ -26,4 +26,16 @@
     <ProjectReference Include="C:\Users\Max\source\repos\CoreExtensions\CoreExtensions\CoreExtensions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="CoreExtensions.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="keys.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LZCompressLib.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

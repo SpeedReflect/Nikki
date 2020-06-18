@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Collections;
 using Nikki.Core;
+using Nikki.Reflection.Enum;
 
 
 
@@ -72,22 +74,23 @@ namespace Nikki.Reflection.Interface
 		/// Exports collection with CollectionName specified to a filename provided.
 		/// </summary>
 		/// <param name="cname">CollectionName of a collection to export.</param>
-		/// <param name="filename">Filename where collection should be exported.</param>
-		void Export(string cname, string filename);
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		void Export(string cname, BinaryWriter bw);
 
 		/// <summary>
 		/// Exports object to a filename specified.
 		/// </summary>
 		/// <param name="value">Object to export.</param>
-		/// <param name="filename">Filename where object should be exported.</param>
-		void Export(object value, string filename);
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		void Export(object value, BinaryWriter bw);
 
 		/// <summary>
 		/// Imports collection from file provided and attempts to add it to the end of 
 		/// this <see cref="IManager"/> in case it does not exist.
 		/// </summary>
-		/// <param name="filename">Filename with collection to import.</param>
-		void Import(string filename);
+		/// <param name="type">Type of serialization of a collection.</param>
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		void Import(eSerializeType type, BinaryReader br);
 
 		/// <summary>
 		/// Searches for the collection with CollectionName specified and returns the 

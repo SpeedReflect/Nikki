@@ -184,24 +184,25 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Serializes instance into a byte array and stores it in the file provided.
         /// </summary>
-        /// <param name="filename">File to write data to.</param>
-        public override void Serialize(string filename)
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        public override void Serialize(BinaryWriter bw)
         {
             byte[] array;
-            using (var ms = new MemoryStream(this.InfoLength << 3 + 4))
-            using (var bw = new BinaryWriter(ms))
+            using (var ms = new MemoryStream(this.InfoLength << 3 + 5 + this.CollectionName.Length))
+            using (var writer = new BinaryWriter(ms))
 			{
 
-                bw.Write(this.InfoLength);
+                writer.WriteNullTermUTF8(this.CollectionName);
+                writer.Write(this.InfoLength);
 
                 foreach (var color in this._colorinfo)
 				{
 
-                    bw.Write(color.Offset);
-                    bw.Write(color.Alpha);
-                    bw.Write(color.Red);
-                    bw.Write(color.Green);
-                    bw.Write(color.Blue);
+                    writer.Write(color.Offset);
+                    writer.Write(color.Alpha);
+                    writer.Write(color.Red);
+                    writer.Write(color.Green);
+                    writer.Write(color.Blue);
 
 				}
 
@@ -211,41 +212,40 @@ namespace Nikki.Support.Carbon.Class
 
             array = Interop.Compress(array, eLZCompressionType.BEST);
 
-            using (var bw = new BinaryWriter(File.Open(filename, FileMode.Create)))
-            {
-
-                bw.Write(array);
-
-            }
+            var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+            header.Write(bw);
+            bw.Write(array.Length);
+            bw.Write(array);
         }
 
         /// <summary>
         /// Deserializes byte array into an instance by loading data from the file provided.
         /// </summary>
-        /// <param name="filename">File to read data from.</param>
-        public override void Deserialize(string filename)
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        public override void Deserialize(BinaryReader br)
         {
-            var array = File.ReadAllBytes(filename);
+            int size = br.ReadInt32();
+            var array = br.ReadBytes(size);
 
             array = Interop.Decompress(array);
 
             using var ms = new MemoryStream(array);
-            using var br = new BinaryReader(ms);
+            using var reader = new BinaryReader(ms);
 
-            this._colorinfo.Clear();
-            var size = br.ReadInt32();
-            this._colorinfo.Capacity = size;
+            this.CollectionName = reader.ReadNullTermUTF8();
+            var count = reader.ReadInt32();
+            this._colorinfo.Capacity = count;
 
-            for (int loop = 0; loop < size; ++loop)
+            for (int loop = 0; loop < count; ++loop)
 			{
 
 				var color = new FEngColor(this)
 				{
-					Offset = br.ReadUInt32(),
-					Alpha = br.ReadByte(),
-					Red = br.ReadByte(),
-					Green = br.ReadByte(),
-					Blue = br.ReadByte()
+					Offset = reader.ReadUInt32(),
+					Alpha = reader.ReadByte(),
+					Red = reader.ReadByte(),
+					Green = reader.ReadByte(),
+					Blue = reader.ReadByte()
 				};
 
                 this._colorinfo.Add(color);

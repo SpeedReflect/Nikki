@@ -22,21 +22,11 @@ namespace Nikki.Support.Carbon.Attributes
 	[DebuggerDisplay("Attribute: {AttribType} | Type: {Type} | Value: {Value}")]
 	public class KeyAttribute : CPAttribute
 	{
-		private const eCarPartAttribType _type = eCarPartAttribType.Key;
-
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="KeyAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public override eCarPartAttribType AttribType
-		{
-			get => _type;
-			set
-			{
-				var index = this.BelongsTo.GetIndex(this);
-				this.BelongsTo.Attributes[index] = this.ConvertTo(value);
-			}
-		}
+		public override eCarPartAttribType AttribType => eCarPartAttribType.Key;
 
 		/// <summary>
 		/// Type of this <see cref="BoolAttribute"/>.

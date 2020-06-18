@@ -430,43 +430,45 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Serializes instance into a byte array and stores it in the file provided.
         /// </summary>
-        /// <param name="filename">File to write data to.</param>
-        public override void Serialize(string filename)
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        public override void Serialize(BinaryWriter bw)
         {
             byte[] array;
-            using (var ms = new MemoryStream(0x60))
-            using (var bw = new BinaryWriter(ms))
+            using (var ms = new MemoryStream(0x61 + this._collection_name.Length))
+            using (var writer = new BinaryWriter(ms))
             {
 
+                writer.WriteNullTermUTF8(this._collection_name);
+
                 // Write all main settings
-                bw.WriteNullTermUTF8(this.PaintType);
-                bw.WriteNullTermUTF8(this.PaintSwatch);
-                bw.Write(this.PaintSaturation);
-                bw.Write(this.PaintBrightness);
+                writer.WriteNullTermUTF8(this.PaintType);
+                writer.WriteNullTermUTF8(this.PaintSwatch);
+                writer.Write(this.PaintSaturation);
+                writer.Write(this.PaintBrightness);
 
                 // Write Generic Vinyl
-                bw.WriteNullTermUTF8(this.GenericVinyl);
+                writer.WriteNullTermUTF8(this.GenericVinyl);
 
                 // Write Vector Vinyl
-                bw.WriteNullTermUTF8(this.VectorVinyl);
-                bw.Write(this.PositionY);
-                bw.Write(this.PositionX);
-                bw.Write((byte)this.Rotation);
-                bw.Write((byte)this.Skew);
-                bw.Write((byte)this.ScaleY);
-                bw.Write((byte)this.ScaleX);
-                bw.WriteNullTermUTF8(this.SwatchFillEffect);
-                bw.Write(this.SaturationFillEffect);
-                bw.Write(this.BrightnessFillEffect);
-                bw.WriteNullTermUTF8(this.SwatchStrokeEffect);
-                bw.Write(this.SaturationStrokeEffect);
-                bw.Write(this.BrightnessStrokeEffect);
-                bw.WriteNullTermUTF8(this.SwatchInnerShadow);
-                bw.Write(this.SaturationInnerShadow);
-                bw.Write(this.BrightnessInnerShadow);
-                bw.WriteNullTermUTF8(this.SwatchInnerGlow);
-                bw.Write(this.SaturationInnerGlow);
-                bw.Write(this.BrightnessInnerGlow);
+                writer.WriteNullTermUTF8(this.VectorVinyl);
+                writer.Write(this.PositionY);
+                writer.Write(this.PositionX);
+                writer.Write((byte)this.Rotation);
+                writer.Write((byte)this.Skew);
+                writer.Write((byte)this.ScaleY);
+                writer.Write((byte)this.ScaleX);
+                writer.WriteNullTermUTF8(this.SwatchFillEffect);
+                writer.Write(this.SaturationFillEffect);
+                writer.Write(this.BrightnessFillEffect);
+                writer.WriteNullTermUTF8(this.SwatchStrokeEffect);
+                writer.Write(this.SaturationStrokeEffect);
+                writer.Write(this.BrightnessStrokeEffect);
+                writer.WriteNullTermUTF8(this.SwatchInnerShadow);
+                writer.Write(this.SaturationInnerShadow);
+                writer.Write(this.BrightnessInnerShadow);
+                writer.WriteNullTermUTF8(this.SwatchInnerGlow);
+                writer.Write(this.SaturationInnerGlow);
+                writer.Write(this.BrightnessInnerGlow);
 
                 array = ms.ToArray();
 
@@ -474,56 +476,56 @@ namespace Nikki.Support.Carbon.Class
 
             array = Interop.Compress(array, eLZCompressionType.BEST);
 
-            using (var bw = new BinaryWriter(File.Open(filename, FileMode.Create)))
-            {
-
-                bw.Write(array);
-
-            }
+            var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+            header.Write(bw);
+            bw.Write(array.Length);
+            bw.Write(array);
         }
 
         /// <summary>
         /// Deserializes byte array into an instance by loading data from the file provided.
         /// </summary>
-        /// <param name="filename">File to read data from.</param>
-        public override void Deserialize(string filename)
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        public override void Deserialize(BinaryReader br)
         {
-            var array = File.ReadAllBytes(filename);
+            int size = br.ReadInt32();
+            var array = br.ReadBytes(size);
 
             array = Interop.Decompress(array);
 
             using var ms = new MemoryStream(array);
-            using var br = new BinaryReader(ms);
+            using var reader = new BinaryReader(ms);
 
             // Read paint settings
-            this.PaintType = br.ReadNullTermUTF8();
-            this.PaintSwatch = br.ReadNullTermUTF8();
-            this.PaintSaturation = br.ReadSingle();
-            this.PaintBrightness = br.ReadSingle();
+            this._collection_name = reader.ReadNullTermUTF8();
+            this.PaintType = reader.ReadNullTermUTF8();
+            this.PaintSwatch = reader.ReadNullTermUTF8();
+            this.PaintSaturation = reader.ReadSingle();
+            this.PaintBrightness = reader.ReadSingle();
 
             // Generic vinyl
-            this.GenericVinyl = br.ReadNullTermUTF8();
+            this.GenericVinyl = reader.ReadNullTermUTF8();
 
             // Vinyl
-            this.VectorVinyl = br.ReadNullTermUTF8();
-            this.PositionY = br.ReadInt16();
-            this.PositionX = br.ReadInt16();
-            this.Rotation = br.ReadSByte();
-            this.Skew = br.ReadSByte();
-            this.ScaleY = br.ReadSByte();
-            this.ScaleX = br.ReadSByte();
-            this.SwatchFillEffect = br.ReadNullTermUTF8();
-            this.SaturationFillEffect = br.ReadByte();
-            this.BrightnessFillEffect = br.ReadByte();
-            this.SwatchStrokeEffect = br.ReadNullTermUTF8();
-            this.SaturationStrokeEffect = br.ReadByte();
-            this.BrightnessStrokeEffect = br.ReadByte();
-            this.SwatchInnerShadow = br.ReadNullTermUTF8();
-            this.SaturationInnerShadow = br.ReadByte();
-            this.BrightnessInnerShadow = br.ReadByte();
-            this.SwatchInnerGlow = br.ReadNullTermUTF8();
-            this.SaturationInnerGlow = br.ReadByte();
-            this.BrightnessInnerGlow = br.ReadByte();
+            this.VectorVinyl = reader.ReadNullTermUTF8();
+            this.PositionY = reader.ReadInt16();
+            this.PositionX = reader.ReadInt16();
+            this.Rotation = reader.ReadSByte();
+            this.Skew = reader.ReadSByte();
+            this.ScaleY = reader.ReadSByte();
+            this.ScaleX = reader.ReadSByte();
+            this.SwatchFillEffect = reader.ReadNullTermUTF8();
+            this.SaturationFillEffect = reader.ReadByte();
+            this.BrightnessFillEffect = reader.ReadByte();
+            this.SwatchStrokeEffect = reader.ReadNullTermUTF8();
+            this.SaturationStrokeEffect = reader.ReadByte();
+            this.BrightnessStrokeEffect = reader.ReadByte();
+            this.SwatchInnerShadow = reader.ReadNullTermUTF8();
+            this.SaturationInnerShadow = reader.ReadByte();
+            this.BrightnessInnerShadow = reader.ReadByte();
+            this.SwatchInnerGlow = reader.ReadNullTermUTF8();
+            this.SaturationInnerGlow = reader.ReadByte();
+            this.BrightnessInnerGlow = reader.ReadByte();
         }
 
         #endregion

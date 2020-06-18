@@ -525,33 +525,27 @@
             <returns>An <see cref="T:System.Collections.IEnumerator"/> that can be used to iterate through 
             the collection.</returns>
         </member>
-        <member name="M:Nikki.Core.Manager`1.Export(System.String,System.String)">
+        <member name="M:Nikki.Core.Manager`1.Export(System.String,System.IO.BinaryWriter)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
-            <param name="filename">Filename where collection should be exported.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Core.Manager`1.Export(`0,System.String)">
-            <summary>
-            Exports collection to a filename specified.
-            </summary>
-            <param name="item">Collection to export.</param>
-            <param name="filename">Filename where collection should be exported.</param>
-        </member>
-        <member name="M:Nikki.Core.Manager`1.Export(System.Object,System.String)">
+        <member name="M:Nikki.Core.Manager`1.Export(System.Object,System.IO.BinaryWriter)">
             <summary>
             Exports object to a filename specified.
             </summary>
             <param name="value">Object to export.</param>
-            <param name="filename">Filename where object should be exported.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Core.Manager`1.Import(System.String)">
+        <member name="M:Nikki.Core.Manager`1.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
             Imports collection from file provided and attempts to add it to the end of 
             this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
             </summary>
-            <param name="filename">Filename with collection to import.</param>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Core.Manager`1.IndexOf(System.String)">
             <summary>
@@ -939,11 +933,6 @@
             Very base class of any database.
             </summary>
         </member>
-        <member name="P:Nikki.Reflection.Abstract.FileBase.Buffer">
-            <summary>
-            File buffer.
-            </summary>
-        </member>
         <member name="P:Nikki.Reflection.Abstract.FileBase.GameINT">
             <summary>
             Game to which the class belongs to.
@@ -991,30 +980,6 @@
             </summary>
             <param name="type"><see cref="T:System.Type"/> of <see cref="T:Nikki.Reflection.Interface.IManager"/> to get.</param>
             <returns><see cref="T:Nikki.Reflection.Interface.IManager"/>, if exists; null otherwise.</returns>
-        </member>
-        <member name="M:Nikki.Reflection.Abstract.FileBase.GetCollection(System.String,System.String)">
-            <summary>
-            Gets a <see cref="T:Nikki.Reflection.Abstract.Collectable"/> class from CollectionName and root provided.
-            </summary>
-            <param name="CName">CollectionName of <see cref="T:Nikki.Reflection.Abstract.Collectable"/> to find.</param>
-            <param name="root">Root collection of the class.</param>
-            <returns><see cref="T:Nikki.Reflection.Abstract.Collectable"/> class.</returns>
-        </member>
-        <member name="M:Nikki.Reflection.Abstract.FileBase.TryGetCollection(System.String,System.String,Nikki.Reflection.Abstract.Collectable@)">
-            <summary>
-            Attempts to get <see cref="T:Nikki.Reflection.Abstract.Collectable"/> class from CollectionName and root provided.
-            </summary>
-            <param name="CName">CollectionName of <see cref="T:Nikki.Reflection.Abstract.Collectable"/> to find.</param>
-            <param name="root">Root collection of the class.</param>
-            <param name="collection"><see cref="T:Nikki.Reflection.Abstract.Collectable"/> class that is to return.</param>
-            <returns>True if collection exists and can be returned; false otherwise.</returns>
-        </member>
-        <member name="M:Nikki.Reflection.Abstract.FileBase.GetPrimitive(System.String[])">
-            <summary>
-            Gets a <see cref="T:Nikki.Reflection.Interface.IReflective"/> class from the path provided.
-            </summary>
-            <param name="path">Path of the <see cref="T:Nikki.Reflection.Interface.IReflective"/> class to find.</param>
-            <returns><see cref="T:Nikki.Reflection.Interface.IReflective"/> class.</returns>
         </member>
         <member name="M:Nikki.Reflection.Abstract.FileBase.GetDatabaseInfo">
             <summary>
@@ -2612,6 +2577,26 @@
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.eRaceGameplayMode.DRIFTURL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Nikki.Reflection.Enum.eSerializeType">
+            <summary>
+            Represents serialization type for collections and managers.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eSerializeType.Synchronize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eSerializeType.Negate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eSerializeType.Override">
             <summary>
             
             </summary>
@@ -8921,17 +8906,17 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
-        <member name="M:Nikki.Reflection.Interface.IAssembly.Serialize(System.String)">
+        <member name="M:Nikki.Reflection.Interface.IAssembly.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Reflection.Interface.IAssembly.Deserialize(System.String)">
+        <member name="M:Nikki.Reflection.Interface.IAssembly.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Reflection.Interface.ICastable`1">
             <summary>
@@ -9029,26 +9014,27 @@
             <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination 
             of the elements copied from this <see cref="T:Nikki.Reflection.Interface.IManager"/>.</param>
         </member>
-        <member name="M:Nikki.Reflection.Interface.IManager.Export(System.String,System.String)">
+        <member name="M:Nikki.Reflection.Interface.IManager.Export(System.String,System.IO.BinaryWriter)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
-            <param name="filename">Filename where collection should be exported.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Reflection.Interface.IManager.Export(System.Object,System.String)">
+        <member name="M:Nikki.Reflection.Interface.IManager.Export(System.Object,System.IO.BinaryWriter)">
             <summary>
             Exports object to a filename specified.
             </summary>
             <param name="value">Object to export.</param>
-            <param name="filename">Filename where object should be exported.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Reflection.Interface.IManager.Import(System.String)">
+        <member name="M:Nikki.Reflection.Interface.IManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
             Imports collection from file provided and attempts to add it to the end of 
             this <see cref="T:Nikki.Reflection.Interface.IManager"/> in case it does not exist.
             </summary>
-            <param name="filename">Filename with collection to import.</param>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Reflection.Interface.IManager.IndexOf(System.String)">
             <summary>
@@ -10900,17 +10886,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.CarTypeInfo.Serialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.CarTypeInfo.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.CarTypeInfo.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.CarTypeInfo.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.Collision">
             <summary>
@@ -11017,17 +11003,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.Collision.Serialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.Collision.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.Collision.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.Collision.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.DBModelPart">
             <summary>
@@ -11138,17 +11124,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.Serialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.FNGroup">
             <summary>
@@ -11211,17 +11197,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.FNGroup.Serialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.FNGroup.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.FNGroup.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.FNGroup.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.Material">
             <summary>
@@ -11513,17 +11499,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.Material.Serialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.Material.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.Material.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.Material.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.PresetRide">
             <summary>
@@ -12060,17 +12046,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.PresetRide.Serialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.PresetRide.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.PresetRide.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.PresetRide.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.PresetSkin">
             <summary>
@@ -12272,17 +12258,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.PresetSkin.Serialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.PresetSkin.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.PresetSkin.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.PresetSkin.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.SlotOverride">
             <summary>
@@ -12409,17 +12395,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.SlotOverride.Serialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.SlotOverride.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.SlotOverride.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.SlotOverride.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.SlotType">
             <summary>
@@ -12551,17 +12537,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.SlotType.Serialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.SlotType.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.SlotType.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.SlotType.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.STRBlock">
             <summary>
@@ -12709,17 +12695,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.STRBlock.Serialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.STRBlock.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.STRBlock.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.STRBlock.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.SunInfo">
             <summary>
@@ -12851,17 +12837,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.SunInfo.Serialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.SunInfo.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.SunInfo.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.SunInfo.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.Texture">
             <summary>
@@ -12981,17 +12967,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.Texture.Serialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.Texture.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.Texture.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.Texture.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.TPKBlock">
             <summary>
@@ -13239,17 +13225,17 @@
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
             <param name="thisOffset">Offset of this TPK in BinaryWriter passed.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.TPKBlock.Serialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.TPKBlock.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.TPKBlock.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.TPKBlock.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.Track">
             <summary>
@@ -13566,17 +13552,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.Track.Serialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.Track.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.Track.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.Track.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Datamap">
             <summary>
@@ -13739,6 +13725,21 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Framework.CarTypeInfoManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.CarTypeInfoManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Carbon.Framework.CollisionManager">
             <summary>
             A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.Carbon.Class.Collision"/> collections.
@@ -13794,6 +13795,21 @@
             Checks whether CollectionName provided allows creation of a new collection.
             </summary>
             <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.CollisionManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.CollisionManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Framework.DBModelPartManager">
             <summary>
@@ -13867,6 +13883,21 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Framework.DBModelPartManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.DBModelPartManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Carbon.Framework.FNGroupManager">
             <summary>
             A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.Carbon.Class.FNGroup"/> collections.
@@ -13922,6 +13953,21 @@
             Checks whether CollectionName provided allows creation of a new collection.
             </summary>
             <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.FNGroupManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.FNGroupManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Framework.MaterialManager">
             <summary>
@@ -13979,6 +14025,21 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Framework.MaterialManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.MaterialManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Carbon.Framework.PresetRideManager">
             <summary>
             A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.Carbon.Class.PresetRide"/> collections.
@@ -14034,6 +14095,21 @@
             Checks whether CollectionName provided allows creation of a new collection.
             </summary>
             <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.PresetRideManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.PresetRideManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Framework.PresetSkinManager">
             <summary>
@@ -14091,6 +14167,21 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Framework.PresetSkinManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.PresetSkinManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Carbon.Framework.SlotOverrideManager">
             <summary>
             A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.Carbon.Class.SlotOverride"/> collections.
@@ -14146,6 +14237,21 @@
             Checks whether CollectionName provided allows creation of a new collection.
             </summary>
             <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.SlotOverrideManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.SlotOverrideManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Framework.SlotTypeManager">
             <summary>
@@ -14203,6 +14309,21 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Framework.SlotTypeManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.SlotTypeManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Carbon.Framework.STRBlockManager">
             <summary>
             A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.Carbon.Class.STRBlock"/> collections.
@@ -14258,6 +14379,21 @@
             Checks whether CollectionName provided allows creation of a new collection.
             </summary>
             <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.STRBlockManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.STRBlockManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Framework.SunInfoManager">
             <summary>
@@ -14315,6 +14451,21 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Framework.SunInfoManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.SunInfoManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Carbon.Framework.TPKBlockManager">
             <summary>
             A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.Carbon.Class.TPKBlock"/> collections.
@@ -14371,6 +14522,21 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Framework.TPKBlockManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.TPKBlockManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Carbon.Framework.TrackManager">
             <summary>
             A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.Carbon.Class.Track"/> collections.
@@ -14426,6 +14592,21 @@
             Checks whether CollectionName provided allows creation of a new collection.
             </summary>
             <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.TrackManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Framework.TrackManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart">
             <summary>
@@ -16261,17 +16442,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.CarTypeInfo.Serialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.CarTypeInfo.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.CarTypeInfo.Deserialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.CarTypeInfo.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.Collision">
             <summary>
@@ -16378,17 +16559,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.Collision.Serialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.Collision.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.Collision.Deserialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.Collision.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.DBModelPart">
             <summary>
@@ -16499,17 +16680,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.Serialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.Deserialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.FNGroup">
             <summary>
@@ -16572,17 +16753,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.FNGroup.Serialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.FNGroup.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.FNGroup.Deserialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.FNGroup.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.Material">
             <summary>
@@ -16834,17 +17015,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.Material.Serialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.Material.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.Material.Deserialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.Material.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.PresetRide">
             <summary>
@@ -17201,17 +17382,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.PresetRide.Serialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.PresetRide.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.PresetRide.Deserialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.PresetRide.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.SlotOverride">
             <summary>
@@ -17313,17 +17494,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.SlotOverride.Serialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.SlotOverride.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.SlotOverride.Deserialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.SlotOverride.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.SlotType">
             <summary>
@@ -17430,17 +17611,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.SlotType.Serialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.SlotType.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.SlotType.Deserialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.SlotType.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.STRBlock">
             <summary>
@@ -17588,17 +17769,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.STRBlock.Serialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.STRBlock.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.STRBlock.Deserialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.STRBlock.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.SunInfo">
             <summary>
@@ -17730,17 +17911,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.SunInfo.Serialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.SunInfo.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.SunInfo.Deserialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.SunInfo.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.Texture">
             <summary>
@@ -17875,17 +18056,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.Texture.Serialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.Texture.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.Texture.Deserialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.Texture.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.TPKBlock">
             <summary>
@@ -18139,17 +18320,17 @@
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
             <param name="thisOffset">Offset of this TPK in BinaryWriter passed.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.TPKBlock.Serialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.TPKBlock.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.TPKBlock.Deserialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.TPKBlock.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.Track">
             <summary>
@@ -18466,17 +18647,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.Track.Serialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.Track.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.Track.Deserialize(System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.Track.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Datamap">
             <summary>
@@ -18634,6 +18815,21 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.CarTypeInfoManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.CarTypeInfoManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Framework.CollisionManager">
             <summary>
             A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.MostWanted.Class.Collision"/> collections.
@@ -18689,6 +18885,21 @@
             Checks whether CollectionName provided allows creation of a new collection.
             </summary>
             <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.CollisionManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.CollisionManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Framework.DBModelPartManager">
             <summary>
@@ -18762,6 +18973,21 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.DBModelPartManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.DBModelPartManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Framework.FNGroupManager">
             <summary>
             A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.MostWanted.Class.FNGroup"/> collections.
@@ -18817,6 +19043,21 @@
             Checks whether CollectionName provided allows creation of a new collection.
             </summary>
             <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.FNGroupManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.FNGroupManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Framework.MaterialManager">
             <summary>
@@ -18874,6 +19115,21 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.MaterialManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.MaterialManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Framework.PresetRideManager">
             <summary>
             A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.MostWanted.Class.PresetRide"/> collections.
@@ -18929,6 +19185,21 @@
             Checks whether CollectionName provided allows creation of a new collection.
             </summary>
             <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.PresetRideManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.PresetRideManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Framework.SlotOverrideManager">
             <summary>
@@ -18986,6 +19257,21 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.SlotOverrideManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.SlotOverrideManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Framework.SlotTypeManager">
             <summary>
             A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.MostWanted.Class.SlotType"/> collections.
@@ -19041,6 +19327,21 @@
             Checks whether CollectionName provided allows creation of a new collection.
             </summary>
             <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.SlotTypeManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.SlotTypeManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Framework.STRBlockManager">
             <summary>
@@ -19098,6 +19399,21 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.STRBlockManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.STRBlockManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Framework.SunInfoManager">
             <summary>
             A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.MostWanted.Class.SunInfo"/> collections.
@@ -19153,6 +19469,21 @@
             Checks whether CollectionName provided allows creation of a new collection.
             </summary>
             <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.SunInfoManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.SunInfoManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Framework.TPKBlockManager">
             <summary>
@@ -19210,6 +19541,21 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.TPKBlockManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.TPKBlockManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Framework.TrackManager">
             <summary>
             A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.MostWanted.Class.Track"/> collections.
@@ -19265,6 +19611,21 @@
             Checks whether CollectionName provided allows creation of a new collection.
             </summary>
             <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.TrackManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Framework.TrackManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct">
             <summary>
@@ -21852,17 +22213,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.CarTypeInfo.Serialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.CarTypeInfo.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.CarTypeInfo.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.CarTypeInfo.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Class.Collision">
             <summary>
@@ -21969,17 +22330,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.Collision.Serialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.Collision.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.Collision.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.Collision.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Class.DBModelPart">
             <summary>
@@ -22090,17 +22451,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.Serialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Class.FNGroup">
             <summary>
@@ -22163,17 +22524,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.FNGroup.Serialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.FNGroup.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.FNGroup.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.FNGroup.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Class.Material">
             <summary>
@@ -22525,17 +22886,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.Material.Serialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.Material.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.Material.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.Material.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Class.SlotOverride">
             <summary>
@@ -22707,17 +23068,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.SlotOverride.Serialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.SlotOverride.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.SlotOverride.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.SlotOverride.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Class.SlotType">
             <summary>
@@ -22894,17 +23255,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.SlotType.Serialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.SlotType.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.SlotType.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.SlotType.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Class.STRBlock">
             <summary>
@@ -23052,17 +23413,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.Serialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Class.SunInfo">
             <summary>
@@ -23194,17 +23555,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.SunInfo.Serialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.SunInfo.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.SunInfo.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.SunInfo.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Class.Texture">
             <summary>
@@ -23324,17 +23685,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.Texture.Serialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.Texture.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.Texture.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.Texture.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Class.TPKBlock">
             <summary>
@@ -23582,17 +23943,17 @@
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
             <param name="thisOffset">Offset of this TPK in BinaryWriter passed.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.Serialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Class.Track">
             <summary>
@@ -23909,17 +24270,17 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.Track.Serialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.Track.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.Track.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.Track.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Datamap">
             <summary>
@@ -24072,6 +24433,21 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.CarTypeInfoManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.CarTypeInfoManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Framework.CollisionManager">
             <summary>
             A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.Prostreet.Class.Collision"/> collections.
@@ -24127,6 +24503,21 @@
             Checks whether CollectionName provided allows creation of a new collection.
             </summary>
             <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.CollisionManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.CollisionManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Framework.DBModelPartManager">
             <summary>
@@ -24200,6 +24591,21 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.DBModelPartManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.DBModelPartManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Framework.FNGroupManager">
             <summary>
             A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.Prostreet.Class.FNGroup"/> collections.
@@ -24255,6 +24661,21 @@
             Checks whether CollectionName provided allows creation of a new collection.
             </summary>
             <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.FNGroupManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.FNGroupManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Framework.MaterialManager">
             <summary>
@@ -24312,6 +24733,21 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.MaterialManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.MaterialManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Framework.SlotOverrideManager">
             <summary>
             A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.Prostreet.Class.SlotOverride"/> collections.
@@ -24367,6 +24803,21 @@
             Checks whether CollectionName provided allows creation of a new collection.
             </summary>
             <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.SlotOverrideManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.SlotOverrideManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Framework.SlotTypeManager">
             <summary>
@@ -24424,6 +24875,21 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.SlotTypeManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.SlotTypeManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Framework.STRBlockManager">
             <summary>
             A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.Prostreet.Class.STRBlock"/> collections.
@@ -24479,6 +24945,21 @@
             Checks whether CollectionName provided allows creation of a new collection.
             </summary>
             <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.STRBlockManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.STRBlockManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Framework.SunInfoManager">
             <summary>
@@ -24536,6 +25017,21 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.SunInfoManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.SunInfoManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Framework.TPKBlockManager">
             <summary>
             A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> collections.
@@ -24592,6 +25088,21 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.TPKBlockManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.TPKBlockManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Framework.TrackManager">
             <summary>
             A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.Prostreet.Class.Track"/> collections.
@@ -24647,6 +25158,21 @@
             Checks whether CollectionName provided allows creation of a new collection.
             </summary>
             <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.TrackManager.Export(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.TrackManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart">
             <summary>
@@ -24857,17 +25383,17 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.AcidEffect"/> with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.AcidEffect.Serialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.AcidEffect.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.AcidEffect.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.AcidEffect.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.AcidEffect.MemoryCast(System.String)">
             <summary>
@@ -25173,17 +25699,17 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.CarTypeInfo"/> with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.CarTypeInfo.Serialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.CarTypeInfo.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.CarTypeInfo.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.CarTypeInfo.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.CarTypeInfo.MemoryCast(System.String)">
             <summary>
@@ -25249,17 +25775,17 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.Collision"/> with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.Collision.Serialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.Collision.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.Collision.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.Collision.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.Collision.MemoryCast(System.String)">
             <summary>
@@ -25325,17 +25851,17 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.CarTypeInfo"/> with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.DBModelPart.Serialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.DBModelPart.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.DBModelPart.MemoryCast(System.String)">
             <summary>
@@ -25463,17 +25989,17 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.FNGroup"/> with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.FNGroup.Serialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.FNGroup.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.FNGroup.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.FNGroup.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.FNGroup.GetColor(System.Int32)">
             <summary>
@@ -25561,17 +26087,17 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.Material"/> with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.Material.Serialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.Material.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.Material.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.Material.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.Material.MemoryCast(System.String)">
             <summary>
@@ -25627,17 +26153,17 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.PresetRide"/> with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.PresetRide.Serialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.PresetRide.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.PresetRide.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.PresetRide.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.PresetRide.MemoryCast(System.String)">
             <summary>
@@ -25708,17 +26234,17 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.PresetSkin"/> with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.PresetSkin.Serialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.PresetSkin.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.PresetSkin.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.PresetSkin.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.PresetSkin.MemoryCast(System.String)">
             <summary>
@@ -25774,17 +26300,17 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.SlotOverride"/> with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.SlotOverride.Serialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.SlotOverride.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.SlotOverride.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.SlotOverride.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.SlotOverride.MemoryCast(System.String)">
             <summary>
@@ -25850,17 +26376,17 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.SlotType"/> with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.SlotType.Serialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.SlotType.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.SlotType.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.SlotType.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.SlotType.MemoryCast(System.String)">
             <summary>
@@ -25923,17 +26449,17 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.STRBlock"/> with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.STRBlock.Serialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.STRBlock.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.STRBlock.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.STRBlock.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.STRBlock.GetRecord(System.UInt32)">
             <summary>
@@ -26073,17 +26599,17 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.SunInfo"/> with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.SunInfo.Serialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.SunInfo.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.SunInfo.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.SunInfo.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.SunInfo.MemoryCast(System.String)">
             <summary>
@@ -26235,17 +26761,17 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.Texture"/> header with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.Texture.Serialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.Texture.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.Texture.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.Texture.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.Texture.GetDDSArray">
             <summary>
@@ -26403,17 +26929,17 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.TPKBlock.Serialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.TPKBlock.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.TPKBlock.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.TPKBlock.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.TPKBlock.FindTexture(System.UInt32,Nikki.Reflection.Enum.eKeyType)">
             <summary>
@@ -26667,17 +27193,17 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.Track"/> with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.Track.Serialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.Track.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
             </summary>
-            <param name="filename">File to write data to.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.Track.Deserialize(System.String)">
+        <member name="M:Nikki.Support.Shared.Class.Track.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
-            <param name="filename">File to read data from.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.Track.MemoryCast(System.String)">
             <summary>
@@ -27541,6 +28067,12 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
+        <member name="M:Nikki.Support.Shared.Parts.TPKParts.AnimSlot.ToString">
+            <summary>
+            Name of the animation slot.
+            </summary>
+            <returns>Name of the slot as a string value.</returns>
+        </member>
         <member name="T:Nikki.Support.Shared.Parts.TPKParts.CompSlot">
             <summary>
             Represents Compression slot of <see cref="T:Nikki.Support.Shared.Class.Texture"/>.
@@ -27565,6 +28097,27 @@
             <summary>
             Compression of the <see cref="T:Nikki.Support.Shared.Class.Texture"/>.
             </summary>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.TPKParts.FrameEntry">
+            <summary>
+            A unit frame that is used in <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.FrameEntry.Name">
+            <summary>
+            Name of the frame.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.FrameEntry.BinKey">
+            <summary>
+            Bin hash of the frame.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.TPKParts.FrameEntry.ToString">
+            <summary>
+            Name of the entry.
+            </summary>
+            <returns>Name of the entry as a string value.</returns>
         </member>
         <member name="T:Nikki.Support.Shared.Parts.TPKParts.MagicHeader">
             <summary>

@@ -24,21 +24,11 @@ namespace Nikki.Support.Prostreet.Attributes
 	[DebuggerDisplay("Attribute: {AttribType} | Type: {Type} | Templated: {Templated}")]
 	public class ModelTableAttribute : CPAttribute
 	{
-		private const eCarPartAttribType _type = eCarPartAttribType.ModelTable;
-
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="ModelTableAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public override eCarPartAttribType AttribType
-		{
-			get => _type;
-			set
-			{
-				var index = this.BelongsTo.GetIndex(this);
-				this.BelongsTo.Attributes[index] = this.ConvertTo(value);
-			}
-		}
+		public override eCarPartAttribType AttribType => eCarPartAttribType.ModelTable;
 
 		/// <summary>
 		/// Type of this <see cref="ModelTableAttribute"/>.
