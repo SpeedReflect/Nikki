@@ -118,7 +118,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// Returns PartName, Attributes count and CarPartGroupID as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() => this.PartName;
+		public override string ToString() => this.PartLabel;
 
 		/// <summary>
 		/// Returns the hash code for this <see cref="RealCarPart"/>.

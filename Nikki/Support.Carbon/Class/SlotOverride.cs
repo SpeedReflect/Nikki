@@ -95,6 +95,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string InfoOverrideGroup2 { get; set; }
 
         /// <summary>
@@ -102,6 +103,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string InfoOverrideGroup3 { get; set; }
 
         /// <summary>
@@ -109,6 +111,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string InfoOverrideGroup4 { get; set; }
 
         /// <summary>
@@ -116,6 +119,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string InfoOverrideGroup5 { get; set; }
 
         /// <summary>
@@ -123,6 +127,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string InfoOverrideGroup6 { get; set; }
 
         #endregion

@@ -64,7 +64,7 @@ namespace Nikki.Support.Prostreet.Class
         /// <summary>
         /// Collection name of the variable.
         /// </summary>
-        [AccessModifiable()]
+        [ReadOnly(true)]
         [Category("Main")]
         public override string CollectionName
         {

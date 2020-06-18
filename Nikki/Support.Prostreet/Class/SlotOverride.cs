@@ -94,6 +94,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string InfoOverrideGroup2 { get; set; }
 
         /// <summary>
@@ -101,6 +102,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string InfoOverrideGroup3 { get; set; }
 
         /// <summary>
@@ -108,6 +110,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string InfoOverrideGroup4 { get; set; }
 
         /// <summary>
@@ -115,6 +118,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string InfoOverrideGroup5 { get; set; }
 
         /// <summary>
@@ -122,6 +126,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string InfoOverrideGroup6 { get; set; }
 
         /// <summary>
@@ -129,6 +134,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string InfoOverrideGroup7 { get; set; }
 
         /// <summary>
@@ -136,6 +142,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string InfoOverrideGroup8 { get; set; }
 
         /// <summary>
@@ -143,6 +150,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string InfoOverrideGroup9 { get; set; }
 
         /// <summary>
@@ -150,6 +158,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string InfoOverrideGroup10 { get; set; }
 
         /// <summary>
@@ -157,6 +166,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string InfoOverrideGroup11 { get; set; }
 
         /// <summary>
@@ -164,6 +174,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string InfoOverrideGroup12 { get; set; }
 
         /// <summary>
@@ -171,6 +182,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string InfoOverrideGroup13 { get; set; }
 
         /// <summary>
@@ -178,6 +190,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string InfoOverrideGroup14 { get; set; }
 
         /// <summary>
@@ -185,6 +198,7 @@ namespace Nikki.Support.Prostreet.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string InfoOverrideGroup15 { get; set; }
 
         #endregion

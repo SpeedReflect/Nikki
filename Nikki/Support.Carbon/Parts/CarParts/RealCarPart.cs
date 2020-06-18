@@ -82,7 +82,51 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 		/// Returns PartName, Attributes count and CarPartGroupID as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() => this.PartName;
+		public override string ToString()
+		{
+			CPAttribute attrib;
+			var realpart = $"{this.Model.CollectionName}_REAL_CAR_PART";
+			attrib = this.GetAttribute("PART_NAME_OFFSETS");
+
+			if (attrib is TwoStringAttribute partnames)
+			{
+
+				var result = this.Model.CollectionName;
+				result += partnames.Value1Exists == eBoolean.True
+					? "_" + partnames.Value1 : String.Empty;
+				result += partnames.Value2Exists == eBoolean.True
+					? "_" + partnames.Value2 : String.Empty;
+				return result;
+
+			}
+
+			attrib = this.GetAttribute("LOD_BASE_NAME");
+			
+			if (attrib is TwoStringAttribute lodnames)
+			{
+
+				var result = this.Model.CollectionName;
+				result += lodnames.Value1Exists == eBoolean.True
+					? "_" + lodnames.Value1 : String.Empty;
+				result += lodnames.Value2Exists == eBoolean.True
+					? "_" + lodnames.Value2 : String.Empty;
+				return result;
+
+			}
+
+			attrib = this.GetAttribute("NAME_OFFSET");
+
+			if (attrib is StringAttribute nameoff)
+			{
+
+				var result = nameoff.ValueExists == eBoolean.True
+					? "_" + nameoff.Value : realpart;
+				return result;
+
+			}
+
+			return realpart;
+		}
 
 		/// <summary>
 		/// Returns the hash code for this <see cref="RealCarPart"/>.

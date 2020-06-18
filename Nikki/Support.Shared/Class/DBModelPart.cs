@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
@@ -21,6 +22,7 @@ namespace Nikki.Support.Shared.Class
 		/// <summary>
 		/// Index of this <see cref="DBModelPart"/> in the database.
 		/// </summary>
+		[Browsable(false)]
 		public int Index { get; set; }
 
 		/// <summary>

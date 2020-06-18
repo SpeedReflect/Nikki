@@ -27,13 +27,13 @@ namespace Nikki.Support.MostWanted
 		/// </summary>
 		public Datamap() : base()
 		{
-			this.Managers.Add(new SlotOverrideManager(this));
 			this.Managers.Add(new CarTypeInfoManager(this));
 			this.Managers.Add(new CollisionManager(this));
 			this.Managers.Add(new DBModelPartManager(this));
 			this.Managers.Add(new FNGroupManager(this));
 			this.Managers.Add(new MaterialManager(this));
 			this.Managers.Add(new PresetRideManager(this));
+			this.Managers.Add(new SlotOverrideManager(this));
 			this.Managers.Add(new SlotTypeManager(this));
 			this.Managers.Add(new STRBlockManager(this));
 			this.Managers.Add(new SunInfoManager(this));

@@ -14,11 +14,13 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 		/// <summary>
 		/// Name of the frame.
 		/// </summary>
+		[Category("Main")]
 		public string Name { get; set; }
 
 		/// <summary>
 		/// Bin hash of the frame.
 		/// </summary>
+		[Category("Main")]
 		[TypeConverter(typeof(HexConverter))]
 		public uint BinKey => this.Name.BinHash();
 
