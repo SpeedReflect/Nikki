@@ -12,7 +12,8 @@ using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
 using CoreExtensions.Conversions;
-using System.Runtime.CompilerServices;
+
+
 
 namespace Nikki.Support.Carbon.Class
 {
@@ -546,7 +547,7 @@ namespace Nikki.Support.Carbon.Class
             {
 
                 // Write header info
-                writer.Write(this._collection_name);
+                writer.WriteNullTermUTF8(this._collection_name);
                 writer.Write(this._binkey);
                 writer.Write(this._cube_environment);
                 writer.Write(this.ClassKey);
@@ -578,14 +579,19 @@ namespace Nikki.Support.Carbon.Class
                 writer.Write(this._scaleT);
 
                 var size = this.Data.Length >> 14;
-                writer.Write(size + 1);
+                var modulo = this.Data.Length % 0x4000;
+                writer.Write(modulo == 0 ? size : size + 1);
 
                 for (int loop = 0; loop <= size; ++loop)
 				{
 
-                    var total = loop == size ? (this.Data.Length % 0x4000) : 0x4000;
+                    var total = loop == size ? modulo : 0x4000;
+
+                    if (total == 0) break;
+
                     var temp = new byte[total];
-                    Array.Copy(this.Data, loop << 14, temp, 0, total);
+                    var off = loop << 14;
+                    Array.Copy(this.Data, off, temp, 0, total);
                     temp = Interop.Compress(temp, eLZCompressionType.BEST);
                     writer.Write(temp.Length);
                     writer.Write(temp);

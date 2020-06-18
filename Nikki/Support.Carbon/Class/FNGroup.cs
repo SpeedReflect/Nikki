@@ -188,7 +188,7 @@ namespace Nikki.Support.Carbon.Class
         public override void Serialize(BinaryWriter bw)
         {
             byte[] array;
-            using (var ms = new MemoryStream(this.InfoLength << 3 + 5 + this.CollectionName.Length))
+            using (var ms = new MemoryStream((this.InfoLength << 3) + 5 + this.CollectionName.Length))
             using (var writer = new BinaryWriter(ms))
 			{
 

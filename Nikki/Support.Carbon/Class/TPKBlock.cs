@@ -1257,7 +1257,7 @@ namespace Nikki.Support.Carbon.Class
                 writer.WriteEnum(this.IsCompressed);
                 writer.Write(this.Animations.Count);
                 writer.Write(this.Textures.Count);
-                
+
                 for (int loop = 0; loop < this.Animations.Count; ++loop)
 				{
 
@@ -1359,7 +1359,7 @@ namespace Nikki.Support.Carbon.Class
                 // Check for consistency
                 if (header.ID != eBlockID.Nikki) break;
                 if (header.Game != this.GameINT) break;
-                if (header.Name != this.Manager.Name) break;
+                if (header.Name != "TEXTURE") break;
 
                 texture.Deserialize(reader);
                 this.Textures.Add(texture);
