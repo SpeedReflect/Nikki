@@ -80,6 +80,7 @@ namespace Nikki.Reflection.Enum
         /// 
         /// </summary>
         kBounds_Joint_Invert = 8192,
+        
         /// <summary>
         /// 
         /// </summary>

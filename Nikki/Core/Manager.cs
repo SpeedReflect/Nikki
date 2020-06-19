@@ -1074,6 +1074,7 @@ namespace Nikki.Core
 				{
 
 					this.RemoveAt(loop);
+					return;
 
 				}
 
