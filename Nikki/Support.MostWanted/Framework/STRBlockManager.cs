@@ -64,6 +64,7 @@ namespace Nikki.Support.MostWanted.Framework
 			{
 
 				bw.GeneratePadding(mark, this.Alignment);
+				collection.Watermark = mark;
 				collection.Assemble(bw);
 
 			}
@@ -133,7 +134,9 @@ namespace Nikki.Support.MostWanted.Framework
 		/// </summary>
 		/// <param name="cname">CollectionName of a collection to export.</param>
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
-		public override void Export(string cname, BinaryWriter bw)
+		/// <param name="serialized">True if collection exported should be serialized; 
+		/// false otherwise.</param>
+		public override void Export(string cname, BinaryWriter bw, bool serialized = true)
 		{
 
 		}
