@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
-using Nikki.Core;
+using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using CoreExtensions.IO;
 
 
 
-namespace Nikki.Utils
+namespace Nikki.Core
 {
 	internal class SerializationHeader
 	{

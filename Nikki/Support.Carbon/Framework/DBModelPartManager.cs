@@ -892,7 +892,21 @@ namespace Nikki.Support.Carbon.Framework
 		/// false otherwise.</param>
 		public override void Export(string cname, BinaryWriter bw, bool serialized = true)
 		{
+			var index = this.IndexOf(cname);
 
+			if (index == -1)
+			{
+
+				throw new Exception($"Collection named {cname} does not exist");
+
+			}
+			else
+			{
+
+				if (serialized) this[index].Serialize(bw);
+				else throw new NotSupportedException("Collection supports only serialization and no plain export");
+
+			}
 		}
 
 		/// <summary>

@@ -525,19 +525,23 @@
             <returns>An <see cref="T:System.Collections.IEnumerator"/> that can be used to iterate through 
             the collection.</returns>
         </member>
-        <member name="M:Nikki.Core.Manager`1.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Core.Manager`1.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
-        <member name="M:Nikki.Core.Manager`1.Export(System.Object,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Core.Manager`1.Export(System.Object,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports object to a filename specified.
             </summary>
             <param name="value">Object to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Core.Manager`1.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -973,6 +977,31 @@
             </summary>
             <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to save data.</param>
             <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Reflection.Abstract.FileBase.Export(System.String,System.String,System.IO.BinaryWriter,System.Boolean)">
+            <summary>
+            Exports collection by writing its data to a <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="manager">Name of <see cref="T:Nikki.Reflection.Interface.IManager"/> to which collection belongs to.</param>
+            <param name="cname">CollectionName of collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection should be serialized; false if plainly 
+            exported.</param>
+        </member>
+        <member name="M:Nikki.Reflection.Abstract.FileBase.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection by reading its data from a <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="type"><see cref="T:Nikki.Reflection.Enum.eSerializeType"/> type of importing collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Reflection.Abstract.FileBase.Import(Nikki.Reflection.Enum.eSerializeType,System.String,System.IO.BinaryReader)">
+            <summary>
+            Imports collection by reading its data from a <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="type"><see cref="T:Nikki.Reflection.Enum.eSerializeType"/> type of importing collection.</param>
+            <param name="manager">Name of <see cref="T:Nikki.Reflection.Interface.IManager"/> to invoke for import.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Reflection.Abstract.FileBase.GetManager(System.String)">
             <summary>
@@ -9021,19 +9050,23 @@
             <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination 
             of the elements copied from this <see cref="T:Nikki.Reflection.Interface.IManager"/>.</param>
         </member>
-        <member name="M:Nikki.Reflection.Interface.IManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Reflection.Interface.IManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
-        <member name="M:Nikki.Reflection.Interface.IManager.Export(System.Object,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Reflection.Interface.IManager.Export(System.Object,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports object to a filename specified.
             </summary>
             <param name="value">Object to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Reflection.Interface.IManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -12707,6 +12740,12 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Class.STRBlock.Synchronize(Nikki.Support.Carbon.Class.STRBlock)">
+            <summary>
+            Synchronizes all parts of this instance with another instance passed.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> to synchronize with.</param>
+        </member>
         <member name="T:Nikki.Support.Carbon.Class.SunInfo">
             <summary>
             <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/> is a collection of sun and daylight settings.
@@ -13237,6 +13276,12 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Class.TPKBlock.Synchronize(Nikki.Support.Carbon.Class.TPKBlock)">
+            <summary>
+            Synchronizes all parts of this instance with another instance passed.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> to synchronize with.</param>
+        </member>
         <member name="T:Nikki.Support.Carbon.Class.Track">
             <summary>
             <see cref="T:Nikki.Support.Carbon.Class.Track"/> is a collection of settings related to races and events.
@@ -13663,6 +13708,31 @@
             <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to save data.</param>
             <returns>True on success; false otherwise.</returns>
         </member>
+        <member name="M:Nikki.Support.Carbon.Datamap.Export(System.String,System.String,System.IO.BinaryWriter,System.Boolean)">
+            <summary>
+            Exports collection by writing its data to a <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="manager">Name of <see cref="T:Nikki.Reflection.Interface.IManager"/> to which collection belongs to.</param>
+            <param name="cname">CollectionName of collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection should be serialized; false if plainly 
+            exported.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Datamap.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection by reading its data from a <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="type"><see cref="T:Nikki.Reflection.Enum.eSerializeType"/> type of importing collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Datamap.Import(Nikki.Reflection.Enum.eSerializeType,System.String,System.IO.BinaryReader)">
+            <summary>
+            Imports collection by reading its data from a <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="type"><see cref="T:Nikki.Reflection.Enum.eSerializeType"/> type of importing collection.</param>
+            <param name="manager">Name of <see cref="T:Nikki.Reflection.Interface.IManager"/> to invoke for import.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="M:Nikki.Support.Carbon.Datamap.GetDatabaseInfo">
             <summary>
             Gets information about <see cref="T:Nikki.Support.Carbon.Datamap"/> database.
@@ -13725,12 +13795,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Framework.CarTypeInfoManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Carbon.Framework.CarTypeInfoManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Framework.CarTypeInfoManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -13796,12 +13868,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Framework.CollisionManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Carbon.Framework.CollisionManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Framework.CollisionManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -13883,12 +13957,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Framework.DBModelPartManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Carbon.Framework.DBModelPartManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Framework.DBModelPartManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -13954,12 +14030,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Framework.FNGroupManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Carbon.Framework.FNGroupManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Framework.FNGroupManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -14025,12 +14103,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Framework.MaterialManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Carbon.Framework.MaterialManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Framework.MaterialManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -14096,12 +14176,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Framework.PresetRideManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Carbon.Framework.PresetRideManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Framework.PresetRideManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -14167,12 +14249,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Framework.PresetSkinManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Carbon.Framework.PresetSkinManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Framework.PresetSkinManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -14238,12 +14322,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Framework.SlotOverrideManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Carbon.Framework.SlotOverrideManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Framework.SlotOverrideManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -14309,12 +14395,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Framework.SlotTypeManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Carbon.Framework.SlotTypeManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Framework.SlotTypeManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -14380,12 +14468,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Framework.STRBlockManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Carbon.Framework.STRBlockManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Framework.STRBlockManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -14451,12 +14541,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Framework.SunInfoManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Carbon.Framework.SunInfoManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Framework.SunInfoManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -14522,12 +14614,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Framework.TPKBlockManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Carbon.Framework.TPKBlockManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Framework.TPKBlockManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -14593,12 +14687,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Framework.TrackManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Carbon.Framework.TrackManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Framework.TrackManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -18747,6 +18843,31 @@
             <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to save data.</param>
             <returns>True on success; false otherwise.</returns>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Datamap.Export(System.String,System.String,System.IO.BinaryWriter,System.Boolean)">
+            <summary>
+            Exports collection by writing its data to a <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="manager">Name of <see cref="T:Nikki.Reflection.Interface.IManager"/> to which collection belongs to.</param>
+            <param name="cname">CollectionName of collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection should be serialized; false if plainly 
+            exported.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Datamap.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection by reading its data from a <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="type"><see cref="T:Nikki.Reflection.Enum.eSerializeType"/> type of importing collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Datamap.Import(Nikki.Reflection.Enum.eSerializeType,System.String,System.IO.BinaryReader)">
+            <summary>
+            Imports collection by reading its data from a <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="type"><see cref="T:Nikki.Reflection.Enum.eSerializeType"/> type of importing collection.</param>
+            <param name="manager">Name of <see cref="T:Nikki.Reflection.Interface.IManager"/> to invoke for import.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="M:Nikki.Support.MostWanted.Datamap.GetDatabaseInfo">
             <summary>
             Gets information about <see cref="T:Nikki.Support.MostWanted.Datamap"/> database.
@@ -18809,12 +18930,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Framework.CarTypeInfoManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.MostWanted.Framework.CarTypeInfoManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Framework.CarTypeInfoManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -18880,12 +19003,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Framework.CollisionManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.MostWanted.Framework.CollisionManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Framework.CollisionManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -18967,12 +19092,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Framework.DBModelPartManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.MostWanted.Framework.DBModelPartManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Framework.DBModelPartManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -19038,12 +19165,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Framework.FNGroupManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.MostWanted.Framework.FNGroupManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Framework.FNGroupManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -19109,12 +19238,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Framework.MaterialManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.MostWanted.Framework.MaterialManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Framework.MaterialManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -19180,12 +19311,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Framework.PresetRideManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.MostWanted.Framework.PresetRideManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Framework.PresetRideManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -19251,12 +19384,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Framework.SlotOverrideManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.MostWanted.Framework.SlotOverrideManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Framework.SlotOverrideManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -19322,12 +19457,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Framework.SlotTypeManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.MostWanted.Framework.SlotTypeManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Framework.SlotTypeManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -19393,12 +19530,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Framework.STRBlockManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.MostWanted.Framework.STRBlockManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Framework.STRBlockManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -19464,12 +19603,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Framework.SunInfoManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.MostWanted.Framework.SunInfoManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Framework.SunInfoManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -19535,12 +19676,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Framework.TPKBlockManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.MostWanted.Framework.TPKBlockManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Framework.TPKBlockManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -19606,12 +19749,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Framework.TrackManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.MostWanted.Framework.TrackManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Framework.TrackManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -24358,6 +24503,31 @@
             <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to save data.</param>
             <returns>True on success; false otherwise.</returns>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Datamap.Export(System.String,System.String,System.IO.BinaryWriter,System.Boolean)">
+            <summary>
+            Exports collection by writing its data to a <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="manager">Name of <see cref="T:Nikki.Reflection.Interface.IManager"/> to which collection belongs to.</param>
+            <param name="cname">CollectionName of collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection should be serialized; false if plainly 
+            exported.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Datamap.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection by reading its data from a <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="type"><see cref="T:Nikki.Reflection.Enum.eSerializeType"/> type of importing collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Datamap.Import(Nikki.Reflection.Enum.eSerializeType,System.String,System.IO.BinaryReader)">
+            <summary>
+            Imports collection by reading its data from a <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="type"><see cref="T:Nikki.Reflection.Enum.eSerializeType"/> type of importing collection.</param>
+            <param name="manager">Name of <see cref="T:Nikki.Reflection.Interface.IManager"/> to invoke for import.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="M:Nikki.Support.Prostreet.Datamap.GetDatabaseInfo">
             <summary>
             Gets information about <see cref="T:Nikki.Support.Prostreet.Datamap"/> database.
@@ -24420,12 +24590,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Framework.CarTypeInfoManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Prostreet.Framework.CarTypeInfoManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Framework.CarTypeInfoManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -24491,12 +24663,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Framework.CollisionManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Prostreet.Framework.CollisionManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Framework.CollisionManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -24578,12 +24752,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Framework.DBModelPartManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Prostreet.Framework.DBModelPartManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Framework.DBModelPartManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -24649,12 +24825,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Framework.FNGroupManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Prostreet.Framework.FNGroupManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Framework.FNGroupManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -24720,12 +24898,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Framework.MaterialManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Prostreet.Framework.MaterialManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Framework.MaterialManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -24791,12 +24971,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Framework.SlotOverrideManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Prostreet.Framework.SlotOverrideManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Framework.SlotOverrideManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -24862,12 +25044,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Framework.SlotTypeManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Prostreet.Framework.SlotTypeManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Framework.SlotTypeManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -24933,12 +25117,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Framework.STRBlockManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Prostreet.Framework.STRBlockManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Framework.STRBlockManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -25004,12 +25190,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Framework.SunInfoManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Prostreet.Framework.SunInfoManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Framework.SunInfoManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -25075,12 +25263,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Framework.TPKBlockManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Prostreet.Framework.TPKBlockManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Framework.TPKBlockManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -25146,12 +25336,14 @@
             </summary>
             <param name="cname">CollectionName to check.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Framework.TrackManager.Export(System.String,System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Prostreet.Framework.TrackManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Exports collection with CollectionName specified to a filename provided.
             </summary>
             <param name="cname">CollectionName of a collection to export.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Framework.TrackManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
@@ -26413,6 +26605,11 @@
             Length of the string information array.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Shared.Class.STRBlock.Watermark">
+            <summary>
+            Custom watermark written on assembly.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Shared.Class.STRBlock.MemoryCast(System.String)">
             <summary>
             Casts all attributes from this object to another one.
@@ -26853,6 +27050,11 @@
         <member name="P:Nikki.Support.Shared.Class.TPKBlock.Animations">
             <summary>
             Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/> of this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.TPKBlock.Watermark">
+            <summary>
+            Custom watermark written on assembly.
             </summary>
         </member>
         <member name="P:Nikki.Support.Shared.Class.TPKBlock.CollectionName">

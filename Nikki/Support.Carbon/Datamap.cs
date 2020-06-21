@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using Nikki.Core;
-using Nikki.Utils;
-using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Enum;
+using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Interface;
 using Nikki.Support.Carbon.Class;
 using Nikki.Support.Carbon.Framework;
 
@@ -224,7 +224,15 @@ namespace Nikki.Support.Carbon
 			return saver.Invoke();
 		}
 
-		public void Export(string manager, string cname, BinaryWriter bw, bool serialized = true)
+		/// <summary>
+		/// Exports collection by writing its data to a <see cref="BinaryWriter"/> provided.
+		/// </summary>
+		/// <param name="manager">Name of <see cref="IManager"/> to which collection belongs to.</param>
+		/// <param name="cname">CollectionName of collection to export.</param>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		/// <param name="serialized">True if collection should be serialized; false if plainly 
+		/// exported.</param>
+		public override void Export(string manager, string cname, BinaryWriter bw, bool serialized = true)
 		{
 			var root = this.GetManager(manager);
 
@@ -238,7 +246,12 @@ namespace Nikki.Support.Carbon
 			root.Export(cname, bw, serialized);
 		}
 
-		public void Import(eSerializeType type, BinaryReader br)
+		/// <summary>
+		/// Imports collection by reading its data from a <see cref="BinaryReader"/> provided.
+		/// </summary>
+		/// <param name="type"><see cref="eSerializeType"/> type of importing collection.</param>
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		public override void Import(eSerializeType type, BinaryReader br)
 		{
 			var position = br.BaseStream.Position;
 			var header = new SerializationHeader();
@@ -271,7 +284,13 @@ namespace Nikki.Support.Carbon
 			manager.Import(type, br);
 		}
 
-		public void Import(eSerializeType type, string manager, BinaryReader br)
+		/// <summary>
+		/// Imports collection by reading its data from a <see cref="BinaryReader"/> provided.
+		/// </summary>
+		/// <param name="type"><see cref="eSerializeType"/> type of importing collection.</param>
+		/// <param name="manager">Name of <see cref="IManager"/> to invoke for import.</param>
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		public override void Import(eSerializeType type, string manager, BinaryReader br)
 		{
 			var root = this.GetManager(manager);
 
@@ -289,6 +308,6 @@ namespace Nikki.Support.Carbon
 		/// Gets information about <see cref="Datamap"/> database.
 		/// </summary>
 		/// <returns>Info about this database as a string value.</returns>
-		public override string GetDatabaseInfo() => throw new System.NotImplementedException();
+		public override string GetDatabaseInfo() => throw new NotImplementedException();
 	}
 }

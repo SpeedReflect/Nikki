@@ -1,5 +1,9 @@
-﻿using Nikki.Core;
+﻿using System;
+using System.IO;
+using Nikki.Core;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Interface;
 using Nikki.Support.MostWanted.Class;
 using Nikki.Support.MostWanted.Framework;
 
@@ -208,9 +212,89 @@ namespace Nikki.Support.MostWanted
 		}
 
 		/// <summary>
+		/// Exports collection by writing its data to a <see cref="BinaryWriter"/> provided.
+		/// </summary>
+		/// <param name="manager">Name of <see cref="IManager"/> to which collection belongs to.</param>
+		/// <param name="cname">CollectionName of collection to export.</param>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		/// <param name="serialized">True if collection should be serialized; false if plainly 
+		/// exported.</param>
+		public override void Export(string manager, string cname, BinaryWriter bw, bool serialized = true)
+		{
+			var root = this.GetManager(manager);
+
+			if (manager == null)
+			{
+
+				throw new Exception($"Cannot find manager named {manager}");
+
+			}
+
+			root.Export(cname, bw, serialized);
+		}
+
+		/// <summary>
+		/// Imports collection by reading its data from a <see cref="BinaryReader"/> provided.
+		/// </summary>
+		/// <param name="type"><see cref="eSerializeType"/> type of importing collection.</param>
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		public override void Import(eSerializeType type, BinaryReader br)
+		{
+			var position = br.BaseStream.Position;
+			var header = new SerializationHeader();
+			header.Read(br);
+
+			if (header.ID != eBlockID.Nikki)
+			{
+
+				throw new Exception($"Missing serialized header in the imported collection");
+
+			}
+
+			if (header.Game != this.GameINT)
+			{
+
+				throw new Exception($"Stated game inside collection is {header.Game}, while should be {this.GameINT}");
+
+			}
+
+			var manager = this.GetManager(header.Name);
+
+			if (manager == null)
+			{
+
+				throw new Exception($"Cannot find manager named {header.Name}");
+
+			}
+
+			br.BaseStream.Position = position;
+			manager.Import(type, br);
+		}
+
+		/// <summary>
+		/// Imports collection by reading its data from a <see cref="BinaryReader"/> provided.
+		/// </summary>
+		/// <param name="type"><see cref="eSerializeType"/> type of importing collection.</param>
+		/// <param name="manager">Name of <see cref="IManager"/> to invoke for import.</param>
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		public override void Import(eSerializeType type, string manager, BinaryReader br)
+		{
+			var root = this.GetManager(manager);
+
+			if (manager == null)
+			{
+
+				throw new Exception($"Cannot find manager named {manager}");
+
+			}
+
+			root.Import(type, br);
+		}
+
+		/// <summary>
 		/// Gets information about <see cref="Datamap"/> database.
 		/// </summary>
 		/// <returns>Info about this database as a string value.</returns>
-		public override string GetDatabaseInfo() => throw new System.NotImplementedException();
+		public override string GetDatabaseInfo() => throw new NotImplementedException();
 	}
 }

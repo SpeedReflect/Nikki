@@ -161,7 +161,7 @@ namespace Nikki.Support.Carbon.Framework
 			if (index == -1)
 			{
 
-				throw new CollectionExistenceException($"Collection named {cname} does not exist");
+				throw new Exception($"Collection named {cname} does not exist");
 
 			}
 			else

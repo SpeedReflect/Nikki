@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using Nikki.Core;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Interface;
 
 
@@ -45,6 +47,31 @@ namespace Nikki.Reflection.Abstract
         /// <param name="options"><see cref="Options"/> that are used to save data.</param>
         /// <returns>True on success; false otherwise.</returns>
         public abstract bool Save(Options options);
+
+        /// <summary>
+        /// Exports collection by writing its data to a <see cref="BinaryWriter"/> provided.
+        /// </summary>
+        /// <param name="manager">Name of <see cref="IManager"/> to which collection belongs to.</param>
+        /// <param name="cname">CollectionName of collection to export.</param>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        /// <param name="serialized">True if collection should be serialized; false if plainly 
+        /// exported.</param>
+        public abstract void Export(string manager, string cname, BinaryWriter bw, bool serialized = true);
+
+        /// <summary>
+        /// Imports collection by reading its data from a <see cref="BinaryReader"/> provided.
+        /// </summary>
+        /// <param name="type"><see cref="eSerializeType"/> type of importing collection.</param>
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        public abstract void Import(eSerializeType type, BinaryReader br);
+
+        /// <summary>
+        /// Imports collection by reading its data from a <see cref="BinaryReader"/> provided.
+        /// </summary>
+        /// <param name="type"><see cref="eSerializeType"/> type of importing collection.</param>
+        /// <param name="manager">Name of <see cref="IManager"/> to invoke for import.</param>
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        public abstract void Import(eSerializeType type, string manager, BinaryReader br);
 
         /// <summary>
         /// Gets <see cref="IManager"/> with name specified.
