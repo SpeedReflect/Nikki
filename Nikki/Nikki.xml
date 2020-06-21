@@ -1801,7 +1801,7 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey._0xEBB03E66">
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.BRAND_NAME">
             <summary>
             
             </summary>
@@ -14724,7 +14724,7 @@
             <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
             <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.PartEquals(Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.Equals(System.Object)">
             <summary>
             Compares two <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/> and checks whether the equal.
             </summary>
@@ -19909,7 +19909,7 @@
             <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
             <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.PartEquals(Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.Equals(System.Object)">
             <summary>
             Compares two <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/> and checks whether the equal.
             </summary>
@@ -25277,7 +25277,7 @@
             <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
             <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.PartEquals(Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.Equals(System.Object)">
             <summary>
             Compares two <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/> and checks whether the equal.
             </summary>
@@ -27691,13 +27691,6 @@
             </summary>
             <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
             <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
-        </member>
-        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.PartEquals(Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
-            <summary>
-            Compares two <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> and checks whether the equal.
-            </summary>
-            <param name="other"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to compare this instance to.</param>
-            <returns>True if this instance equals another instance passed; false otherwise.</returns>
         </member>
         <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.PlainCopy">
             <summary>

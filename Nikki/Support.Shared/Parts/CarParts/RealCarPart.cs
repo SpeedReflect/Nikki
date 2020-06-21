@@ -129,13 +129,6 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		public abstract void CloneAttribute(string newlabel, string copylabel);
 
 		/// <summary>
-		/// Compares two <see cref="RealCarPart"/> and checks whether the equal.
-		/// </summary>
-		/// <param name="other"><see cref="RealCarPart"/> to compare this instance to.</param>
-		/// <returns>True if this instance equals another instance passed; false otherwise.</returns>
-		public abstract bool PartEquals(RealCarPart other);
-
-		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>

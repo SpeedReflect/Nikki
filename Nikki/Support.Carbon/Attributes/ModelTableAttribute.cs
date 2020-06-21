@@ -1057,7 +1057,7 @@ namespace Nikki.Support.Carbon.Attributes
 
 				var thisvalue = this.GetFastPropertyValue(property);
 				var othervalue = other.GetFastPropertyValue(property);
-				result &= thisvalue == othervalue;
+				result &= thisvalue.Equals(othervalue);
 
 			}
 

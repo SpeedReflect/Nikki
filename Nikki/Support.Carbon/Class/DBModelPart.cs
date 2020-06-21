@@ -316,7 +316,7 @@ namespace Nikki.Support.Carbon.Class
 			{
 
 				var num = reader.ReadInt32();
-				var part = new Parts.CarParts.RealCarPart(num);
+				var part = new Parts.CarParts.RealCarPart(this, num);
 
 				for (int i = 0; i < num; ++i)
 				{
@@ -353,19 +353,19 @@ namespace Nikki.Support.Carbon.Class
 			}
 		}
 
-		internal DBModelPart Synchronize(DBModelPart other)
+		internal void Synchronize(DBModelPart other)
 		{
-			var addons = new List<Parts.CarParts.RealCarPart>();
+			var modelparts = new List<RealCarPart>(other.ModelCarParts);
 
-			foreach (Parts.CarParts.RealCarPart part in other.ModelCarParts)
+			for (int i = 0; i < this.Length; ++i)
 			{
 
 				bool found = false;
 
-				for (int loop = 0; loop < this.Length; ++loop)
+				for (int j = 0; j < other.Length; ++j)
 				{
-					
-					if (part.PartEquals((Parts.CarParts.RealCarPart)this.ModelCarParts[loop]))
+
+					if (other.ModelCarParts[j].Equals(this.ModelCarParts[i]))
 					{
 
 						found = true;
@@ -375,12 +375,11 @@ namespace Nikki.Support.Carbon.Class
 
 				}
 
-				if (!found) addons.Add(part);
+				if (!found) modelparts.Add(this.ModelCarParts[i]);
 
 			}
 
-			this.ModelCarParts.AddRange(addons);
-			return this;
+			this.ModelCarParts = modelparts;
 		}
 
 		#endregion

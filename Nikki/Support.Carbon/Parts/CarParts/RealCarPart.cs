@@ -224,23 +224,27 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 		/// </summary>
 		/// <param name="other"><see cref="RealCarPart"/> to compare this instance to.</param>
 		/// <returns>True if this instance equals another instance passed; false otherwise.</returns>
-		public override bool PartEquals(Shared.Parts.CarParts.RealCarPart other)
+		public override bool Equals(object other)
 		{
 			if (other is RealCarPart part)
 			{
 
-				bool result = true;
-
 				if (part.Attributes.Count != this.Attributes.Count) return false;
+
+				var thislist = new List<CPAttribute>(this.Attributes);
+				var otherlist = new List<CPAttribute>(part.Attributes);
+
+				thislist.Sort((x, y) => (int)(x.Key - y.Key));
+				otherlist.Sort((x, y) => (int)(x.Key - y.Key));
 
 				for (int loop = 0; loop < this.Length; ++loop)
 				{
 
-					result &= this.Attributes[loop] == part.Attributes[loop];
+					if (!thislist[loop].Equals(otherlist[loop])) return false;
 
 				}
 
-				return result;
+				return true;
 
 			}
 			else return false;
