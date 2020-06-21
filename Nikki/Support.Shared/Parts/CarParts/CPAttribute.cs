@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Diagnostics;
-using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
@@ -25,12 +24,6 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
 		/// </summary>
 		public abstract uint Key { get; set; }
-
-		/// <summary>
-		/// <see cref="RealCarPart"/> to which this <see cref="CPAttribute"/> belongs to.
-		/// </summary>
-		[Browsable(false)]
-		public RealCarPart BelongsTo { get; set; }
 
 		/// <summary>
 		/// Disassembles byte array into <see cref="CPAttribute"/> using <see cref="BinaryReader"/> 

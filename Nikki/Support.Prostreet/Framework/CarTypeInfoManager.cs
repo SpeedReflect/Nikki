@@ -100,7 +100,9 @@ namespace Nikki.Support.Prostreet.Framework
 				{
 
 					var collection = new CarTypeInfo(br, this);
-					this.Add(collection);
+
+					try { this.Add(collection); }
+					catch { } // skip if exists
 
 				}
 

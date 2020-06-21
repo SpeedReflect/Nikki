@@ -116,8 +116,9 @@ namespace Nikki.Support.Prostreet.Framework
 					{
 						SettingData = settings
 					};
-					
-					this.Add(collection);
+
+					try { this.Add(collection); }
+					catch { } // skip if exists
 
 				}
 

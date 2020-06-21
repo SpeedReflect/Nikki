@@ -86,7 +86,9 @@ namespace Nikki.Support.Prostreet.Framework
 
 				br.BaseStream.Position = block.Offsets[loop];
 				var collection = new STRBlock(br, this);
-				this.Add(collection);
+
+				try { this.Add(collection); }
+				catch { } // skip if exists
 
 			}
 		}

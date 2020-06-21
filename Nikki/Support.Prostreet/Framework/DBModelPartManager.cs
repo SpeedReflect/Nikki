@@ -787,25 +787,19 @@ namespace Nikki.Support.Prostreet.Framework
 				if (String.IsNullOrEmpty(models_list[a1])) continue;
 				var collection = new DBModelPart(models_list[a1], this);
 				var tempparts = temp_cparts.FindAll(_ => _.Index == a1);
-
-				int count = 0;
 				
 				foreach (var temppart in tempparts)
 				{
 				
 					offset_dict.TryGetValue(temppart.AttribOffset, out var cpoff);
 					
-					var realpart = new Parts.CarParts.RealCarPart(a1, cpoff?.AttribOffsets.Count ?? 0, collection)
-					{
-						PartName = $"{models_list[a1]}_PART_{count++}"
-					};
+					var realpart = new Parts.CarParts.RealCarPart(collection, cpoff?.AttribOffsets.Count ?? 0);
 					
 					foreach (var attroff in cpoff?.AttribOffsets ?? Enumerable.Empty<ushort>())
 					{
 					
 						if (attroff >= attrib_list.Length) continue;
 						var addon = (CPAttribute)attrib_list[attroff].PlainCopy();
-						addon.BelongsTo = realpart;
 
 						if (addon is ModelTableAttribute tableattr)
 						{
@@ -822,9 +816,9 @@ namespace Nikki.Support.Prostreet.Framework
 				
 				}
 				
-				collection.ResortNames();
-				this.Add(collection);
-			
+				try { this.Add(collection); }
+				catch { } // skip if exists
+
 			}
 
 			br.BaseStream.Position = position + size;

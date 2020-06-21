@@ -111,19 +111,6 @@ namespace Nikki.Support.Carbon.Class
 		#region Methods
 
 		/// <summary>
-		/// Resorts all names according to their indexed position.
-		/// </summary>
-		public override void ResortNames()
-		{
-			for (int loop = 0; loop < this.ModelCarParts.Count; ++loop)
-			{
-
-				this.ModelCarParts[loop].PartName = $"{this._collection_name}_PART_{loop}";
-
-			}
-		}
-
-		/// <summary>
 		/// Switches two parts and their indexes.
 		/// </summary>
 		/// <param name="part1">First <see cref="RealCarPart"/> to switch.</param>
@@ -147,21 +134,16 @@ namespace Nikki.Support.Carbon.Class
 
 			}
 
-			var temp1 = this.GetRealPart(index1);
-			var temp2 = this.GetRealPart(index2);
+			var temp1 = this.ModelCarParts[index1];
+			var temp2 = this.ModelCarParts[index2];
 			this.ModelCarParts[index2] = temp1;
 			this.ModelCarParts[index1] = temp2;
-			this.ResortNames();
 		}
 
 		/// <summary>
 		/// Reverses all parts in this <see cref="DBModelPart"/>.
 		/// </summary>
-		public override void ReverseParts()
-		{
-			this.ModelCarParts.Reverse();
-			this.ResortNames();
-		}
+		public override void ReverseParts() => this.ModelCarParts.Reverse();
 
 		/// <summary>
 		/// Sorts all parts by property name provided.
@@ -187,8 +169,6 @@ namespace Nikki.Support.Carbon.Class
 				return valueX.CompareTo(valueY);
 			
 			});
-
-			this.ResortNames();
 		}
 
 		/// <summary>
@@ -203,7 +183,9 @@ namespace Nikki.Support.Carbon.Class
 			foreach (var part in this.ModelCarParts)
 			{
 
-				result.ModelCarParts.Add((RealCarPart)part.PlainCopy());
+				var copy = (Parts.CarParts.RealCarPart)part.PlainCopy();
+				copy.Model = result;
+				result.ModelCarParts.Add(copy);
 
 			}
 
@@ -215,8 +197,7 @@ namespace Nikki.Support.Carbon.Class
 		/// </summary>
 		public override void AddRealPart()
 		{
-			this.ModelCarParts.Add(new Parts.CarParts.RealCarPart(this.Index, this));
-			this.ResortNames();
+			this.ModelCarParts.Add(new Parts.CarParts.RealCarPart(this));
 		}
 
 		/// <summary>
@@ -233,8 +214,6 @@ namespace Nikki.Support.Carbon.Class
 				throw new InfoAccessException($"Part named {name} does not exist");
 
 			}
-			
-			this.ResortNames();
 		}
 
 		/// <summary>
@@ -254,9 +233,9 @@ namespace Nikki.Support.Carbon.Class
 
 			}
 
-
-			this.ModelCarParts.Add((RealCarPart)part.PlainCopy());
-			this.ResortNames();
+			var copy = (RealCarPart)part.PlainCopy();
+			copy.Model = this;
+			this.ModelCarParts.Add(copy);
 		}
 
 		/// <summary>
@@ -337,7 +316,7 @@ namespace Nikki.Support.Carbon.Class
 			{
 
 				var num = reader.ReadInt32();
-				var part = new Parts.CarParts.RealCarPart(0, num, this);
+				var part = new Parts.CarParts.RealCarPart(num);
 
 				for (int i = 0; i < num; ++i)
 				{
@@ -364,7 +343,6 @@ namespace Nikki.Support.Carbon.Class
 					};
 
 					attrib.Key = key;
-					attrib.BelongsTo = part;
 					attrib.Deserialize(reader);
 					part.Attributes.Add(attrib);
 
@@ -373,8 +351,36 @@ namespace Nikki.Support.Carbon.Class
 				this.ModelCarParts.Add(part);
 
 			}
+		}
 
-			this.ResortNames();
+		internal DBModelPart Synchronize(DBModelPart other)
+		{
+			var addons = new List<Parts.CarParts.RealCarPart>();
+
+			foreach (Parts.CarParts.RealCarPart part in other.ModelCarParts)
+			{
+
+				bool found = false;
+
+				for (int loop = 0; loop < this.Length; ++loop)
+				{
+					
+					if (part.PartEquals((Parts.CarParts.RealCarPart)this.ModelCarParts[loop]))
+					{
+
+						found = true;
+						break;
+
+					}
+
+				}
+
+				if (!found) addons.Add(part);
+
+			}
+
+			this.ModelCarParts.AddRange(addons);
+			return this;
 		}
 
 		#endregion

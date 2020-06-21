@@ -96,7 +96,9 @@ namespace Nikki.Support.MostWanted.Framework
 				{
 
 					var collection = new SlotOverride(br, this);
-					this.Add(collection);
+
+					try { this.Add(collection); }
+					catch { } // skip if exists
 
 				}
 

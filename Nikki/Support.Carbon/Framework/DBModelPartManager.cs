@@ -786,25 +786,19 @@ namespace Nikki.Support.Carbon.Framework
 				if (String.IsNullOrEmpty(models_list[a1])) continue;
 				var collection = new DBModelPart(models_list[a1], this);
 				var tempparts = temp_cparts.FindAll(_ => _.Index == a1);
-
-				int count = 0;
 				
 				foreach (var temppart in tempparts)
 				{
 				
 					offset_dict.TryGetValue(temppart.AttribOffset, out var cpoff);
 					
-					var realpart = new Parts.CarParts.RealCarPart(a1, cpoff?.AttribOffsets.Count ?? 0, collection)
-					{
-						PartName = $"{models_list[a1]}_PART_{count++}"
-					};
+					var realpart = new Parts.CarParts.RealCarPart(collection, cpoff?.AttribOffsets.Count ?? 0);
 					
 					foreach (var attroff in cpoff?.AttribOffsets ?? Enumerable.Empty<ushort>())
 					{
 					
 						if (attroff >= attrib_list.Length) continue;
 						var addon = (CPAttribute)attrib_list[attroff].PlainCopy();
-						addon.BelongsTo = realpart;
 
 						if (addon is ModelTableAttribute tableattr)
 						{
@@ -821,9 +815,9 @@ namespace Nikki.Support.Carbon.Framework
 				
 				}
 
-				collection.ResortNames();
-				this.Add(collection);
-			
+				try { this.Add(collection); }
+				catch { } // skip if exists
+
 			}
 
 			br.BaseStream.Position = position + size;
@@ -907,7 +901,68 @@ namespace Nikki.Support.Carbon.Framework
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public override void Import(eSerializeType type, BinaryReader br)
 		{
+			var position = br.BaseStream.Position;
+			var header = new SerializationHeader();
+			header.Read(br);
 
+			var collection = new DBModelPart();
+
+			if (header.ID != eBlockID.Nikki)
+			{
+
+				throw new Exception($"Missing serialized header in the imported collection");
+
+			}
+			else
+			{
+
+				if (header.Game != this.GameINT)
+				{
+
+					throw new Exception($"Stated game inside collection is {header.Game}, while should be {this.GameINT}");
+
+				}
+
+				if (header.Name != this.Name)
+				{
+
+					throw new Exception($"Imported collection is not a collection of type {this.Name}");
+
+				}
+
+				collection.Deserialize(br);
+
+			}
+
+			var index = this.IndexOf(collection);
+
+			if (index == -1)
+			{
+
+				this.Add(collection);
+
+			}
+			else
+			{
+
+				switch (type)
+				{
+					case eSerializeType.Negate:
+						break;
+
+					case eSerializeType.Override:
+						this[index] = collection;
+						break;
+
+					case eSerializeType.Synchronize:
+						this[index].Synchronize(collection);
+						break;
+
+					default:
+						break;
+				}
+
+			}
 		}
 	}
 }

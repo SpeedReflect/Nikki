@@ -97,6 +97,7 @@ namespace Nikki.Core
 			{ 0xD9027A7D, "COLOR2ID" },
 			{ 0xD9027EBE, "COLOR3ID" },
 			{ 0xD90F9423, "MAX_LOD" },
+			{ 0xEBB03E66, "BRAND_NAME" },
 			{ 0xEDB20048, "PAINTGROUP" },
 			{ 0xEDBF864E, "WHEELEMITTER" },
 			{ 0xF073C523, "MATNAMEA" },
@@ -200,7 +201,7 @@ namespace Nikki.Core
 			{ 0x6223C6F9, eCarPartAttribType.Key }, // VINYLLANGUAGEHASH
 			{ 0x956326AF, eCarPartAttribType.Key }, // LOD_NAME_PREFIX_NAMEHASH
 			{ 0x900449D3, eCarPartAttribType.Key }, // PART_NAME_BASE_HASH
-			{ 0xEBB03E66, eCarPartAttribType.Key }, // 0xEBB03E66
+			{ 0xEBB03E66, eCarPartAttribType.Key }, // BRAND_NAME
 
 			// Integer Attributes
 			{ 0x0000D99A, eCarPartAttribType.Integer }, // RED

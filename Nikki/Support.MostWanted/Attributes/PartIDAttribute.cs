@@ -25,7 +25,6 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="PartIDAttribute"/>.
 		/// </summary>
-		[AccessModifiable()]
 		public override eCarPartAttribType AttribType => eCarPartAttribType.CarPartID;
 
 		/// <summary>
@@ -37,7 +36,8 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// <summary>
 		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
 		/// </summary>
-		[Browsable(false)]
+		[ReadOnly(true)]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -65,19 +65,21 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// Initializes new instance of <see cref="PartIDAttribute"/> with value provided.
 		/// </summary>
 		/// <param name="value">Value to set.</param>
-		/// <param name="part"><see cref="RealCarPart"/> to which this part belongs to.</param>
-		public PartIDAttribute(object value, RealCarPart part)
+		public PartIDAttribute(object value)
 		{
-			this.BelongsTo = part;
 			try
 			{
+
 				this.Level = (byte)value.ReinterpretCast(typeof(byte));
 				this.ID = ePartMostWanted.INVALID;
+			
 			}
 			catch (Exception)
 			{
+			
 				this.ID = ePartMostWanted.INVALID;
 				this.Level = 0;
+			
 			}
 		}
 
@@ -154,8 +156,10 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
 		public static bool operator ==(PartIDAttribute at1, PartIDAttribute at2)
 		{
-			bool v = !(at2 is null) && at1.Key == at2.Key;
-			return at1 is null ? at2 is null : v && at1.ID == at2.ID && at1.Level == at2.Level;
+			if (at1 is null) return at2 is null;
+			else if (at2 is null) return false;
+
+			return at1.Key == at2.Key && at1.ID == at2.ID && at1.Level == at2.Level;
 		}
 
 		/// <summary>
@@ -190,12 +194,12 @@ namespace Nikki.Support.MostWanted.Attributes
 		public override CPAttribute ConvertTo(eCarPartAttribType type) =>
 			type switch
 			{
-				eCarPartAttribType.Boolean => new BoolAttribute(this.ID, this.BelongsTo),
-				eCarPartAttribType.Floating => new FloatAttribute(this.ID, this.BelongsTo),
-				eCarPartAttribType.Integer => new IntAttribute(this.ID, this.BelongsTo),
-				eCarPartAttribType.String => new StringAttribute(this.ID, this.BelongsTo),
-				eCarPartAttribType.TwoString => new TwoStringAttribute(this.ID, this.BelongsTo),
-				eCarPartAttribType.Key => new KeyAttribute(this.ID, this.BelongsTo),
+				eCarPartAttribType.Boolean => new BoolAttribute(this.ID),
+				eCarPartAttribType.Floating => new FloatAttribute(this.ID),
+				eCarPartAttribType.Integer => new IntAttribute(this.ID),
+				eCarPartAttribType.String => new StringAttribute(this.ID),
+				eCarPartAttribType.TwoString => new TwoStringAttribute(this.ID),
+				eCarPartAttribType.Key => new KeyAttribute(this.ID),
 				_ => this
 			};
 

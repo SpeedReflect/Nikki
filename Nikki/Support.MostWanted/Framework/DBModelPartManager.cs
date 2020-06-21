@@ -764,7 +764,7 @@ namespace Nikki.Support.MostWanted.Framework
 					struct_dict.TryGetValue(temppart.StructOffset, out var cpstr);
 					var actual = (Parts.CarParts.CPStruct)((Parts.CarParts.CPStruct)cpstr)?.PlainCopy();
 					
-					var realpart = new Parts.CarParts.RealCarPart(a1, cpoff?.AttribOffsets.Count ?? 0, collection)
+					var realpart = new Parts.CarParts.RealCarPart(collection, cpoff?.AttribOffsets.Count ?? 0)
 					{
 						PartLabel = temppart.PartNameHash.BinString(eLookupReturn.EMPTY),
 						DebugName = temppart.DebugName,
@@ -778,7 +778,6 @@ namespace Nikki.Support.MostWanted.Framework
 					
 						if (attroff >= attrib_list.Length) continue;
 						var addon = (CPAttribute)attrib_list[attroff].PlainCopy();
-						addon.BelongsTo = realpart;
 						realpart.Attributes.Add(addon);
 					
 					}
@@ -786,9 +785,10 @@ namespace Nikki.Support.MostWanted.Framework
 					collection.ModelCarParts.Add(realpart);
 				
 				}
-				collection.ResortNames();
-				this.Add(collection);
-			
+
+				try { this.Add(collection); }
+				catch { } // skip if exists
+
 			}
 
 			br.BaseStream.Position = position + size;

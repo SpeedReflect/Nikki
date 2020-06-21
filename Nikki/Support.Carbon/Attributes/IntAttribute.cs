@@ -23,7 +23,6 @@ namespace Nikki.Support.Carbon.Attributes
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="IntAttribute"/>.
 		/// </summary>
-		[AccessModifiable()]
 		public override eCarPartAttribType AttribType => eCarPartAttribType.Integer;
 
 		/// <summary>
@@ -35,7 +34,8 @@ namespace Nikki.Support.Carbon.Attributes
 		/// <summary>
 		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
 		/// </summary>
-		[Browsable(false)]
+		[ReadOnly(true)]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -57,17 +57,19 @@ namespace Nikki.Support.Carbon.Attributes
 		/// Initializes new instance of <see cref="IntAttribute"/> with value provided.
 		/// </summary>
 		/// <param name="value">Value to set.</param>
-		/// <param name="part"><see cref="RealCarPart"/> to which this part belongs to.</param>
-		public IntAttribute(object value, RealCarPart part)
+		public IntAttribute(object value)
 		{
-			this.BelongsTo = part;
 			try
 			{
+
 				this.Value = (uint)value.ReinterpretCast(typeof(uint));
+
 			}
 			catch (Exception)
 			{
+
 				this.Value = 0;
+			
 			}
 		}
 
@@ -135,8 +137,13 @@ namespace Nikki.Support.Carbon.Attributes
 		/// <param name="at1">The first <see cref="IntAttribute"/> to compare, or null.</param>
 		/// <param name="at2">The second <see cref="IntAttribute"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
-		public static bool operator ==(IntAttribute at1, IntAttribute at2) =>
-			at1 is null ? at2 is null : !(at2 is null) && at1.Key == at2.Key && at1.Value == at2.Value;
+		public static bool operator ==(IntAttribute at1, IntAttribute at2)
+		{
+			if (at1 is null) return at2 is null;
+			else if (at2 is null) return false;
+
+			return at1.Key == at2.Key && at1.Value == at2.Value;
+		}
 
 		/// <summary>
 		/// Determines whether two specified <see cref="IntAttribute"/> have different values.
@@ -169,13 +176,13 @@ namespace Nikki.Support.Carbon.Attributes
 		public override CPAttribute ConvertTo(eCarPartAttribType type) =>
 			type switch
 			{
-				eCarPartAttribType.Boolean => new BoolAttribute(this.Value, this.BelongsTo),
-				eCarPartAttribType.Floating => new FloatAttribute(this.Value, this.BelongsTo),
-				eCarPartAttribType.String => new StringAttribute(this.Value, this.BelongsTo),
-				eCarPartAttribType.TwoString => new TwoStringAttribute(this.Value, this.BelongsTo),
-				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Value, this.BelongsTo),
-				eCarPartAttribType.Key => new KeyAttribute(this.Value, this.BelongsTo),
-				eCarPartAttribType.ModelTable => new ModelTableAttribute(this.Value, this.BelongsTo),
+				eCarPartAttribType.Boolean => new BoolAttribute(this.Value),
+				eCarPartAttribType.Floating => new FloatAttribute(this.Value),
+				eCarPartAttribType.String => new StringAttribute(this.Value),
+				eCarPartAttribType.TwoString => new TwoStringAttribute(this.Value),
+				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Value),
+				eCarPartAttribType.Key => new KeyAttribute(this.Value),
+				eCarPartAttribType.ModelTable => new ModelTableAttribute(this.Value),
 				_ => this
 			};
 

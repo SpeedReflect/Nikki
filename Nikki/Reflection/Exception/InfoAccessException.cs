@@ -7,14 +7,14 @@
 	public class InfoAccessException : System.Exception
 	{
         /// <summary>
-        /// Initializes new instance of <see cref="ArgumentLengthException"/> 
+        /// Initializes new instance of <see cref="InfoAccessException"/> 
         /// with default message.
         /// </summary>
         public InfoAccessException()
             : base("Property or field does not exist") { }
 
         /// <summary>
-        /// Initializes new instance of <see cref="ArgumentLengthException"/> 
+        /// Initializes new instance of <see cref="InfoAccessException"/> 
         /// with custom message passed.
         /// </summary>
         /// <param name="name">Name of the property/field.</param>

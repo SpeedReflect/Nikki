@@ -389,7 +389,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// <returns>True if obj is a <see cref="CPStruct"/> and its value is the same as 
 		/// this instance; false otherwise. If obj is null, the method returns false.
 		/// </returns>
-		public override bool Equals(object obj) => obj is CPStruct && this == (CPStruct)obj;
+		public override bool Equals(object obj) => obj is CPStruct @struct && this == @struct;
 
 		/// <summary>
 		/// Returns the hash code for this <see cref="CPStruct"/>.
@@ -423,7 +423,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// <param name="cp2">The second <see cref="CPStruct"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
 		public static bool operator ==(CPStruct cp1, CPStruct cp2) =>
-			cp1 is null ? cp2 is null : cp2 is null ? false : cp1.ValueEquals(cp2);
+			cp1 is null ? cp2 is null : !(cp2 is null) && cp1.ValueEquals(cp2);
 
 		/// <summary>
 		/// Determines whether two specified <see cref="CPStruct"/> have different values.

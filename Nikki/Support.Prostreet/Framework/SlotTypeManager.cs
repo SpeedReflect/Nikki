@@ -143,7 +143,9 @@ namespace Nikki.Support.Prostreet.Framework
 				{
 
 					var collection = new SlotType(br, this);
-					this.Add(collection);
+
+					try { this.Add(collection); }
+					catch { } // skip if exists
 
 				}
 

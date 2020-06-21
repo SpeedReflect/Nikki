@@ -88,6 +88,6 @@
 		/// <summary>
 		/// 
 		/// </summary>
-		_0xEBB03E66 = 0xEBB03E66,
+		BRAND_NAME = 0xEBB03E66,
 	}
 }

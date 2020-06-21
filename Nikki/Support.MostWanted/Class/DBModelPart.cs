@@ -108,19 +108,6 @@ namespace Nikki.Support.MostWanted.Class
 		#region Methods
 
 		/// <summary>
-		/// Resorts all names according to their indexed position.
-		/// </summary>
-		public override void ResortNames()
-		{
-			for (int loop = 0; loop < this.ModelCarParts.Count; ++loop)
-			{
-
-				this.ModelCarParts[loop].PartName = $"{this._collection_name}_PART_{loop}";
-
-			}
-		}
-
-		/// <summary>
 		/// Switches two parts and their indexes.
 		/// </summary>
 		/// <param name="part1">First <see cref="RealCarPart"/> to switch.</param>
@@ -144,21 +131,16 @@ namespace Nikki.Support.MostWanted.Class
 
 			}
 
-			var temp1 = this.GetRealPart(index1);
-			var temp2 = this.GetRealPart(index2);
+			var temp1 = this.ModelCarParts[index1];
+			var temp2 = this.ModelCarParts[index2];
 			this.ModelCarParts[index2] = temp1;
 			this.ModelCarParts[index1] = temp2;
-			this.ResortNames();
 		}
 
 		/// <summary>
 		/// Reverses all parts in this <see cref="DBModelPart"/>.
 		/// </summary>
-		public override void ReverseParts()
-		{
-			this.ModelCarParts.Reverse();
-			this.ResortNames();
-		}
+		public override void ReverseParts() => this.ModelCarParts.Reverse();
 
 		/// <summary>
 		/// Sorts all parts by property name provided.
@@ -184,8 +166,6 @@ namespace Nikki.Support.MostWanted.Class
 				return valueX.CompareTo(valueY);
 
 			});
-
-			this.ResortNames();
 		}
 
 		/// <summary>
@@ -200,7 +180,9 @@ namespace Nikki.Support.MostWanted.Class
 			foreach (var part in this.ModelCarParts)
 			{
 
-				result.ModelCarParts.Add((RealCarPart)part.PlainCopy());
+				var copy = (Parts.CarParts.RealCarPart)part.PlainCopy();
+				copy.Model = result;
+				result.ModelCarParts.Add(copy);
 
 			}
 
@@ -212,8 +194,7 @@ namespace Nikki.Support.MostWanted.Class
 		/// </summary>
 		public override void AddRealPart()
 		{
-			this.ModelCarParts.Add(new Parts.CarParts.RealCarPart(this.Index, this));
-			this.ResortNames();
+			this.ModelCarParts.Add(new Parts.CarParts.RealCarPart(this));
 		}
 
 		/// <summary>
@@ -230,8 +211,6 @@ namespace Nikki.Support.MostWanted.Class
 				throw new InfoAccessException($"Part named {name} does not exist");
 
 			}
-
-			this.ResortNames();
 		}
 
 		/// <summary>
@@ -251,9 +230,9 @@ namespace Nikki.Support.MostWanted.Class
 
 			}
 
-
-			this.ModelCarParts.Add((RealCarPart)part.PlainCopy());
-			this.ResortNames();
+			var copy = (RealCarPart)part.PlainCopy();
+			copy.Model = this;
+			this.ModelCarParts.Add(copy);
 		}
 
 		/// <summary>

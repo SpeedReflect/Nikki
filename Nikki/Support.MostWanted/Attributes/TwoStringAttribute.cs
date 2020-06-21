@@ -24,7 +24,6 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="StringAttribute"/>.
 		/// </summary>
-		[AccessModifiable()]
 		public override eCarPartAttribType AttribType => eCarPartAttribType.TwoString;
 
 		/// <summary>
@@ -36,7 +35,8 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// <summary>
 		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
 		/// </summary>
-		[Browsable(false)]
+		[ReadOnly(true)]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -76,23 +76,25 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// Initializes new instance of <see cref="TwoStringAttribute"/> with value provided.
 		/// </summary>
 		/// <param name="value">Value to set.</param>
-		/// <param name="part"><see cref="RealCarPart"/> to which this part belongs to.</param>
-		public TwoStringAttribute(object value, RealCarPart part)
+		public TwoStringAttribute(object value)
 		{
-			this.BelongsTo = part;
 			try
 			{
+
 				this.Value1 = (string)value.ReinterpretCast(typeof(string));
 				this.Value2 = String.Empty;
 				this.Value1Exists = eBoolean.True;
 				this.Value2Exists = eBoolean.False;
+
 			}
 			catch (Exception)
 			{
+
 				this.Value1 = String.Empty;
 				this.Value2 = String.Empty;
 				this.Value1Exists = eBoolean.False;
 				this.Value2Exists = eBoolean.False;
+
 			}
 		}
 
@@ -185,8 +187,9 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// <returns>A 32-bit signed integer hash code.</returns>
 		public override int GetHashCode()
 		{
-			int result = Tuple.Create(this.Key, this.Value1, this.Value2).GetHashCode();
-			return result * $"{this.Value1Exists}{this.Value2Exists}".GetHashCode();
+			int code1 = Tuple.Create(this.Value1, this.Value1Exists.ToString()).GetHashCode();
+			int code2 = Tuple.Create(this.Value2, this.Value2Exists.ToString()).GetHashCode();
+			return HashCode.Combine(this.Key, code1, code2);
 		}
 
 		/// <summary>
@@ -197,8 +200,12 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
 		public static bool operator ==(TwoStringAttribute at1, TwoStringAttribute at2)
 		{
-			bool v = !(at2 is null) && at1.Key == at2.Key && at1.Value1 == at2.Value1;
-			return at1 is null ? at2 is null : v && at1.Value2 == at2.Value2;
+			if (at1 is null) return at2 is null;
+			else if (at2 is null) return false;
+
+			var res1 = at1.Value1Exists == at2.Value1Exists && at1.Value1 == at2.Value1;
+			var res2 = at1.Value2Exists == at2.Value2Exists && at1.Value2 == at2.Value2;
+			return at1.Key == at2.Key && res1 && res2;
 		}
 
 		/// <summary>
@@ -235,12 +242,12 @@ namespace Nikki.Support.MostWanted.Attributes
 		public override CPAttribute ConvertTo(eCarPartAttribType type) =>
 			type switch
 			{
-				eCarPartAttribType.Boolean => new BoolAttribute(this.Value1, this.BelongsTo),
-				eCarPartAttribType.Floating => new FloatAttribute(this.Value1, this.BelongsTo),
-				eCarPartAttribType.Integer => new IntAttribute(this.Value1, this.BelongsTo),
-				eCarPartAttribType.String => new StringAttribute(this.Value1, this.BelongsTo),
-				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Value1, this.BelongsTo),
-				eCarPartAttribType.Key => new KeyAttribute(this.Value1, this.BelongsTo),
+				eCarPartAttribType.Boolean => new BoolAttribute(this.Value1),
+				eCarPartAttribType.Floating => new FloatAttribute(this.Value1),
+				eCarPartAttribType.Integer => new IntAttribute(this.Value1),
+				eCarPartAttribType.String => new StringAttribute(this.Value1),
+				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Value1),
+				eCarPartAttribType.Key => new KeyAttribute(this.Value1),
 				_ => this
 			};
 

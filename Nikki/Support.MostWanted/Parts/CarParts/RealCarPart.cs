@@ -28,13 +28,12 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// Name of this <see cref="RealCarPart"/>.
 		/// </summary>
 		[Browsable(false)]
-		public override string PartName { get; set; } = String.Empty;
+		public override string PartName => this.ToString();
 
 		/// <summary>
-		/// Index of <see cref="DBModelPart"/> to which this part belongs to.
+		/// <see cref="DBModelPart"/> to which this instance belongs to.
 		/// </summary>
-		[Browsable(false)]
-		public override int Index { get; set; }
+		public override Shared.Class.DBModelPart Model { get; set; }
 
 		/// <summary>
 		/// Collection of <see cref="CPAttribute"/> of this <see cref="RealCarPart"/>.
@@ -47,12 +46,6 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		[EditorBrowsable(EditorBrowsableState.Always)]
 		[TypeConverter(typeof(ExpandableObjectConverter))]
 		public CPStruct LodStruct { get; set; }
-
-		/// <summary>
-		/// <see cref="DBModelPart"/> to which this part belongs to.
-		/// </summary>
-		[Browsable(false)]
-		public DBModelPart Model { get; set; }
 
 		/// <summary>
 		/// Label of the car part.
@@ -79,40 +72,28 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		public string DebugName { get; set; }
 
 		/// <summary>
-		/// Initialize new instance of <see cref="RealCarPart"/>.
+		/// Initializes new instance of <see cref="RealCarPart"/>.
 		/// </summary>
-		public RealCarPart()
-		{
-			this.Attributes = new List<CPAttribute>();
-			this.LodStruct = new CPStruct();
-		}
+		public RealCarPart() => this.Attributes = new List<CPAttribute>();
 
 		/// <summary>
-		/// Initialize new instance of <see cref="RealCarPart"/>.
+		/// Initializes new instance of <see cref="RealCarPart"/>.
 		/// </summary>
-		/// <param name="index">Index of the <see cref="DBModelPart"/> in the database.</param>
-		/// <param name="model"><see cref="DBModelPart"/> to which this part belongs to.</param>
-		public RealCarPart(int index, DBModelPart model)
-		{
-			this.Index = index;
-			this.Model = model;
-			this.Attributes = new List<CPAttribute>();
-			this.LodStruct = new CPStruct();
-		}
+		/// <param name="model"><see cref="DBModelPart"/> to which this instance belongs to.</param>
+		public RealCarPart(DBModelPart model) : this() { this.Model = model; }
 
 		/// <summary>
-		/// Initialize new instance of <see cref="RealCarPart"/>.
+		/// Initializes new instance of <see cref="RealCarPart"/>.
 		/// </summary>
-		/// <param name="index">Index of the <see cref="DBModelPart"/> in the database.</param>
 		/// <param name="capacity">Initial capacity of the attribute list.</param>
-		/// <param name="model"><see cref="DBModelPart"/> to which this part belongs to.</param>
-		public RealCarPart(int index, int capacity, DBModelPart model)
-		{
-			this.Index = index;
-			this.Model = model;
-			this.Attributes = new List<CPAttribute>(capacity);
-			this.LodStruct = new CPStruct();
-		}
+		public RealCarPart(int capacity) => this.Attributes = new List<CPAttribute>(capacity);
+
+		/// <summary>
+		/// Initializes new instance of <see cref="RealCarPart"/>.
+		/// </summary>
+		/// <param name="model"><see cref="DBModelPart"/> to which this instance belongs to.</param>
+		/// <param name="capacity">Initial capacity of the attribute list.</param>
+		public RealCarPart(DBModelPart model, int capacity) : this(capacity) { this.Model = model; }
 
 		/// <summary>
 		/// Returns PartName, Attributes count and CarPartGroupID as a string value.
@@ -126,9 +107,20 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// <returns>A 32-bit signed integer hash code.</returns>
 		public override int GetHashCode()
 		{
-			int result = this.PartLabel?.GetHashCode() ?? String.Empty.GetHashCode();
-			result *= this.Index + 7;
-			result ^= this.LodStruct.GetHashCode();
+			int result = this.PartName?.GetHashCode() ?? String.Empty.GetHashCode();
+
+			foreach (var attribute in this.Attributes)
+			{
+
+				result = HashCode.Combine(result, attribute.GetHashCode());
+
+			}
+
+			result = HashCode.Combine(result, this.CarPartGroupID);
+			result = HashCode.Combine(result, this.DebugName);
+			result = HashCode.Combine(result, this.LodStruct.GetHashCode());
+			result = HashCode.Combine(result, this.UpgradeGroupID);
+
 			return result;
 		}
 
@@ -160,13 +152,6 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// <param name="key">Key of the new <see cref="CPAttribute"/>.</param>
 		public override void AddAttribute(uint key)
 		{
-			if (this.GetAttribute(key) != null)
-			{
-
-				throw new InfoAccessException($"Attribute with key type 0x{key:X8} already exist");
-
-			}
-
 			if (!Map.CarPartKeys.TryGetValue(key, out var type))
 			{
 
@@ -176,13 +161,13 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 
 			CPAttribute attribute = type switch
 			{
-				eCarPartAttribType.Boolean => new BoolAttribute(eBoolean.False, this),
-				eCarPartAttribType.Floating => new FloatAttribute((float)0, this),
-				eCarPartAttribType.CarPartID => new PartIDAttribute((int)0, this),
-				eCarPartAttribType.String => new StringAttribute(String.Empty, this),
-				eCarPartAttribType.TwoString => new TwoStringAttribute(String.Empty, this),
-				eCarPartAttribType.Key => new KeyAttribute(String.Empty, this),
-				_ => new IntAttribute((int)0, this)
+				eCarPartAttribType.Boolean => new BoolAttribute(eBoolean.False),
+				eCarPartAttribType.Floating => new FloatAttribute((float)0),
+				eCarPartAttribType.CarPartID => new PartIDAttribute((int)0),
+				eCarPartAttribType.String => new StringAttribute(String.Empty),
+				eCarPartAttribType.TwoString => new TwoStringAttribute(String.Empty),
+				eCarPartAttribType.Key => new KeyAttribute(String.Empty),
+				_ => new IntAttribute((int)0)
 			};
 
 			attribute.Key = key;
@@ -233,13 +218,6 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 
 			}
 
-			if (this.GetAttribute(newkey) != null)
-			{
-
-				throw new InfoAccessException($"Attribute with key type 0x{newkey:X8} already exists");
-
-			}
-
 			if (!Map.CarPartKeys.TryGetValue(newkey, out var type))
 			{
 
@@ -250,7 +228,6 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 			var result = (CPAttribute)attribute.PlainCopy();
 			result = result.ConvertTo(type);
 			result.Key = newkey;
-			result.BelongsTo = this;
 			this.Attributes.Add(result);
 		}
 
@@ -279,16 +256,47 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 			this.CloneAttribute(newlabel.BinHash(), copylabel.BinHash());
 
 		/// <summary>
+		/// Compares two <see cref="RealCarPart"/> and checks whether the equal.
+		/// </summary>
+		/// <param name="other"><see cref="RealCarPart"/> to compare this instance to.</param>
+		/// <returns>True if this instance equals another instance passed; false otherwise.</returns>
+		public override bool PartEquals(Shared.Parts.CarParts.RealCarPart other)
+		{
+			if (other is RealCarPart part)
+			{
+
+				bool result = true;
+
+				if (this.PartLabel != part.PartLabel) return false;
+				if (part.Attributes.Count != this.Attributes.Count) return false;
+
+				for (int loop = 0; loop < this.Length; ++loop)
+				{
+
+					result &= this.Attributes[loop] == part.Attributes[loop];
+
+				}
+
+				result &= this.CarPartGroupID == part.CarPartGroupID;
+				result &= this.DebugName == part.DebugName;
+				result &= this.UpgradeGroupID == part.UpgradeGroupID;
+				result &= this.LodStruct == part.LodStruct;
+				return result;
+
+			}
+			else return false;
+		}
+
+		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
 		public override SubPart PlainCopy()
 		{
-			var result = new RealCarPart(this.Index, this.Length, this.Model)
+			var result = new RealCarPart(this.Length)
 			{
 				CarPartGroupID = this.CarPartGroupID,
 				DebugName = this.DebugName,
-				PartName = this.PartName,
 				PartLabel = this.PartLabel,
 				UpgradeGroupID = this.UpgradeGroupID,
 				LodStruct = (CPStruct)this.LodStruct.PlainCopy()

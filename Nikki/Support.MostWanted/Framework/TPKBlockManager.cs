@@ -116,8 +116,9 @@ namespace Nikki.Support.MostWanted.Framework
 					{
 						SettingData = settings
 					};
-					
-					this.Add(collection);
+
+					try { this.Add(collection); }
+					catch { } // skip if exists
 
 				}
 

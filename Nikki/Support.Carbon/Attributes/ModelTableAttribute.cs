@@ -11,6 +11,7 @@ using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Shared.Parts.CarParts;
 using CoreExtensions.IO;
+using CoreExtensions.Text;
 using CoreExtensions.Reflection;
 using CoreExtensions.Conversions;
 
@@ -27,7 +28,6 @@ namespace Nikki.Support.Carbon.Attributes
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="ModelTableAttribute"/>.
 		/// </summary>
-		[AccessModifiable()]
 		public override eCarPartAttribType AttribType => eCarPartAttribType.ModelTable;
 
 		/// <summary>
@@ -39,7 +39,8 @@ namespace Nikki.Support.Carbon.Attributes
 		/// <summary>
 		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
 		/// </summary>
-		[Browsable(false)]
+		[ReadOnly(true)]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -808,19 +809,21 @@ namespace Nikki.Support.Carbon.Attributes
 		/// Initializes new instance of <see cref="ModelTableAttribute"/> with value provided.
 		/// </summary>
 		/// <param name="value">Value to set.</param>
-		/// <param name="part"><see cref="RealCarPart"/> to which this part belongs to.</param>
-		public ModelTableAttribute(object value, RealCarPart part)
+		public ModelTableAttribute(object value)
 		{
-			this.BelongsTo = part;
 			try
 			{
+
 				this.Templated = (int)value.ReinterpretCast(typeof(int)) == 0
 					? eBoolean.False
 					: eBoolean.True;
+
 			}
 			catch (Exception)
 			{
+
 				this.Templated = eBoolean.False;
+
 			}
 		}
 
@@ -868,66 +871,66 @@ namespace Nikki.Support.Carbon.Attributes
 
 				// Read concatenator
 				long position = br.ReadUInt16();
-				
+
 				if (position != 0xFFFF)
 				{
-				
+
 					str_reader.BaseStream.Position = position << 2;
 					this.Concatenator = str_reader.ReadNullTermUTF8();
 					this.ConcatenatorExists = eBoolean.True;
-				
+
 				}
 
 				for (int lod = (byte)'A'; lod <= (byte)'E'; ++lod)
 				{
-				
+
 					for (int index = 0; index <= 11; ++index)
 					{
-					
+
 						position = br.ReadUInt32();
-						
+
 						if (position != negative)
 						{
-						
+
 							str_reader.BaseStream.Position = position << 2;
 							var lodname = $"Geometry{index}Lod{(char)lod}";
 							var lodexists = $"{lodname}Exists";
 							this.GetFastProperty(lodname).SetValue(this, str_reader.ReadNullTermUTF8());
 							this.GetFastProperty(lodexists).SetValue(this, eBoolean.True);
-						
+
 						}
-					
+
 					}
-				
+
 				}
-			
+
 			}
 			else
 			{
 				br.BaseStream.Position += 2; // skip concatenator
-				
+
 				for (int lod = (byte)'A'; lod <= (byte)'E'; ++lod)
 				{
-					
+
 					for (int index = 0; index <= 11; ++index)
 					{
-					
+
 						var key = br.ReadUInt32();
-						
+
 						if (key != negative)
 						{
-						
+
 							var lodname = $"Geometry{index}Lod{(char)lod}";
 							var lodexists = $"{lodname}Exists";
 							this.GetFastProperty(lodname).SetValue(this, key.BinString(eLookupReturn.EMPTY));
 							this.GetFastProperty(lodexists).SetValue(this, eBoolean.True);
-						
+
 						}
-					
+
 					}
-				
+
 				}
-			
+
 			}
 		}
 
@@ -957,7 +960,7 @@ namespace Nikki.Support.Carbon.Attributes
 
 			if (this.Templated == eBoolean.True)
 			{
-				
+
 				bw.Write((ushort)1);
 				bw.Write(this.ConcatenatorExists == eBoolean.False
 					? (ushort)negint32
@@ -965,10 +968,10 @@ namespace Nikki.Support.Carbon.Attributes
 
 				for (int lod = (byte)'A'; lod <= (byte)'E'; ++lod)
 				{
-				
+
 					for (int index = 0; index <= 11; ++index)
 					{
-					
+
 						var name = $"Geometry{index}Lod{(char)lod}";
 						var lodname = (string)this.GetFastPropertyValue(name);
 						var lodexists = (eBoolean)this.GetFastPropertyValue($"{name}Exists");
@@ -976,23 +979,23 @@ namespace Nikki.Support.Carbon.Attributes
 							? negint32
 							: string_dict[lodname?.GetHashCode() ?? empty]);
 
-					
+
 					}
-				
+
 				}
-			
+
 			}
 			else
 			{
-			
+
 				bw.Write(0xFFFF0000);
-				
+
 				for (int lod = (byte)'A'; lod <= (byte)'E'; ++lod)
 				{
-				
+
 					for (int index = 0; index <= 11; ++index)
 					{
-					
+
 						var name = $"Geometry{index}Lod{(char)lod}";
 						var lodname = (string)this.GetFastPropertyValue(name);
 						var lodexists = (eBoolean)this.GetFastPropertyValue($"{name}Exists");
@@ -1001,9 +1004,9 @@ namespace Nikki.Support.Carbon.Attributes
 							: lodname.BinHash());
 
 					}
-				
+
 				}
-			
+
 			}
 		}
 
@@ -1036,8 +1039,8 @@ namespace Nikki.Support.Carbon.Attributes
 
 			foreach (var property in properties)
 			{
-			
-				result = result * 29 + this.GetValue(property).GetHashCode();
+
+				result = HashCode.Combine(result, this.GetValue(property).GetSafeHashCode());
 
 			}
 
@@ -1048,11 +1051,14 @@ namespace Nikki.Support.Carbon.Attributes
 		{
 			bool result = true;
 			var properties = this.GetAccessibles();
+
 			foreach (var property in properties)
 			{
+
 				var thisvalue = this.GetFastPropertyValue(property);
 				var othervalue = other.GetFastPropertyValue(property);
 				result &= thisvalue == othervalue;
+
 			}
 
 			return result;
@@ -1064,8 +1070,13 @@ namespace Nikki.Support.Carbon.Attributes
 		/// <param name="at1">The first <see cref="ModelTableAttribute"/> to compare, or null.</param>
 		/// <param name="at2">The second <see cref="ModelTableAttribute"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
-		public static bool operator ==(ModelTableAttribute at1, ModelTableAttribute at2) =>
-			at1 is null ? at2 is null : !(at2 is null) && at1.ValueEquals(at2);
+		public static bool operator ==(ModelTableAttribute at1, ModelTableAttribute at2)
+		{
+			if (at1 is null) return at2 is null;
+			else if (at2 is null) return false;
+
+			return at1.ValueEquals(at2);
+		}
 
 		/// <summary>
 		/// Determines whether two specified <see cref="ModelTableAttribute"/> have different values.
@@ -1113,13 +1124,13 @@ namespace Nikki.Support.Carbon.Attributes
 		public override CPAttribute ConvertTo(eCarPartAttribType type) =>
 			type switch
 			{
-				eCarPartAttribType.Boolean => new BoolAttribute(this.Templated, this.BelongsTo),
-				eCarPartAttribType.Floating => new FloatAttribute(this.Templated, this.BelongsTo),
-				eCarPartAttribType.Integer => new IntAttribute(this.Templated, this.BelongsTo),
-				eCarPartAttribType.String => new StringAttribute(this.Templated, this.BelongsTo),
-				eCarPartAttribType.TwoString => new TwoStringAttribute(this.Templated, this.BelongsTo),
-				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Templated, this.BelongsTo),
-				eCarPartAttribType.Key => new KeyAttribute(this.Templated, this.BelongsTo),
+				eCarPartAttribType.Boolean => new BoolAttribute(this.Templated),
+				eCarPartAttribType.Floating => new FloatAttribute(this.Templated),
+				eCarPartAttribType.Integer => new IntAttribute(this.Templated),
+				eCarPartAttribType.String => new StringAttribute(this.Templated),
+				eCarPartAttribType.TwoString => new TwoStringAttribute(this.Templated),
+				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Templated),
+				eCarPartAttribType.Key => new KeyAttribute(this.Templated),
 				_ => this
 			};
 

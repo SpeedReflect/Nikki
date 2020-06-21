@@ -657,7 +657,7 @@ namespace Nikki.Support.Prostreet.Class
             if (br.ReadInt32() != 0x7C) return; // check header size
 
             // Check TPK version
-            if (br.ReadInt32() != (int)this.Version) return; // return if versions does not match
+            br.BaseStream.Position += 4; // assuming user knows what he/she is doing
 
             // Get CollectionName
             var cname = br.ReadNullTermUTF8(0x1C);

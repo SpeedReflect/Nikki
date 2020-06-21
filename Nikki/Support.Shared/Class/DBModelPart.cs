@@ -20,12 +20,6 @@ namespace Nikki.Support.Shared.Class
 		#region Main Properties
 
 		/// <summary>
-		/// Index of this <see cref="DBModelPart"/> in the database.
-		/// </summary>
-		[Browsable(false)]
-		public int Index { get; set; }
-
-		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		public override string CollectionName { get; set; }
@@ -113,11 +107,6 @@ namespace Nikki.Support.Shared.Class
 		/// <returns><see cref="RealCarPart"/> at index specified.</returns>
 		public virtual RealCarPart GetRealPart(int index) =>
 			(index >= 0 && index < this.Length) ? this.ModelCarParts[index] : null;
-
-		/// <summary>
-		/// Resorts all names based on their indexing.
-		/// </summary>
-		public abstract void ResortNames();
 
 		/// <summary>
 		/// Switches two parts and their indexes.

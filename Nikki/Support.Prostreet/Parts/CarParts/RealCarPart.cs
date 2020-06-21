@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
+using Nikki.Reflection.Enum.CP;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Support.Prostreet.Class;
@@ -26,13 +27,12 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 		/// Name of this <see cref="RealCarPart"/>.
 		/// </summary>
 		[Browsable(false)]
-		public override string PartName { get; set; } = String.Empty;
+		public override string PartName => this.GetPartName();
 
 		/// <summary>
-		/// Index of <see cref="DBModelPart"/> to which this part belongs to.
+		/// <see cref="DBModelPart"/> to which this instance belongs to.
 		/// </summary>
-		[Browsable(false)]
-		public override int Index { get; set; }
+		public override Shared.Class.DBModelPart Model { get; set; }
 
 		/// <summary>
 		/// Collection of <see cref="CPAttribute"/> of this <see cref="RealCarPart"/>.
@@ -40,93 +40,34 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 		public override List<CPAttribute> Attributes { get; set; }
 
 		/// <summary>
-		/// <see cref="DBModelPart"/> to which this part belongs to.
+		/// Initializes new instance of <see cref="RealCarPart"/>.
 		/// </summary>
-		[Browsable(false)]
-		public DBModelPart Model { get; set; }
+		public RealCarPart() => this.Attributes = new List<CPAttribute>();
 
 		/// <summary>
-		/// Initialize new instance of <see cref="RealCarPart"/>.
+		/// Initializes new instance of <see cref="RealCarPart"/>.
 		/// </summary>
-		public RealCarPart()
-		{
-			this.Attributes = new List<CPAttribute>();
-		}
+		/// <param name="model"><see cref="DBModelPart"/> to which this instance belongs to.</param>
+		public RealCarPart(DBModelPart model) : this() { this.Model = model; }
 
 		/// <summary>
-		/// Initialize new instance of <see cref="RealCarPart"/>.
+		/// Initializes new instance of <see cref="RealCarPart"/>.
 		/// </summary>
-		/// <param name="index">Index of the <see cref="DBModelPart"/> in the database.</param>
-		/// <param name="model"><see cref="DBModelPart"/> to which this part belongs to.</param>
-		public RealCarPart(int index, DBModelPart model)
-		{
-			this.Index = index;
-			this.Model = model;
-			this.Attributes = new List<CPAttribute>();
-		}
-
-		/// <summary>
-		/// Initialize new instance of <see cref="RealCarPart"/>.
-		/// </summary>
-		/// <param name="index">Index of the <see cref="DBModelPart"/> in the database.</param>
 		/// <param name="capacity">Initial capacity of the attribute list.</param>
-		/// <param name="model"><see cref="DBModelPart"/> to which this part belongs to.</param>
-		public RealCarPart(int index, int capacity, DBModelPart model)
-		{
-			this.Index = index;
-			this.Model = model;
-			this.Attributes = new List<CPAttribute>(capacity);
-		}
+		public RealCarPart(int capacity) => this.Attributes = new List<CPAttribute>(capacity);
 
 		/// <summary>
-		/// Returns PartName, Attributes count and CarPartGroupID as a string value.
+		/// Initializes new instance of <see cref="RealCarPart"/>.
+		/// </summary>
+		/// <param name="model"><see cref="DBModelPart"/> to which this instance belongs to.</param>
+		/// <param name="capacity">Initial capacity of the attribute list.</param>
+		public RealCarPart(DBModelPart model, int capacity) : this(capacity) { this.Model = model; }
+
+		/// <summary>
+		/// Returns PartName of this <see cref="RealCarPart"/>.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString()
-		{
-			CPAttribute attrib;
-			var realpart = $"{this.Model.CollectionName}_REAL_CAR_PART";
-			attrib = this.GetAttribute("PART_NAME_OFFSETS");
-
-			if (attrib is TwoStringAttribute partnames)
-			{
-
-				var result = this.Model.CollectionName;
-				result += partnames.Value1Exists == eBoolean.True
-					? "_" + partnames.Value1 : String.Empty;
-				result += partnames.Value2Exists == eBoolean.True
-					? "_" + partnames.Value2 : String.Empty;
-				return result;
-
-			}
-
-			attrib = this.GetAttribute("LOD_BASE_NAME");
-
-			if (attrib is TwoStringAttribute lodnames)
-			{
-
-				var result = this.Model.CollectionName;
-				result += lodnames.Value1Exists == eBoolean.True
-					? "_" + lodnames.Value1 : String.Empty;
-				result += lodnames.Value2Exists == eBoolean.True
-					? "_" + lodnames.Value2 : String.Empty;
-				return result;
-
-			}
-
-			attrib = this.GetAttribute("NAME_OFFSET");
-
-			if (attrib is StringAttribute nameoff)
-			{
-
-				var result = nameoff.ValueExists == eBoolean.True
-					? "_" + nameoff.Value : realpart;
-				return result;
-
-			}
-
-			return realpart;
-		}
+		public override string ToString() => this.GetPartName();
 
 		/// <summary>
 		/// Returns the hash code for this <see cref="RealCarPart"/>.
@@ -135,7 +76,14 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 		public override int GetHashCode()
 		{
 			int result = this.PartName?.GetHashCode() ?? String.Empty.GetHashCode();
-			result *= this.Index + 7;
+
+			foreach (var attribute in this.Attributes)
+			{
+
+				result = HashCode.Combine(result, attribute.GetHashCode());
+
+			}
+
 			return result;
 		}
 
@@ -167,13 +115,6 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 		/// <param name="key">Key of the new <see cref="CPAttribute"/>.</param>
 		public override void AddAttribute(uint key)
 		{
-			if (this.GetAttribute(key) != null)
-			{
-
-				throw new InfoAccessException($"Attribute with key type 0x{key:X8} already exist");
-
-			}
-
 			if (!Map.CarPartKeys.TryGetValue(key, out var type))
 			{
 
@@ -183,14 +124,14 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 
 			CPAttribute attribute = type switch
 			{
-				eCarPartAttribType.Boolean => new BoolAttribute(eBoolean.False, this),
-				eCarPartAttribType.Floating => new FloatAttribute((float)0, this),
-				eCarPartAttribType.CarPartID => new PartIDAttribute((int)0, this),
-				eCarPartAttribType.String => new StringAttribute(String.Empty, this),
-				eCarPartAttribType.TwoString => new TwoStringAttribute(String.Empty, this),
-				eCarPartAttribType.Key => new KeyAttribute(String.Empty, this),
-				eCarPartAttribType.ModelTable => new ModelTableAttribute(eBoolean.False, this),
-				_ => new IntAttribute((int)0, this)
+				eCarPartAttribType.Boolean => new BoolAttribute(eBoolean.False),
+				eCarPartAttribType.Floating => new FloatAttribute((float)0),
+				eCarPartAttribType.CarPartID => new PartIDAttribute((int)0),
+				eCarPartAttribType.String => new StringAttribute(String.Empty),
+				eCarPartAttribType.TwoString => new TwoStringAttribute(String.Empty),
+				eCarPartAttribType.Key => new KeyAttribute(String.Empty),
+				eCarPartAttribType.ModelTable => new ModelTableAttribute(eBoolean.False),
+				_ => new IntAttribute((int)0)
 			};
 
 			attribute.Key = key;
@@ -241,13 +182,6 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 
 			}
 
-			if (this.GetAttribute(newkey) != null)
-			{
-
-				throw new InfoAccessException($"Attribute with key type 0x{newkey:X8} already exists");
-
-			}
-
 			if (!Map.CarPartKeys.TryGetValue(newkey, out var type))
 			{
 
@@ -258,7 +192,6 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 			var result = (CPAttribute)attribute.PlainCopy();
 			result = result.ConvertTo(type);
 			result.Key = newkey;
-			result.BelongsTo = this;
 			this.Attributes.Add(result);
 		}
 
@@ -287,12 +220,39 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 			this.CloneAttribute(newlabel.BinHash(), copylabel.BinHash());
 
 		/// <summary>
+		/// Compares two <see cref="RealCarPart"/> and checks whether the equal.
+		/// </summary>
+		/// <param name="other"><see cref="RealCarPart"/> to compare this instance to.</param>
+		/// <returns>True if this instance equals another instance passed; false otherwise.</returns>
+		public override bool PartEquals(Shared.Parts.CarParts.RealCarPart other)
+		{
+			if (other is RealCarPart part)
+			{
+
+				bool result = true;
+
+				if (part.Attributes.Count != this.Attributes.Count) return false;
+
+				for (int loop = 0; loop < this.Length; ++loop)
+				{
+
+					result &= this.Attributes[loop] == part.Attributes[loop];
+
+				}
+
+				return result;
+
+			}
+			else return false;
+		}
+
+		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
 		public override SubPart PlainCopy()
 		{
-			var result = new RealCarPart(this.Index, this.Length, this.Model);
+			var result = new RealCarPart(this.Length);
 
 			foreach (var attrib in this.Attributes)
 			{
@@ -303,5 +263,106 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 
 			return result;
 		}
+
+		#region Get Part Name
+
+		private string GetPartName()
+		{
+			var name = this.GetNameUsingLodOffsets();
+			return String.IsNullOrEmpty(name) ? this.GetNameUsingPartOffsets() : name;
+		}
+
+		private string GetNameUsingLodOffsets()
+		{
+			CPAttribute attrib;
+
+			attrib = this.GetAttribute((uint)eAttribInt.LOD_NAME_PREFIX_SELECTOR);
+
+			if (attrib is IntAttribute selector)
+			{
+
+				string realpart = String.Empty;
+				attrib = this.GetAttribute((uint)eAttribTwoString.LOD_BASE_NAME);
+				var offsets = attrib as TwoStringAttribute ?? null;
+
+				switch (selector.Value)
+				{
+
+					case 0:
+						realpart = this.Model?.CollectionName ?? String.Empty;
+						realpart += offsets.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
+						realpart += offsets.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
+						return realpart;
+
+					case 1:
+						attrib = this.GetAttribute((uint)eAttribKey.BRAND_NAME);
+						realpart = attrib is KeyAttribute unkhash ? unkhash.Value : String.Empty;
+						realpart += offsets.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
+						realpart += offsets.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
+						return realpart;
+
+					case 2:
+						attrib = this.GetAttribute((uint)eAttribKey.LOD_NAME_PREFIX_NAMEHASH);
+						realpart = attrib is KeyAttribute basehash ? basehash.Value : String.Empty;
+						realpart += offsets.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
+						realpart += offsets.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
+						return realpart;
+
+					default:
+						break;
+				}
+
+			}
+
+			return null;
+		}
+
+		private string GetNameUsingPartOffsets()
+		{
+			CPAttribute attrib;
+			var realpart = "REAL_CAR_PART";
+
+			attrib = this.GetAttribute((uint)eAttribInt.PART_NAME_SELECTOR);
+
+			if (attrib is IntAttribute selector)
+			{
+
+				attrib = this.GetAttribute((uint)eAttribTwoString.PART_NAME_OFFSETS);
+				var offsets = attrib as TwoStringAttribute ?? null;
+
+				switch (selector.Value)
+				{
+
+					case 0:
+						realpart = this.Model?.CollectionName ?? String.Empty;
+						realpart += offsets.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
+						realpart += offsets.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
+						return realpart;
+
+					case 1:
+						attrib = this.GetAttribute((uint)eAttribKey.BRAND_NAME);
+						realpart = attrib is KeyAttribute unkhash ? unkhash.Value : String.Empty;
+						realpart += offsets.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
+						realpart += offsets.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
+						return realpart;
+
+					case 2:
+						attrib = this.GetAttribute((uint)eAttribKey.PART_NAME_BASE_HASH);
+						realpart = attrib is KeyAttribute basehash ? basehash.Value : String.Empty;
+						realpart += offsets.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
+						realpart += offsets.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
+						return realpart;
+
+					default:
+						break;
+				}
+
+			}
+
+			attrib = this.GetAttribute((uint)eAttribKey.PART_NAME_BASE_HASH);
+			return attrib is KeyAttribute finalhash ? finalhash.Value : realpart;
+		}
+
+		#endregion
 	}
 }

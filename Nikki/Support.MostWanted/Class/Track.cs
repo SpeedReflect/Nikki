@@ -36,7 +36,7 @@ namespace Nikki.Support.MostWanted.Class
 		/// <summary>
 		/// Base size of a unit collection.
 		/// </summary>
-		public const int BaseClassSize = 0x128;
+		public const int BaseClassSize = 0x120;
 
 		#endregion
 
@@ -567,8 +567,6 @@ namespace Nikki.Support.MostWanted.Class
 			bw.Write(-1);
 			bw.Write(-1);
 			bw.Write(-1);
-			bw.Write(-1);
-			bw.Write(-1);
 			bw.Write(this.NumSecBeforeShorcutsAllowed);
 			bw.Write(this.DriftSecondsMin);
 			bw.Write(this.DriftSecondsMax);
@@ -650,7 +648,12 @@ namespace Nikki.Support.MostWanted.Class
 			// Read difficulties and padding
 			this.DifficultyForward = (eTrackDifficulty)(br.ReadInt32());
 			this.DifficultyReverse = (eTrackDifficulty)(br.ReadInt32());
-			br.BaseStream.Position += 0x18;
+
+			// For some weird reason there is a random chance of padding being different
+			// We read till we get away from 0xFFFFFFFF
+			while (br.ReadInt32() == -1) { }
+			br.BaseStream.Position -= 4;
+			
 			this.NumSecBeforeShorcutsAllowed = br.ReadInt16();
 			this.DriftSecondsMin = br.ReadInt16();
 			this.DriftSecondsMax = br.ReadInt16();

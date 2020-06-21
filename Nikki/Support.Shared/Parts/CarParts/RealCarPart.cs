@@ -16,7 +16,12 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <summary>
 		/// Name of this <see cref="RealCarPart"/>.
 		/// </summary>
-		public abstract string PartName { get; set; }
+		public abstract string PartName { get; }
+
+		/// <summary>
+		/// <see cref="DBModelPart"/> to which this instance belongs to.
+		/// </summary>
+		public abstract DBModelPart Model { get; set; }
 
 		/// <summary>
 		/// Collection of <see cref="CPAttribute"/> of this <see cref="RealCarPart"/>.
@@ -28,11 +33,6 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// </summary>
 		[DisplayName("AttributeCount")]
 		public virtual int Length => this.Attributes.Count;
-
-		/// <summary>
-		/// Index of <see cref="DBModelPart"/> to which this part belongs to.
-		/// </summary>
-		public abstract int Index { get; set; }
 
 		/// <summary>
 		/// Gets <see cref="CPAttribute"/> with the key provided.
@@ -127,6 +127,13 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <param name="newlabel">Label of the new <see cref="CPAttribute"/>.</param>
 		/// <param name="copylabel">Label of the <see cref="CPAttribute"/> to clone.</param>
 		public abstract void CloneAttribute(string newlabel, string copylabel);
+
+		/// <summary>
+		/// Compares two <see cref="RealCarPart"/> and checks whether the equal.
+		/// </summary>
+		/// <param name="other"><see cref="RealCarPart"/> to compare this instance to.</param>
+		/// <returns>True if this instance equals another instance passed; false otherwise.</returns>
+		public abstract bool PartEquals(RealCarPart other);
 
 		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.

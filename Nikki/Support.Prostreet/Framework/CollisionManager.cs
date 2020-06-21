@@ -102,7 +102,9 @@ namespace Nikki.Support.Prostreet.Framework
 				{
 
 					var collection = new Collision(br, this);
-					this.Add(collection);
+
+					try { this.Add(collection); }
+					catch { } // skip if exists
 
 				}
 

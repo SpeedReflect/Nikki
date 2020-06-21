@@ -97,7 +97,9 @@ namespace Nikki.Support.Prostreet.Framework
 				{
 
 					var collection = new Track(br, this);
-					this.Add(collection);
+
+					try { this.Add(collection); }
+					catch { } // skip if exists
 
 				}
 

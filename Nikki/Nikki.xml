@@ -8859,13 +8859,13 @@
         </member>
         <member name="M:Nikki.Reflection.Exception.InfoAccessException.#ctor">
             <summary>
-            Initializes new instance of <see cref="T:Nikki.Reflection.Exception.ArgumentLengthException"/> 
+            Initializes new instance of <see cref="T:Nikki.Reflection.Exception.InfoAccessException"/> 
             with default message.
             </summary>
         </member>
         <member name="M:Nikki.Reflection.Exception.InfoAccessException.#ctor(System.String)">
             <summary>
-            Initializes new instance of <see cref="T:Nikki.Reflection.Exception.ArgumentLengthException"/> 
+            Initializes new instance of <see cref="T:Nikki.Reflection.Exception.InfoAccessException"/> 
             with custom message passed.
             </summary>
             <param name="name">Name of the property/field.</param>
@@ -9161,12 +9161,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.BoolAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Carbon.Attributes.BoolAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.Carbon.Attributes.BoolAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.BoolAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Attributes.BoolAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -9285,12 +9284,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Carbon.Attributes.FloatAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.Carbon.Attributes.FloatAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.FloatAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Attributes.FloatAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -9409,12 +9407,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.IntAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Carbon.Attributes.IntAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.Carbon.Attributes.IntAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.IntAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Attributes.IntAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -9533,12 +9530,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.KeyAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Carbon.Attributes.KeyAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.Carbon.Attributes.KeyAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.KeyAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Attributes.KeyAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -10268,12 +10264,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.ModelTableAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Carbon.Attributes.ModelTableAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.Carbon.Attributes.ModelTableAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.ModelTableAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Attributes.ModelTableAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -10411,12 +10406,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.PartIDAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Carbon.Attributes.PartIDAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.Carbon.Attributes.PartIDAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.PartIDAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Attributes.PartIDAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -10540,12 +10534,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.StringAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Carbon.Attributes.StringAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.Carbon.Attributes.StringAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.StringAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Attributes.StringAttribute.#ctor(System.IO.BinaryReader,System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -10678,12 +10671,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.TwoStringAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Carbon.Attributes.TwoStringAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.Carbon.Attributes.TwoStringAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.TwoStringAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Attributes.TwoStringAttribute.#ctor(System.IO.BinaryReader,System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -11066,11 +11058,6 @@
             </summary>
             <param name="CName">CollectionName of the new instance.</param>
             <param name="manager"><see cref="T:Nikki.Support.Carbon.Framework.DBModelPartManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.ResortNames">
-            <summary>
-            Resorts all names according to their indexed position.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.DBModelPart.SwitchParts(System.String,System.String)">
             <summary>
@@ -14618,9 +14605,9 @@
             Name of this <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/>.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.Index">
+        <member name="P:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.Model">
             <summary>
-            Index of <see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> to which this part belongs to.
+            <see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> to which this instance belongs to.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.Attributes">
@@ -14628,34 +14615,33 @@
             Collection of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> of this <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/>.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.Model">
-            <summary>
-            <see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> to which this part belongs to.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.#ctor">
             <summary>
-            Initialize new instance of <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/>.
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.#ctor(System.Int32,Nikki.Support.Carbon.Class.DBModelPart)">
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.#ctor(Nikki.Support.Carbon.Class.DBModelPart)">
             <summary>
-            Initialize new instance of <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/>.
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/>.
             </summary>
-            <param name="index">Index of the <see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> in the database.</param>
-            <param name="model"><see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> to which this part belongs to.</param>
+            <param name="model"><see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.#ctor(System.Int32,System.Int32,Nikki.Support.Carbon.Class.DBModelPart)">
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.#ctor(System.Int32)">
             <summary>
-            Initialize new instance of <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/>.
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/>.
             </summary>
-            <param name="index">Index of the <see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> in the database.</param>
             <param name="capacity">Initial capacity of the attribute list.</param>
-            <param name="model"><see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> to which this part belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.#ctor(Nikki.Support.Carbon.Class.DBModelPart,System.Int32)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="model"><see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> to which this instance belongs to.</param>
+            <param name="capacity">Initial capacity of the attribute list.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.ToString">
             <summary>
-            Returns PartName, Attributes count and CarPartGroupID as a string value.
+            Returns PartName of this <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/>.
             </summary>
             <returns>String value.</returns>
         </member>
@@ -14737,6 +14723,13 @@
             </summary>
             <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
             <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.PartEquals(Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+            <summary>
+            Compares two <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/> and checks whether the equal.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/> to compare this instance to.</param>
+            <returns>True if this instance equals another instance passed; false otherwise.</returns>
         </member>
         <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.PlainCopy">
             <summary>
@@ -15466,12 +15459,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Attributes.BoolAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Attributes.BoolAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.MostWanted.Attributes.BoolAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Attributes.BoolAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Attributes.BoolAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -15590,12 +15582,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Attributes.FloatAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.MostWanted.Attributes.FloatAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Attributes.FloatAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Attributes.FloatAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -15714,12 +15705,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Attributes.IntAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Attributes.IntAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.MostWanted.Attributes.IntAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Attributes.IntAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Attributes.IntAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -15838,12 +15828,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Attributes.KeyAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Attributes.KeyAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.MostWanted.Attributes.KeyAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Attributes.KeyAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Attributes.KeyAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -15967,12 +15956,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Attributes.PartIDAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Attributes.PartIDAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.MostWanted.Attributes.PartIDAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Attributes.PartIDAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Attributes.PartIDAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -16096,12 +16084,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Attributes.StringAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Attributes.StringAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.MostWanted.Attributes.StringAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Attributes.StringAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Attributes.StringAttribute.#ctor(System.IO.BinaryReader,System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -16234,12 +16221,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Attributes.TwoStringAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Attributes.TwoStringAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.MostWanted.Attributes.TwoStringAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Attributes.TwoStringAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Attributes.TwoStringAttribute.#ctor(System.IO.BinaryReader,System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -16622,11 +16608,6 @@
             </summary>
             <param name="CName">CollectionName of the new instance.</param>
             <param name="manager"><see cref="T:Nikki.Support.MostWanted.Framework.DBModelPartManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.ResortNames">
-            <summary>
-            Resorts all names according to their indexed position.
-            </summary>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.SwitchParts(System.String,System.String)">
             <summary>
@@ -19784,9 +19765,9 @@
             Name of this <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.Index">
+        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.Model">
             <summary>
-            Index of <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> to which this part belongs to.
+            <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> to which this instance belongs to.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.Attributes">
@@ -19797,11 +19778,6 @@
         <member name="P:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.LodStruct">
             <summary>
             A <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/> of this <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.Model">
-            <summary>
-            <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> to which this part belongs to.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.PartLabel">
@@ -19826,23 +19802,27 @@
         </member>
         <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.#ctor">
             <summary>
-            Initialize new instance of <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
+            Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.#ctor(System.Int32,Nikki.Support.MostWanted.Class.DBModelPart)">
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.#ctor(Nikki.Support.MostWanted.Class.DBModelPart)">
             <summary>
-            Initialize new instance of <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
+            Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
             </summary>
-            <param name="index">Index of the <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> in the database.</param>
-            <param name="model"><see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> to which this part belongs to.</param>
+            <param name="model"><see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.#ctor(System.Int32,System.Int32,Nikki.Support.MostWanted.Class.DBModelPart)">
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.#ctor(System.Int32)">
             <summary>
-            Initialize new instance of <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
+            Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
             </summary>
-            <param name="index">Index of the <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> in the database.</param>
             <param name="capacity">Initial capacity of the attribute list.</param>
-            <param name="model"><see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> to which this part belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.#ctor(Nikki.Support.MostWanted.Class.DBModelPart,System.Int32)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="model"><see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> to which this instance belongs to.</param>
+            <param name="capacity">Initial capacity of the attribute list.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.ToString">
             <summary>
@@ -19928,6 +19908,13 @@
             </summary>
             <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
             <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.PartEquals(Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+            <summary>
+            Compares two <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/> and checks whether the equal.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/> to compare this instance to.</param>
+            <returns>True if this instance equals another instance passed; false otherwise.</returns>
         </member>
         <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.PlainCopy">
             <summary>
@@ -20488,12 +20475,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.BoolAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Attributes.BoolAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.Prostreet.Attributes.BoolAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.BoolAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Attributes.BoolAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -20612,12 +20598,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Attributes.FloatAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.Prostreet.Attributes.FloatAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.FloatAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Attributes.FloatAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -20736,12 +20721,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.IntAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Attributes.IntAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.Prostreet.Attributes.IntAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.IntAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Attributes.IntAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -20860,12 +20844,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.KeyAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Attributes.KeyAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.Prostreet.Attributes.KeyAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.KeyAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Attributes.KeyAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -21595,12 +21578,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.ModelTableAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Attributes.ModelTableAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.Prostreet.Attributes.ModelTableAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.ModelTableAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Attributes.ModelTableAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -21738,12 +21720,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.PartIDAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Attributes.PartIDAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.Prostreet.Attributes.PartIDAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.PartIDAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Attributes.PartIDAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -21867,12 +21848,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.StringAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Attributes.StringAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.Prostreet.Attributes.StringAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.StringAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Attributes.StringAttribute.#ctor(System.IO.BinaryReader,System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -22005,12 +21985,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.TwoStringAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Attributes.TwoStringAttribute.#ctor(System.Object,Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+        <member name="M:Nikki.Support.Prostreet.Attributes.TwoStringAttribute.#ctor(System.Object)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.TwoStringAttribute"/> with value provided.
             </summary>
             <param name="value">Value to set.</param>
-            <param name="part"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this part belongs to.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Attributes.TwoStringAttribute.#ctor(System.IO.BinaryReader,System.IO.BinaryReader,System.UInt32)">
             <summary>
@@ -22393,11 +22372,6 @@
             </summary>
             <param name="CName">CollectionName of the new instance.</param>
             <param name="manager"><see cref="T:Nikki.Support.Prostreet.Framework.DBModelPartManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.ResortNames">
-            <summary>
-            Resorts all names according to their indexed position.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.SwitchParts(System.String,System.String)">
             <summary>
@@ -25184,9 +25158,9 @@
             Name of this <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/>.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.Index">
+        <member name="P:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.Model">
             <summary>
-            Index of <see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> to which this part belongs to.
+            <see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> to which this instance belongs to.
             </summary>
         </member>
         <member name="P:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.Attributes">
@@ -25194,34 +25168,33 @@
             Collection of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> of this <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/>.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.Model">
-            <summary>
-            <see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> to which this part belongs to.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.#ctor">
             <summary>
-            Initialize new instance of <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/>.
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.#ctor(System.Int32,Nikki.Support.Prostreet.Class.DBModelPart)">
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.#ctor(Nikki.Support.Prostreet.Class.DBModelPart)">
             <summary>
-            Initialize new instance of <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/>.
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/>.
             </summary>
-            <param name="index">Index of the <see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> in the database.</param>
-            <param name="model"><see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> to which this part belongs to.</param>
+            <param name="model"><see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.#ctor(System.Int32,System.Int32,Nikki.Support.Prostreet.Class.DBModelPart)">
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.#ctor(System.Int32)">
             <summary>
-            Initialize new instance of <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/>.
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/>.
             </summary>
-            <param name="index">Index of the <see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> in the database.</param>
             <param name="capacity">Initial capacity of the attribute list.</param>
-            <param name="model"><see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> to which this part belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.#ctor(Nikki.Support.Prostreet.Class.DBModelPart,System.Int32)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="model"><see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> to which this instance belongs to.</param>
+            <param name="capacity">Initial capacity of the attribute list.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.ToString">
             <summary>
-            Returns PartName, Attributes count and CarPartGroupID as a string value.
+            Returns PartName of this <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/>.
             </summary>
             <returns>String value.</returns>
         </member>
@@ -25303,6 +25276,13 @@
             </summary>
             <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
             <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.PartEquals(Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+            <summary>
+            Compares two <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/> and checks whether the equal.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/> to compare this instance to.</param>
+            <returns>True if this instance equals another instance passed; false otherwise.</returns>
         </member>
         <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.PlainCopy">
             <summary>
@@ -25799,11 +25779,6 @@
             <see cref="T:Nikki.Support.Shared.Class.DBModelPart"/> is a collection of car parts of a specific model.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Class.DBModelPart.Index">
-            <summary>
-            Index of this <see cref="T:Nikki.Support.Shared.Class.DBModelPart"/> in the database.
-            </summary>
-        </member>
         <member name="P:Nikki.Support.Shared.Class.DBModelPart.CollectionName">
             <summary>
             Collection name of the variable.
@@ -25883,11 +25858,6 @@
             </summary>
             <param name="index">Index of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to get.</param>
             <returns><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> at index specified.</returns>
-        </member>
-        <member name="M:Nikki.Support.Shared.Class.DBModelPart.ResortNames">
-            <summary>
-            Resorts all names based on their indexing.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Shared.Class.DBModelPart.SwitchParts(System.String,System.String)">
             <summary>
@@ -27444,11 +27414,6 @@
             Key of the part to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.CarParts.CPAttribute.BelongsTo">
-            <summary>
-            <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Shared.Parts.CarParts.CPAttribute.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
             <summary>
             Disassembles byte array into <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> using <see cref="T:System.IO.BinaryReader"/> 
@@ -27618,6 +27583,11 @@
             Name of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.RealCarPart.Model">
+            <summary>
+            <see cref="T:Nikki.Support.Shared.Class.DBModelPart"/> to which this instance belongs to.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Shared.Parts.CarParts.RealCarPart.Attributes">
             <summary>
             Collection of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
@@ -27626,11 +27596,6 @@
         <member name="P:Nikki.Support.Shared.Parts.CarParts.RealCarPart.Length">
             <summary>
             Total amount of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> in this <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Shared.Parts.CarParts.RealCarPart.Index">
-            <summary>
-            Index of <see cref="T:Nikki.Support.Shared.Class.DBModelPart"/> to which this part belongs to.
             </summary>
         </member>
         <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.GetAttribute(System.UInt32)">
@@ -27726,6 +27691,13 @@
             </summary>
             <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
             <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.PartEquals(Nikki.Support.Shared.Parts.CarParts.RealCarPart)">
+            <summary>
+            Compares two <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> and checks whether the equal.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to compare this instance to.</param>
+            <returns>True if this instance equals another instance passed; false otherwise.</returns>
         </member>
         <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.PlainCopy">
             <summary>

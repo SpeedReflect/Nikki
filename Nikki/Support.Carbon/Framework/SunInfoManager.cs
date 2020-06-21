@@ -97,7 +97,9 @@ namespace Nikki.Support.Carbon.Framework
 				{
 
 					var collection = new SunInfo(br, this);
-					this.Add(collection);
+
+					try { this.Add(collection); }
+					catch { } // skip if exists
 
 				}
 
