@@ -33,6 +33,11 @@ namespace Nikki.Support.MostWanted.Framework
 		public override string Name => "SlotTypes";
 
 		/// <summary>
+		/// If true, manager can export and import non-serialized collection; otherwise, false.
+		/// </summary>
+		public override bool AllowsNoSerialization => false;
+
+		/// <summary>
 		/// True if this <see cref="Manager{T}"/> is read-only; otherwise, false.
 		/// </summary>
 		public override bool IsReadOnly => this._is_read_only;

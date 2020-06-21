@@ -236,6 +236,11 @@ namespace Nikki.Core
 		public abstract string Name { get; }
 
 		/// <summary>
+		/// If true, manager can export and import non-serialized collection; otherwise, false.
+		/// </summary>
+		public abstract bool AllowsNoSerialization { get; }
+
+		/// <summary>
 		/// Indicates required alighment when this <see cref="IManager"/> is being serialized.
 		/// </summary>
 		public abstract Alignment Alignment { get; }

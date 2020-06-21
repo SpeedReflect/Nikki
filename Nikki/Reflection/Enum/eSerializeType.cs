@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Nikki.Reflection.Enum
+﻿namespace Nikki.Reflection.Enum
 {
 	/// <summary>
 	/// Represents serialization type for collections and managers.
@@ -10,17 +6,19 @@ namespace Nikki.Reflection.Enum
 	public enum eSerializeType : int
 	{
 		/// <summary>
-		/// 
+		/// If imported collection does not exist, adds it; else ignores and skips.
 		/// </summary>
-		Synchronize = 0,
-		
+		Negate = 0,
+
 		/// <summary>
-		/// 
+		/// If imported collection does not exist, adds it; else, depending on collection type, 
+		/// either replaces existing one or synchronizes properties of both new and existing 
+		/// collections, and then replaces existing collection with newly syncrhonized one.
 		/// </summary>
-		Negate = 1,
-		
+		Synchronize = 1,
+				
 		/// <summary>
-		/// 
+		/// If imported collection does not exist, adds it; else replaces existing one.
 		/// </summary>
 		Override = 2,
 	}

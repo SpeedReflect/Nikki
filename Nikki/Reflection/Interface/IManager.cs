@@ -34,6 +34,11 @@ namespace Nikki.Reflection.Interface
 		int Extender { get; set; }
 
 		/// <summary>
+		/// If true, manager can export and import non-serialized collection; otherwise, false.
+		/// </summary>
+		bool AllowsNoSerialization { get; }
+
+		/// <summary>
 		/// Indicates required alighment when this <see cref="IManager"/> is being serialized.
 		/// </summary>
 		Alignment Alignment { get; }

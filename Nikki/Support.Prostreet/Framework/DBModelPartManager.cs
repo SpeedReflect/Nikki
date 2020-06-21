@@ -38,6 +38,11 @@ namespace Nikki.Support.Prostreet.Framework
 		public override string Name => "DBModelParts";
 
 		/// <summary>
+		/// If true, manager can export and import non-serialized collection; otherwise, false.
+		/// </summary>
+		public override bool AllowsNoSerialization => false;
+
+		/// <summary>
 		/// True if this <see cref="Manager{T}"/> is read-only; otherwise, false.
 		/// </summary>
 		public override bool IsReadOnly => false;
