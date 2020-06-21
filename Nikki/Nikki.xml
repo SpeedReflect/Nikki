@@ -330,6 +330,11 @@
             Name of this <see cref="T:Nikki.Core.Manager`1"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Core.Manager`1.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Core.Manager`1.Alignment">
             <summary>
             Indicates required alighment when this <see cref="T:Nikki.Reflection.Interface.IManager"/> is being serialized.
@@ -2622,19 +2627,21 @@
             Represents serialization type for collections and managers.
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.eSerializeType.Synchronize">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Nikki.Reflection.Enum.eSerializeType.Negate">
             <summary>
-            
+            If imported collection does not exist, adds it; else ignores and skips.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eSerializeType.Synchronize">
+            <summary>
+            If imported collection does not exist, adds it; else, depending on collection type, 
+            either replaces existing one or synchronizes properties of both new and existing 
+            collections, and then replaces existing collection with newly syncrhonized one.
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.eSerializeType.Override">
             <summary>
-            
+            If imported collection does not exist, adds it; else replaces existing one.
             </summary>
         </member>
         <member name="T:Nikki.Reflection.Enum.eSponsorRaceType">
@@ -9017,6 +9024,11 @@
             elements beyond its capacity will not be possible, unless Extender becomes positive.
             </summary>
         </member>
+        <member name="P:Nikki.Reflection.Interface.IManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Reflection.Interface.IManager.Alignment">
             <summary>
             Indicates required alighment when this <see cref="T:Nikki.Reflection.Interface.IManager"/> is being serialized.
@@ -13759,6 +13771,11 @@
             Name of this <see cref="T:Nikki.Support.Carbon.Framework.CarTypeInfoManager"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Carbon.Framework.CarTypeInfoManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Carbon.Framework.CarTypeInfoManager.IsReadOnly">
             <summary>
             True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
@@ -13832,6 +13849,11 @@
             Name of this <see cref="T:Nikki.Support.Carbon.Framework.CollisionManager"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Carbon.Framework.CollisionManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Carbon.Framework.CollisionManager.IsReadOnly">
             <summary>
             True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
@@ -13903,6 +13925,11 @@
         <member name="P:Nikki.Support.Carbon.Framework.DBModelPartManager.Name">
             <summary>
             Name of this <see cref="T:Nikki.Support.Carbon.Framework.DBModelPartManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Framework.DBModelPartManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Framework.DBModelPartManager.IsReadOnly">
@@ -13994,6 +14021,11 @@
             Name of this <see cref="T:Nikki.Support.Carbon.Framework.FNGroupManager"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Carbon.Framework.FNGroupManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Carbon.Framework.FNGroupManager.IsReadOnly">
             <summary>
             True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
@@ -14065,6 +14097,11 @@
         <member name="P:Nikki.Support.Carbon.Framework.MaterialManager.Name">
             <summary>
             Name of this <see cref="T:Nikki.Support.Carbon.Framework.MaterialManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Framework.MaterialManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Framework.MaterialManager.IsReadOnly">
@@ -14140,6 +14177,11 @@
             Name of this <see cref="T:Nikki.Support.Carbon.Framework.PresetRideManager"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Carbon.Framework.PresetRideManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Carbon.Framework.PresetRideManager.IsReadOnly">
             <summary>
             True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
@@ -14211,6 +14253,11 @@
         <member name="P:Nikki.Support.Carbon.Framework.PresetSkinManager.Name">
             <summary>
             Name of this <see cref="T:Nikki.Support.Carbon.Framework.PresetSkinManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Framework.PresetSkinManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Framework.PresetSkinManager.IsReadOnly">
@@ -14286,6 +14333,11 @@
             Name of this <see cref="T:Nikki.Support.Carbon.Framework.SlotOverrideManager"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Carbon.Framework.SlotOverrideManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Carbon.Framework.SlotOverrideManager.IsReadOnly">
             <summary>
             True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
@@ -14357,6 +14409,11 @@
         <member name="P:Nikki.Support.Carbon.Framework.SlotTypeManager.Name">
             <summary>
             Name of this <see cref="T:Nikki.Support.Carbon.Framework.SlotTypeManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Framework.SlotTypeManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Framework.SlotTypeManager.IsReadOnly">
@@ -14432,6 +14489,11 @@
             Name of this <see cref="T:Nikki.Support.Carbon.Framework.STRBlockManager"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Carbon.Framework.STRBlockManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Carbon.Framework.STRBlockManager.IsReadOnly">
             <summary>
             True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
@@ -14503,6 +14565,11 @@
         <member name="P:Nikki.Support.Carbon.Framework.SunInfoManager.Name">
             <summary>
             Name of this <see cref="T:Nikki.Support.Carbon.Framework.SunInfoManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Framework.SunInfoManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Framework.SunInfoManager.IsReadOnly">
@@ -14578,6 +14645,11 @@
             Name of this <see cref="T:Nikki.Support.Carbon.Framework.TPKBlockManager"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Carbon.Framework.TPKBlockManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Carbon.Framework.TPKBlockManager.IsReadOnly">
             <summary>
             True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
@@ -14649,6 +14721,11 @@
         <member name="P:Nikki.Support.Carbon.Framework.TrackManager.Name">
             <summary>
             Name of this <see cref="T:Nikki.Support.Carbon.Framework.TrackManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Framework.TrackManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Framework.TrackManager.IsReadOnly">
@@ -18894,6 +18971,11 @@
             Name of this <see cref="T:Nikki.Support.MostWanted.Framework.CarTypeInfoManager"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.CarTypeInfoManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.MostWanted.Framework.CarTypeInfoManager.IsReadOnly">
             <summary>
             True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
@@ -18967,6 +19049,11 @@
             Name of this <see cref="T:Nikki.Support.MostWanted.Framework.CollisionManager"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.CollisionManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.MostWanted.Framework.CollisionManager.IsReadOnly">
             <summary>
             True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
@@ -19038,6 +19125,11 @@
         <member name="P:Nikki.Support.MostWanted.Framework.DBModelPartManager.Name">
             <summary>
             Name of this <see cref="T:Nikki.Support.MostWanted.Framework.DBModelPartManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.DBModelPartManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Framework.DBModelPartManager.IsReadOnly">
@@ -19129,6 +19221,11 @@
             Name of this <see cref="T:Nikki.Support.MostWanted.Framework.FNGroupManager"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.FNGroupManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.MostWanted.Framework.FNGroupManager.IsReadOnly">
             <summary>
             True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
@@ -19200,6 +19297,11 @@
         <member name="P:Nikki.Support.MostWanted.Framework.MaterialManager.Name">
             <summary>
             Name of this <see cref="T:Nikki.Support.MostWanted.Framework.MaterialManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.MaterialManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Framework.MaterialManager.IsReadOnly">
@@ -19275,6 +19377,11 @@
             Name of this <see cref="T:Nikki.Support.MostWanted.Framework.PresetRideManager"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.PresetRideManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.MostWanted.Framework.PresetRideManager.IsReadOnly">
             <summary>
             True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
@@ -19346,6 +19453,11 @@
         <member name="P:Nikki.Support.MostWanted.Framework.SlotOverrideManager.Name">
             <summary>
             Name of this <see cref="T:Nikki.Support.MostWanted.Framework.SlotOverrideManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.SlotOverrideManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Framework.SlotOverrideManager.IsReadOnly">
@@ -19421,6 +19533,11 @@
             Name of this <see cref="T:Nikki.Support.MostWanted.Framework.SlotTypeManager"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.SlotTypeManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.MostWanted.Framework.SlotTypeManager.IsReadOnly">
             <summary>
             True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
@@ -19492,6 +19609,11 @@
         <member name="P:Nikki.Support.MostWanted.Framework.STRBlockManager.Name">
             <summary>
             Name of this <see cref="T:Nikki.Support.MostWanted.Framework.STRBlockManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.STRBlockManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Framework.STRBlockManager.IsReadOnly">
@@ -19567,6 +19689,11 @@
             Name of this <see cref="T:Nikki.Support.MostWanted.Framework.SunInfoManager"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.SunInfoManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.MostWanted.Framework.SunInfoManager.IsReadOnly">
             <summary>
             True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
@@ -19640,6 +19767,11 @@
             Name of this <see cref="T:Nikki.Support.MostWanted.Framework.TPKBlockManager"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.TPKBlockManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.MostWanted.Framework.TPKBlockManager.IsReadOnly">
             <summary>
             True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
@@ -19711,6 +19843,11 @@
         <member name="P:Nikki.Support.MostWanted.Framework.TrackManager.Name">
             <summary>
             Name of this <see cref="T:Nikki.Support.MostWanted.Framework.TrackManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.TrackManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Framework.TrackManager.IsReadOnly">
@@ -24554,6 +24691,11 @@
             Name of this <see cref="T:Nikki.Support.Prostreet.Framework.CarTypeInfoManager"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.CarTypeInfoManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Prostreet.Framework.CarTypeInfoManager.IsReadOnly">
             <summary>
             True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
@@ -24627,6 +24769,11 @@
             Name of this <see cref="T:Nikki.Support.Prostreet.Framework.CollisionManager"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.CollisionManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Prostreet.Framework.CollisionManager.IsReadOnly">
             <summary>
             True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
@@ -24698,6 +24845,11 @@
         <member name="P:Nikki.Support.Prostreet.Framework.DBModelPartManager.Name">
             <summary>
             Name of this <see cref="T:Nikki.Support.Prostreet.Framework.DBModelPartManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.DBModelPartManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
             </summary>
         </member>
         <member name="P:Nikki.Support.Prostreet.Framework.DBModelPartManager.IsReadOnly">
@@ -24789,6 +24941,11 @@
             Name of this <see cref="T:Nikki.Support.Prostreet.Framework.FNGroupManager"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.FNGroupManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Prostreet.Framework.FNGroupManager.IsReadOnly">
             <summary>
             True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
@@ -24860,6 +25017,11 @@
         <member name="P:Nikki.Support.Prostreet.Framework.MaterialManager.Name">
             <summary>
             Name of this <see cref="T:Nikki.Support.Prostreet.Framework.MaterialManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.MaterialManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
             </summary>
         </member>
         <member name="P:Nikki.Support.Prostreet.Framework.MaterialManager.IsReadOnly">
@@ -24935,6 +25097,11 @@
             Name of this <see cref="T:Nikki.Support.Prostreet.Framework.SlotOverrideManager"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.SlotOverrideManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Prostreet.Framework.SlotOverrideManager.IsReadOnly">
             <summary>
             True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
@@ -25006,6 +25173,11 @@
         <member name="P:Nikki.Support.Prostreet.Framework.SlotTypeManager.Name">
             <summary>
             Name of this <see cref="T:Nikki.Support.Prostreet.Framework.SlotTypeManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.SlotTypeManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
             </summary>
         </member>
         <member name="P:Nikki.Support.Prostreet.Framework.SlotTypeManager.IsReadOnly">
@@ -25081,6 +25253,11 @@
             Name of this <see cref="T:Nikki.Support.Prostreet.Framework.STRBlockManager"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.STRBlockManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Prostreet.Framework.STRBlockManager.IsReadOnly">
             <summary>
             True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
@@ -25152,6 +25329,11 @@
         <member name="P:Nikki.Support.Prostreet.Framework.SunInfoManager.Name">
             <summary>
             Name of this <see cref="T:Nikki.Support.Prostreet.Framework.SunInfoManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.SunInfoManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
             </summary>
         </member>
         <member name="P:Nikki.Support.Prostreet.Framework.SunInfoManager.IsReadOnly">
@@ -25227,6 +25409,11 @@
             Name of this <see cref="T:Nikki.Support.Prostreet.Framework.TPKBlockManager"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.TPKBlockManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Prostreet.Framework.TPKBlockManager.IsReadOnly">
             <summary>
             True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
@@ -25298,6 +25485,11 @@
         <member name="P:Nikki.Support.Prostreet.Framework.TrackManager.Name">
             <summary>
             Name of this <see cref="T:Nikki.Support.Prostreet.Framework.TrackManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.TrackManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
             </summary>
         </member>
         <member name="P:Nikki.Support.Prostreet.Framework.TrackManager.IsReadOnly">

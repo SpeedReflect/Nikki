@@ -14,6 +14,7 @@ namespace Nikki.Core
 		public int Size { get; set; }
 		public GameINT Game { get; set; }
 		public string Name { get; set; } = String.Empty;
+		public static int ThisSize => 0x10;
 
 		public SerializationHeader() : this(0, GameINT.None, String.Empty) { }
 

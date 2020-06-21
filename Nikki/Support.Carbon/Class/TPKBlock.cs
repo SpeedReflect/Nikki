@@ -1250,7 +1250,11 @@ namespace Nikki.Support.Carbon.Class
         public override void Serialize(BinaryWriter bw)
         {
             byte[] array;
-            using (var ms = new MemoryStream(this.Textures.Count << 16))
+
+            var start = bw.BaseStream.Position;
+            bw.WriteBytes(SerializationHeader.ThisSize + 4);
+
+            using (var ms = new MemoryStream(this.Animations.Count * 0x200 + 0x80))
             using (var writer = new BinaryWriter(ms))
 			{
 
@@ -1278,23 +1282,29 @@ namespace Nikki.Support.Carbon.Class
 
 				}
 
-                for (int loop = 0; loop < this.Textures.Count; ++loop)
-				{
-
-                    this.Textures[loop].Serialize(writer);
-
-				}
+                writer.WriteBytes(0x40);
 
                 array = ms.ToArray();
+                array = Interop.Compress(array, eLZCompressionType.BEST);
+                bw.Write(array.Length);
+                bw.Write(array);
 
 			}
 
-            array = Interop.Compress(array, eLZCompressionType.BEST);
+            for (int loop = 0; loop < this.Textures.Count; ++loop)
+            {
 
-            var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+                this.Textures[loop].Serialize(bw);
+
+            }
+
+            var end = bw.BaseStream.Position;
+            bw.BaseStream.Position = start;
+            var size = (int)(end - start) - SerializationHeader.ThisSize - 4;
+            var header = new SerializationHeader(size, this.GameINT, this.Manager.Name);
             header.Write(bw);
-            bw.Write(array.Length);
-            bw.Write(array);
+            bw.Write(size);
+            bw.BaseStream.Position = end;
         }
 
         /// <summary>
@@ -1303,6 +1313,7 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         public override void Deserialize(BinaryReader br)
         {
+            br.BaseStream.Position += 4;
             int size = br.ReadInt32();
             var array = br.ReadBytes(size);
 
@@ -1344,10 +1355,12 @@ namespace Nikki.Support.Carbon.Class
 
 				}
 
+                this.Animations.Add(anim);
+
 			}
 
             for (int loop = 0; loop < textcount; ++loop)
-			{
+            {
 
                 var texture = new Texture()
                 {
@@ -1355,17 +1368,17 @@ namespace Nikki.Support.Carbon.Class
                 };
 
                 var header = new SerializationHeader();
-                header.Read(reader);
+                header.Read(br);
 
                 // Check for consistency
                 if (header.ID != eBlockID.Nikki) break;
                 if (header.Game != this.GameINT) break;
                 if (header.Name != "TEXTURE") break;
 
-                texture.Deserialize(reader);
+                texture.Deserialize(br);
                 this.Textures.Add(texture);
 
-			}
+            }
         }
 
         /// <summary>

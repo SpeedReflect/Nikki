@@ -80,6 +80,7 @@ namespace Nikki.Core
 			{ 0x70FBB1E4, "ONLINE" },
 			{ 0x721AFF7C, "CARBONFIBRE" },
 			{ 0x768C36C0, "DBModelParts" },
+			{ 0x7710F0E0, "RANDOM" },
 			{ 0x7822E22B, "HOODHUE" },
 			{ 0x7822F337, "HOODLUM" },
 			{ 0x78230E71, "HOODSAT" },
@@ -258,16 +259,16 @@ namespace Nikki.Core
 			{ 0x643DABEB, eCarPartAttribType.Integer }, // LOD_NAME_PREFIX_SELECTOR
 
 			// Unknown Label Attributes
-			{ 0x04B39858, eCarPartAttribType.Integer }, // 0x04B39858
+			{ 0x04B39858, eCarPartAttribType.Integer }, // COLOR2LANGUAGEHASH !!!
 			{ 0x1B0EA1A9, eCarPartAttribType.Integer }, // 0x1B0EA1A9
-			{ 0x5412A1D9, eCarPartAttribType.Integer }, // 0x5412A1D9
-			{ 0x6509EC92, eCarPartAttribType.Integer }, // 0x6509EC92
-			{ 0x65F58556, eCarPartAttribType.Integer }, // 0x65F58556
+			{ 0x5412A1D9, eCarPartAttribType.Integer }, // COLOR3LANGUAGEHASH !!!
+			{ 0x6509EC92, eCarPartAttribType.Integer }, // MORPH_MARKERCIDPAINT !!!
+			{ 0x65F58556, eCarPartAttribType.Integer }, // COLOR0LANGUAGEHASH !!!
 			{ 0x6BA02C05, eCarPartAttribType.Integer }, // 0x6BA02C05
 			{ 0x7D29CF3E, eCarPartAttribType.Integer }, // 0x7D29CF3E
-			{ 0xB5548ED7, eCarPartAttribType.Integer }, // 0xB5548ED7
+			{ 0xB5548ED7, eCarPartAttribType.Integer }, // COLOR1LANGUAGEHASH !!!
 			{ 0xC9818DFC, eCarPartAttribType.Integer }, // 0xC9818DFC
-			{ 0xCE7D8DB5, eCarPartAttribType.Integer }, // 0xCE7D8DB5
+			{ 0xCE7D8DB5, eCarPartAttribType.Integer }, // STYLEEXCLUDEBKITSHAPE !!!
 			{ 0xD68A7BAB, eCarPartAttribType.Integer }, // 0xD68A7BAB
 			{ 0xE80A3B62, eCarPartAttribType.Integer }, // 0xE80A3B62
 			{ 0xEB0101E2, eCarPartAttribType.Integer }, // 0xEB0101E2

@@ -12,8 +12,8 @@ using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
 using CoreExtensions.Conversions;
-
-
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Nikki.Support.Carbon.Class
 {
@@ -542,7 +542,12 @@ namespace Nikki.Support.Carbon.Class
         public override void Serialize(BinaryWriter bw)
         {
             byte[] array;
-            using (var ms = new MemoryStream(this.Data.Length + 0x125 + this._collection_name.Length))
+            var datalist = new List<byte[]>();
+
+            var size = this.Data.Length >> 15;
+            var modulo = this.Data.Length % 0x8000;
+
+            using (var ms = new MemoryStream(0x100 + this._collection_name.Length))
             using (var writer = new BinaryWriter(ms))
             {
 
@@ -577,35 +582,41 @@ namespace Nikki.Support.Carbon.Class
                 writer.Write(this._offsetT);
                 writer.Write(this._scaleS);
                 writer.Write(this._scaleT);
-
-                var size = this.Data.Length >> 14;
-                var modulo = this.Data.Length % 0x4000;
+                writer.WriteBytes(0x20); // write padding for better compression
                 writer.Write(modulo == 0 ? size : size + 1);
 
-                for (int loop = 0; loop <= size; ++loop)
-				{
-
-                    var total = loop == size ? modulo : 0x4000;
-
-                    if (total == 0) break;
-
-                    var temp = new byte[total];
-                    var off = loop << 14;
-                    Array.Copy(this.Data, off, temp, 0, total);
-                    temp = Interop.Compress(temp, eLZCompressionType.BEST);
-                    writer.Write(temp.Length);
-                    writer.Write(temp);
-
-				}
-
-                array = ms.ToArray();
+                array = Interop.Compress(ms.ToArray(), eLZCompressionType.BEST);
+                datalist.Add(array);
 
             }
 
-            var header = new SerializationHeader(array.Length, this.GameINT, "TEXTURE");
+            for (int loop = 0; loop <= size; ++loop)
+            {
+
+                var total = loop == size ? modulo : 0x8000;
+
+                if (total == 0) break;
+
+                var temp = new byte[total];
+                Array.Copy(this.Data, loop << 15, temp, 0, total);
+                array = Interop.Compress(temp, eLZCompressionType.BEST);
+                datalist.Add(array);
+
+            }
+
+            var sum = datalist.Aggregate(0, (res, arr) => res += arr.Length);
+            sum += datalist.Count << 2;
+            var header = new SerializationHeader(sum, this.GameINT, "TEXTURE");
             header.Write(bw);
-            bw.Write(array.Length);
-            bw.Write(array);
+            bw.Write(sum);
+
+            foreach (var arr in datalist)
+            {
+
+                bw.Write(arr.Length);
+                bw.Write(arr);
+
+            }
         }
 
         /// <summary>
@@ -614,8 +625,11 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         public override void Deserialize(BinaryReader br)
         {
+            br.BaseStream.Position += 4;
             int size = br.ReadInt32();
             var array = br.ReadBytes(size);
+
+            array = Interop.Decompress(array);
 
             using var ms = new MemoryStream(array);
             using var reader = new BinaryReader(ms);
@@ -650,17 +664,18 @@ namespace Nikki.Support.Carbon.Class
             this._offsetT = reader.ReadInt16();
             this._scaleS = reader.ReadInt16();
             this._scaleT = reader.ReadInt16();
+            reader.BaseStream.Position += 0x20;
+            var count = reader.ReadInt32();
 
             this.Data = new byte[this.Size];
-            var count = reader.ReadInt32();
 
             for (int loop = 0; loop < count; ++loop)
 			{
 
-                var total = reader.ReadInt32();
-                var temp = reader.ReadBytes(total);
+                var total = br.ReadInt32();
+                var temp = br.ReadBytes(total);
                 temp = Interop.Decompress(temp);
-                Array.Copy(temp, 0, this.Data, loop << 14, temp.Length);
+                Array.Copy(temp, 0, this.Data, loop << 15, temp.Length);
 
 			}
         }

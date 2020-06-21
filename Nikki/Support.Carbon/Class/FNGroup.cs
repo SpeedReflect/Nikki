@@ -206,8 +206,8 @@ namespace Nikki.Support.Carbon.Class
 
                 }
 
-                bw.Write(this.Data.Length);
-                bw.Write(this.Data);
+                writer.Write(this.Data.Length);
+                writer.Write(this.Data);
 
                 array = ms.ToArray();
 
@@ -255,8 +255,8 @@ namespace Nikki.Support.Carbon.Class
 
 			}
 
-            count = br.ReadInt32();
-            this.Data = br.ReadBytes(count);
+            count = reader.ReadInt32();
+            this.Data = reader.ReadBytes(count);
         }
 
         #endregion
