@@ -75,14 +75,18 @@ namespace Nikki.Reflection.Interface
 		/// </summary>
 		/// <param name="cname">CollectionName of a collection to export.</param>
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
-		void Export(string cname, BinaryWriter bw);
+		/// <param name="serialized">True if collection exported should be serialized; 
+		/// false otherwise.</param>
+		void Export(string cname, BinaryWriter bw, bool serialized = true);
 
 		/// <summary>
 		/// Exports object to a filename specified.
 		/// </summary>
 		/// <param name="value">Object to export.</param>
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
-		void Export(object value, BinaryWriter bw);
+		/// <param name="serialized">True if collection exported should be serialized; 
+		/// false otherwise.</param>
+		void Export(object value, BinaryWriter bw, bool serialized = true);
 
 		/// <summary>
 		/// Imports collection from file provided and attempts to add it to the end of 

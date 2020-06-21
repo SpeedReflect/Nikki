@@ -997,7 +997,8 @@ namespace Nikki.Support.Prostreet.Class
             bw.Write((long)0);
             bw.Write(0);
             bw.Write(0x50);
-            bw.WriteBytes(0x50);
+            bw.WriteNullTermUTF8(this.Watermark, 0x20);
+            bw.WriteBytes(0x30);
         }
 
         /// <summary>

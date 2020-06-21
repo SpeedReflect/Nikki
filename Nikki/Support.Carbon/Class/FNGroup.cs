@@ -9,8 +9,7 @@ using Nikki.Support.Carbon.Framework;
 using Nikki.Support.Shared.Parts.FNGParts;
 using CoreExtensions.IO;
 using CoreExtensions.Conversions;
-
-
+using System.Runtime.CompilerServices;
 
 namespace Nikki.Support.Carbon.Class
 {
@@ -188,15 +187,16 @@ namespace Nikki.Support.Carbon.Class
         public override void Serialize(BinaryWriter bw)
         {
             byte[] array;
-            using (var ms = new MemoryStream((this.InfoLength << 3) + 5 + this.CollectionName.Length))
+            var size = this.Data.Length + (this.InfoLength << 3) + this.CollectionName.Length + 0x20;
+            using (var ms = new MemoryStream(size))
             using (var writer = new BinaryWriter(ms))
-			{
+            {
 
                 writer.WriteNullTermUTF8(this.CollectionName);
                 writer.Write(this.InfoLength);
 
                 foreach (var color in this._colorinfo)
-				{
+                {
 
                     writer.Write(color.Offset);
                     writer.Write(color.Alpha);
@@ -204,11 +204,14 @@ namespace Nikki.Support.Carbon.Class
                     writer.Write(color.Green);
                     writer.Write(color.Blue);
 
-				}
+                }
+
+                bw.Write(this.Data.Length);
+                bw.Write(this.Data);
 
                 array = ms.ToArray();
 
-			}
+            }
 
             array = Interop.Compress(array, eLZCompressionType.BEST);
 
@@ -252,6 +255,8 @@ namespace Nikki.Support.Carbon.Class
 
 			}
 
+            count = br.ReadInt32();
+            this.Data = br.ReadBytes(count);
         }
 
         #endregion

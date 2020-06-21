@@ -716,14 +716,18 @@ namespace Nikki.Core
 		/// </summary>
 		/// <param name="cname">CollectionName of a collection to export.</param>
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
-		public abstract void Export(string cname, BinaryWriter bw);
+		/// <param name="serialized">True if collection exported should be serialized; 
+		/// false otherwise.</param>
+		public abstract void Export(string cname, BinaryWriter bw, bool serialized = true);
 
 		/// <summary>
 		/// Exports object to a filename specified.
 		/// </summary>
 		/// <param name="value">Object to export.</param>
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
-		public void Export(object value, BinaryWriter bw)
+		/// <param name="serialized">True if collection exported should be serialized; 
+		/// false otherwise.</param>
+		public void Export(object value, BinaryWriter bw, bool serialized = true)
 		{
 			if (value is T obj)
 			{
@@ -1352,6 +1356,23 @@ namespace Nikki.Core
 				}
 
 			}
+		}
+
+		/// <summary>
+		/// Replaces collection with instance passed at index specified.
+		/// </summary>
+		/// <param name="collection">New collection to replace with.</param>
+		/// <param name="index">Position of replacement.</param>
+		internal void Replace(T collection, int index)
+		{
+			if (index < 0 || index >= this._size)
+			{
+
+				throw new IndexOutOfRangeException(nameof(index));
+
+			}
+
+			this._collections[index] = collection;
 		}
 
 		#endregion

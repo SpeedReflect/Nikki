@@ -353,6 +353,10 @@ namespace Nikki.Support.Carbon.Class
 			}
 		}
 
+		/// <summary>
+		/// Synchronizes all parts of this instance with another instance passed.
+		/// </summary>
+		/// <param name="other"><see cref="DBModelPart"/> to synchronize with.</param>
 		internal void Synchronize(DBModelPart other)
 		{
 			var modelparts = new List<RealCarPart>(other.ModelCarParts);

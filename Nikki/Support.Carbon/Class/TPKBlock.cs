@@ -997,7 +997,8 @@ namespace Nikki.Support.Carbon.Class
             bw.Write((long)0);
             bw.Write(0);
             bw.Write(0x50);
-            bw.WriteBytes(0x50);
+            bw.WriteNullTermUTF8(this.Watermark, 0x20);
+            bw.WriteBytes(0x30);
         }
 
         /// <summary>
@@ -1365,6 +1366,67 @@ namespace Nikki.Support.Carbon.Class
                 this.Textures.Add(texture);
 
 			}
+        }
+
+        /// <summary>
+        /// Synchronizes all parts of this instance with another instance passed.
+        /// </summary>
+        /// <param name="other"><see cref="DBModelPart"/> to synchronize with.</param>
+        internal void Synchronize(TPKBlock other)
+        {
+            var animations = new List<AnimSlot>(other.Animations);
+            var textures = new List<Texture>(other.Textures);
+
+            // Synchronize animations
+            for (int i = 0; i < this.Animations.Count; ++i)
+			{
+
+                bool found = false;
+
+                for (int j = 0; j < other.Animations.Count; ++i)
+				{
+
+                    if (other.Animations[j].BinKey == this.Animations[i].BinKey)
+					{
+
+                        found = true;
+                        break;
+
+					}
+
+				}
+
+                if (!found) animations.Add(this.Animations[i]);
+
+			}
+
+
+            for (int i = 0; i < this.Textures.Count; ++i)
+            {
+
+                bool found = false;
+
+                for (int j = 0; j < other.Textures.Count; ++j)
+                {
+
+                    if (other.Textures[j].BinKey == this.Textures[i].BinKey)
+                    {
+
+                        found = true;
+                        break;
+
+                    }
+
+                }
+
+                if (!found) textures.Add(this.Textures[i]);
+
+            }
+
+            this.Animations = animations;
+            this.Textures = textures;
+            this.IsCompressed = other.IsCompressed;
+            this.SettingData = other.SettingData;
         }
 
         #endregion

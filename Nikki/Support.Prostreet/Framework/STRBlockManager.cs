@@ -64,6 +64,7 @@ namespace Nikki.Support.Prostreet.Framework
 			{
 
 				bw.GeneratePadding(mark, this.Alignment);
+				collection.Watermark = mark;
 				collection.Assemble(bw);
 
 			}

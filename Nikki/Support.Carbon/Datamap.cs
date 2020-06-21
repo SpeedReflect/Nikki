@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
@@ -221,6 +222,67 @@ namespace Nikki.Support.Carbon
 		{
 			var saver = new DatabaseSaver(options, this);
 			return saver.Invoke();
+		}
+
+		public void Export(string manager, string cname, BinaryWriter bw, bool serialized = true)
+		{
+			var root = this.GetManager(manager);
+
+			if (manager == null)
+			{
+
+				throw new Exception($"Cannot find manager named {manager}");
+
+			}
+
+			root.Export(cname, bw, serialized);
+		}
+
+		public void Import(eSerializeType type, BinaryReader br)
+		{
+			var position = br.BaseStream.Position;
+			var header = new SerializationHeader();
+			header.Read(br);
+
+			if (header.ID != eBlockID.Nikki)
+			{
+
+				throw new Exception($"Missing serialized header in the imported collection");
+
+			}
+
+			if (header.Game != this.GameINT)
+			{
+
+				throw new Exception($"Stated game inside collection is {header.Game}, while should be {this.GameINT}");
+
+			}
+
+			var manager = this.GetManager(header.Name);
+
+			if (manager == null)
+			{
+
+				throw new Exception($"Cannot find manager named {header.Name}");
+
+			}
+
+			br.BaseStream.Position = position;
+			manager.Import(type, br);
+		}
+
+		public void Import(eSerializeType type, string manager, BinaryReader br)
+		{
+			var root = this.GetManager(manager);
+
+			if (manager == null)
+			{
+
+				throw new Exception($"Cannot find manager named {manager}");
+
+			}
+
+			root.Import(type, br);
 		}
 
 		/// <summary>

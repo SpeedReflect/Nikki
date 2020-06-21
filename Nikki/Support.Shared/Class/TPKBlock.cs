@@ -101,6 +101,11 @@ namespace Nikki.Support.Shared.Class
         [Category("Primary")]
         public List<AnimSlot> Animations { get; set; } = new List<AnimSlot>();
 
+        /// <summary>
+        /// Custom watermark written on assembly.
+        /// </summary>
+        internal string Watermark { get; set; }
+
         #endregion
 
         #region Main Properties

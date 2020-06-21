@@ -432,6 +432,39 @@ namespace Nikki.Support.Carbon.Class
 			}
 		}
 
+		/// <summary>
+		/// Synchronizes all parts of this instance with another instance passed.
+		/// </summary>
+		/// <param name="other"><see cref="DBModelPart"/> to synchronize with.</param>
+		internal void Synchronize(STRBlock other)
+		{
+			var records = new List<StringRecord>(other._stringinfo);
+
+			for (int i = 0; i < this.InfoLength; ++i)
+			{
+
+				bool found = false;
+
+				for (int j = 0; j < other.InfoLength; ++j)
+				{
+
+					if (other._stringinfo[j].Key == this._stringinfo[i].Key)
+					{
+
+						found = true;
+						break;
+
+					}
+
+				}
+
+				if (!found) records.Add(this._stringinfo[i]);
+
+			}
+
+			this._stringinfo = records;
+		}
+
 		#endregion
 	}
 }

@@ -715,6 +715,13 @@
             <param name="action">The <see cref="T:System.Action"/> delegate to perform on each 
             collection of the <see cref="T:Nikki.Core.Manager`1"/>.</param>
         </member>
+        <member name="M:Nikki.Core.Manager`1.Replace(`0,System.Int32)">
+            <summary>
+            Replaces collection with instance passed at index specified.
+            </summary>
+            <param name="collection">New collection to replace with.</param>
+            <param name="index">Position of replacement.</param>
+        </member>
         <member name="M:Nikki.Core.Manager`1.ReadOnlyThrow">
             <summary>
             Throws exception if this <see cref="T:Nikki.Core.Manager`1"/> is read-only.
@@ -11122,6 +11129,12 @@
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.Synchronize(Nikki.Support.Carbon.Class.DBModelPart)">
+            <summary>
+            Synchronizes all parts of this instance with another instance passed.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> to synchronize with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.FNGroup">
             <summary>

@@ -49,9 +49,10 @@ namespace Nikki.Support.Shared.Class
 		/// </summary>
 		public abstract int InfoLength { get; }
 
+		/// <summary>
+		/// Custom watermark written on assembly.
+		/// </summary>
 		internal string Watermark { get; set; } = String.Empty;
-
-		internal string BelongsToFile { get; set; } = String.Empty;
 
 		#endregion
 

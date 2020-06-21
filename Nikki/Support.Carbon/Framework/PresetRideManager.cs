@@ -159,7 +159,67 @@ namespace Nikki.Support.Carbon.Framework
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public override void Import(eSerializeType type, BinaryReader br)
 		{
+			var position = br.BaseStream.Position;
+			var header = new SerializationHeader();
+			header.Read(br);
 
+			var collection = new PresetRide();
+
+			if (header.ID != eBlockID.Nikki)
+			{
+
+				br.BaseStream.Position = position;
+				collection.Disassemble(br);
+
+			}
+			else
+			{
+
+				if (header.Game != this.GameINT)
+				{
+
+					throw new Exception($"Stated game inside collection is {header.Game}, while should be {this.GameINT}");
+
+				}
+
+				if (header.Name != this.Name)
+				{
+
+					throw new Exception($"Imported collection is not a collection of type {this.Name}");
+
+				}
+
+				collection.Deserialize(br);
+
+			}
+
+			var index = this.IndexOf(collection);
+
+			if (index == -1)
+			{
+
+				this.Add(collection);
+
+			}
+			else
+			{
+
+				switch (type)
+				{
+					case eSerializeType.Negate:
+						break;
+
+					case eSerializeType.Synchronize:
+					case eSerializeType.Override:
+						collection.Manager = this;
+						this.Replace(collection, index);
+						break;
+
+					default:
+						break;
+				}
+
+			}
 		}
 	}
 }
