@@ -26,17 +26,18 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 		/// <summary>
 		/// Name of this <see cref="RealCarPart"/>.
 		/// </summary>
-		[Browsable(false)]
 		public override string PartName => this.GetPartName();
 
 		/// <summary>
 		/// <see cref="DBModelPart"/> to which this instance belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override Shared.Class.DBModelPart Model { get; set; }
 
 		/// <summary>
 		/// Collection of <see cref="CPAttribute"/> of this <see cref="RealCarPart"/>.
 		/// </summary>
+		[Browsable(false)]
 		public override List<CPAttribute> Attributes { get; set; }
 
 		/// <summary>

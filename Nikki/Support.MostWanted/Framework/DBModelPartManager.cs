@@ -164,15 +164,6 @@ namespace Nikki.Support.MostWanted.Framework
 							length = Inject(str_attrib.Value, length);
 
 						}
-
-						// Else if attribute is a TwoStringAttribute, write its values
-						else if (attrib is TwoStringAttribute two_attrib)
-						{
-						
-							length = Inject(two_attrib.Value1, length);
-							length = Inject(two_attrib.Value2, length);
-						
-						}
 					
 					}
 				
@@ -538,10 +529,8 @@ namespace Nikki.Support.MostWanted.Framework
 				result[count] = type switch
 				{
 					eCarPartAttribType.Boolean => new BoolAttribute(br, key),
-					eCarPartAttribType.CarPartID => new PartIDAttribute(br, key),
 					eCarPartAttribType.Floating => new FloatAttribute(br, key),
 					eCarPartAttribType.String => new StringAttribute(br, str, key),
-					eCarPartAttribType.TwoString => new TwoStringAttribute(br, str, key),
 					eCarPartAttribType.Key => new KeyAttribute(br, key),
 					_ => new IntAttribute(br, key),
 				};

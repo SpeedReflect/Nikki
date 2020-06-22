@@ -109,6 +109,20 @@ namespace Nikki.Support.Shared.Class
 			(index >= 0 && index < this.Length) ? this.ModelCarParts[index] : null;
 
 		/// <summary>
+		/// Gets first <see cref="RealCarPart"/> in this <see cref="DBModelPart"/>.
+		/// </summary>
+		/// <returns>First <see cref="RealCarPart"/>.</returns>
+		public virtual RealCarPart GetFirstPart() =>
+			this.ModelCarParts.Count == 0 ? null : this.ModelCarParts[0];
+
+		/// <summary>
+		/// Gets last <see cref="RealCarPart"/> in this <see cref="DBModelPart"/>.
+		/// </summary>
+		/// <returns>Last <see cref="RealCarPart"/>.</returns>
+		public virtual RealCarPart GetLastPart() =>
+			this.ModelCarParts.Count == 0 ? null : this.ModelCarParts[^1];
+
+		/// <summary>
 		/// Switches two parts and their indexes.
 		/// </summary>
 		/// <param name="part1">First <see cref="RealCarPart"/> to switch.</param>
@@ -138,11 +152,22 @@ namespace Nikki.Support.Shared.Class
 		public abstract void RemovePart(string name);
 
 		/// <summary>
+		/// Removes <see cref="RealCarPart"/>.
+		/// </summary>
+		/// <param name="index">Index of <see cref="RealCarPart"/> to remove.</param>
+		public abstract void RemovePart(int index);
+
+		/// <summary>
 		/// Clones a <see cref="RealCarPart"/>.
 		/// </summary>
-		/// <param name="newname">Name of the new <see cref="RealCarPart"/>.</param>
 		/// <param name="copyname">Name of <see cref="RealCarPart"/> to clone.</param>
-		public abstract void ClonePart(string newname, string copyname);
+		public abstract void ClonePart(string copyname);
+
+		/// <summary>
+		/// Clones a <see cref="RealCarPart"/>.
+		/// </summary>
+		/// <param name="index">Index of <see cref="RealCarPart"/> to clone.</param>
+		public abstract void ClonePart(int index);
 
 		#endregion
 	}

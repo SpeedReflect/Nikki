@@ -217,12 +217,31 @@ namespace Nikki.Support.Carbon.Class
 		}
 
 		/// <summary>
+		/// Removes <see cref="RealCarPart"/>.
+		/// </summary>
+		/// <param name="index">Index of <see cref="RealCarPart"/> to remove.</param>
+		public override void RemovePart(int index)
+		{
+			if (index < 0 || index >= this.Length)
+			{
+
+				throw new IndexOutOfRangeException(nameof(index));
+
+			}
+			else
+			{
+
+				this.ModelCarParts.RemoveAt(index);
+
+			}
+		}
+
+		/// <summary>
 		/// Attemps to clone a <see cref="RealCarPart"/>.
 		/// </summary>
-		/// <param name="newname">Name of the new <see cref="RealCarPart"/>.</param>
 		/// <param name="copyname">Name of <see cref="RealCarPart"/> to clone.</param>
 		/// <returns>True on success; false otherwise.</returns>
-		public override void ClonePart(string newname, string copyname)
+		public override void ClonePart(string copyname)
 		{
 			var part = this.GetRealPart(copyname);
 			
@@ -236,6 +255,28 @@ namespace Nikki.Support.Carbon.Class
 			var copy = (RealCarPart)part.PlainCopy();
 			copy.Model = this;
 			this.ModelCarParts.Add(copy);
+		}
+
+		/// <summary>
+		/// Clones a <see cref="RealCarPart"/>.
+		/// </summary>
+		/// <param name="index">Index of <see cref="RealCarPart"/> to clone.</param>
+		public override void ClonePart(int index)
+		{
+			if (index < 0 || index >= this.Length)
+			{
+
+				throw new IndexOutOfRangeException(nameof(index));
+
+			}
+			else
+			{
+
+				var copy = (RealCarPart)this.ModelCarParts[index].PlainCopy();
+				copy.Model = this;
+				this.ModelCarParts.Add(copy);
+
+			}
 		}
 
 		/// <summary>

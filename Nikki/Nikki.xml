@@ -11296,13 +11296,24 @@
             </summary>
             <param name="name">Name of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to remove.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.ClonePart(System.String,System.String)">
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.RemovePart(System.Int32)">
+            <summary>
+            Removes <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="index">Index of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to remove.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.ClonePart(System.String)">
             <summary>
             Attemps to clone a <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
             </summary>
-            <param name="newname">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
             <param name="copyname">Name of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to clone.</param>
             <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.DBModelPart.ClonePart(System.Int32)">
+            <summary>
+            Clones a <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="index">Index of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to clone.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.DBModelPart.ToString">
             <summary>
@@ -16985,13 +16996,24 @@
             </summary>
             <param name="name">Name of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to remove.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.ClonePart(System.String,System.String)">
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.RemovePart(System.Int32)">
+            <summary>
+            Removes <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="index">Index of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to remove.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.ClonePart(System.String)">
             <summary>
             Attemps to clone a <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
             </summary>
-            <param name="newname">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
             <param name="copyname">Name of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to clone.</param>
             <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.ClonePart(System.Int32)">
+            <summary>
+            Clones a <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="index">Index of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to clone.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.ToString">
             <summary>
@@ -23001,13 +23023,24 @@
             </summary>
             <param name="name">Name of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to remove.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.ClonePart(System.String,System.String)">
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.RemovePart(System.Int32)">
+            <summary>
+            Removes <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="index">Index of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to remove.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.ClonePart(System.String)">
             <summary>
             Attemps to clone a <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
             </summary>
-            <param name="newname">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
             <param name="copyname">Name of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to clone.</param>
             <returns>True on success; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.ClonePart(System.Int32)">
+            <summary>
+            Clones a <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="index">Index of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to clone.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.ToString">
             <summary>
@@ -26557,6 +26590,18 @@
             <param name="index">Index of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to get.</param>
             <returns><see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> at index specified.</returns>
         </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.GetFirstPart">
+            <summary>
+            Gets first <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> in this <see cref="T:Nikki.Support.Shared.Class.DBModelPart"/>.
+            </summary>
+            <returns>First <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.GetLastPart">
+            <summary>
+            Gets last <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> in this <see cref="T:Nikki.Support.Shared.Class.DBModelPart"/>.
+            </summary>
+            <returns>Last <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</returns>
+        </member>
         <member name="M:Nikki.Support.Shared.Class.DBModelPart.SwitchParts(System.String,System.String)">
             <summary>
             Switches two parts and their indexes.
@@ -26586,12 +26631,23 @@
             </summary>
             <param name="name">Name of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to remove.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.DBModelPart.ClonePart(System.String,System.String)">
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.RemovePart(System.Int32)">
+            <summary>
+            Removes <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="index">Index of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to remove.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.ClonePart(System.String)">
             <summary>
             Clones a <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
             </summary>
-            <param name="newname">Name of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.</param>
             <param name="copyname">Name of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to clone.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.DBModelPart.ClonePart(System.Int32)">
+            <summary>
+            Clones a <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/>.
+            </summary>
+            <param name="index">Index of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> to clone.</param>
         </member>
         <member name="T:Nikki.Support.Shared.Class.FNGroup">
             <summary>

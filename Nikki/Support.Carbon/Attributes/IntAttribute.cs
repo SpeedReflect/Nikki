@@ -50,7 +50,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// </summary>
 		[AccessModifiable()]
 		[Category("Main")]
-		public uint Value { get; set; }
+		public int Value { get; set; }
 
 		/// <summary>
 		/// Initializes new instance of <see cref="IntAttribute"/>.
@@ -66,7 +66,7 @@ namespace Nikki.Support.Carbon.Attributes
 			try
 			{
 
-				this.Value = (uint)value.ReinterpretCast(typeof(uint));
+				this.Value = (int)value.ReinterpretCast(typeof(int));
 
 			}
 			catch (Exception)
@@ -97,7 +97,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// <param name="str_reader"><see cref="BinaryReader"/> to read strings with. 
 		/// Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
 		public override void Disassemble(BinaryReader br, BinaryReader str_reader)
-			=> this.Value = br.ReadUInt32();
+			=> this.Value = br.ReadInt32();
 
 		/// <summary>
 		/// Assembles <see cref="IntAttribute"/> and writes it using <see cref="BinaryWriter"/> 
@@ -204,6 +204,6 @@ namespace Nikki.Support.Carbon.Attributes
 		/// Deserializes byte array into an instance by loading data from the file provided.
 		/// </summary>
 		public override void Deserialize(BinaryReader br) =>
-			this.Value = br.ReadUInt32();
+			this.Value = br.ReadInt32();
 	}
 }

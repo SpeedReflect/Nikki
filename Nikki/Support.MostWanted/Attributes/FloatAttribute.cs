@@ -183,8 +183,6 @@ namespace Nikki.Support.MostWanted.Attributes
 				eCarPartAttribType.Boolean => new BoolAttribute(this.Value),
 				eCarPartAttribType.Integer => new IntAttribute(this.Value),
 				eCarPartAttribType.String => new StringAttribute(this.Value),
-				eCarPartAttribType.TwoString => new TwoStringAttribute(this.Value),
-				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Value),
 				eCarPartAttribType.Key => new KeyAttribute(this.Value),
 				_ => this
 			};
