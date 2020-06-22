@@ -187,13 +187,13 @@ namespace Nikki.Support.Carbon.Class
         public override void Serialize(BinaryWriter bw)
         {
             byte[] array;
-            var size = this.Data.Length + (this.InfoLength << 3) + this.CollectionName.Length + 0x20;
+            var size = this.Data.Length + (this.FEngColorCount << 3) + this.CollectionName.Length + 0x20;
             using (var ms = new MemoryStream(size))
             using (var writer = new BinaryWriter(ms))
             {
 
                 writer.WriteNullTermUTF8(this.CollectionName);
-                writer.Write(this.InfoLength);
+                writer.Write(this.FEngColorCount);
 
                 foreach (var color in this._colorinfo)
                 {

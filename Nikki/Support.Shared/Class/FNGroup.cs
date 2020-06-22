@@ -52,12 +52,6 @@ namespace Nikki.Support.Shared.Class
         public virtual uint VltKey => this.CollectionName.VltHash();
 
         /// <summary>
-        /// Indicates whether current instance can be destroyed.
-        /// </summary>
-        [Browsable(false)]
-        public bool Destroy { get; set; }
-
-        /// <summary>
         /// List of all <see cref="FEngColor"/> that <see cref="FNGroup"/> contains.
         /// </summary>
         protected List<FEngColor> _colorinfo = new List<FEngColor>();
@@ -65,7 +59,8 @@ namespace Nikki.Support.Shared.Class
         /// <summary>
         /// Length of the color information array.
         /// </summary>
-        public int InfoLength => this._colorinfo.Count;
+        [Category("Primary")]
+        public int FEngColorCount => this._colorinfo.Count;
 
         #endregion
 
@@ -111,7 +106,7 @@ namespace Nikki.Support.Shared.Class
         /// <param name="index">Index of the color.</param>
         /// <returns><see cref="FEngColor"/> class.</returns>
         public virtual FEngColor GetColor(int index) =>
-            index >= this.InfoLength ? null : this._colorinfo[index];
+            index >= this.FEngColorCount ? null : this._colorinfo[index];
 
         /// <summary>
         /// Sets new <see cref="FEngColor"/> at specific color.

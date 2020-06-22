@@ -102,6 +102,18 @@ namespace Nikki.Support.Shared.Class
         public List<AnimSlot> Animations { get; set; } = new List<AnimSlot>();
 
         /// <summary>
+        /// Number of <see cref="Texture"/> in this <see cref="TPKBlock"/>.
+        /// </summary>
+        [Category("Primary")]
+        public abstract int TextureCount { get; }
+
+        /// <summary>
+        /// Number of <see cref="AnimSlot"/> in this <see cref="TPKBlock"/>.
+        /// </summary>
+        [Category("Primary")]
+        public int AnimationCount => this.Animations.Count;
+
+        /// <summary>
         /// Custom watermark written on assembly.
         /// </summary>
         internal string Watermark { get; set; }

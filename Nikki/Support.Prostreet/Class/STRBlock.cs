@@ -98,7 +98,7 @@ namespace Nikki.Support.Prostreet.Class
 		/// Length of the string information array.
 		/// </summary>
 		[Category("Primary")]
-		public override int InfoLength => this._stringinfo.Count;
+		public override int StringRecordCount => this._stringinfo.Count;
 
 		#endregion
 
@@ -148,7 +148,7 @@ namespace Nikki.Support.Prostreet.Class
 		public override void Assemble(BinaryWriter bw)
 		{
 			var hash_offset = 0x3C;
-			var text_offset = 0x3C + this.InfoLength * 8;
+			var text_offset = 0x3C + this.StringRecordCount * 8;
 
 			// Sort records by keys
 			this._stringinfo.Sort((a, b) => a.Key.CompareTo(b.Key));
@@ -161,7 +161,7 @@ namespace Nikki.Support.Prostreet.Class
 			var position = bw.BaseStream.Position;
 
 			// Write offsets
-			bw.Write(this.InfoLength);
+			bw.Write(this.StringRecordCount);
 			bw.Write(hash_offset);
 			bw.Write(text_offset);
 			bw.WriteNullTermUTF8(this._collection_name, 0x10);

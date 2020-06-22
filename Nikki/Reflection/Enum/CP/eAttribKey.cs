@@ -9,27 +9,7 @@
 		/// 
 		/// </summary>
 		CV = 0x000004B8,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		COLOR0ID = 0xD90271FB,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		COLOR1ID = 0xD902763C,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		COLOR2ID = 0xD9027A7D,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		COLOR3ID = 0xD9027EBE,
-		
+				
 		/// <summary>
 		/// 
 		/// </summary>
@@ -39,7 +19,12 @@
 		/// 
 		/// </summary>
 		MATNAMEB = 0xF073C524,
-		
+
+		/// <summary>
+		/// 
+		/// </summary>
+		BRAND_NAME = 0xEBB03E66,
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -78,16 +63,31 @@
 		/// <summary>
 		/// 
 		/// </summary>
+		COLOR0LANGUAGEHASH = 0x65F58556,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		COLOR1LANGUAGEHASH = 0xB5548ED7,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		COLOR2LANGUAGEHASH = 0x04B39858,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		COLOR3LANGUAGEHASH = 0x5412A1D9,
+
+		/// <summary>
+		/// 
+		/// </summary>
 		PART_NAME_BASE_HASH = 0x900449D3,
 
 		/// <summary>
 		/// 
 		/// </summary>
 		LOD_NAME_PREFIX_NAMEHASH = 0x956326AF,
-				
-		/// <summary>
-		/// 
-		/// </summary>
-		BRAND_NAME = 0xEBB03E66,
 	}
 }

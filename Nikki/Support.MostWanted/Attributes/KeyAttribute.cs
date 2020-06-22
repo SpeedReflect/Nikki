@@ -28,7 +28,7 @@ namespace Nikki.Support.MostWanted.Attributes
 		public override eCarPartAttribType AttribType => eCarPartAttribType.Key;
 
 		/// <summary>
-		/// Type of this <see cref="BoolAttribute"/>.
+		/// Type of this <see cref="KeyAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
 		public eAttribKey Type { get; set; }

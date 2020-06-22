@@ -12644,7 +12644,7 @@
             Vault memory hash of the collection name.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.STRBlock.InfoLength">
+        <member name="P:Nikki.Support.Carbon.Class.STRBlock.StringRecordCount">
             <summary>
             Length of the string information array.
             </summary>
@@ -13079,6 +13079,11 @@
         <member name="P:Nikki.Support.Carbon.Class.TPKBlock.Textures">
             <summary>
             List of <see cref="T:Nikki.Support.Carbon.Class.Texture"/> in this <see cref="T:Nikki.Support.Carbon.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.TPKBlock.TextureCount">
+            <summary>
+            Number of <see cref="T:Nikki.Support.Carbon.Class.Texture"/> in this <see cref="T:Nikki.Support.Carbon.Class.TPKBlock"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.TPKBlock.#ctor">
@@ -17840,7 +17845,7 @@
             Vault memory hash of the collection name.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.STRBlock.InfoLength">
+        <member name="P:Nikki.Support.MostWanted.Class.STRBlock.StringRecordCount">
             <summary>
             Length of the string information array.
             </summary>
@@ -18284,6 +18289,11 @@
         <member name="P:Nikki.Support.MostWanted.Class.TPKBlock.Textures">
             <summary>
             List of <see cref="T:Nikki.Support.MostWanted.Class.Texture"/> in this <see cref="T:Nikki.Support.MostWanted.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Class.TPKBlock.TextureCount">
+            <summary>
+            Number of <see cref="T:Nikki.Support.MostWanted.Class.Texture"/> in this <see cref="T:Nikki.Support.MostWanted.Class.TPKBlock"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.TPKBlock.#ctor">
@@ -23586,7 +23596,7 @@
             Vault memory hash of the collection name.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Prostreet.Class.STRBlock.InfoLength">
+        <member name="P:Nikki.Support.Prostreet.Class.STRBlock.StringRecordCount">
             <summary>
             Length of the string information array.
             </summary>
@@ -24015,6 +24025,11 @@
         <member name="P:Nikki.Support.Prostreet.Class.TPKBlock.Textures">
             <summary>
             List of <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> in this <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.TPKBlock.TextureCount">
+            <summary>
+            Number of <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> in this <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.#ctor">
@@ -26322,17 +26337,12 @@
             Vault memory hash of the Collection Name.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Class.FNGroup.Destroy">
-            <summary>
-            Indicates whether current instance can be destroyed.
-            </summary>
-        </member>
         <member name="F:Nikki.Support.Shared.Class.FNGroup._colorinfo">
             <summary>
             List of all <see cref="T:Nikki.Support.Shared.Parts.FNGParts.FEngColor"/> that <see cref="T:Nikki.Support.Shared.Class.FNGroup"/> contains.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Class.FNGroup.InfoLength">
+        <member name="P:Nikki.Support.Shared.Class.FNGroup.FEngColorCount">
             <summary>
             Length of the color information array.
             </summary>
@@ -26792,7 +26802,7 @@
             Vault memory hash of the collection name.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Class.STRBlock.InfoLength">
+        <member name="P:Nikki.Support.Shared.Class.STRBlock.StringRecordCount">
             <summary>
             Length of the string information array.
             </summary>
@@ -27242,6 +27252,16 @@
         <member name="P:Nikki.Support.Shared.Class.TPKBlock.Animations">
             <summary>
             Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/> of this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.TPKBlock.TextureCount">
+            <summary>
+            Number of <see cref="T:Nikki.Support.Shared.Class.Texture"/> in this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.TPKBlock.AnimationCount">
+            <summary>
+            Number of <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/> in this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Shared.Class.TPKBlock.Watermark">

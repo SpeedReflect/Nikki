@@ -98,7 +98,7 @@ namespace Nikki.Support.Carbon.Class
 		/// Length of the string information array.
 		/// </summary>
 		[Category("Primary")]
-		public override int InfoLength => this._stringinfo.Count;
+		public override int StringRecordCount => this._stringinfo.Count;
 
 		#endregion
 
@@ -148,7 +148,7 @@ namespace Nikki.Support.Carbon.Class
 		public override void Assemble(BinaryWriter bw)
 		{
 			var hash_offset = 0x3C;
-			var text_offset = 0x3C + this.InfoLength * 8;
+			var text_offset = 0x3C + this.StringRecordCount * 8;
 
 			// Sort records by keys
 			this._stringinfo.Sort((a, b) => a.Key.CompareTo(b.Key));
@@ -161,7 +161,7 @@ namespace Nikki.Support.Carbon.Class
 			var position = bw.BaseStream.Position;
 			
 			// Write offsets
-			bw.Write(this.InfoLength);
+			bw.Write(this.StringRecordCount);
 			bw.Write(hash_offset);
 			bw.Write(text_offset);
 			bw.WriteNullTermUTF8(this._collection_name, 0x10);
@@ -372,14 +372,14 @@ namespace Nikki.Support.Carbon.Class
 		public override void Serialize(BinaryWriter bw)
 		{
 			byte[] array;
-			using (var ms = new MemoryStream(this.InfoLength << 5))
+			using (var ms = new MemoryStream(this.StringRecordCount << 5))
 			using (var writer = new BinaryWriter(ms))
 			{
 
 				writer.WriteNullTermUTF8(this._collection_name);
-				writer.Write(this.InfoLength);
+				writer.Write(this.StringRecordCount);
 
-				for (int loop = 0; loop < this.InfoLength; ++loop)
+				for (int loop = 0; loop < this.StringRecordCount; ++loop)
 				{
 
 					writer.WriteNullTermUTF8(this._stringinfo[loop].Label);
@@ -440,12 +440,12 @@ namespace Nikki.Support.Carbon.Class
 		{
 			var records = new List<StringRecord>(other._stringinfo);
 
-			for (int i = 0; i < this.InfoLength; ++i)
+			for (int i = 0; i < this.StringRecordCount; ++i)
 			{
 
 				bool found = false;
 
-				for (int j = 0; j < other.InfoLength; ++j)
+				for (int j = 0; j < other.StringRecordCount; ++j)
 				{
 
 					if (other._stringinfo[j].Key == this._stringinfo[i].Key)

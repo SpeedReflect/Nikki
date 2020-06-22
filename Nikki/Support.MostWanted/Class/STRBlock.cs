@@ -99,7 +99,7 @@ namespace Nikki.Support.MostWanted.Class
 		/// Length of the string information array.
 		/// </summary>
 		[Category("Primary")]
-		public override int InfoLength => this._stringinfo.Count;
+		public override int StringRecordCount => this._stringinfo.Count;
 
 		#endregion
 
@@ -150,7 +150,7 @@ namespace Nikki.Support.MostWanted.Class
 		{
 			var udat_offset = 0x20;
 			var hash_offset = udat_offset + this._unk_data.Length;
-			var text_offset = hash_offset + this.InfoLength * 8;
+			var text_offset = hash_offset + this.StringRecordCount * 8;
 
 			// Sort records by keys
 			this._stringinfo.Sort((a, b) => a.Key.CompareTo(b.Key));
@@ -164,7 +164,7 @@ namespace Nikki.Support.MostWanted.Class
 
 			// Write offsets
 			bw.Write(udat_offset);
-			bw.Write(this.InfoLength);
+			bw.Write(this.StringRecordCount);
 			bw.Write(hash_offset);
 			bw.Write(text_offset);
 			bw.WriteNullTermUTF8(this._collection_name, 0x10);

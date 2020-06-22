@@ -95,6 +95,12 @@ namespace Nikki.Support.Prostreet.Class
         [Browsable(false)]
         public List<Texture> Textures { get; set; } = new List<Texture>();
 
+        /// <summary>
+        /// Number of <see cref="Texture"/> in this <see cref="TPKBlock"/>.
+        /// </summary>
+        [Category("Primary")]
+        public override int TextureCount => this.Textures.Count;
+
         #endregion
 
         #region Main

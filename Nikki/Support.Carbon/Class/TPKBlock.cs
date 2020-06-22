@@ -95,6 +95,12 @@ namespace Nikki.Support.Carbon.Class
         [Browsable(false)]
         public List<Texture> Textures { get; set; } = new List<Texture>();
 
+        /// <summary>
+        /// Number of <see cref="Texture"/> in this <see cref="TPKBlock"/>.
+        /// </summary>
+        [Category("Primary")]
+        public override int TextureCount => this.Textures.Count;
+
         #endregion
 
         #region Main
@@ -1396,7 +1402,7 @@ namespace Nikki.Support.Carbon.Class
 
                 bool found = false;
 
-                for (int j = 0; j < other.Animations.Count; ++i)
+                for (int j = 0; j < other.Animations.Count; ++j)
 				{
 
                     if (other.Animations[j].BinKey == this.Animations[i].BinKey)

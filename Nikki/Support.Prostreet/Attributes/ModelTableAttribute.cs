@@ -28,12 +28,14 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="ModelTableAttribute"/>.
 		/// </summary>
+		[Category("Main")]
 		public override eCarPartAttribType AttribType => eCarPartAttribType.ModelTable;
 
 		/// <summary>
 		/// Type of this <see cref="ModelTableAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public eAttribModelTable Type { get; set; }
 
 		/// <summary>
@@ -41,6 +43,7 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// </summary>
 		[ReadOnly(true)]
 		[TypeConverter(typeof(HexConverter))]
+		[Category("Main")]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -56,18 +59,21 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// hashes of the names are stored in the table.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public eBoolean Templated { get; set; } = eBoolean.False;
 
 		/// <summary>
 		/// Main concatenator string, if exists.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public string Concatenator { get; set; } = String.Empty;
 
 		/// <summary>
 		/// True if concatenator string exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public eBoolean ConcatenatorExists { get; set; } = eBoolean.False;
 
 		#endregion
@@ -78,360 +84,420 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// Geometry 0 Lod A value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodA")]
 		public string Geometry0LodA { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 0 Lod B value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodB")]
 		public string Geometry0LodB { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 0 Lod C value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodC")]
 		public string Geometry0LodC { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 0 Lod D value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodD")]
 		public string Geometry0LodD { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 0 Lod E value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodE")]
 		public string Geometry0LodE { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 1 Lod A value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodA")]
 		public string Geometry1LodA { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 1 Lod B value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodB")]
 		public string Geometry1LodB { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 1 Lod C value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodC")]
 		public string Geometry1LodC { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 1 Lod D value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodD")]
 		public string Geometry1LodD { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 1 Lod E value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodE")]
 		public string Geometry1LodE { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 2 Lod A value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodA")]
 		public string Geometry2LodA { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 2 Lod B value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodB")]
 		public string Geometry2LodB { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 2 Lod C value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodC")]
 		public string Geometry2LodC { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 2 Lod D value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodD")]
 		public string Geometry2LodD { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 2 Lod E value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodE")]
 		public string Geometry2LodE { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 3 Lod A value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodA")]
 		public string Geometry3LodA { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 3 Lod B value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodB")]
 		public string Geometry3LodB { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 3 Lod C value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodC")]
 		public string Geometry3LodC { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 3 Lod D value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodD")]
 		public string Geometry3LodD { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 3 Lod E value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodE")]
 		public string Geometry3LodE { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 4 Lod A value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodA")]
 		public string Geometry4LodA { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 4 Lod B value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodB")]
 		public string Geometry4LodB { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 4 Lod C value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodC")]
 		public string Geometry4LodC { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 4 Lod D value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodD")]
 		public string Geometry4LodD { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 4 Lod E value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodE")]
 		public string Geometry4LodE { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 5 Lod A value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodA")]
 		public string Geometry5LodA { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 5 Lod B value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodB")]
 		public string Geometry5LodB { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 5 Lod C value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodC")]
 		public string Geometry5LodC { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 5 Lod D value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodD")]
 		public string Geometry5LodD { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 5 Lod E value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodE")]
 		public string Geometry5LodE { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 6 Lod A value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodA")]
 		public string Geometry6LodA { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 6 Lod B value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodB")]
 		public string Geometry6LodB { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 6 Lod C value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodC")]
 		public string Geometry6LodC { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 6 Lod D value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodD")]
 		public string Geometry6LodD { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 6 Lod E value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodE")]
 		public string Geometry6LodE { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 7 Lod A value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodA")]
 		public string Geometry7LodA { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 7 Lod B value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodB")]
 		public string Geometry7LodB { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 7 Lod C value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodC")]
 		public string Geometry7LodC { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 7 Lod D value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodD")]
 		public string Geometry7LodD { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 7 Lod E value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodE")]
 		public string Geometry7LodE { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 8 Lod A value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodA")]
 		public string Geometry8LodA { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 8 Lod B value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodB")]
 		public string Geometry8LodB { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 8 Lod C value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodC")]
 		public string Geometry8LodC { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 8 Lod D value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodD")]
 		public string Geometry8LodD { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 8 Lod E value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodE")]
 		public string Geometry8LodE { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 9 Lod A value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodA")]
 		public string Geometry9LodA { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 9 Lod B value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodB")]
 		public string Geometry9LodB { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 9 Lod C value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodC")]
 		public string Geometry9LodC { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 9 Lod D value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodD")]
 		public string Geometry9LodD { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 9 Lod E value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodE")]
 		public string Geometry9LodE { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 10 Lod A value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodA")]
 		public string Geometry10LodA { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 10 Lod B value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodB")]
 		public string Geometry10LodB { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 10 Lod C value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodC")]
 		public string Geometry10LodC { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 10 Lod D value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodD")]
 		public string Geometry10LodD { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 10 Lod E value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodE")]
 		public string Geometry10LodE { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 11 Lod A value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodA")]
 		public string Geometry11LodA { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 11 Lod B value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodB")]
 		public string Geometry11LodB { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 11 Lod C value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodC")]
 		public string Geometry11LodC { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 11 Lod D value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodD")]
 		public string Geometry11LodD { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Geometry 11 Lod E value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodE")]
 		public string Geometry11LodE { get; set; } = String.Empty;
 
 		#endregion
@@ -442,360 +508,420 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// True if geometry 0 Lod A exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodAExists")]
 		public eBoolean Geometry0LodAExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 0 Lod B exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodBExists")]
 		public eBoolean Geometry0LodBExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 0 Lod C exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodCExists")]
 		public eBoolean Geometry0LodCExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 0 Lod D exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodDExists")]
 		public eBoolean Geometry0LodDExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 0 Lod E exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodEExists")]
 		public eBoolean Geometry0LodEExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 1 Lod A exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodAExists")]
 		public eBoolean Geometry1LodAExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 1 Lod B exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodBExists")]
 		public eBoolean Geometry1LodBExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 1 Lod C exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodCExists")]
 		public eBoolean Geometry1LodCExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 1 Lod D exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodDExists")]
 		public eBoolean Geometry1LodDExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 1 Lod E exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodEExists")]
 		public eBoolean Geometry1LodEExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 2 Lod A exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodAExists")]
 		public eBoolean Geometry2LodAExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 2 Lod B exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodBExists")]
 		public eBoolean Geometry2LodBExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 2 Lod C exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodCExists")]
 		public eBoolean Geometry2LodCExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 2 Lod D exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodDExists")]
 		public eBoolean Geometry2LodDExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 2 Lod E exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodEExists")]
 		public eBoolean Geometry2LodEExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 3 Lod A exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodAExists")]
 		public eBoolean Geometry3LodAExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 3 Lod B exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodBExists")]
 		public eBoolean Geometry3LodBExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 3 Lod C exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodCExists")]
 		public eBoolean Geometry3LodCExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 3 Lod D exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodDExists")]
 		public eBoolean Geometry3LodDExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 3 Lod E exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodEExists")]
 		public eBoolean Geometry3LodEExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 4 Lod A exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodAExists")]
 		public eBoolean Geometry4LodAExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 4 Lod B exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodBExists")]
 		public eBoolean Geometry4LodBExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 4 Lod C exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodCExists")]
 		public eBoolean Geometry4LodCExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 4 Lod D exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodDExists")]
 		public eBoolean Geometry4LodDExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 4 Lod E exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodEExists")]
 		public eBoolean Geometry4LodEExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 5 Lod A exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodAExists")]
 		public eBoolean Geometry5LodAExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 5 Lod B exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodBExists")]
 		public eBoolean Geometry5LodBExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 5 Lod C exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodCExists")]
 		public eBoolean Geometry5LodCExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 5 Lod D exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodDExists")]
 		public eBoolean Geometry5LodDExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 5 Lod E exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodEExists")]
 		public eBoolean Geometry5LodEExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 6 Lod A exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodAExists")]
 		public eBoolean Geometry6LodAExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 6 Lod B exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodBExists")]
 		public eBoolean Geometry6LodBExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 6 Lod C exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodCExists")]
 		public eBoolean Geometry6LodCExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 6 Lod D exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodDExists")]
 		public eBoolean Geometry6LodDExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 6 Lod E exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodEExists")]
 		public eBoolean Geometry6LodEExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 7 Lod A exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodAExists")]
 		public eBoolean Geometry7LodAExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 7 Lod B exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodBExists")]
 		public eBoolean Geometry7LodBExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 7 Lod C exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodCExists")]
 		public eBoolean Geometry7LodCExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 7 Lod D exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodDExists")]
 		public eBoolean Geometry7LodDExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 7 Lod E exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodEExists")]
 		public eBoolean Geometry7LodEExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 8 Lod A exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodAExists")]
 		public eBoolean Geometry8LodAExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 8 Lod B exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodBExists")]
 		public eBoolean Geometry8LodBExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 8 Lod C exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodCExists")]
 		public eBoolean Geometry8LodCExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 8 Lod D exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodDExists")]
 		public eBoolean Geometry8LodDExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 8 Lod E exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodEExists")]
 		public eBoolean Geometry8LodEExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 9 Lod A exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodAExists")]
 		public eBoolean Geometry9LodAExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 9 Lod B exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodBExists")]
 		public eBoolean Geometry9LodBExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 9 Lod C exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodCExists")]
 		public eBoolean Geometry9LodCExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 9 Lod D exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodDExists")]
 		public eBoolean Geometry9LodDExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 9 Lod E exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodEExists")]
 		public eBoolean Geometry9LodEExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 10 Lod A exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodAExists")]
 		public eBoolean Geometry10LodAExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 10 Lod B exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodBExists")]
 		public eBoolean Geometry10LodBExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 10 Lod C exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodCExists")]
 		public eBoolean Geometry10LodCExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 10 Lod D exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodDExists")]
 		public eBoolean Geometry10LodDExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 10 Lod E exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodEExists")]
 		public eBoolean Geometry10LodEExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 11 Lod A exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodAExists")]
 		public eBoolean Geometry11LodAExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 11 Lod B exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodBExists")]
 		public eBoolean Geometry11LodBExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 11 Lod C exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodCExists")]
 		public eBoolean Geometry11LodCExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 11 Lod D exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodDExists")]
 		public eBoolean Geometry11LodDExists { get; set; }
 
 		/// <summary>
 		/// True if geometry 11 Lod E exists; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("GeometryLodEExists")]
 		public eBoolean Geometry11LodEExists { get; set; }
 
 		#endregion
@@ -1129,6 +1255,7 @@ namespace Nikki.Support.Prostreet.Attributes
 				eCarPartAttribType.Integer => new IntAttribute(this.Templated),
 				eCarPartAttribType.String => new StringAttribute(this.Templated),
 				eCarPartAttribType.TwoString => new TwoStringAttribute(this.Templated),
+				eCarPartAttribType.Color => new ColorAttribute(this.Templated),
 				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Templated),
 				eCarPartAttribType.Key => new KeyAttribute(this.Templated),
 				_ => this

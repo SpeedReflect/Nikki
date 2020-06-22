@@ -22,12 +22,12 @@ namespace Nikki.Support.Carbon.Attributes
 	public class TwoStringAttribute : CPAttribute
 	{
 		/// <summary>
-		/// <see cref="eCarPartAttribType"/> type of this <see cref="StringAttribute"/>.
+		/// <see cref="eCarPartAttribType"/> type of this <see cref="TwoStringAttribute"/>.
 		/// </summary>
 		public override eCarPartAttribType AttribType => eCarPartAttribType.TwoString;
 
 		/// <summary>
-		/// Type of this <see cref="BoolAttribute"/>.
+		/// Type of this <see cref="TwoStringAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
 		public eAttribTwoString Type { get; set; }
@@ -246,6 +246,7 @@ namespace Nikki.Support.Carbon.Attributes
 				eCarPartAttribType.Floating => new FloatAttribute(this.Value1),
 				eCarPartAttribType.Integer => new IntAttribute(this.Value1),
 				eCarPartAttribType.String => new StringAttribute(this.Value1),
+				eCarPartAttribType.Color => new ColorAttribute(this.Value),
 				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Value1),
 				eCarPartAttribType.Key => new KeyAttribute(this.Value1),
 				eCarPartAttribType.ModelTable => new ModelTableAttribute(this.Value1),

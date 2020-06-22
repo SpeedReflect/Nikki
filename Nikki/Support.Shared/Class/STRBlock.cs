@@ -47,7 +47,7 @@ namespace Nikki.Support.Shared.Class
 		/// <summary>
 		/// Length of the string information array.
 		/// </summary>
-		public abstract int InfoLength { get; }
+		public abstract int StringRecordCount { get; }
 
 		/// <summary>
 		/// Custom watermark written on assembly.

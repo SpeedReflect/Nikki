@@ -22,12 +22,12 @@ namespace Nikki.Support.MostWanted.Attributes
 	public class TwoStringAttribute : CPAttribute
 	{
 		/// <summary>
-		/// <see cref="eCarPartAttribType"/> type of this <see cref="StringAttribute"/>.
+		/// <see cref="eCarPartAttribType"/> type of this <see cref="TwoStringAttribute"/>.
 		/// </summary>
 		public override eCarPartAttribType AttribType => eCarPartAttribType.TwoString;
 
 		/// <summary>
-		/// Type of this <see cref="BoolAttribute"/>.
+		/// Type of this <see cref="TwoStringAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
 		public eAttribTwoString Type { get; set; }

@@ -121,6 +121,7 @@ namespace Nikki.Core
 			{ 0xF7934316, "EXCLUDE_UG2" },
 			{ 0xFD35FE70, "TEXTURE" },
 			{ 0xFE613B98, "LOD_BASE_NAME" },
+			{ 0xFFFFFFFF, String.Empty },
 		};
 
 		/// <summary>
@@ -184,6 +185,12 @@ namespace Nikki.Core
 			{ 0xA0773FA5, eCarPartAttribType.Floating }, // SPINNEROFFSET
 			{ 0x931FF82E, eCarPartAttribType.Floating }, // SPINNER_TEXTURE
 
+			// Color Attributes
+			{ 0xD90271FB, eCarPartAttribType.Color }, // COLOR0ID
+			{ 0xD902763C, eCarPartAttribType.Color }, // COLOR1ID
+			{ 0xD9027A7D, eCarPartAttribType.Color }, // COLOR2ID
+			{ 0xD9027EBE, eCarPartAttribType.Color }, // COLOR3ID
+
 			// String Attributes
 			{ 0xFD35FE70, eCarPartAttribType.String }, // TEXTURE
 			{ 0x7D65A926, eCarPartAttribType.String }, // NAME_OFFSET
@@ -201,12 +208,9 @@ namespace Nikki.Core
 
 			// Key Attributes
 			{ 0x000004B8, eCarPartAttribType.Key }, // CV
-			{ 0xD90271FB, eCarPartAttribType.Key }, // COLOR0ID
-			{ 0xD902763C, eCarPartAttribType.Key }, // COLOR1ID
-			{ 0xD9027A7D, eCarPartAttribType.Key }, // COLOR2ID
-			{ 0xD9027EBE, eCarPartAttribType.Key }, // COLOR3ID
 			{ 0xF073C523, eCarPartAttribType.Key }, // MATNAMEA
 			{ 0xF073C524, eCarPartAttribType.Key }, // MATNAMEB
+			{ 0xEBB03E66, eCarPartAttribType.Key }, // BRAND_NAME
 			{ 0xEDB20048, eCarPartAttribType.Key }, // PAINTGROUP
 			{ 0x8C185134, eCarPartAttribType.Key }, // TEXTUREHASH
 			{ 0x10C98090, eCarPartAttribType.Key }, // TEXTURE_NAME
@@ -214,9 +218,12 @@ namespace Nikki.Core
 			{ 0x8E73B5DC, eCarPartAttribType.Key }, // SPECIFICCARNAME
 			{ 0x29008B14, eCarPartAttribType.Key }, // GROUPLANGUAGEHASH
 			{ 0x6223C6F9, eCarPartAttribType.Key }, // VINYLLANGUAGEHASH
-			{ 0x956326AF, eCarPartAttribType.Key }, // LOD_NAME_PREFIX_NAMEHASH
+			{ 0x65F58556, eCarPartAttribType.Key }, // COLOR0LANGUAGEHASH
+			{ 0xB5548ED7, eCarPartAttribType.Key }, // COLOR1LANGUAGEHASH
+			{ 0x04B39858, eCarPartAttribType.Key }, // COLOR2LANGUAGEHASH
+			{ 0x5412A1D9, eCarPartAttribType.Key }, // COLOR3LANGUAGEHASH
 			{ 0x900449D3, eCarPartAttribType.Key }, // PART_NAME_BASE_HASH
-			{ 0xEBB03E66, eCarPartAttribType.Key }, // BRAND_NAME
+			{ 0x956326AF, eCarPartAttribType.Key }, // LOD_NAME_PREFIX_NAMEHASH
 
 			// Integer Attributes
 			{ 0x0000D99A, eCarPartAttribType.Integer }, // RED
@@ -259,14 +266,10 @@ namespace Nikki.Core
 			{ 0x643DABEB, eCarPartAttribType.Integer }, // LOD_NAME_PREFIX_SELECTOR
 
 			// Unknown Label Attributes
-			{ 0x04B39858, eCarPartAttribType.Integer }, // COLOR2LANGUAGEHASH !!!
 			{ 0x1B0EA1A9, eCarPartAttribType.Integer }, // 0x1B0EA1A9
-			{ 0x5412A1D9, eCarPartAttribType.Integer }, // COLOR3LANGUAGEHASH !!!
 			{ 0x6509EC92, eCarPartAttribType.Integer }, // MORPH_MARKERCIDPAINT !!!
-			{ 0x65F58556, eCarPartAttribType.Integer }, // COLOR0LANGUAGEHASH !!!
 			{ 0x6BA02C05, eCarPartAttribType.Integer }, // 0x6BA02C05
 			{ 0x7D29CF3E, eCarPartAttribType.Integer }, // 0x7D29CF3E
-			{ 0xB5548ED7, eCarPartAttribType.Integer }, // COLOR1LANGUAGEHASH !!!
 			{ 0xC9818DFC, eCarPartAttribType.Integer }, // 0xC9818DFC
 			{ 0xCE7D8DB5, eCarPartAttribType.Integer }, // STYLEEXCLUDEBKITSHAPE !!!
 			{ 0xD68A7BAB, eCarPartAttribType.Integer }, // 0xD68A7BAB

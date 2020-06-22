@@ -28,7 +28,7 @@ namespace Nikki.Support.Prostreet.Attributes
 		public override eCarPartAttribType AttribType => eCarPartAttribType.Key;
 
 		/// <summary>
-		/// Type of this <see cref="BoolAttribute"/>.
+		/// Type of this <see cref="Keyttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
 		public eAttribKey Type { get; set; }
@@ -183,6 +183,7 @@ namespace Nikki.Support.Prostreet.Attributes
 				eCarPartAttribType.Integer => new IntAttribute(this.Value),
 				eCarPartAttribType.String => new StringAttribute(this.Value),
 				eCarPartAttribType.TwoString => new TwoStringAttribute(this.Value),
+				eCarPartAttribType.Color => new ColorAttribute(this.Value),
 				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Value),
 				eCarPartAttribType.ModelTable => new ModelTableAttribute(this.Value),
 				_ => this

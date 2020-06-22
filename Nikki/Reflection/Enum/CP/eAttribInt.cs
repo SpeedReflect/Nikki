@@ -199,12 +199,7 @@
 		/// 
 		/// </summary>
 		LOD_NAME_PREFIX_SELECTOR = 0x643DABEB,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		_0x04B39858 = 0x04B39858,
-				
+						
 		/// <summary>
 		/// 
 		/// </summary>
@@ -213,17 +208,7 @@
 		/// <summary>
 		/// 
 		/// </summary>
-		_0x5412A1D9 = 0x5412A1D9,
-		
-		/// <summary>
-		/// 
-		/// </summary>
 		_0x6509EC92 = 0x6509EC92,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		_0x65F58556 = 0x65F58556,
 		
 		/// <summary>
 		/// 
@@ -234,11 +219,6 @@
 		/// 
 		/// </summary>
 		_0x7D29CF3E = 0x7D29CF3E,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		_0xB5548ED7 = 0xB5548ED7,
 		
 		/// <summary>
 		/// 

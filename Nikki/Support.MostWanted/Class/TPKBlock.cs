@@ -95,14 +95,20 @@ namespace Nikki.Support.MostWanted.Class
         [Browsable(false)]
         public List<Texture> Textures { get; set; } = new List<Texture>();
 
-		#endregion
+        /// <summary>
+        /// Number of <see cref="Texture"/> in this <see cref="TPKBlock"/>.
+        /// </summary>
+        [Category("Primary")]
+        public override int TextureCount => this.Textures.Count;
 
-		#region Main
+        #endregion
 
-		/// <summary>
-		/// Initializes new instance of <see cref="TPKBlock"/>.
-		/// </summary>
-		public TPKBlock() { }
+        #region Main
+
+        /// <summary>
+        /// Initializes new instance of <see cref="TPKBlock"/>.
+        /// </summary>
+        public TPKBlock() { }
 
         /// <summary>
         /// Initializes new instance of <see cref="TPKBlock"/>.
