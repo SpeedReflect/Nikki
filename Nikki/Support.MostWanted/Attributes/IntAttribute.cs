@@ -23,12 +23,14 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="IntAttribute"/>.
 		/// </summary>
+		[Category("Main")]
 		public override eCarPartAttribType AttribType => eCarPartAttribType.Integer;
 
 		/// <summary>
 		/// Type of this <see cref="IntAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public eAttribInt Type { get; set; }
 
 		/// <summary>
@@ -36,6 +38,7 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// </summary>
 		[ReadOnly(true)]
 		[TypeConverter(typeof(HexConverter))]
+		[Category("Main")]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -46,6 +49,7 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// Attribute value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public uint Value { get; set; }
 
 		/// <summary>

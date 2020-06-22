@@ -23,19 +23,21 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="IntAttribute"/>.
 		/// </summary>
-		[AccessModifiable()]
+		[Category("Main")]
 		public override eCarPartAttribType AttribType => eCarPartAttribType.Integer;
 
 		/// <summary>
 		/// Type of this <see cref="IntAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public eAttribInt Type { get; set; }
 
 		/// <summary>
 		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
 		/// </summary>
 		[ReadOnly(true)]
+		[Category("Main")]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -46,6 +48,7 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// Attribute value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public uint Value { get; set; }
 
 		/// <summary>

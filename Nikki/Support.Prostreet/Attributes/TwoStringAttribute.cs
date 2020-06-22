@@ -24,12 +24,14 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="TwoStringAttribute"/>.
 		/// </summary>
+		[Category("Main")]
 		public override eCarPartAttribType AttribType => eCarPartAttribType.TwoString;
 
 		/// <summary>
 		/// Type of this <see cref="TwoStringAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public eAttribTwoString Type { get; set; }
 
 		/// <summary>
@@ -37,6 +39,7 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// </summary>
 		[ReadOnly(true)]
 		[TypeConverter(typeof(HexConverter))]
+		[Category("Main")]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -47,24 +50,28 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// Attribute value 1.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public string Value1 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Attribute value 2.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public string Value2 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Indicates whether value 1 exists.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public eBoolean Value1Exists { get; set; } = eBoolean.False;
 
 		/// <summary>
 		/// Indicates whether value 2 exists.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public eBoolean Value2Exists { get; set; } = eBoolean.False;
 
 		/// <summary>
@@ -246,7 +253,7 @@ namespace Nikki.Support.Prostreet.Attributes
 				eCarPartAttribType.Floating => new FloatAttribute(this.Value1),
 				eCarPartAttribType.Integer => new IntAttribute(this.Value1),
 				eCarPartAttribType.String => new StringAttribute(this.Value1),
-				eCarPartAttribType.Color => new ColorAttribute(this.Value),
+				eCarPartAttribType.Color => new ColorAttribute(this.Value1),
 				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Value1),
 				eCarPartAttribType.Key => new KeyAttribute(this.Value1),
 				eCarPartAttribType.ModelTable => new ModelTableAttribute(this.Value1),

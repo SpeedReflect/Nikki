@@ -24,12 +24,14 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="StringAttribute"/>.
 		/// </summary>
+		[Category("Main")]
 		public override eCarPartAttribType AttribType => eCarPartAttribType.String;
 
 		/// <summary>
 		/// Type of this <see cref="StringAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public eAttribString Type { get; set; }
 
 		/// <summary>
@@ -37,6 +39,7 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// </summary>
 		[ReadOnly(true)]
 		[TypeConverter(typeof(HexConverter))]
+		[Category("Main")]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -47,12 +50,14 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// Attribute value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public string Value { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Indicates whether value exists.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public eBoolean ValueExists { get; set; } = eBoolean.False;
 
 		/// <summary>

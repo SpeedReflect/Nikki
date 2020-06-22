@@ -24,12 +24,14 @@ namespace Nikki.Support.Carbon.Attributes
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="BoolAttribute"/>.
 		/// </summary>
+		[Category("Main")]
 		public override eCarPartAttribType AttribType => eCarPartAttribType.Boolean;
 
 		/// <summary>
 		/// Type of this <see cref="BoolAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public eAttribBool Type { get; set; }
 
 		/// <summary>
@@ -37,6 +39,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// </summary>
 		[ReadOnly(false)]
 		[TypeConverter(typeof(HexConverter))]
+		[Category("Main")]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -47,6 +50,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// Attribute value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public eBoolean Value { get; set; }
 
 		/// <summary>

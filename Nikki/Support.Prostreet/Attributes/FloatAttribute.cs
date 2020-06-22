@@ -23,13 +23,14 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="FloatAttribute"/>.
 		/// </summary>
-		[AccessModifiable()]
+		[Category("Main")]
 		public override eCarPartAttribType AttribType => eCarPartAttribType.Floating;
 
 		/// <summary>
 		/// Type of this <see cref="FloatAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public eAttribFloat Type { get; set; }
 
 		/// <summary>
@@ -37,6 +38,7 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// </summary>
 		[ReadOnly(false)]
 		[TypeConverter(typeof(HexConverter))]
+		[Category("Main")]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -47,6 +49,7 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// Attribute value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public float Value { get; set; }
 
 		/// <summary>

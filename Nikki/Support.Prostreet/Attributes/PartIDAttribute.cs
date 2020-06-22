@@ -17,7 +17,7 @@ using CoreExtensions.Conversions;
 namespace Nikki.Support.Prostreet.Attributes
 {
 	/// <summary>
-	/// A <see cref="CPAttribute"/> with unknown byte and part ID values.
+	/// A <see cref="CPAttribute"/> with upgrade level and part ID values.
 	/// </summary>
 	[DebuggerDisplay("Attribute: {AttribType} | Type: {Type} | ID: {ID} | Level: {Level}")]
 	public class PartIDAttribute : CPAttribute
@@ -25,12 +25,14 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="PartIDAttribute"/>.
 		/// </summary>
+		[Category("Main")]
 		public override eCarPartAttribType AttribType => eCarPartAttribType.CarPartID;
 
 		/// <summary>
 		/// Type of this <see cref="PartIDAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public eAttribPartID Type { get; set; }
 
 		/// <summary>
@@ -38,6 +40,7 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// </summary>
 		[ReadOnly(true)]
 		[TypeConverter(typeof(HexConverter))]
+		[Category("Main")]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -48,12 +51,14 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// Unknown byte value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public byte Level { get; set; }
 
 		/// <summary>
 		/// Part ID of this <see cref="PartIDAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public ePartProstreet ID { get; set; }
 
 		/// <summary>

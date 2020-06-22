@@ -1437,6 +1437,31 @@
             
             </summary>
         </member>
+        <member name="T:Nikki.Reflection.Enum.CP.eAttribColor">
+            <summary>
+            All attribute types for ColorAttribute.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribColor.COLOR0ID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribColor.COLOR1ID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribColor.COLOR2ID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribColor.COLOR3ID">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Nikki.Reflection.Enum.CP.eAttribFloat">
             <summary>
             All attribute types for FloatAttribute.
@@ -1692,27 +1717,12 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x04B39858">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x1B0EA1A9">
             <summary>
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x5412A1D9">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x6509EC92">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x65F58556">
             <summary>
             
             </summary>
@@ -1723,11 +1733,6 @@
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x7D29CF3E">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0xB5548ED7">
             <summary>
             
             </summary>
@@ -1767,32 +1772,17 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.COLOR0ID">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.COLOR1ID">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.COLOR2ID">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.COLOR3ID">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.MATNAMEA">
             <summary>
             
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.MATNAMEB">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.BRAND_NAME">
             <summary>
             
             </summary>
@@ -1832,17 +1822,32 @@
             
             </summary>
         </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.COLOR0LANGUAGEHASH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.COLOR1LANGUAGEHASH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.COLOR2LANGUAGEHASH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.COLOR3LANGUAGEHASH">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.PART_NAME_BASE_HASH">
             <summary>
             
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.LOD_NAME_PREFIX_NAMEHASH">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.BRAND_NAME">
             <summary>
             
             </summary>
@@ -2200,6 +2205,11 @@
         <member name="F:Nikki.Reflection.Enum.eCarPartAttribType.TwoString">
             <summary>
             Attribute with two <see langword="string"/> stored.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eCarPartAttribType.Color">
+            <summary>
+            Attribute with Color.
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.eCarPartAttribType.CarPartID">
@@ -9306,6 +9316,144 @@
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
         </member>
+        <member name="T:Nikki.Support.Carbon.Attributes.ColorAttribute">
+            <summary>
+            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte signed integer value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.ColorAttribute.AttribType">
+            <summary>
+            <see cref="T:Nikki.Reflection.Enum.eCarPartAttribType"/> type of this <see cref="T:Nikki.Support.Carbon.Attributes.ColorAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.ColorAttribute.Type">
+            <summary>
+            Type of this <see cref="T:Nikki.Support.Carbon.Attributes.ColorAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.ColorAttribute.Key">
+            <summary>
+            Key of the part to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.ColorAttribute.Alpha">
+            <summary>
+            Alpha attribute value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.ColorAttribute.Blue">
+            <summary>
+            Blue attribute value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.ColorAttribute.Green">
+            <summary>
+            Green attribute value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.ColorAttribute.Red">
+            <summary>
+            Red attribute value.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.ColorAttribute.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.ColorAttribute"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.ColorAttribute.#ctor(System.Object)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.ColorAttribute"/> with value provided.
+            </summary>
+            <param name="value">Value to set.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.ColorAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.ColorAttribute"/> by reading data using 
+            <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="key">Key of the attribute's group.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.ColorAttribute.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Disassembles byte array into <see cref="T:Nikki.Support.Carbon.Attributes.ColorAttribute"/> using <see cref="T:System.IO.BinaryReader"/> 
+            provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with. 
+            Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.ColorAttribute.Assemble(System.IO.BinaryWriter,System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Carbon.Attributes.ColorAttribute"/> and writes it using <see cref="T:System.IO.BinaryWriter"/> 
+            provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
+            <param name="string_dict">Dictionary of string HashCodes and their offsets. 
+            Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.ColorAttribute.ToString">
+            <summary>
+            Returns attribute part label and its type as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.ColorAttribute.Equals(System.Object)">
+            <summary>
+            Determines whether this instance and a specified object, which must also be a
+            <see cref="T:Nikki.Support.Carbon.Attributes.ColorAttribute"/> object, have the same value.
+            </summary>
+            <param name="obj">The <see cref="T:Nikki.Support.Carbon.Attributes.ColorAttribute"/> to compare to this instance.</param>
+            <returns>True if obj is a <see cref="T:Nikki.Support.Carbon.Attributes.ColorAttribute"/> and its value is the same as 
+            this instance; false otherwise. If obj is null, the method returns false.
+            </returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.ColorAttribute.GetHashCode">
+            <summary>
+            Returns the hash code for this <see cref="T:Nikki.Support.Carbon.Attributes.ColorAttribute"/>.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.ColorAttribute.op_Equality(Nikki.Support.Carbon.Attributes.ColorAttribute,Nikki.Support.Carbon.Attributes.ColorAttribute)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Carbon.Attributes.ColorAttribute"/> have the same value.
+            </summary>
+            <param name="at1">The first <see cref="T:Nikki.Support.Carbon.Attributes.ColorAttribute"/> to compare, or null.</param>
+            <param name="at2">The second <see cref="T:Nikki.Support.Carbon.Attributes.ColorAttribute"/> to compare, or null.</param>
+            <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.ColorAttribute.op_Inequality(Nikki.Support.Carbon.Attributes.ColorAttribute,Nikki.Support.Carbon.Attributes.ColorAttribute)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Carbon.Attributes.ColorAttribute"/> have different values.
+            </summary>
+            <param name="at1">The first <see cref="T:Nikki.Support.Carbon.Attributes.ColorAttribute"/> to compare, or null.</param>
+            <param name="at2">The second <see cref="T:Nikki.Support.Carbon.Attributes.ColorAttribute"/> to compare, or null.</param>
+            <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.ColorAttribute.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.ColorAttribute.ConvertTo(Nikki.Reflection.Enum.eCarPartAttribType)">
+            <summary>
+            Converts this <see cref="T:Nikki.Support.Carbon.Attributes.ColorAttribute"/> to an attribute of type provided.
+            </summary>
+            <param name="type">Type of a new attribute.</param>
+            <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.ColorAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.ColorAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.Carbon.Attributes.FloatAttribute">
             <summary>
             A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte floating point value.
@@ -9318,7 +9466,7 @@
         </member>
         <member name="P:Nikki.Support.Carbon.Attributes.FloatAttribute.Type">
             <summary>
-            Type of this <see cref="T:Nikki.Support.Carbon.Attributes.BoolAttribute"/>.
+            Type of this <see cref="T:Nikki.Support.Carbon.Attributes.FloatAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Attributes.FloatAttribute.Key">
@@ -9441,7 +9589,7 @@
         </member>
         <member name="P:Nikki.Support.Carbon.Attributes.IntAttribute.Type">
             <summary>
-            Type of this <see cref="T:Nikki.Support.Carbon.Attributes.BoolAttribute"/>.
+            Type of this <see cref="T:Nikki.Support.Carbon.Attributes.IntAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Attributes.IntAttribute.Key">
@@ -9554,7 +9702,7 @@
         </member>
         <member name="T:Nikki.Support.Carbon.Attributes.KeyAttribute">
             <summary>
-            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte signed integer value.
+            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with a string value represented as a binary key.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Attributes.KeyAttribute.AttribType">
@@ -9564,7 +9712,7 @@
         </member>
         <member name="P:Nikki.Support.Carbon.Attributes.KeyAttribute.Type">
             <summary>
-            Type of this <see cref="T:Nikki.Support.Carbon.Attributes.BoolAttribute"/>.
+            Type of this <see cref="T:Nikki.Support.Carbon.Attributes.KeyAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Attributes.KeyAttribute.Key">
@@ -10425,7 +10573,7 @@
         </member>
         <member name="T:Nikki.Support.Carbon.Attributes.PartIDAttribute">
             <summary>
-            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with unknown byte and part ID values.
+            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with upgrade level and part ID values.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Attributes.PartIDAttribute.AttribType">
@@ -10435,7 +10583,7 @@
         </member>
         <member name="P:Nikki.Support.Carbon.Attributes.PartIDAttribute.Type">
             <summary>
-            Type of this <see cref="T:Nikki.Support.Carbon.Attributes.BoolAttribute"/>.
+            Type of this <see cref="T:Nikki.Support.Carbon.Attributes.PartIDAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Attributes.PartIDAttribute.Key">
@@ -10563,7 +10711,7 @@
         </member>
         <member name="P:Nikki.Support.Carbon.Attributes.StringAttribute.Type">
             <summary>
-            Type of this <see cref="T:Nikki.Support.Carbon.Attributes.BoolAttribute"/>.
+            Type of this <see cref="T:Nikki.Support.Carbon.Attributes.StringAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Attributes.StringAttribute.Key">
@@ -10685,12 +10833,12 @@
         </member>
         <member name="P:Nikki.Support.Carbon.Attributes.TwoStringAttribute.AttribType">
             <summary>
-            <see cref="T:Nikki.Reflection.Enum.eCarPartAttribType"/> type of this <see cref="T:Nikki.Support.Carbon.Attributes.StringAttribute"/>.
+            <see cref="T:Nikki.Reflection.Enum.eCarPartAttribType"/> type of this <see cref="T:Nikki.Support.Carbon.Attributes.TwoStringAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Attributes.TwoStringAttribute.Type">
             <summary>
-            Type of this <see cref="T:Nikki.Support.Carbon.Attributes.BoolAttribute"/>.
+            Type of this <see cref="T:Nikki.Support.Carbon.Attributes.TwoStringAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Carbon.Attributes.TwoStringAttribute.Key">
@@ -15755,7 +15903,7 @@
         </member>
         <member name="P:Nikki.Support.MostWanted.Attributes.FloatAttribute.Type">
             <summary>
-            Type of this <see cref="T:Nikki.Support.MostWanted.Attributes.BoolAttribute"/>.
+            Type of this <see cref="T:Nikki.Support.MostWanted.Attributes.FloatAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Attributes.FloatAttribute.Key">
@@ -15878,7 +16026,7 @@
         </member>
         <member name="P:Nikki.Support.MostWanted.Attributes.IntAttribute.Type">
             <summary>
-            Type of this <see cref="T:Nikki.Support.MostWanted.Attributes.BoolAttribute"/>.
+            Type of this <see cref="T:Nikki.Support.MostWanted.Attributes.IntAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Attributes.IntAttribute.Key">
@@ -15991,7 +16139,7 @@
         </member>
         <member name="T:Nikki.Support.MostWanted.Attributes.KeyAttribute">
             <summary>
-            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte signed integer value.
+            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with a string value represented as a binary key.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Attributes.KeyAttribute.AttribType">
@@ -16001,7 +16149,7 @@
         </member>
         <member name="P:Nikki.Support.MostWanted.Attributes.KeyAttribute.Type">
             <summary>
-            Type of this <see cref="T:Nikki.Support.MostWanted.Attributes.BoolAttribute"/>.
+            Type of this <see cref="T:Nikki.Support.MostWanted.Attributes.KeyAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Attributes.KeyAttribute.Key">
@@ -16114,7 +16262,7 @@
         </member>
         <member name="T:Nikki.Support.MostWanted.Attributes.PartIDAttribute">
             <summary>
-            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with unknown byte and part ID values.
+            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with upgrade level and part ID values.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Attributes.PartIDAttribute.AttribType">
@@ -16124,7 +16272,7 @@
         </member>
         <member name="P:Nikki.Support.MostWanted.Attributes.PartIDAttribute.Type">
             <summary>
-            Type of this <see cref="T:Nikki.Support.MostWanted.Attributes.BoolAttribute"/>.
+            Type of this <see cref="T:Nikki.Support.MostWanted.Attributes.PartIDAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Attributes.PartIDAttribute.Key">
@@ -16252,7 +16400,7 @@
         </member>
         <member name="P:Nikki.Support.MostWanted.Attributes.StringAttribute.Type">
             <summary>
-            Type of this <see cref="T:Nikki.Support.MostWanted.Attributes.BoolAttribute"/>.
+            Type of this <see cref="T:Nikki.Support.MostWanted.Attributes.StringAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Attributes.StringAttribute.Key">
@@ -16374,12 +16522,12 @@
         </member>
         <member name="P:Nikki.Support.MostWanted.Attributes.TwoStringAttribute.AttribType">
             <summary>
-            <see cref="T:Nikki.Reflection.Enum.eCarPartAttribType"/> type of this <see cref="T:Nikki.Support.MostWanted.Attributes.StringAttribute"/>.
+            <see cref="T:Nikki.Reflection.Enum.eCarPartAttribType"/> type of this <see cref="T:Nikki.Support.MostWanted.Attributes.TwoStringAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Attributes.TwoStringAttribute.Type">
             <summary>
-            Type of this <see cref="T:Nikki.Support.MostWanted.Attributes.BoolAttribute"/>.
+            Type of this <see cref="T:Nikki.Support.MostWanted.Attributes.TwoStringAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.MostWanted.Attributes.TwoStringAttribute.Key">
@@ -20873,6 +21021,144 @@
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
         </member>
+        <member name="T:Nikki.Support.Prostreet.Attributes.ColorAttribute">
+            <summary>
+            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte signed integer value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.ColorAttribute.AttribType">
+            <summary>
+            <see cref="T:Nikki.Reflection.Enum.eCarPartAttribType"/> type of this <see cref="T:Nikki.Support.Prostreet.Attributes.ColorAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.ColorAttribute.Type">
+            <summary>
+            Type of this <see cref="T:Nikki.Support.Prostreet.Attributes.ColorAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.ColorAttribute.Key">
+            <summary>
+            Key of the part to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.ColorAttribute.Alpha">
+            <summary>
+            Alpha attribute value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.ColorAttribute.Blue">
+            <summary>
+            Blue attribute value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.ColorAttribute.Green">
+            <summary>
+            Green attribute value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.ColorAttribute.Red">
+            <summary>
+            Red attribute value.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.ColorAttribute.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.ColorAttribute"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.ColorAttribute.#ctor(System.Object)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.ColorAttribute"/> with value provided.
+            </summary>
+            <param name="value">Value to set.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.ColorAttribute.#ctor(System.IO.BinaryReader,System.UInt32)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.ColorAttribute"/> by reading data using 
+            <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="key">Key of the attribute's group.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.ColorAttribute.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Disassembles byte array into <see cref="T:Nikki.Support.Prostreet.Attributes.ColorAttribute"/> using <see cref="T:System.IO.BinaryReader"/> 
+            provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with. 
+            Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.ColorAttribute.Assemble(System.IO.BinaryWriter,System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Prostreet.Attributes.ColorAttribute"/> and writes it using <see cref="T:System.IO.BinaryWriter"/> 
+            provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
+            <param name="string_dict">Dictionary of string HashCodes and their offsets. 
+            Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.ColorAttribute.ToString">
+            <summary>
+            Returns attribute part label and its type as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.ColorAttribute.Equals(System.Object)">
+            <summary>
+            Determines whether this instance and a specified object, which must also be a
+            <see cref="T:Nikki.Support.Prostreet.Attributes.ColorAttribute"/> object, have the same value.
+            </summary>
+            <param name="obj">The <see cref="T:Nikki.Support.Prostreet.Attributes.ColorAttribute"/> to compare to this instance.</param>
+            <returns>True if obj is a <see cref="T:Nikki.Support.Prostreet.Attributes.ColorAttribute"/> and its value is the same as 
+            this instance; false otherwise. If obj is null, the method returns false.
+            </returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.ColorAttribute.GetHashCode">
+            <summary>
+            Returns the hash code for this <see cref="T:Nikki.Support.Prostreet.Attributes.ColorAttribute"/>.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.ColorAttribute.op_Equality(Nikki.Support.Prostreet.Attributes.ColorAttribute,Nikki.Support.Prostreet.Attributes.ColorAttribute)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Prostreet.Attributes.ColorAttribute"/> have the same value.
+            </summary>
+            <param name="at1">The first <see cref="T:Nikki.Support.Prostreet.Attributes.ColorAttribute"/> to compare, or null.</param>
+            <param name="at2">The second <see cref="T:Nikki.Support.Prostreet.Attributes.ColorAttribute"/> to compare, or null.</param>
+            <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.ColorAttribute.op_Inequality(Nikki.Support.Prostreet.Attributes.ColorAttribute,Nikki.Support.Prostreet.Attributes.ColorAttribute)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Prostreet.Attributes.ColorAttribute"/> have different values.
+            </summary>
+            <param name="at1">The first <see cref="T:Nikki.Support.Prostreet.Attributes.ColorAttribute"/> to compare, or null.</param>
+            <param name="at2">The second <see cref="T:Nikki.Support.Prostreet.Attributes.ColorAttribute"/> to compare, or null.</param>
+            <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.ColorAttribute.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.ColorAttribute.ConvertTo(Nikki.Reflection.Enum.eCarPartAttribType)">
+            <summary>
+            Converts this <see cref="T:Nikki.Support.Prostreet.Attributes.ColorAttribute"/> to an attribute of type provided.
+            </summary>
+            <param name="type">Type of a new attribute.</param>
+            <returns>New <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.ColorAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.ColorAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Attributes.FloatAttribute">
             <summary>
             A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte floating point value.
@@ -20885,7 +21171,7 @@
         </member>
         <member name="P:Nikki.Support.Prostreet.Attributes.FloatAttribute.Type">
             <summary>
-            Type of this <see cref="T:Nikki.Support.Prostreet.Attributes.BoolAttribute"/>.
+            Type of this <see cref="T:Nikki.Support.Prostreet.Attributes.FloatAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Prostreet.Attributes.FloatAttribute.Key">
@@ -21008,7 +21294,7 @@
         </member>
         <member name="P:Nikki.Support.Prostreet.Attributes.IntAttribute.Type">
             <summary>
-            Type of this <see cref="T:Nikki.Support.Prostreet.Attributes.BoolAttribute"/>.
+            Type of this <see cref="T:Nikki.Support.Prostreet.Attributes.IntAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Prostreet.Attributes.IntAttribute.Key">
@@ -21121,7 +21407,7 @@
         </member>
         <member name="T:Nikki.Support.Prostreet.Attributes.KeyAttribute">
             <summary>
-            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte signed integer value.
+            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with a string value represented as a binary key.
             </summary>
         </member>
         <member name="P:Nikki.Support.Prostreet.Attributes.KeyAttribute.AttribType">
@@ -21131,7 +21417,7 @@
         </member>
         <member name="P:Nikki.Support.Prostreet.Attributes.KeyAttribute.Type">
             <summary>
-            Type of this <see cref="T:Nikki.Support.Prostreet.Attributes.BoolAttribute"/>.
+            Type of this <see cref="T:Nikki.Support.Prostreet.Attributes.KeyAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Prostreet.Attributes.KeyAttribute.Key">
@@ -21992,7 +22278,7 @@
         </member>
         <member name="T:Nikki.Support.Prostreet.Attributes.PartIDAttribute">
             <summary>
-            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with unknown byte and part ID values.
+            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with upgrade level and part ID values.
             </summary>
         </member>
         <member name="P:Nikki.Support.Prostreet.Attributes.PartIDAttribute.AttribType">
@@ -22002,7 +22288,7 @@
         </member>
         <member name="P:Nikki.Support.Prostreet.Attributes.PartIDAttribute.Type">
             <summary>
-            Type of this <see cref="T:Nikki.Support.Prostreet.Attributes.BoolAttribute"/>.
+            Type of this <see cref="T:Nikki.Support.Prostreet.Attributes.PartIDAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Prostreet.Attributes.PartIDAttribute.Key">
@@ -22130,7 +22416,7 @@
         </member>
         <member name="P:Nikki.Support.Prostreet.Attributes.StringAttribute.Type">
             <summary>
-            Type of this <see cref="T:Nikki.Support.Prostreet.Attributes.BoolAttribute"/>.
+            Type of this <see cref="T:Nikki.Support.Prostreet.Attributes.StringAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Prostreet.Attributes.StringAttribute.Key">
@@ -22252,12 +22538,12 @@
         </member>
         <member name="P:Nikki.Support.Prostreet.Attributes.TwoStringAttribute.AttribType">
             <summary>
-            <see cref="T:Nikki.Reflection.Enum.eCarPartAttribType"/> type of this <see cref="T:Nikki.Support.Prostreet.Attributes.StringAttribute"/>.
+            <see cref="T:Nikki.Reflection.Enum.eCarPartAttribType"/> type of this <see cref="T:Nikki.Support.Prostreet.Attributes.TwoStringAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Prostreet.Attributes.TwoStringAttribute.Type">
             <summary>
-            Type of this <see cref="T:Nikki.Support.Prostreet.Attributes.BoolAttribute"/>.
+            Type of this <see cref="T:Nikki.Support.Prostreet.Attributes.TwoStringAttribute"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Prostreet.Attributes.TwoStringAttribute.Key">

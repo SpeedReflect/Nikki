@@ -17,18 +17,20 @@ namespace Nikki.Support.Carbon.Attributes
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with 4-byte signed integer value.
 	/// </summary>
-	[DebuggerDisplay("Attribute: {AttribType} | Type: {Type} | Value: {Value}")]
+	[DebuggerDisplay("Attribute: {AttribType} | Type: {Type} | Color: {Alpha}-{Red}-{Green}-{Blue}")]
 	public class ColorAttribute : CPAttribute
 	{
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="ColorAttribute"/>.
 		/// </summary>
+		[Category("Main")]
 		public override eCarPartAttribType AttribType => eCarPartAttribType.Color;
 
 		/// <summary>
 		/// Type of this <see cref="ColorAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public eAttribColor Type { get; set; }
 
 		/// <summary>
@@ -36,6 +38,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// </summary>
 		[ReadOnly(true)]
 		[TypeConverter(typeof(HexConverter))]
+		[Category("Main")]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -46,24 +49,28 @@ namespace Nikki.Support.Carbon.Attributes
 		/// Alpha attribute value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public byte Alpha { get; set; }
 
 		/// <summary>
 		/// Blue attribute value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public byte Blue { get; set; }
 
 		/// <summary>
 		/// Green attribute value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public byte Green { get; set; }
 
 		/// <summary>
 		/// Red attribute value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public byte Red { get; set; }
 
 		/// <summary>

@@ -23,12 +23,14 @@ namespace Nikki.Support.Carbon.Attributes
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="FloatAttribute"/>.
 		/// </summary>
+		[Category("Main")]
 		public override eCarPartAttribType AttribType => eCarPartAttribType.Floating;
 
 		/// <summary>
 		/// Type of this <see cref="FloatAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public eAttribFloat Type { get; set; }
 
 		/// <summary>
@@ -36,6 +38,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// </summary>
 		[ReadOnly(true)]
 		[TypeConverter(typeof(HexConverter))]
+		[Category("Main")]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -46,6 +49,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// Attribute value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public float Value { get; set; }
 
 		/// <summary>

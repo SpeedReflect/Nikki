@@ -17,7 +17,7 @@ using CoreExtensions.Conversions;
 namespace Nikki.Support.MostWanted.Attributes
 {
 	/// <summary>
-	/// A <see cref="CPAttribute"/> with 4-byte signed integer value.
+	/// A <see cref="CPAttribute"/> with a string value represented as a binary key.
 	/// </summary>
 	[DebuggerDisplay("Attribute: {AttribType} | Type: {Type} | Value: {Value}")]
 	public class KeyAttribute : CPAttribute
@@ -25,12 +25,14 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// <summary>
 		/// <see cref="eCarPartAttribType"/> type of this <see cref="KeyAttribute"/>.
 		/// </summary>
+		[Category("Main")]
 		public override eCarPartAttribType AttribType => eCarPartAttribType.Key;
 
 		/// <summary>
 		/// Type of this <see cref="KeyAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public eAttribKey Type { get; set; }
 
 		/// <summary>
@@ -38,6 +40,7 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// </summary>
 		[ReadOnly(true)]
 		[TypeConverter(typeof(HexConverter))]
+		[Category("Main")]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -48,6 +51,7 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// Attribute value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public string Value { get; set; }
 
 		/// <summary>
