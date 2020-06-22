@@ -158,7 +158,7 @@ namespace Nikki.Core
 			{ 0xC1A84E52, eCarPartAttribType.Boolean }, // WHEELRIGHT
 			{ 0x09163F9F, eCarPartAttribType.Boolean }, // USEMARKER1
 			{ 0x09163FA0, eCarPartAttribType.Boolean }, // USEMARKER2
-			{ 0x87557E1E, eCarPartAttribType.Boolean }, // 0x87557E1E
+			{ 0x87557E1E, eCarPartAttribType.Boolean }, // 0x87557E1E // some hood value
 			{ 0xF9661A07, eCarPartAttribType.Boolean }, // 0xF9661A07
 			{ 0x1BC91595, eCarPartAttribType.Boolean }, // 0x1BC91595
 			{ 0x1BC91597, eCarPartAttribType.Boolean }, // 0x1BC91597
@@ -212,6 +212,8 @@ namespace Nikki.Core
 			{ 0xF073C524, eCarPartAttribType.Key }, // MATNAMEB
 			{ 0xEBB03E66, eCarPartAttribType.Key }, // BRAND_NAME
 			{ 0xEDB20048, eCarPartAttribType.Key }, // PAINTGROUP
+			{ 0x6BA02C05, eCarPartAttribType.Key }, // 0x6BA02C05 // Used Material Name
+			{ 0xD68A7BAB, eCarPartAttribType.Key }, // 0xD68A7BAB // Paint Color
 			{ 0x8C185134, eCarPartAttribType.Key }, // TEXTUREHASH
 			{ 0x10C98090, eCarPartAttribType.Key }, // TEXTURE_NAME
 			{ 0x4732DA07, eCarPartAttribType.Key }, // LANGUAGEHASH
@@ -266,15 +268,13 @@ namespace Nikki.Core
 			{ 0x643DABEB, eCarPartAttribType.Integer }, // LOD_NAME_PREFIX_SELECTOR
 
 			// Unknown Label Attributes
-			{ 0x1B0EA1A9, eCarPartAttribType.Integer }, // 0x1B0EA1A9
+			{ 0x1B0EA1A9, eCarPartAttribType.Integer }, // 0x1B0EA1A9 // idk
 			{ 0x6509EC92, eCarPartAttribType.Integer }, // MORPH_MARKERCIDPAINT !!!
-			{ 0x6BA02C05, eCarPartAttribType.Integer }, // 0x6BA02C05
 			{ 0x7D29CF3E, eCarPartAttribType.Integer }, // 0x7D29CF3E
 			{ 0xC9818DFC, eCarPartAttribType.Integer }, // 0xC9818DFC
-			{ 0xCE7D8DB5, eCarPartAttribType.Integer }, // STYLEEXCLUDEBKITSHAPE !!!
-			{ 0xD68A7BAB, eCarPartAttribType.Integer }, // 0xD68A7BAB
-			{ 0xE80A3B62, eCarPartAttribType.Integer }, // 0xE80A3B62
-			{ 0xEB0101E2, eCarPartAttribType.Integer }, // 0xEB0101E2
+			{ 0xCE7D8DB5, eCarPartAttribType.Integer }, // 0xCE7D8DB5 // Outer Max Rim Size
+			{ 0xE80A3B62, eCarPartAttribType.Integer }, // 0xE80A3B62 // HOODAZRWT (KeyAttribute) ???
+			{ 0xEB0101E2, eCarPartAttribType.Integer }, // 0xEB0101E2 // Inner Max Rim Size
 		};
 
 		/// <summary>

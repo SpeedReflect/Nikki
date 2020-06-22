@@ -1727,11 +1727,6 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x6BA02C05">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x7D29CF3E">
             <summary>
             
@@ -1743,11 +1738,6 @@
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0xCE7D8DB5">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0xD68A7BAB">
             <summary>
             
             </summary>
@@ -1848,6 +1838,16 @@
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.LOD_NAME_PREFIX_NAMEHASH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey._0x6BA02C05">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey._0xD68A7BAB">
             <summary>
             
             </summary>

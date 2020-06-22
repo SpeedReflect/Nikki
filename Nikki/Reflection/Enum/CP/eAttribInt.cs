@@ -209,12 +209,7 @@
 		/// 
 		/// </summary>
 		_0x6509EC92 = 0x6509EC92,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		_0x6BA02C05 = 0x6BA02C05,
-		
+				
 		/// <summary>
 		/// 
 		/// </summary>
@@ -229,11 +224,6 @@
 		/// 
 		/// </summary>
 		_0xCE7D8DB5 = 0xCE7D8DB5,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		_0xD68A7BAB = 0xD68A7BAB,
 		
 		/// <summary>
 		/// 

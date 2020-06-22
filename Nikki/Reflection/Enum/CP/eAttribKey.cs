@@ -89,5 +89,16 @@
 		/// 
 		/// </summary>
 		LOD_NAME_PREFIX_NAMEHASH = 0x956326AF,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		_0x6BA02C05 = 0x6BA02C05,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		_0xD68A7BAB = 0xD68A7BAB,
+
 	}
 }

@@ -111,7 +111,7 @@ namespace Nikki.Support.MostWanted.Attributes
 		public override void Assemble(BinaryWriter bw, Dictionary<int, int> string_dict)
 		{
 			bw.Write(this.Key);
-			bw.Write(this.Value.BinHash());
+			bw.Write(String.IsNullOrEmpty(this.Value) ? 0xFFFFFFFF : this.Value.BinHash());
 		}
 
 		/// <summary>
