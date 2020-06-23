@@ -251,9 +251,10 @@
         </member>
         <member name="T:Nikki.Core.Manager`1">
             <summary>
-            
+            A generic <see cref="T:Nikki.Reflection.Interface.IManager"/> class that is used to manage and maintain 
+            <see cref="T:Nikki.Reflection.Abstract.Collectable"/> classes.
             </summary>
-            <typeparam name="T"></typeparam>
+            <typeparam name="T"><see cref="T:System.Type"/> derived from <see cref="T:Nikki.Reflection.Abstract.Collectable"/> type.</typeparam>
         </member>
         <member name="M:Nikki.Core.Manager`1.#ctor">
             <summary>
@@ -26270,7 +26271,7 @@
             List of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> that this <see cref="T:Nikki.Support.Shared.Class.DBModelPart"/> has.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Class.DBModelPart.Length">
+        <member name="P:Nikki.Support.Shared.Class.DBModelPart.CarPartsCount">
             <summary>
             Total amount of <see cref="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart"/> in this <see cref="T:Nikki.Support.Shared.Class.DBModelPart"/>.
             </summary>

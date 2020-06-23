@@ -222,7 +222,7 @@ namespace Nikki.Support.Carbon.Class
 		/// <param name="index">Index of <see cref="RealCarPart"/> to remove.</param>
 		public override void RemovePart(int index)
 		{
-			if (index < 0 || index >= this.Length)
+			if (index < 0 || index >= this.CarPartsCount)
 			{
 
 				throw new IndexOutOfRangeException(nameof(index));
@@ -263,7 +263,7 @@ namespace Nikki.Support.Carbon.Class
 		/// <param name="index">Index of <see cref="RealCarPart"/> to clone.</param>
 		public override void ClonePart(int index)
 		{
-			if (index < 0 || index >= this.Length)
+			if (index < 0 || index >= this.CarPartsCount)
 			{
 
 				throw new IndexOutOfRangeException(nameof(index));
@@ -301,14 +301,14 @@ namespace Nikki.Support.Carbon.Class
 		public override void Serialize(BinaryWriter bw)
 		{
 			byte[] array;
-			using (var ms = new MemoryStream(this.Length << 5))
+			using (var ms = new MemoryStream(this.CarPartsCount << 5))
 			using (var writer = new BinaryWriter(ms))
 			{
 
 				writer.WriteNullTermUTF8(this._collection_name);
-				writer.Write(this.Length);
+				writer.Write(this.CarPartsCount);
 
-				for (int loop = 0; loop < this.Length; ++loop)
+				for (int loop = 0; loop < this.CarPartsCount; ++loop)
 				{
 
 					var part = this.ModelCarParts[loop];
@@ -402,12 +402,12 @@ namespace Nikki.Support.Carbon.Class
 		{
 			var modelparts = new List<RealCarPart>(other.ModelCarParts);
 
-			for (int i = 0; i < this.Length; ++i)
+			for (int i = 0; i < this.CarPartsCount; ++i)
 			{
 
 				bool found = false;
 
-				for (int j = 0; j < other.Length; ++j)
+				for (int j = 0; j < other.CarPartsCount; ++j)
 				{
 
 					if (other.ModelCarParts[j].Equals(this.ModelCarParts[i]))

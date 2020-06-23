@@ -219,7 +219,7 @@ namespace Nikki.Support.MostWanted.Class
 		/// <param name="index">Index of <see cref="RealCarPart"/> to remove.</param>
 		public override void RemovePart(int index)
 		{
-			if (index < 0 || index >= this.Length)
+			if (index < 0 || index >= this.CarPartsCount)
 			{
 
 				throw new IndexOutOfRangeException(nameof(index));
@@ -260,7 +260,7 @@ namespace Nikki.Support.MostWanted.Class
 		/// <param name="index">Index of <see cref="RealCarPart"/> to clone.</param>
 		public override void ClonePart(int index)
 		{
-			if (index < 0 || index >= this.Length)
+			if (index < 0 || index >= this.CarPartsCount)
 			{
 
 				throw new IndexOutOfRangeException(nameof(index));

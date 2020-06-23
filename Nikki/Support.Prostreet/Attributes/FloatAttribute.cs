@@ -36,7 +36,7 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// <summary>
 		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
 		/// </summary>
-		[ReadOnly(false)]
+		[ReadOnly(true)]
 		[TypeConverter(typeof(HexConverter))]
 		[Category("Main")]
 		public override uint Key

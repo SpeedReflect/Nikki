@@ -68,7 +68,11 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 		/// Returns PartName of this <see cref="RealCarPart"/>.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() => this.GetPartName();
+		public override string ToString()
+		{
+			var result = this.GetPartName();
+			return String.IsNullOrEmpty(result) ? "REAL_CAR_PART" : result;
+		}
 
 		/// <summary>
 		/// Returns the hash code for this <see cref="RealCarPart"/>.
@@ -126,6 +130,7 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 			CPAttribute attribute = type switch
 			{
 				eCarPartAttribType.Boolean => new BoolAttribute(eBoolean.False),
+				eCarPartAttribType.Color => new ColorAttribute((byte)255),
 				eCarPartAttribType.Floating => new FloatAttribute((float)0),
 				eCarPartAttribType.CarPartID => new PartIDAttribute((int)0),
 				eCarPartAttribType.String => new StringAttribute(String.Empty),

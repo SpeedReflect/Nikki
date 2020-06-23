@@ -15,9 +15,10 @@ using CoreExtensions.Management;
 namespace Nikki.Core
 {
 	/// <summary>
-	/// 
+	/// A generic <see cref="IManager"/> class that is used to manage and maintain 
+	/// <see cref="Collectable"/> classes.
 	/// </summary>
-	/// <typeparam name="T"></typeparam>
+	/// <typeparam name="T"><see cref="Type"/> derived from <see cref="Collectable"/> type.</typeparam>
 	[DebuggerDisplay("Name = {Name} | Count = {Count}")]
 	public abstract class Manager<T> : IManager, IList<T> where T : Collectable, new()
 	{
@@ -536,7 +537,7 @@ namespace Nikki.Core
 		/// </summary>
 		/// <param name="item">The collection to locate in this <see cref="Manager{T}"/>.</param>
 		/// <returns>True if collection is in this <see cref="Manager{T}"/>; otherwise, false.</returns>
-		public bool Contains(T item) => item == null ? false : this.Contains(item.CollectionName);
+		public bool Contains(T item) => item != null && this.Contains(item.CollectionName);
 
 		/// <summary>
 		/// Determines whether an object is in the <see cref="Manager{T}"/>.

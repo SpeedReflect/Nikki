@@ -58,7 +58,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// Car Part ID Group to which this part belongs to.
 		/// </summary>
 		[AccessModifiable()]
-		public eSlotMostWanted CarPartGroupID { get; set; }
+		public eSlotMostWanted CarPartGroupID { get; set; } = eSlotMostWanted.INVALID;
 
 		/// <summary>
 		/// Upgrade group ID of this <see cref="RealCarPart"/>.
@@ -75,7 +75,11 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// <summary>
 		/// Initializes new instance of <see cref="RealCarPart"/>.
 		/// </summary>
-		public RealCarPart() => this.Attributes = new List<CPAttribute>();
+		public RealCarPart()
+		{
+			this.Attributes = new List<CPAttribute>();
+			this.LodStruct = new CPStruct();
+		}
 
 		/// <summary>
 		/// Initializes new instance of <see cref="RealCarPart"/>.
@@ -87,7 +91,11 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// Initializes new instance of <see cref="RealCarPart"/>.
 		/// </summary>
 		/// <param name="capacity">Initial capacity of the attribute list.</param>
-		public RealCarPart(int capacity) => this.Attributes = new List<CPAttribute>(capacity);
+		public RealCarPart(int capacity)
+		{
+			this.Attributes = new List<CPAttribute>(capacity);
+			this.LodStruct = new CPStruct();
+		}
 
 		/// <summary>
 		/// Initializes new instance of <see cref="RealCarPart"/>.
@@ -100,7 +108,8 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// Returns PartName, Attributes count and CarPartGroupID as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() => this.PartLabel;
+		public override string ToString() =>
+			String.IsNullOrEmpty(this.PartLabel) ? "REAL_CAR_PART" : this.PartLabel;
 
 		/// <summary>
 		/// Returns the hash code for this <see cref="RealCarPart"/>.

@@ -52,7 +52,7 @@ namespace Nikki.Support.Shared.Class
 		/// <summary>
 		/// Total amount of <see cref="RealCarPart"/> in this <see cref="DBModelPart"/>.
 		/// </summary>
-		public virtual int Length => this.ModelCarParts.Count;
+		public virtual int CarPartsCount => this.ModelCarParts.Count;
 
 		#endregion
 
@@ -106,7 +106,7 @@ namespace Nikki.Support.Shared.Class
 		/// <param name="index">Index of the <see cref="RealCarPart"/> to get.</param>
 		/// <returns><see cref="RealCarPart"/> at index specified.</returns>
 		public virtual RealCarPart GetRealPart(int index) =>
-			(index >= 0 && index < this.Length) ? this.ModelCarParts[index] : null;
+			(index >= 0 && index < this.CarPartsCount) ? this.ModelCarParts[index] : null;
 
 		/// <summary>
 		/// Gets first <see cref="RealCarPart"/> in this <see cref="DBModelPart"/>.
