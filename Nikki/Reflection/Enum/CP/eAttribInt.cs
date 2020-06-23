@@ -188,11 +188,6 @@
 		/// <summary>
 		/// 
 		/// </summary>
-		MODEL_TABLE_OFFSET = 0x10CB799D,
-		
-		/// <summary>
-		/// 
-		/// </summary>
 		PART_NAME_SELECTOR = 0x927097F6,
 				
 		/// <summary>

@@ -164,9 +164,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 			{
 				eCarPartAttribType.Boolean => new BoolAttribute(eBoolean.False),
 				eCarPartAttribType.Floating => new FloatAttribute((float)0),
-				eCarPartAttribType.CarPartID => new PartIDAttribute((int)0),
 				eCarPartAttribType.String => new StringAttribute(String.Empty),
-				eCarPartAttribType.TwoString => new TwoStringAttribute(String.Empty),
 				eCarPartAttribType.Key => new KeyAttribute(String.Empty),
 				_ => new IntAttribute((int)0)
 			};
