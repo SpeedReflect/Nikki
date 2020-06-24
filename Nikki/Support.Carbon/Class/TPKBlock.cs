@@ -12,6 +12,7 @@ using Nikki.Reflection.Attributes;
 using Nikki.Support.Carbon.Framework;
 using Nikki.Support.Shared.Parts.TPKParts;
 using CoreExtensions.IO;
+using CoreExtensions.Management;
 
 
 
@@ -149,6 +150,8 @@ namespace Nikki.Support.Carbon.Class
 
             if (this.IsCompressed == eBoolean.True) this.AssembleCompressed(bw);
             else this.AssembleDecompressed(bw);
+
+            ForcedX.GCCollect(true, true);
         }
 
         private void AssembleDecompressed(BinaryWriter bw)

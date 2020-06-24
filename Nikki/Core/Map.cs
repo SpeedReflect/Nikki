@@ -303,6 +303,7 @@ namespace Nikki.Core
 			{ eBlockID.Subtitles,         Alignment.Default },
 			{ eBlockID.MovieCatalog,      new Alignment(0x80, Alignment.eAlignType.Modular) },
 			{ eBlockID.ICECatalog,        new Alignment(0x80, Alignment.eAlignType.Modular) },
+			{ eBlockID.WCollisionRaww,    new Alignment(0x800, Alignment.eAlignType.Modular) },
 			{ eBlockID.TPKSettings,       new Alignment(0x80, Alignment.eAlignType.Modular) },
 			{ eBlockID.SkinRegionDB,      Alignment.Default },
 			{ eBlockID.VinylMetaData,     Alignment.Default },

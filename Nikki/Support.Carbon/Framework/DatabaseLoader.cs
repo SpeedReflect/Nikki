@@ -5,6 +5,7 @@ using Nikki.Reflection.Enum;
 using CoreExtensions.IO;
 using CoreExtensions.Management;
 using System;
+using System.Collections.Generic;
 
 namespace Nikki.Support.Carbon.Framework
 {
@@ -13,6 +14,7 @@ namespace Nikki.Support.Carbon.Framework
 		private readonly Options _options = Options.Default;
 		private readonly Datamap _db;
 		private readonly Logger _logger;
+		private Dictionary<uint, List<long>> _offsets = new Dictionary<uint, List<long>>();
 
 		private Block caranimations;
 		private Block cartypeinfos;
@@ -52,10 +54,26 @@ namespace Nikki.Support.Carbon.Framework
 		{
 			var info = new FileInfo(this._options.File);
 			if (!info.Exists) return;
-			var comp = this.NeedsDecompression();
 
+			var comp = this.NeedsDecompression();
 			if (!comp && info.Length > (1 << 26)) this.ReadFromStream();
 			else this.ReadFromBuffer(comp);
+
+			foreach (var pair in this._offsets)
+			{
+
+				this._logger.Write($"0x{pair.Key:X8} | ");
+
+				foreach (var off in pair.Value)
+				{
+
+					this._logger.Write($" ---> 0x{off:X8}");
+
+				}
+
+				this._logger.WriteLine(String.Empty);
+
+			}
 
 			ForcedX.GCCollect();
 		}
@@ -124,7 +142,26 @@ namespace Nikki.Support.Carbon.Framework
 				var id = br.ReadEnum<eBlockID>();
 				var size = br.ReadInt32();
 
-				Console.WriteLine($"0x{off:X8} ---> {id}");
+				if (!Enum.IsDefined(typeof(eBlockID), (uint)id))
+				{
+
+					Console.WriteLine("Located unknown data block. Please send MailLog file to the developer!!!");
+
+					if (this._offsets.TryGetValue((uint)id, out var list))
+					{
+
+						list.Add(off);
+
+					}
+					else
+					{
+
+						list = new List<long>() { off };
+						this._offsets[(uint)id] = list;
+
+					}
+
+				}
 
 				switch (id)
 				{

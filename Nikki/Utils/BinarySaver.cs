@@ -58,5 +58,36 @@ namespace Nikki.Utils
 
 			}
 		}
+	
+		public static void GenerateGeometryPadding(BinaryWriter bw, string mark, long position)
+		{
+			var dif = (int)(position % 0x10);
+			var align = new Alignment(dif, Alignment.eAlignType.Actual);
+			GeneratePadding(bw, mark, align);
+		}
+
+		public static void GenerateAlignment(BinaryWriter bw, string mark, long position)
+		{
+			/*
+			Requires Actual alignment:
+				0x00034027 WorldBounds
+				0x00037220 Stream37220
+				0x00037240 Stream37240
+				0x00037250 Stream37250
+				0x00037260 Stream37260
+				0x00037270 Stream37270
+				0x0003B800 WWorld
+				0x0003B801 WCollisionPack
+				0x0003BC00 EmitterLibrary
+				0x80034100 SpeedScenery
+				0x80036000 EmitterTriggers
+				0x8003B810 EventSequence
+				0x80134000 Geometry
+				0x80135000 ELights
+			*/
+
+
+
+		}
 	}
 }
