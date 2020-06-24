@@ -1926,6 +1926,641 @@
             Enum of IDs related to all global blocks.
             </summary>
         </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Padding">
+            <summary>
+            0x00000000
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.FEngFont">
+            <summary>
+            0x00030201
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.FEngFiles">
+            <summary>
+            0x00030203
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.FNGCompress">
+            <summary>
+            0x00030210
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.PresetRides">
+            <summary>
+            0x00030220
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.MagazinesFrontend">
+            <summary>
+            0x00030230
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.MagazinesShowcase">
+            <summary>
+            0x00030231
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.WideDecals">
+            <summary>
+            0x00030240
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.PresetSkins">
+            <summary>
+            0x00030250
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.WorldBounds">
+            <summary>
+            0x00034027
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.TrackPosMarkers">
+            <summary>
+            0x00034146
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Tracks">
+            <summary>
+            0x00034201
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.SunInfos">
+            <summary>
+            0x00034202
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Weatherman">
+            <summary>
+            0x00034250
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.CarTypeInfos">
+            <summary>
+            0x00034600
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.CarSkins">
+            <summary>
+            0x00034601
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.DBCarParts_Header">
+            <summary>
+            0x00034603
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.DBCarParts_Array">
+            <summary>
+            0x00034604
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.DBCarParts_Attribs">
+            <summary>
+            0x00034605
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.DBCarParts_Strings">
+            <summary>
+            0x00034606
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.SlotTypes">
+            <summary>
+            0x00034607
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.CarInfoAnimHookup">
+            <summary>
+            0x00034608
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.CarInfoAnimHideup">
+            <summary>
+            0x00034609
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.DBCarParts_Structs">
+            <summary>
+            0x0003460A
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.DBCarParts_Models">
+            <summary>
+            0x0003460B
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.DBCarParts_Offsets">
+            <summary>
+            0x0003460C
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.StyleMomentsInfo">
+            <summary>
+            0x00034A07
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.GCareer_Races">
+            <summary>
+            0x00034A11
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.GCareer_Shops">
+            <summary>
+            0x00034A12
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.GCareer_Brands">
+            <summary>
+            0x00034A14
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.GCareer_PartPerf">
+            <summary>
+            0x00034A15
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.GCareer_Showcases">
+            <summary>
+            0x00034A16
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.GCareer_Messages">
+            <summary>
+            0x00034A17
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.GCareer_Stages">
+            <summary>
+            0x00034A18
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.GCareer_Sponsors">
+            <summary>
+            0x00034A19
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.GCareer_PerfTun">
+            <summary>
+            0x00034A1A
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.GCareer_Challenges">
+            <summary>
+            0x00034A1B
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.GCareer_PartUnlock">
+            <summary>
+            0x00034A1C
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.GCareer_Strings">
+            <summary>
+            0x00034A1D
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.GCareer_BankTrigs">
+            <summary>
+            0x00034A1E
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.GCareer_CarUnlocks">
+            <summary>
+            0x00034A1F
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.DifficultyInfo">
+            <summary>
+            0x00034B00
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.AcidEffects">
+            <summary>
+            0x00035020
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.AcidEmmiters">
+            <summary>
+            0x00035021
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Stream37220">
+            <summary>
+            0x00037220
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Stream37240">
+            <summary>
+            0x00037240
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Stream37250">
+            <summary>
+            0x00037250
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Stream37260">
+            <summary>
+            0x00037260
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Stream37270">
+            <summary>
+            0x00037270
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.STRBlocks">
+            <summary>
+            0x00039000
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.LangFont">
+            <summary>
+            0x00039001
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Subtitles">
+            <summary>
+            0x00039010
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.MovieCatalog">
+            <summary>
+            0x00039020
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.ICECatalog">
+            <summary>
+            0x0003B200
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.WWorld">
+            <summary>
+            0x0003B800
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.WCollisionPack">
+            <summary>
+            0x0003B801
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.WCollisionRaww">
+            <summary>
+            0x0003B802
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.NISScript">
+            <summary>
+            0x0003B811
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Collision">
+            <summary>
+            0x0003B901
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.EmitterLibrary">
+            <summary>
+            0x0003BC00
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.TPKSettings">
+            <summary>
+            0x0003BD00
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Vinyl_Header">
+            <summary>
+            0x0003CE01
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Vinyl_PointerTable">
+            <summary>
+            0x0003CE02
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Vinyl_PathEntry">
+            <summary>
+            0x0003CE04
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Vinyl_PathData">
+            <summary>
+            0x0003CE05
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Vinyl_PathPoint">
+            <summary>
+            0x0003CE06
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Vinyl_FillEffect">
+            <summary>
+            0x0003CE07
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Vinyl_StrokeEffect">
+            <summary>
+            0x0003CE08
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Vinyl_VectorLine">
+            <summary>
+            0x0003CE09
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Vinyl_InnerGlow">
+            <summary>
+            0x0003CE0A
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Vinyl_ShadowEffect">
+            <summary>
+            0x0003CE0B
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.SkinRegionDB">
+            <summary>
+            0x0003CE12
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.VinylMetaData">
+            <summary>
+            0x0003CE13
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.FX">
+            <summary>
+            0x000B5846
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Materials">
+            <summary>
+            0x00135200
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.EAGLSkeleton">
+            <summary>
+            0x00E34009
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.EAGLAnimations">
+            <summary>
+            0x00E34010
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.DDSTexture">
+            <summary>
+            0x30300200
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.ColorCube">
+            <summary>
+            0x30300201
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.PCAWater0">
+            <summary>
+            0x30300300
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.TPK_InfoPart1">
+            <summary>
+            0x33310001
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.TPK_InfoPart2">
+            <summary>
+            0x33310002
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.TPK_InfoPart3">
+            <summary>
+            0x33310003
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.TPK_InfoPart4">
+            <summary>
+            0x33310004
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.TPK_InfoPart5">
+            <summary>
+            0x33310005
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.TPK_AnimPart1">
+            <summary>
+            0x33312001
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.TPK_AnimPart2">
+            <summary>
+            0x33312002
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.TPK_DataPart1">
+            <summary>
+            0x33320001
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.TPK_DataPart2">
+            <summary>
+            0x33320002
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.TPK_DataPart3">
+            <summary>
+            0x33320003
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Nikki">
+            <summary>
+            0x42704D67
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.ABKC">
+            <summary>
+            0x434B4241
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.LOCH">
+            <summary>
+            0x48434F4C
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.VPAK">
+            <summary>
+            0x4B415056
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.MOIR">
+            <summary>
+            0x52494F4D
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.MEMO">
+            <summary>
+            0x53219999
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.LZCompressed">
+            <summary>
+            0x55441122
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.MVhd">
+            <summary>
+            0x6468564D
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Gnsu">
+            <summary>
+            0x75736E47
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.SpeedScenery">
+            <summary>
+            0x80034100
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.DBCarParts">
+            <summary>
+            0x80034602
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.GCareer">
+            <summary>
+            0x80034A10
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.EmitterTriggers">
+            <summary>
+            0x80036000
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.NISDescription">
+            <summary>
+            0x80037020
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.AnimDirectory">
+            <summary>
+            0x80037050
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.QuickSpline">
+            <summary>
+            0x8003B000
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.IceCameraPart0">
+            <summary>
+            0x8003B200
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.IceCameraPart1">
+            <summary>
+            0x8003B201
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.IceCameraPart2">
+            <summary>
+            0x8003B202
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.IceCameraPart3">
+            <summary>
+            0x8003B203
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.IceCameraPart4">
+            <summary>
+            0x8003B204
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.IceSettings">
+            <summary>
+            0x8003B209
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.SoundStichs">
+            <summary>
+            0x8003B500
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.EventSequence">
+            <summary>
+            0x8003B810
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.DBCarBounds">
+            <summary>
+            0x8003B900
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.VinylSystem">
+            <summary>
+            0x8003CE00
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Vinyl_PathSet">
+            <summary>
+            0x8003CE03
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.LimitsTable">
+            <summary>
+            0x8003CE0D
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.Geometry">
+            <summary>
+            0x80134000
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.ELights">
+            <summary>
+            0x80135000
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.SpecialEffects">
+            <summary>
+            0xB0300100
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.PCAWeights">
+            <summary>
+            0xB0300300
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.TPKBlocks">
+            <summary>
+            0xB3300000
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.TPK_InfoBlock">
+            <summary>
+            0xB3310000
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.TPK_BinData">
+            <summary>
+            0xB3312000
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.TPK_AnimBlock">
+            <summary>
+            0xB3312004
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.TPK_DataBlock">
+            <summary>
+            0xB3320000
+            </summary>
+        </member>
         <member name="T:Nikki.Reflection.Enum.eBoolean">
             <summary>
             Enum with values False (representing boolean false) and True (representing boolean true).

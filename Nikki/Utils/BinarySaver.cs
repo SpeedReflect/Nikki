@@ -59,32 +59,67 @@ namespace Nikki.Utils
 			}
 		}
 	
-		public static void GenerateGeometryPadding(BinaryWriter bw, string mark, long position)
+		public static void GenerateAlignment(this BinaryWriter bw, string mark, long position, eBlockID id)
 		{
-			var dif = (int)(position % 0x10);
-			var align = new Alignment(dif, Alignment.eAlignType.Actual);
-			GeneratePadding(bw, mark, align);
-		}
+			int dif;
+			Alignment align;
 
-		public static void GenerateAlignment(BinaryWriter bw, string mark, long position)
-		{
-			/*
-			Requires Actual alignment:
-				0x00034027 WorldBounds
-				0x00037220 Stream37220
-				0x00037240 Stream37240
-				0x00037250 Stream37250
-				0x00037260 Stream37260
-				0x00037270 Stream37270
-				0x0003B800 WWorld
-				0x0003B801 WCollisionPack
-				0x0003BC00 EmitterLibrary
-				0x80034100 SpeedScenery
-				0x80036000 EmitterTriggers
-				0x8003B810 EventSequence
-				0x80134000 Geometry
-				0x80135000 ELights
-			*/
+			switch (id)
+			{
+				// Padding is just padding, return
+				case eBlockID.Padding:
+					return;
+
+				// Those IDs require Actual alignment based on their previous one
+				case eBlockID.EAGLSkeleton:
+				case eBlockID.EAGLAnimations:
+				case eBlockID.ELights:
+				case eBlockID.EmitterLibrary:
+				case eBlockID.EmitterTriggers:
+				case eBlockID.EventSequence:
+				case eBlockID.Geometry:
+				case eBlockID.NISDescription:
+				case eBlockID.NISScript:
+				case eBlockID.PCAWater0:
+				case eBlockID.QuickSpline:
+				case eBlockID.SpeedScenery:
+				case eBlockID.Stream37220:
+				case eBlockID.Stream37240:
+				case eBlockID.Stream37250:
+				case eBlockID.Stream37260:
+				case eBlockID.Stream37270:
+				case eBlockID.TrackPosMarkers:
+				case eBlockID.WorldBounds:
+				case eBlockID.WCollisionPack:
+				case eBlockID.Weatherman:
+				case eBlockID.WWorld:
+					dif = (int)(position % 0x10);
+					align = new Alignment(dif, Alignment.eAlignType.Actual);
+					GeneratePadding(bw, mark, align);
+					return;
+
+				default:
+					// If we encountered known ID, do the padding accordingly
+					if (Map.BlockToAlignment.TryGetValue(id, out align))
+					{
+
+						GeneratePadding(bw, mark, align);
+
+					}
+
+					// Else generate padding based on previous position
+					else
+					{
+
+						dif = (int)(position % 0x10);
+						align = new Alignment(dif, Alignment.eAlignType.Actual);
+						GeneratePadding(bw, mark, align);
+
+					}
+
+					return;
+
+			}
 
 
 

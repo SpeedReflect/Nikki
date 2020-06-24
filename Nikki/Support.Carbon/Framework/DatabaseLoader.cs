@@ -1,11 +1,13 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using CoreExtensions.IO;
 using CoreExtensions.Management;
-using System;
-using System.Collections.Generic;
+
+
 
 namespace Nikki.Support.Carbon.Framework
 {
@@ -14,7 +16,10 @@ namespace Nikki.Support.Carbon.Framework
 		private readonly Options _options = Options.Default;
 		private readonly Datamap _db;
 		private readonly Logger _logger;
+
+		#if DEBUG
 		private Dictionary<uint, List<long>> _offsets = new Dictionary<uint, List<long>>();
+		#endif
 
 		private Block caranimations;
 		private Block cartypeinfos;
@@ -34,7 +39,7 @@ namespace Nikki.Support.Carbon.Framework
 		{
 			this._options = options;
 			this._db = db;
-			this._logger = new Logger("MainLog.txt", "Nikki.dll : DatabaseLoader", true);
+			this._logger = new Logger("MainLog.txt", "Nikki.dll : Carbon DatabaseLoader", true);
 			this.materials = new Block(eBlockID.Materials);
 			this.tpkblocks = new Block(eBlockID.TPKBlocks);
 			this.cartypeinfos = new Block(eBlockID.CarTypeInfos);
@@ -59,6 +64,7 @@ namespace Nikki.Support.Carbon.Framework
 			if (!comp && info.Length > (1 << 26)) this.ReadFromStream();
 			else this.ReadFromBuffer(comp);
 
+			#if DEBUG
 			foreach (var pair in this._offsets)
 			{
 
@@ -74,6 +80,7 @@ namespace Nikki.Support.Carbon.Framework
 				this._logger.WriteLine(String.Empty);
 
 			}
+			#endif
 
 			ForcedX.GCCollect();
 		}
@@ -142,6 +149,7 @@ namespace Nikki.Support.Carbon.Framework
 				var id = br.ReadEnum<eBlockID>();
 				var size = br.ReadInt32();
 
+				#if DEBUG
 				if (!Enum.IsDefined(typeof(eBlockID), (uint)id))
 				{
 
@@ -162,9 +170,34 @@ namespace Nikki.Support.Carbon.Framework
 					}
 
 				}
+				#endif
 
 				switch (id)
 				{
+					case eBlockID.FX:
+						throw new NotSupportedException("FX Effects files are not supported");
+
+					case eBlockID.ABKC:
+						throw new NotSupportedException("ABKC Sound files are not supported");
+
+					case eBlockID.LOCH:
+						throw new NotSupportedException("LOCH Localization files are not supported");
+
+					case eBlockID.VPAK:
+						throw new NotSupportedException("VPAK Vault files are not supported");
+
+					case eBlockID.MOIR:
+						throw new NotSupportedException("MOIR Sound files are not supported");
+
+					case eBlockID.MEMO:
+						throw new NotSupportedException("Memory Data files are not supported");
+
+					case eBlockID.MVhd:
+						throw new NotSupportedException("VP6 Encoded files are not supported");
+
+					case eBlockID.Gnsu:
+						throw new NotSupportedException("GNSU Sound files are not supported");
+
 					case eBlockID.Materials:
 						this.materials.Offsets.Add(off);
 						goto default;

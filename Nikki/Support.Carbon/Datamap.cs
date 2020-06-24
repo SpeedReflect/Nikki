@@ -218,7 +218,7 @@ namespace Nikki.Support.Carbon
 		/// <param name="options"><see cref="Options"/> that are used to save data.</param>
 		public override void Save(Options options)
 		{
-			var saver = new DatabaseSaver(options, this);
+			using var saver = new DatabaseSaver(options, this);
 			saver.Invoke();
 		}
 

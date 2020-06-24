@@ -1,15 +1,17 @@
 ﻿using System;
 using System.IO;
+using System.Diagnostics;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using CoreExtensions.IO;
 using CoreExtensions.Management;
-using System.Diagnostics;
+
+
 
 namespace Nikki.Support.Carbon.Framework
 {
-	internal class DatabaseSaver
+	internal class DatabaseSaver : IDisposable
 	{
 		private readonly Options _options = Options.Default;
 		private readonly Datamap _db;
@@ -19,7 +21,7 @@ namespace Nikki.Support.Carbon.Framework
 		{
 			this._options = options;
 			this._db = db;
-			this._logger = new Logger("MainLog.txt", "Nikki.dll : DatabaseLoader", true);
+			this._logger = new Logger("MainLog.txt", "Nikki.dll : Carbon DatabaseSaver", true);
 		}
 
 		public void Invoke()
@@ -109,19 +111,30 @@ namespace Nikki.Support.Carbon.Framework
 
 		private void Assemble(BinaryWriter bw, BinaryReader br)
 		{
-			this._db.STRBlocks.Assemble(bw, this._options.Watermark);
-			this._db.Materials.Assemble(bw, this._options.Watermark);
-			this._db.TPKBlocks.Assemble(bw, this._options.Watermark);
-			this._db.CarTypeInfos.Assemble(bw, this._options.Watermark);
-			this._db.SlotTypes.Assemble(bw, this._options.Watermark);
-			this._db.DBModelParts.Assemble(bw, this._options.Watermark);
-			this._db.Tracks.Assemble(bw, this._options.Watermark);
-			this._db.SunInfos.Assemble(bw, this._options.Watermark);
-			this._db.Collisions.Assemble(bw, this._options.Watermark);
-			this._db.PresetRides.Assemble(bw, this._options.Watermark);
-			this._db.PresetSkins.Assemble(bw, this._options.Watermark);
-			this._db.FNGroups.Assemble(bw, this._options.Watermark);
-			this.WriteBlockOffsets(bw, br);
+			try
+			{
+
+				this._db.STRBlocks.Assemble(bw, this._options.Watermark);
+				this._db.Materials.Assemble(bw, this._options.Watermark);
+				this._db.TPKBlocks.Assemble(bw, this._options.Watermark);
+				this._db.CarTypeInfos.Assemble(bw, this._options.Watermark);
+				this._db.SlotTypes.Assemble(bw, this._options.Watermark);
+				this._db.DBModelParts.Assemble(bw, this._options.Watermark);
+				this._db.Tracks.Assemble(bw, this._options.Watermark);
+				this._db.SunInfos.Assemble(bw, this._options.Watermark);
+				this._db.Collisions.Assemble(bw, this._options.Watermark);
+				this._db.PresetRides.Assemble(bw, this._options.Watermark);
+				this._db.PresetSkins.Assemble(bw, this._options.Watermark);
+				this._db.FNGroups.Assemble(bw, this._options.Watermark);
+				this.WriteBlockOffsets(bw, br);
+
+			}
+			catch (Exception e)
+			{
+
+				this._logger.WriteException(e, bw.BaseStream);
+
+			}
 		}
 
 		private void WriteBlockOffsets(BinaryWriter bw, BinaryReader br)
@@ -129,6 +142,7 @@ namespace Nikki.Support.Carbon.Framework
 			while (br.BaseStream.Position < br.BaseStream.Length)
 			{
 
+				var off = br.BaseStream.Position;
 				var id = br.ReadEnum<eBlockID>();
 				var size = br.ReadInt32();
 				var next = eBlockID.Padding;
@@ -168,28 +182,8 @@ namespace Nikki.Support.Carbon.Framework
 						br.BaseStream.Position += size;
 						break;
 
-					case eBlockID.Geometry:
-						var position = br.BaseStream.Position - 8;
-						BinarySaver.GenerateGeometryPadding(bw, this._options.Watermark, position);
-						bw.WriteEnum(id);
-						bw.Write(size);
-						bw.Write(br.ReadBytes(size));
-						break;
-
 					default:
-						if (Map.BlockToAlignment.TryGetValue(id, out var align))
-						{
-
-							BinarySaver.GeneratePadding(bw, this._options.Watermark, align);
-
-						}
-						else
-						{
-
-							BinarySaver.GeneratePadding(bw, this._options.Watermark, Alignment.Default);
-						
-						}
-
+						bw.GenerateAlignment(this._options.Watermark, off, id);
 						bw.WriteEnum(id);
 						bw.Write(size);
 						bw.Write(br.ReadBytes(size));
@@ -199,5 +193,7 @@ namespace Nikki.Support.Carbon.Framework
 
 			}
 		}
+
+		public void Dispose() => this._logger.Dispose();
 	}
 }

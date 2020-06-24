@@ -195,7 +195,7 @@ namespace Nikki.Support.MostWanted
 		/// <param name="options"><see cref="Options"/> that are used to load data.</param>
 		public override void Load(Options options)
 		{
-			var loader = new DatabaseLoader(options, this);
+			using var loader = new DatabaseLoader(options, this);
 			loader.Invoke();
 		}
 
@@ -205,7 +205,7 @@ namespace Nikki.Support.MostWanted
 		/// <param name="options"><see cref="Options"/> that are used to save data.</param>
 		public override void Save(Options options)
 		{
-			var saver = new DatabaseSaver(options, this);
+			using var saver = new DatabaseSaver(options, this);
 			saver.Invoke();
 		}
 
