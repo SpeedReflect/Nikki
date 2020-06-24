@@ -38,15 +38,13 @@ namespace Nikki.Reflection.Abstract
         /// Loads all data in the database using options passed.
         /// </summary>
         /// <param name="options"><see cref="Options"/> that are used to load data.</param>
-        /// <returns>True on success; false otherwise.</returns>
-        public abstract bool Load(Options options);
+        public abstract void Load(Options options);
 
         /// <summary>
         /// Saves all data in the database using options passed.
         /// </summary>
         /// <param name="options"><see cref="Options"/> that are used to save data.</param>
-        /// <returns>True on success; false otherwise.</returns>
-        public abstract bool Save(Options options);
+        public abstract void Save(Options options);
 
         /// <summary>
         /// Exports collection by writing its data to a <see cref="BinaryWriter"/> provided.

@@ -975,14 +975,12 @@
             Loads all data in the database using options passed.
             </summary>
             <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to load data.</param>
-            <returns>True on success; false otherwise.</returns>
         </member>
         <member name="M:Nikki.Reflection.Abstract.FileBase.Save(Nikki.Core.Options)">
             <summary>
             Saves all data in the database using options passed.
             </summary>
             <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to save data.</param>
-            <returns>True on success; false otherwise.</returns>
         </member>
         <member name="M:Nikki.Reflection.Abstract.FileBase.Export(System.String,System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
@@ -13871,14 +13869,12 @@
             Loads all data in the database using options passed.
             </summary>
             <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to load data.</param>
-            <returns>True on success; false otherwise.</returns>
         </member>
         <member name="M:Nikki.Support.Carbon.Datamap.Save(Nikki.Core.Options)">
             <summary>
             Saves all data in the database using options passed.
             </summary>
             <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to save data.</param>
-            <returns>True on success; false otherwise.</returns>
         </member>
         <member name="M:Nikki.Support.Carbon.Datamap.Export(System.String,System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
@@ -18822,14 +18818,12 @@
             Loads all data in the database using options passed.
             </summary>
             <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to load data.</param>
-            <returns>True on success; false otherwise.</returns>
         </member>
         <member name="M:Nikki.Support.MostWanted.Datamap.Save(Nikki.Core.Options)">
             <summary>
             Saves all data in the database using options passed.
             </summary>
             <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to save data.</param>
-            <returns>True on success; false otherwise.</returns>
         </member>
         <member name="M:Nikki.Support.MostWanted.Datamap.Export(System.String,System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>
@@ -24696,14 +24690,12 @@
             Loads all data in the database using options passed.
             </summary>
             <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to load data.</param>
-            <returns>True on success; false otherwise.</returns>
         </member>
         <member name="M:Nikki.Support.Prostreet.Datamap.Save(Nikki.Core.Options)">
             <summary>
             Saves all data in the database using options passed.
             </summary>
             <param name="options"><see cref="T:Nikki.Core.Options"/> that are used to save data.</param>
-            <returns>True on success; false otherwise.</returns>
         </member>
         <member name="M:Nikki.Support.Prostreet.Datamap.Export(System.String,System.String,System.IO.BinaryWriter,System.Boolean)">
             <summary>

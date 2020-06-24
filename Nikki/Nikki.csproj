@@ -33,7 +33,7 @@
 
   <ItemGroup>
     <None Update="CoreExtensions.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="keys.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

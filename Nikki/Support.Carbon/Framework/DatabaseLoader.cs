@@ -4,15 +4,15 @@ using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using CoreExtensions.IO;
 using CoreExtensions.Management;
-
-
+using System;
 
 namespace Nikki.Support.Carbon.Framework
 {
-	internal class DatabaseLoader
+	internal class DatabaseLoader : IDisposable
 	{
 		private readonly Options _options = Options.Default;
 		private readonly Datamap _db;
+		private readonly Logger _logger;
 
 		private Block caranimations;
 		private Block cartypeinfos;
@@ -32,6 +32,7 @@ namespace Nikki.Support.Carbon.Framework
 		{
 			this._options = options;
 			this._db = db;
+			this._logger = new Logger("MainLog.txt", "Nikki.dll : DatabaseLoader", true);
 			this.materials = new Block(eBlockID.Materials);
 			this.tpkblocks = new Block(eBlockID.TPKBlocks);
 			this.cartypeinfos = new Block(eBlockID.CarTypeInfos);
@@ -47,35 +48,71 @@ namespace Nikki.Support.Carbon.Framework
 			this.caranimations = new Block(eBlockID.CarInfoAnimHookup);
 		}
 
-		public bool Invoke()
+		public void Invoke()
 		{
-			if (!File.Exists(this._options.File)) return false;
-			var buffer = File.ReadAllBytes(this._options.File);
-			buffer = Interop.Decompress(buffer);
+			var info = new FileInfo(this._options.File);
+			if (!info.Exists) return;
+			var comp = this.NeedsDecompression();
 
+			if (!comp && info.Length > (1 << 26)) this.ReadFromStream();
+			else this.ReadFromBuffer(comp);
+
+			ForcedX.GCCollect();
+		}
+
+		private bool NeedsDecompression()
+		{
+			var array = new byte[4];
+			using var fs = new FileStream(this._options.File, FileMode.Open, FileAccess.Read);
+			fs.Read(array, 0, 4);
+			var type = BitConverter.ToInt32(array, 0);
+			return Enum.IsDefined(typeof(eLZCompressionType), type);
+		}
+
+		private void ReadFromStream()
+		{
+			using var br = new BinaryReader(File.Open(this._options.File, FileMode.Open, FileAccess.Read));
+			this.Disassemble(br);
+		}
+
+		private void ReadFromBuffer(bool compressed)
+		{
+			var buffer = File.ReadAllBytes(this._options.File);
+			if (compressed) buffer = Interop.Decompress(buffer);
 			using var ms = new MemoryStream(buffer);
 			using var br = new BinaryReader(ms);
+			this.Disassemble(br);
+		}
 
-			this.ReadBlockOffsets(br);
+		private void Disassemble(BinaryReader br)
+		{
+			try
+			{
 
-			this._db.STRBlocks.Disassemble(br, this.strblocks);
-			this._db.Materials.Disassemble(br, this.materials);
-			this._db.TPKBlocks.Disassemble(br, this.tpkblocks);
-			this._db.CarTypeInfos.Disassemble(br, this.cartypeinfos);
-			this._db.DBModelParts.Disassemble(br, this.dbmodelparts);
-			this._db.Tracks.Disassemble(br, this.tracks);
-			this._db.SunInfos.Disassemble(br, this.suninfos);
-			this._db.Collisions.Disassemble(br, this.collisions);
-			this._db.PresetRides.Disassemble(br, this.presetrides);
-			this._db.PresetSkins.Disassemble(br, this.presetskins);
-			this._db.FNGroups.Disassemble(br, this.fngroups);
-			this._db.SlotTypes.Disassemble(br, this.slottypes);
-			this._db.SlotOverrides.Disassemble(br, this.slottypes);
-			this.ProcessCarAnimations(br);
+				this.ReadBlockOffsets(br);
 
-			buffer = null;
-			ForcedX.GCCollect();
-			return true;
+				this._db.STRBlocks.Disassemble(br, this.strblocks);
+				this._db.Materials.Disassemble(br, this.materials);
+				this._db.TPKBlocks.Disassemble(br, this.tpkblocks);
+				this._db.CarTypeInfos.Disassemble(br, this.cartypeinfos);
+				this._db.DBModelParts.Disassemble(br, this.dbmodelparts);
+				this._db.Tracks.Disassemble(br, this.tracks);
+				this._db.SunInfos.Disassemble(br, this.suninfos);
+				this._db.Collisions.Disassemble(br, this.collisions);
+				this._db.PresetRides.Disassemble(br, this.presetrides);
+				this._db.PresetSkins.Disassemble(br, this.presetskins);
+				this._db.FNGroups.Disassemble(br, this.fngroups);
+				this._db.SlotTypes.Disassemble(br, this.slottypes);
+				this._db.SlotOverrides.Disassemble(br, this.slottypes);
+				this.ProcessCarAnimations(br);
+
+			}
+			catch (Exception e)
+			{
+
+				this._logger.WriteException(e, br.BaseStream);
+
+			}
 		}
 
 		private void ReadBlockOffsets(BinaryReader br)
@@ -87,7 +124,7 @@ namespace Nikki.Support.Carbon.Framework
 				var id = br.ReadEnum<eBlockID>();
 				var size = br.ReadInt32();
 
-				System.Console.WriteLine($"0x{off:X8} ---> {id}");
+				Console.WriteLine($"0x{off:X8} ---> {id}");
 
 				switch (id)
 				{
@@ -181,5 +218,7 @@ namespace Nikki.Support.Carbon.Framework
 
 			}
 		}
+
+		public void Dispose() => this._logger.Dispose();
 	}
 }
