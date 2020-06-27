@@ -1686,6 +1686,21 @@
             
             </summary>
         </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.SPOKE_COUNT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.INNER_RADIUS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.OUTER_RADIUS">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.WHEELEMITTER">
             <summary>
             
@@ -1711,11 +1726,6 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x1B0EA1A9">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x6509EC92">
             <summary>
             
@@ -1727,21 +1737,6 @@
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0xC9818DFC">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0xCE7D8DB5">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0xE80A3B62">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0xEB0101E2">
             <summary>
             
             </summary>
@@ -1791,6 +1786,11 @@
             
             </summary>
         </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.EXCLUDEDECAL">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.SPECIFICCARNAME">
             <summary>
             
@@ -1826,17 +1826,17 @@
             
             </summary>
         </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.LIGHT_MATERIAL_NAME">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.PART_NAME_BASE_HASH">
             <summary>
             
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.LOD_NAME_PREFIX_NAMEHASH">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey._0x6BA02C05">
             <summary>
             
             </summary>
@@ -3663,6 +3663,31 @@
             
             </summary>
         </member>
+        <member name="T:Nikki.Reflection.Enum.eTileableType">
+            <summary>
+            Type of tileable UV.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eTileableType.NONE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eTileableType.HORIZONTAL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eTileableType.VERTICAL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eTileableType.ALL_SIDES">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Nikki.Reflection.Enum.eTPKVersion">
             <summary>
             Enum of <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> version types.
@@ -4283,12 +4308,12 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.FRONT_WHEEL">
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.BRAKE">
             <summary>
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.REAR_WHEEL">
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.WHEEL">
             <summary>
             
             </summary>
@@ -4328,17 +4353,7 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.VINYL_SPECIFIC">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.VINYL_GENERIC">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.VECTORVINYL">
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.VINYL_COLOUR">
             <summary>
             
             </summary>
@@ -4353,22 +4368,22 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.WHEEL_PAINT_SWATCH">
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DECAL_TEXTURE">
             <summary>
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.VINYL_COLOUR">
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.VINYL_SPECIFIC">
             <summary>
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DECAL_FRONT_WINDOW_TEX0">
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.VINYL_GENERIC">
             <summary>
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.DECAL_REAR_WINDOW_TEX0">
+        <member name="F:Nikki.Reflection.Enum.PartID.ePartCarbon.VECTORVINYL">
             <summary>
             
             </summary>

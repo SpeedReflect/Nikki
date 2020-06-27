@@ -77,6 +77,7 @@ namespace Nikki.Utils
 				case eBlockID.EmitterLibrary:
 				case eBlockID.EmitterTriggers:
 				case eBlockID.EventSequence:
+				case eBlockID.FEngFont:
 				case eBlockID.Geometry:
 				case eBlockID.NISDescription:
 				case eBlockID.NISScript:

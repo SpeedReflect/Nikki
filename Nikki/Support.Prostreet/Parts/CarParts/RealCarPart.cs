@@ -300,22 +300,22 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 
 					case 0:
 						realpart = this.Model?.CollectionName ?? String.Empty;
-						realpart += offsets.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
-						realpart += offsets.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
+						realpart += offsets?.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
+						realpart += offsets?.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
 						return realpart;
 
 					case 1:
 						attrib = this.GetAttribute((uint)eAttribKey.BRAND_NAME);
 						realpart = attrib is KeyAttribute unkhash ? unkhash.Value : String.Empty;
-						realpart += offsets.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
-						realpart += offsets.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
+						realpart += offsets?.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
+						realpart += offsets?.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
 						return realpart;
 
 					case 2:
 						attrib = this.GetAttribute((uint)eAttribKey.LOD_NAME_PREFIX_NAMEHASH);
 						realpart = attrib is KeyAttribute basehash ? basehash.Value : String.Empty;
-						realpart += offsets.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
-						realpart += offsets.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
+						realpart += offsets?.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
+						realpart += offsets?.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
 						return realpart;
 
 					default:
@@ -345,22 +345,22 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 
 					case 0:
 						realpart = this.Model?.CollectionName ?? String.Empty;
-						realpart += offsets.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
-						realpart += offsets.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
+						realpart += offsets?.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
+						realpart += offsets?.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
 						return realpart;
 
 					case 1:
 						attrib = this.GetAttribute((uint)eAttribKey.BRAND_NAME);
 						realpart = attrib is KeyAttribute unkhash ? unkhash.Value : String.Empty;
-						realpart += offsets.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
-						realpart += offsets.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
+						realpart += offsets?.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
+						realpart += offsets?.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
 						return realpart;
 
 					case 2:
 						attrib = this.GetAttribute((uint)eAttribKey.PART_NAME_BASE_HASH);
 						realpart = attrib is KeyAttribute basehash ? basehash.Value : String.Empty;
-						realpart += offsets.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
-						realpart += offsets.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
+						realpart += offsets?.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
+						realpart += offsets?.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
 						return realpart;
 
 					default:

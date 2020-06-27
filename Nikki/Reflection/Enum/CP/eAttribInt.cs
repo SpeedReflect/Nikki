@@ -173,8 +173,23 @@
 		/// <summary>
 		/// 
 		/// </summary>
+		SPOKE_COUNT = 0x1B0EA1A9,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		INNER_RADIUS = 0xEB0101E2,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		OUTER_RADIUS = 0xCE7D8DB5,
+
+		/// <summary>
+		/// 
+		/// </summary>
 		WHEELEMITTER = 0xEDBF864E,
-		
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -198,11 +213,6 @@
 		/// <summary>
 		/// 
 		/// </summary>
-		_0x1B0EA1A9 = 0x1B0EA1A9,
-		
-		/// <summary>
-		/// 
-		/// </summary>
 		_0x6509EC92 = 0x6509EC92,
 				
 		/// <summary>
@@ -214,20 +224,5 @@
 		/// 
 		/// </summary>
 		_0xC9818DFC = 0xC9818DFC,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		_0xCE7D8DB5 = 0xCE7D8DB5,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		_0xE80A3B62 = 0xE80A3B62,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		_0xEB0101E2 = 0xEB0101E2,
 	}
 }

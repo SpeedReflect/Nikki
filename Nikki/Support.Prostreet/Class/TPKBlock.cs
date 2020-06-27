@@ -416,7 +416,7 @@ namespace Nikki.Support.Prostreet.Class
             if (this.FindTexture(CName.BinHash(), eKeyType.BINKEY) != null)
             {
 
-                throw new Exception($"Texture named ${CName} already exists");
+                throw new Exception($"Texture named {CName} already exists");
 
             }
 

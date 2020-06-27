@@ -113,7 +113,7 @@ namespace Nikki.Support.Carbon.Class
             get => this._collection_name;
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (String.IsNullOrWhiteSpace(value))
                 {
 
                     throw new ArgumentNullException("This value cannot be left empty.");
@@ -249,7 +249,7 @@ namespace Nikki.Support.Carbon.Class
             bw.Write(this._pal_comp);
             bw.Write(this._num_palettes);
             bw.Write(this.Mipmaps);
-            bw.Write(this.TileableUV);
+            bw.WriteEnum(this.TileableUV);
             bw.Write(this.BiasLevel);
             bw.Write(this.RenderingOrder);
             bw.WriteEnum(this.ScrollType);
@@ -306,7 +306,7 @@ namespace Nikki.Support.Carbon.Class
             this._pal_comp = br.ReadByte();
             this._num_palettes = br.ReadInt16();
             this.Mipmaps = br.ReadByte();
-            this.TileableUV = br.ReadByte();
+            this.TileableUV = br.ReadEnum<eTileableType>();
             this.BiasLevel = br.ReadByte();
             this.RenderingOrder = br.ReadByte();
             this.ScrollType = br.ReadEnum<eTextureScrollType>();
@@ -565,7 +565,7 @@ namespace Nikki.Support.Carbon.Class
                 writer.Write(this._pal_comp);
                 writer.Write(this._num_palettes);
                 writer.Write(this.Mipmaps);
-                writer.Write(this.TileableUV);
+                writer.WriteEnum(this.TileableUV);
                 writer.Write(this.BiasLevel);
                 writer.Write(this.RenderingOrder);
                 writer.WriteEnum(this.ScrollType);
@@ -647,7 +647,7 @@ namespace Nikki.Support.Carbon.Class
             this._pal_comp = reader.ReadByte();
             this._num_palettes = reader.ReadInt16();
             this.Mipmaps = reader.ReadByte();
-            this.TileableUV = reader.ReadByte();
+            this.TileableUV = reader.ReadEnum<eTileableType>();
             this.BiasLevel = reader.ReadByte();
             this.RenderingOrder = reader.ReadByte();
             this.ScrollType = reader.ReadEnum<eTextureScrollType>();

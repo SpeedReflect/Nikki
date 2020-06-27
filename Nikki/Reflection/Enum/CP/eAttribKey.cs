@@ -44,7 +44,12 @@
 		/// 
 		/// </summary>
 		LANGUAGEHASH = 0x4732DA07,
-		
+
+		/// <summary>
+		/// 
+		/// </summary>
+		EXCLUDEDECAL = 0xE80A3B62,
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -83,17 +88,17 @@
 		/// <summary>
 		/// 
 		/// </summary>
+		LIGHT_MATERIAL_NAME = 0x6BA02C05,
+
+		/// <summary>
+		/// 
+		/// </summary>
 		PART_NAME_BASE_HASH = 0x900449D3,
 
 		/// <summary>
 		/// 
 		/// </summary>
 		LOD_NAME_PREFIX_NAMEHASH = 0x956326AF,
-
-		/// <summary>
-		/// 
-		/// </summary>
-		_0x6BA02C05 = 0x6BA02C05,
 
 		/// <summary>
 		/// 

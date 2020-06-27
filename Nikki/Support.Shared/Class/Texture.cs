@@ -185,7 +185,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [MemoryCastable()]
         [Category("Secondary")]
-        public byte TileableUV { get; set; }
+        public eTileableType TileableUV { get; set; }
 
         /// <summary>
         /// DDS data of this <see cref="Texture"/>.

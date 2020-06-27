@@ -113,7 +113,7 @@ namespace Nikki.Support.Prostreet.Class
             get => this._collection_name;
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (String.IsNullOrWhiteSpace(value))
                 {
 
                     throw new ArgumentNullException("This value cannot be left empty.");
@@ -249,7 +249,7 @@ namespace Nikki.Support.Prostreet.Class
             bw.Write(this._pal_comp);
             bw.Write(this._num_palettes);
             bw.Write(this.Mipmaps);
-            bw.Write(this.TileableUV);
+            bw.WriteEnum(this.TileableUV);
             bw.Write(this.BiasLevel);
             bw.Write(this.RenderingOrder);
             bw.WriteEnum(this.ScrollType);
@@ -306,7 +306,7 @@ namespace Nikki.Support.Prostreet.Class
             this._pal_comp = br.ReadByte();
             this._num_palettes = br.ReadInt16();
             this.Mipmaps = br.ReadByte();
-            this.TileableUV = br.ReadByte();
+            this.TileableUV = br.ReadEnum<eTileableType>();
             this.BiasLevel = br.ReadByte();
             this.RenderingOrder = br.ReadByte();
             this.ScrollType = br.ReadEnum<eTextureScrollType>();

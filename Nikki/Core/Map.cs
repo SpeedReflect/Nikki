@@ -51,6 +51,7 @@ namespace Nikki.Core
 			{ 0x10C98090, "TEXTURE_NAME" },
 			{ 0x10CB799D, "MODEL_TABLE_OFFSET" },
 			{ 0x18E6DD34, "SlotOverrides" },
+			{ 0x1B0EA1A9, "SPOKE_COUNT" },
 			{ 0x2850A03B, "MORPHTARGET_NUM" },
 			{ 0x29008B14, "GROUPLANGUAGEHASH" },
 			{ 0x2DFDDCBE, "Collisions" },
@@ -75,6 +76,7 @@ namespace Nikki.Core
 			{ 0x643DABEB, "LOD_NAME_PREFIX_SELECTOR" },
 			{ 0x6AB42ADF, "WHEELLEFT" },
 			{ 0x6B66D0E0, "FULLBODY" },
+			{ 0x6BA02C05, "LIGHT_MATERIAL_NAME" },
 			{ 0x6BFA56DA, "MIRROR" },
 			{ 0x6DB4AF51, "STOCK_MATERIAL" },
 			{ 0x70FBB1E4, "ONLINE" },
@@ -102,6 +104,7 @@ namespace Nikki.Core
 			{ 0xBB318B8F, "PART_NAME_OFFSETS" },
 			{ 0xBCADE4C3, "HOODEMITTER" },
 			{ 0xC1A84E52, "WHEELRIGHT" },
+			{ 0xCE7D8DB5, "OUTER_RADIUS" },
 			{ 0xCDAB2874, "ISDECAL" },
 			{ 0xD2BCA329, "PresetRides" },
 			{ 0xD2CFEADA, "PresetSkins" },
@@ -111,6 +114,8 @@ namespace Nikki.Core
 			{ 0xD9027EBE, "COLOR3ID" },
 			{ 0xD90F9423, "MAX_LOD" },
 			{ 0xE15EEFD6, "SlotTypes" },
+			{ 0xE80A3B62, "EXCLUDEDECAL" },
+			{ 0xEB0101E2, "INNER_RADIUS" },
 			{ 0xEBB03E66, "BRAND_NAME" },
 			{ 0xEDB20048, "PAINTGROUP" },
 			{ 0xEDBF864E, "WHEELEMITTER" },
@@ -159,14 +164,14 @@ namespace Nikki.Core
 			{ 0x09163F9F, eCarPartAttribType.Boolean }, // USEMARKER1
 			{ 0x09163FA0, eCarPartAttribType.Boolean }, // USEMARKER2
 			{ 0x87557E1E, eCarPartAttribType.Boolean }, // 0x87557E1E // some hood value
-			{ 0xF9661A07, eCarPartAttribType.Boolean }, // 0xF9661A07
-			{ 0x1BC91595, eCarPartAttribType.Boolean }, // 0x1BC91595
-			{ 0x1BC91597, eCarPartAttribType.Boolean }, // 0x1BC91597
-			{ 0x1BC91598, eCarPartAttribType.Boolean }, // 0x1BC91598
-			{ 0x1BC9159A, eCarPartAttribType.Boolean }, // 0x1BC9159A
-			{ 0x1BC9159B, eCarPartAttribType.Boolean }, // 0x1BC9159B
-			{ 0x1BC915B5, eCarPartAttribType.Boolean }, // 0x1BC915B5
-			{ 0x1BC915BD, eCarPartAttribType.Boolean }, // 0x1BC915BD
+			{ 0xF9661A07, eCarPartAttribType.Boolean }, // 0xF9661A07 // ???
+			{ 0x1BC91595, eCarPartAttribType.Boolean }, // 0x1BC91595 // ???
+			{ 0x1BC91597, eCarPartAttribType.Boolean }, // 0x1BC91597 // ???
+			{ 0x1BC91598, eCarPartAttribType.Boolean }, // 0x1BC91598 // ???
+			{ 0x1BC9159A, eCarPartAttribType.Boolean }, // 0x1BC9159A // ???
+			{ 0x1BC9159B, eCarPartAttribType.Boolean }, // 0x1BC9159B // ???
+			{ 0x1BC915B5, eCarPartAttribType.Boolean }, // 0x1BC915B5 // ???
+			{ 0x1BC915BD, eCarPartAttribType.Boolean }, // 0x1BC915BD // ???
 			{ 0x721AFF7C, eCarPartAttribType.Boolean }, // CARBONFIBRE
 			{ 0xF7933C86, eCarPartAttribType.Boolean }, // EXCLUDE_SUV
 			{ 0xF7934315, eCarPartAttribType.Boolean }, // EXCLUDE_UG1
@@ -181,7 +186,7 @@ namespace Nikki.Core
 			{ 0x06159D55, eCarPartAttribType.Floating }, // TIREHUE
 			{ 0x0615AE61, eCarPartAttribType.Floating }, // TIRELUM
 			{ 0x0615C99B, eCarPartAttribType.Floating }, // TIRESAT
-			{ 0x9A9B6DDC, eCarPartAttribType.Floating }, // 0x9A9B6DDC
+			{ 0x9A9B6DDC, eCarPartAttribType.Floating }, // 0x9A9B6DDC // ???
 			{ 0xA0773FA5, eCarPartAttribType.Floating }, // SPINNEROFFSET
 			{ 0x931FF82E, eCarPartAttribType.Floating }, // SPINNER_TEXTURE
 
@@ -212,11 +217,11 @@ namespace Nikki.Core
 			{ 0xF073C524, eCarPartAttribType.Key }, // MATNAMEB
 			{ 0xEBB03E66, eCarPartAttribType.Key }, // BRAND_NAME
 			{ 0xEDB20048, eCarPartAttribType.Key }, // PAINTGROUP
-			{ 0x6BA02C05, eCarPartAttribType.Key }, // 0x6BA02C05 // Used Material Name
 			{ 0xD68A7BAB, eCarPartAttribType.Key }, // 0xD68A7BAB // Paint Color
 			{ 0x8C185134, eCarPartAttribType.Key }, // TEXTUREHASH
 			{ 0x10C98090, eCarPartAttribType.Key }, // TEXTURE_NAME
 			{ 0x4732DA07, eCarPartAttribType.Key }, // LANGUAGEHASH
+			{ 0xE80A3B62, eCarPartAttribType.Key }, // EXCLUDEDECAL
 			{ 0x8E73B5DC, eCarPartAttribType.Key }, // SPECIFICCARNAME
 			{ 0x29008B14, eCarPartAttribType.Key }, // GROUPLANGUAGEHASH
 			{ 0x6223C6F9, eCarPartAttribType.Key }, // VINYLLANGUAGEHASH
@@ -224,6 +229,7 @@ namespace Nikki.Core
 			{ 0xB5548ED7, eCarPartAttribType.Key }, // COLOR1LANGUAGEHASH
 			{ 0x04B39858, eCarPartAttribType.Key }, // COLOR2LANGUAGEHASH
 			{ 0x5412A1D9, eCarPartAttribType.Key }, // COLOR3LANGUAGEHASH
+			{ 0x6BA02C05, eCarPartAttribType.Key }, // LIGHT_MATERIAL_NAME
 			{ 0x900449D3, eCarPartAttribType.Key }, // PART_NAME_BASE_HASH
 			{ 0x956326AF, eCarPartAttribType.Key }, // LOD_NAME_PREFIX_NAMEHASH
 
@@ -259,22 +265,19 @@ namespace Nikki.Core
 			{ 0x0D4B85C7, eCarPartAttribType.Integer }, // HOODUNDER
 			{ 0x564B8CB6, eCarPartAttribType.Integer }, // NUMCOLOURS
 			{ 0xA77BDCFA, eCarPartAttribType.Integer }, // NUM_DECALS
+			{ 0x6509EC92, eCarPartAttribType.Integer }, // 0x6509EC92 // ???
+			{ 0x7D29CF3E, eCarPartAttribType.Integer }, // 0x7D29CF3E // ???
+			{ 0xC9818DFC, eCarPartAttribType.Integer }, // 0xC9818DFC // ???
 			{ 0xBCADE4C3, eCarPartAttribType.Integer }, // HOODEMITTER
 			{ 0x48620C16, eCarPartAttribType.Integer }, // DAMAGELEVEL
+			{ 0x1B0EA1A9, eCarPartAttribType.Integer }, // SPOKE_COUNT
+			{ 0xEB0101E2, eCarPartAttribType.Integer }, // INNER_RADIUS
+			{ 0xCE7D8DB5, eCarPartAttribType.Integer }, // OUTER_RADIUS
 			{ 0xEDBF864E, eCarPartAttribType.Integer }, // WHEELEMITTER
 			{ 0x6212682B, eCarPartAttribType.Integer }, // NUMREMAPCOLOURS
 			{ 0x2850A03B, eCarPartAttribType.Integer }, // MORPHTARGET_NUM
 			{ 0x927097F6, eCarPartAttribType.Integer }, // PART_NAME_SELECTOR
 			{ 0x643DABEB, eCarPartAttribType.Integer }, // LOD_NAME_PREFIX_SELECTOR
-
-			// Unknown Label Attributes
-			{ 0x1B0EA1A9, eCarPartAttribType.Integer }, // 0x1B0EA1A9 // idk
-			{ 0x6509EC92, eCarPartAttribType.Integer }, // MORPH_MARKERCIDPAINT !!!
-			{ 0x7D29CF3E, eCarPartAttribType.Integer }, // 0x7D29CF3E
-			{ 0xC9818DFC, eCarPartAttribType.Integer }, // 0xC9818DFC
-			{ 0xCE7D8DB5, eCarPartAttribType.Integer }, // 0xCE7D8DB5 // Outer Max Rim Size
-			{ 0xE80A3B62, eCarPartAttribType.Integer }, // 0xE80A3B62 // HOODAZRWT (KeyAttribute) ???
-			{ 0xEB0101E2, eCarPartAttribType.Integer }, // 0xEB0101E2 // Inner Max Rim Size
 		};
 
 		/// <summary>

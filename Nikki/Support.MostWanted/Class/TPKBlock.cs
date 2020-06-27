@@ -427,7 +427,7 @@ namespace Nikki.Support.MostWanted.Class
             if (this.FindTexture(CName.BinHash(), eKeyType.BINKEY) != null)
             {
 
-                throw new Exception($"Texture named ${CName} already exists");
+                throw new Exception($"Texture named {CName} already exists");
 
             }
 
