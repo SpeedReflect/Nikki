@@ -354,7 +354,80 @@ namespace Nikki.Support.MostWanted.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         public override void Serialize(BinaryWriter bw)
         {
+            byte[] array;
+            using (var ms = new MemoryStream(0xB0))
+            using (var writer = new BinaryWriter(ms))
+            {
 
+                writer.WriteNullTermUTF8(this._collection_name);
+                writer.WriteNullTermUTF8(this.ManufacturerName);
+
+                writer.Write(this.HeadlightFOV);
+                writer.Write(this.PadHighPerformance);
+                writer.Write(this.NumAvailableSkinNumbers);
+                writer.Write(this.WhatGame);
+                writer.Write(this.ConvertibleFlag);
+                writer.Write(this.WheelOuterRadius);
+                writer.Write(this.WheelInnerRadiusMin);
+                writer.Write(this.WheelInnerRadiusMax);
+
+                writer.Write(this.HeadlightPositionX);
+                writer.Write(this.HeadlightPositionY);
+                writer.Write(this.HeadlightPositionZ);
+                writer.Write(this.HeadlightPositionW);
+                writer.Write(this.DriverRenderingOffsetX);
+                writer.Write(this.DriverRenderingOffsetY);
+                writer.Write(this.DriverRenderingOffsetZ);
+                writer.Write(this.DriverRenderingOffsetW);
+                writer.Write(this.SteeringWheelRenderingX);
+                writer.Write(this.SteeringWheelRenderingY);
+                writer.Write(this.SteeringWheelRenderingZ);
+                writer.Write(this.SteeringWheelRenderingW);
+
+                writer.WriteEnum(this.UsageType);
+                writer.WriteEnum(this.MemoryType);
+
+                writer.Write(this.MaxInstances1);
+                writer.Write(this.MaxInstances2);
+                writer.Write(this.MaxInstances3);
+                writer.Write(this.MaxInstances4);
+                writer.Write(this.MaxInstances5);
+                writer.Write(this.KeepLoaded1);
+                writer.Write(this.KeepLoaded2);
+                writer.Write(this.KeepLoaded3);
+                writer.Write(this.KeepLoaded4);
+                writer.Write(this.KeepLoaded5);
+
+                writer.Write(this.MinTimeBetweenUses1);
+                writer.Write(this.MinTimeBetweenUses2);
+                writer.Write(this.MinTimeBetweenUses3);
+                writer.Write(this.MinTimeBetweenUses4);
+                writer.Write(this.MinTimeBetweenUses5);
+                writer.Write(this.AvailableSkinNumbers01);
+                writer.Write(this.AvailableSkinNumbers02);
+                writer.Write(this.AvailableSkinNumbers03);
+                writer.Write(this.AvailableSkinNumbers04);
+                writer.Write(this.AvailableSkinNumbers05);
+                writer.Write(this.AvailableSkinNumbers06);
+                writer.Write(this.AvailableSkinNumbers07);
+                writer.Write(this.AvailableSkinNumbers08);
+                writer.Write(this.AvailableSkinNumbers09);
+                writer.Write(this.AvailableSkinNumbers10);
+
+                writer.Write(this.DefaultSkinNumber);
+                writer.WriteEnum(this.IsSkinnable);
+                writer.Write(this.DefaultBasePaint.BinHash());
+
+                array = ms.ToArray();
+
+            }
+
+            array = Interop.Compress(array, eLZCompressionType.BEST);
+
+            var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+            header.Write(bw);
+            bw.Write(array.Length);
+            bw.Write(array);
         }
 
         /// <summary>
@@ -363,7 +436,72 @@ namespace Nikki.Support.MostWanted.Class
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         public override void Deserialize(BinaryReader br)
         {
+            var size = br.ReadInt32();
+            var array = br.ReadBytes(size);
 
+            array = Interop.Decompress(array);
+
+            using var ms = new MemoryStream(array);
+            using var reader = new BinaryReader(ms);
+
+            this._collection_name = reader.ReadNullTermUTF8();
+            this.ManufacturerName = reader.ReadNullTermUTF8();
+
+            this.HeadlightFOV = reader.ReadSingle();
+            this.PadHighPerformance = reader.ReadByte();
+            this.NumAvailableSkinNumbers = reader.ReadByte();
+            this.WhatGame = reader.ReadByte();
+            this.ConvertibleFlag = reader.ReadByte();
+            this.WheelOuterRadius = reader.ReadByte();
+            this.WheelInnerRadiusMin = reader.ReadByte();
+            this.WheelInnerRadiusMax = reader.ReadByte();
+
+            this.HeadlightPositionX = reader.ReadSingle();
+            this.HeadlightPositionY = reader.ReadSingle();
+            this.HeadlightPositionZ = reader.ReadSingle();
+            this.HeadlightPositionW = reader.ReadSingle();
+            this.DriverRenderingOffsetX = reader.ReadSingle();
+            this.DriverRenderingOffsetY = reader.ReadSingle();
+            this.DriverRenderingOffsetZ = reader.ReadSingle();
+            this.DriverRenderingOffsetW = reader.ReadSingle();
+            this.SteeringWheelRenderingX = reader.ReadSingle();
+            this.SteeringWheelRenderingY = reader.ReadSingle();
+            this.SteeringWheelRenderingZ = reader.ReadSingle();
+            this.SteeringWheelRenderingW = reader.ReadSingle();
+
+            this.UsageType = reader.ReadEnum<eUsageType>();
+            this.MemoryType = reader.ReadEnum<eMemoryType>();
+
+            this.MaxInstances1 = reader.ReadByte();
+            this.MaxInstances2 = reader.ReadByte();
+            this.MaxInstances3 = reader.ReadByte();
+            this.MaxInstances4 = reader.ReadByte();
+            this.MaxInstances5 = reader.ReadByte();
+            this.KeepLoaded1 = reader.ReadByte();
+            this.KeepLoaded2 = reader.ReadByte();
+            this.KeepLoaded3 = reader.ReadByte();
+            this.KeepLoaded4 = reader.ReadByte();
+            this.KeepLoaded5 = reader.ReadByte();
+
+            this.MinTimeBetweenUses1 = reader.ReadSingle();
+            this.MinTimeBetweenUses2 = reader.ReadSingle();
+            this.MinTimeBetweenUses3 = reader.ReadSingle();
+            this.MinTimeBetweenUses4 = reader.ReadSingle();
+            this.MinTimeBetweenUses5 = reader.ReadSingle();
+            this.AvailableSkinNumbers01 = reader.ReadByte();
+            this.AvailableSkinNumbers02 = reader.ReadByte();
+            this.AvailableSkinNumbers03 = reader.ReadByte();
+            this.AvailableSkinNumbers04 = reader.ReadByte();
+            this.AvailableSkinNumbers05 = reader.ReadByte();
+            this.AvailableSkinNumbers06 = reader.ReadByte();
+            this.AvailableSkinNumbers07 = reader.ReadByte();
+            this.AvailableSkinNumbers08 = reader.ReadByte();
+            this.AvailableSkinNumbers09 = reader.ReadByte();
+            this.AvailableSkinNumbers10 = reader.ReadByte();
+
+            this.DefaultSkinNumber = reader.ReadByte();
+            this.IsSkinnable = reader.ReadEnum<eBoolean>();
+            this.DefaultBasePaint = reader.ReadUInt32().BinString(eLookupReturn.EMPTY);
         }
 
         #endregion

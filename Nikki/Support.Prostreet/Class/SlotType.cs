@@ -3,6 +3,7 @@ using System.IO;
 using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using Nikki.Reflection.Enum.SlotID;
@@ -344,7 +345,40 @@ namespace Nikki.Support.Prostreet.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         public override void Serialize(BinaryWriter bw)
         {
+            byte[] array;
+            using (var ms = new MemoryStream(0x60))
+            using (var writer = new BinaryWriter(ms))
+            {
 
+                writer.WriteNullTermUTF8(this._collection_name);
+                writer.WriteNullTermUTF8(this.SlotStockOverride);
+                writer.WriteNullTermUTF8(this.SlotMainOverride);
+                writer.WriteNullTermUTF8(this.SlotOverrideGroup2);
+                writer.WriteNullTermUTF8(this.SlotOverrideGroup3);
+                writer.WriteNullTermUTF8(this.SlotOverrideGroup4);
+                writer.WriteNullTermUTF8(this.SlotOverrideGroup5);
+                writer.WriteNullTermUTF8(this.SlotOverrideGroup6);
+                writer.WriteNullTermUTF8(this.SlotOverrideGroup7);
+                writer.WriteNullTermUTF8(this.SlotOverrideGroup8);
+                writer.WriteNullTermUTF8(this.SlotOverrideGroup9);
+                writer.WriteNullTermUTF8(this.SlotOverrideGroup10);
+                writer.WriteNullTermUTF8(this.SlotOverrideGroup11);
+                writer.WriteNullTermUTF8(this.SlotOverrideGroup12);
+                writer.WriteNullTermUTF8(this.SlotOverrideGroup13);
+                writer.WriteNullTermUTF8(this.SlotOverrideGroup14);
+                writer.WriteNullTermUTF8(this.SlotOverrideGroup15);
+                writer.WriteEnum(this.PrimaryAnimation);
+
+                array = ms.ToArray();
+
+            }
+
+            array = Interop.Compress(array, eLZCompressionType.RAWW);
+
+            var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+            header.Write(bw);
+            bw.Write(array.Length);
+            bw.Write(array);
         }
 
         /// <summary>
@@ -353,7 +387,32 @@ namespace Nikki.Support.Prostreet.Class
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         public override void Deserialize(BinaryReader br)
         {
+            int size = br.ReadInt32();
+            var array = br.ReadBytes(size);
 
+            array = Interop.Decompress(array);
+
+            using var ms = new MemoryStream(array);
+            using var reader = new BinaryReader(ms);
+
+            this._collection_name = reader.ReadNullTermUTF8();
+            this.SlotStockOverride = reader.ReadNullTermUTF8();
+            this.SlotMainOverride = reader.ReadNullTermUTF8();
+            this.SlotOverrideGroup2 = reader.ReadNullTermUTF8();
+            this.SlotOverrideGroup3 = reader.ReadNullTermUTF8();
+            this.SlotOverrideGroup4 = reader.ReadNullTermUTF8();
+            this.SlotOverrideGroup5 = reader.ReadNullTermUTF8();
+            this.SlotOverrideGroup6 = reader.ReadNullTermUTF8();
+            this.SlotOverrideGroup7 = reader.ReadNullTermUTF8();
+            this.SlotOverrideGroup8 = reader.ReadNullTermUTF8();
+            this.SlotOverrideGroup9 = reader.ReadNullTermUTF8();
+            this.SlotOverrideGroup10 = reader.ReadNullTermUTF8();
+            this.SlotOverrideGroup11 = reader.ReadNullTermUTF8();
+            this.SlotOverrideGroup12 = reader.ReadNullTermUTF8();
+            this.SlotOverrideGroup13 = reader.ReadNullTermUTF8();
+            this.SlotOverrideGroup14 = reader.ReadNullTermUTF8();
+            this.SlotOverrideGroup15 = reader.ReadNullTermUTF8();
+            this.PrimaryAnimation = reader.ReadEnum<eCarAnimLocation>();
         }
 
         #endregion

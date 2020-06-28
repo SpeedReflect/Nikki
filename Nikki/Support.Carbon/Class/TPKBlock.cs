@@ -1422,7 +1422,7 @@ namespace Nikki.Support.Carbon.Class
 
 			}
 
-
+            // Synchronize textures
             for (int i = 0; i < this.Textures.Count; ++i)
             {
 

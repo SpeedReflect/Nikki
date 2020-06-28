@@ -1258,7 +1258,62 @@ namespace Nikki.Support.Prostreet.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         public override void Serialize(BinaryWriter bw)
         {
+            byte[] array;
 
+            var start = bw.BaseStream.Position;
+            bw.WriteBytes(SerializationHeader.ThisSize + 4);
+
+            using (var ms = new MemoryStream(this.Animations.Count * 0x200 + 0x80))
+            using (var writer = new BinaryWriter(ms))
+            {
+
+                writer.WriteNullTermUTF8(this._collection_name);
+                writer.WriteEnum(this.IsCompressed);
+                writer.Write(this.Animations.Count);
+                writer.Write(this.Textures.Count);
+
+                for (int loop = 0; loop < this.Animations.Count; ++loop)
+                {
+
+                    var anim = this.Animations[loop];
+                    writer.WriteNullTermUTF8(anim.Name);
+                    writer.Write(anim.BinKey);
+                    writer.Write(anim.FramesPerSecond);
+                    writer.Write(anim.TimeBase);
+                    writer.Write((byte)anim.FrameTextures.Count);
+
+                    for (int i = 0; i < anim.FrameTextures.Count; ++i)
+                    {
+
+                        writer.WriteNullTermUTF8(anim.FrameTextures[i].Name);
+
+                    }
+
+                }
+
+                writer.WriteBytes(0x40);
+
+                array = ms.ToArray();
+                array = Interop.Compress(array, eLZCompressionType.BEST);
+                bw.Write(array.Length);
+                bw.Write(array);
+
+            }
+
+            for (int loop = 0; loop < this.Textures.Count; ++loop)
+            {
+
+                this.Textures[loop].Serialize(bw);
+
+            }
+
+            var end = bw.BaseStream.Position;
+            bw.BaseStream.Position = start;
+            var size = (int)(end - start) - SerializationHeader.ThisSize - 4;
+            var header = new SerializationHeader(size, this.GameINT, this.Manager.Name);
+            header.Write(bw);
+            bw.Write(size);
+            bw.BaseStream.Position = end;
         }
 
         /// <summary>
@@ -1267,7 +1322,133 @@ namespace Nikki.Support.Prostreet.Class
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         public override void Deserialize(BinaryReader br)
         {
+            br.BaseStream.Position += 4;
+            int size = br.ReadInt32();
+            var array = br.ReadBytes(size);
 
+            array = Interop.Decompress(array);
+
+            using var ms = new MemoryStream(array);
+            using var reader = new BinaryReader(ms);
+
+            this._collection_name = reader.ReadNullTermUTF8();
+            this.IsCompressed = reader.ReadEnum<eBoolean>();
+            int animcount = reader.ReadInt32();
+            int textcount = reader.ReadInt32();
+            this.Animations.Capacity = animcount;
+            this.Textures.Capacity = textcount;
+
+            for (int loop = 0; loop < animcount; ++loop)
+            {
+
+                var anim = new AnimSlot()
+                {
+                    Name = reader.ReadNullTermUTF8(),
+                    BinKey = reader.ReadUInt32(),
+                    FramesPerSecond = reader.ReadByte(),
+                    TimeBase = reader.ReadByte(),
+                };
+
+                var count = reader.ReadByte();
+                anim.FrameTextures.Capacity = count;
+
+                for (int i = 0; i < count; ++i)
+                {
+
+                    var frame = new FrameEntry()
+                    {
+                        Name = reader.ReadNullTermUTF8()
+                    };
+
+                    anim.FrameTextures.Add(frame);
+
+                }
+
+                this.Animations.Add(anim);
+
+            }
+
+            for (int loop = 0; loop < textcount; ++loop)
+            {
+
+                var texture = new Texture()
+                {
+                    TPK = this
+                };
+
+                var header = new SerializationHeader();
+                header.Read(br);
+
+                // Check for consistency
+                if (header.ID != eBlockID.Nikki) break;
+                if (header.Game != this.GameINT) break;
+                if (header.Name != "TEXTURE") break;
+
+                texture.Deserialize(br);
+                this.Textures.Add(texture);
+
+            }
+        }
+
+        /// <summary>
+        /// Synchronizes all parts of this instance with another instance passed.
+        /// </summary>
+        /// <param name="other"><see cref="DBModelPart"/> to synchronize with.</param>
+        internal void Synchronize(TPKBlock other)
+        {
+            var animations = new List<AnimSlot>(other.Animations);
+            var textures = new List<Texture>(other.Textures);
+
+            // Synchronize animations
+            for (int i = 0; i < this.Animations.Count; ++i)
+            {
+
+                bool found = false;
+
+                for (int j = 0; j < other.Animations.Count; ++j)
+                {
+
+                    if (other.Animations[j].BinKey == this.Animations[i].BinKey)
+                    {
+
+                        found = true;
+                        break;
+
+                    }
+
+                }
+
+                if (!found) animations.Add(this.Animations[i]);
+
+            }
+
+            // Synchronize textures
+            for (int i = 0; i < this.Textures.Count; ++i)
+            {
+
+                bool found = false;
+
+                for (int j = 0; j < other.Textures.Count; ++j)
+                {
+
+                    if (other.Textures[j].BinKey == this.Textures[i].BinKey)
+                    {
+
+                        found = true;
+                        break;
+
+                    }
+
+                }
+
+                if (!found) textures.Add(this.Textures[i]);
+
+            }
+
+            this.Animations = animations;
+            this.Textures = textures;
+            this.IsCompressed = other.IsCompressed;
+            this.SettingData = other.SettingData;
         }
 
         #endregion

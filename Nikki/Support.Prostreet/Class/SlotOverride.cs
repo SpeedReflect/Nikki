@@ -3,6 +3,7 @@ using System.IO;
 using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using Nikki.Reflection.Enum.SlotID;
@@ -332,7 +333,37 @@ namespace Nikki.Support.Prostreet.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         public override void Serialize(BinaryWriter bw)
         {
+            byte[] array;
+            using (var ms = new MemoryStream(0x90))
+            using (var writer = new BinaryWriter(ms))
+            {
 
+                writer.WriteNullTermUTF8(this._collection_name);
+                writer.WriteNullTermUTF8(this.InfoMainOverride);
+                writer.WriteNullTermUTF8(this.InfoOverrideGroup2);
+                writer.WriteNullTermUTF8(this.InfoOverrideGroup3);
+                writer.WriteNullTermUTF8(this.InfoOverrideGroup4);
+                writer.WriteNullTermUTF8(this.InfoOverrideGroup5);
+                writer.WriteNullTermUTF8(this.InfoOverrideGroup6);
+                writer.WriteNullTermUTF8(this.InfoOverrideGroup7);
+                writer.WriteNullTermUTF8(this.InfoOverrideGroup8);
+                writer.WriteNullTermUTF8(this.InfoOverrideGroup9);
+                writer.WriteNullTermUTF8(this.InfoOverrideGroup10);
+                writer.WriteNullTermUTF8(this.InfoOverrideGroup11);
+                writer.WriteNullTermUTF8(this.InfoOverrideGroup12);
+                writer.WriteNullTermUTF8(this.InfoOverrideGroup13);
+                writer.WriteNullTermUTF8(this.InfoOverrideGroup14);
+                writer.WriteNullTermUTF8(this.InfoOverrideGroup15);
+                array = ms.ToArray();
+
+            }
+
+            array = Interop.Compress(array, eLZCompressionType.BEST);
+
+            var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+            header.Write(bw);
+            bw.Write(array.Length);
+            bw.Write(array);
         }
 
         /// <summary>
@@ -341,7 +372,30 @@ namespace Nikki.Support.Prostreet.Class
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         public override void Deserialize(BinaryReader br)
         {
+            int size = br.ReadInt32();
+            var array = br.ReadBytes(size);
 
+            array = Interop.Decompress(array);
+
+            using var ms = new MemoryStream(array);
+            using var reader = new BinaryReader(ms);
+
+            this._collection_name = reader.ReadNullTermUTF8();
+            this.InfoMainOverride = reader.ReadNullTermUTF8();
+            this.InfoOverrideGroup2 = reader.ReadNullTermUTF8();
+            this.InfoOverrideGroup3 = reader.ReadNullTermUTF8();
+            this.InfoOverrideGroup4 = reader.ReadNullTermUTF8();
+            this.InfoOverrideGroup5 = reader.ReadNullTermUTF8();
+            this.InfoOverrideGroup6 = reader.ReadNullTermUTF8();
+            this.InfoOverrideGroup7 = reader.ReadNullTermUTF8();
+            this.InfoOverrideGroup8 = reader.ReadNullTermUTF8();
+            this.InfoOverrideGroup9 = reader.ReadNullTermUTF8();
+            this.InfoOverrideGroup10 = reader.ReadNullTermUTF8();
+            this.InfoOverrideGroup11 = reader.ReadNullTermUTF8();
+            this.InfoOverrideGroup12 = reader.ReadNullTermUTF8();
+            this.InfoOverrideGroup13 = reader.ReadNullTermUTF8();
+            this.InfoOverrideGroup14 = reader.ReadNullTermUTF8();
+            this.InfoOverrideGroup15 = reader.ReadNullTermUTF8();
         }
 
         #endregion

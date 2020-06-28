@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.ComponentModel;
+using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Utils.EA;
@@ -541,7 +543,82 @@ namespace Nikki.Support.Prostreet.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         public override void Serialize(BinaryWriter bw)
         {
+            byte[] array;
+            var datalist = new List<byte[]>();
 
+            var size = this.Data.Length >> 15;
+            var modulo = this.Data.Length % 0x8000;
+
+            using (var ms = new MemoryStream(0x100 + this._collection_name.Length))
+            using (var writer = new BinaryWriter(ms))
+            {
+
+                // Write header info
+                writer.WriteNullTermUTF8(this._collection_name);
+                writer.Write(this._binkey);
+                writer.Write(this._cube_environment);
+                writer.Write(this.ClassKey);
+                writer.Write(this.Size);
+                writer.Write(this.PaletteSize);
+                writer.Write(this._area);
+                writer.Write(this.Width);
+                writer.Write(this.Height);
+                writer.Write(this._compression);
+                writer.Write(this._pal_comp);
+                writer.Write(this._num_palettes);
+                writer.Write(this.Mipmaps);
+                writer.WriteEnum(this.TileableUV);
+                writer.Write(this.BiasLevel);
+                writer.Write(this.RenderingOrder);
+                writer.WriteEnum(this.ScrollType);
+                writer.Write(this._used_flag);
+                writer.Write(this.ApplyAlphaSort);
+                writer.WriteEnum(this.AlphaUsageType);
+                writer.WriteEnum(this.AlphaBlendType);
+                writer.Write(this._flags);
+                writer.WriteEnum(this.MipmapBiasType);
+                writer.Write(this._scroll_timestep);
+                writer.Write(this._scroll_speedS);
+                writer.Write(this._scroll_speedT);
+                writer.Write(this._offsetS);
+                writer.Write(this._offsetT);
+                writer.Write(this._scaleS);
+                writer.Write(this._scaleT);
+                writer.WriteBytes(0x20); // write padding for better compression
+                writer.Write(modulo == 0 ? size : size + 1);
+
+                array = Interop.Compress(ms.ToArray(), eLZCompressionType.BEST);
+                datalist.Add(array);
+
+            }
+
+            for (int loop = 0; loop <= size; ++loop)
+            {
+
+                var total = loop == size ? modulo : 0x8000;
+
+                if (total == 0) break;
+
+                var temp = new byte[total];
+                Array.Copy(this.Data, loop << 15, temp, 0, total);
+                array = Interop.Compress(temp, eLZCompressionType.BEST);
+                datalist.Add(array);
+
+            }
+
+            var sum = datalist.Aggregate(0, (res, arr) => res += arr.Length);
+            sum += datalist.Count << 2;
+            var header = new SerializationHeader(sum, this.GameINT, "TEXTURE");
+            header.Write(bw);
+            bw.Write(sum);
+
+            foreach (var arr in datalist)
+            {
+
+                bw.Write(arr.Length);
+                bw.Write(arr);
+
+            }
         }
 
         /// <summary>
@@ -550,7 +627,59 @@ namespace Nikki.Support.Prostreet.Class
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         public override void Deserialize(BinaryReader br)
         {
+            br.BaseStream.Position += 4;
+            int size = br.ReadInt32();
+            var array = br.ReadBytes(size);
 
+            array = Interop.Decompress(array);
+
+            using var ms = new MemoryStream(array);
+            using var reader = new BinaryReader(ms);
+
+            this._collection_name = reader.ReadNullTermUTF8();
+            this._binkey = reader.ReadUInt32();
+            this._cube_environment = reader.ReadUInt32();
+            this.ClassKey = reader.ReadUInt32();
+            this.Size = reader.ReadInt32();
+            this.PaletteSize = reader.ReadInt32();
+            this._area = reader.ReadInt32();
+            this.Width = reader.ReadInt16();
+            this.Height = reader.ReadInt16();
+            this._compression = reader.ReadByte();
+            this._pal_comp = reader.ReadByte();
+            this._num_palettes = reader.ReadInt16();
+            this.Mipmaps = reader.ReadByte();
+            this.TileableUV = reader.ReadEnum<eTileableType>();
+            this.BiasLevel = reader.ReadByte();
+            this.RenderingOrder = reader.ReadByte();
+            this.ScrollType = reader.ReadEnum<eTextureScrollType>();
+            this._used_flag = reader.ReadByte();
+            this.ApplyAlphaSort = reader.ReadByte();
+            this.AlphaUsageType = reader.ReadEnum<eTextureAlphaUsageType>();
+            this.AlphaBlendType = reader.ReadEnum<eTextureAlphaBlendType>();
+            this._flags = reader.ReadByte();
+            this.MipmapBiasType = reader.ReadEnum<eTextureMipmapBiasType>();
+            this._scroll_timestep = reader.ReadInt16();
+            this._scroll_speedS = reader.ReadInt16();
+            this._scroll_speedT = reader.ReadInt16();
+            this._offsetS = reader.ReadInt16();
+            this._offsetT = reader.ReadInt16();
+            this._scaleS = reader.ReadInt16();
+            this._scaleT = reader.ReadInt16();
+            reader.BaseStream.Position += 0x20;
+            var count = reader.ReadInt32();
+
+            this.Data = new byte[this.Size];
+
+            for (int loop = 0; loop < count; ++loop)
+            {
+
+                var total = br.ReadInt32();
+                var temp = br.ReadBytes(total);
+                temp = Interop.Decompress(temp);
+                Array.Copy(temp, 0, this.Data, loop << 15, temp.Length);
+
+            }
         }
 
         #endregion

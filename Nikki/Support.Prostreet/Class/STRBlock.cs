@@ -371,7 +371,32 @@ namespace Nikki.Support.Prostreet.Class
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		public override void Serialize(BinaryWriter bw)
 		{
+			byte[] array;
+			using (var ms = new MemoryStream(this.StringRecordCount << 5))
+			using (var writer = new BinaryWriter(ms))
+			{
 
+				writer.WriteNullTermUTF8(this._collection_name);
+				writer.Write(this.StringRecordCount);
+
+				for (int loop = 0; loop < this.StringRecordCount; ++loop)
+				{
+
+					writer.WriteNullTermUTF8(this._stringinfo[loop].Label);
+					writer.WriteNullTermUTF8(this._stringinfo[loop].Text);
+
+				}
+
+				array = ms.ToArray();
+
+			}
+
+			array = Interop.Compress(array, eLZCompressionType.BEST);
+
+			var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+			header.Write(bw);
+			bw.Write(array.Length);
+			bw.Write(array);
 		}
 
 		/// <summary>
@@ -380,7 +405,64 @@ namespace Nikki.Support.Prostreet.Class
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public override void Deserialize(BinaryReader br)
 		{
+			int size = br.ReadInt32();
+			var array = br.ReadBytes(size);
 
+			array = Interop.Decompress(array);
+
+			using var ms = new MemoryStream(array);
+			using var reader = new BinaryReader(ms);
+
+			this._collection_name = reader.ReadNullTermUTF8();
+			var count = reader.ReadInt32();
+			this._stringinfo.Capacity = count;
+
+			for (int loop = 0; loop < count; ++loop)
+			{
+
+				var info = new StringRecord(this)
+				{
+					Label = reader.ReadNullTermUTF8(),
+					Text = reader.ReadNullTermUTF8()
+				};
+
+				info.Key = info.Label.BinHash();
+				this._stringinfo.Add(info);
+
+			}
+		}
+
+		/// <summary>
+		/// Synchronizes all parts of this instance with another instance passed.
+		/// </summary>
+		/// <param name="other"><see cref="DBModelPart"/> to synchronize with.</param>
+		internal void Synchronize(STRBlock other)
+		{
+			var records = new List<StringRecord>(other._stringinfo);
+
+			for (int i = 0; i < this.StringRecordCount; ++i)
+			{
+
+				bool found = false;
+
+				for (int j = 0; j < other.StringRecordCount; ++j)
+				{
+
+					if (other._stringinfo[j].Key == this._stringinfo[i].Key)
+					{
+
+						found = true;
+						break;
+
+					}
+
+				}
+
+				if (!found) records.Add(this._stringinfo[i]);
+
+			}
+
+			this._stringinfo = records;
 		}
 
 		#endregion
