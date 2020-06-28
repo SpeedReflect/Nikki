@@ -2,6 +2,7 @@
 using System.IO;
 using System.ComponentModel;
 using Nikki.Core;
+using Nikki.Utils;
 using Nikki.Utils.EA;
 using Nikki.Reflection.Enum;
 using Nikki.Support.MostWanted.Framework;
@@ -187,7 +188,39 @@ namespace Nikki.Support.MostWanted.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         public override void Serialize(BinaryWriter bw)
         {
+            byte[] array;
+            var size = this.Data.Length + (this.FEngColorCount << 3) + this.CollectionName.Length + 0x20;
+            using (var ms = new MemoryStream(size))
+            using (var writer = new BinaryWriter(ms))
+            {
 
+                writer.WriteNullTermUTF8(this.CollectionName);
+                writer.Write(this.FEngColorCount);
+
+                foreach (var color in this._colorinfo)
+                {
+
+                    writer.Write(color.Offset);
+                    writer.Write(color.Alpha);
+                    writer.Write(color.Red);
+                    writer.Write(color.Green);
+                    writer.Write(color.Blue);
+
+                }
+
+                writer.Write(this.Data.Length);
+                writer.Write(this.Data);
+
+                array = ms.ToArray();
+
+            }
+
+            array = Interop.Compress(array, eLZCompressionType.BEST);
+
+            var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+            header.Write(bw);
+            bw.Write(array.Length);
+            bw.Write(array);
         }
 
         /// <summary>
@@ -196,7 +229,36 @@ namespace Nikki.Support.MostWanted.Class
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         public override void Deserialize(BinaryReader br)
         {
+            int size = br.ReadInt32();
+            var array = br.ReadBytes(size);
 
+            array = Interop.Decompress(array);
+
+            using var ms = new MemoryStream(array);
+            using var reader = new BinaryReader(ms);
+
+            this.CollectionName = reader.ReadNullTermUTF8();
+            var count = reader.ReadInt32();
+            this._colorinfo.Capacity = count;
+
+            for (int loop = 0; loop < count; ++loop)
+            {
+
+                var color = new FEngColor(this)
+                {
+                    Offset = reader.ReadUInt32(),
+                    Alpha = reader.ReadByte(),
+                    Red = reader.ReadByte(),
+                    Green = reader.ReadByte(),
+                    Blue = reader.ReadByte()
+                };
+
+                this._colorinfo.Add(color);
+
+            }
+
+            count = reader.ReadInt32();
+            this.Data = reader.ReadBytes(count);
         }
 
         #endregion

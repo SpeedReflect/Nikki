@@ -524,7 +524,53 @@ namespace Nikki.Support.MostWanted.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         public override void Serialize(BinaryWriter bw)
         {
+            byte[] array;
+            using (var ms = new MemoryStream(0x99 + this.CollectionName.Length))
+            using (var writer = new BinaryWriter(ms))
+            {
 
+                writer.WriteNullTermUTF8(this._collection_name);
+                bw.Write(this.DiffuseMinLevel);
+                bw.Write(this.DiffuseMinRed);
+                bw.Write(this.DiffuseMinGreen);
+                bw.Write(this.DiffuseMinBlue);
+                bw.Write(this.DiffuseMaxLevel);
+                bw.Write(this.DiffuseMaxRed);
+                bw.Write(this.DiffuseMaxGreen);
+                bw.Write(this.DiffuseMaxBlue);
+                bw.Write(this.DiffuseMinAlpha);
+                bw.Write(this.DiffuseMaxAlpha);
+                bw.Write(this.SpecularPower);
+                bw.Write(this.SpecularMinLevel);
+                bw.Write(this.SpecularMinRed);
+                bw.Write(this.SpecularMinGreen);
+                bw.Write(this.SpecularMinBlue);
+                bw.Write(this.SpecularMaxLevel);
+                bw.Write(this.SpecularMaxRed);
+                bw.Write(this.SpecularMaxGreen);
+                bw.Write(this.SpecularMaxBlue);
+                bw.Write(this.ClampLevel);
+                bw.Write(this.FlakesLevel);
+                bw.Write(this.VinylScaleLevel);
+                bw.Write(this.Unknown0);
+                bw.Write(this.Unknown1);
+                bw.Write(this.EnvmapMinPower);
+                bw.Write(this.EnvmapMaxPower);
+                bw.Write(this.Unknown2);
+                bw.Write(this.Unknown3);
+                bw.Write(this.Unknown4);
+                bw.Write(this.Unknown5);
+
+                array = ms.ToArray();
+
+            }
+
+            array = Interop.Compress(array, eLZCompressionType.BEST);
+
+            var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+            header.Write(bw);
+            bw.Write(array.Length);
+            bw.Write(array);
         }
 
         /// <summary>
@@ -533,7 +579,45 @@ namespace Nikki.Support.MostWanted.Class
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         public override void Deserialize(BinaryReader br)
         {
+            int size = br.ReadInt32();
+            var array = br.ReadBytes(size);
 
+            array = Interop.Decompress(array);
+
+            using var ms = new MemoryStream(array);
+            using var reader = new BinaryReader(ms);
+
+            this._collection_name = reader.ReadNullTermUTF8();
+            this.DiffuseMinLevel = br.ReadSingle();
+            this.DiffuseMinRed = br.ReadSingle();
+            this.DiffuseMinGreen = br.ReadSingle();
+            this.DiffuseMinBlue = br.ReadSingle();
+            this.DiffuseMaxLevel = br.ReadSingle();
+            this.DiffuseMaxRed = br.ReadSingle();
+            this.DiffuseMaxGreen = br.ReadSingle();
+            this.DiffuseMaxBlue = br.ReadSingle();
+            this.DiffuseMinAlpha = br.ReadSingle();
+            this.DiffuseMaxAlpha = br.ReadSingle();
+            this.SpecularPower = br.ReadSingle();
+            this.SpecularMinLevel = br.ReadSingle();
+            this.SpecularMinRed = br.ReadSingle();
+            this.SpecularMinGreen = br.ReadSingle();
+            this.SpecularMinBlue = br.ReadSingle();
+            this.SpecularMaxLevel = br.ReadSingle();
+            this.SpecularMaxRed = br.ReadSingle();
+            this.SpecularMaxGreen = br.ReadSingle();
+            this.SpecularMaxBlue = br.ReadSingle();
+            this.ClampLevel = br.ReadSingle();
+            this.FlakesLevel = br.ReadSingle();
+            this.VinylScaleLevel = br.ReadSingle();
+            this.Unknown0 = br.ReadSingle();
+            this.Unknown1 = br.ReadSingle();
+            this.EnvmapMinPower = br.ReadSingle();
+            this.EnvmapMaxPower = br.ReadSingle();
+            this.Unknown2 = br.ReadSingle();
+            this.Unknown3 = br.ReadSingle();
+            this.Unknown4 = br.ReadSingle();
+            this.Unknown5 = br.ReadSingle();
         }
 
         #endregion

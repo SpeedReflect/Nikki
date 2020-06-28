@@ -3,10 +3,12 @@ using System.IO;
 using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using Nikki.Reflection.Enum.SlotID;
 using Nikki.Support.MostWanted.Framework;
+using CoreExtensions.IO;
 using CoreExtensions.Conversions;
 
 
@@ -191,7 +193,24 @@ namespace Nikki.Support.MostWanted.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         public override void Serialize(BinaryWriter bw)
         {
+            byte[] array;
+            using (var ms = new MemoryStream(0x60))
+            using (var writer = new BinaryWriter(ms))
+            {
 
+                writer.WriteNullTermUTF8(this._collection_name);
+                writer.WriteNullTermUTF8(this.InfoMainOverride);
+
+                array = ms.ToArray();
+
+            }
+
+            array = Interop.Compress(array, eLZCompressionType.RAWW);
+
+            var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+            header.Write(bw);
+            bw.Write(array.Length);
+            bw.Write(array);
         }
 
         /// <summary>
@@ -200,7 +219,16 @@ namespace Nikki.Support.MostWanted.Class
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         public override void Deserialize(BinaryReader br)
         {
+            int size = br.ReadInt32();
+            var array = br.ReadBytes(size);
 
+            array = Interop.Decompress(array);
+
+            using var ms = new MemoryStream(array);
+            using var reader = new BinaryReader(ms);
+
+            this._collection_name = reader.ReadNullTermUTF8();
+            this.InfoMainOverride = reader.ReadNullTermUTF8();
         }
 
         #endregion

@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using CoreExtensions.IO;
 
 
 
@@ -76,6 +77,28 @@ namespace Nikki.Support.MostWanted.Parts.PresetParts
 			bw.Write(this.HUDBackingColor.BinHash());
 			bw.Write(this.HUDNeedleColor.BinHash());
 			bw.Write(this.HUDCharacterColor.BinHash());
+		}
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public void Serialize(BinaryWriter bw)
+		{
+			bw.WriteNullTermUTF8(this.CustomHUD);
+			bw.WriteNullTermUTF8(this.HUDBackingColor);
+			bw.WriteNullTermUTF8(this.HUDNeedleColor);
+			bw.WriteNullTermUTF8(this.HUDCharacterColor);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public void Deserialize(BinaryReader br)
+		{
+			this.CustomHUD = br.ReadNullTermUTF8();
+			this.HUDBackingColor = br.ReadNullTermUTF8();
+			this.HUDNeedleColor = br.ReadNullTermUTF8();
+			this.HUDCharacterColor = br.ReadNullTermUTF8();
 		}
 	}
 }

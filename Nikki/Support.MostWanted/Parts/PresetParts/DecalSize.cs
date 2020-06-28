@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using CoreExtensions.IO;
 
 
 
@@ -93,6 +94,32 @@ namespace Nikki.Support.MostWanted.Parts.PresetParts
 			bw.Write(this.DecalRightDoor.BinHash());
 			bw.Write(this.DecalLeftQuarter.BinHash());
 			bw.Write(this.DecalRightQuarter.BinHash());
+		}
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public void Serialize(BinaryWriter bw)
+		{
+			bw.WriteNullTermUTF8(this.DecalFrontWindow);
+			bw.WriteNullTermUTF8(this.DecalRearWindow);
+			bw.WriteNullTermUTF8(this.DecalLeftDoor);
+			bw.WriteNullTermUTF8(this.DecalRightDoor);
+			bw.WriteNullTermUTF8(this.DecalLeftQuarter);
+			bw.WriteNullTermUTF8(this.DecalRightQuarter);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public void Deserialize(BinaryReader br)
+		{
+			this.DecalFrontWindow = br.ReadNullTermUTF8();
+			this.DecalRearWindow = br.ReadNullTermUTF8();
+			this.DecalLeftDoor = br.ReadNullTermUTF8();
+			this.DecalRightDoor = br.ReadNullTermUTF8();
+			this.DecalLeftQuarter = br.ReadNullTermUTF8();
+			this.DecalRightQuarter = br.ReadNullTermUTF8();
 		}
 	}
 }

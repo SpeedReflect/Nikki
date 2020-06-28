@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using CoreExtensions.IO;
 
 
 
@@ -93,6 +94,32 @@ namespace Nikki.Support.MostWanted.Parts.PresetParts
 			bw.Write(this.ZeroDamageRear.BinHash());
 			bw.Write(this.ZeroDamageRearLeft.BinHash());
 			bw.Write(this.ZeroDamageRearRight.BinHash());
+		}
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public void Serialize(BinaryWriter bw)
+		{
+			bw.WriteNullTermUTF8(this.ZeroDamageFront);
+			bw.WriteNullTermUTF8(this.ZeroDamageFrontLeft);
+			bw.WriteNullTermUTF8(this.ZeroDamageFrontRight);
+			bw.WriteNullTermUTF8(this.ZeroDamageRear);
+			bw.WriteNullTermUTF8(this.ZeroDamageRearLeft);
+			bw.WriteNullTermUTF8(this.ZeroDamageRearRight);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public void Deserialize(BinaryReader br)
+		{
+			this.ZeroDamageFront = br.ReadNullTermUTF8();
+			this.ZeroDamageFrontLeft = br.ReadNullTermUTF8();
+			this.ZeroDamageFrontRight = br.ReadNullTermUTF8();
+			this.ZeroDamageRear = br.ReadNullTermUTF8();
+			this.ZeroDamageRearLeft = br.ReadNullTermUTF8();
+			this.ZeroDamageRearRight = br.ReadNullTermUTF8();
 		}
 	}
 }

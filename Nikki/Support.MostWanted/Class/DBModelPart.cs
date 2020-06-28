@@ -4,11 +4,15 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Reflection.Enum.SlotID;
 using Nikki.Support.MostWanted.Framework;
+using Nikki.Support.MostWanted.Attributes;
 using Nikki.Support.Shared.Parts.CarParts;
+using CoreExtensions.IO;
 using CoreExtensions.Reflection;
 using CoreExtensions.Conversions;
 
@@ -297,7 +301,45 @@ namespace Nikki.Support.MostWanted.Class
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		public override void Serialize(BinaryWriter bw)
 		{
+			byte[] array;
+			using (var ms = new MemoryStream(this.CarPartsCount << 5 + 0x100))
+			using (var writer = new BinaryWriter(ms))
+			{
 
+				writer.WriteNullTermUTF8(this._collection_name);
+				writer.Write(this.CarPartsCount);
+
+				for (int loop = 0; loop < this.CarPartsCount; ++loop)
+				{
+
+					var part = this.ModelCarParts[loop] as Parts.CarParts.RealCarPart;
+
+					writer.Write(part.Attributes.Count);
+					writer.WriteNullTermUTF8(part.PartLabel);
+					writer.WriteNullTermUTF8(part.DebugName);
+					writer.WriteEnum(part.CarPartGroupID);
+					writer.Write(part.UpgradeGroupID);
+					part.LodStruct.Serialize(writer);
+
+					for (int i = 0; i < part.Attributes.Count; ++i)
+					{
+
+						part.Attributes[i].Serialize(writer);
+
+					}				
+
+				}
+
+				array = ms.ToArray();
+
+			}
+
+			array = Interop.Compress(array, eLZCompressionType.BEST);
+
+			var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+			header.Write(bw);
+			bw.Write(array.Length);
+			bw.Write(array);
 		}
 
 		/// <summary>
@@ -306,7 +348,95 @@ namespace Nikki.Support.MostWanted.Class
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public override void Deserialize(BinaryReader br)
 		{
+			int size = br.ReadInt32();
+			var array = br.ReadBytes(size);
 
+			array = Interop.Decompress(array);
+
+			using var ms = new MemoryStream(array);
+			using var reader = new BinaryReader(ms);
+
+			this._collection_name = reader.ReadNullTermUTF8();
+			var count = reader.ReadInt32();
+			this.ModelCarParts.Capacity = count;
+
+			for (int loop = 0; loop < count; ++loop)
+			{
+
+				var num = reader.ReadInt32();
+				var part = new Parts.CarParts.RealCarPart(this, num)
+				{
+					PartLabel = reader.ReadNullTermUTF8(),
+					DebugName = reader.ReadNullTermUTF8(),
+					CarPartGroupID = reader.ReadEnum<eSlotMostWanted>(),
+					UpgradeGroupID = reader.ReadUInt16()
+				};
+
+				part.LodStruct.Deserialize(reader);
+
+				for (int i = 0; i < num; ++i)
+				{
+
+					var key = reader.ReadUInt32();
+
+					if (!Map.CarPartKeys.TryGetValue(key, out var type))
+					{
+
+						type = eCarPartAttribType.Integer;
+
+					}
+
+					CPAttribute attrib = type switch
+					{
+						eCarPartAttribType.Boolean => new BoolAttribute(),
+						eCarPartAttribType.Floating => new FloatAttribute(),
+						eCarPartAttribType.String => new StringAttribute(),
+						eCarPartAttribType.Key => new KeyAttribute(),
+						_ => new IntAttribute(),
+					};
+
+					attrib.Key = key;
+					attrib.Deserialize(reader);
+					part.Attributes.Add(attrib);
+
+				}
+
+				this.ModelCarParts.Add(part);
+
+			}
+		}
+
+		/// <summary>
+		/// Synchronizes all parts of this instance with another instance passed.
+		/// </summary>
+		/// <param name="other"><see cref="DBModelPart"/> to synchronize with.</param>
+		internal void Synchronize(DBModelPart other)
+		{
+			var modelparts = new List<RealCarPart>(other.ModelCarParts);
+
+			for (int i = 0; i < this.CarPartsCount; ++i)
+			{
+
+				bool found = false;
+
+				for (int j = 0; j < other.CarPartsCount; ++j)
+				{
+
+					if (other.ModelCarParts[j].Equals(this.ModelCarParts[i]))
+					{
+
+						found = true;
+						break;
+
+					}
+
+				}
+
+				if (!found) modelparts.Add(this.ModelCarParts[i]);
+
+			}
+
+			this.ModelCarParts = modelparts;
 		}
 
 		#endregion

@@ -374,6 +374,7 @@ namespace Nikki.Support.Prostreet.Class
 					CPAttribute attrib = type switch
 					{
 						eCarPartAttribType.Boolean => new BoolAttribute(),
+						eCarPartAttribType.Color => new ColorAttribute(),
 						eCarPartAttribType.CarPartID => new PartIDAttribute(),
 						eCarPartAttribType.Floating => new FloatAttribute(),
 						eCarPartAttribType.String => new StringAttribute(),

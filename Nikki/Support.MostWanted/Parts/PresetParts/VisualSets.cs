@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using CoreExtensions.IO;
 
 
 
@@ -101,6 +102,34 @@ namespace Nikki.Support.MostWanted.Parts.PresetParts
 			bw.Write(this.VinylColor1.BinHash());
 			bw.Write(this.VinylColor2.BinHash());
 			bw.Write(this.VinylColor3.BinHash());
+		}
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public void Serialize(BinaryWriter bw)
+		{
+			bw.WriteNullTermUTF8(this.BasePaintType);
+			bw.WriteNullTermUTF8(this.VinylLayer);
+			bw.WriteNullTermUTF8(this.RimsPaintType);
+			bw.WriteNullTermUTF8(this.VinylColor0);
+			bw.WriteNullTermUTF8(this.VinylColor1);
+			bw.WriteNullTermUTF8(this.VinylColor2);
+			bw.WriteNullTermUTF8(this.VinylColor3);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public void Deserialize(BinaryReader br)
+		{
+			this.BasePaintType = br.ReadNullTermUTF8();
+			this.VinylLayer = br.ReadNullTermUTF8();
+			this.RimsPaintType = br.ReadNullTermUTF8();
+			this.VinylColor0 = br.ReadNullTermUTF8();
+			this.VinylColor1 = br.ReadNullTermUTF8();
+			this.VinylColor2 = br.ReadNullTermUTF8();
+			this.VinylColor3 = br.ReadNullTermUTF8();
 		}
 	}
 }

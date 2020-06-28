@@ -720,7 +720,90 @@ namespace Nikki.Support.MostWanted.Class
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		public override void Serialize(BinaryWriter bw)
 		{
+			byte[] array;
+			using (var ms = new MemoryStream(0x122))
+			using (var writer = new BinaryWriter(ms))
+			{
 
+				// Write all directories and locations
+				writer.Write(UInt16.Parse(this._collection_name));
+				writer.WriteNullTermUTF8(this.RaceDescription);
+				writer.WriteNullTermUTF8(this.TrackDirectory);
+				writer.WriteNullTermUTF8(this.RegionName);
+				writer.WriteNullTermUTF8(this.RegionDirectory);
+				writer.Write(this.LocationIndex);
+				writer.WriteNullTermUTF8(this.LocationDirectory);
+
+				// Write race settings
+				writer.WriteEnum(this.LocationType);
+				writer.WriteEnum(this.DriftType);
+				writer.WriteEnum(this.IsValid);
+				writer.WriteEnum(this.IsLoopingRace);
+				writer.WriteEnum(this.ReverseVersionExists);
+				writer.WriteEnum(this.IsPerformanceTuning);
+
+				// Write gameplay scores
+				writer.WriteNullTermUTF8(this.SunInfoName);
+				writer.WriteEnum(this.RaceGameplayMode);
+				writer.Write(this.RaceLength);
+				writer.Write(this.TimeLimitToBeatForward);
+				writer.Write(this.TimeLimitToBeatReverse);
+				writer.Write(this.ScoreToBeatDriftForward);
+				writer.Write(this.ScoreToBeatDriftReverse);
+
+				// Write map calibrations
+				writer.Write(this.TrackMapCalibrationOffsetX);
+				writer.Write(this.TrackMapCalibrationOffsetY);
+				writer.Write(this.TrackMapCalibrationWidth);
+				writer.Write(this.TrackMapCalibrationRotation);
+				writer.Write(this.TrackMapStartgridAngle);
+				writer.Write(this.TrackMapFinishlineAngle);
+				writer.Write(this.TrackMapCalibrationZoomIn);
+
+				// Write difficulties
+				writer.WriteEnum(this.DifficultyForward);
+				writer.WriteEnum(this.DifficultyReverse);
+				writer.Write(this.NumSecBeforeShorcutsAllowed);
+				writer.Write(this.DriftSecondsMin);
+				writer.Write(this.DriftSecondsMax);
+
+				// Write traffic settings
+				writer.Write(this.MaxTrafficCars_0_0);
+				writer.Write(this.MaxTrafficCars_0_1);
+				writer.Write(this.MaxTrafficCars_1_0);
+				writer.Write(this.MaxTrafficCars_1_1);
+				writer.Write(this.MaxTrafficCars_2_0);
+				writer.Write(this.MaxTrafficCars_2_1);
+				writer.Write(this.MaxTrafficCars_3_0);
+				writer.Write(this.MaxTrafficCars_3_1);
+				writer.Write(this.TrafAllowedNearStartgrid);
+				writer.Write(this.TrafAllowedNearFinishline);
+				writer.Write(this.CarRaceStartConfig);
+				writer.Write(this.TrafMinInitDistFromStart);
+				writer.Write(this.TrafMinInitDistFromFinish);
+				writer.Write(this.TrafMinInitDistInbetweenA);
+				writer.Write(this.TrafMinInitDistInbetweenB);
+				writer.Write(this.TrafOncomingFraction1);
+				writer.Write(this.TrafOncomingFraction2);
+				writer.Write(this.TrafOncomingFraction3);
+				writer.Write(this.TrafOncomingFraction4);
+
+				// Write menu map settings
+				writer.Write(this.MenuMapZoomOffsetX);
+				writer.Write(this.MenuMapZoomOffsetY);
+				writer.Write(this.MenuMapZoomWidth);
+				writer.Write(this.MenuMapStartZoomed);
+
+				array = ms.ToArray();
+
+			}
+
+			array = Interop.Compress(array, eLZCompressionType.BEST);
+
+			var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+			header.Write(bw);
+			bw.Write(array.Length);
+			bw.Write(array);
 		}
 
 		/// <summary>
@@ -729,7 +812,82 @@ namespace Nikki.Support.MostWanted.Class
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public override void Deserialize(BinaryReader br)
 		{
+			int size = br.ReadInt32();
+			var array = br.ReadBytes(size);
 
+			array = Interop.Decompress(array);
+
+			using var ms = new MemoryStream(array);
+			using var reader = new BinaryReader(ms);
+
+			// Read all directories and locations
+			this._collection_name = reader.ReadNullTermUTF8();
+			this.RaceDescription = reader.ReadNullTermUTF8();
+			this.TrackDirectory = reader.ReadNullTermUTF8();
+			this.RegionName = reader.ReadNullTermUTF8();
+			this.RegionDirectory = reader.ReadNullTermUTF8();
+			this.LocationIndex = reader.ReadInt32();
+			this.LocationDirectory = reader.ReadNullTermUTF8();
+
+			// Read race settings
+			this.LocationType = reader.ReadEnum<eLocationType>();
+			this.DriftType = reader.ReadEnum<eDriftType>();
+			this.IsValid = reader.ReadEnum<eBoolean>();
+			this.IsLoopingRace = reader.ReadEnum<eBoolean>();
+			this.ReverseVersionExists = reader.ReadEnum<eBoolean>();
+			this.IsPerformanceTuning = reader.ReadEnum<eBoolean>();
+
+			// Read gameplay scores
+			this.SunInfoName = reader.ReadNullTermUTF8();
+			this.RaceGameplayMode = reader.ReadEnum<eRaceGameplayMode>();
+			this.RaceLength = reader.ReadUInt32();
+			this.TimeLimitToBeatForward = reader.ReadSingle();
+			this.TimeLimitToBeatReverse = reader.ReadSingle();
+			this.ScoreToBeatDriftForward = reader.ReadInt32();
+			this.ScoreToBeatDriftReverse = reader.ReadInt32();
+
+			// Read map calibrations
+			this.TrackMapCalibrationOffsetX = reader.ReadSingle();
+			this.TrackMapCalibrationOffsetY = reader.ReadSingle();
+			this.TrackMapCalibrationWidth = reader.ReadSingle();
+			this.TrackMapCalibrationRotation = reader.ReadSingle();
+			this.TrackMapStartgridAngle = reader.ReadSingle();
+			this.TrackMapFinishlineAngle = reader.ReadSingle();
+			this.TrackMapCalibrationZoomIn = reader.ReadSingle();
+
+			// Read difficulties and padding
+			this.DifficultyForward = reader.ReadEnum<eTrackDifficulty>();
+			this.DifficultyReverse = reader.ReadEnum<eTrackDifficulty>();
+			this.NumSecBeforeShorcutsAllowed = reader.ReadInt16();
+			this.DriftSecondsMin = reader.ReadInt16();
+			this.DriftSecondsMax = reader.ReadInt16();
+
+			// Read traffic settings
+			this.MaxTrafficCars_0_0 = reader.ReadByte();
+			this.MaxTrafficCars_0_1 = reader.ReadByte();
+			this.MaxTrafficCars_1_0 = reader.ReadByte();
+			this.MaxTrafficCars_1_1 = reader.ReadByte();
+			this.MaxTrafficCars_2_0 = reader.ReadByte();
+			this.MaxTrafficCars_2_1 = reader.ReadByte();
+			this.MaxTrafficCars_3_0 = reader.ReadByte();
+			this.MaxTrafficCars_3_1 = reader.ReadByte();
+			this.TrafAllowedNearStartgrid = reader.ReadByte();
+			this.TrafAllowedNearFinishline = reader.ReadByte();
+			this.CarRaceStartConfig = reader.ReadInt16();
+			this.TrafMinInitDistFromStart = reader.ReadSingle();
+			this.TrafMinInitDistFromFinish = reader.ReadSingle();
+			this.TrafMinInitDistInbetweenA = reader.ReadSingle();
+			this.TrafMinInitDistInbetweenB = reader.ReadSingle();
+			this.TrafOncomingFraction1 = reader.ReadSingle();
+			this.TrafOncomingFraction2 = reader.ReadSingle();
+			this.TrafOncomingFraction3 = reader.ReadSingle();
+			this.TrafOncomingFraction4 = reader.ReadSingle();
+
+			// Read menu map settings
+			this.MenuMapZoomOffsetX = reader.ReadSingle();
+			this.MenuMapZoomOffsetY = reader.ReadSingle();
+			this.MenuMapZoomWidth = reader.ReadSingle();
+			this.MenuMapStartZoomed = reader.ReadInt32();
 		}
 
 		#endregion

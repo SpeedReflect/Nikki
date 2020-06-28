@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using CoreExtensions.IO;
 
 
 
@@ -221,6 +222,64 @@ namespace Nikki.Support.MostWanted.Parts.PresetParts
 			bw.Write(this.DamageRearRightWindow.BinHash());
 			bw.Write(this.DamageLeftDoor.BinHash());
 			bw.Write(this.DamageLeftRearDoor.BinHash());
+		}
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public void Serialize(BinaryWriter bw)
+		{
+			bw.WriteNullTermUTF8(this.DamageFrontWindow);
+			bw.WriteNullTermUTF8(this.DamageBody);
+			bw.WriteNullTermUTF8(this.DamageCopLights);
+			bw.WriteNullTermUTF8(this.DamageCopSpoiler);
+			bw.WriteNullTermUTF8(this.DamageFrontWheel);
+			bw.WriteNullTermUTF8(this.DamageLeftBrakelight);
+			bw.WriteNullTermUTF8(this.DamageRightBrakelight);
+			bw.WriteNullTermUTF8(this.DamageLeftHeadlight);
+			bw.WriteNullTermUTF8(this.DamageRightHeadlight);
+			bw.WriteNullTermUTF8(this.DamageHood);
+			bw.WriteNullTermUTF8(this.DamageBushguard);
+			bw.WriteNullTermUTF8(this.DamageFrontBumper);
+			bw.WriteNullTermUTF8(this.DamageRightDoor);
+			bw.WriteNullTermUTF8(this.DamageRightRearDoor);
+			bw.WriteNullTermUTF8(this.DamageTrunk);
+			bw.WriteNullTermUTF8(this.DamageRearBumper);
+			bw.WriteNullTermUTF8(this.DamageRearLeftWindow);
+			bw.WriteNullTermUTF8(this.DamageFrontLeftWindow);
+			bw.WriteNullTermUTF8(this.DamageFrontRightWindow);
+			bw.WriteNullTermUTF8(this.DamageRearRightWindow);
+			bw.WriteNullTermUTF8(this.DamageLeftDoor);
+			bw.WriteNullTermUTF8(this.DamageLeftRearDoor);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public void Deserialize(BinaryReader br)
+		{
+			this.DamageFrontWindow = br.ReadNullTermUTF8();
+			this.DamageBody = br.ReadNullTermUTF8();
+			this.DamageCopLights = br.ReadNullTermUTF8();
+			this.DamageCopSpoiler = br.ReadNullTermUTF8();
+			this.DamageFrontWheel = br.ReadNullTermUTF8();
+			this.DamageLeftBrakelight = br.ReadNullTermUTF8();
+			this.DamageRightBrakelight = br.ReadNullTermUTF8();
+			this.DamageLeftHeadlight = br.ReadNullTermUTF8();
+			this.DamageRightHeadlight = br.ReadNullTermUTF8();
+			this.DamageHood = br.ReadNullTermUTF8();
+			this.DamageBushguard = br.ReadNullTermUTF8();
+			this.DamageFrontBumper = br.ReadNullTermUTF8();
+			this.DamageRightDoor = br.ReadNullTermUTF8();
+			this.DamageRightRearDoor = br.ReadNullTermUTF8();
+			this.DamageTrunk = br.ReadNullTermUTF8();
+			this.DamageRearBumper = br.ReadNullTermUTF8();
+			this.DamageRearLeftWindow = br.ReadNullTermUTF8();
+			this.DamageFrontLeftWindow = br.ReadNullTermUTF8();
+			this.DamageFrontRightWindow = br.ReadNullTermUTF8();
+			this.DamageRearRightWindow = br.ReadNullTermUTF8();
+			this.DamageLeftDoor = br.ReadNullTermUTF8();
+			this.DamageLeftRearDoor = br.ReadNullTermUTF8();
 		}
 	}
 }

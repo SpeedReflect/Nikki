@@ -432,5 +432,55 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// <param name="cp2">The second <see cref="CPStruct"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
 		public static bool operator !=(CPStruct cp1, CPStruct cp2) => !(cp1 == cp2);
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public void Serialize(BinaryWriter bw)
+		{
+			bw.WriteEnum(this.Exists);
+			if (this.Exists == eBoolean.False) return;
+
+			bw.WriteEnum(this.Templated);
+			bw.WriteEnum(this.ConcatenatorExists);
+			if (this.ConcatenatorExists == eBoolean.True) bw.WriteNullTermUTF8(this.Concatenator);
+
+			bw.WriteEnum(this.GeometryLodAExists);
+			bw.WriteEnum(this.GeometryLodBExists);
+			bw.WriteEnum(this.GeometryLodCExists);
+			bw.WriteEnum(this.GeometryLodDExists);
+			bw.WriteEnum(this.GeometryLodEExists);
+
+			if (this.GeometryLodAExists == eBoolean.True) bw.WriteNullTermUTF8(this.GeometryLodA);
+			if (this.GeometryLodBExists == eBoolean.True) bw.WriteNullTermUTF8(this.GeometryLodB);
+			if (this.GeometryLodCExists == eBoolean.True) bw.WriteNullTermUTF8(this.GeometryLodC);
+			if (this.GeometryLodDExists == eBoolean.True) bw.WriteNullTermUTF8(this.GeometryLodD);
+			if (this.GeometryLodEExists == eBoolean.True) bw.WriteNullTermUTF8(this.GeometryLodE);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public void Deserialize(BinaryReader br)
+		{
+			this.Exists = br.ReadEnum<eBoolean>();
+			if (this.Exists == eBoolean.False) return;
+
+			this.Templated = br.ReadEnum<eBoolean>();
+			this.ConcatenatorExists = br.ReadEnum<eBoolean>();
+			if (this.ConcatenatorExists == eBoolean.True) this.Concatenator = br.ReadNullTermUTF8();
+
+			this.GeometryLodAExists	= br.ReadEnum<eBoolean>();
+			this.GeometryLodBExists	= br.ReadEnum<eBoolean>();
+			this.GeometryLodCExists	= br.ReadEnum<eBoolean>();
+			this.GeometryLodDExists	= br.ReadEnum<eBoolean>();
+			this.GeometryLodEExists = br.ReadEnum<eBoolean>();
+
+			if (this.GeometryLodAExists == eBoolean.True) this.GeometryLodA = br.ReadNullTermUTF8();
+			if (this.GeometryLodBExists == eBoolean.True) this.GeometryLodB = br.ReadNullTermUTF8();
+			if (this.GeometryLodCExists == eBoolean.True) this.GeometryLodC = br.ReadNullTermUTF8();
+			if (this.GeometryLodDExists == eBoolean.True) this.GeometryLodD = br.ReadNullTermUTF8();
+			if (this.GeometryLodEExists == eBoolean.True) this.GeometryLodE = br.ReadNullTermUTF8();
+		}
 	}
 }
