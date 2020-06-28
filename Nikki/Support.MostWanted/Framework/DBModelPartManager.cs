@@ -746,9 +746,14 @@ namespace Nikki.Support.MostWanted.Framework
 			// Generate Model Collections
 			for (int a1 = 0; a1 < models_list.Length; ++a1)
 			{
-				
+
 				if (String.IsNullOrEmpty(models_list[a1])) continue;
-				var collection = new DBModelPart(models_list[a1], this);
+
+				DBModelPart collection;
+
+				try { collection = new DBModelPart(models_list[a1], this); }
+				catch { continue; } // in case exists
+
 				var tempparts = temp_cparts.FindAll(_ => _.Index == a1);
 
 				foreach (var temppart in tempparts)

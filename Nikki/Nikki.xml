@@ -17411,6 +17411,12 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Class.DBModelPart.Synchronize(Nikki.Support.MostWanted.Class.DBModelPart)">
+            <summary>
+            Synchronizes all parts of this instance with another instance passed.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> to synchronize with.</param>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Class.FNGroup">
             <summary>
             <see cref="T:Nikki.Support.MostWanted.Class.FNGroup"/> is a collection of frontend group elements and scripts.
@@ -18500,6 +18506,12 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Class.STRBlock.Synchronize(Nikki.Support.MostWanted.Class.STRBlock)">
+            <summary>
+            Synchronizes all parts of this instance with another instance passed.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> to synchronize with.</param>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Class.SunInfo">
             <summary>
             <see cref="T:Nikki.Support.MostWanted.Class.SunInfo"/> is a collection of sun and daylight settings.
@@ -19055,6 +19067,12 @@
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.TPKBlock.Synchronize(Nikki.Support.MostWanted.Class.TPKBlock)">
+            <summary>
+            Synchronizes all parts of this instance with another instance passed.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> to synchronize with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.Track">
             <summary>
@@ -20605,6 +20623,16 @@
             <param name="cp2">The second <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.CPStruct"/> to compare, or null.</param>
             <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.CPStruct.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart">
             <summary>
             A unit CarPart attribute of <see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/>.
@@ -20892,6 +20920,16 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.PresetParts.Attachments.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.PresetParts.Attachments.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Parts.PresetParts.Damages">
             <summary>
             A unit <see cref="T:Nikki.Support.MostWanted.Parts.PresetParts.Damages"/> used in preset rides.
@@ -21025,6 +21063,16 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to read data with.</param>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.PresetParts.Damages.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.PresetParts.Damages.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Parts.PresetParts.DecalArray">
             <summary>
             A unit <see cref="T:Nikki.Support.MostWanted.Parts.PresetParts.DecalArray"/> used in preset rides.
@@ -21088,6 +21136,16 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.PresetParts.DecalArray.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.PresetParts.DecalArray.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Parts.PresetParts.DecalSize">
             <summary>
             A unit <see cref="T:Nikki.Support.MostWanted.Parts.PresetParts.DecalSize"/> used in preset rides.
@@ -21141,6 +21199,16 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.PresetParts.DecalSize.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.PresetParts.DecalSize.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Parts.PresetParts.HUDStyle">
             <summary>
             A unit <see cref="T:Nikki.Support.MostWanted.Parts.PresetParts.HUDStyle"/> used in preset rides.
@@ -21183,6 +21251,16 @@
             Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.PresetParts.HUDStyle.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.PresetParts.HUDStyle.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
         </member>
         <member name="T:Nikki.Support.MostWanted.Parts.PresetParts.VisualSets">
             <summary>
@@ -21242,6 +21320,16 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.PresetParts.VisualSets.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.PresetParts.VisualSets.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
         <member name="T:Nikki.Support.MostWanted.Parts.PresetParts.ZeroDamage">
             <summary>
             A unit <see cref="T:Nikki.Support.MostWanted.Parts.PresetParts.ZeroDamage"/> used in preset rides.
@@ -21294,6 +21382,16 @@
             Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.PresetParts.ZeroDamage.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.PresetParts.ZeroDamage.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
         </member>
         <member name="T:Nikki.Support.Prostreet.Attributes.BoolAttribute">
             <summary>
@@ -23436,6 +23534,12 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Class.DBModelPart.Synchronize(Nikki.Support.Prostreet.Class.DBModelPart)">
+            <summary>
+            Synchronizes all parts of this instance with another instance passed.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> to synchronize with.</param>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Class.FNGroup">
             <summary>
             <see cref="T:Nikki.Support.Prostreet.Class.FNGroup"/> is a collection of frontend group elements and scripts.
@@ -24398,6 +24502,12 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.Synchronize(Nikki.Support.Prostreet.Class.STRBlock)">
+            <summary>
+            Synchronizes all parts of this instance with another instance passed.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> to synchronize with.</param>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Class.SunInfo">
             <summary>
             <see cref="T:Nikki.Support.Prostreet.Class.SunInfo"/> is a collection of sun and daylight settings.
@@ -24932,6 +25042,12 @@
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.Synchronize(Nikki.Support.Prostreet.Class.TPKBlock)">
+            <summary>
+            Synchronizes all parts of this instance with another instance passed.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> to synchronize with.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Class.Track">
             <summary>

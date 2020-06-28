@@ -849,7 +849,7 @@ namespace Nikki.Support.MostWanted.Class
                 writer.WriteNullTermUTF8(this.WindshieldTint);
 
                 // Write HUD
-                this.HUD.Serialize(write);
+                this.HUD.Serialize(writer);
 
                 // Finish writing parts
                 writer.WriteNullTermUTF8(this.CV);
