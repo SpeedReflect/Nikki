@@ -213,13 +213,17 @@ namespace Nikki.Support.MostWanted.Class
 			// Since CollectionNames do not exist in vanilla files, but they do exist
 			// in saved files using this library, they are supposed to be located at 
 			// offset 0x10, while unknown data at offset 0x20
-			int count = this.Manager?.Count ?? 0;
-			this._collection_name = $"GLOBAL{count}"; // since there exists only one at a time
+			string count = this.Manager is null
+				? String.Empty
+				: this.Manager.Count == 0 ? String.Empty : this.Manager.Count.ToString();
+			
+			// Since there exists only one at a time
+			this._collection_name = $"GLOBAL{count}";
 
 			if (udatoffset > 0x10 && hashoffset > 0x10 && textoffset > 0x10)
 			{
 
-				br.BaseStream.Position = 0x10;
+				br.BaseStream.Position = broffset + 0x10;
 				var cname = br.ReadNullTermUTF8();
 				if (!String.IsNullOrEmpty(cname)) this._collection_name = cname;
 

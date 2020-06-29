@@ -740,7 +740,7 @@ namespace Nikki.Support.MostWanted.Class
             reader.BaseStream.Position += 0x20;
             var count = reader.ReadInt32();
 
-            this.Data = new byte[this.Size];
+            this.Data = new byte[this.Size + this.PaletteSize];
 
             for (int loop = 0; loop < count; ++loop)
             {

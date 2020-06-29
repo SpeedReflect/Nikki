@@ -213,6 +213,7 @@ namespace Nikki.Core
 
 			// Key Attributes
 			{ 0x000004B8, eCarPartAttribType.Key }, // CV
+			{ 0x0019CBC0, eCarPartAttribType.Key }, // NAME
 			{ 0xF073C523, eCarPartAttribType.Key }, // MATNAMEA
 			{ 0xF073C524, eCarPartAttribType.Key }, // MATNAMEB
 			{ 0xEBB03E66, eCarPartAttribType.Key }, // BRAND_NAME
@@ -244,7 +245,6 @@ namespace Nikki.Core
 			{ 0x00194036, eCarPartAttribType.Integer }, // MAT5
 			{ 0x00194037, eCarPartAttribType.Integer }, // MAT6
 			{ 0x00194038, eCarPartAttribType.Integer }, // MAT7
-			{ 0x0019CBC0, eCarPartAttribType.Integer }, // NAME
 			{ 0x001CAD5A, eCarPartAttribType.Integer }, // SIZE
 			{ 0x00136707, eCarPartAttribType.Integer }, // BLUE
 			{ 0x026E1AC5, eCarPartAttribType.Integer }, // ALPHA

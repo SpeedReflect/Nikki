@@ -58,11 +58,6 @@
 		/// <summary>
 		/// 
 		/// </summary>
-		NAME = 0x0019CBC0,
-		
-		/// <summary>
-		/// 
-		/// </summary>
 		SIZE = 0x001CAD5A,
 		
 		/// <summary>

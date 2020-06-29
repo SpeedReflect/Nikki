@@ -9,7 +9,12 @@
 		/// 
 		/// </summary>
 		CV = 0x000004B8,
-				
+
+		/// <summary>
+		/// 
+		/// </summary>
+		NAME = 0x0019CBC0,
+
 		/// <summary>
 		/// 
 		/// </summary>

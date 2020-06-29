@@ -1571,11 +1571,6 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.NAME">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.SIZE">
             <summary>
             
@@ -1747,6 +1742,11 @@
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.CV">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.NAME">
             <summary>
             
             </summary>
