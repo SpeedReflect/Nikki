@@ -72,15 +72,38 @@ namespace Nikki.Support.Shared.Class
         [Browsable(false)]
         public int PaletteSize { get; protected set; } = 0;
 
+        /// <summary>
+        /// Compression type of the texture.
+        /// </summary>
+        [Category("Primary")]
+        public abstract eTextureCompressionType Compression { get; }
+
+        /// <summary>
+        /// Determines whether this <see cref="Texture"/> has palette.
+        /// </summary>
+        [Category("Primary")]
+        public bool HasPalette => this.Compression switch
+        {
+            eTextureCompressionType.TEXCOMP_4BIT => true,
+            eTextureCompressionType.TEXCOMP_4BIT_IA8 => true,
+            eTextureCompressionType.TEXCOMP_4BIT_RGB16_A8 => true,
+            eTextureCompressionType.TEXCOMP_4BIT_RGB24_A8 => true,
+            eTextureCompressionType.TEXCOMP_8BIT => true,
+            eTextureCompressionType.TEXCOMP_8BIT_16 => true,
+            eTextureCompressionType.TEXCOMP_8BIT_64 => true,
+            eTextureCompressionType.TEXCOMP_8BIT_IA8 => true,
+            eTextureCompressionType.TEXCOMP_8BIT_RGB16_A8 => true,
+            eTextureCompressionType.TEXCOMP_8BIT_RGB24_A8 => true,
+            eTextureCompressionType.TEXCOMP_16BIT => true,
+            eTextureCompressionType.TEXCOMP_16BIT_1555 => true,
+            eTextureCompressionType.TEXCOMP_16BIT_3555 => true,
+            eTextureCompressionType.TEXCOMP_16BIT_565 => true,
+            _ => false
+        };
+
         #endregion
 
         #region Public Properties
-
-        /// <summary>
-        /// Gets compression type of the texture.
-        /// </summary>
-        /// <returns>Compression type as a string.</returns>
-        public abstract string Compression { get; }
 
         /// <summary>
         /// Represents height in pixels of the texture.
@@ -225,7 +248,9 @@ namespace Nikki.Support.Shared.Class
         /// Gets .dds data along with the .dds header.
         /// </summary>
         /// <returns>.dds texture as a byte array.</returns>
-        public abstract byte[] GetDDSArray();
+        /// <param name="make_no_palette">True if palette should be decompressed into 
+        /// 32 bpp DDS; false otherwise.</param>
+        public abstract byte[] GetDDSArray(bool make_no_palette);
 
         /// <summary>
         /// Initializes all properties of the new <see cref="Texture"/>.

@@ -431,10 +431,10 @@ namespace Nikki.Support.MostWanted.Class
 
             }
 
-            if (!Comp.IsDDSTexture(filename))
+            if (!Comp.IsDDSTexture(filename, out string error))
             {
 
-                throw new ArgumentException($"File {filename} is not of supported DDS format");
+                throw new ArgumentException(error);
 
             }
 
@@ -513,10 +513,10 @@ namespace Nikki.Support.MostWanted.Class
 
             }
 
-            if (!Comp.IsDDSTexture(filename))
+            if (!Comp.IsDDSTexture(filename, out string error))
             {
 
-                throw new ArgumentException($"File {filename} is not of supported DDS format");
+                throw new ArgumentException(error);
 
             }
 
@@ -804,7 +804,21 @@ namespace Nikki.Support.MostWanted.Class
 
             // Initialize stack for data and copy it
             texture.Data = new byte[datalength];
-            Array.Copy(array, 0, texture.Data, 0, datalength);
+
+            // Quick way to copy palette in front and data to the back
+            if (texture.PaletteSize == 0 || texture.Offset >= texture.PaletteOffset)
+			{
+
+                Array.Copy(array, 0, texture.Data, 0, datalength);
+
+			}
+            else
+			{
+
+                Array.Copy(array, texture.Size, texture.Data, 0, texture.PaletteSize);
+                Array.Copy(array, 0, texture.Data, texture.PaletteSize, texture.Size);
+
+			}
 
             // Add texture to this TPK
             this.Textures.Add(texture);
@@ -1058,8 +1072,8 @@ namespace Nikki.Support.MostWanted.Class
             var WriteHeader = new Action<Texture, BinaryWriter>((texture, writer) =>
             {
 
-                texture.PaletteOffset = totalTexSize;
-                texture.Offset = totalTexSize + texture.PaletteSize;
+                texture.Offset = totalTexSize;
+                texture.PaletteOffset = totalTexSize + texture.Size;
                 var nextPos = writer.BaseStream.Position + 0x7C;
                 texture.Assemble(writer);
                 writer.BaseStream.Position = nextPos;
@@ -1083,7 +1097,20 @@ namespace Nikki.Support.MostWanted.Class
 
                 // Initialize array of texture data and header, write it
                 var array = new byte[texture.Data.Length + texHeaderSize];
-                Array.Copy(texture.Data, 0, array, 0, texture.Data.Length);
+
+                if (texture.HasPalette)
+                {
+
+                    Array.Copy(texture.Data, texture.PaletteSize, array, 0, texture.Size);
+                    Array.Copy(texture.Data, 0, array, texture.Size, texture.PaletteSize);
+
+                }
+                else
+                {
+
+                    Array.Copy(texture.Data, 0, array, 0, texture.Data.Length);
+
+                }
 
                 using (var strMemory = new MemoryStream(array))
                 using (var strWriter = new BinaryWriter(strMemory))

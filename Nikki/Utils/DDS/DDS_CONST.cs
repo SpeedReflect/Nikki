@@ -181,6 +181,54 @@ namespace Nikki.Utils.DDS
             _PIXELFORMAT.dwABitMask = 0;
         }
 
+        public static void DDSPF_PAL4(DDS_PIXELFORMAT _PIXELFORMAT)
+		{
+            _PIXELFORMAT.dwSize = 0x20;
+            _PIXELFORMAT.dwFlags = (uint)DDS_TYPE.PAL4;
+            _PIXELFORMAT.dwFourCC = 0;
+            _PIXELFORMAT.dwRGBBitCount = 4;
+            _PIXELFORMAT.dwRBitMask = 0;
+            _PIXELFORMAT.dwGBitMask = 0;
+            _PIXELFORMAT.dwBBitMask = 0;
+            _PIXELFORMAT.dwABitMask = 0;
+        }
+
+        public static void DDSPF_PAL4A(DDS_PIXELFORMAT _PIXELFORMAT)
+		{
+            _PIXELFORMAT.dwSize = 0x20;
+            _PIXELFORMAT.dwFlags = (uint)DDS_TYPE.PAL4A;
+            _PIXELFORMAT.dwFourCC = 0;
+            _PIXELFORMAT.dwRGBBitCount = 4;
+            _PIXELFORMAT.dwRBitMask = 0;
+            _PIXELFORMAT.dwGBitMask = 0;
+            _PIXELFORMAT.dwBBitMask = 0;
+            _PIXELFORMAT.dwABitMask = 0;
+        }
+
+        public static void DDSPF_PAL8(DDS_PIXELFORMAT _PIXELFORMAT)
+		{
+            _PIXELFORMAT.dwSize = 0x20;
+            _PIXELFORMAT.dwFlags = (uint)DDS_TYPE.PAL8;
+            _PIXELFORMAT.dwFourCC = 0;
+            _PIXELFORMAT.dwRGBBitCount = 8;
+            _PIXELFORMAT.dwRBitMask = 0;
+            _PIXELFORMAT.dwGBitMask = 0;
+            _PIXELFORMAT.dwBBitMask = 0;
+            _PIXELFORMAT.dwABitMask = 0;
+        }
+
+        public static void DDSPF_PAL8A(DDS_PIXELFORMAT _PIXELFORMAT)
+		{
+            _PIXELFORMAT.dwSize = 0x20;
+            _PIXELFORMAT.dwFlags = (uint)DDS_TYPE.PAL8A;
+            _PIXELFORMAT.dwFourCC = 0;
+            _PIXELFORMAT.dwRGBBitCount = 8;
+            _PIXELFORMAT.dwRBitMask = 0;
+            _PIXELFORMAT.dwGBitMask = 0;
+            _PIXELFORMAT.dwBBitMask = 0;
+            _PIXELFORMAT.dwABitMask = 0;
+        }
+
         public static void DDSPF_A8R8G8B8(DDS_PIXELFORMAT _PIXELFORMAT)
         {
             _PIXELFORMAT.dwSize = 0x20;

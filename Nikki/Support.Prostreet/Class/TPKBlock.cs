@@ -420,10 +420,10 @@ namespace Nikki.Support.Prostreet.Class
 
             }
 
-            if (!Comp.IsDDSTexture(filename))
+            if (!Comp.IsDDSTexture(filename, out string error))
             {
 
-                throw new ArgumentException($"File {filename} is not of supported DDS format");
+                throw new ArgumentException(error);
 
             }
 
@@ -502,10 +502,10 @@ namespace Nikki.Support.Prostreet.Class
 
             }
 
-            if (!Comp.IsDDSTexture(filename))
+            if (!Comp.IsDDSTexture(filename, out string error))
             {
 
-                throw new ArgumentException($"File {filename} is not of supported DDS format");
+                throw new ArgumentException(error);
 
             }
 

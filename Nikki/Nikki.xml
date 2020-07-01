@@ -13787,11 +13787,13 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Carbon.Class.Texture"/> header with.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.Texture.GetDDSArray">
+        <member name="M:Nikki.Support.Carbon.Class.Texture.GetDDSArray(System.Boolean)">
             <summary>
             Gets .dds data along with the .dds header.
             </summary>
             <returns>.dds texture as a byte array.</returns>
+            <param name="make_no_palette">True if palette should be decompressed into 
+            32 bpp DDS; false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.Texture.Initialize(System.String)">
             <summary>
@@ -18753,11 +18755,13 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.MostWanted.Class.Texture"/> header with.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.Texture.GetDDSArray">
+        <member name="M:Nikki.Support.MostWanted.Class.Texture.GetDDSArray(System.Boolean)">
             <summary>
             Gets .dds data along with the .dds header.
             </summary>
             <returns>.dds texture as a byte array.</returns>
+            <param name="make_no_palette">True if palette should be decompressed into 
+            32 bpp DDS; false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.Texture.Initialize(System.String)">
             <summary>
@@ -24734,11 +24738,13 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> header with.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.Texture.GetDDSArray">
+        <member name="M:Nikki.Support.Prostreet.Class.Texture.GetDDSArray(System.Boolean)">
             <summary>
             Gets .dds data along with the .dds header.
             </summary>
             <returns>.dds texture as a byte array.</returns>
+            <param name="make_no_palette">True if palette should be decompressed into 
+            32 bpp DDS; false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Class.Texture.Initialize(System.String)">
             <summary>
@@ -27883,9 +27889,13 @@
         </member>
         <member name="P:Nikki.Support.Shared.Class.Texture.Compression">
             <summary>
-            Gets compression type of the texture.
+            Compression type of the texture.
             </summary>
-            <returns>Compression type as a string.</returns>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Texture.HasPalette">
+            <summary>
+            Determines whether this <see cref="T:Nikki.Support.Shared.Class.Texture"/> has palette.
+            </summary>
         </member>
         <member name="P:Nikki.Support.Shared.Class.Texture.Width">
             <summary>
@@ -27986,11 +27996,13 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.Texture.GetDDSArray">
+        <member name="M:Nikki.Support.Shared.Class.Texture.GetDDSArray(System.Boolean)">
             <summary>
             Gets .dds data along with the .dds header.
             </summary>
             <returns>.dds texture as a byte array.</returns>
+            <param name="make_no_palette">True if palette should be decompressed into 
+            32 bpp DDS; false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.Texture.Initialize(System.String)">
             <summary>
@@ -29454,83 +29466,103 @@
             DDS static class with methods to make <see cref="T:Nikki.Utils.DDS.DDS_PIXELFORMAT"/>.
             </summary>
         </member>
+        <member name="T:Nikki.Utils.DDS.Generator">
+            <summary>
+            A class with DDS reading and writing options.
+            </summary>
+        </member>
+        <member name="P:Nikki.Utils.DDS.Generator.Buffer">
+            <summary>
+            DDS data of the texture.
+            </summary>
+        </member>
+        <member name="P:Nikki.Utils.DDS.Generator.Compression">
+            <summary>
+            <see cref="T:Nikki.Reflection.Enum.eTextureCompressionType"/> type of the texture.
+            </summary>
+        </member>
+        <member name="P:Nikki.Utils.DDS.Generator.Height">
+            <summary>
+            Height of the texture.
+            </summary>
+        </member>
+        <member name="P:Nikki.Utils.DDS.Generator.Width">
+            <summary>
+            Width of the texture.
+            </summary>
+        </member>
+        <member name="P:Nikki.Utils.DDS.Generator.MipMaps">
+            <summary>
+            Number of mipmaps in the texture.
+            </summary>
+        </member>
+        <member name="P:Nikki.Utils.DDS.Generator.Size">
+            <summary>
+            Size of the texture, in bytes.
+            </summary>
+        </member>
+        <member name="P:Nikki.Utils.DDS.Generator.PaletteSize">
+            <summary>
+            Palette size of the texture, in bytes.
+            </summary>
+        </member>
+        <member name="P:Nikki.Utils.DDS.Generator.CanRead">
+            <summary>
+            True if settings can be read and generator is based on DDS data passed; otherwise, false.
+            </summary>
+        </member>
+        <member name="P:Nikki.Utils.DDS.Generator.CanWrite">
+            <summary>
+            True if DDS data can be written based on <see cref="T:Nikki.Support.Shared.Class.Texture"/> passed; otherwise, false.
+            </summary>
+        </member>
+        <member name="M:Nikki.Utils.DDS.Generator.#ctor(System.Byte[],System.Boolean)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Utils.DDS.Generator"/> with ability to read settings of 
+            DDS data buffer passed.
+            </summary>
+            <param name="buffer">DDS data buffer to read.</param>
+            <param name="make_no_palette">True if palette should be decompressed into 
+            32 bpp DDS; false otherwise.</param>
+        </member>
+        <member name="M:Nikki.Utils.DDS.Generator.#ctor(Nikki.Support.Shared.Class.Texture,System.Boolean)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Utils.DDS.Generator"/> with ability to write DDS data 
+            buffer based on <see cref="T:Nikki.Support.Shared.Class.Texture"/> passed.
+            </summary>
+            <param name="texture"><see cref="T:Nikki.Support.Shared.Class.Texture"/> to write data of.</param>
+            <param name="make_no_palette">True if palette should be decompressed into 
+            32 bpp DDS; false otherwise.</param>
+        </member>
+        <member name="M:Nikki.Utils.DDS.Generator.GetDDSTexture">
+            <summary>
+            Gets DDS data buffer for a texture passed.
+            </summary>
+            <returns>DDS data buffer.</returns>
+        </member>
+        <member name="M:Nikki.Utils.DDS.Generator.GetDDSSettings">
+            <summary>
+            Gets settings from DDS data buffer passed.
+            </summary>
+        </member>
         <member name="T:Nikki.Utils.EA.Comp">
             <summary>
             Collection of functions for EA compressed texture files.
             </summary>
         </member>
-        <member name="M:Nikki.Utils.EA.Comp.IsComp(System.UInt32)">
+        <member name="M:Nikki.Utils.EA.Comp.IsDXTEncode(System.UInt32)">
             <summary>
             Determines if an unsigned integer passed is an EA compression.
             </summary>
             <param name="value">Unsigned integer to be based on.</param>
             <returns>True if the value passed is an EA compression.</returns>
         </member>
-        <member name="M:Nikki.Utils.EA.Comp.GetByte(System.UInt32)">
-            <summary>
-            Get EA compression byte from EA compression uint.
-            </summary>
-            <param name="value">Value from which get the result.</param>
-            <returns>EA compression as a byte value.</returns>
-        </member>
-        <member name="M:Nikki.Utils.EA.Comp.GetByte(System.String)">
-            <summary>
-            Get EA compression byte from EA compression string.
-            </summary>
-            <param name="value">Value from which get the result.</param>
-            <returns>EA compression as a byte value.</returns>
-        </member>
-        <member name="M:Nikki.Utils.EA.Comp.GetString(System.Byte)">
-            <summary>
-            Get EA compression string from EA compression byte.
-            </summary>
-            <param name="value">Value from which get the result.</param>
-            <returns>EA compression as a string value.</returns>
-        </member>
-        <member name="M:Nikki.Utils.EA.Comp.GetString(System.UInt32)">
-            <summary>
-            Get EA compression string from EA compression uint.
-            </summary>
-            <param name="value">Value from which get the result.</param>
-            <returns>EA compression as a string value.</returns>
-        </member>
-        <member name="M:Nikki.Utils.EA.Comp.GetInt(System.String)">
-            <summary>
-            Get EA compression uint from EA compression string.
-            </summary>
-            <param name="value">Value from which get the result.</param>
-            <returns>EA compression as a uint value.</returns>
-        </member>
-        <member name="M:Nikki.Utils.EA.Comp.GetInt(System.Byte)">
+        <member name="M:Nikki.Utils.EA.Comp.GetInt(Nikki.Reflection.Enum.eTextureCompressionType)">
             <summary>
             Get EA compression uint from EA compression byte.
             </summary>
             <param name="value">Value from which get the result.</param>
             <returns>EA compression as a uint value.</returns>
-        </member>
-        <member name="M:Nikki.Utils.EA.Comp.FlipToBase(System.Int32)">
-            <summary>
-            Calculates base of 2 image area based on the actual size passed.
-            </summary>
-            <param name="size">Size in pixels.</param>
-            <returns>Base of 2 image size in pixels.</returns>
-        </member>
-        <member name="M:Nikki.Utils.EA.Comp.PitchLinearSize(System.Byte,System.Int16,System.Int16,System.UInt32)">
-            <summary>
-            Calculates .dds pitch or linear size.
-            </summary>
-            <param name="compression">.dds compression format as an EA compression byte.</param>
-            <param name="width">Width of the image in pixels.</param>
-            <param name="height">Height of the image in pixels.</param>
-            <param name="bpp">Bytes per pixel in the image.</param>
-            <returns>Pitch or linear size based on compression passed.</returns>
-        </member>
-        <member name="M:Nikki.Utils.EA.Comp.GetPixelFormat(Nikki.Utils.DDS.DDS_PIXELFORMAT,System.Byte)">
-            <summary>
-            Edits <see cref="T:Nikki.Utils.DDS.DDS_PIXELFORMAT"/> based on compression passed.
-            </summary>
-            <param name="PIXELFORMAT"><see cref="T:Nikki.Utils.DDS.DDS_PIXELFORMAT"/> of the .dds header passed as a reference type.</param>
-            <param name="compression">EA compression byte of the image.</param>
         </member>
         <member name="M:Nikki.Utils.EA.Comp.IsDDSTexture(System.String)">
             <summary>
@@ -29546,14 +29578,6 @@
             <param name="filename">Filename to be evaluated.</param>
             <param name="error">Specifies failure reason in case file is not a .dds texture.</param>
             <returns>True if the texture is a .dds texture.</returns>
-        </member>
-        <member name="M:Nikki.Utils.EA.Comp.GetTPKName(System.Int32,Nikki.Core.GameINT)">
-            <summary>
-            Gets the default .tpk name by index passed.
-            </summary>
-            <param name="index">Index of the .tpk in the array.</param>
-            <param name="game"><see cref="T:Nikki.Core.GameINT"/> of the game.</param>
-            <returns>Collection Name of the .tpk</returns>
         </member>
         <member name="M:Nikki.Utils.EA.Comp.GetPaddingArray(System.Int32,System.Byte)">
             <summary>
