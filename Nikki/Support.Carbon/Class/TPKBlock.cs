@@ -1081,8 +1081,8 @@ namespace Nikki.Support.Carbon.Class
             var WriteHeader = new Action<Texture, BinaryWriter>((texture, writer) =>
             {
             
-                texture.PaletteOffset = totalTexSize;
-                texture.Offset = totalTexSize + texture.PaletteSize;
+                texture.Offset = totalTexSize;
+                texture.PaletteOffset = totalTexSize + texture.Size;
                 var nextPos = writer.BaseStream.Position + 0x7C;
                 texture.Assemble(writer);
                 writer.BaseStream.Position = nextPos;
@@ -1105,6 +1105,17 @@ namespace Nikki.Support.Carbon.Class
                 const int headerSize = 0x18; // header size is constant for all compressions
                 const int maxBlockSize = 0x8000; // maximum block size of data
                 const int texHeaderSize = 0x7C + 0x18; // size of texture header + dds info header
+
+                // If has palette, temporarily swap
+                if (texture.HasPalette)
+				{
+
+                    var tempbuf = new byte[texture.PaletteSize];
+                    Array.Copy(texture.Data, tempbuf, texture.PaletteSize);
+                    Array.Copy(texture.Data, texture.PaletteSize, texture.Data, 0, texture.Size);
+                    Array.Copy(tempbuf, 0, texture.Data, texture.Size, texture.PaletteSize);
+
+				}
 
                 // Calculate header length. Header consists of leftover dds data got by 
                 // dividing it in blocks of 0x8000 bytes + size of texture header + 
@@ -1236,6 +1247,17 @@ namespace Nikki.Support.Carbon.Class
                 // Yield return OffSlot made
                 result.Add(offslot);
             
+                // If has palette, swap back
+                if (texture.HasPalette)
+				{
+
+                    var tempbuf = new byte[texture.PaletteSize];
+                    Array.Copy(texture.Data, texture.Size, tempbuf, 0, texture.PaletteSize);
+                    Array.Copy(texture.Data, 0, texture.Data, texture.PaletteSize, texture.Size);
+                    Array.Copy(tempbuf, texture.Data, texture.PaletteSize);
+
+				}
+
             }
 
             // Finally, fix size at the beginning of the block
