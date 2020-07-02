@@ -247,6 +247,11 @@ namespace Nikki.Core
 		public abstract Alignment Alignment { get; }
 
 		/// <summary>
+		/// Gets a collection and unit element type in this <see cref="IManager"/>.
+		/// </summary>
+		public abstract Type CollectionType { get; }
+
+		/// <summary>
 		/// Gets the number of elements contained in the <see cref="Manager{T}"/>.
 		/// </summary>
 		public int Count => this._size;

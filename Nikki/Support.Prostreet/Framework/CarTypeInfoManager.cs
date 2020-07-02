@@ -47,6 +47,11 @@ namespace Nikki.Support.Prostreet.Framework
 		public override Alignment Alignment { get; }
 
 		/// <summary>
+		/// Gets a collection and unit element type in this <see cref="CarTypeInfoManager"/>.
+		/// </summary>
+		public override Type CollectionType => typeof(CarTypeInfo);
+
+		/// <summary>
 		/// Initializes new instance of <see cref="CarTypeInfoManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>

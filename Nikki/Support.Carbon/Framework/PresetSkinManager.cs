@@ -47,6 +47,11 @@ namespace Nikki.Support.Carbon.Framework
 		public override Alignment Alignment { get; }
 
 		/// <summary>
+		/// Gets a collection and unit element type in this <see cref="PresetSkinManager"/>.
+		/// </summary>
+		public override Type CollectionType => typeof(PresetSkin);
+
+		/// <summary>
 		/// Initializes new instance of <see cref="PresetSkinManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>

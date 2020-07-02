@@ -47,6 +47,11 @@ namespace Nikki.Support.Carbon.Framework
 		public override Alignment Alignment { get; }
 
 		/// <summary>
+		/// Gets a collection and unit element type in this <see cref="SlotOverrideManager"/>.
+		/// </summary>
+		public override Type CollectionType => typeof(SlotOverride);
+
+		/// <summary>
 		/// Initializes new instance of <see cref="SlotOverrideManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>

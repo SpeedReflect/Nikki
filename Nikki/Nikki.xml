@@ -341,6 +341,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Reflection.Interface.IManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Core.Manager`1.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Reflection.Interface.IManager"/>.
+            </summary>
+        </member>
         <member name="P:Nikki.Core.Manager`1.Count">
             <summary>
             Gets the number of elements contained in the <see cref="T:Nikki.Core.Manager`1"/>.
@@ -9688,6 +9693,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Reflection.Interface.IManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Reflection.Interface.IManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Reflection.Interface.IManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Reflection.Interface.IManager.Add(System.String)">
             <summary>
             Adds a new collection to the end of the <see cref="T:Nikki.Reflection.Interface.IManager"/> with CollectionName 
@@ -14594,6 +14604,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Support.Carbon.Framework.CarTypeInfoManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Carbon.Framework.CarTypeInfoManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Carbon.Framework.CarTypeInfoManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Carbon.Framework.CarTypeInfoManager.#ctor(Nikki.Support.Carbon.Datamap)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Framework.CarTypeInfoManager"/>.
@@ -14672,6 +14687,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Support.Carbon.Framework.CollisionManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Carbon.Framework.CollisionManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Carbon.Framework.CollisionManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Carbon.Framework.CollisionManager.#ctor(Nikki.Support.Carbon.Datamap)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Framework.CollisionManager"/>.
@@ -14748,6 +14768,11 @@
         <member name="P:Nikki.Support.Carbon.Framework.DBModelPartManager.Alignment">
             <summary>
             Indicates required alighment when this <see cref="T:Nikki.Support.Carbon.Framework.DBModelPartManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Framework.DBModelPartManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Carbon.Framework.DBModelPartManager"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Carbon.Framework.DBModelPartManager.#ctor(Nikki.Support.Carbon.Datamap)">
@@ -14844,6 +14869,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Support.Carbon.Framework.FNGroupManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Carbon.Framework.FNGroupManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Carbon.Framework.FNGroupManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Carbon.Framework.FNGroupManager.#ctor(Nikki.Support.Carbon.Datamap)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Framework.FNGroupManager"/>.
@@ -14920,6 +14950,11 @@
         <member name="P:Nikki.Support.Carbon.Framework.MaterialManager.Alignment">
             <summary>
             Indicates required alighment when this <see cref="T:Nikki.Support.Carbon.Framework.MaterialManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Framework.MaterialManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Carbon.Framework.MaterialManager"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Carbon.Framework.MaterialManager.#ctor(Nikki.Support.Carbon.Datamap)">
@@ -15000,6 +15035,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Support.Carbon.Framework.PresetRideManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Carbon.Framework.PresetRideManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Carbon.Framework.PresetRideManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Carbon.Framework.PresetRideManager.#ctor(Nikki.Support.Carbon.Datamap)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Framework.PresetRideManager"/>.
@@ -15076,6 +15116,11 @@
         <member name="P:Nikki.Support.Carbon.Framework.PresetSkinManager.Alignment">
             <summary>
             Indicates required alighment when this <see cref="T:Nikki.Support.Carbon.Framework.PresetSkinManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Framework.PresetSkinManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Carbon.Framework.PresetSkinManager"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Carbon.Framework.PresetSkinManager.#ctor(Nikki.Support.Carbon.Datamap)">
@@ -15156,6 +15201,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Support.Carbon.Framework.SlotOverrideManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Carbon.Framework.SlotOverrideManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Carbon.Framework.SlotOverrideManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Carbon.Framework.SlotOverrideManager.#ctor(Nikki.Support.Carbon.Datamap)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Framework.SlotOverrideManager"/>.
@@ -15232,6 +15282,11 @@
         <member name="P:Nikki.Support.Carbon.Framework.SlotTypeManager.Alignment">
             <summary>
             Indicates required alighment when this <see cref="T:Nikki.Support.Carbon.Framework.SlotTypeManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Framework.SlotTypeManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Carbon.Framework.SlotTypeManager"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Carbon.Framework.SlotTypeManager.#ctor(Nikki.Support.Carbon.Datamap)">
@@ -15312,6 +15367,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Support.Carbon.Framework.STRBlockManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Carbon.Framework.STRBlockManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Carbon.Framework.STRBlockManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Carbon.Framework.STRBlockManager.#ctor(Nikki.Support.Carbon.Datamap)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Framework.STRBlockManager"/>.
@@ -15388,6 +15448,11 @@
         <member name="P:Nikki.Support.Carbon.Framework.SunInfoManager.Alignment">
             <summary>
             Indicates required alighment when this <see cref="T:Nikki.Support.Carbon.Framework.SunInfoManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Framework.SunInfoManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Carbon.Framework.SunInfoManager"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Carbon.Framework.SunInfoManager.#ctor(Nikki.Support.Carbon.Datamap)">
@@ -15468,6 +15533,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Support.Carbon.Framework.TPKBlockManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Carbon.Framework.TPKBlockManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Carbon.Framework.TPKBlockManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Carbon.Framework.TPKBlockManager.#ctor(Nikki.Support.Carbon.Datamap)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Framework.TPKBlockManager"/>.
@@ -15544,6 +15614,11 @@
         <member name="P:Nikki.Support.Carbon.Framework.TrackManager.Alignment">
             <summary>
             Indicates required alighment when this <see cref="T:Nikki.Support.Carbon.Framework.TrackManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Framework.TrackManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Carbon.Framework.TrackManager"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Carbon.Framework.TrackManager.#ctor(Nikki.Support.Carbon.Datamap)">
@@ -19563,6 +19638,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Support.MostWanted.Framework.CarTypeInfoManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.CarTypeInfoManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.MostWanted.Framework.CarTypeInfoManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.MostWanted.Framework.CarTypeInfoManager.#ctor(Nikki.Support.MostWanted.Datamap)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Framework.CarTypeInfoManager"/>.
@@ -19641,6 +19721,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Support.MostWanted.Framework.CollisionManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.CollisionManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.MostWanted.Framework.CollisionManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.MostWanted.Framework.CollisionManager.#ctor(Nikki.Support.MostWanted.Datamap)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Framework.CollisionManager"/>.
@@ -19717,6 +19802,11 @@
         <member name="P:Nikki.Support.MostWanted.Framework.DBModelPartManager.Alignment">
             <summary>
             Indicates required alighment when this <see cref="T:Nikki.Support.MostWanted.Framework.DBModelPartManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.DBModelPartManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.MostWanted.Framework.DBModelPartManager"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.MostWanted.Framework.DBModelPartManager.#ctor(Nikki.Support.MostWanted.Datamap)">
@@ -19813,6 +19903,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Support.MostWanted.Framework.FNGroupManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.FNGroupManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.MostWanted.Framework.FNGroupManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.MostWanted.Framework.FNGroupManager.#ctor(Nikki.Support.MostWanted.Datamap)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Framework.FNGroupManager"/>.
@@ -19889,6 +19984,11 @@
         <member name="P:Nikki.Support.MostWanted.Framework.MaterialManager.Alignment">
             <summary>
             Indicates required alighment when this <see cref="T:Nikki.Support.MostWanted.Framework.MaterialManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.MaterialManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.MostWanted.Framework.MaterialManager"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.MostWanted.Framework.MaterialManager.#ctor(Nikki.Support.MostWanted.Datamap)">
@@ -19969,6 +20069,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Support.MostWanted.Framework.PresetRideManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.PresetRideManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.MostWanted.Framework.PresetRideManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.MostWanted.Framework.PresetRideManager.#ctor(Nikki.Support.MostWanted.Datamap)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Framework.PresetRideManager"/>.
@@ -20045,6 +20150,11 @@
         <member name="P:Nikki.Support.MostWanted.Framework.SlotOverrideManager.Alignment">
             <summary>
             Indicates required alighment when this <see cref="T:Nikki.Support.MostWanted.Framework.SlotOverrideManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.SlotOverrideManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.MostWanted.Framework.SlotOverrideManager"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.MostWanted.Framework.SlotOverrideManager.#ctor(Nikki.Support.MostWanted.Datamap)">
@@ -20125,6 +20235,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Support.MostWanted.Framework.SlotTypeManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.SlotTypeManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.MostWanted.Framework.SlotTypeManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.MostWanted.Framework.SlotTypeManager.#ctor(Nikki.Support.MostWanted.Datamap)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Framework.SlotTypeManager"/>.
@@ -20201,6 +20316,11 @@
         <member name="P:Nikki.Support.MostWanted.Framework.STRBlockManager.Alignment">
             <summary>
             Indicates required alighment when this <see cref="T:Nikki.Support.MostWanted.Framework.STRBlockManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.STRBlockManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.MostWanted.Framework.STRBlockManager"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.MostWanted.Framework.STRBlockManager.#ctor(Nikki.Support.MostWanted.Datamap)">
@@ -20281,6 +20401,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Support.MostWanted.Framework.SunInfoManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.SunInfoManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.MostWanted.Framework.SunInfoManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.MostWanted.Framework.SunInfoManager.#ctor(Nikki.Support.MostWanted.Datamap)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Framework.SunInfoManager"/>.
@@ -20359,6 +20484,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Support.MostWanted.Framework.TPKBlockManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.TPKBlockManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.MostWanted.Framework.TPKBlockManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.MostWanted.Framework.TPKBlockManager.#ctor(Nikki.Support.MostWanted.Datamap)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Framework.TPKBlockManager"/>.
@@ -20435,6 +20565,11 @@
         <member name="P:Nikki.Support.MostWanted.Framework.TrackManager.Alignment">
             <summary>
             Indicates required alighment when this <see cref="T:Nikki.Support.MostWanted.Framework.TrackManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Framework.TrackManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.MostWanted.Framework.TrackManager"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.MostWanted.Framework.TrackManager.#ctor(Nikki.Support.MostWanted.Datamap)">
@@ -25535,6 +25670,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Support.Prostreet.Framework.CarTypeInfoManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.CarTypeInfoManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Prostreet.Framework.CarTypeInfoManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Prostreet.Framework.CarTypeInfoManager.#ctor(Nikki.Support.Prostreet.Datamap)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Framework.CarTypeInfoManager"/>.
@@ -25613,6 +25753,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Support.Prostreet.Framework.CollisionManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.CollisionManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Prostreet.Framework.CollisionManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Prostreet.Framework.CollisionManager.#ctor(Nikki.Support.Prostreet.Datamap)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Framework.CollisionManager"/>.
@@ -25689,6 +25834,11 @@
         <member name="P:Nikki.Support.Prostreet.Framework.DBModelPartManager.Alignment">
             <summary>
             Indicates required alighment when this <see cref="T:Nikki.Support.Prostreet.Framework.DBModelPartManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.DBModelPartManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Prostreet.Framework.DBModelPartManager"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Prostreet.Framework.DBModelPartManager.#ctor(Nikki.Support.Prostreet.Datamap)">
@@ -25785,6 +25935,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Support.Prostreet.Framework.FNGroupManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.FNGroupManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Prostreet.Framework.FNGroupManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Prostreet.Framework.FNGroupManager.#ctor(Nikki.Support.Prostreet.Datamap)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Framework.FNGroupManager"/>.
@@ -25861,6 +26016,11 @@
         <member name="P:Nikki.Support.Prostreet.Framework.MaterialManager.Alignment">
             <summary>
             Indicates required alighment when this <see cref="T:Nikki.Support.Prostreet.Framework.MaterialManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.MaterialManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Prostreet.Framework.MaterialManager"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Prostreet.Framework.MaterialManager.#ctor(Nikki.Support.Prostreet.Datamap)">
@@ -25941,6 +26101,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Support.Prostreet.Framework.SlotOverrideManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.SlotOverrideManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Prostreet.Framework.SlotOverrideManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Prostreet.Framework.SlotOverrideManager.#ctor(Nikki.Support.Prostreet.Datamap)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Framework.SlotOverrideManager"/>.
@@ -26017,6 +26182,11 @@
         <member name="P:Nikki.Support.Prostreet.Framework.SlotTypeManager.Alignment">
             <summary>
             Indicates required alighment when this <see cref="T:Nikki.Support.Prostreet.Framework.SlotTypeManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.SlotTypeManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Prostreet.Framework.SlotTypeManager"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Prostreet.Framework.SlotTypeManager.#ctor(Nikki.Support.Prostreet.Datamap)">
@@ -26097,6 +26267,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Support.Prostreet.Framework.STRBlockManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.STRBlockManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Prostreet.Framework.STRBlockManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Prostreet.Framework.STRBlockManager.#ctor(Nikki.Support.Prostreet.Datamap)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Framework.STRBlockManager"/>.
@@ -26173,6 +26348,11 @@
         <member name="P:Nikki.Support.Prostreet.Framework.SunInfoManager.Alignment">
             <summary>
             Indicates required alighment when this <see cref="T:Nikki.Support.Prostreet.Framework.SunInfoManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.SunInfoManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Prostreet.Framework.SunInfoManager"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Prostreet.Framework.SunInfoManager.#ctor(Nikki.Support.Prostreet.Datamap)">
@@ -26253,6 +26433,11 @@
             Indicates required alighment when this <see cref="T:Nikki.Support.Prostreet.Framework.TPKBlockManager"/> is being serialized.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.TPKBlockManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Prostreet.Framework.TPKBlockManager"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Prostreet.Framework.TPKBlockManager.#ctor(Nikki.Support.Prostreet.Datamap)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Framework.TPKBlockManager"/>.
@@ -26329,6 +26514,11 @@
         <member name="P:Nikki.Support.Prostreet.Framework.TrackManager.Alignment">
             <summary>
             Indicates required alighment when this <see cref="T:Nikki.Support.Prostreet.Framework.TrackManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.TrackManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Prostreet.Framework.TrackManager"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Prostreet.Framework.TrackManager.#ctor(Nikki.Support.Prostreet.Datamap)">
@@ -29522,8 +29712,8 @@
             DDS data buffer passed.
             </summary>
             <param name="buffer">DDS data buffer to read.</param>
-            <param name="make_no_palette">True if palette should be decompressed into 
-            32 bpp DDS; false otherwise.</param>
+            <param name="comp_to_palette">True if attempt to compress RGBA 32 bit DDS data 
+            to 8 bit one; </param>
         </member>
         <member name="M:Nikki.Utils.DDS.Generator.#ctor(Nikki.Support.Shared.Class.Texture,System.Boolean)">
             <summary>

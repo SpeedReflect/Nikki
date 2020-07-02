@@ -47,6 +47,11 @@ namespace Nikki.Support.MostWanted.Framework
 		public override Alignment Alignment { get; }
 
 		/// <summary>
+		/// Gets a collection and unit element type in this <see cref="TPKBlockManager"/>.
+		/// </summary>
+		public override Type CollectionType => typeof(TPKBlock);
+
+		/// <summary>
 		/// Initializes new instance of <see cref="TPKBlockManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>

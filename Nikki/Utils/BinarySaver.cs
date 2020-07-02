@@ -59,10 +59,34 @@ namespace Nikki.Utils
 			}
 		}
 	
+		private static void MakeBigAlign(this BinaryWriter bw, string mark, int alignment)
+		{
+			if (bw.BaseStream.Position == 0) return;
+
+			var start = bw.BaseStream.Position;
+			alignment += 0x100;
+
+			var difference = alignment - ((start + 0x50) % 0x100);
+			if (difference == alignment) difference = 0;
+
+			var size = difference + 0x50;
+
+			var end = start + size;
+
+			bw.Write((int)0); // write padding ID
+			bw.Write((int)(size - 8));   // write size
+			bw.WriteEnum(eBlockID.Nikki); // write definition of a padding
+			bw.Write((int)0); // write flags
+
+			bw.WriteNullTermUTF8("Padding Block", 0x20); // write type of block
+			bw.WriteNullTermUTF8(mark, 0x20); // write watermark passed
+
+			while (bw.BaseStream.Position < end) bw.Write((byte)0); // write the rest
+		}
+
 		public static void GenerateAlignment(this BinaryWriter bw, string mark, long position, eBlockID id)
 		{
 			int dif;
-			Alignment align;
 
 			switch (id)
 			{
@@ -94,14 +118,13 @@ namespace Nikki.Utils
 				case eBlockID.WCollisionPack:
 				case eBlockID.Weatherman:
 				case eBlockID.WWorld:
-					dif = (int)(position % 0x10);
-					align = new Alignment(dif, Alignment.eAlignType.Actual);
-					GeneratePadding(bw, mark, align);
+					dif = (int)(position % 0x100);
+					MakeBigAlign(bw, mark, dif);
 					return;
 
 				default:
 					// If we encountered known ID, do the padding accordingly
-					if (Map.BlockToAlignment.TryGetValue(id, out align))
+					if (Map.BlockToAlignment.TryGetValue(id, out var align))
 					{
 
 						GeneratePadding(bw, mark, align);

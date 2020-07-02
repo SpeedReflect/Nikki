@@ -267,12 +267,12 @@ namespace Nikki.Utils.DDS
 		/// DDS data buffer passed.
 		/// </summary>
 		/// <param name="buffer">DDS data buffer to read.</param>
-		/// <param name="make_no_palette">True if palette should be decompressed into 
-		/// 32 bpp DDS; false otherwise.</param>
-		public Generator(byte[] buffer, bool make_no_palette)
+		/// <param name="comp_to_palette">True if attempt to compress RGBA 32 bit DDS data 
+		/// to 8 bit one; </param>
+		public Generator(byte[] buffer, bool comp_to_palette)
 		{
 			this._mode = 1;
-			this._no_palette = make_no_palette;
+			this._no_palette = !comp_to_palette;
 			this._stream = buffer;
 		}
 
@@ -360,10 +360,8 @@ namespace Nikki.Utils.DDS
 
 			}
 
-			var length = this._stream.Length - 0x80;
-			this.Buffer = new byte[length];
-			Array.Copy(this._stream, 0x80, this.Buffer, 0, length);
-			this.Size = length - this.PaletteSize;
+			if (this._no_palette) this.GetDDSSetWithoutLimits();
+			else this.GetDDSSetWithLimits();
 		}
 
 		private byte[] GetDDSTexWithoutLimits()
@@ -424,6 +422,31 @@ namespace Nikki.Utils.DDS
 			}
 
 			return this.GetDDSTexWithoutLimits();
+		}
+
+		private void GetDDSSetWithoutLimits()
+		{
+			var length = this._stream.Length - 0x80;
+			this.Buffer = new byte[length];
+			Array.Copy(this._stream, 0x80, this.Buffer, 0, length);
+			this.Size = length - this.PaletteSize;
+		}
+
+		private void GetDDSSetWithLimits()
+		{
+			switch (this.Compression)
+			{
+				case eTextureCompressionType.TEXCOMP_4BIT:
+				case eTextureCompressionType.TEXCOMP_4BIT_IA8:
+				case eTextureCompressionType.TEXCOMP_4BIT_RGB16_A8:
+				case eTextureCompressionType.TEXCOMP_4BIT_RGB24_A8:
+					break;
+
+
+				default:
+					break;
+			}
+
 		}
 
 		#endregion

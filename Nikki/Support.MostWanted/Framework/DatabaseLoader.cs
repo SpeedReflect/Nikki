@@ -66,6 +66,7 @@ namespace Nikki.Support.MostWanted.Framework
 			foreach (var pair in this._offsets)
 			{
 
+				this._logger.WriteLine($"File: {this._options.File}");
 				this._logger.Write($"0x{pair.Key:X8} | ");
 
 				foreach (var off in pair.Value)

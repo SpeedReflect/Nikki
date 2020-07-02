@@ -43,6 +43,11 @@ namespace Nikki.Reflection.Interface
 		/// </summary>
 		Alignment Alignment { get; }
 
+		/// <summary>
+		/// Gets a collection and unit element type in this <see cref="IManager"/>.
+		/// </summary>
+		Type CollectionType { get; }
+
 		#endregion
 
 		#region Methods
