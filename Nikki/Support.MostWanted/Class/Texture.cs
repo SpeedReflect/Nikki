@@ -383,6 +383,7 @@ namespace Nikki.Support.MostWanted.Class
 
             this.Size = generator.Size;
             this.PaletteSize = generator.PaletteSize;
+            this._area = generator.Area;
             this.Width = (short)generator.Width;
             this.Height = (short)generator.Height;
             this.Mipmaps = (byte)generator.MipMaps;

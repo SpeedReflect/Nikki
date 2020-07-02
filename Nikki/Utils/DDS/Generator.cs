@@ -36,6 +36,11 @@ namespace Nikki.Utils.DDS
 		public eTextureCompressionType Compression { get; private set; }
 
 		/// <summary>
+		/// Area of the texture.
+		/// </summary>
+		public int Area { get; private set; }
+
+		/// <summary>
 		/// Height of the texture.
 		/// </summary>
 		public int Height { get; private set; }
@@ -258,6 +263,37 @@ namespace Nikki.Utils.DDS
 			}
 		}
 
+		private void ReadArea()
+		{
+			this.Area = this.Compression switch
+			{
+				eTextureCompressionType.TEXCOMP_4BIT => this.Width * this.Height * 4,
+				eTextureCompressionType.TEXCOMP_4BIT_IA8 => this.Width * this.Height * 4,
+				eTextureCompressionType.TEXCOMP_4BIT_RGB16_A8 => this.Width * this.Height * 4,
+				eTextureCompressionType.TEXCOMP_4BIT_RGB24_A8 => this.Width * this.Height * 4,
+				eTextureCompressionType.TEXCOMP_8BIT => this.Width * this.Height * 4,
+				eTextureCompressionType.TEXCOMP_8BIT_16 => this.Width * this.Height * 4,
+				eTextureCompressionType.TEXCOMP_8BIT_64 => this.Width * this.Height * 4,
+				eTextureCompressionType.TEXCOMP_8BIT_IA8 => this.Width * this.Height * 4,
+				eTextureCompressionType.TEXCOMP_8BIT_RGB16_A8 => this.Width * this.Height * 4,
+				eTextureCompressionType.TEXCOMP_8BIT_RGB24_A8 => this.Width * this.Height * 4,
+				eTextureCompressionType.TEXCOMP_32BIT => this.Width * this.Height * 4,
+				_ => this.FlipToBase(this.Size)
+			};
+		}
+
+		private int FlipToBase(int size)
+		{
+			uint x = (uint)size;
+			x |= x >> 1;
+			x |= x >> 2;
+			x |= x >> 4;
+			x |= x >> 8;
+			x |= x >> 16;
+			x -= x >> 1;
+			return (int)x;
+		}
+
 		#endregion
 
 		#region Main
@@ -362,6 +398,8 @@ namespace Nikki.Utils.DDS
 
 			if (this._no_palette) this.GetDDSSetWithoutLimits();
 			else this.GetDDSSetWithLimits();
+
+			this.ReadArea();
 		}
 
 		private byte[] GetDDSTexWithoutLimits()

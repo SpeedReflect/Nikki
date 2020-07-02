@@ -29671,6 +29671,11 @@
             <see cref="T:Nikki.Reflection.Enum.eTextureCompressionType"/> type of the texture.
             </summary>
         </member>
+        <member name="P:Nikki.Utils.DDS.Generator.Area">
+            <summary>
+            Area of the texture.
+            </summary>
+        </member>
         <member name="P:Nikki.Utils.DDS.Generator.Height">
             <summary>
             Height of the texture.
