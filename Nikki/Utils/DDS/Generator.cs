@@ -434,19 +434,20 @@ namespace Nikki.Utils.DDS
 
 		private void GetDDSSetWithLimits()
 		{
-			switch (this.Compression)
+			this.GetDDSSetWithoutLimits();
+
+			if (this.Compression == eTextureCompressionType.TEXCOMP_32BIT)
 			{
-				case eTextureCompressionType.TEXCOMP_4BIT:
-				case eTextureCompressionType.TEXCOMP_4BIT_IA8:
-				case eTextureCompressionType.TEXCOMP_4BIT_RGB16_A8:
-				case eTextureCompressionType.TEXCOMP_4BIT_RGB24_A8:
-					break;
 
+				var array = Palette.RGBAtoP8(this.Buffer);
+				if (array == null) return;
 
-				default:
-					break;
+				this.Buffer = array;
+				this.Compression = eTextureCompressionType.TEXCOMP_8BIT;
+				this.PaletteSize = 0x400;
+				this.Size = array.Length - 0x400;
+
 			}
-
 		}
 
 		#endregion
