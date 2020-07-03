@@ -13447,6 +13447,21 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Carbon.Class.STRBlock.SortRecordsByKey">
+            <summary>
+            Sorts all <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> by their BinKey value.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.STRBlock.SortRecordsByLabel">
+            <summary>
+            Sorts all <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> by their Label value.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.STRBlock.SortRecordsByText">
+            <summary>
+            Sorts all <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> by their Text value.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Carbon.Class.STRBlock.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
@@ -18464,6 +18479,21 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.STRBlock.SortRecordsByKey">
+            <summary>
+            Sorts all <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> by their BinKey value.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.STRBlock.SortRecordsByLabel">
+            <summary>
+            Sorts all <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> by their Label value.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.STRBlock.SortRecordsByText">
+            <summary>
+            Sorts all <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> by their Text value.
+            </summary>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.STRBlock.Serialize(System.IO.BinaryWriter)">
             <summary>
@@ -24523,6 +24553,21 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.SortRecordsByKey">
+            <summary>
+            Sorts all <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> by their BinKey value.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.SortRecordsByLabel">
+            <summary>
+            Sorts all <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> by their Label value.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.SortRecordsByText">
+            <summary>
+            Sorts all <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> by their Text value.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Prostreet.Class.STRBlock.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
@@ -27824,6 +27869,21 @@
             </summary>
             <param name="text">Text that other <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> should match.</param>
             <returns>Enumerable of records containing text provided.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.STRBlock.SortRecordsByKey">
+            <summary>
+            Sorts all <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> by their BinKey value.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.STRBlock.SortRecordsByLabel">
+            <summary>
+            Sorts all <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> by their Label value.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.STRBlock.SortRecordsByText">
+            <summary>
+            Sorts all <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> by their Text value.
+            </summary>
         </member>
         <member name="T:Nikki.Support.Shared.Class.SunInfo">
             <summary>
