@@ -198,7 +198,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 			if (!this.Attributes.RemoveWith(_ => _.Key == key))
 			{
 
-				throw new InfoAccessException($"Attribute with key type 0x{key:X8} does not exist");
+				throw new InfoAccessException($"0x{key:X8}");
 
 			}
 		}
@@ -222,7 +222,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 			if (attribute == null)
 			{
 
-				throw new InfoAccessException($"Attribute with key type 0x{copykey:X8} does not exist");
+				throw new InfoAccessException($"0x{copykey:X8}");
 
 			}
 

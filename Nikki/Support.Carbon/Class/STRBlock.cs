@@ -261,8 +261,8 @@ namespace Nikki.Support.Carbon.Class
 		{
 			uint hash = key == BaseArguments.AUTO
 				? label.BinHash()
-				: label.IsHexString()
-					? Convert.ToUInt32(label, 16)
+				: key.IsHexString()
+					? Convert.ToUInt32(key, 16)
 					: 0;
 			
 			if (hash == 0)
@@ -275,7 +275,7 @@ namespace Nikki.Support.Carbon.Class
 			if (this.GetRecord(hash) != null)
 			{
 
-				throw new InfoAccessException($"String record with key 0x{hash:X8} already exists");
+				throw new ArgumentException($"String record with key 0x{hash:X8} already exists");
 
 			}
 
@@ -298,7 +298,7 @@ namespace Nikki.Support.Carbon.Class
 			if (record == null)
 			{
 
-				throw new InfoAccessException($"String record with key 0x{key:X8} does not exist");
+				throw new InfoAccessException($"0x{key:X8}");
 
 			}
 			else

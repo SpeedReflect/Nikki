@@ -77,7 +77,7 @@ namespace Nikki.Support.Shared.Parts.STRParts
 		/// <returns>True if obj is a <see cref="StringRecord"/> and its value is the same as 
 		/// this instance; false otherwise. If obj is null, the method returns false.
 		/// </returns>
-		public override bool Equals(object obj) => obj is StringRecord && this == (StringRecord)obj;
+		public override bool Equals(object obj) => obj is StringRecord record && this == record;
 
 		/// <summary>
 		/// Returns the hash code for this <see cref="StringRecord"/>.
@@ -92,8 +92,12 @@ namespace Nikki.Support.Shared.Parts.STRParts
 		/// <param name="s1">The first <see cref="StringRecord"/> to compare, or null.</param>
 		/// <param name="s2">The second <see cref="StringRecord"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
-		public static bool operator== (StringRecord s1, StringRecord s2) =>
-			s1 is null ? s2 is null : s2 is null ? false : s1.Key == s2.Key;
+		public static bool operator== (StringRecord s1, StringRecord s2)
+		{
+			if (s1 is null) return s2 is null;
+			else if (s2 is null) return false;
+			return s1.Key == s2.Key;
+		}
 
 		/// <summary>
 		/// Determines whether two specified <see cref="StringRecord"/> have different values.
@@ -131,6 +135,8 @@ namespace Nikki.Support.Shared.Parts.STRParts
 					}
 
 					var hash = Convert.ToUInt32(value, 16);
+
+					if (hash == this.Key) return;
 
 					if (this.ThisSTRBlock.GetRecord(hash) != null)
 					{

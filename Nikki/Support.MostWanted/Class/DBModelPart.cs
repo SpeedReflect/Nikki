@@ -124,14 +124,14 @@ namespace Nikki.Support.MostWanted.Class
 			if (index1 == -1)
 			{
 
-				throw new InfoAccessException($"Part named {part1} does not exist");
+				throw new InfoAccessException(part1);
 
 			}
 
 			if (index2 == -1)
 			{
 
-				throw new InfoAccessException($"Part named {part2} does not exist");
+				throw new InfoAccessException(part2);
 
 			}
 
@@ -158,7 +158,7 @@ namespace Nikki.Support.MostWanted.Class
 			if (field == null)
 			{
 
-				throw new InfoAccessException($"Property named {property} does not exist");
+				throw new InfoAccessException(property);
 
 			}
 
@@ -212,7 +212,7 @@ namespace Nikki.Support.MostWanted.Class
 			if (!result)
 			{
 
-				throw new InfoAccessException($"Part named {name} does not exist");
+				throw new InfoAccessException(name);
 
 			}
 		}
@@ -249,7 +249,7 @@ namespace Nikki.Support.MostWanted.Class
 			if (part == null)
 			{
 
-				throw new InfoAccessException($"Part named {copyname} does not exist");
+				throw new InfoAccessException(copyname);
 
 			}
 

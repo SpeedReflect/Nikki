@@ -443,7 +443,7 @@ namespace Nikki.Support.Carbon.Class
             if (index == -1)
             {
 
-                throw new InfoAccessException($"Texture with key 0x{key:X8} does not exist");
+                throw new InfoAccessException($"0x{key:X8}");
 
             }
 
@@ -477,7 +477,7 @@ namespace Nikki.Support.Carbon.Class
             if (copyfrom == null)
             {
 
-                throw new InfoAccessException($"Texture named {copyfrom} does not exist");
+                throw new InfoAccessException($"0x{key:X8}");
 
             }
 
@@ -498,7 +498,7 @@ namespace Nikki.Support.Carbon.Class
             if (tex == null)
             {
 
-                throw new InfoAccessException($"Texture with key 0x{key:X8} does not exist");
+                throw new InfoAccessException($"0x{key:X8}");
 
             }
 
