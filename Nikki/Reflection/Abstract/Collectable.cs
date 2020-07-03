@@ -3,7 +3,6 @@ using System.Reflection;
 using System.Diagnostics;
 using System.Collections.Generic;
 using Nikki.Core;
-using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
@@ -156,7 +155,7 @@ namespace Nikki.Reflection.Abstract
         public virtual bool ContainsAccessModifiable(string PropertyName)
         {
             var property = this.GetFastProperty(PropertyName);
-            return property == null ? false : Attribute.IsDefined(property, typeof(AccessModifiableAttribute));
+            return property != null && Attribute.IsDefined(property, typeof(AccessModifiableAttribute));
         }
 
         /// <summary>

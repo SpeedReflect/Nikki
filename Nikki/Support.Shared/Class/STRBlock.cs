@@ -154,6 +154,21 @@ namespace Nikki.Support.Shared.Class
 		/// <returns>Enumerable of records containing text provided.</returns>
 		public abstract IEnumerable<StringRecord> FindWithText(string text);
 
+		/// <summary>
+		/// Sorts all <see cref="StringRecord"/> by their BinKey value.
+		/// </summary>
+		public abstract void SortRecordsByKey();
+
+		/// <summary>
+		/// Sorts all <see cref="StringRecord"/> by their Label value.
+		/// </summary>
+		public abstract void SortRecordsByLabel();
+
+		/// <summary>
+		/// Sorts all <see cref="StringRecord"/> by their Text value.
+		/// </summary>
+		public abstract void SortRecordsByText();
+
 		#endregion
 	}
 }

@@ -153,7 +153,7 @@ namespace Nikki.Support.MostWanted.Class
 			var text_offset = hash_offset + this.StringRecordCount * 8;
 
 			// Sort records by keys
-			this._stringinfo.Sort((a, b) => a.Key.CompareTo(b.Key));
+			this.SortRecordsByKey();
 
 			// Write ID and temporary size
 			bw.WriteEnum(eBlockID.STRBlocks);
@@ -386,6 +386,21 @@ namespace Nikki.Support.MostWanted.Class
 			return $"Collection Name: {this.CollectionName} | " +
 				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
+
+		/// <summary>
+		/// Sorts all <see cref="StringRecord"/> by their BinKey value.
+		/// </summary>
+		public override void SortRecordsByKey() => this._stringinfo.Sort((x, y) => x.Key.CompareTo(y.Key));
+
+		/// <summary>
+		/// Sorts all <see cref="StringRecord"/> by their Label value.
+		/// </summary>
+		public override void SortRecordsByLabel() => this._stringinfo.Sort((x, y) => x.Label.CompareTo(y.Label));
+
+		/// <summary>
+		/// Sorts all <see cref="StringRecord"/> by their Text value.
+		/// </summary>
+		public override void SortRecordsByText() => this._stringinfo.Sort((x, y) => x.Text.CompareTo(y.Text));
 
 		#endregion
 

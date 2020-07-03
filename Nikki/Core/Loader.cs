@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using Nikki.Utils;
 using Nikki.Support.Shared.Class;
 using CoreExtensions.IO;
-
-
+using Nikki.Reflection.Abstract;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Nikki.Core
 {
@@ -159,21 +159,29 @@ namespace Nikki.Core
 		/// <param name="game"><see cref="GameINT"/> of the file.</param>
 		public static void LoadLangLabels(string file, GameINT game)
 		{
-			//var options = new Options(file, eOptFlags.STRBlocks, String.Empty, false);
-			//var fb = new FileBase(game);
-			//fb.Load(options);
-			//
-			//foreach (STRBlock str in fb.GetManager("STRBlocks"))
-			//{
-			//
-			//	foreach (var record in str.GetRecords())
-			//	{
-			//
-			//		record.Text.BinHash();
-			//
-			//	}
-			//
-			//}
+			var options = new Options(file);
+			FileBase db = game switch
+			{
+				GameINT.Carbon => new Support.Carbon.Datamap(),
+				GameINT.MostWanted => new Support.MostWanted.Datamap(),
+				GameINT.Prostreet => new Support.Prostreet.Datamap(),
+				_ => null
+			};
+
+			if (db == null) return;
+			db.Load(options);
+			
+			foreach (STRBlock str in db.GetManager("STRBlocks"))
+			{
+			
+				foreach (var record in str.GetRecords())
+				{
+			
+					record.Text.BinHash();
+			
+				}
+			
+			}
 		}
 	}
 }

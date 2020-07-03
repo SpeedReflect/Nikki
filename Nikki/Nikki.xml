@@ -93,86 +93,6 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="T:Nikki.Core.eOptFlags">
-            <summary>
-            Flags that specify what collections to load.
-            </summary>
-        </member>
-        <member name="F:Nikki.Core.eOptFlags.None">
-            <summary>
-            Load nothing.
-            </summary>
-        </member>
-        <member name="F:Nikki.Core.eOptFlags.Materials">
-            <summary>
-            Load Material classes.
-            </summary>
-        </member>
-        <member name="F:Nikki.Core.eOptFlags.TPKBlocks">
-            <summary>
-            Load TPKBlock classes.
-            </summary>
-        </member>
-        <member name="F:Nikki.Core.eOptFlags.CarTypeInfos">
-            <summary>
-            Load CarTypeInfo classes.
-            </summary>
-        </member>
-        <member name="F:Nikki.Core.eOptFlags.PresetRides">
-            <summary>
-            Load PresetRide classes.
-            </summary>
-        </member>
-        <member name="F:Nikki.Core.eOptFlags.PresetSkins">
-            <summary>
-            Load PresetSkin classes.
-            </summary>
-        </member>
-        <member name="F:Nikki.Core.eOptFlags.Collisions">
-            <summary>
-            Load Collision classes.
-            </summary>
-        </member>
-        <member name="F:Nikki.Core.eOptFlags.DBModelParts">
-            <summary>
-            Load DBModelPart classes.
-            </summary>
-        </member>
-        <member name="F:Nikki.Core.eOptFlags.FNGroups">
-            <summary>
-            Load FNGroup classes.
-            </summary>
-        </member>
-        <member name="F:Nikki.Core.eOptFlags.STRBlocks">
-            <summary>
-            Load STRBlock classes.
-            </summary>
-        </member>
-        <member name="F:Nikki.Core.eOptFlags.AcidEffects">
-            <summary>
-            Load AcidEffect classes.
-            </summary>
-        </member>
-        <member name="F:Nikki.Core.eOptFlags.SunInfos">
-            <summary>
-            Load SunInfo classes.
-            </summary>
-        </member>
-        <member name="F:Nikki.Core.eOptFlags.Tracks">
-            <summary>
-            Load Track classes.
-            </summary>
-        </member>
-        <member name="F:Nikki.Core.eOptFlags.GCareer">
-            <summary>
-            Load GCareerRace classes.
-            </summary>
-        </member>
-        <member name="F:Nikki.Core.eOptFlags.SlotTypes">
-            <summary>
-            Load SlotType classes.
-            </summary>
-        </member>
         <member name="T:Nikki.Core.GameINT">
             <summary>
             Contains game process enumeration.
@@ -1109,32 +1029,6 @@
             <summary>
             Parent of the property and/or node.
             </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Attributes.ListableAttribute">
-            <summary>
-            Indicates that the property is an <see cref="T:System.Collections.Generic.IEnumerable`1"/> and should be
-            expanded based on its length.
-            </summary>
-        </member>
-        <member name="P:Nikki.Reflection.Attributes.ListableAttribute.Parent">
-            <summary>
-            Parent of the property and/or node.
-            </summary>
-        </member>
-        <member name="P:Nikki.Reflection.Attributes.ListableAttribute.BaseName">
-            <summary>
-            Name that is shared between units in the <see cref="T:System.Collections.Generic.IEnumerable`1"/> when
-            it is expanded in the treeview. Each unit will get an index appended to the 
-            end based on its index in the enumerable itself.
-            </summary>
-        </member>
-        <member name="M:Nikki.Reflection.Attributes.ListableAttribute.#ctor(System.String,System.String)">
-            <summary>
-            Initializes new instance of <see cref="T:Nikki.Reflection.Attributes.ListableAttribute"/> and applies it 
-            to the property or field that it is attached to.
-            </summary>
-            <param name="parent">Parent node of this property and/or node.</param>
-            <param name="name">Base name that is shared between all units.</param>
         </member>
         <member name="T:Nikki.Reflection.Attributes.MemoryCastableAttribute">
             <summary>
