@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Nikki.Support.Shared.Class;
 
 
@@ -77,12 +78,12 @@ namespace Nikki.Support.Shared.Parts.CarParts
 
 			for (int loop = 0; loop < sortlist.Count; ++loop)
 			{
-			
-				result = result * 37 + sortlist[loop] + 1;
+
+				result = HashCode.Combine(result, sortlist[loop], sortlist[loop].ToString());
 			
 			}
 
-			return result.GetHashCode();
+			return result;
 		}
 
 		/// <summary>
@@ -94,19 +95,20 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		public static bool operator ==(CPOffset off1, CPOffset off2)
 		{
 			if (off1 is null) return off2 is null;
-			if (off2 is null) return false;
+			else if (off2 is null) return false;
 
 			if (off1.AttribOffsets.Count != off2.AttribOffsets.Count) return false;
 
-			for (int loop = 0; loop < off1.AttribOffsets.Count; ++loop)
+			var list1 = new List<ushort>(off1.AttribOffsets);
+			var list2 = new List<ushort>(off2.AttribOffsets);
+
+			list1.Sort();
+			list2.Sort();
+
+			for (int loop = 0; loop < list1.Count; ++loop)
 			{
-			
-				if (off1.AttribOffsets[loop] != off2.AttribOffsets[loop])
-				{
 
-					return false;
-
-				}
+				if (list1[loop] != list2[loop]) return false;
 			
 			}
 
