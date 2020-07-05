@@ -27,7 +27,7 @@ namespace Nikki.Reflection.Abstract
         /// <summary>
         /// List of <see cref="IManager"/> types that are used by this <see cref="FileBase"/>.
         /// </summary>
-        public List<IManager> Managers { get; set; }
+        public List<IManager> Managers { get; }
 
         /// <summary>
         /// Initializes new instance of <see cref="FileBase"/>.

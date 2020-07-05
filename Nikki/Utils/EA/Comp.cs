@@ -50,6 +50,13 @@ namespace Nikki.Utils.EA
         /// <returns>True if the texture is a .dds texture.</returns>
         public static bool IsDDSTexture(string filename)
         {
+            if (!File.Exists(filename))
+			{
+
+                throw new FileNotFoundException($"File with path {filename} does not exist");
+
+			}
+
 			using var OpenReader = new BinaryReader(File.Open(filename, FileMode.Open, FileAccess.Read));
 			if (OpenReader.BaseStream.Length < 0x80) return false;
 			if (OpenReader.ReadUInt32() != DDS_MAIN.MAGIC) return false;
@@ -81,7 +88,14 @@ namespace Nikki.Utils.EA
         /// <returns>True if the texture is a .dds texture.</returns>
         public static bool IsDDSTexture(string filename, out string error)
         {
-			using var OpenReader = new BinaryReader(File.Open(filename, FileMode.Open, FileAccess.Read));
+            if (!File.Exists(filename))
+            {
+
+                throw new FileNotFoundException($"File with path {filename} does not exist");
+
+            }
+
+            using var OpenReader = new BinaryReader(File.Open(filename, FileMode.Open, FileAccess.Read));
 			
             if (OpenReader.BaseStream.Length < 0x80)
 			{
