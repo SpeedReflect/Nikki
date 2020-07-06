@@ -92,7 +92,7 @@ namespace Nikki.Support.Prostreet.Class
 		/// <summary>
 		/// Initializes new instance of <see cref="DBModelPart"/>.
 		/// </summary>
-		public DBModelPart() { }
+		public DBModelPart() => this.ModelCarParts = new List<RealCarPart>();
 
 		/// <summary>
 		/// Initializes new instance of <see cref="DBModelPart"/>.

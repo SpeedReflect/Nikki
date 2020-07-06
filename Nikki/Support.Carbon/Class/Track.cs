@@ -811,7 +811,7 @@ namespace Nikki.Support.Carbon.Class
 			using var reader = new BinaryReader(ms);
 
 			// Read all directories and locations
-			this._collection_name = reader.ReadNullTermUTF8();
+			this._collection_name = reader.ReadUInt16().ToString();
 			this.RaceDescription = reader.ReadNullTermUTF8();
 			this.TrackDirectory = reader.ReadNullTermUTF8();
 			this.RegionName = reader.ReadNullTermUTF8();

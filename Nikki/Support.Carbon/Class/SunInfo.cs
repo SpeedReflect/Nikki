@@ -138,7 +138,7 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Initializes new instance of <see cref="SunInfo"/>.
 		/// </summary>
-		public SunInfo() { }
+		public SunInfo() => this.Initialize();
 
 		/// <summary>
 		/// Initializes new instance of <see cref="SunInfo"/>.
