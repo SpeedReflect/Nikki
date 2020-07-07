@@ -148,6 +148,7 @@ namespace Nikki.Support.Prostreet.Framework
 
 				var count = 0x5280 / SlotType.BaseClassSize;
 				this.Capacity += count;
+				SlotType.Index = 0; // reset
 
 				for (int i = 0; i < count; ++i)
 				{

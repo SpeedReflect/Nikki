@@ -94,10 +94,10 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Current index of this <see cref="SlotType"/>.
         /// </summary>
-        private static int Index
+        internal static int Index
         {
             get => _index;
-            set => _index = value > Enum.GetNames(typeof(eSlotCarbon)).Length ? 0 : value;
+            set => _index = value >= 106 ? 0 : value;
         }
 
         /// <summary>

@@ -93,10 +93,10 @@ namespace Nikki.Support.MostWanted.Class
         /// <summary>
         /// Current index of this <see cref="SlotType"/>.
         /// </summary>
-        private static int Index
+        internal static int Index
         {
             get => _index;
-            set => _index = value > Enum.GetNames(typeof(eSlotMostWanted)).Length ? 0 : value;
+            set => _index = value >= 139 ? 0 : value;
         }
 
         #endregion

@@ -94,10 +94,10 @@ namespace Nikki.Support.Prostreet.Class
         /// <summary>
         /// Current index of this <see cref="SlotType"/>.
         /// </summary>
-        private static int Index
+        internal static int Index
         {
             get => _index;
-            set => _index = value > Enum.GetNames(typeof(eSlotProstreet)).Length ? 0 : value;
+            set => _index = value >= 165 ? 0 : value;
         }
 
         /// <summary>

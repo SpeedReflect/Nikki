@@ -971,6 +971,7 @@ namespace Nikki.Support.Carbon.Framework
 			if (index == -1)
 			{
 
+				collection.Manager = this;
 				this.Add(collection);
 
 			}

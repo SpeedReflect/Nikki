@@ -833,11 +833,6 @@
 		/// <summary>
 		/// 
 		/// </summary>
-		NUM = 0xA5,
-
-		/// <summary>
-		/// 
-		/// </summary>
 		INVALID = 0xFF,
 	}
 }

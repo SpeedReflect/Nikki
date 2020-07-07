@@ -149,6 +149,7 @@ namespace Nikki.Support.MostWanted.Framework
 
 				var count = maxslotsize / SlotType.BaseClassSize;
 				this.Capacity += count;
+				SlotType.Index = 0; // reset
 
 				for (int i = 0; i < count; ++i)
 				{

@@ -148,6 +148,7 @@ namespace Nikki.Support.Carbon.Framework
 
 				var count = 0xB98 / SlotType.BaseClassSize;
 				this.Capacity += count;
+				SlotType.Index = 0; // reset
 
 				for (int i = 0; i < count; ++i)
 				{
@@ -247,6 +248,7 @@ namespace Nikki.Support.Carbon.Framework
 
 				this._is_read_only = false;
 				++this.Capacity;
+				collection.Manager = this;
 				this.Add(collection);
 				this._is_read_only = true;
 
