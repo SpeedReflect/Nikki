@@ -151,7 +151,7 @@ namespace Nikki.Support.MostWanted.Class
             if (this.IsCompressed == eBoolean.True) this.AssembleCompressed(bw);
             else this.AssembleDecompressed(bw);
 
-            ForcedX.GCCollect(true, true);
+            ForcedX.GCCollect();
         }
 
         private void AssembleDecompressed(BinaryWriter bw)
