@@ -214,6 +214,7 @@ namespace Nikki.Support.MostWanted.Framework
 				// Allow import of FNGroups because it is safe
 				this._is_read_only = false;
 				++this.Capacity;
+				collection.Manager = this;
 				this.Add(collection);
 				this._is_read_only = true;
 

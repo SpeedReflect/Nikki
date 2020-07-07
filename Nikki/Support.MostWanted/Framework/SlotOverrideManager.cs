@@ -232,6 +232,7 @@ namespace Nikki.Support.MostWanted.Framework
 			if (index == -1)
 			{
 
+				collection.Manager = this;
 				this.Add(collection);
 
 			}
