@@ -222,6 +222,7 @@ namespace Nikki.Support.Prostreet.Framework
 			if (index == -1)
 			{
 
+				collection.Manager = this;
 				this.Add(collection);
 
 			}

@@ -248,6 +248,7 @@ namespace Nikki.Support.Prostreet.Framework
 
 				this._is_read_only = false;
 				++this.Capacity;
+				collection.Manager = this;
 				this.Add(collection);
 				this._is_read_only = true;
 
