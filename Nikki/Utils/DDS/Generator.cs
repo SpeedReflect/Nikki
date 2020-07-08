@@ -387,6 +387,7 @@ namespace Nikki.Utils.DDS
 				this.Width = br.ReadInt32();
 				br.BaseStream.Position += 0x8; // skip pitch/linear size and depth
 				this.MipMaps = br.ReadInt32();
+				if (this.MipMaps == 0) this.MipMaps = 1; // in case it is mipmap-less texture
 
 				br.BaseStream.Position += 0x30; // skips padding
 

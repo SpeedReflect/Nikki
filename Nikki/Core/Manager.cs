@@ -1169,7 +1169,7 @@ namespace Nikki.Core
 			for (int loop = 0; loop < this._size; ++loop)
 			{
 
-				proper.SetValue(this._collections[loop], value);
+				this._collections[loop].SetValue(property, value);
 
 			}
 		}
