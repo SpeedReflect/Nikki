@@ -450,7 +450,7 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Synchronizes all parts of this instance with another instance passed.
 		/// </summary>
-		/// <param name="other"><see cref="DBModelPart"/> to synchronize with.</param>
+		/// <param name="other"><see cref="STRBlock"/> to synchronize with.</param>
 		internal void Synchronize(STRBlock other)
 		{
 			var records = new List<StringRecord>(other._stringinfo);

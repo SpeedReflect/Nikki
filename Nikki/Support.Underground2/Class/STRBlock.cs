@@ -8,7 +8,7 @@ using Nikki.Reflection;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
-using Nikki.Support.MostWanted.Framework;
+using Nikki.Support.Underground2.Framework;
 using Nikki.Support.Shared.Parts.STRParts;
 using CoreExtensions.IO;
 using CoreExtensions.Text;
@@ -16,7 +16,7 @@ using CoreExtensions.Conversions;
 
 
 
-namespace Nikki.Support.MostWanted.Class
+namespace Nikki.Support.Underground2.Class
 {
 	/// <summary>
 	/// <see cref="STRBlock"/> is a collection of language strings, hashes and labels.
@@ -52,13 +52,13 @@ namespace Nikki.Support.MostWanted.Class
 		/// Game to which the class belongs to.
 		/// </summary>
 		[Browsable(false)]
-		public override GameINT GameINT => GameINT.MostWanted;
+		public override GameINT GameINT => GameINT.Underground2;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
 		[Browsable(false)]
-		public override string GameSTR => GameINT.MostWanted.ToString();
+		public override string GameSTR => GameINT.Underground2.ToString();
 
 		/// <summary>
 		/// Manager to which the class belongs to.

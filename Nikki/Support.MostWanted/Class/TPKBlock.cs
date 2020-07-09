@@ -1304,7 +1304,7 @@ namespace Nikki.Support.MostWanted.Class
         /// <summary>
         /// Synchronizes all parts of this instance with another instance passed.
         /// </summary>
-        /// <param name="other"><see cref="DBModelPart"/> to synchronize with.</param>
+        /// <param name="other"><see cref="TPKBlock"/> to synchronize with.</param>
         internal void Synchronize(TPKBlock other)
         {
             var animations = new List<AnimSlot>(other.Animations);
