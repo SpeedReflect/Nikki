@@ -8,7 +8,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
     /// <summary>
     /// A unit <see cref="Ecar"/> used in car performance.
     /// </summary>
-    public class Ecar : ASubPart
+    public class Ecar : SubPart
 	{
         /// <summary>
         /// 
@@ -67,7 +67,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
         /// Creates a plain copy of the objects that contains same values.
         /// </summary>
         /// <returns>Exact plain copy of the object.</returns>
-        public override ASubPart PlainCopy()
+        public override SubPart PlainCopy()
         {
             var result = new Ecar();
 

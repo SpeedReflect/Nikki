@@ -9,7 +9,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
 	/// <summary>
 	/// A unit <see cref="Transmission"/> used in car performance.
 	/// </summary>
-	public class Transmission : ASubPart
+	public class Transmission : SubPart
 	{
 		/// <summary>
 		/// 
@@ -116,7 +116,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new Transmission();
 

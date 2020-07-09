@@ -11,7 +11,7 @@ namespace Nikki.Support.Underground2.Parts.GameParts
 	/// <summary>
 	/// A unit <see cref="Stage"/> that is used in career races.
 	/// </summary>
-	public class Stage : ASubPart
+	public class Stage : SubPart
 	{
 		/// <summary>
 		/// Track ID of this <see cref="Stage"/>.
@@ -35,7 +35,7 @@ namespace Nikki.Support.Underground2.Parts.GameParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new Stage()
 			{

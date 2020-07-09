@@ -13,7 +13,7 @@ namespace Nikki.Support.Underground2.Parts.GameParts
 	/// <summary>
 	/// A unit <see cref="Opponent"/> that is used in career races.
 	/// </summary>
-	public class Opponent : ASubPart
+	public class Opponent : SubPart
 	{
 		/// <summary>
 		/// Name of the opponent.
@@ -61,7 +61,7 @@ namespace Nikki.Support.Underground2.Parts.GameParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new Opponent();
 

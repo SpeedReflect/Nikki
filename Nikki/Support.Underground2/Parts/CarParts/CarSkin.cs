@@ -13,7 +13,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 	/// <summary>
 	/// A unit <see cref="CarSkin"/> used in cartypeinfo collections.
 	/// </summary>
-	public class CarSkin : ASubPart
+	public class CarSkin : SubPart
 	{
 		/// <summary>
 		/// Description of the skin.
@@ -42,7 +42,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new CarSkin()
 			{
