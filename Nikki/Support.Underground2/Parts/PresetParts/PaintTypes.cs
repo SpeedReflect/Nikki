@@ -9,7 +9,7 @@ namespace Nikki.Support.Underground2.Parts.PresetParts
 	/// <summary>
 	/// A unit <see cref="PaintTypes"/> used in preset rides.
 	/// </summary>
-	public class PaintTypes : ASubPart
+	public class PaintTypes : SubPart
 	{
 		/// <summary>
 		/// 
@@ -75,7 +75,7 @@ namespace Nikki.Support.Underground2.Parts.PresetParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new PaintTypes();
 

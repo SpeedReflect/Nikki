@@ -11,7 +11,7 @@ namespace Nikki.Support.Underground2.Parts.PresetParts
 	/// <summary>
 	/// A unit <see cref="HUDStyle"/> used in preset rides.
 	/// </summary>
-	public class HUDStyle : ASubPart
+	public class HUDStyle : SubPart
 	{
 		/// <summary>
 		/// 
@@ -41,7 +41,7 @@ namespace Nikki.Support.Underground2.Parts.PresetParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new HUDStyle()
 			{

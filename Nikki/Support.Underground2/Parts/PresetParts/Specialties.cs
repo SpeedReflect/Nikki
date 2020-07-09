@@ -11,7 +11,7 @@ namespace Nikki.Support.Underground2.Parts.PresetParts
 	/// <summary>
 	/// A unit <see cref="Specialties"/> used in preset rides.
 	/// </summary>
-	public class Specialties : ASubPart
+	public class Specialties : SubPart
 	{
 		/// <summary>
 		/// 
@@ -71,7 +71,7 @@ namespace Nikki.Support.Underground2.Parts.PresetParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new Specialties();
 
