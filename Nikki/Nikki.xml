@@ -1430,51 +1430,6 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MAT0">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MAT1">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MAT2">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MAT3">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MAT4">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MAT5">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MAT6">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.MAT7">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.SIZE">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.BLUE">
             <summary>
             
@@ -1500,22 +1455,12 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.SHAPE">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.ALPHA2">
             <summary>
             
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.GREEN2">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.SWATCH">
             <summary>
             
             </summary>
@@ -1645,7 +1590,62 @@
             
             </summary>
         </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.MAT0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.MAT1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.MAT2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.MAT3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.MAT4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.MAT5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.MAT6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.MAT7">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.NAME">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.SIZE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.SHAPE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.SWATCH">
             <summary>
             
             </summary>

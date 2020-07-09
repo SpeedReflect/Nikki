@@ -213,7 +213,18 @@ namespace Nikki.Core
 
 			// Key Attributes
 			{ 0x000004B8, eCarPartAttribType.Key }, // CV
+			{ 0x00194031, eCarPartAttribType.Key }, // MAT0
+			{ 0x00194032, eCarPartAttribType.Key }, // MAT1
+			{ 0x00194033, eCarPartAttribType.Key }, // MAT2
+			{ 0x00194034, eCarPartAttribType.Key }, // MAT3
+			{ 0x00194035, eCarPartAttribType.Key }, // MAT4
+			{ 0x00194036, eCarPartAttribType.Key }, // MAT5
+			{ 0x00194037, eCarPartAttribType.Key }, // MAT6
+			{ 0x00194038, eCarPartAttribType.Key }, // MAT7
 			{ 0x0019CBC0, eCarPartAttribType.Key }, // NAME
+			{ 0x001CAD5A, eCarPartAttribType.Key }, // SIZE
+			{ 0x03B16390, eCarPartAttribType.Key }, // SHAPE
+			{ 0x7AED5629, eCarPartAttribType.Key }, // SWATCH
 			{ 0xF073C523, eCarPartAttribType.Key }, // MATNAMEA
 			{ 0xF073C524, eCarPartAttribType.Key }, // MATNAMEB
 			{ 0xEBB03E66, eCarPartAttribType.Key }, // BRAND_NAME
@@ -237,24 +248,13 @@ namespace Nikki.Core
 			// Integer Attributes
 			{ 0x0000D99A, eCarPartAttribType.Integer }, // RED
 			{ 0x001C0D0C, eCarPartAttribType.Integer }, // RED2
-			{ 0x00194031, eCarPartAttribType.Integer }, // MAT0
-			{ 0x00194032, eCarPartAttribType.Integer }, // MAT1
-			{ 0x00194033, eCarPartAttribType.Integer }, // MAT2
-			{ 0x00194034, eCarPartAttribType.Integer }, // MAT3
-			{ 0x00194035, eCarPartAttribType.Integer }, // MAT4
-			{ 0x00194036, eCarPartAttribType.Integer }, // MAT5
-			{ 0x00194037, eCarPartAttribType.Integer }, // MAT6
-			{ 0x00194038, eCarPartAttribType.Integer }, // MAT7
-			{ 0x001CAD5A, eCarPartAttribType.Integer }, // SIZE
 			{ 0x00136707, eCarPartAttribType.Integer }, // BLUE
 			{ 0x026E1AC5, eCarPartAttribType.Integer }, // ALPHA
 			{ 0x02DDC8F0, eCarPartAttribType.Integer }, // GREEN
 			{ 0x02DAAB07, eCarPartAttribType.Integer }, // GLOSS
 			{ 0x02804819, eCarPartAttribType.Integer }, // BLUE2
-			{ 0x03B16390, eCarPartAttribType.Integer }, // SHAPE
 			{ 0x50317397, eCarPartAttribType.Integer }, // ALPHA2
 			{ 0x5E96E722, eCarPartAttribType.Integer }, // GREEN2
-			{ 0x7AED5629, eCarPartAttribType.Integer }, // SWATCH
 			{ 0xD90F9423, eCarPartAttribType.Integer }, // MAX_LOD
 			{ 0x368A1A6A, eCarPartAttribType.Integer }, // DISPRED
 			{ 0x07C4C1D7, eCarPartAttribType.Integer }, // DISPBLUE

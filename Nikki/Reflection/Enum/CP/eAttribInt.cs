@@ -18,51 +18,6 @@
 		/// <summary>
 		/// 
 		/// </summary>
-		MAT0 = 0x00194031,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		MAT1 = 0x00194032,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		MAT2 = 0x00194033,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		MAT3 = 0x00194034,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		MAT4 = 0x00194035,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		MAT5 = 0x00194036,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		MAT6 = 0x00194037,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		MAT7 = 0x00194038,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		SIZE = 0x001CAD5A,
-		
-		/// <summary>
-		/// 
-		/// </summary>
 		BLUE = 0x00136707,
 		
 		/// <summary>
@@ -88,22 +43,12 @@
 		/// <summary>
 		/// 
 		/// </summary>
-		SHAPE = 0x03B16390,
-		
-		/// <summary>
-		/// 
-		/// </summary>
 		ALPHA2 = 0x50317397,
 		
 		/// <summary>
 		/// 
 		/// </summary>
 		GREEN2 = 0x5E96E722,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		SWATCH = 0x7AED5629,
 		
 		/// <summary>
 		/// 
