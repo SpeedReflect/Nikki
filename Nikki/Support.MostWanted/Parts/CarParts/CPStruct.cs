@@ -398,13 +398,11 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		public override int GetHashCode()
 		{
 			int result = (this.Templated == eBoolean.True) ? 87 : -87;
-			int empty = String.Empty.GetHashCode();
-			result *= this.Concatenator?.GetHashCode() ?? empty;
-			result *= this.GeometryLodA?.GetHashCode() ?? empty;
-			result ^= this.GeometryLodB?.GetHashCode() ?? empty;
-			result *= this.GeometryLodC?.GetHashCode() ?? empty;
-			result ^= this.GeometryLodD?.GetHashCode() ?? empty;
-			result *= this.GeometryLodE?.GetHashCode() ?? empty;
+			result = HashCode.Combine(result, this.GeometryLodA);
+			result = HashCode.Combine(result, this.GeometryLodB);
+			result = HashCode.Combine(result, this.GeometryLodC);
+			result = HashCode.Combine(result, this.GeometryLodD);
+			result = HashCode.Combine(result, this.GeometryLodE);
 
 			string str = String.Empty;
 			str += ((int)this.GeometryLodAExists).ToString();
@@ -422,8 +420,13 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// <param name="cp1">The first <see cref="CPStruct"/> to compare, or null.</param>
 		/// <param name="cp2">The second <see cref="CPStruct"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
-		public static bool operator ==(CPStruct cp1, CPStruct cp2) =>
-			cp1 is null ? cp2 is null : !(cp2 is null) && cp1.ValueEquals(cp2);
+		public static bool operator ==(CPStruct cp1, CPStruct cp2)
+		{
+			if (cp1 is null) return cp2 is null;
+			else if (cp2 is null) return false;
+
+			return cp1.ValueEquals(cp2);
+		}
 
 		/// <summary>
 		/// Determines whether two specified <see cref="CPStruct"/> have different values.
@@ -470,10 +473,10 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 			this.ConcatenatorExists = br.ReadEnum<eBoolean>();
 			if (this.ConcatenatorExists == eBoolean.True) this.Concatenator = br.ReadNullTermUTF8();
 
-			this.GeometryLodAExists	= br.ReadEnum<eBoolean>();
-			this.GeometryLodBExists	= br.ReadEnum<eBoolean>();
-			this.GeometryLodCExists	= br.ReadEnum<eBoolean>();
-			this.GeometryLodDExists	= br.ReadEnum<eBoolean>();
+			this.GeometryLodAExists = br.ReadEnum<eBoolean>();
+			this.GeometryLodBExists = br.ReadEnum<eBoolean>();
+			this.GeometryLodCExists = br.ReadEnum<eBoolean>();
+			this.GeometryLodDExists = br.ReadEnum<eBoolean>();
 			this.GeometryLodEExists = br.ReadEnum<eBoolean>();
 
 			if (this.GeometryLodAExists == eBoolean.True) this.GeometryLodA = br.ReadNullTermUTF8();
