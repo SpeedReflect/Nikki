@@ -13473,7 +13473,7 @@
             <summary>
             Synchronizes all parts of this instance with another instance passed.
             </summary>
-            <param name="other"><see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> to synchronize with.</param>
+            <param name="other"><see cref="T:Nikki.Support.Carbon.Class.STRBlock"/> to synchronize with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.SunInfo">
             <summary>
@@ -14016,7 +14016,7 @@
             <summary>
             Synchronizes all parts of this instance with another instance passed.
             </summary>
-            <param name="other"><see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> to synchronize with.</param>
+            <param name="other"><see cref="T:Nikki.Support.Carbon.Class.TPKBlock"/> to synchronize with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Class.Track">
             <summary>
@@ -18506,7 +18506,7 @@
             <summary>
             Synchronizes all parts of this instance with another instance passed.
             </summary>
-            <param name="other"><see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> to synchronize with.</param>
+            <param name="other"><see cref="T:Nikki.Support.MostWanted.Class.STRBlock"/> to synchronize with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.SunInfo">
             <summary>
@@ -19070,7 +19070,7 @@
             <summary>
             Synchronizes all parts of this instance with another instance passed.
             </summary>
-            <param name="other"><see cref="T:Nikki.Support.MostWanted.Class.DBModelPart"/> to synchronize with.</param>
+            <param name="other"><see cref="T:Nikki.Support.MostWanted.Class.TPKBlock"/> to synchronize with.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Class.Track">
             <summary>
@@ -24579,7 +24579,7 @@
             <summary>
             Synchronizes all parts of this instance with another instance passed.
             </summary>
-            <param name="other"><see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> to synchronize with.</param>
+            <param name="other"><see cref="T:Nikki.Support.Prostreet.Class.STRBlock"/> to synchronize with.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Class.SunInfo">
             <summary>
@@ -25122,7 +25122,7 @@
             <summary>
             Synchronizes all parts of this instance with another instance passed.
             </summary>
-            <param name="other"><see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> to synchronize with.</param>
+            <param name="other"><see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> to synchronize with.</param>
         </member>
         <member name="T:Nikki.Support.Prostreet.Class.Track">
             <summary>

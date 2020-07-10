@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using CoreExtensions.IO;
 
 
 
@@ -93,6 +94,32 @@ namespace Nikki.Support.Underground2.Parts.PresetParts
 			bw.Write(this.DoorPanelRight.BinHash());
 			bw.Write(this.DoorSillLeft.BinHash());
 			bw.Write(this.DoorSillRight.BinHash());
+		}
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public void Serialize(BinaryWriter bw)
+		{
+			bw.WriteNullTermUTF8(this.DoorLeft);
+			bw.WriteNullTermUTF8(this.DoorRight);
+			bw.WriteNullTermUTF8(this.DoorPanelLeft);
+			bw.WriteNullTermUTF8(this.DoorPanelRight);
+			bw.WriteNullTermUTF8(this.DoorSillLeft);
+			bw.WriteNullTermUTF8(this.DoorSillRight);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public void Deserialize(BinaryReader br)
+		{
+			this.DoorLeft = br.ReadNullTermUTF8();
+			this.DoorRight = br.ReadNullTermUTF8();
+			this.DoorPanelLeft = br.ReadNullTermUTF8();
+			this.DoorPanelRight = br.ReadNullTermUTF8();
+			this.DoorSillLeft = br.ReadNullTermUTF8();
+			this.DoorSillRight = br.ReadNullTermUTF8();
 		}
 	}
 }

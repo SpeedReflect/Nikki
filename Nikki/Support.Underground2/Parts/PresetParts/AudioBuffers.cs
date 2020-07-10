@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using CoreExtensions.IO;
 
 
 
@@ -141,6 +142,44 @@ namespace Nikki.Support.Underground2.Parts.PresetParts
 			bw.Write(this.AudioCompSmall09.BinHash());
 			bw.Write(this.AudioCompMedium10.BinHash());
 			bw.Write(this.AudioCompMedium11.BinHash());
+		}
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public void Serialize(BinaryWriter bw)
+		{
+			bw.WriteNullTermUTF8(this.AudioCompSmall00);
+			bw.WriteNullTermUTF8(this.AudioCompSmall01);
+			bw.WriteNullTermUTF8(this.AudioCompMedium02);
+			bw.WriteNullTermUTF8(this.AudioCompMedium03);
+			bw.WriteNullTermUTF8(this.AudioCompLarge04);
+			bw.WriteNullTermUTF8(this.AudioCompLarge05);
+			bw.WriteNullTermUTF8(this.AudioCompSmall06);
+			bw.WriteNullTermUTF8(this.AudioCompSmall07);
+			bw.WriteNullTermUTF8(this.AudioCompSmall08);
+			bw.WriteNullTermUTF8(this.AudioCompSmall09);
+			bw.WriteNullTermUTF8(this.AudioCompMedium10);
+			bw.WriteNullTermUTF8(this.AudioCompMedium11);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public void Deserialize(BinaryReader br)
+		{
+			this.AudioCompSmall00 = br.ReadNullTermUTF8();
+			this.AudioCompSmall01 = br.ReadNullTermUTF8();
+			this.AudioCompMedium02 = br.ReadNullTermUTF8();
+			this.AudioCompMedium03 = br.ReadNullTermUTF8();
+			this.AudioCompLarge04 = br.ReadNullTermUTF8();
+			this.AudioCompLarge05 = br.ReadNullTermUTF8();
+			this.AudioCompSmall06 = br.ReadNullTermUTF8();
+			this.AudioCompSmall07 = br.ReadNullTermUTF8();
+			this.AudioCompSmall08 = br.ReadNullTermUTF8();
+			this.AudioCompSmall09 = br.ReadNullTermUTF8();
+			this.AudioCompMedium10 = br.ReadNullTermUTF8();
+			this.AudioCompMedium11 = br.ReadNullTermUTF8();
 		}
 	}
 }

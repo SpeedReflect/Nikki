@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using CoreExtensions.IO;
 
 
 
@@ -109,6 +110,36 @@ namespace Nikki.Support.Underground2.Parts.PresetParts
 			bw.Write(this.DecalSlot5.BinHash());
 			bw.Write(this.DecalSlot6.BinHash());
 			bw.Write(this.DecalSlot7.BinHash());
+		}
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public void Serialize(BinaryWriter bw)
+		{
+			bw.WriteNullTermUTF8(this.DecalSlot0);
+			bw.WriteNullTermUTF8(this.DecalSlot1);
+			bw.WriteNullTermUTF8(this.DecalSlot2);
+			bw.WriteNullTermUTF8(this.DecalSlot3);
+			bw.WriteNullTermUTF8(this.DecalSlot4);
+			bw.WriteNullTermUTF8(this.DecalSlot5);
+			bw.WriteNullTermUTF8(this.DecalSlot6);
+			bw.WriteNullTermUTF8(this.DecalSlot7);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public void Deserialize(BinaryReader br)
+		{
+			this.DecalSlot0 = br.ReadNullTermUTF8();
+			this.DecalSlot1 = br.ReadNullTermUTF8();
+			this.DecalSlot2 = br.ReadNullTermUTF8();
+			this.DecalSlot3 = br.ReadNullTermUTF8();
+			this.DecalSlot4 = br.ReadNullTermUTF8();
+			this.DecalSlot5 = br.ReadNullTermUTF8();
+			this.DecalSlot6 = br.ReadNullTermUTF8();
+			this.DecalSlot7 = br.ReadNullTermUTF8();
 		}
 	}
 }

@@ -111,7 +111,7 @@ namespace Nikki.Support.Prostreet.Class
         [AccessModifiable()]
         [MemoryCastable()]
         [Category("Primary")]
-        public eMemoryType MemoryType { get; set; }
+        public eMemoryType MemoryType { get; set; } = eMemoryType.Racing;
 
         #endregion
 

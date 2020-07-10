@@ -14,13 +14,13 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
         /// 
         /// </summary>
         [AccessModifiable()]
-        public float EcarUnknown1 { get; set; } = 2F;
+        public float Unknown1 { get; set; } = 2F;
 
         /// <summary>
         /// 
         /// </summary>
         [AccessModifiable()]
-        public float EcarUnknown2 { get; set; } = 3F;
+        public float Unknown2 { get; set; } = 3F;
 
         /// <summary>
         /// 

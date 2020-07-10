@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using CoreExtensions.IO;
 
 
 
@@ -85,6 +86,30 @@ namespace Nikki.Support.Underground2.Parts.PresetParts
 			bw.Write(this.DamageLeft.BinHash());
 			bw.Write(this.DamageRight.BinHash());
 			bw.Write(this.DamageTop.BinHash());
+		}
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public void Serialize(BinaryWriter bw)
+		{
+			bw.WriteNullTermUTF8(this.DamageFront);
+			bw.WriteNullTermUTF8(this.DamageRear);
+			bw.WriteNullTermUTF8(this.DamageLeft);
+			bw.WriteNullTermUTF8(this.DamageRight);
+			bw.WriteNullTermUTF8(this.DamageTop);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public void Deserialize(BinaryReader br)
+		{
+			this.DamageFront = br.ReadNullTermUTF8();
+			this.DamageRear = br.ReadNullTermUTF8();
+			this.DamageLeft = br.ReadNullTermUTF8();
+			this.DamageRight = br.ReadNullTermUTF8();
+			this.DamageTop = br.ReadNullTermUTF8();
 		}
 	}
 }
