@@ -57,6 +57,7 @@ namespace Nikki.Support.Underground2.Class
         /// <summary>
         /// Manager to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public PresetRideManager Manager { get; set; }
 
         /// <summary>
@@ -420,96 +421,112 @@ namespace Nikki.Support.Underground2.Class
         /// <summary>
         /// Perfomance specifications of this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("BaseKit")]
         public PerfSpecs PERF_SPECS { get; }
 
         /// <summary>
         /// Doorline attributes of this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("BaseKit")]
         public Doorlines KIT_DOORLINES { get; }
 
         /// <summary>
         /// Damage attributes of this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("BaseKit")]
         public Damages KIT_DAMAGES { get; }
 
         /// <summary>
         /// Audio buffer attributes of this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Visuals")]
         public AudioBuffers AUDIO_COMP { get; }
 
         /// <summary>
         /// Decal size attributes of this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("BaseKit")]
         public DecalSize DECAL_SIZES { get; }
 
         /// <summary>
         /// Group of paints appliable to parts in this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Visuals")]
         public PaintTypes PAINT_TYPES { get; }
 
         /// <summary>
         /// Group of vinyls and their colors appliable to this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Visuals")]
         public VinylSets VINYL_SETS { get; }
 
         /// <summary>
         /// Set of hood decals in this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Decals")]
         public DecalArray DECALS_HOOD { get; }
 
         /// <summary>
         /// Set of front window decals in this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Decals")]
         public DecalArray DECALS_FRONT_WINDOW { get; }
 
         /// <summary>
         /// Set of rear window decals in this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Decals")]
         public DecalArray DECALS_REAR_WINDOW { get; }
 
         /// <summary>
         /// Set of left door decals in this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Decals")]
         public DecalArray DECALS_LEFT_DOOR { get; }
 
         /// <summary>
         /// Set of right door decals in this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Decals")]
         public DecalArray DECALS_RIGHT_DOOR { get; }
 
         /// <summary>
         /// Set of left quarter decals in this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Decals")]
         public DecalArray DECALS_LEFT_QUARTER { get; }
 
         /// <summary>
         /// Set of right quarter decals in this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Decals")]
         public DecalArray DECALS_RIGHT_QUARTER { get; }
 
         /// <summary>
         /// Set of specialties and visual attributes of this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Visuals")]
         public Specialties SPECIALTIES { get; }
 
         /// <summary>
         /// Set of HUD elements in this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Visuals")]
         public HUDStyle HUD { get; }
 

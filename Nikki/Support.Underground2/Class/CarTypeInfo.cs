@@ -163,318 +163,371 @@ namespace Nikki.Support.Underground2.Class
         /// <summary>
         /// Car skin 1.
         /// </summary>
+        [Browsable(false)]
         [Expandable("CarSkins")]
         public CarSkin CARSKIN01 { get; }
 
         /// <summary>
         /// Car skin 2.
         /// </summary>
+        [Browsable(false)]
         [Expandable("CarSkins")]
         public CarSkin CARSKIN02 { get; }
 
         /// <summary>
         /// Car skin 3.
         /// </summary>
+        [Browsable(false)]
         [Expandable("CarSkins")]
         public CarSkin CARSKIN03 { get; }
 
         /// <summary>
         /// Car skin 4.
         /// </summary>
+        [Browsable(false)]
         [Expandable("CarSkins")]
         public CarSkin CARSKIN04 { get; }
 
         /// <summary>
         /// Car skin 5.
         /// </summary>
+        [Browsable(false)]
         [Expandable("CarSkins")]
         public CarSkin CARSKIN05 { get; }
 
         /// <summary>
         /// Car skin 6.
         /// </summary>
+        [Browsable(false)]
         [Expandable("CarSkins")]
         public CarSkin CARSKIN06 { get; }
 
         /// <summary>
         /// Car skin 7.
         /// </summary>
+        [Browsable(false)]
         [Expandable("CarSkins")]
         public CarSkin CARSKIN07 { get; }
 
         /// <summary>
         /// Car skin 8.
         /// </summary>
+        [Browsable(false)]
         [Expandable("CarSkins")]
         public CarSkin CARSKIN08 { get; }
 
         /// <summary>
         /// Car skin 9.
         /// </summary>
+        [Browsable(false)]
         [Expandable("CarSkins")]
         public CarSkin CARSKIN09 { get; }
 
         /// <summary>
         /// Car skin 10.
         /// </summary>
+        [Browsable(false)]
         [Expandable("CarSkins")]
         public CarSkin CARSKIN10 { get; }
 
         /// <summary>
         /// Ecar settings of this <see cref="CarTypeInfo"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("General")]
         public Ecar ECAR { get; }
 
         /// <summary>
         /// Pvehicle settings of this <see cref="CarTypeInfo"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("General")]
         public Pvehicle PVEHICLE { get; }
 
         /// <summary>
         /// Rigid control settings of this <see cref="CarTypeInfo"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("General")]
         public RigidControls RIGID_CONTROLS { get; }
 
         /// <summary>
         /// Front left wheel settings of this <see cref="CarTypeInfo"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Wheels")]
         public CarInfoWheel WHEEL_FRONT_LEFT { get; }
 
         /// <summary>
         /// Front right wheel settings of this <see cref="CarTypeInfo"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Wheels")]
         public CarInfoWheel WHEEL_FRONT_RIGHT { get; }
 
         /// <summary>
         /// Rear right wheel settings of this <see cref="CarTypeInfo"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Wheels")]
         public CarInfoWheel WHEEL_REAR_RIGHT { get; }
 
         /// <summary>
         /// Rear left wheel settings of this <see cref="CarTypeInfo"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Wheels")]
         public CarInfoWheel WHEEL_REAR_LEFT { get; }
 
         /// <summary>
         /// Far player camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("PlayerCamera")]
         public Camera PLAYER_CAMERA_FAR { get; }
 
         /// <summary>
         /// Close player camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("PlayerCamera")]
         public Camera PLAYER_CAMERA_CLOSE { get; }
 
         /// <summary>
         /// Bumper player camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("PlayerCamera")]
         public Camera PLAYER_CAMERA_BUMPER { get; }
 
         /// <summary>
         /// Driver player camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("PlayerCamera")]
         public Camera PLAYER_CAMERA_DRIVER { get; }
 
         /// <summary>
         /// Hood player camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("PlayerCamera")]
         public Camera PLAYER_CAMERA_HOOD { get; }
 
         /// <summary>
         /// Drift player camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("PlayerCamera")]
         public Camera PLAYER_CAMERA_DRIFT { get; }
 
         /// <summary>
         /// Far AI camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("AICamera")]
         public Camera AI_CAMERA_FAR { get; }
 
         /// <summary>
         /// Close AI camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("AICamera")]
         public Camera AI_CAMERA_CLOSE { get; }
 
         /// <summary>
         /// Bumper AI camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("AICamera")]
         public Camera AI_CAMERA_BUMPER { get; }
 
         /// <summary>
         /// Driver AI camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("AICamera")]
         public Camera AI_CAMERA_DRIVER { get; }
 
         /// <summary>
         /// Hood AI camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("AICamera")]
         public Camera AI_CAMERA_HOOD { get; }
 
         /// <summary>
         /// Drift AI camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("AICamera")]
         public Camera AI_CAMERA_DRIFT { get; }
 
         /// <summary>
         /// Base tires performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Tires")]
         public Tires BASE_TIRES { get; }
 
         /// <summary>
         /// Top tires performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Tires")]
         public Tires TOP_TIRES { get; }
 
         /// <summary>
         /// Base suspension performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Suspension")]
         public Suspension BASE_SUSPENSION { get; }
 
         /// <summary>
         /// Top suspension performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Suspension")]
         public Suspension TOP_SUSPENSION { get; }
 
         /// <summary>
         /// Base transmission performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Transmission")]
         public Transmission BASE_TRANSMISSION { get; }
 
         /// <summary>
         /// Street transmission performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Transmission")]
         public Transmission STREET_TRANSMISSION { get; }
 
         /// <summary>
         /// Pro transmission performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Transmission")]
         public Transmission PRO_TRANSMISSION { get; }
 
         /// <summary>
         /// Top transmission performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Transmission")]
         public Transmission TOP_TRANSMISSION { get; }
 
         /// <summary>
         /// Base RPM performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("RPM")]
         public RPM BASE_RPM { get; }
 
         /// <summary>
         /// Street RPM performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("RPM")]
         public RPM STREET_RPM { get; }
 
         /// <summary>
         /// Pro RPM performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("RPM")]
         public RPM PRO_RPM { get; }
 
         /// <summary>
         /// Top RPM performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("RPM")]
         public RPM TOP_RPM { get; }
 
         /// <summary>
         /// Street ECU performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("ECU")]
         public ECU STREET_ECU { get; }
 
         /// <summary>
         /// Pro ECU performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("ECU")]
         public ECU PRO_ECU { get; }
 
         /// <summary>
         /// Top ECU performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("ECU")]
         public ECU TOP_ECU { get; }
 
         /// <summary>
         /// Base engine performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Engine")]
         public Engine BASE_ENGINE { get; }
 
         /// <summary>
         /// Top engine performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Engine")]
         public Engine TOP_ENGINE { get; }
 
         /// <summary>
         /// Base turbo performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Turbo")]
         public Turbo BASE_TURBO { get; }
 
         /// <summary>
         /// Top turbo performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Turbo")]
         public Turbo TOP_TURBO { get; }
 
         /// <summary>
         /// Base brakes performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Brakes")]
         public Brakes BASE_BRAKES { get; }
 
         /// <summary>
         /// Top brakes performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Brakes")]
         public Brakes TOP_BRAKES { get; }
 
         /// <summary>
         /// Top weight reduction performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("WeightReduction")]
         public WeightReduction TOP_WEIGHT_REDUCTION { get; }
 
         /// <summary>
         /// Top nitrous performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("NOS")]
         public Nitrous TOP_NITROUS { get; }
 
         /// <summary>
         /// Additional drift yaw control performance settings.
         /// </summary>
+        [Browsable(false)]
         [Expandable("DriftControl")]
         public DriftControl DRIFT_ADD_CONTROL { get; }
 
