@@ -1,11 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -42,35 +44,32 @@ namespace Nikki.Support.Underground2.Class
         /// <summary>
         /// Game to which the class belongs to.
         /// </summary>
+		[Browsable(false)]
         public override GameINT GameINT => GameINT.Underground2;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
+		[Browsable(false)]
         public override string GameSTR => GameINT.Underground2.ToString();
 
         /// <summary>
-        /// Database to which the class belongs to.
+        /// Manager to which the class belongs to.
         /// </summary>
-        public Database.Underground2 Database { get; set; }
+		[Browsable(false)]
+        public AcidEffectManager Manager { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
         /// </summary>
         [AccessModifiable()]
+        [Category("Main")]
         public override string CollectionName
         {
             get => this._collection_name;
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentNullException("This value cannot be left empty.");
-                if (value.Contains(" "))
-                    throw new Exception("CollectionName cannot contain whitespace.");
-                if (value.Length > MaxCNameLength)
-                    throw new ArgumentLengthException(MaxCNameLength);
-                if (this.Database.AcidEffects.FindCollection(value) != null)
-                    throw new CollectionExistenceException(value);
+                this.Manager?.CreationCheck(value);
                 this._collection_name = value;
             }
         }
@@ -78,11 +77,15 @@ namespace Nikki.Support.Underground2.Class
         /// <summary>
         /// Binary memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint BinKey => this._collection_name.BinHash();
 
         /// <summary>
         /// Vault memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint VltKey => this._collection_name.VltHash();
 
         /// <summary>
@@ -91,6 +94,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public uint ClassKey { get; set; }
 
         /// <summary>
@@ -99,6 +103,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public uint Flags { get; set; }
 
         /// <summary>
@@ -107,6 +112,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public ushort NumEmitters { get; set; }
 
         /// <summary>
@@ -115,6 +121,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public ushort SectionNumber { get; set; }
 
         /// <summary>
@@ -123,6 +130,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public string InheritanceKey { get; set; } = String.Empty;
 
         /// <summary>
@@ -131,6 +139,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public float FarClip { get; set; }
 
         /// <summary>
@@ -139,6 +148,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public float Intensity { get; set; }
 
         /// <summary>
@@ -147,6 +157,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float LastPositionX { get; set; }
 
         /// <summary>
@@ -155,6 +166,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float LastPositionY { get; set; }
 
         /// <summary>
@@ -163,6 +175,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float LastPositionZ { get; set; }
 
         /// <summary>
@@ -171,6 +184,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float LastPositionW { get; set; }
 
         /// <summary>
@@ -179,6 +193,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public uint NumZeroParticleFrames { get; set; }
 
         /// <summary>
@@ -187,6 +202,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public uint CreationTimeStamp { get; set; }
 
         /// <summary>
@@ -195,6 +211,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float LocalWorld_Vec1_X { get; set; }
 
         /// <summary>
@@ -203,6 +220,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float LocalWorld_Vec1_Y { get; set; }
 
         /// <summary>
@@ -211,6 +229,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float LocalWorld_Vec1_Z { get; set; }
 
         /// <summary>
@@ -219,6 +238,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float LocalWorld_Vec1_W { get; set; }
 
         /// <summary>
@@ -227,6 +247,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float LocalWorld_Vec2_X { get; set; }
 
         /// <summary>
@@ -235,6 +256,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float LocalWorld_Vec2_Y { get; set; }
 
         /// <summary>
@@ -243,6 +265,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float LocalWorld_Vec2_Z { get; set; }
 
         /// <summary>
@@ -251,6 +274,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float LocalWorld_Vec2_W { get; set; }
 
         /// <summary>
@@ -259,6 +283,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float LocalWorld_Vec3_X { get; set; }
 
         /// <summary>
@@ -267,6 +292,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float LocalWorld_Vec3_Y { get; set; }
 
         /// <summary>
@@ -275,6 +301,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float LocalWorld_Vec3_Z { get; set; }
 
         /// <summary>
@@ -283,6 +310,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float LocalWorld_Vec3_W { get; set; }
 
         /// <summary>
@@ -291,6 +319,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float LocalWorld_Vec4_X { get; set; }
 
         /// <summary>
@@ -299,6 +328,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float LocalWorld_Vec4_Y { get; set; }
 
         /// <summary>
@@ -307,6 +337,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float LocalWorld_Vec4_Z { get; set; }
 
         /// <summary>
@@ -315,6 +346,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float LocalWorld_Vec4_W { get; set; }
 
         #endregion
@@ -330,10 +362,10 @@ namespace Nikki.Support.Underground2.Class
         /// Initializes new instance of <see cref="AcidEffect"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-        public AcidEffect(string CName, Database.Underground2 db)
+        /// <param name="manager"><see cref="AcidEffectManager"/> to which this instance belongs to.</param>
+        public AcidEffect(string CName, AcidEffectManager manager)
         {
-            this.Database = db;
+            this.Manager = manager;
             this.CollectionName = CName;
             CName.BinHash();
         }
@@ -342,10 +374,10 @@ namespace Nikki.Support.Underground2.Class
         /// Initializes new instance of <see cref="AcidEffect"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-        /// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-        public unsafe AcidEffect(BinaryReader br, Database.Underground2 db)
+        /// <param name="manager"><see cref="AcidEffectManager"/> to which this instance belongs to.</param>
+        public AcidEffect(BinaryReader br, AcidEffectManager manager)
         {
-            this.Database = db;
+            this.Manager = manager;
             this.Disassemble(br);
         }
 
@@ -457,9 +489,9 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         /// <param name="CName">CollectionName of the new created object.</param>
         /// <returns>Memory casted copy of the object.</returns>
-        public override ACollectable MemoryCast(string CName)
+        public override Collectable MemoryCast(string CName)
         {
-            var result = new AcidEffect(CName, this.Database);
+            var result = new AcidEffect(CName, this.Manager);
             base.MemoryCast(this, result);
             return result;
         }
@@ -472,7 +504,111 @@ namespace Nikki.Support.Underground2.Class
         public override string ToString()
         {
             return $"Collection Name: {this.CollectionName} | " +
-                   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+                   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
+        }
+
+        #endregion
+
+        #region Serialization
+
+        /// <summary>
+        /// Serializes instance into a byte array and stores it in the file provided.
+        /// </summary>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        public override void Serialize(BinaryWriter bw)
+        {
+            byte[] array;
+            using (var ms = new MemoryStream(0x80 + this.CollectionName.Length))
+            using (var writer = new BinaryWriter(ms))
+            {
+
+                writer.WriteNullTermUTF8(this._collection_name);
+                bw.Write(this.ClassKey);
+                bw.Write(this.Flags);
+                bw.Write(this.NumEmitters);
+                bw.Write(this.SectionNumber);
+                bw.Write(this.LocalWorld_Vec1_X);
+                bw.Write(this.LocalWorld_Vec1_Y);
+                bw.Write(this.LocalWorld_Vec1_Z);
+                bw.Write(this.LocalWorld_Vec1_W);
+                bw.Write(this.LocalWorld_Vec2_X);
+                bw.Write(this.LocalWorld_Vec2_Y);
+                bw.Write(this.LocalWorld_Vec2_Z);
+                bw.Write(this.LocalWorld_Vec2_W);
+                bw.Write(this.LocalWorld_Vec3_X);
+                bw.Write(this.LocalWorld_Vec3_Y);
+                bw.Write(this.LocalWorld_Vec3_Z);
+                bw.Write(this.LocalWorld_Vec3_W);
+                bw.Write(this.LocalWorld_Vec4_X);
+                bw.Write(this.LocalWorld_Vec4_Y);
+                bw.Write(this.LocalWorld_Vec4_Z);
+                bw.Write(this.LocalWorld_Vec4_W);
+                bw.WriteNullTermUTF8(this.InheritanceKey);
+                bw.Write(this.FarClip);
+                bw.Write(this.Intensity);
+                bw.Write(this.LastPositionX);
+                bw.Write(this.LastPositionY);
+                bw.Write(this.LastPositionZ);
+                bw.Write(this.LastPositionW);
+                bw.Write(this.NumZeroParticleFrames);
+                bw.Write(this.CreationTimeStamp);
+
+                array = ms.ToArray();
+
+            }
+
+            array = Interop.Compress(array, eLZCompressionType.BEST);
+
+            var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+            header.Write(bw);
+            bw.Write(array.Length);
+            bw.Write(array);
+        }
+
+        /// <summary>
+        /// Deserializes byte array into an instance by loading data from the file provided.
+        /// </summary>
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        public override void Deserialize(BinaryReader br)
+        {
+            int size = br.ReadInt32();
+            var array = br.ReadBytes(size);
+
+            array = Interop.Decompress(array);
+
+            using var ms = new MemoryStream(array);
+            using var reader = new BinaryReader(ms);
+
+            this._collection_name = reader.ReadNullTermUTF8();
+            this.ClassKey = reader.ReadUInt32();
+            this.Flags = reader.ReadUInt32();
+            this.NumEmitters = reader.ReadUInt16();
+            this.SectionNumber = reader.ReadUInt16();
+            this.LocalWorld_Vec1_X = reader.ReadSingle();
+            this.LocalWorld_Vec1_Y = reader.ReadSingle();
+            this.LocalWorld_Vec1_Z = reader.ReadSingle();
+            this.LocalWorld_Vec1_W = reader.ReadSingle();
+            this.LocalWorld_Vec2_X = reader.ReadSingle();
+            this.LocalWorld_Vec2_Y = reader.ReadSingle();
+            this.LocalWorld_Vec2_Z = reader.ReadSingle();
+            this.LocalWorld_Vec2_W = reader.ReadSingle();
+            this.LocalWorld_Vec3_X = reader.ReadSingle();
+            this.LocalWorld_Vec3_Y = reader.ReadSingle();
+            this.LocalWorld_Vec3_Z = reader.ReadSingle();
+            this.LocalWorld_Vec3_W = reader.ReadSingle();
+            this.LocalWorld_Vec4_X = reader.ReadSingle();
+            this.LocalWorld_Vec4_Y = reader.ReadSingle();
+            this.LocalWorld_Vec4_Z = reader.ReadSingle();
+            this.LocalWorld_Vec4_W = reader.ReadSingle();
+            this.InheritanceKey = reader.ReadNullTermUTF8();
+            this.FarClip = reader.ReadSingle();
+            this.Intensity = reader.ReadSingle();
+            this.LastPositionX = reader.ReadSingle();
+            this.LastPositionY = reader.ReadSingle();
+            this.LastPositionZ = reader.ReadSingle();
+            this.LastPositionW = reader.ReadSingle();
+            this.NumZeroParticleFrames = reader.ReadUInt32();
+            this.CreationTimeStamp = reader.ReadUInt32();
         }
 
         #endregion
