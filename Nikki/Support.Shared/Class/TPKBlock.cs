@@ -4,8 +4,10 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
+using Nikki.Utils.EA;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Exception;
 using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Shared.Parts.TPKParts;
@@ -172,18 +174,6 @@ namespace Nikki.Support.Shared.Class
         }
 
         /// <summary>
-        /// Gets all textures of this <see cref="TPKBlock"/>.
-        /// </summary>
-        /// <returns>Textures as an object.</returns>
-        public virtual IEnumerable<Texture> GetTextures() => this.Textures;
-
-        /// <summary>
-        /// Sorts <see cref="Texture"/> by their CollectionNames or BinKeys.
-        /// </summary>
-        /// <param name="by_name">True if sort by name; false is sort by hash.</param>
-        public abstract void SortTexturesByType(bool by_name);
-
-        /// <summary>
         /// Assembles <see cref="TPKBlock"/> into a byte array.
         /// </summary>
         /// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="TPKBlock"/> with.</param>
@@ -209,12 +199,35 @@ namespace Nikki.Support.Shared.Class
         public abstract void Deserialize(BinaryReader br);
 
         /// <summary>
+        /// Gets all textures of this <see cref="TPKBlock"/>.
+        /// </summary>
+        /// <returns>Textures as an object.</returns>
+        public virtual IEnumerable<Texture> GetTextures() => this.Textures;
+
+        /// <summary>
+        /// Sorts <see cref="Texture"/> by their CollectionNames or BinKeys.
+        /// </summary>
+        /// <param name="by_name">True if sort by name; false is sort by hash.</param>
+        public void SortTexturesByType(bool by_name)
+        {
+            if (!by_name) this.Textures.Sort((x, y) => x.BinKey.CompareTo(y.BinKey));
+            else this.Textures.Sort((x, y) => x.CollectionName.CompareTo(y.CollectionName));
+        }
+
+        /// <summary>
         /// Tries to find <see cref="Texture"/> based on the key passed.
         /// </summary>
         /// <param name="key">Key of the <see cref="Texture"/> Collection Name.</param>
         /// <param name="type">Type of the key passed.</param>
         /// <returns>Texture if it is found; null otherwise.</returns>
-        public abstract Texture FindTexture(uint key, eKeyType type);
+        public Texture FindTexture(uint key, eKeyType type) =>
+            type switch
+            {
+                eKeyType.BINKEY => this.Textures.Find(_ => _.BinKey == key),
+                eKeyType.VLTKEY => this.Textures.Find(_ => _.VltKey == key),
+                eKeyType.CUSTOM => throw new NotImplementedException(),
+                _ => null
+            };
 
         /// <summary>
         /// Gets index of the <see cref="Texture"/> in the <see cref="TPKBlock"/>.
@@ -222,7 +235,38 @@ namespace Nikki.Support.Shared.Class
         /// <param name="key">Key of the Collection Name of the <see cref="Texture"/>.</param>
         /// <param name="type">Key type passed.</param>
         /// <returns>Index number as an integer. If element does not exist, returns -1.</returns>
-        public abstract int GetTextureIndex(uint key, eKeyType type);
+        public int GetTextureIndex(uint key, eKeyType type)
+		{
+            switch (type)
+            {
+
+                case eKeyType.BINKEY:
+                    for (int loop = 0; loop < this.Textures.Count; ++loop)
+                    {
+
+                        if (this.Textures[loop].BinKey == key) return loop;
+
+                    }
+                    break;
+
+                case eKeyType.VLTKEY:
+                    for (int loop = 0; loop < this.Textures.Count; ++loop)
+                    {
+
+                        if (this.Textures[loop].VltKey == key) return loop;
+
+                    }
+                    break;
+
+                case eKeyType.CUSTOM:
+                    throw new NotImplementedException();
+
+                default:
+                    break;
+            }
+
+            return -1;
+        }
 
         /// <summary>
         /// Adds <see cref="Texture"/> to the <see cref="TPKBlock"/> data.
@@ -236,7 +280,19 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to be deleted.</param>
         /// <param name="type">Type fo the key passed.</param>
-        public abstract void RemoveTexture(uint key, eKeyType type);
+        public void RemoveTexture(uint key, eKeyType type)
+		{
+            var index = this.GetTextureIndex(key, type);
+
+            if (index == -1)
+            {
+
+                throw new InfoAccessException($"0x{key:X8}");
+
+            }
+
+            this.Textures.RemoveAt(index);
+        }
 
         /// <summary>
         /// Clones <see cref="Texture"/> specified in the <see cref="TPKBlock"/> data.
@@ -252,7 +308,26 @@ namespace Nikki.Support.Shared.Class
         /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to be replaced.</param>
         /// <param name="type">Type of the key passed.</param>
         /// <param name="filename">Path of the texture that replaces the current one.</param>
-        public abstract void ReplaceTexture(uint key, eKeyType type, string filename);
+        public void ReplaceTexture(uint key, eKeyType type, string filename)
+		{
+            var tex = this.FindTexture(key, type);
+
+            if (tex == null)
+            {
+
+                throw new InfoAccessException($"0x{key:X8}");
+
+            }
+
+            if (!Comp.IsDDSTexture(filename, out string error))
+            {
+
+                throw new ArgumentException(error);
+
+            }
+
+            tex.Reload(filename);
+        }
 
         #endregion
 

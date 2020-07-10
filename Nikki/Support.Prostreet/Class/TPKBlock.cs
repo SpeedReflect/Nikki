@@ -26,6 +26,8 @@ namespace Nikki.Support.Prostreet.Class
         #region Fields
 
         private string _collection_name;
+        private List<AnimSlot> _animations;
+        private List<Shared.Class.Texture> _textures;
         private const long max = 0x7FFFFFFF;
 
         #endregion
@@ -91,10 +93,16 @@ namespace Nikki.Support.Prostreet.Class
         public override eBoolean IsCompressed { get; set; }
 
         /// <summary>
+        /// Represents all <see cref="AnimSlot"/> of this <see cref="TPKBlock"/>.
+        /// </summary>
+        [Category("Primary")]
+        public override List<AnimSlot> Animations => this._animations;
+
+        /// <summary>
         /// List of <see cref="Texture"/> in this <see cref="TPKBlock"/>.
         /// </summary>
         [Browsable(false)]
-        public List<Texture> Textures { get; }
+        public override List<Shared.Class.Texture> Textures => this._textures;
 
         /// <summary>
         /// Number of <see cref="Texture"/> in this <see cref="TPKBlock"/>.
@@ -109,7 +117,11 @@ namespace Nikki.Support.Prostreet.Class
         /// <summary>
         /// Initializes new instance of <see cref="TPKBlock"/>.
         /// </summary>
-        public TPKBlock() => this.Textures = new List<Texture>();
+        public TPKBlock()
+		{
+            this._animations = new List<AnimSlot>();
+            this._textures = new List<Shared.Class.Texture>();
+		}
 
         /// <summary>
         /// Initializes new instance of <see cref="TPKBlock"/>.
@@ -332,74 +344,6 @@ namespace Nikki.Support.Prostreet.Class
         }
 
         /// <summary>
-        /// Tries to find <see cref="Texture"/> based on the key passed.
-        /// </summary>
-        /// <param name="key">Key of the <see cref="Texture"/> Collection Name.</param>
-        /// <param name="type">Type of the key passed.</param>
-        /// <returns>Texture if it is found; null otherwise.</returns>
-        public override Shared.Class.Texture FindTexture(uint key, eKeyType type) =>
-            type switch
-            {
-                eKeyType.BINKEY => this.Textures.Find(_ => _.BinKey == key),
-                eKeyType.VLTKEY => this.Textures.Find(_ => _.VltKey == key),
-                eKeyType.CUSTOM => throw new NotImplementedException(),
-                _ => null
-            };
-
-        /// <summary>
-        /// Sorts <see cref="Texture"/> by their CollectionNames or BinKeys.
-        /// </summary>
-        /// <param name="by_name">True if sort by name; false is sort by hash.</param>
-        public override void SortTexturesByType(bool by_name)
-        {
-            if (!by_name) this.Textures.Sort((x, y) => x.BinKey.CompareTo(y.BinKey));
-            else this.Textures.Sort((x, y) => x.CollectionName.CompareTo(y.CollectionName));
-        }
-
-        /// <summary>
-        /// Gets all textures of this <see cref="TPKBlock"/>.
-        /// </summary>
-        /// <returns>Textures as an object.</returns>
-        public override object GetTextures() => this.Textures;
-
-        /// <summary>
-        /// Gets index of the <see cref="Texture"/> in the <see cref="TPKBlock"/>.
-        /// </summary>
-        /// <param name="key">Key of the Collection Name of the <see cref="Texture"/>.</param>
-        /// <param name="type">Key type passed.</param>
-        /// <returns>Index number as an integer. If element does not exist, returns -1.</returns>
-        public override int GetTextureIndex(uint key, eKeyType type)
-        {
-            switch (type)
-            {
-                case eKeyType.BINKEY:
-                    for (int loop = 0; loop < this.Textures.Count; ++loop)
-                    {
-
-                        if (this.Textures[loop].BinKey == key) return loop;
-
-                    }
-                    break;
-
-                case eKeyType.VLTKEY:
-                    for (int loop = 0; loop < this.Textures.Count; ++loop)
-                    {
-
-                        if (this.Textures[loop].VltKey == key) return loop;
-
-                    }
-                    break;
-
-                case eKeyType.CUSTOM:
-                    throw new NotImplementedException();
-
-                default:
-                    break;
-            }
-            return -1;
-        }
-
-        /// <summary>
         /// Adds <see cref="Texture"/> to the <see cref="TPKBlock"/> data.
         /// </summary>
         /// <param name="CName">Collection Name of the new <see cref="Texture"/>.</param>
@@ -429,25 +373,6 @@ namespace Nikki.Support.Prostreet.Class
 
             var texture = new Texture(CName, filename, this);
             this.Textures.Add(texture);
-        }
-
-        /// <summary>
-        /// Removes <see cref="Texture"/> specified from <see cref="TPKBlock"/> data.
-        /// </summary>
-        /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to be deleted.</param>
-        /// <param name="type">Type fo the key passed.</param>
-        public override void RemoveTexture(uint key, eKeyType type)
-        {
-            var index = this.GetTextureIndex(key, type);
-
-            if (index == -1)
-            {
-
-                throw new InfoAccessException($"0x{key:X8}");
-
-            }
-
-            this.Textures.RemoveAt(index);
         }
 
         /// <summary>
@@ -483,33 +408,6 @@ namespace Nikki.Support.Prostreet.Class
 
             var texture = (Texture)copyfrom.MemoryCast(newname);
             this.Textures.Add(texture);
-        }
-
-        /// <summary>
-        /// Replaces <see cref="Texture"/> specified in the <see cref="TPKBlock"/> data with a new one.
-        /// </summary>
-        /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to be replaced.</param>
-        /// <param name="type">Type of the key passed.</param>
-        /// <param name="filename">Path of the texture that replaces the current one.</param>
-        public override void ReplaceTexture(uint key, eKeyType type, string filename)
-        {
-            var tex = (Texture)this.FindTexture(key, type);
-
-            if (tex == null)
-            {
-
-                throw new InfoAccessException($"0x{key:X8}");
-
-            }
-
-            if (!Comp.IsDDSTexture(filename, out string error))
-            {
-
-                throw new ArgumentException(error);
-
-            }
-
-            tex.Reload(filename);
         }
 
         /// <summary>
@@ -1150,7 +1048,7 @@ namespace Nikki.Support.Prostreet.Class
                         strWriter.BaseStream.Position = strWriter.BaseStream.Length - texHeaderSize;
 
                         // Write header data and calculate next offset
-                        WriteHeader(texture, strWriter);
+                        WriteHeader((Texture)texture, strWriter);
                         CalculateNextOffset(texture.Data.Length);
 
                         // Save compressed data to MagicHeader
@@ -1419,7 +1317,7 @@ namespace Nikki.Support.Prostreet.Class
         internal void Synchronize(TPKBlock other)
         {
             var animations = new List<AnimSlot>(other.Animations);
-            var textures = new List<Texture>(other.Textures);
+            var textures = new List<Shared.Class.Texture>(other.Textures);
 
             // Synchronize animations
             for (int i = 0; i < this.Animations.Count; ++i)
@@ -1467,8 +1365,8 @@ namespace Nikki.Support.Prostreet.Class
 
             }
 
-            this.Animations = animations;
-            this.Textures = textures;
+            this._animations = animations;
+            this._textures = textures;
             this.IsCompressed = other.IsCompressed;
             this.SettingData = other.SettingData;
         }
