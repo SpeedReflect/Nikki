@@ -596,10 +596,10 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(this.Brakelight.BinHash());
             bw.Write(this.Exhaust.BinHash());
 
-            // Read Kit Doorlines
+            // Write Kit Doorlines
             this.KIT_DOORLINES.Write(bw);
 
-            // Continue reading parts
+            // Continue writing parts
             bw.Write(this.Fender.BinHash());
             bw.Write(this.Quarter.BinHash());
             bw.Write(this.HoodUnder.BinHash());
@@ -613,16 +613,16 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(this.LicensePlate.BinHash());
             bw.Write(this.TrunkAudio.BinHash());
 
-            // Read Audio Comps
+            // Write Audio Comps
             this.AUDIO_COMP.Write(bw);
 
-            // Read Kit Damages
+            // Write Kit Damages
             this.KIT_DAMAGES.Write(bw);
 
-            // Read Decal Sizes
+            // Write Decal Sizes
             this.DECAL_SIZES.Write(bw);
 
-            // Continue reading parts
+            // Continue writing parts
             bw.Write(this.PAINT_TYPES.BasePaintType.BinHash());
             bw.Write(this.VINYL_SETS.VinylLayer0.BinHash());
             bw.Write(this.VINYL_SETS.VinylLayer1.BinHash());
@@ -658,7 +658,7 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(this.DoorCarbon.BinHash());
             bw.Write(this.TrunkCarbon.BinHash());
 
-            // Read Decal Arrays
+            // Write Decal Arrays
             this.DECALS_HOOD.Write(bw);
             this.DECALS_FRONT_WINDOW.Write(bw);
             this.DECALS_REAR_WINDOW.Write(bw);
@@ -667,16 +667,16 @@ namespace Nikki.Support.Underground2.Class
             this.DECALS_LEFT_QUARTER.Write(bw);
             this.DECALS_RIGHT_QUARTER.Write(bw);
 
-            // Continue reading parts
+            // Continue writing parts
             bw.Write(this.WindshieldTint.BinHash());
 
-            // Read Specialties
+            // Write Specialties
             this.SPECIALTIES.Write(bw);
 
-            // Read HUD
+            // Write HUD
             this.HUD.Write(bw);
 
-            // Finish reading parts
+            // Finish writing parts
             bw.Write(this.CV.BinHash());
             bw.Write(this.WheelManufacturer.BinHash());
             bw.Write(this.Misc.BinHash());
@@ -900,10 +900,10 @@ namespace Nikki.Support.Underground2.Class
                 bw.WriteNullTermUTF8(this.Brakelight);
                 bw.WriteNullTermUTF8(this.Exhaust);
 
-                // Read Kit Doorlines
+                // Write Kit Doorlines
                 this.KIT_DOORLINES.Serialize(bw);
 
-                // Continue reading parts
+                // Continue writing parts
                 bw.WriteNullTermUTF8(this.Fender);
                 bw.WriteNullTermUTF8(this.Quarter);
                 bw.WriteNullTermUTF8(this.HoodUnder);
@@ -917,16 +917,16 @@ namespace Nikki.Support.Underground2.Class
                 bw.WriteNullTermUTF8(this.LicensePlate);
                 bw.WriteNullTermUTF8(this.TrunkAudio);
 
-                // Read Audio Comps
+                // Write Audio Comps
                 this.AUDIO_COMP.Serialize(bw);
 
-                // Read Kit Damages
+                // Write Kit Damages
                 this.KIT_DAMAGES.Serialize(bw);
 
-                // Read Decal Sizes
+                // Write Decal Sizes
                 this.DECAL_SIZES.Serialize(bw);
 
-                // Continue reading parts
+                // Continue writing parts
                 bw.WriteNullTermUTF8(this.PAINT_TYPES.BasePaintType);
                 bw.WriteNullTermUTF8(this.VINYL_SETS.VinylLayer0);
                 bw.WriteNullTermUTF8(this.VINYL_SETS.VinylLayer1);
@@ -962,7 +962,7 @@ namespace Nikki.Support.Underground2.Class
                 bw.WriteNullTermUTF8(this.DoorCarbon);
                 bw.WriteNullTermUTF8(this.TrunkCarbon);
 
-                // Read Decal Arrays
+                // Write Decal Arrays
                 this.DECALS_HOOD.Serialize(bw);
                 this.DECALS_FRONT_WINDOW.Serialize(bw);
                 this.DECALS_REAR_WINDOW.Serialize(bw);
@@ -971,16 +971,16 @@ namespace Nikki.Support.Underground2.Class
                 this.DECALS_LEFT_QUARTER.Serialize(bw);
                 this.DECALS_RIGHT_QUARTER.Serialize(bw);
 
-                // Continue reading parts
+                // Continue writing parts
                 bw.WriteNullTermUTF8(this.WindshieldTint);
 
-                // Read Specialties
-                this.SPECIALTIES.Write(bw);
+                // Write Specialties
+                this.SPECIALTIES.Serialize(bw);
 
-                // Read HUD
-                this.HUD.Write(bw);
+                // Write HUD
+                this.HUD.Serialize(bw);
 
-                // Finish reading parts
+                // Finish writing parts
                 bw.WriteNullTermUTF8(this.CV);
                 bw.WriteNullTermUTF8(this.WheelManufacturer);
                 bw.WriteNullTermUTF8(this.Misc);
@@ -1015,118 +1015,122 @@ namespace Nikki.Support.Underground2.Class
             using var reader = new BinaryReader(ms);
 
             // CollectionName and MODEL
-            this._collection_name = reader.ReadNullTermUTF8();
-            this.MODEL = reader.ReadNullTermUTF8();
+            this._collection_name = br.ReadNullTermUTF8();
+            this.MODEL = br.ReadNullTermUTF8();
 
-            // Frontend and Pvehicle
-            this.Frontend = reader.ReadNullTermUTF8();
-            this.Pvehicle = reader.ReadNullTermUTF8();
+            // Write unknown value
+            this.UnknownKey1 = br.ReadInt32();
+            this.UnknownKey2 = br.ReadInt32();
 
-            // Start reading parts
-            this.Base = reader.ReadNullTermUTF8();
+            // Performance Level
+            this.PerformanceLevel = br.ReadInt32();
+
+            // Start writing parts
+            this.Base = br.ReadNullTermUTF8();
+            this.AutosculptFrontBumper = br.ReadNullTermUTF8();
+            this.AutosculptRearBumper = br.ReadNullTermUTF8();
+            this.LeftSideMirror = br.ReadNullTermUTF8();
+            this.RightSideMirror = br.ReadNullTermUTF8();
+            this.Body = br.ReadNullTermUTF8();
+            this.AftermarketBodykit = br.ReadNullTermUTF8();
+            this.RoofScoop = br.ReadNullTermUTF8();
+            this.RoofTop = br.ReadNullTermUTF8();
+            this.Hood = br.ReadNullTermUTF8();
+            this.Trunk = br.ReadNullTermUTF8();
+            this.AutosculptSkirt = br.ReadNullTermUTF8();
+            this.Spoiler = br.ReadNullTermUTF8();
+            this.Engine = br.ReadNullTermUTF8();
+            this.Headlight = br.ReadNullTermUTF8();
+            this.Brakelight = br.ReadNullTermUTF8();
+            this.Exhaust = br.ReadNullTermUTF8();
+
+            // Read Kit Doorlines
+            this.KIT_DOORLINES.Deserialize(br);
+
+            // Continue reading parts
+            this.Fender = br.ReadNullTermUTF8();
+            this.Quarter = br.ReadNullTermUTF8();
+            this.HoodUnder = br.ReadNullTermUTF8();
+            this.TrunkUnder = br.ReadNullTermUTF8();
+            this.FrontBrake = br.ReadNullTermUTF8();
+            this.RearBrake = br.ReadNullTermUTF8();
+            this.FrontWheel = br.ReadNullTermUTF8();
+            this.RearWheel = br.ReadNullTermUTF8();
+            this.Spinner = br.ReadNullTermUTF8();
+            this.WingMirror = br.ReadNullTermUTF8();
+            this.LicensePlate = br.ReadNullTermUTF8();
+            this.TrunkAudio = br.ReadNullTermUTF8();
+
+            // Read Audio Comps
+            this.AUDIO_COMP.Deserialize(br);
 
             // Read Kit Damages
-            this.KIT_DAMAGES.Deserialize(reader);
+            this.KIT_DAMAGES.Deserialize(br);
+
+            // Read Decal Sizes
+            this.DECAL_SIZES.Deserialize(br);
 
             // Continue reading parts
-            this.AftermarketBodykit = reader.ReadNullTermUTF8();
-            this.FrontBrake = reader.ReadNullTermUTF8();
-            this.FrontRotor = reader.ReadNullTermUTF8();
-            this.FrontLeftWindow = reader.ReadNullTermUTF8();
-            this.FrontRightWindow = reader.ReadNullTermUTF8();
-            this.FrontWindow = reader.ReadNullTermUTF8();
-            this.Interior = reader.ReadNullTermUTF8();
-            this.LeftBrakelight = reader.ReadNullTermUTF8();
-            this.LeftBrakelightGlass = reader.ReadNullTermUTF8();
-            this.LeftHeadlight = reader.ReadNullTermUTF8();
-            this.LeftHeadlightGlass = reader.ReadNullTermUTF8();
-            this.LeftSideMirror = reader.ReadNullTermUTF8();
-            this.RearBrake = reader.ReadNullTermUTF8();
-            this.RearRotor = reader.ReadNullTermUTF8();
-            this.RearLeftWindow = reader.ReadNullTermUTF8();
-            this.RearRightWindow = reader.ReadNullTermUTF8();
-            this.RearWindow = reader.ReadNullTermUTF8();
-            this.RightBrakelight = reader.ReadNullTermUTF8();
-            this.RightBrakelightGlass = reader.ReadNullTermUTF8();
-            this.RightHeadlight = reader.ReadNullTermUTF8();
-            this.RightHeadlightGlass = reader.ReadNullTermUTF8();
-            this.RightSideMirror = reader.ReadNullTermUTF8();
-            this.Driver = reader.ReadNullTermUTF8();
-            this.SteeringWheel = reader.ReadNullTermUTF8();
-            this.Exhaust = reader.ReadNullTermUTF8();
-            this.Spoiler = reader.ReadNullTermUTF8();
-            this.UniversalSpoilerBase = reader.ReadNullTermUTF8();
+            this.PAINT_TYPES.BasePaintType = br.ReadNullTermUTF8();
+            this.VINYL_SETS.VinylLayer0 = br.ReadNullTermUTF8();
+            this.VINYL_SETS.VinylLayer1 = br.ReadNullTermUTF8();
+            this.VINYL_SETS.VinylLayer2 = br.ReadNullTermUTF8();
+            this.VINYL_SETS.VinylLayer3 = br.ReadNullTermUTF8();
+            this.PAINT_TYPES.EnginePaintType = br.ReadNullTermUTF8();
+            this.PAINT_TYPES.SpoilerPaintType = br.ReadNullTermUTF8();
+            this.PAINT_TYPES.BrakesPaintType = br.ReadNullTermUTF8();
+            this.PAINT_TYPES.ExhaustPaintType = br.ReadNullTermUTF8();
+            this.PAINT_TYPES.AudioPaintType = br.ReadNullTermUTF8();
+            this.PAINT_TYPES.RimsPaintType = br.ReadNullTermUTF8();
+            this.PAINT_TYPES.SpinnersPaintType = br.ReadNullTermUTF8();
+            this.PAINT_TYPES.RoofPaintType = br.ReadNullTermUTF8();
+            this.PAINT_TYPES.MirrorsPaintType = br.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl0_Color0 = br.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl0_Color1 = br.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl0_Color2 = br.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl0_Color3 = br.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl1_Color0 = br.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl1_Color1 = br.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl1_Color2 = br.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl1_Color3 = br.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl2_Color0 = br.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl2_Color1 = br.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl2_Color2 = br.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl2_Color3 = br.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl3_Color0 = br.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl3_Color1 = br.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl3_Color2 = br.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl3_Color3 = br.ReadNullTermUTF8();
+            this.KitCarbon = br.ReadNullTermUTF8();
+            this.HoodCarbon = br.ReadNullTermUTF8();
+            this.DoorCarbon = br.ReadNullTermUTF8();
+            this.TrunkCarbon = br.ReadNullTermUTF8();
 
-            // Read Zero Damages
-            this.ZERO_DAMAGES.Deserialize(reader);
-
-            // Read Attachments
-            this.ATTACHMENTS.Deserialize(reader);
+            // Read Decal Arrays
+            this.DECALS_HOOD.Deserialize(br);
+            this.DECALS_FRONT_WINDOW.Deserialize(br);
+            this.DECALS_REAR_WINDOW.Deserialize(br);
+            this.DECALS_LEFT_DOOR.Deserialize(br);
+            this.DECALS_RIGHT_DOOR.Deserialize(br);
+            this.DECALS_LEFT_QUARTER.Deserialize(br);
+            this.DECALS_RIGHT_QUARTER.Deserialize(br);
 
             // Continue reading parts
-            this.AutosculptFrontBumper = reader.ReadNullTermUTF8();
-            this.FrontBumperBadgingSet = reader.ReadNullTermUTF8();
-            this.AutosculptRearBumper = reader.ReadNullTermUTF8();
-            this.RearBumperBadgingSet = reader.ReadNullTermUTF8();
-            this.RoofTop = reader.ReadNullTermUTF8();
-            this.RoofScoop = reader.ReadNullTermUTF8();
-            this.Hood = reader.ReadNullTermUTF8();
-            this.AutosculptSkirt = reader.ReadNullTermUTF8();
-            this.Headlight = reader.ReadNullTermUTF8();
-            this.Brakelight = reader.ReadNullTermUTF8();
-            this.DoorLeft = reader.ReadNullTermUTF8();
-            this.DoorRight = reader.ReadNullTermUTF8();
-            this.FrontWheel = reader.ReadNullTermUTF8();
-            this.RearWheel = reader.ReadNullTermUTF8();
-            this.LicensePlate = reader.ReadNullTermUTF8();
-            this.Doorline = reader.ReadNullTermUTF8();
-            this.DecalFrontWindow = reader.ReadNullTermUTF8();
-            this.DecalRearWindow = reader.ReadNullTermUTF8();
+            this.WindshieldTint = br.ReadNullTermUTF8();
 
-            // Read Visual Sets
-            this.VISUAL_SETS.Deserialize(reader);
+            // Read Specialties
+            this.SPECIALTIES.Deserialize(br);
+
+            // Read HUD
+            this.HUD.Deserialize(br);
 
             // Finish reading parts
-            this.WindshieldTint = reader.ReadNullTermUTF8();
-            this.CustomHUD = reader.ReadNullTermUTF8();
-            this.CV = reader.ReadNullTermUTF8();
-            this.Misc = reader.ReadNullTermUTF8();
+            this.CV = br.ReadNullTermUTF8();
+            this.WheelManufacturer = br.ReadNullTermUTF8();
+            this.Misc = br.ReadNullTermUTF8();
 
-            // Read Paint
-            this.PAINT_VALUES.Deserialize(reader);
-
-            // Read Autosculpt
-            this.FRONTBUMPER.Read(reader);
-            this.REARBUMPER.Read(reader);
-            this.SKIRT.Read(reader);
-            this.WHEELS.Read(reader);
-            this.HOOD.Read(reader);
-            this.SPOILER.Read(reader);
-            this.ROOFSCOOP.Read(reader);
-            this.ChopTopSizeValue = reader.ReadByte();
-            this.ExhaustSizeValue = reader.ReadByte();
-
-            // Read Vinyls
-            this.VINYL01.Deserialize(reader);
-            this.VINYL02.Deserialize(reader);
-            this.VINYL03.Deserialize(reader);
-            this.VINYL04.Deserialize(reader);
-            this.VINYL05.Deserialize(reader);
-            this.VINYL06.Deserialize(reader);
-            this.VINYL07.Deserialize(reader);
-            this.VINYL08.Deserialize(reader);
-            this.VINYL09.Deserialize(reader);
-            this.VINYL10.Deserialize(reader);
-            this.VINYL11.Deserialize(reader);
-            this.VINYL12.Deserialize(reader);
-            this.VINYL13.Deserialize(reader);
-            this.VINYL14.Deserialize(reader);
-            this.VINYL15.Deserialize(reader);
-            this.VINYL16.Deserialize(reader);
-            this.VINYL17.Deserialize(reader);
-            this.VINYL18.Deserialize(reader);
-            this.VINYL19.Deserialize(reader);
-            this.VINYL20.Deserialize(reader);
+            // Write unknown data
+            this.PERF_SPECS.Read(br);
         }
 
         #endregion

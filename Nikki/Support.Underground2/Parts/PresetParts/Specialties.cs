@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using CoreExtensions.IO;
 
 
 
@@ -117,6 +118,38 @@ namespace Nikki.Support.Underground2.Parts.PresetParts
 			bw.Write(this.DoorStyle.BinHash());
 			bw.Write(this.Hydraulics.BinHash());
 			bw.Write(this.NOSPurge.BinHash());
+		}
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public void Serialize(BinaryWriter bw)
+		{
+			bw.WriteNullTermUTF8(this.NeonBody);
+			bw.WriteNullTermUTF8(this.NeonEngine);
+			bw.WriteNullTermUTF8(this.NeonCabin);
+			bw.WriteNullTermUTF8(this.NeonTrunk);
+			bw.WriteNullTermUTF8(this.CabinNeonStyle);
+			bw.WriteNullTermUTF8(this.HeadlightBulb);
+			bw.WriteNullTermUTF8(this.DoorStyle);
+			bw.WriteNullTermUTF8(this.Hydraulics);
+			bw.WriteNullTermUTF8(this.NOSPurge);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public void Deserialize(BinaryReader br)
+		{
+			this.NeonBody = br.ReadNullTermUTF8();
+			this.NeonEngine = br.ReadNullTermUTF8();
+			this.NeonCabin = br.ReadNullTermUTF8();
+			this.NeonTrunk = br.ReadNullTermUTF8();
+			this.CabinNeonStyle = br.ReadNullTermUTF8();
+			this.HeadlightBulb = br.ReadNullTermUTF8();
+			this.DoorStyle = br.ReadNullTermUTF8();
+			this.Hydraulics = br.ReadNullTermUTF8();
+			this.NOSPurge = br.ReadNullTermUTF8();
 		}
 	}
 }
