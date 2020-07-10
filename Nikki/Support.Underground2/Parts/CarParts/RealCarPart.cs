@@ -58,7 +58,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		/// Car Part ID Group to which this part belongs to.
 		/// </summary>
 		[AccessModifiable()]
-		public eSlotMostWanted CarPartGroupID { get; set; } = eSlotMostWanted.INVALID;
+		public eSlotUnderground2 CarPartGroupID { get; set; } = eSlotUnderground2.INVALID;
 
 		/// <summary>
 		/// Upgrade group ID of this <see cref="RealCarPart"/>.
