@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
+using Nikki.Reflection.Exception;
 using Nikki.Support.Underground2.Class;
 using CoreExtensions.IO;
 
@@ -11,12 +12,10 @@ using CoreExtensions.IO;
 namespace Nikki.Support.Underground2.Framework
 {
 	/// <summary>
-	/// A <see cref="Manager{T}"/> for <see cref="SlotType"/> collections.
+	/// A <see cref="Manager{T}"/> for <see cref="Track"/> collections.
 	/// </summary>
-	public class SlotTypeManager : Manager<SlotType>
+	public class TrackManager : Manager<Track>
 	{
-		private bool _is_read_only = true;
-
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
@@ -28,39 +27,39 @@ namespace Nikki.Support.Underground2.Framework
 		public override string GameSTR => GameINT.Underground2.ToString();
 
 		/// <summary>
-		/// Name of this <see cref="SlotTypeManager"/>.
+		/// Name of this <see cref="TrackManager"/>.
 		/// </summary>
-		public override string Name => "SlotTypes";
+		public override string Name => "Tracks";
 
 		/// <summary>
 		/// If true, manager can export and import non-serialized collection; otherwise, false.
 		/// </summary>
-		public override bool AllowsNoSerialization => false;
+		public override bool AllowsNoSerialization => true;
 
 		/// <summary>
 		/// True if this <see cref="Manager{T}"/> is read-only; otherwise, false.
 		/// </summary>
-		public override bool IsReadOnly => this._is_read_only;
+		public override bool IsReadOnly => false;
 
 		/// <summary>
-		/// Indicates required alighment when this <see cref="SlotTypeManager"/> is being serialized.
+		/// Indicates required alighment when this <see cref="TrackManager"/> is being serialized.
 		/// </summary>
 		public override Alignment Alignment { get; }
 
 		/// <summary>
-		/// Gets a collection and unit element type in this <see cref="SlotTypeManager"/>.
+		/// Gets a collection and unit element type in this <see cref="TrackManager"/>.
 		/// </summary>
-		public override Type CollectionType => typeof(SlotType);
+		public override Type CollectionType => typeof(Track);
 
 		/// <summary>
-		/// Initializes new instance of <see cref="SlotTypeManager"/>.
+		/// Initializes new instance of <see cref="TrackManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>
-		public SlotTypeManager(Datamap db)
+		public TrackManager(Datamap db)
 		{
 			this.Database = db;
-			this.Extender = 0;
-			this.Alignment = new Alignment(0x8, Alignment.eAlignType.Actual);
+			this.Extender = 5;
+			this.Alignment = Alignment.Default;
 		}
 
 		/// <summary>
@@ -74,47 +73,10 @@ namespace Nikki.Support.Underground2.Framework
 
 			bw.GeneratePadding(mark, this.Alignment);
 
-			// Write CarInfo Animation Hookups
-			var dif = 4 - this.Count % 4;
-			if (dif == 4) dif = 0;
+			bw.WriteEnum(eBlockID.Tracks);
+			bw.Write(this.Count * Track.BaseClassSize);
 
-			bw.WriteEnum(eBlockID.CarInfoAnimHookup);
-			bw.Write(this.Count + dif);
-
-			// Write Animations
 			foreach (var collection in this)
-			{
-
-				bw.WriteEnum(collection.PrimaryAnimation);
-				bw.WriteEnum(collection.SecondaryAnimation);
-
-			}
-
-			bw.WriteBytes(dif);
-
-			// Write CarInfo Animation Hideups
-			bw.WriteEnum(eBlockID.CarInfoAnimHideup);
-			bw.Write(0x100);
-			for (int loop = 0; loop < 0x40; ++loop) bw.Write(0xFFFFFFFF);
-
-			// Precalculate size
-			var manager = this.Database.GetManager(typeof(SlotOverrideManager)) as SlotOverrideManager;
-			var size = this.Count * SlotType.BaseClassSize;
-			size += manager.Count * SlotOverride.BaseClassSize;
-
-			bw.WriteEnum(eBlockID.SlotTypes);
-			bw.Write(size);
-
-			// Write SlotTypes
-			foreach (var collection in this)
-			{
-
-				collection.Assemble(bw);
-
-			}
-
-			// Write CarSlotInfos
-			foreach (var collection in manager)
 			{
 
 				collection.Assemble(bw);
@@ -123,39 +85,28 @@ namespace Nikki.Support.Underground2.Framework
 		}
 
 		/// <summary>
-		/// Disassembles data into separate collections in this <see cref="SlotTypeManager"/>.
+		/// Disassembles data into separate collections in this <see cref="TrackManager"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="block"><see cref="Block"/> with offsets.</param>
 		internal override void Disassemble(BinaryReader br, Block block)
 		{
 			if (Block.IsNullOrEmpty(block)) return;
-			if (block.BlockID != eBlockID.SlotTypes) return;
-
-			this._is_read_only = false;
+			if (block.BlockID != eBlockID.Tracks) return;
 
 			for (int loop = 0; loop < block.Offsets.Count; ++loop)
 			{
 
 				br.BaseStream.Position = block.Offsets[loop] + 4;
 				var size = br.ReadInt32();
-				const int maxslotsize = 0x550;
 
-				if (size < maxslotsize)
-				{
-
-					throw new InvalidDataException("SlotTypes block is corrupted or has invalid data");
-
-				}
-
-				var count = maxslotsize / SlotType.BaseClassSize;
+				int count = size / Track.BaseClassSize;
 				this.Capacity += count;
-				SlotType.Index = 0; // reset
 
 				for (int i = 0; i < count; ++i)
 				{
 
-					var collection = new SlotType(br, this);
+					var collection = new Track(br, this);
 
 					try { this.Add(collection); }
 					catch { } // skip if exists
@@ -163,8 +114,6 @@ namespace Nikki.Support.Underground2.Framework
 				}
 
 			}
-
-			this._is_read_only = true;
 		}
 
 		/// <summary>
@@ -173,7 +122,33 @@ namespace Nikki.Support.Underground2.Framework
 		/// <param name="cname">CollectionName to check.</param>
 		internal override void CreationCheck(string cname)
 		{
-			throw new ArgumentException("CollectionName of SlotTypes cannot be changed");
+			if (String.IsNullOrWhiteSpace(cname))
+			{
+
+				throw new ArgumentNullException("CollectionName cannot be null, empty or whitespace");
+
+			}
+
+			if (cname.Contains(" "))
+			{
+
+				throw new ArgumentException("CollectionName cannot contain whitespace");
+
+			}
+
+			if (!UInt16.TryParse(cname, out var id))
+			{
+
+				throw new ArgumentException("Unable to parse CollectionName as a TrackID");
+
+			}
+
+			if (this.Find(cname) != null)
+			{
+
+				throw new CollectionExistenceException(cname);
+
+			}
 		}
 
 		/// <summary>
@@ -197,7 +172,7 @@ namespace Nikki.Support.Underground2.Framework
 			{
 
 				if (serialized) this[index].Serialize(bw);
-				else throw new NotSupportedException("Collection supports only serialization and no plain export");
+				else this[index].Assemble(bw);
 
 			}
 		}
@@ -214,12 +189,13 @@ namespace Nikki.Support.Underground2.Framework
 			var header = new SerializationHeader();
 			header.Read(br);
 
-			var collection = new SlotType();
+			var collection = new Track();
 
 			if (header.ID != eBlockID.Nikki)
 			{
 
-				throw new Exception($"Missing serialized header in the imported collection");
+				br.BaseStream.Position = position;
+				collection.Disassemble(br);
 
 			}
 			else
@@ -248,11 +224,8 @@ namespace Nikki.Support.Underground2.Framework
 			if (index == -1)
 			{
 
-				this._is_read_only = false;
-				++this.Capacity;
 				collection.Manager = this;
 				this.Add(collection);
-				this._is_read_only = true;
 
 			}
 			else
@@ -263,8 +236,8 @@ namespace Nikki.Support.Underground2.Framework
 					case eSerializeType.Negate:
 						break;
 
-					case eSerializeType.Override:
 					case eSerializeType.Synchronize:
+					case eSerializeType.Override:
 						collection.Manager = this;
 						this.Replace(collection, index);
 						break;
