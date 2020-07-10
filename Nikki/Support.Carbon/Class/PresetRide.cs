@@ -535,224 +535,224 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [Expandable("BaseKit")]
         [Browsable(false)]
-        public Damages KIT_DAMAGES { get; set; }
+        public Damages KIT_DAMAGES { get; }
 
         /// <summary>
         /// Zero damage attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("BaseKit")]
         [Browsable(false)]
-        public ZeroDamage ZERO_DAMAGES { get; set; }
+        public ZeroDamage ZERO_DAMAGES { get; }
 
         /// <summary>
         /// Attachment attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("BaseKit")]
         [Browsable(false)]
-        public Attachments ATTACHMENTS { get; set; }
+        public Attachments ATTACHMENTS { get; }
 
         /// <summary>
         /// Visual attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Visuals")]
         [Browsable(false)]
-        public VisualSets VISUAL_SETS { get; set; }
+        public VisualSets VISUAL_SETS { get; }
 
         /// <summary>
         /// Paint attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Visuals")]
         [Browsable(false)]
-        public PaintValues PAINT_VALUES { get; set; }
+        public PaintValues PAINT_VALUES { get; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
         [Browsable(false)]
-        public Vinyl VINYL01 { get; set; }
+        public Vinyl VINYL01 { get; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
         [Browsable(false)]
-        public Vinyl VINYL02 { get; set; }
+        public Vinyl VINYL02 { get; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
         [Browsable(false)]
-        public Vinyl VINYL03 { get; set; }
+        public Vinyl VINYL03 { get; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
         [Browsable(false)]
-        public Vinyl VINYL04 { get; set; }
+        public Vinyl VINYL04 { get; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
         [Browsable(false)]
-        public Vinyl VINYL05 { get; set; }
+        public Vinyl VINYL05 { get; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
         [Browsable(false)]
-        public Vinyl VINYL06 { get; set; }
+        public Vinyl VINYL06 { get; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
         [Browsable(false)]
-        public Vinyl VINYL07 { get; set; }
+        public Vinyl VINYL07 { get; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
         [Browsable(false)]
-        public Vinyl VINYL08 { get; set; }
+        public Vinyl VINYL08 { get; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
         [Browsable(false)]
-        public Vinyl VINYL09 { get; set; }
+        public Vinyl VINYL09 { get; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
         [Browsable(false)]
-        public Vinyl VINYL10 { get; set; }
+        public Vinyl VINYL10 { get; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
         [Browsable(false)]
-        public Vinyl VINYL11 { get; set; }
+        public Vinyl VINYL11 { get; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
         [Browsable(false)]
-        public Vinyl VINYL12 { get; set; }
+        public Vinyl VINYL12 { get; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
         [Browsable(false)]
-        public Vinyl VINYL13 { get; set; }
+        public Vinyl VINYL13 { get; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
         [Browsable(false)]
-        public Vinyl VINYL14 { get; set; }
+        public Vinyl VINYL14 { get; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
         [Browsable(false)]
-        public Vinyl VINYL15 { get; set; }
+        public Vinyl VINYL15 { get; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
         [Browsable(false)]
-        public Vinyl VINYL16 { get; set; }
+        public Vinyl VINYL16 { get; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
         [Browsable(false)]
-        public Vinyl VINYL17 { get; set; }
+        public Vinyl VINYL17 { get; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
         [Browsable(false)]
-        public Vinyl VINYL18 { get; set; }
+        public Vinyl VINYL18 { get; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
         [Browsable(false)]
-        public Vinyl VINYL19 { get; set; }
+        public Vinyl VINYL19 { get; }
 
         /// <summary>
         /// Vinyl attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Vinyls")]
         [Browsable(false)]
-        public Vinyl VINYL20 { get; set; }
+        public Vinyl VINYL20 { get; }
 
         /// <summary>
         /// Autosculpt Front Bumper attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Autosculpt")]
         [Browsable(false)]
-        public Autosculpt FRONTBUMPER { get; set; }
+        public Autosculpt FRONTBUMPER { get; }
 
         /// <summary>
         /// Autosculpt Rear Bumper attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Autosculpt")]
         [Browsable(false)]
-        public Autosculpt REARBUMPER { get; set; }
+        public Autosculpt REARBUMPER { get; }
 
         /// <summary>
         /// Autosculpt Skirt attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Autosculpt")]
         [Browsable(false)]
-        public Autosculpt SKIRT { get; set; }
+        public Autosculpt SKIRT { get; }
 
         /// <summary>
         /// Autosculpt Wheels attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Autosculpt")]
         [Browsable(false)]
-        public Autosculpt WHEELS { get; set; }
+        public Autosculpt WHEELS { get; }
 
         /// <summary>
         /// Autosculpt Hood attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Autosculpt")]
         [Browsable(false)]
-        public Autosculpt HOOD { get; set; }
+        public Autosculpt HOOD { get; }
 
         /// <summary>
         /// Autosculpt Spoiler attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Autosculpt")]
         [Browsable(false)]
-        public Autosculpt SPOILER { get; set; }
+        public Autosculpt SPOILER { get; }
 
         /// <summary>
         /// Autosculpt RoofScoop attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Autosculpt")]
         [Browsable(false)]
-        public Autosculpt ROOFSCOOP { get; set; }
+        public Autosculpt ROOFSCOOP { get; }
 
         #endregion
 
@@ -761,21 +761,54 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Initializes new instance of <see cref="PresetRide"/>.
         /// </summary>
-        public PresetRide() => this.Initialize();
+        public PresetRide()
+		{
+            this.PAINT_VALUES = new PaintValues();
+            this.ZERO_DAMAGES = new ZeroDamage();
+            this.ATTACHMENTS = new Attachments();
+            this.KIT_DAMAGES = new Damages();
+            this.VISUAL_SETS = new VisualSets();
+            this.FRONTBUMPER = new Autosculpt();
+            this.REARBUMPER = new Autosculpt();
+            this.ROOFSCOOP = new Autosculpt();
+            this.SPOILER = new Autosculpt();
+            this.WHEELS = new Autosculpt();
+            this.SKIRT = new Autosculpt();
+            this.HOOD = new Autosculpt();
+            this.VINYL01 = new Vinyl();
+            this.VINYL02 = new Vinyl();
+            this.VINYL03 = new Vinyl();
+            this.VINYL04 = new Vinyl();
+            this.VINYL05 = new Vinyl();
+            this.VINYL06 = new Vinyl();
+            this.VINYL07 = new Vinyl();
+            this.VINYL08 = new Vinyl();
+            this.VINYL09 = new Vinyl();
+            this.VINYL10 = new Vinyl();
+            this.VINYL11 = new Vinyl();
+            this.VINYL12 = new Vinyl();
+            this.VINYL13 = new Vinyl();
+            this.VINYL14 = new Vinyl();
+            this.VINYL15 = new Vinyl();
+            this.VINYL16 = new Vinyl();
+            this.VINYL17 = new Vinyl();
+            this.VINYL18 = new Vinyl();
+            this.VINYL19 = new Vinyl();
+            this.VINYL20 = new Vinyl();
+        }
 
         /// <summary>
         /// Initializes new instance of <see cref="PresetRide"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
         /// <param name="manager"><see cref="PresetRideManager"/> to which this instance belongs to.</param>
-        public PresetRide(string CName, PresetRideManager manager)
+        public PresetRide(string CName, PresetRideManager manager) : this()
         {
             this.Manager = manager;
             this.CollectionName = CName;
             this.MODEL = "SUPRA";
             this.Frontend = "supra";
             this.Pvehicle = "supra";
-            this.Initialize();
             CName.BinHash();
         }
 
@@ -784,10 +817,9 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         /// <param name="manager"><see cref="PresetRideManager"/> to which this instance belongs to.</param>
-        public PresetRide(BinaryReader br, PresetRideManager manager)
+        public PresetRide(BinaryReader br, PresetRideManager manager) : this()
         {
             this.Manager = manager;
-            this.Initialize();
             this.Disassemble(br);
         }
 
@@ -1084,42 +1116,6 @@ namespace Nikki.Support.Carbon.Class
             var result = new PresetRide(CName, this.Manager);
             base.MemoryCast(this, result);
             return result;
-        }
-
-        private void Initialize()
-        {
-            this.PAINT_VALUES = new PaintValues();
-            this.ZERO_DAMAGES = new ZeroDamage();
-            this.ATTACHMENTS = new Attachments();
-            this.KIT_DAMAGES = new Damages();
-            this.VISUAL_SETS = new VisualSets();
-            this.FRONTBUMPER = new Autosculpt();
-            this.REARBUMPER = new Autosculpt();
-            this.ROOFSCOOP = new Autosculpt();
-            this.SPOILER = new Autosculpt();
-            this.WHEELS = new Autosculpt();
-            this.SKIRT = new Autosculpt();
-            this.HOOD = new Autosculpt();
-            this.VINYL01 = new Vinyl();
-            this.VINYL02 = new Vinyl();
-            this.VINYL03 = new Vinyl();
-            this.VINYL04 = new Vinyl();
-            this.VINYL05 = new Vinyl();
-            this.VINYL06 = new Vinyl();
-            this.VINYL07 = new Vinyl();
-            this.VINYL08 = new Vinyl();
-            this.VINYL09 = new Vinyl();
-            this.VINYL10 = new Vinyl();
-            this.VINYL11 = new Vinyl();
-            this.VINYL12 = new Vinyl();
-            this.VINYL13 = new Vinyl();
-            this.VINYL14 = new Vinyl();
-            this.VINYL15 = new Vinyl();
-            this.VINYL16 = new Vinyl();
-            this.VINYL17 = new Vinyl();
-            this.VINYL18 = new Vinyl();
-            this.VINYL19 = new Vinyl();
-            this.VINYL20 = new Vinyl();
         }
 
         /// <summary>

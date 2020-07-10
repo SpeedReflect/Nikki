@@ -421,97 +421,97 @@ namespace Nikki.Support.Underground2.Class
         /// Perfomance specifications of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("BaseKit")]
-        public PerfSpecs PERF_SPECS { get; set; }
+        public PerfSpecs PERF_SPECS { get; }
 
         /// <summary>
         /// Doorline attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("BaseKit")]
-        public Doorlines KIT_DOORLINES { get; set; }
+        public Doorlines KIT_DOORLINES { get; }
 
         /// <summary>
         /// Damage attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("BaseKit")]
-        public Damages KIT_DAMAGES { get; set; }
+        public Damages KIT_DAMAGES { get; }
 
         /// <summary>
         /// Audio buffer attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Visuals")]
-        public AudioBuffers AUDIO_COMP { get; set; }
+        public AudioBuffers AUDIO_COMP { get; }
 
         /// <summary>
         /// Decal size attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("BaseKit")]
-        public DecalSize DECAL_SIZES { get; set; }
+        public DecalSize DECAL_SIZES { get; }
 
         /// <summary>
         /// Group of paints appliable to parts in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Visuals")]
-        public PaintTypes PAINT_TYPES { get; set; }
+        public PaintTypes PAINT_TYPES { get; }
 
         /// <summary>
         /// Group of vinyls and their colors appliable to this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Visuals")]
-        public VinylSets VINYL_SETS { get; set; }
+        public VinylSets VINYL_SETS { get; }
 
         /// <summary>
         /// Set of hood decals in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Decals")]
-        public DecalArray DECALS_HOOD { get; set; }
+        public DecalArray DECALS_HOOD { get; }
 
         /// <summary>
         /// Set of front window decals in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Decals")]
-        public DecalArray DECALS_FRONT_WINDOW { get; set; }
+        public DecalArray DECALS_FRONT_WINDOW { get; }
 
         /// <summary>
         /// Set of rear window decals in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Decals")]
-        public DecalArray DECALS_REAR_WINDOW { get; set; }
+        public DecalArray DECALS_REAR_WINDOW { get; }
 
         /// <summary>
         /// Set of left door decals in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Decals")]
-        public DecalArray DECALS_LEFT_DOOR { get; set; }
+        public DecalArray DECALS_LEFT_DOOR { get; }
 
         /// <summary>
         /// Set of right door decals in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Decals")]
-        public DecalArray DECALS_RIGHT_DOOR { get; set; }
+        public DecalArray DECALS_RIGHT_DOOR { get; }
 
         /// <summary>
         /// Set of left quarter decals in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Decals")]
-        public DecalArray DECALS_LEFT_QUARTER { get; set; }
+        public DecalArray DECALS_LEFT_QUARTER { get; }
 
         /// <summary>
         /// Set of right quarter decals in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Decals")]
-        public DecalArray DECALS_RIGHT_QUARTER { get; set; }
+        public DecalArray DECALS_RIGHT_QUARTER { get; }
 
         /// <summary>
         /// Set of specialties and visual attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Visuals")]
-        public Specialties SPECIALTIES { get; set; }
+        public Specialties SPECIALTIES { get; }
 
         /// <summary>
         /// Set of HUD elements in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Visuals")]
-        public HUDStyle HUD { get; set; }
+        public HUDStyle HUD { get; }
 
         #endregion
 
@@ -520,20 +520,36 @@ namespace Nikki.Support.Underground2.Class
         /// <summary>
         /// Initializes new instance of <see cref="PresetRide"/>.
         /// </summary>
-        public PresetRide() => this.Initialize();
+        public PresetRide()
+		{
+            this.AUDIO_COMP = new AudioBuffers();
+            this.DECALS_FRONT_WINDOW = new DecalArray();
+            this.DECALS_HOOD = new DecalArray();
+            this.DECALS_LEFT_DOOR = new DecalArray();
+            this.DECALS_LEFT_QUARTER = new DecalArray();
+            this.DECALS_REAR_WINDOW = new DecalArray();
+            this.DECALS_RIGHT_DOOR = new DecalArray();
+            this.DECALS_RIGHT_QUARTER = new DecalArray();
+            this.DECAL_SIZES = new DecalSize();
+            this.HUD = new HUDStyle();
+            this.KIT_DAMAGES = new Damages();
+            this.KIT_DOORLINES = new Doorlines();
+            this.PAINT_TYPES = new PaintTypes();
+            this.PERF_SPECS = new PerfSpecs();
+            this.SPECIALTIES = new Specialties();
+            this.VINYL_SETS = new VinylSets();
+        }
 
         /// <summary>
         /// Initializes new instance of <see cref="PresetRide"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
         /// <param name="manager"><see cref="PresetRideManager"/> to which this instance belongs to.</param>
-        public PresetRide(string CName, PresetRideManager manager)
+        public PresetRide(string CName, PresetRideManager manager) : this()
         {
             this.Manager = manager;
             this.CollectionName = CName;
-            this.Initialize();
             this.MODEL = "SUPRA";
-            this._unkdata = new byte[0x44];
             CName.BinHash();
         }
 
@@ -542,10 +558,9 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         /// <param name="manager"><see cref="PresetRideManager"/> to which this instance belongs to.</param>
-        public PresetRide(BinaryReader br, PresetRideManager manager)
+        public PresetRide(BinaryReader br, PresetRideManager manager) : this()
         {
             this.Manager = manager;
-            this.Initialize();
             this.Disassemble(br);
         }
 
@@ -822,26 +837,6 @@ namespace Nikki.Support.Underground2.Class
             var result = new PresetRide(CName, this.Manager);
             base.MemoryCast(this, result);
             return result;
-        }
-
-        private void Initialize()
-        {
-            this.AUDIO_COMP = new AudioBuffers();
-            this.DECALS_FRONT_WINDOW = new DecalArray();
-            this.DECALS_HOOD = new DecalArray();
-            this.DECALS_LEFT_DOOR = new DecalArray();
-            this.DECALS_LEFT_QUARTER = new DecalArray();
-            this.DECALS_REAR_WINDOW = new DecalArray();
-            this.DECALS_RIGHT_DOOR = new DecalArray();
-            this.DECALS_RIGHT_QUARTER = new DecalArray();
-            this.DECAL_SIZES = new DecalSize();
-            this.HUD = new HUDStyle();
-            this.KIT_DAMAGES = new Damages();
-            this.KIT_DOORLINES = new Doorlines();
-            this.PAINT_TYPES = new PaintTypes();
-            this.PERF_SPECS = new PerfSpecs();
-            this.SPECIALTIES = new Specialties();
-            this.VINYL_SETS = new VinylSets();
         }
 
         /// <summary>

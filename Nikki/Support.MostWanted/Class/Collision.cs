@@ -79,13 +79,13 @@ namespace Nikki.Support.MostWanted.Class
 		/// List of collision bounds.
 		/// </summary>
 		[Category("Secondary")]
-		public List<CollisionBound> CollisionBounds { get; set; }
+		public List<CollisionBound> CollisionBounds { get; }
 		
 		/// <summary>
 		/// List of collision clouds.
 		/// </summary>
 		[Category("Secondary")]
-		public List<CollisionCloud> CollisionClouds { get; set; }
+		public List<CollisionCloud> CollisionClouds { get; }
 
 		/// <summary>
 		/// Number of collision bounds.
@@ -135,12 +135,10 @@ namespace Nikki.Support.MostWanted.Class
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
 		/// <param name="manager"><see cref="CollisionManager"/> to which this instance belongs to.</param>
-		public Collision(string CName, CollisionManager manager)
+		public Collision(string CName, CollisionManager manager) : this()
 		{
 			this.Manager = manager;
 			this.CollectionName = CName;
-			this.CollisionBounds = new List<CollisionBound>();
-			this.CollisionClouds = new List<CollisionCloud>();
 			CName.BinHash();
 		}
 
@@ -149,11 +147,9 @@ namespace Nikki.Support.MostWanted.Class
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="manager"><see cref="CollisionManager"/> to which this instance belongs to.</param>
-		public Collision(BinaryReader br, CollisionManager manager)
+		public Collision(BinaryReader br, CollisionManager manager) : this()
 		{
 			this.Manager = manager;
-			this.CollisionBounds = new List<CollisionBound>();
-			this.CollisionClouds = new List<CollisionCloud>();
 			this.Disassemble(br);
 		}
 

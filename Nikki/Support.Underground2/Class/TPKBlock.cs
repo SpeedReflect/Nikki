@@ -94,7 +94,7 @@ namespace Nikki.Support.Underground2.Class
         /// List of <see cref="Texture"/> in this <see cref="TPKBlock"/>.
         /// </summary>
         [Browsable(false)]
-        public List<Texture> Textures { get; set; } = new List<Texture>();
+        public List<Texture> Textures { get; }
 
         /// <summary>
         /// Number of <see cref="Texture"/> in this <see cref="TPKBlock"/>.
@@ -109,14 +109,14 @@ namespace Nikki.Support.Underground2.Class
         /// <summary>
         /// Initializes new instance of <see cref="TPKBlock"/>.
         /// </summary>
-        public TPKBlock() { }
+        public TPKBlock() => this.Textures = new List<Texture>();
 
         /// <summary>
         /// Initializes new instance of <see cref="TPKBlock"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
         /// <param name="manager"><see cref="TPKBlockManager"/> to which this instance belongs to.</param>
-        public TPKBlock(string CName, TPKBlockManager manager)
+        public TPKBlock(string CName, TPKBlockManager manager) : this()
         {
             this.Manager = manager;
             this.CollectionName = CName;
@@ -128,7 +128,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="manager"><see cref="TPKBlockManager"/> to which this instance belongs to.</param>
-        public TPKBlock(BinaryReader br, TPKBlockManager manager)
+        public TPKBlock(BinaryReader br, TPKBlockManager manager) : this()
         {
             this.Manager = manager;
             this.Disassemble(br);

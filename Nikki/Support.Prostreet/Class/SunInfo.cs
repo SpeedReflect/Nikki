@@ -94,42 +94,42 @@ namespace Nikki.Support.Prostreet.Class
 		/// </summary>
 		[Expandable("SunLayers")]
 		[Browsable(false)]
-		public SunLayer SUNLAYER1 { get; set; }
+		public SunLayer SUNLAYER1 { get; }
 
 		/// <summary>
 		/// Sun layer 2.
 		/// </summary>
 		[Expandable("SunLayers")]
 		[Browsable(false)]
-		public SunLayer SUNLAYER2 { get; set; }
+		public SunLayer SUNLAYER2 { get; }
 
 		/// <summary>
 		/// Sun layer 3.
 		/// </summary>
 		[Expandable("SunLayers")]
 		[Browsable(false)]
-		public SunLayer SUNLAYER3 { get; set; }
+		public SunLayer SUNLAYER3 { get; }
 
 		/// <summary>
 		/// Sun layer 4.
 		/// </summary>
 		[Expandable("SunLayers")]
 		[Browsable(false)]
-		public SunLayer SUNLAYER4 { get; set; }
+		public SunLayer SUNLAYER4 { get; }
 
 		/// <summary>
 		/// Sun layer 5.
 		/// </summary>
 		[Expandable("SunLayers")]
 		[Browsable(false)]
-		public SunLayer SUNLAYER5 { get; set; }
+		public SunLayer SUNLAYER5 { get; }
 
 		/// <summary>
 		/// Sun layer 6.
 		/// </summary>
 		[Expandable("SunLayers")]
 		[Browsable(false)]
-		public SunLayer SUNLAYER6 { get; set; }
+		public SunLayer SUNLAYER6 { get; }
 
 		#endregion
 
@@ -138,18 +138,25 @@ namespace Nikki.Support.Prostreet.Class
 		/// <summary>
 		/// Initializes new instance of <see cref="SunInfo"/>.
 		/// </summary>
-		public SunInfo() => this.Initialize();
+		public SunInfo()
+		{
+			this.SUNLAYER1 = new SunLayer();
+			this.SUNLAYER2 = new SunLayer();
+			this.SUNLAYER3 = new SunLayer();
+			this.SUNLAYER4 = new SunLayer();
+			this.SUNLAYER5 = new SunLayer();
+			this.SUNLAYER6 = new SunLayer();
+		}
 
 		/// <summary>
 		/// Initializes new instance of <see cref="SunInfo"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
 		/// <param name="manager"><see cref="SunInfoManager"/> to which this instance belongs to.</param>
-		public SunInfo(string CName, SunInfoManager manager)
+		public SunInfo(string CName, SunInfoManager manager) : this()
 		{
 			this.Manager = manager;
 			this.CollectionName = CName;
-			this.Initialize();
 			CName.BinHash();
 		}
 
@@ -158,10 +165,9 @@ namespace Nikki.Support.Prostreet.Class
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="manager"><see cref="SunInfoManager"/> to which this instance belongs to.</param>
-		public SunInfo(BinaryReader br, SunInfoManager manager)
+		public SunInfo(BinaryReader br, SunInfoManager manager) : this()
 		{
 			this.Manager = manager;
-			this.Initialize();
 			this.Disassemble(br);
 		}
 
@@ -240,16 +246,6 @@ namespace Nikki.Support.Prostreet.Class
 			var result = new SunInfo(CName, this.Manager);
 			base.MemoryCast(this, result);
 			return result;
-		}
-
-		private void Initialize()
-		{
-			this.SUNLAYER1 = new SunLayer();
-			this.SUNLAYER2 = new SunLayer();
-			this.SUNLAYER3 = new SunLayer();
-			this.SUNLAYER4 = new SunLayer();
-			this.SUNLAYER5 = new SunLayer();
-			this.SUNLAYER6 = new SunLayer();
 		}
 
 		/// <summary>

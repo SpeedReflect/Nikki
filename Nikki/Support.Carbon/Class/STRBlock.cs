@@ -26,7 +26,7 @@ namespace Nikki.Support.Carbon.Class
 		#region Fields
 
 		private string _collection_name;
-		private List<StringRecord> _stringinfo = new List<StringRecord>();
+		private List<StringRecord> _stringinfo;
 
 		/// <summary>
 		/// Maximum length of the CollectionName.
@@ -107,14 +107,14 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Initializes new instance of <see cref="STRBlock"/>.
 		/// </summary>
-		public STRBlock() { }
+		public STRBlock() => this._stringinfo = new List<StringRecord>();
 
 		/// <summary>
 		/// Initializes new instance of <see cref="STRBlock"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
 		/// <param name="manager"><see cref="STRBlockManager"/> to which this instance belongs to.</param>
-		public STRBlock(string CName, STRBlockManager manager)
+		public STRBlock(string CName, STRBlockManager manager) : this()
 		{
 			this.Manager = manager;
 			this.CollectionName = CName;
@@ -126,7 +126,7 @@ namespace Nikki.Support.Carbon.Class
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read text data with.</param>
 		/// <param name="manager"><see cref="STRBlockManager"/> to which this instance belongs to.</param>
-		public STRBlock(BinaryReader br, STRBlockManager manager)
+		public STRBlock(BinaryReader br, STRBlockManager manager) : this()
 		{
 			this.Manager = manager;
 			this.Disassemble(br);

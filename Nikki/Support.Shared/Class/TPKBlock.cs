@@ -99,7 +99,13 @@ namespace Nikki.Support.Shared.Class
         /// Represents all <see cref="AnimSlot"/> of this <see cref="TPKBlock"/>.
         /// </summary>
         [Category("Primary")]
-        public List<AnimSlot> Animations { get; set; } = new List<AnimSlot>();
+        public abstract List<AnimSlot> Animations { get; }
+
+        /// <summary>
+        /// List of <see cref="Texture"/> in this <see cref="TPKBlock"/>.
+        /// </summary>
+        [Browsable(false)]
+        public abstract List<Texture> Textures { get; }
 
         /// <summary>
         /// Number of <see cref="Texture"/> in this <see cref="TPKBlock"/>.
@@ -169,7 +175,7 @@ namespace Nikki.Support.Shared.Class
         /// Gets all textures of this <see cref="TPKBlock"/>.
         /// </summary>
         /// <returns>Textures as an object.</returns>
-        public abstract object GetTextures();
+        public virtual IEnumerable<Texture> GetTextures() => this.Textures;
 
         /// <summary>
         /// Sorts <see cref="Texture"/> by their CollectionNames or BinKeys.

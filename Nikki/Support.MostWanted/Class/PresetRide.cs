@@ -407,84 +407,84 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         [Expandable("BaseKit")]
         [Browsable(false)]
-        public Damages KIT_DAMAGES { get; set; }
+        public Damages KIT_DAMAGES { get; }
 
         /// <summary>
         /// Zero damage attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("BaseKit")]
         [Browsable(false)]
-        public ZeroDamage ZERO_DAMAGES { get; set; }
+        public ZeroDamage ZERO_DAMAGES { get; }
 
         /// <summary>
         /// Attachment attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("BaseKit")]
         [Browsable(false)]
-        public Attachments ATTACHMENTS { get; set; }
+        public Attachments ATTACHMENTS { get; }
 
         /// <summary>
         /// Decal size attributes of this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("BaseKit")]
         [Browsable(false)]
-        public DecalSize DECAL_SIZES { get; set; }
+        public DecalSize DECAL_SIZES { get; }
 
         /// <summary>
         /// Group of paints and vinyls in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Visuals")]
         [Browsable(false)]
-        public VisualSets VISUAL_SETS { get; set; }
+        public VisualSets VISUAL_SETS { get; }
 
         /// <summary>
         /// Set of front window decals in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Decals")]
         [Browsable(false)]
-        public DecalArray DECALS_FRONT_WINDOW { get; set; }
+        public DecalArray DECALS_FRONT_WINDOW { get; }
 
         /// <summary>
         /// Set of rear window decals in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Decals")]
         [Browsable(false)]
-        public DecalArray DECALS_REAR_WINDOW { get; set; }
+        public DecalArray DECALS_REAR_WINDOW { get; }
 
         /// <summary>
         /// Set of left door decals in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Decals")]
         [Browsable(false)]
-        public DecalArray DECALS_LEFT_DOOR { get; set; }
+        public DecalArray DECALS_LEFT_DOOR { get; }
 
         /// <summary>
         /// Set of right door decals in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Decals")]
         [Browsable(false)]
-        public DecalArray DECALS_RIGHT_DOOR { get; set; }
+        public DecalArray DECALS_RIGHT_DOOR { get; }
 
         /// <summary>
         /// Set of left quarter decals in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Decals")]
         [Browsable(false)]
-        public DecalArray DECALS_LEFT_QUARTER { get; set; }
+        public DecalArray DECALS_LEFT_QUARTER { get; }
 
         /// <summary>
         /// Set of right quarter decals in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Decals")]
         [Browsable(false)]
-        public DecalArray DECALS_RIGHT_QUARTER { get; set; }
+        public DecalArray DECALS_RIGHT_QUARTER { get; }
 
         /// <summary>
         /// Set of HUD elements in this <see cref="PresetRide"/>.
         /// </summary>
         [Expandable("Visuals")]
         [Browsable(false)]
-        public HUDStyle HUD { get; set; }
+        public HUDStyle HUD { get; }
 
         #endregion
 
@@ -493,21 +493,34 @@ namespace Nikki.Support.MostWanted.Class
         /// <summary>
         /// Initializes new instance of <see cref="PresetRide"/>.
         /// </summary>
-        public PresetRide() => this.Initialize();
+        public PresetRide()
+		{
+            this.ATTACHMENTS = new Attachments();
+            this.DECALS_FRONT_WINDOW = new DecalArray();
+            this.DECALS_LEFT_DOOR = new DecalArray();
+            this.DECALS_LEFT_QUARTER = new DecalArray();
+            this.DECALS_REAR_WINDOW = new DecalArray();
+            this.DECALS_RIGHT_DOOR = new DecalArray();
+            this.DECALS_RIGHT_QUARTER = new DecalArray();
+            this.DECAL_SIZES = new DecalSize();
+            this.HUD = new HUDStyle();
+            this.KIT_DAMAGES = new Damages();
+            this.VISUAL_SETS = new VisualSets();
+            this.ZERO_DAMAGES = new ZeroDamage();
+        }
 
         /// <summary>
         /// Initializes new instance of <see cref="PresetRide"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
         /// <param name="manager"><see cref="PresetRideManager"/> to which this instance belongs to.</param>
-        public PresetRide(string CName, PresetRideManager manager)
+        public PresetRide(string CName, PresetRideManager manager) : this()
         {
             this.Manager = manager;
             this.CollectionName = CName;
             this.MODEL = "SUPRA";
             this.Frontend = "supra";
             this.Pvehicle = "supra";
-            this.Initialize();
             CName.BinHash();
         }
 
@@ -516,10 +529,9 @@ namespace Nikki.Support.MostWanted.Class
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         /// <param name="manager"><see cref="PresetRideManager"/> to which this instance belongs to.</param>
-        public PresetRide(BinaryReader br, PresetRideManager manager)
+        public PresetRide(BinaryReader br, PresetRideManager manager) : this()
         {
             this.Manager = manager;
-            this.Initialize();
             this.Disassemble(br);
         }
 
@@ -732,22 +744,6 @@ namespace Nikki.Support.MostWanted.Class
             var result = new PresetRide(CName, this.Manager);
             base.MemoryCast(this, result);
             return result;
-        }
-
-        private void Initialize()
-        {
-            this.ATTACHMENTS = new Attachments();
-            this.DECALS_FRONT_WINDOW = new DecalArray();
-            this.DECALS_LEFT_DOOR = new DecalArray();
-            this.DECALS_LEFT_QUARTER = new DecalArray();
-            this.DECALS_REAR_WINDOW = new DecalArray();
-            this.DECALS_RIGHT_DOOR = new DecalArray();
-            this.DECALS_RIGHT_QUARTER = new DecalArray();
-            this.DECAL_SIZES = new DecalSize();
-            this.HUD = new HUDStyle();
-            this.KIT_DAMAGES = new Damages();
-            this.VISUAL_SETS = new VisualSets();
-            this.ZERO_DAMAGES = new ZeroDamage();
         }
 
         /// <summary>

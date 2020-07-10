@@ -27,6 +27,7 @@ namespace Nikki.Support.Carbon.Class
 		#region Fields
 
 		private string _collection_name;
+		private List<RealCarPart> _realparts;
 
 		#endregion
 
@@ -83,7 +84,7 @@ namespace Nikki.Support.Carbon.Class
 		/// List of <see cref="RealCarPart"/>.
 		/// </summary>
 		[Browsable(false)]
-		public override List<RealCarPart> ModelCarParts { get; set; }
+		public override List<RealCarPart> ModelCarParts => this._realparts;
 
 		#endregion
 
@@ -92,18 +93,17 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Initializes new instance of <see cref="DBModelPart"/>.
 		/// </summary>
-		public DBModelPart() => this.ModelCarParts = new List<RealCarPart>();
+		public DBModelPart() => this._realparts = new List<RealCarPart>();
 
 		/// <summary>
 		/// Initializes new instance of <see cref="DBModelPart"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
 		/// <param name="manager"><see cref="DBModelPartManager"/> to which this instance belongs to.</param>
-		public DBModelPart(string CName, DBModelPartManager manager)
+		public DBModelPart(string CName, DBModelPartManager manager) : this()
 		{
 			this.Manager = manager;
 			this.CollectionName = CName;
-			this.ModelCarParts = new List<RealCarPart>();
 		}
 
 		#endregion
@@ -425,7 +425,7 @@ namespace Nikki.Support.Carbon.Class
 
 			}
 
-			this.ModelCarParts = modelparts;
+			this._realparts = modelparts;
 		}
 
 		#endregion

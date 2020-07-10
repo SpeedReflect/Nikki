@@ -47,7 +47,7 @@ namespace Nikki.Support.Shared.Class
 		/// <summary>
 		/// List of <see cref="RealCarPart"/> that this <see cref="DBModelPart"/> has.
 		/// </summary>
-		public abstract List<RealCarPart> ModelCarParts { get; set; }
+		public abstract List<RealCarPart> ModelCarParts { get; }
 
 		/// <summary>
 		/// Total amount of <see cref="RealCarPart"/> in this <see cref="DBModelPart"/>.

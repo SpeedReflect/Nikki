@@ -19,13 +19,19 @@ namespace Nikki.Support.Carbon.Class
     /// </summary>
     public class FNGroup : Shared.Class.FNGroup
     {
+		#region Fields
+
+		private byte[] _data;
+
+		#endregion
+
 		#region Properties
 
-        /// <summary>
-        /// Actual data of this <see cref="FNGroup"/>.
-        /// </summary>
+		/// <summary>
+		/// Actual data of this <see cref="FNGroup"/>.
+		/// </summary>
 		[Browsable(false)]
-        public byte[] Data { get; private set; }
+        public byte[] Data => this._data;
 
         /// <summary>
         /// Game to which the class belongs to.
@@ -80,11 +86,11 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="FNGroup"/> with.</param>
         public override void Assemble(BinaryWriter bw)
         {
-            using var ms = new MemoryStream(this.Data);
+            using var ms = new MemoryStream(this._data);
             using var writer = new BinaryWriter(ms);
 
             bw.WriteEnum(eBlockID.FEngFiles);
-            bw.Write(this.Data.Length);
+            bw.Write(this._data.Length);
 
             foreach (var color in this._colorinfo)
             {
@@ -95,7 +101,7 @@ namespace Nikki.Support.Carbon.Class
                 writer.Write((uint)color.Alpha);
             }
 
-            bw.Write(this.Data);
+            bw.Write(this._data);
         }
 
         /// <summary>
@@ -107,9 +113,9 @@ namespace Nikki.Support.Carbon.Class
             var ID = br.ReadUInt32();
             var size = br.ReadInt32();
 
-            this.Data = SAT.Decompress(br.ReadBytes(size), ID);
+            this._data = SAT.Decompress(br.ReadBytes(size), ID);
 
-            using var ms = new MemoryStream(this.Data);
+            using var ms = new MemoryStream(this._data);
             using var reader = new BinaryReader(ms);
 
             reader.BaseStream.Position = 0x28;
@@ -188,7 +194,7 @@ namespace Nikki.Support.Carbon.Class
         public override void Serialize(BinaryWriter bw)
         {
             byte[] array;
-            var size = this.Data.Length + (this.FEngColorCount << 3) + this.CollectionName.Length + 0x20;
+            var size = this._data.Length + (this.FEngColorCount << 3) + this.CollectionName.Length + 0x20;
             using (var ms = new MemoryStream(size))
             using (var writer = new BinaryWriter(ms))
             {
@@ -207,8 +213,8 @@ namespace Nikki.Support.Carbon.Class
 
                 }
 
-                writer.Write(this.Data.Length);
-                writer.Write(this.Data);
+                writer.Write(this._data.Length);
+                writer.Write(this._data);
 
                 array = ms.ToArray();
 
@@ -257,7 +263,7 @@ namespace Nikki.Support.Carbon.Class
 			}
 
             count = reader.ReadInt32();
-            this.Data = reader.ReadBytes(count);
+            this._data = reader.ReadBytes(count);
         }
 
         #endregion

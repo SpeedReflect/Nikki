@@ -164,319 +164,319 @@ namespace Nikki.Support.Underground2.Class
         /// Car skin 1.
         /// </summary>
         [Expandable("CarSkins")]
-        public CarSkin CARSKIN01 { get; set; }
+        public CarSkin CARSKIN01 { get; }
 
         /// <summary>
         /// Car skin 2.
         /// </summary>
         [Expandable("CarSkins")]
-        public CarSkin CARSKIN02 { get; set; }
+        public CarSkin CARSKIN02 { get; }
 
         /// <summary>
         /// Car skin 3.
         /// </summary>
         [Expandable("CarSkins")]
-        public CarSkin CARSKIN03 { get; set; }
+        public CarSkin CARSKIN03 { get; }
 
         /// <summary>
         /// Car skin 4.
         /// </summary>
         [Expandable("CarSkins")]
-        public CarSkin CARSKIN04 { get; set; }
+        public CarSkin CARSKIN04 { get; }
 
         /// <summary>
         /// Car skin 5.
         /// </summary>
         [Expandable("CarSkins")]
-        public CarSkin CARSKIN05 { get; set; }
+        public CarSkin CARSKIN05 { get; }
 
         /// <summary>
         /// Car skin 6.
         /// </summary>
         [Expandable("CarSkins")]
-        public CarSkin CARSKIN06 { get; set; }
+        public CarSkin CARSKIN06 { get; }
 
         /// <summary>
         /// Car skin 7.
         /// </summary>
         [Expandable("CarSkins")]
-        public CarSkin CARSKIN07 { get; set; }
+        public CarSkin CARSKIN07 { get; }
 
         /// <summary>
         /// Car skin 8.
         /// </summary>
         [Expandable("CarSkins")]
-        public CarSkin CARSKIN08 { get; set; }
+        public CarSkin CARSKIN08 { get; }
 
         /// <summary>
         /// Car skin 9.
         /// </summary>
         [Expandable("CarSkins")]
-        public CarSkin CARSKIN09 { get; set; }
+        public CarSkin CARSKIN09 { get; }
 
         /// <summary>
         /// Car skin 10.
         /// </summary>
         [Expandable("CarSkins")]
-        public CarSkin CARSKIN10 { get; set; }
+        public CarSkin CARSKIN10 { get; }
 
         /// <summary>
         /// Ecar settings of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Expandable("General")]
-        public Ecar ECAR { get; set; }
+        public Ecar ECAR { get; }
 
         /// <summary>
         /// Pvehicle settings of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Expandable("General")]
-        public Pvehicle PVEHICLE { get; set; }
+        public Pvehicle PVEHICLE { get; }
 
         /// <summary>
         /// Rigid control settings of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Expandable("General")]
-        public RigidControls RIGID_CONTROLS { get; set; }
+        public RigidControls RIGID_CONTROLS { get; }
 
         /// <summary>
         /// Front left wheel settings of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Expandable("Wheels")]
-        public CarInfoWheel WHEEL_FRONT_LEFT { get; set; }
+        public CarInfoWheel WHEEL_FRONT_LEFT { get; }
 
         /// <summary>
         /// Front right wheel settings of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Expandable("Wheels")]
-        public CarInfoWheel WHEEL_FRONT_RIGHT { get; set; }
+        public CarInfoWheel WHEEL_FRONT_RIGHT { get; }
 
         /// <summary>
         /// Rear right wheel settings of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Expandable("Wheels")]
-        public CarInfoWheel WHEEL_REAR_RIGHT { get; set; }
+        public CarInfoWheel WHEEL_REAR_RIGHT { get; }
 
         /// <summary>
         /// Rear left wheel settings of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Expandable("Wheels")]
-        public CarInfoWheel WHEEL_REAR_LEFT { get; set; }
+        public CarInfoWheel WHEEL_REAR_LEFT { get; }
 
         /// <summary>
         /// Far player camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Expandable("PlayerCamera")]
-        public Camera PLAYER_CAMERA_FAR { get; set; }
+        public Camera PLAYER_CAMERA_FAR { get; }
 
         /// <summary>
         /// Close player camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Expandable("PlayerCamera")]
-        public Camera PLAYER_CAMERA_CLOSE { get; set; }
+        public Camera PLAYER_CAMERA_CLOSE { get; }
 
         /// <summary>
         /// Bumper player camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Expandable("PlayerCamera")]
-        public Camera PLAYER_CAMERA_BUMPER { get; set; }
+        public Camera PLAYER_CAMERA_BUMPER { get; }
 
         /// <summary>
         /// Driver player camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Expandable("PlayerCamera")]
-        public Camera PLAYER_CAMERA_DRIVER { get; set; }
+        public Camera PLAYER_CAMERA_DRIVER { get; }
 
         /// <summary>
         /// Hood player camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Expandable("PlayerCamera")]
-        public Camera PLAYER_CAMERA_HOOD { get; set; }
+        public Camera PLAYER_CAMERA_HOOD { get; }
 
         /// <summary>
         /// Drift player camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Expandable("PlayerCamera")]
-        public Camera PLAYER_CAMERA_DRIFT { get; set; }
+        public Camera PLAYER_CAMERA_DRIFT { get; }
 
         /// <summary>
         /// Far AI camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Expandable("AICamera")]
-        public Camera AI_CAMERA_FAR { get; set; }
+        public Camera AI_CAMERA_FAR { get; }
 
         /// <summary>
         /// Close AI camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Expandable("AICamera")]
-        public Camera AI_CAMERA_CLOSE { get; set; }
+        public Camera AI_CAMERA_CLOSE { get; }
 
         /// <summary>
         /// Bumper AI camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Expandable("AICamera")]
-        public Camera AI_CAMERA_BUMPER { get; set; }
+        public Camera AI_CAMERA_BUMPER { get; }
 
         /// <summary>
         /// Driver AI camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Expandable("AICamera")]
-        public Camera AI_CAMERA_DRIVER { get; set; }
+        public Camera AI_CAMERA_DRIVER { get; }
 
         /// <summary>
         /// Hood AI camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Expandable("AICamera")]
-        public Camera AI_CAMERA_HOOD { get; set; }
+        public Camera AI_CAMERA_HOOD { get; }
 
         /// <summary>
         /// Drift AI camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Expandable("AICamera")]
-        public Camera AI_CAMERA_DRIFT { get; set; }
+        public Camera AI_CAMERA_DRIFT { get; }
 
         /// <summary>
         /// Base tires performance settings.
         /// </summary>
         [Expandable("Tires")]
-        public Tires BASE_TIRES { get; set; }
+        public Tires BASE_TIRES { get; }
 
         /// <summary>
         /// Top tires performance settings.
         /// </summary>
         [Expandable("Tires")]
-        public Tires TOP_TIRES { get; set; }
+        public Tires TOP_TIRES { get; }
 
         /// <summary>
         /// Base suspension performance settings.
         /// </summary>
         [Expandable("Suspension")]
-        public Suspension BASE_SUSPENSION { get; set; }
+        public Suspension BASE_SUSPENSION { get; }
 
         /// <summary>
         /// Top suspension performance settings.
         /// </summary>
         [Expandable("Suspension")]
-        public Suspension TOP_SUSPENSION { get; set; }
+        public Suspension TOP_SUSPENSION { get; }
 
         /// <summary>
         /// Base transmission performance settings.
         /// </summary>
         [Expandable("Transmission")]
-        public Transmission BASE_TRANSMISSION { get; set; }
+        public Transmission BASE_TRANSMISSION { get; }
 
         /// <summary>
         /// Street transmission performance settings.
         /// </summary>
         [Expandable("Transmission")]
-        public Transmission STREET_TRANSMISSION { get; set; }
+        public Transmission STREET_TRANSMISSION { get; }
 
         /// <summary>
         /// Pro transmission performance settings.
         /// </summary>
         [Expandable("Transmission")]
-        public Transmission PRO_TRANSMISSION { get; set; }
+        public Transmission PRO_TRANSMISSION { get; }
 
         /// <summary>
         /// Top transmission performance settings.
         /// </summary>
         [Expandable("Transmission")]
-        public Transmission TOP_TRANSMISSION { get; set; }
+        public Transmission TOP_TRANSMISSION { get; }
 
         /// <summary>
         /// Base RPM performance settings.
         /// </summary>
         [Expandable("RPM")]
-        public RPM BASE_RPM { get; set; }
+        public RPM BASE_RPM { get; }
 
         /// <summary>
         /// Street RPM performance settings.
         /// </summary>
         [Expandable("RPM")]
-        public RPM STREET_RPM { get; set; }
+        public RPM STREET_RPM { get; }
 
         /// <summary>
         /// Pro RPM performance settings.
         /// </summary>
         [Expandable("RPM")]
-        public RPM PRO_RPM { get; set; }
+        public RPM PRO_RPM { get; }
 
         /// <summary>
         /// Top RPM performance settings.
         /// </summary>
         [Expandable("RPM")]
-        public RPM TOP_RPM { get; set; }
+        public RPM TOP_RPM { get; }
 
         /// <summary>
         /// Street ECU performance settings.
         /// </summary>
         [Expandable("ECU")]
-        public ECU STREET_ECU { get; set; }
+        public ECU STREET_ECU { get; }
 
         /// <summary>
         /// Pro ECU performance settings.
         /// </summary>
         [Expandable("ECU")]
-        public ECU PRO_ECU { get; set; }
+        public ECU PRO_ECU { get; }
 
         /// <summary>
         /// Top ECU performance settings.
         /// </summary>
         [Expandable("ECU")]
-        public ECU TOP_ECU { get; set; }
+        public ECU TOP_ECU { get; }
 
         /// <summary>
         /// Base engine performance settings.
         /// </summary>
         [Expandable("Engine")]
-        public Engine BASE_ENGINE { get; set; }
+        public Engine BASE_ENGINE { get; }
 
         /// <summary>
         /// Top engine performance settings.
         /// </summary>
         [Expandable("Engine")]
-        public Engine TOP_ENGINE { get; set; }
+        public Engine TOP_ENGINE { get; }
 
         /// <summary>
         /// Base turbo performance settings.
         /// </summary>
         [Expandable("Turbo")]
-        public Turbo BASE_TURBO { get; set; }
+        public Turbo BASE_TURBO { get; }
 
         /// <summary>
         /// Top turbo performance settings.
         /// </summary>
         [Expandable("Turbo")]
-        public Turbo TOP_TURBO { get; set; }
+        public Turbo TOP_TURBO { get; }
 
         /// <summary>
         /// Base brakes performance settings.
         /// </summary>
         [Expandable("Brakes")]
-        public Brakes BASE_BRAKES { get; set; }
+        public Brakes BASE_BRAKES { get; }
 
         /// <summary>
         /// Top brakes performance settings.
         /// </summary>
         [Expandable("Brakes")]
-        public Brakes TOP_BRAKES { get; set; }
+        public Brakes TOP_BRAKES { get; }
 
         /// <summary>
         /// Top weight reduction performance settings.
         /// </summary>
         [Expandable("WeightReduction")]
-        public WeightReduction TOP_WEIGHT_REDUCTION { get; set; }
+        public WeightReduction TOP_WEIGHT_REDUCTION { get; }
 
         /// <summary>
         /// Top nitrous performance settings.
         /// </summary>
         [Expandable("NOS")]
-        public Nitrous TOP_NITROUS { get; set; }
+        public Nitrous TOP_NITROUS { get; }
 
         /// <summary>
         /// Additional drift yaw control performance settings.
         /// </summary>
         [Expandable("DriftControl")]
-        public DriftControl DRIFT_ADD_CONTROL { get; set; }
+        public DriftControl DRIFT_ADD_CONTROL { get; }
 
         #endregion
 
@@ -485,14 +485,69 @@ namespace Nikki.Support.Underground2.Class
         /// <summary>
         /// Initializes new instance of <see cref="CarTypeInfo"/>.
         /// </summary>
-        public CarTypeInfo() => this.Initialize();
+        public CarTypeInfo()
+		{
+            this.ECAR = new Ecar();
+            this.PVEHICLE = new Pvehicle();
+            this.RIGID_CONTROLS = new RigidControls();
+            this.AI_CAMERA_DRIVER = new Camera();
+            this.AI_CAMERA_CLOSE = new Camera();
+            this.AI_CAMERA_DRIFT = new Camera();
+            this.AI_CAMERA_BUMPER = new Camera();
+            this.AI_CAMERA_FAR = new Camera();
+            this.AI_CAMERA_HOOD = new Camera();
+            this.PLAYER_CAMERA_DRIVER = new Camera();
+            this.PLAYER_CAMERA_CLOSE = new Camera();
+            this.PLAYER_CAMERA_DRIFT = new Camera();
+            this.PLAYER_CAMERA_BUMPER = new Camera();
+            this.PLAYER_CAMERA_FAR = new Camera();
+            this.PLAYER_CAMERA_HOOD = new Camera();
+            this.BASE_BRAKES = new Brakes();
+            this.BASE_ENGINE = new Engine();
+            this.BASE_RPM = new RPM();
+            this.BASE_SUSPENSION = new Suspension();
+            this.BASE_TIRES = new Tires();
+            this.BASE_TRANSMISSION = new Transmission();
+            this.BASE_TURBO = new Turbo();
+            this.DRIFT_ADD_CONTROL = new DriftControl();
+            this.STREET_ECU = new ECU();
+            this.STREET_RPM = new RPM();
+            this.STREET_TRANSMISSION = new Transmission();
+            this.PRO_ECU = new ECU();
+            this.PRO_RPM = new RPM();
+            this.PRO_TRANSMISSION = new Transmission();
+            this.TOP_BRAKES = new Brakes();
+            this.TOP_ECU = new ECU();
+            this.TOP_ENGINE = new Engine();
+            this.TOP_NITROUS = new Nitrous();
+            this.TOP_RPM = new RPM();
+            this.TOP_SUSPENSION = new Suspension();
+            this.TOP_TIRES = new Tires();
+            this.TOP_TRANSMISSION = new Transmission();
+            this.TOP_TURBO = new Turbo();
+            this.TOP_WEIGHT_REDUCTION = new WeightReduction();
+            this.WHEEL_FRONT_LEFT = new CarInfoWheel();
+            this.WHEEL_FRONT_RIGHT = new CarInfoWheel();
+            this.WHEEL_REAR_LEFT = new CarInfoWheel();
+            this.WHEEL_REAR_RIGHT = new CarInfoWheel();
+            this.CARSKIN01 = new CarSkin();
+            this.CARSKIN02 = new CarSkin();
+            this.CARSKIN03 = new CarSkin();
+            this.CARSKIN04 = new CarSkin();
+            this.CARSKIN05 = new CarSkin();
+            this.CARSKIN06 = new CarSkin();
+            this.CARSKIN07 = new CarSkin();
+            this.CARSKIN08 = new CarSkin();
+            this.CARSKIN09 = new CarSkin();
+            this.CARSKIN10 = new CarSkin();
+        }
 
         /// <summary>
         /// Initializes new instance of <see cref="CarTypeInfo"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
         /// <param name="manager"><see cref="CarTypeInfoManager"/> to which this instance belongs to.</param>
-        public CarTypeInfo(string CName, CarTypeInfoManager manager)
+        public CarTypeInfo(string CName, CarTypeInfoManager manager) : this()
         {
             this.Manager = manager;
             this.CollectionName = CName;
@@ -502,7 +557,6 @@ namespace Nikki.Support.Underground2.Class
             this.WheelInnerRadiusMin = 17;
             this.WheelInnerRadiusMax = 20;
             this.DefaultSkinNumber = 1;
-            this.Initialize();
             CName.BinHash();
         }
 
@@ -511,10 +565,9 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         /// <param name="manager"><see cref="CarTypeInfoManager"/> to which this instance belongs to.</param>
-        public CarTypeInfo(BinaryReader br, CarTypeInfoManager manager)
+        public CarTypeInfo(BinaryReader br, CarTypeInfoManager manager) : this()
         {
             this.Manager = manager;
-            this.Initialize();
             this.Disassemble(br);
         }
 
@@ -1188,63 +1241,6 @@ namespace Nikki.Support.Underground2.Class
                 case 10: this.CARSKIN10 = skin; break;
                 default: break;
             }
-        }
-
-        private void Initialize()
-        {
-            this.ECAR = new Ecar();
-            this.PVEHICLE = new Pvehicle();
-            this.RIGID_CONTROLS = new RigidControls();
-            this.AI_CAMERA_DRIVER = new Camera();
-            this.AI_CAMERA_CLOSE = new Camera();
-            this.AI_CAMERA_DRIFT = new Camera();
-            this.AI_CAMERA_BUMPER = new Camera();
-            this.AI_CAMERA_FAR = new Camera();
-            this.AI_CAMERA_HOOD = new Camera();
-            this.PLAYER_CAMERA_DRIVER = new Camera();
-            this.PLAYER_CAMERA_CLOSE = new Camera();
-            this.PLAYER_CAMERA_DRIFT = new Camera();
-            this.PLAYER_CAMERA_BUMPER = new Camera();
-            this.PLAYER_CAMERA_FAR = new Camera();
-            this.PLAYER_CAMERA_HOOD = new Camera();
-            this.BASE_BRAKES = new Brakes();
-            this.BASE_ENGINE = new Engine();
-            this.BASE_RPM = new RPM();
-            this.BASE_SUSPENSION = new Suspension();
-            this.BASE_TIRES = new Tires();
-            this.BASE_TRANSMISSION = new Transmission();
-            this.BASE_TURBO = new Turbo();
-            this.DRIFT_ADD_CONTROL = new DriftControl();
-            this.STREET_ECU = new ECU();
-            this.STREET_RPM = new RPM();
-            this.STREET_TRANSMISSION = new Transmission();
-            this.PRO_ECU = new ECU();
-            this.PRO_RPM = new RPM();
-            this.PRO_TRANSMISSION = new Transmission();
-            this.TOP_BRAKES = new Brakes();
-            this.TOP_ECU = new ECU();
-            this.TOP_ENGINE = new Engine();
-            this.TOP_NITROUS = new Nitrous();
-            this.TOP_RPM = new RPM();
-            this.TOP_SUSPENSION = new Suspension();
-            this.TOP_TIRES = new Tires();
-            this.TOP_TRANSMISSION = new Transmission();
-            this.TOP_TURBO = new Turbo();
-            this.TOP_WEIGHT_REDUCTION = new WeightReduction();
-            this.WHEEL_FRONT_LEFT = new CarInfoWheel();
-            this.WHEEL_FRONT_RIGHT = new CarInfoWheel();
-            this.WHEEL_REAR_LEFT = new CarInfoWheel();
-            this.WHEEL_REAR_RIGHT = new CarInfoWheel();
-            this.CARSKIN01 = new CarSkin();
-            this.CARSKIN02 = new CarSkin();
-            this.CARSKIN03 = new CarSkin();
-            this.CARSKIN04 = new CarSkin();
-            this.CARSKIN05 = new CarSkin();
-            this.CARSKIN06 = new CarSkin();
-            this.CARSKIN07 = new CarSkin();
-            this.CARSKIN08 = new CarSkin();
-            this.CARSKIN09 = new CarSkin();
-            this.CARSKIN10 = new CarSkin();
         }
 
         /// <summary>
