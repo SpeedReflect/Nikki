@@ -59,6 +59,24 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
         public float StockTopSpeedLimiter { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float Unknown1 { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float Unknown2 { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        public float Unknown3 { get; set; }
+
+        /// <summary>
         /// Initializes new instance of <see cref="Pvehicle"/>.
         /// </summary>
         public Pvehicle() { }

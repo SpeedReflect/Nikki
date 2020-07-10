@@ -1,15 +1,17 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Underground2.Framework;
 using Nikki.Support.Underground2.Parts.CarParts;
 using Nikki.Support.Underground2.Parts.InfoParts;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -39,12 +41,6 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         public const int BaseClassSize = 0x890;
 
-        private const float _float_1pt0 = 1;
-        private const float _float_2pt5 = 2.5F;
-        private const float _float_17pt0 = 17;
-        private const int _int32_6 = 6;
-        private ushort[] _rigid_controls;
-
         #endregion
 
         #region Properties
@@ -52,37 +48,32 @@ namespace Nikki.Support.Underground2.Class
         /// <summary>
         /// Game to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override GameINT GameINT => GameINT.Underground2;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override string GameSTR => GameINT.Underground2.ToString();
 
         /// <summary>
-        /// Database to which the class belongs to.
+        /// Manager to which the class belongs to.
         /// </summary>
-        public Database.Underground2 Database { get; set; }
+        [Browsable(false)]
+        public CarTypeInfoManager Manager { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
         /// </summary>
         [AccessModifiable()]
+        [Category("Main")]
         public override string CollectionName
         {
             get => this._collection_name;
             set
             {
-                if (!this.Deletable)
-                    throw new CollectionExistenceException("CollectionName of a non-addon car cannot be changed.");
-                if (String.IsNullOrWhiteSpace(value))
-                    throw new ArgumentNullException("This value cannot be left empty.");
-                if (value.Contains(" "))
-                    throw new Exception("CollectionName cannot contain whitespace.");
-                if (value.Length > MaxCNameLength)
-                    throw new ArgumentLengthException(MaxCNameLength);
-                if (this.Database.CarTypeInfos.FindCollection(value) != null)
-                    throw new CollectionExistenceException(value);
+                this.Manager?.CreationCheck(value);
                 this._collection_name = value;
             }
         }
@@ -90,11 +81,15 @@ namespace Nikki.Support.Underground2.Class
         /// <summary>
         /// Binary memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint BinKey => this._collection_name.BinHash();
 
         /// <summary>
         /// Vault memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint VltKey => this._collection_name.VltHash();
 
         /// <summary>
@@ -102,6 +97,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public override string ManufacturerName { get; set; }
 
         /// <summary>
@@ -109,6 +105,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public override string DefaultBasePaint { get; set; } = String.Empty;
 
         /// <summary>
@@ -116,66 +113,51 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public string DefaultBasePaint2 { get; set; } = String.Empty;
-
-        /// <summary>
-        /// Spoiler type of the <see cref="CarTypeInfo"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [MemoryCastable()]
-        public string Spoiler { get; set; } = String.Empty;
-
-        /// <summary>
-        /// RoofScoop type of the <see cref="CarTypeInfo"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [MemoryCastable()]
-        public string RoofScoop { get; set; } = String.Empty;
-
-        /// <summary>
-        /// Mirrors typ of the <see cref="CarTypeInfo"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [MemoryCastable()]
-        public string Mirrors { get; set; } = String.Empty;
 
         /// <summary>
         /// Defines whether the car is an SUV.
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public eBoolean IsSUV { get; set; }
 
         /// <summary>
-        /// X value of unknown vector.
+        /// X value of aerodynamics vector.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float AerodynamicsForceX { get; set; }
 
         /// <summary>
-        /// Y value of unknown vector.
+        /// Y value of aerodynamics vector.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float AerodynamicsForceY { get; set; }
 
         /// <summary>
-        /// Z value of unknown vector.
+        /// Z value of aerodynamics vector.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float AerodynamicsForceZ { get; set; }
 
         /// <summary>
-        /// W value of unknown vector.
+        /// W value of aerodynamics vector.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public float AerodynamicsForceW { get; set; }
 
         /// <summary>
@@ -249,6 +231,12 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         [Expandable("General")]
         public Pvehicle PVEHICLE { get; set; }
+
+        /// <summary>
+        /// Rigid control settings of this <see cref="CarTypeInfo"/>.
+        /// </summary>
+        [Expandable("General")]
+        public RigidControls RIGID_CONTROLS { get; set; }
 
         /// <summary>
         /// Front left wheel settings of this <see cref="CarTypeInfo"/>.
@@ -497,19 +485,18 @@ namespace Nikki.Support.Underground2.Class
         /// <summary>
         /// Initializes new instance of <see cref="CarTypeInfo"/>.
         /// </summary>
-        public CarTypeInfo() { }
+        public CarTypeInfo() => this.Initialize();
 
         /// <summary>
         /// Initializes new instance of <see cref="CarTypeInfo"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-        public CarTypeInfo(string CName, Database.Underground2 db)
+        /// <param name="manager"><see cref="CarTypeInfoManager"/> to which this instance belongs to.</param>
+        public CarTypeInfo(string CName, CarTypeInfoManager manager)
         {
-            this.Database = db;
+            this.Manager = manager;
             this.CollectionName = CName;
             this.ManufacturerName = "GENERIC";
-            this.Deletable = true;
             this.WhatGame = 2;
             this.WheelOuterRadius = 26;
             this.WheelInnerRadiusMin = 17;
@@ -523,19 +510,12 @@ namespace Nikki.Support.Underground2.Class
         /// Initializes new instance of <see cref="CarTypeInfo"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-        /// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-        public CarTypeInfo(BinaryReader br, Database.Underground2 db)
+        /// <param name="manager"><see cref="CarTypeInfoManager"/> to which this instance belongs to.</param>
+        public CarTypeInfo(BinaryReader br, CarTypeInfoManager manager)
         {
-            this.Database = db;
+            this.Manager = manager;
             this.Initialize();
             this.Disassemble(br);
-
-            if (this.Index <= (int)eBoundValues.MIN_INFO_UNDERGROUND2)
-            {
-
-                this.Deletable = false;
-
-            }
         }
 
         /// <summary>
@@ -613,11 +593,11 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(this.PVEHICLE.TensorScaleZ);
             bw.Write(this.PVEHICLE.TensorScaleW);
             bw.WriteBytes(0x10);
-            bw.Write(this.ECAR.EcarUnknown1);
+            bw.Write(this.ECAR.Unknown1);
             bw.WriteBytes(0x10);
-            bw.Write(this.ECAR.EcarUnknown2);
+            bw.Write(this.ECAR.Unknown2);
             bw.WriteBytes(0x10);
-            bw.Write(_float_1pt0);
+            bw.Write(this.PVEHICLE.Unknown1);
             bw.Write(this.PVEHICLE.InitialHandlingRating);
             bw.WriteBytes(0xC);
 
@@ -648,8 +628,8 @@ namespace Nikki.Support.Underground2.Class
 
             // Ecar Values
             bw.Write((int)0);
-            bw.Write(_float_2pt5);
-            bw.Write(_float_17pt0);
+            bw.Write(this.PVEHICLE.Unknown2);
+            bw.Write(this.PVEHICLE.Unknown3);
             bw.Write((int)0);
             bw.Write(this.PVEHICLE.StockTopSpeedLimiter);
             bw.WriteBytes(0x1C);
@@ -731,10 +711,7 @@ namespace Nikki.Support.Underground2.Class
             this.TOP_TIRES.Write(bw);
 
             // Top Nitrous Performance
-            bw.Write(this.TOP_NITROUS.NOSCapacity);
-            bw.Write(_int32_6);
-            bw.Write((int)0);
-            bw.Write(this.TOP_NITROUS.NOSTorqueBoost);
+            this.TOP_NITROUS.Write(bw);
 
             // Top Brakes Performance
             bw.Write((int)0);
@@ -777,45 +754,8 @@ namespace Nikki.Support.Underground2.Class
             this.AI_CAMERA_HOOD.Write(bw);
             this.AI_CAMERA_DRIFT.Write(bw);
 
-            // Rigid Controls (if an added car, or usagetype modified, or rigid controls are missing or broken
-            if (this.Deletable || this._rigid_controls == null || this._rigid_controls.Length != 40)
-            {
-
-                if (this.UsageType == eUsageType.Traffic)
-                {
-
-                    for (int loop = 0; loop < 40; ++loop)
-                    {
-
-                        bw.Write(RigidControls.RigidTrafControls[loop]);
-
-                    }
-
-                }
-                else
-                {
-
-                    for (int loop = 0; loop < 40; ++loop)
-                    {
-
-                        bw.Write(RigidControls.RigidRacerControls[loop]);
-
-                    }
-
-                }
-            
-            }
-            else
-            {
-                
-                for (int loop = 0; loop < 40; ++loop)
-                {
-
-                    bw.Write(this._rigid_controls[loop]);
-
-                }
-            
-            }
+            // Rigid Controls
+            this.RIGID_CONTROLS.Write(bw);
 
             // Secondary Properties
             bw.Write(this.Index);
@@ -938,10 +878,11 @@ namespace Nikki.Support.Underground2.Class
             this.PVEHICLE.TensorScaleZ = br.ReadSingle();
             this.PVEHICLE.TensorScaleW = br.ReadSingle();
             br.BaseStream.Position += 0x10;
-            this.ECAR.EcarUnknown1 = br.ReadSingle();
+            this.ECAR.Unknown1 = br.ReadSingle();
             br.BaseStream.Position += 0x10;
-            this.ECAR.EcarUnknown2 = br.ReadSingle();
-            br.BaseStream.Position += 0x14;
+            this.ECAR.Unknown2 = br.ReadSingle();
+            br.BaseStream.Position += 0x10;
+            this.PVEHICLE.Unknown1 = br.ReadSingle();
             this.PVEHICLE.InitialHandlingRating = br.ReadSingle();
             br.BaseStream.Position += 0xC;
 
@@ -969,7 +910,10 @@ namespace Nikki.Support.Underground2.Class
             this.BASE_BRAKES.BrakeStrength = br.ReadSingle();
             this.BASE_BRAKES.HandBrakeStrength = br.ReadSingle();
             this.BASE_BRAKES.BrakeBias = br.ReadSingle();
-            br.BaseStream.Position += 0x10;
+            br.BaseStream.Position += 4;
+            this.PVEHICLE.Unknown2 = br.ReadSingle();
+            this.PVEHICLE.Unknown3 = br.ReadSingle();
+            br.BaseStream.Position += 4;
             this.PVEHICLE.StockTopSpeedLimiter = br.ReadSingle();
             br.BaseStream.Position += 0x1C;
 
@@ -1023,9 +967,7 @@ namespace Nikki.Support.Underground2.Class
             this.TOP_TIRES.Read(br);
 
             // Top Nitrous Performance
-            this.TOP_NITROUS.NOSCapacity = br.ReadSingle();
-            br.BaseStream.Position += 8;
-            this.TOP_NITROUS.NOSTorqueBoost = br.ReadSingle();
+            this.TOP_NITROUS.Read(br);
             br.BaseStream.Position += 0x10;
 
             // Top Brakes Performance
@@ -1125,14 +1067,7 @@ namespace Nikki.Support.Underground2.Class
             }
 
             // Rigid Controls
-            this._rigid_controls = new ushort[40];
-            
-            for (int loop = 0; loop < 40; ++loop)
-            {
-
-                this._rigid_controls[loop] = br.ReadUInt16();
-            
-            }
+            this.RIGID_CONTROLS.Read(br);
 
             // Secondary Properties
             this.Index = br.ReadInt32();
@@ -1182,9 +1117,9 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         /// <param name="CName">CollectionName of the new created object.</param>
         /// <returns>Memory casted copy of the object.</returns>
-        public override ACollectable MemoryCast(string CName)
+        public override Collectable MemoryCast(string CName)
         {
-            var result = new CarTypeInfo(CName, this.Database);
+            var result = new CarTypeInfo(CName, this.Manager);
             base.MemoryCast(this, result);
             return result;
         }
@@ -1209,43 +1144,49 @@ namespace Nikki.Support.Underground2.Class
             if (this.AvailableSkinNumbers10 > 0) skinsused.Add(10);
             if (skinsused.Count == 0) return;
 
-            for (int a1 = 0; a1 < skinsused.Count; ++a1)
+            for (int loop = 0; loop < skinsused.Count; ++loop)
             {
-                switch (skinsused[a1])
+
+                switch (skinsused[loop])
                 {
-                    case 1:
-                        this.CARSKIN01.Write(bw, this.Index, 1);
-                        break;
-                    case 2:
-                        this.CARSKIN02.Write(bw, this.Index, 2);
-                        break;
-                    case 3:
-                        this.CARSKIN03.Write(bw, this.Index, 3);
-                        break;
-                    case 4:
-                        this.CARSKIN04.Write(bw, this.Index, 4);
-                        break;
-                    case 5:
-                        this.CARSKIN05.Write(bw, this.Index, 5);
-                        break;
-                    case 6:
-                        this.CARSKIN06.Write(bw, this.Index, 6);
-                        break;
-                    case 7:
-                        this.CARSKIN07.Write(bw, this.Index, 7);
-                        break;
-                    case 8:
-                        this.CARSKIN08.Write(bw, this.Index, 8);
-                        break;
-                    case 9:
-                        this.CARSKIN09.Write(bw, this.Index, 9);
-                        break;
-                    case 10:
-                        this.CARSKIN10.Write(bw, this.Index, 10);
-                        break;
-                    default:
-                        break;
+                    case 1: this.CARSKIN01.Write(bw, this.Index, 1); break;
+                    case 2: this.CARSKIN02.Write(bw, this.Index, 2); break;
+                    case 3: this.CARSKIN03.Write(bw, this.Index, 3); break;
+                    case 4: this.CARSKIN04.Write(bw, this.Index, 4); break;
+                    case 5: this.CARSKIN05.Write(bw, this.Index, 5); break;
+                    case 6: this.CARSKIN06.Write(bw, this.Index, 6); break;
+                    case 7: this.CARSKIN07.Write(bw, this.Index, 7); break;
+                    case 8: this.CARSKIN08.Write(bw, this.Index, 8); break;
+                    case 9: this.CARSKIN09.Write(bw, this.Index, 9); break;
+                    case 10: this.CARSKIN10.Write(bw, this.Index, 10); break;
+                    default: break;
                 }
+            
+            }
+        }
+
+        /// <summary>
+        /// Reads a <see cref="CarSkin"/> using <see cref="BinaryReader"/> provided.
+        /// </summary>
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        public void SetCarSkins(BinaryReader br)
+		{
+            var skin = new CarSkin();
+            skin.Read(br, out int id, out int index);
+
+            switch (index)
+			{
+                case 1: this.CARSKIN01 = skin; break;
+                case 2: this.CARSKIN02 = skin; break;
+                case 3: this.CARSKIN03 = skin; break;
+                case 4: this.CARSKIN04 = skin; break;
+                case 5: this.CARSKIN05 = skin; break;
+                case 6: this.CARSKIN06 = skin; break;
+                case 7: this.CARSKIN07 = skin; break;
+                case 8: this.CARSKIN08 = skin; break;
+                case 9: this.CARSKIN09 = skin; break;
+                case 10: this.CARSKIN10 = skin; break;
+                default: break;
             }
         }
 
@@ -1253,6 +1194,7 @@ namespace Nikki.Support.Underground2.Class
         {
             this.ECAR = new Ecar();
             this.PVEHICLE = new Pvehicle();
+            this.RIGID_CONTROLS = new RigidControls();
             this.AI_CAMERA_DRIVER = new Camera();
             this.AI_CAMERA_CLOSE = new Camera();
             this.AI_CAMERA_DRIFT = new Camera();
@@ -1313,7 +1255,62 @@ namespace Nikki.Support.Underground2.Class
         public override string ToString()
         {
             return $"Collection Name: {this.CollectionName} | " +
-                   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+                   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
+        }
+
+        #endregion
+
+        #region Serialization
+
+        /// <summary>
+        /// Serializes instance into a byte array and stores it in the file provided.
+        /// </summary>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        public override void Serialize(BinaryWriter bw)
+        {
+            byte[] array;
+            using (var ms = new MemoryStream(0x1000))
+            using (var writer = new BinaryWriter(ms))
+            {
+
+                this.Assemble(bw);
+                this.GetCarSkins(bw);
+
+                array = ms.ToArray();
+
+            }
+
+            array = Interop.Compress(array, eLZCompressionType.BEST);
+
+            var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+            header.Write(bw);
+            bw.Write(array.Length);
+            bw.Write(array);
+        }
+
+        /// <summary>
+        /// Deserializes byte array into an instance by loading data from the file provided.
+        /// </summary>
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        public override void Deserialize(BinaryReader br)
+        {
+            var size = br.ReadInt32();
+            var array = br.ReadBytes(size);
+
+            array = Interop.Decompress(array);
+
+            using var ms = new MemoryStream(array);
+            using var reader = new BinaryReader(ms);
+
+            this.Disassemble(reader);
+
+            while (reader.BaseStream.Position < reader.BaseStream.Length)
+			{
+
+                this.SetCarSkins(reader);
+
+			}
+
         }
 
         #endregion
