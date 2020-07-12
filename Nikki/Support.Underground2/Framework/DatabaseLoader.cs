@@ -22,6 +22,7 @@ namespace Nikki.Support.Underground2.Framework
 		#endif
 
 		private Block acideffects;
+		private Block acidemitters;
 		private Block caranimations;
 		private Block carskins;
 		private Block cartypeinfos;
@@ -52,6 +53,7 @@ namespace Nikki.Support.Underground2.Framework
 			this.strblocks = new Block(eBlockID.STRBlocks);
 			this.slottypes = new Block(eBlockID.SlotTypes);
 			this.acideffects = new Block(eBlockID.AcidEffects);
+			this.acidemitters = new Block(eBlockID.AcidEmitters);
 			this.gcareer = new Block(eBlockID.GCareer);
 			this.carskins = new Block(eBlockID.CarSkins);
 			this.caranimations = new Block(eBlockID.CarInfoAnimHookup);
@@ -131,6 +133,7 @@ namespace Nikki.Support.Underground2.Framework
 				this._db.SlotTypes.Disassemble(br, this.slottypes);
 				this._db.SlotOverrides.Disassemble(br, this.slottypes);
 				this._db.AcidEffects.Disassemble(br, this.acideffects);
+				this._db.AcidEmitters.Disassemble(br, this.acidemitters);
 				this.ProcessCarAnimations(br);
 				this.ProcessCarSkins(br);
 
@@ -236,6 +239,10 @@ namespace Nikki.Support.Underground2.Framework
 
 					case eBlockID.AcidEffects:
 						this.acideffects.Offsets.Add(off);
+						goto default;
+
+					case eBlockID.AcidEmitters:
+						this.acidemitters.Offsets.Add(off);
 						goto default;
 
 					case eBlockID.STRBlocks:

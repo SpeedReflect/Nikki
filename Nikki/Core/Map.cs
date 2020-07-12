@@ -300,7 +300,7 @@ namespace Nikki.Core
 			{ eBlockID.StyleMomentsInfo,  new Alignment(0x80, Alignment.eAlignType.Modular) },
 			{ eBlockID.DifficultyInfo,    new Alignment(0x80, Alignment.eAlignType.Modular) },
 			{ eBlockID.AcidEffects,       new Alignment(0x80, Alignment.eAlignType.Modular) },
-			{ eBlockID.AcidEmmiters,      new Alignment(0x80, Alignment.eAlignType.Modular) },
+			{ eBlockID.AcidEmitters,      new Alignment(0x80, Alignment.eAlignType.Modular) },
 			{ eBlockID.STRBlocks,         Alignment.Default },
 			{ eBlockID.LangFont,          Alignment.Default },
 			{ eBlockID.Subtitles,         Alignment.Default },

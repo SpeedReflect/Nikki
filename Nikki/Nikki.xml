@@ -2040,7 +2040,7 @@
             0x00035020
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.eBlockID.AcidEmmiters">
+        <member name="F:Nikki.Reflection.Enum.eBlockID.AcidEmitters">
             <summary>
             0x00035021
             </summary>
@@ -2333,6 +2333,11 @@
         <member name="F:Nikki.Reflection.Enum.eBlockID.GCareer">
             <summary>
             0x80034A10
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eBlockID.GLimitations">
+            <summary>
+            0x80034A30
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.eBlockID.EmitterTriggers">
@@ -26557,7 +26562,7 @@
             <see cref="T:Nikki.Support.Shared.Class.AcidEffect"/> is a collection of vectors and attributes related to acids and xenons.
             </summary>
         </member>
-        <member name="F:Nikki.Support.Shared.Class.AcidEffect._Localizer">
+        <member name="P:Nikki.Support.Shared.Class.AcidEffect.Localizer">
             <summary>
             Constant value used in the header.
             </summary>
@@ -26612,6 +26617,72 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.AcidEffect.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="T:Nikki.Support.Shared.Class.AcidEmitter">
+            <summary>
+            <see cref="T:Nikki.Support.Shared.Class.AcidEmitter"/> is a collection of vectors and attributes related to emitters.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.AcidEmitter.Localizer">
+            <summary>
+            Constant value used in the header.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.AcidEmitter.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.AcidEmitter.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.AcidEmitter.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.AcidEmitter.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.AcidEmitter.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.AcidEmitter.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Shared.Class.AcidEffect"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Shared.Class.AcidEffect"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.AcidEmitter.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Shared.Class.AcidEffect"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.AcidEffect"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.AcidEmitter.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.AcidEmitter.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.AcidEmitter.MemoryCast(System.String)">
             <summary>
             Casts all attributes from this object to another one.
             </summary>
@@ -29077,6 +29148,109 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="T:Nikki.Support.Shared.Parts.GenParts.Matrix">
+            <summary>
+            A unit <see cref="T:Nikki.Support.Shared.Parts.GenParts.Matrix"/> class with 4 (X, Y, Z, W) vectors.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value1X">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value1Y">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value1Z">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value1W">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value2X">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value2Y">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value2Z">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value2W">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value3X">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value3Y">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value3Z">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value3W">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value4X">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value4Y">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value4Z">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value4W">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.GenParts.Matrix.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.GenParts.Matrix.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.GenParts.Matrix.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
         <member name="T:Nikki.Support.Shared.Parts.PresetParts.Add_On">
             <summary>
             Class with all addon strings that can be used to create labels for preset parts.
@@ -30130,6 +30304,11 @@
             Base size of a unit collection.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.Localizer">
+            <summary>
+            Constant value used in the header.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Underground2.Class.AcidEffect.GameINT">
             <summary>
             Game to which the class belongs to.
@@ -30225,84 +30404,9 @@
             Time stamp of this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/> creation.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LocalWorld_Vec1_X">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LocalWorld">
             <summary>
-            Value of Matrix 1-X of the <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LocalWorld_Vec1_Y">
-            <summary>
-            Value of Matrix 1-Y of the <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LocalWorld_Vec1_Z">
-            <summary>
-            Value of Matrix 1-Z of the <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LocalWorld_Vec1_W">
-            <summary>
-            Value of Matrix 1-W of the <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LocalWorld_Vec2_X">
-            <summary>
-            Value of Matrix 2-X of the <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LocalWorld_Vec2_Y">
-            <summary>
-            Value of Matrix 2-Y of the <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LocalWorld_Vec2_Z">
-            <summary>
-            Value of Matrix 2-Z of the <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LocalWorld_Vec2_W">
-            <summary>
-            Value of Matrix 2-W of the <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LocalWorld_Vec3_X">
-            <summary>
-            Value of Matrix 3-X of the <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LocalWorld_Vec3_Y">
-            <summary>
-            Value of Matrix 3-Y of the <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LocalWorld_Vec3_Z">
-            <summary>
-            Value of Matrix 3-Z of the <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LocalWorld_Vec3_W">
-            <summary>
-            Value of Matrix 3-W of the <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LocalWorld_Vec4_X">
-            <summary>
-            Value of Matrix 4-X of the <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LocalWorld_Vec4_Y">
-            <summary>
-            Value of Matrix 4-Y of the <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LocalWorld_Vec4_Z">
-            <summary>
-            Value of Matrix 4-Z of the <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LocalWorld_Vec4_W">
-            <summary>
-            Value of Matrix 4-W of the <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
+            LocalWorld <see cref="T:Nikki.Support.Shared.Parts.GenParts.Matrix"/> of this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.AcidEffect.#ctor">
@@ -30362,6 +30466,203 @@
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.AcidEffect.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Class.AcidEmitter">
+            <summary>
+            <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/> is a collection of vectors and attributes related to emitters.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Class.AcidEmitter.MaxCNameLength">
+            <summary>
+            Maximum length of the CollectionName.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Class.AcidEmitter.CNameOffsetAt">
+            <summary>
+            Offset of the CollectionName in the data.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Class.AcidEmitter.BaseClassSize">
+            <summary>
+            Base size of a unit collection.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Localizer">
+            <summary>
+            Constant value used in the header.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Manager">
+            <summary>
+            Manager to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.SpecialEffect">
+            <summary>
+            Special effect name of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.EmitterName">
+            <summary>
+            Emitter name of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.ClassKey">
+            <summary>
+            Class key of the <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Flags">
+            <summary>
+            Flags used by the effect's properties.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.NumEmitters">
+            <summary>
+            Number of emmiters in this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.SectionNumber">
+            <summary>
+            Section number of this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.InheritanceKey">
+            <summary>
+            Key of the collection from which this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/> is inherited.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.FarClip">
+            <summary>
+            Far clip value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Intensity">
+            <summary>
+            Intensity of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.PivotX">
+            <summary>
+            Last position X of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.PivotY">
+            <summary>
+            Last position Y of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.PivotZ">
+            <summary>
+            Last position Z of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.PivotW">
+            <summary>
+            Last position W of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.NumZeroParticleFrames">
+            <summary>
+            Number of particle frames in this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.CreationTimeStamp">
+            <summary>
+            Time stamp of this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/> creation.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.LocalWorld">
+            <summary>
+            LocalWorld <see cref="T:Nikki.Support.Shared.Parts.GenParts.Matrix"/> of this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.AcidEmitter.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.AcidEmitter.#ctor(System.String,Nikki.Support.Underground2.Framework.AcidEmitterManager)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="manager"><see cref="T:Nikki.Support.Underground2.Framework.AcidEmitterManager"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.AcidEmitter.#ctor(System.IO.BinaryReader,Nikki.Support.Underground2.Framework.AcidEmitterManager)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="manager"><see cref="T:Nikki.Support.Underground2.Framework.AcidEmitterManager"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.AcidEmitter.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.AcidEmitter.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.AcidEmitter.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.AcidEmitter.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.AcidEmitter.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.AcidEmitter.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.AcidEmitter.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
@@ -33116,6 +33417,89 @@
             false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Underground2.Framework.AcidEffectManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Framework.AcidEmitterManager">
+            <summary>
+            A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/> collections.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Framework.AcidEmitterManager.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Framework.AcidEmitterManager.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Framework.AcidEmitterManager.Name">
+            <summary>
+            Name of this <see cref="T:Nikki.Support.Underground2.Framework.AcidEmitterManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Framework.AcidEmitterManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Framework.AcidEmitterManager.IsReadOnly">
+            <summary>
+            True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Framework.AcidEmitterManager.Alignment">
+            <summary>
+            Indicates required alighment when this <see cref="T:Nikki.Support.Underground2.Framework.AcidEmitterManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Framework.AcidEmitterManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Underground2.Framework.AcidEmitterManager"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Framework.AcidEmitterManager.#ctor(Nikki.Support.Underground2.Datamap)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Framework.AcidEmitterManager"/>.
+            </summary>
+            <param name="db"><see cref="T:Nikki.Support.Underground2.Datamap"/> to which this manager belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Framework.AcidEmitterManager.Assemble(System.IO.BinaryWriter,System.String)">
+            <summary>
+            Assembles collection data into byte buffers.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="mark">Watermark to put in the padding blocks.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Framework.AcidEmitterManager.Disassemble(System.IO.BinaryReader,Nikki.Core.Block)">
+            <summary>
+            Disassembles data into separate collections in this <see cref="T:Nikki.Support.Underground2.Framework.AcidEmitterManager"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="block"><see cref="T:Nikki.Core.Block"/> with offsets.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Framework.AcidEmitterManager.CreationCheck(System.String)">
+            <summary>
+            Checks whether CollectionName provided allows creation of a new collection.
+            </summary>
+            <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Framework.AcidEmitterManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Framework.AcidEmitterManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
             <summary>
             Imports collection from file provided and attempts to add it to the end of 
             this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.

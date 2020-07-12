@@ -223,7 +223,7 @@
         /// <summary>
         /// 0x00035021
         /// </summary>
-        AcidEmmiters = 0x00035021, // 0x80 Modular
+        AcidEmitters = 0x00035021, // 0x80 Modular
 
         /// <summary>
         /// 0x00037220
@@ -514,6 +514,11 @@
         /// 0x80034A10
         /// </summary>
         GCareer = 0x80034A10, // 0x80 Modular
+
+        /// <summary>
+        /// 0x80034A30
+        /// </summary>
+        GLimitations = 0x80034A30, // 0x80 Modular
 
         /// <summary>
         /// 0x80036000

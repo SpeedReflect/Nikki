@@ -67,6 +67,7 @@ namespace Nikki.Support.Underground2.Framework
 				this._db.DBModelParts.Assemble(bw, this._options.Watermark);
 				this._db.Tracks.Assemble(bw, this._options.Watermark);
 				this._db.SunInfos.Assemble(bw, this._options.Watermark);
+				this._db.AcidEmitters.Assemble(bw, this._options.Watermark);
 				this._db.AcidEffects.Assemble(bw, this._options.Watermark);
 				this._db.PresetRides.Assemble(bw, this._options.Watermark);
 				this._db.FNGroups.Assemble(bw, this._options.Watermark);
@@ -121,6 +122,7 @@ namespace Nikki.Support.Underground2.Framework
 				this._db.DBModelParts.Assemble(bw, this._options.Watermark);
 				this._db.Tracks.Assemble(bw, this._options.Watermark);
 				this._db.SunInfos.Assemble(bw, this._options.Watermark);
+				this._db.AcidEmitters.Assemble(bw, this._options.Watermark);
 				this._db.AcidEffects.Assemble(bw, this._options.Watermark);
 				this._db.PresetRides.Assemble(bw, this._options.Watermark);
 				this._db.FNGroups.Assemble(bw, this._options.Watermark);
@@ -174,6 +176,7 @@ namespace Nikki.Support.Underground2.Framework
 					case eBlockID.FNGCompress:
 					case eBlockID.PresetRides:
 					case eBlockID.TPKSettings:
+					case eBlockID.AcidEmitters:
 					case eBlockID.CarTypeInfos:
 					case eBlockID.CarInfoAnimHideup:
 					case eBlockID.CarInfoAnimHookup:

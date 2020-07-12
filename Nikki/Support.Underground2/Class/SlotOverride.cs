@@ -132,9 +132,9 @@ namespace Nikki.Support.Underground2.Class
         #region Methods
 
         /// <summary>
-        /// Assembles <see cref="SlotType"/> into a byte array.
+        /// Assembles <see cref="SlotOverride"/> into a byte array.
         /// </summary>
-        /// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="SlotType"/> with.</param>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="SlotOverride"/> with.</param>
         public override void Assemble(BinaryWriter bw)
         {
             var keys = this._collection_name.Split("_PART_", 2, StringSplitOptions.None);
@@ -147,9 +147,9 @@ namespace Nikki.Support.Underground2.Class
         }
 
         /// <summary>
-        /// Disassembles array into <see cref="SlotType"/> properties.
+        /// Disassembles array into <see cref="SlotOverride"/> properties.
         /// </summary>
-        /// <param name="br"><see cref="BinaryReader"/> to read <see cref="SlotType"/> with.</param>
+        /// <param name="br"><see cref="BinaryReader"/> to read <see cref="SlotOverride"/> with.</param>
         public override void Disassemble(BinaryReader br)
         {
             var key = br.ReadUInt32().BinString(eLookupReturn.EMPTY);

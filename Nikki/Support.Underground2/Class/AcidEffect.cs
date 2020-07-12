@@ -18,7 +18,7 @@ namespace Nikki.Support.Underground2.Class
     /// <summary>
     /// <see cref="AcidEffect"/> is a collection of vectors and attributes related to acids and xenons.
     /// </summary>
-    public partial class AcidEffect : Shared.Class.AcidEffect
+    public class AcidEffect : Shared.Class.AcidEffect
     {
         #region Fields
 
@@ -39,13 +39,18 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         public const int BaseClassSize = 0xD0;
 
-        #endregion
-
-        #region Properties
-
         /// <summary>
-        /// Game to which the class belongs to.
+        /// Constant value used in the header.
         /// </summary>
+        protected override int Localizer => 0xB;
+
+		#endregion
+
+		#region Properties
+
+		/// <summary>
+		/// Game to which the class belongs to.
+		/// </summary>
 		[Browsable(false)]
         public override GameINT GameINT => GameINT.Underground2;
 
@@ -221,14 +226,14 @@ namespace Nikki.Support.Underground2.Class
         /// <summary>
         /// Initializes new instance of <see cref="AcidEffect"/>.
         /// </summary>
-        public AcidEffect() { }
+        public AcidEffect() => this.LocalWorld = new Matrix();
 
         /// <summary>
         /// Initializes new instance of <see cref="AcidEffect"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
         /// <param name="manager"><see cref="AcidEffectManager"/> to which this instance belongs to.</param>
-        public AcidEffect(string CName, AcidEffectManager manager)
+        public AcidEffect(string CName, AcidEffectManager manager) : this()
         {
             this.Manager = manager;
             this.CollectionName = CName;
@@ -240,7 +245,7 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         /// <param name="manager"><see cref="AcidEffectManager"/> to which this instance belongs to.</param>
-        public AcidEffect(BinaryReader br, AcidEffectManager manager)
+        public AcidEffect(BinaryReader br, AcidEffectManager manager) : this()
         {
             this.Manager = manager;
             this.Disassemble(br);
@@ -262,8 +267,8 @@ namespace Nikki.Support.Underground2.Class
         public override void Assemble(BinaryWriter bw)
         {
             // Write all settings
-            bw.Write(_Localizer);
-            bw.Write(_Localizer);
+            bw.Write(this.Localizer);
+            bw.Write(this.Localizer);
             bw.Write(this.BinKey);
             bw.Write(this.BinKey);
             bw.Write(this.ClassKey);

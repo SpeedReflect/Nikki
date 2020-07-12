@@ -10,9 +10,9 @@ using Nikki.Reflection.Interface;
 namespace Nikki.Support.Shared.Class
 {
     /// <summary>
-    /// <see cref="AcidEffect"/> is a collection of vectors and attributes related to acids and xenons.
+    /// <see cref="AcidEmitter"/> is a collection of vectors and attributes related to emitters.
     /// </summary>
-    public abstract class AcidEffect : Collectable, IAssembly
+    public abstract class AcidEmitter : Collectable, IAssembly
     {
         #region Private Fields
 
