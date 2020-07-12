@@ -368,7 +368,7 @@ namespace Nikki.Support.Underground2.Class
 				{
 					PartLabel = reader.ReadNullTermUTF8(),
 					DebugName = reader.ReadNullTermUTF8(),
-					CarPartGroupID = reader.ReadEnum<eSlotMostWanted>(),
+					CarPartGroupID = reader.ReadEnum<eSlotUnderground2>(),
 					UpgradeGroupID = reader.ReadUInt16()
 				};
 

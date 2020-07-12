@@ -39,6 +39,18 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		public eCarSkinClass SkinClassKey { get; set; }
 
 		/// <summary>
+		/// Clones values of another <see cref="CarSkin"/>.
+		/// </summary>
+		/// <param name="other"><see cref="CarSkin"/> to clone.</param>
+		public void CloneValues(CarSkin other)
+		{
+			this.MaterialUsed = other.MaterialUsed;
+			this.SkinClassKey = other.SkinClassKey;
+			this.SkinDescription = other.SkinDescription;
+			this.Unknown = other.Unknown;
+		}
+
+		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>

@@ -31,6 +31,7 @@ namespace Nikki.Support.Underground2
 		/// </summary>
 		public Datamap() : base()
 		{
+			this.Managers.Add(new AcidEffectManager(this));
 			this.Managers.Add(new CarTypeInfoManager(this));
 			this.Managers.Add(new DBModelPartManager(this));
 			this.Managers.Add(new FNGroupManager(this));
@@ -42,6 +43,18 @@ namespace Nikki.Support.Underground2
 			this.Managers.Add(new SunInfoManager(this));
 			this.Managers.Add(new TPKBlockManager(this));
 			this.Managers.Add(new TrackManager(this));
+		}
+
+		/// <summary>
+		/// <see cref="Manager{T}"/> that manages <see cref="AcidEffect"/>.
+		/// </summary>
+		public AcidEffectManager AcidEffects
+		{
+			get
+			{
+				var manager = this.GetManager(typeof(AcidEffectManager));
+				return manager == null ? null : manager as AcidEffectManager;
+			}
 		}
 
 		/// <summary>

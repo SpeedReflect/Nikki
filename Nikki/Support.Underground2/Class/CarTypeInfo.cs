@@ -954,21 +954,11 @@ namespace Nikki.Support.Underground2.Class
 
                 switch (wheel.WheelID)
                 {
-                    case eCarWheelType.FRONT_RIGHT:
-                        this.WHEEL_FRONT_RIGHT = wheel;
-                        break;
 
-                    case eCarWheelType.REAR_RIGHT:
-                        this.WHEEL_REAR_RIGHT = wheel;
-                        break;
-
-                    case eCarWheelType.REAR_LEFT:
-                        this.WHEEL_REAR_LEFT = wheel;
-                        break;
-
-                    default:
-                        this.WHEEL_FRONT_LEFT = wheel;
-                        break;
+                    case eCarWheelType.FRONT_RIGHT: this.WHEEL_FRONT_RIGHT.CloneValues(wheel); break;
+                    case eCarWheelType.REAR_RIGHT: this.WHEEL_REAR_RIGHT.CloneValues(wheel); break;
+                    case eCarWheelType.REAR_LEFT: this.WHEEL_REAR_LEFT.CloneValues(wheel); break;
+                    default: this.WHEEL_FRONT_LEFT.CloneValues(wheel); break;
 
                 }
 
@@ -1107,29 +1097,13 @@ namespace Nikki.Support.Underground2.Class
                 
                 switch (camera.CameraType)
                 {
-                    case eCameraType.CLOSE:
-                        this.PLAYER_CAMERA_CLOSE = camera;
-                        break;
-                
-                    case eCameraType.BUMPER:
-                        this.PLAYER_CAMERA_BUMPER = camera;
-                        break;
-                    
-                    case eCameraType.DRIVER:
-                        this.PLAYER_CAMERA_DRIVER = camera;
-                        break;
-                    
-                    case eCameraType.HOOD:
-                        this.PLAYER_CAMERA_HOOD = camera;
-                        break;
-                    
-                    case eCameraType.DRIFT:
-                        this.PLAYER_CAMERA_DRIFT = camera;
-                        break;
-                    
-                    default:
-                        this.PLAYER_CAMERA_FAR = camera;
-                        break;
+
+                    case eCameraType.CLOSE: this.PLAYER_CAMERA_CLOSE.CloneValues(camera); break;
+                    case eCameraType.BUMPER: this.PLAYER_CAMERA_BUMPER.CloneValues(camera); break;
+                    case eCameraType.DRIVER: this.PLAYER_CAMERA_DRIVER.CloneValues(camera); break;
+                    case eCameraType.HOOD: this.PLAYER_CAMERA_HOOD.CloneValues(camera); break;
+                    case eCameraType.DRIFT: this.PLAYER_CAMERA_DRIFT.CloneValues(camera); break;
+                    default: this.PLAYER_CAMERA_FAR.CloneValues(camera); break;
                 
                 }
             
@@ -1144,29 +1118,13 @@ namespace Nikki.Support.Underground2.Class
                 
                 switch (camera.CameraType)
                 {
-                    case eCameraType.CLOSE:
-                        this.AI_CAMERA_CLOSE = camera;
-                        break;
-                    
-                    case eCameraType.BUMPER:
-                        this.AI_CAMERA_BUMPER = camera;
-                        break;
-                    
-                    case eCameraType.DRIVER:
-                        this.AI_CAMERA_DRIVER = camera;
-                        break;
-                    
-                    case eCameraType.HOOD:
-                        this.AI_CAMERA_HOOD = camera;
-                        break;
-                    
-                    case eCameraType.DRIFT:
-                        this.AI_CAMERA_DRIFT = camera;
-                        break;
-                    
-                    default:
-                        this.AI_CAMERA_FAR = camera;
-                        break;
+
+                    case eCameraType.CLOSE: this.AI_CAMERA_CLOSE.CloneValues(camera); break;
+                    case eCameraType.BUMPER: this.AI_CAMERA_BUMPER.CloneValues(camera); break;
+                    case eCameraType.DRIVER: this.AI_CAMERA_DRIVER.CloneValues(camera); break;
+                    case eCameraType.HOOD: this.AI_CAMERA_HOOD.CloneValues(camera); break;
+                    case eCameraType.DRIFT: this.AI_CAMERA_DRIFT.CloneValues(camera); break;
+                    default: this.AI_CAMERA_FAR.CloneValues(camera); break;
                 
                 }
             
@@ -1282,16 +1240,16 @@ namespace Nikki.Support.Underground2.Class
 
             switch (index)
 			{
-                case 1: this.CARSKIN01 = skin; break;
-                case 2: this.CARSKIN02 = skin; break;
-                case 3: this.CARSKIN03 = skin; break;
-                case 4: this.CARSKIN04 = skin; break;
-                case 5: this.CARSKIN05 = skin; break;
-                case 6: this.CARSKIN06 = skin; break;
-                case 7: this.CARSKIN07 = skin; break;
-                case 8: this.CARSKIN08 = skin; break;
-                case 9: this.CARSKIN09 = skin; break;
-                case 10: this.CARSKIN10 = skin; break;
+                case 1: this.CARSKIN01.CloneValues(skin); break;
+                case 2: this.CARSKIN02.CloneValues(skin); break;
+                case 3: this.CARSKIN03.CloneValues(skin); break;
+                case 4: this.CARSKIN04.CloneValues(skin); break;
+                case 5: this.CARSKIN05.CloneValues(skin); break;
+                case 6: this.CARSKIN06.CloneValues(skin); break;
+                case 7: this.CARSKIN07.CloneValues(skin); break;
+                case 8: this.CARSKIN08.CloneValues(skin); break;
+                case 9: this.CARSKIN09.CloneValues(skin); break;
+                case 10: this.CARSKIN10.CloneValues(skin); break;
                 default: break;
             }
         }

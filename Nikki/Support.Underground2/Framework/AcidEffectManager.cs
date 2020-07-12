@@ -12,9 +12,9 @@ using CoreExtensions.IO;
 namespace Nikki.Support.Underground2.Framework
 {
 	/// <summary>
-	/// A <see cref="Manager{T}"/> for <see cref="CarTypeInfo"/> collections.
+	/// A <see cref="Manager{T}"/> for <see cref="AcidEffect"/> collections.
 	/// </summary>
-	public class CarTypeInfoManager : Manager<CarTypeInfo>
+	public class AcidEffectManager : Manager<AcidEffect>
 	{
 		/// <summary>
 		/// Game to which the class belongs to.
@@ -27,9 +27,9 @@ namespace Nikki.Support.Underground2.Framework
 		public override string GameSTR => GameINT.Underground2.ToString();
 
 		/// <summary>
-		/// Name of this <see cref="CarTypeInfoManager"/>.
+		/// Name of this <see cref="AcidEffectManager"/>.
 		/// </summary>
-		public override string Name => "CarTypeInfos";
+		public override string Name => "AcidEffects";
 
 		/// <summary>
 		/// If true, manager can export and import non-serialized collection; otherwise, false.
@@ -42,20 +42,20 @@ namespace Nikki.Support.Underground2.Framework
 		public override bool IsReadOnly => false;
 
 		/// <summary>
-		/// Indicates required alighment when this <see cref="CarTypeInfoManager"/> is being serialized.
+		/// Indicates required alighment when this <see cref="AcidEffectManager"/> is being serialized.
 		/// </summary>
 		public override Alignment Alignment { get; }
 
 		/// <summary>
-		/// Gets a collection and unit element type in this <see cref="CarTypeInfoManager"/>.
+		/// Gets a collection and unit element type in this <see cref="AcidEffectManager"/>.
 		/// </summary>
-		public override Type CollectionType => typeof(CarTypeInfo);
+		public override Type CollectionType => typeof(AcidEffect);
 
 		/// <summary>
-		/// Initializes new instance of <see cref="CarTypeInfoManager"/>.
+		/// Initializes new instance of <see cref="AcidEffectManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>
-		public CarTypeInfoManager(Datamap db)
+		public AcidEffectManager(Datamap db)
 		{
 			this.Database = db;
 			this.Extender = 5;
@@ -73,62 +73,46 @@ namespace Nikki.Support.Underground2.Framework
 
 			bw.GeneratePadding(mark, this.Alignment);
 
-			bw.WriteEnum(eBlockID.CarTypeInfos);
-			bw.Write(this.Count * CarTypeInfo.BaseClassSize + 8);
+			bw.WriteEnum(eBlockID.AcidEffects);
+			bw.Write(this.Count * AcidEffect.BaseClassSize + 0x18);
 			bw.Write(0x11111111);
 			bw.Write(0x11111111);
-
-			int count = 0;
+			bw.Write((long)0);
+			bw.Write((int)6);
+			bw.Write(this.Count);
 
 			foreach (var collection in this)
 			{
 
-				collection.Index = count++;
 				collection.Assemble(bw);
 
 			}
-
-			bw.WriteEnum(eBlockID.CarSkins);
-			bw.Write(-1);
-			var start = bw.BaseStream.Position;
-
-			foreach (var collection in this)
-			{
-
-				collection.GetCarSkins(bw);
-
-			}
-
-			var end = bw.BaseStream.Position;
-			bw.BaseStream.Position = start - 4;
-			bw.Write((int)(end - start));
-			bw.BaseStream.Position = end;
 		}
 
 		/// <summary>
-		/// Disassembles data into separate collections in this <see cref="CarTypeInfoManager"/>.
+		/// Disassembles data into separate collections in this <see cref="AcidEffectManager"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="block"><see cref="Block"/> with offsets.</param>
 		internal override void Disassemble(BinaryReader br, Block block)
 		{
 			if (Block.IsNullOrEmpty(block)) return;
-			if (block.BlockID != eBlockID.CarTypeInfos) return;
+			if (block.BlockID != eBlockID.AcidEffects) return;
 
 			for (int loop = 0; loop < block.Offsets.Count; ++loop)
 			{
 
 				br.BaseStream.Position = block.Offsets[loop] + 4;
-				var size = br.ReadInt32();
-				br.BaseStream.Position += 8;
+				var size = br.ReadInt32() - 0x18;
+				br.BaseStream.Position += 0x18;
 
-				int count = (size - 8) / CarTypeInfo.BaseClassSize;
+				int count = size / AcidEffect.BaseClassSize;
 				this.Capacity += count;
-				
+
 				for (int i = 0; i < count; ++i)
 				{
 
-					var collection = new CarTypeInfo(br, this);
+					var collection = new AcidEffect(br, this);
 
 					try { this.Add(collection); }
 					catch { } // skip if exists
@@ -158,10 +142,10 @@ namespace Nikki.Support.Underground2.Framework
 
 			}
 
-			if (cname.Length > CarTypeInfo.MaxCNameLength)
+			if (cname.Length > AcidEffect.MaxCNameLength)
 			{
 
-				throw new ArgumentLengthException(CarTypeInfo.MaxCNameLength);
+				throw new ArgumentLengthException(AcidEffect.MaxCNameLength);
 
 			}
 
@@ -211,7 +195,7 @@ namespace Nikki.Support.Underground2.Framework
 			var header = new SerializationHeader();
 			header.Read(br);
 
-			var collection = new CarTypeInfo();
+			var collection = new AcidEffect();
 
 			if (header.ID != eBlockID.Nikki)
 			{

@@ -73,6 +73,23 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
         public CarInfoWheel() { }
 
         /// <summary>
+        /// Clones values of another <see cref="CarInfoWheel"/>.
+        /// </summary>
+        /// <param name="other"><see cref="CarInfoWheel"/> to clone.</param>
+        public void CloneValues(CarInfoWheel other)
+        {
+            this.Diameter = other.Diameter;
+            this.RideHeight = other.RideHeight;
+            this.Springs = other.Springs;
+            this.TireSkidWidth = other.TireSkidWidth;
+            this.UnknownVal = other.UnknownVal;
+            this.WheelID = other.WheelID;
+            this.WideBodyYValue = other.WideBodyYValue;
+            this.XValue = other.XValue;
+            this.YValue = other.YValue;
+        }
+
+        /// <summary>
         /// Creates a plain copy of the objects that contains same values.
         /// </summary>
         /// <returns>Exact plain copy of the object.</returns>

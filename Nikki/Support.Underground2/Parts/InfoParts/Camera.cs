@@ -48,6 +48,19 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
 		public Camera() { }
 
 		/// <summary>
+		/// Clones values of another <see cref="Camera"/>.
+		/// </summary>
+		/// <param name="other"><see cref="Camera"/> to clone.</param>
+		public void CloneValues(Camera other)
+		{
+			this.CameraAngle = other.CameraAngle;
+			this.CameraHeight = other.CameraHeight;
+			this.CameraLag = other.CameraLag;
+			this.CameraLatOffset = other.CameraLatOffset;
+			this.CameraType = other.CameraType;
+		}
+
+		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>

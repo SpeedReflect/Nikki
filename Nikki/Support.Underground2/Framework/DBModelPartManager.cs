@@ -179,7 +179,9 @@ namespace Nikki.Support.Underground2.Framework
 			}
 
 			// Return prepared dictionary
-			bw.FillBuffer(0x10);
+			var dif = 0x10 - ((int)ms.Length + 4) % 0x10;
+			if (dif != 0x10) bw.WriteBytes(dif);
+
 			string_buffer = ms.ToArray();
 			return string_dict;
 		}
@@ -302,9 +304,7 @@ namespace Nikki.Support.Underground2.Framework
 			}
 
 			// Return prepared dictionary
-			var dif = 0x10 - ((int)ms.Length + 8) % 0x10;
-			if (dif != 0x10) bw.WriteBytes(dif);
-
+			bw.FillBuffer(0x10);
 			attrib_buffer = ms.ToArray();
 			return attrib_list;
 		}
@@ -346,9 +346,7 @@ namespace Nikki.Support.Underground2.Framework
 			}
 
 			// Return prepared dictionary
-			var dif = 0x10 - ((int)ms.Length + 8) % 0x10;
-			if (dif != 0x10) bw.WriteBytes(dif);
-
+			bw.FillBuffer(0x10);
 			struct_buffer = ms.ToArray();
 			return struct_dict;
 		}
@@ -425,7 +423,7 @@ namespace Nikki.Support.Underground2.Framework
 			}
 
 			// Return number of parts and buffer
-			var dif = 0x10 - ((int)ms.Length + 8) % 0x10;
+			var dif = 0x10 - ((int)ms.Length + 0xC) % 0x10;
 			if (dif != 0x10) bw.WriteBytes(dif);
 
 			cppart_buffer = ms.ToArray();
@@ -555,7 +553,7 @@ namespace Nikki.Support.Underground2.Framework
 		{
 			var size = br.ReadInt32();
 			var offset = br.BaseStream.Position;
-			var result = new Dictionary<int, CPStruct>(size / 0x18); // set initial capacity
+			var result = new Dictionary<int, CPStruct>(size / 0x24); // set initial capacity
 
 			int count = 0;
 			
@@ -564,7 +562,7 @@ namespace Nikki.Support.Underground2.Framework
 			
 				var position = (int)(br.BaseStream.Position - offset);
 				var cpstr = new Parts.CarParts.CPStruct(br, str_reader);
-				result[position / 0x18] = cpstr;
+				result[position / 0x24] = cpstr;
 			
 			}
 			

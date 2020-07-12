@@ -6,6 +6,8 @@ using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Shared.Parts.GenParts;
+using Nikki.Support.Underground2.Framework;
 using CoreExtensions.IO;
 using CoreExtensions.Conversions;
 
@@ -206,148 +208,11 @@ namespace Nikki.Support.Underground2.Class
         public uint CreationTimeStamp { get; set; }
 
         /// <summary>
-        /// Value of Matrix 1-X of the <see cref="AcidEffect"/>.
+        /// LocalWorld <see cref="Matrix"/> of this <see cref="AcidEffect"/>.
         /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Secondary")]
-        public float LocalWorld_Vec1_X { get; set; }
-
-        /// <summary>
-        /// Value of Matrix 1-Y of the <see cref="AcidEffect"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Secondary")]
-        public float LocalWorld_Vec1_Y { get; set; }
-
-        /// <summary>
-        /// Value of Matrix 1-Z of the <see cref="AcidEffect"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Secondary")]
-        public float LocalWorld_Vec1_Z { get; set; }
-
-        /// <summary>
-        /// Value of Matrix 1-W of the <see cref="AcidEffect"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Secondary")]
-        public float LocalWorld_Vec1_W { get; set; }
-
-        /// <summary>
-        /// Value of Matrix 2-X of the <see cref="AcidEffect"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Secondary")]
-        public float LocalWorld_Vec2_X { get; set; }
-
-        /// <summary>
-        /// Value of Matrix 2-Y of the <see cref="AcidEffect"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Secondary")]
-        public float LocalWorld_Vec2_Y { get; set; }
-
-        /// <summary>
-        /// Value of Matrix 2-Z of the <see cref="AcidEffect"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Secondary")]
-        public float LocalWorld_Vec2_Z { get; set; }
-
-        /// <summary>
-        /// Value of Matrix 2-W of the <see cref="AcidEffect"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Secondary")]
-        public float LocalWorld_Vec2_W { get; set; }
-
-        /// <summary>
-        /// Value of Matrix 3-X of the <see cref="AcidEffect"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Secondary")]
-        public float LocalWorld_Vec3_X { get; set; }
-
-        /// <summary>
-        /// Value of Matrix 3-Y of the <see cref="AcidEffect"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Secondary")]
-        public float LocalWorld_Vec3_Y { get; set; }
-
-        /// <summary>
-        /// Value of Matrix 3-Z of the <see cref="AcidEffect"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Secondary")]
-        public float LocalWorld_Vec3_Z { get; set; }
-
-        /// <summary>
-        /// Value of Matrix 3-W of the <see cref="AcidEffect"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Secondary")]
-        public float LocalWorld_Vec3_W { get; set; }
-
-        /// <summary>
-        /// Value of Matrix 4-X of the <see cref="AcidEffect"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Secondary")]
-        public float LocalWorld_Vec4_X { get; set; }
-
-        /// <summary>
-        /// Value of Matrix 4-Y of the <see cref="AcidEffect"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Secondary")]
-        public float LocalWorld_Vec4_Y { get; set; }
-
-        /// <summary>
-        /// Value of Matrix 4-Z of the <see cref="AcidEffect"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Secondary")]
-        public float LocalWorld_Vec4_Z { get; set; }
-
-        /// <summary>
-        /// Value of Matrix 4-W of the <see cref="AcidEffect"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Secondary")]
-        public float LocalWorld_Vec4_W { get; set; }
+        [Expandable("Matrix")]
+        [Browsable(false)]
+        public Matrix LocalWorld { get; set; }
 
         #endregion
 
@@ -406,22 +271,7 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(this.Flags);
             bw.Write(this.NumEmitters);
             bw.Write(this.SectionNumber);
-            bw.Write(this.LocalWorld_Vec1_X);
-            bw.Write(this.LocalWorld_Vec1_Y);
-            bw.Write(this.LocalWorld_Vec1_Z);
-            bw.Write(this.LocalWorld_Vec1_W);
-            bw.Write(this.LocalWorld_Vec2_X);
-            bw.Write(this.LocalWorld_Vec2_Y);
-            bw.Write(this.LocalWorld_Vec2_Z);
-            bw.Write(this.LocalWorld_Vec2_W);
-            bw.Write(this.LocalWorld_Vec3_X);
-            bw.Write(this.LocalWorld_Vec3_Y);
-            bw.Write(this.LocalWorld_Vec3_Z);
-            bw.Write(this.LocalWorld_Vec3_W);
-            bw.Write(this.LocalWorld_Vec4_X);
-            bw.Write(this.LocalWorld_Vec4_Y);
-            bw.Write(this.LocalWorld_Vec4_Z);
-            bw.Write(this.LocalWorld_Vec4_W);
+            this.LocalWorld.Write(bw);
             bw.Write(this.InheritanceKey.BinHash());
             bw.Write(this.FarClip);
             bw.Write(this.Intensity);
@@ -451,22 +301,7 @@ namespace Nikki.Support.Underground2.Class
             this.Flags = br.ReadUInt32();
             this.NumEmitters = br.ReadUInt16();
             this.SectionNumber = br.ReadUInt16();
-            this.LocalWorld_Vec1_X = br.ReadSingle();
-            this.LocalWorld_Vec1_Y = br.ReadSingle();
-            this.LocalWorld_Vec1_Z = br.ReadSingle();
-            this.LocalWorld_Vec1_W = br.ReadSingle();
-            this.LocalWorld_Vec2_X = br.ReadSingle();
-            this.LocalWorld_Vec2_Y = br.ReadSingle();
-            this.LocalWorld_Vec2_Z = br.ReadSingle();
-            this.LocalWorld_Vec2_W = br.ReadSingle();
-            this.LocalWorld_Vec3_X = br.ReadSingle();
-            this.LocalWorld_Vec3_Y = br.ReadSingle();
-            this.LocalWorld_Vec3_Z = br.ReadSingle();
-            this.LocalWorld_Vec3_W = br.ReadSingle();
-            this.LocalWorld_Vec4_X = br.ReadSingle();
-            this.LocalWorld_Vec4_Y = br.ReadSingle();
-            this.LocalWorld_Vec4_Z = br.ReadSingle();
-            this.LocalWorld_Vec4_W = br.ReadSingle();
+            this.LocalWorld.Read(br);
             this.InheritanceKey = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
             this.FarClip = br.ReadSingle();
             this.Intensity = br.ReadSingle();
@@ -527,22 +362,7 @@ namespace Nikki.Support.Underground2.Class
                 bw.Write(this.Flags);
                 bw.Write(this.NumEmitters);
                 bw.Write(this.SectionNumber);
-                bw.Write(this.LocalWorld_Vec1_X);
-                bw.Write(this.LocalWorld_Vec1_Y);
-                bw.Write(this.LocalWorld_Vec1_Z);
-                bw.Write(this.LocalWorld_Vec1_W);
-                bw.Write(this.LocalWorld_Vec2_X);
-                bw.Write(this.LocalWorld_Vec2_Y);
-                bw.Write(this.LocalWorld_Vec2_Z);
-                bw.Write(this.LocalWorld_Vec2_W);
-                bw.Write(this.LocalWorld_Vec3_X);
-                bw.Write(this.LocalWorld_Vec3_Y);
-                bw.Write(this.LocalWorld_Vec3_Z);
-                bw.Write(this.LocalWorld_Vec3_W);
-                bw.Write(this.LocalWorld_Vec4_X);
-                bw.Write(this.LocalWorld_Vec4_Y);
-                bw.Write(this.LocalWorld_Vec4_Z);
-                bw.Write(this.LocalWorld_Vec4_W);
+                this.LocalWorld.Write(bw);
                 bw.WriteNullTermUTF8(this.InheritanceKey);
                 bw.Write(this.FarClip);
                 bw.Write(this.Intensity);
@@ -584,22 +404,7 @@ namespace Nikki.Support.Underground2.Class
             this.Flags = reader.ReadUInt32();
             this.NumEmitters = reader.ReadUInt16();
             this.SectionNumber = reader.ReadUInt16();
-            this.LocalWorld_Vec1_X = reader.ReadSingle();
-            this.LocalWorld_Vec1_Y = reader.ReadSingle();
-            this.LocalWorld_Vec1_Z = reader.ReadSingle();
-            this.LocalWorld_Vec1_W = reader.ReadSingle();
-            this.LocalWorld_Vec2_X = reader.ReadSingle();
-            this.LocalWorld_Vec2_Y = reader.ReadSingle();
-            this.LocalWorld_Vec2_Z = reader.ReadSingle();
-            this.LocalWorld_Vec2_W = reader.ReadSingle();
-            this.LocalWorld_Vec3_X = reader.ReadSingle();
-            this.LocalWorld_Vec3_Y = reader.ReadSingle();
-            this.LocalWorld_Vec3_Z = reader.ReadSingle();
-            this.LocalWorld_Vec3_W = reader.ReadSingle();
-            this.LocalWorld_Vec4_X = reader.ReadSingle();
-            this.LocalWorld_Vec4_Y = reader.ReadSingle();
-            this.LocalWorld_Vec4_Z = reader.ReadSingle();
-            this.LocalWorld_Vec4_W = reader.ReadSingle();
+            this.LocalWorld.Read(br);
             this.InheritanceKey = reader.ReadNullTermUTF8();
             this.FarClip = reader.ReadSingle();
             this.Intensity = reader.ReadSingle();

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.ComponentModel;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
@@ -17,408 +18,476 @@ namespace Nikki.Support.Underground2.Parts.PresetParts
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("WeightReduction")]
 		public eBoolean WT_REMOVE_REAR_SEATS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("WeightReduction")]
 		public eBoolean WT_REMOVE_INTERIOR_PANELS { get; set; }
 		
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("WeightReduction")]
 		public eBoolean WT_LIGHTWEIGHT_WINDOWS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("WeightReduction")]
 		public eBoolean WT_LIGHTWEIGHT_SEATS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("WeightReduction")]
 		public eBoolean WT_LIGHTWEIGHT_DOORS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("WeightReduction")]
 		public eBoolean WT_FOAM_FILLED_INTERIOR { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Drivetrain")]
 		public eBoolean TR_SHORT_THROW_SHIFT_KIT { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Drivetrain")]
 		public eBoolean TR_LIGHT_FLYWHEEL { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Drivetrain")]
 		public eBoolean TR_DIFFERENTIAL { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Drivetrain")]
 		public eBoolean TR_LIMITED_SLIP_DIFFERENTIAL { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Drivetrain")]
 		public eBoolean TR_HIGH_PERFORMANCE_CLUTCH { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Drivetrain")]
 		public eBoolean TR_6_SPEED_TRANSMISSION { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("NOS")]
 		public eBoolean NO_DRY_SHOT_OF_NITROUS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("NOS")]
 		public eBoolean NO_WET_SHOT_OF_NITROUS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("NOS")]
 		public eBoolean NO_DIRECT_PORT_NITROUS_OXIDE { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Engine")]
 		public eBoolean EN_MUFFLER { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Engine")]
 		public eBoolean EN_COLD_AIR_INTAKE_SYSTEM { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Engine")]
 		public eBoolean EN_REPLACE_HEADERS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Engine")]
 		public eBoolean EN_MILD_CAMSHAFT_AND_CAM_GEARS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Engine")]
 		public eBoolean EN_CAT_BACK_EXHAUST_SYSTEM { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Engine")]
 		public eBoolean EN_HIGH_FLOW_INTAKE_MANIFOLD { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Engine")]
 		public eBoolean EN_LARGER_DIAMETER_DOWNPIPE { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Engine")]
 		public eBoolean EN_RACING_CAMSHAFT_AND_GEARS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Engine")]
 		public eBoolean EN_PORT_AND_POLISH_HEADS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Engine")]
 		public eBoolean EN_BLUEPRINT_THE_BLOCK { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Engine")]
 		public eBoolean EN_HIGH_FLOW_HEADERS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Turbo")]
 		public eBoolean TU_STAGE_1_TURBO_KIT { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Turbo")]
 		public eBoolean TU_STAGE_2_TURBO_KIT { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Turbo")]
 		public eBoolean TU_STAGE_3_TURBO_KIT { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Suspension")]
 		public eBoolean SU_SPORT_SPRINGS_AND_SHOCKS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Suspension")]
 		public eBoolean SU_STRUT_TOWER_BAR { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Suspension")]
 		public eBoolean SU_PERFORMANCE_SPRINGS_AND_SHOCKS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Suspension")]
 		public eBoolean SU_FRONT_AND_REAR_SWAY_BARS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Unused")]
 		public eBoolean PERF_UNUSED_1 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Unused")]
 		public eBoolean PERF_UNUSED_2 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Suspension")]
 		public eBoolean SU_COIL_OVER_SUSPENSION_SYSTEM { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Suspension")]
 		public eBoolean SU_CAMBER_KIT { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Suspension")]
 		public eBoolean SU_LARGE_DIAMETER_SWAY_BARS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Brakes")]
 		public eBoolean BR_STREET_COMPOUND_BRAKE_PADS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Brakes")]
 		public eBoolean BR_STEEL_BRAIDED_BRAKE_LINES { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Brakes")]
 		public eBoolean BR_CROSS_DRILLED_ROTORS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Brakes")]
 		public eBoolean BR_LARGE_DIAMETER_ROTORS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Brakes")]
 		public eBoolean BR_RACE_COMPOUND_BRAKE_PADS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Brakes")]
 		public eBoolean BR_CROSS_DRILLED_AND_SLOTTED_ROTORS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Brakes")]
 		public eBoolean BR_6_PISTON_RACING_CALIPERS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("ECU")]
 		public eBoolean EC_REMOVE_SPEED_LIMITER { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("ECU")]
 		public eBoolean EC_PERFORMANCE_CHIP { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("ECU")]
 		public eBoolean EC_HIGH_FLOW_FUEL_PUMP { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("ECU")]
 		public eBoolean EC_FUEL_PRESSURE_REGULATOR { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("ECU")]
 		public eBoolean EC_FUEL_RAIL { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("ECU")]
 		public eBoolean EC_FUEL_FILTER { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("ECU")]
 		public eBoolean EC_ENGINE_MANAGEMENT_UNIT { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("ECU")]
 		public eBoolean EC_FUEL_INJECTORS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Tires")]
 		public eBoolean TI_STREET_PERFORMANCE_TIRES { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Tires")]
 		public eBoolean TI_PRO_PERFORMANCE_TIRES { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Tires")]
 		public eBoolean TI_EXTREME_PERFORMANCE_TIRES { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Aero")]
 		public eBoolean AE_FRONT_BUMPER_L1 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Aero")]
 		public eBoolean AE_FRONT_BUMPER_L2 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Aero")]
 		public eBoolean AE_FRONT_BUMPER_L3 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Aero")]
 		public eBoolean AE_SIDESKIRTS_L1 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Aero")]
 		public eBoolean AE_SIDESKIRTS_L2 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Aero")]
 		public eBoolean AE_SIDESKIRTS_L3 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Aero")]
 		public eBoolean AE_REAR_BUMPER_L1 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Aero")]
 		public eBoolean AE_REAR_BUMPER_L2 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Aero")]
 		public eBoolean AE_REAR_BUMPER_L3 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Aero")]
 		public eBoolean AE_SPOILER_L1 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Aero")]
 		public eBoolean AE_SPOILER_L2 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Aero")]
 		public eBoolean AE_SPOILER_L3 { get; set; }
 
 		/// <summary>
