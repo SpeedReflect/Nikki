@@ -398,6 +398,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		public override int GetHashCode()
 		{
 			int result = (this.Templated == eBoolean.True) ? 87 : -87;
+			result = HashCode.Combine(result, this.Concatenator);
 			result = HashCode.Combine(result, this.GeometryLodA);
 			result = HashCode.Combine(result, this.GeometryLodB);
 			result = HashCode.Combine(result, this.GeometryLodC);
@@ -405,6 +406,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 			result = HashCode.Combine(result, this.GeometryLodE);
 
 			string str = String.Empty;
+			str += ((int)this.ConcatenatorExists).ToString();
 			str += ((int)this.GeometryLodAExists).ToString();
 			str += ((int)this.GeometryLodBExists).ToString();
 			str += ((int)this.GeometryLodCExists).ToString();

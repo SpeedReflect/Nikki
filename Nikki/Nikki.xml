@@ -13123,15 +13123,15 @@
         </member>
         <member name="M:Nikki.Support.Carbon.Class.SlotOverride.Assemble(System.IO.BinaryWriter)">
             <summary>
-            Assembles <see cref="T:Nikki.Support.Carbon.Class.SlotType"/> into a byte array.
+            Assembles <see cref="T:Nikki.Support.Carbon.Class.SlotOverride"/> into a byte array.
             </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Carbon.Class.SlotType"/> with.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Carbon.Class.SlotOverride"/> with.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.SlotOverride.Disassemble(System.IO.BinaryReader)">
             <summary>
-            Disassembles array into <see cref="T:Nikki.Support.Carbon.Class.SlotType"/> properties.
+            Disassembles array into <see cref="T:Nikki.Support.Carbon.Class.SlotOverride"/> properties.
             </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Carbon.Class.SlotType"/> with.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Carbon.Class.SlotOverride"/> with.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.SlotOverride.MemoryCast(System.String)">
             <summary>
@@ -18143,15 +18143,15 @@
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.SlotOverride.Assemble(System.IO.BinaryWriter)">
             <summary>
-            Assembles <see cref="T:Nikki.Support.MostWanted.Class.SlotType"/> into a byte array.
+            Assembles <see cref="T:Nikki.Support.MostWanted.Class.SlotOverride"/> into a byte array.
             </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.MostWanted.Class.SlotType"/> with.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.MostWanted.Class.SlotOverride"/> with.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.SlotOverride.Disassemble(System.IO.BinaryReader)">
             <summary>
-            Disassembles array into <see cref="T:Nikki.Support.MostWanted.Class.SlotType"/> properties.
+            Disassembles array into <see cref="T:Nikki.Support.MostWanted.Class.SlotOverride"/> properties.
             </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.MostWanted.Class.SlotType"/> with.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.MostWanted.Class.SlotOverride"/> with.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.SlotOverride.MemoryCast(System.String)">
             <summary>
@@ -24108,15 +24108,15 @@
         </member>
         <member name="M:Nikki.Support.Prostreet.Class.SlotOverride.Assemble(System.IO.BinaryWriter)">
             <summary>
-            Assembles <see cref="T:Nikki.Support.Prostreet.Class.SlotType"/> into a byte array.
+            Assembles <see cref="T:Nikki.Support.Prostreet.Class.SlotOverride"/> into a byte array.
             </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Prostreet.Class.SlotType"/> with.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Prostreet.Class.SlotOverride"/> with.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Class.SlotOverride.Disassemble(System.IO.BinaryReader)">
             <summary>
-            Disassembles array into <see cref="T:Nikki.Support.Prostreet.Class.SlotType"/> properties.
+            Disassembles array into <see cref="T:Nikki.Support.Prostreet.Class.SlotOverride"/> properties.
             </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.SlotType"/> with.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.SlotOverride"/> with.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Class.SlotOverride.MemoryCast(System.String)">
             <summary>
@@ -30536,9 +30536,24 @@
             Emitter name of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Unknown0x14">
+            <summary>
+            Unknown value at offset 0x14.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.ClassKey">
             <summary>
-            Class key of the <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
+            Class key value of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Stamp">
+            <summary>
+            Stamp value of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.SectionNumber">
+            <summary>
+            Section number of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Flags">
@@ -30546,64 +30561,89 @@
             Flags used by the effect's properties.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.NumEmitters">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Unknown0x1C">
             <summary>
-            Number of emmiters in this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
+            Unknown value at offset 0x1C.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.SectionNumber">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Unknown0x1D">
             <summary>
-            Section number of this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
+            Unknown value at offset 0x1D.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.InheritanceKey">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Unknown0x1E">
             <summary>
-            Key of the collection from which this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/> is inherited.
+            Unknown value at offset 0x1E.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.FarClip">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Unknown0x1F">
             <summary>
-            Far clip value.
+            Unknown value at offset 0x1F.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Intensity">
-            <summary>
-            Intensity of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.PivotX">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.LastPositionX">
             <summary>
             Last position X of the effect.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.PivotY">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.LastPositionY">
             <summary>
             Last position Y of the effect.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.PivotZ">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.LastPositionZ">
             <summary>
             Last position Z of the effect.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.PivotW">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.LastPositionW">
             <summary>
             Last position W of the effect.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.NumZeroParticleFrames">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.ComplexityX">
             <summary>
-            Number of particle frames in this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
+            Complexity X of the effect.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.CreationTimeStamp">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.ComplexityY">
             <summary>
-            Time stamp of this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/> creation.
+            Complexity Y of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.ComplexityZ">
+            <summary>
+            Complexity Z of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.ComplexityW">
+            <summary>
+            Complexity W of the effect.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.LocalWorld">
             <summary>
-            LocalWorld <see cref="T:Nikki.Support.Shared.Parts.GenParts.Matrix"/> of this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
+            LocalWorld <see cref="T:Nikki.Support.Shared.Parts.GenParts.Matrix"/> of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Intensity">
+            <summary>
+            Intensity <see cref="T:Nikki.Support.Shared.Parts.GenParts.Matrix"/> of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Range">
+            <summary>
+            Range <see cref="T:Nikki.Support.Shared.Parts.GenParts.Matrix"/> of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Translation">
+            <summary>
+            Translation <see cref="T:Nikki.Support.Shared.Parts.GenParts.Matrix"/> of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Magnitude">
+            <summary>
+            Magnitude <see cref="T:Nikki.Support.Shared.Parts.GenParts.Matrix"/> of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.AcidEmitter.#ctor">
@@ -30632,15 +30672,15 @@
         </member>
         <member name="M:Nikki.Support.Underground2.Class.AcidEmitter.Assemble(System.IO.BinaryWriter)">
             <summary>
-            Assembles <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/> into a byte array.
+            Assembles <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/> into a byte array.
             </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/> with.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/> with.</param>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.AcidEmitter.Disassemble(System.IO.BinaryReader)">
             <summary>
-            Disassembles array into <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/> properties.
+            Disassembles array into <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/> properties.
             </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/> with.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/> with.</param>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.AcidEmitter.MemoryCast(System.String)">
             <summary>
@@ -30651,7 +30691,7 @@
         </member>
         <member name="M:Nikki.Support.Underground2.Class.AcidEmitter.ToString">
             <summary>
-            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/> 
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/> 
             as a string value.
             </summary>
             <returns>String value.</returns>
@@ -32028,15 +32068,15 @@
         </member>
         <member name="M:Nikki.Support.Underground2.Class.SlotOverride.Assemble(System.IO.BinaryWriter)">
             <summary>
-            Assembles <see cref="T:Nikki.Support.Underground2.Class.SlotType"/> into a byte array.
+            Assembles <see cref="T:Nikki.Support.Underground2.Class.SlotOverride"/> into a byte array.
             </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Underground2.Class.SlotType"/> with.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Underground2.Class.SlotOverride"/> with.</param>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.SlotOverride.Disassemble(System.IO.BinaryReader)">
             <summary>
-            Disassembles array into <see cref="T:Nikki.Support.Underground2.Class.SlotType"/> properties.
+            Disassembles array into <see cref="T:Nikki.Support.Underground2.Class.SlotOverride"/> properties.
             </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Class.SlotType"/> with.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Class.SlotOverride"/> with.</param>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.SlotOverride.MemoryCast(System.String)">
             <summary>
@@ -33241,6 +33281,11 @@
         <member name="P:Nikki.Support.Underground2.Datamap.AcidEffects">
             <summary>
             <see cref="T:Nikki.Core.Manager`1"/> that manages <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Datamap.AcidEmitters">
+            <summary>
+            <see cref="T:Nikki.Core.Manager`1"/> that manages <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Datamap.CarTypeInfos">

@@ -75,11 +75,11 @@ namespace Nikki.Support.Underground2.Framework
 			bw.GeneratePadding(mark, this.Alignment);
 
 			// Write CarInfo Animation Hookups
-			var dif = 4 - this.Count % 4;
+			var dif = 4 - (this.Count << 1) % 4;
 			if (dif == 4) dif = 0;
 
 			bw.WriteEnum(eBlockID.CarInfoAnimHookup);
-			bw.Write(this.Count + dif);
+			bw.Write((this.Count << 1) + dif);
 
 			// Write Animations
 			foreach (var collection in this)

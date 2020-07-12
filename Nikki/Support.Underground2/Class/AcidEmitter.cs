@@ -182,7 +182,7 @@ namespace Nikki.Support.Underground2.Class
         [StaticModifiable()]
         [MemoryCastable()]
         [Category("Secondary")]
-        public int Unknown0x1C { get; set; }
+        public byte Unknown0x1C { get; set; }
 
         /// <summary>
         /// Unknown value at offset 0x1D.
@@ -191,7 +191,7 @@ namespace Nikki.Support.Underground2.Class
         [StaticModifiable()]
         [MemoryCastable()]
         [Category("Secondary")]
-        public int Unknown0x1D { get; set; }
+        public byte Unknown0x1D { get; set; }
 
         /// <summary>
         /// Unknown value at offset 0x1E.
@@ -200,7 +200,7 @@ namespace Nikki.Support.Underground2.Class
         [StaticModifiable()]
         [MemoryCastable()]
         [Category("Secondary")]
-        public int Unknown0x1E { get; set; }
+        public byte Unknown0x1E { get; set; }
 
         /// <summary>
         /// Unknown value at offset 0x1F.
@@ -209,7 +209,7 @@ namespace Nikki.Support.Underground2.Class
         [StaticModifiable()]
         [MemoryCastable()]
         [Category("Secondary")]
-        public int Unknown0x1F { get; set; }
+        public byte Unknown0x1F { get; set; }
 
         /// <summary>
         /// Last position X of the effect.
@@ -305,6 +305,13 @@ namespace Nikki.Support.Underground2.Class
         public Matrix Range { get; set; }
 
         /// <summary>
+        /// Translation <see cref="Matrix"/> of this <see cref="AcidEmitter"/>.
+        /// </summary>
+        [Expandable("Matrix")]
+        [Browsable(false)]
+        public Matrix Translation { get; set; }
+
+        /// <summary>
         /// Magnitude <see cref="Matrix"/> of this <see cref="AcidEmitter"/>.
         /// </summary>
         [Expandable("Matrix")]
@@ -324,6 +331,7 @@ namespace Nikki.Support.Underground2.Class
             this.LocalWorld = new Matrix();
             this.Magnitude = new Matrix();
             this.Range = new Matrix();
+            this.Translation = new Matrix();
 		}
 
         /// <summary>
@@ -390,6 +398,7 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(this.ComplexityY);
             bw.Write(this.ComplexityZ);
             bw.Write(this.ComplexityW);
+            this.Translation.Write(bw);
             this.Magnitude.Write(bw);
 
             // Write CollectionName, SpecialEffect, and EmitterName
@@ -411,10 +420,10 @@ namespace Nikki.Support.Underground2.Class
             this.Stamp = br.ReadByte();
             this.SectionNumber = br.ReadByte();
             this.Flags = br.ReadByte();
-            this.Unknown0x1C = br.ReadInt32();
-            this.Unknown0x1D = br.ReadInt32();
-            this.Unknown0x1E = br.ReadInt32();
-            this.Unknown0x1F = br.ReadInt32();
+            this.Unknown0x1C = br.ReadByte();
+            this.Unknown0x1D = br.ReadByte();
+            this.Unknown0x1E = br.ReadByte();
+            this.Unknown0x1F = br.ReadByte();
             this.LocalWorld.Read(br);
             this.Intensity.Read(br);
             this.Range.Read(br);
@@ -426,6 +435,7 @@ namespace Nikki.Support.Underground2.Class
             this.ComplexityY = br.ReadSingle();
             this.ComplexityZ = br.ReadSingle();
             this.ComplexityW = br.ReadSingle();
+            this.Translation.Read(br);
             this.Magnitude.Read(br);
 
             // Read CollectionName, SpecialEffect, and EmitterName
@@ -468,7 +478,7 @@ namespace Nikki.Support.Underground2.Class
         public override void Serialize(BinaryWriter bw)
         {
             byte[] array;
-            using (var ms = new MemoryStream(0x80 + this.CollectionName.Length))
+            using (var ms = new MemoryStream(0x200 + this.CollectionName.Length))
             using (var writer = new BinaryWriter(ms))
             {
 
@@ -496,6 +506,7 @@ namespace Nikki.Support.Underground2.Class
                 this.LocalWorld.Write(writer);
                 this.Intensity.Write(writer);
                 this.Range.Write(writer);
+                this.Translation.Write(writer);
                 this.Magnitude.Write(writer);
 
                 array = ms.ToArray();
@@ -533,10 +544,10 @@ namespace Nikki.Support.Underground2.Class
             this.Stamp = reader.ReadByte();
             this.SectionNumber = reader.ReadByte();
             this.Flags = reader.ReadByte();
-            this.Unknown0x1C = reader.ReadInt32();
-            this.Unknown0x1D = reader.ReadInt32();
-            this.Unknown0x1E = reader.ReadInt32();
-            this.Unknown0x1F = reader.ReadInt32();
+            this.Unknown0x1C = reader.ReadByte();
+            this.Unknown0x1D = reader.ReadByte();
+            this.Unknown0x1E = reader.ReadByte();
+            this.Unknown0x1F = reader.ReadByte();
             this.LastPositionX = reader.ReadSingle();
             this.LastPositionY = reader.ReadSingle();
             this.LastPositionZ = reader.ReadSingle();
@@ -548,6 +559,7 @@ namespace Nikki.Support.Underground2.Class
             this.LocalWorld.Read(reader);
             this.Intensity.Read(reader);
             this.Range.Read(reader);
+            this.Translation.Read(reader);
             this.Magnitude.Read(reader);
         }
 

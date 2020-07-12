@@ -317,6 +317,7 @@ namespace Nikki.Core
 			{ eBlockID.PCAWater0,         new Alignment(0x80, Alignment.eAlignType.Modular) },
 			{ eBlockID.ColorCube,         Alignment.Default },
 			{ eBlockID.GCareer,           new Alignment(0x80, Alignment.eAlignType.Modular) },
+			{ eBlockID.GLimitations,      new Alignment(0x80, Alignment.eAlignType.Modular) },
 			{ eBlockID.AnimDirectory,     Alignment.Default },
 			{ eBlockID.QuickSpline,       new Alignment(0x80, Alignment.eAlignType.Modular) },
 			{ eBlockID.IceCameraPart0,    Alignment.Default },

@@ -534,6 +534,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		{
 			int result = (this.Templated == eBoolean.True) ? 87 : -87;
 
+			result = HashCode.Combine(result, this.Concatenator);
 			result = HashCode.Combine(result, this.Geometry0LodA);
 			result = HashCode.Combine(result, this.Geometry0LodB);
 			result = HashCode.Combine(result, this.Geometry0LodC);
@@ -544,6 +545,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 			result = HashCode.Combine(result, this.Geometry1LodD);
 
 			string str = String.Empty;
+			str += ((int)this.ConcatenatorExists).ToString();
 			str += ((int)this.Geometry0LodAExists).ToString();
 			str += ((int)this.Geometry0LodBExists).ToString();
 			str += ((int)this.Geometry0LodCExists).ToString();
