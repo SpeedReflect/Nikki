@@ -3592,6 +3592,31 @@
             
             </summary>
         </member>
+        <member name="T:Nikki.Reflection.Enum.eTPKCompressionType">
+            <summary>
+            Compression type of a <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eTPKCompressionType.RawDecompressed">
+            <summary>
+            All TPK textures data are stored raw decompressed.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eTPKCompressionType.StreamDecompressed">
+            <summary>
+            All TPK textures data are stored decompressed using stream rules.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eTPKCompressionType.CompressedFullData">
+            <summary>
+            All TPK textures data are compressed fully without splitting in parts.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.eTPKCompressionType.CompressedByParts">
+            <summary>
+            All TPK textures data are compressed fully by splitting and compressing them in parts.
+            </summary>
+        </member>
         <member name="T:Nikki.Reflection.Enum.eTPKVersion">
             <summary>
             Enum of <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> version types.
@@ -13794,12 +13819,6 @@
             BinKey of the filename.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.TPKBlock.IsCompressed">
-            <summary>
-            If true, indicates that this <see cref="T:Nikki.Support.Carbon.Class.TPKBlock"/> is compressed and 
-            should be saved as compressed on the output.
-            </summary>
-        </member>
         <member name="P:Nikki.Support.Carbon.Class.TPKBlock.Animations">
             <summary>
             Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/> of this <see cref="T:Nikki.Support.Carbon.Class.TPKBlock"/>.
@@ -13958,18 +13977,13 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.TPKBlock.Get2Part2(System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Carbon.Class.TPKBlock.WriteDownTexture(Nikki.Support.Shared.Class.Texture,System.IO.BinaryWriter,System.Int32)">
             <summary>
-            Assembles partial 2 part2 of the tpk block.
+            Writes down a <see cref="T:Nikki.Support.Carbon.Class.Texture"/> header and compression slot.
             </summary>
+            <param name="texture"><see cref="T:Nikki.Support.Carbon.Class.Texture"/> to write down.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Class.TPKBlock.Get2CompressedPart2(System.IO.BinaryWriter,System.Int32)">
-            <summary>
-            Assembles partial 2 part2 as compressed block and return all offslots generated.
-            </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-            <param name="thisOffset">Offset of this TPK in BinaryWriter passed.</param>
+            <param name="totalTexSize">Total texture size written to a buffer.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.TPKBlock.Serialize(System.IO.BinaryWriter)">
             <summary>
@@ -18808,12 +18822,6 @@
             BinKey of the filename.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.TPKBlock.IsCompressed">
-            <summary>
-            If true, indicates that this <see cref="T:Nikki.Support.MostWanted.Class.TPKBlock"/> is compressed and 
-            should be saved as compressed on the output.
-            </summary>
-        </member>
         <member name="P:Nikki.Support.MostWanted.Class.TPKBlock.Animations">
             <summary>
             Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/> of this <see cref="T:Nikki.Support.MostWanted.Class.TPKBlock"/>.
@@ -18977,19 +18985,13 @@
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
             <returns>Byte array of the partial 2 part1.</returns>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.TPKBlock.Get2Part2(System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.MostWanted.Class.TPKBlock.WriteDownTexture(Nikki.Support.Shared.Class.Texture,System.IO.BinaryWriter,System.Int32)">
             <summary>
-            Assembles partial 2 part2 of the tpk block.
+            Writes down a <see cref="T:Nikki.Support.MostWanted.Class.Texture"/> header and compression slot.
             </summary>
+            <param name="texture"><see cref="T:Nikki.Support.MostWanted.Class.Texture"/> to write down.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-            <returns>Byte array of the partial 2 part2.</returns>
-        </member>
-        <member name="M:Nikki.Support.MostWanted.Class.TPKBlock.Get2CompressedPart2(System.IO.BinaryWriter,System.Int32)">
-            <summary>
-            Assembles partial 2 part2 as compressed block and return all offslots generated.
-            </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-            <param name="thisOffset">Offset of this TPK in BinaryWriter passed.</param>
+            <param name="totalTexSize">Total texture size written to a buffer.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.TPKBlock.Serialize(System.IO.BinaryWriter)">
             <summary>
@@ -24832,12 +24834,6 @@
             BinKey of the filename.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Prostreet.Class.TPKBlock.IsCompressed">
-            <summary>
-            If true, indicates that this <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> is compressed and 
-            should be saved as compressed on the output.
-            </summary>
-        </member>
         <member name="P:Nikki.Support.Prostreet.Class.TPKBlock.Animations">
             <summary>
             Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/> of this <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>.
@@ -24996,18 +24992,13 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.Get2Part2(System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.WriteDownTexture(Nikki.Support.Shared.Class.Texture,System.IO.BinaryWriter,System.Int32)">
             <summary>
-            Assembles partial 2 part2 of the tpk block.
+            Writes down a <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> header and compression slot.
             </summary>
+            <param name="texture"><see cref="T:Nikki.Support.Prostreet.Class.Texture"/> to write down.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-        </member>
-        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.Get2CompressedPart2(System.IO.BinaryWriter,System.Int32)">
-            <summary>
-            Assembles partial 2 part2 as compressed block and return all offslots generated.
-            </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-            <param name="thisOffset">Offset of this TPK in BinaryWriter passed.</param>
+            <param name="totalTexSize">Total texture size written to a buffer.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.Serialize(System.IO.BinaryWriter)">
             <summary>
@@ -28159,45 +28150,14 @@
             BinHash of the Filename property.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Class.TPKBlock.PermBlockByteOffset">
+        <member name="P:Nikki.Support.Shared.Class.TPKBlock.CompressionType">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Shared.Class.TPKBlock.PermBlockByteSize">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Shared.Class.TPKBlock.EndianSwapped">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Shared.Class.TPKBlock.TexturePack">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Shared.Class.TPKBlock.TextureIndexEntryTable">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Shared.Class.TPKBlock.TextureStreamEntryTable">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Shared.Class.TPKBlock.IsCompressed">
-            <summary>
-            True if <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> is compressed and should be saved 
-            as compressed; false otherwise.
+            <see cref="T:Nikki.Reflection.Enum.eTPKCompressionType"/> of this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Shared.Class.TPKBlock.SettingData">
             <summary>
-            Settings data related to this <seealso cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
+            Settings data related to this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Shared.Class.TPKBlock.Animations">
@@ -28440,25 +28400,58 @@
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
             <returns>Byte array of the partial 2 part1.</returns>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.TPKBlock.Get2Part2(System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Shared.Class.TPKBlock.Get1PartAnim(System.IO.BinaryWriter)">
+            <summary>
+            Assembles partial 1 animation block.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.TPKBlock.Get2DecodedPart2(System.IO.BinaryWriter)">
             <summary>
             Assembles partial 2 part2 of the tpk block.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
             <returns>Byte array of the partial 2 part2.</returns>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.TPKBlock.Get2CompressedPart2(System.IO.BinaryWriter,System.Int32)">
+        <member name="M:Nikki.Support.Shared.Class.TPKBlock.Get2EncodedPart2(System.IO.BinaryWriter,System.Int32)">
             <summary>
-            Assembles partial 2 part2 as compressed block and return all offslots generated.
+            Gets list of <see cref="T:Nikki.Support.Shared.Parts.TPKParts.OffSlot"/> by compressing all texture data by parts.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-            <param name="thisOffset">Offset of this TPK in BinaryWriter passed.</param>
+            <param name="thisOffset">Offset of this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> in the buffer.</param>
+            <returns><see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:Nikki.Support.Shared.Parts.TPKParts.OffSlot"/> from textures written.</returns>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.TPKBlock.Get1PartAnim(System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Shared.Class.TPKBlock.GetStreamDecompressed(System.IO.BinaryWriter,System.Int32)">
             <summary>
-            Assembles partial 1 animation block.
+            Gets list of <see cref="T:Nikki.Support.Shared.Parts.TPKParts.OffSlot"/> by writing texture data using decompressed stream rules.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="thisOffset">Offset of this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> in the buffer.</param>
+            <returns><see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:Nikki.Support.Shared.Parts.TPKParts.OffSlot"/> from textures written.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.TPKBlock.GetCompressedFullData(System.IO.BinaryWriter,System.Int32)">
+            <summary>
+            Gets list of <see cref="T:Nikki.Support.Shared.Parts.TPKParts.OffSlot"/> by fully compressing all texture data.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="thisOffset">Offset of this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> in the buffer.</param>
+            <returns><see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:Nikki.Support.Shared.Parts.TPKParts.OffSlot"/> from textures written.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.TPKBlock.GetCompressedByParts(System.IO.BinaryWriter,System.Int32)">
+            <summary>
+            Gets list of <see cref="T:Nikki.Support.Shared.Parts.TPKParts.OffSlot"/> by compressing all texture data by parts.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="thisOffset">Offset of this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> in the buffer.</param>
+            <returns><see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:Nikki.Support.Shared.Parts.TPKParts.OffSlot"/> from textures written.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.TPKBlock.WriteDownTexture(Nikki.Support.Shared.Class.Texture,System.IO.BinaryWriter,System.Int32)">
+            <summary>
+            Writes down a <see cref="T:Nikki.Support.Shared.Class.Texture"/> header and compression slot.
+            </summary>
+            <param name="texture"><see cref="T:Nikki.Support.Shared.Class.Texture"/> to write down.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="totalTexSize">Total texture size written to a buffer.</param>
         </member>
         <member name="T:Nikki.Support.Shared.Class.Track">
             <summary>
@@ -32757,12 +32750,6 @@
             BinKey of the filename.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.TPKBlock.IsCompressed">
-            <summary>
-            If true, indicates that this <see cref="T:Nikki.Support.Underground2.Class.TPKBlock"/> is compressed and 
-            should be saved as compressed on the output.
-            </summary>
-        </member>
         <member name="P:Nikki.Support.Underground2.Class.TPKBlock.Animations">
             <summary>
             Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/> of this <see cref="T:Nikki.Support.Underground2.Class.TPKBlock"/>.
@@ -32926,19 +32913,13 @@
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
             <returns>Byte array of the partial 2 part1.</returns>
         </member>
-        <member name="M:Nikki.Support.Underground2.Class.TPKBlock.Get2Part2(System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Underground2.Class.TPKBlock.WriteDownTexture(Nikki.Support.Shared.Class.Texture,System.IO.BinaryWriter,System.Int32)">
             <summary>
-            Assembles partial 2 part2 of the tpk block.
+            Writes down a <see cref="T:Nikki.Support.Underground2.Class.Texture"/> header and compression slot.
             </summary>
+            <param name="texture"><see cref="T:Nikki.Support.Underground2.Class.Texture"/> to write down.</param>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-            <returns>Byte array of the partial 2 part2.</returns>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Class.TPKBlock.Get2CompressedPart2(System.IO.BinaryWriter,System.Int32)">
-            <summary>
-            Assembles partial 2 part2 as compressed block and return all offslots generated.
-            </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-            <param name="thisOffset">Offset of this TPK in BinaryWriter passed.</param>
+            <param name="totalTexSize">Total texture size written to a buffer.</param>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.TPKBlock.Serialize(System.IO.BinaryWriter)">
             <summary>

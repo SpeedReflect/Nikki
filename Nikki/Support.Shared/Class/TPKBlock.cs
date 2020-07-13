@@ -41,58 +41,15 @@ namespace Nikki.Support.Shared.Class
         public abstract uint FilenameHash { get; }
 
         /// <summary>
-        /// 
-        /// </summary>
-        [MemoryCastable()]
-        [Browsable(false)]
-        public uint PermBlockByteOffset { get; set; } = 0;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [MemoryCastable()]
-        [Browsable(false)]
-        public uint PermBlockByteSize { get; set; } = 0;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [MemoryCastable()]
-        [Browsable(false)]
-        public int EndianSwapped { get; set; } = 0;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [MemoryCastable()]
-        [Browsable(false)]
-        public int TexturePack { get; set; } = 0;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [MemoryCastable()]
-        [Browsable(false)]
-        public int TextureIndexEntryTable { get; set; } = 0;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [MemoryCastable()]
-        [Browsable(false)]
-        public int TextureStreamEntryTable { get; set; } = 0;
-
-        /// <summary>
-        /// True if <see cref="TPKBlock"/> is compressed and should be saved 
-        /// as compressed; false otherwise.
+        /// <see cref="eTPKCompressionType"/> of this <see cref="TPKBlock"/>.
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
         [Category("Primary")]
-        public abstract eBoolean IsCompressed { get; set; }
+        public eTPKCompressionType CompressionType { get; set; }
 
         /// <summary>
-        /// Settings data related to this <seealso cref="TPKBlock"/>.
+        /// Settings data related to this <see cref="TPKBlock"/>.
         /// </summary>
         [Browsable(false)]
         public byte[] SettingData { get; set; }
@@ -382,7 +339,7 @@ namespace Nikki.Support.Shared.Class
         /// Gets list of all animations in the <see cref="TPKBlock"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-        protected virtual void GetAnimations(BinaryReader br)
+        protected void GetAnimations(BinaryReader br)
 		{
             var size = br.ReadInt32();
             var offset = br.BaseStream.Position;
@@ -417,7 +374,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         /// <param name="offslots">An enumeration of texture <see cref="OffSlot"/>.</param>
-        protected virtual void ParseCompTextures(BinaryReader br, IEnumerable<OffSlot> offslots)
+        protected void ParseCompTextures(BinaryReader br, IEnumerable<OffSlot> offslots)
 		{
             var start = br.BaseStream.Position;
 
@@ -561,6 +518,13 @@ namespace Nikki.Support.Shared.Class
                 }
                 else continue;
 
+                this.CompressionType = offslot.Flags switch
+                {
+                    1 => eTPKCompressionType.CompressedFullData,
+                    2 => eTPKCompressionType.CompressedByParts,
+                    _ => eTPKCompressionType.StreamDecompressed,
+                };
+
             }
 
         }
@@ -612,24 +576,10 @@ namespace Nikki.Support.Shared.Class
         protected abstract void Get2Part1(BinaryWriter bw);
 
         /// <summary>
-        /// Assembles partial 2 part2 of the tpk block.
-        /// </summary>
-        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
-        /// <returns>Byte array of the partial 2 part2.</returns>
-        protected abstract void Get2Part2(BinaryWriter bw);
-
-        /// <summary>
-        /// Assembles partial 2 part2 as compressed block and return all offslots generated.
-        /// </summary>
-        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
-        /// <param name="thisOffset">Offset of this TPK in BinaryWriter passed.</param>
-        protected abstract List<OffSlot> Get2CompressedPart2(BinaryWriter bw, int thisOffset);
-
-        /// <summary>
         /// Assembles partial 1 animation block.
         /// </summary>
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
-        protected virtual void Get1PartAnim(BinaryWriter bw)
+        protected void Get1PartAnim(BinaryWriter bw)
 		{
 
             if (this.Animations.Count == 0) return;
@@ -649,6 +599,473 @@ namespace Nikki.Support.Shared.Class
             bw.Write((int)(end - start));
             bw.BaseStream.Position = end;
 		}
+
+        /// <summary>
+        /// Assembles partial 2 part2 of the tpk block.
+        /// </summary>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        /// <returns>Byte array of the partial 2 part2.</returns>
+        protected void Get2DecodedPart2(BinaryWriter bw)
+		{
+            bw.WriteEnum(eBlockID.TPK_DataPart2); // write ID
+            bw.Write(-1); // write size
+            var position = bw.BaseStream.Position;
+
+            for (int loop = 0; loop < 30; ++loop)
+            {
+
+                bw.Write(0x11111111);
+
+            }
+
+            for (int loop = 0; loop < this.Textures.Count; ++loop)
+            {
+
+                bw.Write(this.Textures[loop].Data);
+                bw.FillBuffer(0x80);
+
+            }
+
+            bw.BaseStream.Position = position - 4;
+            bw.Write((int)(bw.BaseStream.Length - position));
+            bw.BaseStream.Position = bw.BaseStream.Length;
+        }
+
+        /// <summary>
+        /// Gets list of <see cref="OffSlot"/> by compressing all texture data by parts.
+        /// </summary>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        /// <param name="thisOffset">Offset of this <see cref="TPKBlock"/> in the buffer.</param>
+        /// <returns><see cref="List{T}"/> of <see cref="OffSlot"/> from textures written.</returns>
+        protected List<OffSlot> Get2EncodedPart2(BinaryWriter bw, int thisOffset)
+		{
+            return this.CompressionType switch
+            {
+                eTPKCompressionType.StreamDecompressed => this.GetStreamDecompressed(bw, thisOffset),
+                eTPKCompressionType.CompressedFullData => this.GetCompressedFullData(bw, thisOffset),
+                eTPKCompressionType.CompressedByParts => this.GetCompressedByParts(bw, thisOffset),
+                _ => null
+            };
+		}
+
+        /// <summary>
+        /// Gets list of <see cref="OffSlot"/> by writing texture data using decompressed stream rules.
+        /// </summary>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        /// <param name="thisOffset">Offset of this <see cref="TPKBlock"/> in the buffer.</param>
+        /// <returns><see cref="List{T}"/> of <see cref="OffSlot"/> from textures written.</returns>
+        protected List<OffSlot> GetStreamDecompressed(BinaryWriter bw, int thisOffset)
+        {
+            // Initialize result offslot list
+            var result = new List<OffSlot>(this.Textures.Count);
+
+            // Save position and write ID with temporary size
+            bw.WriteEnum(eBlockID.TPK_DataPart2);
+            bw.Write(0xFFFFFFFF);
+            var start = bw.BaseStream.Position;
+
+            // Write padding alignment
+            for (int loop = 0; loop < 30; ++loop) bw.Write(0x11111111);
+
+            // Precalculate initial capacity for the stream
+            int capacity = this.Textures.Count << 16; // count * 0x8000
+            int totalTexSize = 0; // to keep track of total texture data length
+
+            // Action delegate to calculate next texture offset
+            var CalculateNextOffset = new Action<int>((texlen) =>
+            {
+
+                totalTexSize += texlen;
+                var dif = 0x80 - totalTexSize % 0x80;
+                if (dif != 0x80) totalTexSize += dif;
+
+            });
+
+            // Iterate through every texture. Each iteration creates an OffSlot class 
+            // that is yield returned to IEnumerable output. AbsoluteOffset of each 
+            // OffSlot initially is offset from the beginning of this TPKBlock in buffer.
+            foreach (var texture in this.Textures)
+            {
+
+                // Initialize array of texture data and header, write it
+                var array = new byte[texture.Data.Length + this.CompTexHeaderSize];
+
+                if (texture.HasPalette)
+                {
+
+                    Array.Copy(texture.Data, texture.PaletteSize, array, 0, texture.Size);
+                    Array.Copy(texture.Data, 0, array, texture.Size, texture.PaletteSize);
+
+                }
+                else
+                {
+
+                    Array.Copy(texture.Data, 0, array, 0, texture.Data.Length);
+
+                }
+
+                using (var strMemory = new MemoryStream(array))
+                using (var strWriter = new BinaryWriter(strMemory))
+                {
+
+                    strWriter.BaseStream.Position = texture.Data.Length;
+                    this.WriteDownTexture(texture, strWriter, totalTexSize);
+                    CalculateNextOffset(texture.Data.Length);
+
+                }
+
+                // Create new Offslot that will be yield returned
+                var offslot = new OffSlot()
+                {
+                    Key = texture.BinKey,
+                    AbsoluteOffset = (int)(bw.BaseStream.Position - thisOffset),
+                    DecodedSize = texture.Data.Length + this.CompTexHeaderSize,
+                    EncodedSize = array.Length,
+                    UserFlags = 0,
+                    Flags = 0,
+                    RefCount = 0,
+                    UnknownInt32 = 0,
+                };
+
+                // Write compressed data
+                bw.Write(array);
+
+                // Fill buffer till offset % 0x40
+                bw.FillBuffer(0x40);
+
+                // Yield return OffSlot made
+                result.Add(offslot);
+
+            }
+
+            // Finally, fix size at the beginning of the block
+            var final = bw.BaseStream.Position;
+            bw.BaseStream.Position = start - 4;
+            bw.Write((int)(final - start));
+            bw.BaseStream.Position = final;
+
+            // Return result list
+            return result;
+        }
+
+        /// <summary>
+        /// Gets list of <see cref="OffSlot"/> by fully compressing all texture data.
+        /// </summary>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        /// <param name="thisOffset">Offset of this <see cref="TPKBlock"/> in the buffer.</param>
+        /// <returns><see cref="List{T}"/> of <see cref="OffSlot"/> from textures written.</returns>
+        protected List<OffSlot> GetCompressedFullData(BinaryWriter bw, int thisOffset)
+		{
+            // Initialize result offslot list
+            var result = new List<OffSlot>(this.Textures.Count);
+
+            // Save position and write ID with temporary size
+            bw.WriteEnum(eBlockID.TPK_DataPart2);
+            bw.Write(0xFFFFFFFF);
+            var start = bw.BaseStream.Position;
+
+            // Write padding alignment
+            for (int loop = 0; loop < 30; ++loop) bw.Write(0x11111111);
+
+            // Precalculate initial capacity for the stream
+            int capacity = this.Textures.Count << 16; // count * 0x8000
+            int totalTexSize = 0; // to keep track of total texture data length
+
+            // Action delegate to calculate next texture offset
+            var CalculateNextOffset = new Action<int>((texlen) =>
+            {
+
+                totalTexSize += texlen;
+                var dif = 0x80 - totalTexSize % 0x80;
+                if (dif != 0x80) totalTexSize += dif;
+
+            });
+
+            // Iterate through every texture. Each iteration creates an OffSlot class 
+            // that is yield returned to IEnumerable output. AbsoluteOffset of each 
+            // OffSlot initially is offset from the beginning of this TPKBlock in buffer.
+            foreach (var texture in this.Textures)
+            {
+
+                // Initialize array of texture data and header, write it
+                var array = new byte[texture.Data.Length + this.CompTexHeaderSize];
+
+                if (texture.HasPalette)
+                {
+
+                    Array.Copy(texture.Data, texture.PaletteSize, array, 0, texture.Size);
+                    Array.Copy(texture.Data, 0, array, texture.Size, texture.PaletteSize);
+
+                }
+                else
+                {
+
+                    Array.Copy(texture.Data, 0, array, 0, texture.Data.Length);
+
+                }
+
+                using (var strMemory = new MemoryStream(array))
+                using (var strWriter = new BinaryWriter(strMemory))
+                {
+
+                    strWriter.BaseStream.Position = texture.Data.Length;
+                    this.WriteDownTexture(texture, strWriter, totalTexSize);
+                    CalculateNextOffset(texture.Data.Length);
+
+                }
+
+                // Compress texture data with the best compression
+                array = Interop.Compress(array, eLZCompressionType.BEST);
+
+                // Create new Offslot that will be yield returned
+                var offslot = new OffSlot()
+                {
+                    Key = texture.BinKey,
+                    AbsoluteOffset = (int)(bw.BaseStream.Position - thisOffset),
+                    DecodedSize = texture.Data.Length + this.CompTexHeaderSize,
+                    EncodedSize = array.Length,
+                    UserFlags = 0,
+                    Flags = 1,
+                    RefCount = 0,
+                    UnknownInt32 = 0,
+                };
+
+                // Write compressed data
+                bw.Write(array);
+
+                // Fill buffer till offset % 0x40
+                bw.FillBuffer(0x40);
+
+                // Yield return OffSlot made
+                result.Add(offslot);
+
+            }
+
+            // Finally, fix size at the beginning of the block
+            var final = bw.BaseStream.Position;
+            bw.BaseStream.Position = start - 4;
+            bw.Write((int)(final - start));
+            bw.BaseStream.Position = final;
+
+            // Return result list
+            return result;
+        }
+
+        /// <summary>
+        /// Gets list of <see cref="OffSlot"/> by compressing all texture data by parts.
+        /// </summary>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        /// <param name="thisOffset">Offset of this <see cref="TPKBlock"/> in the buffer.</param>
+        /// <returns><see cref="List{T}"/> of <see cref="OffSlot"/> from textures written.</returns>
+        protected List<OffSlot> GetCompressedByParts(BinaryWriter bw, int thisOffset)
+		{
+            // Initialize result offslot list
+            var result = new List<OffSlot>(this.Textures.Count);
+
+            // Save position and write ID with temporary size
+            bw.WriteEnum(eBlockID.TPK_DataPart2);
+            bw.Write(0xFFFFFFFF);
+            var start = bw.BaseStream.Position;
+
+            // Write padding alignment
+            for (int loop = 0; loop < 30; ++loop) bw.Write(0x11111111);
+
+            // Precalculate initial capacity for the stream
+            int capacity = this.Textures.Count << 16; // count * 0x8000
+            int totalTexSize = 0; // to keep track of total texture data length
+
+            // Action delegate to calculate next texture offset
+            var CalculateNextOffset = new Action<int>((texlen) =>
+            {
+
+                totalTexSize += texlen;
+                var dif = 0x80 - totalTexSize % 0x80;
+                if (dif != 0x80) totalTexSize += dif;
+
+            });
+
+            // Iterate through every texture. Each iteration creates an OffSlot class 
+            // that is yield returned to IEnumerable output. AbsoluteOffset of each 
+            // OffSlot initially is offset from the beginning of this TPKBlock in buffer.
+            foreach (var texture in this.Textures)
+            {
+
+                int texOffset = 0; // to keep track of offset in dds data of the texture
+
+                const int headerSize = 0x18; // header size is constant for all compressions
+                const int maxBlockSize = 0x8000; // maximum block size of data
+
+                // If has palette, temporarily swap
+                if (texture.HasPalette)
+                {
+
+                    var tempbuf = new byte[texture.PaletteSize];
+                    Array.Copy(texture.Data, tempbuf, texture.PaletteSize);
+                    Array.Copy(texture.Data, texture.PaletteSize, texture.Data, 0, texture.Size);
+                    Array.Copy(tempbuf, 0, texture.Data, texture.Size, texture.PaletteSize);
+
+                }
+
+                // Calculate header length. Header consists of leftover dds data got by 
+                // dividing it in blocks of 0x8000 bytes + size of texture header + 
+                // size of dds info header
+                var numParts = texture.Data.Length / maxBlockSize + 1;
+                var magiclist = new List<MagicHeader>(numParts);
+
+                for (int loop = 0; loop < numParts; ++loop)
+                {
+
+                    var magic = new MagicHeader();
+
+                    // If we are at the leftover/last part
+                    if (loop == numParts - 1)
+                    {
+
+                        var difference = texture.Data.Length - texOffset;
+                        var head = new byte[difference + this.CompTexHeaderSize];
+
+                        if (difference != 0)
+                        {
+
+                            Array.Copy(texture.Data, texOffset, head, 0, difference);
+
+                        }
+
+                        texOffset = texture.Data.Length;
+
+                        // Initialize new stream over header and set position at the end
+                        using var strMemory = new MemoryStream(head);
+                        using var strWriter = new BinaryWriter(strMemory);
+                        strWriter.BaseStream.Position = strWriter.BaseStream.Length - this.CompTexHeaderSize;
+
+                        // Write header data and calculate next offset
+                        this.WriteDownTexture(texture, strWriter, totalTexSize);
+                        CalculateNextOffset(texture.Data.Length);
+
+                        // Save compressed data to MagicHeader
+                        magic.Data = Interop.Compress(head, eLZCompressionType.BEST);
+                        magic.DecodedSize = difference + this.CompTexHeaderSize;
+
+                    }
+
+                    // Else compress data and save as MagicHeader
+                    else
+                    {
+
+                        // Use compression type passed
+                        magic.Data = Interop.Compress(texture.Data, texOffset, maxBlockSize, eLZCompressionType.BEST);
+                        texOffset += maxBlockSize;
+                        magic.DecodedSize = maxBlockSize;
+
+                    }
+
+                    magiclist.Add(magic);
+                }
+
+                // Create new Offslot that will be yield returned
+                var offslot = new OffSlot()
+                {
+                    Key = texture.BinKey,
+                    AbsoluteOffset = (int)(bw.BaseStream.Position - thisOffset),
+                    DecodedSize = 0,
+                    EncodedSize = 0,
+                    UserFlags = 0,
+                    Flags = 2,
+                    RefCount = 0,
+                    UnknownInt32 = 0,
+                };
+
+                // Make new offsets to keep track of positions
+                //int decodeOffset = 0;
+                int decodeOffset = magiclist[0].DecodedSize;
+                int encodeOffset = 0;
+
+                // If there are more than 1 subparts
+                if (magiclist.Count > 1)
+                {
+
+                    // Iterate through every part starting with index 1
+                    for (int loop = 1; loop < magiclist.Count; ++loop)
+                    {
+
+                        var magic = magiclist[loop];
+                        var size = magic.Length + headerSize;
+                        var difference = 4 - size % 4;
+                        if (difference != 4) size += difference;
+
+                        // Manage settings about decoded data
+                        magic.DecodedDataPosition = decodeOffset;
+                        decodeOffset += magic.DecodedSize;
+                        offslot.DecodedSize += magic.DecodedSize;
+
+                        // Manage settings about encoded data
+                        magic.EncodedSize = size;
+                        magic.EncodedDataPosition = encodeOffset;
+                        encodeOffset += size;
+                        offslot.EncodedSize += size;
+
+                        magic.Write(bw);
+
+                    }
+
+                }
+
+                // Write very first subpart at the end
+                {
+
+                    var magic = magiclist[0];
+                    var size = magic.Length + headerSize;
+                    var difference = 4 - size % 4;
+                    if (difference != 4) size += difference;
+
+                    // Manage settings about decoded data
+                    offslot.DecodedSize += magic.DecodedSize;
+
+                    // Manage settings about encoded data
+                    magic.EncodedSize = size;
+                    magic.EncodedDataPosition = encodeOffset;
+                    offslot.EncodedSize += size;
+
+                    magic.Write(bw);
+
+                }
+
+                // Fill buffer till offset % 0x40
+                bw.FillBuffer(0x40);
+
+                // Yield return OffSlot made
+                result.Add(offslot);
+
+                // If has palette, swap back
+                if (texture.HasPalette)
+                {
+
+                    var tempbuf = new byte[texture.PaletteSize];
+                    Array.Copy(texture.Data, texture.Size, tempbuf, 0, texture.PaletteSize);
+                    Array.Copy(texture.Data, 0, texture.Data, texture.PaletteSize, texture.Size);
+                    Array.Copy(tempbuf, texture.Data, texture.PaletteSize);
+
+                }
+
+            }
+
+            // Finally, fix size at the beginning of the block
+            var final = bw.BaseStream.Position;
+            bw.BaseStream.Position = start - 4;
+            bw.Write((int)(final - start));
+            bw.BaseStream.Position = final;
+
+            // Return result list
+            return result;
+        }
+
+        /// <summary>
+        /// Writes down a <see cref="Texture"/> header and compression slot.
+        /// </summary>
+        /// <param name="texture"><see cref="Texture"/> to write down.</param>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        /// <param name="totalTexSize">Total texture size written to a buffer.</param>
+        protected abstract void WriteDownTexture(Texture texture, BinaryWriter bw, int totalTexSize);
 
         #endregion
     }

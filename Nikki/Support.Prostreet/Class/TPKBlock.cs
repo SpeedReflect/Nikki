@@ -8,7 +8,6 @@ using Nikki.Utils;
 using Nikki.Utils.EA;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
-using Nikki.Reflection.Attributes;
 using Nikki.Support.Prostreet.Framework;
 using Nikki.Support.Shared.Parts.TPKParts;
 using CoreExtensions.IO;
@@ -85,14 +84,6 @@ namespace Nikki.Support.Prostreet.Class
         public override uint FilenameHash => this.Filename.BinHash();
 
         /// <summary>
-        /// If true, indicates that this <see cref="TPKBlock"/> is compressed and 
-        /// should be saved as compressed on the output.
-        /// </summary>
-        [AccessModifiable()]
-        [Category("Primary")]
-        public override eBoolean IsCompressed { get; set; }
-
-        /// <summary>
         /// Represents all <see cref="AnimSlot"/> of this <see cref="TPKBlock"/>.
         /// </summary>
         [Category("Primary")]
@@ -165,8 +156,8 @@ namespace Nikki.Support.Prostreet.Class
             // TPK Sort
             this.SortTexturesByType(false);
 
-            if (this.IsCompressed == eBoolean.True) this.AssembleCompressed(bw);
-            else this.AssembleDecompressed(bw);
+            if (this.CompressionType == eTPKCompressionType.RawDecompressed) this.AssembleDecompressed(bw);
+            else this.AssembleCompressed(bw);
 
             ForcedX.GCCollect();
         }
@@ -202,7 +193,7 @@ namespace Nikki.Support.Prostreet.Class
             bw.Write(-1);
             var position_2 = bw.BaseStream.Position;
             this.Get2Part1(bw);
-            this.Get2Part2(bw);
+            this.Get2DecodedPart2(bw);
             bw.BaseStream.Position = position_2 - 4;
             bw.Write((int)(bw.BaseStream.Length - position_2));
 
@@ -234,12 +225,7 @@ namespace Nikki.Support.Prostreet.Class
             var position_3 = bw.BaseStream.Position;
             bw.Write((long)0);
 
-            for (int a1 = 0; a1 < this.Textures.Count; ++a1)
-            {
-
-                bw.WriteBytes(0x18);
-
-            }
+            for (int a1 = 0; a1 < this.Textures.Count; ++a1) bw.WriteBytes(0x18);
 
             // Write partial 1 size
             bw.BaseStream.Position = position_1 - 4;
@@ -254,7 +240,7 @@ namespace Nikki.Support.Prostreet.Class
             bw.Write(-1);
             var position_2 = bw.BaseStream.Position;
             this.Get2Part1(bw);
-            var offslots = this.Get2CompressedPart2(bw, start);
+            var offslots = this.Get2EncodedPart2(bw, start);
             bw.BaseStream.Position = position_2 - 4;
             bw.Write((int)(bw.BaseStream.Length - position_2));
 
@@ -301,7 +287,6 @@ namespace Nikki.Support.Prostreet.Class
             if (PartOffsets[2] != max)
             {
 
-                this.IsCompressed = eBoolean.True;
                 br.BaseStream.Position = Start;
                 this.ParseCompTextures(br, offslot_list);
 
@@ -589,13 +574,7 @@ namespace Nikki.Support.Prostreet.Class
 
 
             // Get the rest of the settings
-            br.BaseStream.Position += 4;
-            this.PermBlockByteOffset = br.ReadUInt32();
-            this.PermBlockByteSize = br.ReadUInt32();
-            this.EndianSwapped = br.ReadInt32();
-            this.TexturePack = br.ReadInt32();
-            this.TextureIndexEntryTable = br.ReadInt32();
-            this.TextureStreamEntryTable = br.ReadInt32();
+            br.BaseStream.Position += 0x1C;
         }
 
         /// <summary>
@@ -697,12 +676,7 @@ namespace Nikki.Support.Prostreet.Class
 
             // Write all other settings
             bw.Write(this.FilenameHash);
-            bw.Write(this.PermBlockByteOffset);
-            bw.Write(this.PermBlockByteSize);
-            bw.Write(this.EndianSwapped);
-            bw.Write(this.TexturePack);
-            bw.Write(this.TextureIndexEntryTable);
-            bw.Write(this.TextureStreamEntryTable);
+            bw.WriteBytes(0x18);
         }
 
         /// <summary>
@@ -816,263 +790,22 @@ namespace Nikki.Support.Prostreet.Class
         }
 
         /// <summary>
-        /// Assembles partial 2 part2 of the tpk block.
+        /// Writes down a <see cref="Texture"/> header and compression slot.
         /// </summary>
+        /// <param name="texture"><see cref="Texture"/> to write down.</param>
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
-        protected override void Get2Part2(BinaryWriter bw)
+        /// <param name="totalTexSize">Total texture size written to a buffer.</param>
+        protected override void WriteDownTexture(Shared.Class.Texture texture, BinaryWriter bw, int totalTexSize)
         {
-            bw.WriteEnum(eBlockID.TPK_DataPart2); // write ID
-            bw.Write(-1); // write size
-            var position = bw.BaseStream.Position;
-
-            for (int loop = 0; loop < 30; ++loop)
-            {
-
-                bw.Write(0x11111111);
-
-            }
-
-            for (int loop = 0; loop < this.Textures.Count; ++loop)
-            {
-
-                bw.Write(this.Textures[loop].Data);
-                bw.FillBuffer(0x80);
-
-            }
-
-            bw.BaseStream.Position = position - 4;
-            bw.Write((int)(bw.BaseStream.Length - position));
-            bw.BaseStream.Position = bw.BaseStream.Length;
-        }
-
-        /// <summary>
-        /// Assembles partial 2 part2 as compressed block and return all offslots generated.
-        /// </summary>
-        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
-        /// <param name="thisOffset">Offset of this TPK in BinaryWriter passed.</param>
-        protected override List<OffSlot> Get2CompressedPart2(BinaryWriter bw, int thisOffset)
-        {
-            // Initialize result offslot list
-            var result = new List<OffSlot>(this.Textures.Count);
-
-            // Save position and write ID with temporary size
-            bw.WriteEnum(eBlockID.TPK_DataPart2);
-            bw.Write(0xFFFFFFFF);
-            var start = bw.BaseStream.Position;
-
-            // Write padding alignment
-            for (int loop = 0; loop < 30; ++loop)
-            {
-
-                bw.Write(0x11111111);
-
-            }
-
-            // Precalculate initial capacity for the stream
-            int capacity = this.Textures.Count << 16; // count * 0x8000
-            int totalTexSize = 0; // to keep track of total texture data length
-
-            // Action delegate to calculate next texture offset
-            var CalculateNextOffset = new Action<int>((texlen) =>
-            {
-
-                totalTexSize += texlen;
-                var dif = 0x80 - totalTexSize % 0x80;
-                if (dif != 0x80) totalTexSize += dif;
-
-            });
-
-            // Action delegate to write texture header and dds info header
-            var WriteHeader = new Action<Texture, BinaryWriter>((texture, writer) =>
-            {
-
-                texture.Offset = totalTexSize;
-                texture.PaletteOffset = totalTexSize + texture.Size;
-                var nextPos = writer.BaseStream.Position + 0x7C;
-                texture.Assemble(writer);
-                writer.BaseStream.Position = nextPos;
-                writer.Write((int)0);
-                writer.Write((long)0);
-                writer.Write(Comp.GetInt(texture.Compression));
-                writer.Write((long)0);
-
-            });
-
-            // Iterate through every texture. Each iteration creates an OffSlot class 
-            // that is yield returned to IEnumerable output. AbsoluteOffset of each 
-            // OffSlot initially is offset from the beginning of part 2 + 0x78 bytes 
-            // for padding. Those offsets will later be changed while writing Part 1-3.
-            foreach (var texture in this.Textures)
-            {
-
-                int texOffset = 0; // to keep track of offset in dds data of the texture
-
-                const int headerSize = 0x18; // header size is constant for all compressions
-                const int maxBlockSize = 0x8000; // maximum block size of data
-                const int texHeaderSize = 0x7C + 0x18; // size of texture header + dds info header
-
-                // If has palette, temporarily swap
-                if (texture.HasPalette)
-                {
-
-                    var tempbuf = new byte[texture.PaletteSize];
-                    Array.Copy(texture.Data, tempbuf, texture.PaletteSize);
-                    Array.Copy(texture.Data, texture.PaletteSize, texture.Data, 0, texture.Size);
-                    Array.Copy(tempbuf, 0, texture.Data, texture.Size, texture.PaletteSize);
-
-                }
-
-                // Calculate header length. Header consists of leftover dds data got by 
-                // dividing it in blocks of 0x8000 bytes + size of texture header + 
-                // size of dds info header
-                var numParts = texture.Data.Length / maxBlockSize + 1;
-                var magiclist = new List<MagicHeader>(numParts);
-
-                for (int loop = 0; loop < numParts; ++loop)
-                {
-
-                    var magic = new MagicHeader();
-
-                    // If we are at the leftover/last part
-                    if (loop == numParts - 1)
-                    {
-
-                        var difference = texture.Data.Length - texOffset;
-                        var head = new byte[difference + texHeaderSize];
-
-                        if (difference != 0)
-                        {
-
-                            Array.Copy(texture.Data, texOffset, head, 0, difference);
-
-                        }
-
-                        texOffset = texture.Data.Length;
-
-                        // Initialize new stream over header and set position at the end
-                        using var strMemory = new MemoryStream(head);
-                        using var strWriter = new BinaryWriter(strMemory);
-                        strWriter.BaseStream.Position = strWriter.BaseStream.Length - texHeaderSize;
-
-                        // Write header data and calculate next offset
-                        WriteHeader((Texture)texture, strWriter);
-                        CalculateNextOffset(texture.Data.Length);
-
-                        // Save compressed data to MagicHeader
-                        magic.Data = Interop.Compress(head, eLZCompressionType.BEST);
-                        magic.DecodedSize = difference + texHeaderSize;
-
-                    }
-
-                    // Else compress data and save as MagicHeader
-                    else
-                    {
-
-                        // Use compression type passed
-                        magic.Data = Interop.Compress(texture.Data, texOffset, maxBlockSize, eLZCompressionType.BEST);
-                        texOffset += maxBlockSize;
-                        magic.DecodedSize = maxBlockSize;
-
-                    }
-
-                    magiclist.Add(magic);
-                }
-
-                // Create new Offslot that will be yield returned
-                var offslot = new OffSlot()
-                {
-                    Key = texture.BinKey,
-                    AbsoluteOffset = (int)(bw.BaseStream.Position - thisOffset),
-                    DecodedSize = 0,
-                    EncodedSize = 0,
-                    UserFlags = 0,
-                    Flags = 2,
-                    RefCount = 0,
-                    UnknownInt32 = 0,
-                };
-
-                // Make new offsets to keep track of positions
-                //int decodeOffset = 0;
-                int decodeOffset = magiclist[0].DecodedSize;
-                int encodeOffset = 0;
-
-                // If there are more than 1 subparts
-                if (magiclist.Count > 1)
-                {
-
-                    // Iterate through every part starting with index 1
-                    for (int loop = 1; loop < magiclist.Count; ++loop)
-                    {
-
-                        var magic = magiclist[loop];
-                        var size = magic.Length + headerSize;
-                        var difference = 4 - size % 4;
-                        if (difference != 4) size += difference;
-
-                        // Manage settings about decoded data
-                        magic.DecodedDataPosition = decodeOffset;
-                        decodeOffset += magic.DecodedSize;
-                        offslot.DecodedSize += magic.DecodedSize;
-
-                        // Manage settings about encoded data
-                        magic.EncodedSize = size;
-                        magic.EncodedDataPosition = encodeOffset;
-                        encodeOffset += size;
-                        offslot.EncodedSize += size;
-
-                        magic.Write(bw);
-
-                    }
-
-                }
-
-                // Write very first subpart at the end
-                {
-
-                    var magic = magiclist[0];
-                    var size = magic.Length + headerSize;
-                    var difference = 4 - size % 4;
-                    if (difference != 4) size += difference;
-
-                    // Manage settings about decoded data
-                    offslot.DecodedSize += magic.DecodedSize;
-
-                    // Manage settings about encoded data
-                    magic.EncodedSize = size;
-                    magic.EncodedDataPosition = encodeOffset;
-                    offslot.EncodedSize += size;
-
-                    magic.Write(bw);
-
-                }
-
-                // Fill buffer till offset % 0x40
-                bw.FillBuffer(0x40);
-
-                // Yield return OffSlot made
-                result.Add(offslot);
-
-                // If has palette, swap back
-                if (texture.HasPalette)
-                {
-
-                    var tempbuf = new byte[texture.PaletteSize];
-                    Array.Copy(texture.Data, texture.Size, tempbuf, 0, texture.PaletteSize);
-                    Array.Copy(texture.Data, 0, texture.Data, texture.PaletteSize, texture.Size);
-                    Array.Copy(tempbuf, texture.Data, texture.PaletteSize);
-
-                }
-
-            }
-
-            // Finally, fix size at the beginning of the block
-            var final = bw.BaseStream.Position;
-            bw.BaseStream.Position = start - 4;
-            bw.Write((int)(final - start));
-            bw.BaseStream.Position = final;
-
-            // Return result list
-            return result;
+            texture.Offset = totalTexSize;
+            texture.PaletteOffset = totalTexSize + texture.Size;
+            var nextPos = bw.BaseStream.Position + 0x7C;
+            texture.Assemble(bw);
+            bw.BaseStream.Position = nextPos;
+            bw.Write((int)0);
+            bw.Write((long)0);
+            bw.Write(Comp.GetInt(texture.Compression));
+            bw.Write((long)0);
         }
 
         #endregion
@@ -1095,7 +828,7 @@ namespace Nikki.Support.Prostreet.Class
             {
 
                 writer.WriteNullTermUTF8(this._collection_name);
-                writer.WriteEnum(this.IsCompressed);
+                writer.WriteEnum(this.CompressionType);
                 writer.Write(this.Animations.Count);
                 writer.Write(this.Textures.Count);
 
@@ -1159,7 +892,7 @@ namespace Nikki.Support.Prostreet.Class
             using var reader = new BinaryReader(ms);
 
             this._collection_name = reader.ReadNullTermUTF8();
-            this.IsCompressed = reader.ReadEnum<eBoolean>();
+            this.CompressionType = reader.ReadEnum<eTPKCompressionType>();
             int animcount = reader.ReadInt32();
             int textcount = reader.ReadInt32();
             this.Animations.Capacity = animcount;
@@ -1274,7 +1007,7 @@ namespace Nikki.Support.Prostreet.Class
 
             this._animations = animations;
             this._textures = textures;
-            this.IsCompressed = other.IsCompressed;
+            this.CompressionType = other.CompressionType;
             this.SettingData = other.SettingData;
         }
 
