@@ -36,6 +36,7 @@ namespace Nikki.Support.Carbon.Framework
 
 			}
 
+			info.IsReadOnly = false;
 			var comp = this.NeedsDecompression();
 			if (!comp && info.Length > (1 << 26)) this.WriteFromStream();
 			else this.WriteFromBuffer(comp);

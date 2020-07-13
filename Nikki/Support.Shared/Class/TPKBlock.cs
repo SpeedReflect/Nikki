@@ -7,7 +7,6 @@ using Nikki.Utils;
 using Nikki.Utils.EA;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Shared.Parts.TPKParts;
@@ -249,7 +248,7 @@ namespace Nikki.Support.Shared.Class
             if (index == -1)
             {
 
-                throw new InfoAccessException($"0x{key:X8}");
+                throw new Exception($"Texture with key 0x{key:X8} does not exist");
 
             }
 
@@ -277,7 +276,7 @@ namespace Nikki.Support.Shared.Class
             if (tex == null)
             {
 
-                throw new InfoAccessException($"0x{key:X8}");
+                throw new Exception($"Texture with key 0x{key:X8} does not exist");
 
             }
 

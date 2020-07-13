@@ -103,11 +103,6 @@
 		/// <summary>
 		/// 
 		/// </summary>
-		HOODEMITTER = 0xBCADE4C3,
-		
-		/// <summary>
-		/// 
-		/// </summary>
 		DAMAGELEVEL = 0x48620C16,
 
 		/// <summary>
@@ -124,11 +119,6 @@
 		/// 
 		/// </summary>
 		OUTER_RADIUS = 0xCE7D8DB5,
-
-		/// <summary>
-		/// 
-		/// </summary>
-		WHEELEMITTER = 0xEDBF864E,
 
 		/// <summary>
 		/// 

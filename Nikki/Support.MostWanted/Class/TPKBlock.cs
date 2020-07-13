@@ -7,7 +7,6 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Utils.EA;
 using Nikki.Reflection.Enum;
-using Nikki.Reflection.Exception;
 using Nikki.Support.MostWanted.Framework;
 using Nikki.Support.Shared.Parts.TPKParts;
 using CoreExtensions.IO;
@@ -396,7 +395,7 @@ namespace Nikki.Support.MostWanted.Class
             if (copyfrom == null)
             {
 
-                throw new InfoAccessException($"0x{key:X8}");
+                throw new Exception($"Texture with key 0x{key:X8} does not exist");
 
             }
 

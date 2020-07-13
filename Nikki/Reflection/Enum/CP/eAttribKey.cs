@@ -89,7 +89,12 @@
 		/// 
 		/// </summary>
 		PAINTGROUP = 0xEDB20048,
-		
+
+		/// <summary>
+		/// 
+		/// </summary>
+		HOODEMITTER = 0xBCADE4C3,
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -109,6 +114,11 @@
 		/// 
 		/// </summary>
 		EXCLUDEDECAL = 0xE80A3B62,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		WHEELEMITTER = 0xEDBF864E,
 
 		/// <summary>
 		/// 

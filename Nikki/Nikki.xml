@@ -1515,11 +1515,6 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.HOODEMITTER">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.DAMAGELEVEL">
             <summary>
             
@@ -1536,11 +1531,6 @@
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.OUTER_RADIUS">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.WHEELEMITTER">
             <summary>
             
             </summary>
@@ -1670,6 +1660,11 @@
             
             </summary>
         </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.HOODEMITTER">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.TEXTUREHASH">
             <summary>
             
@@ -1686,6 +1681,11 @@
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.EXCLUDEDECAL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.WHEELEMITTER">
             <summary>
             
             </summary>
