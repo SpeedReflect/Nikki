@@ -126,6 +126,11 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         internal string Watermark { get; set; }
 
+        /// <summary>
+        /// Indicates size of compressed texture header and compression block struct.
+        /// </summary>
+        protected abstract int CompTexHeaderSize { get; }
+
         #endregion
 
         #region Main Properties
@@ -374,14 +379,6 @@ namespace Nikki.Support.Shared.Class
         protected abstract IEnumerable<CompSlot> GetCompressionList(BinaryReader br);
 
         /// <summary>
-        /// Parses compressed texture and returns it on the output.
-        /// </summary>
-        /// <param name="br"><see cref="BinaryReader"/> to read <see cref="TPKBlock"/> with.</param>
-        /// <param name="offslot">Offslot of the texture to be parsed</param>
-        /// <returns>Decompressed texture valid to the current support.</returns>
-        protected abstract void ParseCompTexture(BinaryReader br, OffSlot offslot);
-
-        /// <summary>
         /// Gets list of all animations in the <see cref="TPKBlock"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
@@ -414,6 +411,166 @@ namespace Nikki.Support.Shared.Class
 
 			}
 		}
+
+        /// <summary>
+        /// Parses all compressed textures using <see cref="BinaryReader"/> provided.
+        /// </summary>
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        /// <param name="offslots">An enumeration of texture <see cref="OffSlot"/>.</param>
+        protected virtual void ParseCompTextures(BinaryReader br, IEnumerable<OffSlot> offslots)
+		{
+            var start = br.BaseStream.Position;
+
+            foreach (var offslot in offslots)
+            {
+
+                Texture texture;
+
+                if (offslot.Flags == 0 || offslot.Flags == 1)
+                {
+
+                    // Set position of the reader
+                    br.BaseStream.Position = start + offslot.AbsoluteOffset;
+
+                    // Textures are as one, meaning we read once and it is compressed block itself
+                    var array = br.ReadBytes(offslot.EncodedSize);
+                    if (offslot.Flags == 1) array = Interop.Decompress(array);
+
+                    using var ms = new MemoryStream(array);
+                    using var texr = new BinaryReader(ms);
+
+                    // Texture header is located at the end of data
+                    int datalength = array.Length - this.CompTexHeaderSize;
+                    texr.BaseStream.Position = datalength;
+
+                    // Create new texture based on header found
+                    texture = this.CreateNewTexture(texr);
+
+                    // Initialize stack for data and copy it
+                    texture.Data = new byte[texture.Size + texture.PaletteSize];
+
+                    // Calculate offsets of data and palette
+                    int datoff = 0;
+                    int paloff = 0;
+                    var before = texture.PaletteOffset > texture.PaletteSize;
+
+                    if (before) paloff = texture.PaletteOffset - texture.Offset;
+                    else datoff = texture.Offset - texture.PaletteOffset;
+
+                    // Quick way to copy palette in front and data to the back
+                    if (texture.PaletteSize == 0)
+                    {
+
+                        Array.Copy(array, 0, texture.Data, 0, texture.Size);
+
+                    }
+                    else
+                    {
+
+                        Array.Copy(array, paloff, texture.Data, 0, texture.PaletteSize);
+                        Array.Copy(array, datoff, texture.Data, texture.PaletteSize, texture.Size);
+
+                    }
+
+                    this.Textures.Add(texture);
+
+                }
+                else if (offslot.Flags == 2)
+                {
+
+                    // Set position of the reader
+                    br.BaseStream.Position = start + offslot.AbsoluteOffset;
+                    var offset = br.BaseStream.Position;
+
+                    // Magic list that contains MagicHeaders
+                    int total = 0;
+                    var magiclist = new List<MagicHeader>(offslot.EncodedSize / 0x4000 + 1);
+
+                    // Read while position in the stream is less than encoded size specified
+                    while (br.BaseStream.Position < offset + offslot.EncodedSize)
+                    {
+
+                        // We read till we find magic compressed block number
+                        if (br.ReadEnum<eBlockID>() != eBlockID.LZCompressed) continue;
+
+                        var magic = new MagicHeader();
+                        magic.Read(br);
+
+                        total += magic.Length;
+                        magiclist.Add(magic);
+
+                    }
+
+                    // If no data was read, we return; else if magic count is more than 1, sort by positions
+                    if (magiclist.Count == 0) continue;
+                    else if (magiclist.Count == 1) { }
+                    else magiclist.Sort((x, y) => x.DecodedDataPosition.CompareTo(y.DecodedDataPosition));
+
+                    // Combine all magic headers into one array
+                    var array = new byte[total];
+
+                    for (int i = 0, off = 0; i < magiclist.Count; ++i)
+					{
+
+                        var magic = magiclist[i];
+                        Array.Copy(magic.Data, 0, array, off, magic.Length);
+                        off += magic.Length;
+
+					}
+
+                    // Header is always located at the end of data, meaning last MagicHeader
+                    var header = magiclist[^1];
+                    using (var ms = new MemoryStream(header.Data))
+                    using (var texr = new BinaryReader(ms))
+                    {
+
+                        // Texture header is located at the end of data
+                        texr.BaseStream.Position = header.Length - this.CompTexHeaderSize;
+                        texture = this.CreateNewTexture(texr);
+
+                    }
+
+                    // Calculate offsets of data and palette
+                    int datoff = 0;
+                    int paloff = 0;
+                    var before = texture.PaletteOffset > texture.Offset;
+
+                    if (before) paloff = texture.PaletteOffset - texture.Offset;
+                    else datoff = texture.Offset - texture.PaletteOffset;
+
+                    // Initialize stack for data
+                    texture.Data = new byte[texture.Size + texture.PaletteSize];
+
+                    // Quick way to copy palette in front and data to the back
+                    if (texture.PaletteSize == 0)
+                    {
+
+                        Array.Copy(array, 0, texture.Data, 0, texture.Size);
+
+                    }
+                    else
+                    {
+
+                        Array.Copy(array, paloff, texture.Data, 0, texture.PaletteSize);
+                        Array.Copy(array, datoff, texture.Data, texture.PaletteSize, texture.Size);
+
+                    }
+
+                    this.Textures.Add(texture);
+
+                }
+                else continue;
+
+            }
+
+        }
+
+        /// <summary>
+        /// Creates new texture header and reads compression data using <see cref="BinaryReader"/> provided.
+        /// </summary>
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        /// <returns>A <see cref="Texture"/> got from read data.</returns>
+        protected abstract Texture CreateNewTexture(BinaryReader br);
 
         #endregion
 

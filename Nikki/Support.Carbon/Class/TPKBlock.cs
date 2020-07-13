@@ -110,14 +110,19 @@ namespace Nikki.Support.Carbon.Class
         [Category("Primary")]
         public override int TextureCount => this.Textures.Count;
 
-        #endregion
-
-        #region Main
-
         /// <summary>
-        /// Initializes new instance of <see cref="TPKBlock"/>.
+        /// Indicates size of compressed texture header and compression block struct.
         /// </summary>
-        public TPKBlock()
+        protected override int CompTexHeaderSize => 0x94;
+
+		#endregion
+
+		#region Main
+
+		/// <summary>
+		/// Initializes new instance of <see cref="TPKBlock"/>.
+		/// </summary>
+		public TPKBlock()
 		{
             this._animations = new List<AnimSlot>();
             this._textures = new List<Shared.Class.Texture>();
@@ -285,27 +290,20 @@ namespace Nikki.Support.Carbon.Class
             br.BaseStream.Position = PartOffsets[0];
             this.GetHeaderInfo(br);
 
-            // Get Offslot info
-            br.BaseStream.Position = PartOffsets[2];
-            var offslot_list = this.GetOffsetSlots(br).ToList();
-
             // Get texture header info
             br.BaseStream.Position = PartOffsets[3];
             var texture_list = this.GetTextureHeaders(br, TextureCount);
+
+            // Get Offslot info
+            br.BaseStream.Position = PartOffsets[2];
+            var offslot_list = this.GetOffsetSlots(br).ToList();
 
             if (PartOffsets[2] != max)
             {
                 
                 this.IsCompressed = eBoolean.True;
-                
-                for (int a1 = 0; a1 < TextureCount; ++a1)
-                {
-                
-                    br.BaseStream.Position = Start;
-                    this.ParseCompTexture(br, offslot_list[a1]);
-                    var off = offslot_list[a1];
-                
-                }
+                br.BaseStream.Position = Start;
+                this.ParseCompTextures(br, offslot_list);
             
             }
             else
@@ -659,114 +657,23 @@ namespace Nikki.Support.Carbon.Class
         }
 
         /// <summary>
-        /// Parses compressed texture and returns it on the output.
-        /// </summary>
-        /// <param name="br"><see cref="BinaryReader"/> to read <see cref="TPKBlock"/> with.</param>
-        /// <param name="offslot">Offslot of the texture to be parsed</param>
-        /// <returns>Decompressed texture valid to the current support.</returns>
-        protected override void ParseCompTexture(BinaryReader br, OffSlot offslot)
-        {
-            const int headersize = 0x7C + 0x18; // texture header size + comp slot size
-            br.BaseStream.Position += offslot.AbsoluteOffset;
-            var offset = br.BaseStream.Position; // save this position
-
-            // Magic list that contains MagicHeaders
-            var magiclist = new List<MagicHeader>(offslot.EncodedSize / 0x4000 + 1);
-
-            // Read while position in the stream is less than encoded size specified
-            while (br.BaseStream.Position < offset + offslot.EncodedSize)
-            {
-
-                // We read till we find magic compressed block number
-                if (br.ReadEnum<eBlockID>() != eBlockID.LZCompressed) continue;
-
-                var magic = new MagicHeader();
-                magic.Read(br);
-
-                magiclist.Add(magic);
-
-            }
-
-            // If no data was read, we return; else if magic count is more than 1, sort by positions
-            if (magiclist.Count == 0)
-            {
-
-                return;
-
-            }
-            else if (magiclist.Count > 1)
-            {
-
-                magiclist.Sort((x, y) => x.DecodedDataPosition.CompareTo(y.DecodedDataPosition));
-
-            }
-
-            // Header is always located at the end of data, meaning last MagicHeader
-            var header = magiclist[^1];
-            using var ms = new MemoryStream(header.Data);
-            using var texr = new BinaryReader(ms);
-
-            // Texture header is located at the end of data
-            int headlength = header.Length - headersize;
-            texr.BaseStream.Position = headlength;
-
-            // Create new texture based on header found
-            var texture = new Texture(texr, this);
-
-            // We can skip dds type struct since it is defined in the header.
-
-            // Calculate total length of the texture data
-            int length = 0;
-            magiclist.ForEach(arr => length += arr.Length == header.Length
-                    ? headlength // exclude header size
-                    : arr.Length); // else include entire length
-
-            // Initialize stack for data
-            texture.Data = new byte[length];
-            length = 0; // reset
-
-            // BlockCopy all data to the texture's storage
-            foreach (var magic in magiclist)
-            {
-                
-                if (magic.Length == header.Length)
-                {
-                
-                    if (magic.Length == headersize)
-                    {
-                    
-                        continue;
-                    
-                    }
-                    else
-                    {
-                    
-                        Array.Copy(magic.Data, 0, texture.Data, length, headlength);
-                        length += headlength;
-                    
-                    }
-                
-                }
-                else
-                {
-                
-                    Array.Copy(magic.Data, 0, texture.Data, length, magic.Length);
-                    length += magic.Length;
-                
-                }
-            
-            }
-
-            // Add texture to this TPK
-            this.Textures.Add(texture);
-        }
-
-        /// <summary>
         /// Gets list of compressions of the textures in the tpk block array.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="TPKBlock"/> with.</param>
         protected override IEnumerable<CompSlot> GetCompressionList(BinaryReader br) =>
             throw new NotImplementedException();
+
+        /// <summary>
+        /// Creates new texture header and reads compression data using <see cref="BinaryReader"/> provided.
+        /// </summary>
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        /// <returns>A <see cref="Texture"/> got from read data.</returns>
+        protected override Shared.Class.Texture CreateNewTexture(BinaryReader br)
+		{
+            var texture = new Texture(br, this);
+            br.BaseStream.Position += 0x18;
+            return texture;
+		}
 
         #endregion
 

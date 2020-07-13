@@ -110,14 +110,19 @@ namespace Nikki.Support.MostWanted.Class
         [Category("Primary")]
         public override int TextureCount => this.Textures.Count;
 
-        #endregion
-
-        #region Main
-
         /// <summary>
-        /// Initializes new instance of <see cref="TPKBlock"/>.
+        /// Indicates size of compressed texture header and compression block struct.
         /// </summary>
-        public TPKBlock()
+        protected override int CompTexHeaderSize => 0x9C;
+
+		#endregion
+
+		#region Main
+
+		/// <summary>
+		/// Initializes new instance of <see cref="TPKBlock"/>.
+		/// </summary>
+		public TPKBlock()
 		{
             this._animations = new List<AnimSlot>();
             this._textures = new List<Shared.Class.Texture>();
@@ -285,10 +290,6 @@ namespace Nikki.Support.MostWanted.Class
             br.BaseStream.Position = PartOffsets[0];
             this.GetHeaderInfo(br);
 
-            // Get Offslot info
-            br.BaseStream.Position = PartOffsets[2];
-            var offslot_list = this.GetOffsetSlots(br).ToList();
-
             // Get texture header info
             br.BaseStream.Position = PartOffsets[3];
             var texture_list = this.GetTextureHeaders(br, TextureCount);
@@ -297,19 +298,16 @@ namespace Nikki.Support.MostWanted.Class
             br.BaseStream.Position = PartOffsets[4];
             var compslot_list = this.GetCompressionList(br).ToList();
 
+            // Get Offslot info
+            br.BaseStream.Position = PartOffsets[2];
+            var offslot_list = this.GetOffsetSlots(br).ToList();
+
             if (PartOffsets[2] != max)
             {
 
                 this.IsCompressed = eBoolean.True;
-
-                for (int a1 = 0; a1 < TextureCount; ++a1)
-                {
-                
-                    int count = this.Textures.Count;
-                    br.BaseStream.Position = Start;
-                    this.ParseCompTexture(br, offslot_list[a1]);
-                
-                }
+                br.BaseStream.Position = Start;
+                this.ParseCompTextures(br, offslot_list);
             
             }
             else
@@ -668,61 +666,6 @@ namespace Nikki.Support.MostWanted.Class
         }
 
         /// <summary>
-        /// Parses compressed texture and returns it on the output.
-        /// </summary>
-        /// <param name="br"><see cref="BinaryReader"/> to read <see cref="TPKBlock"/> with.</param>
-        /// <param name="offslot">Offslot of the texture to be parsed</param>
-        /// <returns>Decompressed texture valid to the current support.</returns>
-        protected override void ParseCompTexture(BinaryReader br, OffSlot offslot)
-        {
-            const int headersize = 0x7C + 0x20; // texture header size + comp slot size
-            br.BaseStream.Position += offslot.AbsoluteOffset;
-            var offset = br.BaseStream.Position; // save this position
-
-            // Textures are as one, meaning we read once and it is compressed block itself
-            var array = br.ReadBytes(offslot.EncodedSize);
-            array = Interop.Decompress(array);
-
-            // Header is always located at the end of data, meaning last MagicHeader
-            using var ms = new MemoryStream(array);
-            using var texr = new BinaryReader(ms);
-
-            // Texture header is located at the end of data
-            int datalength = array.Length - headersize;
-            texr.BaseStream.Position = datalength;
-
-            // Create new texture based on header found
-            var texture = new Texture(texr, this);
-
-            // Read compression values right after
-            texr.BaseStream.Position += 8;
-            texture.CompressionValue1 = texr.ReadInt32();
-            texture.CompressionValue2 = texr.ReadInt32();
-            texture.CompressionValue3 = texr.ReadInt32();
-
-            // Initialize stack for data and copy it
-            texture.Data = new byte[datalength];
-
-            // Quick way to copy palette in front and data to the back
-            if (texture.PaletteSize == 0 || texture.Offset >= texture.PaletteOffset)
-			{
-
-                Array.Copy(array, 0, texture.Data, 0, datalength);
-
-			}
-            else
-			{
-
-                Array.Copy(array, texture.Size, texture.Data, 0, texture.PaletteSize);
-                Array.Copy(array, 0, texture.Data, texture.PaletteSize, texture.Size);
-
-			}
-
-            // Add texture to this TPK
-            this.Textures.Add(texture);
-        }
-
-        /// <summary>
         /// Gets list of compressions of the textures in the tpk block array.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="TPKBlock"/> with.</param>
@@ -750,6 +693,22 @@ namespace Nikki.Support.MostWanted.Class
             
             }
         }
+
+        /// <summary>
+        /// Creates new texture header and reads compression data using <see cref="BinaryReader"/> provided.
+        /// </summary>
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        /// <returns>A <see cref="Texture"/> got from read data.</returns>
+        protected override Shared.Class.Texture CreateNewTexture(BinaryReader br)
+		{
+            var texture = new Texture(br, this);
+            br.BaseStream.Position += 0x8;
+            texture.CompressionValue1 = br.ReadInt32();
+            texture.CompressionValue2 = br.ReadInt32();
+            texture.CompressionValue3 = br.ReadInt32();
+            br.BaseStream.Position += 0xC;
+            return texture;
+		}
 
         #endregion
 

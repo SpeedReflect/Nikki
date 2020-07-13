@@ -13815,6 +13815,11 @@
             Number of <see cref="T:Nikki.Support.Carbon.Class.Texture"/> in this <see cref="T:Nikki.Support.Carbon.Class.TPKBlock"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Carbon.Class.TPKBlock.CompTexHeaderSize">
+            <summary>
+            Indicates size of compressed texture header and compression block struct.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Carbon.Class.TPKBlock.#ctor">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.TPKBlock"/>.
@@ -13903,19 +13908,18 @@
             <param name="count">Number of textures to read.</param>
             <returns>Array of offsets and sizes of texture headers.</returns>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.TPKBlock.ParseCompTexture(System.IO.BinaryReader,Nikki.Support.Shared.Parts.TPKParts.OffSlot)">
-            <summary>
-            Parses compressed texture and returns it on the output.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Carbon.Class.TPKBlock"/> with.</param>
-            <param name="offslot">Offslot of the texture to be parsed</param>
-            <returns>Decompressed texture valid to the current support.</returns>
-        </member>
         <member name="M:Nikki.Support.Carbon.Class.TPKBlock.GetCompressionList(System.IO.BinaryReader)">
             <summary>
             Gets list of compressions of the textures in the tpk block array.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Carbon.Class.TPKBlock"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.TPKBlock.CreateNewTexture(System.IO.BinaryReader)">
+            <summary>
+            Creates new texture header and reads compression data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <returns>A <see cref="T:Nikki.Support.Carbon.Class.Texture"/> got from read data.</returns>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.TPKBlock.Get1Part1(System.IO.BinaryWriter)">
             <summary>
@@ -18825,6 +18829,11 @@
             Number of <see cref="T:Nikki.Support.MostWanted.Class.Texture"/> in this <see cref="T:Nikki.Support.MostWanted.Class.TPKBlock"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.MostWanted.Class.TPKBlock.CompTexHeaderSize">
+            <summary>
+            Indicates size of compressed texture header and compression block struct.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.MostWanted.Class.TPKBlock.#ctor">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Class.TPKBlock"/>.
@@ -18913,19 +18922,18 @@
             <param name="count">Number of textures to read.</param>
             <returns>Array of offsets and sizes of texture headers.</returns>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.TPKBlock.ParseCompTexture(System.IO.BinaryReader,Nikki.Support.Shared.Parts.TPKParts.OffSlot)">
-            <summary>
-            Parses compressed texture and returns it on the output.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.MostWanted.Class.TPKBlock"/> with.</param>
-            <param name="offslot">Offslot of the texture to be parsed</param>
-            <returns>Decompressed texture valid to the current support.</returns>
-        </member>
         <member name="M:Nikki.Support.MostWanted.Class.TPKBlock.GetCompressionList(System.IO.BinaryReader)">
             <summary>
             Gets list of compressions of the textures in the tpk block array.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.MostWanted.Class.TPKBlock"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.TPKBlock.CreateNewTexture(System.IO.BinaryReader)">
+            <summary>
+            Creates new texture header and reads compression data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <returns>A <see cref="T:Nikki.Support.MostWanted.Class.Texture"/> got from read data.</returns>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.TPKBlock.Get1Part1(System.IO.BinaryWriter)">
             <summary>
@@ -24845,6 +24853,11 @@
             Number of <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> in this <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Prostreet.Class.TPKBlock.CompTexHeaderSize">
+            <summary>
+            Indicates size of compressed texture header and compression block struct.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.#ctor">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>.
@@ -24933,19 +24946,18 @@
             <param name="count">Number of textures to read.</param>
             <returns>Array of offsets and sizes of texture headers.</returns>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.ParseCompTexture(System.IO.BinaryReader,Nikki.Support.Shared.Parts.TPKParts.OffSlot)">
-            <summary>
-            Parses compressed texture and returns it on the output.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> with.</param>
-            <param name="offslot">Offslot of the texture to be parsed</param>
-            <returns>Decompressed texture valid to the current support.</returns>
-        </member>
         <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.GetCompressionList(System.IO.BinaryReader)">
             <summary>
             Gets list of compressions of the textures in the tpk block array.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.CreateNewTexture(System.IO.BinaryReader)">
+            <summary>
+            Creates new texture header and reads compression data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <returns>A <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> got from read data.</returns>
         </member>
         <member name="M:Nikki.Support.Prostreet.Class.TPKBlock.Get1Part1(System.IO.BinaryWriter)">
             <summary>
@@ -28213,6 +28225,11 @@
             Custom watermark written on assembly.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Shared.Class.TPKBlock.CompTexHeaderSize">
+            <summary>
+            Indicates size of compressed texture header and compression block struct.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Shared.Class.TPKBlock.CollectionName">
             <summary>
             Collection name of the variable.
@@ -28368,19 +28385,25 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.TPKBlock.ParseCompTexture(System.IO.BinaryReader,Nikki.Support.Shared.Parts.TPKParts.OffSlot)">
-            <summary>
-            Parses compressed texture and returns it on the output.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> with.</param>
-            <param name="offslot">Offslot of the texture to be parsed</param>
-            <returns>Decompressed texture valid to the current support.</returns>
-        </member>
         <member name="M:Nikki.Support.Shared.Class.TPKBlock.GetAnimations(System.IO.BinaryReader)">
             <summary>
             Gets list of all animations in the <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.TPKBlock.ParseCompTextures(System.IO.BinaryReader,System.Collections.Generic.IEnumerable{Nikki.Support.Shared.Parts.TPKParts.OffSlot})">
+            <summary>
+            Parses all compressed textures using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="offslots">An enumeration of texture <see cref="T:Nikki.Support.Shared.Parts.TPKParts.OffSlot"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.TPKBlock.CreateNewTexture(System.IO.BinaryReader)">
+            <summary>
+            Creates new texture header and reads compression data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <returns>A <see cref="T:Nikki.Support.Shared.Class.Texture"/> got from read data.</returns>
         </member>
         <member name="M:Nikki.Support.Shared.Class.TPKBlock.Get1Part1(System.IO.BinaryWriter)">
             <summary>
@@ -32755,6 +32778,11 @@
             Number of <see cref="T:Nikki.Support.Underground2.Class.Texture"/> in this <see cref="T:Nikki.Support.Underground2.Class.TPKBlock"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Underground2.Class.TPKBlock.CompTexHeaderSize">
+            <summary>
+            Indicates size of compressed texture header and compression block struct.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Underground2.Class.TPKBlock.#ctor">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Underground2.Class.TPKBlock"/>.
@@ -32843,19 +32871,18 @@
             <param name="count">Number of textures to read.</param>
             <returns>Array of offsets and sizes of texture headers.</returns>
         </member>
-        <member name="M:Nikki.Support.Underground2.Class.TPKBlock.ParseCompTexture(System.IO.BinaryReader,Nikki.Support.Shared.Parts.TPKParts.OffSlot)">
-            <summary>
-            Parses compressed texture and returns it on the output.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Class.TPKBlock"/> with.</param>
-            <param name="offslot">Offslot of the texture to be parsed</param>
-            <returns>Decompressed texture valid to the current support.</returns>
-        </member>
         <member name="M:Nikki.Support.Underground2.Class.TPKBlock.GetCompressionList(System.IO.BinaryReader)">
             <summary>
             Gets list of compressions of the textures in the tpk block array.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Class.TPKBlock"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.TPKBlock.CreateNewTexture(System.IO.BinaryReader)">
+            <summary>
+            Creates new texture header and reads compression data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <returns>A <see cref="T:Nikki.Support.Underground2.Class.Texture"/> got from read data.</returns>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.TPKBlock.Get1Part1(System.IO.BinaryWriter)">
             <summary>
