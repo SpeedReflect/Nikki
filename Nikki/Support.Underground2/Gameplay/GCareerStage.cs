@@ -252,12 +252,12 @@ namespace Nikki.Support.Underground2.Gameplay
 		public short Unknown0x04 { get; set; }
 
 		/// <summary>
-		/// Unknown value at offset 0x06.
+		/// Career identifier of this stage.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
-		public short Unknown0x06 { get; set; }
+		public short CareerIdentifier { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x26.
@@ -486,7 +486,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.Write(this.NumberOfSponsorsToChoose);
 			bw.Write(this.OutrunCashValue);
 			bw.Write(this.Unknown0x04);
-			bw.Write(this.Unknown0x06);
+			bw.Write(this.CareerIdentifier);
 
 			bw.Write(this.StageSponsor1.BinHash());
 			bw.Write(this.StageSponsor2.BinHash());
@@ -548,7 +548,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.NumberOfSponsorsToChoose = br.ReadByte();
 			this.OutrunCashValue = br.ReadInt16();
 			this.Unknown0x04 = br.ReadInt16();
-			this.Unknown0x06 = br.ReadInt16();
+			this.CareerIdentifier = br.ReadInt16();
 
 			// Sponsor Settings
 			this.StageSponsor1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
