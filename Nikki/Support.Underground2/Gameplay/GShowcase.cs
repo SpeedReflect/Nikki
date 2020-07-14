@@ -1,12 +1,15 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Reflection.Exception;
+using Nikki.Support.Underground2.Class;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -15,7 +18,7 @@ namespace Nikki.Support.Underground2.Gameplay
 	/// <summary>
 	/// <see cref="GShowcase"/> is a collection of settings related to showcase events.
 	/// </summary>
-	public class GShowcase : ACollectable
+	public class GShowcase : Collectable
 	{
 		#region Fields
 
@@ -28,35 +31,50 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override GameINT GameINT => GameINT.Underground2;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override string GameSTR => GameINT.Underground2.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// GCareer to which the class belongs to.
 		/// </summary>
-		public Database.Underground2 Database { get; set; }
+		[Browsable(false)]
+		public GCareer Career { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
 			set
 			{
-				if (string.IsNullOrWhiteSpace(value))
+				if (String.IsNullOrWhiteSpace(value))
+				{
+
 					throw new ArgumentNullException("This value cannot be left left empty.");
-				if (value.Contains(" "))
+
+				}
+				if (value.Contains(' '))
+				{
+
 					throw new Exception("CollectionName cannot contain whitespace.");
-				if (value.Length > 0x1F)
-					throw new ArgumentLengthException(0x1F);
-				if (this.Database.GShowcases.FindCollection(value) != null)
+
+				}
+				if (this.Career.GetCollection(value, nameof(this.Career.GShowcases)) != null)
+				{
+
 					throw new CollectionExistenceException(value);
+
+				}
+
 				this._collection_name = value;
 			}
 		}
@@ -64,11 +82,15 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <summary>
 		/// Binary memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public uint BinKey => this._collection_name.BinHash();
 
 		/// <summary>
 		/// Vault memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public uint VltKey => this._collection_name.VltHash();
 
 		/// <summary>
@@ -76,6 +98,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public string DescStringLabel { get; set; } = String.Empty;
 
 		/// <summary>
@@ -83,6 +106,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public string DestinationPoint { get; set; } = String.Empty;
 
 		/// <summary>
@@ -90,38 +114,39 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public string DescAttrib { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Method of taking photo.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public eTakePhotoMethod TakePhotoMethod { get; set; }
 
 		/// <summary>
 		/// Stage to which this <see cref="GShowcase"/> belongs to.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public byte BelongsToStage { get; set; }
 
 		/// <summary>
 		/// Cash value player gets from completing the showcase.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public short CashValue { get; set; }
 
 		/// <summary>
 		/// Required visual rating of a car to unlock this <see cref="GShowcase"/>.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public float RequiredVisualRating { get; set; }
 
 		/// <summary>
@@ -129,6 +154,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte Unknown0x34 { get; set; }
 
 		/// <summary>
@@ -136,6 +162,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte Unknown0x35 { get; set; }
 
 		#endregion
@@ -151,10 +178,10 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Initializes new instance of <see cref="GShowcase"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-		public GShowcase(string CName, Database.Underground2 db)
+		/// <param name="career"><see cref="GCareer"/> to which this instance belongs to.</param>
+		public GShowcase(string CName, GCareer career)
 		{
-			this.Database = db;
+			this.Career = career;
 			this.CollectionName = CName;
 			CName.BinHash();
 		}
@@ -163,10 +190,10 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Initializes new instance of <see cref="GShowcase"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-		public unsafe GShowcase(BinaryReader br, Database.Underground2 db)
+		/// <param name="career"><see cref="GCareer"/> to which this instance belongs to.</param>
+		public GShowcase(BinaryReader br, GCareer career)
 		{
-			this.Database = db;
+			this.Career = career;
 			this.Disassemble(br);
 		}
 
@@ -234,9 +261,9 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		/// <param name="CName">CollectionName of the new created object.</param>
 		/// <returns>Memory casted copy of the object.</returns>
-		public override ACollectable MemoryCast(string CName)
+		public override Collectable MemoryCast(string CName)
 		{
-			var result = new GShowcase(CName, this.Database);
+			var result = new GShowcase(CName, this.Career);
 			base.MemoryCast(this, result);
 			return result;
 		}
@@ -249,7 +276,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
 
 		#endregion

@@ -30,16 +30,19 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override GameINT GameINT => GameINT.Underground2;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override string GameSTR => GameINT.Underground2.ToString();
 
 		/// <summary>
 		/// GCareer to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public GCareer Career { get; set; }
 
 		/// <summary>
