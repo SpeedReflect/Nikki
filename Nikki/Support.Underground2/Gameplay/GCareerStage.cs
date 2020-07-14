@@ -1,10 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Reflection.Exception;
+using Nikki.Support.Underground2.Class;
 using CoreExtensions.Conversions;
 
 
@@ -14,7 +16,7 @@ namespace Nikki.Support.Underground2.Gameplay
 	/// <summary>
 	/// <see cref="GCareerStage"/> is a collection of settings related to career stages.
 	/// </summary>
-	public class GCareerStage : ACollectable
+	public class GCareerStage : Collectable
 	{
 		#region Fields
 
@@ -35,27 +37,39 @@ namespace Nikki.Support.Underground2.Gameplay
 		public override string GameSTR => GameINT.Underground2.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// GCareer to which the class belongs to.
 		/// </summary>
-		public Database.Underground2 Database { get; set; }
+		public GCareer Career { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
 			set
 			{
-				if (string.IsNullOrWhiteSpace(value))
+				if (String.IsNullOrWhiteSpace(value))
+				{
+
 					throw new ArgumentNullException("This value cannot be left left empty.");
-				if (value.Contains(" "))
+
+				}
+				if (value.Contains(' '))
+				{
+
 					throw new Exception("CollectionName cannot contain whitespace.");
-				if (!value.StartsWith("STAGE_") && !value.GetFormattedValue("STAGE_{X}", out byte _))
-					throw new Exception("Unable to parse stage number from CollectionName.");
-				if (this.Database.GCareerStages.FindCollection(value) != null)
+
+				}
+				if (this.Career.GetCollection(value, nameof(this.Career.GCareerStages)) != null)
+				{
+
 					throw new CollectionExistenceException(value);
+
+				}
+
 				this._collection_name = value;
 			}
 		}
@@ -63,19 +77,23 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <summary>
 		/// Binary memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public uint BinKey => this._collection_name.BinHash();
 
 		/// <summary>
 		/// Vault memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public uint VltKey => this._collection_name.VltHash();
 
 		/// <summary>
 		/// Cash value given to the player for winning an outrun event.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public short OutrunCashValue { get; set; }
 
 		/// <summary>
@@ -83,54 +101,55 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public string LastStageEvent { get; set; }
 
 		/// <summary>
 		/// Maximum amount of circuit events shown on the map.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public byte MaxCircuitsShownOnMap { get; set; }
 
 		/// <summary>
 		/// Maximum amount of drag events shown on the map.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public byte MaxDragsShownOnMap { get; set; }
 
 		/// <summary>
 		/// Maximum amount of street X events shown on the map.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public byte MaxStreetXShownOnMap { get; set; }
 
 		/// <summary>
 		/// Maximum amount of drift events shown on the map.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public byte MaxDriftsShownOnMap { get; set; }
 
 		/// <summary>
 		/// Maximum amount of sprint events shown on the map.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public byte MaxSprintsShownOnMap { get; set; }
 
 		/// <summary>
 		/// Maximum amount of outrun events in the stage.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public byte MaxOutrunEvents { get; set; }
 
 		/// <summary>
@@ -138,6 +157,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public string StageSponsor1 { get; set; } = String.Empty;
 
 		/// <summary>
@@ -145,6 +165,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public string StageSponsor2 { get; set; } = String.Empty;
 
 		/// <summary>
@@ -152,6 +173,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public string StageSponsor3 { get; set; } = String.Empty;
 
 		/// <summary>
@@ -159,6 +181,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public string StageSponsor4 { get; set; } = String.Empty;
 
 		/// <summary>
@@ -166,54 +189,55 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public string StageSponsor5 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Number of sponsors in the stage.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public byte NumberOfSponsorsToChoose { get; set; }
 
 		/// <summary>
 		/// Sponsor 1 attribute.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short AttribSponsor1 { get; set; }
 
 		/// <summary>
 		/// Sponsor 2 attribute.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short AttribSponsor2 { get; set; }
 
 		/// <summary>
 		/// Sponsor 3 attribute.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short AttribSponsor3 { get; set; }
 
 		/// <summary>
 		/// Sponsor 4 attribute.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short AttribSponsor4 { get; set; }
 
 		/// <summary>
 		/// Sponsor 5 attribute.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short AttribSponsor5 { get; set; }
 
 		/// <summary>
@@ -221,6 +245,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short Unknown0x04 { get; set; }
 
 		/// <summary>
@@ -228,6 +253,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short Unknown0x06 { get; set; }
 
 		/// <summary>
@@ -235,6 +261,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short Unknown0x26 { get; set; }
 
 		/// <summary>
@@ -242,6 +269,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte Unknown0x2C { get; set; }
 
 		/// <summary>
@@ -249,6 +277,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte Unknown0x2D { get; set; }
 
 		/// <summary>
@@ -256,6 +285,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte Unknown0x2E { get; set; }
 
 		/// <summary>
@@ -263,6 +293,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte Unknown0x2F { get; set; }
 
 		/// <summary>
@@ -270,6 +301,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte Unknown0x35 { get; set; }
 
 		/// <summary>
@@ -277,6 +309,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte Unknown0x36 { get; set; }
 
 		/// <summary>
@@ -284,6 +317,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte Unknown0x37 { get; set; }
 
 		/// <summary>
@@ -291,6 +325,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte Unknown0x38 { get; set; }
 
 		/// <summary>
@@ -298,6 +333,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte Unknown0x39 { get; set; }
 
 		/// <summary>
@@ -305,6 +341,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte Unknown0x3A { get; set; }
 
 		/// <summary>
@@ -312,6 +349,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte Unknown0x3B { get; set; }
 
 		/// <summary>
@@ -319,6 +357,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte Unknown0x3C { get; set; }
 
 		/// <summary>
@@ -326,6 +365,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte Unknown0x3D { get; set; }
 
 		/// <summary>
@@ -333,6 +373,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte Unknown0x3E { get; set; }
 
 		/// <summary>
@@ -340,6 +381,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte Unknown0x3F { get; set; }
 
 		/// <summary>
@@ -347,6 +389,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte Unknown0x41 { get; set; }
 
 		/// <summary>
@@ -354,6 +397,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte Unknown0x42 { get; set; }
 
 		/// <summary>
@@ -361,6 +405,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte Unknown0x43 { get; set; }
 
 		/// <summary>
@@ -368,6 +413,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float Unknown0x44 { get; set; }
 
 		/// <summary>
@@ -375,6 +421,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float Unknown0x48 { get; set; }
 
 		/// <summary>
@@ -382,6 +429,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float Unknown0x4C { get; set; }
 
 		#endregion
@@ -397,10 +445,10 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Initializes new instance of <see cref="GCareerStage"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-		public GCareerStage(string CName, Database.Underground2 db)
+		/// <param name="career"><see cref="GCareer"/> to which this instance belongs to.</param>
+		public GCareerStage(string CName, GCareer career)
 		{
-			this.Database = db;
+			this.Career = career;
 			this.CollectionName = CName;
 			CName.BinHash();
 		}
@@ -409,10 +457,10 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Initializes new instance of <see cref="GCareerStage"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-		public unsafe GCareerStage(BinaryReader br, Database.Underground2 db)
+		/// <param name="career"><see cref="GCareer"/> to which this instance belongs to.</param>
+		public GCareerStage(BinaryReader br, GCareer career)
 		{
-			this.Database = db;
+			this.Career = career;
 			this.Disassemble(br);
 		}
 
@@ -431,8 +479,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="GCareerStage"/> with.</param>
 		public void Assemble(BinaryWriter bw)
 		{
-			this._collection_name.GetFormattedValue("STAGE_{X}", out byte stage);
-			bw.Write(stage);
+			bw.Write(this._collection_name);
 			bw.Write(this.NumberOfSponsorsToChoose);
 			bw.Write(this.OutrunCashValue);
 			bw.Write(this.Unknown0x04);
@@ -492,7 +539,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		public void Disassemble(BinaryReader br)
 		{
 			// CollectionName
-			this._collection_name = $"STAGE_{br.ReadByte()}";
+			this._collection_name = br.ReadByte().ToString();
 
 			// Regular settings
 			this.NumberOfSponsorsToChoose = br.ReadByte();
@@ -553,9 +600,9 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		/// <param name="CName">CollectionName of the new created object.</param>
 		/// <returns>Memory casted copy of the object.</returns>
-		public override ACollectable MemoryCast(string CName)
+		public override Collectable MemoryCast(string CName)
 		{
-			var result = new GCareerStage(CName, this.Database);
+			var result = new GCareerStage(CName, this.Career);
 			base.MemoryCast(this, result);
 			return result;
 		}
@@ -568,7 +615,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
 
 		#endregion
