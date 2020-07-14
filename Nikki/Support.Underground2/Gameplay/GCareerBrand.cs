@@ -1,11 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Reflection.Exception;
+using Nikki.Support.Underground2.Class;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -14,7 +17,7 @@ namespace Nikki.Support.Underground2.Gameplay
 	/// <summary>
 	/// <see cref="GCareerBrand"/> is a collection of settings related to sponsor brands.
 	/// </summary>
-	public class GCareerBrand : ACollectable
+	public class GCareerBrand : Collectable
 	{
 		#region Fields
 
@@ -35,27 +38,39 @@ namespace Nikki.Support.Underground2.Gameplay
 		public override string GameSTR => GameINT.Underground2.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// GCareer to which the class belongs to.
 		/// </summary>
-		public Database.Underground2 Database { get; set; }
+		public GCareer Career { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
 			set
 			{
-				if (string.IsNullOrWhiteSpace(value))
+				if (String.IsNullOrWhiteSpace(value))
+				{
+
 					throw new ArgumentNullException("This value cannot be left left empty.");
-				if (value.Contains(" "))
+
+				}
+				if (value.Contains(' '))
+				{
+
 					throw new Exception("CollectionName cannot contain whitespace.");
-				if (value.Length > 0x1F)
-					throw new ArgumentLengthException("Length of the value should not exceed 31 character.");
-				if (this.Database.GCareerBrands.FindCollection(value) != null)
+
+				}
+				if (this.Career.GetCollection(value, nameof(this.Career.GCareerBrands)) != null)
+				{
+
 					throw new CollectionExistenceException(value);
+
+				}
+
 				this._collection_name = value;
 			}
 		}
@@ -63,11 +78,15 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <summary>
 		/// Binary memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public uint BinKey => this._collection_name.BinHash();
 
 		/// <summary>
 		/// Vault memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public uint VltKey => this._collection_name.VltHash();
 
 		/// <summary>
@@ -75,6 +94,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public string IngameBrandName { get; set; } = String.Empty;
 
 		#endregion
@@ -90,10 +110,10 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Initializes new instance of <see cref="GCareerBrand"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-		public GCareerBrand(string CName, Database.Underground2 db)
+		/// <param name="career"><see cref="GCareer"/> to which this instance belongs to.</param>
+		public GCareerBrand(string CName, GCareer career)
 		{
-			this.Database = db;
+			this.Career = career;
 			this.CollectionName = CName;
 			CName.BinHash();
 		}
@@ -102,10 +122,10 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Initializes new instance of <see cref="GCareerBrand"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-		public GCareerBrand(BinaryReader br, Database.Underground2 db)
+		/// <param name="career"><see cref="GCareer"/> to which this instance belongs to.</param>
+		public GCareerBrand(BinaryReader br, GCareer career)
 		{
-			this.Database = db;
+			this.Career = career;
 			this.Disassemble(br);
 		}
 
@@ -126,7 +146,6 @@ namespace Nikki.Support.Underground2.Gameplay
 		public void Assemble(BinaryWriter bw, BinaryWriter strw)
 		{
 			strw.WriteNullTermUTF8(this._collection_name);
-
 			bw.WriteNullTermUTF8(this._collection_name, 0x20);
 			bw.WriteNullTermUTF8(this.IngameBrandName, 0x20);
 			bw.Write(this.BinKey);
@@ -138,12 +157,8 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="GCareerBrand"/> with.</param>
 		public void Disassemble(BinaryReader br)
 		{
-			// CollectionName
 			this._collection_name = br.ReadNullTermUTF8(0x20);
-
-			// Ingame Brand Name
 			this.IngameBrandName = br.ReadNullTermUTF8(0x20);
-
 			br.BaseStream.Position += 4;
 		}
 
@@ -152,9 +167,9 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		/// <param name="CName">CollectionName of the new created object.</param>
 		/// <returns>Memory casted copy of the object.</returns>
-		public override ACollectable MemoryCast(string CName)
+		public override Collectable MemoryCast(string CName)
 		{
-			var result = new GCareerBrand(CName, this.Database)
+			var result = new GCareerBrand(CName, this.Career)
 			{
 				IngameBrandName = this.IngameBrandName
 			};
@@ -170,7 +185,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
 
 		#endregion
