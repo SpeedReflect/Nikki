@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
+using Nikki.Support.Underground2.Gameplay;
 using Nikki.Support.Underground2.Framework;
 
 
@@ -20,6 +20,7 @@ namespace Nikki.Support.Underground2.Class
         #region Fields
 
         private string _collection_name;
+        private List<BankTrigger> _bank_triggers;
 
 
         private const long max = 0x7FFFFFFF;
@@ -59,6 +60,11 @@ namespace Nikki.Support.Underground2.Class
                 this._collection_name = value;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<BankTrigger> BankTriggers => this._bank_triggers;
 
         #endregion
 
