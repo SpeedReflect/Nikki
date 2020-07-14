@@ -1,12 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
-using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Underground2.Class;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -15,11 +17,51 @@ namespace Nikki.Support.Underground2.Gameplay
 	/// <summary>
 	/// <see cref="Sponsor"/> is a collection of settings related to sponsors and contracts.
 	/// </summary>
-	public class Sponsor : ACollectable
+	public class Sponsor : Collectable
 	{
 		#region Fields
 
 		private string _collection_name;
+
+		#endregion
+
+		#region Enums
+
+		/// <summary>
+		/// Enum of <see cref="Sponsor"/> race types.
+		/// </summary>
+		public enum SponsorRaceType : byte
+		{
+			/// <summary>
+			/// No race type.
+			/// </summary>
+			None = 0,
+
+			/// <summary>
+			/// Circuit race type.
+			/// </summary>
+			Circuit = 1,
+
+			/// <summary>
+			/// Drag race type.
+			/// </summary>
+			Drift = 2,
+
+			/// <summary>
+			/// Drag race type.
+			/// </summary>
+			Drag = 3,
+
+			/// <summary>
+			/// Sprint race type.
+			/// </summary>
+			Sprint = 4,
+
+			/// <summary>
+			/// StreetX race type.
+			/// </summary>
+			StreetX = 5,
+		}
 
 		#endregion
 
@@ -28,33 +70,50 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override GameINT GameINT => GameINT.Underground2;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override string GameSTR => GameINT.Underground2.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// GCareer to which the class belongs to.
 		/// </summary>
-		public Database.Underground2 Database { get; set; }
+		[Browsable(false)]
+		public GCareer Career { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
 			set
 			{
-				if (string.IsNullOrWhiteSpace(value))
+				if (String.IsNullOrWhiteSpace(value))
+				{
+
 					throw new ArgumentNullException("This value cannot be left left empty.");
-				if (value.Contains(" "))
+
+				}
+				if (value.Contains(' '))
+				{
+
 					throw new Exception("CollectionName cannot contain whitespace.");
-				if (this.Database.Sponsors.FindCollection(value) != null)
+
+				}
+				if (this.Career.GetCollection(value, nameof(this.Career.Sponsors)) != null)
+				{
+
 					throw new CollectionExistenceException(value);
+
+				}
+
 				this._collection_name = value;
 			}
 		}
@@ -62,59 +121,63 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <summary>
 		/// Binary memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public uint BinKey => this._collection_name.BinHash();
 
 		/// <summary>
 		/// Vault memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public uint VltKey => this._collection_name.VltHash();
 
 		/// <summary>
 		/// First required sponsor race to win.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
-		public eSponsorRaceType ReqSponsorRace1 { get; set; }
+		[Category("Primary")]
+		public SponsorRaceType ReqSponsorRace1 { get; set; }
 
 		/// <summary>
 		/// Second required sponsor race to win.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
-		public eSponsorRaceType ReqSponsorRace2 { get; set; }
+		[Category("Primary")]
+		public SponsorRaceType ReqSponsorRace2 { get; set; }
 
 		/// <summary>
 		/// Third required sponsor race to win.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
-		public eSponsorRaceType ReqSponsorRace3 { get; set; }
+		[Category("Primary")]
+		public SponsorRaceType ReqSponsorRace3 { get; set; }
 
 		/// <summary>
 		/// Cash value player gets per winning in a sponsor race.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short CashValuePerWin { get; set; }
 
 		/// <summary>
 		/// Cash value player gets when signing contract with this <see cref="Sponsor"/>.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short SignCashBonus { get; set; }
 
 		/// <summary>
 		/// Potential cash value player can get when signing with this <see cref="Sponsor"/>.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short PotentialCashBonus { get; set; }
 
 		#endregion
@@ -130,10 +193,10 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Initializes new instance of <see cref="SMSMessage"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-		public Sponsor(string CName, Database.Underground2 db)
+		/// <param name="career"><see cref="GCareer"/> to which this instance belongs to.</param>
+		public Sponsor(string CName, GCareer career)
 		{
-			this.Database = db;
+			this.Career = career;
 			this.CollectionName = CName;
 			CName.BinHash();
 		}
@@ -142,11 +205,11 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Initializes new instance of <see cref="SMSMessage"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
+		/// <param name="career"><see cref="GCareer"/> to which this instance belongs to.</param>
 		/// <param name="strr"><see cref="BinaryReader"/> to read strings with.</param>
-		public Sponsor(BinaryReader br, BinaryReader strr, Database.Underground2 db)
+		public Sponsor(BinaryReader br, BinaryReader strr, GCareer career)
 		{
-			this.Database = db;
+			this.Career = career;
 			this.Disassemble(br, strr);
 		}
 
@@ -195,9 +258,9 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.CashValuePerWin = br.ReadInt16();
 			
 			// Required Sponsor Races
-			this.ReqSponsorRace1 = br.ReadEnum<eSponsorRaceType>();
-			this.ReqSponsorRace2 = br.ReadEnum<eSponsorRaceType>();
-			this.ReqSponsorRace3 = br.ReadEnum<eSponsorRaceType>();
+			this.ReqSponsorRace1 = br.ReadEnum<SponsorRaceType>();
+			this.ReqSponsorRace2 = br.ReadEnum<SponsorRaceType>();
+			this.ReqSponsorRace3 = br.ReadEnum<SponsorRaceType>();
 
 			// Signing values
 			br.BaseStream.Position += 5;
@@ -210,9 +273,9 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		/// <param name="CName">CollectionName of the new created object.</param>
 		/// <returns>Memory casted copy of the object.</returns>
-		public override ACollectable MemoryCast(string CName)
+		public override Collectable MemoryCast(string CName)
 		{
-			var result = new Sponsor(CName, this.Database);
+			var result = new Sponsor(CName, this.Career);
 			base.MemoryCast(this, result);
 			return result;
 		}
@@ -225,7 +288,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
 
 		#endregion
