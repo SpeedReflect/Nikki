@@ -1,12 +1,15 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Underground2.Class;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -15,12 +18,12 @@ namespace Nikki.Support.Underground2.Gameplay
 	/// <summary>
 	/// <see cref="PartUnlockable"/> is a collection of settings related to visual unlockable parts.
 	/// </summary>
-	public class PartUnlockable : ACollectable
+	public class PartUnlockable : Collectable
 	{
 		#region Fields
 
 		private string _collection_name;
-		private static List<string> PartUnlockablesList = new List<string>(0x56)
+		private static readonly string[] PartUnlockablesList = new string[0x56]
 		{
 			"Engine",                // 0x01
             "ECU",                   // 0x02
@@ -125,175 +128,200 @@ namespace Nikki.Support.Underground2.Gameplay
 		public override string GameSTR => GameINT.Underground2.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// GCareer to which the class belongs to.
 		/// </summary>
-		public Database.Underground2 Database { get; set; }
+		[Browsable(false)]
+		public GCareer Career { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
 			set
 			{
-				throw new NotSupportedException("CollectionName of PartUnlockables cannot be changed.");
+				if (String.IsNullOrWhiteSpace(value))
+				{
+
+					throw new ArgumentNullException("This value cannot be left left empty.");
+
+				}
+				if (value.Contains(' '))
+				{
+
+					throw new Exception("CollectionName cannot contain whitespace.");
+
+				}
+				if (this.Career.GetCollection(value, nameof(this.Career.PartUnlockables)) != null)
+				{
+
+					throw new CollectionExistenceException(value);
+
+				}
+
+				this._collection_name = value;
 			}
 		}
 
 		/// <summary>
 		/// Binary memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public uint BinKey => this._collection_name.BinHash();
 
 		/// <summary>
 		/// Vault memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public uint VltKey => this._collection_name.VltHash();
 
 		/// <summary>
 		/// Visual rating of level 1 parts.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short VisualRating_Level1 { get; set; }
 
 		/// <summary>
 		/// Visual rating of level 2 parts.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short VisualRating_Level2 { get; set; }
 
 		/// <summary>
 		/// Visual rating of level 3 parts.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short VisualRating_Level3 { get; set; }
 
 		/// <summary>
 		/// Price of level 1 parts.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short PartPrice_Level1 { get; set; }
 
 		/// <summary>
 		/// Price of level 2 parts.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short PartPrice_Level2 { get; set; }
 
 		/// <summary>
 		/// Price of level 3 parts.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short PartPrice_Level3 { get; set; }
 
 		/// <summary>
 		/// Unlock method of level 1 parts.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public ePartUnlockReq UnlockMethod_Level1 { get; set; }
 
 		/// <summary>
 		/// Unlock method of level 2 parts.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public ePartUnlockReq UnlockMethod_Level2 { get; set; }
 
 		/// <summary>
 		/// Unlock method of level 3 parts.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public ePartUnlockReq UnlockMethod_Level3 { get; set; }
 
 		/// <summary>
 		/// Shop that unlocks level 1 parts.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public string UnlocksInShop_Level1 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Shop that unlocks level 2 parts.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public string UnlocksInShop_Level2 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Shop that unlocks level 3 parts.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public string UnlocksInShop_Level3 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Required races won to unlock level 1 parts.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte RequiredRacesWon_Level1 { get; set; }
 
 		/// <summary>
 		/// Required races won to unlock level 2 parts.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte RequiredRacesWon_Level2 { get; set; }
 
 		/// <summary>
 		/// Required races won to unlock level 3 parts.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte RequiredRacesWon_Level3 { get; set; }
 
 		/// <summary>
 		/// Stage at which level 1 parts are being unlocked.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public byte BelongsToStage_Level1 { get; set; }
 
 		/// <summary>
 		/// Stage at which level 2 parts are being unlocked.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public byte BelongsToStage_Level2 { get; set; }
 
 		/// <summary>
 		/// Stage at which level 3 parts are being unlocked.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public byte BelongsToStage_Level3 { get; set; }
 
 		#endregion
@@ -309,10 +337,10 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Initializes new instance of <see cref="PartUnlockable"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-		public PartUnlockable(string CName, Database.Underground2 db)
+		/// <param name="career"><see cref="GCareer"/> to which this instance belongs to.</param>
+		public PartUnlockable(string CName, GCareer career)
 		{
-			this.Database = db;
+			this.Career = career;
 			this._collection_name = CName;
 			CName.BinHash();
 		}
@@ -321,10 +349,10 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Initializes new instance of <see cref="PartUnlockable"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-		public unsafe PartUnlockable(BinaryReader br, Database.Underground2 db)
+		/// <param name="career"><see cref="GCareer"/> to which this instance belongs to.</param>
+		public PartUnlockable(BinaryReader br, GCareer career)
 		{
-			this.Database = db;
+			this.Career = career;
 			this.Disassemble(br);
 		}
 
@@ -491,25 +519,30 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		/// <param name="CName">CollectionName of the new created object.</param>
 		/// <returns>Memory casted copy of the object.</returns>
-		public override ACollectable MemoryCast(string CName)
+		public override Collectable MemoryCast(string CName)
 		{
-			var result = new PartUnlockable(CName, this.Database);
+			var result = new PartUnlockable(CName, this.Career);
 			base.MemoryCast(this, result);
 			return result;
 		}
 
 		private string GetValidCollectionName(int index)
 		{
-			return index > PartUnlockablesList.Count
+			return index > PartUnlockablesList.Length
 				? $"UnknownPart{index}"
 				: PartUnlockablesList[index - 1];
 		}
 
 		private int GetValidCollectionIndex()
 		{
-			return PartUnlockablesList.Contains(this._collection_name)
-				? PartUnlockablesList.FindIndex(c => c == this._collection_name) + 1
-				: PartUnlockablesList.Count + 1;
+			for (int i = 0; i < PartUnlockablesList.Length; ++i)
+			{
+
+				if (this._collection_name == PartUnlockablesList[i]) return i + 1;
+
+			}
+
+			return -1;
 		}
 
 		/// <summary>
@@ -520,7 +553,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
 
 		#endregion
