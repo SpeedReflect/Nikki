@@ -274,6 +274,27 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 			return result;
 		}
 
+		/// <summary>
+		/// Clones values of another <see cref="SubPart"/>.
+		/// </summary>
+		/// <param name="other"><see cref="SubPart"/> to clone.</param>
+		public override void CloneValues(SubPart other)
+		{
+			if (other is RealCarPart part)
+			{
+
+				this.Attributes.Capacity = part.Attributes.Capacity;
+
+				foreach (var attrib in part.Attributes)
+				{
+
+					this.Attributes.Add((CPAttribute)attrib.PlainCopy());
+
+				}
+
+			}
+		}
+
 		#region Get Part Name
 
 		private string GetPartName()

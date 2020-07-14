@@ -89,6 +89,30 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 		}
 
 		/// <summary>
+		/// Clones values of another <see cref="SubPart"/>.
+		/// </summary>
+		/// <param name="other"><see cref="SubPart"/> to clone.</param>
+		public override void CloneValues(SubPart other)
+		{
+			if (other is AnimSlot anim)
+			{
+
+				this.FramesPerSecond = anim.FramesPerSecond;
+				this.TimeBase = anim.TimeBase;
+				this.Name = anim.Name;
+				this.FrameTextures.Capacity = anim.FrameTextures.Capacity;
+
+				foreach (var entry in anim.FrameTextures)
+				{
+
+					this.FrameTextures.Add(new FrameEntry() { Name = entry.Name });
+
+				}
+
+			}
+		}
+
+		/// <summary>
 		/// Reads data using <see cref="BinaryReader"/> provided.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>

@@ -26,7 +26,7 @@ namespace Nikki.Support.Underground2.Class
         private List<GCareerStage> _gcareer_stages;
         private List<GCarUnlock> _gcar_unlocks;
         private List<GShowcase> _gshowcases;
-        private List<PartPerformance> _part_performances;
+        //private List<PartPerformance> _part_performances;
         private List<PartUnlockable> _part_unlockables;
         private List<PerfSliderTuning> _perfslider_tunings;
         private List<SMSMessage> _sms_messages;
@@ -111,8 +111,8 @@ namespace Nikki.Support.Underground2.Class
         /// <summary>
         /// <see cref="List{T}"/> of <see cref="PartPerformance"/> in this <see cref="GCareer"/>.
         /// </summary>
-        [Browsable(false)]
-        public List<PartPerformance> PartPerformances => this._part_performances;
+        ///[Browsable(false)]
+        ///public List<PartPerformance> PartPerformances => this._part_performances;
 
         /// <summary>
         /// <see cref="List{T}"/> of <see cref="PartUnlockable"/> in this <see cref="GCareer"/>.
@@ -189,8 +189,8 @@ namespace Nikki.Support.Underground2.Class
         /// <summary>
         /// Total count of <see cref="PartPerformance"/> in this <see cref="GCareer"/>.
         /// </summary>
-        [Category("Primary")]
-        public int PartPerformanceCount => this._part_performances.Count;
+        ///[Category("Primary")]
+        ///public int PartPerformanceCount => this._part_performances.Count;
 
         /// <summary>
         /// Total count of <see cref="PartUnlockable"/> in this <see cref="GCareer"/>.
@@ -243,7 +243,7 @@ namespace Nikki.Support.Underground2.Class
             this._gcareer_stages = new List<GCareerStage>();
             this._gcar_unlocks = new List<GCarUnlock>();
             this._gshowcases = new List<GShowcase>();
-            this._part_performances = new List<PartPerformance>();
+            //this._part_performances = new List<PartPerformance>();
             this._part_unlockables = new List<PartUnlockable>();
             this._perfslider_tunings = new List<PerfSliderTuning>();
             this._sms_messages = new List<SMSMessage>();

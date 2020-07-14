@@ -323,5 +323,31 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 
 			return result;
 		}
+
+		/// <summary>
+		/// Clones values of another <see cref="SubPart"/>.
+		/// </summary>
+		/// <param name="other"><see cref="SubPart"/> to clone.</param>
+		public override void CloneValues(SubPart other)
+		{
+			if (other is RealCarPart part)
+			{
+
+				this.CarPartGroupID = part.CarPartGroupID;
+				this.DebugName = part.DebugName;
+				this.PartLabel = part.PartLabel;
+				this.UpgradeGroupID = part.UpgradeGroupID;
+				this.LodStruct.CloneValues(part.LodStruct);
+				this.Attributes.Capacity = part.Attributes.Capacity;
+
+				foreach (var attrib in part.Attributes)
+				{
+
+					this.Attributes.Add((CPAttribute)attrib.PlainCopy());
+
+				}
+
+			}
+		}
 	}
 }

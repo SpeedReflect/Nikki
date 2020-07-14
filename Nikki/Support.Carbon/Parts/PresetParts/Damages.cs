@@ -153,14 +153,7 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
 		public override SubPart PlainCopy()
 		{
 			var result = new Damages();
-
-			foreach (var property in this.GetType().GetProperties())
-			{
-
-				property.SetValue(result, property.GetValue(this));
-
-			}
-
+			result.CloneValues(this);
 			return result;
 		}
 

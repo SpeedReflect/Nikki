@@ -475,14 +475,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		public override SubPart PlainCopy()
 		{
 			var result = new CPStruct();
-
-			foreach (var property in this.GetType().GetProperties())
-			{
-
-				property.SetValue(result, property.GetValue(this));
-
-			}
-
+			result.CloneValues(this);
 			return result;
 		}
 

@@ -114,15 +114,7 @@ namespace Nikki.Support.Shared.Parts.GenParts
 		public override SubPart PlainCopy()
 		{
 			var result = new Matrix();
-
-
-			foreach (var property in this.GetType().GetProperties())
-			{
-
-				property.SetValue(result, property.GetValue(this));
-
-			}
-
+			result.CloneValues(this);
 			return result;
 		}
 

@@ -88,5 +88,28 @@ namespace Nikki.Reflection.Abstract
         /// </summary>
         /// <returns>Exact plain copy of the object.</returns>
         public abstract SubPart PlainCopy();
+
+        /// <summary>
+        /// Clones values of another <see cref="SubPart"/>.
+        /// </summary>
+        /// <param name="other"><see cref="SubPart"/> to clone.</param>
+        public virtual void CloneValues(SubPart other)
+		{
+            var thistype = this.GetType();
+            var othertype = other.GetType();
+
+            if (thistype == othertype)
+			{
+
+                foreach (var access in this.GetAccessibles())
+				{
+
+                    var property = thistype.GetProperty(access);
+                    property.SetValue(this, property.GetValue(other));
+
+				}
+
+			}
+		}
     }
 }

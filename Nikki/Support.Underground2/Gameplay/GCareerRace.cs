@@ -6,6 +6,7 @@ using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Underground2.Class;
 using Nikki.Support.Underground2.Parts.GameParts;
 using CoreExtensions.IO;
 using CoreExtensions.Conversions;
@@ -55,7 +56,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Manager to which the class belongs to.
 		/// </summary>
 		[Browsable(false)]
-		public GCareerRaceManager Manager { get; set; }
+		public GCareer Career { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
@@ -67,7 +68,6 @@ namespace Nikki.Support.Underground2.Gameplay
 			get => this._collection_name;
 			set
 			{
-				this.Manager?.CreationCheck(value);
 				this._collection_name = value;
 			}
 		}
@@ -347,22 +347,24 @@ namespace Nikki.Support.Underground2.Gameplay
 				if (this.EventBehaviorType != eEventBehaviorType.Drift)
 					return eDriftType.VS_AI;
 
-				var track1 = this.Database.Tracks.FindCollection($"Track_{this.STAGE1.TrackID}");
-				var track2 = this.Database.Tracks.FindCollection($"Track_{this.STAGE2.TrackID}");
-				var track3 = this.Database.Tracks.FindCollection($"Track_{this.STAGE3.TrackID}");
-				var track4 = this.Database.Tracks.FindCollection($"Track_{this.STAGE4.TrackID}");
+				//var track1 = this.Database.Tracks.FindCollection($"Track_{this.STAGE1.TrackID}");
+				//var track2 = this.Database.Tracks.FindCollection($"Track_{this.STAGE2.TrackID}");
+				//var track3 = this.Database.Tracks.FindCollection($"Track_{this.STAGE3.TrackID}");
+				//var track4 = this.Database.Tracks.FindCollection($"Track_{this.STAGE4.TrackID}");
 
-				var drift1 = (track1 != null) ? track1.DriftType : eDriftType.VS_AI;
-				var drift2 = (track2 != null) ? track2.DriftType : eDriftType.VS_AI;
-				var drift3 = (track3 != null) ? track3.DriftType : eDriftType.VS_AI;
-				var drift4 = (track4 != null) ? track4.DriftType : eDriftType.VS_AI;
+				//var drift1 = (track1 != null) ? track1.DriftType : eDriftType.VS_AI;
+				//var drift2 = (track2 != null) ? track2.DriftType : eDriftType.VS_AI;
+				//var drift3 = (track3 != null) ? track3.DriftType : eDriftType.VS_AI;
+				//var drift4 = (track4 != null) ? track4.DriftType : eDriftType.VS_AI;
 
-				return drift1 == eDriftType.DOWNHILL ||
-					   drift2 == eDriftType.DOWNHILL ||
-					   drift3 == eDriftType.DOWNHILL ||
-					   drift4 == eDriftType.DOWNHILL
-						? eDriftType.DOWNHILL
-						: eDriftType.VS_AI;
+				//return drift1 == eDriftType.DOWNHILL ||
+				//	   drift2 == eDriftType.DOWNHILL ||
+				//	   drift3 == eDriftType.DOWNHILL ||
+				//	   drift4 == eDriftType.DOWNHILL
+				//		? eDriftType.DOWNHILL
+				//		: eDriftType.VS_AI;
+
+				return eDriftType.VS_AI;
 			}
 		}
 
@@ -425,10 +427,10 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Initializes new instance of <see cref="GCareerRace"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="manager"><see cref="GCareerRaceManager"/> to which this instance belongs to.</param>
-		public GCareerRace(string CName, GCareerRaceManager manager) : this()
+		/// <param name="career"><see cref="GCareer"/> to which this instance belongs to.</param>
+		public GCareerRace(string CName, GCareer career) : this()
 		{
-			this.Manager = manager;
+			this.Career = career;
 			this.CollectionName = CName;
 			CName.BinHash();
 		}
@@ -438,10 +440,10 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		/// <param name="strr"><see cref="BinaryReader"/> to read strings with.</param>
-		/// <param name="manager"><see cref="GCareerRaceManager"/> to which this instance belongs to.</param>
-		public GCareerRace(BinaryReader br, GCareerRaceManager manager) : this()
+		/// <param name="career"><see cref="GCareer"/> to which this instance belongs to.</param>
+		public GCareerRace(BinaryReader br, BinaryReader strr, GCareer career) : this()
 		{
-			this.Manager = manager;
+			this.Career = career;
 			this.OPPONENT1 = new Opponent();
 			this.OPPONENT2 = new Opponent();
 			this.OPPONENT3 = new Opponent();
@@ -451,7 +453,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.STAGE2 = new Stage();
 			this.STAGE3 = new Stage();
 			this.STAGE4 = new Stage();
-			this.Disassemble(br);
+			this.Disassemble(br, strr);
 		}
 
 		/// <summary>
@@ -711,7 +713,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <returns>Memory casted copy of the object.</returns>
 		public override Collectable MemoryCast(string CName)
 		{
-			var result = new GCareerRace(CName, this.Manager);
+			var result = new GCareerRace(CName, this.Career);
 			base.MemoryCast(this, result);
 			return result;
 		}

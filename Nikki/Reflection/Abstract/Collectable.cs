@@ -235,8 +235,9 @@ namespace Nikki.Reflection.Abstract
                 else if (Attribute.IsDefined(property, typeof(ExpandableAttribute)))
                 {
 
-                    var node = property.GetValue(from) as SubPart;
-                    property.SetValue(to, node.PlainCopy());
+                    var nodefrom = property.GetValue(from) as SubPart;
+                    var nodeto = property.GetValue(to) as SubPart;
+                    nodeto.CloneValues(nodefrom);
 
                 }
 

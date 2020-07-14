@@ -15,5 +15,11 @@ namespace Nikki.Reflection.Interface
         /// </summary>
         /// <returns>Exact plain copy of the object.</returns>
         TypeID PlainCopy();
+
+        /// <summary>
+        /// Clones values of another <see cref="ICopyable{TypeID}"/>.
+        /// </summary>
+        /// <param name="other"><see cref="ICopyable{TypeID}"/> to clone.</param>
+        void CloneValues(TypeID other);
     }
 }

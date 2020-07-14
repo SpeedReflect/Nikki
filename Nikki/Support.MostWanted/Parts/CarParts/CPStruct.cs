@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Diagnostics;
-using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
@@ -346,14 +345,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		public override SubPart PlainCopy()
 		{
 			var result = new CPStruct();
-
-			foreach (var property in this.GetType().GetProperties())
-			{
-
-				property.SetValue(result, property.GetValue(this));
-
-			}
-
+			result.CloneValues(this);
 			return result;
 		}
 

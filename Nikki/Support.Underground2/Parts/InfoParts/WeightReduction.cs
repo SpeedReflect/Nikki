@@ -41,14 +41,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
         public override SubPart PlainCopy()
         {
             var result = new WeightReduction();
-
-            foreach (var property in this.GetType().GetProperties())
-            {
-
-                property.SetValue(result, property.GetValue(this));
-
-            }
-
+            result.CloneValues(this);
             return result;
         }
 

@@ -51,6 +51,27 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		}
 
 		/// <summary>
+		/// Clones values of another <see cref="SubPart"/>.
+		/// </summary>
+		/// <param name="other"><see cref="SubPart"/> to clone.</param>
+		public override void CloneValues(SubPart other)
+		{
+			if (other is CollisionCloud cloud)
+			{
+
+				this.NumberOfVertices = cloud.NumberOfVertices;
+
+				for (int loop = 0; loop < cloud.Vertices.Count; ++loop)
+				{
+
+					this.Vertices[loop] = (CollisionVertex)cloud.Vertices[loop].PlainCopy();
+
+				}
+
+			}
+		}
+
+		/// <summary>
 		/// Disassembles array into <see cref="CollisionBound"/> properties.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="CollisionBound"/> with.</param>

@@ -987,6 +987,12 @@
             </summary>
             <returns>Exact plain copy of the object.</returns>
         </member>
+        <member name="M:Nikki.Reflection.Abstract.SubPart.CloneValues(Nikki.Reflection.Abstract.SubPart)">
+            <summary>
+            Clones values of another <see cref="T:Nikki.Reflection.Abstract.SubPart"/>.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Reflection.Abstract.SubPart"/> to clone.</param>
+        </member>
         <member name="T:Nikki.Reflection.Abstract.VirtualNode">
             <summary>
             Node that can be used for representing virtual hierarchy of collections in the database.
@@ -3005,41 +3011,6 @@
             HugeTraffic Memory Type.
             </summary>
         </member>
-        <member name="T:Nikki.Reflection.Enum.ePartUnlockReq">
-            <summary>
-            Enum of part unlock requirements in Underground 2.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.ePartUnlockReq.NO_REQUIREMENTS">
-            <summary>
-            No requirements.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.ePartUnlockReq.SPECIFIC_SHOP_FOUND">
-            <summary>
-            Need to find specific shop.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.ePartUnlockReq.REQUIRED_REG_RACES_WON">
-            <summary>
-            Need to win specific amount of Regular races.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.ePartUnlockReq.REQUIRED_URL_RACES_WON">
-            <summary>
-            Need to win specific amount of URL races.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.ePartUnlockReq.REQUIRED_SPON_RACES_WON">
-            <summary>
-            Need to win specific amount of Sponsor races.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.ePartUnlockReq.INITIALLY_UNLOCKED">
-            <summary>
-            Initially unlocked.
-            </summary>
-        </member>
         <member name="T:Nikki.Reflection.Enum.ePerformanceType">
             <summary>
             Enum of performance types in Underground 2.
@@ -3187,41 +3158,6 @@
             If imported collection does not exist, adds it; else replaces existing one.
             </summary>
         </member>
-        <member name="T:Nikki.Reflection.Enum.eSponsorRaceType">
-            <summary>
-            Enum of sponsor race types in Underground 2.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSponsorRaceType.None">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSponsorRaceType.Circuit">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSponsorRaceType.Drift">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSponsorRaceType.Drag">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSponsorRaceType.Sprint">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSponsorRaceType.StreetX">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Nikki.Reflection.Enum.eSunAlpha">
             <summary>
             Enum of sun alpha values.
@@ -3270,31 +3206,6 @@
         <member name="F:Nikki.Reflection.Enum.eSunTexture.NUM_SUN_TEXTURES">
             <summary>
             
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eTakePhotoMethod">
-            <summary>
-            Enum of taking photo methods in Underground 2.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eTakePhotoMethod.MAGAZINE_YOURSELF">
-            <summary>
-            Take photo by yourself for magazine.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eTakePhotoMethod.DVD_YOURSELF">
-            <summary>
-            Take photo by yourself for dvd.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eTakePhotoMethod.MAGAZINE_AUTO">
-            <summary>
-            Take photo in-place for magazine.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eTakePhotoMethod.DVD_AUTO">
-            <summary>
-            Take photo in-place for dvd.
             </summary>
         </member>
         <member name="T:Nikki.Reflection.Enum.eTextureAlphaBlendType">
@@ -3750,66 +3661,6 @@
         <member name="F:Nikki.Reflection.Enum.eUsageType.Universal">
             <summary>
             
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eWorldChallengeType">
-            <summary>
-            Enum of world challenge types in Underground 2.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eWorldChallengeType.Visual">
-            <summary>
-            Unlocks visual upgrade.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eWorldChallengeType.Performance">
-            <summary>
-            Unlocks performance upgrade.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eWorldChallengeType.Showcase">
-            <summary>
-            Is a showcase event.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eWorldShopType">
-            <summary>
-            Enum of world shop types in Underground 2.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eWorldShopType.CRIB_GARAGE">
-            <summary>
-            Garage.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eWorldShopType.PAINTSHOP">
-            <summary>
-            Paint shop.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eWorldShopType.PARTSSHOP">
-            <summary>
-            Parts shop.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eWorldShopType.PERFSHOP">
-            <summary>
-            Performance shop.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eWorldShopType.CARLOT">
-            <summary>
-            Car lot.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eWorldShopType.AUDIOSHOP">
-            <summary>
-            Specialties shop.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eWorldShopType.UNIQUE">
-            <summary>
-            Uniques shop.
             </summary>
         </member>
         <member name="T:Nikki.Reflection.Enum.PartID.ePartCarbon">
@@ -9563,6 +9414,12 @@
             Creates a plain copy of the object that contains same values.
             </summary>
             <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Reflection.Interface.ICopyable`1.CloneValues(`0)">
+            <summary>
+            Clones values of another <see cref="T:Nikki.Reflection.Interface.ICopyable`1"/>.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Reflection.Interface.ICopyable`1"/> to clone.</param>
         </member>
         <member name="T:Nikki.Reflection.Interface.IGameSelectable">
             <summary>
@@ -15695,6 +15552,12 @@
             </summary>
             <returns>Exact plain copy of the object.</returns>
         </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.CloneValues(Nikki.Reflection.Abstract.SubPart)">
+            <summary>
+            Clones values of another <see cref="T:Nikki.Reflection.Abstract.SubPart"/>.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Reflection.Abstract.SubPart"/> to clone.</param>
+        </member>
         <member name="T:Nikki.Support.Carbon.Parts.CarParts.TempPart">
             <summary>
             Represents temporary car part that is used to build <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/>.
@@ -20796,6 +20659,12 @@
             Creates a plain copy of the objects that contains same values.
             </summary>
             <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.CloneValues(Nikki.Reflection.Abstract.SubPart)">
+            <summary>
+            Clones values of another <see cref="T:Nikki.Reflection.Abstract.SubPart"/>.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Reflection.Abstract.SubPart"/> to clone.</param>
         </member>
         <member name="T:Nikki.Support.MostWanted.Parts.CarParts.TempPart">
             <summary>
@@ -26534,6 +26403,12 @@
             </summary>
             <returns>Exact plain copy of the object.</returns>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.CloneValues(Nikki.Reflection.Abstract.SubPart)">
+            <summary>
+            Clones values of another <see cref="T:Nikki.Reflection.Abstract.SubPart"/>.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Reflection.Abstract.SubPart"/> to clone.</param>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Parts.CarParts.TempPart">
             <summary>
             Represents temporary car part that is used to build <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/>.
@@ -27327,6 +27202,112 @@
             </summary>
             <param name="color"><see cref="T:Nikki.Support.Shared.Parts.FNGParts.FEngColor"/> to set for all colors.</param>
             <param name="keepalpha">True if alpha value should be kept; false otherwise.</param>
+        </member>
+        <member name="T:Nikki.Support.Shared.Class.GCareer">
+            <summary>
+            <see cref="T:Nikki.Support.Shared.Class.GCareer"/> is a collection of gameplay classes.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.GCareer.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.GCareer.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.GCareer.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.GCareer.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.GCareer.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.GCareer.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.GCareer.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Shared.Class.GCareer"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Shared.Class.GCareer"/> with.</param>
+            <returns>Byte array of the tpk block.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.GCareer.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles <see cref="T:Nikki.Support.Shared.Class.GCareer"/> array into separate properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.GCareer"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.GCareer.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.GCareer.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.GCareer.FindOffsets(System.IO.BinaryReader)">
+            <summary>
+            Finds offsets of all partials and its parts in the <see cref="T:Nikki.Support.Shared.Class.GCareer"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.GCareer"/> with.</param>
+            <returns>Array of all offsets.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.GCareer.GetCollections``1">
+            <summary>
+            Gets all collections of type <see cref="T:Nikki.Reflection.Abstract.Collectable"/>.
+            </summary>
+            <typeparam name="T">A <see cref="T:Nikki.Reflection.Abstract.Collectable"/> collections to get.</typeparam>
+            <returns>Collections of type specified, if type is registered; null otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.GCareer.GetCollection(System.String,System.String)">
+            <summary>
+            Gets collection of with CollectionName specified from a root provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to get.</param>
+            <param name="root">Root to which collection belongs to.</param>
+            <returns>Collection, if exists; null otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.GCareer.AddCollection(System.String,System.String)">
+            <summary>
+            Adds a unit collection at a root provided with CollectionName specified.
+            </summary>
+            <param name="cname">CollectionName of a new collection.</param>
+            <param name="root">Root to which collection should belong to.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.GCareer.RemoveCollection(System.String,System.String)">
+            <summary>
+            Removes collection with CollectionName specified at the root provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to remove.</param>
+            <param name="root">Root to which collection belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.GCareer.CloneCollection(System.String,System.String,System.String)">
+            <summary>
+            Clones collection with CollectionName specified at the root provided.
+            </summary>
+            <param name="newname">CollectionName of a new cloned collection.</param>
+            <param name="copyname">CollectionName of a collection to clone.</param>
+            <param name="root">Root to which collection belongs to.</param>
         </member>
         <member name="T:Nikki.Support.Shared.Class.Material">
             <summary>
@@ -28719,6 +28700,12 @@
             </summary>
             <returns>Exact plain copy of the object.</returns>
         </member>
+        <member name="M:Nikki.Support.Shared.Parts.BoundParts.CollisionCloud.CloneValues(Nikki.Reflection.Abstract.SubPart)">
+            <summary>
+            Clones values of another <see cref="T:Nikki.Reflection.Abstract.SubPart"/>.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Reflection.Abstract.SubPart"/> to clone.</param>
+        </member>
         <member name="M:Nikki.Support.Shared.Parts.BoundParts.CollisionCloud.Read(System.IO.BinaryReader)">
             <summary>
             Disassembles array into <see cref="T:Nikki.Support.Shared.Parts.BoundParts.CollisionBound"/> properties.
@@ -29509,6 +29496,12 @@
             Creates a plain copy of the objects that contains same values.
             </summary>
             <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.TPKParts.AnimSlot.CloneValues(Nikki.Reflection.Abstract.SubPart)">
+            <summary>
+            Clones values of another <see cref="T:Nikki.Reflection.Abstract.SubPart"/>.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Reflection.Abstract.SubPart"/> to clone.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Parts.TPKParts.AnimSlot.Read(System.IO.BinaryReader)">
             <summary>
@@ -31358,6 +31351,253 @@
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Class.GCareer">
+            <summary>
+            <see cref="T:Nikki.Support.Underground2.Class.GCareer"/> is a collection of gameplay classes.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.Manager">
+            <summary>
+            Manager to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.BankTriggers">
+            <summary>
+            <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:Nikki.Support.Underground2.Gameplay.BankTrigger"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.GCareerBrands">
+            <summary>
+            <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerBrand"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.GCareerRaces">
+            <summary>
+            <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.GCareerStages">
+            <summary>
+            <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerStage"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.GCarUnlocks">
+            <summary>
+            <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:Nikki.Support.Underground2.Gameplay.GCarUnlock"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.GShowcases">
+            <summary>
+            <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:Nikki.Support.Underground2.Gameplay.GShowcase"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Nikki.Support.Underground2.Class.GCareer.PartUnlockables" -->
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.PerfSliderTunings">
+            <summary>
+            <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:Nikki.Support.Underground2.Gameplay.PerfSliderTuning"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.SMSMessages">
+            <summary>
+            <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:Nikki.Support.Underground2.Gameplay.SMSMessage"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.Sponsors">
+            <summary>
+            <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:Nikki.Support.Underground2.Gameplay.Sponsor"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.WorldChallenges">
+            <summary>
+            <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:Nikki.Support.Underground2.Gameplay.WorldChallenge"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.WorldShops">
+            <summary>
+            <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:Nikki.Support.Underground2.Gameplay.WorldShop"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.BankTriggerCount">
+            <summary>
+            Total count of <see cref="T:Nikki.Support.Underground2.Gameplay.BankTrigger"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.GCareerBrandCount">
+            <summary>
+            Total count of <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerBrand"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.GCareerRaceCount">
+            <summary>
+            Total count of <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.GCareerStageCount">
+            <summary>
+            Total count of <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerStage"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.GCarUnlockCount">
+            <summary>
+            Total count of <see cref="T:Nikki.Support.Underground2.Gameplay.GCarUnlock"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.GShowcaseCount">
+            <summary>
+            Total count of <see cref="T:Nikki.Support.Underground2.Gameplay.GShowcase"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.PartUnlockableCount">
+             <summary>
+             Total count of <see cref="!:PartPerformance"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+             </summary>
+            [Category("Primary")]
+            public int PartPerformanceCount => this._part_performances.Count;
+            <summary>
+            Total count of <see cref="T:Nikki.Support.Underground2.Gameplay.PartUnlockable"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.PerfSliderTuningCount">
+            <summary>
+            Total count of <see cref="T:Nikki.Support.Underground2.Gameplay.PerfSliderTuning"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.SMSMessageCount">
+            <summary>
+            Total count of <see cref="T:Nikki.Support.Underground2.Gameplay.SMSMessage"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.SponsorCount">
+            <summary>
+            Total count of <see cref="T:Nikki.Support.Underground2.Gameplay.Sponsor"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.WorldChallengeCount">
+            <summary>
+            Total count of <see cref="T:Nikki.Support.Underground2.Gameplay.WorldChallenge"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.WorldShopCount">
+            <summary>
+            Total count of <see cref="T:Nikki.Support.Underground2.Gameplay.WorldShop"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.GCareer.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.GCareer.#ctor(System.String,Nikki.Support.Underground2.Framework.GCareerManager)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="manager"><see cref="T:Nikki.Support.Underground2.Framework.GCareerManager"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.GCareer.#ctor(System.IO.BinaryReader,Nikki.Support.Underground2.Framework.GCareerManager)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="manager"><see cref="T:Nikki.Support.Underground2.Framework.GCareerManager"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.GCareer.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Underground2.Class.GCareer"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Underground2.Class.TPKBlock"/> with.</param>
+            <returns>Byte array of the tpk block.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.GCareer.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles <see cref="T:Nikki.Support.Underground2.Class.GCareer"/> array into separate properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.GCareer.GetCollections``1">
+            <summary>
+            Gets all collections of type <see cref="T:Nikki.Reflection.Abstract.Collectable"/>.
+            </summary>
+            <typeparam name="T">A <see cref="T:Nikki.Reflection.Abstract.Collectable"/> collections to get.</typeparam>
+            <returns>Collections of type specified, if type is registered; null otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.GCareer.GetCollection(System.String,System.String)">
+            <summary>
+            Gets collection of with CollectionName specified from a root provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to get.</param>
+            <param name="root">Root to which collection belongs to.</param>
+            <returns>Collection, if exists; null otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.GCareer.AddCollection(System.String,System.String)">
+            <summary>
+            Adds a unit collection at a root provided with CollectionName specified.
+            </summary>
+            <param name="cname">CollectionName of a new collection.</param>
+            <param name="root">Root to which collection should belong to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.GCareer.RemoveCollection(System.String,System.String)">
+            <summary>
+            Removes collection with CollectionName specified at the root provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to remove.</param>
+            <param name="root">Root to which collection belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.GCareer.CloneCollection(System.String,System.String,System.String)">
+            <summary>
+            Clones collection with CollectionName specified at the root provided.
+            </summary>
+            <param name="newname">CollectionName of a new cloned collection.</param>
+            <param name="copyname">CollectionName of a collection to clone.</param>
+            <param name="root">Root to which collection belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.GCareer.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Underground2.Class.TPKBlock"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.GCareer.FindOffsets(System.IO.BinaryReader)">
+            <summary>
+            Finds offsets of all partials and its parts in the <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Class.GCareer"/> with.</param>
+            <returns>Array of all offsets.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.GCareer.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.GCareer.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.GCareer.Synchronize(Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Synchronizes all parts of this instance with another instance passed.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to synchronize with.</param>
         </member>
         <member name="T:Nikki.Support.Underground2.Class.Material">
             <summary>
@@ -33825,6 +34065,89 @@
             <param name="type">Type of serialization of a collection.</param>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
+        <member name="T:Nikki.Support.Underground2.Framework.GCareerManager">
+            <summary>
+            A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.Underground2.Class.GCareer"/> collections.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Framework.GCareerManager.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Framework.GCareerManager.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Framework.GCareerManager.Name">
+            <summary>
+            Name of this <see cref="T:Nikki.Support.Underground2.Framework.GCareerManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Framework.GCareerManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Framework.GCareerManager.IsReadOnly">
+            <summary>
+            True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Framework.GCareerManager.Alignment">
+            <summary>
+            Indicates required alighment when this <see cref="T:Nikki.Support.Underground2.Framework.GCareerManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Framework.GCareerManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Underground2.Framework.GCareerManager"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Framework.GCareerManager.#ctor(Nikki.Support.Underground2.Datamap)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Framework.GCareerManager"/>.
+            </summary>
+            <param name="db"><see cref="T:Nikki.Support.Underground2.Datamap"/> to which this manager belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Framework.GCareerManager.Assemble(System.IO.BinaryWriter,System.String)">
+            <summary>
+            Assembles collection data into byte buffers.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="mark">Watermark to put in the padding blocks.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Framework.GCareerManager.Disassemble(System.IO.BinaryReader,Nikki.Core.Block)">
+            <summary>
+            Disassembles data into separate collections in this <see cref="T:Nikki.Support.Underground2.Framework.GCareerManager"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="block"><see cref="T:Nikki.Core.Block"/> with offsets.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Framework.GCareerManager.CreationCheck(System.String)">
+            <summary>
+            Checks whether CollectionName provided allows creation of a new collection.
+            </summary>
+            <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Framework.GCareerManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Framework.GCareerManager.Import(Nikki.Reflection.Enum.eSerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Underground2.Framework.MaterialManager">
             <summary>
             A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.Underground2.Class.Material"/> collections.
@@ -34489,6 +34812,2138 @@
             <param name="type">Type of serialization of a collection.</param>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.BankTrigger">
+            <summary>
+            <see cref="T:Nikki.Support.Underground2.Gameplay.BankTrigger"/> is a collection of settings related to cash zone triggers.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.BankTrigger.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.BankTrigger.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.BankTrigger.Career">
+            <summary>
+            GCareer to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.BankTrigger.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.BankTrigger.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.BankTrigger.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.BankTrigger.CashValue">
+            <summary>
+            Cash value that player gets when collecting the trigger.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.BankTrigger.InitiallyUnlocked">
+            <summary>
+            True if initially unlocked; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.BankTrigger.BankIndex">
+            <summary>
+            Index of the trigger.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.BankTrigger.RequiredStagesCompleted">
+            <summary>
+            Requires stages completed in order to be unlocked.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.BankTrigger.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.BankTrigger"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.BankTrigger.#ctor(System.String,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.BankTrigger"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.BankTrigger.#ctor(System.IO.BinaryReader,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.BankTrigger"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.BankTrigger.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.BankTrigger.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Underground2.Gameplay.BankTrigger"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Underground2.Gameplay.BankTrigger"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.BankTrigger.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Underground2.Gameplay.BankTrigger"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Gameplay.BankTrigger"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.BankTrigger.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.BankTrigger.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Underground2.Gameplay.BankTrigger"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.GCareerBrand">
+            <summary>
+            <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerBrand"/> is a collection of settings related to sponsor brands.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerBrand.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerBrand.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerBrand.Career">
+            <summary>
+            GCareer to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerBrand.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerBrand.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerBrand.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerBrand.IngameBrandName">
+            <summary>
+            In-Game name of this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerBrand"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerBrand.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerBrand"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerBrand.#ctor(System.String,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerBrand"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerBrand.#ctor(System.IO.BinaryReader,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerBrand"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerBrand.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerBrand.Assemble(System.IO.BinaryWriter,System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerBrand"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerBrand"/> with.</param>
+            <param name="strw"><see cref="T:System.IO.BinaryWriter"/> to write strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerBrand.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerStage"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerBrand"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerBrand.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerBrand.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerBrand"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.GCareerRace">
+            <summary>
+            <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/> is a collection of settings related to career races and events.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.Career">
+            <summary>
+            Manager to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.EventTrigger">
+            <summary>
+            Engage trigger of this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.UnlockMethod">
+            <summary>
+            Unlock method.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.IsSUVRace">
+            <summary>
+            True if the race is an SUV race; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.EventBehaviorType">
+            <summary>
+            Event type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.RequiredSpecificRaceWon">
+            <summary>
+            Required race completed in order to unlock this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.RequiredSpecificURLWon">
+            <summary>
+            Required URL race completer in order to unlock this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.SponsorChosenToUnlock">
+            <summary>
+            Required sponsor chosen in order to unlock this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.RequiredRacesWon">
+            <summary>
+            Required number of races won to unlock this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.RequiredURLWon">
+            <summary>
+            Required number of URL won to unlock this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.STAGE1">
+            <summary>
+            Track number for stage 1.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.STAGE2">
+            <summary>
+            Track number for stage 2.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.STAGE3">
+            <summary>
+            Track number for stage 3.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.STAGE4">
+            <summary>
+            Track number for stage 4.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.EarnableRespect">
+            <summary>
+            Respect being earned from winning the race.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.PlayerCarType">
+            <summary>
+            Preset Ride that player uses in this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.CashValue">
+            <summary>
+            Cash amount that player gets for winning this race.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.EventIconType">
+            <summary>
+            Event icon type of this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.IsDriveToGPS">
+            <summary>
+            True if the race is a GPS race; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.DifficultyLevel">
+            <summary>
+            Difficulty level of this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>;
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.BelongsToStage">
+            <summary>
+            Stage number to which this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/> belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.NumOpponents">
+            <summary>
+            Number of opponents in this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.UnknownDragValue">
+            <summary>
+            Unknown drag value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.NumStages">
+            <summary>
+            Number of track stages in this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.IsHiddenEvent">
+            <summary>
+            True if this event is hidden on the map; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.IntroMovie">
+            <summary>
+            Movie shown pre-race.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.OutroMovie">
+            <summary>
+            Movie shown post-race.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.NumMapItems">
+            <summary>
+            Number of map items during the race flow.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.Unknown0x3A">
+            <summary>
+            Unknown value at offset 0x3A.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.Unknown0x3B">
+            <summary>
+            Unknown value at offset 0x3B.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.GPSDestination">
+            <summary>
+            GPS destination trigger if the race is a GPS event.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.DriftTypeIfDriftRace">
+            <summary>
+            Drift type of the race, if it is a drift event.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.OPPONENT1">
+            <summary>
+            Opponent 1 settings.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.OPPONENT2">
+            <summary>
+            Opponent 2 settings.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.OPPONENT3">
+            <summary>
+            Opponent 3 settings.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.OPPONENT4">
+            <summary>
+            Opponent 4 settings.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.OPPONENT5">
+            <summary>
+            Opponent 5 settings.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerRace.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerRace.#ctor(System.String,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerRace.#ctor(System.IO.BinaryReader,System.IO.BinaryReader,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="strr"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerRace.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerRace.Assemble(System.IO.BinaryWriter,System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/> with.</param>
+            <param name="strw"><see cref="T:System.IO.BinaryWriter"/> to write strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerRace.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/> with.</param>
+            <param name="strr"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerRace.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerRace.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.GCareerStage">
+            <summary>
+            <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerStage"/> is a collection of settings related to career stages.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Career">
+            <summary>
+            GCareer to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.OutrunCashValue">
+            <summary>
+            Cash value given to the player for winning an outrun event.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.LastStageEvent">
+            <summary>
+            Last career event in the stage.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.MaxCircuitsShownOnMap">
+            <summary>
+            Maximum amount of circuit events shown on the map.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.MaxDragsShownOnMap">
+            <summary>
+            Maximum amount of drag events shown on the map.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.MaxStreetXShownOnMap">
+            <summary>
+            Maximum amount of street X events shown on the map.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.MaxDriftsShownOnMap">
+            <summary>
+            Maximum amount of drift events shown on the map.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.MaxSprintsShownOnMap">
+            <summary>
+            Maximum amount of sprint events shown on the map.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.MaxOutrunEvents">
+            <summary>
+            Maximum amount of outrun events in the stage.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.StageSponsor1">
+            <summary>
+            Sponsor 1.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.StageSponsor2">
+            <summary>
+            Sponsor 2.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.StageSponsor3">
+            <summary>
+            Sponsor 3.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.StageSponsor4">
+            <summary>
+            Sponsor 4.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.StageSponsor5">
+            <summary>
+            Sponsor 5.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.NumberOfSponsorsToChoose">
+            <summary>
+            Number of sponsors in the stage.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.AttribSponsor1">
+            <summary>
+            Sponsor 1 attribute.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.AttribSponsor2">
+            <summary>
+            Sponsor 2 attribute.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.AttribSponsor3">
+            <summary>
+            Sponsor 3 attribute.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.AttribSponsor4">
+            <summary>
+            Sponsor 4 attribute.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.AttribSponsor5">
+            <summary>
+            Sponsor 5 attribute.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x04">
+            <summary>
+            Unknown value at offset 0x04.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.CareerIdentifier">
+            <summary>
+            Career identifier of this stage.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x26">
+            <summary>
+            Unknown value at offset 0x26.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x2C">
+            <summary>
+            Unknown value at offset 0x2C.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x2D">
+            <summary>
+            Unknown value at offset 0x2D.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x2E">
+            <summary>
+            Unknown value at offset 0x2E.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x2F">
+            <summary>
+            Unknown value at offset 0x2F.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x35">
+            <summary>
+            Unknown value at offset 0x35.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x36">
+            <summary>
+            Unknown value at offset 0x36.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x37">
+            <summary>
+            Unknown value at offset 0x37.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x38">
+            <summary>
+            Unknown value at offset 0x38.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x39">
+            <summary>
+            Unknown value at offset 0x39.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x3A">
+            <summary>
+            Unknown value at offset 0x3A.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x3B">
+            <summary>
+            Unknown value at offset 0x3B.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x3C">
+            <summary>
+            Unknown value at offset 0x3C.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x3D">
+            <summary>
+            Unknown value at offset 0x3D.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x3E">
+            <summary>
+            Unknown value at offset 0x3E.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x3F">
+            <summary>
+            Unknown value at offset 0x3F.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x41">
+            <summary>
+            Unknown value at offset 0x41.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x42">
+            <summary>
+            Unknown value at offset 0x42
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x43">
+            <summary>
+            Unknown value at offset 0x43
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x44">
+            <summary>
+            Unknown value at offset 0x44.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x48">
+            <summary>
+            Unknown value at offset 0x48.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerStage.Unknown0x4C">
+            <summary>
+            Unknown value at offset 0x4C.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerStage.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerStage"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerStage.#ctor(System.String,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerStage"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerStage.#ctor(System.IO.BinaryReader,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerStage"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerStage.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerStage.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerStage"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerStage"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerStage.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerStage"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerStage"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerStage.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerStage.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerBrand"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.GCarUnlock">
+            <summary>
+            <see cref="T:Nikki.Support.Underground2.Gameplay.GCarUnlock"/> is a collection of settings related to car unlock requirements.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCarUnlock.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCarUnlock.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCarUnlock.Career">
+            <summary>
+            GCareer to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCarUnlock.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCarUnlock.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCarUnlock.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCarUnlock.ReqEventCompleted1">
+            <summary>
+            One of the two required events completed to unlock the car.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCarUnlock.ReqEventCompleted2">
+            <summary>
+            One of the two required events completed to unlock the car.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCarUnlock.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.GCarUnlock"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCarUnlock.#ctor(System.String,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.GCarUnlock"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCarUnlock.#ctor(System.IO.BinaryReader,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.GCarUnlock"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCarUnlock.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCarUnlock.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Underground2.Gameplay.GCarUnlock"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Underground2.Gameplay.GCarUnlock"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCarUnlock.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Underground2.Gameplay.GCarUnlock"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Gameplay.GCarUnlock"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCarUnlock.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCarUnlock.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Underground2.Gameplay.BankTrigger"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.GShowcase">
+            <summary>
+            <see cref="T:Nikki.Support.Underground2.Gameplay.GShowcase"/> is a collection of settings related to showcase events.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.GShowcase.TakePhotoMethod">
+            <summary>
+            Enum of taking photo methods in <see cref="T:Nikki.Support.Underground2.Gameplay.GShowcase"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.GShowcase.TakePhotoMethod.MagazineYourself">
+            <summary>
+            Take photo by yourself for magazine.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.GShowcase.TakePhotoMethod.DVDYourself">
+            <summary>
+            Take photo by yourself for dvd.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.GShowcase.TakePhotoMethod.MagazineAuto">
+            <summary>
+            Take photo in-place for magazine.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.GShowcase.TakePhotoMethod.DVDAuto">
+            <summary>
+            Take photo in-place for dvd.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GShowcase.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GShowcase.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GShowcase.Career">
+            <summary>
+            GCareer to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GShowcase.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GShowcase.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GShowcase.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GShowcase.DescStringLabel">
+            <summary>
+            Description string for the showcase message.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GShowcase.DestinationPoint">
+            <summary>
+            Destination trigger of the showcase.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GShowcase.DescAttrib">
+            <summary>
+            Descriptive attribute of the showcase.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GShowcase.TakePhotoType">
+            <summary>
+            Method of taking photo.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GShowcase.BelongsToStage">
+            <summary>
+            Stage to which this <see cref="T:Nikki.Support.Underground2.Gameplay.GShowcase"/> belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GShowcase.CashValue">
+            <summary>
+            Cash value player gets from completing the showcase.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GShowcase.RequiredVisualRating">
+            <summary>
+            Required visual rating of a car to unlock this <see cref="T:Nikki.Support.Underground2.Gameplay.GShowcase"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GShowcase.Unknown0x34">
+            <summary>
+            Unknown value at offset 0x34.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GShowcase.Unknown0x35">
+            <summary>
+            Unknown value at offset 0x35.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GShowcase.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.GShowcase"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GShowcase.#ctor(System.String,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.GShowcase"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GShowcase.#ctor(System.IO.BinaryReader,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.GShowcase"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GShowcase.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GShowcase.Assemble(System.IO.BinaryWriter,System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Underground2.Gameplay.GShowcase"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Underground2.Gameplay.GShowcase"/> with.</param>
+            <param name="strw"><see cref="T:System.IO.BinaryWriter"/> to write strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GShowcase.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Underground2.Gameplay.GShowcase"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Gameplay.GShowcase"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GShowcase.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GShowcase.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerBrand"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.PartUnlockable">
+            <summary>
+            <see cref="T:Nikki.Support.Underground2.Gameplay.PartUnlockable"/> is a collection of settings related to visual unlockable parts.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.PartUnlockable.PartUnlockReq">
+            <summary>
+            Enum of <see cref="T:Nikki.Support.Underground2.Gameplay.PartUnlockable"/> requirements.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.PartUnlockable.PartUnlockReq.NoRequirements">
+            <summary>
+            No requirements.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.PartUnlockable.PartUnlockReq.SpecShopFound">
+            <summary>
+            Need to find specific shop.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.PartUnlockable.PartUnlockReq.ReqRegRacesWon">
+            <summary>
+            Need to win specific amount of Regular races.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.PartUnlockable.PartUnlockReq.ReqURLRacesWon">
+            <summary>
+            Need to win specific amount of URL races.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.PartUnlockable.PartUnlockReq.ReqSponRacesWon">
+            <summary>
+            Need to win specific amount of Sponsor races.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.PartUnlockable.PartUnlockReq.InitiallyUnlocked">
+            <summary>
+            Initially unlocked.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.Career">
+            <summary>
+            GCareer to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.VisualRatingLevel1">
+            <summary>
+            Visual rating of level 1 parts.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.VisualRatingLevel2">
+            <summary>
+            Visual rating of level 2 parts.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.VisualRatingLevel3">
+            <summary>
+            Visual rating of level 3 parts.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.PartPriceLevel1">
+            <summary>
+            Price of level 1 parts.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.PartPriceLevel2">
+            <summary>
+            Price of level 2 parts.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.PartPriceLevel3">
+            <summary>
+            Price of level 3 parts.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.UnlockMethodLevel1">
+            <summary>
+            Unlock method of level 1 parts.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.UnlockMethodLevel2">
+            <summary>
+            Unlock method of level 2 parts.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.UnlockMethodLevel3">
+            <summary>
+            Unlock method of level 3 parts.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.UnlocksInShopLevel1">
+            <summary>
+            Shop that unlocks level 1 parts.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.UnlocksInShopLevel2">
+            <summary>
+            Shop that unlocks level 2 parts.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.UnlocksInShopLevel3">
+            <summary>
+            Shop that unlocks level 3 parts.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.RequiredRacesWonLevel1">
+            <summary>
+            Required races won to unlock level 1 parts.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.RequiredRacesWonLevel2">
+            <summary>
+            Required races won to unlock level 2 parts.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.RequiredRacesWonLevel3">
+            <summary>
+            Required races won to unlock level 3 parts.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.BelongsToStageLevel1">
+            <summary>
+            Stage at which level 1 parts are being unlocked.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.BelongsToStageLevel2">
+            <summary>
+            Stage at which level 2 parts are being unlocked.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.BelongsToStageLevel3">
+            <summary>
+            Stage at which level 3 parts are being unlocked.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PartUnlockable.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.PartUnlockable"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PartUnlockable.#ctor(System.String,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.PartUnlockable"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PartUnlockable.#ctor(System.IO.BinaryReader,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.PartUnlockable"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PartUnlockable.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PartUnlockable.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Underground2.Gameplay.PartUnlockable"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Underground2.Gameplay.PartUnlockable"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PartUnlockable.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Underground2.Gameplay.PartUnlockable"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Gameplay.PartUnlockable"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PartUnlockable.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PartUnlockable.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Underground2.Gameplay.BankTrigger"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.PerfSliderTuning">
+            <summary>
+            <see cref="T:Nikki.Support.Underground2.Gameplay.PerfSliderTuning"/> is a collection of settings related to performance sliders.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.Career">
+            <summary>
+            GCareer to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.MinSliderValueRatio">
+            <summary>
+            Minimum ratio slider value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.MaxSliderValueRatio">
+            <summary>
+            Maximum ratio slider value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.ValueSpread1">
+            <summary>
+            Value spread 1.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.ValueSpread2">
+            <summary>
+            Value spread 2.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.PerfSliderTuning"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.#ctor(System.String,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.PerfSliderTuning"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.#ctor(System.IO.BinaryReader,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.PerfSliderTuning"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Underground2.Gameplay.PerfSliderTuning"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Underground2.Gameplay.PerfSliderTuning"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Underground2.Gameplay.PerfSliderTuning"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Gameplay.PerfSliderTuning"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Underground2.Gameplay.BankTrigger"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.SMSMessage">
+            <summary>
+            <see cref="T:Nikki.Support.Underground2.Gameplay.SMSMessage"/> is a collection of settings related to world messages.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.SMSMessage.UnlockType">
+            <summary>
+            Unlock type of an <see cref="T:Nikki.Support.Underground2.Gameplay.SMSMessage"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.UnlockType.Invalid">
+            <summary>
+            Invalid unlock type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.UnlockType.SpecificRaceWon">
+            <summary>
+            Requires specific race won.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.UnlockType.ShopFound">
+            <summary>
+            Requires shop being found.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.UnlockType.TimeElapsed">
+            <summary>
+            Requires specific game time elapsed.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.UnlockType.OutrunEngaged">
+            <summary>
+            Requires outrun being engaged.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.UnlockType.OutrunVictory">
+            <summary>
+            Requires victory in an outrun race.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.UnlockType.OutrunDefeat">
+            <summary>
+            Requires defeat in an outrun race.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.UnlockType.ReqSponRacesWon">
+            <summary>
+            Requires specific number of sponsor races won.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.UnlockType.ReqURLRacesWon">
+            <summary>
+            Requires specific number of URL races won.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.UnlockType.ReqRegRacesWon">
+            <summary>
+            Requires specific number of regular races won.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.UnlockType.MagazineUnlock">
+            <summary>
+            Requires a magazine being unlocked.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.UnlockType.DVDUnlock">
+            <summary>
+            Requires a DVD being unlocked.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.UnlockType.FreeroamFind">
+            <summary>
+            Requires being found in the freeroam.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.SMSMessage.MailType">
+            <summary>
+            Mail type of an <see cref="T:Nikki.Support.Underground2.Gameplay.SMSMessage"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.MailType.Invalid">
+            <summary>
+            Invalid mail type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.MailType.Inbox">
+            <summary>
+            Message is an inbox mail.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.MailType.GameTips">
+            <summary>
+            Message is a game tip.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.MailType.Showcase">
+            <summary>
+            Message is about a showcase.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.MailType.Rachel">
+            <summary>
+            Message is from Rachel.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.MailType.Unlock">
+            <summary>
+            Message is about an unlock.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.SMSMessage.IconType">
+            <summary>
+            Icon type of an <see cref="T:Nikki.Support.Underground2.Gameplay.SMSMessage"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.IconType.Invalid">
+            <summary>
+            Invalid icon type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.IconType.Rachel">
+            <summary>
+            Rachel/Yellow icon type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.IconType.Opponent">
+            <summary>
+            Opponent/Orange icon type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.IconType.Showcase">
+            <summary>
+            Showcase/Star icon type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.IconType.Outrun">
+            <summary>
+            Outrun/Red icon type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.IconType.Shop">
+            <summary>
+            Shop/Magenta icon type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.IconType.Tips">
+            <summary>
+            Tips/Blue icon type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.IconType.Race">
+            <summary>
+            Race/Purple icon type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.IconType.Mail">
+            <summary>
+            Mail/Green icon type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.SMSMessage.IconType.Freeroam">
+            <summary>
+            Freeroam/Green icon type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.Career">
+            <summary>
+            GCareer to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.UnlockRequirement">
+            <summary>
+            Unlock requirement for this message.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.StorageType">
+            <summary>
+            Storage type of this message.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.AutoOpen">
+            <summary>
+            True if message should be automatically opened; false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.IconStyle">
+            <summary>
+            Icon style of this message.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.CareerIdentifier">
+            <summary>
+            Career identifier for this message.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.RequiredSpecRaceWon">
+            <summary>
+            Required specific race won to unlock this message.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.RequiredShopFound">
+            <summary>
+            Required shop found to unlock this message.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.RequiredTimeElapsed">
+            <summary>
+            Required time elapsed to unlock this message.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.RequiredRacesWon">
+            <summary>
+            Required number of races won to unlock this message.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.RequiredDVDUnlocked">
+            <summary>
+            Required DVD number unlocked to unlock this message.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.BelongsToStage">
+            <summary>
+            Stage to which this message belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.CashValue">
+            <summary>
+            Cash value player gets when receiving the message.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.MessageSender">
+            <summary>
+            String label of the sender of the message.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.SMSMessage.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.SMSMessage"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.SMSMessage.#ctor(System.String,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.SMSMessage"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.SMSMessage.#ctor(System.IO.BinaryReader,System.IO.BinaryReader,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.SMSMessage"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+            <param name="strr"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.SMSMessage.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.SMSMessage.Assemble(System.IO.BinaryWriter,System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Underground2.Gameplay.SMSMessage"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Underground2.Gameplay.SMSMessage"/> with.</param>
+            <param name="strw"><see cref="T:System.IO.BinaryWriter"/> to write strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.SMSMessage.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Underground2.Gameplay.SMSMessage"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Gameplay.SMSMessage"/> with.</param>
+            <param name="strr"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.SMSMessage.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.SMSMessage.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.Sponsor">
+            <summary>
+            <see cref="T:Nikki.Support.Underground2.Gameplay.Sponsor"/> is a collection of settings related to sponsors and contracts.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.Sponsor.SponsorRaceType">
+            <summary>
+            Enum of <see cref="T:Nikki.Support.Underground2.Gameplay.Sponsor"/> race types.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.Sponsor.SponsorRaceType.None">
+            <summary>
+            No race type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.Sponsor.SponsorRaceType.Circuit">
+            <summary>
+            Circuit race type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.Sponsor.SponsorRaceType.Drift">
+            <summary>
+            Drag race type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.Sponsor.SponsorRaceType.Drag">
+            <summary>
+            Drag race type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.Sponsor.SponsorRaceType.Sprint">
+            <summary>
+            Sprint race type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.Sponsor.SponsorRaceType.StreetX">
+            <summary>
+            StreetX race type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.Sponsor.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.Sponsor.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.Sponsor.Career">
+            <summary>
+            GCareer to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.Sponsor.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.Sponsor.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.Sponsor.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.Sponsor.ReqSponsorRace1">
+            <summary>
+            First required sponsor race to win.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.Sponsor.ReqSponsorRace2">
+            <summary>
+            Second required sponsor race to win.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.Sponsor.ReqSponsorRace3">
+            <summary>
+            Third required sponsor race to win.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.Sponsor.CashValuePerWin">
+            <summary>
+            Cash value player gets per winning in a sponsor race.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.Sponsor.SignCashBonus">
+            <summary>
+            Cash value player gets when signing contract with this <see cref="T:Nikki.Support.Underground2.Gameplay.Sponsor"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.Sponsor.PotentialCashBonus">
+            <summary>
+            Potential cash value player can get when signing with this <see cref="T:Nikki.Support.Underground2.Gameplay.Sponsor"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.Sponsor.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.SMSMessage"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.Sponsor.#ctor(System.String,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.SMSMessage"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.Sponsor.#ctor(System.IO.BinaryReader,System.IO.BinaryReader,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.SMSMessage"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+            <param name="strr"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.Sponsor.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.Sponsor.Assemble(System.IO.BinaryWriter,System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Underground2.Gameplay.Sponsor"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Underground2.Gameplay.Sponsor"/> with.</param>
+            <param name="strw"><see cref="T:System.IO.BinaryWriter"/> to write strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.Sponsor.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Underground2.Gameplay.Sponsor"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Gameplay.Sponsor"/> with.</param>
+            <param name="strr"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.Sponsor.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.Sponsor.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.WorldChallenge">
+            <summary>
+            <see cref="T:Nikki.Support.Underground2.Gameplay.Sponsor"/> is a collection of settings related to world challenge events.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.WorldChallenge.WorldChallengeType">
+            <summary>
+            Enum of <see cref="T:Nikki.Support.Underground2.Gameplay.WorldChallenge"/> types.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldChallenge.WorldChallengeType.Invalid">
+            <summary>
+            Invalid challenge type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldChallenge.WorldChallengeType.Visual">
+            <summary>
+            Unlocks visual upgrade.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldChallenge.WorldChallengeType.Performance">
+            <summary>
+            Unlocks performance upgrade.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldChallenge.WorldChallengeType.Showcase">
+            <summary>
+            Is a showcase event.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.Career">
+            <summary>
+            GCareer to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.WorldChallengeTrigger">
+            <summary>
+            Event trigger of this <see cref="T:Nikki.Support.Underground2.Gameplay.WorldChallenge"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.BelongsToStage">
+            <summary>
+            Stage to which this challenge belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.UseOutrunsAsReqRaces">
+            <summary>
+            True if challenge requires specific number of outruns won in order to unlock; 
+            false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.RequiredRacesWon">
+            <summary>
+            Required races won to unlock this <see cref="T:Nikki.Support.Underground2.Gameplay.WorldChallenge"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.UnlockableSMS">
+            <summary>
+            Label of the SMS sent when challenge is unlocked.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.Destination">
+            <summary>
+            Parent, or destination in this <see cref="T:Nikki.Support.Underground2.Gameplay.WorldChallenge"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.TimeLimit">
+            <summary>
+            Time limit to complete this challenge.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.ChallengeType">
+            <summary>
+            Type of the challenge.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.PartUnlockable1">
+            <summary>
+            Index of the first unique part that gets unlocked upon completion.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.PartUnlockable2">
+            <summary>
+            Index of the second unique part that gets unlocked upon completion.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.PartUnlockable3">
+            <summary>
+            Index of the third unique part that gets unlocked upon completion.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.WorldChallenge.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.WorldChallenge"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.WorldChallenge.#ctor(System.String,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.WorldChallenge"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.WorldChallenge.#ctor(System.IO.BinaryReader,System.IO.BinaryReader,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.WorldChallenge"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+            <param name="strr"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.WorldChallenge.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.WorldChallenge.Assemble(System.IO.BinaryWriter,System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Underground2.Gameplay.Sponsor"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Underground2.Gameplay.Sponsor"/> with.</param>
+            <param name="strw"><see cref="T:System.IO.BinaryWriter"/> to write strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.WorldChallenge.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Underground2.Gameplay.Sponsor"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Gameplay.Sponsor"/> with.</param>
+            <param name="strr"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.WorldChallenge.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.WorldChallenge.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.WorldShop">
+            <summary>
+            <see cref="T:Nikki.Support.Underground2.Gameplay.WorldShop"/> is a collection of settings related to shops and premises.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.WorldShop.WorldShopType">
+            <summary>
+            Enum of <see cref="T:Nikki.Support.Underground2.Gameplay.WorldShop"/> types.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldShop.WorldShopType.CribGarage">
+            <summary>
+            Garage.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldShop.WorldShopType.PaintShop">
+            <summary>
+            Paint shop.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldShop.WorldShopType.PartsShop">
+            <summary>
+            Parts shop.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldShop.WorldShopType.PerfShop">
+            <summary>
+            Performance shop.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldShop.WorldShopType.CarLot">
+            <summary>
+            Car lot.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldShop.WorldShopType.AudioShop">
+            <summary>
+            Specialties shop.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldShop.WorldShopType.Unique">
+            <summary>
+            Uniques shop.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.Career">
+            <summary>
+            GCareer to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.ShopFilename">
+            <summary>
+            Filename of shop in-game textures.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.IntroMovie">
+            <summary>
+            Movie shown when first-time entering shop.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.ShopTrigger">
+            <summary>
+            Event trigger of this <see cref="T:Nikki.Support.Underground2.Gameplay.WorldShop"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.ShopType">
+            <summary>
+            Type of the shop.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.InitiallyHidden">
+            <summary>
+            True if this <see cref="T:Nikki.Support.Underground2.Gameplay.WorldShop"/> is initially hidden on the world map; 
+            false otherwise.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.RequiresEventCompleted">
+            <summary>
+            True if in order to be unlocked this shop requires an event completed.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.BelongsToStage">
+            <summary>
+            Stage to which this <see cref="T:Nikki.Support.Underground2.Gameplay.WorldShop"/> belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.EventToBeCompleted">
+            <summary>
+            Event name that should be completed to unlock this shop.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.WorldShop.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.WorldShop"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.WorldShop.#ctor(System.String,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.WorldShop"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.WorldShop.#ctor(System.IO.BinaryReader,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.WorldShop"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.WorldShop.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.WorldShop.Assemble(System.IO.BinaryWriter,System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Underground2.Gameplay.WorldShop"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Underground2.Gameplay.WorldShop"/> with.</param>
+            <param name="strw"><see cref="T:System.IO.BinaryWriter"/> to write strings with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.WorldShop.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Underground2.Gameplay.Sponsor"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Gameplay.Sponsor"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.WorldShop.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.WorldShop.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
         <member name="T:Nikki.Support.Underground2.Parts.CarParts.CarSkin">
             <summary>
             A unit <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CarSkin"/> used in cartypeinfo collections.
@@ -34895,6 +37350,12 @@
             Creates a plain copy of the objects that contains same values.
             </summary>
             <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.CloneValues(Nikki.Reflection.Abstract.SubPart)">
+            <summary>
+            Clones values of another <see cref="T:Nikki.Reflection.Abstract.SubPart"/>.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Reflection.Abstract.SubPart"/> to clone.</param>
         </member>
         <member name="T:Nikki.Support.Underground2.Parts.CarParts.TempPart">
             <summary>

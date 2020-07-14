@@ -92,15 +92,7 @@ namespace Nikki.Support.Shared.Parts.SunParts
 		public override SubPart PlainCopy()
 		{
 			var result = new SunLayer();
-
-
-			foreach (var property in this.GetType().GetProperties())
-			{
-
-				property.SetValue(result, property.GetValue(this));
-
-			}
-
+			result.CloneValues(this);
 			return result;
 		}
 

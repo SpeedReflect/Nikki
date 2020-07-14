@@ -6,15 +6,17 @@ using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Shared.Class;
 
 
 
+/*
 namespace Nikki.Support.Underground2.Gameplay
 {
 	/// <summary>
 	/// <see cref="PartPerformance"/> is a collection of settings related to performance parts.
 	/// </summary>
-	public class PartPerformance : ACollectable
+	public class PartPerformance : Collectable
 	{
 		#region Fields
 
@@ -42,7 +44,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <summary>
 		/// Database to which the class belongs to.
 		/// </summary>
-		public Database.Underground2 Database { get; set; }
+		public GCareer Career { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
@@ -57,8 +59,7 @@ namespace Nikki.Support.Underground2.Gameplay
 					throw new ArgumentNullException("This value cannot be left left empty.");
 				if (value.Contains(" "))
 					throw new Exception("CollectionName cannot contain whitespace.");
-				if (this.Database.PartPerformances.FindCollection(value) != null)
-					throw new CollectionExistenceException(value);
+
 				this._collection_name = value;
 				if (this._cname_is_set)
 					Map.PerfPartTable[(int)this._part_perf_type, this._upgrade_level, this._upgrade_part_index] = Convert.ToUInt32(value, 16);
@@ -623,3 +624,4 @@ namespace Nikki.Support.Underground2.Gameplay
 		#endregion
 	}
 }
+*/

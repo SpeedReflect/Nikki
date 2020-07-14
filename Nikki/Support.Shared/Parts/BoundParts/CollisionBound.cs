@@ -141,14 +141,7 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		public override SubPart PlainCopy()
 		{
 			var result = new CollisionBound();
-
-			foreach (var property in this.GetType().GetProperties())
-			{
-
-				property.SetValue(result, property.GetValue(this));
-			
-			}
-
+			result.CloneValues(this);
 			return result;
 		}
 

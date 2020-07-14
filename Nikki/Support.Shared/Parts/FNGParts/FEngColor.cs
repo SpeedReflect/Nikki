@@ -58,10 +58,7 @@ namespace Nikki.Support.Shared.Parts.FNGParts
         /// <returns>True if obj is a <see cref="FEngColor"/> and its value is the same as 
         /// this instance; false otherwise. If obj is null, the method returns false.
         /// </returns>
-        public override bool Equals(object obj)
-        {
-            return obj is FEngColor && this == (FEngColor)obj;
-        }
+        public override bool Equals(object obj) => obj is FEngColor color && this == color;
 
         /// <summary>
         /// Returns the hash code for this <see cref="FEngColor"/>.
@@ -76,9 +73,17 @@ namespace Nikki.Support.Shared.Parts.FNGParts
         /// <param name="c1">The first <see cref="FEngColor"/> to compare, or null.</param>
         /// <param name="c2">The second <see cref="FEngColor"/> to compare, or null.</param>
         /// <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
-        public static bool operator ==(FEngColor c1, FEngColor c2) => 
-            c1 is null ? c2 is null : c2 is null ? false : c1.Red == c2.Red 
-                && c1.Green == c2.Green && c1.Blue == c2.Blue;
+        public static bool operator ==(FEngColor c1, FEngColor c2)
+		{
+            if (c1 is null) return c2 is null;
+            else if (c2 is null) return false;
+
+            bool result = true;
+            result &= c1.Red == c2.Red;
+            result &= c1.Green == c2.Green;
+            result &= c1.Blue == c2.Blue;
+            return result;
+		}
 
         /// <summary>
         /// Determines whether two specified <see cref="FEngColor"/> have different values.
