@@ -14,7 +14,7 @@ namespace Nikki.Support.Underground2.Gameplay
 	/// <summary>
 	/// <see cref="BankTrigger"/> is a collection of settings related to cash zone triggers.
 	/// </summary>
-	public class BankTrigger : ACollectable
+	public class BankTrigger : Collectable
 	{
 		#region Fields
 

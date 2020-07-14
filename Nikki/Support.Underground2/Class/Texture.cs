@@ -392,9 +392,6 @@ namespace Nikki.Support.Underground2.Class
 
             // Default all other values
             this._num_palettes = (short)(this.PaletteSize / 4);
-            this.TileableUV = 0;
-            this._used_flag = 0;
-            this._flags = 0;
             this._scroll_timestep = 0;
             this._scroll_speedS = 0;
             this._scroll_speedT = 0;

@@ -1,0 +1,136 @@
+﻿using System;
+using System.IO;
+using System.ComponentModel;
+using System.Collections.Generic;
+using Nikki.Core;
+using Nikki.Utils;
+using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Interface;
+using CoreExtensions.Conversions;
+
+
+
+namespace Nikki.Support.Shared.Class
+{
+    /// <summary>
+    /// <see cref="GCareer"/> is a collection of gameplay classes.
+    /// </summary>
+    public abstract class GCareer : Collectable, IAssembly
+    {
+        #region Main Properties
+
+        /// <summary>
+        /// Collection name of the variable.
+        /// </summary>
+        public override string CollectionName { get; set; }
+
+        /// <summary>
+        /// Game to which the class belongs to.
+        /// </summary>
+        public override GameINT GameINT => GameINT.None;
+
+        /// <summary>
+        /// Game string to which the class belongs to.
+        /// </summary>
+        public override string GameSTR => GameINT.None.ToString();
+
+        /// <summary>
+        /// Binary memory hash of the collection name.
+        /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
+        public uint BinKey => this.CollectionName.BinHash();
+
+        /// <summary>
+        /// Vault memory hash of the collection name.
+        /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
+        public uint VltKey => this.CollectionName.VltHash();
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Casts all attributes from this object to another one.
+        /// </summary>
+        /// <param name="CName">CollectionName of the new created object.</param>
+        /// <returns>Memory casted copy of the object.</returns>
+        public override Collectable MemoryCast(string CName)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Assembles <see cref="GCareer"/> into a byte array.
+        /// </summary>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="GCareer"/> with.</param>
+        /// <returns>Byte array of the tpk block.</returns>
+        public abstract void Assemble(BinaryWriter bw);
+
+        /// <summary>
+        /// Disassembles <see cref="GCareer"/> array into separate properties.
+        /// </summary>
+        /// <param name="br"><see cref="BinaryReader"/> to read <see cref="GCareer"/> with.</param>
+        public abstract void Disassemble(BinaryReader br);
+
+        /// <summary>
+        /// Serializes instance into a byte array and stores it in the file provided.
+        /// </summary>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        public abstract void Serialize(BinaryWriter bw);
+
+        /// <summary>
+        /// Deserializes byte array into an instance by loading data from the file provided.
+        /// </summary>
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        public abstract void Deserialize(BinaryReader br);
+
+        /// <summary>
+        /// Finds offsets of all partials and its parts in the <see cref="GCareer"/>.
+        /// </summary>
+        /// <param name="br"><see cref="BinaryReader"/> to read <see cref="GCareer"/> with.</param>
+        /// <returns>Array of all offsets.</returns>
+        protected abstract long[] FindOffsets(BinaryReader br);
+
+        /// <summary>
+        /// Gets all collections of type <see cref="Collectable"/>.
+        /// </summary>
+        /// <typeparam name="T">A <see cref="Collectable"/> collections to get.</typeparam>
+        /// <returns>Collections of type specified, if type is registered; null otherwise.</returns>
+        public abstract IEnumerable<T> GetCollections<T>() where T : Collectable;
+
+        /// <summary>
+        /// Gets collection of with CollectionName specified from a root provided.
+        /// </summary>
+        /// <param name="cname">CollectionName of a collection to get.</param>
+        /// <param name="root">Root to which collection belongs to.</param>
+        /// <returns>Collection, if exists; null otherwise.</returns>
+        public abstract Collectable GetCollection(string cname, string root);
+
+        /// <summary>
+        /// Adds a unit collection at a root provided with CollectionName specified.
+        /// </summary>
+        /// <param name="cname">CollectionName of a new collection.</param>
+        /// <param name="root">Root to which collection should belong to.</param>
+        public abstract void AddCollection(string cname, string root);
+
+        /// <summary>
+        /// Removes collection with CollectionName specified at the root provided.
+        /// </summary>
+        /// <param name="cname">CollectionName of a collection to remove.</param>
+        /// <param name="root">Root to which collection belongs to.</param>
+        public abstract void RemoveCollection(string cname, string root);
+
+        /// <summary>
+        /// Clones collection with CollectionName specified at the root provided.
+        /// </summary>
+        /// <param name="newname">CollectionName of a new cloned collection.</param>
+        /// <param name="copyname">CollectionName of a collection to clone.</param>
+        /// <param name="root">Root to which collection belongs to.</param>
+        public abstract void CloneCollection(string newname, string copyname, string root);
+
+		#endregion
+	}
+}
