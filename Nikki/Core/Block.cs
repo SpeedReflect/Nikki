@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Nikki.Reflection.Enum;
 
 
@@ -44,7 +43,7 @@ namespace Nikki.Core
 		/// <returns>True if <see cref="Block"/> is null or its offset count is 0; 
 		/// false otherwise.</returns>
 		public static bool IsNullOrEmpty(Block block) =>
-			block == null ? true : block.Offsets.Count == 0;
+			block == null || block.Offsets.Count == 0;
 
 		/// <summary>
 		/// Returns <see cref="eBlockID"/> and offset count as a string value.

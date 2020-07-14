@@ -1,12 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Utils.EA;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
-using CoreExtensions.Text;
+using Nikki.Support.Underground2.Class;
+using CoreExtensions.Conversions;
 
 
 
@@ -15,11 +17,10 @@ namespace Nikki.Support.Underground2.Gameplay
 	/// <summary>
 	/// <see cref="PerfSliderTuning"/> is a collection of settings related to performance sliders.
 	/// </summary>
-	public class PerfSliderTuning : ACollectable
+	public class PerfSliderTuning : Collectable
 	{
 		#region Fields
 
-		// CollectionName here is an 8-digit hexadecimal containing 4 first major indexes of the slider.
 		private string _collection_name;
 
 		#endregion
@@ -29,35 +30,50 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override GameINT GameINT => GameINT.Underground2;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override string GameSTR => GameINT.Underground2.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// GCareer to which the class belongs to.
 		/// </summary>
-		public Database.Underground2 Database { get; set; }
+		[Browsable(false)]
+		public GCareer Career { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
 			set
 			{
-				if (string.IsNullOrWhiteSpace(value))
+				if (String.IsNullOrWhiteSpace(value))
+				{
+
 					throw new ArgumentNullException("This value cannot be left left empty.");
-				if (value.Contains(" "))
+
+				}
+				if (value.Contains(' '))
+				{
+
 					throw new Exception("CollectionName cannot contain whitespace.");
-				if (value.Length != 10 && !value.IsHexString())
-					throw new Exception("Unable to parse value provided as a hexadecimal containing tuning settings.");
-				if (this.Database.PerfSliderTunings.FindCollection(value) != null)
+
+				}
+				if (this.Career.GetCollection(value, nameof(this.Career.PerfSliderTunings)) != null)
+				{
+
 					throw new CollectionExistenceException(value);
+
+				}
+
 				this._collection_name = value;
 			}
 		}
@@ -65,43 +81,47 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <summary>
 		/// Binary memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public uint BinKey => this._collection_name.BinHash();
 
 		/// <summary>
 		/// Vault memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public uint VltKey => this._collection_name.VltHash();
 
 		/// <summary>
 		/// Minimum ratio slider value.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public float MinSliderValueRatio { get; set; }
 
 		/// <summary>
 		/// Maximum ratio slider value.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public float MaxSliderValueRatio { get; set; }
 
 		/// <summary>
 		/// Value spread 1.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public float ValueSpread1 { get; set; }
 
 		/// <summary>
 		/// Value spread 2.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public float ValueSpread2 { get; set; }
 
 		#endregion
@@ -117,10 +137,10 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Initializes new instance of <see cref="PerfSliderTuning"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-		public PerfSliderTuning(string CName, Database.Underground2 db)
+		/// <param name="career"><see cref="GCareer"/> to which this instance belongs to.</param>
+		public PerfSliderTuning(string CName, GCareer career)
 		{
-			this.Database = db;
+			this.Career = career;
 			this.CollectionName = CName;
 			CName.BinHash();
 		}
@@ -129,10 +149,10 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Initializes new instance of <see cref="PerfSliderTuning"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-		public unsafe PerfSliderTuning(BinaryReader br, Database.Underground2 db)
+		/// <param name="career"><see cref="GCareer"/> to which this instance belongs to.</param>
+		public PerfSliderTuning(BinaryReader br, GCareer career)
 		{
-			this.Database = db;
+			this.Career = career;
 			this.Disassemble(br);
 		}
 
@@ -193,10 +213,16 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		/// <param name="CName">CollectionName of the new created object.</param>
 		/// <returns>Memory casted copy of the object.</returns>
-		public override ACollectable MemoryCast(string CName)
+		public override Collectable MemoryCast(string CName)
 		{
-			var result = new PerfSliderTuning(CName, this.Database);
-			base.MemoryCast(this, result);
+			var result = new PerfSliderTuning(CName, this.Career)
+			{
+				MaxSliderValueRatio = this.MaxSliderValueRatio,
+				MinSliderValueRatio = this.MinSliderValueRatio,
+				ValueSpread1 = this.ValueSpread1,
+				ValueSpread2 = this.ValueSpread2,
+			};
+
 			return result;
 		}
 
@@ -208,7 +234,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
 
 		#endregion
