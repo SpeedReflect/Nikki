@@ -21,7 +21,18 @@ namespace Nikki.Support.Underground2.Class
 
         private string _collection_name;
         private List<BankTrigger> _bank_triggers;
-
+        private List<GCareerBrand> _gcareer_brands;
+        private List<GCareerRace> _gcareer_races;
+        private List<GCareerStage> _gcareer_stages;
+        private List<GCarUnlock> _gcar_unlocks;
+        private List<GShowcase> _gshowcases;
+        private List<PartPerformance> _part_performances;
+        private List<PartUnlockable> _part_unlockables;
+        private List<PerfSliderTuning> _perfslider_tunings;
+        private List<SMSMessage> _sms_messages;
+        private List<Sponsor> _sponsors;
+        private List<WorldChallenge> _world_challenges;
+        private List<WorldShop> _world_shops;
 
         private const long max = 0x7FFFFFFF;
 
@@ -62,9 +73,160 @@ namespace Nikki.Support.Underground2.Class
         }
 
         /// <summary>
-        /// 
+        /// <see cref="List{T}"/> of <see cref="BankTrigger"/> in this <see cref="GCareer"/>.
         /// </summary>
+        [Browsable(false)]
         public List<BankTrigger> BankTriggers => this._bank_triggers;
+
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="GCareerBrand"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Browsable(false)]
+        public List<GCareerBrand> GCareerBrands => this._gcareer_brands;
+
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="GCareerRace"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Browsable(false)]
+        public List<GCareerRace> GCareerRaces => this._gcareer_races;
+
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="GCareerStage"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Browsable(false)]
+        public List<GCareerStage> GCareerStages => this._gcareer_stages;
+
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="GCarUnlock"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Browsable(false)]
+        public List<GCarUnlock> GCarUnlocks => this._gcar_unlocks;
+
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="GShowcase"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Browsable(false)]
+        public List<GShowcase> GShowcases => this._gshowcases;
+
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="PartPerformance"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Browsable(false)]
+        public List<PartPerformance> PartPerformances => this._part_performances;
+
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="PartUnlockable"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Browsable(false)]
+        public List<PartUnlockable> PartUnlockables => this._part_unlockables;
+
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="PerfSliderTuning"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Browsable(false)]
+        public List<PerfSliderTuning> PerfSliderTunings => this._perfslider_tunings;
+
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="SMSMessage"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Browsable(false)]
+        public List<SMSMessage> SMSMessages => this._sms_messages;
+
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="Sponsor"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Browsable(false)]
+        public List<Sponsor> Sponsors => this._sponsors;
+
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="WorldChallenge"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Browsable(false)]
+        public List<WorldChallenge> WorldChallenges => this._world_challenges;
+
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="WorldShop"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Browsable(false)]
+        public List<WorldShop> WorldShops => this._world_shops;
+
+        /// <summary>
+        /// Total count of <see cref="BankTrigger"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Category("Primary")]
+        public int BankTriggerCount => this._bank_triggers.Count;
+
+        /// <summary>
+        /// Total count of <see cref="GCareerBrand"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Category("Primary")]
+        public int GCareerBrandCount => this._gcareer_brands.Count;
+
+        /// <summary>
+        /// Total count of <see cref="GCareerRace"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Category("Primary")]
+        public int GCareerRaceCount => this._gcareer_races.Count;
+
+        /// <summary>
+        /// Total count of <see cref="GCareerStage"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Category("Primary")]
+        public int GCareerStageCount => this._gcareer_stages.Count;
+
+        /// <summary>
+        /// Total count of <see cref="GCarUnlock"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Category("Primary")]
+        public int GCarUnlockCount => this._gcar_unlocks.Count;
+
+        /// <summary>
+        /// Total count of <see cref="GShowcase"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Category("Primary")]
+        public int GShowcaseCount => this._gshowcases.Count;
+
+        /// <summary>
+        /// Total count of <see cref="PartPerformance"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Category("Primary")]
+        public int PartPerformanceCount => this._part_performances.Count;
+
+        /// <summary>
+        /// Total count of <see cref="PartUnlockable"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Category("Primary")]
+        public int PartUnlockableCount => this._part_unlockables.Count;
+
+        /// <summary>
+        /// Total count of <see cref="PerfSliderTuning"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Category("Primary")]
+        public int PerfSliderTuningCount => this._perfslider_tunings.Count;
+
+        /// <summary>
+        /// Total count of <see cref="SMSMessage"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Category("Primary")]
+        public int SMSMessageCount => this._sms_messages.Count;
+
+        /// <summary>
+        /// Total count of <see cref="Sponsor"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Category("Primary")]
+        public int SponsorCount => this._sponsors.Count;
+
+        /// <summary>
+        /// Total count of <see cref="WorldChallenge"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Category("Primary")]
+        public int WorldChallengeCount => this._world_challenges.Count;
+
+        /// <summary>
+        /// Total count of <see cref="WorldShop"/> in this <see cref="GCareer"/>.
+        /// </summary>
+        [Category("Primary")]
+        public int WorldShopCount => this._world_shops.Count;
 
         #endregion
 
@@ -75,7 +237,19 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         public GCareer()
 		{
-
+            this._bank_triggers = new List<BankTrigger>();
+            this._gcareer_brands = new List<GCareerBrand>();
+            this._gcareer_races = new List<GCareerRace>();
+            this._gcareer_stages = new List<GCareerStage>();
+            this._gcar_unlocks = new List<GCarUnlock>();
+            this._gshowcases = new List<GShowcase>();
+            this._part_performances = new List<PartPerformance>();
+            this._part_unlockables = new List<PartUnlockable>();
+            this._perfslider_tunings = new List<PerfSliderTuning>();
+            this._sms_messages = new List<SMSMessage>();
+            this._sponsors = new List<Sponsor>();
+            this._world_challenges = new List<WorldChallenge>();
+            this._world_shops = new List<WorldShop>();
 		}
 
         /// <summary>
