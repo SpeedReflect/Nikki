@@ -1,12 +1,15 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Underground2.Class;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -15,7 +18,7 @@ namespace Nikki.Support.Underground2.Gameplay
 	/// <summary>
 	/// <see cref="Sponsor"/> is a collection of settings related to world challenge events.
 	/// </summary>
-	public class WorldChallenge : ACollectable
+	public class WorldChallenge : Collectable
 	{
 		#region Fields
 
@@ -26,38 +29,85 @@ namespace Nikki.Support.Underground2.Gameplay
 
 		#endregion
 
+		#region Enums
+
+		/// <summary>
+		/// Enum of <see cref="WorldChallenge"/> types.
+		/// </summary>
+		public enum WorldChallengeType : byte
+		{
+			/// <summary>
+			/// Invalid challenge type.
+			/// </summary>
+			Invalid = 0,
+
+			/// <summary>
+			/// Unlocks visual upgrade.
+			/// </summary>
+			Visual = 1,
+
+			/// <summary>
+			/// Unlocks performance upgrade.
+			/// </summary>
+			Performance = 2,
+
+			/// <summary>
+			/// Is a showcase event.
+			/// </summary>
+			Showcase = 4,
+		}
+
+		#endregion
+
 		#region Properties
 
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override GameINT GameINT => GameINT.Underground2;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override string GameSTR => GameINT.Underground2.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// GCareer to which the class belongs to.
 		/// </summary>
-		public Database.Underground2 Database { get; set; }
+		[Browsable(false)]
+		public GCareer Career { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
 			set
 			{
-				if (string.IsNullOrWhiteSpace(value))
+				if (String.IsNullOrWhiteSpace(value))
+				{
+
 					throw new ArgumentNullException("This value cannot be left left empty.");
-				if (value.Contains(" "))
+
+				}
+				if (value.Contains(' '))
+				{
+
 					throw new Exception("CollectionName cannot contain whitespace.");
-				if (this.Database.WorldChallenges.FindCollection(value) != null)
+
+				}
+				if (this.Career.GetCollection(value, nameof(this.Career.WorldChallenges)) != null)
+				{
+
 					throw new CollectionExistenceException(value);
+
+				}
+
 				this._collection_name = value;
 			}
 		}
@@ -65,11 +115,15 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <summary>
 		/// Binary memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public uint BinKey => this._collection_name.BinHash();
 
 		/// <summary>
 		/// Vault memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public uint VltKey => this._collection_name.VltHash();
 
 		/// <summary>
@@ -77,14 +131,15 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public string WorldChallengeTrigger { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Stage to which this challenge belongs to.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public byte BelongsToStage { get; set; }
 
 		/// <summary>
@@ -92,16 +147,16 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// false otherwise.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public eBoolean UseOutrunsAsReqRaces { get; set; }
 
 		/// <summary>
 		/// Required races won to unlock this <see cref="WorldChallenge"/>.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte RequiredRacesWon { get; set; }
 
 		/// <summary>
@@ -109,21 +164,23 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		public string ChallengeSMSLabel { get; set; } = String.Empty;
+		[Category("Secondary")]
+		public string UnlockableSMS { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Parent, or destination in this <see cref="WorldChallenge"/>.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		public string ChallengeParent { get; set; } = String.Empty;
+		[Category("Secondary")]
+		public string Destination { get; set; } = String.Empty;
 		
 		/// <summary>
 		/// Time limit to complete this challenge.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int TimeLimit { get; set; }
 
 		/// <summary>
@@ -131,28 +188,32 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		public eWorldChallengeType WorldChallengeType { get; set; }
+		[Category("Primary")]
+		public WorldChallengeType ChallengeType { get; set; }
 
 		/// <summary>
 		/// Index of the first unique part that gets unlocked upon completion.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		public byte UnlockablePart1_Index { get; set; }
+		[Category("Secondary")]
+		public byte PartUnlockable1 { get; set; }
 
 		/// <summary>
 		/// Index of the second unique part that gets unlocked upon completion.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		public byte UnlockablePart2_Index { get; set; }
+		[Category("Secondary")]
+		public byte PartUnlockable2 { get; set; }
 
 		/// <summary>
 		/// Index of the third unique part that gets unlocked upon completion.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		public byte UnlockablePart3_Index { get; set; }
+		[Category("Secondary")]
+		public byte PartUnlockable3 { get; set; }
 
 		#endregion
 
@@ -167,10 +228,10 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Initializes new instance of <see cref="WorldChallenge"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-		public WorldChallenge(string CName, Database.Underground2 db)
+		/// <param name="career"><see cref="GCareer"/> to which this instance belongs to.</param>
+		public WorldChallenge(string CName, GCareer career)
 		{
-			this.Database = db;
+			this.Career = career;
 			this.CollectionName = CName;
 			CName.BinHash();
 		}
@@ -179,11 +240,11 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Initializes new instance of <see cref="WorldChallenge"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
+		/// <param name="career"><see cref="GCareer"/> to which this instance belongs to.</param>
 		/// <param name="strr"><see cref="BinaryReader"/> to read strings with.</param>
-		public WorldChallenge(BinaryReader br, BinaryReader strr, Database.Underground2 db)
+		public WorldChallenge(BinaryReader br, BinaryReader strr, GCareer career)
 		{
-			this.Database = db;
+			this.Career = career;
 			this.Disassemble(br, strr);
 		}
 
@@ -216,13 +277,13 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.Write(this._padding0);
 			bw.Write((byte)((byte)this.UseOutrunsAsReqRaces * 2));
 			bw.Write(this.RequiredRacesWon);
-			bw.Write(this.ChallengeSMSLabel.BinHash());
-			bw.Write(this.ChallengeParent.BinHash());
+			bw.Write(this.UnlockableSMS.BinHash());
+			bw.Write(this.Destination.BinHash());
 			bw.Write(this.TimeLimit);
-			bw.WriteEnum(this.WorldChallengeType);
-			bw.Write(this.UnlockablePart1_Index);
-			bw.Write(this.UnlockablePart2_Index);
-			bw.Write(this.UnlockablePart3_Index);
+			bw.WriteEnum(this.ChallengeType);
+			bw.Write(this.PartUnlockable1);
+			bw.Write(this.PartUnlockable2);
+			bw.Write(this.PartUnlockable3);
 		}
 
 		/// <summary>
@@ -251,17 +312,17 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.RequiredRacesWon = br.ReadByte();
 
 			// Hashes
-			this.ChallengeSMSLabel = br.ReadUInt32().BinString(eLookupReturn.EMPTY); // unlock sms
-			this.ChallengeParent = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.UnlockableSMS = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.Destination = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
 
 			// Time Limit
 			this.TimeLimit = br.ReadInt32();
 
 			// Type and Unlockables
-			this.WorldChallengeType = br.ReadEnum<eWorldChallengeType>();
-			this.UnlockablePart1_Index = br.ReadByte();
-			this.UnlockablePart2_Index = br.ReadByte();
-			this.UnlockablePart3_Index = br.ReadByte();
+			this.ChallengeType = br.ReadEnum<WorldChallengeType>();
+			this.PartUnlockable1 = br.ReadByte();
+			this.PartUnlockable2 = br.ReadByte();
+			this.PartUnlockable3 = br.ReadByte();
 		}
 
 		/// <summary>
@@ -269,9 +330,9 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		/// <param name="CName">CollectionName of the new created object.</param>
 		/// <returns>Memory casted copy of the object.</returns>
-		public override ACollectable MemoryCast(string CName)
+		public override Collectable MemoryCast(string CName)
 		{
-			var result = new WorldChallenge(CName, this.Database);
+			var result = new WorldChallenge(CName, this.Career);
 			base.MemoryCast(this, result);
 			return result;
 		}
@@ -284,7 +345,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
 
 		#endregion

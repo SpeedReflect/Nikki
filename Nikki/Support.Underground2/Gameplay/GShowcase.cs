@@ -26,6 +26,36 @@ namespace Nikki.Support.Underground2.Gameplay
 
 		#endregion
 
+		#region Enums
+
+		/// <summary>
+		/// Enum of taking photo methods in <see cref="GShowcase"/>.
+		/// </summary>
+		public enum TakePhotoMethod : byte
+		{
+			/// <summary>
+			/// Take photo by yourself for magazine.
+			/// </summary>
+			MagazineYourself = 1,
+
+			/// <summary>
+			/// Take photo by yourself for dvd.
+			/// </summary>
+			DVDYourself = 2,
+
+			/// <summary>
+			/// Take photo in-place for magazine.
+			/// </summary>
+			MagazineAuto = 3,
+
+			/// <summary>
+			/// Take photo in-place for dvd.
+			/// </summary>
+			DVDAuto = 4,
+		}
+
+		#endregion
+
 		#region Properties
 
 		/// <summary>
@@ -123,7 +153,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Primary")]
-		public eTakePhotoMethod TakePhotoMethod { get; set; }
+		public TakePhotoMethod TakePhotoType { get; set; }
 
 		/// <summary>
 		/// Stage to which this <see cref="GShowcase"/> belongs to.
@@ -219,7 +249,7 @@ namespace Nikki.Support.Underground2.Gameplay
 
 			// Write settings
 			bw.Write(this.BinKey);
-			bw.WriteEnum(this.TakePhotoMethod);
+			bw.WriteEnum(this.TakePhotoType);
 			bw.Write(this.BelongsToStage);
 			bw.Write(this.CashValue);
 			bw.Write(this.DescStringLabel.BinHash());
@@ -243,7 +273,7 @@ namespace Nikki.Support.Underground2.Gameplay
 
 			// Take Photo Settings
 			br.BaseStream.Position += 4;
-			this.TakePhotoMethod = br.ReadEnum<eTakePhotoMethod>();
+			this.TakePhotoType = br.ReadEnum<TakePhotoMethod>();
 			this.BelongsToStage = br.ReadByte();
 			this.CashValue = br.ReadInt16();
 			this.DescStringLabel = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
