@@ -115,6 +115,46 @@ namespace Nikki.Support.Underground2.Gameplay
 
 		#endregion
 
+		#region Enums
+
+		/// <summary>
+		/// Enum of <see cref="PartUnlockable"/> requirements.
+		/// </summary>
+		public enum PartUnlockReq : byte
+		{
+			/// <summary>
+			/// No requirements.
+			/// </summary>
+			NoRequirements = 0,
+
+			/// <summary>
+			/// Need to find specific shop.
+			/// </summary>
+			SpecShopFound = 1,
+
+			/// <summary>
+			/// Need to win specific amount of Regular races.
+			/// </summary>
+			ReqRegRacesWon = 2,
+
+			/// <summary>
+			/// Need to win specific amount of URL races.
+			/// </summary>
+			ReqURLRacesWon = 3,
+
+			/// <summary>
+			/// Need to win specific amount of Sponsor races.
+			/// </summary>
+			ReqSponRacesWon = 4,
+
+			/// <summary>
+			/// Initially unlocked.
+			/// </summary>
+			InitiallyUnlocked = 6,
+		}
+
+		#endregion
+
 		#region Properties
 
 		/// <summary>
@@ -185,144 +225,144 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public short VisualRating_Level1 { get; set; }
+		[Category("Level1")]
+		public short VisualRatingLevel1 { get; set; }
 
 		/// <summary>
 		/// Visual rating of level 2 parts.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public short VisualRating_Level2 { get; set; }
+		[Category("Level2")]
+		public short VisualRatingLevel2 { get; set; }
 
 		/// <summary>
 		/// Visual rating of level 3 parts.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public short VisualRating_Level3 { get; set; }
+		[Category("Level3")]
+		public short VisualRatingLevel3 { get; set; }
 
 		/// <summary>
 		/// Price of level 1 parts.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public short PartPrice_Level1 { get; set; }
+		[Category("Level1")]
+		public short PartPriceLevel1 { get; set; }
 
 		/// <summary>
 		/// Price of level 2 parts.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public short PartPrice_Level2 { get; set; }
+		[Category("Level2")]
+		public short PartPriceLevel2 { get; set; }
 
 		/// <summary>
 		/// Price of level 3 parts.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public short PartPrice_Level3 { get; set; }
+		[Category("Level3")]
+		public short PartPriceLevel3 { get; set; }
 
 		/// <summary>
 		/// Unlock method of level 1 parts.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Primary")]
-		public ePartUnlockReq UnlockMethod_Level1 { get; set; }
+		[Category("Level1")]
+		public PartUnlockReq UnlockMethodLevel1 { get; set; }
 
 		/// <summary>
 		/// Unlock method of level 2 parts.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Primary")]
-		public ePartUnlockReq UnlockMethod_Level2 { get; set; }
+		[Category("Level2")]
+		public PartUnlockReq UnlockMethodLevel2 { get; set; }
 
 		/// <summary>
 		/// Unlock method of level 3 parts.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Primary")]
-		public ePartUnlockReq UnlockMethod_Level3 { get; set; }
+		[Category("Level3")]
+		public PartUnlockReq UnlockMethodLevel3 { get; set; }
 
 		/// <summary>
 		/// Shop that unlocks level 1 parts.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public string UnlocksInShop_Level1 { get; set; } = String.Empty;
+		[Category("Level1")]
+		public string UnlocksInShopLevel1 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Shop that unlocks level 2 parts.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public string UnlocksInShop_Level2 { get; set; } = String.Empty;
+		[Category("Level2")]
+		public string UnlocksInShopLevel2 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Shop that unlocks level 3 parts.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public string UnlocksInShop_Level3 { get; set; } = String.Empty;
+		[Category("Level3")]
+		public string UnlocksInShopLevel3 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Required races won to unlock level 1 parts.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public byte RequiredRacesWon_Level1 { get; set; }
+		[Category("Level1")]
+		public byte RequiredRacesWonLevel1 { get; set; }
 
 		/// <summary>
 		/// Required races won to unlock level 2 parts.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public byte RequiredRacesWon_Level2 { get; set; }
+		[Category("Level2")]
+		public byte RequiredRacesWonLevel2 { get; set; }
 
 		/// <summary>
 		/// Required races won to unlock level 3 parts.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public byte RequiredRacesWon_Level3 { get; set; }
+		[Category("Level3")]
+		public byte RequiredRacesWonLevel3 { get; set; }
 
 		/// <summary>
 		/// Stage at which level 1 parts are being unlocked.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Primary")]
-		public byte BelongsToStage_Level1 { get; set; }
+		[Category("Level1")]
+		public byte BelongsToStageLevel1 { get; set; }
 
 		/// <summary>
 		/// Stage at which level 2 parts are being unlocked.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Primary")]
-		public byte BelongsToStage_Level2 { get; set; }
+		[Category("Level2")]
+		public byte BelongsToStageLevel2 { get; set; }
 
 		/// <summary>
 		/// Stage at which level 3 parts are being unlocked.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Primary")]
-		public byte BelongsToStage_Level3 { get; set; }
+		[Category("Level3")]
+		public byte BelongsToStageLevel3 { get; set; }
 
 		#endregion
 
@@ -375,65 +415,65 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.Write(this.GetValidCollectionIndex());
 
 			// Write level 1 settings
-			bw.Write(this.VisualRating_Level1);
-			bw.Write(this.PartPrice_Level1);
-			bw.WriteEnum(this.UnlockMethod_Level1);
+			bw.Write(this.VisualRatingLevel1);
+			bw.Write(this.PartPriceLevel1);
+			bw.WriteEnum(this.UnlockMethodLevel1);
 			bw.Write((byte)1);
 			bw.Write((short)0);
 			
-			if (this.UnlockMethod_Level1 == ePartUnlockReq.SPECIFIC_SHOP_FOUND)
+			if (this.UnlockMethodLevel1 == PartUnlockReq.SpecShopFound)
 			{
 
-				bw.Write(this.UnlocksInShop_Level1.BinHash());
+				bw.Write(this.UnlocksInShopLevel1.BinHash());
 
 			}
 			else
 			{
 
-				bw.Write((short)this.RequiredRacesWon_Level1);
-				bw.Write((short)this.BelongsToStage_Level1);
+				bw.Write((short)this.RequiredRacesWonLevel1);
+				bw.Write((short)this.BelongsToStageLevel1);
 			
 			}
 
 			// Write level 2 settings
-			bw.Write(this.VisualRating_Level2);
-			bw.Write(this.PartPrice_Level2);
-			bw.WriteEnum(this.UnlockMethod_Level2);
+			bw.Write(this.VisualRatingLevel2);
+			bw.Write(this.PartPriceLevel2);
+			bw.WriteEnum(this.UnlockMethodLevel2);
 			bw.Write((byte)2);
 			bw.Write((short)0);
 
-			if (this.UnlockMethod_Level2 == ePartUnlockReq.SPECIFIC_SHOP_FOUND)
+			if (this.UnlockMethodLevel2 == PartUnlockReq.SpecShopFound)
 			{
 
-				bw.Write(this.UnlocksInShop_Level2.BinHash());
+				bw.Write(this.UnlocksInShopLevel2.BinHash());
 
 			}
 			else
 			{
 			
-				bw.Write((short)this.RequiredRacesWon_Level2);
-				bw.Write((short)this.BelongsToStage_Level2);
+				bw.Write((short)this.RequiredRacesWonLevel2);
+				bw.Write((short)this.BelongsToStageLevel2);
 			
 			}
 
 			// Write level 3 settings
-			bw.Write(this.VisualRating_Level3);
-			bw.Write(this.PartPrice_Level3);
-			bw.WriteEnum(this.UnlockMethod_Level3);
+			bw.Write(this.VisualRatingLevel3);
+			bw.Write(this.PartPriceLevel3);
+			bw.WriteEnum(this.UnlockMethodLevel3);
 			bw.Write((byte)3);
 			bw.Write((short)0);
 
-			if (this.UnlockMethod_Level3 == ePartUnlockReq.SPECIFIC_SHOP_FOUND)
+			if (this.UnlockMethodLevel3 == PartUnlockReq.SpecShopFound)
 			{
 
-				bw.Write(this.UnlocksInShop_Level3.BinHash());
+				bw.Write(this.UnlocksInShopLevel3.BinHash());
 
 			}
 			else
 			{
 
-				bw.Write((short)this.RequiredRacesWon_Level3);
-				bw.Write((short)this.BelongsToStage_Level3);
+				bw.Write((short)this.RequiredRacesWonLevel3);
+				bw.Write((short)this.BelongsToStageLevel3);
 			
 			}
 		}
@@ -448,67 +488,67 @@ namespace Nikki.Support.Underground2.Gameplay
 			this._collection_name = this.GetValidCollectionName(br.ReadInt32());
 
 			// Read level 1 settings
-			this.VisualRating_Level1 = br.ReadInt16();
-			this.PartPrice_Level1 = br.ReadInt16();
-			this.UnlockMethod_Level1 = br.ReadEnum<ePartUnlockReq>();
+			this.VisualRatingLevel1 = br.ReadInt16();
+			this.PartPriceLevel1 = br.ReadInt16();
+			this.UnlockMethodLevel1 = br.ReadEnum<PartUnlockReq>();
 			br.BaseStream.Position += 3;
 
-			if (this.UnlockMethod_Level1 == ePartUnlockReq.SPECIFIC_SHOP_FOUND)
+			if (this.UnlockMethodLevel1 == PartUnlockReq.SpecShopFound)
 			{
 
-				this.UnlocksInShop_Level1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+				this.UnlocksInShopLevel1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
 
 			}
 			else
 			{
 
-				this.RequiredRacesWon_Level1 = br.ReadByte();
+				this.RequiredRacesWonLevel1 = br.ReadByte();
 				++br.BaseStream.Position;
-				this.BelongsToStage_Level1 = br.ReadByte();
+				this.BelongsToStageLevel1 = br.ReadByte();
 				++br.BaseStream.Position;
 			
 			}
 
 			// Read level 2 settings
-			this.VisualRating_Level2 = br.ReadInt16();
-			this.PartPrice_Level2 = br.ReadInt16();
-			this.UnlockMethod_Level2 = br.ReadEnum<ePartUnlockReq>();
+			this.VisualRatingLevel2 = br.ReadInt16();
+			this.PartPriceLevel2 = br.ReadInt16();
+			this.UnlockMethodLevel2 = br.ReadEnum<PartUnlockReq>();
 			br.BaseStream.Position += 3;
 
-			if (this.UnlockMethod_Level2 == ePartUnlockReq.SPECIFIC_SHOP_FOUND)
+			if (this.UnlockMethodLevel2 == PartUnlockReq.SpecShopFound)
 			{
 
-				this.UnlocksInShop_Level2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+				this.UnlocksInShopLevel2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
 
 			}
 			else
 			{
 
-				this.RequiredRacesWon_Level2 = br.ReadByte();
+				this.RequiredRacesWonLevel2 = br.ReadByte();
 				++br.BaseStream.Position;
-				this.BelongsToStage_Level2 = br.ReadByte();
+				this.BelongsToStageLevel2 = br.ReadByte();
 				++br.BaseStream.Position;
 			
 			}
 
 			// Read level 3 settings
-			this.VisualRating_Level3 = br.ReadInt16();
-			this.PartPrice_Level3 = br.ReadInt16();
-			this.UnlockMethod_Level3 = br.ReadEnum<ePartUnlockReq>();
+			this.VisualRatingLevel3 = br.ReadInt16();
+			this.PartPriceLevel3 = br.ReadInt16();
+			this.UnlockMethodLevel3 = br.ReadEnum<PartUnlockReq>();
 			br.BaseStream.Position += 3;
 
-			if (this.UnlockMethod_Level3 == ePartUnlockReq.SPECIFIC_SHOP_FOUND)
+			if (this.UnlockMethodLevel3 == PartUnlockReq.SpecShopFound)
 			{
 
-				this.UnlocksInShop_Level3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+				this.UnlocksInShopLevel3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
 
 			}
 			else
 			{
 
-				this.RequiredRacesWon_Level3 = br.ReadByte();
+				this.RequiredRacesWonLevel3 = br.ReadByte();
 				++br.BaseStream.Position;
-				this.BelongsToStage_Level3 = br.ReadByte();
+				this.BelongsToStageLevel3 = br.ReadByte();
 				++br.BaseStream.Position;
 			
 			}
