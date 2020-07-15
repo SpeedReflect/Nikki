@@ -241,7 +241,7 @@ namespace Nikki.Support.MostWanted.Class
             this._collection_name = reader.ReadNullTermUTF8();
             this.SlotStockOverride = reader.ReadNullTermUTF8();
             this.SlotMainOverride = reader.ReadNullTermUTF8();
-            this.PrimaryAnimation = reader.ReadEnum<eCarAnimLocation>();
+            this.PrimaryAnimation = reader.ReadEnum<CarAnimLocation>();
         }
 
         #endregion

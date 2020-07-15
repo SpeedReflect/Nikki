@@ -1,5 +1,5 @@
-﻿using System.IO;
-using Nikki.Reflection.Enum;
+﻿using System;
+using System.IO;
 using Nikki.Reflection.Abstract;
 using Nikki.Support.Shared.Class;
 using Nikki.Reflection.Attributes;
@@ -14,6 +14,88 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 	/// </summary>
 	public class CollisionBound : SubPart
 	{
+		/// <summary>
+		/// Enum of Bound flags that are used for <see cref="CollisionBound"/>.
+		/// </summary>
+		[Flags()]
+		public enum BoundFlags : short
+		{
+			/// <summary>
+			/// 
+			/// </summary>
+			kBounds_Disabled = 1,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			kBounds_PrimVsWorld = 2,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			kBounds_PrimVsObjects = 4,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			kBounds_PrimVsGround = 8,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			kBounds_MeshVsGround = 16,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			kBounds_Internal = 32,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			kBounds_Box = 64,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			kBounds_Sphere = 128,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			kBounds_Constraint_Conical = 256,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			kBounds_Constraint_Prismatic = 512,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			kBounds_Joint_Female = 1024,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			kBounds_Joint_Male = 2048,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			kBounds_Male_Post = 4096,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			kBounds_Joint_Invert = 8192,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			kBounds_PrimVsOwnParts = 16384,
+		}
+
 		/// <summary>
 		/// X value of the orientation of this <see cref="CollisionBound"/>.
 		/// </summary>
@@ -60,7 +142,7 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		/// Type of the bound.
 		/// </summary>
 		[AccessModifiable()]
-		public eBoundFlags BoundType { get; set; } = eBoundFlags.kBounds_Box;
+		public BoundFlags BoundType { get; set; } = BoundFlags.kBounds_Box;
 
 		/// <summary>
 		/// X value of the half dimension of this <see cref="CollisionBound"/>.
@@ -158,7 +240,7 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 			this.PositionX = br.ReadInt16();
 			this.PositionY = br.ReadInt16();
 			this.PositionZ = br.ReadInt16();
-			this.BoundType = (eBoundFlags)br.ReadInt16();
+			this.BoundType = (BoundFlags)br.ReadInt16();
 			this.HalfDimensionX = br.ReadInt16();
 			this.HalfDimensionY = br.ReadInt16();
 			this.HalfDimensionZ = br.ReadInt16();

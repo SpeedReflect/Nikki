@@ -412,7 +412,7 @@ namespace Nikki.Support.Prostreet.Class
             this.SlotOverrideGroup13 = reader.ReadNullTermUTF8();
             this.SlotOverrideGroup14 = reader.ReadNullTermUTF8();
             this.SlotOverrideGroup15 = reader.ReadNullTermUTF8();
-            this.PrimaryAnimation = reader.ReadEnum<eCarAnimLocation>();
+            this.PrimaryAnimation = reader.ReadEnum<CarAnimLocation>();
         }
 
         #endregion

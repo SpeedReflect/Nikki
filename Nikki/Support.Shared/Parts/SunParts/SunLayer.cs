@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
@@ -13,17 +12,73 @@ namespace Nikki.Support.Shared.Parts.SunParts
 	/// </summary>
 	public class SunLayer : SubPart
 	{
+		#region Enums
+
 		/// <summary>
-		/// 
+		/// Enum of sun alpha values.
 		/// </summary>
-		[AccessModifiable()]
-		public eSunTexture SunTextureType { get; set; }
+		public enum SunAlpha : int
+		{
+			/// <summary>
+			/// Blenging rays.
+			/// </summary>
+			SUNALPHA_BLEND = 0,
+
+			/// <summary>
+			/// Additive rays.
+			/// </summary>
+			SUNALPHA_ADD = 1,
+		}
+
+		/// <summary>
+		/// Enum of sun textures that could be used.
+		/// </summary>
+		public enum SunTexture : int
+		{
+			/// <summary>
+			/// 
+			/// </summary>
+			SUNTEX_CENTER = 0,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			SUNTEX_HALO = 1,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			SUNTEX_MAJORRAYS = 2,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			SUNTEX_MINORRAYS = 3,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			SUNTEX_RING = 4,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			NUM_SUN_TEXTURES = 5,
+		}
+
+		#endregion
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
-		public eSunAlpha SunAlphaType { get; set; }
+		public SunTexture SunTextureType { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		[AccessModifiable()]
+		public SunAlpha SunAlphaType { get; set; }
 
 		/// <summary>
 		/// 
@@ -102,8 +157,8 @@ namespace Nikki.Support.Shared.Parts.SunParts
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Read(BinaryReader br)
 		{
-			this.SunTextureType = br.ReadEnum<eSunTexture>();
-			this.SunAlphaType = br.ReadEnum<eSunAlpha>();
+			this.SunTextureType = br.ReadEnum<SunTexture>();
+			this.SunAlphaType = br.ReadEnum<SunAlpha>();
 			this.IntensityScale = br.ReadSingle();
 			this.Size = br.ReadSingle();
 			this.OffsetX = br.ReadSingle();

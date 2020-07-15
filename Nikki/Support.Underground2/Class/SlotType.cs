@@ -97,7 +97,7 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [MemoryCastable()]
         [Category("Primary")]
-        public eCarAnimLocation SecondaryAnimation { get; set; } = eCarAnimLocation.CARANIM_NONE;
+        public CarAnimLocation SecondaryAnimation { get; set; } = CarAnimLocation.CARANIM_NONE;
 
         /// <summary>
         /// Current index of this <see cref="SlotType"/>.
@@ -251,8 +251,8 @@ namespace Nikki.Support.Underground2.Class
             this._collection_name = reader.ReadNullTermUTF8();
             this.SlotStockOverride = reader.ReadNullTermUTF8();
             this.SlotMainOverride = reader.ReadNullTermUTF8();
-            this.PrimaryAnimation = reader.ReadEnum<eCarAnimLocation>();
-            this.SecondaryAnimation = reader.ReadEnum<eCarAnimLocation>();
+            this.PrimaryAnimation = reader.ReadEnum<CarAnimLocation>();
+            this.SecondaryAnimation = reader.ReadEnum<CarAnimLocation>();
         }
 
         #endregion

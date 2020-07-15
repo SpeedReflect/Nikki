@@ -302,7 +302,7 @@ namespace Nikki.Support.Carbon.Class
             this.SlotOverrideGroup4 = reader.ReadNullTermUTF8();
             this.SlotOverrideGroup5 = reader.ReadNullTermUTF8();
             this.SlotOverrideGroup6 = reader.ReadNullTermUTF8();
-            this.PrimaryAnimation = reader.ReadEnum<eCarAnimLocation>();
+            this.PrimaryAnimation = reader.ReadEnum<CarAnimLocation>();
         }
 
         #endregion

@@ -3,7 +3,6 @@ using System.IO;
 using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
-using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
@@ -17,12 +16,52 @@ namespace Nikki.Support.Shared.Class
 	/// </summary>
 	public abstract class SlotType : Collectable, IAssembly
 	{
-		#region Main Properties
+        #region Shared Enums
 
-		/// <summary>
-		/// Collection name of the variable.
-		/// </summary>
-		public override string CollectionName { get; set; }
+        /// <summary>
+        /// Enum of animation locations.
+        /// </summary>
+        public enum CarAnimLocation : sbyte
+        {
+            /// <summary>
+            /// No animations
+            /// </summary>
+            CARANIM_NONE = -1,
+
+            /// <summary>
+            /// Hood animations.
+            /// </summary>
+            CARANIM_HOOD = 0,
+
+            /// <summary>
+            /// Trunk animations.
+            /// </summary>
+            CARANIM_TRUNK = 1,
+
+            /// <summary>
+            /// Left door animations.
+            /// </summary>
+            CARANIM_LEFT_DOOR = 2,
+
+            /// <summary>
+            /// Right door animations.
+            /// </summary>
+            CARANIM_RIGHT_DOOR = 3,
+
+            /// <summary>
+            /// Multiple animations.
+            /// </summary>
+            CARANIM_NUM = 4,
+        }
+
+        #endregion
+
+        #region Main Properties
+
+        /// <summary>
+        /// Collection name of the variable.
+        /// </summary>
+        public override string CollectionName { get; set; }
 
         /// <summary>
         /// Game to which the class belongs to.
@@ -70,7 +109,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [MemoryCastable()]
         [Category("Primary")]
-        public eCarAnimLocation PrimaryAnimation { get; set; } = eCarAnimLocation.CARANIM_NONE;
+        public CarAnimLocation PrimaryAnimation { get; set; } = CarAnimLocation.CARANIM_NONE;
 
 		#endregion
 
