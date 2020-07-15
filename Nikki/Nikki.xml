@@ -840,14 +840,14 @@
             <summary>
             Returns the value of a field name provided.
             </summary>
-            <param name="PropertyName">Field name to get the value from.</param>
+            <param name="propertyName">Field name to get the value from.</param>
             <returns>String value of a field name.</returns>
         </member>
         <member name="M:Nikki.Reflection.Abstract.Collectable.SetValue(System.String,System.Object)">
             <summary>
             Sets value at a field specified.
             </summary>
-            <param name="PropertyName">Name of the field to be modified.</param>
+            <param name="propertyName">Name of the field to be modified.</param>
             <param name="value">Value to be set at the field specified.</param>
             <returns>True on success; false otherwise.</returns>
         </member>
@@ -927,6 +927,20 @@
             <param name="manager">Name of <see cref="T:Nikki.Reflection.Interface.IManager"/> to invoke for import.</param>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
+        <member name="P:Nikki.Reflection.Abstract.FileBase.Item(System.String)">
+            <summary>
+            Gets <see cref="T:Nikki.Reflection.Interface.IManager"/> with name specified.
+            </summary>
+            <param name="name">Name of <see cref="T:Nikki.Reflection.Interface.IManager"/> to get.</param>
+            <returns><see cref="T:Nikki.Reflection.Interface.IManager"/>, if exists; null otherwise.</returns>
+        </member>
+        <member name="P:Nikki.Reflection.Abstract.FileBase.Item(System.Type)">
+            <summary>
+            Gets <see cref="T:Nikki.Reflection.Interface.IManager"/> with type specified.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> of <see cref="T:Nikki.Reflection.Interface.IManager"/> to get.</param>
+            <returns><see cref="T:Nikki.Reflection.Interface.IManager"/>, if exists; null otherwise.</returns>
+        </member>
         <member name="M:Nikki.Reflection.Abstract.FileBase.GetManager(System.String)">
             <summary>
             Gets <see cref="T:Nikki.Reflection.Interface.IManager"/> with name specified.
@@ -965,14 +979,14 @@
             <summary>
             Returns the value of a field name provided.
             </summary>
-            <param name="PropertyName">Field name to get the value from.</param>
+            <param name="propertyName">Field name to get the value from.</param>
             <returns>String value of a field name.</returns>
         </member>
         <member name="M:Nikki.Reflection.Abstract.SubPart.SetValue(System.String,System.Object)">
             <summary>
             Sets value at a field specified.
             </summary>
-            <param name="PropertyName">Name of the field to be modified.</param>
+            <param name="propertyName">Name of the field to be modified.</param>
             <param name="value">Value to be set at the field specified.</param>
             <returns>True on success; false otherwise.</returns>
         </member>
@@ -8677,14 +8691,14 @@
             <summary>
             Returns the value of a field name provided.
             </summary>
-            <param name="PropertyName">Field name to get the value from.</param>
+            <param name="propertyName">Field name to get the value from.</param>
             <returns>String value of a field name.</returns>
         </member>
         <member name="M:Nikki.Reflection.Interface.IReflective.SetValue(System.String,System.Object)">
             <summary>
             Sets value at a field specified.
             </summary>
-            <param name="PropertyName">Name of the field to be modified.</param>
+            <param name="propertyName">Name of the field to be modified.</param>
             <param name="value">Value to be set at the field specified.</param>
             <returns>True on success; false otherwise.</returns>
         </member>

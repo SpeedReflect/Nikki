@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Support.Underground2.Gameplay;
 using Nikki.Support.Underground2.Framework;
+using CoreExtensions.IO;
 
 
 
@@ -295,7 +297,67 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         public override void Disassemble(BinaryReader br)
         {
+            br.BaseStream.Position += 4;
+            var size = br.ReadInt32();
+            var start = br.BaseStream.Position;
+            var offsets = this.FindOffsets(br, size);
 
+            MemoryStream ms = null;
+            BinaryReader strr = null;
+
+            if (offsets[0] != max)
+			{
+
+                br.BaseStream.Position = offsets[0];
+                var total = br.ReadInt32();
+                ms = new MemoryStream(br.ReadBytes(total));
+                strr = new BinaryReader(ms);
+
+			}
+
+            br.BaseStream.Position = offsets[0];
+            this.ReadStrings(br);
+
+            br.BaseStream.Position = offsets[1];
+            this.ReadGCareerRaces(br, strr);
+
+            br.BaseStream.Position = offsets[2];
+            this.ReadWorldShops(br);
+
+            br.BaseStream.Position = offsets[3];
+            this.ReadGCareerBrands(br);
+
+            br.BaseStream.Position = offsets[4];
+            this.ReadPartPerformances(br);
+
+            br.BaseStream.Position = offsets[5];
+            this.ReadGShowcases(br);
+
+            br.BaseStream.Position = offsets[6];
+            this.ReadSMSMessages(br, strr);
+
+            br.BaseStream.Position = offsets[7];
+            this.ReadSponsors(br, strr);
+
+            br.BaseStream.Position = offsets[8];
+            this.ReadGCareerStages(br);
+
+            br.BaseStream.Position = offsets[9];
+            this.ReadPerfSliderTunings(br);
+
+            br.BaseStream.Position = offsets[10];
+            this.ReadWorldChallenges(br, strr);
+
+            br.BaseStream.Position = offsets[11];
+            this.ReadPartUnlockables(br);
+
+            br.BaseStream.Position = offsets[12];
+            this.ReadBankTriggers(br);
+
+            br.BaseStream.Position = offsets[13];
+            this.ReadGCarUnlocks(br);
+
+            br.BaseStream.Position = start + size;
         }
 
         /// <summary>
@@ -305,7 +367,10 @@ namespace Nikki.Support.Underground2.Class
         /// <returns>Collections of type specified, if type is registered; null otherwise.</returns>
         public override IEnumerable<T> GetCollections<T>()
 		{
+            var type = typeof(T);
 
+
+            int aaa = 0;
             return null;
 		}
 
@@ -317,8 +382,23 @@ namespace Nikki.Support.Underground2.Class
         /// <returns>Collection, if exists; null otherwise.</returns>
         public override Collectable GetCollection(string cname, string root)
 		{
-
-            return null;
+            return root switch
+            {
+                nameof(this.BankTriggers) => this.BankTriggers.Find(_ => _.CollectionName == cname),
+                nameof(this.GCareerBrands) => this.GCareerBrands.Find(_ => _.CollectionName == cname),
+                nameof(this.GCareerRaces) => this.GCareerRaces.Find(_ => _.CollectionName == cname),
+                nameof(this.GCareerStages) => this.GCareerStages.Find(_ => _.CollectionName == cname),
+                nameof(this.GCarUnlocks) => this.GCarUnlocks.Find(_ => _.CollectionName == cname),
+                nameof(this.GShowcases) => this.GShowcases.Find(_ => _.CollectionName == cname),
+                nameof(this.PartPerformances) => this.PartPerformances.Find(_ => _.CollectionName == cname),
+                nameof(this.PartUnlockables) => this.PartUnlockables.Find(_ => _.CollectionName == cname),
+                nameof(this.PerfSliderTunings) => this.PerfSliderTunings.Find(_ => _.CollectionName == cname),
+                nameof(this.SMSMessages) => this.SMSMessages.Find(_ => _.CollectionName == cname),
+                nameof(this.Sponsors) => this.Sponsors.Find(_ => _.CollectionName == cname),
+                nameof(this.WorldChallenges) => this.WorldChallenges.Find(_ => _.CollectionName == cname),
+                nameof(this.WorldShops) => this.WorldShops.Find(_ => _.CollectionName == cname),
+                _ => null,
+            };
 		}
 
         /// <summary>
@@ -367,21 +447,355 @@ namespace Nikki.Support.Underground2.Class
 
         #region Reading Methods
 
-        /// <summary>
-        /// Finds offsets of all partials and its parts in the <see cref="GCareer"/>.
-        /// </summary>
-        /// <param name="br"><see cref="BinaryReader"/> to read <see cref="GCareer"/> with.</param>
-        /// <returns>Array of all offsets.</returns>
-        protected override long[] FindOffsets(BinaryReader br)
+        private long[] FindOffsets(BinaryReader br, int size)
         {
+            var result = new long[14];
+            var offset = br.BaseStream.Position;
+            for (int i = 0; i < 14; ++i) result[i] = max;
 
+            while (br.BaseStream.Position < offset + size)
+            {
 
+                var id = br.ReadEnum<BinBlockID>();
 
-            return null;
+                switch (id)
+                {
+                    case BinBlockID.GCareer_Strings:
+                        result[0] = br.BaseStream.Position;
+                        goto default;
+
+                    case BinBlockID.GCareer_Races:
+                        result[1] = br.BaseStream.Position;
+                        goto default;
+
+                    case BinBlockID.GCareer_Shops:
+                        result[2] = br.BaseStream.Position;
+                        goto default;
+
+                    case BinBlockID.GCareer_Brands:
+                        result[3] = br.BaseStream.Position;
+                        goto default;
+
+                    case BinBlockID.GCareer_PartPerf:
+                        result[4] = br.BaseStream.Position;
+                        goto default;
+
+                    case BinBlockID.GCareer_Showcases:
+                        result[5] = br.BaseStream.Position;
+                        goto default;
+
+                    case BinBlockID.GCareer_Messages:
+                        result[6] = br.BaseStream.Position;
+                        goto default;
+
+                    case BinBlockID.GCareer_Sponsors:
+                        result[7] = br.BaseStream.Position;
+                        goto default;
+
+                    case BinBlockID.GCareer_Stages:
+                        result[8] = br.BaseStream.Position;
+                        goto default;
+
+                    case BinBlockID.GCareer_PerfTun:
+                        result[9] = br.BaseStream.Position;
+                        goto default;
+
+                    case BinBlockID.GCareer_Challenges:
+                        result[10] = br.BaseStream.Position;
+                        goto default;
+
+                    case BinBlockID.GCareer_PartUnlock:
+                        result[11] = br.BaseStream.Position;
+                        goto default;
+
+                    case BinBlockID.GCareer_BankTrigs:
+                        result[12] = br.BaseStream.Position;
+                        goto default;
+
+                    case BinBlockID.GCareer_CarUnlocks:
+                        result[13] = br.BaseStream.Position;
+                        goto default;
+
+                    default:
+                        var skip = br.ReadInt32();
+                        br.BaseStream.Position += skip;
+                        break;
+
+                }
+
+            }
+
+            br.BaseStream.Position = offset;
+            return result;
         }
 
+        private void ReadStrings(BinaryReader br)
+		{
+            if (br.BaseStream.Position == max) return;
+            var offset = br.BaseStream.Position;
+            var size = br.ReadInt32();
 
+            while (br.BaseStream.Position < offset + size)
+			{
 
+                var str = br.ReadNullTermUTF8();
+                str.BinHash();
+
+			}
+		}
+
+        private void ReadGCareerRaces(BinaryReader br, BinaryReader strr)
+		{
+            if (br.BaseStream.Position == max) return;
+            var offset = br.BaseStream.Position;
+            var size = br.ReadInt32();
+
+            var count = size / 0x88;
+            this.GCareerRaces.Capacity = count;
+
+            for (int i = 0; i < count; ++i)
+			{
+
+                var collection = new GCareerRace(br, strr, this);
+                this.GCareerRaces.Add(collection);
+
+			}
+		}
+
+        private void ReadWorldShops(BinaryReader br)
+		{
+            if (br.BaseStream.Position == max) return;
+            var offset = br.BaseStream.Position;
+            var size = br.ReadInt32();
+
+            var count = size / 0xA0;
+            this.WorldShops.Capacity = count;
+
+            for (int i = 0; i < count; ++i)
+            {
+
+                var collection = new WorldShop(br, this);
+                this.WorldShops.Add(collection);
+
+            }
+        }
+
+        private void ReadGCareerBrands(BinaryReader br)
+		{
+            if (br.BaseStream.Position == max) return;
+            var offset = br.BaseStream.Position;
+            var size = br.ReadInt32();
+
+            var count = size / 0x44;
+            this.GCareerBrands.Capacity = count;
+
+            for (int i = 0; i < count; ++i)
+            {
+
+                var collection = new GCareerBrand(br, this);
+                this.GCareerBrands.Add(collection);
+
+            }
+        }
+
+        private void ReadPartPerformances(BinaryReader br)
+		{
+            if (br.BaseStream.Position == max) return;
+            var offset = br.BaseStream.Position;
+            var size = br.ReadInt32();
+
+            var count = size / 0x17C;
+
+            for (int loop = 0; loop < count; ++loop)
+            {
+                int index = br.ReadInt32();
+                int level = br.ReadInt32();
+                int total = br.ReadInt32();
+
+                for (int i = 0; i < total; ++i)
+                {
+
+                    var collection = new PartPerformance(br, this)
+                    {
+                        PartPerformanceType = (PartPerformance.PerformanceType)index,
+                        UpgradeLevel = level,
+                        UpgradePartIndex = i,
+                    };
+
+                    this.PartPerformances.Add(collection);
+                
+                }
+
+                for (int i = total; i < 4; ++i)
+                {
+
+                    br.BaseStream.Position += 0x5C;
+
+                }
+            }
+        }
+
+        private void ReadGShowcases(BinaryReader br)
+		{
+            if (br.BaseStream.Position == max) return;
+            var offset = br.BaseStream.Position;
+            var size = br.ReadInt32();
+
+            var count = size >> 6;
+            this.GShowcases.Capacity = count;
+
+            for (int i = 0; i < count; ++i)
+            {
+
+                var collection = new GShowcase(br, this);
+                this.GShowcases.Add(collection);
+
+            }
+        }
+
+        private void ReadSMSMessages(BinaryReader br, BinaryReader strr)
+		{
+            if (br.BaseStream.Position == max) return;
+            var offset = br.BaseStream.Position;
+            var size = br.ReadInt32();
+
+            var count = size / 0x14;
+            this.SMSMessages.Capacity = count;
+
+            for (int i = 0; i < count; ++i)
+            {
+
+                var collection = new SMSMessage(br, strr, this);
+                this.SMSMessages.Add(collection);
+
+            }
+        }
+
+        private void ReadSponsors(BinaryReader br, BinaryReader strr)
+		{
+            if (br.BaseStream.Position == max) return;
+            var offset = br.BaseStream.Position;
+            var size = br.ReadInt32();
+
+            var count = size >> 4;
+            this.Sponsors.Capacity = count;
+
+            for (int i = 0; i < count; ++i)
+            {
+
+                var collection = new Sponsor(br, strr, this);
+                this.Sponsors.Add(collection);
+
+            }
+        }
+
+        private void ReadGCareerStages(BinaryReader br)
+		{
+            if (br.BaseStream.Position == max) return;
+            var offset = br.BaseStream.Position;
+            var size = br.ReadInt32();
+
+            var count = size / 0x50;
+            this.GCareerStages.Capacity = count;
+
+            for (int i = 0; i < count; ++i)
+            {
+
+                var collection = new GCareerStage(br, this);
+                this.GCareerStages.Add(collection);
+
+            }
+        }
+
+        private void ReadPerfSliderTunings(BinaryReader br)
+		{
+            if (br.BaseStream.Position == max) return;
+            var offset = br.BaseStream.Position;
+            var size = br.ReadInt32();
+
+            var count = size / 0x18;
+            this.PerfSliderTunings.Capacity = count;
+
+            for (int i = 0; i < count; ++i)
+            {
+
+                var collection = new PerfSliderTuning(br, this);
+                this.PerfSliderTunings.Add(collection);
+
+            }
+        }
+
+        private void ReadWorldChallenges(BinaryReader br, BinaryReader strr)
+		{
+            if (br.BaseStream.Position == max) return;
+            var offset = br.BaseStream.Position;
+            var size = br.ReadInt32();
+
+            var count = size / 0x18;
+            this.WorldChallenges.Capacity = count;
+
+            for (int i = 0; i < count; ++i)
+            {
+
+                var collection = new WorldChallenge(br, strr, this);
+                this.WorldChallenges.Add(collection);
+
+            }
+        }
+
+        private void ReadPartUnlockables(BinaryReader br)
+		{
+            if (br.BaseStream.Position == max) return;
+            var offset = br.BaseStream.Position;
+            var size = br.ReadInt32();
+
+            var count = size / 0x28;
+            this.PartUnlockables.Capacity = count;
+
+            for (int i = 0; i < count; ++i)
+            {
+
+                var collection = new PartUnlockable(br, this);
+                this.PartUnlockables.Add(collection);
+
+            }
+        }
+
+        private void ReadBankTriggers(BinaryReader br)
+		{
+            if (br.BaseStream.Position == max) return;
+            var offset = br.BaseStream.Position;
+            var size = br.ReadInt32();
+
+            var count = size / 0xC;
+            this.BankTriggers.Capacity = count;
+
+            for (int i = 0; i < count; ++i)
+            {
+
+                var collection = new BankTrigger(br, this);
+                this.BankTriggers.Add(collection);
+
+            }
+        }
+
+        private void ReadGCarUnlocks(BinaryReader br)
+		{
+            if (br.BaseStream.Position == max) return;
+            var offset = br.BaseStream.Position;
+            var size = br.ReadInt32();
+
+            var count = size / 0xC;
+            this.GCarUnlocks.Capacity = count;
+
+            for (int i = 0; i < count; ++i)
+            {
+
+                var collection = new GCarUnlock(br, this);
+                this.GCarUnlocks.Add(collection);
+
+            }
+        }
 
         #endregion
 

@@ -88,13 +88,6 @@ namespace Nikki.Support.Shared.Class
         public abstract void Deserialize(BinaryReader br);
 
         /// <summary>
-        /// Finds offsets of all partials and its parts in the <see cref="GCareer"/>.
-        /// </summary>
-        /// <param name="br"><see cref="BinaryReader"/> to read <see cref="GCareer"/> with.</param>
-        /// <returns>Array of all offsets.</returns>
-        protected abstract long[] FindOffsets(BinaryReader br);
-
-        /// <summary>
         /// Gets all collections of type <see cref="Collectable"/>.
         /// </summary>
         /// <typeparam name="T">A <see cref="Collectable"/> collections to get.</typeparam>
