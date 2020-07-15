@@ -17,12 +17,83 @@ namespace Nikki.Support.Shared.Class
     /// </summary>
     public abstract class CarTypeInfo : Collectable, IAssembly
     {
-		#region Main Properties
+        #region Shared Enums
 
-		/// <summary>
-		/// Collection name of the variable.
-		/// </summary>
-		public override string CollectionName { get; set; }
+        /// <summary>
+        /// Enum of usage types.
+        /// </summary>
+        public enum CarUsageType : int
+        {
+            /// <summary>
+            /// Car is used by racers.
+            /// </summary>
+            Racer = 0,
+
+            /// <summary>
+            /// Car is used by cops.
+            /// </summary>
+            Cop = 1,
+
+            /// <summary>
+            /// Car is used by traffic.
+            /// </summary>
+            Traffic = 2,
+
+            /// <summary>
+            /// CarTypeInfo is a wheels part.
+            /// </summary>
+            Wheels = 3,
+
+            /// <summary>
+            /// CarTypeInfo is a universal part.
+            /// </summary>
+            Universal = 4,
+        }
+
+        /// <summary>
+        /// Enum of car memory types.
+        /// </summary>
+        public enum CarMemoryType : uint
+        {
+            /// <summary>
+            /// Player Memory Type.
+            /// </summary>
+            Player = 0x757C0CEC,
+
+            /// <summary>
+            /// Racing Memory Type.
+            /// </summary>
+            Racing = 0x79602673,
+
+            /// <summary>
+            /// Cop Memory Type.
+            /// </summary>
+            Cop = 0x00009F61,
+
+            /// <summary>
+            /// Traffic Memory Type.
+            /// </summary>
+            Traffic = 0x66DB297E,
+
+            /// <summary>
+            /// BigTraffic Memory Type.
+            /// </summary>
+            BigTraffic = 0xAE00B390,
+
+            /// <summary>
+            /// HugeTraffic Memory Type.
+            /// </summary>
+            HugeTraffic = 0x911B6387,
+        }
+
+        #endregion
+
+        #region Main Properties
+
+        /// <summary>
+        /// Collection name of the variable.
+        /// </summary>
+        public override string CollectionName { get; set; }
 
         /// <summary>
         /// Game to which the class belongs to.
@@ -66,7 +137,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [MemoryCastable()]
         [Category("Primary")]
-        public eUsageType UsageType { get; set; }
+        public CarUsageType UsageType { get; set; }
 
         /// <summary>
         /// Represents boolean as an int of whether <see cref="CarTypeInfo"/> is skinnable.

@@ -121,7 +121,7 @@ namespace Nikki.Support.Carbon.Class
 		[StaticModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
-		public eLocationType LocationType { get; set; }
+		public TrackLocationType LocationType { get; set; }
 
 		/// <summary>
 		/// Drift type of the track.
@@ -130,7 +130,7 @@ namespace Nikki.Support.Carbon.Class
 		[StaticModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
-		public eDriftType DriftType { get; set; }
+		public TrackDriftType DriftType { get; set; }
 
 		/// <summary>
 		/// Total length of the whole track
@@ -611,8 +611,8 @@ namespace Nikki.Support.Carbon.Class
 			this.LocationDirectory = br.ReadNullTermUTF8(0x10);
 
 			// Read race settings
-			this.LocationType = br.ReadEnum<eLocationType>();
-			this.DriftType = br.ReadEnum<eDriftType>();
+			this.LocationType = br.ReadEnum<TrackLocationType>();
+			this.DriftType = br.ReadEnum<TrackDriftType>();
 			this.IsValid = br.ReadEnum<eBoolean>();
 			this.IsLoopingRace = br.ReadByte() == 0 ? eBoolean.True : eBoolean.False;
 			this.ReverseVersionExists = br.ReadEnum<eBoolean>();
@@ -624,7 +624,7 @@ namespace Nikki.Support.Carbon.Class
 
 			// Read gameplay scores
 			this.SunInfoName = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.RaceGameplayMode = br.ReadEnum<eRaceGameplayMode>();
+			this.RaceGameplayMode = br.ReadEnum<TrackGameplayMode>();
 			this.RaceLength = br.ReadUInt32();
 			this.TimeLimitToBeatForward = br.ReadSingle();
 			this.TimeLimitToBeatReverse = br.ReadSingle();
@@ -642,8 +642,8 @@ namespace Nikki.Support.Carbon.Class
 			this.TrackMapCalibrationZoomIn = br.ReadSingle();
 
 			// Read difficulties and padding
-			this.DifficultyForward = (eTrackDifficulty)(br.ReadInt32());
-			this.DifficultyReverse = (eTrackDifficulty)(br.ReadInt32());
+			this.DifficultyForward = (TrackDifficulty)(br.ReadInt32());
+			this.DifficultyReverse = (TrackDifficulty)(br.ReadInt32());
 			this.NumSecBeforeShorcutsAllowed = br.ReadInt16();
 			this.DriftSecondsMin = br.ReadInt16();
 			this.DriftSecondsMax = br.ReadInt16();
@@ -820,8 +820,8 @@ namespace Nikki.Support.Carbon.Class
 			this.LocationDirectory = reader.ReadNullTermUTF8();
 
 			// Read race settings
-			this.LocationType = reader.ReadEnum<eLocationType>();
-			this.DriftType = reader.ReadEnum<eDriftType>();
+			this.LocationType = reader.ReadEnum<TrackLocationType>();
+			this.DriftType = reader.ReadEnum<TrackDriftType>();
 			this.IsValid = reader.ReadEnum<eBoolean>();
 			this.IsLoopingRace = reader.ReadEnum<eBoolean>();
 			this.ReverseVersionExists = reader.ReadEnum<eBoolean>();
@@ -829,7 +829,7 @@ namespace Nikki.Support.Carbon.Class
 
 			// Read gameplay scores
 			this.SunInfoName = reader.ReadNullTermUTF8();
-			this.RaceGameplayMode = reader.ReadEnum<eRaceGameplayMode>();
+			this.RaceGameplayMode = reader.ReadEnum<TrackGameplayMode>();
 			this.RaceLength = reader.ReadUInt32();
 			this.TimeLimitToBeatForward = reader.ReadSingle();
 			this.TimeLimitToBeatReverse = reader.ReadSingle();
@@ -846,8 +846,8 @@ namespace Nikki.Support.Carbon.Class
 			this.TrackMapCalibrationZoomIn = reader.ReadSingle();
 
 			// Read difficulties and padding
-			this.DifficultyForward = reader.ReadEnum<eTrackDifficulty>();
-			this.DifficultyReverse = reader.ReadEnum<eTrackDifficulty>();
+			this.DifficultyForward = reader.ReadEnum<TrackDifficulty>();
+			this.DifficultyReverse = reader.ReadEnum<TrackDifficulty>();
 			this.NumSecBeforeShorcutsAllowed = reader.ReadInt16();
 			this.DriftSecondsMin = reader.ReadInt16();
 			this.DriftSecondsMax = reader.ReadInt16();

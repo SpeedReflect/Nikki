@@ -296,8 +296,8 @@ namespace Nikki.Support.Underground2.Framework
 				for (int i = 0; i < manager.Count; ++i)
 				{
 
-					manager[i].PrimaryAnimation = br.ReadEnum<eCarAnimLocation>();
-					manager[i].SecondaryAnimation = br.ReadEnum<eCarAnimLocation>();
+					manager[i].PrimaryAnimation = br.ReadEnum<Shared.Class.SlotType.CarAnimLocation>();
+					manager[i].SecondaryAnimation = br.ReadEnum<Shared.Class.SlotType.CarAnimLocation>();
 
 				}
 

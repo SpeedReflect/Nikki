@@ -2486,236 +2486,6 @@
             Represents <see langword="true"/>
             </summary>
         </member>
-        <member name="T:Nikki.Reflection.Enum.eBoundFlags">
-            <summary>
-            Enum of Bound flags that are used for <see cref="T:Nikki.Support.Shared.Parts.BoundParts.CollisionBound"/>.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundFlags.kBounds_Disabled">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundFlags.kBounds_PrimVsWorld">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundFlags.kBounds_PrimVsObjects">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundFlags.kBounds_PrimVsGround">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundFlags.kBounds_MeshVsGround">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundFlags.kBounds_Internal">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundFlags.kBounds_Box">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundFlags.kBounds_Sphere">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundFlags.kBounds_Constraint_Conical">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundFlags.kBounds_Constraint_Prismatic">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundFlags.kBounds_Joint_Female">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundFlags.kBounds_Joint_Male">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundFlags.kBounds_Male_Post">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundFlags.kBounds_Joint_Invert">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eBoundFlags.kBounds_PrimVsOwnParts">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eCameraType">
-            <summary>
-            Enum of camera types.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCameraType.FAR">
-            <summary>
-            Far camera.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCameraType.CLOSE">
-            <summary>
-            Close camera.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCameraType.BUMPER">
-            <summary>
-            Bumper camera.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCameraType.DRIVER">
-            <summary>
-            Driver camera.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCameraType.HOOD">
-            <summary>
-            Hood camera.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCameraType.DRIFT">
-            <summary>
-            Drift camera.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eCarAnimLocation">
-            <summary>
-            Enum of animation locations.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarAnimLocation.CARANIM_NONE">
-            <summary>
-            No animations
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarAnimLocation.CARANIM_HOOD">
-            <summary>
-            Hood animations.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarAnimLocation.CARANIM_TRUNK">
-            <summary>
-            Trunk animations.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarAnimLocation.CARANIM_LEFT_DOOR">
-            <summary>
-            Left door animations.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarAnimLocation.CARANIM_RIGHT_DOOR">
-            <summary>
-            Right door animations.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarAnimLocation.CARANIM_NUM">
-            <summary>
-            Multiple animations.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eCareerRaceBehavior">
-            <summary>
-            Enum of career race behavior types in Underground 1.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCareerRaceBehavior.Tournament">
-            <summary>
-            Tournament behavior type.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCareerRaceBehavior.Regular2">
-            <summary>
-            Regular behavior 2.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCareerRaceBehavior.Regular3">
-            <summary>
-            Regular behavior 3.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCareerRaceBehavior.Regular4">
-            <summary>
-            Regular behavior 4.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCareerRaceBehavior.Regular5">
-            <summary>
-            Regular behavior 5.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCareerRaceBehavior.Regular6">
-            <summary>
-            Regular behavior 6.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCareerRaceBehavior.Hmmm">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCareerRaceBehavior.CrashGame">
-            <summary>
-            Crash game.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eCareerRaceType">
-            <summary>
-            Enum of career race types in Underground 1.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCareerRaceType.Circuit">
-            <summary>
-            Circuit race.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCareerRaceType.Drag">
-            <summary>
-            Drag race.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCareerRaceType.Sprint">
-            <summary>
-            Sprint race.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCareerRaceType.Drift">
-            <summary>
-            Drift race.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCareerRaceType.TimeTrial">
-            <summary>
-            Time Trial race.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCareerRaceType.LapKnockout">
-            <summary>
-            Lap Knockout race.
-            </summary>
-        </member>
         <member name="T:Nikki.Reflection.Enum.eCarPartAttribType">
             <summary>
             Enum of car part attribute types.
@@ -2766,126 +2536,6 @@
             Attribute with in-built CPStruct in it.
             </summary>
         </member>
-        <member name="T:Nikki.Reflection.Enum.eCarSkinClass">
-            <summary>
-            Enum of CarSkin types in Underground 2.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarSkinClass.Racing">
-            <summary>
-            Racing CarSkin.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarSkinClass.Traffic">
-            <summary>
-            Traffic CarSkin.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eCarWheelType">
-            <summary>
-            Enum of wheel IDs for Underground1 and Underground2 supports.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarWheelType.FRONT_LEFT">
-            <summary>
-            Front left wheel id
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarWheelType.FRONT_RIGHT">
-            <summary>
-            Front right wheel id
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarWheelType.REAR_RIGHT">
-            <summary>
-            Rear right wheel id
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eCarWheelType.REAR_LEFT">
-            <summary>
-            Rear left wheel id
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eDriftType">
-            <summary>
-            Enum of drift event types in Underground 2.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eDriftType.VS_AI">
-            <summary>
-            Drift versus AI.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eDriftType.DOWNHILL">
-            <summary>
-            Drift downhill.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eDriftType.TEAM">
-            <summary>
-            Team-based drift.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eEventBehaviorType">
-            <summary>
-            Enum of event behavior types in Underground 2.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eEventBehaviorType.Circuit">
-            <summary>
-            Circuit event.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eEventBehaviorType.Sprint">
-            <summary>
-            Sprint event.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eEventBehaviorType.StreetX">
-            <summary>
-            StreetX event.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eEventBehaviorType.OpenWorld">
-            <summary>
-            OpenWorld (FreeRoam) event.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eEventBehaviorType.Drag">
-            <summary>
-            Drag event.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eEventBehaviorType.Drift">
-            <summary>
-            Drift event.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eEventIconType">
-            <summary>
-            Enum of event icon types for Underground 2.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eEventIconType.NONE">
-            <summary>
-            No icon.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eEventIconType.SPONSOR">
-            <summary>
-            Sponsor icon.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eEventIconType.URL">
-            <summary>
-            URL icon.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eEventIconType.REGULAR">
-            <summary>
-            Regular icon.
-            </summary>
-        </member>
         <member name="T:Nikki.Reflection.Enum.eKeyType">
             <summary>
             Type of the key/hash.
@@ -2909,41 +2559,6 @@
         <member name="F:Nikki.Reflection.Enum.eKeyType.CUSTOM">
             <summary>
             Custom key.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eLocationType">
-            <summary>
-            Enum of location types in Underground 2.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eLocationType.UPPER_CLASS">
-            <summary>
-            Beacon Hill.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eLocationType.CITY_CORE">
-            <summary>
-            City Core.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eLocationType.SUBURBAN_HILLS">
-            <summary>
-            Jackson Heights.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eLocationType.INDUSTRIAL_PARK">
-            <summary>
-            Coal Harbor.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eLocationType.AIRPORT">
-            <summary>
-            Airport.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eLocationType.MODE_SPECIFIC">
-            <summary>
-            Debug.
             </summary>
         </member>
         <member name="T:Nikki.Reflection.Enum.eLZCompressionType">
@@ -2976,166 +2591,6 @@
             Use BEST compression (system chooses which one depending on the smallest size). 
             </summary>
         </member>
-        <member name="T:Nikki.Reflection.Enum.eMemoryType">
-            <summary>
-            Enum of car memory types.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eMemoryType.Player">
-            <summary>
-            Player Memory Type.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eMemoryType.Racing">
-            <summary>
-            Racing Memory Type.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eMemoryType.Cop">
-            <summary>
-            Cop Memory Type.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eMemoryType.Traffic">
-            <summary>
-            Traffic Memory Type.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eMemoryType.BigTraffic">
-            <summary>
-            BigTraffic Memory Type.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eMemoryType.HugeTraffic">
-            <summary>
-            HugeTraffic Memory Type.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.ePerformanceType">
-            <summary>
-            Enum of performance types in Underground 2.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.ePerformanceType.WEIGHT_REDUCTION">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.ePerformanceType.DRIVETRAIN">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.ePerformanceType.NOS">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.ePerformanceType.ENGINE">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.ePerformanceType.TURBO">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.ePerformanceType.SUSPENSION">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.ePerformanceType.BRAKES">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.ePerformanceType.ECU">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.ePerformanceType.TIRES">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.ePerformanceType.AERO">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eRaceGameplayMode">
-            <summary>
-            Enum of all gameplay modes in Underground 2.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eRaceGameplayMode.NONE">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eRaceGameplayMode.DRAG">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eRaceGameplayMode.DRIFT">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eRaceGameplayMode.DRAGDRIFT">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eRaceGameplayMode.OPENWORLD">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eRaceGameplayMode.SPRINT">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eRaceGameplayMode.DRAGSPRINT">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eRaceGameplayMode.OUTRUN">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eRaceGameplayMode.CIRCUIT">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eRaceGameplayMode.STREETX">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eRaceGameplayMode.DRIFTSTREETX">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eRaceGameplayMode.URL">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eRaceGameplayMode.DRIFTURL">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Nikki.Reflection.Enum.eSerializeType">
             <summary>
             Represents serialization type for collections and managers.
@@ -3156,56 +2611,6 @@
         <member name="F:Nikki.Reflection.Enum.eSerializeType.Override">
             <summary>
             If imported collection does not exist, adds it; else replaces existing one.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eSunAlpha">
-            <summary>
-            Enum of sun alpha values.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSunAlpha.SUNALPHA_BLEND">
-            <summary>
-            Blenging rays.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSunAlpha.SUNALPHA_ADD">
-            <summary>
-            Additive rays.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eSunTexture">
-            <summary>
-            Enum of sun textures that could be used.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSunTexture.SUNTEX_CENTER">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSunTexture.SUNTEX_HALO">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSunTexture.SUNTEX_MAJORRAYS">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSunTexture.SUNTEX_MINORRAYS">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSunTexture.SUNTEX_RING">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eSunTexture.NUM_SUN_TEXTURES">
-            <summary>
-            
             </summary>
         </member>
         <member name="T:Nikki.Reflection.Enum.eTextureAlphaBlendType">
@@ -3499,166 +2904,6 @@
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.eTileableType.ALL_SIDES">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eTPKCompressionType">
-            <summary>
-            Compression type of a <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eTPKCompressionType.RawDecompressed">
-            <summary>
-            All TPK textures data are stored raw decompressed.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eTPKCompressionType.StreamDecompressed">
-            <summary>
-            All TPK textures data are stored decompressed using stream rules.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eTPKCompressionType.CompressedFullData">
-            <summary>
-            All TPK textures data are compressed fully without splitting in parts.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eTPKCompressionType.CompressedByParts">
-            <summary>
-            All TPK textures data are compressed fully by splitting and compressing them in parts.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eTPKVersion">
-            <summary>
-            Enum of <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> version types.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eTPKVersion.Underground1">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eTPKVersion.Underground2">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eTPKVersion.MostWanted">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eTPKVersion.Carbon">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eTPKVersion.Prostreet">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eTPKVersion.Undercover">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eTrackDifficulty">
-            <summary>
-            Enum of track difficulties in Underground 2.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eTrackDifficulty.TRACK_DIFFICULTY_EASY">
-            <summary>
-            Easy difficulty.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eTrackDifficulty.TRACK_DIFFICULTY_MEDIUM">
-            <summary>
-            Medium difficulty.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eTrackDifficulty.TRACK_DIFFICULTY_HARD">
-            <summary>
-            Hard difficulty.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eUnlockableType">
-            <summary>
-            Enum of unlockable types in Underground 1.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eUnlockableType.Upgrade">
-            <summary>
-            Unlocks a performance or visual upgrade.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eUnlockableType.Car">
-            <summary>
-            Unlocks a car.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eUnlockableType.Track">
-            <summary>
-            Unlocks a track.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eUnlockCondition">
-            <summary>
-            Enum of event unlock conditions in Underground 2.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eUnlockCondition.SPECIFIC_RACE_WON">
-            <summary>
-            Event requires specific race won.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eUnlockCondition.AT_STAGE_START">
-            <summary>
-            Event unlocks at the beginning of the stage to which it belongs to.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eUnlockCondition.SPONSOR_CHOSEN">
-            <summary>
-            Event requires specific sponsor chosen.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eUnlockCondition.REQUIRED_RACES_WON">
-            <summary>
-            Event requires specific amount of races won.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eUnlockCondition.REQUIRED_URL_WON">
-            <summary>
-            Event requires specific amount of URL won.
-            </summary>
-        </member>
-        <member name="T:Nikki.Reflection.Enum.eUsageType">
-            <summary>
-            Enum of usage types.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eUsageType.Racer">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eUsageType.Cop">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eUsageType.Traffic">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eUsageType.Wheels">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.eUsageType.Universal">
             <summary>
             
             </summary>
@@ -26572,6 +25817,71 @@
             <see cref="T:Nikki.Support.Shared.Class.CarTypeInfo"/> is a collection of settings related to a car's basic information.
             </summary>
         </member>
+        <member name="T:Nikki.Support.Shared.Class.CarTypeInfo.CarUsageType">
+            <summary>
+            Enum of usage types.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.CarTypeInfo.CarUsageType.Racer">
+            <summary>
+            Car is used by racers.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.CarTypeInfo.CarUsageType.Cop">
+            <summary>
+            Car is used by cops.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.CarTypeInfo.CarUsageType.Traffic">
+            <summary>
+            Car is used by traffic.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.CarTypeInfo.CarUsageType.Wheels">
+            <summary>
+            CarTypeInfo is a wheels part.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.CarTypeInfo.CarUsageType.Universal">
+            <summary>
+            CarTypeInfo is a universal part.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Shared.Class.CarTypeInfo.CarMemoryType">
+            <summary>
+            Enum of car memory types.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.CarTypeInfo.CarMemoryType.Player">
+            <summary>
+            Player Memory Type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.CarTypeInfo.CarMemoryType.Racing">
+            <summary>
+            Racing Memory Type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.CarTypeInfo.CarMemoryType.Cop">
+            <summary>
+            Cop Memory Type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.CarTypeInfo.CarMemoryType.Traffic">
+            <summary>
+            Traffic Memory Type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.CarTypeInfo.CarMemoryType.BigTraffic">
+            <summary>
+            BigTraffic Memory Type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.CarTypeInfo.CarMemoryType.HugeTraffic">
+            <summary>
+            HugeTraffic Memory Type.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Shared.Class.CarTypeInfo.CollectionName">
             <summary>
             Collection name of the variable.
@@ -27603,6 +26913,41 @@
             <see cref="T:Nikki.Support.Shared.Class.SlotType"/> is a collection of settings related to a parts and slot information.
             </summary>
         </member>
+        <member name="T:Nikki.Support.Shared.Class.SlotType.CarAnimLocation">
+            <summary>
+            Enum of animation locations.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.SlotType.CarAnimLocation.CARANIM_NONE">
+            <summary>
+            No animations
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.SlotType.CarAnimLocation.CARANIM_HOOD">
+            <summary>
+            Hood animations.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.SlotType.CarAnimLocation.CARANIM_TRUNK">
+            <summary>
+            Trunk animations.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.SlotType.CarAnimLocation.CARANIM_LEFT_DOOR">
+            <summary>
+            Left door animations.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.SlotType.CarAnimLocation.CARANIM_RIGHT_DOOR">
+            <summary>
+            Right door animations.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.SlotType.CarAnimLocation.CARANIM_NUM">
+            <summary>
+            Multiple animations.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Shared.Class.SlotType.CollectionName">
             <summary>
             Collection name of the variable.
@@ -28116,6 +27461,66 @@
             <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> is a collection of <see cref="T:Nikki.Support.Shared.Class.Texture"/>.
             </summary>
         </member>
+        <member name="T:Nikki.Support.Shared.Class.TPKBlock.TPKVersion">
+            <summary>
+            Enum of <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/> version types.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.TPKBlock.TPKVersion.Underground1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.TPKBlock.TPKVersion.Underground2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.TPKBlock.TPKVersion.MostWanted">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.TPKBlock.TPKVersion.Carbon">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.TPKBlock.TPKVersion.Prostreet">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.TPKBlock.TPKVersion.Undercover">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Shared.Class.TPKBlock.TPKCompressionType">
+            <summary>
+            Compression type of a <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.TPKBlock.TPKCompressionType.RawDecompressed">
+            <summary>
+            All TPK textures data are stored raw decompressed.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.TPKBlock.TPKCompressionType.StreamDecompressed">
+            <summary>
+            All TPK textures data are stored decompressed using stream rules.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.TPKBlock.TPKCompressionType.CompressedFullData">
+            <summary>
+            All TPK textures data are compressed fully without splitting in parts.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.TPKBlock.TPKCompressionType.CompressedByParts">
+            <summary>
+            All TPK textures data are compressed fully by splitting and compressing them in parts.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Shared.Class.TPKBlock.Version">
             <summary>
             Version of this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
@@ -28133,7 +27538,7 @@
         </member>
         <member name="P:Nikki.Support.Shared.Class.TPKBlock.CompressionType">
             <summary>
-            <see cref="T:Nikki.Reflection.Enum.eTPKCompressionType"/> of this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
+            <see cref="T:Nikki.Support.Shared.Class.TPKBlock.TPKCompressionType"/> of this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Shared.Class.TPKBlock.SettingData">
@@ -28439,6 +27844,151 @@
             <see cref="T:Nikki.Support.Shared.Class.Track"/> is a collection of settings related to races and events.
             </summary>
         </member>
+        <member name="T:Nikki.Support.Shared.Class.Track.TrackDriftType">
+            <summary>
+            Enum of <see cref="T:Nikki.Support.Shared.Class.Track"/> drift event types.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackDriftType.VS_AI">
+            <summary>
+            Drift versus AI.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackDriftType.DOWNHILL">
+            <summary>
+            Drift downhill.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackDriftType.TEAM">
+            <summary>
+            Team-based drift.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Shared.Class.Track.TrackLocationType">
+            <summary>
+            Enum of <see cref="T:Nikki.Support.Shared.Class.Track"/> location types.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackLocationType.UPPER_CLASS">
+            <summary>
+            Beacon Hill.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackLocationType.CITY_CORE">
+            <summary>
+            City Core.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackLocationType.SUBURBAN_HILLS">
+            <summary>
+            Jackson Heights.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackLocationType.INDUSTRIAL_PARK">
+            <summary>
+            Coal Harbor.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackLocationType.AIRPORT">
+            <summary>
+            Airport.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackLocationType.MODE_SPECIFIC">
+            <summary>
+            Debug.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Shared.Class.Track.TrackGameplayMode">
+            <summary>
+            Enum of all <see cref="T:Nikki.Support.Shared.Class.Track"/> gameplay modes.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackGameplayMode.NONE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackGameplayMode.DRAG">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackGameplayMode.DRIFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackGameplayMode.DRAGDRIFT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackGameplayMode.OPENWORLD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackGameplayMode.SPRINT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackGameplayMode.DRAGSPRINT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackGameplayMode.OUTRUN">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackGameplayMode.CIRCUIT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackGameplayMode.STREETX">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackGameplayMode.DRIFTSTREETX">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackGameplayMode.URL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackGameplayMode.DRIFTURL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Shared.Class.Track.TrackDifficulty">
+            <summary>
+            Enum of <see cref="T:Nikki.Support.Shared.Class.Track"/> difficulties.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackDifficulty.TRACK_DIFFICULTY_EASY">
+            <summary>
+            Easy difficulty.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackDifficulty.TRACK_DIFFICULTY_MEDIUM">
+            <summary>
+            Medium difficulty.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.Track.TrackDifficulty.TRACK_DIFFICULTY_HARD">
+            <summary>
+            Hard difficulty.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Shared.Class.Track.CollectionName">
             <summary>
             Collection name of the variable.
@@ -28553,6 +28103,86 @@
         <member name="T:Nikki.Support.Shared.Parts.BoundParts.CollisionBound">
             <summary>
             <see cref="T:Nikki.Support.Shared.Parts.BoundParts.CollisionBound"/> is a unit bound for <see cref="T:Nikki.Support.Shared.Class.Collision"/>.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.BoundParts.CollisionBound.BoundFlags">
+            <summary>
+            Enum of Bound flags that are used for <see cref="T:Nikki.Support.Shared.Parts.BoundParts.CollisionBound"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.BoundParts.CollisionBound.BoundFlags.kBounds_Disabled">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.BoundParts.CollisionBound.BoundFlags.kBounds_PrimVsWorld">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.BoundParts.CollisionBound.BoundFlags.kBounds_PrimVsObjects">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.BoundParts.CollisionBound.BoundFlags.kBounds_PrimVsGround">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.BoundParts.CollisionBound.BoundFlags.kBounds_MeshVsGround">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.BoundParts.CollisionBound.BoundFlags.kBounds_Internal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.BoundParts.CollisionBound.BoundFlags.kBounds_Box">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.BoundParts.CollisionBound.BoundFlags.kBounds_Sphere">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.BoundParts.CollisionBound.BoundFlags.kBounds_Constraint_Conical">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.BoundParts.CollisionBound.BoundFlags.kBounds_Constraint_Prismatic">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.BoundParts.CollisionBound.BoundFlags.kBounds_Joint_Female">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.BoundParts.CollisionBound.BoundFlags.kBounds_Joint_Male">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.BoundParts.CollisionBound.BoundFlags.kBounds_Male_Post">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.BoundParts.CollisionBound.BoundFlags.kBounds_Joint_Invert">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.BoundParts.CollisionBound.BoundFlags.kBounds_PrimVsOwnParts">
+            <summary>
+            
             </summary>
         </member>
         <member name="P:Nikki.Support.Shared.Parts.BoundParts.CollisionBound.OrientationX">
@@ -28772,6 +28402,272 @@
             Returns CollisionVertex string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.CarParts.Camera">
+            <summary>
+            A unit <see cref="T:Nikki.Support.Shared.Parts.CarParts.Camera"/> used in car performance.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.CarParts.Camera.CameraType">
+            <summary>
+            Enum of camera types.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.CarParts.Camera.CameraType.FAR">
+            <summary>
+            Far camera.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.CarParts.Camera.CameraType.CLOSE">
+            <summary>
+            Close camera.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.CarParts.Camera.CameraType.BUMPER">
+            <summary>
+            Bumper camera.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.CarParts.Camera.CameraType.DRIVER">
+            <summary>
+            Driver camera.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.CarParts.Camera.CameraType.HOOD">
+            <summary>
+            Hood camera.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.CarParts.Camera.CameraType.DRIFT">
+            <summary>
+            Drift camera.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.Camera.Type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.Camera.CameraAngle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.Camera.CameraLag">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.Camera.CameraHeight">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.Camera.CameraLatOffset">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.Camera.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.Camera"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.Camera.CloneValues(Nikki.Support.Shared.Parts.CarParts.Camera)">
+            <summary>
+            Clones values of another <see cref="T:Nikki.Support.Shared.Parts.CarParts.Camera"/>.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Support.Shared.Parts.CarParts.Camera"/> to clone.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.Camera.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.Camera.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.Camera.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel">
+            <summary>
+            A unit <see cref="T:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel"/> used in car performance.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.CarWheelType">
+            <summary>
+            Enum of wheel IDs for Underground1 and Underground2 supports.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.CarWheelType.FRONT_LEFT">
+            <summary>
+            Front left wheel id
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.CarWheelType.FRONT_RIGHT">
+            <summary>
+            Front right wheel id
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.CarWheelType.REAR_RIGHT">
+            <summary>
+            Rear right wheel id
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.CarWheelType.REAR_LEFT">
+            <summary>
+            Rear left wheel id
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.XValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.Springs">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.RideHeight">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.UnknownVal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.Diameter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.TireSkidWidth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.WheelID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.YValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.WideBodyYValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.CloneValues(Nikki.Support.Shared.Parts.CarParts.CarInfoWheel)">
+            <summary>
+            Clones values of another <see cref="T:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel"/>.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel"/> to clone.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.CarParts.CarSkin">
+            <summary>
+            A unit <see cref="T:Nikki.Support.Shared.Parts.CarParts.CarSkin"/> used in cartypeinfo collections.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.CarParts.CarSkin.CarSkinClass">
+            <summary>
+            Enum of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CarSkin"/> types.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.CarParts.CarSkin.CarSkinClass.Racing">
+            <summary>
+            Racing CarSkin.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.CarParts.CarSkin.CarSkinClass.Traffic">
+            <summary>
+            Traffic CarSkin.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.CarSkin.SkinDescription">
+            <summary>
+            Description of the skin.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.CarSkin.Unknown">
+            <summary>
+            Unknown integer value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.CarSkin.MaterialUsed">
+            <summary>
+            Material used in this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CarSkin"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.CarSkin.SkinClassKey">
+            <summary>
+            Class key of the skin.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CarSkin.CloneValues(Nikki.Support.Shared.Parts.CarParts.CarSkin)">
+            <summary>
+            Clones values of another <see cref="T:Nikki.Support.Shared.Parts.CarParts.CarSkin"/>.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Support.Shared.Parts.CarParts.CarSkin"/> to clone.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CarSkin.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CarSkin.Read(System.IO.BinaryReader,System.Int32@,System.Int32@)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="id">ID of the car this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CarSkin"/> belongs to.</param>
+            <param name="index">Index of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CarSkin"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CarSkin.Write(System.IO.BinaryWriter,System.Int32,System.Int32)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="id">ID of the car this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CarSkin"/> belongs to.</param>
+            <param name="index">Index of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CarSkin"/>.</param>
         </member>
         <member name="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute">
             <summary>
@@ -29376,6 +29272,56 @@
         <member name="T:Nikki.Support.Shared.Parts.SunParts.SunLayer">
             <summary>
             A unit <see cref="T:Nikki.Support.Shared.Parts.SunParts.SunLayer"/> used in sun info collections.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.SunParts.SunLayer.SunAlpha">
+            <summary>
+            Enum of sun alpha values.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.SunParts.SunLayer.SunAlpha.SUNALPHA_BLEND">
+            <summary>
+            Blenging rays.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.SunParts.SunLayer.SunAlpha.SUNALPHA_ADD">
+            <summary>
+            Additive rays.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.SunParts.SunLayer.SunTexture">
+            <summary>
+            Enum of sun textures that could be used.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.SunParts.SunLayer.SunTexture.SUNTEX_CENTER">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.SunParts.SunLayer.SunTexture.SUNTEX_HALO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.SunParts.SunLayer.SunTexture.SUNTEX_MAJORRAYS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.SunParts.SunLayer.SunTexture.SUNTEX_MINORRAYS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.SunParts.SunLayer.SunTexture.SUNTEX_RING">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Parts.SunParts.SunLayer.SunTexture.NUM_SUN_TEXTURES">
+            <summary>
+            
             </summary>
         </member>
         <member name="P:Nikki.Support.Shared.Parts.SunParts.SunLayer.SunTextureType">
@@ -31117,13 +31063,13 @@
         </member>
         <member name="M:Nikki.Support.Underground2.Class.CarTypeInfo.GetCarSkins(System.IO.BinaryWriter)">
             <summary>
-            Writes all <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CarSkin"/> using <see cref="T:System.IO.BinaryWriter"/> provided.
+            Writes all <see cref="T:Nikki.Support.Shared.Parts.CarParts.CarSkin"/> using <see cref="T:System.IO.BinaryWriter"/> provided.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.CarTypeInfo.SetCarSkins(System.IO.BinaryReader)">
             <summary>
-            Reads a <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CarSkin"/> using <see cref="T:System.IO.BinaryReader"/> provided.
+            Reads a <see cref="T:Nikki.Support.Shared.Parts.CarParts.CarSkin"/> using <see cref="T:System.IO.BinaryReader"/> provided.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
@@ -31407,7 +31353,16 @@
             <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:Nikki.Support.Underground2.Gameplay.GShowcase"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:Nikki.Support.Underground2.Class.GCareer.PartUnlockables" -->
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.PartPerformances">
+            <summary>
+            <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:Nikki.Support.Underground2.Gameplay.PartPerformance"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.PartUnlockables">
+            <summary>
+            <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:Nikki.Support.Underground2.Gameplay.PartUnlockable"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Underground2.Class.GCareer.PerfSliderTunings">
             <summary>
             <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:Nikki.Support.Underground2.Gameplay.PerfSliderTuning"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
@@ -31463,12 +31418,12 @@
             Total count of <see cref="T:Nikki.Support.Underground2.Gameplay.GShowcase"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.PartPerformanceCount">
+            <summary>
+            Total count of <see cref="T:Nikki.Support.Underground2.Gameplay.PartPerformance"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Underground2.Class.GCareer.PartUnlockableCount">
-             <summary>
-             Total count of <see cref="!:PartPerformance"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
-             </summary>
-            [Category("Primary")]
-            public int PartPerformanceCount => this._part_performances.Count;
             <summary>
             Total count of <see cref="T:Nikki.Support.Underground2.Gameplay.PartUnlockable"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
             </summary>
@@ -35013,6 +34968,96 @@
             <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/> is a collection of settings related to career races and events.
             </summary>
         </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.GCareerRace.EventBehaviorType">
+            <summary>
+            Enum of <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/> event behavior types.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.GCareerRace.EventBehaviorType.Circuit">
+            <summary>
+            Circuit event.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.GCareerRace.EventBehaviorType.Sprint">
+            <summary>
+            Sprint event.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.GCareerRace.EventBehaviorType.StreetX">
+            <summary>
+            StreetX event.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.GCareerRace.EventBehaviorType.OpenWorld">
+            <summary>
+            OpenWorld (FreeRoam) event.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.GCareerRace.EventBehaviorType.Drag">
+            <summary>
+            Drag event.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.GCareerRace.EventBehaviorType.Drift">
+            <summary>
+            Drift event.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.GCareerRace.EventIconType">
+            <summary>
+            Enum of <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/> event icon types.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.GCareerRace.EventIconType.NONE">
+            <summary>
+            No icon.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.GCareerRace.EventIconType.SPONSOR">
+            <summary>
+            Sponsor icon.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.GCareerRace.EventIconType.URL">
+            <summary>
+            URL icon.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.GCareerRace.EventIconType.REGULAR">
+            <summary>
+            Regular icon.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.GCareerRace.UnlockCondition">
+            <summary>
+            Enum of <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/> event unlock conditions.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.GCareerRace.UnlockCondition.SpecificRaceWon">
+            <summary>
+            Event requires specific race won.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.GCareerRace.UnlockCondition.AtStageStart">
+            <summary>
+            Event unlocks at the beginning of the stage to which it belongs to.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.GCareerRace.UnlockCondition.SponsorChosen">
+            <summary>
+            Event requires specific sponsor chosen.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.GCareerRace.UnlockCondition.ReqRegRacesWon">
+            <summary>
+            Event requires specific amount of races won.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.GCareerRace.UnlockCondition.ReqURLRacesWon">
+            <summary>
+            Event requires specific amount of URL won.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.GameINT">
             <summary>
             Game to which the class belongs to.
@@ -35025,7 +35070,7 @@
         </member>
         <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.Career">
             <summary>
-            Manager to which the class belongs to.
+            GCareer to which the class belongs to.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.CollectionName">
@@ -35058,7 +35103,7 @@
             True if the race is an SUV race; false otherwise.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.EventBehaviorType">
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.EventBehavior">
             <summary>
             Event type.
             </summary>
@@ -35123,7 +35168,7 @@
             Cash amount that player gets for winning this race.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.EventIconType">
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.EventIcon">
             <summary>
             Event icon type of this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
             </summary>
@@ -35191,11 +35236,6 @@
         <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.GPSDestination">
             <summary>
             GPS destination trigger if the race is a GPS event.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.DriftTypeIfDriftRace">
-            <summary>
-            Drift type of the race, if it is a drift event.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.OPPONENT1">
@@ -35268,6 +35308,11 @@
             </summary>
             <param name="CName">CollectionName of the new created object.</param>
             <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerRace.DriftTypeIfDriftRace">
+            <summary>
+            Drift type of the race, if it is a drift event.
+            </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Gameplay.GCareerRace.ToString">
             <summary>
@@ -35823,6 +35868,246 @@
         <member name="M:Nikki.Support.Underground2.Gameplay.GShowcase.ToString">
             <summary>
             Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerBrand"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.PartPerformance">
+            <summary>
+            <see cref="T:Nikki.Support.Underground2.Gameplay.PartPerformance"/> is a collection of settings related to performance parts.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.PartPerformance.PerformanceType">
+            <summary>
+            Enum of <see cref="T:Nikki.Support.Underground2.Gameplay.PartPerformance"/> types.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.PartPerformance.PerformanceType.WEIGHT_REDUCTION">
+            <summary>
+            Weight Reduction performance type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.PartPerformance.PerformanceType.DRIVETRAIN">
+            <summary>
+            Transmission/Drivetrain performance type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.PartPerformance.PerformanceType.NOS">
+            <summary>
+            Nitrous/NOS performance type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.PartPerformance.PerformanceType.ENGINE">
+            <summary>
+            Engine performance type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.PartPerformance.PerformanceType.TURBO">
+            <summary>
+            Supercharger/Turbo performance type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.PartPerformance.PerformanceType.SUSPENSION">
+            <summary>
+            Suspension performance type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.PartPerformance.PerformanceType.BRAKES">
+            <summary>
+            Calipers/Brakes performance type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.PartPerformance.PerformanceType.ECU">
+            <summary>
+            Control Unit/ECU performance type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.PartPerformance.PerformanceType.TIRES">
+            <summary>
+            Tires performance type.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.PartPerformance.PerformanceType.AERO">
+            <summary>
+            Aerodynamics/Aero performance type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.Career">
+            <summary>
+            GCareer to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.PerfPartCost">
+            <summary>
+            Price of the <see cref="T:Nikki.Support.Underground2.Gameplay.PartPerformance"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.PerfPartAmplifierFraction">
+            <summary>
+            Percentage of whole package performance boost.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.PerfPartRangeX">
+            <summary>
+            Range X of <see cref="T:Nikki.Support.Underground2.Gameplay.PartPerformance"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.PerfPartRangeY">
+            <summary>
+            Range Y of <see cref="T:Nikki.Support.Underground2.Gameplay.PartPerformance"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.PerfPartRangeZ">
+            <summary>
+            Range Z of <see cref="T:Nikki.Support.Underground2.Gameplay.PartPerformance"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.BeingReplacedByIndex1">
+            <summary>
+            First part index by which this <see cref="T:Nikki.Support.Underground2.Gameplay.PartPerformance"/> can be replaced.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.BeingReplacedByIndex2">
+            <summary>
+            Second part index by which this <see cref="T:Nikki.Support.Underground2.Gameplay.PartPerformance"/> can be replaced.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.NumberOfBrands">
+            <summary>
+            Number of brands available to choose when installing the part.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.PerfPartBrand1">
+            <summary>
+            Brand name 1.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.PerfPartBrand2">
+            <summary>
+            Brand name 2.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.PerfPartBrand3">
+            <summary>
+            Brand name 3.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.PerfPartBrand4">
+            <summary>
+            Brand name 4.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.PerfPartBrand5">
+            <summary>
+            Brand name 5.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.PerfPartBrand6">
+            <summary>
+            Brand name 6.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.PerfPartBrand7">
+            <summary>
+            Brand name 7.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.PerfPartBrand8">
+            <summary>
+            Brand name 8.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.PartPerformanceType">
+            <summary>
+            Type of the performance.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.UpgradeLevel">
+            <summary>
+            Upgrade level of the part.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.UpgradePartIndex">
+            <summary>
+            Index of the part in the performance package.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartPerformance.PartIndex">
+            <summary>
+            Index of the part.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PartPerformance.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.PartPerformance"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PartPerformance.#ctor(System.String,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.PartPerformance"/>.
+            </summary>
+            <param name="CName">CollectionName of the new instance.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PartPerformance.#ctor(System.IO.BinaryReader,Nikki.Support.Underground2.Class.GCareer)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Gameplay.PartPerformance"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PartPerformance.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PartPerformance.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Underground2.Gameplay.PartPerformance"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Underground2.Gameplay.PartPerformance"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PartPerformance.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Underground2.Gameplay.PartPerformance"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Gameplay.PartPerformance"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PartPerformance.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PartPerformance.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Underground2.Gameplay.PartPerformance"/> 
             as a string value.
             </summary>
             <returns>String value.</returns>
@@ -36944,59 +37229,6 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="T:Nikki.Support.Underground2.Parts.CarParts.CarSkin">
-            <summary>
-            A unit <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CarSkin"/> used in cartypeinfo collections.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CarSkin.SkinDescription">
-            <summary>
-            Description of the skin.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CarSkin.Unknown">
-            <summary>
-            Unknown integer value.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CarSkin.MaterialUsed">
-            <summary>
-            Material used in this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CarSkin"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.CarParts.CarSkin.SkinClassKey">
-            <summary>
-            Class key of the skin.
-            </summary>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CarSkin.CloneValues(Nikki.Support.Underground2.Parts.CarParts.CarSkin)">
-            <summary>
-            Clones values of another <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CarSkin"/>.
-            </summary>
-            <param name="other"><see cref="T:Nikki.Support.Underground2.Parts.CarParts.CarSkin"/> to clone.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CarSkin.PlainCopy">
-            <summary>
-            Creates a plain copy of the objects that contains same values.
-            </summary>
-            <returns>Exact plain copy of the object.</returns>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CarSkin.Read(System.IO.BinaryReader,System.Int32@,System.Int32@)">
-            <summary>
-            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
-            <param name="id">ID of the car this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CarSkin"/> belongs to.</param>
-            <param name="index">Index of the <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CarSkin"/>.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.CarParts.CarSkin.Write(System.IO.BinaryWriter,System.Int32,System.Int32)">
-            <summary>
-            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
-            </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-            <param name="id">ID of the car this <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CarSkin"/> belongs to.</param>
-            <param name="index">Index of the <see cref="T:Nikki.Support.Underground2.Parts.CarParts.CarSkin"/>.</param>
-        </member>
         <member name="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct">
             <summary>
             A unit <see cref="T:Nikki.Support.Underground2.Parts.CarParts.RealCarPart"/> struct with geometry part names.
@@ -37552,144 +37784,6 @@
             Creates a plain copy of the objects that contains same values.
             </summary>
             <returns>Exact plain copy of the object.</returns>
-        </member>
-        <member name="T:Nikki.Support.Underground2.Parts.InfoParts.Camera">
-            <summary>
-            A unit <see cref="T:Nikki.Support.Underground2.Parts.InfoParts.Camera"/> used in car performance.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.InfoParts.Camera.CameraType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.InfoParts.Camera.CameraAngle">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.InfoParts.Camera.CameraLag">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.InfoParts.Camera.CameraHeight">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.InfoParts.Camera.CameraLatOffset">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.InfoParts.Camera.#ctor">
-            <summary>
-            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Parts.InfoParts.Camera"/>.
-            </summary>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.InfoParts.Camera.CloneValues(Nikki.Support.Underground2.Parts.InfoParts.Camera)">
-            <summary>
-            Clones values of another <see cref="T:Nikki.Support.Underground2.Parts.InfoParts.Camera"/>.
-            </summary>
-            <param name="other"><see cref="T:Nikki.Support.Underground2.Parts.InfoParts.Camera"/> to clone.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.InfoParts.Camera.PlainCopy">
-            <summary>
-            Creates a plain copy of the objects that contains same values.
-            </summary>
-            <returns>Exact plain copy of the object.</returns>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.InfoParts.Camera.Read(System.IO.BinaryReader)">
-            <summary>
-            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.InfoParts.Camera.Write(System.IO.BinaryWriter)">
-            <summary>
-            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
-            </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-        </member>
-        <member name="T:Nikki.Support.Underground2.Parts.InfoParts.CarInfoWheel">
-            <summary>
-            A unit <see cref="T:Nikki.Support.Underground2.Parts.InfoParts.CarInfoWheel"/> used in car performance.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.InfoParts.CarInfoWheel.XValue">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.InfoParts.CarInfoWheel.Springs">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.InfoParts.CarInfoWheel.RideHeight">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.InfoParts.CarInfoWheel.UnknownVal">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.InfoParts.CarInfoWheel.Diameter">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.InfoParts.CarInfoWheel.TireSkidWidth">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.InfoParts.CarInfoWheel.WheelID">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.InfoParts.CarInfoWheel.YValue">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Parts.InfoParts.CarInfoWheel.WideBodyYValue">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.InfoParts.CarInfoWheel.#ctor">
-            <summary>
-            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Parts.InfoParts.Brakes"/>.
-            </summary>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.InfoParts.CarInfoWheel.CloneValues(Nikki.Support.Underground2.Parts.InfoParts.CarInfoWheel)">
-            <summary>
-            Clones values of another <see cref="T:Nikki.Support.Underground2.Parts.InfoParts.CarInfoWheel"/>.
-            </summary>
-            <param name="other"><see cref="T:Nikki.Support.Underground2.Parts.InfoParts.CarInfoWheel"/> to clone.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.InfoParts.CarInfoWheel.PlainCopy">
-            <summary>
-            Creates a plain copy of the objects that contains same values.
-            </summary>
-            <returns>Exact plain copy of the object.</returns>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.InfoParts.CarInfoWheel.Read(System.IO.BinaryReader)">
-            <summary>
-            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Parts.InfoParts.CarInfoWheel.Write(System.IO.BinaryWriter)">
-            <summary>
-            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
-            </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
         <member name="T:Nikki.Support.Underground2.Parts.InfoParts.DriftControl">
             <summary>

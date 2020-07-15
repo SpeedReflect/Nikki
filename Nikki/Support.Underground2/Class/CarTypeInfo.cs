@@ -1135,7 +1135,7 @@ namespace Nikki.Support.Underground2.Class
 
             // Secondary Properties
             this.Index = br.ReadInt32();
-            this.UsageType = br.ReadEnum<eUsageType>();
+            this.UsageType = br.ReadEnum<CarUsageType>();
             br.BaseStream.Position += 4;
             this.DefaultBasePaint = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
             this.DefaultBasePaint2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);

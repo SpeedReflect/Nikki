@@ -17,12 +17,165 @@ namespace Nikki.Support.Shared.Class
     /// </summary>
 	public abstract class Track : Collectable, IAssembly
 	{
-        #region Main Properties
+		#region Shared Enums
 
-        /// <summary>
-        /// Collection name of the variable.
-        /// </summary>
-        public override string CollectionName { get; set; }
+		/// <summary>
+		/// Enum of <see cref="Track"/> drift event types.
+		/// </summary>
+		public enum TrackDriftType : int
+		{
+			/// <summary>
+			/// Drift versus AI.
+			/// </summary>
+			VS_AI = 0,
+
+			/// <summary>
+			/// Drift downhill.
+			/// </summary>
+			DOWNHILL = 1,
+
+			/// <summary>
+			/// Team-based drift.
+			/// </summary>
+			TEAM = 2,
+		}
+
+		/// <summary>
+		/// Enum of <see cref="Track"/> location types.
+		/// </summary>
+		public enum TrackLocationType : int
+		{
+			/// <summary>
+			/// Beacon Hill.
+			/// </summary>
+			UPPER_CLASS = 0,
+
+			/// <summary>
+			/// City Core.
+			/// </summary>
+			CITY_CORE = 1,
+
+			/// <summary>
+			/// Jackson Heights.
+			/// </summary>
+			SUBURBAN_HILLS = 2,
+
+			/// <summary>
+			/// Coal Harbor.
+			/// </summary>
+			INDUSTRIAL_PARK = 3,
+
+			/// <summary>
+			/// Airport.
+			/// </summary>
+			AIRPORT = 4,
+
+			/// <summary>
+			/// Debug.
+			/// </summary>
+			MODE_SPECIFIC = 5,
+		}
+
+		/// <summary>
+		/// Enum of all <see cref="Track"/> gameplay modes.
+		/// </summary>
+		public enum TrackGameplayMode : int
+		{
+			/// <summary>
+			/// 
+			/// </summary>
+			NONE = 0,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			DRAG = 2,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			DRIFT = 8,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			DRAGDRIFT = 10,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			OPENWORLD = 16,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			SPRINT = 52,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			DRAGSPRINT = 60,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			OUTRUN = 112,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			CIRCUIT = 113,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			STREETX = 2048,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			DRIFTSTREETX = 2056,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			URL = 8208,
+
+			/// <summary>
+			/// 
+			/// </summary>
+			DRIFTURL = 8216,
+		}
+
+		/// <summary>
+		/// Enum of <see cref="Track"/> difficulties.
+		/// </summary>
+		public enum TrackDifficulty : byte
+		{
+			/// <summary>
+			/// Easy difficulty.
+			/// </summary>
+			TRACK_DIFFICULTY_EASY = 0,
+
+			/// <summary>
+			/// Medium difficulty.
+			/// </summary>
+			TRACK_DIFFICULTY_MEDIUM = 1,
+
+			/// <summary>
+			/// Hard difficulty.
+			/// </summary>
+			TRACK_DIFFICULTY_HARD = 2,
+		}
+
+		#endregion
+
+		#region Main Properties
+
+		/// <summary>
+		/// Collection name of the variable.
+		/// </summary>
+		public override string CollectionName { get; set; }
 
         /// <summary>
         /// Game to which the class belongs to.
@@ -113,7 +266,7 @@ namespace Nikki.Support.Shared.Class
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Primary")]
-		public eRaceGameplayMode RaceGameplayMode { get; set; }
+		public TrackGameplayMode RaceGameplayMode { get; set; }
 
 		/// <summary>
 		/// Difficulty of the track when it has a forward direction.
@@ -122,7 +275,7 @@ namespace Nikki.Support.Shared.Class
 		[StaticModifiable()]
 		[MemoryCastable()]
 		[Category("Primary")]
-		public eTrackDifficulty DifficultyForward { get; set; }
+		public TrackDifficulty DifficultyForward { get; set; }
 
 		/// <summary>
 		/// Difficulty of the track when it has a reverse direction.
@@ -131,7 +284,7 @@ namespace Nikki.Support.Shared.Class
 		[StaticModifiable()]
 		[MemoryCastable()]
 		[Category("Primary")]
-		public eTrackDifficulty DifficultyReverse { get; set; }
+		public TrackDifficulty DifficultyReverse { get; set; }
 
 		/// <summary>
 		/// Represents sun type during race.

@@ -111,7 +111,7 @@ namespace Nikki.Support.Prostreet.Class
         [AccessModifiable()]
         [MemoryCastable()]
         [Category("Primary")]
-        public eMemoryType MemoryType { get; set; } = eMemoryType.Racing;
+        public CarMemoryType MemoryType { get; set; } = CarMemoryType.Racing;
 
         #endregion
 
@@ -283,8 +283,8 @@ namespace Nikki.Support.Prostreet.Class
             this.SteeringWheelRenderingW = br.ReadSingle();
 
             br.BaseStream.Position += 4;
-            this.UsageType = br.ReadEnum<eUsageType>();
-            this.MemoryType = br.ReadEnum<eMemoryType>();
+            this.UsageType = br.ReadEnum<CarUsageType>();
+            this.MemoryType = br.ReadEnum<CarMemoryType>();
 
             this.MaxInstances1 = br.ReadByte();
             this.MaxInstances2 = br.ReadByte();
@@ -469,8 +469,8 @@ namespace Nikki.Support.Prostreet.Class
             this.SteeringWheelRenderingZ = reader.ReadSingle();
             this.SteeringWheelRenderingW = reader.ReadSingle();
 
-            this.UsageType = reader.ReadEnum<eUsageType>();
-            this.MemoryType = reader.ReadEnum<eMemoryType>();
+            this.UsageType = reader.ReadEnum<CarUsageType>();
+            this.MemoryType = reader.ReadEnum<CarMemoryType>();
 
             this.MaxInstances1 = reader.ReadByte();
             this.MaxInstances2 = reader.ReadByte();

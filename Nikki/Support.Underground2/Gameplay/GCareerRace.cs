@@ -348,7 +348,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
-		public eTrackDifficulty DifficultyLevel { get; set; }
+		public Shared.Class.Track.TrackDifficulty DifficultyLevel { get; set; }
 
 		/// <summary>
 		/// Stage number to which this <see cref="GCareerRace"/> belongs to.
@@ -624,7 +624,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.BaseStream.Position -= 60;
 
 			// If none of the events are drift downhill, write opponent data based on number of the opponents
-			if (this.DriftTypeIfDriftRace() != eDriftType.DOWNHILL)
+			if (this.DriftTypeIfDriftRace() != Shared.Class.Track.TrackDriftType.DOWNHILL)
 			{
 
 				if (this.NumOpponents > 0) this.OPPONENT1.Write(bw, strw);
@@ -726,7 +726,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			// Some UnknownValues
 			this.EventIcon = br.ReadEnum<EventIconType>();
 			this.IsDriveToGPS = br.ReadEnum<eBoolean>();
-			this.DifficultyLevel = br.ReadEnum<eTrackDifficulty>();
+			this.DifficultyLevel = br.ReadEnum<Shared.Class.Track.TrackDifficulty>();
 			this.BelongsToStage = br.ReadByte();
 
 			// Some values
@@ -750,7 +750,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			br.BaseStream.Position -= 0x48;
 
 			// If none of the events are drift downhill, read opponent data based on number of the opponents
-			if (this.DriftTypeIfDriftRace() != eDriftType.DOWNHILL)
+			if (this.DriftTypeIfDriftRace() != Shared.Class.Track.TrackDriftType.DOWNHILL)
 			{
 
 				if (this.NumOpponents > 0) this.OPPONENT1.Read(br, strr);
@@ -791,12 +791,15 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <summary>
 		/// Drift type of the race, if it is a drift event.
 		/// </summary>
-		private eDriftType DriftTypeIfDriftRace()
+		private Shared.Class.Track.TrackDriftType DriftTypeIfDriftRace()
 		{
-			if (this.EventBehavior != EventBehaviorType.Drift) return eDriftType.VS_AI;
-			if (this.Career is null) return eDriftType.VS_AI;
-			if (this.Career.Manager is null) return eDriftType.VS_AI;
-			if (this.Career.Manager.Database is null) return eDriftType.VS_AI;
+			var vsai = Shared.Class.Track.TrackDriftType.VS_AI;
+			var down = Shared.Class.Track.TrackDriftType.DOWNHILL;
+
+			if (this.EventBehavior != EventBehaviorType.Drift) return vsai;
+			if (this.Career is null) return vsai;
+			if (this.Career.Manager is null) return vsai;
+			if (this.Career.Manager.Database is null) return vsai;
 
 			var db = this.Career.Manager.Database as Datamap;
 
@@ -805,17 +808,13 @@ namespace Nikki.Support.Underground2.Gameplay
 			var track3 = db.Tracks[this.STAGE3.TrackID.ToString()];
 			var track4 = db.Tracks[this.STAGE4.TrackID.ToString()];
 
-			var drift1 = (!(track1 is null)) ? track1.DriftType : eDriftType.VS_AI;
-			var drift2 = (!(track2 is null)) ? track2.DriftType : eDriftType.VS_AI;
-			var drift3 = (!(track3 is null)) ? track3.DriftType : eDriftType.VS_AI;
-			var drift4 = (!(track4 is null)) ? track4.DriftType : eDriftType.VS_AI;
+			var drift1 = (!(track1 is null)) ? track1.DriftType : vsai;
+			var drift2 = (!(track2 is null)) ? track2.DriftType : vsai;
+			var drift3 = (!(track3 is null)) ? track3.DriftType : vsai;
+			var drift4 = (!(track4 is null)) ? track4.DriftType : vsai;
 
-			return drift1 == eDriftType.DOWNHILL ||
-				   drift2 == eDriftType.DOWNHILL ||
-				   drift3 == eDriftType.DOWNHILL ||
-				   drift4 == eDriftType.DOWNHILL
-					? eDriftType.DOWNHILL
-					: eDriftType.VS_AI;
+			return drift1 == down || drift2 == down || drift3 == down || drift4 == down
+					? down : vsai;
 		}
 
 		/// <summary>
