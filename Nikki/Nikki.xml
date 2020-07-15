@@ -26409,13 +26409,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.GCareer.FindOffsets(System.IO.BinaryReader)">
-            <summary>
-            Finds offsets of all partials and its parts in the <see cref="T:Nikki.Support.Shared.Class.GCareer"/>.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.GCareer"/> with.</param>
-            <returns>Array of all offsets.</returns>
-        </member>
         <member name="M:Nikki.Support.Shared.Class.GCareer.GetCollections``1">
             <summary>
             Gets all collections of type <see cref="T:Nikki.Reflection.Abstract.Collectable"/>.
@@ -31538,13 +31531,6 @@
             </summary>
             <returns>String value.</returns>
         </member>
-        <member name="M:Nikki.Support.Underground2.Class.GCareer.FindOffsets(System.IO.BinaryReader)">
-            <summary>
-            Finds offsets of all partials and its parts in the <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Class.GCareer"/> with.</param>
-            <returns>Array of all offsets.</returns>
-        </member>
         <member name="M:Nikki.Support.Underground2.Class.GCareer.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
@@ -33513,6 +33499,11 @@
         <member name="P:Nikki.Support.Underground2.Datamap.FNGroups">
             <summary>
             <see cref="T:Nikki.Core.Manager`1"/> that manages <see cref="T:Nikki.Support.Underground2.Class.FNGroup"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Datamap.GCareers">
+            <summary>
+            <see cref="T:Nikki.Core.Manager`1"/> that manages <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Datamap.Materials">

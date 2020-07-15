@@ -302,6 +302,8 @@ namespace Nikki.Support.Underground2.Class
             var start = br.BaseStream.Position;
             var offsets = this.FindOffsets(br, size);
 
+            var a = Map.BinKeys[0];
+
             MemoryStream ms = null;
             BinaryReader strr = null;
 
@@ -532,8 +534,56 @@ namespace Nikki.Support.Underground2.Class
         private void ReadStrings(BinaryReader br)
 		{
             if (br.BaseStream.Position == max) return;
-            var offset = br.BaseStream.Position;
             var size = br.ReadInt32();
+            var offset = br.BaseStream.Position;
+            bool is_named = false;
+
+            for (int i = 0; i < 4 && br.BaseStream.Position < offset + size; ++i)
+			{
+
+                string str = String.Empty;
+
+                switch (i)
+				{
+
+                    case 0:
+                        str = br.ReadNullTermUTF8();
+                        str.BinHash();
+                        break;
+
+                    case 1:
+                        var num = br.ReadEnum<BinBlockID>();
+                        if (num == BinBlockID.Nikki) is_named = true;
+                        break;
+
+                    case 2:
+                        if (is_named) this._collection_name = br.ReadNullTermUTF8();
+                        break;
+
+                    case 3:
+                        if (is_named) br.ReadNullTermUTF8();
+                        break;
+
+                    default:
+                        break;
+
+                }
+
+			}
+
+            if (!is_named)
+            {
+
+                br.BaseStream.Position = offset;
+
+                if (!(this.Manager is null)) this._collection_name = this.Manager.Count switch
+                {
+                    0 => "Main",
+                    1 => "Demo",
+                    _ => $"Career{this.Manager.Count}",
+                };
+
+            }
 
             while (br.BaseStream.Position < offset + size)
 			{
@@ -547,7 +597,6 @@ namespace Nikki.Support.Underground2.Class
         private void ReadGCareerRaces(BinaryReader br, BinaryReader strr)
 		{
             if (br.BaseStream.Position == max) return;
-            var offset = br.BaseStream.Position;
             var size = br.ReadInt32();
 
             var count = size / 0x88;
@@ -565,7 +614,6 @@ namespace Nikki.Support.Underground2.Class
         private void ReadWorldShops(BinaryReader br)
 		{
             if (br.BaseStream.Position == max) return;
-            var offset = br.BaseStream.Position;
             var size = br.ReadInt32();
 
             var count = size / 0xA0;
@@ -583,7 +631,6 @@ namespace Nikki.Support.Underground2.Class
         private void ReadGCareerBrands(BinaryReader br)
 		{
             if (br.BaseStream.Position == max) return;
-            var offset = br.BaseStream.Position;
             var size = br.ReadInt32();
 
             var count = size / 0x44;
@@ -601,7 +648,6 @@ namespace Nikki.Support.Underground2.Class
         private void ReadPartPerformances(BinaryReader br)
 		{
             if (br.BaseStream.Position == max) return;
-            var offset = br.BaseStream.Position;
             var size = br.ReadInt32();
 
             var count = size / 0x17C;
@@ -638,7 +684,6 @@ namespace Nikki.Support.Underground2.Class
         private void ReadGShowcases(BinaryReader br)
 		{
             if (br.BaseStream.Position == max) return;
-            var offset = br.BaseStream.Position;
             var size = br.ReadInt32();
 
             var count = size >> 6;
@@ -656,7 +701,6 @@ namespace Nikki.Support.Underground2.Class
         private void ReadSMSMessages(BinaryReader br, BinaryReader strr)
 		{
             if (br.BaseStream.Position == max) return;
-            var offset = br.BaseStream.Position;
             var size = br.ReadInt32();
 
             var count = size / 0x14;
@@ -674,7 +718,6 @@ namespace Nikki.Support.Underground2.Class
         private void ReadSponsors(BinaryReader br, BinaryReader strr)
 		{
             if (br.BaseStream.Position == max) return;
-            var offset = br.BaseStream.Position;
             var size = br.ReadInt32();
 
             var count = size >> 4;
@@ -692,7 +735,6 @@ namespace Nikki.Support.Underground2.Class
         private void ReadGCareerStages(BinaryReader br)
 		{
             if (br.BaseStream.Position == max) return;
-            var offset = br.BaseStream.Position;
             var size = br.ReadInt32();
 
             var count = size / 0x50;
@@ -710,7 +752,6 @@ namespace Nikki.Support.Underground2.Class
         private void ReadPerfSliderTunings(BinaryReader br)
 		{
             if (br.BaseStream.Position == max) return;
-            var offset = br.BaseStream.Position;
             var size = br.ReadInt32();
 
             var count = size / 0x18;
@@ -728,7 +769,6 @@ namespace Nikki.Support.Underground2.Class
         private void ReadWorldChallenges(BinaryReader br, BinaryReader strr)
 		{
             if (br.BaseStream.Position == max) return;
-            var offset = br.BaseStream.Position;
             var size = br.ReadInt32();
 
             var count = size / 0x18;
@@ -746,7 +786,6 @@ namespace Nikki.Support.Underground2.Class
         private void ReadPartUnlockables(BinaryReader br)
 		{
             if (br.BaseStream.Position == max) return;
-            var offset = br.BaseStream.Position;
             var size = br.ReadInt32();
 
             var count = size / 0x28;
@@ -764,7 +803,6 @@ namespace Nikki.Support.Underground2.Class
         private void ReadBankTriggers(BinaryReader br)
 		{
             if (br.BaseStream.Position == max) return;
-            var offset = br.BaseStream.Position;
             var size = br.ReadInt32();
 
             var count = size / 0xC;
@@ -782,7 +820,6 @@ namespace Nikki.Support.Underground2.Class
         private void ReadGCarUnlocks(BinaryReader br)
 		{
             if (br.BaseStream.Position == max) return;
-            var offset = br.BaseStream.Position;
             var size = br.ReadInt32();
 
             var count = size / 0xC;

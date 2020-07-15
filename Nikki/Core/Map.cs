@@ -14,7 +14,7 @@ namespace Nikki.Core
 		/// <summary>
 		/// Map of all Bin keys during runtime of library.
 		/// </summary>
-		public static Dictionary<uint, string> BinKeys => new Dictionary<uint, string>()
+		public static Dictionary<uint, string> BinKeys { get; set; } = new Dictionary<uint, string>()
 		{
 			{ 0, String.Empty },
 			{ 0x000004B8, "CV" },
@@ -135,7 +135,7 @@ namespace Nikki.Core
 		/// <summary>
 		/// Map of all Vlt keys during runtime of library.
 		/// </summary>
-		public static Dictionary<uint, string> VltKeys => new Dictionary<uint, string>()
+		public static Dictionary<uint, string> VltKeys { get; set; } = new Dictionary<uint, string>()
 		{
 			{ 0, String.Empty },
 			{ 0x2B5B1321, "m3gtre46" }
