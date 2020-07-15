@@ -27,7 +27,7 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		/// <summary>
 		/// List of <see cref="CollisionVertex"/> in this <see cref="CollisionCloud"/>.
 		/// </summary>
-		public List<CollisionVertex> Vertices { get; set; } = new List<CollisionVertex>();
+		public List<CollisionVertex> Vertices => new List<CollisionVertex>();
 
 		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.

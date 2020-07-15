@@ -38,7 +38,7 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 		/// Collection of <see cref="CPAttribute"/> of this <see cref="RealCarPart"/>.
 		/// </summary>
 		[Browsable(false)]
-		public override List<CPAttribute> Attributes { get; set; }
+		public override List<CPAttribute> Attributes { get; }
 
 		/// <summary>
 		/// Initializes new instance of <see cref="RealCarPart"/>.

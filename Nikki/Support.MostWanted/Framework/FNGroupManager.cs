@@ -56,9 +56,8 @@ namespace Nikki.Support.MostWanted.Framework
 		/// Initializes new instance of <see cref="FNGroupManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>
-		public FNGroupManager(Datamap db)
+		public FNGroupManager(Datamap db) : base(db)
 		{
-			this.Database = db;
 			this.Extender = 0;
 			this.Alignment = Alignment.Default;
 		}

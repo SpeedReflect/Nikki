@@ -58,7 +58,7 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 		/// Frame textures of this <see cref="AnimSlot"/>.
 		/// </summary>
 		[Category("Primary")]
-		public List<FrameEntry> FrameTextures { get; set; }
+		public List<FrameEntry> FrameTextures { get; }
 
 		/// <summary>
 		/// Initializes new instance of <see cref="AnimSlot"/>.

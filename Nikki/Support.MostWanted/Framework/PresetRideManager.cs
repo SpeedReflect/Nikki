@@ -55,9 +55,8 @@ namespace Nikki.Support.MostWanted.Framework
 		/// Initializes new instance of <see cref="PresetRideManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>
-		public PresetRideManager(Datamap db)
+		public PresetRideManager(Datamap db) : base(db)
 		{
-			this.Database = db;
 			this.Extender = 5;
 			this.Alignment = Alignment.Default;
 		}

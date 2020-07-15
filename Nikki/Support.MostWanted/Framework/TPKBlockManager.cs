@@ -55,9 +55,8 @@ namespace Nikki.Support.MostWanted.Framework
 		/// Initializes new instance of <see cref="TPKBlockManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>
-		public TPKBlockManager(Datamap db)
+		public TPKBlockManager(Datamap db) : base(db)
 		{
-			this.Database = db;
 			this.Extender = 1;
 			this.Alignment = new Alignment(0x80, Alignment.AlignmentType.Modular);
 		}

@@ -55,9 +55,8 @@ namespace Nikki.Support.Underground2.Framework
 		/// Initializes new instance of <see cref="AcidEmitterManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>
-		public AcidEmitterManager(Datamap db)
+		public AcidEmitterManager(Datamap db) : base(db)
 		{
-			this.Database = db;
 			this.Extender = 5;
 			this.Alignment = Alignment.Default;
 		}

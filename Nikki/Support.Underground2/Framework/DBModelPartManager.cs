@@ -59,9 +59,8 @@ namespace Nikki.Support.Underground2.Framework
 		/// Initializes new instance of <see cref="DBModelPartManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>
-		public DBModelPartManager(Datamap db)
+		public DBModelPartManager(Datamap db) : base(db)
 		{
-			this.Database = db;
 			this.Extender = 5;
 			this.Alignment = new Alignment(0x4, Alignment.AlignmentType.Actual);
 		}
@@ -775,8 +774,9 @@ namespace Nikki.Support.Underground2.Framework
 						DebugName = temppart.DebugName,
 						CarPartGroupID = temppart.CarPartGroupID,
 						UpgradeGroupID = temppart.UpgradeGroupID,
-						LodStruct = actual ?? new Parts.CarParts.CPStruct()
 					};
+
+					if (actual != null) realpart.LodStruct.CloneValues(actual);
 					
 					foreach (var attroff in cpoff?.AttribOffsets ?? Enumerable.Empty<ushort>())
 					{

@@ -19,7 +19,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <summary>
 		/// List of offsets in that this <see cref="CPOffset"/> contains.
 		/// </summary>
-		public List<ushort> AttribOffsets { get; set; }
+		public List<ushort> AttribOffsets { get; }
 
 		/// <summary>
 		/// Initializes new instance of <see cref="CPOffset"/>.

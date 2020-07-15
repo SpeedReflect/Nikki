@@ -39,14 +39,14 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// Collection of <see cref="CPAttribute"/> of this <see cref="RealCarPart"/>.
 		/// </summary>
 		[Browsable(false)]
-		public override List<CPAttribute> Attributes { get; set; }
+		public override List<CPAttribute> Attributes { get; }
 
 		/// <summary>
 		/// A <see cref="CPStruct"/> of this <see cref="RealCarPart"/>.
 		/// </summary>
 		[EditorBrowsable(EditorBrowsableState.Always)]
 		[TypeConverter(typeof(ExpandableObjectConverter))]
-		public CPStruct LodStruct { get; set; }
+		public CPStruct LodStruct { get; }
 
 		/// <summary>
 		/// Label of the car part.
@@ -311,8 +311,9 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 				DebugName = this.DebugName,
 				PartLabel = this.PartLabel,
 				UpgradeGroupID = this.UpgradeGroupID,
-				LodStruct = (CPStruct)this.LodStruct.PlainCopy()
 			};
+
+			result.LodStruct.CloneValues(this.LodStruct);
 
 			foreach (var attrib in this.Attributes)
 			{

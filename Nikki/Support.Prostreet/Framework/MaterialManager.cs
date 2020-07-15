@@ -54,9 +54,8 @@ namespace Nikki.Support.Prostreet.Framework
 		/// Initializes new instance of <see cref="MaterialManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>
-		public MaterialManager(Datamap db)
+		public MaterialManager(Datamap db) : base(db)
 		{
-			this.Database = db;
 			this.Extender = 5;
 			this.Alignment = Alignment.Default;
 		}

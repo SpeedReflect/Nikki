@@ -26,7 +26,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <summary>
 		/// Collection of <see cref="CPAttribute"/> of this <see cref="RealCarPart"/>.
 		/// </summary>
-		public abstract List<CPAttribute> Attributes { get; set; }
+		public abstract List<CPAttribute> Attributes { get; }
 
 		/// <summary>
 		/// Total amount of <see cref="CPAttribute"/> in this <see cref="RealCarPart"/>.

@@ -54,9 +54,8 @@ namespace Nikki.Support.Underground2.Framework
 		/// Initializes new instance of <see cref="GCareerManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>
-		public GCareerManager(Datamap db)
+		public GCareerManager(Datamap db) : base(db)
 		{
-			this.Database = db;
 			this.Extender = 1;
 			this.Alignment = Alignment.Default;
 		}
