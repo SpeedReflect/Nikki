@@ -1,16 +1,17 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
-using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
-using Nikki.Support.Shared.Class;
+using Nikki.Support.Underground2.Class;
+using CoreExtensions.Conversions;
 
 
 
-/*
+
 namespace Nikki.Support.Underground2.Gameplay
 {
 	/// <summary>
@@ -21,11 +22,66 @@ namespace Nikki.Support.Underground2.Gameplay
 		#region Fields
 
 		private string _collection_name;
-		private ePerformanceType _part_perf_type = ePerformanceType.NOS;
-		private int _upgrade_level;
-		private int _upgrade_part_index;
-		private int _part_index;
-		private readonly bool _cname_is_set = false;
+
+		#endregion
+
+		#region Enums
+
+		/// <summary>
+		/// Enum of <see cref="PartPerformance"/> types.
+		/// </summary>
+		public enum PerformanceType : int
+		{
+			/// <summary>
+			/// Weight Reduction performance type.
+			/// </summary>
+			WEIGHT_REDUCTION = 0,
+
+			/// <summary>
+			/// Transmission/Drivetrain performance type.
+			/// </summary>
+			DRIVETRAIN = 1,
+
+			/// <summary>
+			/// Nitrous/NOS performance type.
+			/// </summary>
+			NOS = 2,
+
+			/// <summary>
+			/// Engine performance type.
+			/// </summary>
+			ENGINE = 3,
+
+			/// <summary>
+			/// Supercharger/Turbo performance type.
+			/// </summary>
+			TURBO = 4,
+
+			/// <summary>
+			/// Suspension performance type.
+			/// </summary>
+			SUSPENSION = 5,
+
+			/// <summary>
+			/// Calipers/Brakes performance type.
+			/// </summary>
+			BRAKES = 6,
+
+			/// <summary>
+			/// Control Unit/ECU performance type.
+			/// </summary>
+			ECU = 7,
+
+			/// <summary>
+			/// Tires performance type.
+			/// </summary>
+			TIRES = 8,
+
+			/// <summary>
+			/// Aerodynamics/Aero performance type.
+			/// </summary>
+			AERO = 9,
+		}
 
 		#endregion
 
@@ -34,86 +90,106 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override GameINT GameINT => GameINT.Underground2;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override string GameSTR => GameINT.Underground2.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// GCareer to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public GCareer Career { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
 			set
 			{
-				if (string.IsNullOrWhiteSpace(value))
+				if (String.IsNullOrWhiteSpace(value))
+				{
+
 					throw new ArgumentNullException("This value cannot be left left empty.");
-				if (value.Contains(" "))
+
+				}
+				if (value.Contains(' '))
+				{
+
 					throw new Exception("CollectionName cannot contain whitespace.");
 
+				}
+				if (this.Career.GetCollection(value, nameof(this.Career.PartPerformances)) != null)
+				{
+
+					throw new CollectionExistenceException(value);
+
+				}
+
 				this._collection_name = value;
-				if (this._cname_is_set)
-					Map.PerfPartTable[(int)this._part_perf_type, this._upgrade_level, this._upgrade_part_index] = Convert.ToUInt32(value, 16);
 			}
 		}
 
 		/// <summary>
 		/// Binary memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public uint BinKey => this._collection_name.BinHash();
 
 		/// <summary>
 		/// Vault memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public uint VltKey => this._collection_name.VltHash();
 
 		/// <summary>
 		/// Price of the <see cref="PartPerformance"/>.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int PerfPartCost { get; set; }
 
 		/// <summary>
 		/// Percentage of whole package performance boost.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float PerfPartAmplifierFraction { get; set; }
 
 		/// <summary>
 		/// Range X of <see cref="PartPerformance"/>.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float PerfPartRangeX { get; set; } = -1;
 
 		/// <summary>
 		/// Range Y of <see cref="PartPerformance"/>.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float PerfPartRangeY { get; set; } = -1;
 
 		/// <summary>
 		/// Range Z of <see cref="PartPerformance"/>.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float PerfPartRangeZ { get; set; } = -1;
 
 		/// <summary>
@@ -121,6 +197,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public int BeingReplacedByIndex1 { get; set; } = -1;
 
 		/// <summary>
@@ -128,185 +205,112 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public int BeingReplacedByIndex2 { get; set; } = -1;
 
 		/// <summary>
 		/// Number of brands available to choose when installing the part.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int NumberOfBrands { get; set; }
 
 		/// <summary>
 		/// Brand name 1.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public string PerfPartBrand1 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Brand name 2.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public string PerfPartBrand2 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Brand name 3.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public string PerfPartBrand3 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Brand name 4.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public string PerfPartBrand4 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Brand name 5.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public string PerfPartBrand5 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Brand name 6.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public string PerfPartBrand6 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Brand name 7.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public string PerfPartBrand7 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Brand name 8.
 		/// </summary>
 		[AccessModifiable()]
-		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public string PerfPartBrand8 { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Type of the performance.
 		/// </summary>
 		[AccessModifiable()]
-		public ePerformanceType PartPerformanceType
-		{
-			get => this._part_perf_type;
-			set
-			{
-				if (!Enum.IsDefined(typeof(ePerformanceType), value))
-				{
-
-					throw new MappingFailException();
-
-				}
-
-				if (this.CheckIfTypeCanBeSwitched(value))
-				{
-
-					this.SwitchPerfType(value);
-
-				}
-				else
-				{
-
-					throw new Exception("Unable to set: no available perf part slots in this group exist.");
-
-				}
-			}
-		}
+		[MemoryCastable()]
+		[Category("Primary")]
+		public PerformanceType PartPerformanceType { get; set; }
 
 		/// <summary>
 		/// Upgrade level of the part.
 		/// </summary>
 		[AccessModifiable()]
-		public int UpgradeLevel
-		{
-			get => this._upgrade_level + 1;
-			set
-			{
-				--value;
-
-				if (this.CheckIfLevelCanBeSwitched(value))
-				{
-
-					this.SwitchUpgradeLevel(value);
-
-				}
-				else
-				{
-
-					throw new Exception("Unable to set: no available perf part slots in this level exist.");
-
-				}
-			}
-		}
+		[MemoryCastable()]
+		[Category("Primary")]
+		public int UpgradeLevel { get; set; }
 
 		/// <summary>
 		/// Index of the part in the performance package.
 		/// </summary>
 		[AccessModifiable()]
-		public int UpgradePartIndex
-		{
-			get => this._upgrade_part_index;
-			set
-			{
-				if (this.CheckIfIndexCanBeSwitched(value))
-				{
-
-					this.SwitchUpgradePartIndex(value);
-
-				}
-				else
-				{
-
-					throw new Exception("Unable to set: the perf slot is already taken by a different part.");
-
-				}
-			}
-		}
+		[MemoryCastable()]
+		[Category("Primary")]
+		public int UpgradePartIndex { get; set; }
 
 		/// <summary>
 		/// Index of the part.
 		/// </summary>
 		[AccessModifiable()]
-		public int PartIndex
-		{
-			get => this._part_index;
-			set
-			{
-				foreach (var cla in this.Database.PartPerformances.Collections)
-				{
-
-					if (cla.PartIndex == value)
-					{
-
-						throw new Exception("Performance Part with the same PartIndex already exists.");
-
-					}
-				
-				}
-
-				this._part_index = value;
-			}
-		}
+		[MemoryCastable()]
+		[Category("Primary")]
+		public int PartIndex { get; set; }
 
 		#endregion
 
@@ -321,38 +325,23 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// Initializes new instance of <see cref="PartPerformance"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-		public PartPerformance(string CName, Database.Underground2 db)
+		/// <param name="career"><see cref="GCareer"/> to which this instance belongs to.</param>
+		public PartPerformance(string CName, GCareer career)
 		{
-			this.Database = db;
+			this.Career = career;
 			this.CollectionName = CName;
-			this.SetToFirstAvailablePerfSlot();
-			int index = 0;
-			foreach (var cla in db.PartPerformances.Collections)
-			{
-
-				if (cla.PartIndex > index) index = cla.PartIndex;
-			
-			}
-			this._part_index = index + 1;
-			this._cname_is_set = true;
+			CName.BinHash();
 		}
 
 		/// <summary>
 		/// Initializes new instance of <see cref="PartPerformance"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Underground2"/> to which this instance belongs to.</param>
-		/// <param name="args">Performance type, upgrade level, and upgrade index of the part.</param>
-		public PartPerformance(BinaryReader br, Database.Underground2 db, params int[] args)
+		/// <param name="career"><see cref="GCareer"/> to which this instance belongs to.</param>
+		public PartPerformance(BinaryReader br, GCareer career)
 		{
-			this.Database = db;
-			this._part_perf_type = (ePerformanceType)args[0];
-			this._upgrade_level = args[1];
-			this._upgrade_part_index = args[2];
+			this.Career = career;
 			this.Disassemble(br);
-			Map.PerfPartTable[args[0], args[1], args[2]] = this.BinKey;
-			this._cname_is_set = true;
 		}
 
 		/// <summary>
@@ -370,7 +359,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="PartPerformance"/> with.</param>
 		public void Assemble(BinaryWriter bw)
 		{
-			bw.Write(this._part_index);
+			bw.Write(this.PartIndex);
 			bw.Write(this.BinKey);
 			bw.Write(this.PerfPartCost);
 			bw.Write(this.NumberOfBrands);
@@ -414,32 +403,21 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="PartPerformance"/> with.</param>
 		public void Disassemble(BinaryReader br)
 		{
-			uint key = 0;
-			const uint negative = 0xFFFFFFFF;
-
 			// CollectionName and stuff
-			this._part_index = br.ReadInt32();
+			this.PartIndex = br.ReadInt32();
 			this._collection_name = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
 			this.PerfPartCost = br.ReadInt32();
 			this.NumberOfBrands = br.ReadInt32();
 
 			// Resolve all brands (use non-reflective for speed)
-			key = br.ReadUInt32();
-			this.PerfPartBrand1 = key == negative ? String.Empty : key.BinString(eLookupReturn.EMPTY);
-			key = br.ReadUInt32();
-			this.PerfPartBrand2 = key == negative ? String.Empty : key.BinString(eLookupReturn.EMPTY);
-			key = br.ReadUInt32();
-			this.PerfPartBrand3 = key == negative ? String.Empty : key.BinString(eLookupReturn.EMPTY);
-			key = br.ReadUInt32();
-			this.PerfPartBrand4 = key == negative ? String.Empty : key.BinString(eLookupReturn.EMPTY);
-			key = br.ReadUInt32();
-			this.PerfPartBrand5 = key == negative ? String.Empty : key.BinString(eLookupReturn.EMPTY);
-			key = br.ReadUInt32();
-			this.PerfPartBrand6 = key == negative ? String.Empty : key.BinString(eLookupReturn.EMPTY);
-			key = br.ReadUInt32();
-			this.PerfPartBrand7 = key == negative ? String.Empty : key.BinString(eLookupReturn.EMPTY);
-			key = br.ReadUInt32();
-			this.PerfPartBrand8 = key == negative ? String.Empty : key.BinString(eLookupReturn.EMPTY);
+			this.PerfPartBrand1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.PerfPartBrand2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.PerfPartBrand3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.PerfPartBrand4 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.PerfPartBrand5 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.PerfPartBrand6 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.PerfPartBrand7 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.PerfPartBrand8 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
 
 			// Perf part settings
 			this.PerfPartAmplifierFraction = br.ReadSingle();
@@ -456,172 +434,24 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		/// <param name="CName">CollectionName of the new created object.</param>
 		/// <returns>Memory casted copy of the object.</returns>
-		public override ACollectable MemoryCast(string CName)
+		public override Collectable MemoryCast(string CName)
 		{
-			var result = new PartPerformance(CName, this.Database);
+			var result = new PartPerformance(CName, this.Career);
 			base.MemoryCast(this, result);
 			return result;
 		}
 
-		private void ClearPartTableSlot()
-		{
-			int index = (int)this._part_perf_type;
-			int level = this._upgrade_level;
-			int value = this._upgrade_part_index;
-
-			if (Map.PerfPartTable[index, level, value] == this.BinKey)
-			{
-
-				Map.PerfPartTable[index, level, value] = 0;
-
-			}
-		}
-
-		private bool CheckIfIndexCanBeSwitched(int value)
-		{
-			int index = (int)this._part_perf_type;
-			return Map.PerfPartTable[index, this._upgrade_level, value] == 0;
-		}
-
-		private bool CheckIfLevelCanBeSwitched(int level)
-		{
-			int index = (int)this._part_perf_type;
-			
-			for (int loop = 0; loop < 4; ++loop)
-			{
-
-				if (Map.PerfPartTable[index, level, loop] == 0) return true;
-			
-			}
-
-			return false;
-		}
-
-		private bool CheckIfTypeCanBeSwitched(ePerformanceType perftype)
-		{
-			int index = (int)perftype;
-
-			for (int loop = 0; loop < 3; ++loop)
-			{
-
-				for (int i = 0; i < 4; ++i)
-				{
-
-					if (Map.PerfPartTable[index, loop, i] == 0) return true;
-				}
-			
-			}
-			
-			return false;
-		}
-
-		private void SetToFirstAvailablePerfSlot()
-		{
-			for (int a1 = 0; a1 < 10; ++a1)
-			{
-
-				for (int a2 = 0; a2 < 3; ++a2)
-				{
-					
-					for (int a3 = 0; a3 < 4; ++a3)
-					{
-						
-						if (Map.PerfPartTable[a1, a2, a3] == 0)
-						{
-						
-							this._part_perf_type = (ePerformanceType)a1;
-							this._upgrade_level = a2;
-							this._upgrade_part_index = a3;
-							Map.PerfPartTable[a1, a2, a3] = this.BinKey;
-							return;
-						
-						}
-					
-					}
-				
-				}
-			
-			}
-		}
-
-		private void SwitchPerfType(ePerformanceType perftype)
-		{
-			// Clear slot
-			this.ClearPartTableSlot();
-
-			// Move to another
-			this._part_perf_type = perftype;
-			int index = (int)perftype;
-			
-			for (int a1 = 0; a1 < 3; ++a1)
-			{
-			
-				for (int a2 = 0; a2 < 4; ++a2)
-				{
-				
-					if (Map.PerfPartTable[index, a1, a2] == 0)
-					{
-					
-						Map.PerfPartTable[index, a1, a2] = this.BinKey;
-						this._upgrade_level = a1;
-						this._upgrade_part_index = a2;
-						return;
-					
-					}
-				
-				}
-			
-			}
-		}
-
-		private void SwitchUpgradeLevel(int level)
-		{
-			// Clear slot
-			int index = (int)this._part_perf_type;
-			this.ClearPartTableSlot();
-
-			// Move to another
-			this._upgrade_level = level;
-			
-			for (int a1 = 0; a1 < 4; ++a1)
-			{
-			
-				if (Map.PerfPartTable[index, level, a1] == 0)
-				{
-				
-					Map.PerfPartTable[index, level, a1] = this.BinKey;
-					this._upgrade_part_index = a1;
-					return;
-				
-				}
-			
-			}
-		}
-
-		private void SwitchUpgradePartIndex(int value)
-		{
-			// Clear slot
-			int index = (int)this._part_perf_type;
-			int level = this._upgrade_level;
-			this.ClearPartTableSlot();
-
-			// Move to another
-			this._upgrade_part_index = value;
-			Map.PerfPartTable[index, level, value] = this.BinKey;
-		}
-
 		/// <summary>
-		/// Returns CollectionName, BinKey and GameSTR of this <see cref="BankTrigger"/> 
+		/// Returns CollectionName, BinKey and GameSTR of this <see cref="PartPerformance"/> 
 		/// as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
 
 		#endregion
 	}
 }
-*/
