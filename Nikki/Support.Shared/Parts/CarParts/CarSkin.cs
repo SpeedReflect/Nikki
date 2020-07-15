@@ -1,20 +1,35 @@
 ﻿using System;
 using System.IO;
 using Nikki.Utils;
-using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.Underground2.Parts.CarParts
+namespace Nikki.Support.Shared.Parts.CarParts
 {
 	/// <summary>
 	/// A unit <see cref="CarSkin"/> used in cartypeinfo collections.
 	/// </summary>
 	public class CarSkin : SubPart
 	{
+		/// <summary>
+		/// Enum of <see cref="CarSkin"/> types.
+		/// </summary>
+		public enum CarSkinClass : uint
+		{
+			/// <summary>
+			/// Racing CarSkin.
+			/// </summary>
+			Racing = 0xC2FA99BC,
+
+			/// <summary>
+			/// Traffic CarSkin.
+			/// </summary>
+			Traffic = 0x21713D2F,
+		}
+
 		/// <summary>
 		/// Description of the skin.
 		/// </summary>
@@ -36,7 +51,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		/// Class key of the skin.
 		/// </summary>
 		[AccessModifiable()]
-		public eCarSkinClass SkinClassKey { get; set; }
+		public CarSkinClass SkinClassKey { get; set; } = CarSkinClass.Racing;
 
 		/// <summary>
 		/// Clones values of another <see cref="CarSkin"/>.
@@ -80,7 +95,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 			this.SkinDescription = br.ReadNullTermUTF8(0x20);
 			this.Unknown = br.ReadInt32();
 			this.MaterialUsed = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.SkinClassKey = br.ReadEnum<eCarSkinClass>();
+			this.SkinClassKey = br.ReadEnum<CarSkinClass>();
 			br.BaseStream.Position += 0xC;
 		}
 

@@ -7,8 +7,8 @@ using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Shared.Parts.CarParts;
 using Nikki.Support.Underground2.Framework;
-using Nikki.Support.Underground2.Parts.CarParts;
 using Nikki.Support.Underground2.Parts.InfoParts;
 using CoreExtensions.IO;
 using CoreExtensions.Conversions;
@@ -955,9 +955,9 @@ namespace Nikki.Support.Underground2.Class
                 switch (wheel.WheelID)
                 {
 
-                    case eCarWheelType.FRONT_RIGHT: this.WHEEL_FRONT_RIGHT.CloneValues(wheel); break;
-                    case eCarWheelType.REAR_RIGHT: this.WHEEL_REAR_RIGHT.CloneValues(wheel); break;
-                    case eCarWheelType.REAR_LEFT: this.WHEEL_REAR_LEFT.CloneValues(wheel); break;
+                    case CarInfoWheel.CarWheelType.FRONT_RIGHT: this.WHEEL_FRONT_RIGHT.CloneValues(wheel); break;
+                    case CarInfoWheel.CarWheelType.REAR_RIGHT: this.WHEEL_REAR_RIGHT.CloneValues(wheel); break;
+                    case CarInfoWheel.CarWheelType.REAR_LEFT: this.WHEEL_REAR_LEFT.CloneValues(wheel); break;
                     default: this.WHEEL_FRONT_LEFT.CloneValues(wheel); break;
 
                 }
@@ -1095,14 +1095,14 @@ namespace Nikki.Support.Underground2.Class
                 var camera = new Camera();
                 camera.Read(br);
                 
-                switch (camera.CameraType)
+                switch (camera.Type)
                 {
 
-                    case eCameraType.CLOSE: this.PLAYER_CAMERA_CLOSE.CloneValues(camera); break;
-                    case eCameraType.BUMPER: this.PLAYER_CAMERA_BUMPER.CloneValues(camera); break;
-                    case eCameraType.DRIVER: this.PLAYER_CAMERA_DRIVER.CloneValues(camera); break;
-                    case eCameraType.HOOD: this.PLAYER_CAMERA_HOOD.CloneValues(camera); break;
-                    case eCameraType.DRIFT: this.PLAYER_CAMERA_DRIFT.CloneValues(camera); break;
+                    case Camera.CameraType.CLOSE: this.PLAYER_CAMERA_CLOSE.CloneValues(camera); break;
+                    case Camera.CameraType.BUMPER: this.PLAYER_CAMERA_BUMPER.CloneValues(camera); break;
+                    case Camera.CameraType.DRIVER: this.PLAYER_CAMERA_DRIVER.CloneValues(camera); break;
+                    case Camera.CameraType.HOOD: this.PLAYER_CAMERA_HOOD.CloneValues(camera); break;
+                    case Camera.CameraType.DRIFT: this.PLAYER_CAMERA_DRIFT.CloneValues(camera); break;
                     default: this.PLAYER_CAMERA_FAR.CloneValues(camera); break;
                 
                 }
@@ -1116,14 +1116,14 @@ namespace Nikki.Support.Underground2.Class
                 var camera = new Camera();
                 camera.Read(br);
                 
-                switch (camera.CameraType)
+                switch (camera.Type)
                 {
 
-                    case eCameraType.CLOSE: this.AI_CAMERA_CLOSE.CloneValues(camera); break;
-                    case eCameraType.BUMPER: this.AI_CAMERA_BUMPER.CloneValues(camera); break;
-                    case eCameraType.DRIVER: this.AI_CAMERA_DRIVER.CloneValues(camera); break;
-                    case eCameraType.HOOD: this.AI_CAMERA_HOOD.CloneValues(camera); break;
-                    case eCameraType.DRIFT: this.AI_CAMERA_DRIFT.CloneValues(camera); break;
+                    case Camera.CameraType.CLOSE: this.AI_CAMERA_CLOSE.CloneValues(camera); break;
+                    case Camera.CameraType.BUMPER: this.AI_CAMERA_BUMPER.CloneValues(camera); break;
+                    case Camera.CameraType.DRIVER: this.AI_CAMERA_DRIVER.CloneValues(camera); break;
+                    case Camera.CameraType.HOOD: this.AI_CAMERA_HOOD.CloneValues(camera); break;
+                    case Camera.CameraType.DRIFT: this.AI_CAMERA_DRIFT.CloneValues(camera); break;
                     default: this.AI_CAMERA_FAR.CloneValues(camera); break;
                 
                 }

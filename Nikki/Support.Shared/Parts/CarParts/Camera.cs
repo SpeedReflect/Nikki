@@ -1,12 +1,11 @@
 ﻿using System.IO;
-using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.Underground2.Parts.InfoParts
+namespace Nikki.Support.Shared.Parts.CarParts
 {
 	/// <summary>
 	/// A unit <see cref="Camera"/> used in car performance.
@@ -14,9 +13,45 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
 	public class Camera : SubPart
 	{
 		/// <summary>
+		/// Enum of camera types.
+		/// </summary>
+		public enum CameraType : short
+		{
+			/// <summary>
+			/// Far camera.
+			/// </summary>
+			FAR = 0,
+
+			/// <summary>
+			/// Close camera.
+			/// </summary>
+			CLOSE = 1,
+
+			/// <summary>
+			/// Bumper camera.
+			/// </summary>
+			BUMPER = 2,
+
+			/// <summary>
+			/// Driver camera.
+			/// </summary>
+			DRIVER = 3,
+
+			/// <summary>
+			/// Hood camera.
+			/// </summary>
+			HOOD = 4,
+
+			/// <summary>
+			/// Drift camera.
+			/// </summary>
+			DRIFT = 5
+		}
+
+		/// <summary>
 		/// 
 		/// </summary>
-		internal eCameraType CameraType { get; set; }
+		internal CameraType Type { get; set; }
 
 		/// <summary>
 		/// 
@@ -57,7 +92,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
 			this.CameraHeight = other.CameraHeight;
 			this.CameraLag = other.CameraLag;
 			this.CameraLatOffset = other.CameraLatOffset;
-			this.CameraType = other.CameraType;
+			this.Type = other.Type;
 		}
 
 		/// <summary>
@@ -77,7 +112,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Read(BinaryReader br)
 		{
-			this.CameraType = br.ReadEnum<eCameraType>();
+			this.Type = br.ReadEnum<CameraType>();
 			this.CameraAngle = ((float)br.ReadInt16()) * 180 / 32768;
 			this.CameraLag = br.ReadSingle();
 			this.CameraHeight = br.ReadSingle();
@@ -90,7 +125,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		public void Write(BinaryWriter bw)
 		{
-			bw.WriteEnum(this.CameraType);
+			bw.WriteEnum(this.Type);
 			bw.Write((short)(this.CameraAngle / 180 * 32768));
 			bw.Write(this.CameraLag);
 			bw.Write(this.CameraHeight);

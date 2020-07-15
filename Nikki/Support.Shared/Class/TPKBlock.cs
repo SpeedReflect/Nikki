@@ -22,12 +22,78 @@ namespace Nikki.Support.Shared.Class
     /// </summary>
     public abstract class TPKBlock : Collectable, IAssembly
     {
+        #region Shared Enums
+
+        /// <summary>
+        /// Enum of <see cref="TPKBlock"/> version types.
+        /// </summary>
+        public enum TPKVersion : int
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            Underground1 = 4,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            Underground2 = 5,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            MostWanted = 5,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            Carbon = 8,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            Prostreet = 8,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            Undercover = 9,
+        }
+
+        /// <summary>
+        /// Compression type of a <see cref="TPKBlock"/>.
+        /// </summary>
+        public enum TPKCompressionType : int
+        {
+            /// <summary>
+            /// All TPK textures data are stored raw decompressed.
+            /// </summary>
+            RawDecompressed = 0,
+
+            /// <summary>
+            /// All TPK textures data are stored decompressed using stream rules.
+            /// </summary>
+            StreamDecompressed = 1,
+
+            /// <summary>
+            /// All TPK textures data are compressed fully without splitting in parts.
+            /// </summary>
+            CompressedFullData = 2,
+
+            /// <summary>
+            /// All TPK textures data are compressed fully by splitting and compressing them in parts.
+            /// </summary>
+            CompressedByParts = 3,
+        }
+
+        #endregion
+
         #region Primary Properties
 
         /// <summary>
         /// Version of this <see cref="TPKBlock"/>.
         /// </summary>
-        public abstract eTPKVersion Version { get; }
+        public abstract TPKVersion Version { get; }
 
         /// <summary>
         /// Filename of the <see cref="TPKBlock"/> which was assembled. Has no effect. 0x40 bytes.
@@ -40,12 +106,12 @@ namespace Nikki.Support.Shared.Class
         public abstract uint FilenameHash { get; }
 
         /// <summary>
-        /// <see cref="eTPKCompressionType"/> of this <see cref="TPKBlock"/>.
+        /// <see cref="TPKCompressionType"/> of this <see cref="TPKBlock"/>.
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
         [Category("Primary")]
-        public eTPKCompressionType CompressionType { get; set; }
+        public TPKCompressionType CompressionType { get; set; }
 
         /// <summary>
         /// Settings data related to this <see cref="TPKBlock"/>.
@@ -519,9 +585,9 @@ namespace Nikki.Support.Shared.Class
 
                 this.CompressionType = offslot.Flags switch
                 {
-                    1 => eTPKCompressionType.CompressedFullData,
-                    2 => eTPKCompressionType.CompressedByParts,
-                    _ => eTPKCompressionType.StreamDecompressed,
+                    1 => TPKCompressionType.CompressedFullData,
+                    2 => TPKCompressionType.CompressedByParts,
+                    _ => TPKCompressionType.StreamDecompressed,
                 };
 
             }
@@ -640,9 +706,9 @@ namespace Nikki.Support.Shared.Class
 		{
             return this.CompressionType switch
             {
-                eTPKCompressionType.StreamDecompressed => this.GetStreamDecompressed(bw, thisOffset),
-                eTPKCompressionType.CompressedFullData => this.GetCompressedFullData(bw, thisOffset),
-                eTPKCompressionType.CompressedByParts => this.GetCompressedByParts(bw, thisOffset),
+                TPKCompressionType.StreamDecompressed => this.GetStreamDecompressed(bw, thisOffset),
+                TPKCompressionType.CompressedFullData => this.GetCompressedFullData(bw, thisOffset),
+                TPKCompressionType.CompressedByParts => this.GetCompressedByParts(bw, thisOffset),
                 _ => null
             };
 		}

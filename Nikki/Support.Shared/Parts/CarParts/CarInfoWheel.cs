@@ -1,18 +1,43 @@
 ﻿using System.IO;
-using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
 
 
 
-namespace Nikki.Support.Underground2.Parts.InfoParts
+namespace Nikki.Support.Shared.Parts.CarParts
 {
     /// <summary>
     /// A unit <see cref="CarInfoWheel"/> used in car performance.
     /// </summary>
     public class CarInfoWheel : SubPart
 	{
+        /// <summary>
+        /// Enum of wheel IDs for Underground1 and Underground2 supports.
+        /// </summary>
+        public enum CarWheelType : int
+        {
+            /// <summary>
+            /// Front left wheel id
+            /// </summary>
+            FRONT_LEFT = 0,
+
+            /// <summary>
+            /// Front right wheel id
+            /// </summary>
+            FRONT_RIGHT = 1,
+
+            /// <summary>
+            /// Rear right wheel id
+            /// </summary>
+            REAR_RIGHT = 2,
+
+            /// <summary>
+            /// Rear left wheel id
+            /// </summary>
+            REAR_LEFT = 3,
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -53,7 +78,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
         /// 
         /// </summary>
         [AccessModifiable()]
-        internal eCarWheelType WheelID { get; set; }
+        internal CarWheelType WheelID { get; set; }
 
         /// <summary>
         /// 
@@ -68,7 +93,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
         public float WideBodyYValue { get; set; }
 
         /// <summary>
-        /// Initializes new instance of <see cref="Brakes"/>.
+        /// Initializes new instance of <see cref="CarInfoWheel"/>.
         /// </summary>
         public CarInfoWheel() { }
 
@@ -112,7 +137,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
             this.UnknownVal = br.ReadSingle();
             this.Diameter = br.ReadSingle();
             this.TireSkidWidth = br.ReadSingle();
-            this.WheelID = br.ReadEnum<eCarWheelType>();
+            this.WheelID = br.ReadEnum<CarWheelType>();
             this.YValue = br.ReadSingle();
             this.WideBodyYValue = br.ReadSingle();
             br.BaseStream.Position += 0xC;

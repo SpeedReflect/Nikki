@@ -68,7 +68,7 @@ namespace Nikki.Support.Carbon.Class
 		/// Version of this <see cref="TPKBlock"/>.
 		/// </summary>
 		[Browsable(false)]
-        public override eTPKVersion Version => eTPKVersion.Carbon;
+        public override TPKVersion Version => TPKVersion.Carbon;
 
 		/// <summary>
 		/// Filename used for this <see cref="TPKBlock"/>. It is a default watermark.
@@ -155,7 +155,7 @@ namespace Nikki.Support.Carbon.Class
             // TPK Sort
             this.SortTexturesByType(false);
 
-            if (this.CompressionType == eTPKCompressionType.RawDecompressed) this.AssembleDecompressed(bw);
+            if (this.CompressionType == TPKCompressionType.RawDecompressed) this.AssembleDecompressed(bw);
             else this.AssembleCompressed(bw);
 
             ForcedX.GCCollect();
@@ -891,7 +891,7 @@ namespace Nikki.Support.Carbon.Class
             using var reader = new BinaryReader(ms);
 
             this._collection_name = reader.ReadNullTermUTF8();
-            this.CompressionType = reader.ReadEnum<eTPKCompressionType>();
+            this.CompressionType = reader.ReadEnum<TPKCompressionType>();
             int animcount = reader.ReadInt32();
             int textcount = reader.ReadInt32();
             this.Animations.Capacity = animcount;
