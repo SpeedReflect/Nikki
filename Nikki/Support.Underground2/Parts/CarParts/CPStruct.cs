@@ -289,7 +289,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 				if (key != negative)
 				{
 				
-					this.Geometry0LodA = key.BinString(eLookupReturn.EMPTY);
+					this.Geometry0LodA = key.BinString(LookupReturn.EMPTY);
 					this.Geometry0LodAExists = eBoolean.True;
 				
 				}
@@ -300,7 +300,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 				if (key != negative)
 				{
 				
-					this.Geometry0LodB = key.BinString(eLookupReturn.EMPTY);
+					this.Geometry0LodB = key.BinString(LookupReturn.EMPTY);
 					this.Geometry0LodBExists = eBoolean.True;
 				
 				}
@@ -311,7 +311,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 				if (key != negative)
 				{
 				
-					this.Geometry0LodC = key.BinString(eLookupReturn.EMPTY);
+					this.Geometry0LodC = key.BinString(LookupReturn.EMPTY);
 					this.Geometry0LodCExists = eBoolean.True;
 				
 				}
@@ -322,7 +322,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 				if (key != negative)
 				{
 				
-					this.Geometry0LodD = key.BinString(eLookupReturn.EMPTY);
+					this.Geometry0LodD = key.BinString(LookupReturn.EMPTY);
 					this.Geometry0LodDExists = eBoolean.True;
 				
 				}
@@ -333,7 +333,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 				if (key != negative)
 				{
 
-					this.Geometry1LodA = key.BinString(eLookupReturn.EMPTY);
+					this.Geometry1LodA = key.BinString(LookupReturn.EMPTY);
 					this.Geometry1LodAExists = eBoolean.True;
 
 				}
@@ -344,7 +344,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 				if (key != negative)
 				{
 
-					this.Geometry1LodB = key.BinString(eLookupReturn.EMPTY);
+					this.Geometry1LodB = key.BinString(LookupReturn.EMPTY);
 					this.Geometry1LodBExists = eBoolean.True;
 
 				}
@@ -355,7 +355,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 				if (key != negative)
 				{
 
-					this.Geometry1LodC = key.BinString(eLookupReturn.EMPTY);
+					this.Geometry1LodC = key.BinString(LookupReturn.EMPTY);
 					this.Geometry1LodCExists = eBoolean.True;
 
 				}
@@ -366,7 +366,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 				if (key != negative)
 				{
 
-					this.Geometry1LodD = key.BinString(eLookupReturn.EMPTY);
+					this.Geometry1LodD = key.BinString(LookupReturn.EMPTY);
 					this.Geometry1LodDExists = eBoolean.True;
 
 				}

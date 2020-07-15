@@ -91,7 +91,7 @@ namespace Nikki.Support.MostWanted.Framework
 		internal override void Disassemble(BinaryReader br, Block block)
 		{
 			if (Block.IsNullOrEmpty(block)) return;
-			if (block.BlockID != eBlockID.FEngFiles) return;
+			if (block.BlockID != BinBlockID.FEngFiles) return;
 
 			this._is_read_only = false;
 			this.Capacity = block.Offsets.Count;
@@ -170,7 +170,7 @@ namespace Nikki.Support.MostWanted.Framework
 		/// </summary>
 		/// <param name="type">Type of serialization of a collection.</param>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		public override void Import(eSerializeType type, BinaryReader br)
+		public override void Import(SerializeType type, BinaryReader br)
 		{
 			var position = br.BaseStream.Position;
 			var header = new SerializationHeader();
@@ -178,7 +178,7 @@ namespace Nikki.Support.MostWanted.Framework
 
 			var collection = new FNGroup();
 
-			if (header.ID != eBlockID.Nikki)
+			if (header.ID != BinBlockID.Nikki)
 			{
 
 				br.BaseStream.Position = position;
@@ -224,11 +224,11 @@ namespace Nikki.Support.MostWanted.Framework
 
 				switch (type)
 				{
-					case eSerializeType.Negate:
+					case SerializeType.Negate:
 						break;
 
-					case eSerializeType.Synchronize:
-					case eSerializeType.Override:
+					case SerializeType.Synchronize:
+					case SerializeType.Override:
 						collection.Manager = this;
 						this.Replace(collection, index);
 						break;

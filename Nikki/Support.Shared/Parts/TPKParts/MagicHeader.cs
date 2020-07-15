@@ -15,7 +15,7 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 		/// <summary>
 		/// Magic ID number 0x55441122.
 		/// </summary>
-		public uint Magic => (uint)eBlockID.LZCompressed;
+		public uint Magic => (uint)BinBlockID.LZCompressed;
 
 		/// <summary>
 		/// Size of decoded/decompressed data.

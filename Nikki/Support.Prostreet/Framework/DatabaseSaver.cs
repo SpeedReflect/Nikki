@@ -50,7 +50,7 @@ namespace Nikki.Support.Prostreet.Framework
 			using var fs = new FileStream(this._options.File, FileMode.Open, FileAccess.Read);
 			fs.Read(array, 0, 4);
 			var type = BitConverter.ToInt32(array, 0);
-			return Enum.IsDefined(typeof(eLZCompressionType), type);
+			return Enum.IsDefined(typeof(LZCompressionType), type);
 		}
 
 		private void WriteUnique()
@@ -140,14 +140,14 @@ namespace Nikki.Support.Prostreet.Framework
 			{
 
 				var off = br.BaseStream.Position;
-				var id = br.ReadEnum<eBlockID>();
+				var id = br.ReadEnum<BinBlockID>();
 				var size = br.ReadInt32();
-				var next = eBlockID.Padding;
+				var next = BinBlockID.Padding;
 
 				if (br.BaseStream.Position + 4 < br.BaseStream.Length)
 				{
 
-					next = br.ReadEnum<eBlockID>();
+					next = br.ReadEnum<BinBlockID>();
 					br.BaseStream.Position -= 4;
 
 				}
@@ -155,25 +155,25 @@ namespace Nikki.Support.Prostreet.Framework
 
 				switch (id)
 				{
-					case eBlockID.Padding:
-						if (next != eBlockID.Nikki) goto default;
-						else goto case eBlockID.Nikki;
+					case BinBlockID.Padding:
+						if (next != BinBlockID.Nikki) goto default;
+						else goto case BinBlockID.Nikki;
 
-					case eBlockID.Nikki:
-					case eBlockID.Tracks:
-					case eBlockID.SunInfos:
-					case eBlockID.FEngFiles:
-					case eBlockID.Materials:
-					case eBlockID.SlotTypes:
-					case eBlockID.STRBlocks:
-					case eBlockID.TPKBlocks:
-					case eBlockID.DBCarParts:
-					case eBlockID.DBCarBounds:
-					case eBlockID.FNGCompress:
-					case eBlockID.TPKSettings:
-					case eBlockID.CarTypeInfos:
-					case eBlockID.CarInfoAnimHideup:
-					case eBlockID.CarInfoAnimHookup:
+					case BinBlockID.Nikki:
+					case BinBlockID.Tracks:
+					case BinBlockID.SunInfos:
+					case BinBlockID.FEngFiles:
+					case BinBlockID.Materials:
+					case BinBlockID.SlotTypes:
+					case BinBlockID.STRBlocks:
+					case BinBlockID.TPKBlocks:
+					case BinBlockID.DBCarParts:
+					case BinBlockID.DBCarBounds:
+					case BinBlockID.FNGCompress:
+					case BinBlockID.TPKSettings:
+					case BinBlockID.CarTypeInfos:
+					case BinBlockID.CarInfoAnimHideup:
+					case BinBlockID.CarInfoAnimHookup:
 						br.BaseStream.Position += size;
 						break;
 

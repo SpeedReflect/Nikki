@@ -67,12 +67,12 @@ namespace Nikki.Support.MostWanted.Parts.PresetParts
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Read(BinaryReader br)
 		{
-			this.DecalFrontWindow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalRearWindow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalLeftDoor = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalRightDoor = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalLeftQuarter = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalRightQuarter = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.DecalFrontWindow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalRearWindow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalLeftDoor = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalRightDoor = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalLeftQuarter = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalRightQuarter = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 		}
 
 		/// <summary>

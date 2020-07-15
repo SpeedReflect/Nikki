@@ -247,12 +247,12 @@ namespace Nikki.Support.Shared.Class
         /// <param name="key">Key of the <see cref="Texture"/> Collection Name.</param>
         /// <param name="type">Type of the key passed.</param>
         /// <returns>Texture if it is found; null otherwise.</returns>
-        public Texture FindTexture(uint key, eKeyType type) =>
+        public Texture FindTexture(uint key, KeyType type) =>
             type switch
             {
-                eKeyType.BINKEY => this.Textures.Find(_ => _.BinKey == key),
-                eKeyType.VLTKEY => this.Textures.Find(_ => _.VltKey == key),
-                eKeyType.CUSTOM => throw new NotImplementedException(),
+                KeyType.BINKEY => this.Textures.Find(_ => _.BinKey == key),
+                KeyType.VLTKEY => this.Textures.Find(_ => _.VltKey == key),
+                KeyType.CUSTOM => throw new NotImplementedException(),
                 _ => null
             };
 
@@ -262,12 +262,12 @@ namespace Nikki.Support.Shared.Class
         /// <param name="key">Key of the Collection Name of the <see cref="Texture"/>.</param>
         /// <param name="type">Key type passed.</param>
         /// <returns>Index number as an integer. If element does not exist, returns -1.</returns>
-        public int GetTextureIndex(uint key, eKeyType type)
+        public int GetTextureIndex(uint key, KeyType type)
 		{
             switch (type)
             {
 
-                case eKeyType.BINKEY:
+                case KeyType.BINKEY:
                     for (int loop = 0; loop < this.Textures.Count; ++loop)
                     {
 
@@ -276,7 +276,7 @@ namespace Nikki.Support.Shared.Class
                     }
                     break;
 
-                case eKeyType.VLTKEY:
+                case KeyType.VLTKEY:
                     for (int loop = 0; loop < this.Textures.Count; ++loop)
                     {
 
@@ -285,7 +285,7 @@ namespace Nikki.Support.Shared.Class
                     }
                     break;
 
-                case eKeyType.CUSTOM:
+                case KeyType.CUSTOM:
                     throw new NotImplementedException();
 
                 default:
@@ -307,7 +307,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to be deleted.</param>
         /// <param name="type">Type fo the key passed.</param>
-        public void RemoveTexture(uint key, eKeyType type)
+        public void RemoveTexture(uint key, KeyType type)
 		{
             var index = this.GetTextureIndex(key, type);
 
@@ -327,7 +327,7 @@ namespace Nikki.Support.Shared.Class
         /// <param name="newname">Collection Name of the new <see cref="Texture"/>.</param>
         /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to clone.</param>
         /// <param name="type">Type of the key passed.</param>
-        public abstract void CloneTexture(string newname, uint key, eKeyType type);
+        public abstract void CloneTexture(string newname, uint key, KeyType type);
 
         /// <summary>
         /// Replaces <see cref="Texture"/> specified in the <see cref="TPKBlock"/> data with a new one.
@@ -335,7 +335,7 @@ namespace Nikki.Support.Shared.Class
         /// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to be replaced.</param>
         /// <param name="type">Type of the key passed.</param>
         /// <param name="filename">Path of the texture that replaces the current one.</param>
-        public void ReplaceTexture(uint key, eKeyType type, string filename)
+        public void ReplaceTexture(uint key, KeyType type, string filename)
 		{
             var tex = this.FindTexture(key, type);
 
@@ -412,10 +412,10 @@ namespace Nikki.Support.Shared.Class
             while (br.BaseStream.Position < offset + size)
 			{
 
-                var id = br.ReadEnum<eBlockID>();
+                var id = br.ReadEnum<BinBlockID>();
                 var to = br.ReadInt32();
 
-                if (id != eBlockID.TPK_AnimBlock)
+                if (id != BinBlockID.TPK_AnimBlock)
 				{
 
                     br.BaseStream.Position += to;
@@ -513,7 +513,7 @@ namespace Nikki.Support.Shared.Class
                     {
 
                         // We read till we find magic compressed block number
-                        if (br.ReadEnum<eBlockID>() != eBlockID.LZCompressed) continue;
+                        if (br.ReadEnum<BinBlockID>() != BinBlockID.LZCompressed) continue;
 
                         var magic = new MagicHeader();
                         magic.Read(br);
@@ -648,7 +648,7 @@ namespace Nikki.Support.Shared.Class
 		{
 
             if (this.Animations.Count == 0) return;
-            bw.WriteEnum(eBlockID.TPK_BinData);
+            bw.WriteEnum(BinBlockID.TPK_BinData);
             bw.Write(-1);
             var start = bw.BaseStream.Position;
 
@@ -672,7 +672,7 @@ namespace Nikki.Support.Shared.Class
         /// <returns>Byte array of the partial 2 part2.</returns>
         protected void Get2DecodedPart2(BinaryWriter bw)
 		{
-            bw.WriteEnum(eBlockID.TPK_DataPart2); // write ID
+            bw.WriteEnum(BinBlockID.TPK_DataPart2); // write ID
             bw.Write(-1); // write size
             var position = bw.BaseStream.Position;
 
@@ -725,7 +725,7 @@ namespace Nikki.Support.Shared.Class
             var result = new List<OffSlot>(this.Textures.Count);
 
             // Save position and write ID with temporary size
-            bw.WriteEnum(eBlockID.TPK_DataPart2);
+            bw.WriteEnum(BinBlockID.TPK_DataPart2);
             bw.Write(0xFFFFFFFF);
             var start = bw.BaseStream.Position;
 
@@ -825,7 +825,7 @@ namespace Nikki.Support.Shared.Class
             var result = new List<OffSlot>(this.Textures.Count);
 
             // Save position and write ID with temporary size
-            bw.WriteEnum(eBlockID.TPK_DataPart2);
+            bw.WriteEnum(BinBlockID.TPK_DataPart2);
             bw.Write(0xFFFFFFFF);
             var start = bw.BaseStream.Position;
 
@@ -880,7 +880,7 @@ namespace Nikki.Support.Shared.Class
                 }
 
                 // Compress texture data with the best compression
-                array = Interop.Compress(array, eLZCompressionType.BEST);
+                array = Interop.Compress(array, LZCompressionType.BEST);
 
                 // Create new Offslot that will be yield returned
                 var offslot = new OffSlot()
@@ -928,7 +928,7 @@ namespace Nikki.Support.Shared.Class
             var result = new List<OffSlot>(this.Textures.Count);
 
             // Save position and write ID with temporary size
-            bw.WriteEnum(eBlockID.TPK_DataPart2);
+            bw.WriteEnum(BinBlockID.TPK_DataPart2);
             bw.Write(0xFFFFFFFF);
             var start = bw.BaseStream.Position;
 
@@ -1008,7 +1008,7 @@ namespace Nikki.Support.Shared.Class
                         CalculateNextOffset(texture.Data.Length);
 
                         // Save compressed data to MagicHeader
-                        magic.Data = Interop.Compress(head, eLZCompressionType.BEST);
+                        magic.Data = Interop.Compress(head, LZCompressionType.BEST);
                         magic.DecodedSize = difference + this.CompTexHeaderSize;
 
                     }
@@ -1018,7 +1018,7 @@ namespace Nikki.Support.Shared.Class
                     {
 
                         // Use compression type passed
-                        magic.Data = Interop.Compress(texture.Data, texOffset, maxBlockSize, eLZCompressionType.BEST);
+                        magic.Data = Interop.Compress(texture.Data, texOffset, maxBlockSize, LZCompressionType.BEST);
                         texOffset += maxBlockSize;
                         magic.DecodedSize = maxBlockSize;
 

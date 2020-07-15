@@ -104,7 +104,7 @@ namespace Nikki.Reflection.Interface
 		/// </summary>
 		/// <param name="type">Type of serialization of a collection.</param>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		void Import(eSerializeType type, BinaryReader br);
+		void Import(SerializeType type, BinaryReader br);
 
 		/// <summary>
 		/// Searches for the collection with CollectionName specified and returns the 

@@ -73,7 +73,7 @@ namespace Nikki.Support.Underground2.Framework
 
 			bw.GeneratePadding(mark, this.Alignment);
 
-			bw.WriteEnum(eBlockID.CarTypeInfos);
+			bw.WriteEnum(BinBlockID.CarTypeInfos);
 			bw.Write(this.Count * CarTypeInfo.BaseClassSize + 8);
 			bw.Write(0x11111111);
 			bw.Write(0x11111111);
@@ -88,7 +88,7 @@ namespace Nikki.Support.Underground2.Framework
 
 			}
 
-			bw.WriteEnum(eBlockID.CarSkins);
+			bw.WriteEnum(BinBlockID.CarSkins);
 			bw.Write(-1);
 			var start = bw.BaseStream.Position;
 
@@ -113,7 +113,7 @@ namespace Nikki.Support.Underground2.Framework
 		internal override void Disassemble(BinaryReader br, Block block)
 		{
 			if (Block.IsNullOrEmpty(block)) return;
-			if (block.BlockID != eBlockID.CarTypeInfos) return;
+			if (block.BlockID != BinBlockID.CarTypeInfos) return;
 
 			for (int loop = 0; loop < block.Offsets.Count; ++loop)
 			{
@@ -205,7 +205,7 @@ namespace Nikki.Support.Underground2.Framework
 		/// </summary>
 		/// <param name="type">Type of serialization of a collection.</param>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		public override void Import(eSerializeType type, BinaryReader br)
+		public override void Import(SerializeType type, BinaryReader br)
 		{
 			var position = br.BaseStream.Position;
 			var header = new SerializationHeader();
@@ -213,7 +213,7 @@ namespace Nikki.Support.Underground2.Framework
 
 			var collection = new CarTypeInfo();
 
-			if (header.ID != eBlockID.Nikki)
+			if (header.ID != BinBlockID.Nikki)
 			{
 
 				br.BaseStream.Position = position;
@@ -255,11 +255,11 @@ namespace Nikki.Support.Underground2.Framework
 
 				switch (type)
 				{
-					case eSerializeType.Negate:
+					case SerializeType.Negate:
 						break;
 
-					case eSerializeType.Synchronize:
-					case eSerializeType.Override:
+					case SerializeType.Synchronize:
+					case SerializeType.Override:
 						collection.Manager = this;
 						this.Replace(collection, index);
 						break;

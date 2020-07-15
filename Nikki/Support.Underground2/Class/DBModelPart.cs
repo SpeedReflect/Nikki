@@ -334,7 +334,7 @@ namespace Nikki.Support.Underground2.Class
 
 			}
 
-			array = Interop.Compress(array, eLZCompressionType.BEST);
+			array = Interop.Compress(array, LZCompressionType.BEST);
 
 			var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
 			header.Write(bw);
@@ -368,7 +368,7 @@ namespace Nikki.Support.Underground2.Class
 				{
 					PartLabel = reader.ReadNullTermUTF8(),
 					DebugName = reader.ReadNullTermUTF8(),
-					CarPartGroupID = reader.ReadEnum<eSlotUnderground2>(),
+					CarPartGroupID = reader.ReadEnum<SlotUnderground2>(),
 					UpgradeGroupID = reader.ReadUInt16()
 				};
 
@@ -382,16 +382,16 @@ namespace Nikki.Support.Underground2.Class
 					if (!Map.CarPartKeys.TryGetValue(key, out var type))
 					{
 
-						type = eCarPartAttribType.Integer;
+						type = CarPartAttribType.Integer;
 
 					}
 
 					CPAttribute attrib = type switch
 					{
-						eCarPartAttribType.Boolean => new BoolAttribute(),
-						eCarPartAttribType.Floating => new FloatAttribute(),
-						eCarPartAttribType.String => new StringAttribute(),
-						eCarPartAttribType.Key => new KeyAttribute(),
+						CarPartAttribType.Boolean => new BoolAttribute(),
+						CarPartAttribType.Floating => new FloatAttribute(),
+						CarPartAttribType.String => new StringAttribute(),
+						CarPartAttribType.Key => new KeyAttribute(),
 						_ => new IntAttribute(),
 					};
 

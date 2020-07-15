@@ -28,7 +28,7 @@ namespace Nikki.Support.MostWanted.Class
         private uint _binkey;
         
         [MemoryCastable()]
-        private eTextureCompressionType _compression = eTextureCompressionType.TEXCOMP_32BIT;
+        private TextureCompressionType _compression = TextureCompressionType.TEXCOMP_32BIT;
 
         [MemoryCastable()]
         private int _area = 0;
@@ -135,7 +135,7 @@ namespace Nikki.Support.MostWanted.Class
                 }
 
                 var key = value.BinHash();
-                var type = eKeyType.BINKEY;
+                var type = KeyType.BINKEY;
 
                 if (this.TPK?.GetTextureIndex(key, type) != -1)
                 {
@@ -167,7 +167,7 @@ namespace Nikki.Support.MostWanted.Class
         /// Compression type value of the texture.
         /// </summary>
         [Category("Primary")]
-        public override eTextureCompressionType Compression => this._compression;
+        public override TextureCompressionType Compression => this._compression;
 
         /// <summary>
         /// Used in TPK compression blocks.
@@ -329,20 +329,20 @@ namespace Nikki.Support.MostWanted.Class
             this.Width = br.ReadInt16();
             this.Height = br.ReadInt16();
             br.BaseStream.Position += 2; // skip logs
-            this._compression = br.ReadEnum<eTextureCompressionType>();
+            this._compression = br.ReadEnum<TextureCompressionType>();
             this._pal_comp = br.ReadByte();
             this._num_palettes = br.ReadInt16();
             this.Mipmaps = br.ReadByte();
-            this.TileableUV = br.ReadEnum<eTileableType>();
+            this.TileableUV = br.ReadEnum<TextureTileableType>();
             this.BiasLevel = br.ReadByte();
             this.RenderingOrder = br.ReadByte();
-            this.ScrollType = br.ReadEnum<eTextureScrollType>();
+            this.ScrollType = br.ReadEnum<TextureScrollType>();
             this._used_flag = br.ReadByte();
             this.ApplyAlphaSort = br.ReadByte();
-            this.AlphaUsageType = br.ReadEnum<eTextureAlphaUsageType>();
-            this.AlphaBlendType = br.ReadEnum<eTextureAlphaBlendType>();
+            this.AlphaUsageType = br.ReadEnum<TextureAlphaUsageType>();
+            this.AlphaBlendType = br.ReadEnum<TextureAlphaBlendType>();
             this._flags = br.ReadByte();
-            this.MipmapBiasType = br.ReadEnum<eTextureMipmapBiasType>();
+            this.MipmapBiasType = br.ReadEnum<TextureMipmapBiasType>();
             this._padding = br.ReadByte();
             this._scroll_timestep = br.ReadInt16();
             this._scroll_speedS = br.ReadInt16();
@@ -518,7 +518,7 @@ namespace Nikki.Support.MostWanted.Class
                 writer.WriteBytes(0x20); // write padding for better compression
                 writer.Write(modulo == 0 ? size : size + 1);
 
-                array = Interop.Compress(ms.ToArray(), eLZCompressionType.BEST);
+                array = Interop.Compress(ms.ToArray(), LZCompressionType.BEST);
                 datalist.Add(array);
 
             }
@@ -532,7 +532,7 @@ namespace Nikki.Support.MostWanted.Class
 
                 var temp = new byte[total];
                 Array.Copy(this.Data, loop << 15, temp, 0, total);
-                array = Interop.Compress(temp, eLZCompressionType.BEST);
+                array = Interop.Compress(temp, LZCompressionType.BEST);
                 datalist.Add(array);
 
             }
@@ -576,20 +576,20 @@ namespace Nikki.Support.MostWanted.Class
             this._area = reader.ReadInt32();
             this.Width = reader.ReadInt16();
             this.Height = reader.ReadInt16();
-            this._compression = reader.ReadEnum<eTextureCompressionType>();
+            this._compression = reader.ReadEnum<TextureCompressionType>();
             this._pal_comp = reader.ReadByte();
             this._num_palettes = reader.ReadInt16();
             this.Mipmaps = reader.ReadByte();
-            this.TileableUV = reader.ReadEnum<eTileableType>();
+            this.TileableUV = reader.ReadEnum<TextureTileableType>();
             this.BiasLevel = reader.ReadByte();
             this.RenderingOrder = reader.ReadByte();
-            this.ScrollType = reader.ReadEnum<eTextureScrollType>();
+            this.ScrollType = reader.ReadEnum<TextureScrollType>();
             this._used_flag = reader.ReadByte();
             this.ApplyAlphaSort = reader.ReadByte();
-            this.AlphaUsageType = reader.ReadEnum<eTextureAlphaUsageType>();
-            this.AlphaBlendType = reader.ReadEnum<eTextureAlphaBlendType>();
+            this.AlphaUsageType = reader.ReadEnum<TextureAlphaUsageType>();
+            this.AlphaBlendType = reader.ReadEnum<TextureAlphaBlendType>();
             this._flags = reader.ReadByte();
-            this.MipmapBiasType = reader.ReadEnum<eTextureMipmapBiasType>();
+            this.MipmapBiasType = reader.ReadEnum<TextureMipmapBiasType>();
             this._scroll_timestep = reader.ReadInt16();
             this._scroll_speedS = reader.ReadInt16();
             this._scroll_speedT = reader.ReadInt16();

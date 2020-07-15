@@ -274,15 +274,15 @@ namespace Nikki.Utils
         /// Tries to resolve Bin key provided.
         /// </summary>
         /// <param name="key">Bin key to resolve.</param>
-        /// <param name="type"><see cref="eLookupReturn"/> type.</param>
+        /// <param name="type"><see cref="LookupReturn"/> type.</param>
         /// <returns>Resolved Bin Key.</returns>
-        public static string BinString(this uint key, eLookupReturn type)
+        public static string BinString(this uint key, LookupReturn type)
         {
             return key == 0
                 ? (type switch
                 {
-                    eLookupReturn.NULLARG => BaseArguments.NULL,
-                    eLookupReturn.EMPTY => String.Empty,
+                    LookupReturn.NULLARG => BaseArguments.NULL,
+                    LookupReturn.EMPTY => String.Empty,
                     _ => null
                 })
                 : Map.BinKeys.TryGetValue(key, out var result) ? result : $"0x{key:X8}";
@@ -292,15 +292,15 @@ namespace Nikki.Utils
         /// Tries to resolve Vlt key provided.
         /// </summary>
         /// <param name="key">Vlt key to resolve.</param>
-        /// <param name="type"><see cref="eLookupReturn"/> type.</param>
+        /// <param name="type"><see cref="LookupReturn"/> type.</param>
         /// <returns>Resolved Vlt Key.</returns>
-        public static string VltString(this uint key, eLookupReturn type)
+        public static string VltString(this uint key, LookupReturn type)
         {
             return key == 0
                 ? (type switch
                 {
-                    eLookupReturn.NULLARG => BaseArguments.NULL,
-                    eLookupReturn.EMPTY => String.Empty,
+                    LookupReturn.NULLARG => BaseArguments.NULL,
+                    LookupReturn.EMPTY => String.Empty,
                     _ => null
                 })
                 : Map.VltKeys.TryGetValue(key, out var result) ? result : $"0x{key:X8}";

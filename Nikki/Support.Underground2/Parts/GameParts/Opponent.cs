@@ -79,7 +79,7 @@ namespace Nikki.Support.Underground2.Parts.GameParts
 			strr.BaseStream.Position = position;
 			this.Name = strr.ReadNullTermUTF8();
 			this.StatsMultiplier = br.ReadUInt16();
-			this.PresetRide = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.PresetRide = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			this.SkillEasy = br.ReadByte();
 			this.SkillMedium = br.ReadByte();
 			this.SkillHard = br.ReadByte();

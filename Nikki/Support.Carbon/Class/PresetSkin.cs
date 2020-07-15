@@ -366,35 +366,35 @@ namespace Nikki.Support.Carbon.Class
             this._collection_name = br.ReadNullTermUTF8(0x20);
 
             // Read paint settings
-            this.PaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.PaintSwatch = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.PaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.PaintSwatch = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             this.PaintSaturation = br.ReadSingle();
             this.PaintBrightness = br.ReadSingle();
 
             // Generic vinyl
-            this.GenericVinyl = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.GenericVinyl = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
             // Vinyl
-            this.VectorVinyl = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VectorVinyl = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             this.PositionY = br.ReadInt16();
             this.PositionX = br.ReadInt16();
             this.Rotation = br.ReadSByte();
             this.Skew = br.ReadSByte();
             this.ScaleY = br.ReadSByte();
             this.ScaleX = br.ReadSByte();
-            this.SwatchFillEffect = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.SwatchFillEffect = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             this.SaturationFillEffect = br.ReadByte();
             this.BrightnessFillEffect = br.ReadByte();
             br.BaseStream.Position += 2;
-            this.SwatchStrokeEffect = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.SwatchStrokeEffect = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             this.SaturationStrokeEffect = br.ReadByte();
             this.BrightnessStrokeEffect = br.ReadByte();
             br.BaseStream.Position += 2;
-            this.SwatchInnerShadow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.SwatchInnerShadow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             this.SaturationInnerShadow = br.ReadByte();
             this.BrightnessInnerShadow = br.ReadByte();
             br.BaseStream.Position += 2;
-            this.SwatchInnerGlow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.SwatchInnerGlow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             this.SaturationInnerGlow = br.ReadByte();
             this.BrightnessInnerGlow = br.ReadByte();
             br.BaseStream.Position += 2;
@@ -474,7 +474,7 @@ namespace Nikki.Support.Carbon.Class
 
             }
 
-            array = Interop.Compress(array, eLZCompressionType.BEST);
+            array = Interop.Compress(array, LZCompressionType.BEST);
 
             var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
             header.Write(bw);

@@ -59,17 +59,17 @@ namespace Nikki.Reflection.Abstract
         /// <summary>
         /// Imports collection by reading its data from a <see cref="BinaryReader"/> provided.
         /// </summary>
-        /// <param name="type"><see cref="eSerializeType"/> type of importing collection.</param>
+        /// <param name="type"><see cref="SerializeType"/> type of importing collection.</param>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-        public abstract void Import(eSerializeType type, BinaryReader br);
+        public abstract void Import(SerializeType type, BinaryReader br);
 
         /// <summary>
         /// Imports collection by reading its data from a <see cref="BinaryReader"/> provided.
         /// </summary>
-        /// <param name="type"><see cref="eSerializeType"/> type of importing collection.</param>
+        /// <param name="type"><see cref="SerializeType"/> type of importing collection.</param>
         /// <param name="manager">Name of <see cref="IManager"/> to invoke for import.</param>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-        public abstract void Import(eSerializeType type, string manager, BinaryReader br);
+        public abstract void Import(SerializeType type, string manager, BinaryReader br);
 
         /// <summary>
         /// Gets <see cref="IManager"/> with name specified.

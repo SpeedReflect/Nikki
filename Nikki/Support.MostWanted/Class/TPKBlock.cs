@@ -164,7 +164,7 @@ namespace Nikki.Support.MostWanted.Class
         private void AssembleDecompressed(BinaryWriter bw)
         {
             // Write main
-            bw.WriteEnum(eBlockID.TPKBlocks);
+            bw.WriteEnum(BinBlockID.TPKBlocks);
             bw.Write(-1); // write temp size
             var position_0 = bw.BaseStream.Position;
             bw.Write((int)0);
@@ -172,7 +172,7 @@ namespace Nikki.Support.MostWanted.Class
             bw.WriteBytes(0x30);
 
             // Partial 1 Block
-            bw.WriteEnum(eBlockID.TPK_InfoBlock);
+            bw.WriteEnum(BinBlockID.TPK_InfoBlock);
             bw.Write(-1);
             var position_1 = bw.BaseStream.Position;
             this.Get1Part1(bw);
@@ -188,7 +188,7 @@ namespace Nikki.Support.MostWanted.Class
             bw.Write(Comp.GetPaddingArray((int)bw.BaseStream.Position, 0x80));
 
             // Partial 2 Block
-            bw.WriteEnum(eBlockID.TPK_DataBlock);
+            bw.WriteEnum(BinBlockID.TPK_DataBlock);
             bw.Write(-1);
             var position_2 = bw.BaseStream.Position;
             this.Get2Part1(bw);
@@ -206,7 +206,7 @@ namespace Nikki.Support.MostWanted.Class
         {
             var start = (int)bw.BaseStream.Position;
 
-            bw.WriteEnum(eBlockID.TPKBlocks);
+            bw.WriteEnum(BinBlockID.TPKBlocks);
             bw.Write(-1); // write temp size
             var position_0 = bw.BaseStream.Position;
             bw.Write((int)0);
@@ -214,7 +214,7 @@ namespace Nikki.Support.MostWanted.Class
             bw.WriteBytes(0x30);
 
             // Partial 1 Block
-            bw.WriteEnum(eBlockID.TPK_InfoBlock);
+            bw.WriteEnum(BinBlockID.TPK_InfoBlock);
             bw.Write(-1);
             var position_1 = bw.BaseStream.Position;
             this.Get1Part1(bw);
@@ -235,7 +235,7 @@ namespace Nikki.Support.MostWanted.Class
             bw.Write(Comp.GetPaddingArray((int)bw.BaseStream.Position, 0x80));
 
             // Partial 2 Block
-            bw.WriteEnum(eBlockID.TPK_DataBlock);
+            bw.WriteEnum(BinBlockID.TPK_DataBlock);
             bw.Write(-1);
             var position_2 = bw.BaseStream.Position;
             this.Get2Part1(bw);
@@ -350,7 +350,7 @@ namespace Nikki.Support.MostWanted.Class
 
             }
 
-            if (this.FindTexture(CName.BinHash(), eKeyType.BINKEY) != null)
+            if (this.FindTexture(CName.BinHash(), KeyType.BINKEY) != null)
             {
 
                 throw new Exception($"Texture named {CName} already exists");
@@ -374,7 +374,7 @@ namespace Nikki.Support.MostWanted.Class
 		/// <param name="newname">Collection Name of the new <see cref="Texture"/>.</param>
 		/// <param name="key">Key of the Collection Name of the <see cref="Texture"/> to clone.</param>
 		/// <param name="type">Type of the key passed.</param>
-		public override void CloneTexture(string newname, uint key, eKeyType type)
+		public override void CloneTexture(string newname, uint key, KeyType type)
         {
             if (string.IsNullOrWhiteSpace(newname))
             {
@@ -426,18 +426,18 @@ namespace Nikki.Support.MostWanted.Class
 		protected override long[] FindOffsets(BinaryReader br)
         {
             var offsets = new long[9] { max, max, max, max, max, max, max, max, max };
-            var ReaderID = eBlockID.Padding;
+            var ReaderID = BinBlockID.Padding;
             int InfoBlockSize = 0;
             int DataBlockSize = 0;
             long ReaderOffset = 0;
 
-            while (ReaderID != eBlockID.TPK_InfoBlock)
+            while (ReaderID != BinBlockID.TPK_InfoBlock)
             {
             
-                ReaderID = br.ReadEnum<eBlockID>();
+                ReaderID = br.ReadEnum<BinBlockID>();
                 InfoBlockSize = br.ReadInt32();
                 
-                if (ReaderID != eBlockID.TPK_InfoBlock)
+                if (ReaderID != BinBlockID.TPK_InfoBlock)
                 {
                 
                     br.BaseStream.Position += InfoBlockSize;
@@ -451,31 +451,31 @@ namespace Nikki.Support.MostWanted.Class
             while (br.BaseStream.Position < ReaderOffset + InfoBlockSize)
             {
             
-                ReaderID = br.ReadEnum<eBlockID>();
+                ReaderID = br.ReadEnum<BinBlockID>();
                 
                 switch (ReaderID)
                 {
-                    case eBlockID.TPK_InfoPart1:
+                    case BinBlockID.TPK_InfoPart1:
                         offsets[0] = br.BaseStream.Position;
                         goto default;
 
-                    case eBlockID.TPK_InfoPart2:
+                    case BinBlockID.TPK_InfoPart2:
                         offsets[1] = br.BaseStream.Position;
                         goto default;
 
-                    case eBlockID.TPK_InfoPart3:
+                    case BinBlockID.TPK_InfoPart3:
                         offsets[2] = br.BaseStream.Position;
                         goto default;
 
-                    case eBlockID.TPK_InfoPart4:
+                    case BinBlockID.TPK_InfoPart4:
                         offsets[3] = br.BaseStream.Position;
                         goto default;
 
-                    case eBlockID.TPK_InfoPart5:
+                    case BinBlockID.TPK_InfoPart5:
                         offsets[4] = br.BaseStream.Position;
                         goto default;
 
-                    case eBlockID.TPK_BinData:
+                    case BinBlockID.TPK_BinData:
                         offsets[8] = br.BaseStream.Position;
                         goto default;
 
@@ -488,13 +488,13 @@ namespace Nikki.Support.MostWanted.Class
             
             }
 
-            while (ReaderID != eBlockID.TPK_DataBlock)
+            while (ReaderID != BinBlockID.TPK_DataBlock)
             {
                 
-                ReaderID = br.ReadEnum<eBlockID>();
+                ReaderID = br.ReadEnum<BinBlockID>();
                 DataBlockSize = br.ReadInt32();
 
-                if (ReaderID != eBlockID.TPK_DataBlock)
+                if (ReaderID != BinBlockID.TPK_DataBlock)
                 {
 
                     br.BaseStream.Position += DataBlockSize;
@@ -508,19 +508,19 @@ namespace Nikki.Support.MostWanted.Class
             while (br.BaseStream.Position < ReaderOffset + DataBlockSize)
             {
             
-                ReaderID = br.ReadEnum<eBlockID>();
+                ReaderID = br.ReadEnum<BinBlockID>();
                 
                 switch (ReaderID)
                 {
-                    case eBlockID.TPK_DataPart1:
+                    case BinBlockID.TPK_DataPart1:
                         offsets[5] = br.BaseStream.Position;
                         goto default;
 
-                    case eBlockID.TPK_DataPart2:
+                    case BinBlockID.TPK_DataPart2:
                         offsets[6] = br.BaseStream.Position;
                         goto default;
 
-                    case eBlockID.TPK_DataPart3:
+                    case BinBlockID.TPK_DataPart3:
                         offsets[7] = br.BaseStream.Position;
                         goto default;
 
@@ -699,7 +699,7 @@ namespace Nikki.Support.MostWanted.Class
         /// <returns>Byte array of the partial 1 part1.</returns>
         protected override void Get1Part1(BinaryWriter bw)
         {
-            bw.WriteEnum(eBlockID.TPK_InfoPart1); // write ID
+            bw.WriteEnum(BinBlockID.TPK_InfoPart1); // write ID
             bw.Write(0x7C); // write size
             bw.WriteEnum(this.Version);
 
@@ -721,7 +721,7 @@ namespace Nikki.Support.MostWanted.Class
         /// <returns>Byte array of the partial 1 part2.</returns>
         protected override void Get1Part2(BinaryWriter bw)
         {
-            bw.WriteEnum(eBlockID.TPK_InfoPart2); // write ID
+            bw.WriteEnum(BinBlockID.TPK_InfoPart2); // write ID
             bw.Write(this.Textures.Count * 8); // write size
             
             for (int loop = 0; loop < this.Textures.Count; ++loop)
@@ -740,7 +740,7 @@ namespace Nikki.Support.MostWanted.Class
         /// <param name="offslots">List of <see cref="OffSlot"/> to write.</param>
         protected void Get1Part3(BinaryWriter bw, List<OffSlot> offslots)
         {
-            bw.WriteEnum(eBlockID.TPK_InfoPart3); // write ID
+            bw.WriteEnum(BinBlockID.TPK_InfoPart3); // write ID
             bw.Write(this.Textures.Count * 0x18); // write size
 
             foreach (var offslot in offslots)
@@ -783,7 +783,7 @@ namespace Nikki.Support.MostWanted.Class
             }
 
             var data = ms.ToArray();
-            bw.WriteEnum(eBlockID.TPK_InfoPart4); // write ID
+            bw.WriteEnum(BinBlockID.TPK_InfoPart4); // write ID
             bw.Write(data.Length); // write size
             bw.Write(data);
         }
@@ -795,7 +795,7 @@ namespace Nikki.Support.MostWanted.Class
         /// <returns>Byte array of the partial 1 part5.</returns>
         protected override void Get1Part5(BinaryWriter bw)
         {
-            bw.WriteEnum(eBlockID.TPK_InfoPart5); // write ID
+            bw.WriteEnum(BinBlockID.TPK_InfoPart5); // write ID
             bw.Write(this.Textures.Count * 0x20); // write size
             
             for (int loop = 0; loop < this.Textures.Count; ++loop)
@@ -819,7 +819,7 @@ namespace Nikki.Support.MostWanted.Class
         /// <returns>Byte array of the partial 2 part1.</returns>
         protected override void Get2Part1(BinaryWriter bw)
         {
-            bw.WriteEnum(eBlockID.TPK_DataPart1); // write ID
+            bw.WriteEnum(BinBlockID.TPK_DataPart1); // write ID
             bw.Write(0x18); // write size
             bw.Write((long)0);
             bw.Write(1);
@@ -899,7 +899,7 @@ namespace Nikki.Support.MostWanted.Class
                 writer.WriteBytes(0x40);
 
                 array = ms.ToArray();
-                array = Interop.Compress(array, eLZCompressionType.BEST);
+                array = Interop.Compress(array, LZCompressionType.BEST);
                 bw.Write(array.Length);
                 bw.Write(array);
 
@@ -985,7 +985,7 @@ namespace Nikki.Support.MostWanted.Class
                 header.Read(br);
 
                 // Check for consistency
-                if (header.ID != eBlockID.Nikki) break;
+                if (header.ID != BinBlockID.Nikki) break;
                 if (header.Game != this.GameINT) break;
                 if (header.Name != "TEXTURE") break;
 

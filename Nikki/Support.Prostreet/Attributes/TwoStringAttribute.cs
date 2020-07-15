@@ -22,10 +22,10 @@ namespace Nikki.Support.Prostreet.Attributes
 	public class TwoStringAttribute : CPAttribute
 	{
 		/// <summary>
-		/// <see cref="eCarPartAttribType"/> type of this <see cref="TwoStringAttribute"/>.
+		/// <see cref="CarPartAttribType"/> type of this <see cref="TwoStringAttribute"/>.
 		/// </summary>
 		[Category("Main")]
-		public override eCarPartAttribType AttribType => eCarPartAttribType.TwoString;
+		public override CarPartAttribType AttribType => CarPartAttribType.TwoString;
 
 		/// <summary>
 		/// Type of this <see cref="TwoStringAttribute"/>.
@@ -246,17 +246,17 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// </summary>
 		/// <param name="type">Type of a new attribute.</param>
 		/// <returns>New <see cref="CPAttribute"/>.</returns>
-		public override CPAttribute ConvertTo(eCarPartAttribType type) =>
+		public override CPAttribute ConvertTo(CarPartAttribType type) =>
 			type switch
 			{
-				eCarPartAttribType.Boolean => new BoolAttribute(this.Value1),
-				eCarPartAttribType.Floating => new FloatAttribute(this.Value1),
-				eCarPartAttribType.Integer => new IntAttribute(this.Value1),
-				eCarPartAttribType.String => new StringAttribute(this.Value1),
-				eCarPartAttribType.Color => new ColorAttribute(this.Value1),
-				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Value1),
-				eCarPartAttribType.Key => new KeyAttribute(this.Value1),
-				eCarPartAttribType.ModelTable => new ModelTableAttribute(this.Value1),
+				CarPartAttribType.Boolean => new BoolAttribute(this.Value1),
+				CarPartAttribType.Floating => new FloatAttribute(this.Value1),
+				CarPartAttribType.Integer => new IntAttribute(this.Value1),
+				CarPartAttribType.String => new StringAttribute(this.Value1),
+				CarPartAttribType.Color => new ColorAttribute(this.Value1),
+				CarPartAttribType.CarPartID => new PartIDAttribute(this.Value1),
+				CarPartAttribType.Key => new KeyAttribute(this.Value1),
+				CarPartAttribType.ModelTable => new ModelTableAttribute(this.Value1),
 				_ => this
 			};
 

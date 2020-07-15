@@ -21,10 +21,10 @@ namespace Nikki.Support.MostWanted.Attributes
 	public class FloatAttribute : CPAttribute
 	{
 		/// <summary>
-		/// <see cref="eCarPartAttribType"/> type of this <see cref="FloatAttribute"/>.
+		/// <see cref="CarPartAttribType"/> type of this <see cref="FloatAttribute"/>.
 		/// </summary>
 		[Category("Main")]
-		public override eCarPartAttribType AttribType => eCarPartAttribType.Floating;
+		public override CarPartAttribType AttribType => CarPartAttribType.Floating;
 
 		/// <summary>
 		/// Type of this <see cref="FloatAttribute"/>.
@@ -177,13 +177,13 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// </summary>
 		/// <param name="type">Type of a new attribute.</param>
 		/// <returns>New <see cref="CPAttribute"/>.</returns>
-		public override CPAttribute ConvertTo(eCarPartAttribType type) =>
+		public override CPAttribute ConvertTo(CarPartAttribType type) =>
 			type switch
 			{
-				eCarPartAttribType.Boolean => new BoolAttribute(this.Value),
-				eCarPartAttribType.Integer => new IntAttribute(this.Value),
-				eCarPartAttribType.String => new StringAttribute(this.Value),
-				eCarPartAttribType.Key => new KeyAttribute(this.Value),
+				CarPartAttribType.Boolean => new BoolAttribute(this.Value),
+				CarPartAttribType.Integer => new IntAttribute(this.Value),
+				CarPartAttribType.String => new StringAttribute(this.Value),
+				CarPartAttribType.Key => new KeyAttribute(this.Value),
 				_ => this
 			};
 

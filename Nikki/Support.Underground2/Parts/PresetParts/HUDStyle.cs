@@ -61,10 +61,10 @@ namespace Nikki.Support.Underground2.Parts.PresetParts
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Read(BinaryReader br)
 		{
-			this.CustomHUD = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.HUDBackingColor = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.HUDNeedleColor = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.HUDCharacterColor = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.CustomHUD = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.HUDBackingColor = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.HUDNeedleColor = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.HUDCharacterColor = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 		}
 
 		/// <summary>

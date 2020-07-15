@@ -23,10 +23,10 @@ namespace Nikki.Support.Carbon.Attributes
 	public class PartIDAttribute : CPAttribute
 	{
 		/// <summary>
-		/// <see cref="eCarPartAttribType"/> type of this <see cref="PartIDAttribute"/>.
+		/// <see cref="CarPartAttribType"/> type of this <see cref="PartIDAttribute"/>.
 		/// </summary>
 		[Category("Main")]
-		public override eCarPartAttribType AttribType => eCarPartAttribType.CarPartID;
+		public override CarPartAttribType AttribType => CarPartAttribType.CarPartID;
 
 		/// <summary>
 		/// Type of this <see cref="PartIDAttribute"/>.
@@ -59,7 +59,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// </summary>
 		[AccessModifiable()]
 		[Category("Main")]
-		public ePartCarbon ID { get; set; } = ePartCarbon.INVALID;
+		public PartCarbon ID { get; set; } = PartCarbon.INVALID;
 
 		/// <summary>
 		/// Initializes new instance of <see cref="PartIDAttribute"/>.
@@ -76,13 +76,13 @@ namespace Nikki.Support.Carbon.Attributes
 			{
 
 				this.Level = (byte)value.ReinterpretCast(typeof(byte));
-				this.ID = ePartCarbon.INVALID;
+				this.ID = PartCarbon.INVALID;
 
 			}
 			catch (Exception)
 			{
 
-				this.ID = ePartCarbon.INVALID;
+				this.ID = PartCarbon.INVALID;
 				this.Level = 0;
 
 			}
@@ -110,7 +110,7 @@ namespace Nikki.Support.Carbon.Attributes
 		public override void Disassemble(BinaryReader br, BinaryReader str_reader)
 		{
 			this.Level = br.ReadByte();
-			this.ID = br.ReadEnum<ePartCarbon>();
+			this.ID = br.ReadEnum<PartCarbon>();
 			br.BaseStream.Position += 2;
 		}
 
@@ -196,17 +196,17 @@ namespace Nikki.Support.Carbon.Attributes
 		/// </summary>
 		/// <param name="type">Type of a new attribute.</param>
 		/// <returns>New <see cref="CPAttribute"/>.</returns>
-		public override CPAttribute ConvertTo(eCarPartAttribType type) =>
+		public override CPAttribute ConvertTo(CarPartAttribType type) =>
 			type switch
 			{
-				eCarPartAttribType.Boolean => new BoolAttribute(this.ID),
-				eCarPartAttribType.Floating => new FloatAttribute(this.ID),
-				eCarPartAttribType.Integer => new IntAttribute(this.ID),
-				eCarPartAttribType.String => new StringAttribute(this.ID),
-				eCarPartAttribType.TwoString => new TwoStringAttribute(this.ID),
-				eCarPartAttribType.Color => new ColorAttribute(this.ID),
-				eCarPartAttribType.Key => new KeyAttribute(this.ID),
-				eCarPartAttribType.ModelTable => new ModelTableAttribute(this.ID),
+				CarPartAttribType.Boolean => new BoolAttribute(this.ID),
+				CarPartAttribType.Floating => new FloatAttribute(this.ID),
+				CarPartAttribType.Integer => new IntAttribute(this.ID),
+				CarPartAttribType.String => new StringAttribute(this.ID),
+				CarPartAttribType.TwoString => new TwoStringAttribute(this.ID),
+				CarPartAttribType.Color => new ColorAttribute(this.ID),
+				CarPartAttribType.Key => new KeyAttribute(this.ID),
+				CarPartAttribType.ModelTable => new ModelTableAttribute(this.ID),
 				_ => this
 			};
 
@@ -226,7 +226,7 @@ namespace Nikki.Support.Carbon.Attributes
 		public override void Deserialize(BinaryReader br)
 		{
 			this.Level = br.ReadByte();
-			this.ID = br.ReadEnum<ePartCarbon>();
+			this.ID = br.ReadEnum<PartCarbon>();
 		}
 	}
 }

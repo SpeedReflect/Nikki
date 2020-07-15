@@ -154,7 +154,7 @@ namespace Nikki.Support.Prostreet.Class
 			this.SortRecordsByKey();
 
 			// Write ID and temporary size
-			bw.WriteEnum(eBlockID.STRBlocks);
+			bw.WriteEnum(BinBlockID.STRBlocks);
 			bw.Write(-1);
 
 			// Save position
@@ -221,7 +221,7 @@ namespace Nikki.Support.Prostreet.Class
 
 				br.BaseStream.Position = broffset + textoffset + br.ReadInt32();
 				info.Text = br.ReadNullTermUTF8();
-				info.Label = info.Key.BinString(eLookupReturn.EMPTY);
+				info.Label = info.Key.BinString(LookupReturn.EMPTY);
 				this._stringinfo.Add(info);
 
 			}
@@ -406,7 +406,7 @@ namespace Nikki.Support.Prostreet.Class
 
 			}
 
-			array = Interop.Compress(array, eLZCompressionType.BEST);
+			array = Interop.Compress(array, LZCompressionType.BEST);
 
 			var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
 			header.Write(bw);

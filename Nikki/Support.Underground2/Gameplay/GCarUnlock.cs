@@ -165,9 +165,9 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="GCarUnlock"/> with.</param>
 		public void Disassemble(BinaryReader br)
 		{
-			this._collection_name = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.ReqEventCompleted1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.ReqEventCompleted2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this._collection_name = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.ReqEventCompleted1 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.ReqEventCompleted2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 		}
 
 		/// <summary>

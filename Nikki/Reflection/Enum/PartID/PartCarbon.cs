@@ -1,9 +1,9 @@
-﻿namespace Nikki.Reflection.Enum.SlotID
+﻿namespace Nikki.Reflection.Enum.PartID
 {
     /// <summary>
-    /// Slot IDs enum for Carbon support.
+    /// Part IDs enum for Carbon support.
     /// </summary>
-    public enum eSlotCarbon : byte
+    public enum PartCarbon : byte
     {
         /// <summary>
         /// 
@@ -428,12 +428,12 @@
         /// <summary>
         /// 
         /// </summary>
-        FRONT_WHEEL = 0x54,
+        BRAKE = 0x54,
 
         /// <summary>
         /// 
         /// </summary>
-        REAR_WHEEL = 0x55,
+        WHEEL = 0x55,
 
         /// <summary>
         /// 
@@ -473,67 +473,57 @@
         /// <summary>
         /// 
         /// </summary>
-        VINYL_SPECIFIC = 0x5D,
+        VINYL_COLOUR = 0x5D,
 
         /// <summary>
         /// 
         /// </summary>
-        VINYL_GENERIC = 0x5E,
+        PAINT_RIM = 0x5E,
 
         /// <summary>
         /// 
         /// </summary>
-        VECTORVINYL = 0x5F,
+        WHEEL_PAINT_GROUP = 0x5F,
 
         /// <summary>
         /// 
         /// </summary>
-        PAINT_RIM = 0x60,
+        DECAL_TEXTURE = 0x60,
 
         /// <summary>
         /// 
         /// </summary>
-        WHEEL_PAINT_GROUP = 0x61,
+        VINYL_SPECIFIC = 0x61,
 
         /// <summary>
         /// 
         /// </summary>
-        WHEEL_PAINT_SWATCH = 0x62,
+        VINYL_GENERIC = 0x62,
 
         /// <summary>
         /// 
         /// </summary>
-        VINYL_COLOUR = 0x63,
+        VECTORVINYL = 0x63,
 
         /// <summary>
         /// 
         /// </summary>
-        DECAL_FRONT_WINDOW_TEX0 = 0x64,
+        WINDSHIELD_TINT = 0x64,
 
         /// <summary>
         /// 
         /// </summary>
-        DECAL_REAR_WINDOW_TEX0 = 0x65,
+        CUSTOM_HUD = 0x65,
 
         /// <summary>
         /// 
         /// </summary>
-        WINDSHIELD_TINT = 0x66,
+        CV = 0x66,
 
         /// <summary>
         /// 
         /// </summary>
-        CUSTOM_HUD = 0x67,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        CV = 0x68,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        MISC = 0x69,
+        MISC = 0x67,
 
         /// <summary>
         /// 

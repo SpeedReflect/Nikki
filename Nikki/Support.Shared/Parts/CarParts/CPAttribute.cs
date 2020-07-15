@@ -16,9 +16,9 @@ namespace Nikki.Support.Shared.Parts.CarParts
 	public abstract class CPAttribute : SubPart
 	{
 		/// <summary>
-		/// <see cref="eCarPartAttribType"/> type of this <see cref="CPAttribute"/>.
+		/// <see cref="CarPartAttribType"/> type of this <see cref="CPAttribute"/>.
 		/// </summary>
-		public abstract eCarPartAttribType AttribType { get; }
+		public abstract CarPartAttribType AttribType { get; }
 
 		/// <summary>
 		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
@@ -56,7 +56,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// </summary>
 		/// <param name="type">Type of a new attribute.</param>
 		/// <returns>New <see cref="CPAttribute"/>.</returns>
-		public abstract CPAttribute ConvertTo(eCarPartAttribType type);
+		public abstract CPAttribute ConvertTo(CarPartAttribType type);
 
 		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.

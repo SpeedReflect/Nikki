@@ -26,10 +26,10 @@ namespace Nikki.Support.Prostreet.Attributes
 	public class ModelTableAttribute : CPAttribute
 	{
 		/// <summary>
-		/// <see cref="eCarPartAttribType"/> type of this <see cref="ModelTableAttribute"/>.
+		/// <see cref="CarPartAttribType"/> type of this <see cref="ModelTableAttribute"/>.
 		/// </summary>
 		[Category("Main")]
-		public override eCarPartAttribType AttribType => eCarPartAttribType.ModelTable;
+		public override CarPartAttribType AttribType => CarPartAttribType.ModelTable;
 
 		/// <summary>
 		/// Type of this <see cref="ModelTableAttribute"/>.
@@ -1048,7 +1048,7 @@ namespace Nikki.Support.Prostreet.Attributes
 						
 							var lodname = $"Geometry{index}Lod{(char)lod}";
 							var lodexists = $"{lodname}Exists";
-							this.GetFastProperty(lodname).SetValue(this, key.BinString(eLookupReturn.EMPTY));
+							this.GetFastProperty(lodname).SetValue(this, key.BinString(LookupReturn.EMPTY));
 							this.GetFastProperty(lodexists).SetValue(this, eBoolean.True);
 						
 						}
@@ -1247,17 +1247,17 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// </summary>
 		/// <param name="type">Type of a new attribute.</param>
 		/// <returns>New <see cref="CPAttribute"/>.</returns>
-		public override CPAttribute ConvertTo(eCarPartAttribType type) =>
+		public override CPAttribute ConvertTo(CarPartAttribType type) =>
 			type switch
 			{
-				eCarPartAttribType.Boolean => new BoolAttribute(this.Templated),
-				eCarPartAttribType.Floating => new FloatAttribute(this.Templated),
-				eCarPartAttribType.Integer => new IntAttribute(this.Templated),
-				eCarPartAttribType.String => new StringAttribute(this.Templated),
-				eCarPartAttribType.TwoString => new TwoStringAttribute(this.Templated),
-				eCarPartAttribType.Color => new ColorAttribute(this.Templated),
-				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Templated),
-				eCarPartAttribType.Key => new KeyAttribute(this.Templated),
+				CarPartAttribType.Boolean => new BoolAttribute(this.Templated),
+				CarPartAttribType.Floating => new FloatAttribute(this.Templated),
+				CarPartAttribType.Integer => new IntAttribute(this.Templated),
+				CarPartAttribType.String => new StringAttribute(this.Templated),
+				CarPartAttribType.TwoString => new TwoStringAttribute(this.Templated),
+				CarPartAttribType.Color => new ColorAttribute(this.Templated),
+				CarPartAttribType.CarPartID => new PartIDAttribute(this.Templated),
+				CarPartAttribType.Key => new KeyAttribute(this.Templated),
 				_ => this
 			};
 

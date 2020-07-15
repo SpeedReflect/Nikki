@@ -67,12 +67,12 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Read(BinaryReader br)
 		{
-			this.ZeroDamageFront = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.ZeroDamageFrontLeft = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.ZeroDamageFrontRight = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.ZeroDamageRear = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.ZeroDamageRearLeft = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.ZeroDamageRearRight = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.ZeroDamageFront = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.ZeroDamageFrontLeft = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.ZeroDamageFrontRight = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.ZeroDamageRear = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.ZeroDamageRearLeft = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.ZeroDamageRearRight = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 		}
 
 		/// <summary>

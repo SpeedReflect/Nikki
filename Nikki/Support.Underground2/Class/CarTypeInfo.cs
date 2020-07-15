@@ -1137,8 +1137,8 @@ namespace Nikki.Support.Underground2.Class
             this.Index = br.ReadInt32();
             this.UsageType = br.ReadEnum<CarUsageType>();
             br.BaseStream.Position += 4;
-            this.DefaultBasePaint = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.DefaultBasePaint2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.DefaultBasePaint = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.DefaultBasePaint2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             this.MaxInstances1 = br.ReadByte();
             this.MaxInstances2 = br.ReadByte();
             this.MaxInstances3 = br.ReadByte();
@@ -1287,7 +1287,7 @@ namespace Nikki.Support.Underground2.Class
 
             }
 
-            array = Interop.Compress(array, eLZCompressionType.BEST);
+            array = Interop.Compress(array, LZCompressionType.BEST);
 
             var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
             header.Write(bw);

@@ -88,11 +88,6 @@
 		/// <summary>
 		/// 
 		/// </summary>
-		HOODUNDER = 0x0D4B85C7,
-
-		/// <summary>
-		/// 
-		/// </summary>
 		NUMCOLOURS = 0x564B8CB6,
 		
 		/// <summary>

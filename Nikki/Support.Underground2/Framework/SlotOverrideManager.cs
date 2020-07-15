@@ -86,7 +86,7 @@ namespace Nikki.Support.Underground2.Framework
 		internal override void Disassemble(BinaryReader br, Block block)
 		{
 			if (Block.IsNullOrEmpty(block)) return;
-			if (block.BlockID != eBlockID.SlotTypes) return;
+			if (block.BlockID != BinBlockID.SlotTypes) return;
 
 			const int maxslotsize = 0x550;
 
@@ -151,7 +151,7 @@ namespace Nikki.Support.Underground2.Framework
 					$"format is \"CARNAME_PART_SLOTTYPE\"");
 
 			}
-			else if (!Enum.TryParse(keys[1], out eSlotMostWanted _))
+			else if (!Enum.TryParse(keys[1], out SlotMostWanted _))
 			{
 
 				throw new ArgumentException($"CollectionName passed is of invalid format. Valid " +
@@ -192,7 +192,7 @@ namespace Nikki.Support.Underground2.Framework
 		/// </summary>
 		/// <param name="type">Type of serialization of a collection.</param>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		public override void Import(eSerializeType type, BinaryReader br)
+		public override void Import(SerializeType type, BinaryReader br)
 		{
 			var position = br.BaseStream.Position;
 			var header = new SerializationHeader();
@@ -200,7 +200,7 @@ namespace Nikki.Support.Underground2.Framework
 
 			var collection = new SlotOverride();
 
-			if (header.ID != eBlockID.Nikki)
+			if (header.ID != BinBlockID.Nikki)
 			{
 
 				throw new Exception($"Missing serialized header in the imported collection");
@@ -241,11 +241,11 @@ namespace Nikki.Support.Underground2.Framework
 
 				switch (type)
 				{
-					case eSerializeType.Negate:
+					case SerializeType.Negate:
 						break;
 
-					case eSerializeType.Synchronize:
-					case eSerializeType.Override:
+					case SerializeType.Synchronize:
+					case SerializeType.Override:
 						collection.Manager = this;
 						this.Replace(collection, index);
 						break;

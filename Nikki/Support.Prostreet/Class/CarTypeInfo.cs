@@ -318,7 +318,7 @@ namespace Nikki.Support.Prostreet.Class
             this.IsSkinnable = br.ReadEnum<eBoolean>();
             br.BaseStream.Position += 4;
 
-            this.DefaultBasePaint = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.DefaultBasePaint = br.ReadUInt32().BinString(LookupReturn.EMPTY);
         }
 
         /// <summary>
@@ -422,7 +422,7 @@ namespace Nikki.Support.Prostreet.Class
 
             }
 
-            array = Interop.Compress(array, eLZCompressionType.BEST);
+            array = Interop.Compress(array, LZCompressionType.BEST);
 
             var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
             header.Write(bw);
@@ -501,7 +501,7 @@ namespace Nikki.Support.Prostreet.Class
 
             this.DefaultSkinNumber = reader.ReadByte();
             this.IsSkinnable = reader.ReadEnum<eBoolean>();
-            this.DefaultBasePaint = reader.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.DefaultBasePaint = reader.ReadUInt32().BinString(LookupReturn.EMPTY);
         }
 
         #endregion

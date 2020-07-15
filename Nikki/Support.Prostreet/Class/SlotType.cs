@@ -286,29 +286,29 @@ namespace Nikki.Support.Prostreet.Class
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="SlotType"/> with.</param>
         public override void Disassemble(BinaryReader br)
         {
-            this._collection_name = ((eSlotProstreet)(Index++)).ToString();
+            this._collection_name = ((SlotProstreet)(Index++)).ToString();
 
             uint key = 0;
             const uint empty = 0xFFFFFFFF;
 
             key = br.ReadUInt32();
-            this.SlotStockOverride = key == empty ? String.Empty : key.BinString(eLookupReturn.EMPTY);
+            this.SlotStockOverride = key == empty ? String.Empty : key.BinString(LookupReturn.EMPTY);
 
-            this.SlotMainOverride = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.SlotOverrideGroup2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.SlotOverrideGroup3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.SlotOverrideGroup4 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.SlotOverrideGroup5 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.SlotOverrideGroup6 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.SlotOverrideGroup7 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.SlotOverrideGroup8 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.SlotOverrideGroup9 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.SlotOverrideGroup10 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.SlotOverrideGroup11 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.SlotOverrideGroup12 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.SlotOverrideGroup13 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.SlotOverrideGroup14 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.SlotOverrideGroup15 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.SlotMainOverride = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.SlotOverrideGroup2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.SlotOverrideGroup3 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.SlotOverrideGroup4 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.SlotOverrideGroup5 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.SlotOverrideGroup6 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.SlotOverrideGroup7 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.SlotOverrideGroup8 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.SlotOverrideGroup9 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.SlotOverrideGroup10 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.SlotOverrideGroup11 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.SlotOverrideGroup12 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.SlotOverrideGroup13 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.SlotOverrideGroup14 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.SlotOverrideGroup15 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 0x40;
         }
 
@@ -373,7 +373,7 @@ namespace Nikki.Support.Prostreet.Class
 
             }
 
-            array = Interop.Compress(array, eLZCompressionType.RAWW);
+            array = Interop.Compress(array, LZCompressionType.RAWW);
 
             var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
             header.Write(bw);

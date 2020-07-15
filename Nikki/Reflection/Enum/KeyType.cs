@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Type of the key/hash.
 	/// </summary>
-	public enum eKeyType : int
+	public enum KeyType : int
 	{
 		/// <summary>
 		/// Default system HashCode.

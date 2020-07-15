@@ -188,7 +188,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.InitiallyUnlocked = br.ReadByte() == 0 ? eBoolean.True : eBoolean.False;
 			this.BankIndex = br.ReadByte();
 			this.RequiredStagesCompleted = br.ReadInt32();
-			this._collection_name = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this._collection_name = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 		}
 
 		/// <summary>

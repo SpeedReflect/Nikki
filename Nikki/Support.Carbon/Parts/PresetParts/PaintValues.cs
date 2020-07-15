@@ -70,8 +70,8 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
 		public void Read(BinaryReader br)
 		{
 			this.IsCarbonStyle = br.ReadInt32() == 0 ? eBoolean.False : eBoolean.True;
-			this.PaintGroup = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.PaintSwatch = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.PaintGroup = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.PaintSwatch = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			this.Saturation = br.ReadSingle();
 			this.Brightness = br.ReadSingle();
 		}

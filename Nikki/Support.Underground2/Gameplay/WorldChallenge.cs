@@ -312,8 +312,8 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.RequiredRacesWon = br.ReadByte();
 
 			// Hashes
-			this.UnlockableSMS = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.Destination = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.UnlockableSMS = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.Destination = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
 			// Time Limit
 			this.TimeLimit = br.ReadInt32();

@@ -496,7 +496,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			if (this.UnlockMethodLevel1 == PartUnlockReq.SpecShopFound)
 			{
 
-				this.UnlocksInShopLevel1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+				this.UnlocksInShopLevel1 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
 			}
 			else
@@ -518,7 +518,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			if (this.UnlockMethodLevel2 == PartUnlockReq.SpecShopFound)
 			{
 
-				this.UnlocksInShopLevel2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+				this.UnlocksInShopLevel2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
 			}
 			else
@@ -540,7 +540,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			if (this.UnlockMethodLevel3 == PartUnlockReq.SpecShopFound)
 			{
 
-				this.UnlocksInShopLevel3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+				this.UnlocksInShopLevel3 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
 			}
 			else

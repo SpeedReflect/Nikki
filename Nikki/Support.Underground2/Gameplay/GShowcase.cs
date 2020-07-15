@@ -276,13 +276,13 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.TakePhotoType = br.ReadEnum<TakePhotoMethod>();
 			this.BelongsToStage = br.ReadByte();
 			this.CashValue = br.ReadInt16();
-			this.DescStringLabel = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DestinationPoint = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.DescStringLabel = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DestinationPoint = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			br.BaseStream.Position += 4;
 			this.Unknown0x34 = br.ReadByte();
 			this.Unknown0x35 = br.ReadByte();
 			br.BaseStream.Position += 2;
-			this.DescAttrib = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.DescAttrib = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			this.RequiredVisualRating = br.ReadSingle();
 		}
 

@@ -103,18 +103,18 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Read(BinaryReader br)
 		{
-			this.BasePaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.BasePaintGroup = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.BasePaintSwatch = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.VinylSpecific = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.VinylGeneric = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.VectorVinyl = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.RimsPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.RimsPaintGroup = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.RimsPaintSwatch = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.VinylColor = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalFront = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalRear = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.BasePaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.BasePaintGroup = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.BasePaintSwatch = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.VinylSpecific = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.VinylGeneric = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.VectorVinyl = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.RimsPaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.RimsPaintGroup = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.RimsPaintSwatch = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.VinylColor = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalFront = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalRear = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 		}
 
 		/// <summary>

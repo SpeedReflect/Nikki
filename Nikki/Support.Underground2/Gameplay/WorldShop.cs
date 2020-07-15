@@ -298,7 +298,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			br.BaseStream.Position += 4;
 			key = br.ReadUInt32();
 			var guess = $"TRIGGER_{this._collection_name}";
-			this.ShopTrigger = key == guess.BinHash() ? guess : key.BinString(eLookupReturn.EMPTY);
+			this.ShopTrigger = key == guess.BinHash() ? guess : key.BinString(LookupReturn.EMPTY);
 
 			// Shop Filename
 			this.ShopFilename = br.ReadNullTermUTF8(0x10);
@@ -309,7 +309,7 @@ namespace Nikki.Support.Underground2.Gameplay
 
 			// Event to complete
 			br.BaseStream.Position += 0x22;
-			this.EventToBeCompleted = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.EventToBeCompleted = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
 			// Last settings
 			br.BaseStream.Position += 0x24;

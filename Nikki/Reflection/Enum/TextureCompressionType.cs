@@ -3,7 +3,7 @@
     /// <summary>
     /// Enum of all compression types used in TPK.
     /// </summary>
-    public enum eTextureCompressionType : byte
+    public enum TextureCompressionType : byte
     {
         /// <summary>
         /// 

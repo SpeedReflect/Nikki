@@ -19,7 +19,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		/// <summary>
 		/// Group ID of the car.
 		/// </summary>
-		public eSlotUnderground2 CarPartGroupID { get; set; }
+		public SlotUnderground2 CarPartGroupID { get; set; }
 
 		/// <summary>
 		/// Unknown yet value.
@@ -54,7 +54,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		public void Disassemble(BinaryReader br, BinaryReader str_reader)
 		{
 			this.PartNameHash = br.ReadUInt32();
-			this.CarPartGroupID = br.ReadEnum<eSlotUnderground2>();
+			this.CarPartGroupID = br.ReadEnum<SlotUnderground2>();
 			this.UpgradeGroupID = br.ReadUInt16();
 			this.Index = br.ReadByte();
 

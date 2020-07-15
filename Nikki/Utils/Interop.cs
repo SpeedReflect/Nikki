@@ -33,7 +33,7 @@ namespace Nikki.Utils
 			if (input == null || input.Length < 0x10) return null;
 
 			var type = BitConverter.ToInt32(input, 0);
-			if (!Enum.IsDefined(typeof(eLZCompressionType), type)) return input;
+			if (!Enum.IsDefined(typeof(LZCompressionType), type)) return input;
 
 			var outsize = BitConverter.ToInt32(input, 8);
 			var output = new byte[outsize];
@@ -48,7 +48,7 @@ namespace Nikki.Utils
 		/// <param name="input">Array to compress.</param>
 		/// <param name="type">Type of the compression.</param>
 		/// <returns>Compressed data.</returns>
-		public static byte[] Compress(byte[] input, eLZCompressionType type)
+		public static byte[] Compress(byte[] input, LZCompressionType type)
 		{
 			if (input == null) return null;
 
@@ -67,7 +67,7 @@ namespace Nikki.Utils
 		/// <param name="count">Number of bytes to compress.</param>
 		/// <param name="type">Type of the compression.</param>
 		/// <returns>Compressed data.</returns>
-		public static byte[] Compress(byte[] input, int start, int count, eLZCompressionType type)
+		public static byte[] Compress(byte[] input, int start, int count, LZCompressionType type)
 		{
 			if (input == null) return null;
 			if (start < 0 || count <= 0) return null;

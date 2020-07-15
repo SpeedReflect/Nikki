@@ -32,14 +32,14 @@ namespace Nikki.Utils.EA
         /// </summary>
         /// <param name="value">Value from which get the result.</param>
         /// <returns>EA compression as a uint value.</returns>
-        public static uint GetInt(eTextureCompressionType value) => value switch
+        public static uint GetInt(TextureCompressionType value) => value switch
         {
-            eTextureCompressionType.TEXCOMP_DXTC1 => EAComp.DXT1_32,
-            eTextureCompressionType.TEXCOMP_DXTC3 => EAComp.DXT3_32,
-            eTextureCompressionType.TEXCOMP_DXTC5 => EAComp.DXT5_32,
-            eTextureCompressionType.TEXCOMP_8BIT => EAComp.P8_32,
-            eTextureCompressionType.TEXCOMP_8BIT_16 => EAComp.P8_32,
-            eTextureCompressionType.TEXCOMP_8BIT_64 => EAComp.P8_32,
+            TextureCompressionType.TEXCOMP_DXTC1 => EAComp.DXT1_32,
+            TextureCompressionType.TEXCOMP_DXTC3 => EAComp.DXT3_32,
+            TextureCompressionType.TEXCOMP_DXTC5 => EAComp.DXT5_32,
+            TextureCompressionType.TEXCOMP_8BIT => EAComp.P8_32,
+            TextureCompressionType.TEXCOMP_8BIT_16 => EAComp.P8_32,
+            TextureCompressionType.TEXCOMP_8BIT_64 => EAComp.P8_32,
             _ => EAComp.RGBA_32
         };
 

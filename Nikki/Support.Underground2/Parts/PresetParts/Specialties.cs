@@ -85,15 +85,15 @@ namespace Nikki.Support.Underground2.Parts.PresetParts
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Read(BinaryReader br)
 		{
-			this.NeonBody = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.NeonEngine = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.NeonCabin = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.NeonTrunk = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.CabinNeonStyle = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.HeadlightBulb = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DoorStyle = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.Hydraulics = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.NOSPurge = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.NeonBody = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.NeonEngine = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.NeonCabin = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.NeonTrunk = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.CabinNeonStyle = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.HeadlightBulb = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DoorStyle = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.Hydraulics = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.NOSPurge = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 		}
 
 		/// <summary>

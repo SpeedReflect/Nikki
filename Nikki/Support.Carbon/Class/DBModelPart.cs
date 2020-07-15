@@ -327,7 +327,7 @@ namespace Nikki.Support.Carbon.Class
 
 			}
 
-			array = Interop.Compress(array, eLZCompressionType.BEST);
+			array = Interop.Compress(array, LZCompressionType.BEST);
 
 			var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
 			header.Write(bw);
@@ -367,20 +367,20 @@ namespace Nikki.Support.Carbon.Class
 					if (!Map.CarPartKeys.TryGetValue(key, out var type))
 					{
 
-						type = eCarPartAttribType.Integer;
+						type = CarPartAttribType.Integer;
 
 					}
 
 					CPAttribute attrib = type switch
 					{
-						eCarPartAttribType.Boolean => new BoolAttribute(),
-						eCarPartAttribType.Color => new ColorAttribute(),
-						eCarPartAttribType.CarPartID => new PartIDAttribute(),
-						eCarPartAttribType.Floating => new FloatAttribute(),
-						eCarPartAttribType.String => new StringAttribute(),
-						eCarPartAttribType.TwoString => new TwoStringAttribute(),
-						eCarPartAttribType.Key => new KeyAttribute(),
-						eCarPartAttribType.ModelTable => new ModelTableAttribute(),
+						CarPartAttribType.Boolean => new BoolAttribute(),
+						CarPartAttribType.Color => new ColorAttribute(),
+						CarPartAttribType.CarPartID => new PartIDAttribute(),
+						CarPartAttribType.Floating => new FloatAttribute(),
+						CarPartAttribType.String => new StringAttribute(),
+						CarPartAttribType.TwoString => new TwoStringAttribute(),
+						CarPartAttribType.Key => new KeyAttribute(),
+						CarPartAttribType.ModelTable => new ModelTableAttribute(),
 						_ => new IntAttribute(),
 					};
 

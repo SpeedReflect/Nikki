@@ -298,7 +298,7 @@ namespace Nikki.Support.Carbon.Class
 
 			}
 
-			array = Interop.Compress(array, eLZCompressionType.BEST);
+			array = Interop.Compress(array, LZCompressionType.BEST);
 
 			var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
 			header.Write(bw);

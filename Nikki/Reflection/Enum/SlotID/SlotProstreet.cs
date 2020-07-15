@@ -1,859 +1,834 @@
 ﻿namespace Nikki.Reflection.Enum.SlotID
 {
 	/// <summary>
-	/// Slot IDs enum for Underground2 support.
+	/// Slot IDs enum for Prostreet support.
 	/// </summary>
-	public enum eSlotUnderground2 : byte
+	public enum SlotProstreet : byte
 	{
 		/// <summary>
 		/// 
 		/// </summary>
-		BASE = 0x00,
+		BADGING_BUMPER_SET_FRONT = 0x00,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		FRONT_BUMPER = 0x01,
+		BADGING_BUMPER_SET_REAR = 0x01,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		REAR_BUMPER = 0x02,
+		BADGING_FENDER_FRONT_LEFT = 0x02,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		LEFT_SIDE_MIRROR = 0x03,
+		BADGING_FENDER_FRONT_RIGHT = 0x03,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		RIGHT_SIDE_MIRROR = 0x04,
+		BADGING_FENDER_REAR_LEFT = 0x04,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		BODY = 0x05,
+		BADGING_FENDER_REAR_RIGHT = 0x05,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		WIDE_BODY = 0x06,
+		BADGING_TRUNK = 0x06,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		ROOF = 0x07,
+		BASE = 0x07,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		TOP = 0x08,
+		BODY = 0x08,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		HOOD = 0x09,
+		BODY_DOORLINE = 0x09,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		TRUNK = 0x0A,
+		BRAKE_CALIPER_FRONT = 0x0A,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		SKIRT = 0x0B,
+		BRAKE_CALIPER_REAR = 0x0B,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		SPOILER = 0x0C,
+		BRAKE_ROTOR_FRONT = 0x0C,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		ENGINE = 0x0D,
+		BRAKE_ROTOR_REAR = 0x0D,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		HEADLIGHT = 0x0E,
+		BRAKELIGHT_GLASS_LEFT = 0x0E,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		BRAKELIGHT = 0x0F,
+		BRAKELIGHT_GLASS_RIGHT = 0x0F,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		EXHAUST = 0x10,
+		BRAKELIGHT_LEFT = 0x10,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DOOR_LEFT = 0x11,
+		BRAKELIGHT_RIGHT = 0x11,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DOOR_RIGHT = 0x12,
+		BUMPER_FRONT = 0x12,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DOOR_PANEL_LEFT = 0x13,
+		BUMPER_FRONT_EXTRA = 0x13,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DOOR_PANEL_RIGHT = 0x14,
+		BUMPER_REAR = 0x14,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DOOR_SILL_LEFT = 0x15,
+		BUMPER_REAR_EXTRA = 0x15,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DOOR_SILL_RIGHT = 0x16,
+		DAMAGE_BODY = 0x16,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		FENDER = 0x17,
+		DAMAGE_BRAKELIGHT_LEFT = 0x17,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		QUARTER = 0x18,
+		DAMAGE_BRAKELIGHT_RIGHT = 0x18,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		HOOD_UNDER = 0x19,
+		DAMAGE_BUMPER_FRONT = 0x19,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		TRUNK_UNDER = 0x1A,
+		DAMAGE_BUMPER_REAR = 0x1A,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		FRONT_BRAKE = 0x1B,
+		DAMAGE_DOOR_LEFT = 0x1B,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		REAR_BRAKE = 0x1C,
+		DAMAGE_DOOR_REAR_LEFT = 0x1C,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		FRONT_WHEEL = 0x1D,
+		DAMAGE_DOOR_REAR_RIGHT = 0x1D,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		REAR_WHEEL = 0x1E,
+		DAMAGE_DOOR_RIGHT = 0x1E,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		SPINNER = 0x1F,
+		DAMAGE_FENDER_FRONT_LEFT = 0x1F,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		WING_MIRROR = 0x20,
+		DAMAGE_FENDER_FRONT_RIGHT = 0x20,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		LICENSE_PLATE = 0x21,
+		DAMAGE_HEADLIGHT_LEFT = 0x21,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		TRUNK_AUDIO = 0x22,
+		DAMAGE_HEADLIGHT_RIGHT = 0x22,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		TRUNK_AUDIO_COMP_0 = 0x23,
+		DAMAGE_HOOD = 0x23,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		TRUNK_AUDIO_COMP_1 = 0x24,
+		DAMAGE_SIDEMIRROR_LEFT = 0x24,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		TRUNK_AUDIO_COMP_2 = 0x25,
+		DAMAGE_SIDEMIRROR_RIGHT = 0x25,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		TRUNK_AUDIO_COMP_3 = 0x26,
+		DAMAGE_TRUNK = 0x26,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		TRUNK_AUDIO_COMP_4 = 0x27,
+		DAMAGE_WIDEBODY = 0x27,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		TRUNK_AUDIO_COMP_5 = 0x28,
+		DAMAGE_WIDEBODY_BUMPER_FRONT = 0x28,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		TRUNK_AUDIO_COMP_6 = 0x29,
+		DAMAGE_WIDEBODY_BUMPER_REAR = 0x29,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		TRUNK_AUDIO_COMP_7 = 0x2A,
+		DAMAGE_WIDEBODY_DOOR_LEFT = 0x2A,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		TRUNK_AUDIO_COMP_8 = 0x2B,
+		DAMAGE_WIDEBODY_DOOR_REAR_LEFT = 0x2B,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		TRUNK_AUDIO_COMP_9 = 0x2C,
+		DAMAGE_WIDEBODY_DOOR_REAR_RIGHT = 0x2C,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		TRUNK_AUDIO_COMP_10 = 0x2D,
+		DAMAGE_WIDEBODY_DOOR_RIGHT = 0x2D,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		TRUNK_AUDIO_COMP_11 = 0x2E,
+		DAMAGE_WIDEBODY_FENDER_FRONT_LEFT = 0x2E,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DAMAGE_FRONT = 0x2F,
+		DAMAGE_WIDEBODY_FENDER_FRONT_RIGHT = 0x2F,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DAMAGE_REAR = 0x30,
+		DAMAGE_WINDOW_FRONT = 0x30,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DAMAGE_LEFT = 0x31,
+		DAMAGE_WINDOW_FRONT_LEFT = 0x31,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DAMAGE_RIGHT = 0x32,
+		DAMAGE_WINDOW_FRONT_RIGHT = 0x32,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DAMAGE_TOP = 0x33,
+		DAMAGE_WINDOW_REAR = 0x33,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_HOOD = 0x34,
+		DAMAGE_WINDOW_REAR_LEFT = 0x34,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_FRONT_WINDOW = 0x35,
+		DAMAGE_WINDOW_REAR_RIGHT = 0x35,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_REAR_WINDOW = 0x36,
+		DAMAGE0_FRONT = 0x36,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_LEFT_DOOR = 0x37,
+		DAMAGE0_FRONTLEFT = 0x37,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_RIGHT_DOOR = 0x38,
+		DAMAGE0_FRONTRIGHT = 0x38,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_LEFT_QUARTER = 0x39,
+		DAMAGE0_REAR = 0x39,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_RIGHT_QUARTER = 0x3A,
+		DAMAGE0_REARLEFT = 0x3A,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		WIDEBODY_DECAL_LEFT_DOOR = 0x3B,
+		DAMAGE0_REARRIGHT = 0x3B,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		WIDEBODY_DECAL_RIGHT_DOOR = 0x3C,
+		DECAL_FRONT_WINDOW = 0x3C,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		WIDEBODY_DECAL_LEFT_QUARTER = 0x3D,
+		DECAL_REAR_WINDOW = 0x3D,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		WIDEBODY_DECAL_RIGHT_QUARTER = 0x3E,
+		DOOR_LEFT = 0x3E,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		BASE_PAINT = 0x3F,
+		DOOR_REAR_LEFT = 0x3F,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		VINYL_LAYER0 = 0x40,
+		DOOR_REAR_RIGHT = 0x40,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		VINYL_LAYER1 = 0x41,
+		DOOR_RIGHT = 0x41,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		VINYL_LAYER2 = 0x42,
+		DOORHANDLE_FRONT_LEFT = 0x42,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		VINYL_LAYER3 = 0x43,
+		DOORHANDLE_FRONT_RIGHT = 0x43,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		PAINT_ENGINE = 0x44,
+		DOORHANDLE_REAR_LEFT = 0x44,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		PAINT_SPOILER = 0x45,
+		DOORHANDLE_REAR_RIGHT = 0x45,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		PAINT_BRAKE = 0x46,
+		DRIVER = 0x46,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		PAINT_EXHAUST = 0x47,
+		ENGINE = 0x47,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		PAINT_AUDIO = 0x48,
+		EXHAUST = 0x48,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		PAINT_RIM = 0x49,
+		FENDER_FRONT_LEFT = 0x49,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		PAINT_SPINNER = 0x4A,
+		FENDER_FRONT_RIGHT = 0x4A,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		PAINT_ROOF = 0x4B,
+		HEADLIGHT_GLASS_LEFT = 0x4B,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		PAINT_MIRROR = 0x4C,
+		HEADLIGHT_GLASS_RIGHT = 0x4C,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		VINYL_COLOUR0_0 = 0x4D,
+		HEADLIGHT_LEFT = 0x4D,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		VINYL_COLOUR0_1 = 0x4E,
+		HEADLIGHT_RIGHT = 0x4E,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		VINYL_COLOUR0_2 = 0x4F,
+		HOOD = 0x4F,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		VINYL_COLOUR0_3 = 0x50,
+		INTERIOR = 0x50,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		VINYL_COLOUR1_0 = 0x51,
+		LICENSE_PLATE = 0x51,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		VINYL_COLOUR1_1 = 0x52,
+		ROLL_CAGE = 0x52,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		VINYL_COLOUR1_2 = 0x53,
+		ROOF = 0x53,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		VINYL_COLOUR1_3 = 0x54,
+		ROOF_INSIDE = 0x54,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		VINYL_COLOUR2_0 = 0x55,
+		ROOFSCOOP = 0x55,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		VINYL_COLOUR2_1 = 0x56,
+		SEAT_LEFT = 0x56,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		VINYL_COLOUR2_2 = 0x57,
+		SEAT_RIGHT = 0x57,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		VINYL_COLOUR2_3 = 0x58,
+		SIDE_MIRROR_LEFT = 0x58,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		VINYL_COLOUR3_0 = 0x59,
+		SIDE_MIRROR_RIGHT = 0x59,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		VINYL_COLOUR3_1 = 0x5A,
+		SKIRT_LEFT = 0x5A,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		VINYL_COLOUR3_2 = 0x5B,
+		SKIRT_RIGHT = 0x5B,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		VINYL_COLOUR3_3 = 0x5C,
+		SPOILER = 0x5C,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		KIT_CARBON = 0x5D,
+		STEERINGWHEEL = 0x5D,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		HOOD_CARBON = 0x5E,
+		TRUNK = 0x5E,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DOOR_CARBON = 0x5F,
+		UNIVERSAL_SPOILER_BASE = 0x5F,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		TRUNK_CARBON = 0x60,
+		WHEEL_FRONT = 0x60,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_HOOD_TEX0 = 0x61,
+		WHEEL_REAR = 0x61,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_HOOD_TEX1 = 0x62,
+		WINDOW_FRONT = 0x62,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_HOOD_TEX2 = 0x63,
+		WINDOW_FRONT_LEFT = 0x63,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_HOOD_TEX3 = 0x64,
+		WINDOW_FRONT_RIGHT = 0x64,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_HOOD_TEX4 = 0x65,
+		WINDOW_REAR = 0x65,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_HOOD_TEX5 = 0x66,
+		WINDOW_REAR_LEFT = 0x66,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_HOOD_TEX6 = 0x67,
+		WINDOW_REAR_RIGHT = 0x67,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_HOOD_TEX7 = 0x68,
+		WINDTUNNEL_TYPE1 = 0x68,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_FRONT_WINDOW_TEX0 = 0x69,
+		WINDTUNNEL_TYPE10 = 0x69,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_FRONT_WINDOW_TEX1 = 0x6A,
+		WINDTUNNEL_TYPE2 = 0x6A,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_FRONT_WINDOW_TEX2 = 0x6B,
+		WINDTUNNEL_TYPE3 = 0x6B,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_FRONT_WINDOW_TEX3 = 0x6C,
+		WINDTUNNEL_TYPE4 = 0x6C,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_FRONT_WINDOW_TEX4 = 0x6D,
+		WINDTUNNEL_TYPE5 = 0x6D,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_FRONT_WINDOW_TEX5 = 0x6E,
+		WINDTUNNEL_TYPE6 = 0x6E,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_FRONT_WINDOW_TEX6 = 0x6F,
+		WINDTUNNEL_TYPE7 = 0x6F,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_FRONT_WINDOW_TEX7 = 0x70,
+		WINDTUNNEL_TYPE8 = 0x70,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_REAR_WINDOW_TEX0 = 0x71,
+		WINDTUNNEL_TYPE9 = 0x71,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_REAR_WINDOW_TEX1 = 0x72,
+		BODY_PAINT = 0x72,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_REAR_WINDOW_TEX2 = 0x73,
+		BODY_PAINT_GROUP = 0x73,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_REAR_WINDOW_TEX3 = 0x74,
+		BODY_PAINT_SWATCH = 0x74,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_REAR_WINDOW_TEX4 = 0x75,
+		BUMPER_FRONT_PAINT = 0x75,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_REAR_WINDOW_TEX5 = 0x76,
+		BUMPER_FRONT_PAINT_GROUP = 0x76,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_REAR_WINDOW_TEX6 = 0x77,
+		BUMPER_FRONT_PAINT_SWATCH = 0x77,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_REAR_WINDOW_TEX7 = 0x78,
+		BUMPER_REAR_PAINT = 0x78,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_LEFT_DOOR_TEX0 = 0x79,
+		BUMPER_REAR_PAINT_GROUP = 0x79,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_LEFT_DOOR_TEX1 = 0x7A,
+		BUMPER_REAR_PAINT_SWATCH = 0x7A,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_LEFT_DOOR_TEX2 = 0x7B,
+		CHASSIS = 0x7B,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_LEFT_DOOR_TEX3 = 0x7C,
+		DRIVETRAIN_PACKAGE = 0x7C,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_LEFT_DOOR_TEX4 = 0x7D,
+		ENGINE_PACKAGE = 0x7D,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_LEFT_DOOR_TEX5 = 0x7E,
+		FORCED_INDUCTION_PACKAGE = 0x7E,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_LEFT_DOOR_TEX6 = 0x7F,
+		HOOD_PAINT = 0x7F,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_LEFT_DOOR_TEX7 = 0x80,
+		HOOD_PAINT_GROUP = 0x80,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_RIGHT_DOOR_TEX0 = 0x81,
+		HOOD_PAINT_SWATCH = 0x81,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_RIGHT_DOOR_TEX1 = 0x82,
+		LIVERY = 0x82,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_RIGHT_DOOR_TEX2 = 0x83,
+		NITROUS_PACKAGE = 0x83,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_RIGHT_DOOR_TEX3 = 0x84,
+		ROLLCAGE_PAINT = 0x84,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_RIGHT_DOOR_TEX4 = 0x85,
+		ROLLCAGE_PAINT_GROUP = 0x85,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_RIGHT_DOOR_TEX5 = 0x86,
+		ROLLCAGE_PAINT_SWATCH = 0x86,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_RIGHT_DOOR_TEX6 = 0x87,
+		ROOF_SCOOP_PAINT = 0x87,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_RIGHT_DOOR_TEX7 = 0x88,
+		ROOF_SCOOP_PAINT_GROUP = 0x88,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_LEFT_QUARTER_TEX0 = 0x89,
+		ROOF_SCOOP_PAINT_SWATCH = 0x89,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_LEFT_QUARTER_TEX1 = 0x8A,
+		SIDE_MIRROR_PAINT = 0x8A,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_LEFT_QUARTER_TEX2 = 0x8B,
+		SIDE_MIRROR_PAINT_GROUP = 0x8B,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_LEFT_QUARTER_TEX3 = 0x8C,
+		SIDE_MIRROR_PAINT_SWATCH = 0x8C,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_LEFT_QUARTER_TEX4 = 0x8D,
+		SKIRT_PAINT = 0x8D,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_LEFT_QUARTER_TEX5 = 0x8E,
+		SKIRT_PAINT_GROUP = 0x8E,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_LEFT_QUARTER_TEX6 = 0x8F,
+		SKIRT_PAINT_SWATCH = 0x8F,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_LEFT_QUARTER_TEX7 = 0x90,
+		SPOILER_PAINT = 0x90,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_RIGHT_QUARTER_TEX0 = 0x91,
+		SPOILER_PAINT_GROUP = 0x91,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_RIGHT_QUARTER_TEX1 = 0x92,
+		SPOILER_PAINT_SWATCH = 0x92,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_RIGHT_QUARTER_TEX2 = 0x93,
+		SUSPENSION_PACKAGE = 0x93,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_RIGHT_QUARTER_TEX3 = 0x94,
+		TIRE_FRONT = 0x94,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_RIGHT_QUARTER_TEX4 = 0x95,
+		TIRE_PACKAGE = 0x95,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_RIGHT_QUARTER_TEX5 = 0x96,
+		TIRE_REAR = 0x96,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_RIGHT_QUARTER_TEX6 = 0x97,
+		VECTORVINYL = 0x97,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DECAL_RIGHT_QUARTER_TEX7 = 0x98,
+		VINYL_PAINT = 0x98,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		WINDOW_TINT = 0x99,
+		WHEEL_PAINT = 0x99,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		NEON = 0x9A,
+		WHEEL_PAINT_GROUP = 0x9A,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		NEON_ENGINE = 0x9B,
+		WHEEL_PAINT_SWATCH = 0x9B,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		NEON_CABIN = 0x9C,
+		WHEEL_SPOKE_FRONT_PAINT = 0x9C,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		NEON_TRUNK = 0x9D,
+		WHEEL_SPOKE_FRONT_PAINT_GROUP = 0x9D,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		CABIN_NEON_FRAME = 0x9E,
+		WHEEL_SPOKE_FRONT_PAINT_SWATCH = 0x9E,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		HEADLIGHT_BULB = 0x9F,
+		WHEEL_SPOKE_REAR_PAINT = 0x9F,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DOOR_STYLE = 0xA0,
+		WHEEL_SPOKE_REAR_PAINT_GROUP = 0xA0,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		HYDRALICS = 0xA1,
+		WHEEL_SPOKE_REAR_PAINT_SWATCH = 0xA1,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		NOS_PURGE = 0xA2,
+		WINDOW_TINT = 0xA2,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		CUSTOM_HUD = 0xA3,
+		WINDOW_TINT_GROUP = 0xA3,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		HUD_BACKING_COLOUR = 0xA4,
-
-		/// <summary>
-		/// 
-		/// </summary>
-		HUD_NEEDLE_COLOUR = 0xA5,
-
-		/// <summary>
-		/// 
-		/// </summary>
-		HUD_CHARACTER_COLOUR = 0xA6,
-
-		/// <summary>
-		/// 
-		/// </summary>
-		CV = 0xA7,
-
-		/// <summary>
-		/// 
-		/// </summary>
-		WHEEL_MANUFACTURER = 0xA8,
-
-		/// <summary>
-		/// 
-		/// </summary>
-		MISC = 0xA9,
+		WINDOW_TINT_SWATCH = 0xA4,
 
 		/// <summary>
 		/// 

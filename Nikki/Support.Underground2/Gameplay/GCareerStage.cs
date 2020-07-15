@@ -551,11 +551,11 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.CareerIdentifier = br.ReadInt16();
 
 			// Sponsor Settings
-			this.StageSponsor1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.StageSponsor2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.StageSponsor3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.StageSponsor4 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.StageSponsor5 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.StageSponsor1 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.StageSponsor2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.StageSponsor3 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.StageSponsor4 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.StageSponsor5 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			this.AttribSponsor1 = br.ReadInt16();
 			this.AttribSponsor2 = br.ReadInt16();
 			this.AttribSponsor3 = br.ReadInt16();
@@ -564,7 +564,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.Unknown0x26 = br.ReadInt16();
 
 			// Last stage event
-			this.LastStageEvent = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.LastStageEvent = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
 			// Race Settings
 			this.Unknown0x2C = br.ReadByte();

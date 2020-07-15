@@ -118,7 +118,7 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Read(BinaryReader br)
 		{
-			if (br.ReadEnum<eBlockID>() != eBlockID.TPK_AnimPart1) return;
+			if (br.ReadEnum<BinBlockID>() != BinBlockID.TPK_AnimPart1) return;
 			br.BaseStream.Position += 0xC; // I guess we trust size stated?
 
 			this._name = br.ReadNullTermUTF8(0x10);
@@ -129,7 +129,7 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 			this.TimeBase = br.ReadByte();
 			br.BaseStream.Position += 0xD;
 
-			while (br.ReadEnum<eBlockID>() != eBlockID.TPK_AnimPart2) { }
+			while (br.ReadEnum<BinBlockID>() != BinBlockID.TPK_AnimPart2) { }
 			var size = br.ReadInt32() / 0xC;
 
 			for (int loop = 0; loop < size; ++loop)
@@ -137,7 +137,7 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 
 				var entry = new FrameEntry()
 				{
-					Name = br.ReadUInt32().BinString(eLookupReturn.EMPTY)
+					Name = br.ReadUInt32().BinString(LookupReturn.EMPTY)
 				};
 
 				this.FrameTextures.Add(entry);
@@ -154,11 +154,11 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 		{
 			// Precalculate size
 			var size = 0x3C + this.FrameTextures.Count * 0xC;
-			bw.WriteEnum(eBlockID.TPK_AnimBlock);
+			bw.WriteEnum(BinBlockID.TPK_AnimBlock);
 			bw.Write(size);
 
 			// Write header
-			bw.WriteEnum(eBlockID.TPK_AnimPart1);
+			bw.WriteEnum(BinBlockID.TPK_AnimPart1);
 			bw.Write(0x2C);
 			bw.Write((long)0);
 			bw.WriteNullTermUTF8(this._name, 0x10);
@@ -169,7 +169,7 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 			bw.WriteBytes(0xD);
 
 			// Write frames
-			bw.WriteEnum(eBlockID.TPK_AnimPart2);
+			bw.WriteEnum(BinBlockID.TPK_AnimPart2);
 			bw.Write(this.FrameTextures.Count * 0xC);
 
 			for (int loop = 0; loop < this.FrameTextures.Count; ++loop)

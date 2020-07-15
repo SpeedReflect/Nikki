@@ -78,7 +78,7 @@ namespace Nikki.Support.Carbon.Framework
 				if (collection.SettingData != null)
 				{
 
-					bw.WriteEnum(eBlockID.TPKSettings);
+					bw.WriteEnum(BinBlockID.TPKSettings);
 					bw.Write(collection.SettingData.Length);
 					bw.Write(collection.SettingData);
 					bw.GeneratePadding(mark, this.Alignment);
@@ -99,7 +99,7 @@ namespace Nikki.Support.Carbon.Framework
 		internal override void Disassemble(BinaryReader br, Block block)
 		{
 			if (Block.IsNullOrEmpty(block)) return;
-			if (block.BlockID != eBlockID.TPKBlocks) return;
+			if (block.BlockID != BinBlockID.TPKBlocks) return;
 
 			this.Capacity = block.Offsets.Count;
 			byte[] settings = null;
@@ -108,17 +108,17 @@ namespace Nikki.Support.Carbon.Framework
 			{
 
 				br.BaseStream.Position = block.Offsets[loop];
-				var id = br.ReadEnum<eBlockID>();
+				var id = br.ReadEnum<BinBlockID>();
 				var size = br.ReadInt32();
 
-				if (id == eBlockID.TPKSettings)
+				if (id == BinBlockID.TPKSettings)
 				{
 
 					settings = br.ReadBytes(size);
 					continue;
 
 				}
-				else if (id == eBlockID.TPKBlocks)
+				else if (id == BinBlockID.TPKBlocks)
 				{
 
 					br.BaseStream.Position -= 8;
@@ -203,7 +203,7 @@ namespace Nikki.Support.Carbon.Framework
 		/// </summary>
 		/// <param name="type">Type of serialization of a collection.</param>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		public override void Import(eSerializeType type, BinaryReader br)
+		public override void Import(SerializeType type, BinaryReader br)
 		{
 			var position = br.BaseStream.Position;
 			var header = new SerializationHeader();
@@ -211,7 +211,7 @@ namespace Nikki.Support.Carbon.Framework
 
 			var collection = new TPKBlock();
 
-			if (header.ID != eBlockID.Nikki)
+			if (header.ID != BinBlockID.Nikki)
 			{
 
 				br.BaseStream.Position = position;
@@ -253,15 +253,15 @@ namespace Nikki.Support.Carbon.Framework
 
 				switch (type)
 				{
-					case eSerializeType.Negate:
+					case SerializeType.Negate:
 						break;
 
-					case eSerializeType.Override:
+					case SerializeType.Override:
 						collection.Manager = this;
 						this.Replace(collection, index);
 						break;
 
-					case eSerializeType.Synchronize:
+					case SerializeType.Synchronize:
 						this[index].Synchronize(collection);
 						break;
 

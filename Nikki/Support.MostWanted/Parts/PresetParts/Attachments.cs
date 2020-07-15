@@ -91,16 +91,16 @@ namespace Nikki.Support.MostWanted.Parts.PresetParts
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Read(BinaryReader br)
 		{
-			this.Attachment0 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.Attachment1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.Attachment2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.Attachment3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.Attachment4 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.Attachment5 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.Attachment6 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.Attachment7 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.Attachment8 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.Attachment9 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.Attachment0 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.Attachment1 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.Attachment2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.Attachment3 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.Attachment4 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.Attachment5 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.Attachment6 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.Attachment7 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.Attachment8 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.Attachment9 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 		}
 
 		/// <summary>

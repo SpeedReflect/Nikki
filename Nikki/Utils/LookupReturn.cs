@@ -8,7 +8,7 @@ namespace Nikki.Utils
 	/// <summary>
 	/// Type of return string in case of resolving key = 0.
 	/// </summary>
-	public enum eLookupReturn : int
+	public enum LookupReturn : int
 	{
 		/// <summary>
 		/// Returns <see langword="null"/>.

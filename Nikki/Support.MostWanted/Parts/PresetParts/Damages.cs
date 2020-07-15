@@ -163,28 +163,28 @@ namespace Nikki.Support.MostWanted.Parts.PresetParts
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Read(BinaryReader br)
 		{
-			this.DamageFrontWindow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageBody = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageCopLights = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageCopSpoiler = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageFrontWheel = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageLeftBrakelight = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageRightBrakelight = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageLeftHeadlight = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageRightHeadlight = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageHood = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageBushguard = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageFrontBumper = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageRightDoor = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageRightRearDoor = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageTrunk = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageRearBumper = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageRearLeftWindow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageFrontLeftWindow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageFrontRightWindow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageRearRightWindow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageLeftDoor = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DamageLeftRearDoor = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.DamageFrontWindow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageBody = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageCopLights = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageCopSpoiler = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageFrontWheel = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageLeftBrakelight = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageRightBrakelight = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageLeftHeadlight = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageRightHeadlight = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageHood = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageBushguard = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageFrontBumper = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageRightDoor = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageRightRearDoor = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageTrunk = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageRearBumper = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageRearLeftWindow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageFrontLeftWindow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageFrontRightWindow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageRearRightWindow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageLeftDoor = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DamageLeftRearDoor = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 		}
 
 		/// <summary>

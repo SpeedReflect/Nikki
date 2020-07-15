@@ -17,6 +17,190 @@ namespace Nikki.Support.Shared.Class
     /// </summary>
     public abstract class Texture : Collectable, IAssembly
     {
+        #region Shared Enums
+
+        /// <summary>
+        /// Enum of alpha usage types for textures.
+        /// </summary>
+        public enum TextureAlphaUsageType : byte
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXUSAGE_NONE = 0,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXUSAGE_PUNCHTHRU = 1,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXUSAGE_MODULATED = 2,
+        }
+
+        /// <summary>
+        /// Enum of alpha blend types for textures.
+        /// </summary>
+        public enum TextureAlphaBlendType : sbyte
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXBLEND_DEFAULT = -1,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXBLEND_SRCCOPY = 0,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXBLEND_BLEND = 1,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXBLEND_ADDATIVE = 2,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXBLEND_SUBTRACTIVE = 3,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXBLEND_OVERBRIGHT = 4,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXBLEND_DEST_BLEND = 5,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXBLEND_DEST_ADDATIVE = 6,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXBLEND_DEST_SUBTRACTIVE = 7,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXBLEND_DEST_OVERBRIGHT = 8,
+        }
+
+        /// <summary>
+        /// Enum of possible mipmap bias types.
+        /// </summary>
+        public enum TextureMipmapBiasType : byte
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXBIAS_DEFAULT = 0,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXBIAS_ADS = 1,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXBIAS_ARC = 2,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXBIAS_OBJ = 3,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXBIAS_ORG = 4,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXBIAS_SGN = 5,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXBIAS_TRN = 6,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXBIAS_PARTICLES = 7,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXBIAS_NUM = 8,
+        }
+
+        /// <summary>
+        /// Enum of texture scroll types.
+        /// </summary>
+        public enum TextureScrollType : byte
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXSCROLL_NONE = 0,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXSCROLL_SMOOTH = 1,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXSCROLL_SNAP = 2,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            TEXSCROLL_OFFSETSCALE = 3,
+        }
+
+        /// <summary>
+        /// Type of tileable UV.
+        /// </summary>
+        public enum TextureTileableType : byte
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            NONE = 0,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            HORIZONTAL = 1,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            VERTICAL = 2,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            ALL_SIDES = 3,
+        }
+
+        #endregion
+
         #region Main Properties
 
         /// <summary>
@@ -76,7 +260,7 @@ namespace Nikki.Support.Shared.Class
         /// Compression type of the texture.
         /// </summary>
         [Category("Primary")]
-        public abstract eTextureCompressionType Compression { get; }
+        public abstract TextureCompressionType Compression { get; }
 
         /// <summary>
         /// Determines whether this <see cref="Texture"/> has palette.
@@ -84,20 +268,20 @@ namespace Nikki.Support.Shared.Class
         [Category("Primary")]
         public bool HasPalette => this.Compression switch
         {
-            eTextureCompressionType.TEXCOMP_4BIT => true,
-            eTextureCompressionType.TEXCOMP_4BIT_IA8 => true,
-            eTextureCompressionType.TEXCOMP_4BIT_RGB16_A8 => true,
-            eTextureCompressionType.TEXCOMP_4BIT_RGB24_A8 => true,
-            eTextureCompressionType.TEXCOMP_8BIT => true,
-            eTextureCompressionType.TEXCOMP_8BIT_16 => true,
-            eTextureCompressionType.TEXCOMP_8BIT_64 => true,
-            eTextureCompressionType.TEXCOMP_8BIT_IA8 => true,
-            eTextureCompressionType.TEXCOMP_8BIT_RGB16_A8 => true,
-            eTextureCompressionType.TEXCOMP_8BIT_RGB24_A8 => true,
-            eTextureCompressionType.TEXCOMP_16BIT => true,
-            eTextureCompressionType.TEXCOMP_16BIT_1555 => true,
-            eTextureCompressionType.TEXCOMP_16BIT_3555 => true,
-            eTextureCompressionType.TEXCOMP_16BIT_565 => true,
+            TextureCompressionType.TEXCOMP_4BIT => true,
+            TextureCompressionType.TEXCOMP_4BIT_IA8 => true,
+            TextureCompressionType.TEXCOMP_4BIT_RGB16_A8 => true,
+            TextureCompressionType.TEXCOMP_4BIT_RGB24_A8 => true,
+            TextureCompressionType.TEXCOMP_8BIT => true,
+            TextureCompressionType.TEXCOMP_8BIT_16 => true,
+            TextureCompressionType.TEXCOMP_8BIT_64 => true,
+            TextureCompressionType.TEXCOMP_8BIT_IA8 => true,
+            TextureCompressionType.TEXCOMP_8BIT_RGB16_A8 => true,
+            TextureCompressionType.TEXCOMP_8BIT_RGB24_A8 => true,
+            TextureCompressionType.TEXCOMP_16BIT => true,
+            TextureCompressionType.TEXCOMP_16BIT_1555 => true,
+            TextureCompressionType.TEXCOMP_16BIT_3555 => true,
+            TextureCompressionType.TEXCOMP_16BIT_565 => true,
             _ => false
         };
 
@@ -152,7 +336,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [MemoryCastable()]
         [Category("Secondary")]
-        public eTextureMipmapBiasType MipmapBiasType { get; set; }
+        public TextureMipmapBiasType MipmapBiasType { get; set; }
 
         /// <summary>
         /// Represents bias level of the texture.
@@ -168,7 +352,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [MemoryCastable()]
         [Category("Secondary")]
-        public eTextureAlphaUsageType AlphaUsageType { get; set; } = eTextureAlphaUsageType.TEXUSAGE_MODULATED;
+        public TextureAlphaUsageType AlphaUsageType { get; set; } = TextureAlphaUsageType.TEXUSAGE_MODULATED;
 
         /// <summary>
         /// Represents alpha blend type of the texture.
@@ -176,7 +360,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [MemoryCastable()]
         [Category("Secondary")]
-        public eTextureAlphaBlendType AlphaBlendType { get; set; } = eTextureAlphaBlendType.TEXBLEND_BLEND;
+        public TextureAlphaBlendType AlphaBlendType { get; set; } = TextureAlphaBlendType.TEXBLEND_BLEND;
 
         /// <summary>
         /// Represents type of applying alpha sort of the texture.
@@ -192,7 +376,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [MemoryCastable()]
         [Category("Secondary")]
-        public eTextureScrollType ScrollType { get; set; }
+        public TextureScrollType ScrollType { get; set; }
 
         /// <summary>
         /// Represents rendering order of the texture.
@@ -208,7 +392,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [MemoryCastable()]
         [Category("Secondary")]
-        public eTileableType TileableUV { get; set; }
+        public TextureTileableType TileableUV { get; set; }
 
         /// <summary>
         /// DDS data of this <see cref="Texture"/>.

@@ -406,7 +406,7 @@ namespace Nikki.Support.MostWanted.Class
         public override void Assemble(BinaryWriter bw)
         {
             // Write header of the material
-            bw.WriteEnum(eBlockID.Materials);
+            bw.WriteEnum(BinBlockID.Materials);
             bw.Write((int)0xA8);
             bw.Write(_Unknown1);
             bw.Write(_Localizer);
@@ -565,7 +565,7 @@ namespace Nikki.Support.MostWanted.Class
 
             }
 
-            array = Interop.Compress(array, eLZCompressionType.BEST);
+            array = Interop.Compress(array, LZCompressionType.BEST);
 
             var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
             header.Write(bw);

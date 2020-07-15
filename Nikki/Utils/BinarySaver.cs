@@ -25,7 +25,7 @@ namespace Nikki.Utils
 
 				bw.Write((int)0); // write padding ID
 				bw.Write((int)(size - 8));   // write size
-				bw.WriteEnum(eBlockID.Nikki); // write definition of a padding
+				bw.WriteEnum(BinBlockID.Nikki); // write definition of a padding
 				bw.Write((int)0); // write flags
 
 				bw.WriteNullTermUTF8("Padding Block", 0x20); // write type of block
@@ -48,7 +48,7 @@ namespace Nikki.Utils
 
 				bw.Write((int)0); // write padding ID
 				bw.Write((int)(size - 8));   // write size
-				bw.WriteEnum(eBlockID.Nikki); // write definition of a padding
+				bw.WriteEnum(BinBlockID.Nikki); // write definition of a padding
 				bw.Write((int)0); // write flags
 
 				bw.WriteNullTermUTF8("Padding Block", 0x20); // write type of block
@@ -75,7 +75,7 @@ namespace Nikki.Utils
 
 			bw.Write((int)0); // write padding ID
 			bw.Write((int)(size - 8));   // write size
-			bw.WriteEnum(eBlockID.Nikki); // write definition of a padding
+			bw.WriteEnum(BinBlockID.Nikki); // write definition of a padding
 			bw.Write((int)0); // write flags
 
 			bw.WriteNullTermUTF8("Padding Block", 0x20); // write type of block
@@ -84,40 +84,40 @@ namespace Nikki.Utils
 			while (bw.BaseStream.Position < end) bw.Write((byte)0); // write the rest
 		}
 
-		public static void GenerateAlignment(this BinaryWriter bw, string mark, long position, eBlockID id)
+		public static void GenerateAlignment(this BinaryWriter bw, string mark, long position, BinBlockID id)
 		{
 			int dif;
 
 			switch (id)
 			{
 				// Padding is just padding, return
-				case eBlockID.Padding:
+				case BinBlockID.Padding:
 					return;
 
 				// Those IDs require Actual alignment based on their previous one
-				case eBlockID.EAGLSkeleton:
-				case eBlockID.EAGLAnimations:
-				case eBlockID.ELights:
-				case eBlockID.EmitterLibrary:
-				case eBlockID.EmitterTriggers:
-				case eBlockID.EventSequence:
-				case eBlockID.FEngFont:
-				case eBlockID.Geometry:
-				case eBlockID.NISDescription:
-				case eBlockID.NISScript:
-				case eBlockID.PCAWater0:
-				case eBlockID.QuickSpline:
-				case eBlockID.SpeedScenery:
-				case eBlockID.Stream37220:
-				case eBlockID.Stream37240:
-				case eBlockID.Stream37250:
-				case eBlockID.Stream37260:
-				case eBlockID.Stream37270:
-				case eBlockID.TrackPosMarkers:
-				case eBlockID.WorldBounds:
-				case eBlockID.WCollisionPack:
-				case eBlockID.Weatherman:
-				case eBlockID.WWorld:
+				case BinBlockID.EAGLSkeleton:
+				case BinBlockID.EAGLAnimations:
+				case BinBlockID.ELights:
+				case BinBlockID.EmitterLibrary:
+				case BinBlockID.EmitterTriggers:
+				case BinBlockID.EventSequence:
+				case BinBlockID.FEngFont:
+				case BinBlockID.Geometry:
+				case BinBlockID.NISDescription:
+				case BinBlockID.NISScript:
+				case BinBlockID.PCAWater0:
+				case BinBlockID.QuickSpline:
+				case BinBlockID.SpeedScenery:
+				case BinBlockID.Stream37220:
+				case BinBlockID.Stream37240:
+				case BinBlockID.Stream37250:
+				case BinBlockID.Stream37260:
+				case BinBlockID.Stream37270:
+				case BinBlockID.TrackPosMarkers:
+				case BinBlockID.WorldBounds:
+				case BinBlockID.WCollisionPack:
+				case BinBlockID.Weatherman:
+				case BinBlockID.WWorld:
 					dif = (int)(position % 0x100);
 					MakeBigAlign(bw, mark, dif);
 					return;

@@ -23,10 +23,10 @@ namespace Nikki.Support.Prostreet.Attributes
 	public class KeyAttribute : CPAttribute
 	{
 		/// <summary>
-		/// <see cref="eCarPartAttribType"/> type of this <see cref="KeyAttribute"/>.
+		/// <see cref="CarPartAttribType"/> type of this <see cref="KeyAttribute"/>.
 		/// </summary>
 		[Category("Main")]
-		public override eCarPartAttribType AttribType => eCarPartAttribType.Key;
+		public override CarPartAttribType AttribType => CarPartAttribType.Key;
 
 		/// <summary>
 		/// Type of this <see cref="KeyAttribute"/>.
@@ -99,7 +99,7 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// <param name="str_reader"><see cref="BinaryReader"/> to read strings with. 
 		/// Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
 		public override void Disassemble(BinaryReader br, BinaryReader str_reader)
-			=> this.Value = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			=> this.Value = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
 		/// <summary>
 		/// Assembles <see cref="KeyAttribute"/> and writes it using <see cref="BinaryWriter"/> 
@@ -179,17 +179,17 @@ namespace Nikki.Support.Prostreet.Attributes
 		/// </summary>
 		/// <param name="type">Type of a new attribute.</param>
 		/// <returns>New <see cref="CPAttribute"/>.</returns>
-		public override CPAttribute ConvertTo(eCarPartAttribType type) =>
+		public override CPAttribute ConvertTo(CarPartAttribType type) =>
 			type switch
 			{
-				eCarPartAttribType.Boolean => new BoolAttribute(this.Value),
-				eCarPartAttribType.Floating => new FloatAttribute(this.Value),
-				eCarPartAttribType.Integer => new IntAttribute(this.Value),
-				eCarPartAttribType.String => new StringAttribute(this.Value),
-				eCarPartAttribType.TwoString => new TwoStringAttribute(this.Value),
-				eCarPartAttribType.Color => new ColorAttribute(this.Value),
-				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Value),
-				eCarPartAttribType.ModelTable => new ModelTableAttribute(this.Value),
+				CarPartAttribType.Boolean => new BoolAttribute(this.Value),
+				CarPartAttribType.Floating => new FloatAttribute(this.Value),
+				CarPartAttribType.Integer => new IntAttribute(this.Value),
+				CarPartAttribType.String => new StringAttribute(this.Value),
+				CarPartAttribType.TwoString => new TwoStringAttribute(this.Value),
+				CarPartAttribType.Color => new ColorAttribute(this.Value),
+				CarPartAttribType.CarPartID => new PartIDAttribute(this.Value),
+				CarPartAttribType.ModelTable => new ModelTableAttribute(this.Value),
 				_ => this
 			};
 

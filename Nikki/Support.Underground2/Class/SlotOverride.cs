@@ -138,7 +138,7 @@ namespace Nikki.Support.Underground2.Class
         public override void Assemble(BinaryWriter bw)
         {
             var keys = this._collection_name.Split("_PART_", 2, StringSplitOptions.None);
-            var id = (eSlotUnderground2)Enum.Parse(typeof(eSlotUnderground2), keys[1]);
+            var id = (SlotUnderground2)Enum.Parse(typeof(SlotUnderground2), keys[1]);
 
             bw.Write(keys[0].BinHash());
             bw.Write((int)id);
@@ -152,12 +152,12 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="SlotOverride"/> with.</param>
         public override void Disassemble(BinaryReader br)
         {
-            var key = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            var id = (eSlotUnderground2)br.ReadInt32();
+            var key = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            var id = (SlotUnderground2)br.ReadInt32();
             br.BaseStream.Position += 4;
             this._collection_name = $"{key}_PART_{id}";
 
-            this.InfoMainOverride = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.InfoMainOverride = br.ReadUInt32().BinString(LookupReturn.EMPTY);
         }
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace Nikki.Support.Underground2.Class
 
             }
 
-            array = Interop.Compress(array, eLZCompressionType.RAWW);
+            array = Interop.Compress(array, LZCompressionType.RAWW);
 
             var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
             header.Write(bw);

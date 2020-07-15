@@ -73,7 +73,7 @@ namespace Nikki.Support.Underground2.Framework
 
 			bw.GeneratePadding(mark, this.Alignment);
 
-			bw.WriteEnum(eBlockID.Tracks);
+			bw.WriteEnum(BinBlockID.Tracks);
 			bw.Write(this.Count * Track.BaseClassSize);
 
 			foreach (var collection in this)
@@ -92,7 +92,7 @@ namespace Nikki.Support.Underground2.Framework
 		internal override void Disassemble(BinaryReader br, Block block)
 		{
 			if (Block.IsNullOrEmpty(block)) return;
-			if (block.BlockID != eBlockID.Tracks) return;
+			if (block.BlockID != BinBlockID.Tracks) return;
 
 			for (int loop = 0; loop < block.Offsets.Count; ++loop)
 			{
@@ -183,7 +183,7 @@ namespace Nikki.Support.Underground2.Framework
 		/// </summary>
 		/// <param name="type">Type of serialization of a collection.</param>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		public override void Import(eSerializeType type, BinaryReader br)
+		public override void Import(SerializeType type, BinaryReader br)
 		{
 			var position = br.BaseStream.Position;
 			var header = new SerializationHeader();
@@ -191,7 +191,7 @@ namespace Nikki.Support.Underground2.Framework
 
 			var collection = new Track();
 
-			if (header.ID != eBlockID.Nikki)
+			if (header.ID != BinBlockID.Nikki)
 			{
 
 				br.BaseStream.Position = position;
@@ -233,11 +233,11 @@ namespace Nikki.Support.Underground2.Framework
 
 				switch (type)
 				{
-					case eSerializeType.Negate:
+					case SerializeType.Negate:
 						break;
 
-					case eSerializeType.Synchronize:
-					case eSerializeType.Override:
+					case SerializeType.Synchronize:
+					case SerializeType.Override:
 						collection.Manager = this;
 						this.Replace(collection, index);
 						break;

@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Represents serialization type for collections and managers.
 	/// </summary>
-	public enum eSerializeType : int
+	public enum SerializeType : int
 	{
 		/// <summary>
 		/// If imported collection does not exist, adds it; else ignores and skips.

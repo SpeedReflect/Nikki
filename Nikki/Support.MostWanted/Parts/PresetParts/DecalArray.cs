@@ -79,14 +79,14 @@ namespace Nikki.Support.MostWanted.Parts.PresetParts
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Read(BinaryReader br)
 		{
-			this.DecalSlot0 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalSlot1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalSlot2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalSlot3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalSlot4 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalSlot5 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalSlot6 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalSlot7 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.DecalSlot0 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalSlot1 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalSlot2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalSlot3 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalSlot4 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalSlot5 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalSlot6 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalSlot7 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 		}
 
 		/// <summary>

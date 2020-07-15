@@ -39,18 +39,18 @@ namespace Nikki.Support.MostWanted.Framework
 			this._options = options;
 			this._db = db;
 			this._logger = new Logger("MainLog.txt", "Nikki.dll : MostWanted DatabaseLoader", true);
-			this.materials = new Block(eBlockID.Materials);
-			this.tpkblocks = new Block(eBlockID.TPKBlocks);
-			this.cartypeinfos = new Block(eBlockID.CarTypeInfos);
-			this.presetrides = new Block(eBlockID.PresetRides);
-			this.collisions = new Block(eBlockID.DBCarBounds);
-			this.dbmodelparts = new Block(eBlockID.DBCarParts);
-			this.suninfos = new Block(eBlockID.SunInfos);
-			this.tracks = new Block(eBlockID.Tracks);
-			this.fngroups = new Block(eBlockID.FEngFiles);
-			this.strblocks = new Block(eBlockID.STRBlocks);
-			this.slottypes = new Block(eBlockID.SlotTypes);
-			this.caranimations = new Block(eBlockID.CarInfoAnimHookup);
+			this.materials = new Block(BinBlockID.Materials);
+			this.tpkblocks = new Block(BinBlockID.TPKBlocks);
+			this.cartypeinfos = new Block(BinBlockID.CarTypeInfos);
+			this.presetrides = new Block(BinBlockID.PresetRides);
+			this.collisions = new Block(BinBlockID.DBCarBounds);
+			this.dbmodelparts = new Block(BinBlockID.DBCarParts);
+			this.suninfos = new Block(BinBlockID.SunInfos);
+			this.tracks = new Block(BinBlockID.Tracks);
+			this.fngroups = new Block(BinBlockID.FEngFiles);
+			this.strblocks = new Block(BinBlockID.STRBlocks);
+			this.slottypes = new Block(BinBlockID.SlotTypes);
+			this.caranimations = new Block(BinBlockID.CarInfoAnimHookup);
 		}
 
 		public void Invoke()
@@ -90,7 +90,7 @@ namespace Nikki.Support.MostWanted.Framework
 			using var fs = new FileStream(this._options.File, FileMode.Open, FileAccess.Read);
 			fs.Read(array, 0, 4);
 			var type = BitConverter.ToInt32(array, 0);
-			return Enum.IsDefined(typeof(eLZCompressionType), type);
+			return Enum.IsDefined(typeof(LZCompressionType), type);
 		}
 
 		private void ReadFromStream()
@@ -144,11 +144,11 @@ namespace Nikki.Support.MostWanted.Framework
 			{
 
 				var off = br.BaseStream.Position;
-				var id = br.ReadEnum<eBlockID>();
+				var id = br.ReadEnum<BinBlockID>();
 				var size = br.ReadInt32();
 
 				#if DEBUG
-				if (!Enum.IsDefined(typeof(eBlockID), (uint)id))
+				if (!Enum.IsDefined(typeof(BinBlockID), (uint)id))
 				{
 
 					Console.WriteLine("Located unknown data block. Please send MailLog file to the developer!!!");
@@ -172,77 +172,77 @@ namespace Nikki.Support.MostWanted.Framework
 
 				switch (id)
 				{
-					case eBlockID.FX:
+					case BinBlockID.FX:
 						throw new NotSupportedException("FX Effects files are not supported");
 
-					case eBlockID.ABKC:
+					case BinBlockID.ABKC:
 						throw new NotSupportedException("ABKC Sound files are not supported");
 
-					case eBlockID.LOCH:
+					case BinBlockID.LOCH:
 						throw new NotSupportedException("LOCH Localization files are not supported");
 
-					case eBlockID.VPAK:
+					case BinBlockID.VPAK:
 						throw new NotSupportedException("VPAK Vault files are not supported");
 
-					case eBlockID.MOIR:
+					case BinBlockID.MOIR:
 						throw new NotSupportedException("MOIR Sound files are not supported");
 
-					case eBlockID.MEMO:
+					case BinBlockID.MEMO:
 						throw new NotSupportedException("Memory Data files are not supported");
 
-					case eBlockID.MVhd:
+					case BinBlockID.MVhd:
 						throw new NotSupportedException("VP6 Encoded files are not supported");
 
-					case eBlockID.Gnsu:
+					case BinBlockID.Gnsu:
 						throw new NotSupportedException("GNSU Sound files are not supported");
 
-					case eBlockID.Materials:
+					case BinBlockID.Materials:
 						this.materials.Offsets.Add(off);
 						goto default;
 
-					case eBlockID.TPKBlocks:
-					case eBlockID.TPKSettings:
+					case BinBlockID.TPKBlocks:
+					case BinBlockID.TPKSettings:
 						this.tpkblocks.Offsets.Add(off);
 						goto default;
 
-					case eBlockID.CarTypeInfos:
+					case BinBlockID.CarTypeInfos:
 						this.cartypeinfos.Offsets.Add(off);
 						goto default;
 
-					case eBlockID.PresetRides:
+					case BinBlockID.PresetRides:
 						this.presetrides.Offsets.Add(off);
 						goto default;
 
-					case eBlockID.DBCarBounds:
+					case BinBlockID.DBCarBounds:
 						this.collisions.Offsets.Add(off);
 						goto default;
 
-					case eBlockID.DBCarParts:
+					case BinBlockID.DBCarParts:
 						this.dbmodelparts.Offsets.Add(off);
 						goto default;
 
-					case eBlockID.SunInfos:
+					case BinBlockID.SunInfos:
 						this.suninfos.Offsets.Add(off);
 						goto default;
 
-					case eBlockID.Tracks:
+					case BinBlockID.Tracks:
 						this.tracks.Offsets.Add(off);
 						goto default;
 
-					case eBlockID.STRBlocks:
+					case BinBlockID.STRBlocks:
 						this.strblocks.Offsets.Add(off);
 						goto default;
 
-					case eBlockID.FEngFiles:
-					case eBlockID.FNGCompress:
+					case BinBlockID.FEngFiles:
+					case BinBlockID.FNGCompress:
 						this.fngroups.Offsets.Add(off);
 						goto default;
 
-					case eBlockID.SlotTypes:
+					case BinBlockID.SlotTypes:
 						this.slottypes.Offsets.Add(off);
 						goto default;
 
-					case eBlockID.CarInfoAnimHookup:
+					case BinBlockID.CarInfoAnimHookup:
 						this.caranimations.Offsets.Add(off);
 						goto default;
 

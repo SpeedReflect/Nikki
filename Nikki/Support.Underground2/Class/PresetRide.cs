@@ -738,40 +738,40 @@ namespace Nikki.Support.Underground2.Class
             this.PerformanceLevel = br.ReadInt32();
 
             // Start reading parts
-            this.Base = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.AutosculptFrontBumper = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.AutosculptRearBumper = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.LeftSideMirror = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.RightSideMirror = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Body = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.AftermarketBodykit = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.RoofScoop = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.RoofTop = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Hood = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Trunk = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.AutosculptSkirt = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Spoiler = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Engine = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Headlight = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Brakelight = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Exhaust = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.Base = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.AutosculptFrontBumper = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.AutosculptRearBumper = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.LeftSideMirror = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.RightSideMirror = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.Body = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.AftermarketBodykit = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.RoofScoop = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.RoofTop = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.Hood = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.Trunk = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.AutosculptSkirt = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.Spoiler = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.Engine = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.Headlight = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.Brakelight = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.Exhaust = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
             // Read Kit Doorlines
             this.KIT_DOORLINES.Read(br);
 
             // Continue reading parts
-            this.Fender = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Quarter = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.HoodUnder = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.TrunkUnder = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.FrontBrake = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.RearBrake = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.FrontWheel = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.RearWheel = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Spinner = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.WingMirror = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.LicensePlate = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.TrunkAudio = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.Fender = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.Quarter = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.HoodUnder = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.TrunkUnder = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.FrontBrake = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.RearBrake = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.FrontWheel = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.RearWheel = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.Spinner = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.WingMirror = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.LicensePlate = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.TrunkAudio = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
             // Read Audio Comps
             this.AUDIO_COMP.Read(br);
@@ -783,40 +783,40 @@ namespace Nikki.Support.Underground2.Class
             this.DECAL_SIZES.Read(br);
 
             // Continue reading parts
-            this.PAINT_TYPES.BasePaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.VINYL_SETS.VinylLayer0 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.VINYL_SETS.VinylLayer1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.VINYL_SETS.VinylLayer2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.VINYL_SETS.VinylLayer3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.PAINT_TYPES.EnginePaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.PAINT_TYPES.SpoilerPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.PAINT_TYPES.BrakesPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.PAINT_TYPES.ExhaustPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.PAINT_TYPES.AudioPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.PAINT_TYPES.RimsPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.PAINT_TYPES.SpinnersPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.PAINT_TYPES.RoofPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.PAINT_TYPES.MirrorsPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.VINYL_SETS.Vinyl0_Color0 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.VINYL_SETS.Vinyl0_Color1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.VINYL_SETS.Vinyl0_Color2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.VINYL_SETS.Vinyl0_Color3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.VINYL_SETS.Vinyl1_Color0 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.VINYL_SETS.Vinyl1_Color1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.VINYL_SETS.Vinyl1_Color2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.VINYL_SETS.Vinyl1_Color3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.VINYL_SETS.Vinyl2_Color0 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.VINYL_SETS.Vinyl2_Color1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.VINYL_SETS.Vinyl2_Color2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.VINYL_SETS.Vinyl2_Color3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.VINYL_SETS.Vinyl3_Color0 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.VINYL_SETS.Vinyl3_Color1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.VINYL_SETS.Vinyl3_Color2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.VINYL_SETS.Vinyl3_Color3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.KitCarbon = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.HoodCarbon = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.DoorCarbon = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.TrunkCarbon = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.PAINT_TYPES.BasePaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.VINYL_SETS.VinylLayer0 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.VINYL_SETS.VinylLayer1 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.VINYL_SETS.VinylLayer2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.VINYL_SETS.VinylLayer3 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.PAINT_TYPES.EnginePaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.PAINT_TYPES.SpoilerPaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.PAINT_TYPES.BrakesPaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.PAINT_TYPES.ExhaustPaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.PAINT_TYPES.AudioPaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.PAINT_TYPES.RimsPaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.PAINT_TYPES.SpinnersPaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.PAINT_TYPES.RoofPaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.PAINT_TYPES.MirrorsPaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl0_Color0 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl0_Color1 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl0_Color2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl0_Color3 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl1_Color0 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl1_Color1 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl1_Color2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl1_Color3 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl2_Color0 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl2_Color1 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl2_Color2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl2_Color3 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl3_Color0 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl3_Color1 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl3_Color2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl3_Color3 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.KitCarbon = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.HoodCarbon = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.DoorCarbon = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.TrunkCarbon = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
             // Read Decal Arrays
             this.DECALS_HOOD.Read(br);
@@ -828,7 +828,7 @@ namespace Nikki.Support.Underground2.Class
             this.DECALS_RIGHT_QUARTER.Read(br);
 
             // Continue reading parts
-            this.WindshieldTint = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.WindshieldTint = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
             // Read Specialties
             this.SPECIALTIES.Read(br);
@@ -837,9 +837,9 @@ namespace Nikki.Support.Underground2.Class
             this.HUD.Read(br);
 
             // Finish reading parts
-            this.CV = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.WheelManufacturer = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Misc = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.CV = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.WheelManufacturer = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.Misc = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
             // Read unknown array
             this.PERF_SPECS.Read(br);
@@ -1005,7 +1005,7 @@ namespace Nikki.Support.Underground2.Class
 
             }
 
-            array = Interop.Compress(array, eLZCompressionType.BEST);
+            array = Interop.Compress(array, LZCompressionType.BEST);
 
             var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
             header.Write(bw);

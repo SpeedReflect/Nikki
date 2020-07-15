@@ -89,7 +89,7 @@ namespace Nikki.Support.MostWanted.Class
             using var ms = new MemoryStream(this._data);
             using var writer = new BinaryWriter(ms);
 
-            bw.WriteEnum(eBlockID.FEngFiles);
+            bw.WriteEnum(BinBlockID.FEngFiles);
             bw.Write(this._data.Length);
 
             foreach (var color in this._colorinfo)
@@ -221,7 +221,7 @@ namespace Nikki.Support.MostWanted.Class
 
             }
 
-            array = Interop.Compress(array, eLZCompressionType.BEST);
+            array = Interop.Compress(array, LZCompressionType.BEST);
 
             var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
             header.Write(bw);

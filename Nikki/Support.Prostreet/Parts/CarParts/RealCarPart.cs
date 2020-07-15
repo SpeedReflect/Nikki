@@ -129,14 +129,14 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 
 			CPAttribute attribute = type switch
 			{
-				eCarPartAttribType.Boolean => new BoolAttribute(eBoolean.False),
-				eCarPartAttribType.Color => new ColorAttribute((byte)255),
-				eCarPartAttribType.Floating => new FloatAttribute((float)0),
-				eCarPartAttribType.CarPartID => new PartIDAttribute((int)0),
-				eCarPartAttribType.String => new StringAttribute(String.Empty),
-				eCarPartAttribType.TwoString => new TwoStringAttribute(String.Empty),
-				eCarPartAttribType.Key => new KeyAttribute(String.Empty),
-				eCarPartAttribType.ModelTable => new ModelTableAttribute(eBoolean.False),
+				CarPartAttribType.Boolean => new BoolAttribute(eBoolean.False),
+				CarPartAttribType.Color => new ColorAttribute((byte)255),
+				CarPartAttribType.Floating => new FloatAttribute((float)0),
+				CarPartAttribType.CarPartID => new PartIDAttribute((int)0),
+				CarPartAttribType.String => new StringAttribute(String.Empty),
+				CarPartAttribType.TwoString => new TwoStringAttribute(String.Empty),
+				CarPartAttribType.Key => new KeyAttribute(String.Empty),
+				CarPartAttribType.ModelTable => new ModelTableAttribute(eBoolean.False),
 				_ => new IntAttribute((int)0)
 			};
 

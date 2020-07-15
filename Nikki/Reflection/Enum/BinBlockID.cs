@@ -3,7 +3,7 @@
     /// <summary>
     /// Enum of IDs related to all global blocks.
     /// </summary>
-	public enum eBlockID : uint
+	public enum BinBlockID : uint
 	{
         /// <summary>
         /// 0x00000000

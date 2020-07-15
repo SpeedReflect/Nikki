@@ -10,7 +10,7 @@ namespace Nikki.Core
 {
 	internal class SerializationHeader
 	{
-		public eBlockID ID { get; set; } = eBlockID.Nikki;
+		public BinBlockID ID { get; set; } = BinBlockID.Nikki;
 		public int Size { get; set; }
 		public GameINT Game { get; set; }
 		public string Name { get; set; } = String.Empty;
@@ -27,10 +27,10 @@ namespace Nikki.Core
 
 		public void Read(BinaryReader br)
 		{
-			this.ID = br.ReadEnum<eBlockID>();
+			this.ID = br.ReadEnum<BinBlockID>();
 			this.Size = br.ReadInt32();
 			this.Game = br.ReadEnum<GameINT>();
-			this.Name = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.Name = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 		}
 
 		public void Write(BinaryWriter bw)

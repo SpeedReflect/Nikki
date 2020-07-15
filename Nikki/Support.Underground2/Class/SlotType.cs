@@ -167,15 +167,15 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="SlotType"/> with.</param>
         public override void Disassemble(BinaryReader br)
         {
-            this._collection_name = ((eSlotUnderground2)(Index++)).ToString();
+            this._collection_name = ((SlotUnderground2)(Index++)).ToString();
 
             uint key = 0;
             const uint empty = 0xFFFFFFFF;
 
             key = br.ReadUInt32();
-            this.SlotStockOverride = key == empty ? String.Empty : key.BinString(eLookupReturn.EMPTY);
+            this.SlotStockOverride = key == empty ? String.Empty : key.BinString(LookupReturn.EMPTY);
 
-            this.SlotMainOverride = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.SlotMainOverride = br.ReadUInt32().BinString(LookupReturn.EMPTY);
         }
 
         /// <summary>
@@ -226,7 +226,7 @@ namespace Nikki.Support.Underground2.Class
 
             }
 
-            array = Interop.Compress(array, eLZCompressionType.RAWW);
+            array = Interop.Compress(array, LZCompressionType.RAWW);
 
             var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
             header.Write(bw);

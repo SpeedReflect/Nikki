@@ -764,7 +764,7 @@ namespace Nikki.Core
 		/// </summary>
 		/// <param name="type">Type of serialization of a collection.</param>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		public abstract void Import(eSerializeType type, BinaryReader br);
+		public abstract void Import(SerializeType type, BinaryReader br);
 
 		#endregion
 

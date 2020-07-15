@@ -178,7 +178,7 @@ namespace Nikki.Support.Carbon.Class
         public override void Assemble(BinaryWriter bw)
         {
             var keys = this._collection_name.Split("_PART_", 2, StringSplitOptions.None);
-            var id = (eSlotCarbon)Enum.Parse(typeof(eSlotCarbon), keys[1]);
+            var id = (SlotCarbon)Enum.Parse(typeof(SlotCarbon), keys[1]);
 
             bw.Write(keys[0].BinHash());
             bw.Write((int)id);
@@ -197,17 +197,17 @@ namespace Nikki.Support.Carbon.Class
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="SlotOverride"/> with.</param>
         public override void Disassemble(BinaryReader br)
         {
-            var key = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            var id = (eSlotCarbon)br.ReadInt32();
+            var key = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            var id = (SlotCarbon)br.ReadInt32();
             br.BaseStream.Position += 4;
             this._collection_name = $"{key}_PART_{id}";
 
-            this.InfoMainOverride = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.InfoOverrideGroup2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.InfoOverrideGroup3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.InfoOverrideGroup4 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.InfoOverrideGroup5 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.InfoOverrideGroup6 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.InfoMainOverride = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.InfoOverrideGroup2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.InfoOverrideGroup3 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.InfoOverrideGroup4 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.InfoOverrideGroup5 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.InfoOverrideGroup6 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
         }
 
         /// <summary>
@@ -260,7 +260,7 @@ namespace Nikki.Support.Carbon.Class
 
             }
 
-            array = Interop.Compress(array, eLZCompressionType.BEST);
+            array = Interop.Compress(array, LZCompressionType.BEST);
 
             var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
             header.Write(bw);

@@ -3,7 +3,7 @@
 	/// <summary>
 	/// LZC Compression type of the buffer.
 	/// </summary>
-	public enum eLZCompressionType : int
+	public enum LZCompressionType : int
 	{
 		/// <summary>
 		/// Use RAWW compression.

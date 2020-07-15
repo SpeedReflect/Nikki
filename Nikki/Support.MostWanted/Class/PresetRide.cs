@@ -655,41 +655,41 @@ namespace Nikki.Support.MostWanted.Class
             this._collection_name = br.ReadNullTermUTF8(0x20);
 
             // Frontend and Pvehicle
-            this.Frontend = br.ReadUInt32().VltString(eLookupReturn.EMPTY);
+            this.Frontend = br.ReadUInt32().VltString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.Pvehicle = br.ReadUInt32().VltString(eLookupReturn.EMPTY);
+            this.Pvehicle = br.ReadUInt32().VltString(LookupReturn.EMPTY);
             br.BaseStream.Position += 0xC;
 
             // Start reading parts
-            this.Base = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.Base = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
             // Read Kit Damages
             this.KIT_DAMAGES.Read(br);
 
             // Continue reading parts
-            this.AftermarketBodykit = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.FrontBrake = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.FrontLeftWindow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.FrontRightWindow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.FrontWindow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Interior = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.LeftBrakelight = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.LeftBrakelightGlass = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.LeftHeadlight = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.LeftHeadlightGlass = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.LeftSideMirror = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.RearBrake = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.RearLeftWindow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.RearRightWindow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.RearWindow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.RightBrakelight = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.RightBrakelightGlass = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.RightHeadlight = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.RightHeadlightGlass = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.RightSideMirror = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Driver = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Spoiler = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.UniversalSpoilerBase = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.AftermarketBodykit = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.FrontBrake = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.FrontLeftWindow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.FrontRightWindow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.FrontWindow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.Interior = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.LeftBrakelight = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.LeftBrakelightGlass = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.LeftHeadlight = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.LeftHeadlightGlass = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.LeftSideMirror = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.RearBrake = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.RearLeftWindow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.RearRightWindow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.RearWindow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.RightBrakelight = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.RightBrakelightGlass = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.RightHeadlight = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.RightHeadlightGlass = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.RightSideMirror = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.Driver = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.Spoiler = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.UniversalSpoilerBase = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
             // Read Zero Damages
             this.ZERO_DAMAGES.Read(br);
@@ -698,14 +698,14 @@ namespace Nikki.Support.MostWanted.Class
             this.ATTACHMENTS.Read(br);
 
             // Continue reading parts
-            this.RoofScoop = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Hood = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Headlight = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Brakelight = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.FrontWheel = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.RearWheel = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Spinner = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.LicensePlate = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.RoofScoop = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.Hood = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.Headlight = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.Brakelight = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.FrontWheel = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.RearWheel = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.Spinner = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.LicensePlate = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
             // Read Decal Sizes
             this.DECAL_SIZES.Read(br);
@@ -722,15 +722,15 @@ namespace Nikki.Support.MostWanted.Class
             this.DECALS_RIGHT_QUARTER.Read(br);
 
             // Continue reading parts
-            this.WindshieldTint = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.WindshieldTint = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
             // Read HUD
             this.HUD.Read(br);
 
             // Finish reading parts
-            this.CV = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.WheelManufacturer = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-            this.Misc = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.CV = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.WheelManufacturer = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.Misc = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
         }
 
@@ -856,7 +856,7 @@ namespace Nikki.Support.MostWanted.Class
 
             }
 
-            array = Interop.Compress(array, eLZCompressionType.BEST);
+            array = Interop.Compress(array, LZCompressionType.BEST);
 
             var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
             header.Write(bw);

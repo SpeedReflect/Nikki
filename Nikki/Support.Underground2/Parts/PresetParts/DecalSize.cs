@@ -97,17 +97,17 @@ namespace Nikki.Support.Underground2.Parts.PresetParts
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Read(BinaryReader br)
 		{
-			this.DecalHood = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalFrontWindow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalRearWindow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalLeftDoor = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalRightDoor = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalLeftQuarter = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalRightQuarter = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalWideLeftDoor = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalWideRightDoor = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalWideLeftQuarter = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.DecalWideRightQuarter = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.DecalHood = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalFrontWindow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalRearWindow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalLeftDoor = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalRightDoor = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalLeftQuarter = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalRightQuarter = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalWideLeftDoor = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalWideRightDoor = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalWideLeftQuarter = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.DecalWideRightQuarter = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 		}
 
 		/// <summary>

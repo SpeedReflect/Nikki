@@ -1,6 +1,6 @@
 ﻿namespace Nikki.Reflection.Enum
 {
-	internal enum eCollectionAddResult : int
+	internal enum CollectionAddResult : int
 	{
 		ADDSUCCESS = 0,
 		NULL_EMPTY = 1,

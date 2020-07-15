@@ -174,7 +174,7 @@ namespace Nikki.Support.Carbon.Class
 			}
 
 			// Write data
-			bw.WriteEnum(eBlockID.Collision);
+			bw.WriteEnum(BinBlockID.Collision);
 			bw.Write(size);
 			bw.Write(0x11111111);
 			bw.Write(0x11111111);
@@ -209,7 +209,7 @@ namespace Nikki.Support.Carbon.Class
 		public override void Disassemble(BinaryReader br)
 		{
 			br.BaseStream.Position += 0x10; // skip ID, size and alignment
-			this._collection_name = br.ReadUInt32().VltString(eLookupReturn.EMPTY);
+			this._collection_name = br.ReadUInt32().VltString(LookupReturn.EMPTY);
 			this.NumberOfBounds = br.ReadInt32();
 			this.IsResolved = br.ReadInt32() == 0 ? eBoolean.False : eBoolean.True;
 			br.BaseStream.Position += 4;
@@ -320,7 +320,7 @@ namespace Nikki.Support.Carbon.Class
 
 			}
 
-			array = Interop.Compress(array, eLZCompressionType.BEST);
+			array = Interop.Compress(array, LZCompressionType.BEST);
 
 			var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
 			header.Write(bw);

@@ -216,7 +216,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 				if (key != negative)
 				{
 				
-					this.GeometryLodA = key.BinString(eLookupReturn.EMPTY);
+					this.GeometryLodA = key.BinString(LookupReturn.EMPTY);
 					this.GeometryLodAExists = eBoolean.True;
 				
 				}
@@ -227,7 +227,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 				if (key != negative)
 				{
 				
-					this.GeometryLodB = key.BinString(eLookupReturn.EMPTY);
+					this.GeometryLodB = key.BinString(LookupReturn.EMPTY);
 					this.GeometryLodBExists = eBoolean.True;
 				
 				}
@@ -238,7 +238,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 				if (key != negative)
 				{
 				
-					this.GeometryLodC = key.BinString(eLookupReturn.EMPTY);
+					this.GeometryLodC = key.BinString(LookupReturn.EMPTY);
 					this.GeometryLodCExists = eBoolean.True;
 				
 				}
@@ -249,7 +249,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 				if (key != negative)
 				{
 				
-					this.GeometryLodD = key.BinString(eLookupReturn.EMPTY);
+					this.GeometryLodD = key.BinString(LookupReturn.EMPTY);
 					this.GeometryLodDExists = eBoolean.True;
 				
 				}
@@ -260,7 +260,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 				if (key != negative)
 				{
 				
-					this.GeometryLodE = key.BinString(eLookupReturn.EMPTY);
+					this.GeometryLodE = key.BinString(LookupReturn.EMPTY);
 					this.GeometryLodEExists = eBoolean.True;
 				
 				}

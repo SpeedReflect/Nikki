@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Enum of car part attribute types.
 	/// </summary>
-	public enum eCarPartAttribType : int
+	public enum CarPartAttribType : int
 	{
 		/// <summary>
 		/// Attribute with a <see langword="bool"/> stored.

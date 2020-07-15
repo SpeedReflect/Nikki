@@ -307,7 +307,7 @@ namespace Nikki.Support.Underground2.Class
             this.NumEmitters = br.ReadUInt16();
             this.SectionNumber = br.ReadUInt16();
             this.LocalWorld.Read(br);
-            this.InheritanceKey = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.InheritanceKey = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             this.FarClip = br.ReadSingle();
             this.Intensity = br.ReadSingle();
             br.BaseStream.Position += 4;
@@ -382,7 +382,7 @@ namespace Nikki.Support.Underground2.Class
 
             }
 
-            array = Interop.Compress(array, eLZCompressionType.BEST);
+            array = Interop.Compress(array, LZCompressionType.BEST);
 
             var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
             header.Write(bw);

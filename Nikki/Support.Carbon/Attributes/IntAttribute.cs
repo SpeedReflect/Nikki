@@ -21,10 +21,10 @@ namespace Nikki.Support.Carbon.Attributes
 	public class IntAttribute : CPAttribute
 	{
 		/// <summary>
-		/// <see cref="eCarPartAttribType"/> type of this <see cref="IntAttribute"/>.
+		/// <see cref="CarPartAttribType"/> type of this <see cref="IntAttribute"/>.
 		/// </summary>
 		[Category("Main")]
-		public override eCarPartAttribType AttribType => eCarPartAttribType.Integer;
+		public override CarPartAttribType AttribType => CarPartAttribType.Integer;
 
 		/// <summary>
 		/// Type of this <see cref="IntAttribute"/>.
@@ -177,17 +177,17 @@ namespace Nikki.Support.Carbon.Attributes
 		/// </summary>
 		/// <param name="type">Type of a new attribute.</param>
 		/// <returns>New <see cref="CPAttribute"/>.</returns>
-		public override CPAttribute ConvertTo(eCarPartAttribType type) =>
+		public override CPAttribute ConvertTo(CarPartAttribType type) =>
 			type switch
 			{
-				eCarPartAttribType.Boolean => new BoolAttribute(this.Value),
-				eCarPartAttribType.Floating => new FloatAttribute(this.Value),
-				eCarPartAttribType.String => new StringAttribute(this.Value),
-				eCarPartAttribType.TwoString => new TwoStringAttribute(this.Value),
-				eCarPartAttribType.Color => new ColorAttribute(this.Value),
-				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Value),
-				eCarPartAttribType.Key => new KeyAttribute(this.Value),
-				eCarPartAttribType.ModelTable => new ModelTableAttribute(this.Value),
+				CarPartAttribType.Boolean => new BoolAttribute(this.Value),
+				CarPartAttribType.Floating => new FloatAttribute(this.Value),
+				CarPartAttribType.String => new StringAttribute(this.Value),
+				CarPartAttribType.TwoString => new TwoStringAttribute(this.Value),
+				CarPartAttribType.Color => new ColorAttribute(this.Value),
+				CarPartAttribType.CarPartID => new PartIDAttribute(this.Value),
+				CarPartAttribType.Key => new KeyAttribute(this.Value),
+				CarPartAttribType.ModelTable => new ModelTableAttribute(this.Value),
 				_ => this
 			};
 

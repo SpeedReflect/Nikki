@@ -405,19 +405,19 @@ namespace Nikki.Support.Underground2.Gameplay
 		{
 			// CollectionName and stuff
 			this.PartIndex = br.ReadInt32();
-			this._collection_name = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this._collection_name = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			this.PerfPartCost = br.ReadInt32();
 			this.NumberOfBrands = br.ReadInt32();
 
 			// Resolve all brands (use non-reflective for speed)
-			this.PerfPartBrand1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.PerfPartBrand2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.PerfPartBrand3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.PerfPartBrand4 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.PerfPartBrand5 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.PerfPartBrand6 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.PerfPartBrand7 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.PerfPartBrand8 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.PerfPartBrand1 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.PerfPartBrand2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.PerfPartBrand3 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.PerfPartBrand4 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.PerfPartBrand5 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.PerfPartBrand6 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.PerfPartBrand7 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.PerfPartBrand8 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
 			// Perf part settings
 			this.PerfPartAmplifierFraction = br.ReadSingle();

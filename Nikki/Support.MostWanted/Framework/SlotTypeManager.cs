@@ -78,7 +78,7 @@ namespace Nikki.Support.MostWanted.Framework
 			var dif = 4 - this.Count % 4;
 			if (dif == 4) dif = 0;
 
-			bw.WriteEnum(eBlockID.CarInfoAnimHookup);
+			bw.WriteEnum(BinBlockID.CarInfoAnimHookup);
 			bw.Write(this.Count + dif);
 
 			// Write Animations
@@ -92,7 +92,7 @@ namespace Nikki.Support.MostWanted.Framework
 			bw.WriteBytes(dif);
 
 			// Write CarInfo Animation Hideups
-			bw.WriteEnum(eBlockID.CarInfoAnimHideup);
+			bw.WriteEnum(BinBlockID.CarInfoAnimHideup);
 			bw.Write(0x100);
 			for (int loop = 0; loop < 0x40; ++loop) bw.Write(0xFFFFFFFF);
 
@@ -101,7 +101,7 @@ namespace Nikki.Support.MostWanted.Framework
 			var size = this.Count * SlotType.BaseClassSize;
 			size += manager.Count * SlotOverride.BaseClassSize;
 
-			bw.WriteEnum(eBlockID.SlotTypes);
+			bw.WriteEnum(BinBlockID.SlotTypes);
 			bw.Write(size);
 
 			// Write SlotTypes
@@ -129,7 +129,7 @@ namespace Nikki.Support.MostWanted.Framework
 		internal override void Disassemble(BinaryReader br, Block block)
 		{
 			if (Block.IsNullOrEmpty(block)) return;
-			if (block.BlockID != eBlockID.SlotTypes) return;
+			if (block.BlockID != BinBlockID.SlotTypes) return;
 
 			this._is_read_only = false;
 
@@ -207,7 +207,7 @@ namespace Nikki.Support.MostWanted.Framework
 		/// </summary>
 		/// <param name="type">Type of serialization of a collection.</param>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		public override void Import(eSerializeType type, BinaryReader br)
+		public override void Import(SerializeType type, BinaryReader br)
 		{
 			var position = br.BaseStream.Position;
 			var header = new SerializationHeader();
@@ -215,7 +215,7 @@ namespace Nikki.Support.MostWanted.Framework
 
 			var collection = new SlotType();
 
-			if (header.ID != eBlockID.Nikki)
+			if (header.ID != BinBlockID.Nikki)
 			{
 
 				throw new Exception($"Missing serialized header in the imported collection");
@@ -259,11 +259,11 @@ namespace Nikki.Support.MostWanted.Framework
 
 				switch (type)
 				{
-					case eSerializeType.Negate:
+					case SerializeType.Negate:
 						break;
 
-					case eSerializeType.Override:
-					case eSerializeType.Synchronize:
+					case SerializeType.Override:
+					case SerializeType.Synchronize:
 						collection.Manager = this;
 						this.Replace(collection, index);
 						break;

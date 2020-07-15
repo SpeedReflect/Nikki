@@ -696,7 +696,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			if (this.UnlockMethod == UnlockCondition.SpecificRaceWon)
 			{
 
-				this.RequiredSpecificRaceWon = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+				this.RequiredSpecificRaceWon = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
 			}
 			else
@@ -720,7 +720,7 @@ namespace Nikki.Support.Underground2.Gameplay
 
 			// PlayerCarType and CashValue
 			br.BaseStream.Position += 4;
-			this.PlayerCarType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.PlayerCarType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			this.CashValue = br.ReadInt32();
 
 			// Some UnknownValues
@@ -736,7 +736,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.Unknown0x3B = br.ReadByte();
 
 			// GPS Destination
-			this.GPSDestination = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.GPSDestination = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
 			// Stage Values
 			br.BaseStream.Position += 0x3C;

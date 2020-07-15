@@ -13,7 +13,7 @@ namespace Nikki.Core
 		/// <summary>
 		/// ID of this block.
 		/// </summary>
-		public eBlockID BlockID { get; set; }
+		public BinBlockID BlockID { get; set; }
 
 		/// <summary>
 		/// Offset of this <see cref="Block"/> in the buffer.
@@ -23,8 +23,8 @@ namespace Nikki.Core
 		/// <summary>
 		/// Initializes new instance of <see cref="Block"/>.
 		/// </summary>
-		/// <param name="id"><see cref="eBlockID"/> of this block.</param>
-		public Block(eBlockID id)
+		/// <param name="id"><see cref="BinBlockID"/> of this block.</param>
+		public Block(BinBlockID id)
 		{
 			this.BlockID = id;
 			this.Offsets = new List<long>();
@@ -46,7 +46,7 @@ namespace Nikki.Core
 			block == null || block.Offsets.Count == 0;
 
 		/// <summary>
-		/// Returns <see cref="eBlockID"/> and offset count as a string value.
+		/// Returns <see cref="BinBlockID"/> and offset count as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
 		public override string ToString() => $"ID: {this.BlockID} | Count: {this.Offsets.Count}";

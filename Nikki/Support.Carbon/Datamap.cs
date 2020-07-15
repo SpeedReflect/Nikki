@@ -247,15 +247,15 @@ namespace Nikki.Support.Carbon
 		/// <summary>
 		/// Imports collection by reading its data from a <see cref="BinaryReader"/> provided.
 		/// </summary>
-		/// <param name="type"><see cref="eSerializeType"/> type of importing collection.</param>
+		/// <param name="type"><see cref="SerializeType"/> type of importing collection.</param>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		public override void Import(eSerializeType type, BinaryReader br)
+		public override void Import(SerializeType type, BinaryReader br)
 		{
 			var position = br.BaseStream.Position;
 			var header = new SerializationHeader();
 			header.Read(br);
 
-			if (header.ID != eBlockID.Nikki)
+			if (header.ID != BinBlockID.Nikki)
 			{
 
 				throw new Exception($"Missing serialized header in the imported collection");
@@ -285,10 +285,10 @@ namespace Nikki.Support.Carbon
 		/// <summary>
 		/// Imports collection by reading its data from a <see cref="BinaryReader"/> provided.
 		/// </summary>
-		/// <param name="type"><see cref="eSerializeType"/> type of importing collection.</param>
+		/// <param name="type"><see cref="SerializeType"/> type of importing collection.</param>
 		/// <param name="manager">Name of <see cref="IManager"/> to invoke for import.</param>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		public override void Import(eSerializeType type, string manager, BinaryReader br)
+		public override void Import(SerializeType type, string manager, BinaryReader br)
 		{
 			var root = this.GetManager(manager);
 

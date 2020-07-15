@@ -19,7 +19,7 @@ namespace Nikki.Utils.DDS
 		private byte _mode; // 1 = write | 2 = read
 		private byte[] _stream;
 		private bool _no_palette = false;
-		private eTextureCompressionType _prev;
+		private TextureCompressionType _prev;
 
 		#endregion
 
@@ -31,9 +31,9 @@ namespace Nikki.Utils.DDS
 		public byte[] Buffer { get; private set; }
 
 		/// <summary>
-		/// <see cref="eTextureCompressionType"/> type of the texture.
+		/// <see cref="TextureCompressionType"/> type of the texture.
 		/// </summary>
-		public eTextureCompressionType Compression { get; private set; }
+		public TextureCompressionType Compression { get; private set; }
 
 		/// <summary>
 		/// Area of the texture.
@@ -81,9 +81,9 @@ namespace Nikki.Utils.DDS
 
 		private bool IsCompressed() => this.Compression switch
 		{
-			eTextureCompressionType.TEXCOMP_DXTC1 => true,
-			eTextureCompressionType.TEXCOMP_DXTC3 => true,
-			eTextureCompressionType.TEXCOMP_DXTC5 => true,
+			TextureCompressionType.TEXCOMP_DXTC1 => true,
+			TextureCompressionType.TEXCOMP_DXTC3 => true,
+			TextureCompressionType.TEXCOMP_DXTC5 => true,
 			_ => false
 		};
 
@@ -93,51 +93,51 @@ namespace Nikki.Utils.DDS
 
 			switch (this.Compression)
 			{
-				case eTextureCompressionType.TEXCOMP_DXTC1:
+				case TextureCompressionType.TEXCOMP_DXTC1:
 					result = (1 > (this.Width + 3) / 4) ? 1 : (this.Width + 3) / 4;
 					result *= (1 > (this.Height + 3) / 4) ? 1 : (this.Height + 3) / 4;
 					result *= 8;
 					break;
 
-				case eTextureCompressionType.TEXCOMP_DXTC3:
-				case eTextureCompressionType.TEXCOMP_DXTC5:
+				case TextureCompressionType.TEXCOMP_DXTC3:
+				case TextureCompressionType.TEXCOMP_DXTC5:
 					result = (1 > (this.Width + 3) / 4) ? 1 : (this.Width + 3) / 4;
 					result *= (1 > (this.Height + 3) / 4) ? 1 : (this.Height + 3) / 4;
 					result *= 16;
 					break;
 
-				case eTextureCompressionType.TEXCOMP_4BIT:
-				case eTextureCompressionType.TEXCOMP_4BIT_IA8:
-				case eTextureCompressionType.TEXCOMP_4BIT_RGB16_A8:
-				case eTextureCompressionType.TEXCOMP_4BIT_RGB24_A8:
+				case TextureCompressionType.TEXCOMP_4BIT:
+				case TextureCompressionType.TEXCOMP_4BIT_IA8:
+				case TextureCompressionType.TEXCOMP_4BIT_RGB16_A8:
+				case TextureCompressionType.TEXCOMP_4BIT_RGB24_A8:
 					result = this.Width * 4 + 7;
 					result /= 8;
 					break;
 
-				case eTextureCompressionType.TEXCOMP_8BIT:
-				case eTextureCompressionType.TEXCOMP_8BIT_16:
-				case eTextureCompressionType.TEXCOMP_8BIT_64:
-				case eTextureCompressionType.TEXCOMP_8BIT_IA8:
-				case eTextureCompressionType.TEXCOMP_8BIT_RGB16_A8:
-				case eTextureCompressionType.TEXCOMP_8BIT_RGB24_A8:
+				case TextureCompressionType.TEXCOMP_8BIT:
+				case TextureCompressionType.TEXCOMP_8BIT_16:
+				case TextureCompressionType.TEXCOMP_8BIT_64:
+				case TextureCompressionType.TEXCOMP_8BIT_IA8:
+				case TextureCompressionType.TEXCOMP_8BIT_RGB16_A8:
+				case TextureCompressionType.TEXCOMP_8BIT_RGB24_A8:
 					result = this.Width * 8 + 7;
 					result /= 8;
 					break;
 
-				case eTextureCompressionType.TEXCOMP_16BIT:
-				case eTextureCompressionType.TEXCOMP_16BIT_1555:
-				case eTextureCompressionType.TEXCOMP_16BIT_3555:
-				case eTextureCompressionType.TEXCOMP_16BIT_565:
+				case TextureCompressionType.TEXCOMP_16BIT:
+				case TextureCompressionType.TEXCOMP_16BIT_1555:
+				case TextureCompressionType.TEXCOMP_16BIT_3555:
+				case TextureCompressionType.TEXCOMP_16BIT_565:
 					result = this.Width * 16 + 7;
 					result /= 8;
 					break;
 
-				case eTextureCompressionType.TEXCOMP_24BIT:
+				case TextureCompressionType.TEXCOMP_24BIT:
 					result = this.Width * 24 + 7;
 					result /= 8;
 					break;
 
-				case eTextureCompressionType.TEXCOMP_32BIT:
+				case TextureCompressionType.TEXCOMP_32BIT:
 					result = this.Width * 32 + 7;
 					result /= 8;
 					break;
@@ -158,41 +158,41 @@ namespace Nikki.Utils.DDS
 
 			switch (this.Compression)
 			{
-				case eTextureCompressionType.TEXCOMP_DXTC1:
+				case TextureCompressionType.TEXCOMP_DXTC1:
 					DDS_CONST.DDSPF_DXT1(format);
 					break;
 
-				case eTextureCompressionType.TEXCOMP_DXTC3:
+				case TextureCompressionType.TEXCOMP_DXTC3:
 					DDS_CONST.DDSPF_DXT3(format);
 					break;
 
-				case eTextureCompressionType.TEXCOMP_DXTC5:
+				case TextureCompressionType.TEXCOMP_DXTC5:
 					DDS_CONST.DDSPF_DXT5(format);
 					break;
 
-				case eTextureCompressionType.TEXCOMP_4BIT:
+				case TextureCompressionType.TEXCOMP_4BIT:
 					DDS_CONST.DDSPF_PAL4(format);
 					break;
 
-				case eTextureCompressionType.TEXCOMP_4BIT_IA8:
-				case eTextureCompressionType.TEXCOMP_4BIT_RGB16_A8:
-				case eTextureCompressionType.TEXCOMP_4BIT_RGB24_A8:
+				case TextureCompressionType.TEXCOMP_4BIT_IA8:
+				case TextureCompressionType.TEXCOMP_4BIT_RGB16_A8:
+				case TextureCompressionType.TEXCOMP_4BIT_RGB24_A8:
 					DDS_CONST.DDSPF_PAL4A(format);
 					break;
 
-				case eTextureCompressionType.TEXCOMP_8BIT:
-				case eTextureCompressionType.TEXCOMP_8BIT_16:
-				case eTextureCompressionType.TEXCOMP_8BIT_64:
+				case TextureCompressionType.TEXCOMP_8BIT:
+				case TextureCompressionType.TEXCOMP_8BIT_16:
+				case TextureCompressionType.TEXCOMP_8BIT_64:
 					DDS_CONST.DDSPF_PAL8(format);
 					break;
 
-				case eTextureCompressionType.TEXCOMP_8BIT_IA8:
-				case eTextureCompressionType.TEXCOMP_8BIT_RGB16_A8:
-				case eTextureCompressionType.TEXCOMP_8BIT_RGB24_A8:
+				case TextureCompressionType.TEXCOMP_8BIT_IA8:
+				case TextureCompressionType.TEXCOMP_8BIT_RGB16_A8:
+				case TextureCompressionType.TEXCOMP_8BIT_RGB24_A8:
 					DDS_CONST.DDSPF_PAL8A(format);
 					break;
 
-				case eTextureCompressionType.TEXCOMP_32BIT:
+				case TextureCompressionType.TEXCOMP_32BIT:
 					DDS_CONST.DDSPF_A8R8G8B8(format);
 					break;
 
@@ -219,41 +219,41 @@ namespace Nikki.Utils.DDS
 				case (uint)DDS_TYPE.FOURCC:
 					this.Compression = code switch
 					{
-						EAComp.DXT1_32 => eTextureCompressionType.TEXCOMP_DXTC1,
-						EAComp.DXT3_32 => eTextureCompressionType.TEXCOMP_DXTC3,
-						EAComp.DXT5_32 => eTextureCompressionType.TEXCOMP_DXTC5,
+						EAComp.DXT1_32 => TextureCompressionType.TEXCOMP_DXTC1,
+						EAComp.DXT3_32 => TextureCompressionType.TEXCOMP_DXTC3,
+						EAComp.DXT5_32 => TextureCompressionType.TEXCOMP_DXTC5,
 						_ => throw new NotSupportedException("Not supported texture compression")
 					};
 					this.PaletteSize = 0;
 					return;
 
 				case (uint)DDS_TYPE.PAL4:
-					this.Compression = eTextureCompressionType.TEXCOMP_4BIT;
+					this.Compression = TextureCompressionType.TEXCOMP_4BIT;
 					this.PaletteSize = 0x40;
 					return;
 
 				case (uint)DDS_TYPE.PAL4A:
-					this.Compression = eTextureCompressionType.TEXCOMP_4BIT_IA8;
+					this.Compression = TextureCompressionType.TEXCOMP_4BIT_IA8;
 					this.PaletteSize = 0x40;
 					return;
 
 				case (uint)DDS_TYPE.PAL8:
-					this.Compression = eTextureCompressionType.TEXCOMP_8BIT;
+					this.Compression = TextureCompressionType.TEXCOMP_8BIT;
 					this.PaletteSize = 0x400;
 					return;
 
 				case (uint)DDS_TYPE.PAL8A:
-					this.Compression = eTextureCompressionType.TEXCOMP_8BIT_IA8;
+					this.Compression = TextureCompressionType.TEXCOMP_8BIT_IA8;
 					this.PaletteSize = 0x400;
 					return;
 
 				case (uint)DDS_TYPE.RGB:
-					this.Compression = eTextureCompressionType.TEXCOMP_24BIT;
+					this.Compression = TextureCompressionType.TEXCOMP_24BIT;
 					this.PaletteSize = 0;
 					return;
 
 				case (uint)DDS_TYPE.RGBA:
-					this.Compression = eTextureCompressionType.TEXCOMP_32BIT;
+					this.Compression = TextureCompressionType.TEXCOMP_32BIT;
 					this.PaletteSize = 0;
 					return;
 
@@ -267,17 +267,17 @@ namespace Nikki.Utils.DDS
 		{
 			this.Area = this.Compression switch
 			{
-				eTextureCompressionType.TEXCOMP_4BIT => this.Width * this.Height * 4,
-				eTextureCompressionType.TEXCOMP_4BIT_IA8 => this.Width * this.Height * 4,
-				eTextureCompressionType.TEXCOMP_4BIT_RGB16_A8 => this.Width * this.Height * 4,
-				eTextureCompressionType.TEXCOMP_4BIT_RGB24_A8 => this.Width * this.Height * 4,
-				eTextureCompressionType.TEXCOMP_8BIT => this.Width * this.Height * 4,
-				eTextureCompressionType.TEXCOMP_8BIT_16 => this.Width * this.Height * 4,
-				eTextureCompressionType.TEXCOMP_8BIT_64 => this.Width * this.Height * 4,
-				eTextureCompressionType.TEXCOMP_8BIT_IA8 => this.Width * this.Height * 4,
-				eTextureCompressionType.TEXCOMP_8BIT_RGB16_A8 => this.Width * this.Height * 4,
-				eTextureCompressionType.TEXCOMP_8BIT_RGB24_A8 => this.Width * this.Height * 4,
-				eTextureCompressionType.TEXCOMP_32BIT => this.Width * this.Height * 4,
+				TextureCompressionType.TEXCOMP_4BIT => this.Width * this.Height * 4,
+				TextureCompressionType.TEXCOMP_4BIT_IA8 => this.Width * this.Height * 4,
+				TextureCompressionType.TEXCOMP_4BIT_RGB16_A8 => this.Width * this.Height * 4,
+				TextureCompressionType.TEXCOMP_4BIT_RGB24_A8 => this.Width * this.Height * 4,
+				TextureCompressionType.TEXCOMP_8BIT => this.Width * this.Height * 4,
+				TextureCompressionType.TEXCOMP_8BIT_16 => this.Width * this.Height * 4,
+				TextureCompressionType.TEXCOMP_8BIT_64 => this.Width * this.Height * 4,
+				TextureCompressionType.TEXCOMP_8BIT_IA8 => this.Width * this.Height * 4,
+				TextureCompressionType.TEXCOMP_8BIT_RGB16_A8 => this.Width * this.Height * 4,
+				TextureCompressionType.TEXCOMP_8BIT_RGB24_A8 => this.Width * this.Height * 4,
+				TextureCompressionType.TEXCOMP_32BIT => this.Width * this.Height * 4,
 				_ => this.FlipToBase(this.Size)
 			};
 		}
@@ -334,7 +334,7 @@ namespace Nikki.Utils.DDS
 				this._no_palette = texture.HasPalette;
 				this._prev = texture.Compression;
 				this.Compression = texture.HasPalette
-					? eTextureCompressionType.TEXCOMP_32BIT
+					? TextureCompressionType.TEXCOMP_32BIT
 					: texture.Compression;
 
 			}
@@ -439,19 +439,19 @@ namespace Nikki.Utils.DDS
 		{
 			switch (this._prev)
 			{
-				case eTextureCompressionType.TEXCOMP_4BIT:
-				case eTextureCompressionType.TEXCOMP_4BIT_IA8:
-				case eTextureCompressionType.TEXCOMP_4BIT_RGB16_A8:
-				case eTextureCompressionType.TEXCOMP_4BIT_RGB24_A8:
+				case TextureCompressionType.TEXCOMP_4BIT:
+				case TextureCompressionType.TEXCOMP_4BIT_IA8:
+				case TextureCompressionType.TEXCOMP_4BIT_RGB16_A8:
+				case TextureCompressionType.TEXCOMP_4BIT_RGB24_A8:
 					this.Buffer = Palette.P4toRGBA(this.Buffer);
 					break;
 
-				case eTextureCompressionType.TEXCOMP_8BIT:
-				case eTextureCompressionType.TEXCOMP_8BIT_16:
-				case eTextureCompressionType.TEXCOMP_8BIT_64:
-				case eTextureCompressionType.TEXCOMP_8BIT_IA8:
-				case eTextureCompressionType.TEXCOMP_8BIT_RGB16_A8:
-				case eTextureCompressionType.TEXCOMP_8BIT_RGB24_A8:
+				case TextureCompressionType.TEXCOMP_8BIT:
+				case TextureCompressionType.TEXCOMP_8BIT_16:
+				case TextureCompressionType.TEXCOMP_8BIT_64:
+				case TextureCompressionType.TEXCOMP_8BIT_IA8:
+				case TextureCompressionType.TEXCOMP_8BIT_RGB16_A8:
+				case TextureCompressionType.TEXCOMP_8BIT_RGB24_A8:
 					this.Buffer = Palette.P8toRGBA(this.Buffer);
 					break;
 
@@ -475,14 +475,14 @@ namespace Nikki.Utils.DDS
 		{
 			this.GetDDSSetWithoutLimits();
 
-			if (this.Compression == eTextureCompressionType.TEXCOMP_32BIT)
+			if (this.Compression == TextureCompressionType.TEXCOMP_32BIT)
 			{
 
 				var array = Palette.RGBAtoP8(this.Buffer);
 				if (array == null) return;
 
 				this.Buffer = array;
-				this.Compression = eTextureCompressionType.TEXCOMP_8BIT;
+				this.Compression = TextureCompressionType.TEXCOMP_8BIT;
 				this.PaletteSize = 0x400;
 				this.Size = array.Length - 0x400;
 

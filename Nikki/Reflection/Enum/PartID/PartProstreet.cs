@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Part IDs enum for Prostreet support.
 	/// </summary>
-	public enum ePartProstreet : byte
+	public enum PartProstreet : byte
 	{
 		/// <summary>
 		/// 

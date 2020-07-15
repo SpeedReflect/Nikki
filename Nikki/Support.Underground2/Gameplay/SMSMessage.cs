@@ -481,11 +481,11 @@ namespace Nikki.Support.Underground2.Gameplay
 			switch (this.UnlockRequirement)
 			{
 				case UnlockType.SpecificRaceWon:
-					this.RequiredSpecRaceWon = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+					this.RequiredSpecRaceWon = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 					break;
 
 				case UnlockType.ShopFound:
-					this.RequiredShopFound = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+					this.RequiredShopFound = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 					break;
 
 				case UnlockType.TimeElapsed:
@@ -505,7 +505,7 @@ namespace Nikki.Support.Underground2.Gameplay
 
 				#if DEBUG
 				case UnlockType.FreeroamFind:
-					var cname = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+					var cname = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 					Console.WriteLine($"{this._collection_name} ---> {cname}");
 					break;
 				#endif
@@ -517,7 +517,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			}
 
 			this.CashValue = br.ReadInt32();
-			this.MessageSender = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.MessageSender = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 		}
 
 		/// <summary>

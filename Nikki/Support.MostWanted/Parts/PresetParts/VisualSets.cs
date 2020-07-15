@@ -73,13 +73,13 @@ namespace Nikki.Support.MostWanted.Parts.PresetParts
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Read(BinaryReader br)
 		{
-			this.BasePaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.VinylLayer = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.RimsPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.VinylColor0 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.VinylColor1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.VinylColor2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.VinylColor3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.BasePaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.VinylLayer = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.RimsPaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.VinylColor0 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.VinylColor1 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.VinylColor2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.VinylColor3 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 		}
 
 		/// <summary>

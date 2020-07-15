@@ -627,7 +627,7 @@ namespace Nikki.Support.MostWanted.Class
 			br.BaseStream.Position += 4;
 
 			// Read gameplay scores
-			this.SunInfoName = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.SunInfoName = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			this.RaceGameplayMode = br.ReadEnum<TrackGameplayMode>();
 			this.RaceLength = br.ReadUInt32();
 			this.TimeLimitToBeatForward = br.ReadSingle();
@@ -798,7 +798,7 @@ namespace Nikki.Support.MostWanted.Class
 
 			}
 
-			array = Interop.Compress(array, eLZCompressionType.BEST);
+			array = Interop.Compress(array, LZCompressionType.BEST);
 
 			var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
 			header.Write(bw);

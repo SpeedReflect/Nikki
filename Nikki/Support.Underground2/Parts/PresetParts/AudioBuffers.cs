@@ -103,18 +103,18 @@ namespace Nikki.Support.Underground2.Parts.PresetParts
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Read(BinaryReader br)
 		{
-			this.AudioCompSmall00 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.AudioCompSmall01 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.AudioCompMedium02 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.AudioCompMedium03 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.AudioCompLarge04 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.AudioCompLarge05 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.AudioCompSmall06 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.AudioCompSmall07 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.AudioCompSmall08 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.AudioCompSmall09 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.AudioCompMedium10 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.AudioCompMedium11 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.AudioCompSmall00 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.AudioCompSmall01 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.AudioCompMedium02 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.AudioCompMedium03 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.AudioCompLarge04 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.AudioCompLarge05 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.AudioCompSmall06 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.AudioCompSmall07 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.AudioCompSmall08 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.AudioCompSmall09 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.AudioCompMedium10 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.AudioCompMedium11 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 		}
 
 		/// <summary>

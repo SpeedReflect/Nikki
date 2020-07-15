@@ -94,7 +94,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 			index = br.ReadInt32();
 			this.SkinDescription = br.ReadNullTermUTF8(0x20);
 			this.Unknown = br.ReadInt32();
-			this.MaterialUsed = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.MaterialUsed = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			this.SkinClassKey = br.ReadEnum<CarSkinClass>();
 			br.BaseStream.Position += 0xC;
 		}

@@ -58,7 +58,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		/// Car Part ID Group to which this part belongs to.
 		/// </summary>
 		[AccessModifiable()]
-		public eSlotUnderground2 CarPartGroupID { get; set; } = eSlotUnderground2.INVALID;
+		public SlotUnderground2 CarPartGroupID { get; set; } = SlotUnderground2.INVALID;
 
 		/// <summary>
 		/// Upgrade group ID of this <see cref="RealCarPart"/>.
@@ -171,10 +171,10 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 
 			CPAttribute attribute = type switch
 			{
-				eCarPartAttribType.Boolean => new BoolAttribute(eBoolean.False),
-				eCarPartAttribType.Floating => new FloatAttribute((float)0),
-				eCarPartAttribType.String => new StringAttribute(String.Empty),
-				eCarPartAttribType.Key => new KeyAttribute(String.Empty),
+				CarPartAttribType.Boolean => new BoolAttribute(eBoolean.False),
+				CarPartAttribType.Floating => new FloatAttribute((float)0),
+				CarPartAttribType.String => new StringAttribute(String.Empty),
+				CarPartAttribType.Key => new KeyAttribute(String.Empty),
 				_ => new IntAttribute((int)0)
 			};
 

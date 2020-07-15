@@ -83,6 +83,11 @@
 		/// <summary>
 		/// 
 		/// </summary>
+		HOODUNDER = 0x0D4B85C7,
+
+		/// <summary>
+		/// 
+		/// </summary>
 		BRAND_NAME = 0xEBB03E66,
 
 		/// <summary>

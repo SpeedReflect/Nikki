@@ -503,35 +503,35 @@ namespace Nikki.Support.Carbon.Framework
 			while (br.BaseStream.Position < offset + size)
 			{
 
-				var id = br.ReadEnum<eBlockID>();
+				var id = br.ReadEnum<BinBlockID>();
 
 				switch (id)
 				{
-					case eBlockID.DBCarParts_Header:
+					case BinBlockID.DBCarParts_Header:
 						result[0] = br.BaseStream.Position;
 						goto default;
 
-					case eBlockID.DBCarParts_Strings:
+					case BinBlockID.DBCarParts_Strings:
 						result[1] = br.BaseStream.Position;
 						goto default;
 
-					case eBlockID.DBCarParts_Offsets:
+					case BinBlockID.DBCarParts_Offsets:
 						result[2] = br.BaseStream.Position;
 						goto default;
 
-					case eBlockID.DBCarParts_Attribs:
+					case BinBlockID.DBCarParts_Attribs:
 						result[3] = br.BaseStream.Position;
 						goto default;
 
-					case eBlockID.DBCarParts_Structs:
+					case BinBlockID.DBCarParts_Structs:
 						result[4] = br.BaseStream.Position;
 						goto default;
 
-					case eBlockID.DBCarParts_Models:
+					case BinBlockID.DBCarParts_Models:
 						result[5] = br.BaseStream.Position;
 						goto default;
 
-					case eBlockID.DBCarParts_Array:
+					case BinBlockID.DBCarParts_Array:
 						result[6] = br.BaseStream.Position;
 						goto default;
 
@@ -589,20 +589,20 @@ namespace Nikki.Support.Carbon.Framework
 				if (!Map.CarPartKeys.TryGetValue(key, out var type))
 				{
 
-					type = eCarPartAttribType.Integer;
+					type = CarPartAttribType.Integer;
 
 				}
 
 				result[count] = type switch
 				{
-					eCarPartAttribType.Boolean => new BoolAttribute(br, key),
-					eCarPartAttribType.CarPartID => new PartIDAttribute(br, key),
-					eCarPartAttribType.Floating => new FloatAttribute(br, key),
-					eCarPartAttribType.String => new StringAttribute(br, str, key),
-					eCarPartAttribType.TwoString => new TwoStringAttribute(br, str, key),
-					eCarPartAttribType.Color => new ColorAttribute(br, key),
-					eCarPartAttribType.Key => new KeyAttribute(br, key),
-					eCarPartAttribType.ModelTable => new ModelTableAttribute(br, key),
+					CarPartAttribType.Boolean => new BoolAttribute(br, key),
+					CarPartAttribType.CarPartID => new PartIDAttribute(br, key),
+					CarPartAttribType.Floating => new FloatAttribute(br, key),
+					CarPartAttribType.String => new StringAttribute(br, str, key),
+					CarPartAttribType.TwoString => new TwoStringAttribute(br, str, key),
+					CarPartAttribType.Color => new ColorAttribute(br, key),
+					CarPartAttribType.Key => new KeyAttribute(br, key),
+					CarPartAttribType.ModelTable => new ModelTableAttribute(br, key),
 					_ => new IntAttribute(br, key),
 				};
 
@@ -626,7 +626,7 @@ namespace Nikki.Support.Carbon.Framework
 			{
 
 				var key = br.ReadUInt32();
-				result[a1] = key.BinString(eLookupReturn.EMPTY);
+				result[a1] = key.BinString(LookupReturn.EMPTY);
 			
 			}
 			
@@ -697,41 +697,41 @@ namespace Nikki.Support.Carbon.Framework
 			size += cppart_buffer.Length + 8;
 
 			// Write ID and Size
-			bw.WriteEnum(eBlockID.DBCarParts);
+			bw.WriteEnum(BinBlockID.DBCarParts);
 			bw.Write(size);
 
 			// Write header
-			bw.WriteEnum(eBlockID.DBCarParts_Header);
+			bw.WriteEnum(BinBlockID.DBCarParts_Header);
 			bw.Write(header_buffer.Length);
 			bw.Write(header_buffer);
 
 			// Write strings
-			bw.WriteEnum(eBlockID.DBCarParts_Strings);
+			bw.WriteEnum(BinBlockID.DBCarParts_Strings);
 			bw.Write(string_buffer.Length);
 			bw.Write(string_buffer);
 
 			// Write offsets
-			bw.WriteEnum(eBlockID.DBCarParts_Offsets);
+			bw.WriteEnum(BinBlockID.DBCarParts_Offsets);
 			bw.Write(offset_buffer.Length);
 			bw.Write(offset_buffer);
 
 			// Write attributes
-			bw.WriteEnum(eBlockID.DBCarParts_Attribs);
+			bw.WriteEnum(BinBlockID.DBCarParts_Attribs);
 			bw.Write(attrib_buffer.Length);
 			bw.Write(attrib_buffer);
 
 			// Write structs
-			bw.WriteEnum(eBlockID.DBCarParts_Structs);
+			bw.WriteEnum(BinBlockID.DBCarParts_Structs);
 			bw.Write(struct_buffer.Length);
 			bw.Write(struct_buffer);
 
 			// Write models
-			bw.WriteEnum(eBlockID.DBCarParts_Models);
+			bw.WriteEnum(BinBlockID.DBCarParts_Models);
 			bw.Write(models_buffer.Length);
 			bw.Write(models_buffer);
 
 			// Write cpparts
-			bw.WriteEnum(eBlockID.DBCarParts_Array);
+			bw.WriteEnum(BinBlockID.DBCarParts_Array);
 			bw.Write(cppart_buffer.Length);
 			bw.Write(cppart_buffer);
 		}
@@ -859,7 +859,7 @@ namespace Nikki.Support.Carbon.Framework
 		internal override void Disassemble(BinaryReader br, Block block)
 		{
 			if (Block.IsNullOrEmpty(block)) return;
-			if (block.BlockID != eBlockID.DBCarParts) return;
+			if (block.BlockID != BinBlockID.DBCarParts) return;
 
 			for (int loop = 0; loop < block.Offsets.Count; ++loop)
 			{
@@ -931,7 +931,7 @@ namespace Nikki.Support.Carbon.Framework
 		/// </summary>
 		/// <param name="type">Type of serialization of a collection.</param>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		public override void Import(eSerializeType type, BinaryReader br)
+		public override void Import(SerializeType type, BinaryReader br)
 		{
 			var position = br.BaseStream.Position;
 			var header = new SerializationHeader();
@@ -939,7 +939,7 @@ namespace Nikki.Support.Carbon.Framework
 
 			var collection = new DBModelPart();
 
-			if (header.ID != eBlockID.Nikki)
+			if (header.ID != BinBlockID.Nikki)
 			{
 
 				throw new Exception($"Missing serialized header in the imported collection");
@@ -980,15 +980,15 @@ namespace Nikki.Support.Carbon.Framework
 
 				switch (type)
 				{
-					case eSerializeType.Negate:
+					case SerializeType.Negate:
 						break;
 
-					case eSerializeType.Override:
+					case SerializeType.Override:
 						collection.Manager = this;
 						this.Replace(collection, index);
 						break;
 
-					case eSerializeType.Synchronize:
+					case SerializeType.Synchronize:
 						this[index].Synchronize(collection);
 						break;
 

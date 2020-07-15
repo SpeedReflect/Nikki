@@ -145,26 +145,26 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         public void Read(BinaryReader br)
         {
-            this.VectorVinyl = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VectorVinyl = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             this.PositionY = br.ReadInt16();
             this.PositionX = br.ReadInt16();
             this.Rotation = br.ReadSByte();
             this.Skew = br.ReadSByte();
             this.ScaleY = br.ReadSByte();
             this.ScaleX = br.ReadSByte();
-            this.SwatchFillEffect = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.SwatchFillEffect = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             this.SaturationFillEffect = br.ReadByte();
             this.BrightnessFillEffect = br.ReadByte();
             br.BaseStream.Position += 2;
-            this.SwatchStrokeEffect = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.SwatchStrokeEffect = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             this.SaturationStrokeEffect = br.ReadByte();
             this.BrightnessStrokeEffect = br.ReadByte();
             br.BaseStream.Position += 2;
-            this.SwatchInnerShadow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.SwatchInnerShadow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             this.SaturationInnerShadow = br.ReadByte();
             this.BrightnessInnerShadow = br.ReadByte();
             br.BaseStream.Position += 2;
-            this.SwatchInnerGlow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.SwatchInnerGlow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             this.SaturationInnerGlow = br.ReadByte();
             this.BrightnessInnerGlow = br.ReadByte();
             br.BaseStream.Position += 2;
