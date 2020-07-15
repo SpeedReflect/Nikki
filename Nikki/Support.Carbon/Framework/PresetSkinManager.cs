@@ -55,9 +55,8 @@ namespace Nikki.Support.Carbon.Framework
 		/// Initializes new instance of <see cref="PresetSkinManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>
-		public PresetSkinManager(Datamap db)
+		public PresetSkinManager(Datamap db) : base(db)
 		{
-			this.Database = db;
 			this.Extender = 5;
 			this.Alignment = Alignment.Default;
 		}

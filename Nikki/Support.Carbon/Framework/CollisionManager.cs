@@ -55,11 +55,10 @@ namespace Nikki.Support.Carbon.Framework
 		/// Initializes new instance of <see cref="CollisionManager"/>.
 		/// </summary>
 		/// <param name="db"><see cref="Datamap"/> to which this manager belongs to.</param>
-		public CollisionManager(Datamap db)
+		public CollisionManager(Datamap db) : base(db)
 		{
-			this.Database = db;
 			this.Extender = 5;
-			this.Alignment = new Alignment(0x8, Alignment.eAlignType.Actual);
+			this.Alignment = new Alignment(0x8, Alignment.AlignmentType.Actual);
 		}
 
 		/// <summary>

@@ -27,12 +27,13 @@ namespace Nikki.Core
 		private T[] _collections;
 		private int _size = 0;
 		private T[] _empty = new T[0];
-		private int _capacity => this._collections.Length;
 		private int _extender = 1;
 
 		#endregion
 
 		#region Main
+
+		internal Manager(FileBase db) : this() => this.Database = db;
 
 		/// <summary>
 		/// Initializes new instance of <see cref="Manager{T}"/> with default initial capacity.
@@ -328,7 +329,7 @@ namespace Nikki.Core
 		/// </summary>
 		/// <returns>True if access to the <see cref="ICollection"/> is synchronized 
 		/// (thread safe); otherwise, false..</returns>
-		public bool IsSynchronized => throw new NotImplementedException();
+		public bool IsSynchronized => true;
 
 		/// <summary>
 		/// Throws <see cref="NotImplementedException"/>.
@@ -338,7 +339,7 @@ namespace Nikki.Core
 		/// <summary>
 		/// Database to which this <see cref="Manager{T}"/> belongs to.
 		/// </summary>
-		public FileBase Database { get; set; }
+		public FileBase Database { get; }
 
 		#endregion
 
@@ -354,7 +355,7 @@ namespace Nikki.Core
 			this.ReadOnlyThrow();
 			this.CreationCheck(cname);
 
-			if (this._size == this._capacity)
+			if (this._size == this.Capacity)
 			{
 
 				if (this.IsFixedSize)
@@ -393,7 +394,7 @@ namespace Nikki.Core
 
 			}
 
-			if (this._size == this._capacity)
+			if (this._size == this.Capacity)
 			{
 
 				if (this.IsFixedSize)
@@ -460,7 +461,7 @@ namespace Nikki.Core
 
 			this.CreationCheck(to);
 
-			if (this._size == this._capacity)
+			if (this._size == this.Capacity)
 			{
 
 				if (this.IsFixedSize)
@@ -965,7 +966,7 @@ namespace Nikki.Core
 
 			this.CreationCheck(cname);
 
-			if (this._size == this._capacity)
+			if (this._size == this.Capacity)
 			{
 
 				if (this.IsFixedSize)
@@ -1019,7 +1020,7 @@ namespace Nikki.Core
 
 			}
 
-			if (this._size == this._capacity)
+			if (this._size == this.Capacity)
 			{
 
 				if (this.IsFixedSize)

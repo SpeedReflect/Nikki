@@ -155,38 +155,38 @@ namespace Nikki.Reflection.Abstract
         public virtual bool ContainsAccessModifiable(string PropertyName)
         {
             var property = this.GetFastProperty(PropertyName);
-            return property != null && Attribute.IsDefined(property, typeof(AccessModifiableAttribute));
+            return !(property is null) && Attribute.IsDefined(property, typeof(AccessModifiableAttribute));
         }
 
         /// <summary>
         /// Returns the value of a field name provided.
         /// </summary>
-        /// <param name="PropertyName">Field name to get the value from.</param>
+        /// <param name="propertyName">Field name to get the value from.</param>
         /// <returns>String value of a field name.</returns>
-        public string GetValue(string PropertyName) =>
-            this.GetFastPropertyValue(PropertyName)?.ToString() ?? String.Empty;
+        public string GetValue(string propertyName) =>
+            this.GetFastPropertyValue(propertyName)?.ToString() ?? String.Empty;
 
         /// <summary>
         /// Sets value at a field specified.
         /// </summary>
-        /// <param name="PropertyName">Name of the field to be modified.</param>
+        /// <param name="propertyName">Name of the field to be modified.</param>
         /// <param name="value">Value to be set at the field specified.</param>
         /// <returns>True on success; false otherwise.</returns>
-        public void SetValue(string PropertyName, object value)
+        public void SetValue(string propertyName, object value)
         {
-            var property = this.GetFastProperty(PropertyName);
+            var property = this.GetFastProperty(propertyName);
 
             if (property == null)
             {
 
-                throw new InfoAccessException(PropertyName);
+                throw new InfoAccessException(propertyName);
 
             }
 
             if (!Attribute.IsDefined(property, typeof(AccessModifiableAttribute)))
             {
 
-                throw new InfoAccessException(PropertyName);
+                throw new ArgumentException($"Field or property named {propertyName} is not accessible");
 
             }
 
@@ -231,7 +231,7 @@ namespace Nikki.Reflection.Abstract
 
                 }
 
-                // Else if property has an Expandable attribute, set its plain copy
+                // Else if property has an Expandable attribute, clone all values
                 else if (Attribute.IsDefined(property, typeof(ExpandableAttribute)))
                 {
 

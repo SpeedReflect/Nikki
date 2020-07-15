@@ -63,7 +63,7 @@ namespace Nikki.Support.MostWanted.Framework
 		{
 			this.Database = db;
 			this.Extender = 5;
-			this.Alignment = new Alignment(0xC, Alignment.eAlignType.Actual);
+			this.Alignment = new Alignment(0xC, Alignment.AlignmentType.Actual);
 		}
 
 		#region Private Assemble

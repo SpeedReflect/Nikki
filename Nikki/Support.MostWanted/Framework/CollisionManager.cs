@@ -59,7 +59,7 @@ namespace Nikki.Support.MostWanted.Framework
 		{
 			this.Database = db;
 			this.Extender = 5;
-			this.Alignment = new Alignment(0x8, Alignment.eAlignType.Actual);
+			this.Alignment = new Alignment(0x8, Alignment.AlignmentType.Actual);
 		}
 
 		/// <summary>

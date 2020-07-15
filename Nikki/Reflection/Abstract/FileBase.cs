@@ -76,6 +76,20 @@ namespace Nikki.Reflection.Abstract
         /// </summary>
         /// <param name="name">Name of <see cref="IManager"/> to get.</param>
         /// <returns><see cref="IManager"/>, if exists; null otherwise.</returns>
+        public IManager this[string name] => this.Managers.Find(_ => _.Name == name);
+
+        /// <summary>
+        /// Gets <see cref="IManager"/> with type specified.
+        /// </summary>
+        /// <param name="type"><see cref="Type"/> of <see cref="IManager"/> to get.</param>
+        /// <returns><see cref="IManager"/>, if exists; null otherwise.</returns>
+        public IManager this[Type type] => this.GetManager(type);
+
+        /// <summary>
+        /// Gets <see cref="IManager"/> with name specified.
+        /// </summary>
+        /// <param name="name">Name of <see cref="IManager"/> to get.</param>
+        /// <returns><see cref="IManager"/>, if exists; null otherwise.</returns>
         public IManager GetManager(string name) => this.Managers.Find(_ => _.Name == name);
 
         /// <summary>

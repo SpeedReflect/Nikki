@@ -13,7 +13,7 @@ namespace Nikki.Utils
 		{
 			if (bw.BaseStream.Position == 0) return;
 
-			if (alignment.AlignType == Alignment.eAlignType.Actual)
+			if (alignment.AlignType == Alignment.AlignmentType.Actual)
 			{
 				var start = bw.BaseStream.Position;
 				var difference = 0x10 - start % 0x10;
@@ -136,7 +136,7 @@ namespace Nikki.Utils
 					{
 
 						dif = (int)(position % 0x10);
-						align = new Alignment(dif, Alignment.eAlignType.Actual);
+						align = new Alignment(dif, Alignment.AlignmentType.Actual);
 						GeneratePadding(bw, mark, align);
 
 					}

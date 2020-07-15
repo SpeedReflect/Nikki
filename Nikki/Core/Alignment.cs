@@ -8,7 +8,7 @@
 		/// <summary>
 		/// Represents alignment type.
 		/// </summary>
-		public enum eAlignType : int
+		public enum AlignmentType : int
 		{
 			/// <summary>
 			/// Alignment of type Z = X % Y
@@ -27,21 +27,21 @@
 		public int Align { get; set; }
 
 		/// <summary>
-		/// <see cref="eAlignType"/> of this alignment.
+		/// <see cref="AlignmentType"/> of this alignment.
 		/// </summary>
-		public eAlignType AlignType { get; set; }
+		public AlignmentType AlignType { get; set; }
 
 		/// <summary>
 		/// Default <see cref="Alignment"/> with Modular alignment type of 0x10.
 		/// </summary>
-		public static readonly Alignment Default = new Alignment(0x10, eAlignType.Modular);
+		public static readonly Alignment Default = new Alignment(0x10, AlignmentType.Modular);
 
 		/// <summary>
 		/// Initializes new instance of <see cref="Alignment"/> with align and type provided.
 		/// </summary>
 		/// <param name="align">Alignment offset value.</param>
-		/// <param name="type"><see cref="eAlignType"/> of this alignment.</param>
-		public Alignment(int align, eAlignType type)
+		/// <param name="type"><see cref="AlignmentType"/> of this alignment.</param>
+		public Alignment(int align, AlignmentType type)
 		{
 			this.Align = align;
 			this.AlignType = type;

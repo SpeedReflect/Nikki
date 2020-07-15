@@ -9,17 +9,17 @@
             Represents data alignment type for <see cref="T:Nikki.Core.Manager`1"/>.
             </summary>
         </member>
-        <member name="T:Nikki.Core.Alignment.eAlignType">
+        <member name="T:Nikki.Core.Alignment.AlignmentType">
             <summary>
             Represents alignment type.
             </summary>
         </member>
-        <member name="F:Nikki.Core.Alignment.eAlignType.Modular">
+        <member name="F:Nikki.Core.Alignment.AlignmentType.Modular">
             <summary>
             Alignment of type Z = X % Y
             </summary>
         </member>
-        <member name="F:Nikki.Core.Alignment.eAlignType.Actual">
+        <member name="F:Nikki.Core.Alignment.AlignmentType.Actual">
             <summary>
             Alignment of type Z = 0x10 - Y
             </summary>
@@ -31,7 +31,7 @@
         </member>
         <member name="P:Nikki.Core.Alignment.AlignType">
             <summary>
-            <see cref="T:Nikki.Core.Alignment.eAlignType"/> of this alignment.
+            <see cref="T:Nikki.Core.Alignment.AlignmentType"/> of this alignment.
             </summary>
         </member>
         <member name="F:Nikki.Core.Alignment.Default">
@@ -39,12 +39,12 @@
             Default <see cref="T:Nikki.Core.Alignment"/> with Modular alignment type of 0x10.
             </summary>
         </member>
-        <member name="M:Nikki.Core.Alignment.#ctor(System.Int32,Nikki.Core.Alignment.eAlignType)">
+        <member name="M:Nikki.Core.Alignment.#ctor(System.Int32,Nikki.Core.Alignment.AlignmentType)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Core.Alignment"/> with align and type provided.
             </summary>
             <param name="align">Alignment offset value.</param>
-            <param name="type"><see cref="T:Nikki.Core.Alignment.eAlignType"/> of this alignment.</param>
+            <param name="type"><see cref="T:Nikki.Core.Alignment.AlignmentType"/> of this alignment.</param>
         </member>
         <member name="M:Nikki.Core.Alignment.ToString">
             <summary>
@@ -695,11 +695,6 @@
         <member name="P:Nikki.Core.Map.VltKeys">
             <summary>
             Map of all Vlt keys during runtime of library.
-            </summary>
-        </member>
-        <member name="P:Nikki.Core.Map.PerfPartTable">
-            <summary>
-            Index table of all performance parts.
             </summary>
         </member>
         <member name="P:Nikki.Core.Map.CarPartKeys">
@@ -2201,11 +2196,6 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.HOODUNDER">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.NUMCOLOURS">
             <summary>
             
@@ -2347,6 +2337,11 @@
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.MATNAMEB">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.HOODUNDER">
             <summary>
             
             </summary>
@@ -40028,26 +40023,6 @@
             <param name="color">Hexadecimal color passed.</param>
             <returns>Blue parameter as a byte.</returns>
         </member>
-        <member name="T:Nikki.Utils.eLookupReturn">
-            <summary>
-            Type of return string in case of resolving key = 0.
-            </summary>
-        </member>
-        <member name="F:Nikki.Utils.eLookupReturn.NULLREF">
-            <summary>
-            Returns <see langword="null"/>.
-            </summary>
-        </member>
-        <member name="F:Nikki.Utils.eLookupReturn.EMPTY">
-            <summary>
-            Returns <see cref="F:System.String.Empty"/>.
-            </summary>
-        </member>
-        <member name="F:Nikki.Utils.eLookupReturn.NULLARG">
-            <summary>
-            Returns <see cref="F:Nikki.Reflection.BaseArguments.NULL"/>.
-            </summary>
-        </member>
         <member name="T:Nikki.Utils.Hashing">
             <summary>
             Provides all major extensions of hashing strings.
@@ -40074,20 +40049,20 @@
             <param name="value">String to be hashed.</param>
             <returns>Vlt64 Memory Hash of the string as an unsigned long.</returns>
         </member>
-        <member name="M:Nikki.Utils.Hashing.BinString(System.UInt32,Nikki.Utils.eLookupReturn)">
+        <member name="M:Nikki.Utils.Hashing.BinString(System.UInt32,Nikki.Utils.LookupReturn)">
             <summary>
             Tries to resolve Bin key provided.
             </summary>
             <param name="key">Bin key to resolve.</param>
-            <param name="type"><see cref="T:Nikki.Utils.eLookupReturn"/> type.</param>
+            <param name="type"><see cref="T:Nikki.Utils.LookupReturn"/> type.</param>
             <returns>Resolved Bin Key.</returns>
         </member>
-        <member name="M:Nikki.Utils.Hashing.VltString(System.UInt32,Nikki.Utils.eLookupReturn)">
+        <member name="M:Nikki.Utils.Hashing.VltString(System.UInt32,Nikki.Utils.LookupReturn)">
             <summary>
             Tries to resolve Vlt key provided.
             </summary>
             <param name="key">Vlt key to resolve.</param>
-            <param name="type"><see cref="T:Nikki.Utils.eLookupReturn"/> type.</param>
+            <param name="type"><see cref="T:Nikki.Utils.LookupReturn"/> type.</param>
             <returns>Resolved Vlt Key.</returns>
         </member>
         <member name="T:Nikki.Utils.Interop">
@@ -40119,6 +40094,26 @@
             <param name="count">Number of bytes to compress.</param>
             <param name="type">Type of the compression.</param>
             <returns>Compressed data.</returns>
+        </member>
+        <member name="T:Nikki.Utils.LookupReturn">
+            <summary>
+            Type of return string in case of resolving key = 0.
+            </summary>
+        </member>
+        <member name="F:Nikki.Utils.LookupReturn.NULLREF">
+            <summary>
+            Returns <see langword="null"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Utils.LookupReturn.EMPTY">
+            <summary>
+            Returns <see cref="F:System.String.Empty"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Utils.LookupReturn.NULLARG">
+            <summary>
+            Returns <see cref="F:Nikki.Reflection.BaseArguments.NULL"/>.
+            </summary>
         </member>
         <member name="T:Nikki.Utils.MemoryUnlock">
             <summary>

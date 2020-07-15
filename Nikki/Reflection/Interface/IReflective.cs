@@ -20,16 +20,16 @@ namespace Nikki.Reflection.Interface
         /// <summary>
         /// Returns the value of a field name provided.
         /// </summary>
-        /// <param name="PropertyName">Field name to get the value from.</param>
+        /// <param name="propertyName">Field name to get the value from.</param>
         /// <returns>String value of a field name.</returns>
-        string GetValue(string PropertyName);
+        string GetValue(string propertyName);
 
         /// <summary>
         /// Sets value at a field specified.
         /// </summary>
-        /// <param name="PropertyName">Name of the field to be modified.</param>
+        /// <param name="propertyName">Name of the field to be modified.</param>
         /// <param name="value">Value to be set at the field specified.</param>
         /// <returns>True on success; false otherwise.</returns>
-        void SetValue(string PropertyName, object value);
+        void SetValue(string propertyName, object value);
     }
 }

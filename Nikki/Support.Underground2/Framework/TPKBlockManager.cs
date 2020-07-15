@@ -59,7 +59,7 @@ namespace Nikki.Support.Underground2.Framework
 		{
 			this.Database = db;
 			this.Extender = 1;
-			this.Alignment = new Alignment(0x80, Alignment.eAlignType.Modular);
+			this.Alignment = new Alignment(0x80, Alignment.AlignmentType.Modular);
 		}
 
 		/// <summary>
