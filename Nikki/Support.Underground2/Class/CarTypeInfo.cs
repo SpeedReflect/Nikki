@@ -684,6 +684,10 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(this.AerodynamicsForceW);
 
             // Car Wheels
+            this.WHEEL_FRONT_LEFT.WheelID = CarInfoWheel.CarWheelType.FRONT_LEFT;
+            this.WHEEL_FRONT_RIGHT.WheelID = CarInfoWheel.CarWheelType.FRONT_RIGHT;
+            this.WHEEL_REAR_RIGHT.WheelID = CarInfoWheel.CarWheelType.REAR_RIGHT;
+            this.WHEEL_REAR_LEFT.WheelID = CarInfoWheel.CarWheelType.REAR_LEFT;
             this.WHEEL_FRONT_LEFT.Write(bw);
             this.WHEEL_FRONT_RIGHT.Write(bw);
             this.WHEEL_REAR_RIGHT.Write(bw);
@@ -845,6 +849,12 @@ namespace Nikki.Support.Underground2.Class
             bw.Write((long)0);
 
             // Player Cameras
+            this.PLAYER_CAMERA_FAR.Type = Camera.CameraType.FAR;
+            this.PLAYER_CAMERA_CLOSE.Type = Camera.CameraType.CLOSE;
+            this.PLAYER_CAMERA_BUMPER.Type = Camera.CameraType.BUMPER;
+            this.PLAYER_CAMERA_DRIVER.Type = Camera.CameraType.DRIVER;
+            this.PLAYER_CAMERA_HOOD.Type = Camera.CameraType.HOOD;
+            this.PLAYER_CAMERA_DRIFT.Type = Camera.CameraType.DRIFT;
             this.PLAYER_CAMERA_FAR.Write(bw);
             this.PLAYER_CAMERA_CLOSE.Write(bw);
             this.PLAYER_CAMERA_BUMPER.Write(bw);
@@ -853,6 +863,12 @@ namespace Nikki.Support.Underground2.Class
             this.PLAYER_CAMERA_DRIFT.Write(bw);
 
             // AI Cameras
+            this.AI_CAMERA_FAR.Type = Camera.CameraType.FAR;
+            this.AI_CAMERA_CLOSE.Type = Camera.CameraType.CLOSE;
+            this.AI_CAMERA_BUMPER.Type = Camera.CameraType.BUMPER;
+            this.AI_CAMERA_DRIVER.Type = Camera.CameraType.DRIVER;
+            this.AI_CAMERA_HOOD.Type = Camera.CameraType.HOOD;
+            this.AI_CAMERA_DRIFT.Type = Camera.CameraType.DRIFT;
             this.AI_CAMERA_FAR.Write(bw);
             this.AI_CAMERA_CLOSE.Write(bw);
             this.AI_CAMERA_BUMPER.Write(bw);

@@ -86,13 +86,18 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Clones values of another <see cref="Camera"/>.
 		/// </summary>
 		/// <param name="other"><see cref="Camera"/> to clone.</param>
-		public void CloneValues(Camera other)
+		public override void CloneValues(SubPart other)
 		{
-			this.CameraAngle = other.CameraAngle;
-			this.CameraHeight = other.CameraHeight;
-			this.CameraLag = other.CameraLag;
-			this.CameraLatOffset = other.CameraLatOffset;
-			this.Type = other.Type;
+			if (other is Camera camera)
+			{
+
+				this.Type = camera.Type;
+				this.CameraAngle = camera.CameraAngle;
+				this.CameraHeight = camera.CameraHeight;
+				this.CameraLag = camera.CameraLag;
+				this.CameraLatOffset = camera.CameraLatOffset;
+
+			}
 		}
 
 		/// <summary>

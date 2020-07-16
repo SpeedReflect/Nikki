@@ -99,6 +99,7 @@ namespace Nikki.Support.Underground2.Parts.GameParts
 				strw.WriteNullTermUTF8(this.Name);
 				bw.Write(pointer);
 			}
+
 			else bw.Write((ushort)0);
 			bw.Write(this.StatsMultiplier);
 			bw.Write(this.PresetRide.BinHash());

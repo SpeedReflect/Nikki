@@ -269,7 +269,6 @@ namespace Nikki.Support.Carbon.Class
             // Get texture count
             br.BaseStream.Position = PartOffsets[1];
             var TextureCount = this.GetTextureCount(br);
-            if (TextureCount == 0) return; // if no textures allocated
 
             // Get header info
             br.BaseStream.Position = PartOffsets[0];

@@ -28475,7 +28475,7 @@
             Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.Camera"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Shared.Parts.CarParts.Camera.CloneValues(Nikki.Support.Shared.Parts.CarParts.Camera)">
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.Camera.CloneValues(Nikki.Reflection.Abstract.SubPart)">
             <summary>
             Clones values of another <see cref="T:Nikki.Support.Shared.Parts.CarParts.Camera"/>.
             </summary>
@@ -28579,7 +28579,7 @@
             Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.CloneValues(Nikki.Support.Shared.Parts.CarParts.CarInfoWheel)">
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel.CloneValues(Nikki.Reflection.Abstract.SubPart)">
             <summary>
             Clones values of another <see cref="T:Nikki.Support.Shared.Parts.CarParts.CarInfoWheel"/>.
             </summary>
@@ -28643,7 +28643,7 @@
             Class key of the skin.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Shared.Parts.CarParts.CarSkin.CloneValues(Nikki.Support.Shared.Parts.CarParts.CarSkin)">
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CarSkin.CloneValues(Nikki.Reflection.Abstract.SubPart)">
             <summary>
             Clones values of another <see cref="T:Nikki.Support.Shared.Parts.CarParts.CarSkin"/>.
             </summary>
@@ -31323,6 +31323,11 @@
         <member name="P:Nikki.Support.Underground2.Class.GCareer.CollectionName">
             <summary>
             Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.Watermark">
+            <summary>
+            Watermark written during assembly.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Class.GCareer.BankTriggers">

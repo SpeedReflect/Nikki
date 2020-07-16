@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
+using Nikki.Utils.EA;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Support.Underground2.Gameplay;
@@ -73,6 +74,11 @@ namespace Nikki.Support.Underground2.Class
                 this._collection_name = value;
             }
         }
+
+        /// <summary>
+        /// Watermark written during assembly.
+        /// </summary>
+        internal string Watermark { get; set; }
 
         /// <summary>
         /// <see cref="List{T}"/> of <see cref="BankTrigger"/> in this <see cref="GCareer"/>.
@@ -288,7 +294,69 @@ namespace Nikki.Support.Underground2.Class
         /// <returns>Byte array of the tpk block.</returns>
         public override void Assemble(BinaryWriter bw)
         {
+            using var ms = new MemoryStream(0x8000);
+            using var strw = new BinaryWriter(ms);
+            strw.Write((byte)0);
+            strw.WriteEnum(BinBlockID.Nikki);
+            strw.WriteNullTermUTF8(this._collection_name);
+            strw.WriteNullTermUTF8(this.Watermark);
 
+            var GCareerRacesBlock = this.WriteGCareerRaces(strw);
+            var WorldShopBlock = this.WriteWorldShops(strw);
+            var GCareerBrandsBlock = this.WriteGCareerBrands(strw);
+            var PartPerformancesBlock = this.WritePartPerformances();
+            var GShowcasesBlock = this.WriteGShowcases(strw);
+            var SMSMessagesBlock = this.WriteSMSMessages(strw);
+            var SponsorsBlock = this.WriteSponsors(strw);
+            var GCareerStagesBlock = this.WriteGCareerStages();
+            var PerfSliderTuningsBlock = this.WritePerfSliderTunings();
+            var WorldChallengesBlock = this.WriteWorldChallenges(strw);
+            var PartUnlockablesBlock = this.WritePartUnlockables();
+            var BankTriggersBlock = this.WriteBankTriggers();
+            var GCarUnlocksBlock = this.WriteGCarUnlocks();
+
+            strw.FillBuffer(4);
+            var StringBlock = ms.ToArray();
+
+            var size = 8 + StringBlock.Length;
+            size += GCareerRacesBlock.Length;
+            size += WorldShopBlock.Length;
+            size += GCareerBrandsBlock.Length;
+            size += PartPerformancesBlock.Length;
+            size += GShowcasesBlock.Length;
+            size += SMSMessagesBlock.Length;
+            size += SponsorsBlock.Length;
+            size += GCareerStagesBlock.Length;
+            size += PerfSliderTuningsBlock.Length;
+            size += WorldChallengesBlock.Length;
+            size += PartUnlockablesBlock.Length;
+            size += BankTriggersBlock.Length;
+            size += GCarUnlocksBlock.Length;
+
+            var padding = Comp.GetPaddingArray(size + 0x50, 0x80);
+            size += padding.Length;
+
+            bw.WriteEnum(BinBlockID.GCareer);
+            bw.Write(size);
+
+            bw.WriteEnum(BinBlockID.GCareer_Strings);
+            bw.Write(StringBlock.Length);
+            bw.Write(StringBlock);
+
+            bw.Write(GCareerRacesBlock);
+            bw.Write(WorldShopBlock);
+            bw.Write(GCareerBrandsBlock);
+            bw.Write(PartPerformancesBlock);
+            bw.Write(GShowcasesBlock);
+            bw.Write(SMSMessagesBlock);
+            bw.Write(SponsorsBlock);
+            bw.Write(GCareerStagesBlock);
+            bw.Write(PerfSliderTuningsBlock);
+            bw.Write(WorldChallengesBlock);
+            bw.Write(PartUnlockablesBlock);
+            bw.Write(BankTriggersBlock);
+            bw.Write(GCarUnlocksBlock);
+            bw.Write(padding);
         }
 
         /// <summary>
@@ -301,8 +369,6 @@ namespace Nikki.Support.Underground2.Class
             var size = br.ReadInt32();
             var start = br.BaseStream.Position;
             var offsets = this.FindOffsets(br, size);
-
-            var a = Map.BinKeys[0];
 
             MemoryStream ms = null;
             BinaryReader strr = null;
@@ -832,6 +898,260 @@ namespace Nikki.Support.Underground2.Class
                 this.GCarUnlocks.Add(collection);
 
             }
+        }
+
+		#endregion
+
+		#region Writing Methods
+
+        private byte[] WriteGCareerRaces(BinaryWriter strw)
+		{
+            var size = this.GCareerRaceCount * 0x88;
+            var result = new byte[size + 8];
+            using var ms = new MemoryStream(result);
+            using var bw = new BinaryWriter(ms);
+
+            bw.WriteEnum(BinBlockID.GCareer_Races);
+            bw.Write(size);
+
+            foreach (var collection in this.GCareerRaces)
+			{
+
+                collection.Assemble(bw, strw);
+
+			}
+
+            return result;
+		}
+
+        private byte[] WriteWorldShops(BinaryWriter strw)
+        {
+            var size = this.WorldShopCount * 0xA0;
+            var result = new byte[size + 8];
+            using var ms = new MemoryStream(result);
+            using var bw = new BinaryWriter(ms);
+
+            bw.WriteEnum(BinBlockID.GCareer_Shops);
+            bw.Write(size);
+
+            foreach (var collection in this.WorldShops)
+            {
+
+                collection.Assemble(bw, strw);
+
+            }
+
+            return result;
+        }
+
+        private byte[] WriteGCareerBrands(BinaryWriter strw)
+        {
+            var size = this.GCareerBrandCount * 0x44;
+            var result = new byte[size + 8];
+            using var ms = new MemoryStream(result);
+            using var bw = new BinaryWriter(ms);
+
+            bw.WriteEnum(BinBlockID.GCareer_Brands);
+            bw.Write(size);
+
+            foreach (var collection in this.GCareerBrands)
+            {
+
+                collection.Assemble(bw, strw);
+
+            }
+
+            return result;
+        }
+
+        private byte[] WritePartPerformances()
+		{
+            var result = new byte[0x2C90];
+            using var ms = new MemoryStream(result);
+            using var bw = new BinaryWriter(ms);
+
+
+            return result;
+		}
+
+        private byte[] WriteGShowcases(BinaryWriter strw)
+        {
+            var size = this.GShowcaseCount << 6;
+            var result = new byte[size + 8];
+            using var ms = new MemoryStream(result);
+            using var bw = new BinaryWriter(ms);
+
+            bw.WriteEnum(BinBlockID.GCareer_Showcases);
+            bw.Write(size);
+
+            foreach (var collection in this.GShowcases)
+            {
+
+                collection.Assemble(bw, strw);
+
+            }
+
+            return result;
+        }
+
+        private byte[] WriteSMSMessages(BinaryWriter strw)
+        {
+            var size = this.SMSMessageCount * 0x14;
+            var result = new byte[size + 8];
+            using var ms = new MemoryStream(result);
+            using var bw = new BinaryWriter(ms);
+
+            bw.WriteEnum(BinBlockID.GCareer_Messages);
+            bw.Write(size);
+
+            foreach (var collection in this.SMSMessages)
+            {
+
+                collection.Assemble(bw, strw);
+
+            }
+
+            return result;
+        }
+
+        private byte[] WriteSponsors(BinaryWriter strw)
+        {
+            var size = this.SponsorCount << 4;
+            var result = new byte[size + 8];
+            using var ms = new MemoryStream(result);
+            using var bw = new BinaryWriter(ms);
+
+            bw.WriteEnum(BinBlockID.GCareer_Sponsors);
+            bw.Write(size);
+
+            foreach (var collection in this.Sponsors)
+            {
+
+                collection.Assemble(bw, strw);
+
+            }
+
+            return result;
+        }
+
+        private byte[] WriteGCareerStages()
+        {
+            var size = this.GCareerStageCount * 0x50;
+            var result = new byte[size + 8];
+            using var ms = new MemoryStream(result);
+            using var bw = new BinaryWriter(ms);
+
+            bw.WriteEnum(BinBlockID.GCareer_Stages);
+            bw.Write(size);
+
+            foreach (var collection in this.GCareerStages)
+            {
+
+                collection.Assemble(bw);
+
+            }
+
+            return result;
+        }
+
+        private byte[] WritePerfSliderTunings()
+        {
+            var size = this.PerfSliderTuningCount * 0x18;
+            var result = new byte[size + 8];
+            using var ms = new MemoryStream(result);
+            using var bw = new BinaryWriter(ms);
+
+            bw.WriteEnum(BinBlockID.GCareer_PerfTun);
+            bw.Write(size);
+
+            foreach (var collection in this.PerfSliderTunings)
+            {
+
+                collection.Assemble(bw);
+
+            }
+
+            return result;
+        }
+
+        private byte[] WriteWorldChallenges(BinaryWriter strw)
+        {
+            var size = this.WorldChallengeCount * 0x18;
+            var result = new byte[size + 8];
+            using var ms = new MemoryStream(result);
+            using var bw = new BinaryWriter(ms);
+
+            bw.WriteEnum(BinBlockID.GCareer_Challenges);
+            bw.Write(size);
+
+            foreach (var collection in this.WorldChallenges)
+            {
+
+                collection.Assemble(bw, strw);
+
+            }
+
+            return result;
+        }
+
+        private byte[] WritePartUnlockables()
+        {
+            var size = this.PartUnlockableCount * 0x28;
+            var result = new byte[size + 8];
+            using var ms = new MemoryStream(result);
+            using var bw = new BinaryWriter(ms);
+
+            bw.WriteEnum(BinBlockID.GCareer_PartUnlock);
+            bw.Write(size);
+
+            foreach (var collection in this.PartUnlockables)
+            {
+
+                collection.Assemble(bw);
+
+            }
+
+            return result;
+        }
+
+        private byte[] WriteBankTriggers()
+        {
+            var size = this.BankTriggerCount * 0xC;
+            var result = new byte[size + 8];
+            using var ms = new MemoryStream(result);
+            using var bw = new BinaryWriter(ms);
+
+            bw.WriteEnum(BinBlockID.GCareer_BankTrigs);
+            bw.Write(size);
+
+            foreach (var collection in this.BankTriggers)
+            {
+
+                collection.Assemble(bw);
+
+            }
+
+            return result;
+        }
+
+        private byte[] WriteGCarUnlocks()
+        {
+            var size = this.GCarUnlockCount * 0xC;
+            var result = new byte[size + 8];
+            using var ms = new MemoryStream(result);
+            using var bw = new BinaryWriter(ms);
+
+            bw.WriteEnum(BinBlockID.GCareer_CarUnlocks);
+            bw.Write(size);
+
+            foreach (var collection in this.GCarUnlocks)
+            {
+
+                collection.Assemble(bw);
+
+            }
+
+            return result;
         }
 
         #endregion

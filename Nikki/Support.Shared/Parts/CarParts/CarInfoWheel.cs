@@ -101,17 +101,22 @@ namespace Nikki.Support.Shared.Parts.CarParts
         /// Clones values of another <see cref="CarInfoWheel"/>.
         /// </summary>
         /// <param name="other"><see cref="CarInfoWheel"/> to clone.</param>
-        public void CloneValues(CarInfoWheel other)
+        public override void CloneValues(SubPart other)
         {
-            this.Diameter = other.Diameter;
-            this.RideHeight = other.RideHeight;
-            this.Springs = other.Springs;
-            this.TireSkidWidth = other.TireSkidWidth;
-            this.UnknownVal = other.UnknownVal;
-            this.WheelID = other.WheelID;
-            this.WideBodyYValue = other.WideBodyYValue;
-            this.XValue = other.XValue;
-            this.YValue = other.YValue;
+            if (other is CarInfoWheel wheel)
+            {
+
+                this.Diameter = wheel.Diameter;
+                this.RideHeight = wheel.RideHeight;
+                this.Springs = wheel.Springs;
+                this.TireSkidWidth = wheel.TireSkidWidth;
+                this.UnknownVal = wheel.UnknownVal;
+                this.WheelID = wheel.WheelID;
+                this.WideBodyYValue = wheel.WideBodyYValue;
+                this.XValue = wheel.XValue;
+                this.YValue = wheel.YValue;
+
+            }
         }
 
         /// <summary>

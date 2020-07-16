@@ -57,12 +57,17 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Clones values of another <see cref="CarSkin"/>.
 		/// </summary>
 		/// <param name="other"><see cref="CarSkin"/> to clone.</param>
-		public void CloneValues(CarSkin other)
+		public override void CloneValues(SubPart other)
 		{
-			this.MaterialUsed = other.MaterialUsed;
-			this.SkinClassKey = other.SkinClassKey;
-			this.SkinDescription = other.SkinDescription;
-			this.Unknown = other.Unknown;
+			if (other is CarSkin skin)
+			{
+
+				this.MaterialUsed = skin.MaterialUsed;
+				this.SkinClassKey = skin.SkinClassKey;
+				this.SkinDescription = skin.SkinDescription;
+				this.Unknown = skin.Unknown;
+
+			}
 		}
 
 		/// <summary>
