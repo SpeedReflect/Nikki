@@ -518,7 +518,7 @@
         /// <summary>
         /// 
         /// </summary>
-        WINDSHIELD_TINT = 0x66,
+        WINDOW_TINT = 0x66,
 
         /// <summary>
         /// 

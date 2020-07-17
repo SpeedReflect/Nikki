@@ -813,7 +813,7 @@
 		/// <summary>
 		/// 
 		/// </summary>
-		HYDRALICS = 0xA1,
+		HYDRAULICS = 0xA1,
 
 		/// <summary>
 		/// 

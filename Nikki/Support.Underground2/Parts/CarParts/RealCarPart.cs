@@ -8,7 +8,7 @@ using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
-using Nikki.Reflection.Enum.SlotID;
+using Nikki.Reflection.Enum.PartID;
 using Nikki.Support.Underground2.Class;
 using Nikki.Support.Shared.Parts.CarParts;
 using Nikki.Support.Underground2.Attributes;
@@ -58,7 +58,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		/// Car Part ID Group to which this part belongs to.
 		/// </summary>
 		[AccessModifiable()]
-		public SlotUnderground2 CarPartGroupID { get; set; } = SlotUnderground2.INVALID;
+		public PartUnderground2 CarPartGroupID { get; set; } = PartUnderground2.INVALID;
 
 		/// <summary>
 		/// Upgrade group ID of this <see cref="RealCarPart"/>.

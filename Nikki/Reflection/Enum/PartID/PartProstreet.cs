@@ -573,11 +573,6 @@
 		/// <summary>
 		/// 
 		/// </summary>
-		NUM = 0x71,
-
-		/// <summary>
-		/// 
-		/// </summary>
 		INVALID = 0xFF,
 	}
 }

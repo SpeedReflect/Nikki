@@ -8,7 +8,7 @@ using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
-using Nikki.Reflection.Enum.SlotID;
+using Nikki.Reflection.Enum.PartID;
 using Nikki.Support.Shared.Parts.CarParts;
 using Nikki.Support.Underground2.Framework;
 using Nikki.Support.Underground2.Attributes;
@@ -368,7 +368,7 @@ namespace Nikki.Support.Underground2.Class
 				{
 					PartLabel = reader.ReadNullTermUTF8(),
 					DebugName = reader.ReadNullTermUTF8(),
-					CarPartGroupID = reader.ReadEnum<SlotUnderground2>(),
+					CarPartGroupID = reader.ReadEnum<PartUnderground2>(),
 					UpgradeGroupID = reader.ReadUInt16()
 				};
 

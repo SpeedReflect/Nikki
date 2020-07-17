@@ -8,7 +8,7 @@ using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
-using Nikki.Reflection.Enum.SlotID;
+using Nikki.Reflection.Enum.PartID;
 using Nikki.Support.MostWanted.Framework;
 using Nikki.Support.MostWanted.Attributes;
 using Nikki.Support.Shared.Parts.CarParts;
@@ -368,7 +368,7 @@ namespace Nikki.Support.MostWanted.Class
 				{
 					PartLabel = reader.ReadNullTermUTF8(),
 					DebugName = reader.ReadNullTermUTF8(),
-					CarPartGroupID = reader.ReadEnum<SlotMostWanted>(),
+					CarPartGroupID = reader.ReadEnum<PartMostWanted>(),
 					UpgradeGroupID = reader.ReadUInt16()
 				};
 
