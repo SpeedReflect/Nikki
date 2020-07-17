@@ -363,20 +363,20 @@ namespace Nikki.Support.Underground2.Class
             {
 
                 writer.WriteNullTermUTF8(this._collection_name);
-                bw.Write(this.ClassKey);
-                bw.Write(this.Flags);
-                bw.Write(this.NumEmitters);
-                bw.Write(this.SectionNumber);
-                this.LocalWorld.Write(bw);
-                bw.WriteNullTermUTF8(this.InheritanceKey);
-                bw.Write(this.FarClip);
-                bw.Write(this.Intensity);
-                bw.Write(this.LastPositionX);
-                bw.Write(this.LastPositionY);
-                bw.Write(this.LastPositionZ);
-                bw.Write(this.LastPositionW);
-                bw.Write(this.NumZeroParticleFrames);
-                bw.Write(this.CreationTimeStamp);
+                writer.Write(this.ClassKey);
+                writer.Write(this.Flags);
+                writer.Write(this.NumEmitters);
+                writer.Write(this.SectionNumber);
+                this.LocalWorld.Write(writer);
+                writer.WriteNullTermUTF8(this.InheritanceKey);
+                writer.Write(this.FarClip);
+                writer.Write(this.Intensity);
+                writer.Write(this.LastPositionX);
+                writer.Write(this.LastPositionY);
+                writer.Write(this.LastPositionZ);
+                writer.Write(this.LastPositionW);
+                writer.Write(this.NumZeroParticleFrames);
+                writer.Write(this.CreationTimeStamp);
 
                 array = ms.ToArray();
 

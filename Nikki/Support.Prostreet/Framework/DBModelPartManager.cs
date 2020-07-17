@@ -600,6 +600,7 @@ namespace Nikki.Support.Prostreet.Framework
 				{
 					CarPartAttribType.Boolean => new BoolAttribute(br, key),
 					CarPartAttribType.CarPartID => new PartIDAttribute(br, key),
+					CarPartAttribType.Color => new ColorAttribute(br, key),
 					CarPartAttribType.Floating => new FloatAttribute(br, key),
 					CarPartAttribType.String => new StringAttribute(br, str, key),
 					CarPartAttribType.TwoString => new TwoStringAttribute(br, str, key),

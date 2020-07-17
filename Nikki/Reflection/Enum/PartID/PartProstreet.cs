@@ -353,147 +353,147 @@
 		/// <summary>
 		/// 
 		/// </summary>
-		INTERIOR = 0x45,
+		PLATES = 0x45,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		PLATES = 0x46,
+		ROLL_CAGE = 0x46,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		ROLL_CAGE = 0x47,
+		ROOF = 0x47,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		ROOF = 0x48,
+		ROOF_INSIDE = 0x48,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		ROOF_INSIDE = 0x49,
+		ROOFSCOOP = 0x49,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		ROOFSCOOP = 0x4A,
+		SEAT = 0x4A,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		SEAT = 0x4B,
+		SIDEMIRROR_LEFT = 0x4B,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		SIDEMIRROR_LEFT = 0x4C,
+		SIDEMIRROR_RIGHT = 0x4C,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		SIDEMIRROR_RIGHT = 0x4D,
+		SKIRT_LEFT = 0x4D,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		SKIRT_LEFT = 0x4E,
+		SKIRT_RIGHT = 0x4E,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		SKIRT_RIGHT = 0x4F,
+		SPOILER = 0x4F,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		SPOILER = 0x50,
+		STEERINGWHEEL = 0x50,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		STEERINGWHEEL = 0x51,
+		TRUNK = 0x51,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		TRUNK = 0x52,
+		UNIVERSAL_SPOILER_BASE = 0x52,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		UNIVERSAL_SPOILER_BASE = 0x53,
+		WHEEL = 0x53,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		WHEEL = 0x54,
+		WHEEL_REAR = 0x54,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		WHEEL_REAR = 0x55,
+		WINDOW_FRONT = 0x55,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		WINDOW_FRONT = 0x56,
+		WINDOW_FRONT_LEFT = 0x56,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		WINDOW_FRONT_LEFT = 0x57,
+		WINDOW_FRONT_RIGHT = 0x57,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		WINDOW_FRONT_RIGHT = 0x58,
+		WINDOW_REAR = 0x58,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		WINDOW_REAR = 0x59,
+		WINDOW_REAR_LEFT = 0x59,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		WINDOW_REAR_LEFT = 0x5A,
+		WINDOW_REAR_RIGHT = 0x5A,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		WINDOW_REAR_RIGHT = 0x5B,
+		WINDTUNNEL = 0x5B,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		WINDTUNNEL = 0x5C,
+		BODY_PAINT_GROUP = 0x5C,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		BODY_PAINT_GROUP = 0x5D,
+		CHASSIS = 0x5D,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		CHASSIS = 0x5E,
+		DRIVETRAIN_PACKAGE = 0x5E,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		DRIVETRAIN_PACKAGE = 0x5F,
+		ENGINE_PACKAGE = 0x5F,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		ENGINE_PACKAGE = 0x60,
+		FORCED_INDUCTION_PACKAGE = 0x60,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		FORCED_INDUCTION_PACKAGE = 0x61,
+		INTERIOR = 0x61,
 
 		/// <summary>
 		/// 

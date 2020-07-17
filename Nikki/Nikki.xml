@@ -4165,11 +4165,6 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.PartID.PartProstreet.INTERIOR">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Nikki.Reflection.Enum.PartID.PartProstreet.PLATES">
             <summary>
             
@@ -4306,6 +4301,11 @@
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.PartID.PartProstreet.FORCED_INDUCTION_PACKAGE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.PartID.PartProstreet.INTERIOR">
             <summary>
             
             </summary>
@@ -6927,11 +6927,6 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.SlotID.SlotProstreet.INTERIOR">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Nikki.Reflection.Enum.SlotID.SlotProstreet.LICENSE_PLATE">
             <summary>
             
@@ -7173,6 +7168,11 @@
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.SlotID.SlotProstreet.HOOD_PAINT_SWATCH">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.SlotID.SlotProstreet.INTERIOR">
             <summary>
             
             </summary>
