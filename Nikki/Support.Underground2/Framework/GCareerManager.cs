@@ -57,7 +57,7 @@ namespace Nikki.Support.Underground2.Framework
 		public GCareerManager(Datamap db) : base(db)
 		{
 			this.Extender = 1;
-			this.Alignment = Alignment.Default;
+			this.Alignment = new Alignment(0x80, Alignment.AlignmentType.Modular);
 		}
 
 		/// <summary>
@@ -69,11 +69,11 @@ namespace Nikki.Support.Underground2.Framework
 		{
 			if (this.Count == 0) return;
 
-			bw.GeneratePadding(mark, this.Alignment);
-
 			foreach (var collection in this)
 			{
 
+				bw.GeneratePadding(mark, this.Alignment);
+				collection.Watermark = mark;
 				collection.Assemble(bw);
 
 			}

@@ -333,9 +333,6 @@ namespace Nikki.Support.Underground2.Class
             size += BankTriggersBlock.Length;
             size += GCarUnlocksBlock.Length;
 
-            var padding = Comp.GetPaddingArray(size + 0x50, 0x80);
-            size += padding.Length;
-
             bw.WriteEnum(BinBlockID.GCareer);
             bw.Write(size);
 
@@ -356,7 +353,6 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(PartUnlockablesBlock);
             bw.Write(BankTriggersBlock);
             bw.Write(GCarUnlocksBlock);
-            bw.Write(padding);
         }
 
         /// <summary>
@@ -970,6 +966,62 @@ namespace Nikki.Support.Underground2.Class
             using var ms = new MemoryStream(result);
             using var bw = new BinaryWriter(ms);
 
+            bw.WriteEnum(BinBlockID.GCareer_PartPerf);
+            bw.Write(0x2C88);
+
+            for (int loop = 0; loop < 10; ++loop)
+			{
+
+                for (int i = 1; i < 4; ++i)
+                {
+
+                    int count = 0;
+                    bw.Write(loop);
+                    bw.Write(i);
+                    var start = bw.BaseStream.Position;
+                    bw.Write(-1);
+                    PartPerformance part = null;
+
+                    part = this.PartPerformances.Find(_ =>
+                        (int)_.PartPerformanceType == loop &&
+                        _.UpgradeLevel == i &&
+                        _.UpgradePartIndex == 0);
+
+                    if (part is null) bw.BaseStream.Position += 0x5C;
+                    else { part.Assemble(bw); ++count; }
+
+                    part = this.PartPerformances.Find(_ =>
+                        (int)_.PartPerformanceType == loop &&
+                        _.UpgradeLevel == i &&
+                        _.UpgradePartIndex == 1);
+
+                    if (part is null) bw.BaseStream.Position += 0x5C;
+                    else { part.Assemble(bw); ++count; }
+
+                    part = this.PartPerformances.Find(_ =>
+                        (int)_.PartPerformanceType == loop &&
+                        _.UpgradeLevel == i &&
+                        _.UpgradePartIndex == 2);
+
+                    if (part is null) bw.BaseStream.Position += 0x5C;
+                    else { part.Assemble(bw); ++count; }
+
+                    part = this.PartPerformances.Find(_ =>
+                        (int)_.PartPerformanceType == loop &&
+                        _.UpgradeLevel == i &&
+                        _.UpgradePartIndex == 3);
+
+                    if (part is null) bw.BaseStream.Position += 0x5C;
+                    else { part.Assemble(bw); ++count; }
+
+                    var final = bw.BaseStream.Position;
+                    bw.BaseStream.Position = start;
+                    bw.Write(count);
+                    bw.BaseStream.Position = final;
+
+                }
+
+            }
 
             return result;
 		}

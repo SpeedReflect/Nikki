@@ -72,6 +72,12 @@ namespace Nikki.Support.Underground2.Gameplay
 					throw new CollectionExistenceException(value);
 
 				}
+				if (!Byte.TryParse(value, out byte result))
+				{
+
+					throw new Exception($"Value {value} cannot be converted to a byte ranged 0-255");
+
+				}
 
 				this._collection_name = value;
 			}
@@ -482,7 +488,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="GCareerStage"/> with.</param>
 		public void Assemble(BinaryWriter bw)
 		{
-			bw.Write(this._collection_name);
+			bw.Write(Byte.Parse(this._collection_name));
 			bw.Write(this.NumberOfSponsorsToChoose);
 			bw.Write(this.OutrunCashValue);
 			bw.Write(this.Unknown0x04);

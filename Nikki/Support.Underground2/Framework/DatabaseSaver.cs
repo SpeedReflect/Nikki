@@ -70,6 +70,7 @@ namespace Nikki.Support.Underground2.Framework
 				this._db.SunInfos.Assemble(bw, this._options.Watermark);
 				this._db.AcidEmitters.Assemble(bw, this._options.Watermark);
 				this._db.AcidEffects.Assemble(bw, this._options.Watermark);
+				this._db.GCareers.Assemble(bw, this._options.Watermark);
 				this._db.PresetRides.Assemble(bw, this._options.Watermark);
 				this._db.FNGroups.Assemble(bw, this._options.Watermark);
 
@@ -112,8 +113,10 @@ namespace Nikki.Support.Underground2.Framework
 
 		private void Assemble(BinaryWriter bw, BinaryReader br)
 		{
+			#if !DEBUG
 			try
 			{
+			#endif
 
 				this._db.STRBlocks.Assemble(bw, this._options.Watermark);
 				this._db.Materials.Assemble(bw, this._options.Watermark);
@@ -125,10 +128,12 @@ namespace Nikki.Support.Underground2.Framework
 				this._db.SunInfos.Assemble(bw, this._options.Watermark);
 				this._db.AcidEmitters.Assemble(bw, this._options.Watermark);
 				this._db.AcidEffects.Assemble(bw, this._options.Watermark);
+				this._db.GCareers.Assemble(bw, this._options.Watermark);
 				this._db.PresetRides.Assemble(bw, this._options.Watermark);
 				this._db.FNGroups.Assemble(bw, this._options.Watermark);
 				this.WriteBlockOffsets(bw, br);
 
+			#if !DEBUG
 			}
 			catch (Exception e)
 			{
@@ -136,6 +141,7 @@ namespace Nikki.Support.Underground2.Framework
 				this._logger.WriteException(e, bw.BaseStream);
 
 			}
+			#endif
 		}
 
 		private void WriteBlockOffsets(BinaryWriter bw, BinaryReader br)
@@ -165,6 +171,7 @@ namespace Nikki.Support.Underground2.Framework
 
 					case BinBlockID.Nikki:
 					case BinBlockID.Tracks:
+					case BinBlockID.GCareer:
 					case BinBlockID.CarSkins:
 					case BinBlockID.SunInfos:
 					case BinBlockID.FEngFiles:

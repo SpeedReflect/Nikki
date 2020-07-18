@@ -230,7 +230,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		public void Assemble(BinaryWriter bw, BinaryWriter strw)
 		{
 			bw.Write((ushort)strw.BaseStream.Position);
-			strw.Write(this._collection_name);
+			strw.WriteNullTermUTF8(this._collection_name);
 
 			bw.Write(this.CashValuePerWin);
 			bw.WriteEnum(this.ReqSponsorRace1);

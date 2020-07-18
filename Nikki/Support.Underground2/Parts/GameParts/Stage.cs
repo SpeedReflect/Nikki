@@ -17,7 +17,7 @@ namespace Nikki.Support.Underground2.Parts.GameParts
 		/// Track ID of this <see cref="Stage"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public uint TrackID { get; set; }
+		public ushort TrackID { get; set; }
 
 		/// <summary>
 		/// Number of laps in this <see cref="Stage"/>.

@@ -619,9 +619,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.Write(this.Unknown0x3B);
 			bw.Write(this.GPSDestination.BinHash());
 
-			bw.WriteBytes(60); // fill buffer in case of skips
-			var position = bw.BaseStream.Position;
-			bw.BaseStream.Position -= 60;
+			var position = bw.BaseStream.Position + 60;
 
 			// If none of the events are drift downhill, write opponent data based on number of the opponents
 			if (this.DriftTypeIfDriftRace() != Shared.Class.Track.TrackDriftType.DOWNHILL)

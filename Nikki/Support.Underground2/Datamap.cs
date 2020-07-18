@@ -36,7 +36,7 @@ namespace Nikki.Support.Underground2
 			this.Managers.Add(new CarTypeInfoManager(this));
 			this.Managers.Add(new DBModelPartManager(this));
 			this.Managers.Add(new FNGroupManager(this));
-			//this.Managers.Add(new GCareerManager(this));
+			this.Managers.Add(new GCareerManager(this));
 			this.Managers.Add(new MaterialManager(this));
 			this.Managers.Add(new PresetRideManager(this));
 			this.Managers.Add(new SlotOverrideManager(this));
@@ -110,14 +110,14 @@ namespace Nikki.Support.Underground2
 		/// <summary>
 		/// <see cref="Manager{T}"/> that manages <see cref="GCareer"/>.
 		/// </summary>
-		//public GCareerManager GCareers
-		//{
-		//	get
-		//	{
-		//		var manager = this.GetManager(typeof(GCareerManager));
-		//		return manager == null ? null : manager as GCareerManager;
-		//	}
-		//}
+		public GCareerManager GCareers
+		{
+			get
+			{
+				var manager = this.GetManager(typeof(GCareerManager));
+				return manager == null ? null : manager as GCareerManager;
+			}
+		}
 
 		/// <summary>
 		/// <see cref="Manager{T}"/> that manages <see cref="Material"/>.

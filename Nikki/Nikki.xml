@@ -32736,6 +32736,11 @@
             <see cref="T:Nikki.Core.Manager`1"/> that manages <see cref="T:Nikki.Support.Underground2.Class.FNGroup"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Underground2.Datamap.GCareers">
+            <summary>
+            <see cref="T:Nikki.Core.Manager`1"/> that manages <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Underground2.Datamap.Materials">
             <summary>
             <see cref="T:Nikki.Core.Manager`1"/> that manages <see cref="T:Nikki.Support.Underground2.Class.Material"/>.

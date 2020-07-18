@@ -71,8 +71,6 @@ namespace Nikki.Support.Carbon.Framework
 		{
 			if (this.Count == 0) return;
 
-			bw.GeneratePadding(mark, this.Alignment);
-
 			foreach (var collection in this)
 			{
 
