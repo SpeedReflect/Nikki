@@ -2970,7 +2970,7 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.PartID.PartCarbon.ROOFSCOOP">
+        <member name="F:Nikki.Reflection.Enum.PartID.PartCarbon.ROOF_SCOOP">
             <summary>
             
             </summary>
@@ -3020,7 +3020,7 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.PartID.PartCarbon.DOORLINE">
+        <member name="F:Nikki.Reflection.Enum.PartID.PartCarbon.BODY_DOORLINE">
             <summary>
             
             </summary>
@@ -3035,27 +3035,27 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.PartID.PartCarbon.BASE_PAINT">
+        <member name="F:Nikki.Reflection.Enum.PartID.PartCarbon.PAINT">
             <summary>
             
             </summary>     
         </member>
-        <member name="F:Nikki.Reflection.Enum.PartID.PartCarbon.BODY_PAINT_GROUP">
+        <member name="F:Nikki.Reflection.Enum.PartID.PartCarbon.PAINT_GROUP">
             <summary>
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.PartID.PartCarbon.BODY_PAINT_SWATCH">
+        <member name="F:Nikki.Reflection.Enum.PartID.PartCarbon.PAINT_SWATCH">
             <summary>
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.PartID.PartCarbon.VINYL_COLOUR">
+        <member name="F:Nikki.Reflection.Enum.PartID.PartCarbon.VINYL_PAINT">
             <summary>
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.PartID.PartCarbon.PAINT_RIM">
+        <member name="F:Nikki.Reflection.Enum.PartID.PartCarbon.RIM_PAINT">
             <summary>
             
             </summary>
@@ -32734,11 +32734,6 @@
         <member name="P:Nikki.Support.Underground2.Datamap.FNGroups">
             <summary>
             <see cref="T:Nikki.Core.Manager`1"/> that manages <see cref="T:Nikki.Support.Underground2.Class.FNGroup"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Datamap.GCareers">
-            <summary>
-            <see cref="T:Nikki.Core.Manager`1"/> that manages <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Datamap.Materials">

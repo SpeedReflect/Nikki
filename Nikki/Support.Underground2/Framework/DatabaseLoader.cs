@@ -134,7 +134,7 @@ namespace Nikki.Support.Underground2.Framework
 				this._db.SlotOverrides.Disassemble(br, this.slottypes);
 				this._db.AcidEffects.Disassemble(br, this.acideffects);
 				this._db.AcidEmitters.Disassemble(br, this.acidemitters);
-				this._db.GCareers.Disassemble(br, this.gcareer);
+				//this._db.GCareers.Disassemble(br, this.gcareer);
 				this.ProcessCarAnimations(br);
 				this.ProcessCarSkins(br);
 

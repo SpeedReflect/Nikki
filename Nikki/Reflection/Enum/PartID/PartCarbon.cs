@@ -393,7 +393,7 @@
         /// <summary>
         /// 
         /// </summary>
-        ROOFSCOOP = 0x4D,
+        ROOF_SCOOP = 0x4D,
 
         /// <summary>
         /// 
@@ -443,7 +443,7 @@
         /// <summary>
         /// 
         /// </summary>
-        DOORLINE = 0x57,
+        BODY_DOORLINE = 0x57,
 
         /// <summary>
         /// 
@@ -458,27 +458,27 @@
         /// <summary>
         /// 
         /// </summary>     
-        BASE_PAINT = 0x5A,
+        PAINT = 0x5A,
 
         /// <summary>
         /// 
         /// </summary>
-        BODY_PAINT_GROUP = 0x5B,
+        PAINT_GROUP = 0x5B,
 
         /// <summary>
         /// 
         /// </summary>
-        BODY_PAINT_SWATCH = 0x5C,
+        PAINT_SWATCH = 0x5C,
 
         /// <summary>
         /// 
         /// </summary>
-        VINYL_COLOUR = 0x5D,
+        VINYL_PAINT = 0x5D,
 
         /// <summary>
         /// 
         /// </summary>
-        PAINT_RIM = 0x5E,
+        RIM_PAINT = 0x5E,
 
         /// <summary>
         /// 
