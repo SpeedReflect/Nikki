@@ -21,18 +21,22 @@ namespace Nikki.Core
 		/// <param name="files">Files to load.</param>
 		public static void LoadBinKeys(IEnumerable<string> files)
 		{
+			var state = Hashing.PauseHashSave;
+			Hashing.PauseHashSave = false;
+
 			foreach (var file in files)
 			{
 				
 				if (!File.Exists(file)) continue;
+
 				try
 				{
 				
 					var lines = File.ReadAllLines(file);
-					
+
 					foreach (var line in lines)
 					{
-					
+
 						if (line.StartsWith("//") || line.StartsWith("#")) continue;
 						else line.BinHash();
 					
@@ -42,6 +46,8 @@ namespace Nikki.Core
 				catch { }
 			
 			}
+
+			Hashing.PauseHashSave = state;
 		}
 
 		/// <summary>

@@ -583,12 +583,12 @@ namespace Nikki.Support.MostWanted.Framework
 				var key = br.ReadUInt32();
 				result[a1] = key.BinString(LookupReturn.EMPTY);
 
-				foreach (var part in Parts.CarParts.UsageType.PartName)
-				{
-
-					(result[a1] + part).BinHash();
-
-				}
+				//foreach (var part in Parts.CarParts.UsageType.PartName)
+				//{
+				//
+				//	(result[a1] + part).BinHash();
+				//
+				//}
 			
 			}
 			

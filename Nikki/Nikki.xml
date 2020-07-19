@@ -707,6 +707,11 @@
             Map of all block to alignments.
             </summary>
         </member>
+        <member name="M:Nikki.Core.Map.ReloadBinKeys">
+            <summary>
+            Reloads entire <see cref="P:Nikki.Core.Map.BinKeys"/> dictionary to its entry runtime state.
+            </summary>
+        </member>
         <member name="T:Nikki.Core.Options">
             <summary>
             A class that specifies loading and saving of files.
@@ -1473,6 +1478,11 @@
         <member name="F:Nikki.Reflection.Enum.BinBlockID.MovieCatalog">
             <summary>
             0x00039020
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.CompTPKBlock">
+            <summary>
+            0x0003A100
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.BinBlockID.ICECatalog">
@@ -39266,6 +39276,11 @@
         <member name="T:Nikki.Utils.Hashing">
             <summary>
             Provides all major extensions of hashing strings.
+            </summary>
+        </member>
+        <member name="P:Nikki.Utils.Hashing.PauseHashSave">
+            <summary>
+            True to pause runtime hash saving; false otherwise.
             </summary>
         </member>
         <member name="M:Nikki.Utils.Hashing.BinHash(System.String)">

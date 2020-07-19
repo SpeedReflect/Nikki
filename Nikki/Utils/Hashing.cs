@@ -14,6 +14,11 @@ namespace Nikki.Utils
     public static class Hashing
     {
         /// <summary>
+        /// True to pause runtime hash saving; false otherwise.
+        /// </summary>
+        public static bool PauseHashSave { get; set; } = false;
+		
+        /// <summary>
         /// Hashes string passed and returns its binary hash.
         /// </summary>
         /// <param name="value">String to be hashed.</param>
@@ -24,7 +29,7 @@ namespace Nikki.Utils
             if (value == BaseArguments.NULL) return 0;
             if (value.IsHexString()) return Convert.ToUInt32(value, 16);
 
-            var arr = Encoding.ASCII.GetBytes(value);
+            var arr = value.GetBytes();
             var len = 0;
             var result = 0xFFFFFFFF;
 
@@ -44,7 +49,7 @@ namespace Nikki.Utils
             
             }
             
-            Map.BinKeys[result] = value;
+            if (!PauseHashSave) Map.BinKeys[result] = value;
             return result;
         }
 
@@ -59,7 +64,7 @@ namespace Nikki.Utils
             if (value == BaseArguments.NULL) return 0;
             if (value.IsHexString()) return Convert.ToUInt32(value, 16);
 
-            var arr = Encoding.ASCII.GetBytes(value);
+            var arr = value.GetBytes();
             var a = 0x9E3779B9;
             var b = 0x9E3779B9;
             var c = 0xABCDEF00;

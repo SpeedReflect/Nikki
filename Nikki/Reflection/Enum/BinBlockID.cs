@@ -271,6 +271,11 @@
         MovieCatalog = 0x00039020, // 0x80 Modular
 
         /// <summary>
+        /// 0x0003A100
+        /// </summary>
+        CompTPKBlock = 0x0003A100, // 0x10 Modular
+
+        /// <summary>
         /// 0x0003B200
         /// </summary>
         ICECatalog = 0x0003B200, // 0x80 Modular

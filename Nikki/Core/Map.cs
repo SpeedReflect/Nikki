@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Nikki.Utils;
 using Nikki.Reflection.Enum;
 
 
@@ -11,10 +12,7 @@ namespace Nikki.Core
 	/// </summary>
 	public static class Map
 	{
-		/// <summary>
-		/// Map of all Bin keys during runtime of library.
-		/// </summary>
-		public static Dictionary<uint, string> BinKeys { get; set; } = new Dictionary<uint, string>()
+		private static Dictionary<uint, string> _binkeys = new Dictionary<uint, string>()
 		{
 			{ 0, String.Empty },
 			{ 0x000004B8, "CV" },
@@ -131,20 +129,12 @@ namespace Nikki.Core
 			{ 0xFE613B98, "LOD_BASE_NAME" },
 			{ 0xFFFFFFFF, String.Empty },
 		};
-
-		/// <summary>
-		/// Map of all Vlt keys during runtime of library.
-		/// </summary>
-		public static Dictionary<uint, string> VltKeys { get; set; } = new Dictionary<uint, string>()
+		private static Dictionary<uint, string> _vltkeys = new Dictionary<uint, string>()
 		{
 			{ 0, String.Empty },
 			{ 0x2B5B1321, "m3gtre46" }
 		};
-
-		/// <summary>
-		/// Map of all car part labels to <see cref="CarPartAttribType"/>.
-		/// </summary>
-		public static Dictionary<uint, CarPartAttribType> CarPartKeys => new Dictionary<uint, CarPartAttribType>()
+		private static Dictionary<uint, CarPartAttribType> _carpartkeys = new Dictionary<uint, CarPartAttribType>()
 		{
 			// Boolean Attributes
 			{ 0x03B83203, CarPartAttribType.Boolean }, // STOCK
@@ -279,6 +269,21 @@ namespace Nikki.Core
 		};
 
 		/// <summary>
+		/// Map of all Bin keys during runtime of library.
+		/// </summary>
+		public static Dictionary<uint, string> BinKeys => _binkeys;
+
+		/// <summary>
+		/// Map of all Vlt keys during runtime of library.
+		/// </summary>
+		public static Dictionary<uint, string> VltKeys => _vltkeys;
+
+		/// <summary>
+		/// Map of all car part labels to <see cref="CarPartAttribType"/>.
+		/// </summary>
+		public static Dictionary<uint, CarPartAttribType> CarPartKeys => _carpartkeys;
+
+		/// <summary>
 		/// Map of all block to alignments.
 		/// </summary>
 		internal static Dictionary<BinBlockID, Alignment> BlockToAlignment => new Dictionary<BinBlockID, Alignment>()
@@ -334,5 +339,132 @@ namespace Nikki.Core
 			{ BinBlockID.PCAWeights,        new Alignment(0x80, Alignment.AlignmentType.Modular) },
 			{ BinBlockID.TPKBlocks,         new Alignment(0x80, Alignment.AlignmentType.Modular) },
 		};
+	
+		/// <summary>
+		/// Reloads entire <see cref="BinKeys"/> dictionary to its entry runtime state.
+		/// </summary>
+		public static void ReloadBinKeys()
+		{
+			var state = Hashing.PauseHashSave;
+			Hashing.PauseHashSave = false;
+
+			_binkeys.Clear();
+			_binkeys[0] = String.Empty;
+			_binkeys[0xFFFFFFFF] = String.Empty;
+			"CV".BinHash();
+			"RED".BinHash();
+			"BLUE".BinHash();
+			"RED2".BinHash();
+			"MAT0".BinHash();
+			"MAT1".BinHash();
+			"MAT2".BinHash();
+			"MAT3".BinHash();
+			"MAT4".BinHash();
+			"MAT5".BinHash();
+			"MAT6".BinHash();
+			"MAT7".BinHash();
+			"NAME".BinHash();
+			"SIZE".BinHash();
+			"DISPGREEN".BinHash();
+			"AcidEffects".BinHash();
+			"ALPHA".BinHash();
+			"BLEND".BinHash();
+			"BLUE2".BinHash();
+			"GREEN".BinHash();
+			"GLOSS".BinHash();
+			"REMAP".BinHash();
+			"SHAPE".BinHash();
+			"STOCK".BinHash();
+			"TIREHUE".BinHash();
+			"TIRELUM".BinHash();
+			"TIRESAT".BinHash();
+			"DISPBLUE".BinHash();
+			"USEMARKER1".BinHash();
+			"USEMARKER2".BinHash();
+			"HOODRIGHT".BinHash();
+			"HOODUNDER".BinHash();
+			"TEXTURE_NAME".BinHash();
+			"MODEL_TABLE_OFFSET".BinHash();
+			"SlotOverrides".BinHash();
+			"SPOKE_COUNT".BinHash();
+			"GCareers".BinHash();
+			"MORPHTARGET_NUM".BinHash();
+			"GROUPLANGUAGEHASH".BinHash();
+			"Collisions".BinHash();
+			"HUDINDEX".BinHash();
+			"DISPRED".BinHash();
+			"TPKBlocks".BinHash();
+			"ANIMSTYLE".BinHash();
+			"VERTSPLIT".BinHash();
+			"LOD_CHARACTERS_OFFSET".BinHash();
+			"LANGUAGEHASH".BinHash();
+			"FNGroups".BinHash();
+			"DAMAGELEVEL".BinHash();
+			"AcidEmitters".BinHash();
+			"ALPHA2".BinHash();
+			"CENTER".BinHash();
+			"NUMCOLOURS".BinHash();
+			"CarTypeInfos".BinHash();
+			"SunInfos".BinHash();
+			"Materials".BinHash();
+			"GREEN2".BinHash();
+			"NUMREMAPCOLOURS".BinHash();
+			"VINYLLANGUAGEHASH".BinHash();
+			"LOD_NAME_PREFIX_SELECTOR".BinHash();
+			"WHEELLEFT".BinHash();
+			"FULLBODY".BinHash();
+			"LIGHT_MATERIAL_NAME".BinHash();
+			"MIRROR".BinHash();
+			"STOCK_MATERIAL".BinHash();
+			"ONLINE".BinHash();
+			"CARBONFIBRE".BinHash();
+			"DBModelParts".BinHash();
+			"RANDOM".BinHash();
+			"HOODHUE".BinHash();
+			"HOODLUM".BinHash();
+			"HOODSAT".BinHash();
+			"KITNUMBER".BinHash();
+			"SWATCH".BinHash();
+			"HOODLEFT".BinHash();
+			"NAME_OFFSET".BinHash();
+			"Tracks".BinHash();
+			"TEXTUREHASH".BinHash();
+			"SPECIFICCARNAME".BinHash();
+			"STRBlocks".BinHash();
+			"PART_NAME_BASE_HASH".BinHash();
+			"PARTID_UPGRADE_GROUP".BinHash();
+			"PART_NAME_SELECTOR".BinHash();
+			"SPINNER_TEXTURE".BinHash();
+			"LOD_NAME_PREFIX_NAMEHASH".BinHash();
+			"SPINNEROFFSET".BinHash();
+			"NUM_DECALS".BinHash();
+			"PART_NAME_OFFSETS".BinHash();
+			"HOODEMITTER".BinHash();
+			"WHEELRIGHT".BinHash();
+			"OUTER_RADIUS".BinHash();
+			"ISDECAL".BinHash();
+			"PresetRides".BinHash();
+			"PresetSkins".BinHash();
+			"COLOR0ID".BinHash();
+			"COLOR1ID".BinHash();
+			"COLOR2ID".BinHash();
+			"COLOR3ID".BinHash();
+			"MAX_LOD".BinHash();
+			"SlotTypes".BinHash();
+			"EXCLUDEDECAL".BinHash();
+			"INNER_RADIUS".BinHash();
+			"BRAND_NAME".BinHash();
+			"PAINTGROUP".BinHash();
+			"WHEELEMITTER".BinHash();
+			"MATNAMEA".BinHash();
+			"MATNAMEB".BinHash();
+			"EXCLUDE_SUV".BinHash();
+			"EXCLUDE_UG1".BinHash();
+			"EXCLUDE_UG2".BinHash();
+			"TEXTURE".BinHash();
+			"LOD_BASE_NAME".BinHash();
+
+			Hashing.PauseHashSave = state;
+		}
 	}
 }
