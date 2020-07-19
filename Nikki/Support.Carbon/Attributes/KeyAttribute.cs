@@ -135,7 +135,7 @@ namespace Nikki.Support.Carbon.Attributes
 		/// Returns the hash code for this <see cref="KeyAttribute"/>.
 		/// </summary>
 		/// <returns>A 32-bit signed integer hash code.</returns>
-		public override int GetHashCode() => Tuple.Create(this.Key, this.Value).GetHashCode();
+		public override int GetHashCode() => Tuple.Create(this.Key, this.Value.BinHash()).GetHashCode();
 
 		/// <summary>
 		/// Determines whether two specified <see cref="KeyAttribute"/> have the same value.
@@ -148,7 +148,9 @@ namespace Nikki.Support.Carbon.Attributes
 			if (at1 is null) return at2 is null;
 			else if (at2 is null) return false;
 
-			return at1.Key == at2.Key && at1.Value == at2.Value;
+			var key1 = at1.Value.BinHash();
+			var key2 = at2.Value.BinHash();
+			return at1.Key == at2.Key && key1 == key2;
 		}
 
 		/// <summary>

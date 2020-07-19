@@ -357,20 +357,46 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 
 		private bool ValueEquals(CPStruct other)
 		{
-			bool result = true;
-			result &= this.Templated == other.Templated;
-			result &= this.Concatenator == other.Concatenator;
-			result &= this.GeometryLodA == other.GeometryLodA;
-			result &= this.GeometryLodB == other.GeometryLodB;
-			result &= this.GeometryLodC == other.GeometryLodC;
-			result &= this.GeometryLodD == other.GeometryLodD;
-			result &= this.GeometryLodE == other.GeometryLodE;
-			result &= this.GeometryLodAExists == other.GeometryLodAExists;
-			result &= this.GeometryLodBExists == other.GeometryLodBExists;
-			result &= this.GeometryLodCExists == other.GeometryLodCExists;
-			result &= this.GeometryLodDExists == other.GeometryLodDExists;
-			result &= this.GeometryLodEExists == other.GeometryLodEExists;
-			return result;
+			if (this.Templated != other.Templated) return false;
+
+			if (this.Templated == eBoolean.True)
+			{
+
+				bool result = true;
+				result &= this.Concatenator == other.Concatenator;
+				result &= this.ConcatenatorExists == other.ConcatenatorExists;
+				if (!result) return false;
+
+				result &= this.GeometryLodA == other.GeometryLodA;
+				result &= this.GeometryLodB == other.GeometryLodB;
+				result &= this.GeometryLodC == other.GeometryLodC;
+				result &= this.GeometryLodD == other.GeometryLodD;
+				result &= this.GeometryLodE == other.GeometryLodE;
+				result &= this.GeometryLodAExists == other.GeometryLodAExists;
+				result &= this.GeometryLodBExists == other.GeometryLodBExists;
+				result &= this.GeometryLodCExists == other.GeometryLodCExists;
+				result &= this.GeometryLodDExists == other.GeometryLodDExists;
+				result &= this.GeometryLodEExists == other.GeometryLodEExists;
+				return result;
+
+			}
+			else
+			{
+
+				bool result = true;
+				result &= this.GeometryLodA.BinHash() == other.GeometryLodA.BinHash();
+				result &= this.GeometryLodB.BinHash() == other.GeometryLodB.BinHash();
+				result &= this.GeometryLodC.BinHash() == other.GeometryLodC.BinHash();
+				result &= this.GeometryLodD.BinHash() == other.GeometryLodD.BinHash();
+				result &= this.GeometryLodE.BinHash() == other.GeometryLodE.BinHash();
+				result &= this.GeometryLodAExists == other.GeometryLodAExists;
+				result &= this.GeometryLodBExists == other.GeometryLodBExists;
+				result &= this.GeometryLodCExists == other.GeometryLodCExists;
+				result &= this.GeometryLodDExists == other.GeometryLodDExists;
+				result &= this.GeometryLodEExists == other.GeometryLodEExists;
+				return result;
+
+			}
 		}
 
 		/// <summary>
@@ -390,15 +416,31 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		public override int GetHashCode()
 		{
 			int result = (this.Templated == eBoolean.True) ? 87 : -87;
-			result = HashCode.Combine(result, this.Concatenator);
-			result = HashCode.Combine(result, this.GeometryLodA);
-			result = HashCode.Combine(result, this.GeometryLodB);
-			result = HashCode.Combine(result, this.GeometryLodC);
-			result = HashCode.Combine(result, this.GeometryLodD);
-			result = HashCode.Combine(result, this.GeometryLodE);
+
+			if (this.Templated == eBoolean.True)
+			{
+
+				result = HashCode.Combine(result, this.Concatenator);
+				result = HashCode.Combine(result, this.ConcatenatorExists);
+				result = HashCode.Combine(result, this.GeometryLodA);
+				result = HashCode.Combine(result, this.GeometryLodB);
+				result = HashCode.Combine(result, this.GeometryLodC);
+				result = HashCode.Combine(result, this.GeometryLodD);
+				result = HashCode.Combine(result, this.GeometryLodE);
+
+			}
+			else
+			{
+
+				result = HashCode.Combine(result, this.GeometryLodA.BinHash());
+				result = HashCode.Combine(result, this.GeometryLodB.BinHash());
+				result = HashCode.Combine(result, this.GeometryLodC.BinHash());
+				result = HashCode.Combine(result, this.GeometryLodD.BinHash());
+				result = HashCode.Combine(result, this.GeometryLodE.BinHash());
+
+			}
 
 			string str = String.Empty;
-			str += ((int)this.ConcatenatorExists).ToString();
 			str += ((int)this.GeometryLodAExists).ToString();
 			str += ((int)this.GeometryLodBExists).ToString();
 			str += ((int)this.GeometryLodCExists).ToString();

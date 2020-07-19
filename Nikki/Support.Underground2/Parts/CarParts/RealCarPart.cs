@@ -117,7 +117,7 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		/// <returns>A 32-bit signed integer hash code.</returns>
 		public override int GetHashCode()
 		{
-			int result = this.PartName?.GetHashCode() ?? String.Empty.GetHashCode();
+			int result = (int)this.PartName.BinHash();
 
 			foreach (var attribute in this.Attributes)
 			{
@@ -273,13 +273,14 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 			if (other is RealCarPart part)
 			{
 
+				if (part.PartLabel.BinHash() != this.PartLabel.BinHash()) return false;
 				if (part.Attributes.Count != this.Attributes.Count) return false;
 
 				var thislist = new List<CPAttribute>(this.Attributes);
 				var otherlist = new List<CPAttribute>(part.Attributes);
 
-				thislist.Sort((x, y) => (int)(x.Key - y.Key));
-				otherlist.Sort((x, y) => (int)(x.Key - y.Key));
+				thislist.Sort((x, y) => x.Key.CompareTo(y.Key));
+				otherlist.Sort((x, y) => x.Key.CompareTo(y.Key));
 
 				for (int loop = 0; loop < this.Length; ++loop)
 				{

@@ -240,8 +240,8 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 				var thislist = new List<CPAttribute>(this.Attributes);
 				var otherlist = new List<CPAttribute>(part.Attributes);
 
-				thislist.Sort((x, y) => (int)(x.Key - y.Key));
-				otherlist.Sort((x, y) => (int)(x.Key - y.Key));
+				thislist.Sort((x, y) => x.Key.CompareTo(y.Key));
+				otherlist.Sort((x, y) => x.Key.CompareTo(y.Key));
 
 				for (int loop = 0; loop < this.Length; ++loop)
 				{

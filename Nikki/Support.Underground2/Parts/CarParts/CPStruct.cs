@@ -486,26 +486,58 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 
 		private bool ValueEquals(CPStruct other)
 		{
-			bool result = true;
-			result &= this.Templated == other.Templated;
-			result &= this.Concatenator == other.Concatenator;
-			result &= this.Geometry0LodA == other.Geometry0LodA;
-			result &= this.Geometry0LodB == other.Geometry0LodB;
-			result &= this.Geometry0LodC == other.Geometry0LodC;
-			result &= this.Geometry0LodD == other.Geometry0LodD;
-			result &= this.Geometry1LodA == other.Geometry1LodA;
-			result &= this.Geometry1LodB == other.Geometry1LodB;
-			result &= this.Geometry1LodC == other.Geometry1LodC;
-			result &= this.Geometry1LodD == other.Geometry1LodD;
-			result &= this.Geometry0LodAExists == other.Geometry0LodAExists;
-			result &= this.Geometry0LodBExists == other.Geometry0LodBExists;
-			result &= this.Geometry0LodCExists == other.Geometry0LodCExists;
-			result &= this.Geometry0LodDExists == other.Geometry0LodDExists;
-			result &= this.Geometry1LodAExists == other.Geometry1LodAExists;
-			result &= this.Geometry1LodBExists == other.Geometry1LodBExists;
-			result &= this.Geometry1LodCExists == other.Geometry1LodCExists;
-			result &= this.Geometry1LodDExists == other.Geometry1LodDExists;
-			return result;
+			if (this.Templated != other.Templated) return false;
+
+			if (this.Templated == eBoolean.True)
+			{
+
+				bool result = true;
+				result &= this.Concatenator == other.Concatenator;
+				result &= this.ConcatenatorExists == other.ConcatenatorExists;
+				if (!result) return false;
+
+				result &= this.Geometry0LodA == other.Geometry0LodA;
+				result &= this.Geometry0LodB == other.Geometry0LodB;
+				result &= this.Geometry0LodC == other.Geometry0LodC;
+				result &= this.Geometry0LodD == other.Geometry0LodD;
+				result &= this.Geometry1LodA == other.Geometry1LodA;
+				result &= this.Geometry1LodB == other.Geometry1LodB;
+				result &= this.Geometry1LodC == other.Geometry1LodC;
+				result &= this.Geometry1LodD == other.Geometry1LodD;
+				result &= this.Geometry0LodAExists == other.Geometry0LodAExists;
+				result &= this.Geometry0LodBExists == other.Geometry0LodBExists;
+				result &= this.Geometry0LodCExists == other.Geometry0LodCExists;
+				result &= this.Geometry0LodDExists == other.Geometry0LodDExists;
+				result &= this.Geometry1LodAExists == other.Geometry1LodAExists;
+				result &= this.Geometry1LodBExists == other.Geometry1LodBExists;
+				result &= this.Geometry1LodCExists == other.Geometry1LodCExists;
+				result &= this.Geometry1LodDExists == other.Geometry1LodDExists;
+				return result;
+
+			}
+			else
+			{
+
+				bool result = true;
+				result &= this.Geometry0LodA.BinHash() == other.Geometry0LodA.BinHash();
+				result &= this.Geometry0LodB.BinHash() == other.Geometry0LodB.BinHash();
+				result &= this.Geometry0LodC.BinHash() == other.Geometry0LodC.BinHash();
+				result &= this.Geometry0LodD.BinHash() == other.Geometry0LodD.BinHash();
+				result &= this.Geometry1LodA.BinHash() == other.Geometry1LodA.BinHash();
+				result &= this.Geometry1LodB.BinHash() == other.Geometry1LodB.BinHash();
+				result &= this.Geometry1LodC.BinHash() == other.Geometry1LodC.BinHash();
+				result &= this.Geometry1LodD.BinHash() == other.Geometry1LodD.BinHash();
+				result &= this.Geometry0LodAExists == other.Geometry0LodAExists;
+				result &= this.Geometry0LodBExists == other.Geometry0LodBExists;
+				result &= this.Geometry0LodCExists == other.Geometry0LodCExists;
+				result &= this.Geometry0LodDExists == other.Geometry0LodDExists;
+				result &= this.Geometry1LodAExists == other.Geometry1LodAExists;
+				result &= this.Geometry1LodBExists == other.Geometry1LodBExists;
+				result &= this.Geometry1LodCExists == other.Geometry1LodCExists;
+				result &= this.Geometry1LodDExists == other.Geometry1LodDExists;
+				return result;
+
+			}
 		}
 
 		/// <summary>
@@ -526,18 +558,36 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		{
 			int result = (this.Templated == eBoolean.True) ? 87 : -87;
 
-			result = HashCode.Combine(result, this.Concatenator);
-			result = HashCode.Combine(result, this.Geometry0LodA);
-			result = HashCode.Combine(result, this.Geometry0LodB);
-			result = HashCode.Combine(result, this.Geometry0LodC);
-			result = HashCode.Combine(result, this.Geometry0LodD);
-			result = HashCode.Combine(result, this.Geometry1LodA);
-			result = HashCode.Combine(result, this.Geometry1LodB);
-			result = HashCode.Combine(result, this.Geometry1LodC);
-			result = HashCode.Combine(result, this.Geometry1LodD);
+			if (this.Templated == eBoolean.True)
+			{
+
+				result = HashCode.Combine(result, this.Concatenator);
+				result = HashCode.Combine(result, this.ConcatenatorExists);
+				result = HashCode.Combine(result, this.Geometry0LodA);
+				result = HashCode.Combine(result, this.Geometry0LodB);
+				result = HashCode.Combine(result, this.Geometry0LodC);
+				result = HashCode.Combine(result, this.Geometry0LodD);
+				result = HashCode.Combine(result, this.Geometry1LodA);
+				result = HashCode.Combine(result, this.Geometry1LodB);
+				result = HashCode.Combine(result, this.Geometry1LodC);
+				result = HashCode.Combine(result, this.Geometry1LodD);
+
+			}
+			else
+			{
+
+				result = HashCode.Combine(result, this.Geometry0LodA.BinHash());
+				result = HashCode.Combine(result, this.Geometry0LodB.BinHash());
+				result = HashCode.Combine(result, this.Geometry0LodC.BinHash());
+				result = HashCode.Combine(result, this.Geometry0LodD.BinHash());
+				result = HashCode.Combine(result, this.Geometry1LodA.BinHash());
+				result = HashCode.Combine(result, this.Geometry1LodB.BinHash());
+				result = HashCode.Combine(result, this.Geometry1LodC.BinHash());
+				result = HashCode.Combine(result, this.Geometry1LodD.BinHash());
+
+			}
 
 			string str = String.Empty;
-			str += ((int)this.ConcatenatorExists).ToString();
 			str += ((int)this.Geometry0LodAExists).ToString();
 			str += ((int)this.Geometry0LodBExists).ToString();
 			str += ((int)this.Geometry0LodCExists).ToString();
