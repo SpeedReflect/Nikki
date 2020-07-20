@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Collections;
 using System.ComponentModel;
-using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
@@ -48,6 +48,12 @@ namespace Nikki.Support.Shared.Class
         [TypeConverter(typeof(HexConverter))]
         public uint VltKey => this.CollectionName.VltHash();
 
+        /// <summary>
+        /// Represents array of <see cref="IList"/> of <see cref="Collectable"/> collections.
+        /// </summary>
+        [Browsable(false)]
+        public abstract IList[] AllCollections { get; }
+
         #endregion
 
         #region Methods
@@ -88,11 +94,11 @@ namespace Nikki.Support.Shared.Class
         public abstract void Deserialize(BinaryReader br);
 
         /// <summary>
-        /// Gets all collections of type <see cref="Collectable"/>.
+        /// Returns an <see cref="IList"/> root with name specified.
         /// </summary>
-        /// <typeparam name="T">A <see cref="Collectable"/> collections to get.</typeparam>
-        /// <returns>Collections of type specified, if type is registered; null otherwise.</returns>
-        public abstract IEnumerable<T> GetCollections<T>() where T : Collectable;
+        /// <param name="root">Name of a root to get.</param>
+        /// <returns>Root with name specified as an <see cref="IList"/>.</returns>
+        public abstract IList GetRoot(string root);
 
         /// <summary>
         /// Gets collection of with CollectionName specified from a root provided.

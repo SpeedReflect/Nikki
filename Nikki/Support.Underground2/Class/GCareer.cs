@@ -1,10 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
+using System.Collections;
 using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
-using Nikki.Utils.EA;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Support.Underground2.Gameplay;
@@ -36,6 +37,7 @@ namespace Nikki.Support.Underground2.Class
         private List<Sponsor> _sponsors;
         private List<WorldChallenge> _world_challenges;
         private List<WorldShop> _world_shops;
+        private Dictionary<string, ConstructorInfo> _activators;
 
         private const long max = 0x7FFFFFFF;
 
@@ -236,6 +238,27 @@ namespace Nikki.Support.Underground2.Class
         [Category("Primary")]
         public int WorldShopCount => this._world_shops.Count;
 
+        /// <summary>
+        /// Represents array of <see cref="IList"/> of <see cref="Collectable"/> collections.
+        /// </summary>
+        [Browsable(false)]
+        public override IList[] AllCollections => new IList[]
+        {
+            this.BankTriggers,
+            this.GCareerBrands,
+            this.GCareerRaces,
+            this.GCareerStages,
+            this.GCarUnlocks,
+            this.GShowcases,
+            this.PartPerformances,
+            this.PartUnlockables,
+            this.PerfSliderTunings,
+            this.SMSMessages,
+            this.Sponsors,
+            this.WorldChallenges,
+            this.WorldShops,
+        };
+
         #endregion
 
         #region Main
@@ -258,6 +281,8 @@ namespace Nikki.Support.Underground2.Class
             this._sponsors = new List<Sponsor>();
             this._world_challenges = new List<WorldChallenge>();
             this._world_shops = new List<WorldShop>();
+            this._activators = new Dictionary<string, ConstructorInfo>(13);
+            this.GenerateActivatorMap();
 		}
 
         /// <summary>
@@ -425,18 +450,30 @@ namespace Nikki.Support.Underground2.Class
         }
 
         /// <summary>
-        /// Gets all collections of type <see cref="Collectable"/>.
+        /// Returns an <see cref="IList"/> root with name specified.
         /// </summary>
-        /// <typeparam name="T">A <see cref="Collectable"/> collections to get.</typeparam>
-        /// <returns>Collections of type specified, if type is registered; null otherwise.</returns>
-        public override IEnumerable<T> GetCollections<T>()
+        /// <param name="root">Name of a root to get.</param>
+        /// <returns>Root with name specified as an <see cref="IList"/>.</returns>
+        public override IList GetRoot(string root)
 		{
-            var type = typeof(T);
-
-
-            int aaa = 0;
-            return null;
-		}
+            return root switch
+            {
+                nameof(this.BankTriggers) => this.BankTriggers,
+                nameof(this.GCareerBrands) => this.GCareerBrands,
+                nameof(this.GCareerRaces) => this.GCareerRaces,
+                nameof(this.GCareerStages) => this.GCareerStages,
+                nameof(this.GCarUnlocks) => this.GCarUnlocks,
+                nameof(this.GShowcases) => this.GShowcases,
+                nameof(this.PartPerformances) => this.PartPerformances,
+                nameof(this.PartUnlockables) => this.PartUnlockables,
+                nameof(this.PerfSliderTunings) => this.PerfSliderTunings,
+                nameof(this.SMSMessages) => this.SMSMessages,
+                nameof(this.Sponsors) => this.Sponsors,
+                nameof(this.WorldChallenges) => this.WorldChallenges,
+                nameof(this.WorldShops) => this.WorldShops,
+                _ => null,
+            };
+        }
 
         /// <summary>
         /// Gets collection of with CollectionName specified from a root provided.
@@ -472,7 +509,20 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="root">Root to which collection should belong to.</param>
         public override void AddCollection(string cname, string root)
 		{
+            if (!this._activators.TryGetValue(root, out var constructor))
+			{
 
+                throw new Exception($"Root named {cname} does not exist");
+
+			}
+            else
+			{
+
+                var collection = constructor.Invoke(new object[] { cname, this });
+                var manager = this.GetRoot(root);
+                manager.Add(collection);
+
+			}
 		}
 
         /// <summary>
@@ -482,8 +532,27 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="root">Root to which collection belongs to.</param>
         public override void RemoveCollection(string cname, string root)
 		{
+            var manager = this.GetRoot(root);
+            if (manager is null)
+			{
 
-		}
+                throw new Exception($"Root named {root} does not exist");
+
+			}
+
+            int index = 0;
+
+            foreach (Collectable collection in manager)
+			{
+
+                if (collection.CollectionName == cname) break;
+                ++index;
+
+			}
+
+            if (index < manager.Count) manager.RemoveAt(index);
+            else throw new Exception($"Collection named {cname} does not exist");
+        }
 
         /// <summary>
         /// Clones collection with CollectionName specified at the root provided.
@@ -493,8 +562,84 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="root">Root to which collection belongs to.</param>
         public override void CloneCollection(string newname, string copyname, string root)
 		{
+            var manager = this.GetRoot(root);
+            var collection = this.GetCollection(copyname, root);
 
+            if (manager is null)
+			{
+
+                throw new Exception($"Root named {root} does not exist");
+
+			}
+
+            if (collection is null)
+			{
+
+                throw new Exception($"Collection {copyname} does not exist");
+
+			}
+
+            var instance = collection.MemoryCast(newname);
+            manager.Add(instance);
 		}
+
+        private void GenerateActivatorMap()
+        {
+            Type type;
+            ConstructorInfo constructor;
+
+            type = typeof(BankTrigger);
+            constructor = type.GetConstructor(new Type[] { typeof(string), typeof(GCareer) });
+            this._activators[nameof(this.BankTriggers)] = constructor;
+
+            type = typeof(GCareerBrand);
+            constructor = type.GetConstructor(new Type[] { typeof(string), typeof(GCareer) });
+            this._activators[nameof(this.GCareerBrands)] = constructor;
+
+            type = typeof(GCareerRace);
+            constructor = type.GetConstructor(new Type[] { typeof(string), typeof(GCareer) });
+            this._activators[nameof(this.GCareerRaces)] = constructor;
+
+            type = typeof(GCareerStage);
+            constructor = type.GetConstructor(new Type[] { typeof(string), typeof(GCareer) });
+            this._activators[nameof(this.GCareerStages)] = constructor;
+
+            type = typeof(GCarUnlock);
+            constructor = type.GetConstructor(new Type[] { typeof(string), typeof(GCareer) });
+            this._activators[nameof(this.GCarUnlocks)] = constructor;
+
+            type = typeof(GShowcase);
+            constructor = type.GetConstructor(new Type[] { typeof(string), typeof(GCareer) });
+            this._activators[nameof(this.GShowcases)] = constructor;
+
+            type = typeof(PartPerformance);
+            constructor = type.GetConstructor(new Type[] { typeof(string), typeof(GCareer) });
+            this._activators[nameof(this.PartPerformances)] = constructor;
+
+            type = typeof(PartUnlockable);
+            constructor = type.GetConstructor(new Type[] { typeof(string), typeof(GCareer) });
+            this._activators[nameof(this.PartUnlockables)] = constructor;
+
+            type = typeof(PerfSliderTuning);
+            constructor = type.GetConstructor(new Type[] { typeof(string), typeof(GCareer) });
+            this._activators[nameof(this.PerfSliderTunings)] = constructor;
+
+            type = typeof(SMSMessage);
+            constructor = type.GetConstructor(new Type[] { typeof(string), typeof(GCareer) });
+            this._activators[nameof(this.SMSMessages)] = constructor;
+
+            type = typeof(Sponsor);
+            constructor = type.GetConstructor(new Type[] { typeof(string), typeof(GCareer) });
+            this._activators[nameof(this.Sponsors)] = constructor;
+
+            type = typeof(WorldChallenge);
+            constructor = type.GetConstructor(new Type[] { typeof(string), typeof(GCareer) });
+            this._activators[nameof(this.WorldChallenges)] = constructor;
+
+            type = typeof(WorldShop);
+            constructor = type.GetConstructor(new Type[] { typeof(string), typeof(GCareer) });
+            this._activators[nameof(this.WorldShops)] = constructor;
+        }
 
         /// <summary>
         /// Returns CollectionName, BinKey and GameSTR of this <see cref="TPKBlock"/> 

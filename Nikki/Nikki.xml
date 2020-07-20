@@ -25617,6 +25617,11 @@
             Vault memory hash of the collection name.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Shared.Class.GCareer.AllCollections">
+            <summary>
+            Represents array of <see cref="T:System.Collections.IList"/> of <see cref="T:Nikki.Reflection.Abstract.Collectable"/> collections.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Shared.Class.GCareer.MemoryCast(System.String)">
             <summary>
             Casts all attributes from this object to another one.
@@ -25649,12 +25654,12 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Class.GCareer.GetCollections``1">
+        <member name="M:Nikki.Support.Shared.Class.GCareer.GetRoot(System.String)">
             <summary>
-            Gets all collections of type <see cref="T:Nikki.Reflection.Abstract.Collectable"/>.
+            Returns an <see cref="T:System.Collections.IList"/> root with name specified.
             </summary>
-            <typeparam name="T">A <see cref="T:Nikki.Reflection.Abstract.Collectable"/> collections to get.</typeparam>
-            <returns>Collections of type specified, if type is registered; null otherwise.</returns>
+            <param name="root">Name of a root to get.</param>
+            <returns>Root with name specified as an <see cref="T:System.Collections.IList"/>.</returns>
         </member>
         <member name="M:Nikki.Support.Shared.Class.GCareer.GetCollection(System.String,System.String)">
             <summary>
@@ -30700,6 +30705,11 @@
             Total count of <see cref="T:Nikki.Support.Underground2.Gameplay.WorldShop"/> in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.AllCollections">
+            <summary>
+            Represents array of <see cref="T:System.Collections.IList"/> of <see cref="T:Nikki.Reflection.Abstract.Collectable"/> collections.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Underground2.Class.GCareer.#ctor">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
@@ -30732,12 +30742,12 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
-        <member name="M:Nikki.Support.Underground2.Class.GCareer.GetCollections``1">
+        <member name="M:Nikki.Support.Underground2.Class.GCareer.GetRoot(System.String)">
             <summary>
-            Gets all collections of type <see cref="T:Nikki.Reflection.Abstract.Collectable"/>.
+            Returns an <see cref="T:System.Collections.IList"/> root with name specified.
             </summary>
-            <typeparam name="T">A <see cref="T:Nikki.Reflection.Abstract.Collectable"/> collections to get.</typeparam>
-            <returns>Collections of type specified, if type is registered; null otherwise.</returns>
+            <param name="root">Name of a root to get.</param>
+            <returns>Root with name specified as an <see cref="T:System.Collections.IList"/>.</returns>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.GCareer.GetCollection(System.String,System.String)">
             <summary>
