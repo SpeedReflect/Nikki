@@ -515,6 +515,13 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="root">Root to which collection should belong to.</param>
         public override void AddCollection(string cname, string root)
 		{
+            if (root == nameof(this.PartUnlockables))
+			{
+
+                throw new Exception("PartUnlockables cannot be added");
+
+			}
+
             if (!this._activators.TryGetValue(root, out var constructor))
 			{
 
@@ -538,6 +545,13 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="root">Root to which collection belongs to.</param>
         public override void RemoveCollection(string cname, string root)
 		{
+            if (root == nameof(this.PartUnlockables))
+			{
+
+                throw new Exception("PartUnlockables cannot be removed");
+
+			}
+
             var manager = this.GetRoot(root);
             if (manager is null)
 			{
@@ -568,6 +582,13 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="root">Root to which collection belongs to.</param>
         public override void CloneCollection(string newname, string copyname, string root)
 		{
+            if (root == nameof(this.PartUnlockables))
+			{
+
+                throw new Exception("PartUnlockables cannot be copied");
+
+			}
+
             var manager = this.GetRoot(root);
             var collection = this.GetCollection(copyname, root);
 
@@ -1384,7 +1405,7 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         public override void Serialize(BinaryWriter bw)
         {
-
+            throw new Exception("Serialization/Export of GCareer is not implemented yet");
         }
 
         /// <summary>
@@ -1393,7 +1414,7 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         public override void Deserialize(BinaryReader br)
         {
-
+            throw new Exception("Deserialization/Import of GCareer is not implemeneted yet");
         }
 
         /// <summary>

@@ -267,16 +267,16 @@ namespace Nikki.Utils.DDS
 		{
 			this.Area = this.Compression switch
 			{
-				TextureCompressionType.TEXCOMP_4BIT => this.Width * this.Height * 4,
-				TextureCompressionType.TEXCOMP_4BIT_IA8 => this.Width * this.Height * 4,
-				TextureCompressionType.TEXCOMP_4BIT_RGB16_A8 => this.Width * this.Height * 4,
-				TextureCompressionType.TEXCOMP_4BIT_RGB24_A8 => this.Width * this.Height * 4,
-				TextureCompressionType.TEXCOMP_8BIT => this.Width * this.Height * 4,
-				TextureCompressionType.TEXCOMP_8BIT_16 => this.Width * this.Height * 4,
-				TextureCompressionType.TEXCOMP_8BIT_64 => this.Width * this.Height * 4,
-				TextureCompressionType.TEXCOMP_8BIT_IA8 => this.Width * this.Height * 4,
-				TextureCompressionType.TEXCOMP_8BIT_RGB16_A8 => this.Width * this.Height * 4,
-				TextureCompressionType.TEXCOMP_8BIT_RGB24_A8 => this.Width * this.Height * 4,
+				TextureCompressionType.TEXCOMP_4BIT => this.Width * this.Height,
+				TextureCompressionType.TEXCOMP_4BIT_IA8 => this.Width * this.Height,
+				TextureCompressionType.TEXCOMP_4BIT_RGB16_A8 => this.Width * this.Height,
+				TextureCompressionType.TEXCOMP_4BIT_RGB24_A8 => this.Width * this.Height,
+				TextureCompressionType.TEXCOMP_8BIT => this.Width * this.Height,
+				TextureCompressionType.TEXCOMP_8BIT_16 => this.Width * this.Height,
+				TextureCompressionType.TEXCOMP_8BIT_64 => this.Width * this.Height,
+				TextureCompressionType.TEXCOMP_8BIT_IA8 => this.Width * this.Height,
+				TextureCompressionType.TEXCOMP_8BIT_RGB16_A8 => this.Width * this.Height,
+				TextureCompressionType.TEXCOMP_8BIT_RGB24_A8 => this.Width * this.Height,
 				TextureCompressionType.TEXCOMP_32BIT => this.Width * this.Height * 4,
 				_ => this.FlipToBase(this.Size)
 			};
