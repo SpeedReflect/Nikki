@@ -118,7 +118,7 @@ namespace Nikki.Support.Underground2.Gameplay
 				if (String.IsNullOrWhiteSpace(value))
 				{
 
-					throw new ArgumentNullException("This value cannot be left left empty.");
+					throw new ArgumentNullException("This value cannot be left empty.");
 
 				}
 				if (value.Contains(' '))

@@ -226,7 +226,7 @@ namespace Nikki.Support.Underground2.Gameplay
 				if (String.IsNullOrWhiteSpace(value))
 				{
 
-					throw new ArgumentNullException("This value cannot be left left empty.");
+					throw new ArgumentNullException("This value cannot be left empty.");
 
 				}
 				if (value.Contains(' '))
@@ -341,6 +341,14 @@ namespace Nikki.Support.Underground2.Gameplay
 		public int RequiredDVDUnlocked { get; set; }
 
 		/// <summary>
+		/// Freeroam engage trigger of the message.
+		/// </summary>
+		[AccessModifiable()]
+		[MemoryCastable()]
+		[Category("Secondary")]
+		public string FreeroamTrigger { get; set; } = String.Empty;
+
+		/// <summary>
 		/// Stage to which this message belongs to.
 		/// </summary>
 		[AccessModifiable()]
@@ -448,7 +456,7 @@ namespace Nikki.Support.Underground2.Gameplay
 					break;
 
 				case UnlockType.FreeroamFind:
-					bw.Write(this.BinKey);
+					bw.Write(this.FreeroamTrigger.BinHash());
 					break;
 
 				default:
@@ -503,12 +511,9 @@ namespace Nikki.Support.Underground2.Gameplay
 					this.RequiredDVDUnlocked = br.ReadInt32();
 					break;
 
-				#if DEBUG
 				case UnlockType.FreeroamFind:
-					var cname = br.ReadUInt32().BinString(LookupReturn.EMPTY);
-					Console.WriteLine($"{this._collection_name} ---> {cname}");
+					this.FreeroamTrigger = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 					break;
-				#endif
 
 				default:
 					br.BaseStream.Position += 4;

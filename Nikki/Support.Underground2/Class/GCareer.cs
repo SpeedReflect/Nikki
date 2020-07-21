@@ -259,6 +259,12 @@ namespace Nikki.Support.Underground2.Class
             this.WorldShops,
         };
 
+        /// <summary>
+        /// Represents array of all root names in this <see cref="GCareer"/>.
+        /// </summary>
+        [Browsable(false)]
+        public override string[] AllRootNames => this.GetRootNames();
+
         #endregion
 
         #region Main
@@ -640,6 +646,23 @@ namespace Nikki.Support.Underground2.Class
             constructor = type.GetConstructor(new Type[] { typeof(string), typeof(GCareer) });
             this._activators[nameof(this.WorldShops)] = constructor;
         }
+
+        private string[] GetRootNames() => new string[]
+        {
+            nameof(this.BankTriggers),
+            nameof(this.GCareerBrands),
+            nameof(this.GCareerRaces),
+            nameof(this.GCareerStages),
+            nameof(this.GCarUnlocks),
+            nameof(this.GShowcases),
+            nameof(this.PartPerformances),
+            nameof(this.PartUnlockables),
+            nameof(this.PerfSliderTunings),
+            nameof(this.SMSMessages),
+            nameof(this.Sponsors),
+            nameof(this.WorldChallenges),
+            nameof(this.WorldShops),
+        };
 
         /// <summary>
         /// Returns CollectionName, BinKey and GameSTR of this <see cref="TPKBlock"/> 

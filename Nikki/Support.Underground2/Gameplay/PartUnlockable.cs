@@ -3,7 +3,6 @@ using System.IO;
 using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
-using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
@@ -28,11 +27,11 @@ namespace Nikki.Support.Underground2.Gameplay
 			"Engine",                // 0x01
             "ECU",                   // 0x02
             "Suspension",            // 0x03
-            "Transmission",          // 0x04
-            "NOS",                   // 0x05
-            "Tires",                 // 0x06
-            "Brakes",                // 0x07
-            "WeightReduction",       // 0x08
+            "NOS",                   // 0x04
+            "Transmission",          // 0x05
+            "WeightReduction",       // 0x06
+            "Tires",                 // 0x07
+            "Brakes",                // 0x08
             "Turbo",                 // 0x09
             "Aerodynamics",          // 0x0A
             "Hoods",                 // 0x0B
@@ -113,6 +112,9 @@ namespace Nikki.Support.Underground2.Gameplay
             "TrunkCarbon",           // 0x56
         };
 
+		[MemoryCastable()]
+		private int _unlock_index = -1;
+		
 		#endregion
 
 		#region Enums
@@ -160,11 +162,13 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override GameINT GameINT => GameINT.Underground2;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override string GameSTR => GameINT.Underground2.ToString();
 
 		/// <summary>
@@ -176,34 +180,12 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
-		[AccessModifiable()]
+		[ReadOnly(true)]
 		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
-			set
-			{
-				if (String.IsNullOrWhiteSpace(value))
-				{
-
-					throw new ArgumentNullException("This value cannot be left left empty.");
-
-				}
-				if (value.Contains(' '))
-				{
-
-					throw new Exception("CollectionName cannot contain whitespace.");
-
-				}
-				if (this.Career.GetCollection(value, nameof(this.Career.PartUnlockables)) != null)
-				{
-
-					throw new CollectionExistenceException(value);
-
-				}
-
-				this._collection_name = value;
-			}
+			set => throw new Exception($"Collection names of PartUnlockables cannot be changed");
 		}
 
 		/// <summary>
@@ -219,6 +201,12 @@ namespace Nikki.Support.Underground2.Gameplay
 		[Category("Main")]
 		[TypeConverter(typeof(HexConverter))]
 		public uint VltKey => this._collection_name.VltHash();
+
+		/// <summary>
+		/// Unlockable index of this <see cref="PartUnlockable"/>.
+		/// </summary>
+		[Category("Primary")]
+		public int UnlockableIndex => this._unlock_index;
 
 		/// <summary>
 		/// Visual rating of level 1 parts.
@@ -381,7 +369,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		public PartUnlockable(string CName, GCareer career)
 		{
 			this.Career = career;
-			this._collection_name = CName;
+			this.CollectionName = CName;
 			CName.BinHash();
 		}
 
@@ -485,7 +473,8 @@ namespace Nikki.Support.Underground2.Gameplay
 		public void Disassemble(BinaryReader br)
 		{
 			// CollectionName
-			this._collection_name = this.GetValidCollectionName(br.ReadInt32());
+			this._unlock_index = br.ReadInt32();
+			this._collection_name = this.GetValidCollectionName(this._unlock_index);
 
 			// Read level 1 settings
 			this.VisualRatingLevel1 = br.ReadInt16();

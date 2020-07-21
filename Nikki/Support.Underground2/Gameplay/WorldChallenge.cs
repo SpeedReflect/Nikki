@@ -92,7 +92,7 @@ namespace Nikki.Support.Underground2.Gameplay
 				if (String.IsNullOrWhiteSpace(value))
 				{
 
-					throw new ArgumentNullException("This value cannot be left left empty.");
+					throw new ArgumentNullException("This value cannot be left empty.");
 
 				}
 				if (value.Contains(' '))
@@ -197,7 +197,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
-		public byte PartUnlockable1 { get; set; }
+		public sbyte PartUnlockable1 { get; set; }
 
 		/// <summary>
 		/// Index of the second unique part that gets unlocked upon completion.
@@ -205,7 +205,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
-		public byte PartUnlockable2 { get; set; }
+		public sbyte PartUnlockable2 { get; set; }
 
 		/// <summary>
 		/// Index of the third unique part that gets unlocked upon completion.
@@ -213,7 +213,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
-		public byte PartUnlockable3 { get; set; }
+		public sbyte PartUnlockable3 { get; set; }
 
 		#endregion
 
@@ -320,9 +320,9 @@ namespace Nikki.Support.Underground2.Gameplay
 
 			// Type and Unlockables
 			this.ChallengeType = br.ReadEnum<WorldChallengeType>();
-			this.PartUnlockable1 = br.ReadByte();
-			this.PartUnlockable2 = br.ReadByte();
-			this.PartUnlockable3 = br.ReadByte();
+			this.PartUnlockable1 = br.ReadSByte();
+			this.PartUnlockable2 = br.ReadSByte();
+			this.PartUnlockable3 = br.ReadSByte();
 		}
 
 		/// <summary>

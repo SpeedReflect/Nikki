@@ -54,6 +54,12 @@ namespace Nikki.Support.Shared.Class
         [Browsable(false)]
         public abstract IList[] AllCollections { get; }
 
+        /// <summary>
+        /// Represents array of all root names in this <see cref="GCareer"/>.
+        /// </summary>
+        [Browsable(false)]
+        public abstract string[] AllRootNames { get; }
+
         #endregion
 
         #region Methods

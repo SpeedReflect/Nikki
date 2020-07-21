@@ -169,7 +169,7 @@ namespace Nikki.Support.Underground2.Gameplay
 				if (String.IsNullOrWhiteSpace(value))
 				{
 
-					throw new ArgumentNullException("This value cannot be left left empty.");
+					throw new ArgumentNullException("This value cannot be left empty.");
 
 				}
 				if (value.Contains(' '))
@@ -332,6 +332,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public EventIconType EventIcon { get; set; }
 
 		/// <summary>

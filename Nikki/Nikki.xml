@@ -25622,6 +25622,11 @@
             Represents array of <see cref="T:System.Collections.IList"/> of <see cref="T:Nikki.Reflection.Abstract.Collectable"/> collections.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Shared.Class.GCareer.AllRootNames">
+            <summary>
+            Represents array of all root names in this <see cref="T:Nikki.Support.Shared.Class.GCareer"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Shared.Class.GCareer.MemoryCast(System.String)">
             <summary>
             Casts all attributes from this object to another one.
@@ -30710,6 +30715,11 @@
             Represents array of <see cref="T:System.Collections.IList"/> of <see cref="T:Nikki.Reflection.Abstract.Collectable"/> collections.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Underground2.Class.GCareer.AllRootNames">
+            <summary>
+            Represents array of all root names in this <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Underground2.Class.GCareer.#ctor">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Underground2.Class.GCareer"/>.
@@ -35437,6 +35447,11 @@
             Vault memory hash of the collection name.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.UnlockableIndex">
+            <summary>
+            Unlockable index of this <see cref="T:Nikki.Support.Underground2.Gameplay.PartUnlockable"/>.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Underground2.Gameplay.PartUnlockable.VisualRatingLevel1">
             <summary>
             Visual rating of level 1 parts.
@@ -35925,6 +35940,11 @@
         <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.RequiredDVDUnlocked">
             <summary>
             Required DVD number unlocked to unlock this message.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.FreeroamTrigger">
+            <summary>
+            Freeroam engage trigger of the message.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Gameplay.SMSMessage.BelongsToStage">

@@ -53,8 +53,8 @@ namespace Nikki.Support.Underground2.Parts.GameParts
 		public void Read(BinaryReader br)
 		{
 			this.TrackID = br.ReadUInt16();
-			this.NumberOfLaps = br.ReadByte();
 			this.InReverseDirection = (eBoolean)(br.ReadByte() % 2);
+			this.NumberOfLaps = br.ReadByte();
 		}
 
 		/// <summary>
@@ -64,8 +64,8 @@ namespace Nikki.Support.Underground2.Parts.GameParts
 		public void Write(BinaryWriter bw)
 		{
 			bw.Write(this.TrackID);
-			bw.Write(this.NumberOfLaps);
 			bw.WriteEnum(this.InReverseDirection);
+			bw.Write(this.NumberOfLaps);
 		}
 	}
 }
