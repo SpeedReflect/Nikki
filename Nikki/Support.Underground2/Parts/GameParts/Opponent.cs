@@ -108,5 +108,33 @@ namespace Nikki.Support.Underground2.Parts.GameParts
 			bw.Write(this.SkillHard);
 			bw.Write(this.CatchUp);
 		}
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public void Serialize(BinaryWriter bw)
+		{
+			bw.WriteNullTermUTF8(this.Name);
+			bw.WriteNullTermUTF8(this.PresetRide);
+			bw.Write(this.StatsMultiplier);
+			bw.Write(this.SkillEasy);
+			bw.Write(this.SkillMedium);
+			bw.Write(this.SkillHard);
+			bw.Write(this.CatchUp);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public void Deserialize(BinaryReader br)
+		{
+			this.Name = br.ReadNullTermUTF8();
+			this.PresetRide = br.ReadNullTermUTF8();
+			this.StatsMultiplier = br.ReadUInt16();
+			this.SkillEasy = br.ReadByte();
+			this.SkillMedium = br.ReadByte();
+			this.SkillHard = br.ReadByte();
+			this.CatchUp = br.ReadByte();
+		}
 	}
 }

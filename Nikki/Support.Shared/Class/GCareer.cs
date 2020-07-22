@@ -7,8 +7,7 @@ using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Interface;
 using CoreExtensions.Conversions;
-
-
+using System.Collections.Generic;
 
 namespace Nikki.Support.Shared.Class
 {
@@ -135,6 +134,29 @@ namespace Nikki.Support.Shared.Class
         /// <param name="copyname">CollectionName of a collection to clone.</param>
         /// <param name="root">Root to which collection belongs to.</param>
         public abstract void CloneCollection(string newname, string copyname, string root);
+
+        /// <summary>
+        /// Merges two lists of <see cref="Collectable"/> into one.
+        /// </summary>
+        /// <typeparam name="T">Type of <see cref="Collectable"/>.</typeparam>
+        /// <param name="main">Main list that takes merging priority in case of duplicates.</param>
+        /// <param name="merger">List that main list is being merged with.</param>
+        /// <returns>List with merged collections.</returns>
+        protected List<T> MergeCollectionLists<T>(List<T> main, List<T> merger) where T : Collectable
+		{
+            var result = new List<T>(main);
+
+            foreach (var collection in merger)
+			{
+
+                var match = main.Find(_ => _.CollectionName == collection.CollectionName);
+                if (match is null) result.Add(collection);
+                else continue;
+
+			}
+
+            return result;
+		}
 
 		#endregion
 	}

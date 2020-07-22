@@ -1405,7 +1405,51 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         public override void Serialize(BinaryWriter bw)
         {
-            throw new Exception("Serialization/Export of GCareer is not implemented yet");
+            byte[] array;
+            using (var ms = new MemoryStream(0x18000))
+            using (var writer = new BinaryWriter(ms))
+            {
+
+                writer.WriteNullTermUTF8(this._collection_name);
+
+                writer.Write(this.BankTriggerCount);
+                writer.Write(this.GCareerBrandCount);
+                writer.Write(this.GCareerRaceCount);
+                writer.Write(this.GCareerStageCount);
+                writer.Write(this.GCarUnlockCount);
+                writer.Write(this.GShowcaseCount);
+                writer.Write(this.PartPerformanceCount);
+                writer.Write(this.PartUnlockableCount);
+                writer.Write(this.PerfSliderTuningCount);
+                writer.Write(this.SMSMessageCount);
+                writer.Write(this.SponsorCount);
+                writer.Write(this.WorldChallengeCount);
+                writer.Write(this.WorldShopCount);
+
+                foreach (var c in this.BankTriggers) c.Serialize(writer);
+                foreach (var c in this.GCareerBrands) c.Serialize(writer);
+                foreach (var c in this.GCareerRaces) c.Serialize(writer);
+                foreach (var c in this.GCareerStages) c.Serialize(writer);
+                foreach (var c in this.GCarUnlocks) c.Serialize(writer);
+                foreach (var c in this.GShowcases) c.Serialize(writer);
+                foreach (var c in this.PartPerformances) c.Serialize(writer);
+                foreach (var c in this.PartUnlockables) c.Serialize(writer);
+                foreach (var c in this.PerfSliderTunings) c.Serialize(writer);
+                foreach (var c in this.SMSMessages) c.Serialize(writer);
+                foreach (var c in this.Sponsors) c.Serialize(writer);
+                foreach (var c in this.WorldChallenges) c.Serialize(writer);
+                foreach (var c in this.WorldShops) c.Serialize(writer);
+
+                array = ms.ToArray();
+
+            }
+
+            array = Interop.Compress(array, LZCompressionType.BEST);
+
+            var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+            header.Write(bw);
+            bw.Write(array.Length);
+            bw.Write(array);
         }
 
         /// <summary>
@@ -1414,7 +1458,146 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         public override void Deserialize(BinaryReader br)
         {
-            throw new Exception("Deserialization/Import of GCareer is not implemeneted yet");
+            int size = br.ReadInt32();
+            var array = br.ReadBytes(size);
+
+            array = Interop.Decompress(array);
+
+            using var ms = new MemoryStream(array);
+            using var reader = new BinaryReader(ms);
+
+            this._collection_name = reader.ReadNullTermUTF8();
+
+            this.BankTriggers.Capacity = reader.ReadInt32();
+            this.GCareerBrands.Capacity = reader.ReadInt32();
+            this.GCareerRaces.Capacity = reader.ReadInt32();
+            this.GCareerStages.Capacity = reader.ReadInt32();
+            this.GCarUnlocks.Capacity = reader.ReadInt32();
+            this.GShowcases.Capacity = reader.ReadInt32();
+            this.PartPerformances.Capacity = reader.ReadInt32();
+            this.PartUnlockables.Capacity = reader.ReadInt32();
+            this.PerfSliderTunings.Capacity = reader.ReadInt32();
+            this.SMSMessages.Capacity = reader.ReadInt32();
+            this.Sponsors.Capacity = reader.ReadInt32();
+            this.WorldChallenges.Capacity = reader.ReadInt32();
+            this.WorldShops.Capacity = reader.ReadInt32();
+
+            for (int i = 0, max = this.BankTriggers.Capacity; i < max; ++i)
+			{
+
+                var collection = new BankTrigger() { Career = this };
+                collection.Deserialize(reader);
+                this.BankTriggers.Add(collection);
+
+			}
+
+            for (int i = 0, max = this.GCareerBrands.Capacity; i < max; ++i)
+            {
+
+                var collection = new GCareerBrand() { Career = this };
+                collection.Deserialize(reader);
+                this.GCareerBrands.Add(collection);
+
+            }
+
+            for (int i = 0, max = this.GCareerRaces.Capacity; i < max; ++i)
+            {
+
+                var collection = new GCareerRace() { Career = this };
+                collection.Deserialize(reader);
+                this.GCareerRaces.Add(collection);
+
+            }
+
+            for (int i = 0, max = this.GCareerStages.Capacity; i < max; ++i)
+            {
+
+                var collection = new GCareerStage() { Career = this };
+                collection.Deserialize(reader);
+                this.GCareerStages.Add(collection);
+
+            }
+
+            for (int i = 0, max = this.GCarUnlocks.Capacity; i < max; ++i)
+            {
+
+                var collection = new GCarUnlock() { Career = this };
+                collection.Deserialize(reader);
+                this.GCarUnlocks.Add(collection);
+
+            }
+
+            for (int i = 0, max = this.GShowcases.Capacity; i < max; ++i)
+            {
+
+                var collection = new GShowcase() { Career = this };
+                collection.Deserialize(reader);
+                this.GShowcases.Add(collection);
+
+            }
+
+            for (int i = 0, max = this.PartPerformances.Capacity; i < max; ++i)
+            {
+
+                var collection = new PartPerformance() { Career = this };
+                collection.Deserialize(reader);
+                this.PartPerformances.Add(collection);
+
+            }
+
+            for (int i = 0, max = this.PartUnlockables.Capacity; i < max; ++i)
+            {
+
+                var collection = new PartUnlockable() { Career = this };
+                collection.Deserialize(reader);
+                this.PartUnlockables.Add(collection);
+
+            }
+
+            for (int i = 0, max = this.PerfSliderTunings.Capacity; i < max; ++i)
+            {
+
+                var collection = new PerfSliderTuning() { Career = this };
+                collection.Deserialize(reader);
+                this.PerfSliderTunings.Add(collection);
+
+            }
+
+            for (int i = 0, max = this.SMSMessages.Capacity; i < max; ++i)
+            {
+
+                var collection = new SMSMessage() { Career = this };
+                collection.Deserialize(reader);
+                this.SMSMessages.Add(collection);
+
+            }
+
+            for (int i = 0, max = this.Sponsors.Capacity; i < max; ++i)
+            {
+
+                var collection = new Sponsor() { Career = this };
+                collection.Deserialize(reader);
+                this.Sponsors.Add(collection);
+
+            }
+
+            for (int i = 0, max = this.WorldChallenges.Capacity; i < max; ++i)
+            {
+
+                var collection = new WorldChallenge() { Career = this };
+                collection.Deserialize(reader);
+                this.WorldChallenges.Add(collection);
+
+            }
+
+            for (int i = 0, max = this.WorldShops.Capacity; i < max; ++i)
+            {
+
+                var collection = new WorldShop() { Career = this };
+                collection.Deserialize(reader);
+                this.WorldShops.Add(collection);
+
+            }
         }
 
         /// <summary>
@@ -1423,7 +1606,19 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="other"><see cref="GCareer"/> to synchronize with.</param>
         internal void Synchronize(GCareer other)
         {
-
+            this._bank_triggers = this.MergeCollectionLists(other.BankTriggers, this.BankTriggers);
+            this._gcareer_brands = this.MergeCollectionLists(other.GCareerBrands, this.GCareerBrands);
+            this._gcareer_races = this.MergeCollectionLists(other.GCareerRaces, this.GCareerRaces);
+            this._gcareer_stages = this.MergeCollectionLists(other.GCareerStages, this.GCareerStages);
+            this._gcar_unlocks = this.MergeCollectionLists(other.GCarUnlocks, this.GCarUnlocks);
+            this._gshowcases = this.MergeCollectionLists(other.GShowcases, this.GShowcases);
+            this._part_performances = this.MergeCollectionLists(other.PartPerformances, this.PartPerformances);
+            this._part_unlockables = this.MergeCollectionLists(other.PartUnlockables, this.PartUnlockables);
+            this._perfslider_tunings = this.MergeCollectionLists(other.PerfSliderTunings, this.PerfSliderTunings);
+            this._sms_messages = this.MergeCollectionLists(other.SMSMessages, this.SMSMessages);
+            this._sponsors = this.MergeCollectionLists(other.Sponsors, this.Sponsors);
+            this._world_challenges = this.MergeCollectionLists(other.WorldChallenges, this.WorldChallenges);
+            this._world_shops = this.MergeCollectionLists(other.WorldShops, this.WorldShops);
         }
 
         #endregion

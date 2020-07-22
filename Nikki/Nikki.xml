@@ -25696,6 +25696,15 @@
             <param name="copyname">CollectionName of a collection to clone.</param>
             <param name="root">Root to which collection belongs to.</param>
         </member>
+        <member name="M:Nikki.Support.Shared.Class.GCareer.MergeCollectionLists``1(System.Collections.Generic.List{``0},System.Collections.Generic.List{``0})">
+            <summary>
+            Merges two lists of <see cref="T:Nikki.Reflection.Abstract.Collectable"/> into one.
+            </summary>
+            <typeparam name="T">Type of <see cref="T:Nikki.Reflection.Abstract.Collectable"/>.</typeparam>
+            <param name="main">Main list that takes merging priority in case of duplicates.</param>
+            <param name="merger">List that main list is being merged with.</param>
+            <returns>List with merged collections.</returns>
+        </member>
         <member name="T:Nikki.Support.Shared.Class.Material">
             <summary>
             <see cref="T:Nikki.Support.Shared.Class.Material"/> is a collection of float attributes of shaders and materials.
@@ -34137,6 +34146,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.BankTrigger.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.BankTrigger.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Underground2.Gameplay.GCareerBrand">
             <summary>
             <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerBrand"/> is a collection of settings related to sponsor brands.
@@ -34227,6 +34248,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerBrand.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerBrand.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Underground2.Gameplay.GCareerRace">
             <summary>
@@ -34586,6 +34619,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerRace.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerRace.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Underground2.Gameplay.GCareerStage">
             <summary>
             <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerStage"/> is a collection of settings related to career stages.
@@ -34886,6 +34931,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerStage.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerStage.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Underground2.Gameplay.GCarUnlock">
             <summary>
             <see cref="T:Nikki.Support.Underground2.Gameplay.GCarUnlock"/> is a collection of settings related to car unlock requirements.
@@ -34980,6 +35037,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCarUnlock.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GCarUnlock.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Underground2.Gameplay.GShowcase">
             <summary>
@@ -35136,6 +35205,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GShowcase.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.GShowcase.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Underground2.Gameplay.PartPerformance">
             <summary>
@@ -35377,6 +35458,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PartPerformance.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PartPerformance.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Underground2.Gameplay.PartUnlockable">
             <summary>
             <see cref="T:Nikki.Support.Underground2.Gameplay.PartUnlockable"/> is a collection of settings related to visual unlockable parts.
@@ -35592,6 +35685,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PartUnlockable.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PartUnlockable.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Underground2.Gameplay.PerfSliderTuning">
             <summary>
             <see cref="T:Nikki.Support.Underground2.Gameplay.PerfSliderTuning"/> is a collection of settings related to performance sliders.
@@ -35696,6 +35801,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Underground2.Gameplay.SMSMessage">
             <summary>
@@ -36015,6 +36132,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.SMSMessage.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.SMSMessage.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Underground2.Gameplay.Sponsor">
             <summary>
             <see cref="T:Nikki.Support.Underground2.Gameplay.Sponsor"/> is a collection of settings related to sponsors and contracts.
@@ -36167,6 +36296,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.Sponsor.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.Sponsor.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Underground2.Gameplay.WorldChallenge">
             <summary>
@@ -36337,6 +36478,18 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.WorldChallenge.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.WorldChallenge.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Underground2.Gameplay.WorldShop">
             <summary>
             <see cref="T:Nikki.Support.Underground2.Gameplay.WorldShop"/> is a collection of settings related to shops and premises.
@@ -36503,6 +36656,18 @@
             as a string value.
             </summary>
             <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.WorldShop.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Gameplay.WorldShop.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="T:Nikki.Support.Underground2.Parts.CarParts.CPStruct">
             <summary>
@@ -36970,6 +37135,16 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
             <param name="strw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.GameParts.Opponent.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.GameParts.Opponent.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
         </member>
         <member name="T:Nikki.Support.Underground2.Parts.GameParts.Stage">
             <summary>

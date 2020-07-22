@@ -33,7 +33,7 @@ namespace Nikki.Support.Underground2.Framework
 		/// <summary>
 		/// If true, manager can export and import non-serialized collection; otherwise, false.
 		/// </summary>
-		public override bool AllowsNoSerialization => true;
+		public override bool AllowsNoSerialization => false;
 
 		/// <summary>
 		/// True if this <see cref="Manager{T}"/> is read-only; otherwise, false.

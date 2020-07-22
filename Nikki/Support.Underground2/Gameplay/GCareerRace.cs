@@ -837,7 +837,61 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		public void Serialize(BinaryWriter bw)
 		{
+			bw.WriteNullTermUTF8(this._collection_name);
+			bw.WriteNullTermUTF8(this.IntroMovie);
+			bw.WriteNullTermUTF8(this.OutroMovie);
+			bw.WriteNullTermUTF8(this.EventTrigger);
+			bw.WriteEnum(this.UnlockMethod);
+			bw.WriteEnum(this.IsSUVRace);
+			bw.Write(this._padding0);
+			bw.WriteEnum(this.EventBehavior);
 
+			if (this.UnlockMethod == UnlockCondition.SpecificRaceWon)
+			{
+
+				bw.WriteNullTermUTF8(this.RequiredSpecificRaceWon);
+
+			}
+			else
+			{
+
+				bw.Write(this.RequiredSpecificURLWon);
+				bw.Write(this.SponsorChosenToUnlock);
+				bw.Write(this.RequiredRacesWon);
+				bw.Write(this.RequiredURLWon);
+
+			}
+
+			bw.Write(this.EarnableRespect);
+			this.STAGE1.Write(bw);
+			this.STAGE2.Write(bw);
+			this.STAGE3.Write(bw);
+			this.STAGE4.Write(bw);
+
+			bw.WriteNullTermUTF8(this.PlayerCarType);
+			bw.Write(this.CashValue);
+			bw.WriteEnum(this.EventIcon);
+			bw.WriteEnum(this.IsDriveToGPS);
+			bw.WriteEnum(this.DifficultyLevel);
+			bw.Write(this.BelongsToStage);
+			bw.Write(this.NumMapItems);
+			bw.Write(this._padding1);
+			bw.Write(this.Unknown0x3A);
+			bw.Write(this.Unknown0x3B);
+			bw.WriteNullTermUTF8(this.GPSDestination);
+
+			this.OPPONENT1.Serialize(bw);
+			this.OPPONENT2.Serialize(bw);
+			this.OPPONENT3.Serialize(bw);
+			this.OPPONENT4.Serialize(bw);
+			this.OPPONENT5.Serialize(bw);
+
+			bw.Write(this.NumOpponents);
+			bw.Write(this.UnknownDragValue);
+			bw.Write(this.NumStages);
+			bw.WriteEnum(this.IsHiddenEvent);
+			bw.Write(this._padding2);
+			bw.Write(this._padding3);
 		}
 
 		/// <summary>
@@ -846,7 +900,61 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Deserialize(BinaryReader br)
 		{
+			this._collection_name = br.ReadNullTermUTF8();
+			this.IntroMovie = br.ReadNullTermUTF8();
+			this.OutroMovie = br.ReadNullTermUTF8();
+			this.EventTrigger = br.ReadNullTermUTF8();
+			this.UnlockMethod = br.ReadEnum<UnlockCondition>();
+			this.IsSUVRace = br.ReadEnum<eBoolean>();
+			this._padding0 = br.ReadByte();
+			this.EventBehavior = br.ReadEnum<EventBehaviorType>();
 
+			if (this.UnlockMethod == UnlockCondition.SpecificRaceWon)
+			{
+
+				this.RequiredSpecificRaceWon = br.ReadNullTermUTF8();
+
+			}
+			else
+			{
+
+				this.RequiredSpecificURLWon = br.ReadByte();
+				this.SponsorChosenToUnlock = br.ReadByte();
+				this.RequiredRacesWon = br.ReadByte();
+				this.RequiredURLWon = br.ReadByte();
+
+			}
+
+			this.EarnableRespect = br.ReadInt32();
+			this.STAGE1.Read(br);
+			this.STAGE2.Read(br);
+			this.STAGE3.Read(br);
+			this.STAGE4.Read(br);
+
+			this.PlayerCarType = br.ReadNullTermUTF8();
+			this.CashValue = br.ReadInt32();
+			this.EventIcon = br.ReadEnum<EventIconType>();
+			this.IsDriveToGPS = br.ReadEnum<eBoolean>();
+			this.DifficultyLevel = br.ReadEnum<Shared.Class.Track.TrackDifficulty>();
+			this.BelongsToStage = br.ReadByte();
+			this.NumMapItems = br.ReadByte();
+			this._padding1 = br.ReadByte();
+			this.Unknown0x3A = br.ReadByte();
+			this.Unknown0x3B = br.ReadByte();
+			this.GPSDestination = br.ReadNullTermUTF8();
+
+			this.OPPONENT1.Deserialize(br);
+			this.OPPONENT2.Deserialize(br);
+			this.OPPONENT3.Deserialize(br);
+			this.OPPONENT4.Deserialize(br);
+			this.OPPONENT5.Deserialize(br);
+
+			this.NumOpponents = br.ReadByte();
+			this.UnknownDragValue = br.ReadByte();
+			this.NumStages = br.ReadByte();
+			this.IsHiddenEvent = br.ReadEnum<eBoolean>();
+			this._padding2 = br.ReadInt32();
+			this._padding3 = br.ReadInt32();
 		}
 
 		#endregion

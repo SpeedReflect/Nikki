@@ -597,6 +597,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		{
 			// Write index
 			bw.WriteNullTermUTF8(this._collection_name);
+			bw.Write(this._unlock_index);
 
 			// Write level 1 settings
 			bw.Write(this.VisualRatingLevel1);
@@ -664,6 +665,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		{
 			// CollectionName
 			this._collection_name = br.ReadNullTermUTF8();
+			this._unlock_index = br.ReadInt32();
 
 			// Read level 1 settings
 			this.VisualRatingLevel1 = br.ReadInt16();

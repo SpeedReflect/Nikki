@@ -7,6 +7,7 @@ using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Underground2.Class;
+using CoreExtensions.IO;
 using CoreExtensions.Conversions;
 
 
@@ -637,7 +638,50 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		public void Serialize(BinaryWriter bw)
 		{
-
+			bw.Write(Byte.Parse(this._collection_name));
+			bw.Write(this.NumberOfSponsorsToChoose);
+			bw.Write(this.OutrunCashValue);
+			bw.Write(this.Unknown0x04);
+			bw.Write(this.CareerIdentifier);
+			bw.WriteNullTermUTF8(this.StageSponsor1);
+			bw.WriteNullTermUTF8(this.StageSponsor2);
+			bw.WriteNullTermUTF8(this.StageSponsor3);
+			bw.WriteNullTermUTF8(this.StageSponsor4);
+			bw.WriteNullTermUTF8(this.StageSponsor5);
+			bw.Write(this.AttribSponsor1);
+			bw.Write(this.AttribSponsor2);
+			bw.Write(this.AttribSponsor3);
+			bw.Write(this.AttribSponsor4);
+			bw.Write(this.AttribSponsor5);
+			bw.Write(this.Unknown0x26);
+			bw.WriteNullTermUTF8(this.LastStageEvent);
+			bw.Write(this.Unknown0x2C);
+			bw.Write(this.Unknown0x2D);
+			bw.Write(this.Unknown0x2E);
+			bw.Write(this.Unknown0x2F);
+			bw.Write(this.MaxCircuitsShownOnMap);
+			bw.Write(this.MaxDragsShownOnMap);
+			bw.Write(this.MaxStreetXShownOnMap);
+			bw.Write(this.MaxDriftsShownOnMap);
+			bw.Write(this.MaxSprintsShownOnMap);
+			bw.Write(this.Unknown0x35);
+			bw.Write(this.Unknown0x36);
+			bw.Write(this.Unknown0x37);
+			bw.Write(this.Unknown0x38);
+			bw.Write(this.Unknown0x39);
+			bw.Write(this.Unknown0x3A);
+			bw.Write(this.Unknown0x3B);
+			bw.Write(this.Unknown0x3C);
+			bw.Write(this.Unknown0x3D);
+			bw.Write(this.Unknown0x3E);
+			bw.Write(this.Unknown0x3F);
+			bw.Write(this.MaxOutrunEvents);
+			bw.Write(this.Unknown0x41);
+			bw.Write(this.Unknown0x42);
+			bw.Write(this.Unknown0x43);
+			bw.Write(this.Unknown0x44);
+			bw.Write(this.Unknown0x48);
+			bw.Write(this.Unknown0x4C);
 		}
 
 		/// <summary>
@@ -646,7 +690,50 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Deserialize(BinaryReader br)
 		{
-
+			this._collection_name = br.ReadByte().ToString();
+			this.NumberOfSponsorsToChoose = br.ReadByte();
+			this.OutrunCashValue = br.ReadInt16();
+			this.Unknown0x04 = br.ReadInt16();
+			this.CareerIdentifier = br.ReadInt16();
+			this.StageSponsor1 = br.ReadNullTermUTF8();
+			this.StageSponsor2 = br.ReadNullTermUTF8();
+			this.StageSponsor3 = br.ReadNullTermUTF8();
+			this.StageSponsor4 = br.ReadNullTermUTF8();
+			this.StageSponsor5 = br.ReadNullTermUTF8();
+			this.AttribSponsor1 = br.ReadInt16();
+			this.AttribSponsor2 = br.ReadInt16();
+			this.AttribSponsor3 = br.ReadInt16();
+			this.AttribSponsor4 = br.ReadInt16();
+			this.AttribSponsor5 = br.ReadInt16();
+			this.Unknown0x26 = br.ReadInt16();
+			this.LastStageEvent = br.ReadNullTermUTF8();
+			this.Unknown0x2C = br.ReadByte();
+			this.Unknown0x2D = br.ReadByte();
+			this.Unknown0x2E = br.ReadByte();
+			this.Unknown0x2F = br.ReadByte();
+			this.MaxCircuitsShownOnMap = br.ReadByte();
+			this.MaxDragsShownOnMap = br.ReadByte();
+			this.MaxStreetXShownOnMap = br.ReadByte();
+			this.MaxDriftsShownOnMap = br.ReadByte();
+			this.MaxSprintsShownOnMap = br.ReadByte();
+			this.Unknown0x35 = br.ReadByte();
+			this.Unknown0x36 = br.ReadByte();
+			this.Unknown0x37 = br.ReadByte();
+			this.Unknown0x38 = br.ReadByte();
+			this.Unknown0x39 = br.ReadByte();
+			this.Unknown0x3A = br.ReadByte();
+			this.Unknown0x3B = br.ReadByte();
+			this.Unknown0x3C = br.ReadByte();
+			this.Unknown0x3D = br.ReadByte();
+			this.Unknown0x3E = br.ReadByte();
+			this.Unknown0x3F = br.ReadByte();
+			this.MaxOutrunEvents = br.ReadByte();
+			this.Unknown0x41 = br.ReadByte();
+			this.Unknown0x42 = br.ReadByte();
+			this.Unknown0x43 = br.ReadByte();
+			this.Unknown0x44 = br.ReadSingle();
+			this.Unknown0x48 = br.ReadSingle();
+			this.Unknown0x4C = br.ReadSingle();
 		}
 
 		#endregion
