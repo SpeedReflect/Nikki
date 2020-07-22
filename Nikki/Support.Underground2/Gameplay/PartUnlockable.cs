@@ -595,7 +595,65 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		public void Serialize(BinaryWriter bw)
 		{
+			// Write index
+			bw.WriteNullTermUTF8(this._collection_name);
 
+			// Write level 1 settings
+			bw.Write(this.VisualRatingLevel1);
+			bw.Write(this.PartPriceLevel1);
+			bw.WriteEnum(this.UnlockMethodLevel1);
+
+			if (this.UnlockMethodLevel1 == PartUnlockReq.SpecShopFound)
+			{
+
+				bw.WriteNullTermUTF8(this.UnlocksInShopLevel1);
+
+			}
+			else
+			{
+
+				bw.Write(this.RequiredRacesWonLevel1);
+				bw.Write(this.BelongsToStageLevel1);
+
+			}
+
+			// Write level 2 settings
+			bw.Write(this.VisualRatingLevel2);
+			bw.Write(this.PartPriceLevel2);
+			bw.WriteEnum(this.UnlockMethodLevel2);
+
+			if (this.UnlockMethodLevel2 == PartUnlockReq.SpecShopFound)
+			{
+
+				bw.WriteNullTermUTF8(this.UnlocksInShopLevel2);
+
+			}
+			else
+			{
+
+				bw.Write(this.RequiredRacesWonLevel2);
+				bw.Write(this.BelongsToStageLevel2);
+
+			}
+
+			// Write level 3 settings
+			bw.Write(this.VisualRatingLevel3);
+			bw.Write(this.PartPriceLevel3);
+			bw.WriteEnum(this.UnlockMethodLevel3);
+
+			if (this.UnlockMethodLevel3 == PartUnlockReq.SpecShopFound)
+			{
+
+				bw.WriteNullTermUTF8(this.UnlocksInShopLevel3);
+
+			}
+			else
+			{
+
+				bw.Write(this.RequiredRacesWonLevel3);
+				bw.Write(this.BelongsToStageLevel3);
+
+			}
 		}
 
 		/// <summary>
@@ -604,7 +662,65 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Deserialize(BinaryReader br)
 		{
+			// CollectionName
+			this._collection_name = br.ReadNullTermUTF8();
 
+			// Read level 1 settings
+			this.VisualRatingLevel1 = br.ReadInt16();
+			this.PartPriceLevel1 = br.ReadInt16();
+			this.UnlockMethodLevel1 = br.ReadEnum<PartUnlockReq>();
+
+			if (this.UnlockMethodLevel1 == PartUnlockReq.SpecShopFound)
+			{
+
+				this.UnlocksInShopLevel1 = br.ReadNullTermUTF8();
+
+			}
+			else
+			{
+
+				this.RequiredRacesWonLevel1 = br.ReadByte();
+				this.BelongsToStageLevel1 = br.ReadByte();
+
+			}
+
+			// Read level 2 settings
+			this.VisualRatingLevel2 = br.ReadInt16();
+			this.PartPriceLevel2 = br.ReadInt16();
+			this.UnlockMethodLevel2 = br.ReadEnum<PartUnlockReq>();
+
+			if (this.UnlockMethodLevel2 == PartUnlockReq.SpecShopFound)
+			{
+
+				this.UnlocksInShopLevel2 = br.ReadNullTermUTF8();
+
+			}
+			else
+			{
+
+				this.RequiredRacesWonLevel2 = br.ReadByte();
+				this.BelongsToStageLevel2 = br.ReadByte();
+
+			}
+
+			// Read level 3 settings
+			this.VisualRatingLevel3 = br.ReadInt16();
+			this.PartPriceLevel3 = br.ReadInt16();
+			this.UnlockMethodLevel3 = br.ReadEnum<PartUnlockReq>();
+
+			if (this.UnlockMethodLevel3 == PartUnlockReq.SpecShopFound)
+			{
+
+				this.UnlocksInShopLevel3 = br.ReadNullTermUTF8();
+
+			}
+			else
+			{
+
+				this.RequiredRacesWonLevel3 = br.ReadByte();
+				this.BelongsToStageLevel3 = br.ReadByte();
+
+			}
 		}
 
 		#endregion

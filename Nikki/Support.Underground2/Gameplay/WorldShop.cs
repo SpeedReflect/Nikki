@@ -351,7 +351,15 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		public void Serialize(BinaryWriter bw)
 		{
-
+			bw.WriteNullTermUTF8(this._collection_name);
+			bw.WriteNullTermUTF8(this.IntroMovie);
+			bw.WriteNullTermUTF8(this.ShopTrigger);
+			bw.WriteNullTermUTF8(this.ShopFilename);
+			bw.WriteEnum(this.ShopType);
+			bw.WriteEnum(this.InitiallyHidden);
+			bw.WriteNullTermUTF8(this.EventToBeCompleted);
+			bw.WriteEnum(this.RequiresEventCompleted);
+			bw.Write(this.BelongsToStage);
 		}
 
 		/// <summary>
@@ -360,7 +368,15 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Deserialize(BinaryReader br)
 		{
-
+			this._collection_name = br.ReadNullTermUTF8();
+			this.IntroMovie = br.ReadNullTermUTF8();
+			this.ShopTrigger = br.ReadNullTermUTF8();
+			this.ShopFilename = br.ReadNullTermUTF8();
+			this.ShopType = br.ReadEnum<WorldShopType>();
+			this.InitiallyHidden = br.ReadEnum<eBoolean>();
+			this.EventToBeCompleted = br.ReadNullTermUTF8();
+			this.RequiresEventCompleted = br.ReadEnum<eBoolean>();
+			this.BelongsToStage = br.ReadByte();
 		}
 
 		#endregion

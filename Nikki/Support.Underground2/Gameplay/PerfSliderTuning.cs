@@ -247,7 +247,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		public void Serialize(BinaryWriter bw)
 		{
-
+			this.Assemble(bw);
 		}
 
 		/// <summary>
@@ -256,7 +256,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Deserialize(BinaryReader br)
 		{
-
+			this.Disassemble(br);
 		}
 
 		#endregion

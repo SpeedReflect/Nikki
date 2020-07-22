@@ -301,7 +301,13 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		public void Serialize(BinaryWriter bw)
 		{
-
+			bw.WriteNullTermUTF8(this._collection_name);
+			bw.Write(this.CashValuePerWin);
+			bw.WriteEnum(this.ReqSponsorRace1);
+			bw.WriteEnum(this.ReqSponsorRace2);
+			bw.WriteEnum(this.ReqSponsorRace3);
+			bw.Write(this.SignCashBonus);
+			bw.Write(this.PotentialCashBonus);
 		}
 
 		/// <summary>
@@ -310,7 +316,13 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Deserialize(BinaryReader br)
 		{
-
+			this._collection_name = br.ReadNullTermUTF8();
+			this.CashValuePerWin = br.ReadInt16();
+			this.ReqSponsorRace1 = br.ReadEnum<SponsorRaceType>();
+			this.ReqSponsorRace2 = br.ReadEnum<SponsorRaceType>();
+			this.ReqSponsorRace3 = br.ReadEnum<SponsorRaceType>();
+			this.SignCashBonus = br.ReadInt16();
+			this.PotentialCashBonus = br.ReadInt16();
 		}
 
 		#endregion

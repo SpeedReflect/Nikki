@@ -201,8 +201,8 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		public void Serialize(BinaryWriter bw)
 		{
-			bw.WriteNullTermUTF8(this._collection_name, 0x20);
-			bw.WriteNullTermUTF8(this.IngameBrandName, 0x20);
+			bw.WriteNullTermUTF8(this._collection_name);
+			bw.WriteNullTermUTF8(this.IngameBrandName);
 		}
 
 		/// <summary>
@@ -211,8 +211,8 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Deserialize(BinaryReader br)
 		{
-			this._collection_name = br.ReadNullTermUTF8(0x20);
-			this.IngameBrandName = br.ReadNullTermUTF8(0x20);
+			this._collection_name = br.ReadNullTermUTF8();
+			this.IngameBrandName = br.ReadNullTermUTF8();
 		}
 
 		#endregion

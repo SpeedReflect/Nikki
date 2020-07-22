@@ -558,7 +558,50 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		public void Serialize(BinaryWriter bw)
 		{
+			bw.WriteNullTermUTF8(this._collection_name);
 
+			bw.WriteEnum(this.UnlockRequirement);
+			bw.WriteEnum(this.StorageType);
+			bw.WriteEnum(this.AutoOpen);
+			bw.WriteEnum(this.IconStyle);
+			bw.Write(this.CareerIdentifier);
+
+			switch (this.UnlockRequirement)
+			{
+				case UnlockType.SpecificRaceWon:
+					bw.WriteNullTermUTF8(this.RequiredSpecRaceWon);
+					break;
+
+				case UnlockType.ShopFound:
+					bw.WriteNullTermUTF8(this.RequiredShopFound);
+					break;
+
+				case UnlockType.TimeElapsed:
+					bw.Write(this.RequiredTimeElapsed);
+					break;
+
+				case UnlockType.ReqSponRacesWon:
+				case UnlockType.ReqURLRacesWon:
+				case UnlockType.ReqRegRacesWon:
+					bw.Write(this.RequiredRacesWon);
+					bw.Write(this.BelongsToStage);
+					break;
+
+				case UnlockType.DVDUnlock:
+					bw.Write(this.RequiredDVDUnlocked);
+					break;
+
+				case UnlockType.FreeroamFind:
+					bw.WriteNullTermUTF8(this.FreeroamTrigger);
+					break;
+
+				default:
+					break;
+
+			}
+
+			bw.Write(this.CashValue);
+			bw.WriteNullTermUTF8(this.MessageSender);
 		}
 
 		/// <summary>
@@ -567,7 +610,50 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Deserialize(BinaryReader br)
 		{
+			this._collection_name = br.ReadNullTermUTF8();
 
+			this.UnlockRequirement = br.ReadEnum<UnlockType>();
+			this.StorageType = br.ReadEnum<MailType>();
+			this.AutoOpen = br.ReadEnum<eBoolean>();
+			this.IconStyle = br.ReadEnum<IconType>();
+			this.CareerIdentifier = br.ReadInt16();
+
+			switch (this.UnlockRequirement)
+			{
+				case UnlockType.SpecificRaceWon:
+					this.RequiredSpecRaceWon = br.ReadNullTermUTF8();
+					break;
+
+				case UnlockType.ShopFound:
+					this.RequiredShopFound = br.ReadNullTermUTF8();
+					break;
+
+				case UnlockType.TimeElapsed:
+					this.RequiredTimeElapsed = br.ReadInt32();
+					break;
+
+				case UnlockType.ReqSponRacesWon:
+				case UnlockType.ReqURLRacesWon:
+				case UnlockType.ReqRegRacesWon:
+					this.RequiredRacesWon = br.ReadInt16();
+					this.BelongsToStage = br.ReadInt16();
+					break;
+
+				case UnlockType.DVDUnlock:
+					this.RequiredDVDUnlocked = br.ReadInt32();
+					break;
+
+				case UnlockType.FreeroamFind:
+					this.FreeroamTrigger = br.ReadNullTermUTF8();
+					break;
+
+				default:
+					break;
+
+			}
+
+			this.CashValue = br.ReadInt32();
+			this.MessageSender = br.ReadNullTermUTF8();
 		}
 
 		#endregion

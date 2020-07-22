@@ -358,7 +358,19 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		public void Serialize(BinaryWriter bw)
 		{
-
+			bw.WriteNullTermUTF8(this._collection_name);
+			bw.WriteNullTermUTF8(this.WorldChallengeTrigger);
+			bw.Write(this.BelongsToStage);
+			bw.Write(this._padding0);
+			bw.WriteEnum(this.UseOutrunsAsReqRaces);
+			bw.Write(this.RequiredRacesWon);
+			bw.WriteNullTermUTF8(this.UnlockableSMS);
+			bw.WriteNullTermUTF8(this.Destination);
+			bw.Write(this.TimeLimit);
+			bw.WriteEnum(this.ChallengeType);
+			bw.Write(this.PartUnlockable1);
+			bw.Write(this.PartUnlockable2);
+			bw.Write(this.PartUnlockable3);
 		}
 
 		/// <summary>
@@ -367,7 +379,19 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Deserialize(BinaryReader br)
 		{
-
+			this._collection_name = br.ReadNullTermUTF8();
+			this.WorldChallengeTrigger = br.ReadNullTermUTF8();
+			this.BelongsToStage = br.ReadByte();
+			this._padding0 = br.ReadByte();
+			this.UseOutrunsAsReqRaces = br.ReadEnum<eBoolean>();
+			this.RequiredRacesWon = br.ReadByte();
+			this.UnlockableSMS = br.ReadNullTermUTF8();
+			this.Destination = br.ReadNullTermUTF8();
+			this.TimeLimit = br.ReadInt32();
+			this.ChallengeType = br.ReadEnum<WorldChallengeType>();
+			this.PartUnlockable1 = br.ReadSByte();
+			this.PartUnlockable2 = br.ReadSByte();
+			this.PartUnlockable3 = br.ReadSByte();
 		}
 
 		#endregion
