@@ -7,6 +7,7 @@ using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Underground2.Class;
+using CoreExtensions.IO;
 using CoreExtensions.Conversions;
 
 
@@ -207,7 +208,9 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		public void Serialize(BinaryWriter bw)
 		{
-
+			bw.WriteNullTermUTF8(this._collection_name);
+			bw.WriteNullTermUTF8(this.ReqEventCompleted1);
+			bw.WriteNullTermUTF8(this.ReqEventCompleted2);
 		}
 
 		/// <summary>
@@ -216,7 +219,9 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Deserialize(BinaryReader br)
 		{
-
+			this._collection_name = br.ReadNullTermUTF8();
+			this.ReqEventCompleted1 = br.ReadNullTermUTF8();
+			this.ReqEventCompleted2 = br.ReadNullTermUTF8();
 		}
 
 		#endregion

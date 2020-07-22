@@ -3,7 +3,6 @@ using System.IO;
 using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
-using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
@@ -319,7 +318,16 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		public void Serialize(BinaryWriter bw)
 		{
-
+			bw.WriteNullTermUTF8(this._collection_name, 0x20);
+			bw.WriteEnum(this.TakePhotoType);
+			bw.Write(this.BelongsToStage);
+			bw.Write(this.CashValue);
+			bw.WriteNullTermUTF8(this.DescStringLabel);
+			bw.WriteNullTermUTF8(this.DestinationPoint);
+			bw.Write(this.Unknown0x34);
+			bw.Write(this.Unknown0x35);
+			bw.WriteNullTermUTF8(this.DescAttrib);
+			bw.Write(this.RequiredVisualRating);
 		}
 
 		/// <summary>
@@ -328,7 +336,16 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Deserialize(BinaryReader br)
 		{
-
+			this._collection_name = br.ReadNullTermUTF8(0x20);
+			this.TakePhotoType = br.ReadEnum<TakePhotoMethod>();
+			this.BelongsToStage = br.ReadByte();
+			this.CashValue = br.ReadInt16();
+			this.DescStringLabel = br.ReadNullTermUTF8();
+			this.DestinationPoint = br.ReadNullTermUTF8();
+			this.Unknown0x34 = br.ReadByte();
+			this.Unknown0x35 = br.ReadByte();
+			this.DescAttrib = br.ReadNullTermUTF8();
+			this.RequiredVisualRating = br.ReadSingle();
 		}
 
 		#endregion

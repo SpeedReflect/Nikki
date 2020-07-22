@@ -7,8 +7,8 @@ using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Underground2.Class;
+using CoreExtensions.IO;
 using CoreExtensions.Conversions;
-
 
 
 
@@ -462,7 +462,28 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		public void Serialize(BinaryWriter bw)
 		{
+			bw.WriteNullTermUTF8(this._collection_name);
+			bw.WriteEnum(this.PartPerformanceType);
+			bw.Write(this.UpgradeLevel);
+			bw.Write(this.UpgradePartIndex);
+			bw.Write(this.PartIndex);
+			bw.Write(this.BeingReplacedByIndex1);
+			bw.Write(this.BeingReplacedByIndex2);
+			bw.Write(this.PerfPartCost);
+			bw.Write(this.PerfPartAmplifierFraction);
+			bw.Write(this.PerfPartRangeX);
+			bw.Write(this.PerfPartRangeY);
+			bw.Write(this.PerfPartRangeZ);
+			bw.Write(this.NumberOfBrands);
 
+			if (this.NumberOfBrands > 0) bw.WriteNullTermUTF8(this.PerfPartBrand1);
+			if (this.NumberOfBrands > 1) bw.WriteNullTermUTF8(this.PerfPartBrand2);
+			if (this.NumberOfBrands > 2) bw.WriteNullTermUTF8(this.PerfPartBrand3);
+			if (this.NumberOfBrands > 3) bw.WriteNullTermUTF8(this.PerfPartBrand4);
+			if (this.NumberOfBrands > 4) bw.WriteNullTermUTF8(this.PerfPartBrand5);
+			if (this.NumberOfBrands > 5) bw.WriteNullTermUTF8(this.PerfPartBrand6);
+			if (this.NumberOfBrands > 6) bw.WriteNullTermUTF8(this.PerfPartBrand7);
+			if (this.NumberOfBrands > 7) bw.WriteNullTermUTF8(this.PerfPartBrand8);
 		}
 
 		/// <summary>
@@ -471,7 +492,28 @@ namespace Nikki.Support.Underground2.Gameplay
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Deserialize(BinaryReader br)
 		{
+			this._collection_name = br.ReadNullTermUTF8();
+			this.PartPerformanceType = br.ReadEnum<PerformanceType>();
+			this.UpgradeLevel = br.ReadInt32();
+			this.UpgradePartIndex = br.ReadInt32();
+			this.PartIndex = br.ReadInt32();
+			this.BeingReplacedByIndex1 = br.ReadInt32();
+			this.BeingReplacedByIndex2 = br.ReadInt32();
+			this.PerfPartCost = br.ReadInt32();
+			this.PerfPartAmplifierFraction = br.ReadSingle();
+			this.PerfPartRangeX = br.ReadSingle();
+			this.PerfPartRangeY = br.ReadSingle();
+			this.PerfPartRangeZ = br.ReadSingle();
+			this.NumberOfBrands = br.ReadInt32();
 
+			if (this.NumberOfBrands > 0) this.PerfPartBrand1 = br.ReadNullTermUTF8();
+			if (this.NumberOfBrands > 1) this.PerfPartBrand2 = br.ReadNullTermUTF8();
+			if (this.NumberOfBrands > 2) this.PerfPartBrand3 = br.ReadNullTermUTF8();
+			if (this.NumberOfBrands > 3) this.PerfPartBrand4 = br.ReadNullTermUTF8();
+			if (this.NumberOfBrands > 4) this.PerfPartBrand5 = br.ReadNullTermUTF8();
+			if (this.NumberOfBrands > 5) this.PerfPartBrand6 = br.ReadNullTermUTF8();
+			if (this.NumberOfBrands > 6) this.PerfPartBrand7 = br.ReadNullTermUTF8();
+			if (this.NumberOfBrands > 7) this.PerfPartBrand8 = br.ReadNullTermUTF8();
 		}
 
 		#endregion
