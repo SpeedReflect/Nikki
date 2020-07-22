@@ -150,7 +150,7 @@ namespace Nikki.Support.Underground2.Framework
 					$"format is \"CARNAME_PART_SLOTTYPE\"");
 
 			}
-			else if (!Enum.TryParse(keys[1], out SlotMostWanted _))
+			else if (!Enum.TryParse(keys[1], out SlotUnderground2 _))
 			{
 
 				throw new ArgumentException($"CollectionName passed is of invalid format. Valid " +

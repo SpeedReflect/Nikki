@@ -8,6 +8,7 @@ using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Underground2.Class;
+using CoreExtensions.IO;
 using CoreExtensions.Conversions;
 
 
@@ -218,6 +219,36 @@ namespace Nikki.Support.Underground2.Gameplay
 		{
 			return $"Collection Name: {this.CollectionName} | " +
 				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
+		}
+
+		#endregion
+
+		#region Serialization
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		public void Serialize(BinaryWriter bw)
+		{
+			bw.Write(this.CashValue);
+			bw.WriteEnum(this.InitiallyUnlocked);
+			bw.Write(this.BankIndex);
+			bw.Write(this.RequiredStagesCompleted);
+			bw.WriteNullTermUTF8(this._collection_name);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		public void Deserialize(BinaryReader br)
+		{
+			this.CashValue = br.ReadUInt16();
+			this.InitiallyUnlocked = br.ReadEnum<eBoolean>();
+			this.BankIndex = br.ReadByte();
+			this.RequiredStagesCompleted = br.ReadInt32();
+			this._collection_name = br.ReadNullTermUTF8();
 		}
 
 		#endregion

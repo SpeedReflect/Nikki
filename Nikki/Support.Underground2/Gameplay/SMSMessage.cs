@@ -549,5 +549,27 @@ namespace Nikki.Support.Underground2.Gameplay
 		}
 
 		#endregion
+
+		#region Serialization
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		public void Serialize(BinaryWriter bw)
+		{
+
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		public void Deserialize(BinaryReader br)
+		{
+
+		}
+
+		#endregion
 	}
 }
