@@ -45,11 +45,11 @@ namespace Nikki.Utils
             if (Map.BinKeys.TryGetValue(result, out var str) && value != str)
             {
 
-                System.Diagnostics.Debugger.Break();
+                //System.Diagnostics.Debugger.Break();
             
             }
             
-            if (!PauseHashSave) Map.BinKeys[result] = value;
+            if (!PauseHashSave) Map.BinKeys.TryAdd(result, value);
             return result;
         }
 

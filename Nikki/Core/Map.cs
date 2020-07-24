@@ -152,6 +152,7 @@ namespace Nikki.Core
 			{ 0x09163F9F, CarPartAttribType.Boolean }, // USEMARKER1
 			{ 0x09163FA0, CarPartAttribType.Boolean }, // USEMARKER2
 			{ 0x87557E1E, CarPartAttribType.Boolean }, // 0x87557E1E // some hood value
+			{ 0x6509EC92, CarPartAttribType.Boolean }, // 0x6509EC92 // ALUMINUM ???
 			{ 0xF9661A07, CarPartAttribType.Boolean }, // 0xF9661A07 // ???
 			{ 0x1BC91595, CarPartAttribType.Boolean }, // 0x1BC91595 // ???
 			{ 0x1BC91597, CarPartAttribType.Boolean }, // 0x1BC91597 // ???
@@ -176,7 +177,6 @@ namespace Nikki.Core
 			{ 0x0615C99B, CarPartAttribType.Floating }, // TIRESAT
 			{ 0x9A9B6DDC, CarPartAttribType.Floating }, // 0x9A9B6DDC // ???
 			{ 0xA0773FA5, CarPartAttribType.Floating }, // SPINNEROFFSET
-			{ 0x931FF82E, CarPartAttribType.Floating }, // SPINNER_TEXTURE
 
 			// Color Attributes
 			{ 0xD90271FB, CarPartAttribType.Color }, // COLOR0ID
@@ -226,6 +226,7 @@ namespace Nikki.Core
 			{ 0xE80A3B62, CarPartAttribType.Key }, // EXCLUDEDECAL
 			{ 0xEDBF864E, CarPartAttribType.Key }, // WHEELEMITTER
 			{ 0x8E73B5DC, CarPartAttribType.Key }, // SPECIFICCARNAME
+			{ 0x931FF82E, CarPartAttribType.Key }, // SPINNER_TEXTURE
 			{ 0x29008B14, CarPartAttribType.Key }, // GROUPLANGUAGEHASH
 			{ 0x6223C6F9, CarPartAttribType.Key }, // VINYLLANGUAGEHASH
 			{ 0x65F58556, CarPartAttribType.Key }, // COLOR0LANGUAGEHASH
@@ -255,7 +256,6 @@ namespace Nikki.Core
 			{ 0x796C0CB0, CarPartAttribType.Integer }, // KITNUMBER
 			{ 0x564B8CB6, CarPartAttribType.Integer }, // NUMCOLOURS
 			{ 0xA77BDCFA, CarPartAttribType.Integer }, // NUM_DECALS
-			{ 0x6509EC92, CarPartAttribType.Integer }, // 0x6509EC92 // ???
 			{ 0x7D29CF3E, CarPartAttribType.Integer }, // 0x7D29CF3E // ???
 			{ 0xC9818DFC, CarPartAttribType.Integer }, // 0xC9818DFC // ???
 			{ 0x48620C16, CarPartAttribType.Integer }, // DAMAGELEVEL

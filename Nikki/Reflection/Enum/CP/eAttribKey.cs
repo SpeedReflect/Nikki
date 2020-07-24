@@ -129,7 +129,12 @@
 		/// 
 		/// </summary>
 		SPECIFICCARNAME = 0x8E73B5DC,
-		
+
+		/// <summary>
+		/// 
+		/// </summary>
+		SPINNER_TEXTURE = 0x931FF82E,
+
 		/// <summary>
 		/// 
 		/// </summary>

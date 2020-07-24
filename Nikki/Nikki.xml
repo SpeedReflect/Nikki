@@ -2010,6 +2010,11 @@
             
             </summary>
         </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0x6509EC92">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0x87557E1E">
             <summary>
             
@@ -2121,11 +2126,6 @@
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribFloat.SPINNEROFFSET">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribFloat.SPINNER_TEXTURE">
             <summary>
             
             </summary>
@@ -2270,11 +2270,6 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x6509EC92">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x7D29CF3E">
             <summary>
             
@@ -2411,6 +2406,11 @@
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.SPECIFICCARNAME">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.SPINNER_TEXTURE">
             <summary>
             
             </summary>

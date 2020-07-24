@@ -48,11 +48,6 @@
 		/// <summary>
 		/// 
 		/// </summary>
-		SPINNER_TEXTURE = 0x931FF82E,
-		
-		/// <summary>
-		/// 
-		/// </summary>
 		_0x9A9B6DDC = 0x9A9B6DDC,
 	}
 }

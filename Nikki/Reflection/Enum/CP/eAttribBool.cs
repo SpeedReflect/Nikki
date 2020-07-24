@@ -103,6 +103,11 @@
 		/// <summary>
 		/// 
 		/// </summary>
+		_0x6509EC92 = 0x6509EC92,
+
+		/// <summary>
+		/// 
+		/// </summary>
 		_0x87557E1E = 0x87557E1E,
 
 		/// <summary>

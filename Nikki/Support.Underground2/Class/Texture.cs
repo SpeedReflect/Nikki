@@ -315,8 +315,7 @@ namespace Nikki.Support.Underground2.Class
         {
             // Get texture name
             br.BaseStream.Position += 0xC;
-            this._collection_name = br.ReadNullTermUTF8(0x18);
-            this._collection_name.BinHash();
+            var cname = br.ReadNullTermUTF8(0x18);
 
             this._binkey = br.ReadUInt32();
             this.ClassKey = br.ReadUInt32();
@@ -356,6 +355,14 @@ namespace Nikki.Support.Underground2.Class
             this._unknown3 = br.ReadInt32();
             this._unknown4 = br.ReadInt32();
             this._unknown5 = br.ReadInt32();
+
+            if (!Map.BinKeys.TryGetValue(this._binkey, out this._collection_name))
+            {
+
+                this._collection_name = cname;
+                this._collection_name.BinHash();
+
+            }
         }
 
         /// <summary>

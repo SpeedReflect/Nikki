@@ -134,11 +134,6 @@
 		/// 
 		/// </summary>
 		LOD_NAME_PREFIX_SELECTOR = 0x643DABEB,
-						
-		/// <summary>
-		/// 
-		/// </summary>
-		_0x6509EC92 = 0x6509EC92,
 				
 		/// <summary>
 		/// 
