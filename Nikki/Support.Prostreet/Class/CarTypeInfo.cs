@@ -149,6 +149,7 @@ namespace Nikki.Support.Prostreet.Class
         {
             this.Manager = manager;
             this.Disassemble(br);
+            this.CollectionName.BinHash();
         }
 
         /// <summary>

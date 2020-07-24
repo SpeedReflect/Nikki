@@ -149,6 +149,7 @@ namespace Nikki.Support.Carbon.Class
         {
             this.Manager = manager;
             this.Disassemble(br);
+            this.CollectionName.BinHash();
         }
 
         /// <summary>

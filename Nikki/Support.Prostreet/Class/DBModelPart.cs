@@ -104,6 +104,7 @@ namespace Nikki.Support.Prostreet.Class
 		{
 			this.Manager = manager;
 			this.CollectionName = CName;
+			this.CollectionName.BinHash();
 		}
 
 		#endregion

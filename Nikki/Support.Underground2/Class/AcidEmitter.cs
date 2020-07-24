@@ -355,6 +355,7 @@ namespace Nikki.Support.Underground2.Class
         {
             this.Manager = manager;
             this.Disassemble(br);
+            this.CollectionName.BinHash();
         }
 
         /// <summary>
@@ -442,6 +443,8 @@ namespace Nikki.Support.Underground2.Class
             this._collection_name = br.ReadNullTermUTF8(0x40);
             this._special_effect = br.ReadNullTermUTF8(0x30);
             this._emitter_name = br.ReadNullTermUTF8(0x30);
+            this._special_effect.BinHash();
+            this._emitter_name.BinHash();
         }
 
         /// <summary>

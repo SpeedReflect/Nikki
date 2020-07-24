@@ -622,6 +622,7 @@ namespace Nikki.Support.Underground2.Class
         {
             this.Manager = manager;
             this.Disassemble(br);
+            this.CollectionName.BinHash();
         }
 
         /// <summary>

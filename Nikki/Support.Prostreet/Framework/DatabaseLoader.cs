@@ -118,8 +118,8 @@ namespace Nikki.Support.Prostreet.Framework
 				this._db.TPKBlocks.Disassemble(br, this.tpkblocks);
 				this._db.CarTypeInfos.Disassemble(br, this.cartypeinfos);
 				this._db.DBModelParts.Disassemble(br, this.dbmodelparts);
-				this._db.Tracks.Disassemble(br, this.tracks);
 				this._db.SunInfos.Disassemble(br, this.suninfos);
+				this._db.Tracks.Disassemble(br, this.tracks);
 				this._db.Collisions.Disassemble(br, this.collisions);
 				this._db.FNGroups.Disassemble(br, this.fngroups);
 				this._db.SlotTypes.Disassemble(br, this.slottypes);

@@ -105,6 +105,7 @@ namespace Nikki.Support.Underground2.Class
 		{
 			this.Manager = manager;
 			this.CollectionName = CName;
+			this.CollectionName.BinHash();
 		}
 
 		#endregion

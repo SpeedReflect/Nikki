@@ -233,6 +233,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		{
 			this.Career = career;
 			this.Disassemble(br);
+			this.CollectionName.BinHash();
 		}
 
 		/// <summary>
