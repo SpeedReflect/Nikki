@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Diagnostics;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 
@@ -9,6 +10,7 @@ namespace Nikki.Support.Carbon.Parts.VinylParts
 	/// <summary>
 	/// A unit <see cref="GradientEffect"/> that is used in <see cref="PathSet"/>.
 	/// </summary>
+	[DebuggerDisplay("Color1: {HexColor1} | Color2: {HexColor2}")]
 	public class GradientEffect : SubPart
 	{
 		/// <summary>
@@ -124,6 +126,18 @@ namespace Nikki.Support.Carbon.Parts.VinylParts
 		/// </summary>
 		[AccessModifiable()]
 		public float OffsetV { get; set; }
+
+		/// <summary>
+		/// Hexadecimal string representation of the color of the effect.
+		/// </summary>
+		public string HexColor1 =>
+			$"0x{this.Color1Red:X2}{this.Color1Green:X2}{this.Color1Blue:X2}{this.Color1Alpha:X2}";
+
+		/// <summary>
+		/// Hexadecimal string representation of the color of the effect.
+		/// </summary>
+		public string HexColor2 =>
+			$"0x{this.Color2Red:X2}{this.Color2Green:X2}{this.Color2Blue:X2}{this.Color2Alpha:X2}";
 
 		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.

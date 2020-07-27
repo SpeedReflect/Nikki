@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Diagnostics;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 
@@ -9,6 +10,7 @@ namespace Nikki.Support.Carbon.Parts.VinylParts
 	/// <summary>
 	/// A unit <see cref="PathPoint"/> that is used in <see cref="PathSet"/>.
 	/// </summary>
+	[DebuggerDisplay("({X}, {Y})")]
 	public class PathPoint : SubPart
 	{
 		/// <summary>

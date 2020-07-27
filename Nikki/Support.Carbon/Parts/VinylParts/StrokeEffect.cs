@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Diagnostics;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 
@@ -9,6 +10,7 @@ namespace Nikki.Support.Carbon.Parts.VinylParts
 	/// <summary>
 	/// A unit <see cref="StrokeEffect"/> that is used in <see cref="PathSet"/>.
 	/// </summary>
+	[DebuggerDisplay("Color: {HexColor}")]
 	public class StrokeEffect : SubPart
 	{
 		/// <summary>
@@ -40,6 +42,11 @@ namespace Nikki.Support.Carbon.Parts.VinylParts
 		/// </summary>
 		[AccessModifiable()]
 		public float Thickness { get; set; }
+
+		/// <summary>
+		/// Hexadecimal string representation of the color of the effect.
+		/// </summary>
+		public string HexColor => $"0x{this.Red:X2}{this.Green:X2}{this.Blue:X2}{this.Alpha:X2}";
 
 		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.

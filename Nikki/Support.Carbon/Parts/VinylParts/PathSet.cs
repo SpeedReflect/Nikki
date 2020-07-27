@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Diagnostics;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
@@ -11,8 +12,9 @@ using CoreExtensions.Conversions;
 namespace Nikki.Support.Carbon.Parts.VinylParts
 {
 	/// <summary>
-	/// 
+	/// A unit <see cref="PathSet"/> that is used in <see cref="Class.VectorVinyl"/>.
 	/// </summary>
+	[DebuggerDisplay("PathDatas: {NumPathDatas} | PathPoints: {NumPathPoints}")]
 	public class PathSet : SubPart
 	{
 		private const int max = Int32.MaxValue;

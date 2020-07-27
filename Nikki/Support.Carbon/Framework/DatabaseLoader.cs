@@ -34,6 +34,7 @@ namespace Nikki.Support.Carbon.Framework
 		private Block suninfos;
 		private Block tpkblocks;
 		private Block tracks;
+		private Block vectorvinyls;
 
 		public DatabaseLoader(Options options, Datamap db)
 		{
@@ -51,6 +52,7 @@ namespace Nikki.Support.Carbon.Framework
 			this.tracks = new Block(BinBlockID.Tracks);
 			this.fngroups = new Block(BinBlockID.FEngFiles);
 			this.strblocks = new Block(BinBlockID.STRBlocks);
+			this.vectorvinyls = new Block(BinBlockID.VinylSystem);
 			this.slottypes = new Block(BinBlockID.SlotTypes);
 			this.caranimations = new Block(BinBlockID.CarInfoAnimHookup);
 		}
@@ -130,6 +132,7 @@ namespace Nikki.Support.Carbon.Framework
 				this._db.FNGroups.Disassemble(br, this.fngroups);
 				this._db.SlotTypes.Disassemble(br, this.slottypes);
 				this._db.SlotOverrides.Disassemble(br, this.slottypes);
+				this._db.VectorVinyls.Disassemble(br, this.vectorvinyls);
 				this.ProcessCarAnimations(br);
 
 			}
@@ -247,6 +250,10 @@ namespace Nikki.Support.Carbon.Framework
 
 					case BinBlockID.SlotTypes:
 						this.slottypes.Offsets.Add(off);
+						goto default;
+
+					case BinBlockID.VinylSystem:
+						this.vectorvinyls.Offsets.Add(off);
 						goto default;
 
 					case BinBlockID.CarInfoAnimHookup:

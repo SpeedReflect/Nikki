@@ -216,6 +216,14 @@ namespace Nikki.Support.Carbon.Class
 			for (int i = 0; i < list.Count && i < this.NumberOfPaths; ++i)
 			{
 
+				if (this.NumberOfPaths > 1)
+				{
+
+					int aaa = 0;
+
+				}
+
+				br.BaseStream.Position = list[i];
 				size = br.ReadInt32();
 				this.PathSets[i].Read(br, size);
 
