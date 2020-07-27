@@ -156,18 +156,40 @@ namespace Nikki.Support.Carbon.Class
 		#region Methods
 
 		/// <summary>
-		/// Assembles <see cref="SunInfo"/> into a byte array.
+		/// Assembles <see cref="VectorVinyl"/> into a byte array.
 		/// </summary>
-		/// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="SunInfo"/> with.</param>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="VectorVinyl"/> with.</param>
 		public override void Assemble(BinaryWriter bw)
 		{
+			bw.WriteEnum(BinBlockID.VinylSystem);
+			bw.Write(-1);
+			var start = bw.BaseStream.Position;
 
+			bw.WriteEnum(BinBlockID.Vinyl_Header);
+			bw.Write((int)0x1C);
+			bw.Write((long)0);
+			bw.Write(this.NumberOfPaths);
+			bw.Write((int)0);
+			bw.Write(this.BinKey);
+			bw.Write(this.CenterX);
+			bw.Write(this.CenterY);
+
+			bw.WriteEnum(BinBlockID.Vinyl_PointerTable);
+			bw.Write(this.NumberOfPaths << 2);
+			bw.WriteBytes(this.NumberOfPaths << 2);
+
+			foreach (var set in this.PathSets) set.Write(bw);
+
+			var end = bw.BaseStream.Position;
+			bw.BaseStream.Position = start - 4;
+			bw.Write((int)(end - start));
+			bw.BaseStream.Position = end;
 		}
 
 		/// <summary>
-		/// Disassembles array into <see cref="SunInfo"/> properties.
+		/// Disassembles array into <see cref="VectorVinyl"/> properties.
 		/// </summary>
-		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="SunInfo"/> with.</param>
+		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="VectorVinyl"/> with.</param>
 		public override void Disassemble(BinaryReader br)
 		{
 			br.BaseStream.Position += 4;
@@ -202,7 +224,7 @@ namespace Nikki.Support.Carbon.Class
 						goto default; // do not process pointers
 
 					case BinBlockID.Vinyl_PathSet:
-						list.Add(br.BaseStream.Position - 4);
+						list.Add(br.BaseStream.Position - 8);
 						goto default;
 
 					default:
@@ -216,16 +238,8 @@ namespace Nikki.Support.Carbon.Class
 			for (int i = 0; i < list.Count && i < this.NumberOfPaths; ++i)
 			{
 
-				if (this.NumberOfPaths > 1)
-				{
-
-					int aaa = 0;
-
-				}
-
 				br.BaseStream.Position = list[i];
-				size = br.ReadInt32();
-				this.PathSets[i].Read(br, size);
+				this.PathSets[i].Read(br);
 
 			}
 
@@ -251,7 +265,7 @@ namespace Nikki.Support.Carbon.Class
 		}
 
 		/// <summary>
-		/// Returns CollectionName, BinKey and GameSTR of this <see cref="SunInfo"/> 
+		/// Returns CollectionName, BinKey and GameSTR of this <see cref="VectorVinyl"/> 
 		/// as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>

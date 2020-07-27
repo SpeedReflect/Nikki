@@ -353,7 +353,7 @@
         /// <summary>
         /// 0x0003CE09
         /// </summary>
-        Vinyl_VectorLine = 0x0003CE09, // varies
+        Vinyl_DropShadow = 0x0003CE09, // varies
 
         /// <summary>
         /// 0x0003CE0A

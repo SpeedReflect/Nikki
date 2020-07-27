@@ -15344,12 +15344,17 @@
             </summary>
             <param name="other"><see cref="T:Nikki.Reflection.Abstract.SubPart"/> to clone.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.PathSet.Read(System.IO.BinaryReader,System.Int32)">
+        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.PathSet.Read(System.IO.BinaryReader)">
             <summary>
             Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
-            <param name="size">Size of the <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.PathSet.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
         <member name="T:Nikki.Support.Carbon.Parts.VinylParts.StrokeEffect">
             <summary>
