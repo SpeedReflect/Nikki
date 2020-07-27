@@ -223,7 +223,7 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		public override SubPart PlainCopy()
 		{
 			var result = new CollisionBound();
-			result.CloneValues(this);
+			result.CloneValuesFrom(this);
 			return result;
 		}
 

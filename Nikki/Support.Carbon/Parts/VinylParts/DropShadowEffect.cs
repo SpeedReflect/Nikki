@@ -60,7 +60,7 @@ namespace Nikki.Support.Carbon.Parts.VinylParts
 		public override SubPart PlainCopy()
 		{
 			var result = new DropShadowEffect();
-			result.CloneValues(this);
+			result.CloneValuesFrom(this);
 			return result;
 		}
 

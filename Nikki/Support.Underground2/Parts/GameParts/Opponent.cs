@@ -64,7 +64,7 @@ namespace Nikki.Support.Underground2.Parts.GameParts
 		public override SubPart PlainCopy()
 		{
 			var result = new Opponent();
-			result.CloneValues(this);
+			result.CloneValuesFrom(this);
 			return result;
 		}
 

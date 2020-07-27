@@ -119,7 +119,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
 		public override SubPart PlainCopy()
 		{
 			var result = new Transmission();
-			result.CloneValues(this);
+			result.CloneValuesFrom(this);
 			return result;
 		}
 

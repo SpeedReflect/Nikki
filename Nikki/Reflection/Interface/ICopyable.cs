@@ -20,6 +20,6 @@ namespace Nikki.Reflection.Interface
         /// Clones values of another <see cref="ICopyable{TypeID}"/>.
         /// </summary>
         /// <param name="other"><see cref="ICopyable{TypeID}"/> to clone.</param>
-        void CloneValues(TypeID other);
+        void CloneValuesFrom(TypeID other);
     }
 }

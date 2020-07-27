@@ -775,7 +775,7 @@ namespace Nikki.Support.MostWanted.Framework
 						UpgradeGroupID = temppart.UpgradeGroupID,
 					};
 
-					if (actual != null) realpart.LodStruct.CloneValues(actual);
+					if (actual != null) realpart.LodStruct.CloneValuesFrom(actual);
 
 					foreach (var attroff in cpoff?.AttribOffsets ?? Enumerable.Empty<ushort>())
 					{

@@ -147,7 +147,7 @@ namespace Nikki.Support.Shared.Parts.SunParts
 		public override SubPart PlainCopy()
 		{
 			var result = new SunLayer();
-			result.CloneValues(this);
+			result.CloneValuesFrom(this);
 			return result;
 		}
 

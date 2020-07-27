@@ -135,7 +135,7 @@ namespace Nikki.Support.Carbon.Parts.PresetParts
         public override SubPart PlainCopy()
         {
             var result = new Vinyl();
-            result.CloneValues(this);
+            result.CloneValuesFrom(this);
             return result;
         }
 

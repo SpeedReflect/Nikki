@@ -78,7 +78,7 @@ namespace Nikki.Support.Carbon.Parts.VinylParts
 		public override SubPart PlainCopy()
 		{
 			var result = new InnerGlowEffect();
-			result.CloneValues(this);
+			result.CloneValuesFrom(this);
 			return result;
 		}
 

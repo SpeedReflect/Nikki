@@ -972,10 +972,10 @@ namespace Nikki.Support.Underground2.Class
                 switch (wheel.WheelID)
                 {
 
-                    case CarInfoWheel.CarWheelType.FRONT_RIGHT: this.WHEEL_FRONT_RIGHT.CloneValues(wheel); break;
-                    case CarInfoWheel.CarWheelType.REAR_RIGHT: this.WHEEL_REAR_RIGHT.CloneValues(wheel); break;
-                    case CarInfoWheel.CarWheelType.REAR_LEFT: this.WHEEL_REAR_LEFT.CloneValues(wheel); break;
-                    default: this.WHEEL_FRONT_LEFT.CloneValues(wheel); break;
+                    case CarInfoWheel.CarWheelType.FRONT_RIGHT: this.WHEEL_FRONT_RIGHT.CloneValuesFrom(wheel); break;
+                    case CarInfoWheel.CarWheelType.REAR_RIGHT: this.WHEEL_REAR_RIGHT.CloneValuesFrom(wheel); break;
+                    case CarInfoWheel.CarWheelType.REAR_LEFT: this.WHEEL_REAR_LEFT.CloneValuesFrom(wheel); break;
+                    default: this.WHEEL_FRONT_LEFT.CloneValuesFrom(wheel); break;
 
                 }
 
@@ -1115,12 +1115,12 @@ namespace Nikki.Support.Underground2.Class
                 switch (camera.Type)
                 {
 
-                    case Camera.CameraType.CLOSE: this.PLAYER_CAMERA_CLOSE.CloneValues(camera); break;
-                    case Camera.CameraType.BUMPER: this.PLAYER_CAMERA_BUMPER.CloneValues(camera); break;
-                    case Camera.CameraType.DRIVER: this.PLAYER_CAMERA_DRIVER.CloneValues(camera); break;
-                    case Camera.CameraType.HOOD: this.PLAYER_CAMERA_HOOD.CloneValues(camera); break;
-                    case Camera.CameraType.DRIFT: this.PLAYER_CAMERA_DRIFT.CloneValues(camera); break;
-                    default: this.PLAYER_CAMERA_FAR.CloneValues(camera); break;
+                    case Camera.CameraType.CLOSE: this.PLAYER_CAMERA_CLOSE.CloneValuesFrom(camera); break;
+                    case Camera.CameraType.BUMPER: this.PLAYER_CAMERA_BUMPER.CloneValuesFrom(camera); break;
+                    case Camera.CameraType.DRIVER: this.PLAYER_CAMERA_DRIVER.CloneValuesFrom(camera); break;
+                    case Camera.CameraType.HOOD: this.PLAYER_CAMERA_HOOD.CloneValuesFrom(camera); break;
+                    case Camera.CameraType.DRIFT: this.PLAYER_CAMERA_DRIFT.CloneValuesFrom(camera); break;
+                    default: this.PLAYER_CAMERA_FAR.CloneValuesFrom(camera); break;
                 
                 }
             
@@ -1136,12 +1136,12 @@ namespace Nikki.Support.Underground2.Class
                 switch (camera.Type)
                 {
 
-                    case Camera.CameraType.CLOSE: this.AI_CAMERA_CLOSE.CloneValues(camera); break;
-                    case Camera.CameraType.BUMPER: this.AI_CAMERA_BUMPER.CloneValues(camera); break;
-                    case Camera.CameraType.DRIVER: this.AI_CAMERA_DRIVER.CloneValues(camera); break;
-                    case Camera.CameraType.HOOD: this.AI_CAMERA_HOOD.CloneValues(camera); break;
-                    case Camera.CameraType.DRIFT: this.AI_CAMERA_DRIFT.CloneValues(camera); break;
-                    default: this.AI_CAMERA_FAR.CloneValues(camera); break;
+                    case Camera.CameraType.CLOSE: this.AI_CAMERA_CLOSE.CloneValuesFrom(camera); break;
+                    case Camera.CameraType.BUMPER: this.AI_CAMERA_BUMPER.CloneValuesFrom(camera); break;
+                    case Camera.CameraType.DRIVER: this.AI_CAMERA_DRIVER.CloneValuesFrom(camera); break;
+                    case Camera.CameraType.HOOD: this.AI_CAMERA_HOOD.CloneValuesFrom(camera); break;
+                    case Camera.CameraType.DRIFT: this.AI_CAMERA_DRIFT.CloneValuesFrom(camera); break;
+                    default: this.AI_CAMERA_FAR.CloneValuesFrom(camera); break;
                 
                 }
             
@@ -1257,16 +1257,16 @@ namespace Nikki.Support.Underground2.Class
 
             switch (index)
 			{
-                case 1: this.CARSKIN01.CloneValues(skin); break;
-                case 2: this.CARSKIN02.CloneValues(skin); break;
-                case 3: this.CARSKIN03.CloneValues(skin); break;
-                case 4: this.CARSKIN04.CloneValues(skin); break;
-                case 5: this.CARSKIN05.CloneValues(skin); break;
-                case 6: this.CARSKIN06.CloneValues(skin); break;
-                case 7: this.CARSKIN07.CloneValues(skin); break;
-                case 8: this.CARSKIN08.CloneValues(skin); break;
-                case 9: this.CARSKIN09.CloneValues(skin); break;
-                case 10: this.CARSKIN10.CloneValues(skin); break;
+                case 1: this.CARSKIN01.CloneValuesFrom(skin); break;
+                case 2: this.CARSKIN02.CloneValuesFrom(skin); break;
+                case 3: this.CARSKIN03.CloneValuesFrom(skin); break;
+                case 4: this.CARSKIN04.CloneValuesFrom(skin); break;
+                case 5: this.CARSKIN05.CloneValuesFrom(skin); break;
+                case 6: this.CARSKIN06.CloneValuesFrom(skin); break;
+                case 7: this.CARSKIN07.CloneValuesFrom(skin); break;
+                case 8: this.CARSKIN08.CloneValuesFrom(skin); break;
+                case 9: this.CARSKIN09.CloneValuesFrom(skin); break;
+                case 10: this.CARSKIN10.CloneValuesFrom(skin); break;
                 default: break;
             }
         }

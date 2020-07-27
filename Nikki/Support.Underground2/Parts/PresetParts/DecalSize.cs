@@ -87,7 +87,7 @@ namespace Nikki.Support.Underground2.Parts.PresetParts
 		public override SubPart PlainCopy()
 		{
 			var result = new DecalSize();
-			result.CloneValues(this);
+			result.CloneValuesFrom(this);
 			return result;
 		}
 

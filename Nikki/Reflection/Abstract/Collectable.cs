@@ -237,7 +237,7 @@ namespace Nikki.Reflection.Abstract
 
                     var nodefrom = property.GetValue(from) as SubPart;
                     var nodeto = property.GetValue(to) as SubPart;
-                    nodeto.CloneValues(nodefrom);
+                    nodeto.CloneValuesFrom(nodefrom);
 
                 }
 

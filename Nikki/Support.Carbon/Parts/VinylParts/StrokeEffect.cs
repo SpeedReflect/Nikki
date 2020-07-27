@@ -48,7 +48,7 @@ namespace Nikki.Support.Carbon.Parts.VinylParts
 		public override SubPart PlainCopy()
 		{
 			var result = new StrokeEffect();
-			result.CloneValues(this);
+			result.CloneValuesFrom(this);
 			return result;
 		}
 

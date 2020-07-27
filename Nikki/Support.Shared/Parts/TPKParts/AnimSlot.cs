@@ -92,7 +92,7 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 		/// Clones values of another <see cref="SubPart"/>.
 		/// </summary>
 		/// <param name="other"><see cref="SubPart"/> to clone.</param>
-		public override void CloneValues(SubPart other)
+		public override void CloneValuesFrom(SubPart other)
 		{
 			if (other is AnimSlot anim)
 			{

@@ -101,7 +101,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
         /// Clones values of another <see cref="CarInfoWheel"/>.
         /// </summary>
         /// <param name="other"><see cref="CarInfoWheel"/> to clone.</param>
-        public override void CloneValues(SubPart other)
+        public override void CloneValuesFrom(SubPart other)
         {
             if (other is CarInfoWheel wheel)
             {
@@ -126,7 +126,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
         public override SubPart PlainCopy()
         {
             var result = new CarInfoWheel();
-            result.CloneValues(this);
+            result.CloneValuesFrom(this);
             return result;
         }
 

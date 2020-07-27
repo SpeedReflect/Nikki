@@ -127,7 +127,7 @@ namespace Nikki.Support.Carbon.Parts.VinylParts
 		public override SubPart PlainCopy()
 		{
 			var result = new PathSet();
-			result.CloneValues(this);
+			result.CloneValuesFrom(this);
 			return result;
 		}
 
@@ -135,7 +135,7 @@ namespace Nikki.Support.Carbon.Parts.VinylParts
 		/// Clones values of another <see cref="SubPart"/>.
 		/// </summary>
 		/// <param name="other"><see cref="SubPart"/> to clone.</param>
-		public override void CloneValues(SubPart other)
+		public override void CloneValuesFrom(SubPart other)
 		{
 			if (other is PathSet set)
 			{
@@ -148,12 +148,12 @@ namespace Nikki.Support.Carbon.Parts.VinylParts
 				this.InnerGlowEffectExists = set.InnerGlowEffectExists;
 				this.InnerShadowEffectExists = set.InnerShadowEffectExists;
 				this.StrokeEffectExists = set.StrokeEffectExists;
-				this.DropShadowEffect.CloneValues(set.DropShadowEffect);
-				this.FillEffect.CloneValues(set.FillEffect);
-				this.GradientEffect.CloneValues(set.GradientEffect);
-				this.InnerGlowEffect.CloneValues(set.InnerGlowEffect);
-				this.InnerShadowEffect.CloneValues(set.InnerShadowEffect);
-				this.StrokeEffect.CloneValues(set.StrokeEffect);
+				this.DropShadowEffect.CloneValuesFrom(set.DropShadowEffect);
+				this.FillEffect.CloneValuesFrom(set.FillEffect);
+				this.GradientEffect.CloneValuesFrom(set.GradientEffect);
+				this.InnerGlowEffect.CloneValuesFrom(set.InnerGlowEffect);
+				this.InnerShadowEffect.CloneValuesFrom(set.InnerShadowEffect);
+				this.StrokeEffect.CloneValuesFrom(set.StrokeEffect);
 
 			}
 		}

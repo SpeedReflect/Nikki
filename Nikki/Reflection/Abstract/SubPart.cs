@@ -93,7 +93,7 @@ namespace Nikki.Reflection.Abstract
         /// Clones values of another <see cref="SubPart"/>.
         /// </summary>
         /// <param name="other"><see cref="SubPart"/> to clone.</param>
-        public virtual void CloneValues(SubPart other)
+        public virtual void CloneValuesFrom(SubPart other)
 		{
             var thistype = this.GetType();
             var othertype = other.GetType();

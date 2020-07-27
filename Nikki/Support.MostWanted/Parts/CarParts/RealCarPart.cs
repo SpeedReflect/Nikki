@@ -314,7 +314,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 				UpgradeGroupID = this.UpgradeGroupID,
 			};
 
-			result.LodStruct.CloneValues(this.LodStruct);
+			result.LodStruct.CloneValuesFrom(this.LodStruct);
 
 			foreach (var attrib in this.Attributes)
 			{
@@ -330,7 +330,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 		/// Clones values of another <see cref="SubPart"/>.
 		/// </summary>
 		/// <param name="other"><see cref="SubPart"/> to clone.</param>
-		public override void CloneValues(SubPart other)
+		public override void CloneValuesFrom(SubPart other)
 		{
 			if (other is RealCarPart part)
 			{
@@ -339,7 +339,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 				this.DebugName = part.DebugName;
 				this.PartLabel = part.PartLabel;
 				this.UpgradeGroupID = part.UpgradeGroupID;
-				this.LodStruct.CloneValues(part.LodStruct);
+				this.LodStruct.CloneValuesFrom(part.LodStruct);
 				this.Attributes.Capacity = part.Attributes.Capacity;
 
 				foreach (var attrib in part.Attributes)
