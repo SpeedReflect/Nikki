@@ -11,8 +11,8 @@ using Nikki.Support.Carbon.Framework;
 using Nikki.Support.Carbon.Parts.VinylParts;
 using CoreExtensions.IO;
 using CoreExtensions.Conversions;
-
-
+using System.Text;
+using System.Linq;
 
 namespace Nikki.Support.Carbon.Class
 {
@@ -214,7 +214,7 @@ namespace Nikki.Support.Carbon.Class
 							this.NumberOfPaths = br.ReadInt32();
 							br.BaseStream.Position += 4;
 							this._collection_name = br.ReadUInt32().BinString(LookupReturn.EMPTY);
-							this.CenterX = br.ReadUInt32();
+							this.CenterX = br.ReadSingle();
 							this.CenterY = br.ReadSingle();
 
 						}
@@ -273,6 +273,60 @@ namespace Nikki.Support.Carbon.Class
 		{
 			return $"Collection Name: {this.CollectionName} | " +
 				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
+		}
+
+		#endregion
+
+		#region Functional
+
+		/// <summary>
+		/// Gets data of this <see cref="VectorVinyl"/> as an SVG-formatted string.
+		/// </summary>
+		/// <param name="resolution">Resolution of the SVG image.</param>
+		/// <param name="width">Stroke line width of the image.</param>
+		/// <param name="color">Color of the image in hexadecimal HTML representation.</param>
+		/// <returns>Data as an SVG-formatted string.</returns>
+		public string GetSVGString(int resolution, int width, string color)
+		{
+			if (resolution > 0x10000) resolution = 0x10000;
+			var difference = 0x10000 / resolution;
+			var bitshift = (byte)Math.Log2(difference);
+
+			var builder = new StringBuilder(0x8000);
+
+			builder.Append($"<svg height=\"{resolution}\" width=\"{resolution}\">" + Environment.NewLine);
+
+			foreach (var set in this.PathSets)
+			{
+
+				foreach (var data in set.PathDatas)
+				{
+
+					for (int i = 0, index = data.StartIndex; i < data.NumCurves; ++i, index += 3)
+					{
+
+						var p1x = set.PathPoints[index].X >> bitshift;
+						var p1y = set.PathPoints[index].Y >> bitshift;
+						var c1x = set.PathPoints[index + 1].X >> bitshift;
+						var c1y = set.PathPoints[index + 1].Y >> bitshift;
+						var c2x = set.PathPoints[index + 2].X >> bitshift;
+						var c2y = set.PathPoints[index + 2].Y >> bitshift;
+						var p2x = set.PathPoints[index + 3].X >> bitshift;
+						var p2y = set.PathPoints[index + 3].Y >> bitshift;
+
+						var str = $"<path d=\"M {p1x} {p1y} C {c1x} {c1y}, {c2x} {c2y} {p2x} {p2y}\" " +
+							$"style=\"stroke: {color}; stroke-width: {width}; fill: none\" />";
+
+						builder.Append(str + Environment.NewLine);
+
+					}
+
+				}
+
+			}
+
+			builder.Append("</svg>");
+			return builder.ToString();
 		}
 
 		#endregion

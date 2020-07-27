@@ -1560,7 +1560,7 @@
             0x0003CE08
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.BinBlockID.Vinyl_VectorLine">
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.Vinyl_DropShadow">
             <summary>
             0x0003CE09
             </summary>
@@ -12592,15 +12592,15 @@
         </member>
         <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.Assemble(System.IO.BinaryWriter)">
             <summary>
-            Assembles <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/> into a byte array.
+            Assembles <see cref="T:Nikki.Support.Carbon.Class.VectorVinyl"/> into a byte array.
             </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/> with.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Carbon.Class.VectorVinyl"/> with.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.Disassemble(System.IO.BinaryReader)">
             <summary>
-            Disassembles array into <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/> properties.
+            Disassembles array into <see cref="T:Nikki.Support.Carbon.Class.VectorVinyl"/> properties.
             </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/> with.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Carbon.Class.VectorVinyl"/> with.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.MemoryCast(System.String)">
             <summary>
@@ -12611,7 +12611,7 @@
         </member>
         <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.ToString">
             <summary>
-            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/> 
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Carbon.Class.VectorVinyl"/> 
             as a string value.
             </summary>
             <returns>String value.</returns>

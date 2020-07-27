@@ -72,6 +72,7 @@ namespace Nikki.Support.Carbon.Framework
 				this._db.PresetRides.Assemble(bw, this._options.Watermark);
 				this._db.PresetSkins.Assemble(bw, this._options.Watermark);
 				this._db.FNGroups.Assemble(bw, this._options.Watermark);
+				this._db.VectorVinyls.Assemble(bw, this._options.Watermark);
 
 			}
 			catch (Exception e)
@@ -127,6 +128,7 @@ namespace Nikki.Support.Carbon.Framework
 				this._db.PresetRides.Assemble(bw, this._options.Watermark);
 				this._db.PresetSkins.Assemble(bw, this._options.Watermark);
 				this._db.FNGroups.Assemble(bw, this._options.Watermark);
+				this._db.VectorVinyls.Assemble(bw, this._options.Watermark);
 				this.WriteBlockOffsets(bw, br);
 
 			}
@@ -177,6 +179,7 @@ namespace Nikki.Support.Carbon.Framework
 					case BinBlockID.PresetRides:
 					case BinBlockID.PresetSkins:
 					case BinBlockID.TPKSettings:
+					case BinBlockID.VinylSystem:
 					case BinBlockID.CarTypeInfos:
 					case BinBlockID.CarInfoAnimHideup:
 					case BinBlockID.CarInfoAnimHookup:

@@ -69,14 +69,64 @@ namespace Nikki.Support.Carbon.Framework
 		{
 			if (this.Count == 0) return;
 
-			bw.GeneratePadding(mark, this.Alignment);
+			var GetPaddingArray = new Func<int, int, byte[]>((length, start_at) =>
+			{
+				byte[] result;
+				int difference = start_at - (length % start_at);
+				if (difference == start_at) difference = -1;
+
+				switch (difference)
+				{
+					case -1:
+						result = new byte[0];
+						return result;
+
+					case 4:
+						result = new byte[4 + start_at];
+						unsafe
+						{
+
+							fixed (byte* byteptr_t = &result[0])
+							{
+
+								*(int*)(byteptr_t + 4) = start_at - 4;
+
+							}
+
+						}
+						return result;
+
+					case 8:
+						result = new byte[8];
+						return result;
+
+					default:
+						result = new byte[difference];
+						unsafe
+						{
+
+							fixed (byte* byteptr_t = &result[0])
+							{
+
+								*(int*)(byteptr_t + 4) = difference - 8;
+
+							}
+
+						}
+						return result;
+				}
+			});
 
 			foreach (var collection in this)
 			{
 
+				var array = GetPaddingArray((int)bw.BaseStream.Position, 0x800);
+				if (array.Length != 0) bw.Write(array);
 				collection.Assemble(bw);
 
 			}
+
+			bw.Write(GetPaddingArray((int)bw.BaseStream.Position, 0x800));
 		}
 
 		/// <summary>

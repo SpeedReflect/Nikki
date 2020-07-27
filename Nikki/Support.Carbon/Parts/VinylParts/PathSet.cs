@@ -360,8 +360,8 @@ namespace Nikki.Support.Carbon.Parts.VinylParts
 		private int PrecalculateSize()
 		{
 			var size = 0x30;
-			size += 8 + this.NumPathDatas << 2;
-			size += 8 + this.NumPathPoints << 2;
+			size += 8 + (this.NumPathDatas << 2);
+			size += 8 + (this.NumPathPoints << 2);
 			if (this.FillEffectExists == eBoolean.True) size += 0xC;
 			if (this.StrokeEffectExists == eBoolean.True) size += 0x10;
 			if (this.DropShadowEffectExists == eBoolean.True) size += 0x18;
