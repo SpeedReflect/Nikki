@@ -1,11 +1,16 @@
 ﻿using System;
 using System.IO;
 using System.ComponentModel;
+using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Carbon.Parts.VinylParts;
+using CoreExtensions.IO;
 using CoreExtensions.Conversions;
+
 
 
 namespace Nikki.Support.Carbon.Class
@@ -36,7 +41,7 @@ namespace Nikki.Support.Carbon.Class
 		public override string GameSTR => GameINT.Carbon.ToString();
 
 		/// <summary>
-		/// Manager to which the class belongs to.
+		/// 
 		/// </summary>
 		[Browsable(false)]
 		public VectorVinylManager Manager { get; set; }
@@ -70,7 +75,29 @@ namespace Nikki.Support.Carbon.Class
 		[TypeConverter(typeof(HexConverter))]
 		public override uint VltKey => this._collection_name.VltHash();
 
+		/// <summary>
+		/// Number of <see cref="PathSet"/> in this <see cref="VectorVinyl"/>.
+		/// </summary>
+		public int NumberOfPaths
+		{
+			get => this.PathSets.Count;
+			set => this.PathSets.Resize(value);
+		}
 
+		/// <summary>
+		/// X position of the center of this <see cref="VectorVinyl"/>.
+		/// </summary>
+		public float CenterX { get; set; }
+
+		/// <summary>
+		/// Y position of the center of this <see cref="VectorVinyl"/>.
+		/// </summary>
+		public float CenterY { get; set; }
+
+		/// <summary>
+		/// List of <see cref="PathSet"/> in this <see cref="VectorVinyl"/>.
+		/// </summary>
+		public List<PathSet> PathSets { get; }
 
 		#endregion
 
@@ -81,14 +108,14 @@ namespace Nikki.Support.Carbon.Class
 		/// </summary>
 		public VectorVinyl()
 		{
-
+			this.PathSets = new List<PathSet>();
 		}
 
 		/// <summary>
-		/// Initializes new instance of <see cref="VectorVinyl"/>.
+		/// 
 		/// </summary>
-		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="manager"><see cref="SunInfoManager"/> to which this instance belongs to.</param>
+		/// <param name="CName"></param>
+		/// <param name="manager"></param>
 		public VectorVinyl(string CName, VectorVinylManager manager) : this()
 		{
 			this.Manager = manager;
@@ -97,10 +124,10 @@ namespace Nikki.Support.Carbon.Class
 		}
 
 		/// <summary>
-		/// Initializes new instance of <see cref="VectorVinyl"/>.
+		/// 
 		/// </summary>
-		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="manager"><see cref="VectorVinylManager"/> to which this instance belongs to.</param>
+		/// <param name="br"></param>
+		/// <param name="manager"></param>
 		public VectorVinyl(BinaryReader br, VectorVinylManager manager) : this()
 		{
 			this.Manager = manager;
@@ -132,7 +159,58 @@ namespace Nikki.Support.Carbon.Class
 		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="SunInfo"/> with.</param>
 		public override void Disassemble(BinaryReader br)
 		{
+			br.BaseStream.Position += 8;
+			var size = br.ReadInt32();
+			var off = br.BaseStream.Position;
+			var end = off + size;
+			var list = new List<long>();
 
+			while (br.BaseStream.Position < end)
+			{
+
+				var id = br.ReadEnum<BinBlockID>();
+				var len = br.ReadInt32();
+				var cur = br.BaseStream.Position;
+
+				switch (id)
+				{
+					case BinBlockID.Vinyl_Header:
+						{
+
+							br.BaseStream.Position += 8;
+							this.NumberOfPaths = br.ReadInt32();
+							br.BaseStream.Position += 4;
+							this._collection_name = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+							this.CenterX = br.ReadUInt32();
+							this.CenterY = br.ReadSingle();
+
+						}
+						goto default;
+
+					case BinBlockID.Vinyl_PointerTable:
+						goto default; // do not process pointers
+
+					case BinBlockID.Vinyl_PathSet:
+						list.Add(br.BaseStream.Position - 4);
+						goto default;
+
+					default:
+						br.BaseStream.Position = cur + len;
+						break;
+
+				}
+
+			}
+
+			for (int i = 0; i < list.Count && i < this.NumberOfPaths; ++i)
+			{
+
+				size = br.ReadInt32();
+				this.PathSets[i].Read(br, size);
+
+			}
+
+			br.BaseStream.Position = end;
 		}
 
 		/// <summary>
@@ -142,7 +220,7 @@ namespace Nikki.Support.Carbon.Class
 		/// <returns>Memory casted copy of the object.</returns>
 		public override Collectable MemoryCast(string CName)
 		{
-			var result = new VectorVinyl(CName, this.Manager);
+			var result = new VectorVinyl(/* CName, this.Manager */);
 			base.MemoryCast(this, result);
 			return result;
 		}

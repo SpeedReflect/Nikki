@@ -366,6 +366,11 @@
         Vinyl_ShadowEffect = 0x0003CE0B, // varies
 
         /// <summary>
+        /// 0x0003CE0C
+        /// </summary>
+        Vinyl_Gradient = 0x0003CE0C, // varies
+
+        /// <summary>
         /// 0x0003CE12
         /// </summary>
         SkinRegionDB = 0x0003CE12, // 0x10 Modular

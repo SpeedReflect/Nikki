@@ -12506,6 +12506,104 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
+        <member name="T:Nikki.Support.Carbon.Class.VectorVinyl">
+            <summary>
+            <see cref="T:Nikki.Support.Carbon.Class.VectorVinyl"/> is a collection of vectors that form a vinyl.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.VectorVinyl.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.VectorVinyl.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.VectorVinyl.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.VectorVinyl.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.VectorVinyl.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.VectorVinyl.NumberOfPaths">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.VectorVinyl.CenterX">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.VectorVinyl.CenterY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Class.VectorVinyl.PathSets">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.VectorVinyl"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Carbon.Datamap">
             <summary>
             <see cref="T:Nikki.Support.Carbon.Datamap"/> is an extension of <see cref="T:Nikki.Reflection.Abstract.FileBase"/> for Carbon support.
@@ -27355,6 +27453,67 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.Track.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="T:Nikki.Support.Shared.Class.VectorVinyl">
+            <summary>
+            <see cref="T:Nikki.Support.Shared.Class.VectorVinyl"/> is a collection of vectors that form a vinyl.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.VectorVinyl.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.VectorVinyl.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.VectorVinyl.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.VectorVinyl.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.VectorVinyl.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.VectorVinyl.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Shared.Class.AcidEffect"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Shared.Class.AcidEffect"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.VectorVinyl.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Shared.Class.AcidEffect"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Shared.Class.AcidEffect"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.VectorVinyl.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.VectorVinyl.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.VectorVinyl.MemoryCast(System.String)">
             <summary>
             Casts all attributes from this object to another one.
             </summary>
