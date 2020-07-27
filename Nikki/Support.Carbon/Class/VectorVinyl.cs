@@ -7,6 +7,7 @@ using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Carbon.Framework;
 using Nikki.Support.Carbon.Parts.VinylParts;
 using CoreExtensions.IO;
 using CoreExtensions.Conversions;
@@ -78,6 +79,9 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// Number of <see cref="PathSet"/> in this <see cref="VectorVinyl"/>.
 		/// </summary>
+		[AccessModifiable()]
+		[MemoryCastable()]
+		[Category("Primary")]
 		public int NumberOfPaths
 		{
 			get => this.PathSets.Count;
@@ -87,16 +91,23 @@ namespace Nikki.Support.Carbon.Class
 		/// <summary>
 		/// X position of the center of this <see cref="VectorVinyl"/>.
 		/// </summary>
+		[AccessModifiable()]
+		[MemoryCastable()]
+		[Category("Primary")]
 		public float CenterX { get; set; }
 
 		/// <summary>
 		/// Y position of the center of this <see cref="VectorVinyl"/>.
 		/// </summary>
+		[AccessModifiable()]
+		[MemoryCastable()]
+		[Category("Primary")]
 		public float CenterY { get; set; }
 
 		/// <summary>
 		/// List of <see cref="PathSet"/> in this <see cref="VectorVinyl"/>.
 		/// </summary>
+		[Browsable(false)]
 		public List<PathSet> PathSets { get; }
 
 		#endregion
@@ -159,7 +170,7 @@ namespace Nikki.Support.Carbon.Class
 		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="SunInfo"/> with.</param>
 		public override void Disassemble(BinaryReader br)
 		{
-			br.BaseStream.Position += 8;
+			br.BaseStream.Position += 4;
 			var size = br.ReadInt32();
 			var off = br.BaseStream.Position;
 			var end = off + size;
@@ -220,8 +231,14 @@ namespace Nikki.Support.Carbon.Class
 		/// <returns>Memory casted copy of the object.</returns>
 		public override Collectable MemoryCast(string CName)
 		{
-			var result = new VectorVinyl(/* CName, this.Manager */);
-			base.MemoryCast(this, result);
+			var result = new VectorVinyl(CName, this.Manager)
+			{
+				CenterX = this.CenterX,
+				CenterY = this.CenterY,
+			};
+
+			foreach (var set in this.PathSets) result.PathSets.Add((PathSet)set.PlainCopy());
+
 			return result;
 		}
 
