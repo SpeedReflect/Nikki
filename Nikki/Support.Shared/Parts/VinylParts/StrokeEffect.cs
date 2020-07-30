@@ -14,6 +14,11 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 	public abstract class StrokeEffect : SubPart
 	{
 		/// <summary>
+		/// Constant size of one unit class.
+		/// </summary>
+		public abstract int BlockSize { get; }
+
+		/// <summary>
 		/// Red color of the effect.
 		/// </summary>
 		[AccessModifiable()]

@@ -14,6 +14,11 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 	public class GradientEffect : SubPart
 	{
 		/// <summary>
+		/// Constant size of one unit class.
+		/// </summary>
+		public int BlockSize => 0x28;
+
+		/// <summary>
 		/// Angle of the gradient.
 		/// </summary>
 		[AccessModifiable()]

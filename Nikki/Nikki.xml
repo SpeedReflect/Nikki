@@ -14786,558 +14786,9 @@
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
         </member>
-        <member name="T:Nikki.Support.Carbon.Parts.VinylParts.DropShadowEffect">
-            <summary>
-            A unit <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.DropShadowEffect"/> that is used in <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.DropShadowEffect.Red">
-            <summary>
-            Red color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.DropShadowEffect.Green">
-            <summary>
-            Green color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.DropShadowEffect.Blue">
-            <summary>
-            Blue color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.DropShadowEffect.Alpha">
-            <summary>
-            Alpha color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.DropShadowEffect.DisperseU">
-            <summary>
-            Disperse U coordinate of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.DropShadowEffect.DisperseV">
-            <summary>
-            Disperse V coordinate of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.DropShadowEffect.Blur">
-            <summary>
-            Blue ratio of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.DropShadowEffect.HexColor">
-            <summary>
-            Hexadecimal string representation of the color of the effect.
-            </summary>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.DropShadowEffect.PlainCopy">
-            <summary>
-            Creates a plain copy of the objects that contains same values.
-            </summary>
-            <returns>Exact plain copy of the object.</returns>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.DropShadowEffect.Read(System.IO.BinaryReader)">
-            <summary>
-            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.DropShadowEffect.Write(System.IO.BinaryWriter)">
-            <summary>
-            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
-            </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-        </member>
-        <member name="T:Nikki.Support.Carbon.Parts.VinylParts.FillEffect">
-            <summary>
-            A unit <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.FillEffect"/> that is used in <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.FillEffect.Red">
-            <summary>
-            Red color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.FillEffect.Green">
-            <summary>
-            Green color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.FillEffect.Blue">
-            <summary>
-            Blue color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.FillEffect.Alpha">
-            <summary>
-            Alpha color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.FillEffect.HexColor">
-            <summary>
-            Hexadecimal string representation of the color of the effect.
-            </summary>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.FillEffect.PlainCopy">
-            <summary>
-            Creates a plain copy of the objects that contains same values.
-            </summary>
-            <returns>Exact plain copy of the object.</returns>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.FillEffect.Read(System.IO.BinaryReader)">
-            <summary>
-            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.FillEffect.Write(System.IO.BinaryWriter)">
-            <summary>
-            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
-            </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.FillEffect.GetHTMLColor">
-            <summary>
-            Gets color of this effect as an HTML formatted string.
-            </summary>
-            <returns>Color as an HTML formatted string.</returns>
-        </member>
-        <member name="T:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect">
-            <summary>
-            A unit <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect"/> that is used in <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.Angle">
-            <summary>
-            Angle of the gradient.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.MainAlpha">
-            <summary>
-            Main alpha of the gradient.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.Unknown1">
-            <summary>
-            Unknown value 1 of the gradient.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.Unknown2">
-            <summary>
-            Unknown value 2 of the gradient.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.Unknown3">
-            <summary>
-            Unknown value 3 of the gradient.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.Color1Red">
-            <summary>
-            Red color 1 of the gradient.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.Color1Green">
-            <summary>
-            Green color 1 of the gradient.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.Color1Blue">
-            <summary>
-            Blue color 1 of the gradient.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.Color1Alpha">
-            <summary>
-            Alpha color 1 of the gradient.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.Color2Red">
-            <summary>
-            Red color 2 of the gradient.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.Color2Green">
-            <summary>
-            Green color 2 of the gradient.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.Color2Blue">
-            <summary>
-            Blue color 2 of the gradient.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.Color2Alpha">
-            <summary>
-            Alpha color 2 of the gradient.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.Color1Position">
-            <summary>
-            Position of color 1 of the gradient.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.Color2Position">
-            <summary>
-            Position of color 2 of the gradient.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.Alpha1Position">
-            <summary>
-            Position of alpha 1 color of the gradient.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.Alpha2Position">
-            <summary>
-            Position of alpha 2 color of the gradient.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.OffsetU">
-            <summary>
-            Offset U coordinate of the gradient.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.OffsetV">
-            <summary>
-            Offset V coordinate of the gradient.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.HexColor1">
-            <summary>
-            Hexadecimal string representation of the color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.HexColor2">
-            <summary>
-            Hexadecimal string representation of the color of the effect.
-            </summary>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.PlainCopy">
-            <summary>
-            Creates a plain copy of the objects that contains same values.
-            </summary>
-            <returns>Exact plain copy of the object.</returns>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.Read(System.IO.BinaryReader)">
-            <summary>
-            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect.Write(System.IO.BinaryWriter)">
-            <summary>
-            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
-            </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-        </member>
-        <member name="T:Nikki.Support.Carbon.Parts.VinylParts.InnerGlowEffect">
-            <summary>
-            A unit <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.InnerGlowEffect"/> that is used in <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.InnerGlowEffect.Red">
-            <summary>
-            Red color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.InnerGlowEffect.Green">
-            <summary>
-            Green color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.InnerGlowEffect.Blue">
-            <summary>
-            Blue color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.InnerGlowEffect.Alpha">
-            <summary>
-            Alpha color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.InnerGlowEffect.Edge">
-            <summary>
-            Edge value of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.InnerGlowEffect.Unknown1">
-            <summary>
-            Unknown value 1 of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.InnerGlowEffect.Unknown2">
-            <summary>
-            Unknown value 2 of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.InnerGlowEffect.Unknown3">
-            <summary>
-            Unknown value 3 of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.InnerGlowEffect.Size">
-            <summary>
-            Size of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.InnerGlowEffect.Choke">
-            <summary>
-            Choke value of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.InnerGlowEffect.HexColor">
-            <summary>
-            Hexadecimal string representation of the color of the effect.
-            </summary>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.InnerGlowEffect.PlainCopy">
-            <summary>
-            Creates a plain copy of the objects that contains same values.
-            </summary>
-            <returns>Exact plain copy of the object.</returns>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.InnerGlowEffect.Read(System.IO.BinaryReader)">
-            <summary>
-            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.InnerGlowEffect.Write(System.IO.BinaryWriter)">
-            <summary>
-            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
-            </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-        </member>
-        <member name="T:Nikki.Support.Carbon.Parts.VinylParts.InnerShadowEffect">
-            <summary>
-            A unit <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.InnerShadowEffect"/> that is used in <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.InnerShadowEffect.Red">
-            <summary>
-            Red color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.InnerShadowEffect.Green">
-            <summary>
-            Green color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.InnerShadowEffect.Blue">
-            <summary>
-            Blue color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.InnerShadowEffect.Alpha">
-            <summary>
-            Alpha color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.InnerShadowEffect.DisperseU">
-            <summary>
-            Disperse U coordinate of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.InnerShadowEffect.DisperseV">
-            <summary>
-            Disperse V coordinate of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.InnerShadowEffect.Size">
-            <summary>
-            Size of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.InnerShadowEffect.Choke">
-            <summary>
-            Choke value of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.InnerShadowEffect.HexColor">
-            <summary>
-            Hexadecimal string representation of the color of the effect.
-            </summary>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.InnerShadowEffect.PlainCopy">
-            <summary>
-            Creates a plain copy of the objects that contains same values.
-            </summary>
-            <returns>Exact plain copy of the object.</returns>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.InnerShadowEffect.Read(System.IO.BinaryReader)">
-            <summary>
-            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.InnerShadowEffect.Write(System.IO.BinaryWriter)">
-            <summary>
-            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
-            </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-        </member>
-        <member name="T:Nikki.Support.Carbon.Parts.VinylParts.PathData">
-            <summary>
-            A unit <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathData"/> that is used in <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.PathData.StartIndex">
-            <summary>
-            Index of the starting point of this <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathData"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.PathData.NumCurves">
-            <summary>
-            Number of curves in this <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathData"/>.
-            </summary>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.PathData.PlainCopy">
-            <summary>
-            Creates a plain copy of the objects that contains same values.
-            </summary>
-            <returns>Exact plain copy of the object.</returns>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.PathData.CloneValuesFrom(Nikki.Reflection.Abstract.SubPart)">
-            <summary>
-            Clones values of another <see cref="T:Nikki.Reflection.Abstract.SubPart"/>.
-            </summary>
-            <param name="other"><see cref="T:Nikki.Reflection.Abstract.SubPart"/> to clone.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.PathData.Read(System.IO.BinaryReader)">
-            <summary>
-            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.PathData.Write(System.IO.BinaryWriter)">
-            <summary>
-            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
-            </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-        </member>
-        <member name="T:Nikki.Support.Carbon.Parts.VinylParts.PathPoint">
-            <summary>
-            A unit <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathPoint"/> that is used in <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.PathPoint.X">
-            <summary>
-            X coordinate of this <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathPoint"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.PathPoint.Y">
-            <summary>
-            Y coordinate of this <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathPoint"/>.
-            </summary>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.PathPoint.PlainCopy">
-            <summary>
-            Creates a plain copy of the objects that contains same values.
-            </summary>
-            <returns>Exact plain copy of the object.</returns>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.PathPoint.CloneValuesFrom(Nikki.Reflection.Abstract.SubPart)">
-            <summary>
-            Clones values of another <see cref="T:Nikki.Reflection.Abstract.SubPart"/>.
-            </summary>
-            <param name="other"><see cref="T:Nikki.Reflection.Abstract.SubPart"/> to clone.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.PathPoint.Read(System.IO.BinaryReader)">
-            <summary>
-            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.PathPoint.Write(System.IO.BinaryWriter)">
-            <summary>
-            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
-            </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-        </member>
         <member name="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet">
             <summary>
             A unit <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/> that is used in <see cref="T:Nikki.Support.Carbon.Class.VectorVinyl"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.PathSet.NumPathDatas">
-            <summary>
-            Number of <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathData"/> in this <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.PathSet.NumPathPoints">
-            <summary>
-            Number of <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathPoint"/> in this <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.PathSet.PathDatas">
-            <summary>
-            List of <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathData"/> in this <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.PathSet.PathPoints">
-            <summary>
-            List of <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathPoint"/> in this <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.PathSet.FillEffectExists">
-            <summary>
-            Indicates whether FillEffect exists.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.PathSet.StrokeEffectExists">
-            <summary>
-            Indicates whether FillEffect exists.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.PathSet.DropShadowEffectExists">
-            <summary>
-            Indicates whether DropShadowEffect exists.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.PathSet.InnerGlowEffectExists">
-            <summary>
-            Indicates whether InnerGlowEffect exists.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.PathSet.InnerShadowEffectExists">
-            <summary>
-            Indicates whether InnerShadowEffect exists.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.PathSet.GradientEffectExists">
-            <summary>
-            Indicates whether GradientEffect exists.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.PathSet.FillEffect">
-            <summary>
-            <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.FillEffect"/> of this <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.PathSet.StrokeEffect">
-            <summary>
-            <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.StrokeEffect"/> of this <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.PathSet.DropShadowEffect">
-            <summary>
-            <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.DropShadowEffect"/> of this <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.PathSet.InnerGlowEffect">
-            <summary>
-            <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.InnerGlowEffect"/> of this <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.PathSet.InnerShadowEffect">
-            <summary>
-            <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.InnerShadowEffect"/> of this <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.PathSet.GradientEffect">
-            <summary>
-            <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect"/> of this <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.
             </summary>
         </member>
         <member name="M:Nikki.Support.Carbon.Parts.VinylParts.PathSet.#ctor">
@@ -15357,51 +14808,14 @@
             </summary>
             <param name="other"><see cref="T:Nikki.Reflection.Abstract.SubPart"/> to clone.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.PathSet.Read(System.IO.BinaryReader)">
-            <summary>
-            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
-            </summary>
-            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.PathSet.Write(System.IO.BinaryWriter)">
-            <summary>
-            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
-            </summary>
-            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-        </member>
         <member name="T:Nikki.Support.Carbon.Parts.VinylParts.StrokeEffect">
             <summary>
             A unit <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.StrokeEffect"/> that is used in <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.StrokeEffect.Red">
+        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.StrokeEffect.BlockSize">
             <summary>
-            Red color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.StrokeEffect.Green">
-            <summary>
-            Green color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.StrokeEffect.Blue">
-            <summary>
-            Blue color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.StrokeEffect.Alpha">
-            <summary>
-            Alpha color of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.StrokeEffect.Thickness">
-            <summary>
-            Thinkness of the stroke outline.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Carbon.Parts.VinylParts.StrokeEffect.HexColor">
-            <summary>
-            Hexadecimal string representation of the color of the effect.
+            Constant size of one unit class.
             </summary>
         </member>
         <member name="M:Nikki.Support.Carbon.Parts.VinylParts.StrokeEffect.PlainCopy">
@@ -15421,12 +14835,6 @@
             Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.StrokeEffect.GetHTMLColor">
-            <summary>
-            Gets color of this effect as an HTML formatted string.
-            </summary>
-            <returns>Color as an HTML formatted string.</returns>
         </member>
         <member name="T:Nikki.Support.MostWanted.Attributes.BoolAttribute">
             <summary>
@@ -29800,6 +29208,660 @@
             <summary>
             Unknown 4-byte signed integer value.
             </summary>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.VinylParts.DropShadowEffect">
+            <summary>
+            A unit <see cref="T:Nikki.Support.Shared.Parts.VinylParts.DropShadowEffect"/> that is used in <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.DropShadowEffect.BlockSize">
+            <summary>
+            Constant size of one unit class.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.DropShadowEffect.Red">
+            <summary>
+            Red color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.DropShadowEffect.Green">
+            <summary>
+            Green color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.DropShadowEffect.Blue">
+            <summary>
+            Blue color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.DropShadowEffect.Alpha">
+            <summary>
+            Alpha color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.DropShadowEffect.DisperseU">
+            <summary>
+            Disperse U coordinate of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.DropShadowEffect.DisperseV">
+            <summary>
+            Disperse V coordinate of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.DropShadowEffect.Blur">
+            <summary>
+            Blue ratio of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.DropShadowEffect.HexColor">
+            <summary>
+            Hexadecimal string representation of the color of the effect.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.DropShadowEffect.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.DropShadowEffect.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.DropShadowEffect.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.VinylParts.FillEffect">
+            <summary>
+            A unit <see cref="T:Nikki.Support.Shared.Parts.VinylParts.FillEffect"/> that is used in <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.FillEffect.BlockSize">
+            <summary>
+            Constant size of one unit class.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.FillEffect.Red">
+            <summary>
+            Red color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.FillEffect.Green">
+            <summary>
+            Green color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.FillEffect.Blue">
+            <summary>
+            Blue color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.FillEffect.Alpha">
+            <summary>
+            Alpha color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.FillEffect.HexColor">
+            <summary>
+            Hexadecimal string representation of the color of the effect.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.FillEffect.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.FillEffect.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.FillEffect.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.FillEffect.GetHTMLColor">
+            <summary>
+            Gets color of this effect as an HTML formatted string.
+            </summary>
+            <returns>Color as an HTML formatted string.</returns>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.VinylParts.GradientEffect">
+            <summary>
+            A unit <see cref="T:Nikki.Support.Shared.Parts.VinylParts.GradientEffect"/> that is used in <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.BlockSize">
+            <summary>
+            Constant size of one unit class.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.Angle">
+            <summary>
+            Angle of the gradient.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.MainAlpha">
+            <summary>
+            Main alpha of the gradient.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.Unknown1">
+            <summary>
+            Unknown value 1 of the gradient.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.Unknown2">
+            <summary>
+            Unknown value 2 of the gradient.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.Unknown3">
+            <summary>
+            Unknown value 3 of the gradient.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.Color1Red">
+            <summary>
+            Red color 1 of the gradient.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.Color1Green">
+            <summary>
+            Green color 1 of the gradient.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.Color1Blue">
+            <summary>
+            Blue color 1 of the gradient.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.Color1Alpha">
+            <summary>
+            Alpha color 1 of the gradient.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.Color2Red">
+            <summary>
+            Red color 2 of the gradient.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.Color2Green">
+            <summary>
+            Green color 2 of the gradient.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.Color2Blue">
+            <summary>
+            Blue color 2 of the gradient.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.Color2Alpha">
+            <summary>
+            Alpha color 2 of the gradient.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.Color1Position">
+            <summary>
+            Position of color 1 of the gradient.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.Color2Position">
+            <summary>
+            Position of color 2 of the gradient.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.Alpha1Position">
+            <summary>
+            Position of alpha 1 color of the gradient.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.Alpha2Position">
+            <summary>
+            Position of alpha 2 color of the gradient.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.OffsetU">
+            <summary>
+            Offset U coordinate of the gradient.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.OffsetV">
+            <summary>
+            Offset V coordinate of the gradient.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.HexColor1">
+            <summary>
+            Hexadecimal string representation of the color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.HexColor2">
+            <summary>
+            Hexadecimal string representation of the color of the effect.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect">
+            <summary>
+            A unit <see cref="T:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect"/> that is used in <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect.BlockSize">
+            <summary>
+            Constant size of one unit class.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect.Red">
+            <summary>
+            Red color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect.Green">
+            <summary>
+            Green color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect.Blue">
+            <summary>
+            Blue color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect.Alpha">
+            <summary>
+            Alpha color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect.Edge">
+            <summary>
+            Edge value of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect.Unknown1">
+            <summary>
+            Unknown value 1 of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect.Unknown2">
+            <summary>
+            Unknown value 2 of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect.Unknown3">
+            <summary>
+            Unknown value 3 of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect.Size">
+            <summary>
+            Size of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect.Choke">
+            <summary>
+            Choke value of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect.HexColor">
+            <summary>
+            Hexadecimal string representation of the color of the effect.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.VinylParts.InnerShadowEffect">
+            <summary>
+            A unit <see cref="T:Nikki.Support.Shared.Parts.VinylParts.InnerShadowEffect"/> that is used in <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerShadowEffect.BlockSize">
+            <summary>
+            Constant size of one unit class.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerShadowEffect.Red">
+            <summary>
+            Red color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerShadowEffect.Green">
+            <summary>
+            Green color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerShadowEffect.Blue">
+            <summary>
+            Blue color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerShadowEffect.Alpha">
+            <summary>
+            Alpha color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerShadowEffect.DisperseU">
+            <summary>
+            Disperse U coordinate of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerShadowEffect.DisperseV">
+            <summary>
+            Disperse V coordinate of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerShadowEffect.Size">
+            <summary>
+            Size of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerShadowEffect.Choke">
+            <summary>
+            Choke value of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.InnerShadowEffect.HexColor">
+            <summary>
+            Hexadecimal string representation of the color of the effect.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.InnerShadowEffect.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.InnerShadowEffect.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.InnerShadowEffect.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.VinylParts.PathData">
+            <summary>
+            A unit <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathData"/> that is used in <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.PathData.StartIndex">
+            <summary>
+            Index of the starting point of this <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathData"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.PathData.NumCurves">
+            <summary>
+            Number of curves in this <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathData"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.PathData.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.PathData.CloneValuesFrom(Nikki.Reflection.Abstract.SubPart)">
+            <summary>
+            Clones values of another <see cref="T:Nikki.Reflection.Abstract.SubPart"/>.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Reflection.Abstract.SubPart"/> to clone.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.PathData.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.PathData.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.VinylParts.PathPoint">
+            <summary>
+            A unit <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathPoint"/> that is used in <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.PathPoint.X">
+            <summary>
+            X coordinate of this <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathPoint"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.PathPoint.Y">
+            <summary>
+            Y coordinate of this <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathPoint"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.PathPoint.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.PathPoint.CloneValuesFrom(Nikki.Reflection.Abstract.SubPart)">
+            <summary>
+            Clones values of another <see cref="T:Nikki.Reflection.Abstract.SubPart"/>.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Reflection.Abstract.SubPart"/> to clone.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.PathPoint.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.PathPoint.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.VinylParts.PathSet">
+            <summary>
+            A unit <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/> that is used in <see cref="T:Nikki.Support.Shared.Class.VectorVinyl"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.PathSet.NumPathDatas">
+            <summary>
+            Number of <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathData"/> in this <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.PathSet.NumPathPoints">
+            <summary>
+            Number of <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathPoint"/> in this <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.PathSet.PathDatas">
+            <summary>
+            List of <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathData"/> in this <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.PathSet.PathPoints">
+            <summary>
+            List of <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathPoint"/> in this <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.PathSet.FillEffectExists">
+            <summary>
+            Indicates whether FillEffect exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.PathSet.StrokeEffectExists">
+            <summary>
+            Indicates whether FillEffect exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.PathSet.DropShadowEffectExists">
+            <summary>
+            Indicates whether DropShadowEffect exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.PathSet.InnerGlowEffectExists">
+            <summary>
+            Indicates whether InnerGlowEffect exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.PathSet.InnerShadowEffectExists">
+            <summary>
+            Indicates whether InnerShadowEffect exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.PathSet.GradientEffectExists">
+            <summary>
+            Indicates whether GradientEffect exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.PathSet.FillEffect">
+            <summary>
+            <see cref="T:Nikki.Support.Shared.Parts.VinylParts.FillEffect"/> of this <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.PathSet.StrokeEffect">
+            <summary>
+            <see cref="T:Nikki.Support.Shared.Parts.VinylParts.StrokeEffect"/> of this <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.PathSet.DropShadowEffect">
+            <summary>
+            <see cref="T:Nikki.Support.Shared.Parts.VinylParts.DropShadowEffect"/> of this <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.PathSet.InnerGlowEffect">
+            <summary>
+            <see cref="T:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect"/> of this <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.PathSet.InnerShadowEffect">
+            <summary>
+            <see cref="T:Nikki.Support.Shared.Parts.VinylParts.InnerShadowEffect"/> of this <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.PathSet.GradientEffect">
+            <summary>
+            <see cref="T:Nikki.Support.Shared.Parts.VinylParts.GradientEffect"/> of this <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.PathSet.#ctor(Nikki.Support.Shared.Parts.VinylParts.StrokeEffect)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.PathSet.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.PathSet.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="T:Nikki.Support.Shared.Parts.VinylParts.StrokeEffect">
+            <summary>
+            A unit <see cref="T:Nikki.Support.Shared.Parts.VinylParts.StrokeEffect"/> that is used in <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.StrokeEffect.BlockSize">
+            <summary>
+            Constant size of one unit class.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.StrokeEffect.Red">
+            <summary>
+            Red color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.StrokeEffect.Green">
+            <summary>
+            Green color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.StrokeEffect.Blue">
+            <summary>
+            Blue color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.StrokeEffect.Alpha">
+            <summary>
+            Alpha color of the effect.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.StrokeEffect.Thickness">
+            <summary>
+            Thinkness of the stroke outline.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.VinylParts.StrokeEffect.HexColor">
+            <summary>
+            Hexadecimal string representation of the color of the effect.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.StrokeEffect.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.StrokeEffect.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.StrokeEffect.GetHTMLColor">
+            <summary>
+            Gets color of this effect as an HTML formatted string.
+            </summary>
+            <returns>Color as an HTML formatted string.</returns>
         </member>
         <member name="T:Nikki.Support.Underground2.Attributes.BoolAttribute">
             <summary>

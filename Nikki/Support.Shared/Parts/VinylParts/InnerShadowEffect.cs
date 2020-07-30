@@ -14,6 +14,11 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 	public class InnerShadowEffect : SubPart
 	{
 		/// <summary>
+		/// Constant size of one unit class.
+		/// </summary>
+		public int BlockSize => 0x14;
+
+		/// <summary>
 		/// Red color of the effect.
 		/// </summary>
 		[AccessModifiable()]

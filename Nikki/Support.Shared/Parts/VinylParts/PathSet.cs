@@ -110,11 +110,12 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 		/// <summary>
 		/// Initializes new instance of <see cref="PathSet"/>.
 		/// </summary>
-		public PathSet()
+		protected PathSet(StrokeEffect stroke)
 		{
 			this.PathDatas = new List<PathData>();
 			this.PathPoints = new List<PathPoint>();
 			this.FillEffect = new FillEffect();
+			this.StrokeEffect = stroke;
 			this.DropShadowEffect = new DropShadowEffect();
 			this.InnerGlowEffect = new InnerGlowEffect();
 			this.InnerShadowEffect = new InnerShadowEffect();
@@ -323,12 +324,12 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 			var size = 0x30;
 			size += 8 + (this.NumPathDatas << 2);
 			size += 8 + (this.NumPathPoints << 2);
-			if (this.FillEffectExists == eBoolean.True) size += 0xC;
-			if (this.StrokeEffectExists == eBoolean.True) size += 0x10;
-			if (this.DropShadowEffectExists == eBoolean.True) size += 0x18;
-			if (this.InnerGlowEffectExists == eBoolean.True) size += 0x18;
-			if (this.InnerShadowEffectExists == eBoolean.True) size += 0x1C;
-			if (this.GradientEffectExists == eBoolean.True) size += 0x30;
+			if (this.FillEffectExists == eBoolean.True) size += this.FillEffect.BlockSize + 8;
+			if (this.StrokeEffectExists == eBoolean.True) size += this.StrokeEffect.BlockSize + 8;
+			if (this.DropShadowEffectExists == eBoolean.True) size += this.DropShadowEffect.BlockSize + 8;
+			if (this.InnerGlowEffectExists == eBoolean.True) size += this.InnerGlowEffect.BlockSize + 8;
+			if (this.InnerShadowEffectExists == eBoolean.True) size += this.InnerShadowEffect.BlockSize + 8;
+			if (this.GradientEffectExists == eBoolean.True) size += this.GradientEffect.BlockSize + 8;
 			return size;
 		}
 
@@ -362,7 +363,7 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 		{
 			if (this.FillEffectExists == eBoolean.False) return;
 			bw.WriteEnum(BinBlockID.Vinyl_FillEffect);
-			bw.Write((int)0x4);
+			bw.Write(this.FillEffect.BlockSize);
 			this.FillEffect.Write(bw);
 		}
 
@@ -370,7 +371,7 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 		{
 			if (this.StrokeEffectExists == eBoolean.False) return;
 			bw.WriteEnum(BinBlockID.Vinyl_StrokeEffect);
-			bw.Write((int)0x8);
+			bw.Write(this.StrokeEffect.BlockSize);
 			this.StrokeEffect.Write(bw);
 		}
 
@@ -378,7 +379,7 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 		{
 			if (this.DropShadowEffectExists == eBoolean.False) return;
 			bw.WriteEnum(BinBlockID.Vinyl_DropShadow);
-			bw.Write((int)0x10);
+			bw.Write(this.DropShadowEffect.BlockSize);
 			this.DropShadowEffect.Write(bw);
 		}
 
@@ -386,7 +387,7 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 		{
 			if (this.InnerGlowEffectExists == eBoolean.False) return;
 			bw.WriteEnum(BinBlockID.Vinyl_InnerGlow);
-			bw.Write((int)0x10);
+			bw.Write(this.InnerGlowEffect.BlockSize);
 			this.InnerGlowEffect.Write(bw);
 		}
 
@@ -394,7 +395,7 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 		{
 			if (this.InnerShadowEffectExists == eBoolean.False) return;
 			bw.WriteEnum(BinBlockID.Vinyl_ShadowEffect);
-			bw.Write((int)0x14);
+			bw.Write(this.InnerShadowEffect.BlockSize);
 			this.InnerShadowEffect.Write(bw);
 		}
 
@@ -402,7 +403,7 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 		{
 			if (this.GradientEffectExists == eBoolean.False) return;
 			bw.WriteEnum(BinBlockID.Vinyl_Gradient);
-			bw.Write((int)0x28);
+			bw.Write(this.GradientEffect.BlockSize);
 			this.GradientEffect.Write(bw);
 		}
 

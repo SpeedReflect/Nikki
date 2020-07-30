@@ -14,6 +14,11 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 	public class DropShadowEffect : SubPart
 	{
 		/// <summary>
+		/// Constant size of one unit class.
+		/// </summary>
+		public int BlockSize => 0x10;
+
+		/// <summary>
 		/// Red color of the effect.
 		/// </summary>
 		[AccessModifiable()]
