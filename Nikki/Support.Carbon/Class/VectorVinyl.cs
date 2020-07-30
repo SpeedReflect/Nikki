@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
+using Nikki.Utils.EA;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
@@ -11,10 +13,8 @@ using Nikki.Support.Carbon.Framework;
 using Nikki.Support.Carbon.Parts.VinylParts;
 using CoreExtensions.IO;
 using CoreExtensions.Conversions;
-using System.Text;
-using System.Linq;
-using System.Xml;
-using Nikki.Utils.EA;
+
+
 
 namespace Nikki.Support.Carbon.Class
 {
