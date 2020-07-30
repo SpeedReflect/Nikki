@@ -120,13 +120,15 @@ namespace Nikki.Support.Carbon.Framework
 			foreach (var collection in this)
 			{
 
-				var array = GetPaddingArray((int)bw.BaseStream.Position, 0x800);
-				if (array.Length != 0) bw.Write(array);
+				//var array = GetPaddingArray((int)bw.BaseStream.Position, 0x800);
+				//if (array.Length != 0) bw.Write(array);
+				bw.GeneratePadding(mark, this.Alignment);
 				collection.Assemble(bw);
 
 			}
 
-			bw.Write(GetPaddingArray((int)bw.BaseStream.Position, 0x800));
+			bw.GeneratePadding(mark, this.Alignment);
+			//bw.Write(GetPaddingArray((int)bw.BaseStream.Position, 0x800));
 		}
 
 		/// <summary>

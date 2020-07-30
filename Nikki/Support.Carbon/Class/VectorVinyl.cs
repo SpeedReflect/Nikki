@@ -13,6 +13,8 @@ using CoreExtensions.IO;
 using CoreExtensions.Conversions;
 using System.Text;
 using System.Linq;
+using System.Xml;
+using Nikki.Utils.EA;
 
 namespace Nikki.Support.Carbon.Class
 {
@@ -283,50 +285,107 @@ namespace Nikki.Support.Carbon.Class
 		/// Gets data of this <see cref="VectorVinyl"/> as an SVG-formatted string.
 		/// </summary>
 		/// <param name="resolution">Resolution of the SVG image.</param>
-		/// <param name="width">Stroke line width of the image.</param>
-		/// <param name="color">Color of the image in hexadecimal HTML representation.</param>
 		/// <returns>Data as an SVG-formatted string.</returns>
-		public string GetSVGString(int resolution, int width, string color)
+		public string GetSVGString(int resolution)
 		{
 			if (resolution > 0x10000) resolution = 0x10000;
 			var difference = 0x10000 / resolution;
 			var bitshift = (byte)Math.Log2(difference);
 
-			var builder = new StringBuilder(0x8000);
+			var builder = new StringBuilder(0x1000);
 
-			builder.Append($"<svg height=\"{resolution}\" width=\"{resolution}\">" + Environment.NewLine);
+			var defs = new List<string>();
+			var gs = new List<string>();
 
-			foreach (var set in this.PathSets)
+			for (int setnum = 0; setnum < this.NumberOfPaths; ++setnum)
 			{
 
-				foreach (var data in set.PathDatas)
+				var set = this.PathSets[setnum];
+				var id = $"set{setnum}";
+				builder.Append($"<path id=\"{id}\" d=\"" + Environment.NewLine);
+
+				for (int datnum = 0; datnum < set.NumPathDatas; ++datnum)
 				{
 
-					for (int i = 0, index = data.StartIndex; i < data.NumCurves; ++i, index += 3)
+					var data = set.PathDatas[datnum];
+					builder.Append("M ");
+
+					for (int i = 0, index = data.StartIndex; i < data.NumCurves; ++i)
 					{
 
-						var p1x = set.PathPoints[index].X >> bitshift;
-						var p1y = set.PathPoints[index].Y >> bitshift;
-						var c1x = set.PathPoints[index + 1].X >> bitshift;
-						var c1y = set.PathPoints[index + 1].Y >> bitshift;
-						var c2x = set.PathPoints[index + 2].X >> bitshift;
-						var c2y = set.PathPoints[index + 2].Y >> bitshift;
-						var p2x = set.PathPoints[index + 3].X >> bitshift;
-						var p2y = set.PathPoints[index + 3].Y >> bitshift;
+						var px = set.PathPoints[index].X >> bitshift;
+						var py = set.PathPoints[index++].Y >> bitshift;
+						var cx = set.PathPoints[index].X >> bitshift;
+						var cy = set.PathPoints[index++].Y >> bitshift;
+						var mx = set.PathPoints[index].X >> bitshift;
+						var my = set.PathPoints[index++].Y >> bitshift;
 
-						var str = $"<path d=\"M {p1x} {p1y} C {c1x} {c1y}, {c2x} {c2y} {p2x} {p2y}\" " +
-							$"style=\"stroke: {color}; stroke-width: {width}; fill: none\" />";
-
-						builder.Append(str + Environment.NewLine);
+						var str = $"{px} {py} C {cx} {cy} {mx} {my} ";
+						builder.Append(str);
 
 					}
 
+					var last = data.StartIndex + data.NumCurves * 3;
+					var lx = set.PathPoints[last].X >> bitshift;
+					var ly = set.PathPoints[last].Y >> bitshift;
+
+					builder.Append($"{lx} {ly} Z " + Environment.NewLine);
+
+
 				}
+
+				builder.Append("\" />" + Environment.NewLine);
+				defs.Add(builder.ToString());
+				builder.Clear();
+				gs.Add(this.GetFormattedSetG(set, id, resolution));
 
 			}
 
-			builder.Append("</svg>");
+			builder.Clear();
+
+			builder.Append(this.GetSVGHeaderString(resolution));
+			builder.Append("<defs>" + Environment.NewLine);
+			foreach (var def in defs) builder.Append(def);
+			builder.Append("</defs>" + Environment.NewLine);
+			builder.Append("<g>" + Environment.NewLine);
+			foreach (var g in gs) builder.Append(g);
+			builder.Append("</g>" + Environment.NewLine);
+			builder.Append("</svg>" + Environment.NewLine);
 			return builder.ToString();
+		}
+
+		public void ReadFromFile(string file)
+		{
+			using var svgreader = new SVGReader(file);
+			svgreader.ReadAllContents();
+
+			int oof = 0;
+		}
+
+		private string GetSVGHeaderString(int resolution)
+		{
+			var builder = new StringBuilder(0x200);
+			builder.Append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" + Environment.NewLine);
+			builder.Append("<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">" + Environment.NewLine);
+			builder.Append("<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\"" + Environment.NewLine);
+			builder.Append("xmlns:xlink=\"http://www.w3.org/1999/xlink\"" + Environment.NewLine);
+			builder.Append("preserveAspectRatio=\"xMidYMid meet\"" + Environment.NewLine);
+			builder.Append($"viewBox=\"0 0 {resolution} {resolution}\"" + Environment.NewLine);
+			builder.Append($"width=\"{resolution}\" height=\"{resolution}\">" + Environment.NewLine);
+			return builder.ToString();
+		}
+
+		private string GetFormattedSetG(PathSet set, string id, int resolution)
+		{
+			var result = $"<use xlink:href=\"#{id}\" fill-rule=\"evenodd\" ";
+
+			var fill = set.FillEffect.GetHTMLColor();
+			var stroke = set.StrokeEffect.GetHTMLColor();
+			var thick = set.StrokeEffect.Thickness * resolution;
+			if (thick == 0) thick = resolution >> 11;
+
+			result += $"fill=\"{fill}\" stroke=\"{stroke}\" stroke-width=\"{thick:0.00}\" />";
+			return result + Environment.NewLine;
 		}
 
 		#endregion

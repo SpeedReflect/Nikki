@@ -76,5 +76,11 @@ namespace Nikki.Support.Carbon.Parts.VinylParts
 			bw.Write(this.Blue);
 			bw.Write(this.Alpha);
 		}
+
+		/// <summary>
+		/// Gets color of this effect as an HTML formatted string.
+		/// </summary>
+		/// <returns>Color as an HTML formatted string.</returns>
+		public string GetHTMLColor() => $"#{this.Red:X2}{this.Green:X2}{this.Blue:X2}";
 	}
 }

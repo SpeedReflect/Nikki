@@ -7,6 +7,7 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Utils.EA;
 using Nikki.Reflection.Enum;
+using Nikki.Reflection.Attributes;
 using Nikki.Support.Carbon.Framework;
 using Nikki.Support.Shared.Parts.TPKParts;
 using CoreExtensions.IO;
@@ -54,6 +55,7 @@ namespace Nikki.Support.Carbon.Class
         /// Collection name of the variable.
         /// </summary>
         [Category("Main")]
+        [AccessModifiable()]
         public override string CollectionName
         {
             get => this._collection_name;

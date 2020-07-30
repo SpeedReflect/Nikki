@@ -12616,6 +12616,13 @@
             </summary>
             <returns>String value.</returns>
         </member>
+        <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.GetSVGString(System.Int32)">
+            <summary>
+            Gets data of this <see cref="T:Nikki.Support.Carbon.Class.VectorVinyl"/> as an SVG-formatted string.
+            </summary>
+            <param name="resolution">Resolution of the SVG image.</param>
+            <returns>Data as an SVG-formatted string.</returns>
+        </member>
         <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.Serialize(System.IO.BinaryWriter)">
             <summary>
             Serializes instance into a byte array and stores it in the file provided.
@@ -14890,6 +14897,12 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.FillEffect.GetHTMLColor">
+            <summary>
+            Gets color of this effect as an HTML formatted string.
+            </summary>
+            <returns>Color as an HTML formatted string.</returns>
+        </member>
         <member name="T:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect">
             <summary>
             A unit <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.GradientEffect"/> that is used in <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.
@@ -15408,6 +15421,12 @@
             Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.StrokeEffect.GetHTMLColor">
+            <summary>
+            Gets color of this effect as an HTML formatted string.
+            </summary>
+            <returns>Color as an HTML formatted string.</returns>
         </member>
         <member name="T:Nikki.Support.MostWanted.Attributes.BoolAttribute">
             <summary>
@@ -40378,6 +40397,18 @@
             </summary>
             <param name="color">Hexadecimal color passed.</param>
             <returns>Blue parameter as a byte.</returns>
+        </member>
+        <member name="M:Nikki.Utils.EA.SVGReader.Dispose">
+            <summary>
+            Releases all resources used by the current instance of the <see cref="T:Nikki.Utils.EA.SVGReader"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Utils.EA.SVGReader.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:Nikki.Utils.EA.SVGReader"/>.
+            </summary>
+            <param name="disposing">True if release both managed and unmanaged resources; false 
+            if release unmanaged only.</param>
         </member>
         <member name="T:Nikki.Utils.Hashing">
             <summary>
