@@ -3,20 +3,51 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
+using Nikki.Reflection.Enum;
+using Nikki.Support.Shared.Class;
+
+
 
 namespace Nikki.Utils.EA
 {
+	/// <summary>
+	/// A class for reading SVG path data and converting to <see cref="VectorVinyl"/> data.
+	/// </summary>
 	public class SVGReader : IDisposable
 	{
 		private class ObservableElement
 		{
 			public string ID { get; }
 			public string FillColor { get; set; }
-			public string FillOpacity { get; set; }
+			public string FillOpacity { get; set; } = "1";
 			public string StrokeColor { get; set; }
-			public string StrokeOpacity { get; set; }
+			public string StrokeOpacity { get; set; } = "1";
 			public string Thickness { get; set; }
 			public List<PathPointSet> PointDatas { get; }
+			public float FillSingleOpacity
+			{
+				get
+				{
+					try { return Single.Parse(this.FillOpacity); }
+					catch { return 1; }
+				}
+			}
+			public float StrokeSingleOpacity
+			{
+				get
+				{
+					try { return Single.Parse(this.StrokeOpacity); }
+					catch { return 1; }
+				}
+			}
+			public float ThinknessSingle
+			{
+				get
+				{
+					try { return Convert.ToSingle(this.Thickness); }
+					catch { return 1; }
+				}
+			}
 
 			public ObservableElement(string id) { this.ID = id; this.PointDatas = new List<PathPointSet>(); }
 		}
@@ -30,20 +61,6 @@ namespace Nikki.Utils.EA
 
 			public PathPointSet() => this.Points = new List<XYPoint>();
 			public PathPointSet(int capacity) => this.Points = new List<XYPoint>(capacity);
-		}
-
-		private struct RGBColor
-		{
-			public byte Red { get; set; }
-			public byte Green { get; set; }
-			public byte Blue { get; set; }
-			
-			public RGBColor(byte r, byte g, byte b)
-			{
-				this.Red = r;
-				this.Green = g;
-				this.Blue = b;
-			}
 		}
 
 		private class XYPoint
@@ -83,6 +100,10 @@ namespace Nikki.Utils.EA
 		private ushort _width;
 		private ushort _height;
 
+		/// <summary>
+		/// Initializes new instance of <see cref="SVGReader"/> using file path provided.
+		/// </summary>
+		/// <param name="filename">SVG file to read.</param>
 		public SVGReader(string filename)
 		{
 			if (!File.Exists(filename))
@@ -97,6 +118,28 @@ namespace Nikki.Utils.EA
 			this._map = new Dictionary<string, ObservableElement>();
 		}
 
+		/// <summary>
+		/// Releases all resources used by the current instance of the <see cref="SVGReader"/>.
+		/// </summary>
+		public void Dispose() => this.Dispose(true);
+
+		/// <summary>
+		/// Releases the unmanaged resources used by the <see cref="SVGReader"/>.
+		/// </summary>
+		/// <param name="disposing">True if release both managed and unmanaged resources; false 
+		/// if release unmanaged only.</param>
+		protected void Dispose(bool disposing)
+		{
+			if (disposing) this._reader.Close();
+
+			var reader = this._reader;
+			this._reader = null;
+			reader.Dispose();
+		}
+
+		/// <summary>
+		/// Reads all contents of a file passed during initialization.
+		/// </summary>
 		public void ReadAllContents()
 		{
 			while (this._reader.Read())
@@ -119,6 +162,66 @@ namespace Nikki.Utils.EA
 
 			}
 
+		}
+
+		/// <summary>
+		/// Converts all data read from SVG file that was passed on initialization.
+		/// </summary>
+		/// <param name="vinyl"><see cref="VectorVinyl"/> to copy data to.</param>
+		public void ToVectorVinyl(VectorVinyl vinyl)
+		{
+			var ratioX = 0x10000 / this._width;
+			var ratioY = 0x10000 / this._height;
+			var maxres = Math.Max(this._width, this._height);
+
+			foreach (var element in this._map.Values)
+			{
+
+				var num = vinyl.NumberOfPaths;
+				vinyl.AddPathSet();
+				var set = vinyl.GetPathSet(vinyl.NumberOfPaths);
+				ushort start = 0;
+
+				foreach (var data in element.PointDatas)
+				{
+
+					set.PathDatas.Add(new Support.Shared.Parts.VinylParts.PathData()
+					{
+						StartIndex = start,
+						NumCurves = (ushort)((data.Points.Count - 1) / 3),
+					});
+
+					foreach (var point in data.Points)
+					{
+
+						set.PathPoints.Add(new Support.Shared.Parts.VinylParts.PathPoint()
+						{
+							X = (ushort)(point.X * ratioX),
+							Y = (ushort)(point.Y * ratioY),
+						});
+
+					}
+
+					start += (ushort)data.Points.Count;
+
+				}
+
+				var fill = this.FromHTMLColor(element.FillColor);
+				var stroke = this.FromHTMLColor(element.StrokeColor);
+
+				set.FillEffect.Red = fill.Item1;
+				set.FillEffect.Green = fill.Item2;
+				set.FillEffect.Blue = fill.Item3;
+				set.StrokeEffect.Red = stroke.Item1;
+				set.StrokeEffect.Green = stroke.Item2;
+				set.StrokeEffect.Blue = stroke.Item3;
+				set.FillEffectExists = eBoolean.True;
+				set.StrokeEffectExists = eBoolean.True;
+				set.StrokeEffect.Thickness = (float)(element.ThinknessSingle / maxres);
+				set.FillEffect.Alpha = (byte)(element.FillSingleOpacity * 255);
+				set.StrokeEffect.Alpha = (byte)(element.StrokeSingleOpacity * 255);
+
+			}
 		}
 
 		private void ValidateSVGorHTML()
@@ -411,38 +514,23 @@ namespace Nikki.Utils.EA
 			return 0;
 		}
 
-		public List<Support.Carbon.Parts.VinylParts.PathSet> GetPathSets()
+		private (byte, byte, byte) FromHTMLColor(string color)
 		{
-			var list = new List<Support.Carbon.Parts.VinylParts.PathSet>(this._map.Count);
-
-			foreach (var element in this._map.Values)
+			if (String.IsNullOrWhiteSpace(color) || !color.StartsWith('#') || color.Length != 7)
 			{
 
-				var set = new Support.Carbon.Parts.VinylParts.PathSet();
-				
+				return (0, 0, 0);
 
 			}
+			else
+			{
 
-			return list;
-		}
+				var red = Convert.ToByte(color.Substring(1, 2));
+				var green = Convert.ToByte(color.Substring(3, 2));
+				var blue = Convert.ToByte(color.Substring(5, 2));
+				return (red, green, blue);
 
-		/// <summary>
-		/// Releases all resources used by the current instance of the <see cref="SVGReader"/>.
-		/// </summary>
-		public void Dispose() => this.Dispose(true);
-
-		/// <summary>
-		/// Releases the unmanaged resources used by the <see cref="SVGReader"/>.
-		/// </summary>
-		/// <param name="disposing">True if release both managed and unmanaged resources; false 
-		/// if release unmanaged only.</param>
-		protected void Dispose(bool disposing)
-		{
-			if (disposing) this._reader.Close();
-
-			var reader = this._reader;
-			this._reader = null;
-			reader.Dispose();
+			}
 		}
 	}
 }

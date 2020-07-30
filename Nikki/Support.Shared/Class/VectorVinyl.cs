@@ -1,15 +1,17 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.ComponentModel;
+using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
+using Nikki.Utils.EA;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Interface;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Shared.Parts.VinylParts;
-using System.Text;
-using Nikki.Utils.EA;
-using System.Collections.Generic;
+
+
 
 namespace Nikki.Support.Shared.Class
 {
@@ -190,6 +192,7 @@ namespace Nikki.Support.Shared.Class
 		{
 			using var svgreader = new SVGReader(file);
 			svgreader.ReadAllContents();
+			svgreader.ToVectorVinyl(this);
 		}
 
 		private string GetSVGHeaderString(int resolution)
