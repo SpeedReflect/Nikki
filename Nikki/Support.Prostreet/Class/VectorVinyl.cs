@@ -1,11 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Text;
+﻿using System.IO;
 using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
-using Nikki.Utils.EA;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
@@ -26,6 +23,7 @@ namespace Nikki.Support.Prostreet.Class
 		#region Fields
 
 		private string _collection_name;
+		private readonly List<PathSet> _pathsets;
 
 		#endregion
 
@@ -84,10 +82,10 @@ namespace Nikki.Support.Prostreet.Class
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Primary")]
-		public int NumberOfPaths
+		public override int NumberOfPaths
 		{
-			get => this.PathSets.Count;
-			set => this.PathSets.Resize(value);
+			get => this._pathsets.Count;
+			set => this._pathsets.Resize(value);
 		}
 
 		/// <summary>
@@ -114,12 +112,6 @@ namespace Nikki.Support.Prostreet.Class
 		[Category("Primary")]
 		public float AspectRatio { get; set; }
 
-		/// <summary>
-		/// List of <see cref="PathSet"/> in this <see cref="VectorVinyl"/>.
-		/// </summary>
-		[Browsable(false)]
-		public List<PathSet> PathSets { get; }
-
 		#endregion
 
 		#region Main
@@ -129,7 +121,7 @@ namespace Nikki.Support.Prostreet.Class
 		/// </summary>
 		public VectorVinyl()
 		{
-			this.PathSets = new List<PathSet>();
+			this._pathsets = new List<PathSet>();
 		}
 
 		/// <summary>
@@ -189,7 +181,7 @@ namespace Nikki.Support.Prostreet.Class
 			bw.Write(this.NumberOfPaths << 2);
 			bw.WriteBytes(this.NumberOfPaths << 2);
 
-			foreach (var set in this.PathSets) set.Write(bw);
+			foreach (var set in this._pathsets) set.Write(bw);
 
 			var end = bw.BaseStream.Position;
 			bw.BaseStream.Position = start - 4;
@@ -251,7 +243,7 @@ namespace Nikki.Support.Prostreet.Class
 			{
 
 				br.BaseStream.Position = list[i];
-				this.PathSets[i].Read(br);
+				this._pathsets[i].Read(br);
 
 			}
 
@@ -272,9 +264,37 @@ namespace Nikki.Support.Prostreet.Class
 				AspectRatio = this.AspectRatio,
 			};
 
-			foreach (var set in this.PathSets) result.PathSets.Add((PathSet)set.PlainCopy());
+			foreach (var set in this._pathsets) result._pathsets.Add((PathSet)set.PlainCopy());
 
 			return result;
+		}
+
+		/// <summary>
+		/// Gets <see cref="PathSet"/> in this <see cref="VectorVinyl"/> at index specified.
+		/// </summary>
+		/// <param name="index">Index of the <see cref="PathSet"/> to get.</param>
+		/// <returns><see cref="PathSet"/> at index specified.</returns>
+		public override Shared.Parts.VinylParts.PathSet GetPathSet(int index)
+		{
+			return index < 0 || index >= this.NumberOfPaths ? null : this._pathsets[index];
+		}
+
+		/// <summary>
+		/// Adds <see cref="PathSet"/> to the end.
+		/// </summary>
+		public override void AddPathSet()
+		{
+			this._pathsets.Add(new PathSet());
+		}
+
+		/// <summary>
+		/// Removes <see cref="PathSet"/> at index specified.
+		/// </summary>
+		/// <param name="index">Index of <see cref="PathSet"/> to remove.</param>
+		public override void RemovePathSet(int index)
+		{
+			if (index < 0 || index >= this.NumberOfPaths) return;
+			else this._pathsets.RemoveAt(index);
 		}
 
 		/// <summary>
@@ -286,117 +306,6 @@ namespace Nikki.Support.Prostreet.Class
 		{
 			return $"Collection Name: {this.CollectionName} | " +
 				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
-		}
-
-		#endregion
-
-		#region Functional
-
-		/// <summary>
-		/// Gets data of this <see cref="VectorVinyl"/> as an SVG-formatted string.
-		/// </summary>
-		/// <param name="resolution">Resolution of the SVG image.</param>
-		/// <returns>Data as an SVG-formatted string.</returns>
-		public string GetSVGString(int resolution)
-		{
-			if (resolution > 0x10000) resolution = 0x10000;
-			var difference = 0x10000 / resolution;
-			var bitshift = (byte)Math.Log2(difference);
-
-			var builder = new StringBuilder(0x1000);
-
-			var defs = new List<string>();
-			var gs = new List<string>();
-
-			for (int setnum = 0; setnum < this.NumberOfPaths; ++setnum)
-			{
-
-				var set = this.PathSets[setnum];
-				var id = $"set{setnum}";
-				builder.Append($"<path id=\"{id}\" d=\"" + Environment.NewLine);
-
-				for (int datnum = 0; datnum < set.NumPathDatas; ++datnum)
-				{
-
-					var data = set.PathDatas[datnum];
-					builder.Append("M ");
-
-					for (int i = 0, index = data.StartIndex; i < data.NumCurves; ++i)
-					{
-
-						var px = set.PathPoints[index].X >> bitshift;
-						var py = set.PathPoints[index++].Y >> bitshift;
-						var cx = set.PathPoints[index].X >> bitshift;
-						var cy = set.PathPoints[index++].Y >> bitshift;
-						var mx = set.PathPoints[index].X >> bitshift;
-						var my = set.PathPoints[index++].Y >> bitshift;
-
-						var str = $"{px} {py} C {cx} {cy} {mx} {my} ";
-						builder.Append(str);
-
-					}
-
-					var last = data.StartIndex + data.NumCurves * 3;
-					var lx = set.PathPoints[last].X >> bitshift;
-					var ly = set.PathPoints[last].Y >> bitshift;
-
-					builder.Append($"{lx} {ly} Z " + Environment.NewLine);
-
-
-				}
-
-				builder.Append("\" />" + Environment.NewLine);
-				defs.Add(builder.ToString());
-				builder.Clear();
-				gs.Add(this.GetFormattedSetG(set, id, resolution));
-
-			}
-
-			builder.Clear();
-
-			builder.Append(this.GetSVGHeaderString(resolution));
-			builder.Append("<defs>" + Environment.NewLine);
-			foreach (var def in defs) builder.Append(def);
-			builder.Append("</defs>" + Environment.NewLine);
-			builder.Append("<g>" + Environment.NewLine);
-			foreach (var g in gs) builder.Append(g);
-			builder.Append("</g>" + Environment.NewLine);
-			builder.Append("</svg>" + Environment.NewLine);
-			return builder.ToString();
-		}
-
-		public void ReadFromFile(string file)
-		{
-			using var svgreader = new SVGReader(file);
-			svgreader.ReadAllContents();
-
-			int oof = 0;
-		}
-
-		private string GetSVGHeaderString(int resolution)
-		{
-			var builder = new StringBuilder(0x200);
-			builder.Append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" + Environment.NewLine);
-			builder.Append("<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">" + Environment.NewLine);
-			builder.Append("<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\"" + Environment.NewLine);
-			builder.Append("xmlns:xlink=\"http://www.w3.org/1999/xlink\"" + Environment.NewLine);
-			builder.Append("preserveAspectRatio=\"xMidYMid meet\"" + Environment.NewLine);
-			builder.Append($"viewBox=\"0 0 {resolution} {resolution}\"" + Environment.NewLine);
-			builder.Append($"width=\"{resolution}\" height=\"{resolution}\">" + Environment.NewLine);
-			return builder.ToString();
-		}
-
-		private string GetFormattedSetG(PathSet set, string id, int resolution)
-		{
-			var result = $"<use xlink:href=\"#{id}\" fill-rule=\"evenodd\" ";
-
-			var fill = set.FillEffect.GetHTMLColor();
-			var stroke = set.StrokeEffect.GetHTMLColor();
-			var thick = set.StrokeEffect.Thickness * resolution;
-			if (thick == 0) thick = resolution >> 11;
-
-			result += $"fill=\"{fill}\" stroke=\"{stroke}\" stroke-width=\"{thick:0.00}\" />";
-			return result + Environment.NewLine;
 		}
 
 		#endregion
