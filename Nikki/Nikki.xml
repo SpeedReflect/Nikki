@@ -1580,6 +1580,26 @@
             0x0003CE0C
             </summary>
         </member>
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.VinylDataHeader">
+            <summary>
+            0x0003CE0E
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.VinylCarEntries">
+            <summary>
+            0x0003CE0F
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.VinylFloatMatrix">
+            <summary>
+            0x0003CE10
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.VinylVectorEntries">
+            <summary>
+            0x0003CE11
+            </summary>
+        </member>
         <member name="F:Nikki.Reflection.Enum.BinBlockID.SkinRegionDB">
             <summary>
             0x0003CE12
@@ -1815,7 +1835,7 @@
             0x8003CE03
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.BinBlockID.LimitsTable">
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.VinylDataTable">
             <summary>
             0x8003CE0D
             </summary>
@@ -12561,11 +12581,6 @@
             Y position of the center of this <see cref="T:Nikki.Support.Carbon.Class.VectorVinyl"/>.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Carbon.Class.VectorVinyl.PathSets">
-            <summary>
-            List of <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/> in this <see cref="T:Nikki.Support.Carbon.Class.VectorVinyl"/>.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.#ctor">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Class.VectorVinyl"/>.
@@ -12609,19 +12624,30 @@
             <param name="CName">CollectionName of the new created object.</param>
             <returns>Memory casted copy of the object.</returns>
         </member>
+        <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.GetPathSet(System.Int32)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/> in this <see cref="T:Nikki.Support.Carbon.Class.VectorVinyl"/> at index specified.
+            </summary>
+            <param name="index">Index of the <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/> to get.</param>
+            <returns><see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/> at index specified.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.AddPathSet">
+            <summary>
+            Adds <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/> to the end.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.RemovePathSet(System.Int32)">
+            <summary>
+            Removes <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/> at index specified.
+            </summary>
+            <param name="index">Index of <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/> to remove.</param>
+        </member>
         <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.ToString">
             <summary>
             Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Carbon.Class.VectorVinyl"/> 
             as a string value.
             </summary>
             <returns>String value.</returns>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.GetSVGString(System.Int32)">
-            <summary>
-            Gets data of this <see cref="T:Nikki.Support.Carbon.Class.VectorVinyl"/> as an SVG-formatted string.
-            </summary>
-            <param name="resolution">Resolution of the SVG image.</param>
-            <returns>Data as an SVG-formatted string.</returns>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.Serialize(System.IO.BinaryWriter)">
             <summary>
@@ -14093,6 +14119,12 @@
             Clones values of another <see cref="T:Nikki.Reflection.Abstract.SubPart"/>.
             </summary>
             <param name="other"><see cref="T:Nikki.Reflection.Abstract.SubPart"/> to clone.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.GetBinKey">
+            <summary>
+            Gets Bin Key of the part.
+            </summary>
+            <returns>Bin Key of the part as an unsigned integer.</returns>
         </member>
         <member name="T:Nikki.Support.Carbon.Parts.CarParts.TempPart">
             <summary>
@@ -23800,6 +23832,141 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
+        <member name="T:Nikki.Support.Prostreet.Class.VectorVinyl">
+            <summary>
+            <see cref="T:Nikki.Support.Prostreet.Class.VectorVinyl"/> is a collection of vectors that form a vinyl.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.VectorVinyl.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.VectorVinyl.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.VectorVinyl.Manager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.VectorVinyl.CollectionName">
+            <summary>
+            Collection name of the variable.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.VectorVinyl.BinKey">
+            <summary>
+            Binary memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.VectorVinyl.VltKey">
+            <summary>
+            Vault memory hash of the collection name.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.VectorVinyl.NumberOfPaths">
+            <summary>
+            Number of <see cref="T:Nikki.Support.Prostreet.Parts.VinylParts.PathSet"/> in this <see cref="T:Nikki.Support.Prostreet.Class.VectorVinyl"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.VectorVinyl.CenterX">
+            <summary>
+            X position of the center of this <see cref="T:Nikki.Support.Prostreet.Class.VectorVinyl"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.VectorVinyl.CenterY">
+            <summary>
+            Y position of the center of this <see cref="T:Nikki.Support.Prostreet.Class.VectorVinyl"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Class.VectorVinyl.AspectRatio">
+            <summary>
+            Aspect ratio of this <see cref="T:Nikki.Support.Prostreet.Class.VectorVinyl"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.VectorVinyl.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Class.VectorVinyl"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.VectorVinyl.#ctor(System.String,Nikki.Support.Prostreet.Framework.VectorVinylManager)">
+            <summary>
+            
+            </summary>
+            <param name="CName"></param>
+            <param name="manager"></param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.VectorVinyl.#ctor(System.IO.BinaryReader,Nikki.Support.Prostreet.Framework.VectorVinylManager)">
+            <summary>
+            
+            </summary>
+            <param name="br"></param>
+            <param name="manager"></param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.VectorVinyl.Finalize">
+            <summary>
+            Destroys current instance.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.VectorVinyl.Assemble(System.IO.BinaryWriter)">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Prostreet.Class.VectorVinyl"/> into a byte array.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write <see cref="T:Nikki.Support.Prostreet.Class.VectorVinyl"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.VectorVinyl.Disassemble(System.IO.BinaryReader)">
+            <summary>
+            Disassembles array into <see cref="T:Nikki.Support.Prostreet.Class.VectorVinyl"/> properties.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.VectorVinyl"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.VectorVinyl.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.VectorVinyl.GetPathSet(System.Int32)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Prostreet.Parts.VinylParts.PathSet"/> in this <see cref="T:Nikki.Support.Prostreet.Class.VectorVinyl"/> at index specified.
+            </summary>
+            <param name="index">Index of the <see cref="T:Nikki.Support.Prostreet.Parts.VinylParts.PathSet"/> to get.</param>
+            <returns><see cref="T:Nikki.Support.Prostreet.Parts.VinylParts.PathSet"/> at index specified.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.VectorVinyl.AddPathSet">
+            <summary>
+            Adds <see cref="T:Nikki.Support.Prostreet.Parts.VinylParts.PathSet"/> to the end.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.VectorVinyl.RemovePathSet(System.Int32)">
+            <summary>
+            Removes <see cref="T:Nikki.Support.Prostreet.Parts.VinylParts.PathSet"/> at index specified.
+            </summary>
+            <param name="index">Index of <see cref="T:Nikki.Support.Prostreet.Parts.VinylParts.PathSet"/> to remove.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.VectorVinyl.ToString">
+            <summary>
+            Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Prostreet.Class.VectorVinyl"/> 
+            as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.VectorVinyl.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Class.VectorVinyl.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Datamap">
             <summary>
             <see cref="T:Nikki.Support.Prostreet.Datamap"/> is an extension of <see cref="T:Nikki.Reflection.Abstract.FileBase"/> for Prostreet support.
@@ -24847,6 +25014,89 @@
             <param name="type">Type of serialization of a collection.</param>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
+        <member name="T:Nikki.Support.Prostreet.Framework.VectorVinylManager">
+            <summary>
+            A <see cref="T:Nikki.Core.Manager`1"/> for <see cref="T:Nikki.Support.Prostreet.Class.VectorVinyl"/> collections.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.VectorVinylManager.GameINT">
+            <summary>
+            Game to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.VectorVinylManager.GameSTR">
+            <summary>
+            Game string to which the class belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.VectorVinylManager.Name">
+            <summary>
+            Name of this <see cref="T:Nikki.Support.Prostreet.Framework.VectorVinylManager"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.VectorVinylManager.AllowsNoSerialization">
+            <summary>
+            If true, manager can export and import non-serialized collection; otherwise, false.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.VectorVinylManager.IsReadOnly">
+            <summary>
+            True if this <see cref="T:Nikki.Core.Manager`1"/> is read-only; otherwise, false.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.VectorVinylManager.Alignment">
+            <summary>
+            Indicates required alighment when this <see cref="T:Nikki.Support.Prostreet.Framework.VectorVinylManager"/> is being serialized.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Framework.VectorVinylManager.CollectionType">
+            <summary>
+            Gets a collection and unit element type in this <see cref="T:Nikki.Support.Prostreet.Framework.VectorVinylManager"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.VectorVinylManager.#ctor(Nikki.Support.Prostreet.Datamap)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Framework.VectorVinylManager"/>.
+            </summary>
+            <param name="db"><see cref="T:Nikki.Support.Prostreet.Datamap"/> to which this manager belongs to.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.VectorVinylManager.Assemble(System.IO.BinaryWriter,System.String)">
+            <summary>
+            Assembles collection data into byte buffers.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="mark">Watermark to put in the padding blocks.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.VectorVinylManager.Disassemble(System.IO.BinaryReader,Nikki.Core.Block)">
+            <summary>
+            Disassembles data into separate collections in this <see cref="T:Nikki.Support.Prostreet.Framework.VectorVinylManager"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="block"><see cref="T:Nikki.Core.Block"/> with offsets.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.VectorVinylManager.CreationCheck(System.String)">
+            <summary>
+            Checks whether CollectionName provided allows creation of a new collection.
+            </summary>
+            <param name="cname">CollectionName to check.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.VectorVinylManager.Export(System.String,System.IO.BinaryWriter,System.Boolean)">
+            <summary>
+            Exports collection with CollectionName specified to a filename provided.
+            </summary>
+            <param name="cname">CollectionName of a collection to export.</param>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="serialized">True if collection exported should be serialized; 
+            false otherwise.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Framework.VectorVinylManager.Import(Nikki.Reflection.Enum.SerializeType,System.IO.BinaryReader)">
+            <summary>
+            Imports collection from file provided and attempts to add it to the end of 
+            this <see cref="T:Nikki.Core.Manager`1"/> in case it does not exist.
+            </summary>
+            <param name="type">Type of serialization of a collection.</param>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart">
             <summary>
             A unit CarPart attribute of <see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/>.
@@ -25020,6 +25270,61 @@
             Disassembles array of bytes into <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.TempPart"/>.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+        </member>
+        <member name="T:Nikki.Support.Prostreet.Parts.VinylParts.PathSet">
+            <summary>
+            A unit <see cref="T:Nikki.Support.Prostreet.Parts.VinylParts.PathSet"/> that is used in <see cref="T:Nikki.Support.Prostreet.Class.VectorVinyl"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.VinylParts.PathSet.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.VinylParts.PathSet.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.VinylParts.PathSet.CloneValuesFrom(Nikki.Reflection.Abstract.SubPart)">
+            <summary>
+            Clones values of another <see cref="T:Nikki.Reflection.Abstract.SubPart"/>.
+            </summary>
+            <param name="other"><see cref="T:Nikki.Reflection.Abstract.SubPart"/> to clone.</param>
+        </member>
+        <member name="T:Nikki.Support.Prostreet.Parts.VinylParts.StrokeEffect">
+            <summary>
+            A unit <see cref="T:Nikki.Support.Prostreet.Parts.VinylParts.StrokeEffect"/> that is used in <see cref="T:Nikki.Support.Prostreet.Parts.VinylParts.PathSet"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Parts.VinylParts.StrokeEffect.BlockSize">
+            <summary>
+            Constant size of one unit class.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Parts.VinylParts.StrokeEffect.Position">
+            <summary>
+            Position value of the effect.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.VinylParts.StrokeEffect.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.VinylParts.StrokeEffect.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.VinylParts.StrokeEffect.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
         <member name="T:Nikki.Support.Shared.Class.AcidEffect">
             <summary>
@@ -27658,6 +27963,11 @@
             Vault memory hash of the collection name.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Shared.Class.VectorVinyl.NumberOfPaths">
+            <summary>
+            Number of <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/> in this <see cref="T:Nikki.Support.Shared.Class.VectorVinyl"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Shared.Class.VectorVinyl.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Shared.Class.AcidEffect"/> into a byte array.
@@ -27688,6 +27998,37 @@
             </summary>
             <param name="CName">CollectionName of the new created object.</param>
             <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.VectorVinyl.GetPathSet(System.Int32)">
+            <summary>
+            Gets <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/> in this <see cref="T:Nikki.Support.Shared.Class.VectorVinyl"/> at index specified.
+            </summary>
+            <param name="index">Index of the <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/> to get.</param>
+            <returns><see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/> at index specified.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.VectorVinyl.AddPathSet">
+            <summary>
+            Adds <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/> to the end.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.VectorVinyl.RemovePathSet(System.Int32)">
+            <summary>
+            Removes <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/> at index specified.
+            </summary>
+            <param name="index">Index of <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/> to remove.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.VectorVinyl.GetSVGString(System.Int32)">
+            <summary>
+            Gets data of this <see cref="T:Nikki.Support.Shared.Class.VectorVinyl"/> as an SVG-formatted string.
+            </summary>
+            <param name="resolution">Resolution of the SVG image.</param>
+            <returns>Data as an SVG-formatted string.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.VectorVinyl.ReadFromFile(System.String)">
+            <summary>
+            Reads paths from an SVG file provided and sets all its data into this <see cref="T:Nikki.Support.Shared.Class.VectorVinyl"/>.
+            </summary>
+            <param name="file">SVG file to read.</param>
         </member>
         <member name="T:Nikki.Support.Shared.Parts.BoundParts.CollisionBound">
             <summary>
@@ -40460,6 +40801,17 @@
             <param name="color">Hexadecimal color passed.</param>
             <returns>Blue parameter as a byte.</returns>
         </member>
+        <member name="T:Nikki.Utils.EA.SVGReader">
+            <summary>
+            A class for reading SVG path data and converting to <see cref="T:Nikki.Support.Shared.Class.VectorVinyl"/> data.
+            </summary>
+        </member>
+        <member name="M:Nikki.Utils.EA.SVGReader.#ctor(System.String)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Utils.EA.SVGReader"/> using file path provided.
+            </summary>
+            <param name="filename">SVG file to read.</param>
+        </member>
         <member name="M:Nikki.Utils.EA.SVGReader.Dispose">
             <summary>
             Releases all resources used by the current instance of the <see cref="T:Nikki.Utils.EA.SVGReader"/>.
@@ -40471,6 +40823,17 @@
             </summary>
             <param name="disposing">True if release both managed and unmanaged resources; false 
             if release unmanaged only.</param>
+        </member>
+        <member name="M:Nikki.Utils.EA.SVGReader.ReadAllContents">
+            <summary>
+            Reads all contents of a file passed during initialization.
+            </summary>
+        </member>
+        <member name="M:Nikki.Utils.EA.SVGReader.ToVectorVinyl(Nikki.Support.Shared.Class.VectorVinyl)">
+            <summary>
+            Converts all data read from SVG file that was passed on initialization.
+            </summary>
+            <param name="vinyl"><see cref="T:Nikki.Support.Shared.Class.VectorVinyl"/> to copy data to.</param>
         </member>
         <member name="T:Nikki.Utils.Hashing">
             <summary>
@@ -40487,6 +40850,14 @@
             Hashes string passed and returns its binary hash.
             </summary>
             <param name="value">String to be hashed.</param>
+            <returns>Bin Memory Hash of the string as an unsigned integer.</returns>
+        </member>
+        <member name="M:Nikki.Utils.Hashing.BinHash(System.String,System.UInt32)">
+            <summary>
+            Hashes string passed and returns its binary hash.
+            </summary>
+            <param name="value">String to be hashed.</param>
+            <param name="prefix">Prefix binary hash that string passed should be hashed based on.</param>
             <returns>Bin Memory Hash of the string as an unsigned integer.</returns>
         </member>
         <member name="M:Nikki.Utils.Hashing.VltHash(System.String)">

@@ -181,6 +181,7 @@ namespace Nikki.Support.Carbon.Framework
 					case BinBlockID.TPKSettings:
 					case BinBlockID.VinylSystem:
 					case BinBlockID.CarTypeInfos:
+					case BinBlockID.VinylDataTable:
 					case BinBlockID.CarInfoAnimHideup:
 					case BinBlockID.CarInfoAnimHookup:
 						br.BaseStream.Position += size;

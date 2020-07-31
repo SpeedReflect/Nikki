@@ -179,7 +179,7 @@ namespace Nikki.Utils.EA
 
 				var num = vinyl.NumberOfPaths;
 				vinyl.AddPathSet();
-				var set = vinyl.GetPathSet(vinyl.NumberOfPaths);
+				var set = vinyl.GetPathSet(num);
 				ushort start = 0;
 
 				foreach (var data in element.PointDatas)

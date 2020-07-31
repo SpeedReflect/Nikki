@@ -371,6 +371,26 @@
         Vinyl_Gradient = 0x0003CE0C, // varies
 
         /// <summary>
+        /// 0x0003CE0E
+        /// </summary>
+        VinylDataHeader = 0x0003CE0E, // varies
+
+        /// <summary>
+        /// 0x0003CE0F
+        /// </summary>
+        VinylCarEntries = 0x0003CE0F, // varies
+
+        /// <summary>
+        /// 0x0003CE10
+        /// </summary>
+        VinylFloatMatrix = 0x0003CE10, // varies
+
+        /// <summary>
+        /// 0x0003CE11
+        /// </summary>
+        VinylVectorEntries = 0x0003CE11, // varies
+
+        /// <summary>
         /// 0x0003CE12
         /// </summary>
         SkinRegionDB = 0x0003CE12, // 0x10 Modular
@@ -608,7 +628,7 @@
         /// <summary>
         /// 0x8003CE0D
         /// </summary>
-        LimitsTable = 0x8003CE0D, // 0x10 Modular
+        VinylDataTable = 0x8003CE0D, // 0x10 Modular
 
         /// <summary>
         /// 0x80134000

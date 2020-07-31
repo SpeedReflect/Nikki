@@ -396,5 +396,112 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 		}
 
 		#endregion
+
+		#region Get Bin Key
+
+		/// <summary>
+		/// Gets Bin Key of the part.
+		/// </summary>
+		/// <returns>Bin Key of the part as an unsigned integer.</returns>
+		public uint GetBinKey()
+		{
+			var key = this.GetKeyUsingLodOffsets();
+			return key != 0 && key != UInt32.MaxValue ? key : this.GetKeyUsingPartOffsets();
+		}
+
+		private uint GetKeyUsingLodOffsets()
+		{
+			CPAttribute attrib;
+
+			attrib = this.GetAttribute((uint)eAttribInt.LOD_NAME_PREFIX_SELECTOR);
+
+			if (attrib is IntAttribute selector)
+			{
+
+				uint prefix = UInt32.MaxValue;
+				string realpart = String.Empty;
+				attrib = this.GetAttribute((uint)eAttribTwoString.LOD_BASE_NAME);
+				var offsets = attrib as TwoStringAttribute ?? null;
+
+				switch (selector.Value)
+				{
+
+					case 0:
+						prefix  = this.Model?.BinKey ?? UInt32.MaxValue;
+						realpart += offsets?.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
+						realpart += offsets?.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
+						return realpart.BinHash(prefix);
+
+					case 1:
+						attrib = this.GetAttribute((uint)eAttribKey.BRAND_NAME);
+						prefix = attrib is KeyAttribute unkhash ? unkhash.Value.BinHash() : UInt32.MaxValue;
+						realpart += offsets?.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
+						realpart += offsets?.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
+						return realpart.BinHash(prefix);
+
+					case 2:
+						attrib = this.GetAttribute((uint)eAttribKey.LOD_NAME_PREFIX_NAMEHASH);
+						prefix = attrib is KeyAttribute basehash ? basehash.Value.BinHash() : UInt32.MaxValue;
+						realpart += offsets?.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
+						realpart += offsets?.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
+						return realpart.BinHash(prefix);
+
+					default:
+						break;
+				}
+
+			}
+
+			return UInt32.MaxValue;
+		}
+
+		private uint GetKeyUsingPartOffsets()
+		{
+			CPAttribute attrib;
+			var realpart = String.Empty;
+
+			attrib = this.GetAttribute((uint)eAttribInt.PART_NAME_SELECTOR);
+
+			if (attrib is IntAttribute selector)
+			{
+
+				uint prefix = UInt32.MaxValue;
+				attrib = this.GetAttribute((uint)eAttribTwoString.PART_NAME_OFFSETS);
+				var offsets = attrib as TwoStringAttribute ?? null;
+
+				switch (selector.Value)
+				{
+
+					case 0:
+						prefix = this.Model?.BinKey ?? UInt32.MaxValue;
+						realpart += offsets?.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
+						realpart += offsets?.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
+						return realpart.BinHash(prefix);
+
+					case 1:
+						attrib = this.GetAttribute((uint)eAttribKey.BRAND_NAME);
+						prefix = attrib is KeyAttribute unkhash ? unkhash.Value.BinHash() : UInt32.MaxValue;
+						realpart += offsets?.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
+						realpart += offsets?.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
+						return realpart.BinHash(prefix);
+
+					case 2:
+						attrib = this.GetAttribute((uint)eAttribKey.PART_NAME_BASE_HASH);
+						prefix = attrib is KeyAttribute basehash ? basehash.Value.BinHash() : UInt32.MaxValue;
+						realpart += offsets?.Value1Exists == eBoolean.True ? "_" + offsets.Value1 : String.Empty;
+						realpart += offsets?.Value2Exists == eBoolean.True ? "_" + offsets.Value2 : String.Empty;
+						return realpart.BinHash(prefix);
+
+					default:
+						break;
+				}
+
+			}
+
+			attrib = this.GetAttribute((uint)eAttribKey.PART_NAME_BASE_HASH);
+			return attrib is KeyAttribute finalhash ? finalhash.Value.BinHash() : UInt32.MaxValue;
+		}
+
+		#endregion
 	}
 }

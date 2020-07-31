@@ -54,6 +54,32 @@ namespace Nikki.Utils
         }
 
         /// <summary>
+        /// Hashes string passed and returns its binary hash.
+        /// </summary>
+        /// <param name="value">String to be hashed.</param>
+        /// <param name="prefix">Prefix binary hash that string passed should be hashed based on.</param>
+        /// <returns>Bin Memory Hash of the string as an unsigned integer.</returns>
+        public static uint BinHash(this string value, uint prefix)
+		{
+            if (string.IsNullOrWhiteSpace(value)) return prefix;
+            if (value == BaseArguments.NULL) return prefix;
+            if (value.IsHexString()) return Convert.ToUInt32(value, 16);
+
+            var arr = value.GetBytes();
+            var result = prefix;
+
+            for (int len = 0; len < arr.Length; ++len)
+            {
+
+                result *= 0x21;
+                result += arr[len];
+
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Hashes string passed and returns its vault hash.
         /// </summary>
         /// <param name="value">String to be hashed.</param>

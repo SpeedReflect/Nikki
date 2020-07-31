@@ -333,7 +333,7 @@ namespace Nikki.Core
 			{ BinBlockID.EventSequence,     new Alignment(0x08, Alignment.AlignmentType.Actual) },
 			{ BinBlockID.DBCarBounds,       new Alignment(0x08, Alignment.AlignmentType.Actual) },
 			{ BinBlockID.VinylSystem,       new Alignment(0x800, Alignment.AlignmentType.Modular) },
-			{ BinBlockID.LimitsTable,       Alignment.Default },
+			{ BinBlockID.VinylDataTable,    Alignment.Default },
 			{ BinBlockID.Geometry,          new Alignment(0x80, Alignment.AlignmentType.Modular) },
 			{ BinBlockID.SpecialEffects,    new Alignment(0x80, Alignment.AlignmentType.Modular) },
 			{ BinBlockID.PCAWeights,        new Alignment(0x80, Alignment.AlignmentType.Modular) },
