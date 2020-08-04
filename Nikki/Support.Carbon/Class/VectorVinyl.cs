@@ -287,6 +287,11 @@ namespace Nikki.Support.Carbon.Class
 		}
 
 		/// <summary>
+		/// Removes all <see cref="PathSet"/> from the vinyl.
+		/// </summary>
+		public override void ClearPaths() => this._pathsets.Clear();
+
+		/// <summary>
 		/// Returns CollectionName, BinKey and GameSTR of this <see cref="VectorVinyl"/> 
 		/// as a string value.
 		/// </summary>

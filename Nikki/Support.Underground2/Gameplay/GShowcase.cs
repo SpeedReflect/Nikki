@@ -3,6 +3,7 @@ using System.IO;
 using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
@@ -187,12 +188,12 @@ namespace Nikki.Support.Underground2.Gameplay
 		public byte Unknown0x34 { get; set; }
 
 		/// <summary>
-		/// Unknown value at offset 0x35.
+		/// True if this <see cref="GShowcase"/> is required to complete; false otherwise.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
-		public byte Unknown0x35 { get; set; }
+		public eBoolean RequiredToComplete { get; set; }
 
 		#endregion
 
@@ -255,7 +256,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.Write(this.DestinationPoint.BinHash());
 			bw.Write((int)0);
 			bw.Write(this.Unknown0x34);
-			bw.Write(this.Unknown0x35);
+			bw.WriteEnum(this.RequiredToComplete);
 			bw.Write((short)0);
 			bw.Write(this.DescAttrib.BinHash());
 			bw.Write(this.RequiredVisualRating);
@@ -279,7 +280,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.DestinationPoint = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			br.BaseStream.Position += 4;
 			this.Unknown0x34 = br.ReadByte();
-			this.Unknown0x35 = br.ReadByte();
+			this.RequiredToComplete = br.ReadEnum<eBoolean>();
 			br.BaseStream.Position += 2;
 			this.DescAttrib = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			this.RequiredVisualRating = br.ReadSingle();
@@ -325,7 +326,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.WriteNullTermUTF8(this.DescStringLabel);
 			bw.WriteNullTermUTF8(this.DestinationPoint);
 			bw.Write(this.Unknown0x34);
-			bw.Write(this.Unknown0x35);
+			bw.WriteEnum(this.RequiredToComplete);
 			bw.WriteNullTermUTF8(this.DescAttrib);
 			bw.Write(this.RequiredVisualRating);
 		}
@@ -343,7 +344,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.DescStringLabel = br.ReadNullTermUTF8();
 			this.DestinationPoint = br.ReadNullTermUTF8();
 			this.Unknown0x34 = br.ReadByte();
-			this.Unknown0x35 = br.ReadByte();
+			this.RequiredToComplete = br.ReadEnum<eBoolean>();
 			this.DescAttrib = br.ReadNullTermUTF8();
 			this.RequiredVisualRating = br.ReadSingle();
 		}

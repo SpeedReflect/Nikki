@@ -69,6 +69,37 @@ namespace Nikki.Support.Underground2.Gameplay
 			Unique = 6,
 		}
 
+		/// <summary>
+		/// Enum of unlock conditions for <see cref="WorldShop"/>.
+		/// </summary>
+		public enum UnlockType : byte
+		{
+			/// <summary>
+			/// Unlocked from the start.
+			/// </summary>
+			InitiallyUnlocked = 0,
+
+			/// <summary>
+			/// Requires specific race completed.
+			/// </summary>
+			SpecificRaceWon = 1,
+			
+			/// <summary>
+			/// Requires specific number of URL races won.
+			/// </summary>
+			ReqURLRacesWon = 2,
+
+			/// <summary>
+			/// Requires specific number of regular races won.
+			/// </summary>
+			ReqRegRacesWon = 3,
+
+			/// <summary>
+			/// Requires specific number of sponsor races won.
+			/// </summary>
+			ReqSponRacesWon = 4,
+		}
+
 		#endregion
 
 		#region Properties
@@ -180,12 +211,12 @@ namespace Nikki.Support.Underground2.Gameplay
 		public eBoolean InitiallyHidden { get; set; }
 
 		/// <summary>
-		/// True if in order to be unlocked this shop requires an event completed.
+		/// Unlock type of this <see cref="WorldShop"/>.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
-		public eBoolean RequiresEventCompleted { get; set; }
+		public UnlockType UnlockMethod { get; set; }
 
 		/// <summary>
 		/// Stage to which this <see cref="WorldShop"/> belongs to.
@@ -201,7 +232,15 @@ namespace Nikki.Support.Underground2.Gameplay
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
-		public string EventToBeCompleted { get; set; } = String.Empty;
+		public string RequiredSpecRaceWon { get; set; } = String.Empty;
+
+		/// <summary>
+		/// Number of required races won.
+		/// </summary>
+		[AccessModifiable()]
+		[MemoryCastable()]
+		[Category("Secondary")]
+		public int RequiredRacesWon { get; set; }
 
 		#endregion
 
@@ -274,9 +313,27 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.WriteEnum(this.ShopType);
 			bw.WriteEnum(this.InitiallyHidden);
 			bw.WriteBytes(0x22);
-			bw.Write(this.EventToBeCompleted.BinHash());
+
+			switch (this.UnlockMethod)
+			{
+
+				case UnlockType.SpecificRaceWon:
+					bw.Write(this.RequiredSpecRaceWon.BinHash());
+					break;
+
+				case UnlockType.ReqRegRacesWon:
+				case UnlockType.ReqURLRacesWon:
+				case UnlockType.ReqSponRacesWon:
+					bw.Write(this.RequiredRacesWon);
+					break;
+
+				default:
+					break;
+
+			}
+
 			bw.WriteBytes(0x24);
-			bw.WriteEnum(this.RequiresEventCompleted);
+			bw.WriteEnum(this.UnlockMethod);
 			bw.Write(this.BelongsToStage);
 			bw.Write((short)0);
 		}
@@ -310,13 +367,31 @@ namespace Nikki.Support.Underground2.Gameplay
 
 			// Event to complete
 			br.BaseStream.Position += 0x22;
-			this.EventToBeCompleted = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			var temp = br.ReadUInt32();
 
 			// Last settings
 			br.BaseStream.Position += 0x24;
-			this.RequiresEventCompleted = br.ReadEnum<eBoolean>();
+			this.UnlockMethod = br.ReadEnum<UnlockType>();
 			this.BelongsToStage = br.ReadByte();
 			br.BaseStream.Position += 2;
+
+			switch (this.UnlockMethod)
+			{
+
+				case UnlockType.SpecificRaceWon:
+					this.RequiredSpecRaceWon = temp.BinString(LookupReturn.EMPTY);
+					break;
+
+				case UnlockType.ReqRegRacesWon:
+				case UnlockType.ReqURLRacesWon:
+				case UnlockType.ReqSponRacesWon:
+					this.RequiredRacesWon = (int)temp;
+					break;
+
+				default:
+					break;
+
+			}
 		}
 
 		/// <summary>
@@ -358,8 +433,9 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.WriteNullTermUTF8(this.ShopFilename);
 			bw.WriteEnum(this.ShopType);
 			bw.WriteEnum(this.InitiallyHidden);
-			bw.WriteNullTermUTF8(this.EventToBeCompleted);
-			bw.WriteEnum(this.RequiresEventCompleted);
+			bw.WriteNullTermUTF8(this.RequiredSpecRaceWon);
+			bw.Write(this.RequiredRacesWon);
+			bw.WriteEnum(this.UnlockMethod);
 			bw.Write(this.BelongsToStage);
 		}
 
@@ -375,8 +451,9 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.ShopFilename = br.ReadNullTermUTF8();
 			this.ShopType = br.ReadEnum<WorldShopType>();
 			this.InitiallyHidden = br.ReadEnum<eBoolean>();
-			this.EventToBeCompleted = br.ReadNullTermUTF8();
-			this.RequiresEventCompleted = br.ReadEnum<eBoolean>();
+			this.RequiredSpecRaceWon = br.ReadNullTermUTF8();
+			this.RequiredRacesWon = br.ReadInt32();
+			this.UnlockMethod = br.ReadEnum<UnlockType>();
 			this.BelongsToStage = br.ReadByte();
 		}
 

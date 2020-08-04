@@ -119,19 +119,19 @@ namespace Nikki.Support.Underground2.Gameplay
 			AtStageStart = 1,
 
 			/// <summary>
-			/// Event requires specific sponsor chosen.
+			/// Event requires specific sponsor index chosen.
 			/// </summary>
-			SponsorChosen = 2,
+			UnknownType = 2,
 
 			/// <summary>
-			/// Event requires specific amount of races won.
+			/// Event requires specific amount of regular races won.
 			/// </summary>
 			ReqRegRacesWon = 3,
 
 			/// <summary>
-			/// Event requires specific amount of URL won.
+			/// Event requires specific amount of URL, sponsor, and regular won.
 			/// </summary>
-			ReqURLRacesWon = 4,
+			ReqVarRacesWon = 4,
 		}
 
 		#endregion
@@ -236,44 +236,44 @@ namespace Nikki.Support.Underground2.Gameplay
 		public EventBehaviorType EventBehavior { get; set; }
 
 		/// <summary>
+		/// Unknown value at offset 0x10.
+		/// </summary>
+		[AccessModifiable()]
+		[MemoryCastable()]
+		[Category("Secondary")]
+		public byte Unknown0x10 { get; set; }
+
+		/// <summary>
 		/// Required race completed in order to unlock this <see cref="GCareerRace"/>.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
-		public string RequiredSpecificRaceWon { get; set; } = String.Empty;
+		public string ReqSpecRaceWon { get; set; } = String.Empty;
 
 		/// <summary>
-		/// Required URL race completer in order to unlock this <see cref="GCareerRace"/>.
+		/// Required number of sponsor races won to unlock this <see cref="GCareerRace"/>.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
-		public byte RequiredSpecificURLWon { get; set; }
+		public byte ReqSponRacesWon { get; set; }
 
 		/// <summary>
-		/// Required sponsor chosen in order to unlock this <see cref="GCareerRace"/>.
+		/// Required number of regular races won to unlock this <see cref="GCareerRace"/>.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
-		public byte SponsorChosenToUnlock { get; set; }
+		public byte ReqRegRacesWon { get; set; }
 
 		/// <summary>
-		/// Required number of races won to unlock this <see cref="GCareerRace"/>.
+		/// Required number of URL races won to unlock this <see cref="GCareerRace"/>.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
-		public byte RequiredRacesWon { get; set; }
-
-		/// <summary>
-		/// Required number of URL won to unlock this <see cref="GCareerRace"/>.
-		/// </summary>
-		[AccessModifiable()]
-		[MemoryCastable()]
-		[Category("Secondary")]
-		public byte RequiredURLWon { get; set; }
+		public byte ReqURLRacesWon { get; set; }
 
 		/// <summary>
 		/// Track number for stage 1.
@@ -585,20 +585,28 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.Write(this._padding0);
 			bw.WriteEnum(this.EventBehavior);
 
-			if (this.UnlockMethod == UnlockCondition.SpecificRaceWon)
+			switch (this.UnlockMethod)
 			{
 
-				bw.Write(this.RequiredSpecificRaceWon.BinHash());
+				case UnlockCondition.SpecificRaceWon:
+					bw.Write(this.ReqSpecRaceWon.BinHash());
+					break;
 
-			}
-			else
-			{
-			
-				bw.Write(this.RequiredSpecificURLWon);
-				bw.Write(this.SponsorChosenToUnlock);
-				bw.Write(this.RequiredRacesWon);
-				bw.Write(this.RequiredURLWon);
-			
+				case UnlockCondition.ReqRegRacesWon:
+					bw.Write((short)0);
+					break;
+
+				case UnlockCondition.ReqVarRacesWon:
+					bw.Write((byte)0);
+					bw.Write(this.ReqRegRacesWon);
+					bw.Write(this.ReqSponRacesWon);
+					bw.Write(this.ReqURLRacesWon);
+					break;
+
+				default:
+					bw.Write((int)0);
+					break;
+
 			}
 
 			bw.Write(this.EarnableRespect);
@@ -692,20 +700,30 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.EventBehavior = br.ReadEnum<EventBehaviorType>();
 
 			// Unlock conditions
-			if (this.UnlockMethod == UnlockCondition.SpecificRaceWon)
+			switch (this.UnlockMethod)
 			{
 
-				this.RequiredSpecificRaceWon = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+				case UnlockCondition.SpecificRaceWon:
+					this.ReqSpecRaceWon = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+					break;
 
-			}
-			else
-			{
+				case UnlockCondition.ReqRegRacesWon:
+					br.BaseStream.Position += 2;
+					this.ReqRegRacesWon = br.ReadByte();
+					++br.BaseStream.Position;
+					break;
 
-				this.RequiredSpecificURLWon = br.ReadByte();
-				this.SponsorChosenToUnlock = br.ReadByte();
-				this.RequiredRacesWon = br.ReadByte();
-				this.RequiredURLWon = br.ReadByte();
-			
+				case UnlockCondition.ReqVarRacesWon:
+					++br.BaseStream.Position;
+					this.ReqRegRacesWon = br.ReadByte();
+					this.ReqSponRacesWon = br.ReadByte();
+					this.ReqURLRacesWon = br.ReadByte();
+					break;
+
+				default:
+					br.BaseStream.Position += 4;
+					break;
+
 			}
 
 			// Earnable Respect ?
@@ -846,21 +864,10 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.Write(this._padding0);
 			bw.WriteEnum(this.EventBehavior);
 
-			if (this.UnlockMethod == UnlockCondition.SpecificRaceWon)
-			{
-
-				bw.WriteNullTermUTF8(this.RequiredSpecificRaceWon);
-
-			}
-			else
-			{
-
-				bw.Write(this.RequiredSpecificURLWon);
-				bw.Write(this.SponsorChosenToUnlock);
-				bw.Write(this.RequiredRacesWon);
-				bw.Write(this.RequiredURLWon);
-
-			}
+			bw.WriteNullTermUTF8(this.ReqSpecRaceWon);
+			bw.Write(this.ReqRegRacesWon);
+			bw.Write(this.ReqURLRacesWon);
+			bw.Write(this.ReqSponRacesWon);
 
 			bw.Write(this.EarnableRespect);
 			this.STAGE1.Write(bw);
@@ -909,21 +916,10 @@ namespace Nikki.Support.Underground2.Gameplay
 			this._padding0 = br.ReadByte();
 			this.EventBehavior = br.ReadEnum<EventBehaviorType>();
 
-			if (this.UnlockMethod == UnlockCondition.SpecificRaceWon)
-			{
-
-				this.RequiredSpecificRaceWon = br.ReadNullTermUTF8();
-
-			}
-			else
-			{
-
-				this.RequiredSpecificURLWon = br.ReadByte();
-				this.SponsorChosenToUnlock = br.ReadByte();
-				this.RequiredRacesWon = br.ReadByte();
-				this.RequiredURLWon = br.ReadByte();
-
-			}
+			this.ReqSpecRaceWon = br.ReadNullTermUTF8();
+			this.ReqRegRacesWon = br.ReadByte();
+			this.ReqURLRacesWon = br.ReadByte();
+			this.ReqSponRacesWon = br.ReadByte();
 
 			this.EarnableRespect = br.ReadInt32();
 			this.STAGE1.Read(br);

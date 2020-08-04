@@ -112,6 +112,11 @@ namespace Nikki.Support.Shared.Class
 		public abstract void RemovePathSet(int index);
 
 		/// <summary>
+		/// Removes all <see cref="PathSet"/> from the vinyl.
+		/// </summary>
+		public abstract void ClearPaths();
+
+		/// <summary>
 		/// Gets data of this <see cref="VectorVinyl"/> as an SVG-formatted string.
 		/// </summary>
 		/// <param name="resolution">Resolution of the SVG image.</param>
@@ -192,6 +197,7 @@ namespace Nikki.Support.Shared.Class
 		{
 			using var svgreader = new SVGReader(file);
 			svgreader.ReadAllContents();
+			this.ClearPaths();
 			svgreader.ToVectorVinyl(this);
 		}
 

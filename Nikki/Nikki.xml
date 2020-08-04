@@ -12642,6 +12642,11 @@
             </summary>
             <param name="index">Index of <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/> to remove.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.ClearPaths">
+            <summary>
+            Removes all <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/> from the vinyl.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.ToString">
             <summary>
             Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Carbon.Class.VectorVinyl"/> 
@@ -23948,6 +23953,11 @@
             </summary>
             <param name="index">Index of <see cref="T:Nikki.Support.Prostreet.Parts.VinylParts.PathSet"/> to remove.</param>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Class.VectorVinyl.ClearPaths">
+            <summary>
+            Removes all <see cref="T:Nikki.Support.Prostreet.Parts.VinylParts.PathSet"/> from the vinyl.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Prostreet.Class.VectorVinyl.ToString">
             <summary>
             Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Prostreet.Class.VectorVinyl"/> 
@@ -28016,6 +28026,11 @@
             Removes <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/> at index specified.
             </summary>
             <param name="index">Index of <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/> to remove.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.VectorVinyl.ClearPaths">
+            <summary>
+            Removes all <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/> from the vinyl.
+            </summary>
         </member>
         <member name="M:Nikki.Support.Shared.Class.VectorVinyl.GetSVGString(System.Int32)">
             <summary>
@@ -35664,19 +35679,19 @@
             Event unlocks at the beginning of the stage to which it belongs to.
             </summary>
         </member>
-        <member name="F:Nikki.Support.Underground2.Gameplay.GCareerRace.UnlockCondition.SponsorChosen">
+        <member name="F:Nikki.Support.Underground2.Gameplay.GCareerRace.UnlockCondition.UnknownType">
             <summary>
-            Event requires specific sponsor chosen.
+            Event requires specific sponsor index chosen.
             </summary>
         </member>
         <member name="F:Nikki.Support.Underground2.Gameplay.GCareerRace.UnlockCondition.ReqRegRacesWon">
             <summary>
-            Event requires specific amount of races won.
+            Event requires specific amount of regular races won.
             </summary>
         </member>
-        <member name="F:Nikki.Support.Underground2.Gameplay.GCareerRace.UnlockCondition.ReqURLRacesWon">
+        <member name="F:Nikki.Support.Underground2.Gameplay.GCareerRace.UnlockCondition.ReqVarRacesWon">
             <summary>
-            Event requires specific amount of URL won.
+            Event requires specific amount of URL, sponsor, and regular won.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.GameINT">
@@ -35729,29 +35744,29 @@
             Event type.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.RequiredSpecificRaceWon">
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.Unknown0x10">
+            <summary>
+            Unknown value at offset 0x10.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.ReqSpecRaceWon">
             <summary>
             Required race completed in order to unlock this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.RequiredSpecificURLWon">
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.ReqSponRacesWon">
             <summary>
-            Required URL race completer in order to unlock this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
+            Required number of sponsor races won to unlock this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.SponsorChosenToUnlock">
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.ReqRegRacesWon">
             <summary>
-            Required sponsor chosen in order to unlock this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
+            Required number of regular races won to unlock this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.RequiredRacesWon">
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.ReqURLRacesWon">
             <summary>
-            Required number of races won to unlock this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.RequiredURLWon">
-            <summary>
-            Required number of URL won to unlock this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
+            Required number of URL races won to unlock this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.STAGE1">
@@ -36473,9 +36488,9 @@
             Unknown value at offset 0x34.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Gameplay.GShowcase.Unknown0x35">
+        <member name="P:Nikki.Support.Underground2.Gameplay.GShowcase.RequiredToComplete">
             <summary>
-            Unknown value at offset 0x35.
+            True if this <see cref="T:Nikki.Support.Underground2.Gameplay.GShowcase"/> is required to complete; false otherwise.
             </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Gameplay.GShowcase.#ctor">
@@ -37858,6 +37873,36 @@
             Uniques shop.
             </summary>
         </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.WorldShop.UnlockType">
+            <summary>
+            Enum of unlock conditions for <see cref="T:Nikki.Support.Underground2.Gameplay.WorldShop"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldShop.UnlockType.InitiallyUnlocked">
+            <summary>
+            Unlocked from the start.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldShop.UnlockType.SpecificRaceWon">
+            <summary>
+            Requires specific race completed.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldShop.UnlockType.ReqURLRacesWon">
+            <summary>
+            Requires specific number of URL races won.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldShop.UnlockType.ReqRegRacesWon">
+            <summary>
+            Requires specific number of regular races won.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldShop.UnlockType.ReqSponRacesWon">
+            <summary>
+            Requires specific number of sponsor races won.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.GameINT">
             <summary>
             Game to which the class belongs to.
@@ -37914,9 +37959,9 @@
             false otherwise.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.RequiresEventCompleted">
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.UnlockMethod">
             <summary>
-            True if in order to be unlocked this shop requires an event completed.
+            Unlock type of this <see cref="T:Nikki.Support.Underground2.Gameplay.WorldShop"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.BelongsToStage">
@@ -37924,9 +37969,14 @@
             Stage to which this <see cref="T:Nikki.Support.Underground2.Gameplay.WorldShop"/> belongs to.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.EventToBeCompleted">
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.RequiredSpecRaceWon">
             <summary>
             Event name that should be completed to unlock this shop.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldShop.RequiredRacesWon">
+            <summary>
+            Number of required races won.
             </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Gameplay.WorldShop.#ctor">
