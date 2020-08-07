@@ -328,6 +328,7 @@ namespace Nikki.Support.Underground2.Gameplay
 					break;
 
 				default:
+					bw.Write((int)0);
 					break;
 
 			}

@@ -32468,14 +32468,9 @@
             Model that this <see cref="T:Nikki.Support.Underground2.Class.PresetRide"/> uses.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.PresetRide.UnknownKey1">
+        <member name="P:Nikki.Support.Underground2.Class.PresetRide.IsFESponsorCar">
             <summary>
-            Unknown key 1.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.PresetRide.UnknownKey2">
-            <summary>
-            Unknown key 2.
+            True if this preset is in special frontend sponsor cars category; false otherwise.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Class.PresetRide.PerformanceLevel">
@@ -35814,7 +35809,7 @@
             True if the race is a GPS race; false otherwise.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.DifficultyLevel">
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.TrafficDensity">
             <summary>
             Difficulty level of this <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/>;
             </summary>

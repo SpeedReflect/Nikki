@@ -116,8 +116,10 @@ namespace Nikki.Support.Underground2.Framework
 
 		public void Disassemble(BinaryReader br)
 		{
+			#if !DEBUG
 			try
 			{
+			#endif
 
 				this.ReadBlockOffsets(br);
 
@@ -138,6 +140,7 @@ namespace Nikki.Support.Underground2.Framework
 				this.ProcessCarAnimations(br);
 				this.ProcessCarSkins(br);
 
+			#if !DEBUG
 			}
 			catch (Exception e)
 			{
@@ -145,6 +148,7 @@ namespace Nikki.Support.Underground2.Framework
 				this._logger.WriteException(e, br.BaseStream);
 			
 			}
+			#endif
 		}
 
 		private void ReadBlockOffsets(BinaryReader br)
@@ -156,7 +160,7 @@ namespace Nikki.Support.Underground2.Framework
 				var id = br.ReadEnum<BinBlockID>();
 				var size = br.ReadInt32();
 
-				#if DEBUG
+#if DEBUG
 				if (!Enum.IsDefined(typeof(BinBlockID), (uint)id))
 				{
 
@@ -177,7 +181,7 @@ namespace Nikki.Support.Underground2.Framework
 					}
 
 				}
-				#endif
+#endif
 
 				switch (id)
 				{

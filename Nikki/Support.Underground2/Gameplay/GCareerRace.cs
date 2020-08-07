@@ -349,7 +349,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
-		public Shared.Class.Track.TrackDifficulty DifficultyLevel { get; set; }
+		public byte TrafficDensity { get; set; }
 
 		/// <summary>
 		/// Stage number to which this <see cref="GCareerRace"/> belongs to.
@@ -594,6 +594,8 @@ namespace Nikki.Support.Underground2.Gameplay
 
 				case UnlockCondition.ReqRegRacesWon:
 					bw.Write((short)0);
+					bw.Write(this.ReqRegRacesWon);
+					bw.Write((byte)0);
 					break;
 
 				case UnlockCondition.ReqVarRacesWon:
@@ -620,7 +622,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.Write(this.CashValue);
 			bw.WriteEnum(this.EventIcon);
 			bw.WriteEnum(this.IsDriveToGPS);
-			bw.WriteEnum(this.DifficultyLevel);
+			bw.Write(this.TrafficDensity);
 			bw.Write(this.BelongsToStage);
 			bw.Write(this.NumMapItems);
 			bw.Write(this._padding1);
@@ -743,7 +745,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			// Some UnknownValues
 			this.EventIcon = br.ReadEnum<EventIconType>();
 			this.IsDriveToGPS = br.ReadEnum<eBoolean>();
-			this.DifficultyLevel = br.ReadEnum<Shared.Class.Track.TrackDifficulty>();
+			this.TrafficDensity = br.ReadByte();
 			this.BelongsToStage = br.ReadByte();
 
 			// Some values
@@ -879,7 +881,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.Write(this.CashValue);
 			bw.WriteEnum(this.EventIcon);
 			bw.WriteEnum(this.IsDriveToGPS);
-			bw.WriteEnum(this.DifficultyLevel);
+			bw.Write(this.TrafficDensity);
 			bw.Write(this.BelongsToStage);
 			bw.Write(this.NumMapItems);
 			bw.Write(this._padding1);
@@ -931,7 +933,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.CashValue = br.ReadInt32();
 			this.EventIcon = br.ReadEnum<EventIconType>();
 			this.IsDriveToGPS = br.ReadEnum<eBoolean>();
-			this.DifficultyLevel = br.ReadEnum<Shared.Class.Track.TrackDifficulty>();
+			this.TrafficDensity = br.ReadByte();
 			this.BelongsToStage = br.ReadByte();
 			this.NumMapItems = br.ReadByte();
 			this._padding1 = br.ReadByte();
