@@ -256,6 +256,12 @@ namespace Nikki.Utils.EA
 				this.ParseUsageSet();
 
 			}
+			else if (String.Compare("image", this._reader.Name, StringComparison.OrdinalIgnoreCase) == 0)
+			{
+
+				this.ParseImageSet();
+
+			}
 		}
 
 		private void ParsePathSet()
@@ -321,14 +327,27 @@ namespace Nikki.Utils.EA
 
 		private void ParseUsageSet()
 		{
-			var id = this._reader.GetAttribute("xlink:href")[1..];
-			if (!this._map.TryGetValue(id, out var element)) return;
+			var id = this._reader.GetAttribute("xlink:href");
+			if (id == null) return;
+			if (!this._map.TryGetValue(id[1..], out var element)) return;
 
 			element.FillColor = this._reader.GetAttribute("fill");
 			element.StrokeColor = this._reader.GetAttribute("stroke");
 			element.FillOpacity = this._reader.GetAttribute("opacity");
 			element.StrokeOpacity = this._reader.GetAttribute("stroke-opacity");
 			element.Thickness = this._reader.GetAttribute("stroke-width");
+		}
+
+		private void ParseImageSet()
+		{
+			var data = this._reader.GetAttribute("xlink:href");
+			if (data == null) return;
+			if (data.Contains("base64", StringComparison.OrdinalIgnoreCase))
+			{
+
+				throw new Exception("Base64 SVG formats are not supported");
+
+			}
 		}
 
 		private string EnsureDelimWhitespace(string str)

@@ -99,22 +99,12 @@ namespace Nikki.Support.Shared.Class
 			/// <summary>
 			/// 
 			/// </summary>
-			DRAGDRIFT = 10,
-
-			/// <summary>
-			/// 
-			/// </summary>
 			OPENWORLD = 16,
 
 			/// <summary>
 			/// 
 			/// </summary>
 			SPRINT = 52,
-
-			/// <summary>
-			/// 
-			/// </summary>
-			DRAGSPRINT = 60,
 
 			/// <summary>
 			/// 

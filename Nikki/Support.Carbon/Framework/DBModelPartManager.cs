@@ -22,8 +22,6 @@ namespace Nikki.Support.Carbon.Framework
 	/// </summary>
 	public class DBModelPartManager : Manager<DBModelPart>
 	{
-		private byte[] _vinyldatatable;
-
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
@@ -840,120 +838,6 @@ namespace Nikki.Support.Carbon.Framework
 			br.BaseStream.Position = position + size;
 		}
 
-		private void MakeVinylTable(BinaryWriter bw)
-		{
-			var vinyls = this["VECTORVINYL"];
-
-			if (vinyls is null)
-			{
-
-				bw.WriteEnum(BinBlockID.VinylDataTable);
-				bw.Write(this._vinyldatatable.Length);
-				bw.Write(this._vinyldatatable);
-				return;
-
-			}
-
-			using var ms = new MemoryStream(this._vinyldatatable);
-			using var br = new BinaryReader(ms);
-
-			byte[] header = null;
-			byte[] carkeys = null;
-			byte[] floats = null;
-			var vectors = new Dictionary<uint, uint>(700);
-
-			while (br.BaseStream.Position < br.BaseStream.Length)
-			{
-
-				var id = br.ReadEnum<BinBlockID>();
-				var size = br.ReadInt32();
-
-				switch (id)
-				{
-					case BinBlockID.VinylDataHeader: header = br.ReadBytes(size); break;
-					case BinBlockID.VinylCarEntries: carkeys = br.ReadBytes(size); break;
-					case BinBlockID.VinylFloatMatrix: floats = br.ReadBytes(size); break;
-					case BinBlockID.VinylVectorEntries:
-						for (int i = 0; i < size; i += 8)
-						{
-
-							var key = br.ReadUInt32();
-							var num = br.ReadUInt32();
-							vectors.TryAdd(key, num);
-
-						}
-						break;
-
-				}
-
-			}
-
-			foreach (Parts.CarParts.RealCarPart vinyl in vinyls.ModelCarParts)
-			{
-
-				var hash = vinyl.GetBinKey();
-				if (!vectors.ContainsKey(hash)) vectors.Add(hash, UInt32.MaxValue);
-
-			}
-
-			int total = (vectors.Count << 3) + 8;
-			if (header != null) total += 8 + header.Length;
-			if (carkeys != null) total += 8 + carkeys.Length;
-			if (floats != null) total += 8 + floats.Length;
-
-			bw.WriteEnum(BinBlockID.VinylDataTable);
-			bw.Write(total);
-			
-			if (header != null)
-			{
-
-				bw.WriteEnum(BinBlockID.VinylDataHeader);
-				bw.Write(header.Length);
-
-				if (header.Length == 0x1C)
-				{
-
-					header[0x14] = (byte)vectors.Count;
-					header[0x15] = (byte)(vectors.Count >> 8);
-					header[0x16] = (byte)(vectors.Count >> 16);
-					header[0x17] = (byte)(vectors.Count >> 24);
-
-				}
-
-				bw.Write(header);
-
-			}
-
-			if (carkeys != null)
-			{
-
-				bw.WriteEnum(BinBlockID.VinylCarEntries);
-				bw.Write(carkeys.Length);
-				bw.Write(carkeys);
-
-			}
-
-			if (floats != null)
-			{
-
-				bw.WriteEnum(BinBlockID.VinylFloatMatrix);
-				bw.Write(floats.Length);
-				bw.Write(floats);
-
-			}
-
-			bw.WriteEnum(BinBlockID.VinylVectorEntries);
-			bw.Write(vectors.Count << 3);
-			
-			foreach (var entry in vectors)
-			{
-
-				bw.Write(entry.Key);
-				bw.Write(entry.Value);
-
-			}
-		}
-
 		/// <summary>
 		/// Assembles collection data into byte buffers.
 		/// </summary>
@@ -964,14 +848,6 @@ namespace Nikki.Support.Carbon.Framework
 			if (this.Count == 0) return;
 			bw.GeneratePadding(mark, this.Alignment);
 			this.Encode(bw, mark);
-
-			if (this._vinyldatatable != null)
-			{
-
-				bw.GeneratePadding(mark, Alignment.Default);
-				this.MakeVinylTable(bw);
-
-			}
 		}
 
 		/// <summary>
@@ -987,12 +863,9 @@ namespace Nikki.Support.Carbon.Framework
 			for (int loop = 0; loop < block.Offsets.Count; ++loop)
 			{
 
-				br.BaseStream.Position = block.Offsets[loop];
-				var id = br.ReadEnum<BinBlockID>();
+				br.BaseStream.Position = block.Offsets[loop] + 4;
 				var size = br.ReadInt32();
-
-				if (id == BinBlockID.DBCarParts) this.Decode(br, size);
-				else this._vinyldatatable = br.ReadBytes(size);
+				this.Decode(br, size);
 
 			}
 		}

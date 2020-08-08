@@ -27762,22 +27762,12 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Support.Shared.Class.Track.TrackGameplayMode.DRAGDRIFT">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Nikki.Support.Shared.Class.Track.TrackGameplayMode.OPENWORLD">
             <summary>
             
             </summary>
         </member>
         <member name="F:Nikki.Support.Shared.Class.Track.TrackGameplayMode.SPRINT">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Support.Shared.Class.Track.TrackGameplayMode.DRAGSPRINT">
             <summary>
             
             </summary>

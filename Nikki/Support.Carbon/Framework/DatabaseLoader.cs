@@ -228,7 +228,6 @@ namespace Nikki.Support.Carbon.Framework
 						goto default;
 
 					case BinBlockID.DBCarParts:
-					case BinBlockID.VinylDataTable:
 						this.dbmodelparts.Offsets.Add(off);
 						goto default;
 
