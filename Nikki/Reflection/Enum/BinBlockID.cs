@@ -51,9 +51,24 @@
         PresetSkins = 0x00030250, // 0x08 Actual
 
         /// <summary>
+        /// 0x00034026
+        /// </summary>
+        Smokeables = 0x00034026, // 0x10 Modular
+
+        /// <summary>
         /// 0x00034027
         /// </summary>
         WorldBounds = 0x00034027, // varies
+
+        /// <summary>
+        /// 0x00034107
+        /// </summary>
+        SceneryOverride = 0x00034107, // 0x10 Modular
+
+        /// <summary>
+        /// 0x00034108
+        /// </summary>
+        SceneryGroup = 0x00034108, // 0x10 Modular
 
         /// <summary>
         /// 0x00034146

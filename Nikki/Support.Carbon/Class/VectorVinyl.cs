@@ -312,7 +312,51 @@ namespace Nikki.Support.Carbon.Class
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		public override void Serialize(BinaryWriter bw)
 		{
+			byte[] array;
+			using (var ms = new MemoryStream(0x8000))
+			using (var writer = new BinaryWriter(ms))
+			{
 
+				writer.WriteNullTermUTF8(this._collection_name);
+				writer.Write(this.CenterX);
+				writer.Write(this.CenterY);
+				writer.Write(this.NumberOfPaths);
+
+				foreach (var set in this._pathsets)
+				{
+
+					writer.Write(set.NumPathDatas);
+					writer.Write(set.NumPathPoints);
+
+					foreach (var data in set.PathDatas) data.Write(writer);
+					foreach (var point in set.PathPoints) point.Write(writer);
+
+					writer.WriteEnum(set.FillEffectExists);
+					writer.WriteEnum(set.StrokeEffectExists);
+					writer.WriteEnum(set.DropShadowEffectExists);
+					writer.WriteEnum(set.InnerGlowEffectExists);
+					writer.WriteEnum(set.InnerShadowEffectExists);
+					writer.WriteEnum(set.GradientEffectExists);
+
+					if (set.FillEffectExists == eBoolean.True) set.FillEffect.Write(writer);
+					if (set.StrokeEffectExists == eBoolean.True) set.StrokeEffect.Write(writer);
+					if (set.DropShadowEffectExists == eBoolean.True) set.DropShadowEffect.Write(writer);
+					if (set.InnerGlowEffectExists == eBoolean.True) set.InnerGlowEffect.Write(writer);
+					if (set.InnerShadowEffectExists == eBoolean.True) set.InnerShadowEffect.Write(writer);
+					if (set.GradientEffectExists == eBoolean.True) set.GradientEffect.Write(writer);
+
+				}
+
+				array = ms.ToArray();
+
+			}
+
+			array = Interop.Compress(array, LZCompressionType.BEST);
+
+			var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+			header.Write(bw);
+			bw.Write(array.Length);
+			bw.Write(array);
 		}
 
 		/// <summary>
@@ -321,7 +365,44 @@ namespace Nikki.Support.Carbon.Class
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public override void Deserialize(BinaryReader br)
 		{
+			int size = br.ReadInt32();
+			var array = br.ReadBytes(size);
 
+			array = Interop.Decompress(array);
+
+			using var ms = new MemoryStream(array);
+			using var reader = new BinaryReader(ms);
+
+			// Read all directories and locations
+			this._collection_name = reader.ReadNullTermUTF8();
+			this.CenterX = reader.ReadSingle();
+			this.CenterY = reader.ReadSingle();
+			this.NumberOfPaths = reader.ReadInt32();
+
+			foreach (var set in this._pathsets)
+			{
+
+				set.NumPathDatas = reader.ReadInt32();
+				set.NumPathPoints = reader.ReadInt32();
+
+				foreach (var data in set.PathDatas) data.Read(reader);
+				foreach (var point in set.PathPoints) point.Read(reader);
+
+				set.FillEffectExists = reader.ReadEnum<eBoolean>();
+				set.StrokeEffectExists = reader.ReadEnum<eBoolean>();
+				set.DropShadowEffectExists = reader.ReadEnum<eBoolean>();
+				set.InnerGlowEffectExists = reader.ReadEnum<eBoolean>();
+				set.InnerShadowEffectExists = reader.ReadEnum<eBoolean>();
+				set.GradientEffectExists = reader.ReadEnum<eBoolean>();
+
+				if (set.FillEffectExists == eBoolean.True) set.FillEffect.Read(reader);
+				if (set.StrokeEffectExists == eBoolean.True) set.StrokeEffect.Read(reader);
+				if (set.DropShadowEffectExists == eBoolean.True) set.DropShadowEffect.Read(reader);
+				if (set.InnerGlowEffectExists == eBoolean.True) set.InnerGlowEffect.Read(reader);
+				if (set.InnerShadowEffectExists == eBoolean.True) set.InnerShadowEffect.Read(reader);
+				if (set.GradientEffectExists == eBoolean.True) set.GradientEffect.Read(reader);
+
+			}
 		}
 
 		#endregion

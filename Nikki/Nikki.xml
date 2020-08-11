@@ -1260,9 +1260,24 @@
             0x00030250
             </summary>
         </member>
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.Smokeables">
+            <summary>
+            0x00034026
+            </summary>
+        </member>
         <member name="F:Nikki.Reflection.Enum.BinBlockID.WorldBounds">
             <summary>
             0x00034027
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.SceneryOverride">
+            <summary>
+            0x00034107
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.SceneryGroup">
+            <summary>
+            0x00034108
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.BinBlockID.TrackPosMarkers">
@@ -14124,12 +14139,6 @@
             Clones values of another <see cref="T:Nikki.Reflection.Abstract.SubPart"/>.
             </summary>
             <param name="other"><see cref="T:Nikki.Reflection.Abstract.SubPart"/> to clone.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.GetBinKey">
-            <summary>
-            Gets Bin Key of the part.
-            </summary>
-            <returns>Bin Key of the part as an unsigned integer.</returns>
         </member>
         <member name="T:Nikki.Support.Carbon.Parts.CarParts.TempPart">
             <summary>
