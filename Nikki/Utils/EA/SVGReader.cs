@@ -1,12 +1,14 @@
 ﻿using System;
 using System.IO;
 using System.Xml;
+using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
 using Nikki.Support.Shared.Class;
-using CoreExtensions.Text;
-using System.Diagnostics;
+
+
 
 namespace Nikki.Utils.EA
 {
@@ -371,6 +373,7 @@ namespace Nikki.Utils.EA
 					var p = new XYPoint(points[0], points[1]);
 					p.X += lastknown.X; p.Y += lastknown.Y;
 					list.Points.Add(p);
+					list.LastCurveType = "m";
 
 				}
 				else
@@ -378,10 +381,10 @@ namespace Nikki.Utils.EA
 
 					// Else if M, or first path, means absolute coordinate
 					list.Points.Add(new XYPoint(points[0], points[1]));
+					list.LastCurveType = "M";
 
 				}
 
-				Console.WriteLine($"({list.Last.X}, {list.Last.Y})");
 				int index = 2;
 
 				while (index < points.Length)
@@ -416,18 +419,12 @@ namespace Nikki.Utils.EA
 				}
 
 				element.PointDatas.Add(list);
-
-				lastknown = list.LastCurveType == "z" || list.LastCurveType == "Z"
-					? list.Points[^3]
-					: list.Last;
+				lastknown = list.Last;
 
 			}
 
-			element.FillColor = this._reader.GetAttribute("fill");
-			element.StrokeColor = this._reader.GetAttribute("stroke");
-			element.FillOpacity = this._reader.GetAttribute("opacity");
-			element.StrokeOpacity = this._reader.GetAttribute("stroke-opacity");
-			element.Thickness = this._reader.GetAttribute("stroke-width");
+			this.ReadColorSet(element);
+			this.ReadStyleSet(element);
 		}
 
 		private void ParseUsageSet()
@@ -435,12 +432,7 @@ namespace Nikki.Utils.EA
 			var id = this._reader.GetAttribute("xlink:href");
 			if (id == null) return;
 			if (!this._map.TryGetValue(id[1..], out var element)) return;
-
-			element.FillColor = this._reader.GetAttribute("fill");
-			element.StrokeColor = this._reader.GetAttribute("stroke");
-			element.FillOpacity = this._reader.GetAttribute("opacity");
-			element.StrokeOpacity = this._reader.GetAttribute("stroke-opacity");
-			element.Thickness = this._reader.GetAttribute("stroke-width");
+			else this.ReadColorSet(element);
 		}
 
 		private void ParseGroupSet()
@@ -456,26 +448,15 @@ namespace Nikki.Utils.EA
 			}
 
 			// If no group with the same id is to be found
-			if (!this._map.TryGetValue(id, out var element))
+			if (!this._map.ContainsKey(id))
 			{
 
-				element = new ObservableElement(id);
+				var element = new ObservableElement(id);
 				this._groups.Push(element);
 				this._map.Add(id, element);
+				this.ReadColorSet(element);
 
 			}
-			else // just skip it, having same IDs is ???
-			{
-
-				return;
-
-			}
-
-			element.FillColor = this._reader.GetAttribute("fill");
-			element.StrokeColor = this._reader.GetAttribute("stroke");
-			element.FillOpacity = this._reader.GetAttribute("opacity");
-			element.StrokeOpacity = this._reader.GetAttribute("stroke-opacity");
-			element.Thickness = this._reader.GetAttribute("stroke-width");
 		}
 
 		private void ParseImageSet()
@@ -766,6 +747,8 @@ namespace Nikki.Utils.EA
 
 			var result = set.LastCurveType switch
 			{
+				"m" => this.ReadLinearCurve(points, index, set, true),
+				"M" => this.ReadLinearCurve(points, index, set, false),
 				"c" => this.ReadCubicCurve(points, index, set, true),
 				"C" => this.ReadCubicCurve(points, index, set, false),
 				"s" => this.ReadSmoothCurve(points, index, set, true),
@@ -782,7 +765,7 @@ namespace Nikki.Utils.EA
 				"V" => this.ReadVerticalCurve(points, index, set, false),
 				"z" => this.ReadEnclosion(set),
 				"Z" => this.ReadEnclosion(set),
-				_ => 1, // what else do we do in case of unknown operation?
+				_ => 1,
 			};
 
 			return result - 1;
@@ -801,6 +784,67 @@ namespace Nikki.Utils.EA
 				default:
 					return null;
 			}
+		}
+
+		private void ReadColorSet(ObservableElement element)
+		{
+			string attrib = null;
+			attrib = this._reader.GetAttribute("fill");
+			if (attrib != null) element.FillColor = attrib;
+			attrib = this._reader.GetAttribute("stroke");
+			if (attrib != null) element.StrokeColor = attrib;
+			attrib = this._reader.GetAttribute("opacity");
+			if (attrib != null) element.FillOpacity = attrib;
+			attrib = this._reader.GetAttribute("stroke-opacity");
+			if (attrib != null) element.StrokeOpacity = attrib;
+			attrib = this._reader.GetAttribute("stroke-width");
+			if (attrib != null) element.Thickness = attrib;
+		}
+
+		private void ReadStyleSet(ObservableElement element)
+		{
+			var style = this._reader.GetAttribute("style");
+			if (style == null) return;
+
+			var attribs = style.Replace(" ", "")
+				.Split(';', StringSplitOptions.RemoveEmptyEntries)
+				.Select(str => str.Split(':'))
+				.Select(str => Tuple.Create(str[0], str[1]))
+				.ToArray();
+
+			foreach (var attrib in attribs)
+			{
+
+				switch (attrib.Item1)
+				{
+
+					case "fill":
+						element.FillColor = attrib.Item2;
+						break;
+
+					case "stroke":
+						element.StrokeColor = attrib.Item2;
+						break;
+
+					case "opacity":
+						element.FillOpacity = attrib.Item2;
+						break;
+
+					case "stroke-opacity":
+						element.StrokeOpacity = attrib.Item2;
+						break;
+
+					case "stroke-width":
+						element.Thickness = attrib.Item2;
+						break;
+
+					default:
+						break;
+
+				}
+
+			}
+
 		}
 
 		private (byte, byte, byte) FromHTMLColor(string color)
