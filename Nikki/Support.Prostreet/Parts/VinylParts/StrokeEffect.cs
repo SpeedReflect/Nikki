@@ -64,5 +64,11 @@ namespace Nikki.Support.Prostreet.Parts.VinylParts
 			bw.Write(this.Thickness);
 			bw.Write(this.Position);
 		}
+
+		/// <summary>
+		/// Returns name of the class a string value.
+		/// </summary>
+		/// <returns>Name of the class a string value.</returns>
+		public override string ToString() => "StrokeEffect";
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Diagnostics;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
@@ -22,6 +23,8 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 		/// <summary>
 		/// Number of <see cref="PathData"/> in this <see cref="PathSet"/>.
 		/// </summary>
+		[ReadOnly(true)]
+		[Category("Main")]
 		public int NumPathDatas
 		{
 			get => this.PathDatas.Count;
@@ -31,6 +34,8 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 		/// <summary>
 		/// Number of <see cref="PathPoint"/> in this <see cref="PathSet"/>.
 		/// </summary>
+		[ReadOnly(true)]
+		[Category("Main")]
 		public int NumPathPoints
 		{
 			get => this.PathPoints.Count;
@@ -40,71 +45,97 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 		/// <summary>
 		/// List of <see cref="PathData"/> in this <see cref="PathSet"/>.
 		/// </summary>
+		[Category("Main")]
 		public List<PathData> PathDatas { get; }
 
 		/// <summary>
 		/// List of <see cref="PathPoint"/> in this <see cref="PathSet"/>.
 		/// </summary>
+		[Category("Main")]
 		public List<PathPoint> PathPoints { get; }
 
 		/// <summary>
 		/// Indicates whether FillEffect exists.
 		/// </summary>
+		[Category("Existence")]
 		public eBoolean FillEffectExists { get; set; }
 
 		/// <summary>
 		/// Indicates whether FillEffect exists.
 		/// </summary>
+		[Category("Existence")]
 		public eBoolean StrokeEffectExists { get; set; }
 
 		/// <summary>
 		/// Indicates whether DropShadowEffect exists.
 		/// </summary>
+		[Category("Existence")]
 		public eBoolean DropShadowEffectExists { get; set; }
 
 		/// <summary>
 		/// Indicates whether InnerGlowEffect exists.
 		/// </summary>
+		[Category("Existence")]
 		public eBoolean InnerGlowEffectExists { get; set; }
 
 		/// <summary>
 		/// Indicates whether InnerShadowEffect exists.
 		/// </summary>
+		[Category("Existence")]
 		public eBoolean InnerShadowEffectExists { get; set; }
 
 		/// <summary>
 		/// Indicates whether GradientEffect exists.
 		/// </summary>
+		[Category("Existence")]
 		public eBoolean GradientEffectExists { get; set; }
 
 		/// <summary>
 		/// <see cref="VinylParts.FillEffect"/> of this <see cref="PathSet"/>.
 		/// </summary>
+		[Category("Effects")]
+		[EditorBrowsable(EditorBrowsableState.Always)]
+		[TypeConverter(typeof(ExpandableObjectConverter))]
 		public FillEffect FillEffect { get; }
 
 		/// <summary>
 		/// <see cref="VinylParts.StrokeEffect"/> of this <see cref="PathSet"/>.
 		/// </summary>
+		[Category("Effects")]
+		[EditorBrowsable(EditorBrowsableState.Always)]
+		[TypeConverter(typeof(ExpandableObjectConverter))]
 		public StrokeEffect StrokeEffect { get; }
 
 		/// <summary>
 		/// <see cref="VinylParts.DropShadowEffect"/> of this <see cref="PathSet"/>.
 		/// </summary>
+		[Category("Effects")]
+		[EditorBrowsable(EditorBrowsableState.Always)]
+		[TypeConverter(typeof(ExpandableObjectConverter))]
 		public DropShadowEffect DropShadowEffect { get; }
 
 		/// <summary>
 		/// <see cref="VinylParts.InnerGlowEffect"/> of this <see cref="PathSet"/>.
 		/// </summary>
+		[Category("Effects")]
+		[EditorBrowsable(EditorBrowsableState.Always)]
+		[TypeConverter(typeof(ExpandableObjectConverter))]
 		public InnerGlowEffect InnerGlowEffect { get; }
 
 		/// <summary>
 		/// <see cref="VinylParts.InnerShadowEffect"/> of this <see cref="PathSet"/>.
 		/// </summary>
+		[Category("Effects")]
+		[EditorBrowsable(EditorBrowsableState.Always)]
+		[TypeConverter(typeof(ExpandableObjectConverter))]
 		public InnerShadowEffect InnerShadowEffect { get; }
 
 		/// <summary>
 		/// <see cref="VinylParts.GradientEffect"/> of this <see cref="PathSet"/>.
 		/// </summary>
+		[Category("Effects")]
+		[EditorBrowsable(EditorBrowsableState.Always)]
+		[TypeConverter(typeof(ExpandableObjectConverter))]
 		public GradientEffect GradientEffect { get; }
 
 		/// <summary>

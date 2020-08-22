@@ -74,5 +74,11 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 			bw.Write(this.X);
 			bw.Write(this.Y);
 		}
+
+		/// <summary>
+		/// Returns name of the class a string value.
+		/// </summary>
+		/// <returns>Name of the class a string value.</returns>
+		public override string ToString() => "PathPoint";
 	}
 }

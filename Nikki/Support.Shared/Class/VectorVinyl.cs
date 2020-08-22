@@ -117,6 +117,13 @@ namespace Nikki.Support.Shared.Class
 		public abstract void ClearPaths();
 
 		/// <summary>
+		/// Swaps two <see cref="PathSet"/> with indexes provided.
+		/// </summary>
+		/// <param name="index1">Index of the first <see cref="PathSet"/> to switch.</param>
+		/// <param name="index2">Index of the second <see cref="PathSet"/> to switch.</param>
+		public abstract void SwitchPaths(int index1, int index2);
+
+		/// <summary>
 		/// Gets data of this <see cref="VectorVinyl"/> as an SVG-formatted string.
 		/// </summary>
 		/// <param name="resolution">Resolution of the SVG image.</param>

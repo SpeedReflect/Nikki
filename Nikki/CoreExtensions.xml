@@ -2191,6 +2191,20 @@
             <param name="array">Array of bytes to convert to string.</param>
             <returns>String from array of bytes.</returns>
         </member>
+        <member name="M:CoreExtensions.Text.RegX.IsLower(System.String)">
+            <summary>
+            Checks whether entire string value consists of lowercase-only characters.
+            </summary>
+            <param name="value">String value to check.</param>
+            <returns>True if all characters in the string are lowercase; false otherwise.</returns>
+        </member>
+        <member name="M:CoreExtensions.Text.RegX.IsUpper(System.String)">
+            <summary>
+            Checks whether entire string value consists of uppercase-only characters.
+            </summary>
+            <param name="value">String value to check.</param>
+            <returns>True if all characters in the string are uppercase; false otherwise.</returns>
+        </member>
         <member name="M:CoreExtensions.Text.RegX.GetSafeHashCode(System.String)">
             <summary>
             Gets HashCode of the string; if string is null, returns String.Empty HashCode.

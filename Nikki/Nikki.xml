@@ -12662,6 +12662,13 @@
             Removes all <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/> from the vinyl.
             </summary>
         </member>
+        <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.SwitchPaths(System.Int32,System.Int32)">
+            <summary>
+            Swaps two <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/> with indexes provided.
+            </summary>
+            <param name="index1">Index of the first <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/> to switch.</param>
+            <param name="index2">Index of the second <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/> to switch.</param>
+        </member>
         <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.ToString">
             <summary>
             Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Carbon.Class.VectorVinyl"/> 
@@ -14854,6 +14861,12 @@
             </summary>
             <param name="other"><see cref="T:Nikki.Reflection.Abstract.SubPart"/> to clone.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.PathSet.ToString">
+            <summary>
+            Returns name of the class a string value.
+            </summary>
+            <returns>Name of the class a string value.</returns>
+        </member>
         <member name="T:Nikki.Support.Carbon.Parts.VinylParts.StrokeEffect">
             <summary>
             A unit <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.StrokeEffect"/> that is used in <see cref="T:Nikki.Support.Carbon.Parts.VinylParts.PathSet"/>.
@@ -14881,6 +14894,12 @@
             Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Parts.VinylParts.StrokeEffect.ToString">
+            <summary>
+            Returns name of the class a string value.
+            </summary>
+            <returns>Name of the class a string value.</returns>
         </member>
         <member name="T:Nikki.Support.MostWanted.Attributes.BoolAttribute">
             <summary>
@@ -23967,6 +23986,13 @@
             Removes all <see cref="T:Nikki.Support.Prostreet.Parts.VinylParts.PathSet"/> from the vinyl.
             </summary>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Class.VectorVinyl.SwitchPaths(System.Int32,System.Int32)">
+            <summary>
+            Swaps two <see cref="T:Nikki.Support.Prostreet.Parts.VinylParts.PathSet"/> with indexes provided.
+            </summary>
+            <param name="index1">Index of the first <see cref="T:Nikki.Support.Prostreet.Parts.VinylParts.PathSet"/> to switch.</param>
+            <param name="index2">Index of the second <see cref="T:Nikki.Support.Prostreet.Parts.VinylParts.PathSet"/> to switch.</param>
+        </member>
         <member name="M:Nikki.Support.Prostreet.Class.VectorVinyl.ToString">
             <summary>
             Returns CollectionName, BinKey and GameSTR of this <see cref="T:Nikki.Support.Prostreet.Class.VectorVinyl"/> 
@@ -25312,6 +25338,12 @@
             </summary>
             <param name="other"><see cref="T:Nikki.Reflection.Abstract.SubPart"/> to clone.</param>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.VinylParts.PathSet.ToString">
+            <summary>
+            Returns name of the class a string value.
+            </summary>
+            <returns>Name of the class a string value.</returns>
+        </member>
         <member name="T:Nikki.Support.Prostreet.Parts.VinylParts.StrokeEffect">
             <summary>
             A unit <see cref="T:Nikki.Support.Prostreet.Parts.VinylParts.StrokeEffect"/> that is used in <see cref="T:Nikki.Support.Prostreet.Parts.VinylParts.PathSet"/>.
@@ -25344,6 +25376,12 @@
             Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.VinylParts.StrokeEffect.ToString">
+            <summary>
+            Returns name of the class a string value.
+            </summary>
+            <returns>Name of the class a string value.</returns>
         </member>
         <member name="T:Nikki.Support.Shared.Class.AcidEffect">
             <summary>
@@ -28031,6 +28069,13 @@
             Removes all <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/> from the vinyl.
             </summary>
         </member>
+        <member name="M:Nikki.Support.Shared.Class.VectorVinyl.SwitchPaths(System.Int32,System.Int32)">
+            <summary>
+            Swaps two <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/> with indexes provided.
+            </summary>
+            <param name="index1">Index of the first <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/> to switch.</param>
+            <param name="index2">Index of the second <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/> to switch.</param>
+        </member>
         <member name="M:Nikki.Support.Shared.Class.VectorVinyl.GetSVGString(System.Int32)">
             <summary>
             Gets data of this <see cref="T:Nikki.Support.Shared.Class.VectorVinyl"/> as an SVG-formatted string.
@@ -29632,6 +29677,12 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.DropShadowEffect.ToString">
+            <summary>
+            Returns name of the class a string value.
+            </summary>
+            <returns>Name of the class a string value.</returns>
+        </member>
         <member name="T:Nikki.Support.Shared.Parts.VinylParts.FillEffect">
             <summary>
             A unit <see cref="T:Nikki.Support.Shared.Parts.VinylParts.FillEffect"/> that is used in <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
@@ -29690,6 +29741,12 @@
             Gets color of this effect as an HTML formatted string.
             </summary>
             <returns>Color as an HTML formatted string.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.FillEffect.ToString">
+            <summary>
+            Returns name of the class a string value.
+            </summary>
+            <returns>Name of the class a string value.</returns>
         </member>
         <member name="T:Nikki.Support.Shared.Parts.VinylParts.GradientEffect">
             <summary>
@@ -29824,6 +29881,12 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.GradientEffect.ToString">
+            <summary>
+            Returns name of the class a string value.
+            </summary>
+            <returns>Name of the class a string value.</returns>
+        </member>
         <member name="T:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect">
             <summary>
             A unit <see cref="T:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect"/> that is used in <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
@@ -29907,6 +29970,12 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.InnerGlowEffect.ToString">
+            <summary>
+            Returns name of the class a string value.
+            </summary>
+            <returns>Name of the class a string value.</returns>
+        </member>
         <member name="T:Nikki.Support.Shared.Parts.VinylParts.InnerShadowEffect">
             <summary>
             A unit <see cref="T:Nikki.Support.Shared.Parts.VinylParts.InnerShadowEffect"/> that is used in <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
@@ -29980,6 +30049,12 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.InnerShadowEffect.ToString">
+            <summary>
+            Returns name of the class a string value.
+            </summary>
+            <returns>Name of the class a string value.</returns>
+        </member>
         <member name="T:Nikki.Support.Shared.Parts.VinylParts.PathData">
             <summary>
             A unit <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathData"/> that is used in <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
@@ -30019,6 +30094,12 @@
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
         </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.PathData.ToString">
+            <summary>
+            Returns name of the class a string value.
+            </summary>
+            <returns>Name of the class a string value.</returns>
+        </member>
         <member name="T:Nikki.Support.Shared.Parts.VinylParts.PathPoint">
             <summary>
             A unit <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathPoint"/> that is used in <see cref="T:Nikki.Support.Shared.Parts.VinylParts.PathSet"/>.
@@ -30057,6 +30138,12 @@
             Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.PathPoint.ToString">
+            <summary>
+            Returns name of the class a string value.
+            </summary>
+            <returns>Name of the class a string value.</returns>
         </member>
         <member name="T:Nikki.Support.Shared.Parts.VinylParts.PathSet">
             <summary>
@@ -30217,6 +30304,12 @@
             Gets color of this effect as an HTML formatted string.
             </summary>
             <returns>Color as an HTML formatted string.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.VinylParts.StrokeEffect.ToString">
+            <summary>
+            Returns name of the class a string value.
+            </summary>
+            <returns>Name of the class a string value.</returns>
         </member>
         <member name="T:Nikki.Support.Underground2.Attributes.BoolAttribute">
             <summary>
@@ -37671,6 +37764,31 @@
             Is a showcase event.
             </summary>
         </member>
+        <member name="T:Nikki.Support.Underground2.Gameplay.WorldChallenge.UnlockType">
+            <summary>
+            Enum of unlock types for <see cref="T:Nikki.Support.Underground2.Gameplay.WorldChallenge"/>.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldChallenge.UnlockType.ReqRegRacesWon">
+            <summary>
+            Requires specific number of regular races won to unlock.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldChallenge.UnlockType.ReqURLRacesWon">
+            <summary>
+            Requires specific number of URL races won to unlock.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldChallenge.UnlockType.ReqOutrunsWon">
+            <summary>
+            Requires specific number of outrun races won to unlock.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldChallenge.UnlockType.ReqSponRacesWon">
+            <summary>
+            Requires specific number of sponsor races won to unlock.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.GameINT">
             <summary>
             Game to which the class belongs to.
@@ -37711,7 +37829,7 @@
             Stage to which this challenge belongs to.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.UseOutrunsAsReqRaces">
+        <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.UnlockMethod">
             <summary>
             True if challenge requires specific number of outruns won in order to unlock; 
             false otherwise.

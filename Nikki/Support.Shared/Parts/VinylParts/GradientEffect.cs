@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Diagnostics;
+using System.ComponentModel;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 
@@ -16,6 +17,7 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 		/// <summary>
 		/// Constant size of one unit class.
 		/// </summary>
+		[Browsable(false)]
 		public int BlockSize => 0x28;
 
 		/// <summary>
@@ -135,12 +137,14 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 		/// <summary>
 		/// Hexadecimal string representation of the color of the effect.
 		/// </summary>
+		[Browsable(false)]
 		public string HexColor1 =>
 			$"0x{this.Color1Red:X2}{this.Color1Green:X2}{this.Color1Blue:X2}{this.Color1Alpha:X2}";
 
 		/// <summary>
 		/// Hexadecimal string representation of the color of the effect.
 		/// </summary>
+		[Browsable(false)]
 		public string HexColor2 =>
 			$"0x{this.Color2Red:X2}{this.Color2Green:X2}{this.Color2Blue:X2}{this.Color2Alpha:X2}";
 
@@ -208,5 +212,11 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 			bw.Write(this.OffsetU);
 			bw.Write(this.OffsetV);
 		}
+
+		/// <summary>
+		/// Returns name of the class a string value.
+		/// </summary>
+		/// <returns>Name of the class a string value.</returns>
+		public override string ToString() => "GradientEffect";
 	}
 }

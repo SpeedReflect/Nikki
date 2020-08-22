@@ -55,5 +55,11 @@ namespace Nikki.Support.Carbon.Parts.VinylParts
 			bw.Write(this.Alpha);
 			bw.Write(this.Thickness);
 		}
+
+		/// <summary>
+		/// Returns name of the class a string value.
+		/// </summary>
+		/// <returns>Name of the class a string value.</returns>
+		public override string ToString() => "StrokeEffect";
 	}
 }

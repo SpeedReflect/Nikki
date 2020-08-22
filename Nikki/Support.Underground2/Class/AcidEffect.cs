@@ -410,7 +410,7 @@ namespace Nikki.Support.Underground2.Class
             this.Flags = reader.ReadUInt32();
             this.NumEmitters = reader.ReadUInt16();
             this.SectionNumber = reader.ReadUInt16();
-            this.LocalWorld.Read(br);
+            this.LocalWorld.Read(reader);
             this.InheritanceKey = reader.ReadNullTermUTF8();
             this.FarClip = reader.ReadSingle();
             this.Intensity = reader.ReadSingle();

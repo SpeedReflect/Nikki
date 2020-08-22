@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Xml;
+using System.Text;
+using System.Collections.Generic;
 using Nikki.Reflection.Enum;
 using Nikki.Support.Shared.Class;
-
-
+using CoreExtensions.Text;
+using System.Diagnostics;
 
 namespace Nikki.Utils.EA
 {
@@ -15,6 +15,7 @@ namespace Nikki.Utils.EA
 	/// </summary>
 	public class SVGReader : IDisposable
 	{
+		[DebuggerDisplay("ID: [{ID}] PointDatas: [{PointDatas.Count}]")]
 		private class ObservableElement
 		{
 			public string ID { get; }
@@ -52,6 +53,7 @@ namespace Nikki.Utils.EA
 			public ObservableElement(string id) { this.ID = id; this.PointDatas = new List<PathPointSet>(); }
 		}
 
+		[DebuggerDisplay("F ({First.X}, {First.Y}) C [{Points.Count}] L ({Last.X}, {Last.Y})")]
 		private class PathPointSet
 		{
 			public List<XYPoint> Points { get; }
@@ -63,6 +65,7 @@ namespace Nikki.Utils.EA
 			public PathPointSet(int capacity) => this.Points = new List<XYPoint>(capacity);
 		}
 
+		[DebuggerDisplay("({X}, {Y})")]
 		private class XYPoint
 		{
 			public float X { get; set; }
@@ -95,10 +98,18 @@ namespace Nikki.Utils.EA
 			}
 		}
 
+		[DebuggerDisplay("Relative: {StartRelative} | Path: {Path}")]
+		private class PathD
+		{
+			public string Path { get; set; }
+			public bool StartRelative { get; set; }
+		}
+
 		private Dictionary<string, ObservableElement> _map;
 		private XmlReader _reader;
-		private ushort _width;
-		private ushort _height;
+		private float _width;
+		private float _height;
+		private Stack<ObservableElement> _groups;
 
 		/// <summary>
 		/// Initializes new instance of <see cref="SVGReader"/> using file path provided.
@@ -116,6 +127,7 @@ namespace Nikki.Utils.EA
 			var settings = new XmlReaderSettings() { DtdProcessing = DtdProcessing.Parse };
 			this._reader = XmlReader.Create(filename, settings);
 			this._map = new Dictionary<string, ObservableElement>();
+			this._groups = new Stack<ObservableElement>();
 		}
 
 		/// <summary>
@@ -155,6 +167,10 @@ namespace Nikki.Utils.EA
 						this.ParseSingleElement();
 						break;
 
+					case XmlNodeType.EndElement:
+						this.ParseIsEndGroup();
+						break;
+
 					default:
 						break;
 
@@ -177,6 +193,7 @@ namespace Nikki.Utils.EA
 			foreach (var element in this._map.Values)
 			{
 
+				if (element.PointDatas.Count == 0) continue;
 				var num = vinyl.NumberOfPaths;
 				vinyl.AddPathSet();
 				var set = vinyl.GetPathSet(num);
@@ -194,10 +211,13 @@ namespace Nikki.Utils.EA
 					foreach (var point in data.Points)
 					{
 
+						var x = point.X * ratioX;
+						var y = point.Y * ratioY;
+
 						set.PathPoints.Add(new Support.Shared.Parts.VinylParts.PathPoint()
 						{
-							X = (ushort)(point.X * ratioX),
-							Y = (ushort)(point.Y * ratioY),
+							X = x > UInt16.MaxValue ? UInt16.MaxValue : (ushort)x,
+							Y = y > UInt16.MaxValue ? UInt16.MaxValue : (ushort)y,
 						});
 
 					}
@@ -215,11 +235,23 @@ namespace Nikki.Utils.EA
 				set.StrokeEffect.Red = stroke.Item1;
 				set.StrokeEffect.Green = stroke.Item2;
 				set.StrokeEffect.Blue = stroke.Item3;
-				set.FillEffectExists = eBoolean.True;
-				set.StrokeEffectExists = eBoolean.True;
-				set.StrokeEffect.Thickness = (float)(element.ThinknessSingle / maxres);
-				set.FillEffect.Alpha = (byte)(element.FillSingleOpacity * 255);
-				set.StrokeEffect.Alpha = (byte)(element.StrokeSingleOpacity * 255);
+
+				if (String.Compare("none", element.FillColor, StringComparison.OrdinalIgnoreCase) != 0)
+				{
+					
+					set.FillEffectExists = eBoolean.True;
+					set.FillEffect.Alpha = (byte)(element.FillSingleOpacity * 255);
+
+				}
+
+				if (String.Compare("none", element.StrokeColor, StringComparison.OrdinalIgnoreCase) != 0)
+				{
+
+					set.StrokeEffectExists = eBoolean.True;
+					set.StrokeEffect.Alpha = (byte)(element.StrokeSingleOpacity * 255);
+					set.StrokeEffect.Thickness = (float)(element.ThinknessSingle / maxres);
+
+				}
 
 			}
 		}
@@ -243,11 +275,35 @@ namespace Nikki.Utils.EA
 				this.ParsePathSet();
 
 			}
+			else if (String.Compare("g", this._reader.Name, StringComparison.OrdinalIgnoreCase) == 0)
+			{
+
+				this.ParseGroupSet();
+
+			}
 			else if (String.Compare("svg", this._reader.Name, StringComparison.OrdinalIgnoreCase) == 0)
 			{
 
-				this._width = UInt16.Parse(this._reader.GetAttribute("width"));
-				this._height = UInt16.Parse(this._reader.GetAttribute("height"));
+				var viewbox = this._reader.GetAttribute("viewBox");
+				if (viewbox == null)
+				{
+
+					throw new Exception("SVG without ViewBox properties are not supported");
+
+				}
+
+				var splits = viewbox.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+				var w_shift = Single.Parse(splits[0]);
+				var h_shift = Single.Parse(splits[1]);
+				this._width = Single.Parse(splits[2]);
+				this._height = Single.Parse(splits[3]);
+				
+				if (w_shift != 0 || h_shift != 0)
+				{
+
+					throw new Exception("SVG Image ViewBox shifts are not supported. Please ensure they are set to 0");
+
+				}
 
 			}
 			else if (String.Compare("use", this._reader.Name, StringComparison.OrdinalIgnoreCase) == 0)
@@ -268,7 +324,26 @@ namespace Nikki.Utils.EA
 		{
 			var id = this._reader.GetAttribute("id");
 			var path = this._reader.GetAttribute("d");
-			if (id == null || path == null) return;
+			if (path == null) return;
+
+			if (id == null)
+			{
+
+				if (this._groups.Count == 0) // if current group stack is empty, means on its own
+				{
+
+					var random = new Random();
+					id = random.Next(0, Int32.MaxValue).ToString("X8");
+
+				}
+				else // else belongs to the last found group, so id is the same
+				{
+
+					id = this._groups.Peek().ID;
+
+				}
+
+			}
 
 			if (!this._map.TryGetValue(id, out var element))
 			{
@@ -278,18 +353,35 @@ namespace Nikki.Utils.EA
 
 			}
 
-			var sets = path.Split(new char[] { 'm', 'M' }, StringSplitOptions.RemoveEmptyEntries);
+			var sets = this.SplitPathInMoves(path);
+			XYPoint lastknown = null;
 
 			foreach (var set in sets)
 			{
 
-
-				var points = this.EnsureDelimWhitespace(set).Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+				var points = this.EnsureDelimWhitespace(set.Path).Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
 				if (points.Length < 2) continue; // if less than 1 point then curve is invalid
 				var list = new PathPointSet(points.Length >> 1);
 
 				// Considering after M/m there should be at least one point
-				list.Points.Add(new XYPoint(points[0], points[1]));
+				if (lastknown != null && set.StartRelative)
+				{
+
+					// If 'm' use last known point to build new one
+					var p = new XYPoint(points[0], points[1]);
+					p.X += lastknown.X; p.Y += lastknown.Y;
+					list.Points.Add(p);
+
+				}
+				else
+				{
+
+					// Else if M, or first path, means absolute coordinate
+					list.Points.Add(new XYPoint(points[0], points[1]));
+
+				}
+
+				Console.WriteLine($"({list.Last.X}, {list.Last.Y})");
 				int index = 2;
 
 				while (index < points.Length)
@@ -299,22 +391,35 @@ namespace Nikki.Utils.EA
 
 					index += obj switch
 					{
-						"C" => this.ReadCubicCurve(points, index, list),
-						"S" => this.ReadSmoothCurve(points, index, list),
-						"Q" => this.ReadQuadraticCurve(points, index, list),
-						"T" => this.ReadTupledCurve(points, index, list),
-						"L" => this.ReadLinearCurve(points, index, list),
-						"H" => this.ReadHorizontalCurve(points, index, list),
-						"V" => this.ReadVerticalCurve(points, index, list),
+						"c" => this.ReadCubicCurve(points, index, list, true),
+						"C" => this.ReadCubicCurve(points, index, list, false),
+						"s" => this.ReadSmoothCurve(points, index, list, true),
+						"S" => this.ReadSmoothCurve(points, index, list, false),
+						"q" => this.ReadQuadraticCurve(points, index, list, true),
+						"Q" => this.ReadQuadraticCurve(points, index, list, false),
+						"t" => this.ReadTupledCurve(points, index, list, true),
+						"T" => this.ReadTupledCurve(points, index, list, false),
+						"l" => this.ReadLinearCurve(points, index, list, true),
+						"L" => this.ReadLinearCurve(points, index, list, false),
+						"h" => this.ReadHorizontalCurve(points, index, list, true),
+						"H" => this.ReadHorizontalCurve(points, index, list, false),
+						"v" => this.ReadVerticalCurve(points, index, list, true),
+						"V" => this.ReadVerticalCurve(points, index, list, false),
+						"z" => this.ReadEnclosion(list),
 						"Z" => this.ReadEnclosion(list),
-						_ => this.ReadLinearCurve(points, index, list),
+						_ => this.ReadRepetitiveCurve(points, index, list),
 					};
 
-					list.LastCurveType = obj;
+					obj = this.ReturnCurveType(obj);
+					if (obj != null) list.LastCurveType = obj;
 
 				}
 
 				element.PointDatas.Add(list);
+
+				lastknown = list.LastCurveType == "z" || list.LastCurveType == "Z"
+					? list.Points[^3]
+					: list.Last;
 
 			}
 
@@ -338,6 +443,41 @@ namespace Nikki.Utils.EA
 			element.Thickness = this._reader.GetAttribute("stroke-width");
 		}
 
+		private void ParseGroupSet()
+		{
+			var id = this._reader.GetAttribute("id");
+			if (id == null)
+			{
+
+				// Create random id
+				var random = new Random();
+				id = random.Next(0, Int32.MaxValue).ToString("X8");
+
+			}
+
+			// If no group with the same id is to be found
+			if (!this._map.TryGetValue(id, out var element))
+			{
+
+				element = new ObservableElement(id);
+				this._groups.Push(element);
+				this._map.Add(id, element);
+
+			}
+			else // just skip it, having same IDs is ???
+			{
+
+				return;
+
+			}
+
+			element.FillColor = this._reader.GetAttribute("fill");
+			element.StrokeColor = this._reader.GetAttribute("stroke");
+			element.FillOpacity = this._reader.GetAttribute("opacity");
+			element.StrokeOpacity = this._reader.GetAttribute("stroke-opacity");
+			element.Thickness = this._reader.GetAttribute("stroke-width");
+		}
+
 		private void ParseImageSet()
 		{
 			var data = this._reader.GetAttribute("xlink:href");
@@ -350,6 +490,47 @@ namespace Nikki.Utils.EA
 			}
 		}
 
+		private void ParseIsEndGroup()
+		{
+			if (String.Compare("g", this._reader.Name, StringComparison.OrdinalIgnoreCase) == 0)
+			{
+
+				if (this._groups.Count != 0) this._groups.Pop();
+
+			}
+		}
+
+		private PathD[] SplitPathInMoves(string str)
+		{
+			var splits = str.Trim().Split(new char[] { 'm', 'M' }, StringSplitOptions.RemoveEmptyEntries);
+			var paths = new PathD[splits.Length];
+			
+			for (int i = 0, k = 0; i < str.Length; ++i)
+			{
+
+				switch (str[i])
+				{
+
+					case 'M':
+						var pathM = new PathD() { Path = splits[k], StartRelative = false };
+						paths[k++] = pathM;
+						continue;
+
+					case 'm':
+						var pathm = new PathD() { Path = splits[k], StartRelative = true };
+						paths[k++] = pathm;
+						continue;
+
+					default:
+						continue;
+
+				}
+
+			}
+
+			return paths;
+		}
+
 		private string EnsureDelimWhitespace(string str)
 		{
 			var builder = new StringBuilder(str.Length + 100);
@@ -358,22 +539,22 @@ namespace Nikki.Utils.EA
 			{
 				string n = c switch
 				{
-					'c' => " C ",
-					'C' => " C ",
-					's' => " S ",
-					'S' => " S ",
-					'h' => " H ",
-					'H' => " H ",
-					'v' => " V ",
-					'V' => " V ",
-					'l' => " L ",
-					'L' => " L ",
-					'q' => " Q ",
-					'Q' => " Q ",
-					't' => " T ",
-					'T' => " T ",
-					'z' => " Z ",
-					'Z' => " Z ",
+					'c' => " c ", // cubic relative
+					'C' => " C ", // cubic absolute
+					's' => " s ", // smooth relative
+					'S' => " S ", // smooth absolute
+					'h' => " h ", // horizontal relative
+					'H' => " H ", // horizontal absolute
+					'v' => " v ", // vertical relative
+					'V' => " V ", // vertical absolute
+					'l' => " l ", // linear relative
+					'L' => " L ", // linear absolute
+					'q' => " q ", // quadratic relative
+					'Q' => " Q ", // quadratic absolute
+					't' => " t ", // tupled relative
+					'T' => " T ", // tupled absolute
+					'z' => " z ", // enclosion
+					'Z' => " Z ", // enclosion
 					_ => c.ToString(),
 				};
 
@@ -384,7 +565,7 @@ namespace Nikki.Utils.EA
 			return builder.ToString();
 		}
 
-		private int ReadCubicCurve(string[] points, int index, PathPointSet set)
+		private int ReadCubicCurve(string[] points, int index, PathPointSet set, bool relative)
 		{
 			if (index + 6 > points.Length)
 			{
@@ -393,13 +574,25 @@ namespace Nikki.Utils.EA
 
 			}
 
-			set.Points.Add(new XYPoint(points[index], points[index + 1]));
-			set.Points.Add(new XYPoint(points[index + 2], points[index + 3]));
-			set.Points.Add(new XYPoint(points[index + 4], points[index + 5]));
+			var ps = new XYPoint[3];
+			ps[0] = new XYPoint(points[index], points[index + 1]);
+			ps[1] = new XYPoint(points[index + 2], points[index + 3]);
+			ps[2] = new XYPoint(points[index + 4], points[index + 5]);
+
+			if (relative)
+			{
+
+				ps[0].X += set.Last.X; ps[0].Y += set.Last.Y;
+				ps[1].X += set.Last.X; ps[1].Y += set.Last.Y;
+				ps[2].X += set.Last.X; ps[2].Y += set.Last.Y;
+
+			}
+
+			set.Points.AddRange(ps);
 			return 6;
 		}
 
-		private int ReadSmoothCurve(string[] points, int index, PathPointSet set)
+		private int ReadSmoothCurve(string[] points, int index, PathPointSet set, bool relative)
 		{
 			if (index + 4 > points.Length)
 			{
@@ -412,21 +605,32 @@ namespace Nikki.Utils.EA
 			{
 
 				var prev = set.Points[^2];
-				set.Points.Add(new XYPoint(set.Last.X * 2 - prev.X, set.Last.Y * 2 - prev.Y));
-				set.Points.Add(new XYPoint(points[index], points[index + 1]));
-				set.Points.Add(new XYPoint(points[index + 2], points[index + 3]));
+				var ps = new XYPoint[3];
+				ps[0] = new XYPoint(set.Last.X * 2 - prev.X, set.Last.Y * 2 - prev.Y);
+				ps[1] = new XYPoint(points[index], points[index + 1]);
+				ps[2] = new XYPoint(points[index + 2], points[index + 3]);
+				
+				if (relative)
+				{
+
+					ps[1].X += set.Last.X; ps[1].Y += set.Last.Y;
+					ps[2].X += set.Last.X; ps[2].Y += set.Last.Y;
+
+				}
+
+				set.Points.AddRange(ps);
 				return 4;
 
 			}
 			else
 			{
 
-				return this.ReadQuadraticCurve(points, index, set);
+				return this.ReadQuadraticCurve(points, index, set, relative);
 
 			}
 		}
 
-		private int ReadQuadraticCurve(string[] points, int index, PathPointSet set)
+		private int ReadQuadraticCurve(string[] points, int index, PathPointSet set, bool relative)
 		{
 			if (index + 4 > points.Length)
 			{
@@ -435,20 +639,30 @@ namespace Nikki.Utils.EA
 
 			}
 
+			var ps = new XYPoint[3];
 			var mid = new XYPoint(points[index], points[index + 1]);
-			var end = new XYPoint(points[index + 2], points[index + 3]);
+			ps[2] = new XYPoint(points[index + 2], points[index + 3]);
+
+			if (relative)
+			{
+
+				mid.X += set.Last.X; mid.Y += set.Last.Y;
+				ps[2].X += set.Last.X; ps[2].Y += set.Last.Y;
+
+			}
+
 			var c1x = set.Last.X + (mid.X - set.Last.X) * 2 / 3;
 			var c1y = set.Last.Y + (mid.Y - set.Last.Y) * 2 / 3;
-			var c2x = end.X + (mid.X - end.X) * 2 / 3;
-			var c2y = end.Y + (mid.X - end.Y) * 2 / 3;
+			var c2x = ps[2].X + (mid.X - ps[2].X) * 2 / 3;
+			var c2y = ps[2].Y + (mid.X - ps[2].Y) * 2 / 3;
 
-			set.Points.Add(new XYPoint(c1x, c1y));
-			set.Points.Add(new XYPoint(c2x, c2y));
-			set.Points.Add(end);
+			ps[0] = new XYPoint(c1x, c1y);
+			ps[1] = new XYPoint(c2x, c2y);		
+			set.Points.AddRange(ps);
 			return 4;
 		}
 
-		private int ReadTupledCurve(string[] points, int index, PathPointSet set)
+		private int ReadTupledCurve(string[] points, int index, PathPointSet set, bool relative)
 		{
 			if (index + 2 > points.Length)
 			{
@@ -460,27 +674,31 @@ namespace Nikki.Utils.EA
 			if (set.LastCurveType == "Q" || set.LastCurveType == "T")
 			{
 
+				var ps = new XYPoint[3];
 				var slope1 = set.Points[^3];
 				var slope2 = set.Points[^2];
 				var c1x = set.Last.X * 2 - slope2.X;
 				var c1y = set.Last.Y * 2 - slope2.Y;
 				var c2x = set.Last.X * 2 - slope1.X;
 				var c2y = set.Last.Y * 2 - slope1.Y;
-				set.Points.Add(new XYPoint(c1x, c1y));
-				set.Points.Add(new XYPoint(c2x, c2y));
-				set.Points.Add(new XYPoint(points[index], points[index + 1]));
+				ps[0] = new XYPoint(c1x, c1y);
+				ps[1] = new XYPoint(c2x, c2y);
+				ps[2] = new XYPoint(points[index], points[index + 1]);
+
+				if (relative) { ps[2].X += set.Last.X; ps[2].Y += set.Last.Y; }
+				set.Points.AddRange(ps);
 				return 2;
 
 			}
 			else
 			{
 
-				return this.ReadLinearCurve(points, index, set);
+				return this.ReadLinearCurve(points, index, set, relative);
 
 			}
 		}
 
-		private int ReadLinearCurve(string[] points, int index, PathPointSet set)
+		private int ReadLinearCurve(string[] points, int index, PathPointSet set, bool relative)
 		{
 			if (index + 2 > points.Length)
 			{
@@ -489,13 +707,16 @@ namespace Nikki.Utils.EA
 
 			}
 
+			var p = new XYPoint(points[index], points[index + 1]);
+			if (relative) { p.X += set.Last.X; p.Y += set.Last.Y; }
+
 			set.Points.Add(new XYPoint(set.Last));
-			set.Points.Add(new XYPoint(points[index], points[index + 1]));
+			set.Points.Add(p);
 			set.Points.Add(new XYPoint(set.Last));
 			return 2;
 		}
 
-		private int ReadHorizontalCurve(string[] points, int index, PathPointSet set)
+		private int ReadHorizontalCurve(string[] points, int index, PathPointSet set, bool relative)
 		{
 			if (index + 1 > points.Length)
 			{
@@ -504,13 +725,16 @@ namespace Nikki.Utils.EA
 
 			}
 
+			var p = new XYPoint(points[index], set.Last.Y);
+			if (relative) p.X += set.Last.X;
+
 			set.Points.Add(new XYPoint(set.Last));
-			set.Points.Add(new XYPoint(points[index], set.Last.Y));
+			set.Points.Add(p);
 			set.Points.Add(new XYPoint(set.Last));
 			return 1;
 		}
 
-		private int ReadVerticalCurve(string[] points, int index, PathPointSet set)
+		private int ReadVerticalCurve(string[] points, int index, PathPointSet set, bool relative)
 		{
 			if (index + 1 > points.Length)
 			{
@@ -519,8 +743,11 @@ namespace Nikki.Utils.EA
 
 			}
 
+			var p = new XYPoint(set.Last.X, points[index]);
+			if (relative) p.Y += set.Last.Y;
+
 			set.Points.Add(new XYPoint(set.Last));
-			set.Points.Add(new XYPoint(set.Last.X, points[index]));
+			set.Points.Add(p);
 			set.Points.Add(new XYPoint(set.Last));
 			return 1;
 		}
@@ -531,6 +758,49 @@ namespace Nikki.Utils.EA
 			set.Points.Add(new XYPoint(set.First));
 			set.Points.Add(new XYPoint(set.First));
 			return 0;
+		}
+
+		private int ReadRepetitiveCurve(string[] points, int index, PathPointSet set)
+		{
+			--index;
+
+			var result = set.LastCurveType switch
+			{
+				"c" => this.ReadCubicCurve(points, index, set, true),
+				"C" => this.ReadCubicCurve(points, index, set, false),
+				"s" => this.ReadSmoothCurve(points, index, set, true),
+				"S" => this.ReadSmoothCurve(points, index, set, false),
+				"q" => this.ReadQuadraticCurve(points, index, set, true),
+				"Q" => this.ReadQuadraticCurve(points, index, set, false),
+				"t" => this.ReadTupledCurve(points, index, set, true),
+				"T" => this.ReadTupledCurve(points, index, set, false),
+				"l" => this.ReadLinearCurve(points, index, set, true),
+				"L" => this.ReadLinearCurve(points, index, set, false),
+				"h" => this.ReadHorizontalCurve(points, index, set, true),
+				"H" => this.ReadHorizontalCurve(points, index, set, false),
+				"v" => this.ReadVerticalCurve(points, index, set, true),
+				"V" => this.ReadVerticalCurve(points, index, set, false),
+				"z" => this.ReadEnclosion(set),
+				"Z" => this.ReadEnclosion(set),
+				_ => 1, // what else do we do in case of unknown operation?
+			};
+
+			return result - 1;
+		}
+
+		private string ReturnCurveType(string str)
+		{
+			switch (str)
+			{
+				case "c": case "C": case "s": case "S":
+				case "q": case "Q": case "t": case "T":
+				case "l": case "L": case "z": case "Z":
+				case "h": case "H": case "v": case "V":
+					return str;
+
+				default:
+					return null;
+			}
 		}
 
 		private (byte, byte, byte) FromHTMLColor(string color)
@@ -544,9 +814,9 @@ namespace Nikki.Utils.EA
 			else
 			{
 
-				var red = Convert.ToByte(color.Substring(1, 2));
-				var green = Convert.ToByte(color.Substring(3, 2));
-				var blue = Convert.ToByte(color.Substring(5, 2));
+				var red = Convert.ToByte(color.Substring(1, 2), 16);
+				var green = Convert.ToByte(color.Substring(3, 2), 16);
+				var blue = Convert.ToByte(color.Substring(5, 2), 16);
 				return (red, green, blue);
 
 			}

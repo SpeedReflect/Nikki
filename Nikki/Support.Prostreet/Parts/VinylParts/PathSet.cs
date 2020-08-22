@@ -65,5 +65,11 @@ namespace Nikki.Support.Prostreet.Parts.VinylParts
 
 			}
 		}
+
+		/// <summary>
+		/// Returns name of the class a string value.
+		/// </summary>
+		/// <returns>Name of the class a string value.</returns>
+		public override string ToString() => "PathSet";
 	}
 }

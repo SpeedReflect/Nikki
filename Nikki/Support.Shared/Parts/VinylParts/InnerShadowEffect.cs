@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Diagnostics;
+using System.ComponentModel;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 
@@ -16,6 +17,7 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 		/// <summary>
 		/// Constant size of one unit class.
 		/// </summary>
+		[Browsable(false)]
 		public int BlockSize => 0x14;
 
 		/// <summary>
@@ -69,6 +71,7 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 		/// <summary>
 		/// Hexadecimal string representation of the color of the effect.
 		/// </summary>
+		[Browsable(false)]
 		public string HexColor => $"0x{this.Red:X2}{this.Green:X2}{this.Blue:X2}{this.Alpha:X2}";
 
 		/// <summary>
@@ -113,5 +116,11 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 			bw.Write(this.Size);
 			bw.Write(this.Choke);
 		}
+
+		/// <summary>
+		/// Returns name of the class a string value.
+		/// </summary>
+		/// <returns>Name of the class a string value.</returns>
+		public override string ToString() => "InnerShadowEffect";
 	}
 }

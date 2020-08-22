@@ -74,5 +74,11 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 			bw.Write(this.StartIndex);
 			bw.Write(this.NumCurves);
 		}
+
+		/// <summary>
+		/// Returns name of the class a string value.
+		/// </summary>
+		/// <returns>Name of the class a string value.</returns>
+		public override string ToString() => "PathData";
 	}
 }

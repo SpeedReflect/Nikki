@@ -303,6 +303,21 @@ namespace Nikki.Support.Prostreet.Class
 		public override void ClearPaths() => this._pathsets.Clear();
 
 		/// <summary>
+		/// Swaps two <see cref="PathSet"/> with indexes provided.
+		/// </summary>
+		/// <param name="index1">Index of the first <see cref="PathSet"/> to switch.</param>
+		/// <param name="index2">Index of the second <see cref="PathSet"/> to switch.</param>
+		public override void SwitchPaths(int index1, int index2)
+		{
+			if (index1 < 0 || index1 >= this.NumberOfPaths) return;
+			else if (index2 < 0 || index2 >= this.NumberOfPaths) return;
+
+			var temp = this._pathsets[index1];
+			this._pathsets[index1] = this._pathsets[index2];
+			this._pathsets[index2] = temp;
+		}
+
+		/// <summary>
 		/// Returns CollectionName, BinKey and GameSTR of this <see cref="VectorVinyl"/> 
 		/// as a string value.
 		/// </summary>

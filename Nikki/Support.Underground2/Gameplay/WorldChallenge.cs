@@ -3,7 +3,6 @@ using System.IO;
 using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
-using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
@@ -55,6 +54,32 @@ namespace Nikki.Support.Underground2.Gameplay
 			/// Is a showcase event.
 			/// </summary>
 			Showcase = 4,
+		}
+
+		/// <summary>
+		/// Enum of unlock types for <see cref="WorldChallenge"/>.
+		/// </summary>
+		public enum UnlockType : byte
+		{
+			/// <summary>
+			/// Requires specific number of regular races won to unlock.
+			/// </summary>
+			ReqRegRacesWon = 0,
+
+			/// <summary>
+			/// Requires specific number of URL races won to unlock.
+			/// </summary>
+			ReqURLRacesWon = 1,
+
+			/// <summary>
+			/// Requires specific number of outrun races won to unlock.
+			/// </summary>
+			ReqOutrunsWon = 2,
+
+			/// <summary>
+			/// Requires specific number of sponsor races won to unlock.
+			/// </summary>
+			ReqSponRacesWon = 3,
 		}
 
 		#endregion
@@ -149,7 +174,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
-		public eBoolean UseOutrunsAsReqRaces { get; set; }
+		public UnlockType UnlockMethod { get; set; }
 
 		/// <summary>
 		/// Required races won to unlock this <see cref="WorldChallenge"/>.
@@ -275,7 +300,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			// All settings
 			bw.Write(this.BelongsToStage);
 			bw.Write(this._padding0);
-			bw.Write((byte)((byte)this.UseOutrunsAsReqRaces * 2));
+			bw.WriteEnum(this.UnlockMethod);
 			bw.Write(this.RequiredRacesWon);
 			bw.Write(this.UnlockableSMS.BinHash());
 			bw.Write(this.Destination.BinHash());
@@ -308,7 +333,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			// Stage and Unlock settings
 			this.BelongsToStage = br.ReadByte();
 			this._padding0 = br.ReadByte();
-			this.UseOutrunsAsReqRaces = (br.ReadByte() == 2) ? eBoolean.True : eBoolean.False;
+			this.UnlockMethod = br.ReadEnum<UnlockType>();
 			this.RequiredRacesWon = br.ReadByte();
 
 			// Hashes
@@ -362,7 +387,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.WriteNullTermUTF8(this.WorldChallengeTrigger);
 			bw.Write(this.BelongsToStage);
 			bw.Write(this._padding0);
-			bw.WriteEnum(this.UseOutrunsAsReqRaces);
+			bw.WriteEnum(this.UnlockMethod);
 			bw.Write(this.RequiredRacesWon);
 			bw.WriteNullTermUTF8(this.UnlockableSMS);
 			bw.WriteNullTermUTF8(this.Destination);
@@ -383,7 +408,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.WorldChallengeTrigger = br.ReadNullTermUTF8();
 			this.BelongsToStage = br.ReadByte();
 			this._padding0 = br.ReadByte();
-			this.UseOutrunsAsReqRaces = br.ReadEnum<eBoolean>();
+			this.UnlockMethod = br.ReadEnum<UnlockType>();
 			this.RequiredRacesWon = br.ReadByte();
 			this.UnlockableSMS = br.ReadNullTermUTF8();
 			this.Destination = br.ReadNullTermUTF8();
