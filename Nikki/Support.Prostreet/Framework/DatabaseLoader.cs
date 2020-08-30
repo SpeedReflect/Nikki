@@ -32,6 +32,7 @@ namespace Nikki.Support.Prostreet.Framework
 		private Block suninfos;
 		private Block tpkblocks;
 		private Block tracks;
+		private Block vectorvinyls;
 
 		public DatabaseLoader(Options options, Datamap db)
 		{
@@ -48,6 +49,7 @@ namespace Nikki.Support.Prostreet.Framework
 			this.fngroups = new Block(BinBlockID.FEngFiles);
 			this.strblocks = new Block(BinBlockID.STRBlocks);
 			this.slottypes = new Block(BinBlockID.SlotTypes);
+			this.vectorvinyls = new Block(BinBlockID.VinylSystem);
 			this.caranimations = new Block(BinBlockID.CarInfoAnimHookup);
 		}
 
@@ -124,6 +126,7 @@ namespace Nikki.Support.Prostreet.Framework
 				this._db.FNGroups.Disassemble(br, this.fngroups);
 				this._db.SlotTypes.Disassemble(br, this.slottypes);
 				this._db.SlotOverrides.Disassemble(br, this.slottypes);
+				this._db.VectorVinyls.Disassemble(br, this.vectorvinyls);
 				this.ProcessCarAnimations(br);
 
 			}
@@ -209,6 +212,10 @@ namespace Nikki.Support.Prostreet.Framework
 
 					case BinBlockID.SlotTypes:
 						this.slottypes.Offsets.Add(off);
+						goto default;
+
+					case BinBlockID.VinylSystem:
+						this.vectorvinyls.Offsets.Add(off);
 						goto default;
 
 					case BinBlockID.CarInfoAnimHookup:

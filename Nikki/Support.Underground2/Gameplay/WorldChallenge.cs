@@ -23,9 +23,6 @@ namespace Nikki.Support.Underground2.Gameplay
 
 		private string _collection_name;
 
-		[MemoryCastable()]
-		private byte _padding0;
-
 		#endregion
 
 		#region Enums
@@ -80,6 +77,11 @@ namespace Nikki.Support.Underground2.Gameplay
 			/// Requires specific number of sponsor races won to unlock.
 			/// </summary>
 			ReqSponRacesWon = 3,
+
+			/// <summary>
+			/// Requires specific number of world challenges won to unlock.
+			/// </summary>
+			ReqWorldChalWon = 4,
 		}
 
 		#endregion
@@ -165,7 +167,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Primary")]
-		public byte BelongsToStage { get; set; }
+		public ushort BelongsToStage { get; set; }
 
 		/// <summary>
 		/// True if challenge requires specific number of outruns won in order to unlock; 
@@ -299,7 +301,6 @@ namespace Nikki.Support.Underground2.Gameplay
 
 			// All settings
 			bw.Write(this.BelongsToStage);
-			bw.Write(this._padding0);
 			bw.WriteEnum(this.UnlockMethod);
 			bw.Write(this.RequiredRacesWon);
 			bw.Write(this.UnlockableSMS.BinHash());
@@ -331,8 +332,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.WorldChallengeTrigger = strr.ReadNullTermUTF8();
 
 			// Stage and Unlock settings
-			this.BelongsToStage = br.ReadByte();
-			this._padding0 = br.ReadByte();
+			this.BelongsToStage = br.ReadUInt16();
 			this.UnlockMethod = br.ReadEnum<UnlockType>();
 			this.RequiredRacesWon = br.ReadByte();
 
@@ -386,7 +386,6 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.WriteNullTermUTF8(this._collection_name);
 			bw.WriteNullTermUTF8(this.WorldChallengeTrigger);
 			bw.Write(this.BelongsToStage);
-			bw.Write(this._padding0);
 			bw.WriteEnum(this.UnlockMethod);
 			bw.Write(this.RequiredRacesWon);
 			bw.WriteNullTermUTF8(this.UnlockableSMS);
@@ -406,8 +405,7 @@ namespace Nikki.Support.Underground2.Gameplay
 		{
 			this._collection_name = br.ReadNullTermUTF8();
 			this.WorldChallengeTrigger = br.ReadNullTermUTF8();
-			this.BelongsToStage = br.ReadByte();
-			this._padding0 = br.ReadByte();
+			this.BelongsToStage = br.ReadUInt16();
 			this.UnlockMethod = br.ReadEnum<UnlockType>();
 			this.RequiredRacesWon = br.ReadByte();
 			this.UnlockableSMS = br.ReadNullTermUTF8();

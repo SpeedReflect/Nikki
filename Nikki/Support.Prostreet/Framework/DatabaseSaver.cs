@@ -70,6 +70,7 @@ namespace Nikki.Support.Prostreet.Framework
 				this._db.SunInfos.Assemble(bw, this._options.Watermark);
 				this._db.Collisions.Assemble(bw, this._options.Watermark);
 				this._db.FNGroups.Assemble(bw, this._options.Watermark);
+				this._db.VectorVinyls.Assemble(bw, this._options.Watermark);
 
 			}
 			catch (Exception e)
@@ -123,6 +124,7 @@ namespace Nikki.Support.Prostreet.Framework
 				this._db.SunInfos.Assemble(bw, this._options.Watermark);
 				this._db.Collisions.Assemble(bw, this._options.Watermark);
 				this._db.FNGroups.Assemble(bw, this._options.Watermark);
+				this._db.VectorVinyls.Assemble(bw, this._options.Watermark);
 				this.WriteBlockOffsets(bw, br);
 
 			}
@@ -171,6 +173,7 @@ namespace Nikki.Support.Prostreet.Framework
 					case BinBlockID.DBCarBounds:
 					case BinBlockID.FNGCompress:
 					case BinBlockID.TPKSettings:
+					case BinBlockID.VinylSystem:
 					case BinBlockID.CarTypeInfos:
 					case BinBlockID.CarInfoAnimHideup:
 					case BinBlockID.CarInfoAnimHookup:

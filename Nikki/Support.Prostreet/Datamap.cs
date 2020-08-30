@@ -42,6 +42,7 @@ namespace Nikki.Support.Prostreet
 			this.Managers.Add(new SunInfoManager(this));
 			this.Managers.Add(new TPKBlockManager(this));
 			this.Managers.Add(new TrackManager(this));
+			this.Managers.Add(new VectorVinylManager(this));
 		}
 
 		/// <summary>
@@ -173,6 +174,18 @@ namespace Nikki.Support.Prostreet
 			{
 				var manager = this.GetManager(typeof(TrackManager));
 				return manager == null ? null : manager as TrackManager;
+			}
+		}
+
+		/// <summary>
+		/// <see cref="Manager{T}"/> that manages <see cref="VectorVinyl"/>.
+		/// </summary>
+		public VectorVinylManager VectorVinyls
+		{
+			get
+			{
+				var manager = this.GetManager(typeof(VectorVinylManager));
+				return manager == null ? null : manager as VectorVinylManager;
 			}
 		}
 

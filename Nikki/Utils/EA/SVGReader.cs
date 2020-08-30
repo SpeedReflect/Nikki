@@ -373,7 +373,6 @@ namespace Nikki.Utils.EA
 					var p = new XYPoint(points[0], points[1]);
 					p.X += lastknown.X; p.Y += lastknown.Y;
 					list.Points.Add(p);
-					list.LastCurveType = "m";
 
 				}
 				else
@@ -381,10 +380,10 @@ namespace Nikki.Utils.EA
 
 					// Else if M, or first path, means absolute coordinate
 					list.Points.Add(new XYPoint(points[0], points[1]));
-					list.LastCurveType = "M";
 
 				}
 
+				list.LastCurveType = set.StartRelative ? "m" : "M";
 				int index = 2;
 
 				while (index < points.Length)

@@ -26,9 +26,6 @@ namespace Nikki.Support.Underground2.Gameplay
 		private string _collection_name;
 
 		[MemoryCastable()]
-		private byte _padding0 = 0;
-
-		[MemoryCastable()]
 		private byte _padding1 = 0;
 
 		[MemoryCastable()]
@@ -226,6 +223,14 @@ namespace Nikki.Support.Underground2.Gameplay
 		[MemoryCastable()]
 		[Category("Secondary")]
 		public eBoolean IsSUVRace { get; set; }
+
+		/// <summary>
+		/// Unused true-false value.
+		/// </summary>
+		[AccessModifiable()]
+		[MemoryCastable()]
+		[Category("Secondary")]
+		public eBoolean UnusedValue { get; set; }
 
 		/// <summary>
 		/// Event type.
@@ -582,7 +587,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.Write(this.BinKey);
 			bw.WriteEnum(this.UnlockMethod);
 			bw.WriteEnum(this.IsSUVRace);
-			bw.Write(this._padding0);
+			bw.WriteEnum(this.UnusedValue);
 			bw.WriteEnum(this.EventBehavior);
 
 			switch (this.UnlockMethod)
@@ -698,7 +703,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			br.BaseStream.Position += 4;
 			this.UnlockMethod = br.ReadEnum<UnlockCondition>();
 			this.IsSUVRace = br.ReadEnum<eBoolean>();
-			this._padding0 = br.ReadByte();
+			this.UnusedValue = br.ReadEnum<eBoolean>();
 			this.EventBehavior = br.ReadEnum<EventBehaviorType>();
 
 			// Unlock conditions
@@ -863,7 +868,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			bw.WriteNullTermUTF8(this.EventTrigger);
 			bw.WriteEnum(this.UnlockMethod);
 			bw.WriteEnum(this.IsSUVRace);
-			bw.Write(this._padding0);
+			bw.WriteEnum(this.UnusedValue);
 			bw.WriteEnum(this.EventBehavior);
 
 			bw.WriteNullTermUTF8(this.ReqSpecRaceWon);
@@ -915,7 +920,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.EventTrigger = br.ReadNullTermUTF8();
 			this.UnlockMethod = br.ReadEnum<UnlockCondition>();
 			this.IsSUVRace = br.ReadEnum<eBoolean>();
-			this._padding0 = br.ReadByte();
+			this.UnusedValue = br.ReadEnum<eBoolean>();
 			this.EventBehavior = br.ReadEnum<EventBehaviorType>();
 
 			this.ReqSpecRaceWon = br.ReadNullTermUTF8();

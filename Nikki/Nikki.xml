@@ -24087,6 +24087,11 @@
             <see cref="T:Nikki.Core.Manager`1"/> that manages <see cref="T:Nikki.Support.Prostreet.Class.Track"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Prostreet.Datamap.VectorVinyls">
+            <summary>
+            <see cref="T:Nikki.Core.Manager`1"/> that manages <see cref="T:Nikki.Support.Prostreet.Class.VectorVinyl"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Prostreet.Datamap.Load(Nikki.Core.Options)">
             <summary>
             Loads all data in the database using options passed.
@@ -35826,6 +35831,11 @@
             True if the race is an SUV race; false otherwise.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.UnusedValue">
+            <summary>
+            Unused true-false value.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Underground2.Gameplay.GCareerRace.EventBehavior">
             <summary>
             Event type.
@@ -37787,6 +37797,11 @@
         <member name="F:Nikki.Support.Underground2.Gameplay.WorldChallenge.UnlockType.ReqSponRacesWon">
             <summary>
             Requires specific number of sponsor races won to unlock.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground2.Gameplay.WorldChallenge.UnlockType.ReqWorldChalWon">
+            <summary>
+            Requires specific number of world challenges won to unlock.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Gameplay.WorldChallenge.GameINT">
