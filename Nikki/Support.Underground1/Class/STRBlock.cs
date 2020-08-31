@@ -1,15 +1,18 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection;
-using Nikki.Reflection.ID;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Shared.Parts.STRParts;
+using Nikki.Support.Underground1.Framework;
 using CoreExtensions.IO;
 using CoreExtensions.Text;
+using CoreExtensions.Conversions;
 
 
 
@@ -24,7 +27,7 @@ namespace Nikki.Support.Underground1.Class
 
 		private string _collection_name;
 		private byte[] _unk_data;
-		private List<StringRecord> _stringinfo = new List<StringRecord>();
+		private List<StringRecord> _stringinfo;
 
 		/// <summary>
 		/// Maximum length of the CollectionName.
@@ -48,43 +51,55 @@ namespace Nikki.Support.Underground1.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override GameINT GameINT => GameINT.Underground1;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override string GameSTR => GameINT.Underground1.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// Manager to which the class belongs to.
 		/// </summary>
-		public Database.Underground1 Database { get; set; }
+		[Browsable(false)]
+		public STRBlockManager Manager { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
 			set
 			{
-				if (String.IsNullOrWhiteSpace(value))
-					throw new ArgumentNullException("This value cannot be left empty.");
-				if (value.Contains(" "))
-					throw new Exception("CollectionName cannot contain whitespace.");
-				if (value.Length > MaxCNameLength)
-					throw new ArgumentLengthException(MaxCNameLength);
-				if (this.Database.STRBlocks.FindCollection(value) != null)
-					throw new CollectionExistenceException(value);
+				this.Manager?.CreationCheck(value);
 				this._collection_name = value;
 			}
 		}
 
 		/// <summary>
+		/// Binary memory hash of the collection name.
+		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
+		public override uint BinKey => this._collection_name.BinHash();
+
+		/// <summary>
+		/// Vault memory hash of the collection name.
+		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
+		public override uint VltKey => this._collection_name.VltHash();
+
+		/// <summary>
 		/// Length of the string information array.
 		/// </summary>
-		public override int InfoLength => this._stringinfo.Count;
+		[Category("Primary")]
+		public override int StringRecordCount => this._stringinfo.Count;
 
 		#endregion
 
@@ -93,16 +108,16 @@ namespace Nikki.Support.Underground1.Class
 		/// <summary>
 		/// Initializes new instance of <see cref="STRBlock"/>.
 		/// </summary>
-		public STRBlock() { }
+		public STRBlock() => this._stringinfo = new List<StringRecord>();
 
 		/// <summary>
 		/// Initializes new instance of <see cref="STRBlock"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Underground1"/> to which this instance belongs to.</param>
-		public STRBlock(string CName, Database.Underground1 db)
+		/// <param name="manager"><see cref="STRBlockManager"/> to which this instance belongs to.</param>
+		public STRBlock(string CName, STRBlockManager manager) : this()
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.CollectionName = CName;
 			CName.BinHash();
 		}
@@ -111,10 +126,10 @@ namespace Nikki.Support.Underground1.Class
 		/// Initializes new instance of <see cref="STRBlock"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read text data with.</param>
-		/// <param name="db"><see cref="Database.Underground1"/> to which this instance belongs to.</param>
-		public STRBlock(BinaryReader br, Database.Underground1 db)
+		/// <param name="manager"><see cref="STRBlockManager"/> to which this instance belongs to.</param>
+		public STRBlock(BinaryReader br, STRBlockManager manager) : this()
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.Disassemble(br);
 		}
 
@@ -133,15 +148,15 @@ namespace Nikki.Support.Underground1.Class
 		/// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="STRBlock"/> with.</param>
 		public override void Assemble(BinaryWriter bw)
 		{
-			var udat_offset = 0x30;
+			var udat_offset = 0x20;
 			var hash_offset = udat_offset + this._unk_data.Length;
-			var text_offset = hash_offset + this.InfoLength * 8;
+			var text_offset = hash_offset + this.StringRecordCount * 8;
 
 			// Sort records by keys
-			this._stringinfo.Sort((a, b) => a.Key.CompareTo(b.Key));
+			this.SortRecordsByKey();
 
 			// Write ID and temporary size
-			bw.Write(Global.STRBlocks);
+			bw.WriteEnum(BinBlockID.STRBlocks);
 			bw.Write(-1);
 
 			// Save position
@@ -149,10 +164,10 @@ namespace Nikki.Support.Underground1.Class
 
 			// Write offsets
 			bw.Write(udat_offset);
-			bw.Write(this.InfoLength);
+			bw.Write(this.StringRecordCount);
 			bw.Write(hash_offset);
 			bw.Write(text_offset);
-			bw.WriteNullTermUTF8(this.Watermark, 0x20);
+			bw.WriteNullTermUTF8(this._collection_name, 0x10);
 			bw.Write(this._unk_data);
 
 			int length = 0;
@@ -195,7 +210,24 @@ namespace Nikki.Support.Underground1.Class
 			int textoffset = br.ReadInt32();
 
 			// Read CollectionName
-			this._collection_name = "GLOBAL"; // since there exists only one at a time
+			// Since CollectionNames do not exist in vanilla files, but they do exist
+			// in saved files using this library, they are supposed to be located at 
+			// offset 0x10, while unknown data at offset 0x20
+			string count = this.Manager is null
+				? String.Empty
+				: this.Manager.Count == 0 ? String.Empty : this.Manager.Count.ToString();
+
+			// Since there exists only one at a time
+			this._collection_name = $"GLOBAL{count}";
+
+			if (udatoffset > 0x10 && hashoffset > 0x10 && textoffset > 0x10)
+			{
+
+				br.BaseStream.Position = broffset + 0x10;
+				var cname = br.ReadNullTermUTF8();
+				if (!String.IsNullOrEmpty(cname)) this._collection_name = cname;
+
+			}
 
 			// Read unknown data
 			var unksize = hashoffset - udatoffset;
@@ -215,7 +247,7 @@ namespace Nikki.Support.Underground1.Class
 
 				br.BaseStream.Position = broffset + textoffset + br.ReadInt32();
 				info.Text = br.ReadNullTermUTF8();
-				info.Label = info.Key.BinString(eLookupReturn.EMPTY);
+				info.Label = info.Key.BinString(LookupReturn.EMPTY);
 				this._stringinfo.Add(info);
 
 			}
@@ -255,8 +287,8 @@ namespace Nikki.Support.Underground1.Class
 		{
 			uint hash = key == BaseArguments.AUTO
 				? label.BinHash()
-				: label.IsHexString()
-					? Convert.ToUInt32(label, 16)
+				: key.IsHexString()
+					? Convert.ToUInt32(key, 16)
 					: 0;
 
 			if (hash == 0)
@@ -269,7 +301,7 @@ namespace Nikki.Support.Underground1.Class
 			if (this.GetRecord(hash) != null)
 			{
 
-				throw new InfoAccessException($"String record with key 0x{hash:X8} already exists");
+				throw new ArgumentException($"String record with key 0x{hash:X8} already exists");
 
 			}
 
@@ -292,7 +324,7 @@ namespace Nikki.Support.Underground1.Class
 			if (record == null)
 			{
 
-				throw new InfoAccessException($"String record with key 0x{key:X8} does not exist");
+				throw new InfoAccessException($"0x{key:X8}");
 
 			}
 			else
@@ -352,7 +384,135 @@ namespace Nikki.Support.Underground1.Class
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
+		}
+
+		/// <summary>
+		/// Sorts all <see cref="StringRecord"/> by their BinKey value.
+		/// </summary>
+		public override void SortRecordsByKey() => this._stringinfo.Sort((x, y) => x.Key.CompareTo(y.Key));
+
+		/// <summary>
+		/// Sorts all <see cref="StringRecord"/> by their Label value.
+		/// </summary>
+		public override void SortRecordsByLabel() => this._stringinfo.Sort((x, y) => x.Label.CompareTo(y.Label));
+
+		/// <summary>
+		/// Sorts all <see cref="StringRecord"/> by their Text value.
+		/// </summary>
+		public override void SortRecordsByText() => this._stringinfo.Sort((x, y) => x.Text.CompareTo(y.Text));
+
+		#endregion
+
+		#region Serialization
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		public override void Serialize(BinaryWriter bw)
+		{
+			byte[] array;
+			using (var ms = new MemoryStream(this.StringRecordCount << 5 + this._unk_data.Length))
+			using (var writer = new BinaryWriter(ms))
+			{
+
+				writer.WriteNullTermUTF8(this._collection_name);
+				writer.Write(this._unk_data.Length);
+				writer.Write(this.StringRecordCount);
+
+				writer.Write(this._unk_data);
+
+				for (int loop = 0; loop < this.StringRecordCount; ++loop)
+				{
+
+					writer.WriteNullTermUTF8(this._stringinfo[loop].Label);
+					writer.WriteNullTermUTF8(this._stringinfo[loop].Text);
+
+				}
+
+				array = ms.ToArray();
+
+			}
+
+			array = Interop.Compress(array, LZCompressionType.BEST);
+
+			var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+			header.Write(bw);
+			bw.Write(array.Length);
+			bw.Write(array);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		public override void Deserialize(BinaryReader br)
+		{
+			int size = br.ReadInt32();
+			var array = br.ReadBytes(size);
+
+			array = Interop.Decompress(array);
+
+			using var ms = new MemoryStream(array);
+			using var reader = new BinaryReader(ms);
+
+			this._collection_name = reader.ReadNullTermUTF8();
+			var length = reader.ReadInt32();
+			var count = reader.ReadInt32();
+			this._stringinfo.Capacity = count;
+
+			this._unk_data = reader.ReadBytes(length);
+
+			for (int loop = 0; loop < count; ++loop)
+			{
+
+				var info = new StringRecord(this)
+				{
+					Label = reader.ReadNullTermUTF8(),
+					Text = reader.ReadNullTermUTF8()
+				};
+
+				info.Key = info.Label.BinHash();
+				this._stringinfo.Add(info);
+
+			}
+		}
+
+		/// <summary>
+		/// Synchronizes all parts of this instance with another instance passed.
+		/// </summary>
+		/// <param name="other"><see cref="STRBlock"/> to synchronize with.</param>
+		internal void Synchronize(STRBlock other)
+		{
+			var records = new List<StringRecord>(other._stringinfo);
+
+			for (int i = 0; i < this.StringRecordCount; ++i)
+			{
+
+				bool found = false;
+
+				for (int j = 0; j < other.StringRecordCount; ++j)
+				{
+
+					if (other._stringinfo[j].Key == this._stringinfo[i].Key)
+					{
+
+						found = true;
+						break;
+
+					}
+
+				}
+
+				if (!found) records.Add(this._stringinfo[i]);
+
+			}
+
+			this._stringinfo = records;
+
+			// Replace unknown data, if any
+			if (other._unk_data != null) this._unk_data = other._unk_data;
 		}
 
 		#endregion
