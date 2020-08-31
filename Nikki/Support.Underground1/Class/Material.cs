@@ -1,12 +1,13 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
-using Nikki.Reflection.ID;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Underground1.Framework;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -37,42 +38,39 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         public const int BaseClassSize = 0xA8;
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		/// <summary>
-		/// Game to which the class belongs to.
-		/// </summary>
-		public override GameINT GameINT => GameINT.Underground1;
+        /// <summary>
+        /// Game to which the class belongs to.
+        /// </summary>
+        [Browsable(false)]
+        public override GameINT GameINT => GameINT.Underground1;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override string GameSTR => GameINT.Underground1.ToString();
 
         /// <summary>
-        /// Database to which the class belongs to.
+        /// Manager to which the class belongs to.
         /// </summary>
-        public Database.Underground1 Database { get; set; }
+        [Browsable(false)]
+        public MaterialManager Manager { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
         /// </summary>
         [AccessModifiable()]
+        [Category("Main")]
         public override string CollectionName
         {
             get => this._collection_name;
             set
             {
-                if (String.IsNullOrWhiteSpace(value))
-                    throw new ArgumentNullException("This value cannot be left empty.");
-                if (value.Contains(" "))
-                    throw new Exception("CollectionName cannot contain whitespace.");
-                if (value.Length > MaxCNameLength)
-                    throw new ArgumentLengthException(MaxCNameLength);
-                if (this.Database.Materials.FindCollection(value) != null)
-                    throw new CollectionExistenceException(value);
+                this.Manager?.CreationCheck(value);
                 this._collection_name = value;
             }
         }
@@ -80,235 +78,267 @@ namespace Nikki.Support.Underground1.Class
         /// <summary>
         /// Binary memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint BinKey => this._collection_name.BinHash();
 
         /// <summary>
         /// Vault memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint VltKey => this._collection_name.VltHash();
 
         /// <summary>
-        /// Level value of the first bright color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Diffuse")]
         public float DiffuseMinLevel { get; set; }
 
         /// <summary>
-        /// Red value of the first bright color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Diffuse")]
         public float DiffuseMinRed { get; set; }
 
         /// <summary>
-        /// Green value of the first bright color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Diffuse")]
         public float DiffuseMinGreen { get; set; }
 
         /// <summary>
-        /// Blue value of the first bright color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Diffuse")]
         public float DiffuseMinBlue { get; set; }
 
         /// <summary>
-        /// Level value of the second bright color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Diffuse")]
         public float DiffuseMaxLevel { get; set; }
 
         /// <summary>
-        /// Red value of the second bright color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Diffuse")]
         public float DiffuseMaxRed { get; set; }
 
         /// <summary>
-        /// Green value of the second bright color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Diffuse")]
         public float DiffuseMaxGreen { get; set; }
 
         /// <summary>
-        /// Blue value of the second bright color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Diffuse")]
         public float DiffuseMaxBlue { get; set; }
 
         /// <summary>
-        /// First alpha value of the material colors.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public float DiffuseMinAlpha { get; set; }
 
         /// <summary>
-        /// Second alpha value of the material colors.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public float DiffuseMaxAlpha { get; set; }
 
         /// <summary>
-        /// Level value of the first strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Specular")]
         public float SpecularMinLevel { get; set; }
 
         /// <summary>
-        /// Red value of the first strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Specular")]
         public float SpecularMinRed { get; set; }
 
         /// <summary>
-        /// Green value of the first strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Specular")]
         public float SpecularMinGreen { get; set; }
 
         /// <summary>
-        /// Blue value of the first strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Specular")]
         public float SpecularMinBlue { get; set; }
 
         /// <summary>
-        /// Level value of the second strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Specular")]
         public float SpecularMaxLevel { get; set; }
 
         /// <summary>
-        /// Red value of the second strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Specular")]
         public float SpecularMaxRed { get; set; }
 
         /// <summary>
-        /// Green value of the second strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Specular")]
         public float SpecularMaxGreen { get; set; }
 
         /// <summary>
-        /// Blue value of the second strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Specular")]
         public float SpecularMaxBlue { get; set; }
 
         /// <summary>
-        /// Level value of the third strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Envmap")]
         public float EnvmapMinLevel { get; set; }
 
         /// <summary>
-        /// Red value of the third strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Envmap")]
         public float EnvmapMinRed { get; set; }
 
         /// <summary>
-        /// Green value of the third strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Envmap")]
         public float EnvmapMinGreen { get; set; }
 
         /// <summary>
-        /// Blue value of the third strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Envmap")]
         public float EnvmapMinBlue { get; set; }
 
         /// <summary>
-        /// Level value of the fourth strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Envmap")]
         public float EnvmapMaxLevel { get; set; }
 
         /// <summary>
-        /// Red value of the fourth strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Envmap")]
         public float EnvmapMaxRed { get; set; }
 
         /// <summary>
-        /// Green value of the fourth strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Envmap")]
         public float EnvmapMaxGreen { get; set; }
 
         /// <summary>
-        /// Blue value of the fourth strong color of the material.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Envmap")]
         public float EnvmapMaxBlue { get; set; }
 
         /// <summary>
-        /// Ratio between first and second strong colors of the material
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public float SpecularPower { get; set; }
 
         /// <summary>
-        /// Ratio between third and fourth strong colors of the material
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public float EnvmapPower { get; set; }
 
         #endregion
@@ -324,10 +354,10 @@ namespace Nikki.Support.Underground1.Class
         /// Initializes new instance of <see cref="Material"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="db"><see cref="Database.Underground1"/> to which this instance belongs to.</param>
-        public Material(string CName, Database.Underground1 db)
+        /// <param name="manager"><see cref="MaterialManager"/> to which this instance belongs to.</param>
+        public Material(string CName, MaterialManager manager)
         {
-            this.Database = db;
+            this.Manager = manager;
             this.CollectionName = CName;
             CName.BinHash();
         }
@@ -336,11 +366,12 @@ namespace Nikki.Support.Underground1.Class
         /// Initializes new instance of <see cref="Material"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-        /// <param name="db"><see cref="Database.Underground1"/> to which this instance belongs to.</param>
-        public unsafe Material(BinaryReader br, Database.Underground1 db)
+        /// <param name="manager"><see cref="MaterialManager"/> to which this instance belongs to.</param>
+        public Material(BinaryReader br, MaterialManager manager)
         {
-            this.Database = db;
+            this.Manager = manager;
             this.Disassemble(br);
+            this.CollectionName.BinHash();
         }
 
         /// <summary>
@@ -359,7 +390,7 @@ namespace Nikki.Support.Underground1.Class
         public override void Assemble(BinaryWriter bw)
         {
             // Write header of the material
-            bw.Write(Global.Materials);
+            bw.WriteEnum(BinBlockID.Materials);
             bw.Write((int)0xA0);
             bw.Write(_class_key);
             bw.Write(_Localizer);
@@ -407,7 +438,7 @@ namespace Nikki.Support.Underground1.Class
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="Material"/> with.</param>
         public override void Disassemble(BinaryReader br)
         {
-            br.BaseStream.Position += 0x14;
+            br.BaseStream.Position += 0x1C;
             this._collection_name = br.ReadNullTermUTF8(0x1C);
 
             this.DiffuseMinLevel = br.ReadSingle();
@@ -445,9 +476,9 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         /// <param name="CName">CollectionName of the new created object.</param>
         /// <returns>Memory casted copy of the object.</returns>
-        public override ACollectable MemoryCast(string CName)
+        public override Collectable MemoryCast(string CName)
         {
-            var result = new Material(CName, this.Database);
+            var result = new Material(CName, this.Manager);
             base.MemoryCast(this, result);
             return result;
         }
@@ -460,7 +491,109 @@ namespace Nikki.Support.Underground1.Class
         public override string ToString()
         {
             return $"Collection Name: {this.CollectionName} | " +
-                   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+                   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
+        }
+
+        #endregion
+
+        #region Serialization
+
+        /// <summary>
+        /// Serializes instance into a byte array and stores it in the file provided.
+        /// </summary>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        public override void Serialize(BinaryWriter bw)
+        {
+            byte[] array;
+            using (var ms = new MemoryStream(0x99 + this.CollectionName.Length))
+            using (var writer = new BinaryWriter(ms))
+            {
+
+                writer.WriteNullTermUTF8(this._collection_name);
+                writer.Write(this.DiffuseMinLevel);
+                writer.Write(this.DiffuseMinRed);
+                writer.Write(this.DiffuseMinGreen);
+                writer.Write(this.DiffuseMinBlue);
+                writer.Write(this.DiffuseMaxLevel);
+                writer.Write(this.DiffuseMaxRed);
+                writer.Write(this.DiffuseMaxGreen);
+                writer.Write(this.DiffuseMaxBlue);
+                writer.Write(this.DiffuseMinAlpha);
+                writer.Write(this.DiffuseMaxAlpha);
+                writer.Write(this.SpecularPower);
+                writer.Write(this.SpecularMinLevel);
+                writer.Write(this.SpecularMinRed);
+                writer.Write(this.SpecularMinGreen);
+                writer.Write(this.SpecularMinBlue);
+                writer.Write(this.SpecularMaxLevel);
+                writer.Write(this.SpecularMaxRed);
+                writer.Write(this.SpecularMaxGreen);
+                writer.Write(this.SpecularMaxBlue);
+                writer.Write(this.EnvmapPower);
+                writer.Write(this.EnvmapMinLevel);
+                writer.Write(this.EnvmapMinRed);
+                writer.Write(this.EnvmapMinGreen);
+                writer.Write(this.EnvmapMinBlue);
+                writer.Write(this.EnvmapMaxLevel);
+                writer.Write(this.EnvmapMaxRed);
+                writer.Write(this.EnvmapMaxGreen);
+                writer.Write(this.EnvmapMaxBlue);
+
+                array = ms.ToArray();
+
+            }
+
+            array = Interop.Compress(array, LZCompressionType.BEST);
+
+            var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+            header.Write(bw);
+            bw.Write(array.Length);
+            bw.Write(array);
+        }
+
+        /// <summary>
+        /// Deserializes byte array into an instance by loading data from the file provided.
+        /// </summary>
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        public override void Deserialize(BinaryReader br)
+        {
+            int size = br.ReadInt32();
+            var array = br.ReadBytes(size);
+
+            array = Interop.Decompress(array);
+
+            using var ms = new MemoryStream(array);
+            using var reader = new BinaryReader(ms);
+
+            this._collection_name = reader.ReadNullTermUTF8();
+            this.DiffuseMinLevel = reader.ReadSingle();
+            this.DiffuseMinRed = reader.ReadSingle();
+            this.DiffuseMinGreen = reader.ReadSingle();
+            this.DiffuseMinBlue = reader.ReadSingle();
+            this.DiffuseMaxLevel = reader.ReadSingle();
+            this.DiffuseMaxRed = reader.ReadSingle();
+            this.DiffuseMaxGreen = reader.ReadSingle();
+            this.DiffuseMaxBlue = reader.ReadSingle();
+            this.DiffuseMinAlpha = reader.ReadSingle();
+            this.DiffuseMaxAlpha = reader.ReadSingle();
+            this.SpecularPower = reader.ReadSingle();
+            this.SpecularMinLevel = reader.ReadSingle();
+            this.SpecularMinRed = reader.ReadSingle();
+            this.SpecularMinGreen = reader.ReadSingle();
+            this.SpecularMinBlue = reader.ReadSingle();
+            this.SpecularMaxLevel = reader.ReadSingle();
+            this.SpecularMaxRed = reader.ReadSingle();
+            this.SpecularMaxGreen = reader.ReadSingle();
+            this.SpecularMaxBlue = reader.ReadSingle();
+            this.EnvmapPower = reader.ReadSingle();
+            this.EnvmapMinLevel = reader.ReadSingle();
+            this.EnvmapMinRed = reader.ReadSingle();
+            this.EnvmapMinGreen = reader.ReadSingle();
+            this.EnvmapMinBlue = reader.ReadSingle();
+            this.EnvmapMaxLevel = reader.ReadSingle();
+            this.EnvmapMaxRed = reader.ReadSingle();
+            this.EnvmapMaxGreen = reader.ReadSingle();
+            this.EnvmapMaxBlue = reader.ReadSingle();
         }
 
         #endregion
