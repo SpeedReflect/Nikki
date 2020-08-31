@@ -1,12 +1,15 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Underground1.Framework;
 using Nikki.Support.Underground1.Parts.PresetParts;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -43,35 +46,32 @@ namespace Nikki.Support.Underground1.Class
         /// <summary>
         /// Game to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override GameINT GameINT => GameINT.Underground1;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
+        [Browsable(false)]
         public override string GameSTR => GameINT.Underground1.ToString();
 
         /// <summary>
-        /// Database to which the class belongs to.
+        /// Manager to which the class belongs to.
         /// </summary>
-        public Database.Underground1 Database { get; set; }
+        [Browsable(false)]
+        public PresetRideManager Manager { get; set; }
 
         /// <summary>
         /// Collection name of the variable.
         /// </summary>
         [AccessModifiable()]
+        [Category("Main")]
         public override string CollectionName
         {
             get => this._collection_name;
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentNullException("This value cannot be left empty.");
-                if (value.Contains(" "))
-                    throw new Exception("CollectionName cannot contain whitespace.");
-                if (value.Length > MaxCNameLength)
-                    throw new ArgumentLengthException(MaxCNameLength);
-                if (this.Database.PresetRides.FindCollection(value) != null)
-                    throw new CollectionExistenceException(value);
+                this.Manager?.CreationCheck(value);
                 this._collection_name = value;
             }
         }
@@ -79,11 +79,15 @@ namespace Nikki.Support.Underground1.Class
         /// <summary>
         /// Binary memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint BinKey => this._collection_name.BinHash();
 
         /// <summary>
         /// Vault memory hash of the collection name.
         /// </summary>
+        [Category("Main")]
+        [TypeConverter(typeof(HexConverter))]
         public override uint VltKey => this._collection_name.VltHash();
 
         /// <summary>
@@ -91,6 +95,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public override string MODEL { get; set; } = String.Empty;
 
         /// <summary>
@@ -98,6 +103,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public int UnknownKey1 { get; set; }
 
         /// <summary>
@@ -105,6 +111,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Primary")]
         public int UnknownKey2 { get; set; }
 
         /// <summary>
@@ -112,6 +119,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Base { get; set; } = String.Empty;
 
         /// <summary>
@@ -119,6 +127,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string AutosculptFrontBumper { get; set; } = String.Empty;
 
         /// <summary>
@@ -126,6 +135,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string AutosculptRearBumper { get; set; } = String.Empty;
 
         /// <summary>
@@ -133,6 +143,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string AutosculptSkirt { get; set; } = String.Empty;
 
         /// <summary>
@@ -140,6 +151,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string LeftSideMirror { get; set; } = String.Empty;
 
         /// <summary>
@@ -147,6 +159,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RightSideMirror { get; set; } = String.Empty;
 
         /// <summary>
@@ -154,6 +167,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Body { get; set; } = String.Empty;
 
         /// <summary>
@@ -161,6 +175,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string AftermarketBodykit { get; set; } = String.Empty;
 
         /// <summary>
@@ -168,6 +183,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string RoofScoop { get; set; } = String.Empty;
 
         /// <summary>
@@ -175,6 +191,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Hood { get; set; } = String.Empty;
 
         /// <summary>
@@ -182,6 +199,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Trunk { get; set; } = String.Empty;
 
         /// <summary>
@@ -189,6 +207,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Spoiler { get; set; } = String.Empty;
 
         /// <summary>
@@ -196,6 +215,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Engine { get; set; } = String.Empty;
 
         /// <summary>
@@ -203,6 +223,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Headlight { get; set; } = String.Empty;
 
         /// <summary>
@@ -210,6 +231,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Brakelight { get; set; } = String.Empty;
 
         /// <summary>
@@ -217,6 +239,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Exhaust { get; set; } = String.Empty;
 
         /// <summary>
@@ -224,6 +247,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Brake { get; set; } = String.Empty;
 
         /// <summary>
@@ -231,6 +255,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Wheel { get; set; } = String.Empty;
 
         /// <summary>
@@ -238,6 +263,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string LicensePlate { get; set; } = String.Empty;
 
         /// <summary>
@@ -245,6 +271,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string DecalTex { get; set; } = String.Empty;
 
         /// <summary>
@@ -252,6 +279,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string WindshieldTint { get; set; } = String.Empty;
 
         /// <summary>
@@ -259,6 +287,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string NeonBody { get; set; } = String.Empty;
 
         /// <summary>
@@ -266,6 +295,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string CV { get; set; } = String.Empty;
 
         /// <summary>
@@ -273,6 +303,7 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string WheelManufacturer { get; set; } = String.Empty;
 
         /// <summary>
@@ -280,65 +311,76 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
+        [Category("Secondary")]
         public string Misc { get; set; } = String.Empty;
 
         /// <summary>
         /// Decal size attributes of this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("BaseKit")]
         public DecalSize DECAL_SIZES { get; set; }
 
         /// <summary>
         /// Group of paints appliable to parts in this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Visuals")]
         public PaintTypes PAINT_TYPES { get; set; }
 
         /// <summary>
         /// Group of vinyls and their colors appliable to this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Visuals")]
         public VinylSets VINYL_SETS { get; set; }
 
         /// <summary>
         /// Set of hood decals in this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Decals")]
         public DecalArray DECALS_HOOD { get; set; }
 
         /// <summary>
         /// Set of front window decals in this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Decals")]
         public DecalArray DECALS_FRONT_WINDOW { get; set; }
 
         /// <summary>
         /// Set of rear window decals in this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Decals")]
         public DecalArray DECALS_REAR_WINDOW { get; set; }
 
         /// <summary>
         /// Set of left door decals in this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Decals")]
         public DecalArray DECALS_LEFT_DOOR { get; set; }
 
         /// <summary>
         /// Set of right door decals in this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Decals")]
         public DecalArray DECALS_RIGHT_DOOR { get; set; }
 
         /// <summary>
         /// Set of left quarter decals in this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Decals")]
         public DecalArray DECALS_LEFT_QUARTER { get; set; }
 
         /// <summary>
         /// Set of right quarter decals in this <see cref="PresetRide"/>.
         /// </summary>
+        [Browsable(false)]
         [Expandable("Decals")]
         public DecalArray DECALS_RIGHT_QUARTER { get; set; }
 
@@ -349,18 +391,29 @@ namespace Nikki.Support.Underground1.Class
         /// <summary>
         /// Initializes new instance of <see cref="PresetRide"/>.
         /// </summary>
-        public PresetRide() { }
+        public PresetRide()
+        {
+            this.DECALS_FRONT_WINDOW = new DecalArray();
+            this.DECALS_HOOD = new DecalArray();
+            this.DECALS_LEFT_DOOR = new DecalArray();
+            this.DECALS_LEFT_QUARTER = new DecalArray();
+            this.DECALS_REAR_WINDOW = new DecalArray();
+            this.DECALS_RIGHT_DOOR = new DecalArray();
+            this.DECALS_RIGHT_QUARTER = new DecalArray();
+            this.DECAL_SIZES = new DecalSize();
+            this.PAINT_TYPES = new PaintTypes();
+            this.VINYL_SETS = new VinylSets();
+        }
 
         /// <summary>
         /// Initializes new instance of <see cref="PresetRide"/>.
         /// </summary>
         /// <param name="CName">CollectionName of the new instance.</param>
-        /// <param name="db"><see cref="Database.Underground1"/> to which this instance belongs to.</param>
-        public PresetRide(string CName, Database.Underground1 db)
+        /// <param name="manager"><see cref="PresetRideManager"/> to which this instance belongs to.</param>
+        public PresetRide(string CName, PresetRideManager manager) : this()
         {
-            this.Database = db;
+            this.Manager = manager;
             this.CollectionName = CName;
-            this.Initialize();
             this.MODEL = "SUPRA";
             CName.BinHash();
         }
@@ -369,12 +422,12 @@ namespace Nikki.Support.Underground1.Class
         /// Initializes new instance of <see cref="PresetRide"/>.
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-        /// <param name="db"><see cref="Database.Underground1"/> to which this instance belongs to.</param>
-        public PresetRide(BinaryReader br, Database.Underground1 db)
+        /// <param name="manager"><see cref="PresetRideManager"/> to which this instance belongs to.</param>
+        public PresetRide(BinaryReader br, PresetRideManager manager) : this()
         {
-            this.Database = db;
-            this.Initialize();
+            this.Manager = manager;
             this.Disassemble(br);
+            this.CollectionName.BinHash();
         }
 
         /// <summary>
@@ -442,10 +495,10 @@ namespace Nikki.Support.Underground1.Class
             bw.Write((int)0x12);
             bw.Write(this.LicensePlate.BinHash());
 
-            // Read Decal Sizes
+            // Write Decal Sizes
             this.DECAL_SIZES.Write(bw);
 
-            // Continue reading parts
+            // Continue writing parts
             bw.Write((int)0x1E);
             bw.Write(this.PAINT_TYPES.BasePaintType.BinHash());
             bw.Write((int)0x1F);
@@ -505,7 +558,7 @@ namespace Nikki.Support.Underground1.Class
             bw.Write((int)0x3A);
             bw.Write(this.DecalTex.BinHash());
 
-            // Read Decal Arrays
+            // Write Decal Arrays
             this.DECALS_HOOD.Write(bw, 0x3B);
             this.DECALS_FRONT_WINDOW.Write(bw, 0x43);
             this.DECALS_REAR_WINDOW.Write(bw, 0x4B);
@@ -514,7 +567,7 @@ namespace Nikki.Support.Underground1.Class
             this.DECALS_LEFT_QUARTER.Write(bw, 0x63);
             this.DECALS_RIGHT_QUARTER.Write(bw, 0x6B);
 
-            // Finish reading parts
+            // Finish writing parts
             bw.Write((int)0x73);
             bw.Write(this.WindshieldTint.BinHash());
             bw.Write((int)0x74);
@@ -545,106 +598,106 @@ namespace Nikki.Support.Underground1.Class
 
             // Start reading parts
             br.BaseStream.Position += 4;
-            this.Base = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.Base = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.AutosculptFrontBumper = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.AutosculptFrontBumper = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.AutosculptRearBumper = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.AutosculptRearBumper = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.LeftSideMirror = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.LeftSideMirror = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.RightSideMirror = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.RightSideMirror = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.Body = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.Body = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.AftermarketBodykit = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.AftermarketBodykit = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.RoofScoop = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.RoofScoop = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.Hood = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.Hood = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.Trunk = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.Trunk = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.AutosculptSkirt = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.AutosculptSkirt = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.Spoiler = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.Spoiler = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.Engine = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.Engine = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.Headlight = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.Headlight = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.Brakelight = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.Brakelight = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.Exhaust = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.Exhaust = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.Brake = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.Brake = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.Wheel = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.Wheel = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.LicensePlate = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.LicensePlate = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
             // Read Decal Sizes
             this.DECAL_SIZES.Read(br);
 
             // Continue reading parts
             br.BaseStream.Position += 4;
-            this.PAINT_TYPES.BasePaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.PAINT_TYPES.BasePaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.VinylLayer0 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.VinylLayer0 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.VinylLayer1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.VinylLayer1 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.VinylLayer2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.VinylLayer2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.VinylLayer3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.VinylLayer3 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.VinylHood = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.VinylHood = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.VinylSpoiler = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.VinylSpoiler = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.PAINT_TYPES.EnginePaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.PAINT_TYPES.EnginePaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.PAINT_TYPES.SpoilerPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.PAINT_TYPES.SpoilerPaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.PAINT_TYPES.BrakesPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.PAINT_TYPES.BrakesPaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.PAINT_TYPES.ExhaustPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.PAINT_TYPES.ExhaustPaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.PAINT_TYPES.RimsPaintType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.PAINT_TYPES.RimsPaintType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.Vinyl0_Color0 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl0_Color0 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.Vinyl0_Color1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl0_Color1 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.Vinyl0_Color2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl0_Color2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.Vinyl0_Color3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl0_Color3 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.Vinyl1_Color0 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl1_Color0 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.Vinyl1_Color1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl1_Color1 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.Vinyl1_Color2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl1_Color2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.Vinyl1_Color3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl1_Color3 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.Vinyl2_Color0 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl2_Color0 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.Vinyl2_Color1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl2_Color1 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.Vinyl2_Color2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl2_Color2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.Vinyl2_Color3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl2_Color3 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.Vinyl3_Color0 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl3_Color0 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.Vinyl3_Color1 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl3_Color1 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.Vinyl3_Color2 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl3_Color2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.VINYL_SETS.Vinyl3_Color3 = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.VINYL_SETS.Vinyl3_Color3 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.DecalTex = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.DecalTex = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
             // Read Decal Arrays
             this.DECALS_HOOD.Read(br);
@@ -657,15 +710,15 @@ namespace Nikki.Support.Underground1.Class
 
             // Finish reading parts
             br.BaseStream.Position += 4;
-            this.WindshieldTint = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.WindshieldTint = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.NeonBody = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.NeonBody = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.CV = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.CV = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.WheelManufacturer = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.WheelManufacturer = br.ReadUInt32().BinString(LookupReturn.EMPTY);
             br.BaseStream.Position += 4;
-            this.Misc = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+            this.Misc = br.ReadUInt32().BinString(LookupReturn.EMPTY);
         }
 
         /// <summary>
@@ -673,25 +726,11 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         /// <param name="CName">CollectionName of the new created object.</param>
         /// <returns>Memory casted copy of the object.</returns>
-        public override ACollectable MemoryCast(string CName)
+        public override Collectable MemoryCast(string CName)
         {
-            var result = new PresetRide(CName, this.Database);
+            var result = new PresetRide(CName, this.Manager);
             base.MemoryCast(this, result);
             return result;
-        }
-
-        private void Initialize()
-        {
-            this.DECALS_FRONT_WINDOW = new DecalArray();
-            this.DECALS_HOOD = new DecalArray();
-            this.DECALS_LEFT_DOOR = new DecalArray();
-            this.DECALS_LEFT_QUARTER = new DecalArray();
-            this.DECALS_REAR_WINDOW = new DecalArray();
-            this.DECALS_RIGHT_DOOR = new DecalArray();
-            this.DECALS_RIGHT_QUARTER = new DecalArray();
-            this.DECAL_SIZES = new DecalSize();
-            this.PAINT_TYPES = new PaintTypes();
-            this.VINYL_SETS = new VinylSets();
         }
 
         /// <summary>
@@ -702,7 +741,207 @@ namespace Nikki.Support.Underground1.Class
         public override string ToString()
         {
             return $"Collection Name: {this.CollectionName} | " +
-                   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+                   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
+        }
+
+        #endregion
+
+        #region Serialization
+
+        /// <summary>
+        /// Serializes instance into a byte array and stores it in the file provided.
+        /// </summary>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        public override void Serialize(BinaryWriter bw)
+        {
+            byte[] array;
+            using (var ms = new MemoryStream(0x2000))
+            using (var writer = new BinaryWriter(ms))
+            {
+
+                // CollectionName and MODEL
+                writer.WriteNullTermUTF8(this._collection_name);
+                writer.WriteNullTermUTF8(this.MODEL);
+
+                // Write unknown value
+                writer.Write(this.UnknownKey1);
+                writer.Write(this.UnknownKey2);
+
+                // Start writing parts
+                writer.WriteNullTermUTF8(this.Base);
+                writer.WriteNullTermUTF8(this.AutosculptFrontBumper);
+                writer.WriteNullTermUTF8(this.AutosculptRearBumper);
+                writer.WriteNullTermUTF8(this.LeftSideMirror);
+                writer.WriteNullTermUTF8(this.RightSideMirror);
+                writer.WriteNullTermUTF8(this.Body);
+                writer.WriteNullTermUTF8(this.AftermarketBodykit);
+                writer.WriteNullTermUTF8(this.RoofScoop);
+                writer.WriteNullTermUTF8(this.Hood);
+                writer.WriteNullTermUTF8(this.Trunk);
+                writer.WriteNullTermUTF8(this.AutosculptSkirt);
+                writer.WriteNullTermUTF8(this.Spoiler);
+                writer.WriteNullTermUTF8(this.Engine);
+                writer.WriteNullTermUTF8(this.Headlight);
+                writer.WriteNullTermUTF8(this.Brakelight);
+                writer.WriteNullTermUTF8(this.Exhaust);
+                writer.WriteNullTermUTF8(this.Brake);
+                writer.WriteNullTermUTF8(this.Wheel);
+                writer.WriteNullTermUTF8(this.LicensePlate);
+
+                // Write Decal Sizes
+                this.DECAL_SIZES.Serialize(writer);
+
+                // Continue writing parts
+                writer.WriteNullTermUTF8(this.PAINT_TYPES.BasePaintType);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.VinylLayer0);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.VinylLayer1);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.VinylLayer2);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.VinylLayer3);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.VinylHood);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.VinylSpoiler);
+                writer.WriteNullTermUTF8(this.PAINT_TYPES.EnginePaintType);
+                writer.WriteNullTermUTF8(this.PAINT_TYPES.SpoilerPaintType);
+                writer.WriteNullTermUTF8(this.PAINT_TYPES.BrakesPaintType);
+                writer.WriteNullTermUTF8(this.PAINT_TYPES.ExhaustPaintType);
+                writer.WriteNullTermUTF8(this.PAINT_TYPES.RimsPaintType);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.Vinyl0_Color0);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.Vinyl0_Color1);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.Vinyl0_Color2);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.Vinyl0_Color3);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.Vinyl1_Color0);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.Vinyl1_Color1);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.Vinyl1_Color2);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.Vinyl1_Color3);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.Vinyl2_Color0);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.Vinyl2_Color1);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.Vinyl2_Color2);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.Vinyl2_Color3);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.Vinyl3_Color0);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.Vinyl3_Color1);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.Vinyl3_Color2);
+                writer.WriteNullTermUTF8(this.VINYL_SETS.Vinyl3_Color3);
+                writer.WriteNullTermUTF8(this.DecalTex);
+
+                // Write Decal Arrays
+                this.DECALS_HOOD.Serialize(writer);
+                this.DECALS_FRONT_WINDOW.Serialize(writer);
+                this.DECALS_REAR_WINDOW.Serialize(writer);
+                this.DECALS_LEFT_DOOR.Serialize(writer);
+                this.DECALS_RIGHT_DOOR.Serialize(writer);
+                this.DECALS_LEFT_QUARTER.Serialize(writer);
+                this.DECALS_RIGHT_QUARTER.Serialize(writer);
+
+                // Finish writing parts
+                writer.WriteNullTermUTF8(this.WindshieldTint);
+                writer.WriteNullTermUTF8(this.NeonBody);
+                writer.WriteNullTermUTF8(this.CV);
+                writer.WriteNullTermUTF8(this.WheelManufacturer);
+                writer.WriteNullTermUTF8(this.Misc);
+
+                array = ms.ToArray();
+
+            }
+
+            array = Interop.Compress(array, LZCompressionType.BEST);
+
+            var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+            header.Write(bw);
+            bw.Write(array.Length);
+            bw.Write(array);
+        }
+
+        /// <summary>
+        /// Deserializes byte array into an instance by loading data from the file provided.
+        /// </summary>
+        /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+        public override void Deserialize(BinaryReader br)
+        {
+            int size = br.ReadInt32();
+            var array = br.ReadBytes(size);
+
+            array = Interop.Decompress(array);
+
+            using var ms = new MemoryStream(array);
+            using var reader = new BinaryReader(ms);
+
+            // CollectionName and MODEL
+            this._collection_name = reader.ReadNullTermUTF8();
+            this.MODEL = reader.ReadNullTermUTF8();
+
+            // Read unknown value
+            this.UnknownKey1 = reader.ReadInt32();
+            this.UnknownKey2 = reader.ReadInt32();
+
+            // Start reading parts
+            this.Base = reader.ReadNullTermUTF8();
+            this.AutosculptFrontBumper = reader.ReadNullTermUTF8();
+            this.AutosculptRearBumper = reader.ReadNullTermUTF8();
+            this.LeftSideMirror = reader.ReadNullTermUTF8();
+            this.RightSideMirror = reader.ReadNullTermUTF8();
+            this.Body = reader.ReadNullTermUTF8();
+            this.AftermarketBodykit = reader.ReadNullTermUTF8();
+            this.RoofScoop = reader.ReadNullTermUTF8();
+            this.Hood = reader.ReadNullTermUTF8();
+            this.Trunk = reader.ReadNullTermUTF8();
+            this.AutosculptSkirt = reader.ReadNullTermUTF8();
+            this.Spoiler = reader.ReadNullTermUTF8();
+            this.Engine = reader.ReadNullTermUTF8();
+            this.Headlight = reader.ReadNullTermUTF8();
+            this.Brakelight = reader.ReadNullTermUTF8();
+            this.Exhaust = reader.ReadNullTermUTF8();
+            this.Brake = reader.ReadNullTermUTF8();
+            this.Wheel = reader.ReadNullTermUTF8();
+            this.LicensePlate = reader.ReadNullTermUTF8();
+
+            // Read Decal Sizes
+            this.DECAL_SIZES.Deserialize(reader);
+
+            // Continue reading parts
+            this.PAINT_TYPES.BasePaintType = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.VinylLayer0 = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.VinylLayer1 = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.VinylLayer2 = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.VinylLayer3 = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.VinylHood = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.VinylSpoiler = reader.ReadNullTermUTF8();
+            this.PAINT_TYPES.EnginePaintType = reader.ReadNullTermUTF8();
+            this.PAINT_TYPES.SpoilerPaintType = reader.ReadNullTermUTF8();
+            this.PAINT_TYPES.BrakesPaintType = reader.ReadNullTermUTF8();
+            this.PAINT_TYPES.ExhaustPaintType = reader.ReadNullTermUTF8();
+            this.PAINT_TYPES.RimsPaintType = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl0_Color0 = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl0_Color1 = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl0_Color2 = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl0_Color3 = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl1_Color0 = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl1_Color1 = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl1_Color2 = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl1_Color3 = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl2_Color0 = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl2_Color1 = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl2_Color2 = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl2_Color3 = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl3_Color0 = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl3_Color1 = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl3_Color2 = reader.ReadNullTermUTF8();
+            this.VINYL_SETS.Vinyl3_Color3 = reader.ReadNullTermUTF8();
+            this.DecalTex = reader.ReadNullTermUTF8();
+
+            // Read Decal Arrays
+            this.DECALS_HOOD.Deserialize(reader);
+            this.DECALS_FRONT_WINDOW.Deserialize(reader);
+            this.DECALS_REAR_WINDOW.Deserialize(reader);
+            this.DECALS_LEFT_DOOR.Deserialize(reader);
+            this.DECALS_RIGHT_DOOR.Deserialize(reader);
+            this.DECALS_LEFT_QUARTER.Deserialize(reader);
+            this.DECALS_RIGHT_QUARTER.Deserialize(reader);
+
+            // Finish reading parts
+            this.WindshieldTint = reader.ReadNullTermUTF8();
+            this.NeonBody = reader.ReadNullTermUTF8();
+            this.CV = reader.ReadNullTermUTF8();
+            this.WheelManufacturer = reader.ReadNullTermUTF8();
+            this.Misc = reader.ReadNullTermUTF8();
         }
 
         #endregion
