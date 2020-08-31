@@ -22,11 +22,8 @@
 
   <ItemGroup>
     <Compile Remove="Support.Undercover\**" />
-    <Compile Remove="Support.Underground1\**" />
     <EmbeddedResource Remove="Support.Undercover\**" />
-    <EmbeddedResource Remove="Support.Underground1\**" />
     <None Remove="Support.Undercover\**" />
-    <None Remove="Support.Underground1\**" />
   </ItemGroup>
 
   <ItemGroup>
