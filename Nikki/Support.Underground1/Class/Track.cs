@@ -1,11 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Underground1.Framework;
 using CoreExtensions.IO;
 using CoreExtensions.Conversions;
 
@@ -25,17 +26,17 @@ namespace Nikki.Support.Underground1.Class
 		/// <summary>
 		/// Maximum length of the CollectionName.
 		/// </summary>
-		public const int MaxCNameLength = 0x1F;
+		public const int MaxCNameLength = 0x02;
 
 		/// <summary>
 		/// Offset of the CollectionName in the data.
 		/// </summary>
-		public const int CNameOffsetAt = 0x20;
+		public const int CNameOffsetAt = 0x6C;
 
 		/// <summary>
 		/// Base size of a unit collection.
 		/// </summary>
-		public const int BaseClassSize = 0x128;
+		public const int BaseClassSize = 0xFC;
 
 		#endregion
 
@@ -44,60 +45,56 @@ namespace Nikki.Support.Underground1.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
-		public override GameINT GameINT => GameINT.Underground1;
+		[Browsable(false)]
+		public override GameINT GameINT => GameINT.Underground2;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
-		public override string GameSTR => GameINT.Underground1.ToString();
+		[Browsable(false)]
+		public override string GameSTR => GameINT.Underground2.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// Manager to which the class belongs to.
 		/// </summary>
-		public Database.Underground1 Database { get; set; }
+		[Browsable(false)]
+		public TrackManager Manager { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
 			set
 			{
-				if (string.IsNullOrWhiteSpace(value))
-					throw new ArgumentNullException("This value cannot be left empty.");
-				if (value.Contains(" "))
-					throw new Exception("CollectionName cannot contain whitespace.");
-				if (!UInt16.TryParse(value, out ushort id))
-					throw new Exception("Unable to parse TrackID from the collection name provided.");
-				if (this.Database.Tracks.FindCollection(value) != null)
-					throw new CollectionExistenceException(value);
+				this.Manager.CreationCheck(value);
 				this._collection_name = value;
-				this.TrackID = id;
 			}
 		}
 
 		/// <summary>
 		/// Binary memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint BinKey => this._collection_name.BinHash();
 
 		/// <summary>
 		/// Vault memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint VltKey => this._collection_name.VltHash();
-
-		/// <summary>
-		/// Unique ID value of the track that is used ingame.
-		/// </summary>
-		public ushort TrackID { get; private set; }
 
 		/// <summary>
 		/// Second race description name.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public string RaceDescription2 { get; set; } = String.Empty;
 
 		/// <summary>
@@ -105,6 +102,7 @@ namespace Nikki.Support.Underground1.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public uint RaceLength { get; set; }
 
 		/// <summary>
@@ -113,6 +111,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TimeLimitToBeatForward { get; set; }
 
 		/// <summary>
@@ -121,6 +120,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TimeLimitToBeatReverse { get; set; }
 
 		/// <summary>
@@ -129,6 +129,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int ScoreToBeatDriftForward { get; set; }
 
 		/// <summary>
@@ -137,6 +138,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int ScoreToBeatDriftReverse { get; set; }
 
 		/// <summary>
@@ -145,6 +147,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short NumSecBeforeShorcutsAllowed { get; set; }
 
 		/// <summary>
@@ -153,6 +156,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short DriftSecondsMin { get; set; }
 
 		/// <summary>
@@ -161,6 +165,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short DriftSecondsMax { get; set; }
 
 		/// <summary>
@@ -169,6 +174,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public short CarRaceStartConfig { get; set; }
 
 		/// <summary>
@@ -177,6 +183,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrackMapCalibrationOffsetX { get; set; }
 
 		/// <summary>
@@ -185,6 +192,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrackMapCalibrationOffsetY { get; set; }
 
 		/// <summary>
@@ -193,6 +201,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrackMapCalibrationWidth { get; set; }
 
 		/// <summary>
@@ -201,6 +210,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrackMapCalibrationRotation { get; set; }
 
 		/// <summary>
@@ -209,6 +219,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrackMapStartgridAngle { get; set; }
 
 		/// <summary>
@@ -217,6 +228,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrackMapFinishlineAngle { get; set; }
 
 		/// <summary>
@@ -225,6 +237,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_0_0 { get; set; }
 
 		/// <summary>
@@ -233,6 +246,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_0_1 { get; set; }
 
 		/// <summary>
@@ -241,6 +255,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_1_0 { get; set; }
 
 		/// <summary>
@@ -249,6 +264,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_1_1 { get; set; }
 
 		/// <summary>
@@ -257,6 +273,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_2_0 { get; set; }
 
 		/// <summary>
@@ -265,6 +282,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_2_1 { get; set; }
 
 		/// <summary>
@@ -273,6 +291,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_3_0 { get; set; }
 
 		/// <summary>
@@ -281,6 +300,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_3_1 { get; set; }
 
 		/// <summary>
@@ -289,6 +309,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte TrafAllowedNearStartgrid { get; set; }
 
 		/// <summary>
@@ -297,6 +318,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte TrafAllowedNearFinishline { get; set; }
 
 		/// <summary>
@@ -305,6 +327,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrafMinInitDistFromStart { get; set; }
 
 		/// <summary>
@@ -313,6 +336,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrafMinInitDistFromFinish { get; set; }
 
 		/// <summary>
@@ -321,6 +345,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrafMinInitDistInbetweenA { get; set; }
 
 		/// <summary>
@@ -329,6 +354,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float TrafMinInitDistInbetweenB { get; set; }
 
 		#endregion
@@ -344,10 +370,10 @@ namespace Nikki.Support.Underground1.Class
 		/// Initializes new instance of <see cref="Track"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Underground1"/> to which this instance belongs to.</param>
-		public Track(string CName, Database.Underground1 db)
+		/// <param name="manager"><see cref="TrackManager"/> to which this instance belongs to.</param>
+		public Track(string CName, TrackManager manager)
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.CollectionName = CName;
 			CName.BinHash();
 		}
@@ -356,10 +382,10 @@ namespace Nikki.Support.Underground1.Class
 		/// Initializes new instance of <see cref="Track"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Underground1"/> to which this instance belongs to.</param>
-		public Track(BinaryReader br, Database.Underground1 db)
+		/// <param name="manager"><see cref="TrackManager"/> to which this instance belongs to.</param>
+		public Track(BinaryReader br, TrackManager manager)
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.Disassemble(br);
 		}
 
@@ -389,8 +415,8 @@ namespace Nikki.Support.Underground1.Class
 			bw.Write(this.IsLoopingRace == eBoolean.True ? (byte)0 : (byte)1);
 			bw.Write(this.ReverseVersionExists == eBoolean.True ? (byte)2 : (byte)0);
 			bw.Write((byte)0);
-			bw.Write(this.TrackID);
-			bw.Write(this.TrackID);
+			bw.Write(UInt16.Parse(this._collection_name));
+			bw.Write(UInt16.Parse(this._collection_name));
 
 			// Write gameplay scores
 			bw.Write(this.SunInfoName.BinHash());
@@ -461,11 +487,11 @@ namespace Nikki.Support.Underground1.Class
 			this.ReverseVersionExists = br.ReadByte() == 2 ? eBoolean.True : eBoolean.False;
 			br.BaseStream.Position += 1;
 			this._collection_name = br.ReadUInt16().ToString();
-			this.TrackID = br.ReadUInt16();
+			br.BaseStream.Position += 2;
 
 			// Read gameplay scores
-			this.SunInfoName = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
-			this.RaceGameplayMode = br.ReadEnum<eRaceGameplayMode>();
+			this.SunInfoName = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.RaceGameplayMode = br.ReadEnum<TrackGameplayMode>();
 			this.RaceLength = br.ReadUInt32();
 			this.TimeLimitToBeatForward = br.ReadSingle();
 			this.TimeLimitToBeatReverse = br.ReadSingle();
@@ -482,8 +508,8 @@ namespace Nikki.Support.Underground1.Class
 			br.BaseStream.Position += 2;
 
 			// Read difficulties and padding
-			this.DifficultyForward = (eTrackDifficulty)(br.ReadInt32());
-			this.DifficultyReverse = (eTrackDifficulty)(br.ReadInt32());
+			this.DifficultyForward = (TrackDifficulty)(br.ReadInt32());
+			this.DifficultyReverse = (TrackDifficulty)(br.ReadInt32());
 			br.BaseStream.Position += 0x10;
 			this.NumSecBeforeShorcutsAllowed = br.ReadInt16();
 			this.DriftSecondsMin = br.ReadInt16();
@@ -516,9 +542,9 @@ namespace Nikki.Support.Underground1.Class
 		/// </summary>
 		/// <param name="CName">CollectionName of the new created object.</param>
 		/// <returns>Memory casted copy of the object.</returns>
-		public override ACollectable MemoryCast(string CName)
+		public override Collectable MemoryCast(string CName)
 		{
-			var result = new Track(CName, this.Database);
+			var result = new Track(CName, this.Manager);
 			base.MemoryCast(this, result);
 			return result;
 		}
@@ -531,7 +557,157 @@ namespace Nikki.Support.Underground1.Class
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
+		}
+
+		#endregion
+
+		#region Serialization
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		public override void Serialize(BinaryWriter bw)
+		{
+			byte[] array;
+			using (var ms = new MemoryStream(0x122))
+			using (var writer = new BinaryWriter(ms))
+			{
+
+				// Write all directories and locations
+				writer.Write(UInt16.Parse(this._collection_name));
+				writer.WriteNullTermUTF8(this.RaceDescription);
+				writer.WriteNullTermUTF8(this.RaceDescription2);
+				writer.WriteNullTermUTF8(this.TrackDirectory);
+				writer.WriteNullTermUTF8(this.RegionName);
+				writer.WriteNullTermUTF8(this.RegionDirectory);
+
+				// Write race settings
+				writer.WriteEnum(this.IsValid);
+				writer.WriteEnum(this.IsLoopingRace);
+				writer.WriteEnum(this.ReverseVersionExists);
+
+				// Write gameplay scores
+				writer.WriteNullTermUTF8(this.SunInfoName);
+				writer.WriteEnum(this.RaceGameplayMode);
+				writer.Write(this.RaceLength);
+				writer.Write(this.TimeLimitToBeatForward);
+				writer.Write(this.TimeLimitToBeatReverse);
+				writer.Write(this.ScoreToBeatDriftForward);
+				writer.Write(this.ScoreToBeatDriftReverse);
+
+				// Write map calibrations
+				writer.Write(this.TrackMapCalibrationOffsetX);
+				writer.Write(this.TrackMapCalibrationOffsetY);
+				writer.Write(this.TrackMapCalibrationWidth);
+				writer.Write(this.TrackMapCalibrationRotation);
+				writer.Write(this.TrackMapStartgridAngle);
+				writer.Write(this.TrackMapFinishlineAngle);
+
+				// Write difficulties and padding
+				writer.WriteEnum(this.DifficultyForward);
+				writer.WriteEnum(this.DifficultyReverse);
+				writer.Write(this.NumSecBeforeShorcutsAllowed);
+				writer.Write(this.DriftSecondsMin);
+				writer.Write(this.DriftSecondsMax);
+
+				// Write traffic settings
+				writer.Write(this.MaxTrafficCars_0_0);
+				writer.Write(this.MaxTrafficCars_0_1);
+				writer.Write(this.MaxTrafficCars_1_0);
+				writer.Write(this.MaxTrafficCars_1_1);
+				writer.Write(this.MaxTrafficCars_2_0);
+				writer.Write(this.MaxTrafficCars_2_1);
+				writer.Write(this.MaxTrafficCars_3_0);
+				writer.Write(this.MaxTrafficCars_3_1);
+				writer.Write(this.TrafAllowedNearStartgrid);
+				writer.Write(this.TrafAllowedNearFinishline);
+				writer.Write(this.CarRaceStartConfig);
+				writer.Write(this.TrafMinInitDistFromStart);
+				writer.Write(this.TrafMinInitDistFromFinish);
+				writer.Write(this.TrafMinInitDistInbetweenA);
+				writer.Write(this.TrafMinInitDistInbetweenB);
+
+				array = ms.ToArray();
+
+			}
+
+			array = Interop.Compress(array, LZCompressionType.BEST);
+
+			var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+			header.Write(bw);
+			bw.Write(array.Length);
+			bw.Write(array);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		public override void Deserialize(BinaryReader br)
+		{
+			int size = br.ReadInt32();
+			var array = br.ReadBytes(size);
+
+			array = Interop.Decompress(array);
+
+			using var ms = new MemoryStream(array);
+			using var reader = new BinaryReader(ms);
+
+			// Write all directories and locations
+			this._collection_name = reader.ReadUInt16().ToString();
+			this.RaceDescription = reader.ReadNullTermUTF8();
+			this.RaceDescription2 = reader.ReadNullTermUTF8();
+			this.TrackDirectory = reader.ReadNullTermUTF8();
+			this.RegionName = reader.ReadNullTermUTF8();
+			this.RegionDirectory = reader.ReadNullTermUTF8();
+
+			// Write race settings
+			this.IsValid = reader.ReadEnum<eBoolean>();
+			this.IsLoopingRace = reader.ReadEnum<eBoolean>();
+			this.ReverseVersionExists = reader.ReadEnum<eBoolean>();
+
+			// Write gameplay scores
+			this.SunInfoName = reader.ReadNullTermUTF8();
+			this.RaceGameplayMode = reader.ReadEnum<TrackGameplayMode>();
+			this.RaceLength = reader.ReadUInt32();
+			this.TimeLimitToBeatForward = reader.ReadSingle();
+			this.TimeLimitToBeatReverse = reader.ReadSingle();
+			this.ScoreToBeatDriftForward = reader.ReadInt32();
+			this.ScoreToBeatDriftReverse = reader.ReadInt32();
+
+			// Write map calibrations
+			this.TrackMapCalibrationOffsetX = reader.ReadSingle();
+			this.TrackMapCalibrationOffsetY = reader.ReadSingle();
+			this.TrackMapCalibrationWidth = reader.ReadSingle();
+			this.TrackMapCalibrationRotation = reader.ReadSingle();
+			this.TrackMapStartgridAngle = reader.ReadSingle();
+			this.TrackMapFinishlineAngle = reader.ReadSingle();
+
+			// Write difficulties and padding
+			this.DifficultyForward = reader.ReadEnum<TrackDifficulty>();
+			this.DifficultyReverse = reader.ReadEnum<TrackDifficulty>();
+			this.NumSecBeforeShorcutsAllowed = reader.ReadInt16();
+			this.DriftSecondsMin = reader.ReadInt16();
+			this.DriftSecondsMax = reader.ReadInt16();
+
+			// Write traffic settings
+			this.MaxTrafficCars_0_0 = reader.ReadByte();
+			this.MaxTrafficCars_0_1 = reader.ReadByte();
+			this.MaxTrafficCars_1_0 = reader.ReadByte();
+			this.MaxTrafficCars_1_1 = reader.ReadByte();
+			this.MaxTrafficCars_2_0 = reader.ReadByte();
+			this.MaxTrafficCars_2_1 = reader.ReadByte();
+			this.MaxTrafficCars_3_0 = reader.ReadByte();
+			this.MaxTrafficCars_3_1 = reader.ReadByte();
+			this.TrafAllowedNearStartgrid = reader.ReadByte();
+			this.TrafAllowedNearFinishline = reader.ReadByte();
+			this.CarRaceStartConfig = reader.ReadInt16();
+			this.TrafMinInitDistFromStart = reader.ReadSingle();
+			this.TrafMinInitDistFromFinish = reader.ReadSingle();
+			this.TrafMinInitDistInbetweenA = reader.ReadSingle();
+			this.TrafMinInitDistInbetweenB = reader.ReadSingle();
 		}
 
 		#endregion

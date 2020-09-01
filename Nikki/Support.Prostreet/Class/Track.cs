@@ -26,12 +26,12 @@ namespace Nikki.Support.Prostreet.Class
 		/// <summary>
 		/// Maximum length of the CollectionName.
 		/// </summary>
-		public const int MaxCNameLength = 0x3F;
+		public const int MaxCNameLength = 0x02;
 
 		/// <summary>
 		/// Offset of the CollectionName in the data.
 		/// </summary>
-		public const int CNameOffsetAt = 0x40;
+		public const int CNameOffsetAt = 0x112;
 
 		/// <summary>
 		/// Base size of a unit collection.

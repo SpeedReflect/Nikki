@@ -26,12 +26,12 @@ namespace Nikki.Support.Underground2.Class
 		/// <summary>
 		/// Maximum length of the CollectionName.
 		/// </summary>
-		public const int MaxCNameLength = 0x1F;
+		public const int MaxCNameLength = 0x02;
 
 		/// <summary>
 		/// Offset of the CollectionName in the data.
 		/// </summary>
-		public const int CNameOffsetAt = 0x20;
+		public const int CNameOffsetAt = 0x8A;
 
 		/// <summary>
 		/// Base size of a unit collection.
