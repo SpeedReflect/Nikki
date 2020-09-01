@@ -59,9 +59,9 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 		public ushort TrackID { get; set; }
 
 		/// <summary>
-		/// Padding, perhaps?
+		/// Padding, perhaps
 		/// </summary>
-		public int Padding0 { get; set; }
+		public int Unknown { get; set; }
 
 		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.
@@ -74,7 +74,7 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 				UnlockType = this.UnlockType,
 				UnlockName = this.UnlockName,
 				TrackID = this.TrackID,
-				Padding0 = this.Padding0
+				Unknown = this.Unknown,
 			};
 			return result;
 		}
@@ -99,7 +99,7 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 			
 			}
 			
-			this.Padding0 = br.ReadInt32();
+			this.Unknown = br.ReadInt32();
 		}
 
 		/// <summary>
@@ -123,7 +123,29 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 
 			}
 
-			bw.WriteEnum(this.Padding0);
+			bw.WriteEnum(this.Unknown);
+		}
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public void Serialize(BinaryWriter bw)
+		{
+			bw.WriteEnum(this.UnlockType);
+			bw.WriteNullTermUTF8(this.UnlockName);
+			bw.Write(this.TrackID);
+			bw.Write(this.Unknown);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public void Deserialize(BinaryReader br)
+		{
+			this.UnlockType = br.ReadEnum<UnlockableType>();
+			this.UnlockName = br.ReadNullTermUTF8();
+			this.TrackID = br.ReadUInt16();
+			this.Unknown = br.ReadInt32();
 		}
 	}
 }

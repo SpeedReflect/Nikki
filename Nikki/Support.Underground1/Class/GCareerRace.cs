@@ -761,5 +761,165 @@ namespace Nikki.Support.Underground1.Gameplay
 		}
 
 		#endregion
+
+		#region Serialization
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+		public void Serialize(BinaryWriter bw)
+		{
+			byte[] array;
+			using (var ms = new MemoryStream(0x2000))
+			using (var writer = new BinaryWriter(ms))
+			{
+
+				// CollectionName
+				writer.WriteNullTermUTF8(this._collection_name);
+
+				writer.WriteEnum(this.RaceType);
+				writer.WriteEnum(this.RaceBehavior);
+				writer.Write(this.Unknown0x0C);
+				writer.Write(this.Unknown0x10);
+				writer.Write(this.Unknown0x14);
+				writer.Write(this.Unknown0x18);
+				writer.Write(this.Unknown0x1C);
+				writer.Write(this.Unknown0x20);
+				writer.Write(this.Unknown0x24);
+				writer.Write(this.Opponent1Key);
+				writer.Write(this.Opponent2Key);
+				writer.Write(this.Opponent3Key);
+				writer.Write(this.SwitchValue);
+
+				this.UNLOCK1.Serialize(writer);
+				this.UNLOCK2.Serialize(writer);
+				this.UNLOCK3.Serialize(writer);
+				this.UNLOCK4.Serialize(writer);
+				this.UNLOCK5.Serialize(writer);
+				
+				writer.Write(this.NumberOfUnlocks);
+				
+				this.STAGE1.Write(writer);
+				this.STAGE2.Write(writer);
+				this.STAGE3.Write(writer);
+				this.STAGE4.Write(writer);
+				this.STAGE5.Write(writer);
+				this.STAGE6.Write(writer);
+				this.STAGE7.Write(writer);
+				this.STAGE8.Write(writer);
+
+				writer.Write(this.NumberOfStages);
+				writer.Write(this.UnlockedByRace);
+				writer.Write(this.Unknown0xA0);
+				writer.Write(this.Unknown0xA4);
+				writer.WriteEnum(this.IsValidEvent);
+				writer.WriteEnum(this.InitiallyLockedMayb);
+				writer.WriteNullTermUTF8(this.IntroMovie);
+				writer.WriteNullTermUTF8(this.InterMovie);
+				writer.WriteNullTermUTF8(this.OutroMovie);
+				writer.WriteNullTermUTF8(this.PlayerCarType);
+				
+				this.OPPONENT1.Serialize(writer);
+				this.OPPONENT2.Serialize(writer);
+				this.OPPONENT3.Serialize(writer);
+				
+				writer.Write(this.NumberOfOpponents);
+				writer.Write(this.Unknown0x12C);
+				writer.Write(this.SomeKey);
+				writer.Write(this.AllowTrafficMayb);
+				writer.Write(this.Unknown0x138);
+				writer.Write(this.Unknown0x13C);
+				writer.Write(this.Unknown0x140);
+				writer.Write(this.Unknown0x144);
+				writer.Write(this.Unknown0x148);
+
+				array = ms.ToArray();
+
+			}
+
+			array = Interop.Compress(array, LZCompressionType.BEST);
+
+			var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
+			header.Write(bw);
+			bw.Write(array.Length);
+			bw.Write(array);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
+		public void Deserialize(BinaryReader br)
+		{
+			int size = br.ReadInt32();
+			var array = br.ReadBytes(size);
+
+			array = Interop.Decompress(array);
+
+			using var ms = new MemoryStream(array);
+			using var reader = new BinaryReader(ms);
+
+			// CollectionName
+			this._collection_name = reader.ReadNullTermUTF8();
+
+			this.RaceType = reader.ReadEnum<CareerRaceType>();
+			this.RaceBehavior = reader.ReadEnum<CareerRaceBehavior>();
+			this.Unknown0x0C = reader.ReadInt32();
+			this.Unknown0x10 = reader.ReadInt32();
+			this.Unknown0x14 = reader.ReadInt32();
+			this.Unknown0x18 = reader.ReadInt32();
+			this.Unknown0x1C = reader.ReadInt32();
+			this.Unknown0x20 = reader.ReadInt32();
+			this.Unknown0x24 = reader.ReadInt32();
+			this.Opponent1Key = reader.ReadUInt32();
+			this.Opponent2Key = reader.ReadUInt32();
+			this.Opponent3Key = reader.ReadUInt32();
+			this.SwitchValue = reader.ReadInt32();
+
+			this.UNLOCK1.Deserialize(reader);
+			this.UNLOCK2.Deserialize(reader);
+			this.UNLOCK3.Deserialize(reader);
+			this.UNLOCK4.Deserialize(reader);
+			this.UNLOCK5.Deserialize(reader);
+
+			this.NumberOfUnlocks = reader.ReadInt32();
+
+			this.STAGE1.Read(reader);
+			this.STAGE2.Read(reader);
+			this.STAGE3.Read(reader);
+			this.STAGE4.Read(reader);
+			this.STAGE5.Read(reader);
+			this.STAGE6.Read(reader);
+			this.STAGE7.Read(reader);
+			this.STAGE8.Read(reader);
+
+			this.NumberOfStages = reader.ReadInt32();
+			this.UnlockedByRace = reader.ReadInt32();
+			this.Unknown0xA0 = reader.ReadInt32();
+			this.Unknown0xA4 = reader.ReadInt32();
+			this.IsValidEvent = reader.ReadEnum<eBoolean>();
+			this.InitiallyLockedMayb = reader.ReadEnum<eBoolean>();
+			this.IntroMovie = reader.ReadNullTermUTF8();
+			this.InterMovie = reader.ReadNullTermUTF8();
+			this.OutroMovie = reader.ReadNullTermUTF8();
+			this.PlayerCarType = reader.ReadNullTermUTF8();
+
+			this.OPPONENT1.Deserialize(reader);
+			this.OPPONENT2.Deserialize(reader);
+			this.OPPONENT3.Deserialize(reader);
+
+			this.NumberOfOpponents = reader.ReadInt32();
+			this.Unknown0x12C = reader.ReadSingle();
+			this.SomeKey = reader.ReadUInt32();
+			this.AllowTrafficMayb = reader.ReadInt32();
+			this.Unknown0x138 = reader.ReadInt32();
+			this.Unknown0x13C = reader.ReadSingle();
+			this.Unknown0x140 = reader.ReadSingle();
+			this.Unknown0x144 = reader.ReadSingle();
+			this.Unknown0x148 = reader.ReadInt32();
+		}
+
+		#endregion
 	}
 }
