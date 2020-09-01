@@ -1,13 +1,15 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
-using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Support.Underground1.Framework;
 using Nikki.Support.Underground1.Parts.GameParts;
 using CoreExtensions.IO;
+using CoreExtensions.Conversions;
 
 
 
@@ -16,87 +18,187 @@ namespace Nikki.Support.Underground1.Gameplay
 	/// <summary>
 	/// <see cref="GCareerRace"/> is a collection of settings related to career races and events.
 	/// </summary>
-	public class GCareerRace : ACollectable
+	public class GCareerRace : Collectable
 	{
 		#region Fields
 
 		private string _collection_name;
 
+		/// <summary>
+		/// Maximum length of the CollectionName.
+		/// </summary>
+		public const int MaxCNameLength = 0x04;
+
+		/// <summary>
+		/// Offset of the CollectionName in the data.
+		/// </summary>
+		public const int CNameOffsetAt = 0x00;
+
+		/// <summary>
+		/// Base size of a unit collection.
+		/// </summary>
+		public const int BaseClassSize = 0x14C;
+
+		#endregion
+
+		#region Enums
+
+		/// <summary>
+		/// Enum of career race behavior types in Underground 1.
+		/// </summary>
+		public enum CareerRaceBehavior : int
+		{
+			/// <summary>
+			/// Tournament behavior type.
+			/// </summary>
+			Tournament = 1,
+
+			/// <summary>
+			/// Regular behavior 2.
+			/// </summary>
+			Regular2 = 2,
+
+			/// <summary>
+			/// Regular behavior 3.
+			/// </summary>
+			Regular3 = 3,
+
+			/// <summary>
+			/// Regular behavior 4.
+			/// </summary>
+			Regular4 = 4,
+
+			/// <summary>
+			/// Regular behavior 5.
+			/// </summary>
+			Regular5 = 5,
+
+			/// <summary>
+			/// Regular behavior 6.
+			/// </summary>
+			Regular6 = 6,
+
+			/// <summary>
+			/// Unknown.
+			/// </summary>
+			Hmmm = 7,
+
+			/// <summary>
+			/// Crash game.
+			/// </summary>
+			CrashGame = 8,
+		}
+
+		/// <summary>
+		/// Enum of career race types in Underground 1.
+		/// </summary>
+		public enum CareerRaceType : int
+		{
+			/// <summary>
+			/// Circuit race.
+			/// </summary>
+			Circuit = 0,
+
+			/// <summary>
+			/// Drag race.
+			/// </summary>
+			Drag = 1,
+
+			/// <summary>
+			/// Sprint race.
+			/// </summary>
+			Sprint = 2,
+
+			/// <summary>
+			/// Drift race.
+			/// </summary>
+			Drift = 3,
+
+			/// <summary>
+			/// Time Trial race.
+			/// </summary>
+			TimeTrial = 4,
+
+			/// <summary>
+			/// Lap Knockout race.
+			/// </summary>
+			LapKnockout = 5,
+		}
+
 		#endregion
 
 		#region Properties
 
+
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override GameINT GameINT => GameINT.Underground1;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override string GameSTR => GameINT.Underground1.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// Manager to which the class belongs to.
 		/// </summary>
-		public Database.Underground1 Database { get; set; }
+		[Browsable(false)]
+		public GCareerRaceManager Manager { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
 			set
 			{
-				if (string.IsNullOrWhiteSpace(value))
-					throw new ArgumentNullException("This value cannot be left left empty.");
-				if (value.Contains(" "))
-					throw new Exception("CollectionName cannot contain whitespace.");
-				if (!Byte.TryParse(value, out byte id))
-					throw new Exception("Unable to parse event ID from CollectionName provided.");
-				if (this.Database.GCareerRaces.FindCollection(value) != null)
-					throw new CollectionExistenceException(value);
+				this.Manager?.CreationCheck(value);
 				this._collection_name = value;
-				this.ID = id;
 			}
 		}
 
 		/// <summary>
 		/// Binary memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public uint BinKey => this._collection_name.BinHash();
 
 		/// <summary>
 		/// Vault memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public uint VltKey => this._collection_name.VltHash();
-
-		/// <summary>
-		/// ID of this race.
-		/// </summary>
-		public byte ID { get; set; }
 
 		/// <summary>
 		/// Career race behavior.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		public eCareerRaceBehavior RaceBehavior { get; set; }
+		[Category("Secondary")]
+		public CareerRaceBehavior RaceBehavior { get; set; }
 
 		/// <summary>
 		/// Career race type.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		public eCareerRaceType RaceType { get; set; }
+		[Category("Secondary")]
+		public CareerRaceType RaceType { get; set; }
 
 		/// <summary>
 		/// Unknown value at offset 0x0C.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int Unknown0x0C { get; set; }
 
 		/// <summary>
@@ -104,6 +206,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int Unknown0x10 { get; set; }
 
 		/// <summary>
@@ -111,6 +214,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int Unknown0x14 { get; set; }
 
 		/// <summary>
@@ -118,6 +222,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int Unknown0x18 { get; set; }
 
 		/// <summary>
@@ -125,6 +230,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int Unknown0x1C { get; set; }
 
 		/// <summary>
@@ -132,6 +238,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int Unknown0x20 { get; set; }
 
 		/// <summary>
@@ -139,6 +246,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int Unknown0x24 { get; set; }
 
 		/// <summary>
@@ -146,6 +254,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public uint Opponent1Key { get; set; }
 
 		/// <summary>
@@ -153,6 +262,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public uint Opponent2Key { get; set; }
 
 		/// <summary>
@@ -160,6 +270,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public uint Opponent3Key { get; set; }
 
 		/// <summary>
@@ -167,83 +278,97 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int SwitchValue { get; set; }
 
 		/// <summary>
 		/// Unlock 1 upon completion of this race.
 		/// </summary>
+		[Browsable(false)]
 		[Expandable("Unlocks")]
 		public Unlock UNLOCK1 { get; set; }
 
 		/// <summary>
 		/// Unlock 2 upon completion of this race.
 		/// </summary>
+		[Browsable(false)]
 		[Expandable("Unlocks")]
 		public Unlock UNLOCK2 { get; set; }
 
 		/// <summary>
 		/// Unlock 3 upon completion of this race.
 		/// </summary>
+		[Browsable(false)]
 		[Expandable("Unlocks")]
 		public Unlock UNLOCK3 { get; set; }
 
 		/// <summary>
 		/// Unlock 4 upon completion of this race.
 		/// </summary>
+		[Browsable(false)]
 		[Expandable("Unlocks")]
 		public Unlock UNLOCK4 { get; set; }
 
 		/// <summary>
 		/// Unlock 5 upon completion of this race.
 		/// </summary>
+		[Browsable(false)]
 		[Expandable("Unlocks")]
 		public Unlock UNLOCK5 { get; set; }
 
 		/// <summary>
 		/// Stage 1 of this race.
 		/// </summary>
+		[Browsable(false)]
 		[Expandable("Stages")]
 		public Stage STAGE1 { get; set; }
 
 		/// <summary>
 		/// Stage 2 of this race.
 		/// </summary>
+		[Browsable(false)]
 		[Expandable("Stages")]
 		public Stage STAGE2 { get; set; }
 
 		/// <summary>
 		/// Stage 3 of this race.
 		/// </summary>
+		[Browsable(false)]
 		[Expandable("Stages")]
 		public Stage STAGE3 { get; set; }
 
 		/// <summary>
 		/// Stage 4 of this race.
 		/// </summary>
+		[Browsable(false)]
 		[Expandable("Stages")]
 		public Stage STAGE4 { get; set; }
 
 		/// <summary>
 		/// Stage 5 of this race.
 		/// </summary>
+		[Browsable(false)]
 		[Expandable("Stages")]
 		public Stage STAGE5 { get; set; }
 
 		/// <summary>
 		/// Stage 6 of this race.
 		/// </summary>
+		[Browsable(false)]
 		[Expandable("Stages")]
 		public Stage STAGE6 { get; set; }
 
 		/// <summary>
 		/// Stage 7 of this race.
 		/// </summary>
+		[Browsable(false)]
 		[Expandable("Stages")]
 		public Stage STAGE7 { get; set; }
 
 		/// <summary>
 		/// Stage 8 of this race.
 		/// </summary>
+		[Browsable(false)]
 		[Expandable("Stages")]
 		public Stage STAGE8 { get; set; }
 
@@ -253,6 +378,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public int NumberOfUnlocks { get; set; }
 
 		/// <summary>
@@ -261,6 +387,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public int NumberOfStages { get; set; }
 
 		/// <summary>
@@ -268,6 +395,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int UnlockedByRace { get; set; }
 
 		/// <summary>
@@ -275,6 +403,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int Unknown0xA0 { get; set; }
 
 		/// <summary>
@@ -282,6 +411,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int Unknown0xA4 { get; set; }
 
 		/// <summary>
@@ -290,6 +420,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public eBoolean IsValidEvent { get; set; }
 
 		/// <summary>
@@ -297,6 +428,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public eBoolean InitiallyLockedMayb { get; set; }
 
 		/// <summary>
@@ -304,6 +436,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public string IntroMovie { get; set; } = String.Empty;
 
 		/// <summary>
@@ -311,6 +444,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public string InterMovie { get; set; } = String.Empty;
 
 		/// <summary>
@@ -318,6 +452,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public string OutroMovie { get; set; } = String.Empty;
 
 		/// <summary>
@@ -326,23 +461,27 @@ namespace Nikki.Support.Underground1.Gameplay
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public string PlayerCarType { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Opponent 1 settings.
 		/// </summary>
+		[Browsable(false)]
 		[Expandable("Opponents")]
 		public Opponent OPPONENT1 { get; set; }
 
 		/// <summary>
 		/// Opponent 2 settings.
 		/// </summary>
+		[Browsable(false)]
 		[Expandable("Opponents")]
 		public Opponent OPPONENT2 { get; set; }
 
 		/// <summary>
 		/// Opponent 3 settings.
 		/// </summary>
+		[Browsable(false)]
 		[Expandable("Opponents")]
 		public Opponent OPPONENT3 { get; set; }
 
@@ -352,6 +491,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
+		[Category("Primary")]
 		public int NumberOfOpponents { get; set; }
 
 		/// <summary>
@@ -359,6 +499,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float Unknown0x12C { get; set; }
 
 		/// <summary>
@@ -366,6 +507,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public uint SomeKey { get; set; }
 
 		/// <summary>
@@ -373,6 +515,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int AllowTrafficMayb { get; set; }
 
 		/// <summary>
@@ -380,6 +523,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int Unknown0x138 { get; set; }
 
 		/// <summary>
@@ -387,6 +531,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float Unknown0x13C { get; set; }
 
 		/// <summary>
@@ -394,6 +539,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float Unknown0x140 { get; set; }
 
 		/// <summary>
@@ -401,6 +547,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public float Unknown0x144 { get; set; }
 
 		/// <summary>
@@ -408,6 +555,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
+		[Category("Secondary")]
 		public int Unknown0x148 { get; set; }
 
 		#endregion
@@ -417,18 +565,35 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// <summary>
 		/// Initializes new instance of <see cref="GCareerRace"/>.
 		/// </summary>
-		public GCareerRace() { }
+		public GCareerRace()
+		{
+			this.OPPONENT1 = new Opponent();
+			this.OPPONENT2 = new Opponent();
+			this.OPPONENT3 = new Opponent();
+			this.STAGE1 = new Stage();
+			this.STAGE2 = new Stage();
+			this.STAGE3 = new Stage();
+			this.STAGE4 = new Stage();
+			this.STAGE5 = new Stage();
+			this.STAGE6 = new Stage();
+			this.STAGE7 = new Stage();
+			this.STAGE8 = new Stage();
+			this.UNLOCK1 = new Unlock();
+			this.UNLOCK2 = new Unlock();
+			this.UNLOCK3 = new Unlock();
+			this.UNLOCK4 = new Unlock();
+			this.UNLOCK5 = new Unlock();
+		}
 
 		/// <summary>
 		/// Initializes new instance of <see cref="GCareerRace"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Underground1"/> to which this instance belongs to.</param>
-		public GCareerRace(string CName, Database.Underground1 db)
+		/// <param name="manager"><see cref="GCareerRaceManager"/> to which this instance belongs to.</param>
+		public GCareerRace(string CName, GCareerRaceManager manager) : this()
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.CollectionName = CName;
-			this.Initialize();
 			CName.BinHash();
 		}
 
@@ -436,12 +601,12 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// Initializes new instance of <see cref="GCareerRace"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		/// <param name="db"><see cref="Database.Underground1"/> to which this instance belongs to.</param>
-		public GCareerRace(BinaryReader br, Database.Underground1 db)
+		/// <param name="manager"><see cref="GCareerRaceManager"/> to which this instance belongs to.</param>
+		public GCareerRace(BinaryReader br, GCareerRaceManager manager) : this()
 		{
-			this.Database = db;
-			this.Initialize();
+			this.Manager = manager;
 			this.Disassemble(br);
+			this.CollectionName.BinHash();
 		}
 
 		/// <summary>
@@ -459,7 +624,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="GCareerRace"/> with.</param>
 		public void Assemble(BinaryWriter bw)
 		{
-			bw.Write((int)this.ID);
+			bw.Write(Int32.Parse(this._collection_name));
 			bw.WriteEnum(this.RaceType);
 			bw.WriteEnum(this.RaceBehavior);
 			bw.Write(this.Unknown0x0C);
@@ -518,11 +683,11 @@ namespace Nikki.Support.Underground1.Gameplay
 		public void Disassemble(BinaryReader br)
 		{
 			// Collection Name
-			this._collection_name = br.ReadInt32().ToString("X2");
+			this._collection_name = br.ReadInt32().ToString();
 
 			// Settings
-			this.RaceType = br.ReadEnum<eCareerRaceType>();
-			this.RaceBehavior = br.ReadEnum<eCareerRaceBehavior>();
+			this.RaceType = br.ReadEnum<CareerRaceType>();
+			this.RaceBehavior = br.ReadEnum<CareerRaceBehavior>();
 			this.Unknown0x0C = br.ReadInt32();
 			this.Unknown0x10 = br.ReadInt32();
 			this.Unknown0x14 = br.ReadInt32();
@@ -557,7 +722,7 @@ namespace Nikki.Support.Underground1.Gameplay
 			this.IntroMovie = br.ReadNullTermUTF8(0xC);
 			this.InterMovie = br.ReadNullTermUTF8(0xC);
 			this.OutroMovie = br.ReadNullTermUTF8(0xC);
-			this.PlayerCarType = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.PlayerCarType = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			this.OPPONENT1.Read(br);
 			this.OPPONENT2.Read(br);
 			this.OPPONENT3.Read(br);
@@ -577,31 +742,11 @@ namespace Nikki.Support.Underground1.Gameplay
 		/// </summary>
 		/// <param name="CName">CollectionName of the new created object.</param>
 		/// <returns>Memory casted copy of the object.</returns>
-		public override ACollectable MemoryCast(string CName)
+		public override Collectable MemoryCast(string CName)
 		{
-			var result = new GCareerRace(CName, this.Database);
+			var result = new GCareerRace(CName, this.Manager);
 			base.MemoryCast(this, result);
 			return result;
-		}
-
-		private void Initialize()
-		{
-			this.OPPONENT1 = new Opponent();
-			this.OPPONENT2 = new Opponent();
-			this.OPPONENT3 = new Opponent();
-			this.STAGE1 = new Stage();
-			this.STAGE2 = new Stage();
-			this.STAGE3 = new Stage();
-			this.STAGE4 = new Stage();
-			this.STAGE5 = new Stage();
-			this.STAGE6 = new Stage();
-			this.STAGE7 = new Stage();
-			this.STAGE8 = new Stage();
-			this.UNLOCK1 = new Unlock();
-			this.UNLOCK2 = new Unlock();
-			this.UNLOCK3 = new Unlock();
-			this.UNLOCK4 = new Unlock();
-			this.UNLOCK5 = new Unlock();
 		}
 
 		/// <summary>
@@ -612,7 +757,7 @@ namespace Nikki.Support.Underground1.Gameplay
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
 
 		#endregion
