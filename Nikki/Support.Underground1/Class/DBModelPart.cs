@@ -1,11 +1,18 @@
 ﻿using System;
+using System.IO;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Reflection.Enum.PartID;
 using Nikki.Support.Shared.Parts.CarParts;
+using Nikki.Support.Underground1.Framework;
+using Nikki.Support.Underground1.Attributes;
+using CoreExtensions.IO;
 using CoreExtensions.Reflection;
 using CoreExtensions.Conversions;
 
@@ -21,6 +28,7 @@ namespace Nikki.Support.Underground1.Class
 		#region Fields
 
 		private string _collection_name;
+		private List<RealCarPart> _realparts;
 
 		#endregion
 
@@ -29,33 +37,32 @@ namespace Nikki.Support.Underground1.Class
 		/// <summary>
 		/// Game to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override GameINT GameINT => GameINT.Underground1;
 
 		/// <summary>
 		/// Game string to which the class belongs to.
 		/// </summary>
+		[Browsable(false)]
 		public override string GameSTR => GameINT.Underground1.ToString();
 
 		/// <summary>
-		/// Database to which the class belongs to.
+		/// Manager to which the class belongs to.
 		/// </summary>
-		public Database.Underground1 Database { get; set; }
+		[Browsable(false)]
+		public DBModelPartManager Manager { get; set; }
 
 		/// <summary>
 		/// Collection name of the variable.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public override string CollectionName
 		{
 			get => this._collection_name;
 			set
 			{
-				if (String.IsNullOrWhiteSpace(value))
-					throw new ArgumentNullException("This value cannot be left empty.");
-				if (value.Contains(" "))
-					throw new Exception("CollectionName cannot contain whitespace.");
-				if (this.Database.ModelParts.FindCollection(value) != null)
-					throw new CollectionExistenceException(value);
+				this.Manager?.CreationCheck(value);
 				this._collection_name = value;
 			}
 		}
@@ -63,17 +70,22 @@ namespace Nikki.Support.Underground1.Class
 		/// <summary>
 		/// Binary memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint BinKey => this._collection_name.BinHash();
 
 		/// <summary>
 		/// Vault memory hash of the collection name.
 		/// </summary>
+		[Category("Main")]
+		[TypeConverter(typeof(HexConverter))]
 		public override uint VltKey => this._collection_name.VltHash();
 
 		/// <summary>
 		/// List of <see cref="RealCarPart"/>.
 		/// </summary>
-		public override List<RealCarPart> ModelCarParts { get; set; }
+		[Browsable(false)]
+		public override List<RealCarPart> ModelCarParts => this._realparts;
 
 		#endregion
 
@@ -82,36 +94,23 @@ namespace Nikki.Support.Underground1.Class
 		/// <summary>
 		/// Initializes new instance of <see cref="DBModelPart"/>.
 		/// </summary>
-		public DBModelPart() { }
+		public DBModelPart() => this._realparts = new List<RealCarPart>();
 
 		/// <summary>
 		/// Initializes new instance of <see cref="DBModelPart"/>.
 		/// </summary>
 		/// <param name="CName">CollectionName of the new instance.</param>
-		/// <param name="db"><see cref="Database.Underground1"/> to which this instance belongs to.</param>
-		public DBModelPart(string CName, Database.Underground1 db)
+		/// <param name="manager"><see cref="DBModelPartManager"/> to which this instance belongs to.</param>
+		public DBModelPart(string CName, DBModelPartManager manager) : this()
 		{
-			this.Database = db;
+			this.Manager = manager;
 			this.CollectionName = CName;
-			this.ModelCarParts = new List<RealCarPart>();
+			this.CollectionName.BinHash();
 		}
 
 		#endregion
 
 		#region Methods
-
-		/// <summary>
-		/// Resorts all names according to their indexed position.
-		/// </summary>
-		public override void ResortNames()
-		{
-			for (int loop = 0; loop < this.ModelCarParts.Count; ++loop)
-			{
-
-				this.ModelCarParts[loop].PartName = $"{this._collection_name}_PART_{loop}";
-
-			}
-		}
 
 		/// <summary>
 		/// Switches two parts and their indexes.
@@ -126,32 +125,27 @@ namespace Nikki.Support.Underground1.Class
 			if (index1 == -1)
 			{
 
-				throw new InfoAccessException($"Part named {part1} does not exist");
+				throw new InfoAccessException(part1);
 
 			}
 
 			if (index2 == -1)
 			{
 
-				throw new InfoAccessException($"Part named {part2} does not exist");
+				throw new InfoAccessException(part2);
 
 			}
 
-			var temp1 = this.GetRealPart(index1);
-			var temp2 = this.GetRealPart(index2);
+			var temp1 = this.ModelCarParts[index1];
+			var temp2 = this.ModelCarParts[index2];
 			this.ModelCarParts[index2] = temp1;
 			this.ModelCarParts[index1] = temp2;
-			this.ResortNames();
 		}
 
 		/// <summary>
 		/// Reverses all parts in this <see cref="DBModelPart"/>.
 		/// </summary>
-		public override void ReverseParts()
-		{
-			this.ModelCarParts.Reverse();
-			this.ResortNames();
-		}
+		public override void ReverseParts() => this.ModelCarParts.Reverse();
 
 		/// <summary>
 		/// Sorts all parts by property name provided.
@@ -165,7 +159,7 @@ namespace Nikki.Support.Underground1.Class
 			if (field == null)
 			{
 
-				throw new InfoAccessException($"Property named {property} does not exist");
+				throw new InfoAccessException(property);
 
 			}
 
@@ -177,8 +171,6 @@ namespace Nikki.Support.Underground1.Class
 				return valueX.CompareTo(valueY);
 
 			});
-
-			this.ResortNames();
 		}
 
 		/// <summary>
@@ -186,14 +178,16 @@ namespace Nikki.Support.Underground1.Class
 		/// </summary>
 		/// <param name="CName">CollectionName of the new created object.</param>
 		/// <returns>Memory casted copy of the object.</returns>
-		public override ACollectable MemoryCast(string CName)
+		public override Collectable MemoryCast(string CName)
 		{
-			var result = new DBModelPart(CName, this.Database);
+			var result = new DBModelPart(CName, this.Manager);
 
 			foreach (var part in this.ModelCarParts)
 			{
 
-				result.ModelCarParts.Add((RealCarPart)part.PlainCopy());
+				var copy = (Parts.CarParts.RealCarPart)part.PlainCopy();
+				copy.Model = result;
+				result.ModelCarParts.Add(copy);
 
 			}
 
@@ -205,8 +199,7 @@ namespace Nikki.Support.Underground1.Class
 		/// </summary>
 		public override void AddRealPart()
 		{
-			this.ModelCarParts.Add(new Parts.CarParts.RealCarPart(this.Index, this));
-			this.ResortNames();
+			this.ModelCarParts.Add(new Parts.CarParts.RealCarPart(this));
 		}
 
 		/// <summary>
@@ -220,33 +213,72 @@ namespace Nikki.Support.Underground1.Class
 			if (!result)
 			{
 
-				throw new InfoAccessException($"Part named {name} does not exist");
+				throw new InfoAccessException(name);
 
 			}
+		}
 
-			this.ResortNames();
+		/// <summary>
+		/// Removes <see cref="RealCarPart"/>.
+		/// </summary>
+		/// <param name="index">Index of <see cref="RealCarPart"/> to remove.</param>
+		public override void RemovePart(int index)
+		{
+			if (index < 0 || index >= this.CarPartsCount)
+			{
+
+				throw new IndexOutOfRangeException(nameof(index));
+
+			}
+			else
+			{
+
+				this.ModelCarParts.RemoveAt(index);
+
+			}
 		}
 
 		/// <summary>
 		/// Attemps to clone a <see cref="RealCarPart"/>.
 		/// </summary>
-		/// <param name="newname">Name of the new <see cref="RealCarPart"/>.</param>
 		/// <param name="copyname">Name of <see cref="RealCarPart"/> to clone.</param>
 		/// <returns>True on success; false otherwise.</returns>
-		public override void ClonePart(string newname, string copyname)
+		public override void ClonePart(string copyname)
 		{
 			var part = this.GetRealPart(copyname);
 
 			if (part == null)
 			{
 
-				throw new InfoAccessException($"Part named {copyname} does not exist");
+				throw new InfoAccessException(copyname);
 
 			}
 
+			var copy = (RealCarPart)part.PlainCopy();
+			copy.Model = this;
+			this.ModelCarParts.Add(copy);
+		}
 
-			this.ModelCarParts.Add((RealCarPart)part.PlainCopy());
-			this.ResortNames();
+		/// <summary>
+		/// Clones a <see cref="RealCarPart"/>.
+		/// </summary>
+		/// <param name="index">Index of <see cref="RealCarPart"/> to clone.</param>
+		public override void ClonePart(int index)
+		{
+			if (index < 0 || index >= this.CarPartsCount)
+			{
+
+				throw new IndexOutOfRangeException(nameof(index));
+
+			}
+			else
+			{
+
+				var copy = (RealCarPart)this.ModelCarParts[index].PlainCopy();
+				copy.Model = this;
+				this.ModelCarParts.Add(copy);
+
+			}
 		}
 
 		/// <summary>
@@ -257,9 +289,11 @@ namespace Nikki.Support.Underground1.Class
 		public override string ToString()
 		{
 			return $"Collection Name: {this.CollectionName} | " +
-				   $"BinKey: {this.BinKey.ToString("X8")} | Game: {this.GameSTR}";
+				   $"BinKey: {this.BinKey:X8} | Game: {this.GameSTR}";
 		}
 
 		#endregion
+
+
 	}
 }

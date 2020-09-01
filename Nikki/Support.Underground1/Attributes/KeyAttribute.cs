@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Diagnostics;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
@@ -7,6 +9,7 @@ using Nikki.Reflection.Enum.CP;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Shared.Parts.CarParts;
+using CoreExtensions.IO;
 using CoreExtensions.Conversions;
 
 
@@ -14,35 +17,30 @@ using CoreExtensions.Conversions;
 namespace Nikki.Support.Underground1.Attributes
 {
 	/// <summary>
-	/// A <see cref="CPAttribute"/> with 4-byte signed integer value.
+	/// A <see cref="CPAttribute"/> with a string value represented as a binary key.
 	/// </summary>
+	[DebuggerDisplay("Attribute: {AttribType} | Type: {Type} | Value: {Value}")]
 	public class KeyAttribute : CPAttribute
 	{
-		private const eCarPartAttribType _type = eCarPartAttribType.Key;
+		/// <summary>
+		/// <see cref="CarPartAttribType"/> type of this <see cref="KeyAttribute"/>.
+		/// </summary>
+		[Category("Main")]
+		public override CarPartAttribType AttribType => CarPartAttribType.Key;
 
 		/// <summary>
-		/// <see cref="eCarPartAttribType"/> type of this <see cref="KeyAttribute"/>.
+		/// Type of this <see cref="KeyAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public override eCarPartAttribType AttribType
-		{
-			get => _type;
-			set
-			{
-				var index = this.BelongsTo.GetIndex(this);
-				this.BelongsTo.Attributes[index] = this.ConvertTo(value);
-			}
-		}
-
-		/// <summary>
-		/// Type of this <see cref="BoolAttribute"/>.
-		/// </summary>
-		[AccessModifiable()]
+		[Category("Main")]
 		public eAttribKey Type { get; set; }
 
 		/// <summary>
 		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
 		/// </summary>
+		[ReadOnly(true)]
+		[TypeConverter(typeof(HexConverter))]
+		[Category("Main")]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -53,6 +51,7 @@ namespace Nikki.Support.Underground1.Attributes
 		/// Attribute value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public string Value { get; set; }
 
 		/// <summary>
@@ -64,17 +63,19 @@ namespace Nikki.Support.Underground1.Attributes
 		/// Initializes new instance of <see cref="KeyAttribute"/> with value provided.
 		/// </summary>
 		/// <param name="value">Value to set.</param>
-		/// <param name="part"><see cref="RealCarPart"/> to which this part belongs to.</param>
-		public KeyAttribute(object value, RealCarPart part)
+		public KeyAttribute(object value)
 		{
-			this.BelongsTo = part;
 			try
 			{
+
 				this.Value = (string)value.ReinterpretCast(typeof(string));
+
 			}
 			catch (Exception)
 			{
+
 				this.Value = String.Empty;
+
 			}
 		}
 
@@ -98,7 +99,7 @@ namespace Nikki.Support.Underground1.Attributes
 		/// <param name="str_reader"><see cref="BinaryReader"/> to read strings with. 
 		/// Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
 		public override void Disassemble(BinaryReader br, BinaryReader str_reader)
-			=> this.Value = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			=> this.Value = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 
 		/// <summary>
 		/// Assembles <see cref="KeyAttribute"/> and writes it using <see cref="BinaryWriter"/> 
@@ -110,14 +111,14 @@ namespace Nikki.Support.Underground1.Attributes
 		public override void Assemble(BinaryWriter bw, Dictionary<int, int> string_dict)
 		{
 			bw.Write(this.Key);
-			bw.Write(this.Value.BinHash());
+			bw.Write(String.IsNullOrEmpty(this.Value) ? 0xFFFFFFFF : this.Value.BinHash());
 		}
 
 		/// <summary>
 		/// Returns attribute part label and its type as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() => $"Attribute: {this.AttribType} | Type: {this.Type} | Value: {this.Value}";
+		public override string ToString() => this.Type.ToString();
 
 		/// <summary>
 		/// Determines whether this instance and a specified object, which must also be a
@@ -128,13 +129,13 @@ namespace Nikki.Support.Underground1.Attributes
 		/// this instance; false otherwise. If obj is null, the method returns false.
 		/// </returns>
 		public override bool Equals(object obj) =>
-			obj is KeyAttribute && this == (KeyAttribute)obj;
+			obj is KeyAttribute attribute && this == attribute;
 
 		/// <summary>
 		/// Returns the hash code for this <see cref="KeyAttribute"/>.
 		/// </summary>
 		/// <returns>A 32-bit signed integer hash code.</returns>
-		public override int GetHashCode() => Tuple.Create(this.Key, this.Value).GetHashCode();
+		public override int GetHashCode() => Tuple.Create(this.Key, this.Value.BinHash()).GetHashCode();
 
 		/// <summary>
 		/// Determines whether two specified <see cref="KeyAttribute"/> have the same value.
@@ -142,9 +143,15 @@ namespace Nikki.Support.Underground1.Attributes
 		/// <param name="at1">The first <see cref="KeyAttribute"/> to compare, or null.</param>
 		/// <param name="at2">The second <see cref="KeyAttribute"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
-		public static bool operator ==(KeyAttribute at1, KeyAttribute at2) =>
-			at1 is null ? at2 is null : at2 is null ? false
-			: (at1.Key == at2.Key && at1.Value == at2.Value);
+		public static bool operator ==(KeyAttribute at1, KeyAttribute at2)
+		{
+			if (at1 is null) return at2 is null;
+			else if (at2 is null) return false;
+
+			var key1 = at1.Value.BinHash();
+			var key2 = at2.Value.BinHash();
+			return at1.Key == at2.Key && key1 == key2;
+		}
 
 		/// <summary>
 		/// Determines whether two specified <see cref="KeyAttribute"/> have different values.
@@ -158,7 +165,7 @@ namespace Nikki.Support.Underground1.Attributes
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new KeyAttribute
 			{
@@ -174,16 +181,29 @@ namespace Nikki.Support.Underground1.Attributes
 		/// </summary>
 		/// <param name="type">Type of a new attribute.</param>
 		/// <returns>New <see cref="CPAttribute"/>.</returns>
-		public override CPAttribute ConvertTo(eCarPartAttribType type) =>
+		public override CPAttribute ConvertTo(CarPartAttribType type) =>
 			type switch
 			{
-				eCarPartAttribType.Boolean => new BoolAttribute(this.Value, this.BelongsTo),
-				eCarPartAttribType.Floating => new FloatAttribute(this.Value, this.BelongsTo),
-				eCarPartAttribType.Integer => new IntAttribute(this.Value, this.BelongsTo),
-				eCarPartAttribType.String => new StringAttribute(this.Value, this.BelongsTo),
-				eCarPartAttribType.TwoString => new TwoStringAttribute(this.Value, this.BelongsTo),
-				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Value, this.BelongsTo),
+				CarPartAttribType.Boolean => new BoolAttribute(this.Value),
+				CarPartAttribType.Floating => new FloatAttribute(this.Value),
+				CarPartAttribType.Integer => new IntAttribute(this.Value),
+				CarPartAttribType.String => new StringAttribute(this.Value),
 				_ => this
 			};
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public override void Serialize(BinaryWriter bw)
+		{
+			bw.Write(this.Key);
+			bw.WriteNullTermUTF8(this.Value);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public override void Deserialize(BinaryReader br) =>
+			this.Value = br.ReadNullTermUTF8();
 	}
 }

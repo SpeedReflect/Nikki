@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Diagnostics;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Enum.CP;
@@ -16,33 +18,28 @@ namespace Nikki.Support.Underground1.Attributes
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with null-terminated string value.
 	/// </summary>
+	[DebuggerDisplay("Attribute: {AttribType} | Type: {Type} | Value: {Value}")]
 	public class StringAttribute : CPAttribute
 	{
-		private const eCarPartAttribType _type = eCarPartAttribType.String;
+		/// <summary>
+		/// <see cref="CarPartAttribType"/> type of this <see cref="StringAttribute"/>.
+		/// </summary>
+		[Category("Main")]
+		public override CarPartAttribType AttribType => CarPartAttribType.String;
 
 		/// <summary>
-		/// <see cref="eCarPartAttribType"/> type of this <see cref="StringAttribute"/>.
+		/// Type of this <see cref="StringAttribute"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public override eCarPartAttribType AttribType
-		{
-			get => _type;
-			set
-			{
-				var index = this.BelongsTo.GetIndex(this);
-				this.BelongsTo.Attributes[index] = this.ConvertTo(value);
-			}
-		}
-
-		/// <summary>
-		/// Type of this <see cref="BoolAttribute"/>.
-		/// </summary>
-		[AccessModifiable()]
+		[Category("Main")]
 		public eAttribString Type { get; set; }
 
 		/// <summary>
 		/// Key of the part to which this <see cref="CPAttribute"/> belongs to.
 		/// </summary>
+		[ReadOnly(true)]
+		[TypeConverter(typeof(HexConverter))]
+		[Category("Main")]
 		public override uint Key
 		{
 			get => (uint)this.Type;
@@ -53,12 +50,14 @@ namespace Nikki.Support.Underground1.Attributes
 		/// Attribute value.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public string Value { get; set; } = String.Empty;
 
 		/// <summary>
 		/// Indicates whether value exists.
 		/// </summary>
 		[AccessModifiable()]
+		[Category("Main")]
 		public eBoolean ValueExists { get; set; } = eBoolean.False;
 
 		/// <summary>
@@ -70,17 +69,19 @@ namespace Nikki.Support.Underground1.Attributes
 		/// Initializes new instance of <see cref="StringAttribute"/> with value provided.
 		/// </summary>
 		/// <param name="value">Value to set.</param>
-		/// <param name="part"><see cref="RealCarPart"/> to which this part belongs to.</param>
-		public StringAttribute(object value, RealCarPart part)
+		public StringAttribute(object value)
 		{
-			this.BelongsTo = part;
 			try
 			{
+
 				this.Value = (string)value.ReinterpretCast(typeof(string));
+
 			}
 			catch (Exception)
 			{
+
 				this.Value = String.Empty;
+
 			}
 		}
 
@@ -106,14 +107,14 @@ namespace Nikki.Support.Underground1.Attributes
 		public override void Disassemble(BinaryReader br, BinaryReader str_reader)
 		{
 			var position = br.ReadUInt32();
-			
-			if (position < 0xFFFFFFFF)
+
+			if (position < 0xFFFF)
 			{
-			
-				str_reader.BaseStream.Position = position;
+
+				str_reader.BaseStream.Position = position << 2;
 				this.Value = str_reader.ReadNullTermUTF8();
 				this.ValueExists = eBoolean.True;
-			
+
 			}
 		}
 
@@ -128,7 +129,7 @@ namespace Nikki.Support.Underground1.Attributes
 			var result = String.IsNullOrEmpty(this.Value)
 				? -1
 				: string_dict[this.Value.GetHashCode()];
-			
+
 			bw.Write(this.Key);
 			bw.Write(result);
 		}
@@ -137,7 +138,7 @@ namespace Nikki.Support.Underground1.Attributes
 		/// Returns attribute part label and its type as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
-		public override string ToString() => $"Attribute: {this.AttribType} | Type: {this.Type} | Value: {this.Value}";
+		public override string ToString() => this.Type.ToString();
 
 		/// <summary>
 		/// Determines whether this instance and a specified object, which must also be a
@@ -148,7 +149,7 @@ namespace Nikki.Support.Underground1.Attributes
 		/// this instance; false otherwise. If obj is null, the method returns false.
 		/// </returns>
 		public override bool Equals(object obj) =>
-			obj is StringAttribute && this == (StringAttribute)obj;
+			obj is StringAttribute attribute && this == attribute;
 
 		/// <summary>
 		/// Returns the hash code for this <see cref="StringAttribute"/>.
@@ -156,8 +157,7 @@ namespace Nikki.Support.Underground1.Attributes
 		/// <returns>A 32-bit signed integer hash code.</returns>
 		public override int GetHashCode()
 		{
-			int result = Tuple.Create(this.Key, this.Value).GetHashCode();
-			return result * this.ValueExists.ToString().GetHashCode();
+			return Tuple.Create(this.Key, this.Value, this.ValueExists.ToString()).GetHashCode();
 		}
 
 		/// <summary>
@@ -166,9 +166,13 @@ namespace Nikki.Support.Underground1.Attributes
 		/// <param name="at1">The first <see cref="StringAttribute"/> to compare, or null.</param>
 		/// <param name="at2">The second <see cref="StringAttribute"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
-		public static bool operator ==(StringAttribute at1, StringAttribute at2) =>
-			at1 is null ? at2 is null : at2 is null ? false
-			: (at1.Key == at2.Key && at1.Value == at2.Value);
+		public static bool operator ==(StringAttribute at1, StringAttribute at2)
+		{
+			if (at1 is null) return at2 is null;
+			else if (at2 is null) return false;
+
+			return at1.Key == at2.Key && at1.ValueExists == at2.ValueExists && at1.Value == at2.Value;
+		}
 
 		/// <summary>
 		/// Determines whether two specified <see cref="StringAttribute"/> have different values.
@@ -182,7 +186,7 @@ namespace Nikki.Support.Underground1.Attributes
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new StringAttribute
 			{
@@ -199,16 +203,45 @@ namespace Nikki.Support.Underground1.Attributes
 		/// </summary>
 		/// <param name="type">Type of a new attribute.</param>
 		/// <returns>New <see cref="CPAttribute"/>.</returns>
-		public override CPAttribute ConvertTo(eCarPartAttribType type) =>
+		public override CPAttribute ConvertTo(CarPartAttribType type) =>
 			type switch
 			{
-				eCarPartAttribType.Boolean => new BoolAttribute(this.Value, this.BelongsTo),
-				eCarPartAttribType.Floating => new FloatAttribute(this.Value, this.BelongsTo),
-				eCarPartAttribType.Integer => new IntAttribute(this.Value, this.BelongsTo),
-				eCarPartAttribType.TwoString => new TwoStringAttribute(this.Value, this.BelongsTo),
-				eCarPartAttribType.CarPartID => new PartIDAttribute(this.Value, this.BelongsTo),
-				eCarPartAttribType.Key => new KeyAttribute(this.Value, this.BelongsTo),
+				CarPartAttribType.Boolean => new BoolAttribute(this.Value),
+				CarPartAttribType.Floating => new FloatAttribute(this.Value),
+				CarPartAttribType.Integer => new IntAttribute(this.Value),
+				CarPartAttribType.Key => new KeyAttribute(this.Value),
 				_ => this
 			};
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public override void Serialize(BinaryWriter bw)
+		{
+			bw.Write(this.Key);
+			bw.WriteEnum(this.ValueExists);
+
+			if (this.ValueExists == eBoolean.True)
+			{
+
+				bw.WriteNullTermUTF8(this.Value);
+
+			}
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public override void Deserialize(BinaryReader br)
+		{
+			this.ValueExists = br.ReadEnum<eBoolean>();
+
+			if (this.ValueExists == eBoolean.True)
+			{
+
+				this.Value = br.ReadNullTermUTF8();
+
+			}
+		}
 	}
 }
