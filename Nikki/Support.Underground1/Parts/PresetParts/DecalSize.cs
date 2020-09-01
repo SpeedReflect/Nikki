@@ -3,6 +3,7 @@ using System.IO;
 using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
+using CoreExtensions.IO;
 
 
 
@@ -11,7 +12,7 @@ namespace Nikki.Support.Underground1.Parts.PresetParts
 	/// <summary>
 	/// A unit <see cref="DecalSize"/> used in preset rides.
 	/// </summary>
-	public class DecalSize : ASubPart
+	public class DecalSize : SubPart
 	{
 		/// <summary>
 		/// 
@@ -83,17 +84,10 @@ namespace Nikki.Support.Underground1.Parts.PresetParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new DecalSize();
-
-			foreach (var property in this.GetType().GetProperties())
-			{
-
-				property.SetValue(result, property.GetValue(this));
-
-			}
-
+			result.CloneValuesFrom(this);
 			return result;
 		}
 
@@ -104,27 +98,27 @@ namespace Nikki.Support.Underground1.Parts.PresetParts
 		public void Read(BinaryReader br)
 		{
 			br.BaseStream.Position += 4;
-			this.DecalHood = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.DecalHood = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			br.BaseStream.Position += 4;
-			this.DecalFrontWindow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.DecalFrontWindow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			br.BaseStream.Position += 4;
-			this.DecalRearWindow = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.DecalRearWindow = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			br.BaseStream.Position += 4;
-			this.DecalLeftDoor = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.DecalLeftDoor = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			br.BaseStream.Position += 4;
-			this.DecalRightDoor = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.DecalRightDoor = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			br.BaseStream.Position += 4;
-			this.DecalLeftQuarter = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.DecalLeftQuarter = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			br.BaseStream.Position += 4;
-			this.DecalRightQuarter = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.DecalRightQuarter = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			br.BaseStream.Position += 4;
-			this.DecalWideLeftDoor = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.DecalWideLeftDoor = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			br.BaseStream.Position += 4;
-			this.DecalWideRightDoor = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.DecalWideRightDoor = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			br.BaseStream.Position += 4;
-			this.DecalWideLeftQuarter = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.DecalWideLeftQuarter = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			br.BaseStream.Position += 4;
-			this.DecalWideRightQuarter = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.DecalWideRightQuarter = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 		}
 
 		/// <summary>
@@ -155,6 +149,42 @@ namespace Nikki.Support.Underground1.Parts.PresetParts
 			bw.Write(this.DecalWideLeftQuarter.BinHash());
 			bw.Write((int)0x1D);
 			bw.Write(this.DecalWideRightQuarter.BinHash());
+		}
+
+		/// <summary>
+		/// Serializes instance into a byte array and stores it in the file provided.
+		/// </summary>
+		public void Serialize(BinaryWriter bw)
+		{
+			bw.WriteNullTermUTF8(this.DecalHood);
+			bw.WriteNullTermUTF8(this.DecalFrontWindow);
+			bw.WriteNullTermUTF8(this.DecalRearWindow);
+			bw.WriteNullTermUTF8(this.DecalLeftDoor);
+			bw.WriteNullTermUTF8(this.DecalRightDoor);
+			bw.WriteNullTermUTF8(this.DecalLeftQuarter);
+			bw.WriteNullTermUTF8(this.DecalRightQuarter);
+			bw.WriteNullTermUTF8(this.DecalWideLeftDoor);
+			bw.WriteNullTermUTF8(this.DecalWideRightDoor);
+			bw.WriteNullTermUTF8(this.DecalWideLeftQuarter);
+			bw.WriteNullTermUTF8(this.DecalWideRightQuarter);
+		}
+
+		/// <summary>
+		/// Deserializes byte array into an instance by loading data from the file provided.
+		/// </summary>
+		public void Deserialize(BinaryReader br)
+		{
+			this.DecalHood = br.ReadNullTermUTF8();
+			this.DecalFrontWindow = br.ReadNullTermUTF8();
+			this.DecalRearWindow = br.ReadNullTermUTF8();
+			this.DecalLeftDoor = br.ReadNullTermUTF8();
+			this.DecalRightDoor = br.ReadNullTermUTF8();
+			this.DecalLeftQuarter = br.ReadNullTermUTF8();
+			this.DecalRightQuarter = br.ReadNullTermUTF8();
+			this.DecalWideLeftDoor = br.ReadNullTermUTF8();
+			this.DecalWideRightDoor = br.ReadNullTermUTF8();
+			this.DecalWideLeftQuarter = br.ReadNullTermUTF8();
+			this.DecalWideRightQuarter = br.ReadNullTermUTF8();
 		}
 	}
 }

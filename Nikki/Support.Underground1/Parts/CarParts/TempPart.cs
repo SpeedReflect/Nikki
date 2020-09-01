@@ -1,5 +1,7 @@
 ﻿using System.IO;
 using System.Collections.Generic;
+using Nikki.Reflection.Enum.PartID;
+using CoreExtensions.IO;
 
 
 
@@ -33,7 +35,7 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 		/// <summary>
 		/// Group ID of the part.
 		/// </summary>
-		public byte CarPartGroupID { get; set; }
+		public PartUnderground1 CarPartGroupID { get; set; }
 
 		/// <summary>
 		/// Upgrade group ID of the part.
@@ -110,7 +112,7 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 			this.PartNameHash = br.ReadUInt32();
 			this.BrandNameHash = br.ReadUInt32();
 
-			this.CarPartGroupID = br.ReadByte();
+			this.CarPartGroupID = br.ReadEnum<PartUnderground1>();
 			this.UpgradeGroupID = br.ReadByte();
 			this.UpgradeStyle = br.ReadByte();
 			this.Padding = br.ReadByte();

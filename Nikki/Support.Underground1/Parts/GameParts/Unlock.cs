@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using Nikki.Utils;
-using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
@@ -13,13 +12,39 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 	/// <summary>
 	/// A unit <see cref="Unlock"/> that is used in career races.
 	/// </summary>
-	public class Unlock : ASubPart
+	public class Unlock : SubPart
 	{
+		/// <summary>
+		/// Enum of unlockable types in Underground 1.
+		/// </summary>
+		public enum UnlockableType : int
+		{
+			/// <summary>
+			/// An invalid unlockable type.
+			/// </summary>
+			Invalid = 0,
+
+			/// <summary>
+			/// Unlocks a performance or visual upgrade.
+			/// </summary>
+			Upgrade = 1,
+
+			/// <summary>
+			/// Unlocks a car.
+			/// </summary>
+			Car = 2,
+
+			/// <summary>
+			/// Unlocks a track.
+			/// </summary>
+			Track = 3,
+		}
+
 		/// <summary>
 		/// Unlockable type of this <see cref="Unlock"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public eUnlockableType UnlockType { get; set; }
+		public UnlockableType UnlockType { get; set; }
 
 		/// <summary>
 		/// Unlockable name of this <see cref="Unlock"/>.
@@ -42,7 +67,7 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new Unlock()
 			{
@@ -60,11 +85,20 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Read(BinaryReader br)
 		{
-			this.UnlockType = br.ReadEnum<eUnlockableType>();
-			if (this.UnlockType == eUnlockableType.Track)
+			this.UnlockType = br.ReadEnum<UnlockableType>();
+
+			if (this.UnlockType == UnlockableType.Track)
+			{
 				this.TrackID = (ushort)br.ReadInt32();
+
+			}
 			else
-				this.UnlockName = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			{
+			
+				this.UnlockName = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			
+			}
+			
 			this.Padding0 = br.ReadInt32();
 		}
 
@@ -75,10 +109,20 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 		public void Write(BinaryWriter bw)
 		{
 			bw.WriteEnum(this.UnlockType);
-			if (this.UnlockType == eUnlockableType.Track)
+
+			if (this.UnlockType == UnlockableType.Track)
+			{
+
 				bw.Write((int)this.TrackID);
+
+			}
 			else
+			{
+
 				bw.Write(this.UnlockName.BinHash());
+
+			}
+
 			bw.WriteEnum(this.Padding0);
 		}
 	}

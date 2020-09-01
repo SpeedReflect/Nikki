@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Core;
 using Nikki.Utils;
@@ -6,8 +8,10 @@ using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
+using Nikki.Reflection.Enum.PartID;
 using Nikki.Support.Underground1.Class;
 using Nikki.Support.Shared.Parts.CarParts;
+using Nikki.Support.Underground1.Attributes;
 using CoreExtensions.Conversions;
 
 
@@ -17,27 +21,25 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 	/// <summary>
 	/// A unit CarPart attribute of <see cref="DBModelPart"/>.
 	/// </summary>
+	[DebuggerDisplay("PartName: {PartName} | AttribCount: {Attributes.Count} | GroupID: {CarPartGroupID}")]
 	public class RealCarPart : Shared.Parts.CarParts.RealCarPart
 	{
 		/// <summary>
 		/// Name of this <see cref="RealCarPart"/>.
 		/// </summary>
-		public override string PartName { get; set; } = String.Empty;
+		public override string PartName => this.ToString();
 
 		/// <summary>
-		/// Index of <see cref="DBModelPart"/> to which this part belongs to.
+		/// <see cref="DBModelPart"/> to which this instance belongs to.
 		/// </summary>
-		public override int Index { get; set; }
+		[Browsable(false)]
+		public override Shared.Class.DBModelPart Model { get; set; }
 
 		/// <summary>
 		/// Collection of <see cref="CPAttribute"/> of this <see cref="RealCarPart"/>.
 		/// </summary>
-		public override List<CPAttribute> Attributes { get; set; }
-
-		/// <summary>
-		/// <see cref="DBModelPart"/> to which this part belongs to.
-		/// </summary>
-		public DBModelPart Model { get; set; }
+		[Browsable(false)]
+		public override List<CPAttribute> Attributes { get; }
 
 		/// <summary>
 		/// Debug name of this <see cref="RealCarPart"/>.
@@ -61,7 +63,7 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 		/// Car Part ID Group to which this part belongs to.
 		/// </summary>
 		[AccessModifiable()]
-		public byte CarPartGroupID { get; set; }
+		public PartUnderground1 CarPartGroupID { get; set; } = PartUnderground1.INVALID;
 
 		/// <summary>
 		/// Upgrade group ID of this <see cref="RealCarPart"/>.
@@ -102,42 +104,33 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 		/// <summary>
 		/// Initialize new instance of <see cref="RealCarPart"/>.
 		/// </summary>
-		public RealCarPart()
-		{
-			this.Attributes = new List<CPAttribute>();
-		}
+		public RealCarPart() => this.Attributes = new List<CPAttribute>();
 
 		/// <summary>
-		/// Initialize new instance of <see cref="RealCarPart"/>.
+		/// Initializes new instance of <see cref="RealCarPart"/>.
 		/// </summary>
-		/// <param name="index">Index of the <see cref="DBModelPart"/> in the database.</param>
-		/// <param name="model"><see cref="DBModelPart"/> to which this part belongs to.</param>
-		public RealCarPart(int index, DBModelPart model)
-		{
-			this.Index = index;
-			this.Model = model;
-			this.Attributes = new List<CPAttribute>();
-		}
+		/// <param name="model"><see cref="DBModelPart"/> to which this instance belongs to.</param>
+		public RealCarPart(DBModelPart model) : this() { this.Model = model; }
 
 		/// <summary>
-		/// Initialize new instance of <see cref="RealCarPart"/>.
+		/// Initializes new instance of <see cref="RealCarPart"/>.
 		/// </summary>
-		/// <param name="index">Index of the <see cref="DBModelPart"/> in the database.</param>
 		/// <param name="capacity">Initial capacity of the attribute list.</param>
-		/// <param name="model"><see cref="DBModelPart"/> to which this part belongs to.</param>
-		public RealCarPart(int index, int capacity, DBModelPart model)
-		{
-			this.Index = index;
-			this.Model = model;
-			this.Attributes = new List<CPAttribute>(capacity);
-		}
+		public RealCarPart(int capacity) => this.Attributes = new List<CPAttribute>(capacity);
+
+		/// <summary>
+		/// Initializes new instance of <see cref="RealCarPart"/>.
+		/// </summary>
+		/// <param name="model"><see cref="DBModelPart"/> to which this instance belongs to.</param>
+		/// <param name="capacity">Initial capacity of the attribute list.</param>
+		public RealCarPart(DBModelPart model, int capacity) : this(capacity) { this.Model = model; }
 
 		/// <summary>
 		/// Returns PartName, Attributes count and CarPartGroupID as a string value.
 		/// </summary>
 		/// <returns>String value.</returns>
 		public override string ToString() =>
-			$"PartName: {this.PartName} | AttribCount: {this.Attributes.Count} | GroupID: {this.CarPartGroupID}";
+			String.IsNullOrEmpty(this.PartLabel) ? "REAL_CAR_PART" : this.PartLabel;
 
 		/// <summary>
 		/// Returns the hash code for this <see cref="RealCarPart"/>.
@@ -145,10 +138,25 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 		/// <returns>A 32-bit signed integer hash code.</returns>
 		public override int GetHashCode()
 		{
-			int empty = String.Empty.GetHashCode();
-			int result = this.PartLabel?.GetHashCode() ?? empty;
-			result *= this.Index + 7;
-			result ^= this.BrandLabel?.GetHashCode() ?? empty;
+			int result = (int)this.PartName.BinHash();
+
+			foreach (var attribute in this.Attributes)
+			{
+
+				result = HashCode.Combine(result, attribute.GetHashCode());
+
+			}
+
+			result = HashCode.Combine(result, this.CarPartGroupID);
+			result = HashCode.Combine(result, this.DebugName);
+			result = HashCode.Combine(result, this.UpgradeGroupID);
+			result = HashCode.Combine(result, this.BrandLabel);
+			result = HashCode.Combine(result, this.UpgradeStyle);
+			result = HashCode.Combine(result, this.GeometryLodA);
+			result = HashCode.Combine(result, this.GeometryLodB);
+			result = HashCode.Combine(result, this.GeometryLodC);
+			result = HashCode.Combine(result, this.GeometryLodD);
+
 			return result;
 		}
 
@@ -180,13 +188,6 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 		/// <param name="key">Key of the new <see cref="CPAttribute"/>.</param>
 		public override void AddAttribute(uint key)
 		{
-			if (this.GetAttribute(key) != null)
-			{
-
-				throw new InfoAccessException($"Attribute with key type 0x{key:X8} already exist");
-
-			}
-
 			if (!Map.CarPartKeys.TryGetValue(key, out var type))
 			{
 
@@ -196,14 +197,11 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 
 			CPAttribute attribute = type switch
 			{
-				eCarPartAttribType.Boolean => new BoolAttribute(eBoolean.False, this),
-				eCarPartAttribType.Floating => new FloatAttribute((float)0, this),
-				eCarPartAttribType.CarPartID => new PartIDAttribute((int)0, this),
-				eCarPartAttribType.String => new StringAttribute(String.Empty, this),
-				eCarPartAttribType.TwoString => new TwoStringAttribute(String.Empty, this),
-				eCarPartAttribType.Key => new KeyAttribute(String.Empty, this),
-				eCarPartAttribType.ModelTable => new ModelTableAttribute(eBoolean.False, this),
-				_ => new IntAttribute((int)0, this)
+				CarPartAttribType.Boolean => new BoolAttribute(eBoolean.False),
+				CarPartAttribType.Floating => new FloatAttribute((float)0),
+				CarPartAttribType.String => new StringAttribute(String.Empty),
+				CarPartAttribType.Key => new KeyAttribute(String.Empty),
+				_ => new IntAttribute((int)0)
 			};
 
 			attribute.Key = key;
@@ -226,7 +224,7 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 			if (!this.Attributes.RemoveWith(_ => _.Key == key))
 			{
 
-				throw new InfoAccessException($"Attribute with key type 0x{key:X8} does not exist");
+				throw new InfoAccessException($"0x{key:X8}");
 
 			}
 		}
@@ -250,14 +248,7 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 			if (attribute == null)
 			{
 
-				throw new InfoAccessException($"Attribute with key type 0x{copykey:X8} does not exist");
-
-			}
-
-			if (this.GetAttribute(newkey) != null)
-			{
-
-				throw new InfoAccessException($"Attribute with key type 0x{newkey:X8} already exists");
+				throw new InfoAccessException($"0x{copykey:X8}");
 
 			}
 
@@ -271,7 +262,6 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 			var result = (CPAttribute)attribute.PlainCopy();
 			result = result.ConvertTo(type);
 			result.Key = newkey;
-			result.BelongsTo = this;
 			this.Attributes.Add(result);
 		}
 
@@ -300,23 +290,65 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 			this.CloneAttribute(newlabel.BinHash(), copylabel.BinHash());
 
 		/// <summary>
+		/// Compares two <see cref="RealCarPart"/> and checks whether the equal.
+		/// </summary>
+		/// <param name="other"><see cref="RealCarPart"/> to compare this instance to.</param>
+		/// <returns>True if this instance equals another instance passed; false otherwise.</returns>
+		public override bool Equals(object other)
+		{
+			if (other is RealCarPart part)
+			{
+
+				if (part.PartLabel.BinHash() != this.PartLabel.BinHash()) return false;
+				if (part.Attributes.Count != this.Attributes.Count) return false;
+
+				var thislist = new List<CPAttribute>(this.Attributes);
+				var otherlist = new List<CPAttribute>(part.Attributes);
+
+				thislist.Sort((x, y) => x.Key.CompareTo(y.Key));
+				otherlist.Sort((x, y) => x.Key.CompareTo(y.Key));
+
+				for (int loop = 0; loop < this.Length; ++loop)
+				{
+
+					if (!thislist[loop].Equals(otherlist[loop])) return false;
+
+				}
+
+				bool result = true;
+				result &= this.CarPartGroupID == part.CarPartGroupID;
+				result &= this.DebugName == part.DebugName;
+				result &= this.UpgradeGroupID == part.UpgradeGroupID;
+				result &= this.UpgradeStyle == part.UpgradeStyle;
+				result &= this.BrandLabel == part.BrandLabel;
+				result &= this.GeometryLodA == part.GeometryLodA;
+				result &= this.GeometryLodB == part.GeometryLodB;
+				result &= this.GeometryLodC == part.GeometryLodC;
+				result &= this.GeometryLodD == part.GeometryLodD;
+				return result;
+
+			}
+			else return false;
+		}
+
+		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
-			var result = new RealCarPart(this.Index, this.Length, this.Model)
+			var result = new RealCarPart(this.Length)
 			{
-				DebugName = this.DebugName,
-				PartName = this.PartName,
-				PartLabel = this.PartLabel,
 				BrandLabel = this.BrandLabel,
 				CarPartGroupID = this.CarPartGroupID,
-				UpgradeGroupID = this.UpgradeGroupID,
+				DebugName = this.DebugName,
 				GeometryLodA = this.GeometryLodA,
 				GeometryLodB = this.GeometryLodB,
 				GeometryLodC = this.GeometryLodC,
 				GeometryLodD = this.GeometryLodD,
+				PartLabel = this.PartLabel,
+				UpgradeGroupID = this.UpgradeGroupID,
+				UpgradeStyle = this.UpgradeStyle,
 			};
 
 			foreach (var attrib in this.Attributes)
@@ -327,6 +359,37 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 			}
 
 			return result;
+		}
+
+		/// <summary>
+		/// Clones values of another <see cref="SubPart"/>.
+		/// </summary>
+		/// <param name="other"><see cref="SubPart"/> to clone.</param>
+		public override void CloneValuesFrom(SubPart other)
+		{
+			if (other is RealCarPart part)
+			{
+
+				this.CarPartGroupID = part.CarPartGroupID;
+				this.DebugName = part.DebugName;
+				this.BrandLabel = part.BrandLabel;
+				this.PartLabel = part.PartLabel;
+				this.UpgradeGroupID = part.UpgradeGroupID;
+				this.UpgradeStyle = part.UpgradeStyle;
+				this.GeometryLodA = part.GeometryLodA;
+				this.GeometryLodB = part.GeometryLodB;
+				this.GeometryLodC = part.GeometryLodC;
+				this.GeometryLodD = part.GeometryLodD;
+				this.Attributes.Capacity = part.Attributes.Capacity;
+
+				foreach (var attrib in part.Attributes)
+				{
+
+					this.Attributes.Add((CPAttribute)attrib.PlainCopy());
+
+				}
+
+			}
 		}
 	}
 }

@@ -9,7 +9,7 @@ namespace Nikki.Support.Underground1.Parts.PresetParts
 	/// <summary>
 	/// A unit <see cref="VinylSets"/> used in preset rides.
 	/// </summary>
-	public class VinylSets : ASubPart
+	public class VinylSets : SubPart
 	{
 		/// <summary>
 		/// 
@@ -147,17 +147,10 @@ namespace Nikki.Support.Underground1.Parts.PresetParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new VinylSets();
-
-			foreach (var property in this.GetType().GetProperties())
-			{
-
-				property.SetValue(result, property.GetValue(this));
-
-			}
-
+			result.CloneValuesFrom(this);
 			return result;
 		}
 	}

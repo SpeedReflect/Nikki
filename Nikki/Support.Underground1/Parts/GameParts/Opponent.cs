@@ -13,7 +13,7 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 	/// <summary>
 	/// A unit <see cref="Opponent"/> that is used in career races.
 	/// </summary>
-	public class Opponent : ASubPart
+	public class Opponent : SubPart
 	{
 		/// <summary>
 		/// Name of the opponent.
@@ -67,17 +67,10 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override ASubPart PlainCopy()
+		public override SubPart PlainCopy()
 		{
 			var result = new Opponent();
-			
-			foreach (var property in this.GetType().GetProperties())
-			{
-
-				property.SetValue(result, property.GetValue(this));
-
-			}
-
+			result.CloneValuesFrom(this);
 			return result;
 		}
 
@@ -89,7 +82,7 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 		{
 			this.Name = br.ReadNullTermUTF8(0x8);
 			this.UnknownInt1 = br.ReadUInt32();
-			this.PresetRide = br.ReadUInt32().BinString(eLookupReturn.EMPTY);
+			this.PresetRide = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			this.SkillEasy = br.ReadInt16();
 			this.SkillMedium = br.ReadInt16();
 			this.SkillHard = br.ReadInt16();
