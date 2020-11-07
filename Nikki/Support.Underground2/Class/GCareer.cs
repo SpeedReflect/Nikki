@@ -8,6 +8,7 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
+using Nikki.Reflection.Attributes;
 using Nikki.Support.Underground2.Gameplay;
 using Nikki.Support.Underground2.Framework;
 using CoreExtensions.IO;
@@ -66,6 +67,7 @@ namespace Nikki.Support.Underground2.Class
         /// <summary>
         /// Collection name of the variable.
         /// </summary>
+        [AccessModifiable()]
         [Category("Main")]
         public override string CollectionName
         {

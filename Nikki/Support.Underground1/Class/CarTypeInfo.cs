@@ -8,14 +8,14 @@ using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Shared.Parts.CarParts;
-using Nikki.Support.Underground2.Framework;
-using Nikki.Support.Underground2.Parts.InfoParts;
+using Nikki.Support.Underground1.Framework;
+using Nikki.Support.Underground1.Parts.InfoParts;
 using CoreExtensions.IO;
 using CoreExtensions.Conversions;
 
 
 
-namespace Nikki.Support.Underground2.Class
+namespace Nikki.Support.Underground1.Class
 {
     /// <summary>
     /// <see cref="CarTypeInfo"/> is a collection of settings related to a car's basic information.
@@ -39,7 +39,7 @@ namespace Nikki.Support.Underground2.Class
         /// <summary>
         /// Base size of a unit collection.
         /// </summary>
-        public const int BaseClassSize = 0x890;
+        public const int BaseClassSize = 0xC90;
 
         #endregion
 
@@ -49,13 +49,13 @@ namespace Nikki.Support.Underground2.Class
         /// Game to which the class belongs to.
         /// </summary>
         [Browsable(false)]
-        public override GameINT GameINT => GameINT.Underground2;
+        public override GameINT GameINT => GameINT.Underground1;
 
         /// <summary>
         /// Game string to which the class belongs to.
         /// </summary>
         [Browsable(false)]
-        public override string GameSTR => GameINT.Underground2.ToString();
+        public override string GameSTR => GameINT.Underground1.ToString();
 
         /// <summary>
         /// Manager to which the class belongs to.
@@ -109,20 +109,28 @@ namespace Nikki.Support.Underground2.Class
         public override string DefaultBasePaint { get; set; } = String.Empty;
 
         /// <summary>
-        /// Second default base paint of the <see cref="CarTypeInfo"/>.
+        /// Unknown value at offset 0xC58.
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
-        [Category("Primary")]
-        public string DefaultBasePaint2 { get; set; } = String.Empty;
+        [Category("Secondary")]
+        public short Unknown1 { get; set; }
 
         /// <summary>
-        /// Defines whether the car is an SUV.
+        /// Unknown value at offset 0xC5A.
         /// </summary>
         [AccessModifiable()]
         [MemoryCastable()]
-        [Category("Primary")]
-        public eBoolean IsSUV { get; set; }
+        [Category("Secondary")]
+        public short Unknown2 { get; set; }
+
+        /// <summary>
+        /// Unknown value at offset 0xC8A.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        [Category("Secondary")]
+        public short Unknown3 { get; set; }
 
         /// <summary>
         /// X value of aerodynamics vector.
@@ -308,13 +316,6 @@ namespace Nikki.Support.Underground2.Class
         public Camera PLAYER_CAMERA_DRIVER { get; }
 
         /// <summary>
-        /// Hood player camera of this <see cref="CarTypeInfo"/>.
-        /// </summary>
-        [Browsable(false)]
-        [Expandable("PlayerCamera")]
-        public Camera PLAYER_CAMERA_HOOD { get; }
-
-        /// <summary>
         /// Drift player camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Browsable(false)]
@@ -350,13 +351,6 @@ namespace Nikki.Support.Underground2.Class
         public Camera AI_CAMERA_DRIVER { get; }
 
         /// <summary>
-        /// Hood AI camera of this <see cref="CarTypeInfo"/>.
-        /// </summary>
-        [Browsable(false)]
-        [Expandable("AICamera")]
-        public Camera AI_CAMERA_HOOD { get; }
-
-        /// <summary>
         /// Drift AI camera of this <see cref="CarTypeInfo"/>.
         /// </summary>
         [Browsable(false)]
@@ -371,6 +365,20 @@ namespace Nikki.Support.Underground2.Class
         public Tires BASE_TIRES { get; }
 
         /// <summary>
+        /// Street tires performance settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("Tires")]
+        public Tires STREET_TIRES { get; }
+
+        /// <summary>
+        /// Pro tires performance settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("Tires")]
+        public Tires PRO_TIRES { get; }
+
+        /// <summary>
         /// Top tires performance settings.
         /// </summary>
         [Browsable(false)]
@@ -383,6 +391,20 @@ namespace Nikki.Support.Underground2.Class
         [Browsable(false)]
         [Expandable("Suspension")]
         public Suspension BASE_SUSPENSION { get; }
+
+        /// <summary>
+        /// Street suspension performance settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("Suspension")]
+        public Suspension STREET_SUSPENSION { get; }
+
+        /// <summary>
+        /// Pro suspension performance settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("Suspension")]
+        public Suspension PRO_SUSPENSION { get; }
 
         /// <summary>
         /// Top suspension performance settings.
@@ -476,6 +498,20 @@ namespace Nikki.Support.Underground2.Class
         public Engine BASE_ENGINE { get; }
 
         /// <summary>
+        /// Street engine performance settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("Engine")]
+        public Engine STREET_ENGINE { get; }
+
+        /// <summary>
+        /// Pro engine performance settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("Engine")]
+        public Engine PRO_ENGINE { get; }
+
+        /// <summary>
         /// Top engine performance settings.
         /// </summary>
         [Browsable(false)]
@@ -488,6 +524,20 @@ namespace Nikki.Support.Underground2.Class
         [Browsable(false)]
         [Expandable("Turbo")]
         public Turbo BASE_TURBO { get; }
+
+        /// <summary>
+        /// Street turbo performance settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("Turbo")]
+        public Turbo STREET_TURBO { get; }
+
+        /// <summary>
+        /// Pro turbo performance settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("Turbo")]
+        public Turbo PRO_TURBO { get; }
 
         /// <summary>
         /// Top turbo performance settings.
@@ -504,11 +554,39 @@ namespace Nikki.Support.Underground2.Class
         public Brakes BASE_BRAKES { get; }
 
         /// <summary>
+        /// Street brakes performance settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("Brakes")]
+        public Brakes STREET_BRAKES { get; }
+        
+        /// <summary>
+        /// Pro brakes performance settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("Brakes")]
+        public Brakes PRO_BRAKES { get; }
+        
+        /// <summary>
         /// Top brakes performance settings.
         /// </summary>
         [Browsable(false)]
         [Expandable("Brakes")]
         public Brakes TOP_BRAKES { get; }
+
+        /// <summary>
+        /// Street weight reduction performance settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("WeightReduction")]
+        public WeightReduction STREET_WEIGHT_REDUCTION { get; }
+
+        /// <summary>
+        /// Pro weight reduction performance settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("WeightReduction")]
+        public WeightReduction PRO_WEIGHT_REDUCTION { get; }
 
         /// <summary>
         /// Top weight reduction performance settings.
@@ -518,6 +596,20 @@ namespace Nikki.Support.Underground2.Class
         public WeightReduction TOP_WEIGHT_REDUCTION { get; }
 
         /// <summary>
+        /// Street nitrous performance settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("NOS")]
+        public Nitrous STREET_NITROUS { get; }
+
+        /// <summary>
+        /// Pro nitrous performance settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("NOS")]
+        public Nitrous PRO_NITROUS { get; }
+
+        /// <summary>
         /// Top nitrous performance settings.
         /// </summary>
         [Browsable(false)]
@@ -525,11 +617,60 @@ namespace Nikki.Support.Underground2.Class
         public Nitrous TOP_NITROUS { get; }
 
         /// <summary>
-        /// Additional drift yaw control performance settings.
+        /// Base part specs settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("PartSpecs")]
+        public PartSpecs BASE_PART_SPECS { get; }
+
+        /// <summary>
+        /// Street part specs settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("PartSpecs")]
+        public PartSpecs STREET_PART_SPECS { get; }
+
+        /// <summary>
+        /// Pro part specs settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("PartSpecs")]
+        public PartSpecs PRO_PART_SPECS { get; }
+
+        /// <summary>
+        /// Top part specs settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("PartSpecs")]
+        public PartSpecs TOP_PART_SPECS { get; }
+
+        /// <summary>
+        /// Base additional drift yaw control performance settings.
         /// </summary>
         [Browsable(false)]
         [Expandable("DriftControl")]
-        public DriftControl DRIFT_ADD_CONTROL { get; }
+        public DriftControl BASE_DRIFT_ADD { get; }
+
+        /// <summary>
+        /// Street additional drift yaw control performance settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("DriftControl")]
+        public DriftControl STREET_DRIFT_ADD { get; }
+
+        /// <summary>
+        /// Pro additional drift yaw control performance settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("DriftControl")]
+        public DriftControl PRO_DRIFT_ADD { get; }
+
+        /// <summary>
+        /// Top additional drift yaw control performance settings.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("DriftControl")]
+        public DriftControl TOP_DRIFT_ADD { get; }
 
         #endregion
 
@@ -548,31 +689,50 @@ namespace Nikki.Support.Underground2.Class
             this.AI_CAMERA_DRIFT = new Camera();
             this.AI_CAMERA_BUMPER = new Camera();
             this.AI_CAMERA_FAR = new Camera();
-            this.AI_CAMERA_HOOD = new Camera();
             this.PLAYER_CAMERA_DRIVER = new Camera();
             this.PLAYER_CAMERA_CLOSE = new Camera();
             this.PLAYER_CAMERA_DRIFT = new Camera();
             this.PLAYER_CAMERA_BUMPER = new Camera();
             this.PLAYER_CAMERA_FAR = new Camera();
-            this.PLAYER_CAMERA_HOOD = new Camera();
             this.BASE_BRAKES = new Brakes();
+            this.BASE_DRIFT_ADD = new DriftControl();
             this.BASE_ENGINE = new Engine();
+            this.BASE_PART_SPECS = new PartSpecs();
             this.BASE_RPM = new RPM();
             this.BASE_SUSPENSION = new Suspension();
             this.BASE_TIRES = new Tires();
             this.BASE_TRANSMISSION = new Transmission();
             this.BASE_TURBO = new Turbo();
-            this.DRIFT_ADD_CONTROL = new DriftControl();
+            this.STREET_BRAKES = new Brakes();
+            this.STREET_DRIFT_ADD = new DriftControl();
             this.STREET_ECU = new ECU();
+            this.STREET_ENGINE = new Engine();
+            this.STREET_NITROUS = new Nitrous();
+            this.STREET_PART_SPECS = new PartSpecs();
             this.STREET_RPM = new RPM();
+            this.STREET_SUSPENSION = new Suspension();
+            this.STREET_TIRES = new Tires();
             this.STREET_TRANSMISSION = new Transmission();
+            this.STREET_TURBO = new Turbo();
+            this.STREET_WEIGHT_REDUCTION = new WeightReduction();
+            this.PRO_BRAKES = new Brakes();
+            this.PRO_DRIFT_ADD = new DriftControl();
             this.PRO_ECU = new ECU();
+            this.PRO_ENGINE = new Engine();
+            this.PRO_NITROUS = new Nitrous();
+            this.PRO_PART_SPECS = new PartSpecs();
             this.PRO_RPM = new RPM();
+            this.PRO_SUSPENSION = new Suspension();
+            this.PRO_TIRES = new Tires();
             this.PRO_TRANSMISSION = new Transmission();
+            this.PRO_TURBO = new Turbo();
+            this.PRO_WEIGHT_REDUCTION = new WeightReduction();
             this.TOP_BRAKES = new Brakes();
+            this.TOP_DRIFT_ADD = new DriftControl();
             this.TOP_ECU = new ECU();
             this.TOP_ENGINE = new Engine();
             this.TOP_NITROUS = new Nitrous();
+            this.TOP_PART_SPECS = new PartSpecs();
             this.TOP_RPM = new RPM();
             this.TOP_SUSPENSION = new Suspension();
             this.TOP_TIRES = new Tires();
@@ -745,106 +905,104 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(this.PVEHICLE.StockTopSpeedLimiter);
             bw.WriteBytes(0x1C);
 
-            // DriftAdditionalYawControl Performance
-            this.DRIFT_ADD_CONTROL.Write(bw);
-
-            // Skip Street + Pro Engine and Street Turbo, 0x03E0 - 0x0450
-            bw.Write(this.TOP_ENGINE.EngineTorque1 / 3);
-            bw.Write(this.TOP_ENGINE.EngineTorque2 / 3);
-            bw.Write(this.TOP_ENGINE.EngineTorque3 / 3);
-            bw.Write(this.TOP_ENGINE.EngineTorque4 / 3);
-            bw.Write(this.TOP_ENGINE.EngineTorque5 / 3);
-            bw.Write(this.TOP_ENGINE.EngineTorque6 / 3);
-            bw.Write(this.TOP_ENGINE.EngineTorque7 / 3);
-            bw.Write(this.TOP_ENGINE.EngineTorque8 / 3);
-            bw.Write(this.TOP_ENGINE.EngineTorque9 / 3);
-            bw.Write(this.TOP_ENGINE.EngineTorque1 / 3);
-            bw.Write(this.TOP_ENGINE.EngineTorque2 / 3);
-            bw.Write(this.TOP_ENGINE.EngineTorque3 / 3);
-            bw.Write(this.TOP_ENGINE.EngineTorque4 / 3);
-            bw.Write(this.TOP_ENGINE.EngineTorque5 / 3);
-            bw.Write(this.TOP_ENGINE.EngineTorque6 / 3);
-            bw.Write(this.TOP_ENGINE.EngineTorque7 / 3);
-            bw.Write(this.TOP_ENGINE.EngineTorque8 / 3);
-            bw.Write(this.TOP_ENGINE.EngineTorque9 / 3);
-            bw.Write(this.TOP_TURBO.TurboBraking / 10);
-            bw.Write(this.TOP_TURBO.TurboVacuum / 10);
-            bw.Write(this.TOP_TURBO.TurboHeatHigh / 10);
-            bw.Write(this.TOP_TURBO.TurboHeatLow / 10);
-            bw.Write(this.TOP_TURBO.TurboHighBoost / 10);
-            bw.Write(this.TOP_TURBO.TurboLowBoost / 10);
-            bw.Write(this.TOP_TURBO.TurboSpool / 10);
-            bw.Write(this.TOP_TURBO.TurboSpoolTimeDown / 10);
-            bw.Write(this.TOP_TURBO.TurboSpoolTimeUp / 10);
-            bw.Write((int)0);
-
-            // Top Weight Reduction Performance
+            // Weight Reduction Performance
+            this.STREET_WEIGHT_REDUCTION.Write(bw);
+            this.PRO_WEIGHT_REDUCTION.Write(bw);
             this.TOP_WEIGHT_REDUCTION.Write(bw);
 
-            // Street Transmission Performance
+            // Transmission Performance
             this.STREET_TRANSMISSION.Write(bw);
-
-            // Pro Transmission Performance
             this.PRO_TRANSMISSION.Write(bw);
-
-            // Top Transmission Performance
             this.TOP_TRANSMISSION.Write(bw);
 
-            // Top Engine Performance
+            // Engine Performance
+            bw.WriteBytes(0xC);
+            this.STREET_ENGINE.Write(bw);
+            bw.WriteBytes(0xC);
+            this.PRO_ENGINE.Write(bw);
             bw.WriteBytes(0xC);
             this.TOP_ENGINE.Write(bw);
 
-            // Street RPM Performance
+            // RPM & ECU Performance
             this.STREET_RPM.Write(bw);
-            bw.Write(this.TOP_ENGINE.SpeedRefreshRate / 3);
-
-            // Street ECU Performance
+            bw.Write(this.STREET_ENGINE.SpeedRefreshRate);
             this.STREET_ECU.Write(bw);
-
-            // Pro RPM Performance
             this.PRO_RPM.Write(bw);
-            bw.Write(this.TOP_ENGINE.SpeedRefreshRate * 2 / 3);
-
-            // Pro ECU Performance
+            bw.Write(this.PRO_ENGINE.SpeedRefreshRate);
             this.PRO_ECU.Write(bw);
-
-            // Top RPM Performance
             this.TOP_RPM.Write(bw);
             bw.Write(this.TOP_ENGINE.SpeedRefreshRate);
-
-            // Top ECU Performance
             this.TOP_ECU.Write(bw);
 
-            // Top Turbo Performance
+            // Turbo Performance
+            this.STREET_TURBO.Write(bw);
+            this.PRO_TURBO.Write(bw);
             this.TOP_TURBO.Write(bw);
 
-            // Top Tires Performance
+            // Tires Performance
+            this.STREET_TIRES.Write(bw);
+            this.PRO_TIRES.Write(bw);
             this.TOP_TIRES.Write(bw);
 
-            // Top Nitrous Performance
+            // Nitrous Performance
+            this.STREET_NITROUS.Write(bw);
+            this.PRO_NITROUS.Write(bw);
             this.TOP_NITROUS.Write(bw);
 
-            // Top Brakes Performance
+            // Brakes Performance
             bw.Write((int)0);
+            bw.Write(this.STREET_BRAKES.RearDownForce);
+            bw.Write(this.STREET_BRAKES.BumpJumpForce);
+            bw.Write((long)0);
+            bw.Write(this.PRO_BRAKES.RearDownForce);
+            bw.Write(this.PRO_BRAKES.BumpJumpForce);
+            bw.Write((long)0);
             bw.Write(this.TOP_BRAKES.RearDownForce);
             bw.Write(this.TOP_BRAKES.BumpJumpForce);
+            bw.Write((int)0);
+            bw.Write(this.STREET_BRAKES.FrontDownForce);
+            bw.Write(this.STREET_BRAKES.RearDownForce);
+            bw.Write(this.STREET_BRAKES.BumpJumpForce);
+            bw.Write((int)0);
+            bw.Write(this.PRO_BRAKES.FrontDownForce);
+            bw.Write(this.PRO_BRAKES.RearDownForce);
+            bw.Write(this.PRO_BRAKES.BumpJumpForce);
             bw.Write((int)0);
             bw.Write(this.TOP_BRAKES.FrontDownForce);
             bw.Write(this.TOP_BRAKES.RearDownForce);
             bw.Write(this.TOP_BRAKES.BumpJumpForce);
             bw.Write((int)0);
+            bw.Write(this.STREET_BRAKES.BrakeStrength);
+            bw.Write(this.STREET_BRAKES.HandBrakeStrength);
+            bw.Write(this.STREET_BRAKES.BrakeBias);
+            bw.Write(this.STREET_BRAKES.SteeringRatio);
+            bw.Write(this.PRO_BRAKES.BrakeStrength);
+            bw.Write(this.PRO_BRAKES.HandBrakeStrength);
+            bw.Write(this.PRO_BRAKES.BrakeBias);
+            bw.Write(this.PRO_BRAKES.SteeringRatio);
             bw.Write(this.TOP_BRAKES.BrakeStrength);
             bw.Write(this.TOP_BRAKES.HandBrakeStrength);
             bw.Write(this.TOP_BRAKES.BrakeBias);
             bw.Write(this.TOP_BRAKES.SteeringRatio);
-
-            // Top Suspension Performance
+            
+            // Suspension Performance
+            this.STREET_SUSPENSION.Write(bw);
+            this.PRO_SUSPENSION.Write(bw);
             this.TOP_SUSPENSION.Write(bw);
 
-            bw.Write(this.ECAR.HandlingBuffer);
-            bw.Write(this.ECAR.TopSuspFrontHeightReduce);
-            bw.Write(this.ECAR.TopSuspRearHeightReduce);
-            bw.Write((int)0);
+            // Drift Additional Yaw
+            this.BASE_DRIFT_ADD.Write(bw);
+            this.STREET_DRIFT_ADD.Write(bw);
+            this.PRO_DRIFT_ADD.Write(bw);
+            this.TOP_DRIFT_ADD.Write(bw);
+
+            // Part Specs Configuarations
+            this.BASE_PART_SPECS.Write(bw);
+            this.STREET_PART_SPECS.Write(bw);
+            this.PRO_PART_SPECS.Write(bw);
+            this.TOP_PART_SPECS.Write(bw);
+            
+            // Number of Cameras
             bw.Write(this.ECAR.NumPlayerCameras);
             bw.Write(this.ECAR.NumAICameras);
             bw.Write((long)0);
@@ -854,13 +1012,11 @@ namespace Nikki.Support.Underground2.Class
             this.PLAYER_CAMERA_CLOSE.Type = Camera.CameraType.CLOSE;
             this.PLAYER_CAMERA_BUMPER.Type = Camera.CameraType.BUMPER;
             this.PLAYER_CAMERA_DRIVER.Type = Camera.CameraType.DRIVER;
-            this.PLAYER_CAMERA_HOOD.Type = Camera.CameraType.HOOD;
-            this.PLAYER_CAMERA_DRIFT.Type = Camera.CameraType.DRIFT;
+            this.PLAYER_CAMERA_DRIFT.Type = Camera.CameraType.HOOD;
             this.PLAYER_CAMERA_FAR.Write(bw);
             this.PLAYER_CAMERA_CLOSE.Write(bw);
             this.PLAYER_CAMERA_BUMPER.Write(bw);
             this.PLAYER_CAMERA_DRIVER.Write(bw);
-            this.PLAYER_CAMERA_HOOD.Write(bw);
             this.PLAYER_CAMERA_DRIFT.Write(bw);
 
             // AI Cameras
@@ -868,13 +1024,11 @@ namespace Nikki.Support.Underground2.Class
             this.AI_CAMERA_CLOSE.Type = Camera.CameraType.CLOSE;
             this.AI_CAMERA_BUMPER.Type = Camera.CameraType.BUMPER;
             this.AI_CAMERA_DRIVER.Type = Camera.CameraType.DRIVER;
-            this.AI_CAMERA_HOOD.Type = Camera.CameraType.HOOD;
-            this.AI_CAMERA_DRIFT.Type = Camera.CameraType.DRIFT;
+            this.AI_CAMERA_DRIFT.Type = Camera.CameraType.HOOD;
             this.AI_CAMERA_FAR.Write(bw);
             this.AI_CAMERA_CLOSE.Write(bw);
             this.AI_CAMERA_BUMPER.Write(bw);
             this.AI_CAMERA_DRIVER.Write(bw);
-            this.AI_CAMERA_HOOD.Write(bw);
             this.AI_CAMERA_DRIFT.Write(bw);
 
             // Rigid Controls
@@ -883,20 +1037,9 @@ namespace Nikki.Support.Underground2.Class
             // Secondary Properties
             bw.Write(this.Index);
             bw.WriteEnum(this.UsageType);
-            bw.Write((int)0);
+            bw.Write(this.Unknown1);
+            bw.Write(this.Unknown2);
             bw.Write(this.DefaultBasePaint.BinHash());
-            bw.Write(this.DefaultBasePaint2.BinHash());
-            bw.Write(this.MaxInstances1);
-            bw.Write(this.MaxInstances2);
-            bw.Write(this.MaxInstances3);
-            bw.Write(this.MaxInstances4);
-            bw.Write(this.MaxInstances5);
-            bw.Write(this.KeepLoaded1);
-            bw.Write(this.KeepLoaded2);
-            bw.Write(this.KeepLoaded3);
-            bw.Write(this.KeepLoaded4);
-            bw.Write(this.KeepLoaded5);
-            bw.Write((short)0);
             bw.Write(this.MinTimeBetweenUses1);
             bw.Write(this.MinTimeBetweenUses2);
             bw.Write(this.MinTimeBetweenUses3);
@@ -915,7 +1058,7 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(this.AvailableSkinNumbers08);
             bw.Write(this.AvailableSkinNumbers09);
             bw.Write(this.AvailableSkinNumbers10);
-            bw.Write((short)this.IsSUV);
+            bw.Write(this.Unknown3);
             bw.Write((int)this.IsSkinnable);
         }
 
@@ -925,15 +1068,15 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="CarTypeInfo"/> with.</param>
         public override void Disassemble(BinaryReader br)
         {
-            // CollectionName
+            // Read CollectionName
             this._collection_name = br.ReadNullTermUTF8(0x20);
-
-            // Manufacturer name
             br.BaseStream.Position += 0xA0;
+
+            // Read ManufacturerName
             this.ManufacturerName = br.ReadNullTermUTF8(0x10);
 
             // Secondary Properties
-            br.BaseStream.Position += 4;
+            br.BaseStream.Position += 4; // skip BinKey
             this.HeadlightFOV = br.ReadSingle();
             this.PadHighPerformance = br.ReadByte();
             this.NumAvailableSkinNumbers = br.ReadByte();
@@ -963,14 +1106,14 @@ namespace Nikki.Support.Underground2.Class
             this.AerodynamicsForceW = br.ReadSingle();
 
             // Car Wheels
-            for (int loop = 0; loop < 4; ++loop)
-            {
+            for (int i = 0; i < 4; ++i)
+			{
 
                 var wheel = new CarInfoWheel();
                 wheel.Read(br);
 
                 switch (wheel.WheelID)
-                {
+				{
 
                     case CarInfoWheel.CarWheelType.FRONT_RIGHT: this.WHEEL_FRONT_RIGHT.CloneValuesFrom(wheel); break;
                     case CarInfoWheel.CarWheelType.REAR_RIGHT: this.WHEEL_REAR_RIGHT.CloneValuesFrom(wheel); break;
@@ -979,12 +1122,12 @@ namespace Nikki.Support.Underground2.Class
 
                 }
 
-            }
+			}
 
             // Base Tires Performance
             this.BASE_TIRES.Read(br);
 
-            // Pvehicle and Ecar Values
+            // Pvehicle Values
             this.PVEHICLE.Massx1000Multiplier = br.ReadSingle();
             this.PVEHICLE.TensorScaleX = br.ReadSingle();
             this.PVEHICLE.TensorScaleY = br.ReadSingle();
@@ -997,7 +1140,7 @@ namespace Nikki.Support.Underground2.Class
             br.BaseStream.Position += 0x10;
             this.PVEHICLE.Unknown1 = br.ReadSingle();
             this.PVEHICLE.InitialHandlingRating = br.ReadSingle();
-            br.BaseStream.Position += 0xC;
+            br.BaseStream.Position += 0x0C;
 
             // Base Suspension Performance
             this.BASE_SUSPENSION.Read(br);
@@ -1023,6 +1166,8 @@ namespace Nikki.Support.Underground2.Class
             this.BASE_BRAKES.BrakeStrength = br.ReadSingle();
             this.BASE_BRAKES.HandBrakeStrength = br.ReadSingle();
             this.BASE_BRAKES.BrakeBias = br.ReadSingle();
+
+            // Ecar Values
             br.BaseStream.Position += 4;
             this.PVEHICLE.Unknown2 = br.ReadSingle();
             this.PVEHICLE.Unknown3 = br.ReadSingle();
@@ -1030,121 +1175,137 @@ namespace Nikki.Support.Underground2.Class
             this.PVEHICLE.StockTopSpeedLimiter = br.ReadSingle();
             br.BaseStream.Position += 0x1C;
 
-            // DriftAdditionalYawControl Performance
-            this.DRIFT_ADD_CONTROL.Read(br);
-
-            // Skip Street + Pro Engine and Street Turbo, 0x03E0 - 0x0450
-            br.BaseStream.Position += 0x70;
-
-            // Top Weight Reduction Performance
+            // Weight Reduction Performance
+            this.STREET_WEIGHT_REDUCTION.Read(br);
+            this.PRO_WEIGHT_REDUCTION.Read(br);
             this.TOP_WEIGHT_REDUCTION.Read(br);
 
-            // Street Transmission Performance
+            // Transmission Performance
             this.STREET_TRANSMISSION.Read(br);
-
-            // Pro Transmission Performance
             this.PRO_TRANSMISSION.Read(br);
-
-            // Top Transmission Performance
             this.TOP_TRANSMISSION.Read(br);
 
-            // Top Engine Performance
-            br.BaseStream.Position += 0xC;
+            // Engine Performance
+            br.BaseStream.Position += 0x0C;
+            this.STREET_ENGINE.Read(br);
+            br.BaseStream.Position += 0x0C;
+            this.PRO_ENGINE.Read(br);
+            br.BaseStream.Position += 0x0C;
             this.TOP_ENGINE.Read(br);
 
-            // Street RPM Performance
+            // RPM & ECU Performance
             this.STREET_RPM.Read(br);
-            br.BaseStream.Position += 4;
-
-            // Street ECU Performance
+            this.STREET_ENGINE.SpeedRefreshRate = br.ReadSingle();
             this.STREET_ECU.Read(br);
-
-            // Pro RPM Performance
             this.PRO_RPM.Read(br);
-            br.BaseStream.Position += 4;
-
-            // Pro ECU Performance
+            this.PRO_ENGINE.SpeedRefreshRate = br.ReadSingle();
             this.PRO_ECU.Read(br);
-
-            // Top RPM Performance
             this.TOP_RPM.Read(br);
-            br.BaseStream.Position += 4;
-
-            // Top ECU Performance
+            this.TOP_ENGINE.SpeedRefreshRate = br.ReadSingle();
             this.TOP_ECU.Read(br);
 
-            // Top Turbo Performance
+            // Turbo Performance
+            this.STREET_TURBO.Read(br);
+            this.PRO_TURBO.Read(br);
             this.TOP_TURBO.Read(br);
 
-            // Top Tires Performance
+            // Tires Performance
+            this.STREET_TIRES.Read(br);
+            this.PRO_TIRES.Read(br);
             this.TOP_TIRES.Read(br);
 
-            // Top Nitrous Performance
+            // Nitrous Performance
+            this.STREET_NITROUS.Read(br);
+            this.PRO_NITROUS.Read(br);
             this.TOP_NITROUS.Read(br);
-            br.BaseStream.Position += 0x10;
 
-            // Top Brakes Performance
+            // Brakes Performance
+            br.BaseStream.Position += 0x30;
+            this.STREET_BRAKES.FrontDownForce = br.ReadSingle();
+            this.STREET_BRAKES.RearDownForce = br.ReadSingle();
+            this.STREET_BRAKES.BumpJumpForce = br.ReadSingle();
+            br.BaseStream.Position += 4;
+            this.PRO_BRAKES.FrontDownForce = br.ReadSingle();
+            this.PRO_BRAKES.RearDownForce = br.ReadSingle();
+            this.PRO_BRAKES.BumpJumpForce = br.ReadSingle();
+            br.BaseStream.Position += 4;
             this.TOP_BRAKES.FrontDownForce = br.ReadSingle();
             this.TOP_BRAKES.RearDownForce = br.ReadSingle();
             this.TOP_BRAKES.BumpJumpForce = br.ReadSingle();
             br.BaseStream.Position += 4;
+            this.STREET_BRAKES.BrakeStrength = br.ReadSingle();
+            this.STREET_BRAKES.HandBrakeStrength = br.ReadSingle();
+            this.STREET_BRAKES.BrakeBias = br.ReadSingle();
+            this.STREET_BRAKES.SteeringRatio = br.ReadSingle();
+            this.PRO_BRAKES.BrakeStrength = br.ReadSingle();
+            this.PRO_BRAKES.HandBrakeStrength = br.ReadSingle();
+            this.PRO_BRAKES.BrakeBias = br.ReadSingle();
+            this.PRO_BRAKES.SteeringRatio = br.ReadSingle();
             this.TOP_BRAKES.BrakeStrength = br.ReadSingle();
             this.TOP_BRAKES.HandBrakeStrength = br.ReadSingle();
             this.TOP_BRAKES.BrakeBias = br.ReadSingle();
             this.TOP_BRAKES.SteeringRatio = br.ReadSingle();
 
-            // Top Suspension Performance
+            // Suspension Performance
+            this.STREET_SUSPENSION.Read(br);
+            this.PRO_SUSPENSION.Read(br);
             this.TOP_SUSPENSION.Read(br);
 
-            // Ecar values
-            this.ECAR.HandlingBuffer = br.ReadSingle();
-            this.ECAR.TopSuspFrontHeightReduce = br.ReadSingle();
-            this.ECAR.TopSuspRearHeightReduce = br.ReadSingle();
-            br.BaseStream.Position += 4;
+            // Drift Additional Yaw
+            this.BASE_DRIFT_ADD.Read(br);
+            this.STREET_DRIFT_ADD.Read(br);
+            this.PRO_DRIFT_ADD.Read(br);
+            this.TOP_DRIFT_ADD.Read(br);
+
+            // Part Specs Configuarations
+            this.BASE_PART_SPECS.Read(br);
+            this.STREET_PART_SPECS.Read(br);
+            this.PRO_PART_SPECS.Read(br);
+            this.TOP_PART_SPECS.Read(br);
+
+            // Number of Cameras
             this.ECAR.NumPlayerCameras = br.ReadInt32();
             this.ECAR.NumAICameras = br.ReadInt32();
             br.BaseStream.Position += 8;
 
             // Player Cameras
-            for (int loop = 0; loop < 6; ++loop)
-            {
+            for (int i = 0; i < 5; ++i)
+			{
 
                 var camera = new Camera();
                 camera.Read(br);
-                
+
                 switch (camera.Type)
-                {
+				{
 
                     case Camera.CameraType.CLOSE: this.PLAYER_CAMERA_CLOSE.CloneValuesFrom(camera); break;
                     case Camera.CameraType.BUMPER: this.PLAYER_CAMERA_BUMPER.CloneValuesFrom(camera); break;
                     case Camera.CameraType.DRIVER: this.PLAYER_CAMERA_DRIVER.CloneValuesFrom(camera); break;
-                    case Camera.CameraType.HOOD: this.PLAYER_CAMERA_HOOD.CloneValuesFrom(camera); break;
-                    case Camera.CameraType.DRIFT: this.PLAYER_CAMERA_DRIFT.CloneValuesFrom(camera); break;
+                    case Camera.CameraType.HOOD: this.PLAYER_CAMERA_DRIFT.CloneValuesFrom(camera); break;
                     default: this.PLAYER_CAMERA_FAR.CloneValuesFrom(camera); break;
-                
-                }
-            
-            }
+
+				}
+
+			}
 
             // AI Cameras
-            for (int loop = 0; loop < 6; ++loop)
+            for (int i = 0; i < 5; ++i)
             {
-                
+
                 var camera = new Camera();
                 camera.Read(br);
-                
+
                 switch (camera.Type)
                 {
 
                     case Camera.CameraType.CLOSE: this.AI_CAMERA_CLOSE.CloneValuesFrom(camera); break;
                     case Camera.CameraType.BUMPER: this.AI_CAMERA_BUMPER.CloneValuesFrom(camera); break;
                     case Camera.CameraType.DRIVER: this.AI_CAMERA_DRIVER.CloneValuesFrom(camera); break;
-                    case Camera.CameraType.HOOD: this.AI_CAMERA_HOOD.CloneValuesFrom(camera); break;
-                    case Camera.CameraType.DRIFT: this.AI_CAMERA_DRIFT.CloneValuesFrom(camera); break;
+                    case Camera.CameraType.HOOD: this.AI_CAMERA_DRIFT.CloneValuesFrom(camera); break;
                     default: this.AI_CAMERA_FAR.CloneValuesFrom(camera); break;
-                
+
                 }
-            
+
             }
 
             // Rigid Controls
@@ -1153,20 +1314,9 @@ namespace Nikki.Support.Underground2.Class
             // Secondary Properties
             this.Index = br.ReadInt32();
             this.UsageType = br.ReadEnum<CarUsageType>();
-            br.BaseStream.Position += 4;
+            this.Unknown1 = br.ReadInt16();
+            this.Unknown2 = br.ReadInt16();
             this.DefaultBasePaint = br.ReadUInt32().BinString(LookupReturn.EMPTY);
-            this.DefaultBasePaint2 = br.ReadUInt32().BinString(LookupReturn.EMPTY);
-            this.MaxInstances1 = br.ReadByte();
-            this.MaxInstances2 = br.ReadByte();
-            this.MaxInstances3 = br.ReadByte();
-            this.MaxInstances4 = br.ReadByte();
-            this.MaxInstances5 = br.ReadByte();
-            this.KeepLoaded1 = br.ReadByte();
-            this.KeepLoaded2 = br.ReadByte();
-            this.KeepLoaded3 = br.ReadByte();
-            this.KeepLoaded4 = br.ReadByte();
-            this.KeepLoaded5 = br.ReadByte();
-            br.BaseStream.Position += 2;
             this.MinTimeBetweenUses1 = br.ReadSingle();
             this.MinTimeBetweenUses2 = br.ReadSingle();
             this.MinTimeBetweenUses3 = br.ReadSingle();
@@ -1185,12 +1335,8 @@ namespace Nikki.Support.Underground2.Class
             this.AvailableSkinNumbers08 = br.ReadByte();
             this.AvailableSkinNumbers09 = br.ReadByte();
             this.AvailableSkinNumbers10 = br.ReadByte();
-            this.IsSUV = (br.ReadInt16() == 0)
-                ? eBoolean.False
-                : eBoolean.True;
-            this.IsSkinnable = (br.ReadInt32() == 0)
-                ? eBoolean.False
-                : eBoolean.True;
+            this.Unknown3 = br.ReadInt16();
+            this.IsSkinnable = (eBoolean)br.ReadInt32();
         }
 
         /// <summary>
@@ -1297,8 +1443,8 @@ namespace Nikki.Support.Underground2.Class
             using (var writer = new BinaryWriter(ms))
             {
 
-                this.Assemble(writer);
-                this.GetCarSkins(writer);
+                this.Assemble(bw);
+                this.GetCarSkins(bw);
 
                 array = ms.ToArray();
 
