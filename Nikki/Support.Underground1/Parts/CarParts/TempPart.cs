@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Collections.Generic;
 using Nikki.Reflection.Enum.PartID;
 using CoreExtensions.IO;
 
@@ -96,15 +95,16 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 		/// Disassembles array of bytes into <see cref="TempPart"/>.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read with.</param>
-		/// <param name="string_dict">Dictionary of offsets and strings.</param>
-		public void Disassemble(BinaryReader br, Dictionary<int, string> string_dict)
+		/// <param name="str_reader"><see cref="BinaryReader"/> to read strings with.</param>
+		public void Disassemble(BinaryReader br, BinaryReader str_reader)
 		{
 			var position = br.ReadUInt32();
 
-			if (position < 0xFFFFFFFF && string_dict.TryGetValue((int)position, out var value))
+			if (position < 0xFFFFFFFF)
 			{
 
-				this.DebugName = value;
+				str_reader.BaseStream.Position = position;
+				this.DebugName = str_reader.ReadNullTermUTF8();
 
 			}
 
