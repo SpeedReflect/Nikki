@@ -13,7 +13,7 @@ using CoreExtensions.Conversions;
 
 
 
-namespace Nikki.Support.Underground1.Gameplay
+namespace Nikki.Support.Underground1.Class
 {
 	/// <summary>
 	/// <see cref="GCareerRace"/> is a collection of settings related to career races and events.
@@ -128,7 +128,6 @@ namespace Nikki.Support.Underground1.Gameplay
 		#endregion
 
 		#region Properties
-
 
 		/// <summary>
 		/// Game to which the class belongs to.

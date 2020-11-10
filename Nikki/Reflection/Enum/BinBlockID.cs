@@ -151,6 +151,16 @@
         DBCarParts_Offsets = 0x0003460C, // varies
 
         /// <summary>
+        /// 0x00034A01
+        /// </summary>
+        GCareer_Upgrade = 0x00034A01, // varies
+
+        /// <summary>
+        /// 0x00034A02
+        /// </summary>
+        GCareer_Races_Old = 0x00034A02, // 0x08 Actual
+
+        /// <summary>
         /// 0x00034A07
         /// </summary>
         StyleMomentsInfo = 0x00034A07, // 0x80 Modular
@@ -554,6 +564,11 @@
         /// 0x80034602
         /// </summary>
         DBCarParts = 0x80034602, // varies
+
+        /// <summary>
+        /// 0x80034A00
+        /// </summary>
+        GCareer_Old = 0x80034A00, // 0x80 Modular
 
         /// <summary>
         /// 0x80034A10
