@@ -95,6 +95,8 @@ namespace Nikki.Utils
 					return;
 
 				// Those IDs require Actual alignment based on their previous one
+				case BinBlockID.AcidEffects:
+				case BinBlockID.AcidEmitters:
 				case BinBlockID.EAGLSkeleton:
 				case BinBlockID.EAGLAnimations:
 				case BinBlockID.ELights:
@@ -103,6 +105,7 @@ namespace Nikki.Utils
 				case BinBlockID.EventSequence:
 				case BinBlockID.FEngFont:
 				case BinBlockID.Geometry:
+				case BinBlockID.GCareer_Styles:
 				case BinBlockID.NISDescription:
 				case BinBlockID.NISScript:
 				case BinBlockID.PCAWater0:
@@ -113,6 +116,7 @@ namespace Nikki.Utils
 				case BinBlockID.Stream37250:
 				case BinBlockID.Stream37260:
 				case BinBlockID.Stream37270:
+				case BinBlockID.StyleMomentsInfo:
 				case BinBlockID.TrackPosMarkers:
 				case BinBlockID.WorldBounds:
 				case BinBlockID.WCollisionPack:

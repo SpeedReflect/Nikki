@@ -111,7 +111,7 @@ namespace Nikki.Support.Underground1.Attributes
 			if (position < 0xFFFF)
 			{
 
-				str_reader.BaseStream.Position = position << 2;
+				str_reader.BaseStream.Position = position;// << 2;
 				this.Value = str_reader.ReadNullTermUTF8();
 				this.ValueExists = eBoolean.True;
 

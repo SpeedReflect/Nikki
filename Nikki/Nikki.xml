@@ -1375,6 +1375,21 @@
             0x00034A07
             </summary>
         </member>
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.StylePartitions">
+            <summary>
+            0x00034A08
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.GCareer_Stars">
+            <summary>
+            0x00034A09
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.GCareer_Styles">
+            <summary>
+            0x00034A09
+            </summary>
+        </member>
         <member name="F:Nikki.Reflection.Enum.BinBlockID.GCareer_Races">
             <summary>
             0x00034A11
@@ -3390,7 +3405,7 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.PartID.PartMostWanted.RIGHT_SIDE_WINDOW">
+        <member name="F:Nikki.Reflection.Enum.PartID.PartMostWanted.RIGHT_SIDE_MIRROR">
             <summary>
             
             </summary>
@@ -31425,6 +31440,21 @@
             Top additional drift yaw control performance settings.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Underground1.Class.CarTypeInfo.STREET_UNKNOWN">
+            <summary>
+            Street unknown performance upgrade.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Class.CarTypeInfo.PRO_UNKNOWN">
+            <summary>
+            Pro unknown performance upgrade.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Class.CarTypeInfo.TOP_UNKNOWN">
+            <summary>
+            Top unknown performance upgrade.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Underground1.Class.CarTypeInfo.#ctor">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Underground1.Class.CarTypeInfo"/>.
@@ -31880,19 +31910,19 @@
             Unknown value at offset 0x24.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.Opponent1Key">
+        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.CashValueEasy">
             <summary>
-            Key of the first opponent.
+            Cash value won on easy difficulty.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.Opponent2Key">
+        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.CashValueNormal">
             <summary>
-            Key of the second opponent.
+            Cash value won on normal difficulty.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.Opponent3Key">
+        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.CashValueHard">
             <summary>
-            Key of the third opponent.
+            Cash value won on hard difficulty.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground1.Class.GCareerRace.SwitchValue">
@@ -33519,6 +33549,26 @@
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground1.Class.Track.TrackMapFinishlineAngle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Class.Track.Unknown0xA8">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Class.Track.Unknown0xAC">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Class.Track.Unknown0xB0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Class.Track.Unknown0xB4">
             <summary>
             
             </summary>
@@ -36083,17 +36133,19 @@
             </summary>
             <returns>Exact plain copy of the object.</returns>
         </member>
-        <member name="M:Nikki.Support.Underground1.Parts.InfoParts.Suspension.Read(System.IO.BinaryReader)">
+        <member name="M:Nikki.Support.Underground1.Parts.InfoParts.Suspension.Read(System.IO.BinaryReader,System.Boolean)">
             <summary>
             Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+            <param name="base">True if read base values; false if read upgraded ones.</param>
         </member>
-        <member name="M:Nikki.Support.Underground1.Parts.InfoParts.Suspension.Write(System.IO.BinaryWriter)">
+        <member name="M:Nikki.Support.Underground1.Parts.InfoParts.Suspension.Write(System.IO.BinaryWriter,System.Boolean)">
             <summary>
             Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <param name="base">True if read base values; false if read upgraded ones.</param>
         </member>
         <member name="T:Nikki.Support.Underground1.Parts.InfoParts.Tires">
             <summary>
@@ -36349,6 +36401,54 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
         </member>
         <member name="M:Nikki.Support.Underground1.Parts.InfoParts.Turbo.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="T:Nikki.Support.Underground1.Parts.InfoParts.Unknown">
+            <summary>
+            A unit <see cref="T:Nikki.Support.Underground1.Parts.InfoParts.Unknown"/> used in car performance.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Parts.InfoParts.Unknown.Unknown1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Parts.InfoParts.Unknown.Unknown2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Parts.InfoParts.Unknown.Unknown3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Parts.InfoParts.Unknown.Unknown4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground1.Parts.InfoParts.Unknown.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground1.Parts.InfoParts.Unknown"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground1.Parts.InfoParts.Unknown.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground1.Parts.InfoParts.Unknown.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground1.Parts.InfoParts.Unknown.Write(System.IO.BinaryWriter)">
             <summary>
             Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
             </summary>

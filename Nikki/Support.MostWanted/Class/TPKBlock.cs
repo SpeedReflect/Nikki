@@ -7,6 +7,7 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Utils.EA;
 using Nikki.Reflection.Enum;
+using Nikki.Reflection.Attributes;
 using Nikki.Support.MostWanted.Framework;
 using Nikki.Support.Shared.Parts.TPKParts;
 using CoreExtensions.IO;
@@ -53,6 +54,7 @@ namespace Nikki.Support.MostWanted.Class
         /// <summary>
         /// Collection name of the variable.
         /// </summary>
+        [AccessModifiable()]
         [Category("Main")]
         public override string CollectionName
         {

@@ -123,7 +123,7 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 
 			}
 
-			bw.WriteEnum(this.Unknown);
+			bw.Write(this.Unknown);
 		}
 
 		/// <summary>

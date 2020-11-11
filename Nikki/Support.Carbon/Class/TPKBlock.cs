@@ -54,8 +54,8 @@ namespace Nikki.Support.Carbon.Class
         /// <summary>
         /// Collection name of the variable.
         /// </summary>
-        [Category("Main")]
         [AccessModifiable()]
+        [Category("Main")]
         public override string CollectionName
         {
             get => this._collection_name;

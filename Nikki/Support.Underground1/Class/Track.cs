@@ -238,6 +238,42 @@ namespace Nikki.Support.Underground1.Class
 		[StaticModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
+		public int Unknown0xA8 { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		[AccessModifiable()]
+		[StaticModifiable()]
+		[MemoryCastable()]
+		[Category("Secondary")]
+		public int Unknown0xAC { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		[AccessModifiable()]
+		[StaticModifiable()]
+		[MemoryCastable()]
+		[Category("Secondary")]
+		public int Unknown0xB0 { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		[AccessModifiable()]
+		[StaticModifiable()]
+		[MemoryCastable()]
+		[Category("Secondary")]
+		public int Unknown0xB4 { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		[AccessModifiable()]
+		[StaticModifiable()]
+		[MemoryCastable()]
+		[Category("Secondary")]
 		public byte MaxTrafficCars_0_0 { get; set; }
 
 		/// <summary>
@@ -439,10 +475,10 @@ namespace Nikki.Support.Underground1.Class
 			// Write difficulties and padding
 			bw.Write((int)this.DifficultyForward);
 			bw.Write((int)this.DifficultyReverse);
-			bw.Write(-1);
-			bw.Write(-1);
-			bw.Write(-1);
-			bw.Write(-1);
+			bw.Write(this.Unknown0xA8);
+			bw.Write(this.Unknown0xAC);
+			bw.Write(this.Unknown0xB0);
+			bw.Write(this.Unknown0xB4);
 			bw.Write(this.NumSecBeforeShorcutsAllowed);
 			bw.Write(this.DriftSecondsMin);
 			bw.Write(this.DriftSecondsMax);
@@ -510,7 +546,10 @@ namespace Nikki.Support.Underground1.Class
 			// Read difficulties and padding
 			this.DifficultyForward = (TrackDifficulty)(br.ReadInt32());
 			this.DifficultyReverse = (TrackDifficulty)(br.ReadInt32());
-			br.BaseStream.Position += 0x10;
+			this.Unknown0xA8 = br.ReadInt32();
+			this.Unknown0xAC = br.ReadInt32();
+			this.Unknown0xB0 = br.ReadInt32();
+			this.Unknown0xB4 = br.ReadInt32();
 			this.NumSecBeforeShorcutsAllowed = br.ReadInt16();
 			this.DriftSecondsMin = br.ReadInt16();
 			this.DriftSecondsMax = br.ReadInt16();
@@ -608,6 +647,10 @@ namespace Nikki.Support.Underground1.Class
 				// Write difficulties and padding
 				writer.WriteEnum(this.DifficultyForward);
 				writer.WriteEnum(this.DifficultyReverse);
+				writer.Write(this.Unknown0xA8);
+				writer.Write(this.Unknown0xAC);
+				writer.Write(this.Unknown0xB0);
+				writer.Write(this.Unknown0xB4);
 				writer.Write(this.NumSecBeforeShorcutsAllowed);
 				writer.Write(this.DriftSecondsMin);
 				writer.Write(this.DriftSecondsMax);
@@ -688,6 +731,10 @@ namespace Nikki.Support.Underground1.Class
 			// Write difficulties and padding
 			this.DifficultyForward = reader.ReadEnum<TrackDifficulty>();
 			this.DifficultyReverse = reader.ReadEnum<TrackDifficulty>();
+			this.Unknown0xA8 = reader.ReadInt32();
+			this.Unknown0xAC = reader.ReadInt32();
+			this.Unknown0xB0 = reader.ReadInt32();
+			this.Unknown0xB4 = reader.ReadInt32();
 			this.NumSecBeforeShorcutsAllowed = reader.ReadInt16();
 			this.DriftSecondsMin = reader.ReadInt16();
 			this.DriftSecondsMax = reader.ReadInt16();

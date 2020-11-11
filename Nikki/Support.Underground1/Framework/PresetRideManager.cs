@@ -107,6 +107,7 @@ namespace Nikki.Support.Underground1.Framework
 
 					var collection = new PresetRide(br, this);
 
+					if (String.IsNullOrEmpty(collection.CollectionName)) continue;
 					try { this.Add(collection); }
 					catch { } // skip if exists
 

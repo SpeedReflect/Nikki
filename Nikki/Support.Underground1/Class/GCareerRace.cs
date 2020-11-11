@@ -249,28 +249,28 @@ namespace Nikki.Support.Underground1.Class
 		public int Unknown0x24 { get; set; }
 
 		/// <summary>
-		/// Key of the first opponent.
+		/// Cash value won on easy difficulty.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
-		public uint Opponent1Key { get; set; }
+		public float CashValueEasy { get; set; }
 
 		/// <summary>
-		/// Key of the second opponent.
+		/// Cash value won on normal difficulty.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
-		public uint Opponent2Key { get; set; }
+		public float CashValueNormal { get; set; }
 
 		/// <summary>
-		/// Key of the third opponent.
+		/// Cash value won on hard difficulty.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
-		public uint Opponent3Key { get; set; }
+		public float CashValueHard { get; set; }
 
 		/// <summary>
 		/// Some switch value at offset 0x34.
@@ -633,9 +633,9 @@ namespace Nikki.Support.Underground1.Class
 			bw.Write(this.Unknown0x1C);
 			bw.Write(this.Unknown0x20);
 			bw.Write(this.Unknown0x24);
-			bw.Write(this.Opponent1Key);
-			bw.Write(this.Opponent2Key);
-			bw.Write(this.Opponent3Key);
+			bw.Write(this.CashValueEasy);
+			bw.Write(this.CashValueNormal);
+			bw.Write(this.CashValueHard);
 			bw.Write(this.SwitchValue);
 			this.UNLOCK1.Write(bw);
 			this.UNLOCK2.Write(bw);
@@ -655,8 +655,8 @@ namespace Nikki.Support.Underground1.Class
 			bw.Write(this.UnlockedByRace);
 			bw.Write(this.Unknown0xA0);
 			bw.Write(this.Unknown0xA4);
-			bw.Write((int)this.IsValidEvent);
-			bw.Write((int)this.InitiallyLockedMayb);
+			bw.Write((short)this.IsValidEvent);
+			bw.Write((short)this.InitiallyLockedMayb);
 			bw.WriteNullTermUTF8(this.IntroMovie, 0xC);
 			bw.WriteNullTermUTF8(this.InterMovie, 0xC);
 			bw.WriteNullTermUTF8(this.OutroMovie, 0xC);
@@ -694,9 +694,9 @@ namespace Nikki.Support.Underground1.Class
 			this.Unknown0x1C = br.ReadInt32();
 			this.Unknown0x20 = br.ReadInt32();
 			this.Unknown0x24 = br.ReadInt32();
-			this.Opponent1Key = br.ReadUInt32();
-			this.Opponent2Key = br.ReadUInt32();
-			this.Opponent3Key = br.ReadUInt32();
+			this.CashValueEasy = br.ReadSingle();
+			this.CashValueNormal = br.ReadSingle();
+			this.CashValueHard = br.ReadSingle();
 			this.SwitchValue = br.ReadInt32();
 			this.UNLOCK1.Read(br);
 			this.UNLOCK2.Read(br);
@@ -716,8 +716,8 @@ namespace Nikki.Support.Underground1.Class
 			this.UnlockedByRace = br.ReadInt32();
 			this.Unknown0xA0 = br.ReadInt32();
 			this.Unknown0xA4 = br.ReadInt32();
-			this.IsValidEvent = (eBoolean)br.ReadInt32();
-			this.InitiallyLockedMayb = (eBoolean)br.ReadInt32();
+			this.IsValidEvent = (eBoolean)br.ReadInt16();
+			this.InitiallyLockedMayb = (eBoolean)br.ReadInt16();
 			this.IntroMovie = br.ReadNullTermUTF8(0xC);
 			this.InterMovie = br.ReadNullTermUTF8(0xC);
 			this.OutroMovie = br.ReadNullTermUTF8(0xC);
@@ -726,7 +726,7 @@ namespace Nikki.Support.Underground1.Class
 			this.OPPONENT2.Read(br);
 			this.OPPONENT3.Read(br);
 			this.NumberOfOpponents = br.ReadInt32();
-			this.Unknown0x12C = br.ReadInt32();
+			this.Unknown0x12C = br.ReadSingle();
 			this.SomeKey = br.ReadUInt32();
 			this.AllowTrafficMayb = br.ReadInt32();
 			this.Unknown0x138 = br.ReadInt32();
@@ -786,9 +786,9 @@ namespace Nikki.Support.Underground1.Class
 				writer.Write(this.Unknown0x1C);
 				writer.Write(this.Unknown0x20);
 				writer.Write(this.Unknown0x24);
-				writer.Write(this.Opponent1Key);
-				writer.Write(this.Opponent2Key);
-				writer.Write(this.Opponent3Key);
+				writer.Write(this.CashValueEasy);
+				writer.Write(this.CashValueNormal);
+				writer.Write(this.CashValueHard);
 				writer.Write(this.SwitchValue);
 
 				this.UNLOCK1.Serialize(writer);
@@ -871,9 +871,9 @@ namespace Nikki.Support.Underground1.Class
 			this.Unknown0x1C = reader.ReadInt32();
 			this.Unknown0x20 = reader.ReadInt32();
 			this.Unknown0x24 = reader.ReadInt32();
-			this.Opponent1Key = reader.ReadUInt32();
-			this.Opponent2Key = reader.ReadUInt32();
-			this.Opponent3Key = reader.ReadUInt32();
+			this.CashValueEasy = reader.ReadSingle();
+			this.CashValueNormal = reader.ReadSingle();
+			this.CashValueHard = reader.ReadSingle();
 			this.SwitchValue = reader.ReadInt32();
 
 			this.UNLOCK1.Deserialize(reader);

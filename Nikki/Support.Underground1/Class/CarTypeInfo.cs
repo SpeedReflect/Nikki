@@ -672,6 +672,27 @@ namespace Nikki.Support.Underground1.Class
         [Expandable("DriftControl")]
         public DriftControl TOP_DRIFT_ADD { get; }
 
+        /// <summary>
+        /// Street unknown performance upgrade.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("Unknown")]
+        public Unknown STREET_UNKNOWN { get; }
+
+        /// <summary>
+        /// Pro unknown performance upgrade.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("Unknown")]
+        public Unknown PRO_UNKNOWN { get; }
+
+        /// <summary>
+        /// Top unknown performance upgrade.
+        /// </summary>
+        [Browsable(false)]
+        [Expandable("Unknown")]
+        public Unknown TOP_UNKNOWN { get; }
+
         #endregion
 
         #region Main
@@ -714,6 +735,7 @@ namespace Nikki.Support.Underground1.Class
             this.STREET_TIRES = new Tires();
             this.STREET_TRANSMISSION = new Transmission();
             this.STREET_TURBO = new Turbo();
+            this.STREET_UNKNOWN = new Unknown();
             this.STREET_WEIGHT_REDUCTION = new WeightReduction();
             this.PRO_BRAKES = new Brakes();
             this.PRO_DRIFT_ADD = new DriftControl();
@@ -726,6 +748,7 @@ namespace Nikki.Support.Underground1.Class
             this.PRO_TIRES = new Tires();
             this.PRO_TRANSMISSION = new Transmission();
             this.PRO_TURBO = new Turbo();
+            this.PRO_UNKNOWN = new Unknown();
             this.PRO_WEIGHT_REDUCTION = new WeightReduction();
             this.TOP_BRAKES = new Brakes();
             this.TOP_DRIFT_ADD = new DriftControl();
@@ -738,6 +761,7 @@ namespace Nikki.Support.Underground1.Class
             this.TOP_TIRES = new Tires();
             this.TOP_TRANSMISSION = new Transmission();
             this.TOP_TURBO = new Turbo();
+            this.TOP_UNKNOWN = new Unknown();
             this.TOP_WEIGHT_REDUCTION = new WeightReduction();
             this.WHEEL_FRONT_LEFT = new CarInfoWheel();
             this.WHEEL_FRONT_RIGHT = new CarInfoWheel();
@@ -873,7 +897,7 @@ namespace Nikki.Support.Underground1.Class
             bw.WriteBytes(0xC);
 
             // Base Suspension Performance
-            this.BASE_SUSPENSION.Write(bw);
+            this.BASE_SUSPENSION.Write(bw, true);
 
             // Base Transmission Performance
             this.BASE_TRANSMISSION.Write(bw);
@@ -950,16 +974,9 @@ namespace Nikki.Support.Underground1.Class
             this.TOP_NITROUS.Write(bw);
 
             // Brakes Performance
-            bw.Write((int)0);
-            bw.Write(this.STREET_BRAKES.RearDownForce);
-            bw.Write(this.STREET_BRAKES.BumpJumpForce);
-            bw.Write((long)0);
-            bw.Write(this.PRO_BRAKES.RearDownForce);
-            bw.Write(this.PRO_BRAKES.BumpJumpForce);
-            bw.Write((long)0);
-            bw.Write(this.TOP_BRAKES.RearDownForce);
-            bw.Write(this.TOP_BRAKES.BumpJumpForce);
-            bw.Write((int)0);
+            this.STREET_UNKNOWN.Write(bw);
+            this.PRO_UNKNOWN.Write(bw);
+            this.TOP_UNKNOWN.Write(bw);
             bw.Write(this.STREET_BRAKES.FrontDownForce);
             bw.Write(this.STREET_BRAKES.RearDownForce);
             bw.Write(this.STREET_BRAKES.BumpJumpForce);
@@ -986,9 +1003,9 @@ namespace Nikki.Support.Underground1.Class
             bw.Write(this.TOP_BRAKES.SteeringRatio);
             
             // Suspension Performance
-            this.STREET_SUSPENSION.Write(bw);
-            this.PRO_SUSPENSION.Write(bw);
-            this.TOP_SUSPENSION.Write(bw);
+            this.STREET_SUSPENSION.Write(bw, false);
+            this.PRO_SUSPENSION.Write(bw, false);
+            this.TOP_SUSPENSION.Write(bw, false);
 
             // Drift Additional Yaw
             this.BASE_DRIFT_ADD.Write(bw);
@@ -1143,7 +1160,7 @@ namespace Nikki.Support.Underground1.Class
             br.BaseStream.Position += 0x0C;
 
             // Base Suspension Performance
-            this.BASE_SUSPENSION.Read(br);
+            this.BASE_SUSPENSION.Read(br, true);
 
             // Base Transmission Performance
             this.BASE_TRANSMISSION.Read(br);
@@ -1220,7 +1237,9 @@ namespace Nikki.Support.Underground1.Class
             this.TOP_NITROUS.Read(br);
 
             // Brakes Performance
-            br.BaseStream.Position += 0x30;
+            this.STREET_UNKNOWN.Read(br);
+            this.PRO_UNKNOWN.Read(br);
+            this.TOP_UNKNOWN.Read(br);
             this.STREET_BRAKES.FrontDownForce = br.ReadSingle();
             this.STREET_BRAKES.RearDownForce = br.ReadSingle();
             this.STREET_BRAKES.BumpJumpForce = br.ReadSingle();
@@ -1247,9 +1266,9 @@ namespace Nikki.Support.Underground1.Class
             this.TOP_BRAKES.SteeringRatio = br.ReadSingle();
 
             // Suspension Performance
-            this.STREET_SUSPENSION.Read(br);
-            this.PRO_SUSPENSION.Read(br);
-            this.TOP_SUSPENSION.Read(br);
+            this.STREET_SUSPENSION.Read(br, false);
+            this.PRO_SUSPENSION.Read(br, false);
+            this.TOP_SUSPENSION.Read(br, false);
 
             // Drift Additional Yaw
             this.BASE_DRIFT_ADD.Read(br);

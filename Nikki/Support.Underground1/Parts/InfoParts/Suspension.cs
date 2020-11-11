@@ -145,7 +145,8 @@ namespace Nikki.Support.Underground1.Parts.InfoParts
 		/// Reads data using <see cref="BinaryReader"/> provided.
 		/// </summary>
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
-		public void Read(BinaryReader br)
+		/// <param name="base">True if read base values; false if read upgraded ones.</param>
+		public void Read(BinaryReader br, bool @base)
 		{
 			this.ShockStiffnessFront = br.ReadSingle();
 			this.ShockExtStiffnessFront = br.ReadSingle();
@@ -163,17 +164,24 @@ namespace Nikki.Support.Underground1.Parts.InfoParts
 			this.TrackWidthRear = br.ReadSingle();
 			this.CounterBiasRear = br.ReadSingle();
 			this.ShockDigressionRear = br.ReadSingle();
-			this.HandlingBuffer = br.ReadSingle();
-			this.SuspFrontHeightReduce = br.ReadSingle();
-			this.SuspRearHeightReduce = br.ReadSingle();
-			br.BaseStream.Position += 4;
+
+			if (!@base)
+			{
+
+				this.HandlingBuffer = br.ReadSingle();
+				this.SuspFrontHeightReduce = br.ReadSingle();
+				this.SuspRearHeightReduce = br.ReadSingle();
+				br.BaseStream.Position += 4;
+
+			}
 		}
 
 		/// <summary>
 		/// Writes data using <see cref="BinaryWriter"/> provided.
 		/// </summary>
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
-		public void Write(BinaryWriter bw)
+		/// <param name="base">True if read base values; false if read upgraded ones.</param>
+		public void Write(BinaryWriter bw, bool @base)
 		{
 			bw.Write(this.ShockStiffnessFront);
 			bw.Write(this.ShockExtStiffnessFront);
@@ -191,10 +199,16 @@ namespace Nikki.Support.Underground1.Parts.InfoParts
 			bw.Write(this.TrackWidthRear);
 			bw.Write(this.CounterBiasRear);
 			bw.Write(this.ShockDigressionRear);
-			bw.Write(this.HandlingBuffer);
-			bw.Write(this.SuspFrontHeightReduce);
-			bw.Write(this.SuspRearHeightReduce);
-			bw.Write((int)0);
+
+			if (!@base)
+			{
+
+				bw.Write(this.HandlingBuffer);
+				bw.Write(this.SuspFrontHeightReduce);
+				bw.Write(this.SuspRearHeightReduce);
+				bw.Write((int)0);
+
+			}
 		}
 	}
 }

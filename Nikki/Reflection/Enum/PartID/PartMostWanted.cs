@@ -218,7 +218,7 @@
 		/// <summary>
 		/// 
 		/// </summary>
-		RIGHT_SIDE_WINDOW = 0x2A,
+		RIGHT_SIDE_MIRROR = 0x2A,
 
 		/// <summary>
 		/// 

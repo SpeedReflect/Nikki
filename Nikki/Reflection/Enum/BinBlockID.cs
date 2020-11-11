@@ -166,6 +166,21 @@
         StyleMomentsInfo = 0x00034A07, // 0x80 Modular
 
         /// <summary>
+        /// 0x00034A08
+        /// </summary>
+        StylePartitions = 0x00034A08, // 0x80 Modular
+
+        /// <summary>
+        /// 0x00034A09
+        /// </summary>
+        GCareer_Stars = 0x00034A09, // varies
+
+        /// <summary>
+        /// 0x00034A09
+        /// </summary>
+        GCareer_Styles = 0x00034A0A, // 0x10 Modular
+
+        /// <summary>
         /// 0x00034A11
         /// </summary>
         GCareer_Races = 0x00034A11, // varies
