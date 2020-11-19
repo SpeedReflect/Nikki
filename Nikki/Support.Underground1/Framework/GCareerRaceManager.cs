@@ -173,10 +173,10 @@ namespace Nikki.Support.Underground1.Framework
 
 			}
 
-			if (cname.Length > GCareerRace.MaxCNameLength)
+			if (!Int32.TryParse(cname, out int _))
 			{
 
-				throw new ArgumentLengthException(GCareerRace.MaxCNameLength);
+				throw new Exception("CollectionName of a GCareerRace should be an integer");
 
 			}
 

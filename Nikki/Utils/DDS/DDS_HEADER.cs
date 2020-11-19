@@ -31,7 +31,5 @@ namespace Nikki.Utils.DDS
             this.dwReserved2 = 0; // unused
             this.dwSize = 0x7C; // always const, unless stated otherwise
         }
-        
-        ~DDS_HEADER() { }
     }
 }

@@ -172,11 +172,6 @@ namespace Nikki.Support.Underground1.Class
 			this.CollectionName.BinHash();
 		}
 
-		/// <summary>
-		/// Destroys current instance.
-		/// </summary>
-		~SunInfo() { }
-
 		#endregion
 
 		#region Methods

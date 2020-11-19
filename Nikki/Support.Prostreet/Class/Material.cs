@@ -521,11 +521,6 @@ namespace Nikki.Support.Prostreet.Class
             this.CollectionName.BinHash();
         }
 
-        /// <summary>
-        /// Destroys current instance.
-        /// </summary>
-        ~Material() { }
-
         #endregion
 
         #region Methods

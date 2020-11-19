@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Nikki.Utils;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Attributes;
 using CoreExtensions.IO;
@@ -20,14 +21,14 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 		public enum UnlockableType : int
 		{
 			/// <summary>
-			/// An invalid unlockable type.
-			/// </summary>
-			Invalid = 0,
-
-			/// <summary>
 			/// Unlocks a performance or visual upgrade.
 			/// </summary>
-			Upgrade = 1,
+			Upgrade = 0, // Performance
+
+			/// <summary>
+			/// Unlocks a magazine.
+			/// </summary>
+			Magazine = 1,
 
 			/// <summary>
 			/// Unlocks a car.
@@ -53,15 +54,26 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 		public string UnlockName { get; set; } = String.Empty;
 
 		/// <summary>
+		/// Index of an unlockable part.
+		/// </summary>
+		[AccessModifiable()]
+		public int PartIndex { get; set; }
+
+		/// <summary>
 		/// Track ID that gets unlocked.
 		/// </summary>
 		[AccessModifiable()]
 		public ushort TrackID { get; set; }
 
 		/// <summary>
-		/// Padding, perhaps
+		/// Upgrade level of an unlock.
 		/// </summary>
-		public int Unknown { get; set; }
+		public int UpgradeLevel { get; set; }
+
+		/// <summary>
+		/// Indicates whether track unlocked is in reverse.
+		/// </summary>
+		public eBoolean IsInReverse { get; set; }
 
 		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.
@@ -71,10 +83,11 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 		{
 			var result = new Unlock()
 			{
-				UnlockType = this.UnlockType,
-				UnlockName = this.UnlockName,
+				PartIndex = this.PartIndex,
 				TrackID = this.TrackID,
-				Unknown = this.Unknown,
+				UnlockName = this.UnlockName,
+				UnlockType = this.UnlockType,
+				UpgradeLevel = this.UpgradeLevel,
 			};
 			return result;
 		}
@@ -87,19 +100,25 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 		{
 			this.UnlockType = br.ReadEnum<UnlockableType>();
 
-			if (this.UnlockType == UnlockableType.Track)
+			switch (this.UnlockType)
 			{
-				this.TrackID = (ushort)br.ReadInt32();
+
+				case UnlockableType.Upgrade:
+					this.PartIndex = br.ReadInt32();
+					this.UpgradeLevel = br.ReadInt32();
+					break;
+
+				case UnlockableType.Track:
+					this.TrackID = (ushort)br.ReadInt32();
+					this.IsInReverse = (eBoolean)br.ReadInt32();
+					break;
+
+				default:
+					this.UnlockName = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+					br.BaseStream.Position += 4;
+					break;
 
 			}
-			else
-			{
-			
-				this.UnlockName = br.ReadUInt32().BinString(LookupReturn.EMPTY);
-			
-			}
-			
-			this.Unknown = br.ReadInt32();
 		}
 
 		/// <summary>
@@ -110,20 +129,25 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 		{
 			bw.WriteEnum(this.UnlockType);
 
-			if (this.UnlockType == UnlockableType.Track)
+			switch (this.UnlockType)
 			{
 
-				bw.Write((int)this.TrackID);
+				case UnlockableType.Upgrade:
+					bw.Write(this.PartIndex);
+					bw.Write(this.UpgradeLevel);
+					break;
+
+				case UnlockableType.Track:
+					bw.Write((int)this.TrackID);
+					bw.Write((int)this.IsInReverse);
+					break;
+
+				default:
+					bw.Write(this.UnlockName.BinHash());
+					bw.Write((int)0);
+					break;
 
 			}
-			else
-			{
-
-				bw.Write(this.UnlockName.BinHash());
-
-			}
-
-			bw.Write(this.Unknown);
 		}
 
 		/// <summary>
@@ -132,9 +156,25 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 		public void Serialize(BinaryWriter bw)
 		{
 			bw.WriteEnum(this.UnlockType);
-			bw.WriteNullTermUTF8(this.UnlockName);
-			bw.Write(this.TrackID);
-			bw.Write(this.Unknown);
+
+			switch (this.UnlockType)
+			{
+
+				case UnlockableType.Upgrade:
+					bw.Write(this.PartIndex);
+					bw.Write(this.UpgradeLevel);
+					break;
+
+				case UnlockableType.Track:
+					bw.Write(this.TrackID);
+					bw.WriteEnum(this.IsInReverse);
+					break;
+
+				default:
+					bw.WriteNullTermUTF8(this.UnlockName);
+					break;
+
+			}
 		}
 
 		/// <summary>
@@ -143,9 +183,25 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 		public void Deserialize(BinaryReader br)
 		{
 			this.UnlockType = br.ReadEnum<UnlockableType>();
-			this.UnlockName = br.ReadNullTermUTF8();
-			this.TrackID = br.ReadUInt16();
-			this.Unknown = br.ReadInt32();
+
+			switch (this.UnlockType)
+			{
+
+				case UnlockableType.Upgrade:
+					this.PartIndex = br.ReadInt32();
+					this.UpgradeLevel = br.ReadInt32();
+					break;
+
+				case UnlockableType.Track:
+					this.TrackID = br.ReadUInt16();
+					this.IsInReverse = br.ReadEnum<eBoolean>();
+					break;
+
+				default:
+					this.UnlockName = br.ReadNullTermUTF8();
+					break;
+
+			}
 		}
 	}
 }

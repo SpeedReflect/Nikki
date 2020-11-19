@@ -243,11 +243,6 @@ namespace Nikki.Support.Underground1.Class
             this.Disassemble(br);
         }
 
-        /// <summary>
-        /// Destroys current instance.
-        /// </summary>
-        ~Texture() { }
-
         #endregion
 
         #region Methods

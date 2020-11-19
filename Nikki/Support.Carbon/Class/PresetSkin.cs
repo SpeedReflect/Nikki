@@ -301,11 +301,6 @@ namespace Nikki.Support.Carbon.Class
             this.CollectionName.BinHash();
         }
 
-        /// <summary>
-        /// Destroys current instance.
-        /// </summary>
-        ~PresetSkin() { }
-
         #endregion
 
         #region Methods

@@ -132,11 +132,6 @@ namespace Nikki.Support.Carbon.Class
 			this.Disassemble(br);
 		}
 
-		/// <summary>
-		/// Destroys current instance.
-		/// </summary>
-		~STRBlock() { }
-
 		#endregion
 
 		#region Methods

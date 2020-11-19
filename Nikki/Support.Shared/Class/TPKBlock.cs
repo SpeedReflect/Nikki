@@ -111,7 +111,7 @@ namespace Nikki.Support.Shared.Class
         [AccessModifiable()]
         [MemoryCastable()]
         [Category("Primary")]
-        public TPKCompressionType CompressionType { get; set; }
+        public virtual TPKCompressionType CompressionType { get; set; }
 
         /// <summary>
         /// Settings data related to this <see cref="TPKBlock"/>.

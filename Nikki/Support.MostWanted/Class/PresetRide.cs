@@ -72,7 +72,7 @@ namespace Nikki.Support.MostWanted.Class
             set
             {
                 this.Manager?.CreationCheck(value);
-                this._collection_name = value;
+                this._collection_name = value.ToUpperInvariant();
             }
         }
 
@@ -536,11 +536,6 @@ namespace Nikki.Support.MostWanted.Class
             this.CollectionName.BinHash();
         }
 
-        /// <summary>
-        /// Destroys current instance.
-        /// </summary>
-        ~PresetRide() { }
-
         #endregion
 
         #region Methods
@@ -653,7 +648,7 @@ namespace Nikki.Support.MostWanted.Class
             this.MODEL = br.ReadNullTermUTF8(0x20);
 
             // CollectionName
-            this._collection_name = br.ReadNullTermUTF8(0x20);
+            this._collection_name = br.ReadNullTermUTF8(0x20).ToUpperInvariant();
 
             // Frontend and Pvehicle
             this.Frontend = br.ReadUInt32().VltString(LookupReturn.EMPTY);

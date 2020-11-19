@@ -87,7 +87,7 @@ namespace Nikki.Support.Underground2.Class
             set
             {
                 this.Manager?.CreationCheck(value);
-                this._collection_name = value;
+                this._collection_name = value.ToUpperInvariant();
             }
         }
 
@@ -590,11 +590,6 @@ namespace Nikki.Support.Underground2.Class
             this.CollectionName.BinHash();
         }
 
-        /// <summary>
-        /// Destroys current instance.
-        /// </summary>
-        ~PresetRide() { }
-
         #endregion
 
         #region Methods
@@ -748,7 +743,7 @@ namespace Nikki.Support.Underground2.Class
             this.MODEL = br.ReadNullTermUTF8(0x20);
 
             // CollectionName
-            this._collection_name = br.ReadNullTermUTF8(0x20);
+            this._collection_name = br.ReadNullTermUTF8(0x20).ToUpperInvariant();
 
             // Performance Level
             this.PerformanceLevel = br.ReadInt32();

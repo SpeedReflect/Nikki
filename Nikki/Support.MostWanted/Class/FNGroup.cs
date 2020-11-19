@@ -71,11 +71,6 @@ namespace Nikki.Support.MostWanted.Class
             this.Disassemble(br);
         }
 
-        /// <summary>
-        /// Destroys current instance.
-        /// </summary>
-        ~FNGroup() { }
-
         #endregion
 
         #region Methods

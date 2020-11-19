@@ -275,11 +275,6 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.CollectionName.BinHash();
 		}
 
-		/// <summary>
-		/// Destroys current instance.
-		/// </summary>
-		~WorldShop() { }
-
 		#endregion
 
 		#region Methods

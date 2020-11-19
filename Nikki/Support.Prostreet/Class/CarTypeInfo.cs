@@ -152,11 +152,6 @@ namespace Nikki.Support.Prostreet.Class
             this.CollectionName.BinHash();
         }
 
-        /// <summary>
-        /// Destroys current instance.
-        /// </summary>
-        ~CarTypeInfo() { }
-
         #endregion
 
         #region Methods

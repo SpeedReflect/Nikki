@@ -275,11 +275,6 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.Disassemble(br, strr);
 		}
 
-		/// <summary>
-		/// Destroys current instance.
-		/// </summary>
-		~WorldChallenge() { }
-
 		#endregion
 
 		#region Methods

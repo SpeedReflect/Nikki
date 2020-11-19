@@ -28,6 +28,7 @@ namespace Nikki.Support.Underground1.Class
         private List<AnimSlot> _animations;
         private List<Shared.Class.Texture> _textures;
         private const long max = 0x7FFFFFFF;
+        private TPKCompressionType _comp_type;
 
         #endregion
 
@@ -73,9 +74,33 @@ namespace Nikki.Support.Underground1.Class
         public override TPKVersion Version => TPKVersion.Underground1;
 
         /// <summary>
-        /// Filename used for this <see cref="TPKBlock"/>. It is a default watermark.
+        /// <see cref="Shared.Class.TPKBlock.TPKCompressionType"/> of this <see cref="TPKBlock"/>.
         /// </summary>
-        [Browsable(false)]
+        [AccessModifiable()]
+        [MemoryCastable()]
+        [Category("Primary")]
+        public override TPKCompressionType CompressionType
+		{
+            get => this._comp_type;
+            set
+			{
+
+                if (value == TPKCompressionType.CompressedByParts)
+				{
+
+                    throw new Exception("CompressedByParts is not supported in Underground 1");
+
+				}
+
+                this._comp_type = value;
+
+			}
+		}
+
+		/// <summary>
+		/// Filename used for this <see cref="TPKBlock"/>. It is a default watermark.
+		/// </summary>
+		[Browsable(false)]
         public override string Filename => $"{this.CollectionName}.tpk";
 
         /// <summary>
@@ -225,8 +250,12 @@ namespace Nikki.Support.Underground1.Class
             // Write temporary Part3
             var position_3 = bw.BaseStream.Position;
             bw.Write((long)0);
+            bw.WriteBytes(0x14 * this.Textures.Count);
 
-            for (int a1 = 0; a1 < this.Textures.Count; ++a1) bw.WriteBytes(0x18);
+            // Write Parts 4 & 5
+            this.Get1Part4(bw);
+            this.Get1Part5(bw);
+            this.Get1PartAnim(bw);
 
             // Write partial 1 size
             bw.BaseStream.Position = position_1 - 4;
@@ -241,7 +270,43 @@ namespace Nikki.Support.Underground1.Class
             bw.Write(-1);
             var position_2 = bw.BaseStream.Position;
             this.Get2Part1(bw);
-            var offslots = this.Get2EncodedPart2(bw, start);
+
+            bw.WriteEnum(BinBlockID.TPK_DataPart2);
+            bw.Write(-1);
+            var position_4 = bw.BaseStream.Position;
+
+            for (int loop = 0; loop < 30; ++loop) bw.Write(0x11111111);
+
+            var offslots = new List<OffSlot>(this.Textures.Count);
+            var comptype = this.CompressionType == TPKCompressionType.StreamDecompressed ? (byte)0 : (byte)1;
+
+            // Write all texture data and get OffSlots
+            for (int i = 0; i < this.Textures.Count; ++i)
+			{
+
+                var offslot = new OffSlot()
+                {
+                    Key = this.Textures[i].BinKey,
+                    AbsoluteOffset = (int)bw.BaseStream.Position,
+                    DecodedSize = 0,
+                    UserFlags = 0,
+                    Flags = comptype,
+                    RefCount = 0,
+                    UnknownInt32 = 0,
+                };
+
+                var array = this.Textures[i].Data;
+                if (comptype == 1) array = Interop.Compress(array, LZCompressionType.BEST);
+                offslot.EncodedSize = array.Length;
+                bw.Write(array);
+                offslots.Add(offslot);
+
+			}
+
+            // Make sizes correct
+            bw.FillBuffer(0x10);
+            bw.BaseStream.Position = position_4 - 4;
+            bw.Write((int)(bw.BaseStream.Length - position_4));
             bw.BaseStream.Position = position_2 - 4;
             bw.Write((int)(bw.BaseStream.Length - position_2));
 
@@ -291,8 +356,43 @@ namespace Nikki.Support.Underground1.Class
             if (PartOffsets[2] != max)
             {
 
-                br.BaseStream.Position = Start;
-                this.ParseCompTextures(br, offslot_list);
+                // Add textures to the list
+                for (int a1 = 0; a1 < TextureCount; ++a1)
+				{
+
+                    br.BaseStream.Position = texture_list[a1];
+
+                    var tex = new Texture(br, this)
+                    {
+                        CompressionValue1 = compslot_list[a1].Var1,
+                        CompressionValue2 = compslot_list[a1].Var2,
+                        CompressionValue3 = compslot_list[a1].Var3
+                    };
+
+                    var offslot = offslot_list[a1];
+                    br.BaseStream.Position = offslot.AbsoluteOffset;
+                    
+                    if (offslot.Flags == 0) // in case no compression
+					{
+
+                        this.CompressionType = TPKCompressionType.StreamDecompressed;
+                        var array = br.ReadBytes(offslot.EncodedSize);
+                        tex.Data = array;
+
+					}
+                    else // only 1 is possible
+					{
+
+                        this.CompressionType = TPKCompressionType.CompressedFullData;
+                        var array = br.ReadBytes(offslot.EncodedSize);
+                        array = Interop.Decompress(array);
+                        tex.Data = array;
+
+					}
+
+                    this.Textures.Add(tex);
+
+				}
 
             }
             else
@@ -607,7 +707,7 @@ namespace Nikki.Support.Underground1.Class
                     Key = br.ReadUInt32(),
                     AbsoluteOffset = br.ReadInt32(),
                     EncodedSize = br.ReadInt32(),
-                    DecodedSize = br.ReadInt32(),
+                    //DecodedSize = br.ReadInt32(),
                     UserFlags = br.ReadByte(),
                     Flags = br.ReadByte(),
                     RefCount = br.ReadInt16(),
@@ -742,7 +842,7 @@ namespace Nikki.Support.Underground1.Class
         protected void Get1Part3(BinaryWriter bw, List<OffSlot> offslots)
         {
             bw.WriteEnum(BinBlockID.TPK_InfoPart3); // write ID
-            bw.Write(this.Textures.Count * 0x18); // write size
+            bw.Write(this.Textures.Count * 0x14); // write size
 
             foreach (var offslot in offslots)
             {
@@ -750,7 +850,7 @@ namespace Nikki.Support.Underground1.Class
                 bw.Write(offslot.Key);
                 bw.Write(offslot.AbsoluteOffset);
                 bw.Write(offslot.EncodedSize);
-                bw.Write(offslot.DecodedSize);
+                //bw.Write(offslot.DecodedSize);
                 bw.Write(offslot.UserFlags);
                 bw.Write(offslot.Flags);
                 bw.Write(offslot.RefCount);

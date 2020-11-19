@@ -11,21 +11,40 @@ namespace Nikki.Utils.EA
     public static class SAT
     {
         /// <summary>
-        /// Decompresses .fng JDLZ-compressed file.
+        /// Decompresses compressed .fng.
         /// </summary>
         /// <param name="fng">.fng file as a byte array.</param>
         /// <param name="ID">ID of the .fng file.</param>
         /// <returns>Decompressed FEng file as a byte array.</returns>
         public static unsafe byte[] Decompress(byte[] fng, uint ID)
         {
-            // return if already decompressed
-            if (ID == (uint)BinBlockID.FEngFiles) return fng;
+            // So decompressed fng block can have a compressed fng block inside it,
+            // which makes literally zero sense
+            if (ID == (uint)BinBlockID.FEngFiles)
+            {
 
-            byte[] InterData = new byte[fng.Length - 4];
-            Array.Copy(fng, 4, InterData, 0, fng.Length - 4);
-            var result = Interop.Decompress(InterData);
+                var secID = BitConverter.ToUInt32(fng, 0);
+                var size = BitConverter.ToUInt32(fng, 4);
 
-            return result;
+                // Return if already decompressed
+                if (secID != (uint)BinBlockID.FNGCompress) return fng;
+
+                byte[] InterData = new byte[fng.Length - 12];
+                Array.Copy(fng, 12, InterData, 0, fng.Length - 12);
+                var result = Interop.Decompress(InterData);
+
+                return result;
+
+            }
+            else
+            {
+
+                byte[] InterData = new byte[fng.Length - 4];
+                Array.Copy(fng, 4, InterData, 0, fng.Length - 4);
+                var result = Interop.Decompress(InterData);
+
+                return result;
+            }
         }
 
         /// <summary>

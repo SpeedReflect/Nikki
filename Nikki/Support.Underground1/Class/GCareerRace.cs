@@ -49,6 +49,11 @@ namespace Nikki.Support.Underground1.Class
 		public enum CareerRaceBehavior : int
 		{
 			/// <summary>
+			/// Regular race behavior.
+			/// </summary>
+			Regular = 0,
+
+			/// <summary>
 			/// Tournament behavior type.
 			/// </summary>
 			Tournament = 1,
@@ -56,27 +61,27 @@ namespace Nikki.Support.Underground1.Class
 			/// <summary>
 			/// Regular behavior 2.
 			/// </summary>
-			Regular2 = 2,
+			ChallengeTJ = 2,
 
 			/// <summary>
 			/// Regular behavior 3.
 			/// </summary>
-			Regular3 = 3,
+			ChallengeSamantha = 3, // Samantha Challenge
 
 			/// <summary>
 			/// Regular behavior 4.
 			/// </summary>
-			Regular4 = 4,
+			ChallengeMelissa = 4, // Melissa Challenge
 
 			/// <summary>
 			/// Regular behavior 5.
 			/// </summary>
-			Regular5 = 5,
+			ChallengeEddie = 5, // Eddie Challenge
 
 			/// <summary>
-			/// Regular behavior 6.
+			/// Advances player in rating table.
 			/// </summary>
-			Regular6 = 6,
+			RankAdvancement = 6,
 
 			/// <summary>
 			/// Unknown.
@@ -84,9 +89,9 @@ namespace Nikki.Support.Underground1.Class
 			Hmmm = 7,
 
 			/// <summary>
-			/// Crash game.
+			/// Invalid and unsupported race.
 			/// </summary>
-			CrashGame = 8,
+			InvalidRace = 8,
 		}
 
 		/// <summary>
@@ -123,6 +128,32 @@ namespace Nikki.Support.Underground1.Class
 			/// Lap Knockout race.
 			/// </summary>
 			LapKnockout = 5,
+		}
+
+		/// <summary>
+		/// Enum of career rating type in Underground 1.
+		/// </summary>
+		public enum RatingType : short
+		{
+			/// <summary>
+			/// Circuit rating table.
+			/// </summary>
+			Circuit = 0,
+
+			/// <summary>
+			/// Sprint rating table.
+			/// </summary>
+			Sprint = 1,
+
+			/// <summary>
+			/// Drag rating table.
+			/// </summary>
+			Drag = 2,
+
+			/// <summary>
+			/// Drift rating table.
+			/// </summary>
+			Drift = 3,
 		}
 
 		#endregion
@@ -181,7 +212,7 @@ namespace Nikki.Support.Underground1.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
+		[Category("Settings")]
 		public CareerRaceBehavior RaceBehavior { get; set; }
 
 		/// <summary>
@@ -189,71 +220,47 @@ namespace Nikki.Support.Underground1.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
+		[Category("Settings")]
 		public CareerRaceType RaceType { get; set; }
 
 		/// <summary>
-		/// Unknown value at offset 0x0C.
+		/// Number of stars required to unlock this race.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public int Unknown0x0C { get; set; }
+		[Category("Counts")]
+		public int StarsRequired { get; set; }
 
 		/// <summary>
-		/// Unknown value at offset 0x10.
+		/// Time limit to complete this race on easy difficulty.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public int Unknown0x10 { get; set; }
+		[Category("Difficulty")]
+		public float TimeLimitEasy { get; set; }
 
 		/// <summary>
-		/// Unknown value at offset 0x14.
+		/// Time limit to complete this race on normal difficulty.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public int Unknown0x14 { get; set; }
+		[Category("Difficulty")]
+		public float TimeLimitNormal { get; set; }
 
 		/// <summary>
-		/// Unknown value at offset 0x18.
+		/// Time limit to complete this race on hard difficulty.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public int Unknown0x18 { get; set; }
-
-		/// <summary>
-		/// Unknown value at offset 0x1C.
-		/// </summary>
-		[AccessModifiable()]
-		[MemoryCastable()]
-		[Category("Secondary")]
-		public int Unknown0x1C { get; set; }
-
-		/// <summary>
-		/// Unknown value at offset 0x20.
-		/// </summary>
-		[AccessModifiable()]
-		[MemoryCastable()]
-		[Category("Secondary")]
-		public int Unknown0x20 { get; set; }
-
-		/// <summary>
-		/// Unknown value at offset 0x24.
-		/// </summary>
-		[AccessModifiable()]
-		[MemoryCastable()]
-		[Category("Secondary")]
-		public int Unknown0x24 { get; set; }
+		[Category("Difficulty")]
+		public float TimeLimitHard { get; set; }
 
 		/// <summary>
 		/// Cash value won on easy difficulty.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
+		[Category("Difficulty")]
 		public float CashValueEasy { get; set; }
 
 		/// <summary>
@@ -261,7 +268,7 @@ namespace Nikki.Support.Underground1.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
+		[Category("Difficulty")]
 		public float CashValueNormal { get; set; }
 
 		/// <summary>
@@ -269,16 +276,24 @@ namespace Nikki.Support.Underground1.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
+		[Category("Difficulty")]
 		public float CashValueHard { get; set; }
 
 		/// <summary>
-		/// Some switch value at offset 0x34.
+		/// Rating advancement type of this race.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public int SwitchValue { get; set; }
+		[Category("Rating")]
+		public RatingType RankType { get; set; }
+
+		/// <summary>
+		/// Position in the rating table.
+		/// </summary>
+		[AccessModifiable()]
+		[MemoryCastable()]
+		[Category("Rating")]
+		public short RankRating { get; set; }
 
 		/// <summary>
 		/// Unlock 1 upon completion of this race.
@@ -377,7 +392,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
-		[Category("Primary")]
+		[Category("Counts")]
 		public int NumberOfUnlocks { get; set; }
 
 		/// <summary>
@@ -386,32 +401,62 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
-		[Category("Primary")]
+		[Category("Counts")]
 		public int NumberOfStages { get; set; }
 
 		/// <summary>
-		/// Race ID which unlocks this race.
+		/// First required race won to unlock this race.
 		/// </summary>
 		[AccessModifiable()]
+		[StaticModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public int UnlockedByRace { get; set; }
+		[Category("Requirements")]
+		public short RequiredRaceWon1 { get; set; }
 
 		/// <summary>
-		/// Unknown value at offset 0xA0.
+		/// Second required race won to unlock this race.
 		/// </summary>
 		[AccessModifiable()]
+		[StaticModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public int Unknown0xA0 { get; set; }
+		[Category("Requirements")]
+		public short RequiredRaceWon2 { get; set; }
 
 		/// <summary>
-		/// Unknown value at offset 0xA4.
+		/// Third required race won to unlock this race.
 		/// </summary>
 		[AccessModifiable()]
+		[StaticModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public int Unknown0xA4 { get; set; }
+		[Category("Requirements")]
+		public short RequiredRaceWon3 { get; set; }
+
+		/// <summary>
+		/// Fourth required race won to unlock this race.
+		/// </summary>
+		[AccessModifiable()]
+		[StaticModifiable()]
+		[MemoryCastable()]
+		[Category("Requirements")]
+		public short RequiredRaceWon4 { get; set; }
+
+		/// <summary>
+		/// Fifth required race won to unlock this race.
+		/// </summary>
+		[AccessModifiable()]
+		[StaticModifiable()]
+		[MemoryCastable()]
+		[Category("Requirements")]
+		public short RequiredRaceWon5 { get; set; }
+
+		/// <summary>
+		/// Sixth required race won to unlock this race.
+		/// </summary>
+		[AccessModifiable()]
+		[StaticModifiable()]
+		[MemoryCastable()]
+		[Category("Requirements")]
+		public short RequiredRaceWon6 { get; set; }
 
 		/// <summary>
 		/// True if event is valid and should be shown on the map; false otherwise.
@@ -419,7 +464,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
-		[Category("Primary")]
+		[Category("Secondary")]
 		public eBoolean IsValidEvent { get; set; }
 
 		/// <summary>
@@ -427,15 +472,15 @@ namespace Nikki.Support.Underground1.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public eBoolean InitiallyLockedMayb { get; set; }
+		[Category("Counts")]
+		public short RequiredRacesWon { get; set; }
 
 		/// <summary>
 		/// Intro movie shown at the beginning of the race.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Primary")]
+		[Category("Movies")]
 		public string IntroMovie { get; set; } = String.Empty;
 
 		/// <summary>
@@ -443,7 +488,7 @@ namespace Nikki.Support.Underground1.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Primary")]
+		[Category("Movies")]
 		public string InterMovie { get; set; } = String.Empty;
 
 		/// <summary>
@@ -451,7 +496,7 @@ namespace Nikki.Support.Underground1.Class
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Primary")]
+		[Category("Movies")]
 		public string OutroMovie { get; set; } = String.Empty;
 
 		/// <summary>
@@ -460,7 +505,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
-		[Category("Primary")]
+		[Category("Settings")]
 		public string PlayerCarType { get; set; } = String.Empty;
 
 		/// <summary>
@@ -490,7 +535,7 @@ namespace Nikki.Support.Underground1.Class
 		[AccessModifiable()]
 		[StaticModifiable()]
 		[MemoryCastable()]
-		[Category("Primary")]
+		[Category("Counts")]
 		public int NumberOfOpponents { get; set; }
 
 		/// <summary>
@@ -502,20 +547,20 @@ namespace Nikki.Support.Underground1.Class
 		public float Unknown0x12C { get; set; }
 
 		/// <summary>
-		/// Some key value at offset 0x130.
+		/// Caller photo name.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
 		[Category("Secondary")]
-		public uint SomeKey { get; set; }
+		public string CallerPhoto { get; set; }
 
 		/// <summary>
 		/// Allows traffic.
 		/// </summary>
 		[AccessModifiable()]
 		[MemoryCastable()]
-		[Category("Secondary")]
-		public int AllowTrafficMayb { get; set; }
+		[Category("Settings")]
+		public int TrafficLevel { get; set; }
 
 		/// <summary>
 		/// Unknown integer value at offset 0x138.
@@ -608,11 +653,6 @@ namespace Nikki.Support.Underground1.Class
 			this.CollectionName.BinHash();
 		}
 
-		/// <summary>
-		/// Destroys current instance.
-		/// </summary>
-		~GCareerRace() { }
-
 		#endregion
 
 		#region Methods
@@ -624,19 +664,19 @@ namespace Nikki.Support.Underground1.Class
 		public void Assemble(BinaryWriter bw)
 		{
 			bw.Write(Int32.Parse(this._collection_name));
-			bw.WriteEnum(this.RaceType);
 			bw.WriteEnum(this.RaceBehavior);
-			bw.Write(this.Unknown0x0C);
-			bw.Write(this.Unknown0x10);
-			bw.Write(this.Unknown0x14);
-			bw.Write(this.Unknown0x18);
-			bw.Write(this.Unknown0x1C);
-			bw.Write(this.Unknown0x20);
-			bw.Write(this.Unknown0x24);
+			bw.WriteEnum(this.RaceType);
+			bw.Write((long)0);
+			bw.Write((int)0);
+			bw.Write(this.StarsRequired);
+			bw.Write(this.TimeLimitEasy);
+			bw.Write(this.TimeLimitNormal);
+			bw.Write(this.TimeLimitHard);
 			bw.Write(this.CashValueEasy);
 			bw.Write(this.CashValueNormal);
 			bw.Write(this.CashValueHard);
-			bw.Write(this.SwitchValue);
+			bw.WriteEnum(this.RankType);
+			bw.Write(this.RankRating);
 			this.UNLOCK1.Write(bw);
 			this.UNLOCK2.Write(bw);
 			this.UNLOCK3.Write(bw);
@@ -652,11 +692,14 @@ namespace Nikki.Support.Underground1.Class
 			this.STAGE7.Write(bw);
 			this.STAGE8.Write(bw);
 			bw.Write(this.NumberOfStages);
-			bw.Write(this.UnlockedByRace);
-			bw.Write(this.Unknown0xA0);
-			bw.Write(this.Unknown0xA4);
+			bw.Write(this.RequiredRaceWon1);
+			bw.Write(this.RequiredRaceWon2);
+			bw.Write(this.RequiredRaceWon3);
+			bw.Write(this.RequiredRaceWon4);
+			bw.Write(this.RequiredRaceWon5);
+			bw.Write(this.RequiredRaceWon6);
 			bw.Write((short)this.IsValidEvent);
-			bw.Write((short)this.InitiallyLockedMayb);
+			bw.Write((short)this.RequiredRacesWon);
 			bw.WriteNullTermUTF8(this.IntroMovie, 0xC);
 			bw.WriteNullTermUTF8(this.InterMovie, 0xC);
 			bw.WriteNullTermUTF8(this.OutroMovie, 0xC);
@@ -666,8 +709,8 @@ namespace Nikki.Support.Underground1.Class
 			this.OPPONENT3.Write(bw);
 			bw.Write(this.NumberOfOpponents);
 			bw.Write(this.Unknown0x12C);
-			bw.Write(this.SomeKey);
-			bw.Write(this.AllowTrafficMayb);
+			bw.Write(this.CallerPhoto.BinHash());
+			bw.Write(this.TrafficLevel);
 			bw.Write(this.Unknown0x138);
 			bw.Write(this.Unknown0x13C);
 			bw.Write(this.Unknown0x140);
@@ -685,19 +728,18 @@ namespace Nikki.Support.Underground1.Class
 			this._collection_name = br.ReadInt32().ToString();
 
 			// Settings
-			this.RaceType = br.ReadEnum<CareerRaceType>();
 			this.RaceBehavior = br.ReadEnum<CareerRaceBehavior>();
-			this.Unknown0x0C = br.ReadInt32();
-			this.Unknown0x10 = br.ReadInt32();
-			this.Unknown0x14 = br.ReadInt32();
-			this.Unknown0x18 = br.ReadInt32();
-			this.Unknown0x1C = br.ReadInt32();
-			this.Unknown0x20 = br.ReadInt32();
-			this.Unknown0x24 = br.ReadInt32();
+			this.RaceType = br.ReadEnum<CareerRaceType>();
+			br.BaseStream.Position += 0x0C;
+			this.StarsRequired = br.ReadInt32();
+			this.TimeLimitEasy = br.ReadSingle();
+			this.TimeLimitNormal = br.ReadSingle();
+			this.TimeLimitHard = br.ReadSingle();
 			this.CashValueEasy = br.ReadSingle();
 			this.CashValueNormal = br.ReadSingle();
 			this.CashValueHard = br.ReadSingle();
-			this.SwitchValue = br.ReadInt32();
+			this.RankType = br.ReadEnum<RatingType>();
+			this.RankRating = br.ReadInt16();
 			this.UNLOCK1.Read(br);
 			this.UNLOCK2.Read(br);
 			this.UNLOCK3.Read(br);
@@ -713,11 +755,14 @@ namespace Nikki.Support.Underground1.Class
 			this.STAGE7.Read(br);
 			this.STAGE8.Read(br);
 			this.NumberOfStages = br.ReadInt32();
-			this.UnlockedByRace = br.ReadInt32();
-			this.Unknown0xA0 = br.ReadInt32();
-			this.Unknown0xA4 = br.ReadInt32();
+			this.RequiredRaceWon1 = br.ReadInt16();
+			this.RequiredRaceWon2 = br.ReadInt16();
+			this.RequiredRaceWon3 = br.ReadInt16();
+			this.RequiredRaceWon4 = br.ReadInt16();
+			this.RequiredRaceWon5 = br.ReadInt16();
+			this.RequiredRaceWon6 = br.ReadInt16();
 			this.IsValidEvent = (eBoolean)br.ReadInt16();
-			this.InitiallyLockedMayb = (eBoolean)br.ReadInt16();
+			this.RequiredRacesWon = br.ReadInt16();
 			this.IntroMovie = br.ReadNullTermUTF8(0xC);
 			this.InterMovie = br.ReadNullTermUTF8(0xC);
 			this.OutroMovie = br.ReadNullTermUTF8(0xC);
@@ -727,8 +772,8 @@ namespace Nikki.Support.Underground1.Class
 			this.OPPONENT3.Read(br);
 			this.NumberOfOpponents = br.ReadInt32();
 			this.Unknown0x12C = br.ReadSingle();
-			this.SomeKey = br.ReadUInt32();
-			this.AllowTrafficMayb = br.ReadInt32();
+			this.CallerPhoto = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.TrafficLevel = br.ReadInt32();
 			this.Unknown0x138 = br.ReadInt32();
 			this.Unknown0x13C = br.ReadSingle();
 			this.Unknown0x140 = br.ReadSingle();
@@ -777,19 +822,17 @@ namespace Nikki.Support.Underground1.Class
 				// CollectionName
 				writer.WriteNullTermUTF8(this._collection_name);
 
-				writer.WriteEnum(this.RaceType);
 				writer.WriteEnum(this.RaceBehavior);
-				writer.Write(this.Unknown0x0C);
-				writer.Write(this.Unknown0x10);
-				writer.Write(this.Unknown0x14);
-				writer.Write(this.Unknown0x18);
-				writer.Write(this.Unknown0x1C);
-				writer.Write(this.Unknown0x20);
-				writer.Write(this.Unknown0x24);
+				writer.WriteEnum(this.RaceType);
+				writer.Write(this.StarsRequired);
+				writer.Write(this.TimeLimitEasy);
+				writer.Write(this.TimeLimitNormal);
+				writer.Write(this.TimeLimitHard);
 				writer.Write(this.CashValueEasy);
 				writer.Write(this.CashValueNormal);
 				writer.Write(this.CashValueHard);
-				writer.Write(this.SwitchValue);
+				writer.WriteEnum(this.RankType);
+				writer.Write(this.RankRating);
 
 				this.UNLOCK1.Serialize(writer);
 				this.UNLOCK2.Serialize(writer);
@@ -809,11 +852,14 @@ namespace Nikki.Support.Underground1.Class
 				this.STAGE8.Write(writer);
 
 				writer.Write(this.NumberOfStages);
-				writer.Write(this.UnlockedByRace);
-				writer.Write(this.Unknown0xA0);
-				writer.Write(this.Unknown0xA4);
+				writer.Write(this.RequiredRaceWon1);
+				writer.Write(this.RequiredRaceWon2);
+				writer.Write(this.RequiredRaceWon3);
+				writer.Write(this.RequiredRaceWon4);
+				writer.Write(this.RequiredRaceWon5);
+				writer.Write(this.RequiredRaceWon6);
 				writer.WriteEnum(this.IsValidEvent);
-				writer.WriteEnum(this.InitiallyLockedMayb);
+				writer.Write(this.RequiredRacesWon);
 				writer.WriteNullTermUTF8(this.IntroMovie);
 				writer.WriteNullTermUTF8(this.InterMovie);
 				writer.WriteNullTermUTF8(this.OutroMovie);
@@ -825,8 +871,8 @@ namespace Nikki.Support.Underground1.Class
 				
 				writer.Write(this.NumberOfOpponents);
 				writer.Write(this.Unknown0x12C);
-				writer.Write(this.SomeKey);
-				writer.Write(this.AllowTrafficMayb);
+				writer.WriteNullTermUTF8(this.CallerPhoto);
+				writer.Write(this.TrafficLevel);
 				writer.Write(this.Unknown0x138);
 				writer.Write(this.Unknown0x13C);
 				writer.Write(this.Unknown0x140);
@@ -862,19 +908,17 @@ namespace Nikki.Support.Underground1.Class
 			// CollectionName
 			this._collection_name = reader.ReadNullTermUTF8();
 
-			this.RaceType = reader.ReadEnum<CareerRaceType>();
 			this.RaceBehavior = reader.ReadEnum<CareerRaceBehavior>();
-			this.Unknown0x0C = reader.ReadInt32();
-			this.Unknown0x10 = reader.ReadInt32();
-			this.Unknown0x14 = reader.ReadInt32();
-			this.Unknown0x18 = reader.ReadInt32();
-			this.Unknown0x1C = reader.ReadInt32();
-			this.Unknown0x20 = reader.ReadInt32();
-			this.Unknown0x24 = reader.ReadInt32();
+			this.RaceType = reader.ReadEnum<CareerRaceType>();
+			this.StarsRequired = reader.ReadInt32();
+			this.TimeLimitEasy = reader.ReadSingle();
+			this.TimeLimitNormal = reader.ReadSingle();
+			this.TimeLimitHard = reader.ReadSingle();
 			this.CashValueEasy = reader.ReadSingle();
 			this.CashValueNormal = reader.ReadSingle();
 			this.CashValueHard = reader.ReadSingle();
-			this.SwitchValue = reader.ReadInt32();
+			this.RankType = reader.ReadEnum<RatingType>();
+			this.RankRating = reader.ReadInt16();
 
 			this.UNLOCK1.Deserialize(reader);
 			this.UNLOCK2.Deserialize(reader);
@@ -894,11 +938,14 @@ namespace Nikki.Support.Underground1.Class
 			this.STAGE8.Read(reader);
 
 			this.NumberOfStages = reader.ReadInt32();
-			this.UnlockedByRace = reader.ReadInt32();
-			this.Unknown0xA0 = reader.ReadInt32();
-			this.Unknown0xA4 = reader.ReadInt32();
+			this.RequiredRaceWon1 = reader.ReadInt16();
+			this.RequiredRaceWon2 = reader.ReadInt16();
+			this.RequiredRaceWon3 = reader.ReadInt16();
+			this.RequiredRaceWon4 = reader.ReadInt16();
+			this.RequiredRaceWon5 = reader.ReadInt16();
+			this.RequiredRaceWon6 = reader.ReadInt16();
 			this.IsValidEvent = reader.ReadEnum<eBoolean>();
-			this.InitiallyLockedMayb = reader.ReadEnum<eBoolean>();
+			this.RequiredRacesWon = reader.ReadInt16();
 			this.IntroMovie = reader.ReadNullTermUTF8();
 			this.InterMovie = reader.ReadNullTermUTF8();
 			this.OutroMovie = reader.ReadNullTermUTF8();
@@ -910,8 +957,8 @@ namespace Nikki.Support.Underground1.Class
 
 			this.NumberOfOpponents = reader.ReadInt32();
 			this.Unknown0x12C = reader.ReadSingle();
-			this.SomeKey = reader.ReadUInt32();
-			this.AllowTrafficMayb = reader.ReadInt32();
+			this.CallerPhoto = reader.ReadNullTermUTF8();
+			this.TrafficLevel = reader.ReadInt32();
 			this.Unknown0x138 = reader.ReadInt32();
 			this.Unknown0x13C = reader.ReadSingle();
 			this.Unknown0x140 = reader.ReadSingle();

@@ -4215,11 +4215,6 @@
             Part IDs enum for Underground1 support.
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.PartID.PartUnderground1.INVALID">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Nikki.Reflection.Enum.PartID.PartUnderground2">
             <summary>
             Part IDs enum for Underground2 support.
@@ -6680,11 +6675,6 @@
         <member name="T:Nikki.Reflection.Enum.SlotID.SlotUnderground1">
             <summary>
             Slot IDs enum for Underground1 support.
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.SlotID.SlotUnderground1.INVALID">
-            <summary>
-            
             </summary>
         </member>
         <member name="T:Nikki.Reflection.Enum.SlotID.SlotUnderground2">
@@ -9886,11 +9876,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Carbon.Framework.CarTypeInfoManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.CarTypeInfo.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Carbon.Class.CarTypeInfo.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Carbon.Class.CarTypeInfo"/> into a byte array.
@@ -10216,11 +10201,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Carbon.Framework.FNGroupManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.FNGroup.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Carbon.Class.FNGroup.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Carbon.Class.FNGroup"/> into a byte array.
@@ -10510,11 +10490,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Carbon.Framework.MaterialManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Class.Material.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.Material.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -11058,11 +11033,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Carbon.Framework.PresetRideManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.PresetRide.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Carbon.Class.PresetRide.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Carbon.Class.PresetRide"/> into a byte array.
@@ -11270,11 +11240,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Carbon.Framework.PresetSkinManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.PresetSkin.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Carbon.Class.PresetSkin.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Carbon.Class.PresetSkin"/> into a byte array.
@@ -11406,11 +11371,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Carbon.Framework.SlotOverrideManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Class.SlotOverride.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.SlotOverride.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -11549,11 +11509,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Carbon.Framework.SlotTypeManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.SlotType.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Carbon.Class.SlotType.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Carbon.Class.SlotType"/> into a byte array.
@@ -11665,11 +11620,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read text data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Carbon.Framework.STRBlockManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Class.STRBlock.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.STRBlock.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -11870,11 +11820,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Carbon.Framework.SunInfoManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.SunInfo.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Carbon.Class.SunInfo.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Carbon.Class.SunInfo"/> into a byte array.
@@ -11979,11 +11924,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="tpk"><see cref="T:Nikki.Support.Carbon.Class.TPKBlock"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Class.Texture.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.Texture.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -12553,11 +12493,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Carbon.Framework.TrackManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Class.Track.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Carbon.Class.Track.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Carbon.Class.Track"/> into a byte array.
@@ -12664,11 +12599,6 @@
             </summary>
             <param name="br"></param>
             <param name="manager"></param>
-        </member>
-        <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Carbon.Class.VectorVinyl.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -15654,11 +15584,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.MostWanted.Framework.CarTypeInfoManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.CarTypeInfo.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.MostWanted.Class.CarTypeInfo.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.MostWanted.Class.CarTypeInfo"/> into a byte array.
@@ -15984,11 +15909,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.MostWanted.Framework.FNGroupManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.FNGroup.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.MostWanted.Class.FNGroup.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.MostWanted.Class.FNGroup"/> into a byte array.
@@ -16238,11 +16158,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.MostWanted.Framework.MaterialManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.MostWanted.Class.Material.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.Material.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -16606,11 +16521,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.MostWanted.Framework.PresetRideManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.PresetRide.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.MostWanted.Class.PresetRide.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.MostWanted.Class.PresetRide"/> into a byte array.
@@ -16717,11 +16627,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.MostWanted.Framework.SlotOverrideManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.MostWanted.Class.SlotOverride.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.SlotOverride.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -16835,11 +16740,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.MostWanted.Framework.SlotTypeManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.SlotType.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.MostWanted.Class.SlotType.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.MostWanted.Class.SlotType"/> into a byte array.
@@ -16951,11 +16851,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read text data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.MostWanted.Framework.STRBlockManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.MostWanted.Class.STRBlock.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.STRBlock.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -17156,11 +17051,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.MostWanted.Framework.SunInfoManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Class.SunInfo.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.MostWanted.Class.SunInfo.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.MostWanted.Class.SunInfo"/> into a byte array.
@@ -17280,11 +17170,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="tpk"><see cref="T:Nikki.Support.MostWanted.Class.TPKBlock"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.MostWanted.Class.Texture.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.Texture.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -17858,11 +17743,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.MostWanted.Framework.TrackManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.MostWanted.Class.Track.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.Track.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -21814,11 +21694,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Prostreet.Framework.CarTypeInfoManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.CarTypeInfo.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Prostreet.Class.CarTypeInfo.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Prostreet.Class.CarTypeInfo"/> into a byte array.
@@ -22143,11 +22018,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Prostreet.Framework.FNGroupManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Prostreet.Class.FNGroup.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Prostreet.Class.FNGroup.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -22499,11 +22369,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Prostreet.Framework.MaterialManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.Material.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Prostreet.Class.Material.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Prostreet.Class.Material"/> into a byte array.
@@ -22680,11 +22545,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Prostreet.Framework.SlotOverrideManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Prostreet.Class.SlotOverride.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Prostreet.Class.SlotOverride.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -22868,11 +22728,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Prostreet.Framework.SlotTypeManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.SlotType.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Prostreet.Class.SlotType.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Prostreet.Class.SlotType"/> into a byte array.
@@ -22984,11 +22839,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read text data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Prostreet.Framework.STRBlockManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Prostreet.Class.STRBlock.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -23189,11 +23039,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Prostreet.Framework.SunInfoManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.SunInfo.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Prostreet.Class.SunInfo.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Prostreet.Class.SunInfo"/> into a byte array.
@@ -23298,11 +23143,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="tpk"><see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Prostreet.Class.Texture.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Prostreet.Class.Texture.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -23872,11 +23712,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Prostreet.Framework.TrackManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Class.Track.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Prostreet.Class.Track.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Prostreet.Class.Track"/> into a byte array.
@@ -23988,11 +23823,6 @@
             </summary>
             <param name="br"></param>
             <param name="manager"></param>
-        </member>
-        <member name="M:Nikki.Support.Prostreet.Class.VectorVinyl.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Prostreet.Class.VectorVinyl.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -31474,11 +31304,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Underground1.Framework.CarTypeInfoManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Underground1.Class.CarTypeInfo.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Underground1.Class.CarTypeInfo.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Underground1.Class.CarTypeInfo"/> into a byte array.
@@ -31699,11 +31524,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Underground1.Framework.FNGroupManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Underground1.Class.FNGroup.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Underground1.Class.FNGroup.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Underground1.Class.FNGroup"/> into a byte array.
@@ -31760,34 +31580,39 @@
             Enum of career race behavior types in Underground 1.
             </summary>
         </member>
+        <member name="F:Nikki.Support.Underground1.Class.GCareerRace.CareerRaceBehavior.Regular">
+            <summary>
+            Regular race behavior.
+            </summary>
+        </member>
         <member name="F:Nikki.Support.Underground1.Class.GCareerRace.CareerRaceBehavior.Tournament">
             <summary>
             Tournament behavior type.
             </summary>
         </member>
-        <member name="F:Nikki.Support.Underground1.Class.GCareerRace.CareerRaceBehavior.Regular2">
+        <member name="F:Nikki.Support.Underground1.Class.GCareerRace.CareerRaceBehavior.ChallengeTJ">
             <summary>
             Regular behavior 2.
             </summary>
         </member>
-        <member name="F:Nikki.Support.Underground1.Class.GCareerRace.CareerRaceBehavior.Regular3">
+        <member name="F:Nikki.Support.Underground1.Class.GCareerRace.CareerRaceBehavior.ChallengeSamantha">
             <summary>
             Regular behavior 3.
             </summary>
         </member>
-        <member name="F:Nikki.Support.Underground1.Class.GCareerRace.CareerRaceBehavior.Regular4">
+        <member name="F:Nikki.Support.Underground1.Class.GCareerRace.CareerRaceBehavior.ChallengeMelissa">
             <summary>
             Regular behavior 4.
             </summary>
         </member>
-        <member name="F:Nikki.Support.Underground1.Class.GCareerRace.CareerRaceBehavior.Regular5">
+        <member name="F:Nikki.Support.Underground1.Class.GCareerRace.CareerRaceBehavior.ChallengeEddie">
             <summary>
             Regular behavior 5.
             </summary>
         </member>
-        <member name="F:Nikki.Support.Underground1.Class.GCareerRace.CareerRaceBehavior.Regular6">
+        <member name="F:Nikki.Support.Underground1.Class.GCareerRace.CareerRaceBehavior.RankAdvancement">
             <summary>
-            Regular behavior 6.
+            Advances player in rating table.
             </summary>
         </member>
         <member name="F:Nikki.Support.Underground1.Class.GCareerRace.CareerRaceBehavior.Hmmm">
@@ -31795,9 +31620,9 @@
             Unknown.
             </summary>
         </member>
-        <member name="F:Nikki.Support.Underground1.Class.GCareerRace.CareerRaceBehavior.CrashGame">
+        <member name="F:Nikki.Support.Underground1.Class.GCareerRace.CareerRaceBehavior.InvalidRace">
             <summary>
-            Crash game.
+            Invalid and unsupported race.
             </summary>
         </member>
         <member name="T:Nikki.Support.Underground1.Class.GCareerRace.CareerRaceType">
@@ -31833,6 +31658,31 @@
         <member name="F:Nikki.Support.Underground1.Class.GCareerRace.CareerRaceType.LapKnockout">
             <summary>
             Lap Knockout race.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Underground1.Class.GCareerRace.RatingType">
+            <summary>
+            Enum of career rating type in Underground 1.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground1.Class.GCareerRace.RatingType.Circuit">
+            <summary>
+            Circuit rating table.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground1.Class.GCareerRace.RatingType.Sprint">
+            <summary>
+            Sprint rating table.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground1.Class.GCareerRace.RatingType.Drag">
+            <summary>
+            Drag rating table.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground1.Class.GCareerRace.RatingType.Drift">
+            <summary>
+            Drift rating table.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground1.Class.GCareerRace.GameINT">
@@ -31875,39 +31725,24 @@
             Career race type.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.Unknown0x0C">
+        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.StarsRequired">
             <summary>
-            Unknown value at offset 0x0C.
+            Number of stars required to unlock this race.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.Unknown0x10">
+        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.TimeLimitEasy">
             <summary>
-            Unknown value at offset 0x10.
+            Time limit to complete this race on easy difficulty.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.Unknown0x14">
+        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.TimeLimitNormal">
             <summary>
-            Unknown value at offset 0x14.
+            Time limit to complete this race on normal difficulty.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.Unknown0x18">
+        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.TimeLimitHard">
             <summary>
-            Unknown value at offset 0x18.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.Unknown0x1C">
-            <summary>
-            Unknown value at offset 0x1C.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.Unknown0x20">
-            <summary>
-            Unknown value at offset 0x20.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.Unknown0x24">
-            <summary>
-            Unknown value at offset 0x24.
+            Time limit to complete this race on hard difficulty.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground1.Class.GCareerRace.CashValueEasy">
@@ -31925,9 +31760,14 @@
             Cash value won on hard difficulty.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.SwitchValue">
+        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.RankType">
             <summary>
-            Some switch value at offset 0x34.
+            Rating advancement type of this race.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.RankRating">
+            <summary>
+            Position in the rating table.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground1.Class.GCareerRace.UNLOCK1">
@@ -32005,19 +31845,34 @@
             Number of stages in this race.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.UnlockedByRace">
+        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.RequiredRaceWon1">
             <summary>
-            Race ID which unlocks this race.
+            First required race won to unlock this race.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.Unknown0xA0">
+        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.RequiredRaceWon2">
             <summary>
-            Unknown value at offset 0xA0.
+            Second required race won to unlock this race.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.Unknown0xA4">
+        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.RequiredRaceWon3">
             <summary>
-            Unknown value at offset 0xA4.
+            Third required race won to unlock this race.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.RequiredRaceWon4">
+            <summary>
+            Fourth required race won to unlock this race.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.RequiredRaceWon5">
+            <summary>
+            Fifth required race won to unlock this race.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.RequiredRaceWon6">
+            <summary>
+            Sixth required race won to unlock this race.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground1.Class.GCareerRace.IsValidEvent">
@@ -32025,7 +31880,7 @@
             True if event is valid and should be shown on the map; false otherwise.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.InitiallyLockedMayb">
+        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.RequiredRacesWon">
             <summary>
             True if initially locked; false otherwise.
             </summary>
@@ -32075,12 +31930,12 @@
             Unknown float value at offset 0x12C.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.SomeKey">
+        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.CallerPhoto">
             <summary>
-            Some key value at offset 0x130.
+            Caller photo name.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.AllowTrafficMayb">
+        <member name="P:Nikki.Support.Underground1.Class.GCareerRace.TrafficLevel">
             <summary>
             Allows traffic.
             </summary>
@@ -32128,11 +31983,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Underground1.Framework.GCareerRaceManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground1.Class.GCareerRace.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Underground1.Class.GCareerRace.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -32380,11 +32230,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Underground1.Framework.MaterialManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground1.Class.Material.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Underground1.Class.Material.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -32683,11 +32528,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Underground1.Framework.PresetRideManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Underground1.Class.PresetRide.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Underground1.Class.PresetRide.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Underground1.Class.PresetRide"/> into a byte array.
@@ -32799,11 +32639,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read text data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Underground1.Framework.STRBlockManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground1.Class.STRBlock.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Underground1.Class.STRBlock.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -33004,11 +32839,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Underground1.Framework.SunInfoManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Underground1.Class.SunInfo.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Underground1.Class.SunInfo.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Underground1.Class.SunInfo"/> into a byte array.
@@ -33129,11 +32959,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="tpk"><see cref="T:Nikki.Support.Underground1.Class.TPKBlock"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Underground1.Class.Texture.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Underground1.Class.Texture.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Underground1.Class.Texture"/> header into a byte array.
@@ -33222,6 +33047,11 @@
         <member name="P:Nikki.Support.Underground1.Class.TPKBlock.Version">
             <summary>
             Version of this <see cref="T:Nikki.Support.Underground1.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Class.TPKBlock.CompressionType">
+            <summary>
+            <see cref="T:Nikki.Support.Shared.Class.TPKBlock.TPKCompressionType"/> of this <see cref="T:Nikki.Support.Underground1.Class.TPKBlock"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground1.Class.TPKBlock.Filename">
@@ -33661,11 +33491,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Underground1.Framework.TrackManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground1.Class.Track.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Underground1.Class.Track.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -35075,14 +34900,14 @@
             Enum of unlockable types in Underground 1.
             </summary>
         </member>
-        <member name="F:Nikki.Support.Underground1.Parts.GameParts.Unlock.UnlockableType.Invalid">
-            <summary>
-            An invalid unlockable type.
-            </summary>
-        </member>
         <member name="F:Nikki.Support.Underground1.Parts.GameParts.Unlock.UnlockableType.Upgrade">
             <summary>
             Unlocks a performance or visual upgrade.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground1.Parts.GameParts.Unlock.UnlockableType.Magazine">
+            <summary>
+            Unlocks a magazine.
             </summary>
         </member>
         <member name="F:Nikki.Support.Underground1.Parts.GameParts.Unlock.UnlockableType.Car">
@@ -35105,14 +34930,24 @@
             Unlockable name of this <see cref="T:Nikki.Support.Underground1.Parts.GameParts.Unlock"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Underground1.Parts.GameParts.Unlock.PartIndex">
+            <summary>
+            Index of an unlockable part.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Underground1.Parts.GameParts.Unlock.TrackID">
             <summary>
             Track ID that gets unlocked.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground1.Parts.GameParts.Unlock.Unknown">
+        <member name="P:Nikki.Support.Underground1.Parts.GameParts.Unlock.UpgradeLevel">
             <summary>
-            Padding, perhaps
+            Upgrade level of an unlock.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Parts.GameParts.Unlock.IsInReverse">
+            <summary>
+            Indicates whether track unlocked is in reverse.
             </summary>
         </member>
         <member name="M:Nikki.Support.Underground1.Parts.GameParts.Unlock.PlainCopy">
@@ -37584,11 +37419,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Underground2.Framework.AcidEffectManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Underground2.Class.AcidEffect.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Underground2.Class.AcidEffect.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/> into a byte array.
@@ -37820,11 +37650,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Underground2.Framework.AcidEmitterManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Class.AcidEmitter.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.AcidEmitter.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -38238,11 +38063,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Underground2.Framework.CarTypeInfoManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Underground2.Class.CarTypeInfo.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Underground2.Class.CarTypeInfo.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Underground2.Class.CarTypeInfo"/> into a byte array.
@@ -38462,11 +38282,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Underground2.Framework.FNGroupManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Class.FNGroup.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.FNGroup.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -38972,11 +38787,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Underground2.Framework.MaterialManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Underground2.Class.Material.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Underground2.Class.Material.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Underground2.Class.Material"/> into a byte array.
@@ -39364,11 +39174,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Underground2.Framework.PresetRideManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Underground2.Class.PresetRide.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Underground2.Class.PresetRide.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Underground2.Class.PresetRide"/> into a byte array.
@@ -39475,11 +39280,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Underground2.Framework.SlotOverrideManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Class.SlotOverride.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.SlotOverride.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -39598,11 +39398,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Underground2.Framework.SlotTypeManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Underground2.Class.SlotType.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Underground2.Class.SlotType.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Underground2.Class.SlotType"/> into a byte array.
@@ -39714,11 +39509,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read text data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Underground2.Framework.STRBlockManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Class.STRBlock.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.STRBlock.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -39919,11 +39709,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Underground2.Framework.SunInfoManager"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Underground2.Class.SunInfo.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Underground2.Class.SunInfo.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Underground2.Class.SunInfo"/> into a byte array.
@@ -40043,11 +39828,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="tpk"><see cref="T:Nikki.Support.Underground2.Class.TPKBlock"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Class.Texture.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.Texture.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -40621,11 +40401,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="manager"><see cref="T:Nikki.Support.Underground2.Framework.TrackManager"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Class.Track.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.Track.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -42050,11 +41825,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Underground2.Gameplay.BankTrigger.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Underground2.Gameplay.BankTrigger.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Underground2.Gameplay.BankTrigger"/> into a byte array.
@@ -42151,11 +41921,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerBrand.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Gameplay.GCareerBrand.Assemble(System.IO.BinaryWriter,System.IO.BinaryWriter)">
             <summary>
@@ -42521,11 +42286,6 @@
             <param name="strr"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
             <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerRace.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Underground2.Gameplay.GCareerRace.Assemble(System.IO.BinaryWriter,System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerRace"/> into a byte array.
@@ -42840,11 +42600,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Underground2.Gameplay.GCareerStage.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Underground2.Gameplay.GCareerStage.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Underground2.Gameplay.GCareerStage"/> into a byte array.
@@ -42946,11 +42701,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Gameplay.GCarUnlock.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Gameplay.GCarUnlock.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -43113,11 +42863,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Gameplay.GShowcase.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Gameplay.GShowcase.Assemble(System.IO.BinaryWriter,System.IO.BinaryWriter)">
             <summary>
@@ -43367,11 +43112,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Underground2.Gameplay.PartPerformance.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Underground2.Gameplay.PartPerformance.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Underground2.Gameplay.PartPerformance"/> into a byte array.
@@ -43594,11 +43334,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
         </member>
-        <member name="M:Nikki.Support.Underground2.Gameplay.PartUnlockable.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Underground2.Gameplay.PartUnlockable.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Underground2.Gameplay.PartUnlockable"/> into a byte array.
@@ -43710,11 +43445,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Gameplay.PerfSliderTuning.Assemble(System.IO.BinaryWriter)">
             <summary>
@@ -44039,11 +43769,6 @@
             <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
             <param name="strr"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
         </member>
-        <member name="M:Nikki.Support.Underground2.Gameplay.SMSMessage.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
-        </member>
         <member name="M:Nikki.Support.Underground2.Gameplay.SMSMessage.Assemble(System.IO.BinaryWriter,System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Underground2.Gameplay.SMSMessage"/> into a byte array.
@@ -44203,11 +43928,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
             <param name="strr"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Gameplay.Sponsor.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Gameplay.Sponsor.Assemble(System.IO.BinaryWriter,System.IO.BinaryWriter)">
             <summary>
@@ -44414,11 +44134,6 @@
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
             <param name="strr"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Gameplay.WorldChallenge.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Gameplay.WorldChallenge.Assemble(System.IO.BinaryWriter,System.IO.BinaryWriter)">
             <summary>
@@ -44629,11 +44344,6 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="career"><see cref="T:Nikki.Support.Underground2.Class.GCareer"/> to which this instance belongs to.</param>
-        </member>
-        <member name="M:Nikki.Support.Underground2.Gameplay.WorldShop.Finalize">
-            <summary>
-            Destroys current instance.
-            </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Gameplay.WorldShop.Assemble(System.IO.BinaryWriter,System.IO.BinaryWriter)">
             <summary>
@@ -47439,7 +47149,7 @@
         </member>
         <member name="M:Nikki.Utils.EA.SAT.Decompress(System.Byte[],System.UInt32)">
             <summary>
-            Decompresses .fng JDLZ-compressed file.
+            Decompresses compressed .fng.
             </summary>
             <param name="fng">.fng file as a byte array.</param>
             <param name="ID">ID of the .fng file.</param>

@@ -474,11 +474,6 @@ namespace Nikki.Support.Underground2.Gameplay
 			this.Disassemble(br);
 		}
 
-		/// <summary>
-		/// Destroys current instance.
-		/// </summary>
-		~GCareerStage() { }
-
 		#endregion
 
 		#region Methods

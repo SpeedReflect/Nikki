@@ -131,11 +131,6 @@ namespace Nikki.Support.MostWanted.Class
             this.Disassemble(br);
         }
 
-        /// <summary>
-        /// Destroys current instance.
-        /// </summary>
-        ~SlotType() { }
-
         #endregion
 
         #region Methods

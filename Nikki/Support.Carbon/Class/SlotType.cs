@@ -172,11 +172,6 @@ namespace Nikki.Support.Carbon.Class
             this.Disassemble(br);
         }
 
-        /// <summary>
-        /// Destroys current instance.
-        /// </summary>
-        ~SlotType() { }
-
         #endregion
 
         #region Methods

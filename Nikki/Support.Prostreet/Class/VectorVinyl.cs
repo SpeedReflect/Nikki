@@ -148,11 +148,6 @@ namespace Nikki.Support.Prostreet.Class
 			this.CollectionName.BinHash();
 		}
 
-		/// <summary>
-		/// Destroys current instance.
-		/// </summary>
-		~VectorVinyl() { }
-
 		#endregion
 
 		#region Methods

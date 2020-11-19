@@ -504,11 +504,6 @@ namespace Nikki.Support.Prostreet.Class
 			this.Disassemble(br);
 		}
 
-		/// <summary>
-		/// Destroys current instance.
-		/// </summary>
-		~Track() { }
-
 		#endregion
 
 		#region Methods
