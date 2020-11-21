@@ -252,18 +252,18 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 
 					case CarPartAttribType.String:
 						var strAttr = attribute as StringAttribute;
-						Regex.Replace(strAttr.Value, pattern, replacement, regexOptions);
+						strAttr.Value = Regex.Replace(strAttr.Value, pattern, replacement, regexOptions);
 						break;
 
 					case CarPartAttribType.TwoString:
 						var twostrAttr = attribute as TwoStringAttribute;
-						Regex.Replace(twostrAttr.Value1, pattern, replacement, regexOptions);
-						Regex.Replace(twostrAttr.Value2, pattern, replacement, regexOptions);
+						twostrAttr.Value1 = Regex.Replace(twostrAttr.Value1, pattern, replacement, regexOptions);
+						twostrAttr.Value2 = Regex.Replace(twostrAttr.Value2, pattern, replacement, regexOptions);
 						break;
 
 					case CarPartAttribType.ModelTable:
 						var modelAttr = attribute as ModelTableAttribute;
-						Regex.Replace(modelAttr.Concatenator, pattern, replacement, regexOptions);
+						modelAttr.Concatenator = Regex.Replace(modelAttr.Concatenator, pattern, replacement, regexOptions);
 						for (int lod = (byte)'A'; lod <= (byte)'E'; ++lod)
 						{
 
@@ -285,14 +285,14 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 						if (custAttr.Type == CarPartAttribType.String)
 						{
 
-							Regex.Replace(custAttr.ValueString, pattern, replacement, regexOptions);
+							custAttr.ValueString = Regex.Replace(custAttr.ValueString, pattern, replacement, regexOptions);
 
 						}
 						else if (custAttr.Type == CarPartAttribType.TwoString)
 						{
 
-							Regex.Replace(custAttr.ValueString1, pattern, replacement, regexOptions);
-							Regex.Replace(custAttr.ValueString2, pattern, replacement, regexOptions);
+							custAttr.ValueString1 = Regex.Replace(custAttr.ValueString1, pattern, replacement, regexOptions);
+							custAttr.ValueString2 = Regex.Replace(custAttr.ValueString2, pattern, replacement, regexOptions);
 
 						}
 						break;

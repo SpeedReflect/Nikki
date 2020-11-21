@@ -311,19 +311,19 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 			if (onlyLabel)
 			{
 
-				Regex.Replace(this.PartLabel, pattern, replacement, regexOptions);
+				this.PartLabel = Regex.Replace(this.PartLabel, pattern, replacement, regexOptions);
 
 			}
 			else
 			{
 
-				Regex.Replace(this.PartLabel, pattern, replacement, regexOptions);
-				Regex.Replace(this.DebugName, pattern, replacement, regexOptions);
-				Regex.Replace(this.BrandLabel, pattern, replacement, regexOptions);
-				Regex.Replace(this.GeometryLodA, pattern, replacement, regexOptions);
-				Regex.Replace(this.GeometryLodB, pattern, replacement, regexOptions);
-				Regex.Replace(this.GeometryLodC, pattern, replacement, regexOptions);
-				Regex.Replace(this.GeometryLodD, pattern, replacement, regexOptions);
+				this.PartLabel = Regex.Replace(this.PartLabel, pattern, replacement, regexOptions);
+				this.DebugName = Regex.Replace(this.DebugName, pattern, replacement, regexOptions);
+				this.BrandLabel = Regex.Replace(this.BrandLabel, pattern, replacement, regexOptions);
+				this.GeometryLodA = Regex.Replace(this.GeometryLodA, pattern, replacement, regexOptions);
+				this.GeometryLodB = Regex.Replace(this.GeometryLodB, pattern, replacement, regexOptions);
+				this.GeometryLodC = Regex.Replace(this.GeometryLodC, pattern, replacement, regexOptions);
+				this.GeometryLodD = Regex.Replace(this.GeometryLodD, pattern, replacement, regexOptions);
 
 				foreach (var attribute in this.Attributes)
 				{
@@ -333,7 +333,7 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 
 						case CarPartAttribType.String:
 							var strAttr = attribute as StringAttribute;
-							Regex.Replace(strAttr.Value, pattern, replacement, regexOptions);
+							strAttr.Value = Regex.Replace(strAttr.Value, pattern, replacement, regexOptions);
 							break;
 
 						case CarPartAttribType.Custom:
@@ -341,7 +341,7 @@ namespace Nikki.Support.Underground1.Parts.CarParts
 							if (custAttr.Type == CarPartAttribType.String)
 							{
 
-								Regex.Replace(custAttr.ValueString, pattern, replacement, regexOptions);
+								custAttr.ValueString = Regex.Replace(custAttr.ValueString, pattern, replacement, regexOptions);
 
 							}
 							break;

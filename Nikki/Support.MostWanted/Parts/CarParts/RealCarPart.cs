@@ -285,20 +285,20 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 			if (onlyLabel)
 			{
 
-				Regex.Replace(this.PartLabel, pattern, replacement, regexOptions);
+				this.PartLabel = Regex.Replace(this.PartLabel, pattern, replacement, regexOptions);
 
 			}
 			else
 			{
 
-				Regex.Replace(this.PartLabel, pattern, replacement, regexOptions);
-				Regex.Replace(this.DebugName, pattern, replacement, regexOptions);
-				Regex.Replace(this.LodStruct.Concatenator, pattern, replacement, regexOptions);
-				Regex.Replace(this.LodStruct.GeometryLodA, pattern, replacement, regexOptions);
-				Regex.Replace(this.LodStruct.GeometryLodB, pattern, replacement, regexOptions);
-				Regex.Replace(this.LodStruct.GeometryLodC, pattern, replacement, regexOptions);
-				Regex.Replace(this.LodStruct.GeometryLodD, pattern, replacement, regexOptions);
-				Regex.Replace(this.LodStruct.GeometryLodE, pattern, replacement, regexOptions);
+				this.PartLabel = Regex.Replace(this.PartLabel, pattern, replacement, regexOptions);
+				this.DebugName = Regex.Replace(this.DebugName, pattern, replacement, regexOptions);
+				this.LodStruct.Concatenator = Regex.Replace(this.LodStruct.Concatenator, pattern, replacement, regexOptions);
+				this.LodStruct.GeometryLodA = Regex.Replace(this.LodStruct.GeometryLodA, pattern, replacement, regexOptions);
+				this.LodStruct.GeometryLodB = Regex.Replace(this.LodStruct.GeometryLodB, pattern, replacement, regexOptions);
+				this.LodStruct.GeometryLodC = Regex.Replace(this.LodStruct.GeometryLodC, pattern, replacement, regexOptions);
+				this.LodStruct.GeometryLodD = Regex.Replace(this.LodStruct.GeometryLodD, pattern, replacement, regexOptions);
+				this.LodStruct.GeometryLodE = Regex.Replace(this.LodStruct.GeometryLodE, pattern, replacement, regexOptions);
 
 				foreach (var attribute in this.Attributes)
 				{
@@ -308,7 +308,7 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 
 						case CarPartAttribType.String:
 							var strAttr = attribute as StringAttribute;
-							Regex.Replace(strAttr.Value, pattern, replacement, regexOptions);
+							strAttr.Value = Regex.Replace(strAttr.Value, pattern, replacement, regexOptions);
 							break;
 
 						case CarPartAttribType.Custom:
@@ -316,14 +316,14 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 							if (custAttr.Type == CarPartAttribType.String)
 							{
 
-								Regex.Replace(custAttr.ValueString, pattern, replacement, regexOptions);
+								custAttr.ValueString = Regex.Replace(custAttr.ValueString, pattern, replacement, regexOptions);
 
 							}
 							else if (custAttr.Type == CarPartAttribType.TwoString)
 							{
 
-								Regex.Replace(custAttr.ValueString1, pattern, replacement, regexOptions);
-								Regex.Replace(custAttr.ValueString2, pattern, replacement, regexOptions);
+								custAttr.ValueString1 = Regex.Replace(custAttr.ValueString1, pattern, replacement, regexOptions);
+								custAttr.ValueString2 = Regex.Replace(custAttr.ValueString2, pattern, replacement, regexOptions);
 
 							}
 							break;

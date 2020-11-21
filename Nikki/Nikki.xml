@@ -14338,6 +14338,15 @@
             </summary>
             <param name="name">Name of custom attribute to add.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.MakeReplace(System.Boolean,System.String,System.String,System.Text.RegularExpressions.RegexOptions)">
+            <summary>
+            Makes regex replacement of PartLabel or every single property and attribute.
+            </summary>
+            <param name="onlyLabel">True if replace only label; false if replace all.</param>
+            <param name="pattern">Pattern of characters as a string to replace.</param>
+            <param name="replacement">Replacement string for encountered pattern of characters.</param>
+            <param name="regexOptions"><see cref="T:System.Text.RegularExpressions.RegexOptions"/> for regex replacement.</param>
+        </member>
         <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.Equals(System.Object)">
             <summary>
             Compares two <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/> and checks whether the equal.
@@ -15230,6 +15239,200 @@
             </summary>
         </member>
         <member name="M:Nikki.Support.MostWanted.Attributes.BoolAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.MostWanted.Attributes.CustomAttribute">
+            <summary>
+            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte signed integer value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Attributes.CustomAttribute.AttribType">
+            <summary>
+            <see cref="T:Nikki.Reflection.Enum.CarPartAttribType"/> type of this <see cref="T:Nikki.Support.MostWanted.Attributes.CustomAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Attributes.CustomAttribute.Type">
+            <summary>
+            <see cref="T:Nikki.Reflection.Enum.CarPartAttribType"/> of the value stored in this <see cref="T:Nikki.Support.MostWanted.Attributes.CustomAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Attributes.CustomAttribute.Name">
+            <summary>
+            Name of this <see cref="T:Nikki.Support.MostWanted.Attributes.CustomAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Attributes.CustomAttribute.Key">
+            <summary>
+            Key of the part to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Attributes.CustomAttribute.ValueBoolean">
+            <summary>
+            Attribute value of boolean type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Attributes.CustomAttribute.ValueInteger">
+            <summary>
+            Attribute value of integer type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Attributes.CustomAttribute.ValueFloating">
+            <summary>
+            Attribute value of floating type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Attributes.CustomAttribute.ValueKey">
+            <summary>
+            Attribute value of key type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Attributes.CustomAttribute.ValueString">
+            <summary>
+            Attribute value of string type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Attributes.CustomAttribute.ValueStringExists">
+            <summary>
+            Indicates whether value of string type exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Attributes.CustomAttribute.ValueString1">
+            <summary>
+            Attribute value 1 of two-string type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Attributes.CustomAttribute.ValueString2">
+            <summary>
+            Attribute value of two-string type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Attributes.CustomAttribute.ValueString1Exists">
+            <summary>
+            Indicates whether value 1 of two-string type exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Attributes.CustomAttribute.ValueString2Exists">
+            <summary>
+            Indicates whether value 2 of two-string type exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Attributes.CustomAttribute.ValueColorRed">
+            <summary>
+            Attribute red value of color type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Attributes.CustomAttribute.ValueColorGreen">
+            <summary>
+            Attribute green value of color type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Attributes.CustomAttribute.ValueColorBlue">
+            <summary>
+            Attribute blue value of color type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.MostWanted.Attributes.CustomAttribute.ValueColorAlpha">
+            <summary>
+            Attribute alpha value of color type.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.CustomAttribute.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Attributes.CustomAttribute"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.CustomAttribute.#ctor(System.String)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Attributes.CustomAttribute"/> with value provided.
+            </summary>
+            <param name="name">Name of this attribute.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.CustomAttribute.#ctor(System.IO.BinaryReader,System.IO.BinaryReader,Nikki.Support.Shared.Parts.CarParts.CustomCP)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.MostWanted.Attributes.CustomAttribute"/> by reading data using 
+            <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+            <param name="cp"><see cref="T:Nikki.Support.Shared.Parts.CarParts.CustomCP"/> with attribute type data.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.CustomAttribute.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Disassembles byte array into <see cref="T:Nikki.Support.MostWanted.Attributes.CustomAttribute"/> using <see cref="T:System.IO.BinaryReader"/> 
+            provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with. 
+            Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.CustomAttribute.Assemble(System.IO.BinaryWriter,System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.MostWanted.Attributes.CustomAttribute"/> and writes it using <see cref="T:System.IO.BinaryWriter"/> 
+            provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
+            <param name="string_dict">Dictionary of string HashCodes and their offsets. 
+            Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.CustomAttribute.ToString">
+            <summary>
+            Returns attribute part label and its type as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.CustomAttribute.Equals(System.Object)">
+            <summary>
+            Determines whether this instance and a specified object, which must also be a
+            <see cref="T:Nikki.Support.MostWanted.Attributes.CustomAttribute"/> object, have the same value.
+            </summary>
+            <param name="obj">The <see cref="T:Nikki.Support.MostWanted.Attributes.CustomAttribute"/> to compare to this instance.</param>
+            <returns>True if obj is a <see cref="T:Nikki.Support.MostWanted.Attributes.CustomAttribute"/> and its value is the same as 
+            this instance; false otherwise. If obj is null, the method returns false.
+            </returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.CustomAttribute.GetHashCode">
+            <summary>
+            Returns the hash code for this <see cref="T:Nikki.Support.MostWanted.Attributes.CustomAttribute"/>.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.CustomAttribute.op_Equality(Nikki.Support.MostWanted.Attributes.CustomAttribute,Nikki.Support.MostWanted.Attributes.CustomAttribute)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.MostWanted.Attributes.CustomAttribute"/> have the same value.
+            </summary>
+            <param name="at1">The first <see cref="T:Nikki.Support.MostWanted.Attributes.CustomAttribute"/> to compare, or null.</param>
+            <param name="at2">The second <see cref="T:Nikki.Support.MostWanted.Attributes.CustomAttribute"/> to compare, or null.</param>
+            <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.CustomAttribute.op_Inequality(Nikki.Support.MostWanted.Attributes.CustomAttribute,Nikki.Support.MostWanted.Attributes.CustomAttribute)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.MostWanted.Attributes.CustomAttribute"/> have different values.
+            </summary>
+            <param name="at1">The first <see cref="T:Nikki.Support.MostWanted.Attributes.CustomAttribute"/> to compare, or null.</param>
+            <param name="at2">The second <see cref="T:Nikki.Support.MostWanted.Attributes.CustomAttribute"/> to compare, or null.</param>
+            <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.CustomAttribute.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.CustomAttribute.ConvertTo(Nikki.Reflection.Enum.CarPartAttribType)">
+            <summary>
+            Returns itself.
+            </summary>
+            <param name="type">Type of a new attribute.</param>
+            <returns>This instance.</returns>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.CustomAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Attributes.CustomAttribute.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
@@ -19464,6 +19667,15 @@
             </summary>
             <param name="name">Name of custom attribute to add.</param>
         </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.MakeReplace(System.Boolean,System.String,System.String,System.Text.RegularExpressions.RegexOptions)">
+            <summary>
+            Makes regex replacement of PartLabel or every single property and attribute.
+            </summary>
+            <param name="onlyLabel">True if replace only label; false if replace all.</param>
+            <param name="pattern">Pattern of characters as a string to replace.</param>
+            <param name="replacement">Replacement string for encountered pattern of characters.</param>
+            <param name="regexOptions"><see cref="T:System.Text.RegularExpressions.RegexOptions"/> for regex replacement.</param>
+        </member>
         <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.Equals(System.Object)">
             <summary>
             Compares two <see cref="T:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart"/> and checks whether the equal.
@@ -20333,6 +20545,200 @@
             </summary>
         </member>
         <member name="M:Nikki.Support.Prostreet.Attributes.ColorAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Prostreet.Attributes.CustomAttribute">
+            <summary>
+            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte signed integer value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.CustomAttribute.AttribType">
+            <summary>
+            <see cref="T:Nikki.Reflection.Enum.CarPartAttribType"/> type of this <see cref="T:Nikki.Support.Prostreet.Attributes.CustomAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.CustomAttribute.Type">
+            <summary>
+            <see cref="T:Nikki.Reflection.Enum.CarPartAttribType"/> of the value stored in this <see cref="T:Nikki.Support.Prostreet.Attributes.CustomAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.CustomAttribute.Name">
+            <summary>
+            Name of this <see cref="T:Nikki.Support.Prostreet.Attributes.CustomAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.CustomAttribute.Key">
+            <summary>
+            Key of the part to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.CustomAttribute.ValueBoolean">
+            <summary>
+            Attribute value of boolean type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.CustomAttribute.ValueInteger">
+            <summary>
+            Attribute value of integer type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.CustomAttribute.ValueFloating">
+            <summary>
+            Attribute value of floating type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.CustomAttribute.ValueKey">
+            <summary>
+            Attribute value of key type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.CustomAttribute.ValueString">
+            <summary>
+            Attribute value of string type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.CustomAttribute.ValueStringExists">
+            <summary>
+            Indicates whether value of string type exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.CustomAttribute.ValueString1">
+            <summary>
+            Attribute value 1 of two-string type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.CustomAttribute.ValueString2">
+            <summary>
+            Attribute value of two-string type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.CustomAttribute.ValueString1Exists">
+            <summary>
+            Indicates whether value 1 of two-string type exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.CustomAttribute.ValueString2Exists">
+            <summary>
+            Indicates whether value 2 of two-string type exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.CustomAttribute.ValueColorRed">
+            <summary>
+            Attribute red value of color type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.CustomAttribute.ValueColorGreen">
+            <summary>
+            Attribute green value of color type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.CustomAttribute.ValueColorBlue">
+            <summary>
+            Attribute blue value of color type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Attributes.CustomAttribute.ValueColorAlpha">
+            <summary>
+            Attribute alpha value of color type.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.CustomAttribute.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.CustomAttribute"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.CustomAttribute.#ctor(System.String)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.CustomAttribute"/> with value provided.
+            </summary>
+            <param name="name">Name of this attribute.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.CustomAttribute.#ctor(System.IO.BinaryReader,System.IO.BinaryReader,Nikki.Support.Shared.Parts.CarParts.CustomCP)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Prostreet.Attributes.CustomAttribute"/> by reading data using 
+            <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+            <param name="cp"><see cref="T:Nikki.Support.Shared.Parts.CarParts.CustomCP"/> with attribute type data.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.CustomAttribute.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Disassembles byte array into <see cref="T:Nikki.Support.Prostreet.Attributes.CustomAttribute"/> using <see cref="T:System.IO.BinaryReader"/> 
+            provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with. 
+            Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.CustomAttribute.Assemble(System.IO.BinaryWriter,System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Prostreet.Attributes.CustomAttribute"/> and writes it using <see cref="T:System.IO.BinaryWriter"/> 
+            provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
+            <param name="string_dict">Dictionary of string HashCodes and their offsets. 
+            Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.CustomAttribute.ToString">
+            <summary>
+            Returns attribute part label and its type as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.CustomAttribute.Equals(System.Object)">
+            <summary>
+            Determines whether this instance and a specified object, which must also be a
+            <see cref="T:Nikki.Support.Prostreet.Attributes.CustomAttribute"/> object, have the same value.
+            </summary>
+            <param name="obj">The <see cref="T:Nikki.Support.Prostreet.Attributes.CustomAttribute"/> to compare to this instance.</param>
+            <returns>True if obj is a <see cref="T:Nikki.Support.Prostreet.Attributes.CustomAttribute"/> and its value is the same as 
+            this instance; false otherwise. If obj is null, the method returns false.
+            </returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.CustomAttribute.GetHashCode">
+            <summary>
+            Returns the hash code for this <see cref="T:Nikki.Support.Prostreet.Attributes.CustomAttribute"/>.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.CustomAttribute.op_Equality(Nikki.Support.Prostreet.Attributes.CustomAttribute,Nikki.Support.Prostreet.Attributes.CustomAttribute)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Prostreet.Attributes.CustomAttribute"/> have the same value.
+            </summary>
+            <param name="at1">The first <see cref="T:Nikki.Support.Prostreet.Attributes.CustomAttribute"/> to compare, or null.</param>
+            <param name="at2">The second <see cref="T:Nikki.Support.Prostreet.Attributes.CustomAttribute"/> to compare, or null.</param>
+            <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.CustomAttribute.op_Inequality(Nikki.Support.Prostreet.Attributes.CustomAttribute,Nikki.Support.Prostreet.Attributes.CustomAttribute)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Prostreet.Attributes.CustomAttribute"/> have different values.
+            </summary>
+            <param name="at1">The first <see cref="T:Nikki.Support.Prostreet.Attributes.CustomAttribute"/> to compare, or null.</param>
+            <param name="at2">The second <see cref="T:Nikki.Support.Prostreet.Attributes.CustomAttribute"/> to compare, or null.</param>
+            <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.CustomAttribute.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.CustomAttribute.ConvertTo(Nikki.Reflection.Enum.CarPartAttribType)">
+            <summary>
+            Returns itself.
+            </summary>
+            <param name="type">Type of a new attribute.</param>
+            <returns>This instance.</returns>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.CustomAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Prostreet.Attributes.CustomAttribute.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
@@ -25398,6 +25804,15 @@
             </summary>
             <param name="name">Name of custom attribute to add.</param>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.MakeReplace(System.Boolean,System.String,System.String,System.Text.RegularExpressions.RegexOptions)">
+            <summary>
+            Makes regex replacement of PartLabel or every single property and attribute.
+            </summary>
+            <param name="onlyLabel">True if replace only label; false if replace all.</param>
+            <param name="pattern">Pattern of characters as a string to replace.</param>
+            <param name="replacement">Replacement string for encountered pattern of characters.</param>
+            <param name="regexOptions"><see cref="T:System.Text.RegularExpressions.RegexOptions"/> for regex replacement.</param>
+        </member>
         <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.Equals(System.Object)">
             <summary>
             Compares two <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/> and checks whether the equal.
@@ -29152,6 +29567,15 @@
             </summary>
             <param name="name">Name of custom attribute to add.</param>
         </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.MakeReplace(System.Boolean,System.String,System.String,System.Text.RegularExpressions.RegexOptions)">
+            <summary>
+            Makes regex replacement of PartLabel or every single property and attribute.
+            </summary>
+            <param name="onlyLabel">True if replace only label; false if replace all.</param>
+            <param name="pattern">Pattern of characters as a string to replace.</param>
+            <param name="replacement">Replacement string for encountered pattern of characters.</param>
+            <param name="regexOptions"><see cref="T:System.Text.RegularExpressions.RegexOptions"/> for regex replacement.</param>
+        </member>
         <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.PlainCopy">
             <summary>
             Creates a plain copy of the objects that contains same values.
@@ -30631,6 +31055,180 @@
             </summary>
         </member>
         <member name="M:Nikki.Support.Underground1.Attributes.BoolAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Underground1.Attributes.CustomAttribute">
+            <summary>
+            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte signed integer value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Attributes.CustomAttribute.AttribType">
+            <summary>
+            <see cref="T:Nikki.Reflection.Enum.CarPartAttribType"/> type of this <see cref="T:Nikki.Support.Underground1.Attributes.CustomAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Attributes.CustomAttribute.Type">
+            <summary>
+            <see cref="T:Nikki.Reflection.Enum.CarPartAttribType"/> of the value stored in this <see cref="T:Nikki.Support.Underground1.Attributes.CustomAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Attributes.CustomAttribute.Name">
+            <summary>
+            Name of this <see cref="T:Nikki.Support.Underground1.Attributes.CustomAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Attributes.CustomAttribute.Key">
+            <summary>
+            Key of the part to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Attributes.CustomAttribute.ValueBoolean">
+            <summary>
+            Attribute value of boolean type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Attributes.CustomAttribute.ValueInteger">
+            <summary>
+            Attribute value of integer type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Attributes.CustomAttribute.ValueFloating">
+            <summary>
+            Attribute value of floating type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Attributes.CustomAttribute.ValueKey">
+            <summary>
+            Attribute value of key type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Attributes.CustomAttribute.ValueString">
+            <summary>
+            Attribute value of string type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Attributes.CustomAttribute.ValueStringExists">
+            <summary>
+            Indicates whether value of string type exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Attributes.CustomAttribute.ValueColorRed">
+            <summary>
+            Attribute red value of color type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Attributes.CustomAttribute.ValueColorGreen">
+            <summary>
+            Attribute green value of color type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Attributes.CustomAttribute.ValueColorBlue">
+            <summary>
+            Attribute blue value of color type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground1.Attributes.CustomAttribute.ValueColorAlpha">
+            <summary>
+            Attribute alpha value of color type.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground1.Attributes.CustomAttribute.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground1.Attributes.CustomAttribute"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground1.Attributes.CustomAttribute.#ctor(System.String)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground1.Attributes.CustomAttribute"/> with value provided.
+            </summary>
+            <param name="name">Name of this attribute.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground1.Attributes.CustomAttribute.#ctor(System.IO.BinaryReader,System.IO.BinaryReader,Nikki.Support.Shared.Parts.CarParts.CustomCP)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground1.Attributes.CustomAttribute"/> by reading data using 
+            <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+            <param name="cp"><see cref="T:Nikki.Support.Shared.Parts.CarParts.CustomCP"/> with attribute type data.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground1.Attributes.CustomAttribute.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Disassembles byte array into <see cref="T:Nikki.Support.Underground1.Attributes.CustomAttribute"/> using <see cref="T:System.IO.BinaryReader"/> 
+            provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with. 
+            Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground1.Attributes.CustomAttribute.Assemble(System.IO.BinaryWriter,System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Underground1.Attributes.CustomAttribute"/> and writes it using <see cref="T:System.IO.BinaryWriter"/> 
+            provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
+            <param name="string_dict">Dictionary of string HashCodes and their offsets. 
+            Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground1.Attributes.CustomAttribute.ToString">
+            <summary>
+            Returns attribute part label and its type as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground1.Attributes.CustomAttribute.Equals(System.Object)">
+            <summary>
+            Determines whether this instance and a specified object, which must also be a
+            <see cref="T:Nikki.Support.Underground1.Attributes.CustomAttribute"/> object, have the same value.
+            </summary>
+            <param name="obj">The <see cref="T:Nikki.Support.Underground1.Attributes.CustomAttribute"/> to compare to this instance.</param>
+            <returns>True if obj is a <see cref="T:Nikki.Support.Underground1.Attributes.CustomAttribute"/> and its value is the same as 
+            this instance; false otherwise. If obj is null, the method returns false.
+            </returns>
+        </member>
+        <member name="M:Nikki.Support.Underground1.Attributes.CustomAttribute.GetHashCode">
+            <summary>
+            Returns the hash code for this <see cref="T:Nikki.Support.Underground1.Attributes.CustomAttribute"/>.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground1.Attributes.CustomAttribute.op_Equality(Nikki.Support.Underground1.Attributes.CustomAttribute,Nikki.Support.Underground1.Attributes.CustomAttribute)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Underground1.Attributes.CustomAttribute"/> have the same value.
+            </summary>
+            <param name="at1">The first <see cref="T:Nikki.Support.Underground1.Attributes.CustomAttribute"/> to compare, or null.</param>
+            <param name="at2">The second <see cref="T:Nikki.Support.Underground1.Attributes.CustomAttribute"/> to compare, or null.</param>
+            <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground1.Attributes.CustomAttribute.op_Inequality(Nikki.Support.Underground1.Attributes.CustomAttribute,Nikki.Support.Underground1.Attributes.CustomAttribute)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Underground1.Attributes.CustomAttribute"/> have different values.
+            </summary>
+            <param name="at1">The first <see cref="T:Nikki.Support.Underground1.Attributes.CustomAttribute"/> to compare, or null.</param>
+            <param name="at2">The second <see cref="T:Nikki.Support.Underground1.Attributes.CustomAttribute"/> to compare, or null.</param>
+            <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground1.Attributes.CustomAttribute.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground1.Attributes.CustomAttribute.ConvertTo(Nikki.Reflection.Enum.CarPartAttribType)">
+            <summary>
+            Returns itself.
+            </summary>
+            <param name="type">Type of a new attribute.</param>
+            <returns>This instance.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground1.Attributes.CustomAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground1.Attributes.CustomAttribute.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
@@ -34990,6 +35588,15 @@
             </summary>
             <param name="name">Name of custom attribute to add.</param>
         </member>
+        <member name="M:Nikki.Support.Underground1.Parts.CarParts.RealCarPart.MakeReplace(System.Boolean,System.String,System.String,System.Text.RegularExpressions.RegexOptions)">
+            <summary>
+            Makes regex replacement of PartLabel or every single property and attribute.
+            </summary>
+            <param name="onlyLabel">True if replace only label; false if replace all.</param>
+            <param name="pattern">Pattern of characters as a string to replace.</param>
+            <param name="replacement">Replacement string for encountered pattern of characters.</param>
+            <param name="regexOptions"><see cref="T:System.Text.RegularExpressions.RegexOptions"/> for regex replacement.</param>
+        </member>
         <member name="M:Nikki.Support.Underground1.Parts.CarParts.RealCarPart.Equals(System.Object)">
             <summary>
             Compares two <see cref="T:Nikki.Support.Underground1.Parts.CarParts.RealCarPart"/> and checks whether the equal.
@@ -37102,6 +37709,200 @@
             </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Attributes.BoolAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Underground2.Attributes.CustomAttribute">
+            <summary>
+            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte signed integer value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Attributes.CustomAttribute.AttribType">
+            <summary>
+            <see cref="T:Nikki.Reflection.Enum.CarPartAttribType"/> type of this <see cref="T:Nikki.Support.Underground2.Attributes.CustomAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Attributes.CustomAttribute.Type">
+            <summary>
+            <see cref="T:Nikki.Reflection.Enum.CarPartAttribType"/> of the value stored in this <see cref="T:Nikki.Support.Underground2.Attributes.CustomAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Attributes.CustomAttribute.Name">
+            <summary>
+            Name of this <see cref="T:Nikki.Support.Underground2.Attributes.CustomAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Attributes.CustomAttribute.Key">
+            <summary>
+            Key of the part to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Attributes.CustomAttribute.ValueBoolean">
+            <summary>
+            Attribute value of boolean type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Attributes.CustomAttribute.ValueInteger">
+            <summary>
+            Attribute value of integer type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Attributes.CustomAttribute.ValueFloating">
+            <summary>
+            Attribute value of floating type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Attributes.CustomAttribute.ValueKey">
+            <summary>
+            Attribute value of key type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Attributes.CustomAttribute.ValueString">
+            <summary>
+            Attribute value of string type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Attributes.CustomAttribute.ValueStringExists">
+            <summary>
+            Indicates whether value of string type exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Attributes.CustomAttribute.ValueString1">
+            <summary>
+            Attribute value 1 of two-string type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Attributes.CustomAttribute.ValueString2">
+            <summary>
+            Attribute value of two-string type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Attributes.CustomAttribute.ValueString1Exists">
+            <summary>
+            Indicates whether value 1 of two-string type exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Attributes.CustomAttribute.ValueString2Exists">
+            <summary>
+            Indicates whether value 2 of two-string type exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Attributes.CustomAttribute.ValueColorRed">
+            <summary>
+            Attribute red value of color type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Attributes.CustomAttribute.ValueColorGreen">
+            <summary>
+            Attribute green value of color type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Attributes.CustomAttribute.ValueColorBlue">
+            <summary>
+            Attribute blue value of color type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Attributes.CustomAttribute.ValueColorAlpha">
+            <summary>
+            Attribute alpha value of color type.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Attributes.CustomAttribute.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Attributes.CustomAttribute"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Attributes.CustomAttribute.#ctor(System.String)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Attributes.CustomAttribute"/> with value provided.
+            </summary>
+            <param name="name">Name of this attribute.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Attributes.CustomAttribute.#ctor(System.IO.BinaryReader,System.IO.BinaryReader,Nikki.Support.Shared.Parts.CarParts.CustomCP)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Underground2.Attributes.CustomAttribute"/> by reading data using 
+            <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+            <param name="cp"><see cref="T:Nikki.Support.Shared.Parts.CarParts.CustomCP"/> with attribute type data.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Attributes.CustomAttribute.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Disassembles byte array into <see cref="T:Nikki.Support.Underground2.Attributes.CustomAttribute"/> using <see cref="T:System.IO.BinaryReader"/> 
+            provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with. 
+            Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Attributes.CustomAttribute.Assemble(System.IO.BinaryWriter,System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Underground2.Attributes.CustomAttribute"/> and writes it using <see cref="T:System.IO.BinaryWriter"/> 
+            provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
+            <param name="string_dict">Dictionary of string HashCodes and their offsets. 
+            Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Attributes.CustomAttribute.ToString">
+            <summary>
+            Returns attribute part label and its type as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Attributes.CustomAttribute.Equals(System.Object)">
+            <summary>
+            Determines whether this instance and a specified object, which must also be a
+            <see cref="T:Nikki.Support.Underground2.Attributes.CustomAttribute"/> object, have the same value.
+            </summary>
+            <param name="obj">The <see cref="T:Nikki.Support.Underground2.Attributes.CustomAttribute"/> to compare to this instance.</param>
+            <returns>True if obj is a <see cref="T:Nikki.Support.Underground2.Attributes.CustomAttribute"/> and its value is the same as 
+            this instance; false otherwise. If obj is null, the method returns false.
+            </returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Attributes.CustomAttribute.GetHashCode">
+            <summary>
+            Returns the hash code for this <see cref="T:Nikki.Support.Underground2.Attributes.CustomAttribute"/>.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Attributes.CustomAttribute.op_Equality(Nikki.Support.Underground2.Attributes.CustomAttribute,Nikki.Support.Underground2.Attributes.CustomAttribute)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Underground2.Attributes.CustomAttribute"/> have the same value.
+            </summary>
+            <param name="at1">The first <see cref="T:Nikki.Support.Underground2.Attributes.CustomAttribute"/> to compare, or null.</param>
+            <param name="at2">The second <see cref="T:Nikki.Support.Underground2.Attributes.CustomAttribute"/> to compare, or null.</param>
+            <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Attributes.CustomAttribute.op_Inequality(Nikki.Support.Underground2.Attributes.CustomAttribute,Nikki.Support.Underground2.Attributes.CustomAttribute)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Underground2.Attributes.CustomAttribute"/> have different values.
+            </summary>
+            <param name="at1">The first <see cref="T:Nikki.Support.Underground2.Attributes.CustomAttribute"/> to compare, or null.</param>
+            <param name="at2">The second <see cref="T:Nikki.Support.Underground2.Attributes.CustomAttribute"/> to compare, or null.</param>
+            <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Attributes.CustomAttribute.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Attributes.CustomAttribute.ConvertTo(Nikki.Reflection.Enum.CarPartAttribType)">
+            <summary>
+            Returns itself.
+            </summary>
+            <param name="type">Type of a new attribute.</param>
+            <returns>This instance.</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Attributes.CustomAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Attributes.CustomAttribute.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
@@ -45057,6 +45858,15 @@
             Adds a custom attribute type to this part.
             </summary>
             <param name="name">Name of custom attribute to add.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.MakeReplace(System.Boolean,System.String,System.String,System.Text.RegularExpressions.RegexOptions)">
+            <summary>
+            Makes regex replacement of PartLabel or every single property and attribute.
+            </summary>
+            <param name="onlyLabel">True if replace only label; false if replace all.</param>
+            <param name="pattern">Pattern of characters as a string to replace.</param>
+            <param name="replacement">Replacement string for encountered pattern of characters.</param>
+            <param name="regexOptions"><see cref="T:System.Text.RegularExpressions.RegexOptions"/> for regex replacement.</param>
         </member>
         <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.Equals(System.Object)">
             <summary>
