@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
@@ -269,7 +270,75 @@ namespace Nikki.Support.Underground2.Parts.CarParts
 		/// <param name="name">Name of custom attribute to add.</param>
 		public override void AddCustomAttribute(string name)
 		{
-			//this.Attributes.Add(new CustomAttribute(name));
+			this.Attributes.Add(new CustomAttribute(name));
+		}
+
+		/// <summary>
+		/// Makes regex replacement of PartLabel or every single property and attribute.
+		/// </summary>
+		/// <param name="onlyLabel">True if replace only label; false if replace all.</param>
+		/// <param name="pattern">Pattern of characters as a string to replace.</param>
+		/// <param name="replacement">Replacement string for encountered pattern of characters.</param>
+		/// <param name="regexOptions"><see cref="RegexOptions"/> for regex replacement.</param>
+		public override void MakeReplace(bool onlyLabel, string pattern, string replacement, RegexOptions regexOptions)
+		{
+			if (onlyLabel)
+			{
+
+				Regex.Replace(this.PartLabel, pattern, replacement, regexOptions);
+
+			}
+			else
+			{
+
+				Regex.Replace(this.PartLabel, pattern, replacement, regexOptions);
+				Regex.Replace(this.DebugName, pattern, replacement, regexOptions);
+				Regex.Replace(this.LodStruct.Concatenator, pattern, replacement, regexOptions);
+				Regex.Replace(this.LodStruct.Geometry0LodA, pattern, replacement, regexOptions);
+				Regex.Replace(this.LodStruct.Geometry0LodB, pattern, replacement, regexOptions);
+				Regex.Replace(this.LodStruct.Geometry0LodC, pattern, replacement, regexOptions);
+				Regex.Replace(this.LodStruct.Geometry0LodD, pattern, replacement, regexOptions);
+				Regex.Replace(this.LodStruct.Geometry1LodA, pattern, replacement, regexOptions);
+				Regex.Replace(this.LodStruct.Geometry1LodB, pattern, replacement, regexOptions);
+				Regex.Replace(this.LodStruct.Geometry1LodC, pattern, replacement, regexOptions);
+				Regex.Replace(this.LodStruct.Geometry1LodD, pattern, replacement, regexOptions);
+				
+				foreach (var attribute in this.Attributes)
+				{
+
+					switch (attribute.AttribType)
+					{
+
+						case CarPartAttribType.String:
+							var strAttr = attribute as StringAttribute;
+							Regex.Replace(strAttr.Value, pattern, replacement, regexOptions);
+							break;
+
+						case CarPartAttribType.Custom:
+							var custAttr = attribute as CustomAttribute;
+							if (custAttr.Type == CarPartAttribType.String)
+							{
+
+								Regex.Replace(custAttr.ValueString, pattern, replacement, regexOptions);
+
+							}
+							else if (custAttr.Type == CarPartAttribType.TwoString)
+							{
+
+								Regex.Replace(custAttr.ValueString1, pattern, replacement, regexOptions);
+								Regex.Replace(custAttr.ValueString2, pattern, replacement, regexOptions);
+
+							}
+							break;
+
+						default:
+							break;
+
+					}
+
+				}
+
+			}
 		}
 
 		/// <summary>

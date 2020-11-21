@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Nikki.Utils;
-using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Support.Shared.Class;
 
@@ -136,9 +136,18 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		public abstract void AddCustomAttribute(string name);
 
 		/// <summary>
+		/// Makes regex replacement of PartLabel or every single property and attribute.
+		/// </summary>
+		/// <param name="onlyLabel">True if replace only label; false if replace all.</param>
+		/// <param name="pattern">Pattern of characters as a string to replace.</param>
+		/// <param name="replacement">Replacement string for encountered pattern of characters.</param>
+		/// <param name="regexOptions"><see cref="RegexOptions"/> for regex replacement.</param>
+		public abstract void MakeReplace(bool onlyLabel, string pattern, string replacement, RegexOptions regexOptions);
+
+		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.
 		/// </summary>
 		/// <returns>Exact plain copy of the object.</returns>
-		public override SubPart PlainCopy() { return null; }
+		public override SubPart PlainCopy() => null;
 	}
 }

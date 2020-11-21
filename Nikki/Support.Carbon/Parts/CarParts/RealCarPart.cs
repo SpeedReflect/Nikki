@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
@@ -232,6 +233,76 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 		public override void AddCustomAttribute(string name)
 		{
 			this.Attributes.Add(new CustomAttribute(name));
+		}
+
+		/// <summary>
+		/// Makes regex replacement of PartLabel or every single property and attribute.
+		/// </summary>
+		/// <param name="onlyLabel">True if replace only label; false if replace all.</param>
+		/// <param name="pattern">Pattern of characters as a string to replace.</param>
+		/// <param name="replacement">Replacement string for encountered pattern of characters.</param>
+		/// <param name="regexOptions"><see cref="RegexOptions"/> for regex replacement.</param>
+		public override void MakeReplace(bool onlyLabel, string pattern, string replacement, RegexOptions regexOptions)
+		{
+			foreach (var attribute in this.Attributes)
+			{
+
+				switch (attribute.AttribType)
+				{
+
+					case CarPartAttribType.String:
+						var strAttr = attribute as StringAttribute;
+						Regex.Replace(strAttr.Value, pattern, replacement, regexOptions);
+						break;
+
+					case CarPartAttribType.TwoString:
+						var twostrAttr = attribute as TwoStringAttribute;
+						Regex.Replace(twostrAttr.Value1, pattern, replacement, regexOptions);
+						Regex.Replace(twostrAttr.Value2, pattern, replacement, regexOptions);
+						break;
+
+					case CarPartAttribType.ModelTable:
+						var modelAttr = attribute as ModelTableAttribute;
+						Regex.Replace(modelAttr.Concatenator, pattern, replacement, regexOptions);
+						for (int lod = (byte)'A'; lod <= (byte)'E'; ++lod)
+						{
+
+							for (int i = 0; i <= 11; ++i)
+							{
+
+								var lodname = $"Geometry{i}Lod{(char)lod}";
+								var value = modelAttr.GetValue(lodname);
+								Regex.Replace(value, pattern, replacement, regexOptions);
+								modelAttr.SetValue(lodname, value);
+
+							}
+
+						}
+						break;
+
+					case CarPartAttribType.Custom:
+						var custAttr = attribute as CustomAttribute;
+						if (custAttr.Type == CarPartAttribType.String)
+						{
+
+							Regex.Replace(custAttr.ValueString, pattern, replacement, regexOptions);
+
+						}
+						else if (custAttr.Type == CarPartAttribType.TwoString)
+						{
+
+							Regex.Replace(custAttr.ValueString1, pattern, replacement, regexOptions);
+							Regex.Replace(custAttr.ValueString2, pattern, replacement, regexOptions);
+
+						}
+						break;
+
+					default:
+						break;
+
+				}
+
+			}
 		}
 
 		/// <summary>

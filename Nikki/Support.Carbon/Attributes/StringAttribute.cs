@@ -107,7 +107,7 @@ namespace Nikki.Support.Carbon.Attributes
 		{
 			var position = br.ReadUInt32();
 			
-			if (position < 0xFFFF)
+			if (position < UInt32.MaxValue)
 			{
 			
 				str_reader.BaseStream.Position = position << 2;

@@ -129,7 +129,7 @@ namespace Nikki.Support.Carbon.Attributes
 			ushort position;
 			position = br.ReadUInt16();
 			
-			if (position != 0xFFFF)
+			if (position != UInt16.MaxValue)
 			{
 			
 				str_reader.BaseStream.Position = position << 2;
@@ -140,7 +140,7 @@ namespace Nikki.Support.Carbon.Attributes
 			
 			position = br.ReadUInt16();
 			
-			if (position != 0xFFFF)
+			if (position != UInt16.MaxValue)
 			{
 			
 				str_reader.BaseStream.Position = position << 2;
@@ -159,11 +159,11 @@ namespace Nikki.Support.Carbon.Attributes
 		public override void Assemble(BinaryWriter bw, Dictionary<int, int> string_dict)
 		{
 			var result1 = this.Value1Exists == eBoolean.False
-				? 0xFFFF
+				? UInt16.MaxValue
 				: (ushort)string_dict[this.Value1.GetHashCode()];
 			
 			var result2 = this.Value2Exists == eBoolean.False
-				? 0xFFFF
+				? UInt16.MaxValue
 				: (ushort)string_dict[this.Value2.GetHashCode()];
 			
 			bw.Write(this.Key);

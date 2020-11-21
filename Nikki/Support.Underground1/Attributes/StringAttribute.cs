@@ -108,7 +108,7 @@ namespace Nikki.Support.Underground1.Attributes
 		{
 			var position = br.ReadUInt32();
 
-			if (position < 0xFFFF)
+			if (position < UInt32.MaxValue)
 			{
 
 				str_reader.BaseStream.Position = position;// << 2;
