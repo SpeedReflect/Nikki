@@ -14,7 +14,7 @@ using CoreExtensions.Conversions;
 
 
 
-namespace Nikki.Support.Carbon.Attributes
+namespace Nikki.Support.MostWanted.Attributes
 {
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with 4-byte signed integer value.
@@ -232,7 +232,7 @@ namespace Nikki.Support.Carbon.Attributes
 				case CarPartAttribType.Integer: this.ValueInteger = br.ReadInt32(); return;
 				case CarPartAttribType.Floating: this.ValueFloating = br.ReadSingle(); return;
 				case CarPartAttribType.Key: this.ValueKey = br.ReadUInt32().BinString(LookupReturn.EMPTY); return;
-
+				
 				case CarPartAttribType.String:
 					var strPtr = br.ReadUInt32();
 					if (strPtr < UInt32.MaxValue)
@@ -244,7 +244,7 @@ namespace Nikki.Support.Carbon.Attributes
 
 					}
 					return;
-
+				
 				case CarPartAttribType.TwoString:
 					var twostrPtr1 = br.ReadUInt16();
 					var twostrPtr2 = br.ReadUInt16();
@@ -265,14 +265,14 @@ namespace Nikki.Support.Carbon.Attributes
 
 					}
 					return;
-
+				
 				case CarPartAttribType.Color:
 					this.ValueColorRed = br.ReadByte();
 					this.ValueColorGreen = br.ReadByte();
 					this.ValueColorBlue = br.ReadByte();
 					this.ValueColorAlpha = br.ReadByte();
 					return;
-
+				
 				default: return;
 
 			}

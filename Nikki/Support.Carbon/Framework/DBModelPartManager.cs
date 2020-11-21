@@ -557,6 +557,10 @@ namespace Nikki.Support.Carbon.Framework
 
 			}
 
+			// Return buffer and its length
+			var dif = 0x10 - ((int)ms.Length + 8) % 0x10;
+			if (dif != 0x10) bw.WriteBytes(dif);
+
 			bw.BaseStream.Position = 0;
 			bw.Write(count);
 			custattr_buffer = ms.ToArray();

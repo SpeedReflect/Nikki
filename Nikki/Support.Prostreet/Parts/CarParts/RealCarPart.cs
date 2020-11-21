@@ -229,10 +229,9 @@ namespace Nikki.Support.Prostreet.Parts.CarParts
 		/// Adds a custom attribute type to this part.
 		/// </summary>
 		/// <param name="name">Name of custom attribute to add.</param>
-		/// <param name="type">Type of custom attribute to add.</param>
-		public override void AddCustomAttribute(string name, CarPartAttribType type)
+		public override void AddCustomAttribute(string name)
 		{
-			//this.Attributes.Add(new CustomAttribute(name, type));
+			//this.Attributes.Add(new CustomAttribute(name));
 		}
 
 		/// <summary>

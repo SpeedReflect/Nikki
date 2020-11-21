@@ -8413,12 +8413,11 @@
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.CustomAttribute"/>.
             </summary>
         </member>
-        <member name="M:Nikki.Support.Carbon.Attributes.CustomAttribute.#ctor(System.String,Nikki.Reflection.Enum.CarPartAttribType)">
+        <member name="M:Nikki.Support.Carbon.Attributes.CustomAttribute.#ctor(System.String)">
             <summary>
             Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.CustomAttribute"/> with value provided.
             </summary>
             <param name="name">Name of this attribute.</param>
-            <param name="type">Type of this attribute.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Attributes.CustomAttribute.#ctor(System.IO.BinaryReader,System.IO.BinaryReader,Nikki.Support.Shared.Parts.CarParts.CustomCP)">
             <summary>
@@ -14333,12 +14332,11 @@
             <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
             <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
         </member>
-        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.AddCustomAttribute(System.String,Nikki.Reflection.Enum.CarPartAttribType)">
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.AddCustomAttribute(System.String)">
             <summary>
             Adds a custom attribute type to this part.
             </summary>
             <param name="name">Name of custom attribute to add.</param>
-            <param name="type">Type of custom attribute to add.</param>
         </member>
         <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.Equals(System.Object)">
             <summary>
@@ -19460,12 +19458,11 @@
             <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
             <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
         </member>
-        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.AddCustomAttribute(System.String,Nikki.Reflection.Enum.CarPartAttribType)">
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.AddCustomAttribute(System.String)">
             <summary>
             Adds a custom attribute type to this part.
             </summary>
             <param name="name">Name of custom attribute to add.</param>
-            <param name="type">Type of custom attribute to add.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.Equals(System.Object)">
             <summary>
@@ -25395,12 +25392,11 @@
             <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
             <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
         </member>
-        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.AddCustomAttribute(System.String,Nikki.Reflection.Enum.CarPartAttribType)">
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.AddCustomAttribute(System.String)">
             <summary>
             Adds a custom attribute type to this part.
             </summary>
             <param name="name">Name of custom attribute to add.</param>
-            <param name="type">Type of custom attribute to add.</param>
         </member>
         <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.Equals(System.Object)">
             <summary>
@@ -29150,12 +29146,11 @@
             <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
             <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
         </member>
-        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.AddCustomAttribute(System.String,Nikki.Reflection.Enum.CarPartAttribType)">
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.AddCustomAttribute(System.String)">
             <summary>
             Adds a custom attribute type to this part.
             </summary>
             <param name="name">Name of custom attribute to add.</param>
-            <param name="type">Type of custom attribute to add.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.PlainCopy">
             <summary>
@@ -34989,12 +34984,11 @@
             <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
             <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
         </member>
-        <member name="M:Nikki.Support.Underground1.Parts.CarParts.RealCarPart.AddCustomAttribute(System.String,Nikki.Reflection.Enum.CarPartAttribType)">
+        <member name="M:Nikki.Support.Underground1.Parts.CarParts.RealCarPart.AddCustomAttribute(System.String)">
             <summary>
             Adds a custom attribute type to this part.
             </summary>
             <param name="name">Name of custom attribute to add.</param>
-            <param name="type">Type of custom attribute to add.</param>
         </member>
         <member name="M:Nikki.Support.Underground1.Parts.CarParts.RealCarPart.Equals(System.Object)">
             <summary>
@@ -45058,12 +45052,11 @@
             <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
             <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
         </member>
-        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.AddCustomAttribute(System.String,Nikki.Reflection.Enum.CarPartAttribType)">
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.AddCustomAttribute(System.String)">
             <summary>
             Adds a custom attribute type to this part.
             </summary>
             <param name="name">Name of custom attribute to add.</param>
-            <param name="type">Type of custom attribute to add.</param>
         </member>
         <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.Equals(System.Object)">
             <summary>

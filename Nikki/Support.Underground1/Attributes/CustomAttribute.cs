@@ -14,7 +14,7 @@ using CoreExtensions.Conversions;
 
 
 
-namespace Nikki.Support.Carbon.Attributes
+namespace Nikki.Support.Underground1.Attributes
 {
 	/// <summary>
 	/// A <see cref="CPAttribute"/> with 4-byte signed integer value.
@@ -46,6 +46,7 @@ namespace Nikki.Support.Carbon.Attributes
 					case CarPartAttribType.CarPartID:
 					case CarPartAttribType.Custom:
 					case CarPartAttribType.ModelTable:
+					case CarPartAttribType.TwoString:
 						throw new Exception("Unsupported type of custom attribute");
 
 					default:
@@ -128,34 +129,6 @@ namespace Nikki.Support.Carbon.Attributes
 		public eBoolean ValueStringExists { get; set; }
 
 		/// <summary>
-		/// Attribute value 1 of two-string type.
-		/// </summary>
-		[AccessModifiable()]
-		[Category("TwoString")]
-		public string ValueString1 { get; set; } = String.Empty;
-
-		/// <summary>
-		/// Attribute value of two-string type.
-		/// </summary>
-		[AccessModifiable()]
-		[Category("TwoString")]
-		public string ValueString2 { get; set; } = String.Empty;
-
-		/// <summary>
-		/// Indicates whether value 1 of two-string type exists.
-		/// </summary>
-		[AccessModifiable()]
-		[Category("TwoString")]
-		public eBoolean ValueString1Exists { get; set; }
-
-		/// <summary>
-		/// Indicates whether value 2 of two-string type exists.
-		/// </summary>
-		[AccessModifiable()]
-		[Category("TwoString")]
-		public eBoolean ValueString2Exists { get; set; }
-
-		/// <summary>
 		/// Attribute red value of color type.
 		/// </summary>
 		[AccessModifiable()]
@@ -232,47 +205,26 @@ namespace Nikki.Support.Carbon.Attributes
 				case CarPartAttribType.Integer: this.ValueInteger = br.ReadInt32(); return;
 				case CarPartAttribType.Floating: this.ValueFloating = br.ReadSingle(); return;
 				case CarPartAttribType.Key: this.ValueKey = br.ReadUInt32().BinString(LookupReturn.EMPTY); return;
-
+				
 				case CarPartAttribType.String:
 					var strPtr = br.ReadUInt32();
 					if (strPtr < UInt32.MaxValue)
 					{
 
-						str_reader.BaseStream.Position = strPtr << 2;
+						str_reader.BaseStream.Position = strPtr;
 						this.ValueString = str_reader.ReadNullTermUTF8();
 						this.ValueStringExists = eBoolean.True;
 
 					}
 					return;
-
-				case CarPartAttribType.TwoString:
-					var twostrPtr1 = br.ReadUInt16();
-					var twostrPtr2 = br.ReadUInt16();
-					if (twostrPtr1 != UInt16.MaxValue)
-					{
-
-						str_reader.BaseStream.Position = twostrPtr1 << 2;
-						this.ValueString1 = str_reader.ReadNullTermUTF8();
-						this.ValueString1Exists = eBoolean.True;
-
-					}
-					if (twostrPtr2 != UInt16.MaxValue)
-					{
-
-						str_reader.BaseStream.Position = twostrPtr2 << 2;
-						this.ValueString2 = str_reader.ReadNullTermUTF8();
-						this.ValueString2Exists = eBoolean.True;
-
-					}
-					return;
-
+								
 				case CarPartAttribType.Color:
 					this.ValueColorRed = br.ReadByte();
 					this.ValueColorGreen = br.ReadByte();
 					this.ValueColorBlue = br.ReadByte();
 					this.ValueColorAlpha = br.ReadByte();
 					return;
-
+				
 				default: return;
 
 			}
@@ -300,13 +252,6 @@ namespace Nikki.Support.Carbon.Attributes
 				case CarPartAttribType.String:
 					if (this.ValueStringExists == eBoolean.False) bw.Write(-1);
 					else bw.Write(string_dict[this.ValueString?.GetHashCode() ?? String.Empty.GetHashCode()]);
-					return;
-
-				case CarPartAttribType.TwoString:
-					if (this.ValueString1Exists == eBoolean.False) bw.Write((short)-1);
-					else bw.Write((ushort)string_dict[this.ValueString1?.GetHashCode() ?? String.Empty.GetHashCode()]);
-					if (this.ValueString2Exists == eBoolean.False) bw.Write((short)-1);
-					else bw.Write((ushort)string_dict[this.ValueString2?.GetHashCode() ?? String.Empty.GetHashCode()]);
 					return;
 
 				case CarPartAttribType.Color:
@@ -358,11 +303,6 @@ namespace Nikki.Support.Carbon.Attributes
 					result = HashCode.Combine(result, this.ValueString, this.ValueStringExists.ToString());
 					break;
 
-				case CarPartAttribType.TwoString:
-					result = HashCode.Combine(result, this.ValueString1, this.ValueString1Exists.ToString());
-					result = HashCode.Combine(result, this.ValueString2, this.ValueString2Exists.ToString());
-					break;
-
 				case CarPartAttribType.Color:
 					result = HashCode.Combine(result, this.ValueColorAlpha, this.ValueColorBlue);
 					result = HashCode.Combine(result, this.ValueColorGreen, this.ValueColorRed);
@@ -403,13 +343,6 @@ namespace Nikki.Support.Carbon.Attributes
 					result &= String.CompareOrdinal(at1.ValueString, at2.ValueString) == 0;
 					break;
 
-				case CarPartAttribType.TwoString:
-					result &= at1.ValueString1Exists == at2.ValueString1Exists;
-					result &= at1.ValueString2Exists == at2.ValueString2Exists;
-					result &= String.CompareOrdinal(at1.ValueString1, at2.ValueString1) == 0;
-					result &= String.CompareOrdinal(at1.ValueString2, at2.ValueString2) == 0;
-					break;
-
 				case CarPartAttribType.Color:
 					result &= at1.ValueColorRed == at2.ValueColorRed;
 					result &= at1.ValueColorGreen == at2.ValueColorGreen;
@@ -446,11 +379,7 @@ namespace Nikki.Support.Carbon.Attributes
 				ValueFloating = this.ValueFloating,
 				ValueKey = this.ValueKey,
 				ValueString = this.ValueString,
-				ValueString1 = this.ValueString1,
-				ValueString2 = this.ValueString2,
 				ValueStringExists = this.ValueStringExists,
-				ValueString1Exists = this.ValueString1Exists,
-				ValueString2Exists = this.ValueString2Exists,
 				ValueColorAlpha = this.ValueColorAlpha,
 				ValueColorBlue = this.ValueColorBlue,
 				ValueColorGreen = this.ValueColorGreen,
@@ -488,13 +417,6 @@ namespace Nikki.Support.Carbon.Attributes
 					if (this.ValueStringExists == eBoolean.True) bw.WriteNullTermUTF8(this.ValueString);
 					break;
 				
-				case CarPartAttribType.TwoString:
-					bw.WriteEnum(this.ValueString1Exists);
-					bw.WriteEnum(this.ValueString2Exists);
-					if (this.ValueString1Exists == eBoolean.True) bw.WriteNullTermUTF8(this.ValueString1);
-					if (this.ValueString2Exists == eBoolean.True) bw.WriteNullTermUTF8(this.ValueString2);
-					break;
-
 				case CarPartAttribType.Color:
 					bw.Write(this.ValueColorAlpha);
 					bw.Write(this.ValueColorBlue);
@@ -526,13 +448,6 @@ namespace Nikki.Support.Carbon.Attributes
 				case CarPartAttribType.String:
 					this.ValueStringExists = br.ReadEnum<eBoolean>();
 					if (this.ValueStringExists == eBoolean.True) this.ValueString = br.ReadNullTermUTF8();
-					break;
-
-				case CarPartAttribType.TwoString:
-					this.ValueString1Exists = br.ReadEnum<eBoolean>();
-					this.ValueString2Exists = br.ReadEnum<eBoolean>();
-					if (this.ValueString1Exists == eBoolean.True) this.ValueString1 = br.ReadNullTermUTF8();
-					if (this.ValueString2Exists == eBoolean.True) this.ValueString2 = br.ReadNullTermUTF8();
 					break;
 
 				case CarPartAttribType.Color:

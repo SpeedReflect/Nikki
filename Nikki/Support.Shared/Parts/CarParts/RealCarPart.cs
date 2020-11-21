@@ -133,8 +133,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// Adds a custom attribute type to this part.
 		/// </summary>
 		/// <param name="name">Name of custom attribute to add.</param>
-		/// <param name="type">Type of custom attribute to add.</param>
-		public abstract void AddCustomAttribute(string name, CarPartAttribType type);
+		public abstract void AddCustomAttribute(string name);
 
 		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.
