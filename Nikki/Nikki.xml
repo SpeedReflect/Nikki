@@ -657,6 +657,11 @@
             <param name="collection">New collection to replace with.</param>
             <param name="index">Position of replacement.</param>
         </member>
+        <member name="M:Nikki.Core.Manager`1.SortByKey">
+            <summary>
+            Sorts all collections by their BinKey value.
+            </summary>
+        </member>
         <member name="M:Nikki.Core.Manager`1.ReadOnlyThrow">
             <summary>
             Throws exception if this <see cref="T:Nikki.Core.Manager`1"/> is read-only.
@@ -1360,6 +1365,11 @@
             0x0003460C
             </summary>
         </member>
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.DBCarParts_Custom">
+            <summary>
+            0x0003460D
+            </summary>
+        </member>
         <member name="F:Nikki.Reflection.Enum.BinBlockID.GCareer_Upgrade">
             <summary>
             0x00034A01
@@ -1978,6 +1988,11 @@
         <member name="F:Nikki.Reflection.Enum.CarPartAttribType.ModelTable">
             <summary>
             Attribute with in-built CPStruct in it.
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CarPartAttribType.Custom">
+            <summary>
+            Attribute with custom type and value.
             </summary>
         </member>
         <member name="T:Nikki.Reflection.Enum.CP.eAttribBool">
@@ -7820,6 +7835,21 @@
             </summary>
             <param name="other"><see cref="T:Nikki.Reflection.Interface.ICopyable`1"/> to clone.</param>
         </member>
+        <member name="T:Nikki.Reflection.Interface.ICustomAttrib">
+            <summary>
+            Interface that declares a custom attribute type for car parts.
+            </summary>
+        </member>
+        <member name="P:Nikki.Reflection.Interface.ICustomAttrib.Name">
+            <summary>
+            Name of this <see cref="T:Nikki.Reflection.Interface.ICustomAttrib"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Reflection.Interface.ICustomAttrib.Type">
+            <summary>
+            <see cref="T:Nikki.Reflection.Enum.CarPartAttribType"/> of the value stored in this <see cref="T:Nikki.Reflection.Interface.ICustomAttrib"/>.
+            </summary>
+        </member>
         <member name="T:Nikki.Reflection.Interface.IGameSelectable">
             <summary>
             Interface that points to what game object belongs to.
@@ -8279,6 +8309,201 @@
             </summary>
         </member>
         <member name="M:Nikki.Support.Carbon.Attributes.ColorAttribute.Deserialize(System.IO.BinaryReader)">
+            <summary>
+            Deserializes byte array into an instance by loading data from the file provided.
+            </summary>
+        </member>
+        <member name="T:Nikki.Support.Carbon.Attributes.CustomAttribute">
+            <summary>
+            A <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> with 4-byte signed integer value.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.CustomAttribute.AttribType">
+            <summary>
+            <see cref="T:Nikki.Reflection.Enum.CarPartAttribType"/> type of this <see cref="T:Nikki.Support.Carbon.Attributes.CustomAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.CustomAttribute.Type">
+            <summary>
+            <see cref="T:Nikki.Reflection.Enum.CarPartAttribType"/> of the value stored in this <see cref="T:Nikki.Support.Carbon.Attributes.CustomAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.CustomAttribute.Name">
+            <summary>
+            Name of this <see cref="T:Nikki.Support.Carbon.Attributes.CustomAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.CustomAttribute.Key">
+            <summary>
+            Key of the part to which this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> belongs to.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.CustomAttribute.ValueBoolean">
+            <summary>
+            Attribute value of boolean type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.CustomAttribute.ValueInteger">
+            <summary>
+            Attribute value of integer type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.CustomAttribute.ValueFloating">
+            <summary>
+            Attribute value of floating type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.CustomAttribute.ValueKey">
+            <summary>
+            Attribute value of key type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.CustomAttribute.ValueString">
+            <summary>
+            Attribute value of string type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.CustomAttribute.ValueStringExists">
+            <summary>
+            Indicates whether value of string type exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.CustomAttribute.ValueString1">
+            <summary>
+            Attribute value 1 of two-string type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.CustomAttribute.ValueString2">
+            <summary>
+            Attribute value of two-string type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.CustomAttribute.ValueString1Exists">
+            <summary>
+            Indicates whether value 1 of two-string type exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.CustomAttribute.ValueString2Exists">
+            <summary>
+            Indicates whether value 2 of two-string type exists.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.CustomAttribute.ValueColorRed">
+            <summary>
+            Attribute red value of color type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.CustomAttribute.ValueColorGreen">
+            <summary>
+            Attribute green value of color type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.CustomAttribute.ValueColorBlue">
+            <summary>
+            Attribute blue value of color type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Attributes.CustomAttribute.ValueColorAlpha">
+            <summary>
+            Attribute alpha value of color type.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.CustomAttribute.#ctor">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.CustomAttribute"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.CustomAttribute.#ctor(System.String,Nikki.Reflection.Enum.CarPartAttribType)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.CustomAttribute"/> with value provided.
+            </summary>
+            <param name="name">Name of this attribute.</param>
+            <param name="type">Type of this attribute.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.CustomAttribute.#ctor(System.IO.BinaryReader,System.IO.BinaryReader,Nikki.Support.Shared.Parts.CarParts.CustomCP)">
+            <summary>
+            Initializes new instance of <see cref="T:Nikki.Support.Carbon.Attributes.CustomAttribute"/> by reading data using 
+            <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with.</param>
+            <param name="cp"><see cref="T:Nikki.Support.Shared.Parts.CarParts.CustomCP"/> with attribute type data.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.CustomAttribute.Disassemble(System.IO.BinaryReader,System.IO.BinaryReader)">
+            <summary>
+            Disassembles byte array into <see cref="T:Nikki.Support.Carbon.Attributes.CustomAttribute"/> using <see cref="T:System.IO.BinaryReader"/> 
+            provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+            <param name="str_reader"><see cref="T:System.IO.BinaryReader"/> to read strings with. 
+            Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.CustomAttribute.Assemble(System.IO.BinaryWriter,System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+            <summary>
+            Assembles <see cref="T:Nikki.Support.Carbon.Attributes.CustomAttribute"/> and writes it using <see cref="T:System.IO.BinaryWriter"/> 
+            provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
+            <param name="string_dict">Dictionary of string HashCodes and their offsets. 
+            Since it is an Integer Attribute, this value can be <see langword="null"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.CustomAttribute.ToString">
+            <summary>
+            Returns attribute part label and its type as a string value.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.CustomAttribute.Equals(System.Object)">
+            <summary>
+            Determines whether this instance and a specified object, which must also be a
+            <see cref="T:Nikki.Support.Carbon.Attributes.CustomAttribute"/> object, have the same value.
+            </summary>
+            <param name="obj">The <see cref="T:Nikki.Support.Carbon.Attributes.CustomAttribute"/> to compare to this instance.</param>
+            <returns>True if obj is a <see cref="T:Nikki.Support.Carbon.Attributes.CustomAttribute"/> and its value is the same as 
+            this instance; false otherwise. If obj is null, the method returns false.
+            </returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.CustomAttribute.GetHashCode">
+            <summary>
+            Returns the hash code for this <see cref="T:Nikki.Support.Carbon.Attributes.CustomAttribute"/>.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.CustomAttribute.op_Equality(Nikki.Support.Carbon.Attributes.CustomAttribute,Nikki.Support.Carbon.Attributes.CustomAttribute)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Carbon.Attributes.CustomAttribute"/> have the same value.
+            </summary>
+            <param name="at1">The first <see cref="T:Nikki.Support.Carbon.Attributes.CustomAttribute"/> to compare, or null.</param>
+            <param name="at2">The second <see cref="T:Nikki.Support.Carbon.Attributes.CustomAttribute"/> to compare, or null.</param>
+            <returns>True if the value of c1 is the same as the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.CustomAttribute.op_Inequality(Nikki.Support.Carbon.Attributes.CustomAttribute,Nikki.Support.Carbon.Attributes.CustomAttribute)">
+            <summary>
+            Determines whether two specified <see cref="T:Nikki.Support.Carbon.Attributes.CustomAttribute"/> have different values.
+            </summary>
+            <param name="at1">The first <see cref="T:Nikki.Support.Carbon.Attributes.CustomAttribute"/> to compare, or null.</param>
+            <param name="at2">The second <see cref="T:Nikki.Support.Carbon.Attributes.CustomAttribute"/> to compare, or null.</param>
+            <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.CustomAttribute.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.CustomAttribute.ConvertTo(Nikki.Reflection.Enum.CarPartAttribType)">
+            <summary>
+            Returns itself.
+            </summary>
+            <param name="type">Type of a new attribute.</param>
+            <returns>This instance.</returns>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.CustomAttribute.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serializes instance into a byte array and stores it in the file provided.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Carbon.Attributes.CustomAttribute.Deserialize(System.IO.BinaryReader)">
             <summary>
             Deserializes byte array into an instance by loading data from the file provided.
             </summary>
@@ -14108,6 +14333,13 @@
             <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
             <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.AddCustomAttribute(System.String,Nikki.Reflection.Enum.CarPartAttribType)">
+            <summary>
+            Adds a custom attribute type to this part.
+            </summary>
+            <param name="name">Name of custom attribute to add.</param>
+            <param name="type">Type of custom attribute to add.</param>
+        </member>
         <member name="M:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.Equals(System.Object)">
             <summary>
             Compares two <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/> and checks whether the equal.
@@ -19227,6 +19459,13 @@
             </summary>
             <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
             <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.AddCustomAttribute(System.String,Nikki.Reflection.Enum.CarPartAttribType)">
+            <summary>
+            Adds a custom attribute type to this part.
+            </summary>
+            <param name="name">Name of custom attribute to add.</param>
+            <param name="type">Type of custom attribute to add.</param>
         </member>
         <member name="M:Nikki.Support.MostWanted.Parts.CarParts.RealCarPart.Equals(System.Object)">
             <summary>
@@ -25156,6 +25395,13 @@
             <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
             <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.AddCustomAttribute(System.String,Nikki.Reflection.Enum.CarPartAttribType)">
+            <summary>
+            Adds a custom attribute type to this part.
+            </summary>
+            <param name="name">Name of custom attribute to add.</param>
+            <param name="type">Type of custom attribute to add.</param>
+        </member>
         <member name="M:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.Equals(System.Object)">
             <summary>
             Compares two <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/> and checks whether the equal.
@@ -28717,6 +28963,74 @@
             </summary>
             <returns>Exact plain copy of the object.</returns>
         </member>
+        <member name="T:Nikki.Support.Shared.Parts.CarParts.CustomCP">
+            <summary>
+            A class that holds parameters for a custom attribute type.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.CustomCP.Name">
+            <summary>
+            Name of the custom attribute.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.CustomCP.Key">
+            <summary>
+            BinKey of the custom attribute.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.CarParts.CustomCP.AttribType">
+            <summary>
+            Attribute type of the custom attribute.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CustomCP.#ctor">
+            <summary>
+            Constructor for <see cref="T:Nikki.Support.Shared.Parts.CarParts.CustomCP"/>.
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CustomCP.#ctor(System.UInt32)">
+            <summary>
+            Constructor for <see cref="T:Nikki.Support.Shared.Parts.CarParts.CustomCP"/>.
+            </summary>
+            <param name="key">Key of this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CustomCP"/>.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CustomCP.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data from stream into this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CustomCP"/>.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CustomCP.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data to stream using this <see cref="T:Nikki.Support.Shared.Parts.CarParts.CustomCP"/>.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CustomCP.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CustomCP.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CustomCP.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CustomCP.op_Equality(Nikki.Support.Shared.Parts.CarParts.CustomCP,Nikki.Support.Shared.Parts.CarParts.CustomCP)">
+            <summary>
+            Compares two instances of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CustomCP"/> and returns true if they are equal.
+            </summary>
+            <param name="cp1">First <see cref="T:Nikki.Support.Shared.Parts.CarParts.CustomCP"/> to compare.</param>
+            <param name="cp2">Second <see cref="T:Nikki.Support.Shared.Parts.CarParts.CustomCP"/> to compare.</param>
+            <returns>True if two instances are equal; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CustomCP.op_Inequality(Nikki.Support.Shared.Parts.CarParts.CustomCP,Nikki.Support.Shared.Parts.CarParts.CustomCP)">
+            <summary>
+            Compares two instances of <see cref="T:Nikki.Support.Shared.Parts.CarParts.CustomCP"/> and returns true if they are not equal.
+            </summary>
+            <param name="cp1">First <see cref="T:Nikki.Support.Shared.Parts.CarParts.CustomCP"/> to compare.</param>
+            <param name="cp2">Second <see cref="T:Nikki.Support.Shared.Parts.CarParts.CustomCP"/> to compare.</param>
+            <returns>True if two instances are not equal; false otherwise.</returns>
+        </member>
         <member name="T:Nikki.Support.Shared.Parts.CarParts.RealCarPart">
             <summary>
             A unit CarPart attribute of <see cref="T:Nikki.Support.Shared.Class.DBModelPart"/>.
@@ -28835,6 +29149,13 @@
             </summary>
             <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
             <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.AddCustomAttribute(System.String,Nikki.Reflection.Enum.CarPartAttribType)">
+            <summary>
+            Adds a custom attribute type to this part.
+            </summary>
+            <param name="name">Name of custom attribute to add.</param>
+            <param name="type">Type of custom attribute to add.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Parts.CarParts.RealCarPart.PlainCopy">
             <summary>
@@ -34668,6 +34989,13 @@
             <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
             <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
         </member>
+        <member name="M:Nikki.Support.Underground1.Parts.CarParts.RealCarPart.AddCustomAttribute(System.String,Nikki.Reflection.Enum.CarPartAttribType)">
+            <summary>
+            Adds a custom attribute type to this part.
+            </summary>
+            <param name="name">Name of custom attribute to add.</param>
+            <param name="type">Type of custom attribute to add.</param>
+        </member>
         <member name="M:Nikki.Support.Underground1.Parts.CarParts.RealCarPart.Equals(System.Object)">
             <summary>
             Compares two <see cref="T:Nikki.Support.Underground1.Parts.CarParts.RealCarPart"/> and checks whether the equal.
@@ -34918,6 +35246,11 @@
         <member name="F:Nikki.Support.Underground1.Parts.GameParts.Unlock.UnlockableType.Track">
             <summary>
             Unlocks a track.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Underground1.Parts.GameParts.Unlock.UnlockableType.Unknown">
+            <summary>
+            Unlocks unknown.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground1.Parts.GameParts.Unlock.UnlockType">
@@ -44724,6 +45057,13 @@
             </summary>
             <param name="newlabel">Label of the new <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/>.</param>
             <param name="copylabel">Label of the <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPAttribute"/> to clone.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.AddCustomAttribute(System.String,Nikki.Reflection.Enum.CarPartAttribType)">
+            <summary>
+            Adds a custom attribute type to this part.
+            </summary>
+            <param name="name">Name of custom attribute to add.</param>
+            <param name="type">Type of custom attribute to add.</param>
         </member>
         <member name="M:Nikki.Support.Underground2.Parts.CarParts.RealCarPart.Equals(System.Object)">
             <summary>

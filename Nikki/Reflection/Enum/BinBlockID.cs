@@ -151,6 +151,11 @@
         DBCarParts_Offsets = 0x0003460C, // varies
 
         /// <summary>
+        /// 0x0003460D
+        /// </summary>
+        DBCarParts_Custom = 0x0003460D, // varies
+
+        /// <summary>
         /// 0x00034A01
         /// </summary>
         GCareer_Upgrade = 0x00034A01, // varies

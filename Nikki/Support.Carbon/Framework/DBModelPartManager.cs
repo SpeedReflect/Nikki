@@ -217,6 +217,29 @@ namespace Nikki.Support.Carbon.Framework
 							}
 						
 						}
+
+						// Else if attribute is CustomAttribute, write its strings
+						else if (attrib is CustomAttribute cust_attrib)
+						{
+
+							switch (cust_attrib.Type)
+							{
+
+								case CarPartAttribType.String:
+									length = Inject(cust_attrib.ValueString, length);
+									break;
+
+								case CarPartAttribType.TwoString:
+									length = Inject(cust_attrib.ValueString1, length);
+									length = Inject(cust_attrib.ValueString2, length);
+									break;
+
+								default:
+									break;
+
+							}
+
+						}
 					
 					}
 				
@@ -490,14 +513,65 @@ namespace Nikki.Support.Carbon.Framework
 			return length;
 		}
 
+		private int MakeCustomAttrList(out byte[] custattr_buffer)
+		{
+			custattr_buffer = null;
+			var map = new Dictionary<int, CustomAttribute>();
+			using var ms = new MemoryStream();
+			using var bw = new BinaryWriter(ms);
+
+			bw.Write(-1); // total number of custom attributes
+			int count = 0;
+
+			foreach (var model in this)
+			{
+
+				foreach (var part in model.ModelCarParts)
+				{
+
+					foreach (var attrib in part.Attributes)
+					{
+
+						if (attrib.AttribType == CarPartAttribType.Custom)
+						{
+
+							var custom = attrib as CustomAttribute;
+							var code = custom.GetHashCode();
+							if (!map.ContainsKey(code)) map.Add(code, custom);
+
+						}
+
+					}
+
+				}
+
+			}
+
+			foreach (var custom in map.Values)
+			{
+
+				bw.WriteNullTermUTF8(custom.Name);
+				bw.Write(custom.Key);
+				bw.WriteEnum(custom.Type);
+				++count;
+
+			}
+
+			bw.BaseStream.Position = 0;
+			bw.Write(count);
+			custattr_buffer = ms.ToArray();
+			return custattr_buffer?.Length ?? 0;
+		}
+
 		#endregion
 
 		#region Private Disassemble
 
 		private long[] FindOffsets(BinaryReader br, int size)
 		{
-			var result = new long[7];
+			var result = new long[8];
 			var offset = br.BaseStream.Position;
+			result[7] = -1;
 			
 			while (br.BaseStream.Position < offset + size)
 			{
@@ -532,6 +606,10 @@ namespace Nikki.Support.Carbon.Framework
 
 					case BinBlockID.DBCarParts_Array:
 						result[6] = br.BaseStream.Position;
+						goto default;
+
+					case BinBlockID.DBCarParts_Custom:
+						result[7] = br.BaseStream.Position;
 						goto default;
 
 					default:
@@ -573,7 +651,7 @@ namespace Nikki.Support.Carbon.Framework
 			return result;
 		}
 
-		private CPAttribute[] ReadAttribs(BinaryReader br, BinaryReader str, int maxlen)
+		private CPAttribute[] ReadAttribs(BinaryReader br, BinaryReader str, int maxlen, Dictionary<uint, CustomCP> cpmap)
 		{
 			var size = br.ReadInt32();
 			var offset = br.BaseStream.Position;
@@ -585,10 +663,14 @@ namespace Nikki.Support.Carbon.Framework
 			{
 			
 				var key = br.ReadUInt32();
+				CustomCP cp = null;
+
+				// If existing map does not have attribute key, it might be a custom key then
 				if (!Map.CarPartKeys.TryGetValue(key, out var type))
 				{
 
-					type = CarPartAttribType.Integer;
+					type = CarPartAttribType.Custom;
+					if (!cpmap.TryGetValue(key, out cp)) cp = new CustomCP(key);
 
 				}
 
@@ -602,6 +684,7 @@ namespace Nikki.Support.Carbon.Framework
 					CarPartAttribType.Color => new ColorAttribute(br, key),
 					CarPartAttribType.Key => new KeyAttribute(br, key),
 					CarPartAttribType.ModelTable => new ModelTableAttribute(br, key),
+					CarPartAttribType.Custom => new CustomAttribute(br, str, cp),
 					_ => new IntAttribute(br, key),
 				};
 
@@ -654,6 +737,38 @@ namespace Nikki.Support.Carbon.Framework
 			return result;
 		}
 
+		private Dictionary<uint, CustomCP> ReadCustomCP(BinaryReader br, long offset)
+		{
+			if (offset != -1)
+			{
+
+				var map = new Dictionary<uint, CustomCP>();
+				br.BaseStream.Position = offset;
+				var len = br.ReadInt32();
+
+				if (len > 0)
+				{
+
+					var count = br.ReadInt32();
+
+					for (int i = 0; i < count; ++i)
+					{
+
+						var cp = new CustomCP();
+						cp.Read(br);
+						map[cp.Key] = cp;
+
+					}
+
+				}
+
+				return map;
+
+			}
+
+			return null;
+		}
+
 		#endregion
 
 		/// <summary>
@@ -682,6 +797,9 @@ namespace Nikki.Support.Carbon.Framework
 			// Get temppart list
 			var numparts = this.MakeCPPartList(offset_dict, out var cppart_buffer);
 
+			// Get custom attribute list
+			var custattrs = this.MakeCustomAttrList(out var custat_buffer);
+
 			// Get header
 			var header_buffer = this.MakeHeader(attrib_dict.Count, nummodels, numstructs, numparts);
 
@@ -694,6 +812,7 @@ namespace Nikki.Support.Carbon.Framework
 			size += struct_buffer.Length + 8;
 			size += models_buffer.Length + 8;
 			size += cppart_buffer.Length + 8;
+			size += custat_buffer.Length + 8;
 
 			// Write ID and Size
 			bw.WriteEnum(BinBlockID.DBCarParts);
@@ -733,6 +852,11 @@ namespace Nikki.Support.Carbon.Framework
 			bw.WriteEnum(BinBlockID.DBCarParts_Array);
 			bw.Write(cppart_buffer.Length);
 			bw.Write(cppart_buffer);
+
+			// Write custom attributes
+			bw.WriteEnum(BinBlockID.DBCarParts_Custom);
+			bw.Write(custattrs);
+			bw.Write(custat_buffer);
 		}
 
 		/// <summary>
@@ -756,6 +880,9 @@ namespace Nikki.Support.Carbon.Framework
 			br.BaseStream.Position = offsets[0] + 0x3C;
 			int maxcparts = br.ReadInt32();
 
+			// Get all custom attributes
+			var cpmap = this.ReadCustomCP(br, offsets[7]);
+
 			// Initialize stream over string block
 			br.BaseStream.Position = offsets[1];
 			var strlen = br.ReadInt32();
@@ -769,7 +896,7 @@ namespace Nikki.Support.Carbon.Framework
 
 			// Read all car part attributes
 			br.BaseStream.Position = offsets[3];
-			var attrib_list = this.ReadAttribs(br, StrReader, maxattrib);
+			var attrib_list = this.ReadAttribs(br, StrReader, maxattrib, cpmap);
 
 			// Read all models
 			br.BaseStream.Position = offsets[5];

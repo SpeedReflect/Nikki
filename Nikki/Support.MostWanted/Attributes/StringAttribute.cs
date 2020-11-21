@@ -126,12 +126,10 @@ namespace Nikki.Support.MostWanted.Attributes
 		/// <param name="string_dict">Dictionary of string HashCodes and their offsets.</param>
 		public override void Assemble(BinaryWriter bw, Dictionary<int, int> string_dict)
 		{
-			var result = String.IsNullOrEmpty(this.Value)
-				? -1
-				: string_dict[this.Value.GetHashCode()];
-			
 			bw.Write(this.Key);
-			bw.Write(result);
+
+			if (this.ValueExists == eBoolean.False) bw.Write(-1);
+			else bw.Write(string_dict[this.Value?.GetHashCode() ?? String.Empty.GetHashCode()]);
 		}
 
 		/// <summary>

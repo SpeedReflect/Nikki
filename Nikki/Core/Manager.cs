@@ -3,6 +3,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
+using Nikki.Utils;
 using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Interface;
@@ -1385,6 +1386,31 @@ namespace Nikki.Core
 			}
 
 			this._collections[index] = collection;
+		}
+
+		/// <summary>
+		/// Sorts all collections by their BinKey value.
+		/// </summary>
+		internal void SortByKey()
+		{
+			for (int i = 0; i < this._size - 1; ++i)
+			{
+
+				for (int k = 0; k < this._size - i - 1; ++k)
+				{
+
+					if (this._collections[k].CollectionName.BinHash() > this._collections[k + 1].CollectionName.BinHash())
+					{
+
+						var temp = this._collections[k];
+						this._collections[k] = this._collections[k + 1];
+						this._collections[k + 1] = temp;
+
+					}
+
+				}
+
+			}
 		}
 
 		#endregion

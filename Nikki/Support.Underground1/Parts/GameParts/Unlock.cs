@@ -39,6 +39,11 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 			/// Unlocks a track.
 			/// </summary>
 			Track = 3,
+
+			/// <summary>
+			/// Unlocks unknown.
+			/// </summary>
+			Unknown = 4,
 		}
 
 		/// <summary>

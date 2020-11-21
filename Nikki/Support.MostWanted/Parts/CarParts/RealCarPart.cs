@@ -264,6 +264,16 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 			this.CloneAttribute(newlabel.BinHash(), copylabel.BinHash());
 
 		/// <summary>
+		/// Adds a custom attribute type to this part.
+		/// </summary>
+		/// <param name="name">Name of custom attribute to add.</param>
+		/// <param name="type">Type of custom attribute to add.</param>
+		public override void AddCustomAttribute(string name, CarPartAttribType type)
+		{
+			//this.Attributes.Add(new CustomAttribute(name, type));
+		}
+
+		/// <summary>
 		/// Compares two <see cref="RealCarPart"/> and checks whether the equal.
 		/// </summary>
 		/// <param name="other"><see cref="RealCarPart"/> to compare this instance to.</param>

@@ -368,6 +368,9 @@ namespace Nikki.Support.Underground1.Framework
 		/// <param name="mark">Watermark written when saving.</param>
 		private void Encode(BinaryWriter bw, string mark)
 		{
+			// Sort by key
+			this.SortByKey();
+
 			// Get string map
 			var string_dict = this.MakeStringList(mark, out var string_buffer);
 

@@ -49,5 +49,10 @@
 		/// Attribute with in-built CPStruct in it.
 		/// </summary>
 		ModelTable = 9,
+
+		/// <summary>
+		/// Attribute with custom type and value.
+		/// </summary>
+		Custom = 10,
 	}
 }

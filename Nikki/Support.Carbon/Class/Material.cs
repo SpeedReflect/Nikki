@@ -165,6 +165,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         [Category("Diffuse")]
         public float DiffuseMaxLevel { get; set; }
 
@@ -173,6 +174,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         [Category("Diffuse")]
         public float DiffuseMaxRed { get; set; }
 
@@ -181,6 +183,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         [Category("Diffuse")]
         public float DiffuseMaxGreen { get; set; }
 
@@ -189,6 +192,7 @@ namespace Nikki.Support.Carbon.Class
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
+        [MemoryCastable()]
         [Category("Diffuse")]
         public float DiffuseMaxBlue { get; set; }
 

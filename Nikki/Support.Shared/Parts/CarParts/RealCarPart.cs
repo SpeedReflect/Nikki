@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Collections.Generic;
 using Nikki.Utils;
+using Nikki.Reflection.Enum;
 using Nikki.Reflection.Abstract;
 using Nikki.Support.Shared.Class;
 
@@ -127,6 +128,13 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <param name="newlabel">Label of the new <see cref="CPAttribute"/>.</param>
 		/// <param name="copylabel">Label of the <see cref="CPAttribute"/> to clone.</param>
 		public abstract void CloneAttribute(string newlabel, string copylabel);
+
+		/// <summary>
+		/// Adds a custom attribute type to this part.
+		/// </summary>
+		/// <param name="name">Name of custom attribute to add.</param>
+		/// <param name="type">Type of custom attribute to add.</param>
+		public abstract void AddCustomAttribute(string name, CarPartAttribType type);
 
 		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.
