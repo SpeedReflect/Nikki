@@ -564,7 +564,7 @@ namespace Nikki.Support.Carbon.Framework
 			bw.BaseStream.Position = 0;
 			bw.Write(count);
 			custattr_buffer = ms.ToArray();
-			return custattr_buffer?.Length ?? 0;
+			return custattr_buffer.Length;
 		}
 
 		#endregion
