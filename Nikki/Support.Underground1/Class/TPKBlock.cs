@@ -204,7 +204,7 @@ namespace Nikki.Support.Underground1.Class
             var position_1 = bw.BaseStream.Position;
             this.Get1Part1(bw);
             this.Get1Part2(bw);
-            this.Get1Part4(bw);
+            this.Get1Part4(bw, false);
             this.Get1Part5(bw);
             this.Get1PartAnim(bw);
             bw.BaseStream.Position = position_1 - 4;
@@ -253,7 +253,7 @@ namespace Nikki.Support.Underground1.Class
             bw.WriteBytes(0x14 * this.Textures.Count);
 
             // Write Parts 4 & 5
-            this.Get1Part4(bw);
+            this.Get1Part4(bw, true);
             this.Get1Part5(bw);
             this.Get1PartAnim(bw);
 
@@ -284,9 +284,11 @@ namespace Nikki.Support.Underground1.Class
             for (int i = 0; i < this.Textures.Count; ++i)
 			{
 
+                var texture = this.Textures[i];
+
                 var offslot = new OffSlot()
                 {
-                    Key = this.Textures[i].BinKey,
+                    Key = texture.BinKey,
                     AbsoluteOffset = (int)bw.BaseStream.Position,
                     DecodedSize = 0,
                     UserFlags = 0,
@@ -295,8 +297,24 @@ namespace Nikki.Support.Underground1.Class
                     UnknownInt32 = 0,
                 };
 
-                var array = this.Textures[i].Data;
-                if (comptype == 1) array = Interop.Compress(array, LZCompressionType.BEST);
+                var array = new byte[texture.Data.Length];
+
+                // If it has palette, switch data in the array
+                if (texture.HasPalette)
+				{
+
+                    Array.Copy(texture.Data, 0, array, texture.Size, texture.PaletteSize);
+                    Array.Copy(texture.Data, texture.PaletteSize, array, 0, texture.Size);
+
+				}
+                else
+				{
+
+                    Array.Copy(texture.Data, 0, array, 0, array.Length);
+
+				}
+
+                if (comptype == 1) array = Interop.Compress(array, LZCompressionType.JDLZ);
                 offslot.EncodedSize = array.Length;
                 bw.Write(array);
                 offslots.Add(offslot);
@@ -387,6 +405,46 @@ namespace Nikki.Support.Underground1.Class
                         var array = br.ReadBytes(offslot.EncodedSize);
                         array = Interop.Decompress(array);
                         tex.Data = array;
+
+					}
+
+                    // If texture has palette
+                    if (tex.HasPalette)
+                    {
+
+                        // If data precedes palette
+                        if (tex.Offset < tex.PaletteOffset)
+                        {
+
+                            var palOff = tex.PaletteOffset - tex.Offset;
+                            var real = new byte[tex.PaletteSize + tex.Size];
+                            Array.Copy(tex.Data, palOff, real, 0, tex.PaletteSize);
+                            Array.Copy(tex.Data, 0, real, tex.PaletteSize, tex.Size);
+                            tex.Data = real;
+
+                        }
+
+                        // If palette precedes data
+                        else
+						{
+
+                            var datOff = tex.Offset - tex.PaletteOffset;
+                            var real = new byte[tex.PaletteSize + tex.Size];
+                            Array.Copy(tex.Data, 0, real, 0, tex.PaletteSize);
+                            Array.Copy(tex.Data, datOff, real, tex.PaletteSize, tex.Size);
+                            tex.Data = real;
+
+						}
+
+                    }
+                    
+                    // Else if size of texture is less then current data
+                    else if (tex.Size < tex.Data.Length)
+					{
+
+                        var real = new byte[tex.Size];
+                        Array.Copy(tex.Data, 0, real, 0, tex.Size);
+                        tex.Data = real;
 
 					}
 
@@ -860,11 +918,20 @@ namespace Nikki.Support.Underground1.Class
         }
 
         /// <summary>
-        /// Assembles partial 1 part4 of the tpk block.
+        /// Deprecated. Use <see cref="Get1Part4(BinaryWriter, bool)"/> instead.
         /// </summary>
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
-        /// <returns>Byte array of the partial 1 part4.</returns>
+        /// <returns>Nothing</returns>
         protected override void Get1Part4(BinaryWriter bw)
+		{
+		}
+
+		/// <summary>
+		/// Assembles partial 1 part4 of the tpk block.
+		/// </summary>
+		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
+        /// <param name="compressed">True if compressed assembly is invoked; false otherwise.</param>
+		protected void Get1Part4(BinaryWriter bw, bool compressed)
         {
             using var ms = new MemoryStream();
             using var writer = new BinaryWriter(ms);
@@ -874,8 +941,21 @@ namespace Nikki.Support.Underground1.Class
             foreach (var tex in this.Textures)
             {
 
-                tex.PaletteOffset = length;
-                tex.Offset = length + tex.PaletteSize;
+                if (compressed)
+                {
+
+                    tex.Offset = length;
+                    tex.PaletteOffset = length + tex.Size;
+
+                }
+                else
+				{
+
+                    tex.PaletteOffset = length;
+                    tex.Offset = length + tex.PaletteSize;
+
+				}
+
                 tex.Assemble(writer);
                 length += tex.PaletteSize + tex.Size;
                 var pad = 0x80 - length % 0x80;

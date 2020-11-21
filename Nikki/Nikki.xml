@@ -34122,10 +34122,17 @@
         </member>
         <member name="M:Nikki.Support.Underground1.Class.TPKBlock.Get1Part4(System.IO.BinaryWriter)">
             <summary>
+            Deprecated. Use <see cref="M:Nikki.Support.Underground1.Class.TPKBlock.Get1Part4(System.IO.BinaryWriter,System.Boolean)"/> instead.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+            <returns>Nothing</returns>
+        </member>
+        <member name="M:Nikki.Support.Underground1.Class.TPKBlock.Get1Part4(System.IO.BinaryWriter,System.Boolean)">
+            <summary>
             Assembles partial 1 part4 of the tpk block.
             </summary>
             <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
-            <returns>Byte array of the partial 1 part4.</returns>
+            <param name="compressed">True if compressed assembly is invoked; false otherwise.</param>
         </member>
         <member name="M:Nikki.Support.Underground1.Class.TPKBlock.Get1Part5(System.IO.BinaryWriter)">
             <summary>
