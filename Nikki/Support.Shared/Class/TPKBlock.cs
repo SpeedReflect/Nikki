@@ -84,6 +84,11 @@ namespace Nikki.Support.Shared.Class
             /// All TPK textures data are compressed fully by splitting and compressing them in parts.
             /// </summary>
             CompressedByParts = 3,
+
+            /// <summary>
+            /// MiniMap compression type, where TPK is compressed and put inside 0x0003A100 block.
+            /// </summary>
+            CompressedMiniMap = 4,
         }
 
         #endregion

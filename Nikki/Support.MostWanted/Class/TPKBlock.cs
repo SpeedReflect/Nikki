@@ -140,7 +140,29 @@ namespace Nikki.Support.MostWanted.Class
 		public TPKBlock(BinaryReader br, TPKBlockManager manager) : this()
         {
             this.Manager = manager;
-            this.Disassemble(br);
+            var id = br.ReadEnum<BinBlockID>();
+
+            if (id == BinBlockID.CompTPKBlock)
+            {
+
+                var size = br.ReadInt32();
+                var array = br.ReadBytes(size);
+                array = Interop.Decompress(array);
+
+                using var ms = new MemoryStream(array);
+                using var reader = new BinaryReader(ms);
+
+                this.Disassemble(reader);
+                this.CompressionType = TPKCompressionType.CompressedMiniMap;
+
+            }
+            else
+            {
+
+                br.BaseStream.Position -= 4;
+                this.Disassemble(br);
+
+            }
         }
 
 		#endregion
@@ -157,8 +179,36 @@ namespace Nikki.Support.MostWanted.Class
             // TPK Sort
             this.SortTexturesByType(false);
 
-            if (this.CompressionType == TPKCompressionType.RawDecompressed) this.AssembleDecompressed(bw);
-            else this.AssembleCompressed(bw);
+            if (this.CompressionType == TPKCompressionType.CompressedMiniMap)
+            {
+
+                using var ms = new MemoryStream(20000);
+                using var writer = new BinaryWriter(ms);
+                this.AssembleDecompressed(writer);
+                var array = ms.ToArray();
+                array = Interop.Compress(array, LZCompressionType.BEST);
+                int size = array.Length;
+                var dif = 4 - (array.Length % 4);
+                if (dif != 4) size += dif;
+                
+                bw.WriteEnum(BinBlockID.CompTPKBlock);
+                bw.Write(size);
+                bw.Write(array);
+                bw.FillBuffer(4);
+
+            }
+            else if (this.CompressionType == TPKCompressionType.RawDecompressed)
+            {
+
+                this.AssembleDecompressed(bw);
+
+            }
+            else
+            {
+
+                this.AssembleCompressed(bw);
+
+            }
 
             ForcedX.GCCollect();
         }
@@ -262,7 +312,7 @@ namespace Nikki.Support.MostWanted.Class
         public override void Disassemble(BinaryReader br)
         {
             var Start = br.BaseStream.Position;
-            uint ID = br.ReadUInt32();
+            var ID = br.ReadEnum<BinBlockID>();
             int size = br.ReadInt32();
             var Final = br.BaseStream.Position + size;
 

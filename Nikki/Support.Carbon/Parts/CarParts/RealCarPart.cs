@@ -6,13 +6,14 @@ using System.Text.RegularExpressions;
 using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection.Enum;
+using Nikki.Reflection.Enum.CP;
 using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Support.Carbon.Class;
 using Nikki.Support.Carbon.Attributes;
 using Nikki.Support.Shared.Parts.CarParts;
+using CoreExtensions.Text;
 using CoreExtensions.Conversions;
-using Nikki.Reflection.Enum.CP;
 
 
 
@@ -28,6 +29,16 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 		/// Name of this <see cref="RealCarPart"/>.
 		/// </summary>
 		public override string PartName => this.GetPartName();
+
+		/// <summary>
+		/// Gets the name of the part using its lod offsets.
+		/// </summary>
+		public string NameByLodOffsets => this.GetNameUsingLodOffsets() ?? String.Empty;
+
+		/// <summary>
+		/// Gets the name of the part using its part offsets.
+		/// </summary>
+		public string NameByPartOffsets => this.GetNameUsingPartOffsets() ?? String.Empty;
 
 		/// <summary>
 		/// <see cref="DBModelPart"/> to which this instance belongs to.
@@ -250,6 +261,16 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 				switch (attribute.AttribType)
 				{
 
+					case CarPartAttribType.Key:
+						var keyAttr = attribute as KeyAttribute;
+						if (!keyAttr.Value.IsHexString())
+						{
+
+							keyAttr.Value = Regex.Replace(keyAttr.Value, pattern, replacement, regexOptions);
+
+						}
+						break;
+
 					case CarPartAttribType.String:
 						var strAttr = attribute as StringAttribute;
 						strAttr.Value = Regex.Replace(strAttr.Value, pattern, replacement, regexOptions);
@@ -282,6 +303,12 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 
 					case CarPartAttribType.Custom:
 						var custAttr = attribute as CustomAttribute;
+						if (custAttr.Type == CarPartAttribType.Key && !custAttr.ValueKey.IsHexString())
+						{
+
+							custAttr.ValueKey = Regex.Replace(custAttr.ValueKey, pattern, replacement, regexOptions);
+
+						}
 						if (custAttr.Type == CarPartAttribType.String)
 						{
 

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Version>1.4.7</Version>
+    <Version>1.4.11</Version>
     <Authors>MaxHwoy</Authors>
     <Copyright>Copyright © 2020 MaxHwoy</Copyright>
     <Description>Library to read and write Binary (BIN) data. Includes support for BlackBox NFS games.</Description>

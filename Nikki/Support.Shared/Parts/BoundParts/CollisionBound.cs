@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Nikki.Utils;
 using Nikki.Reflection.Abstract;
 using Nikki.Support.Shared.Class;
 using Nikki.Reflection.Attributes;
@@ -100,43 +101,43 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		/// X value of the orientation of this <see cref="CollisionBound"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public short OrientationX { get; set; }
+		public float OrientationX { get; set; }
 
 		/// <summary>
 		/// Y value of the orientation of this <see cref="CollisionBound"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public short OrientationY { get; set; }
+		public float OrientationY { get; set; }
 
 		/// <summary>
 		/// Z value of the orientation of this <see cref="CollisionBound"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public short OrientationZ { get; set; }
+		public float OrientationZ { get; set; }
 
 		/// <summary>
 		/// W value of the orientation of this <see cref="CollisionBound"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public short OrientationW { get; set; }
+		public float OrientationW { get; set; }
 
 		/// <summary>
 		/// X value of the position of this <see cref="CollisionBound"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public short PositionX { get; set; }
+		public float PositionX { get; set; }
 
 		/// <summary>
 		/// Y value of the position of this <see cref="CollisionBound"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public short PositionY { get; set; }
+		public float PositionY { get; set; }
 
 		/// <summary>
 		/// Z value of the position of this <see cref="CollisionBound"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public short PositionZ { get; set; }
+		public float PositionZ { get; set; }
 
 		/// <summary>
 		/// Type of the bound.
@@ -148,19 +149,19 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		/// X value of the half dimension of this <see cref="CollisionBound"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public short HalfDimensionX { get; set; }
+		public float HalfDimensionX { get; set; }
 
 		/// <summary>
 		/// Y value of the half dimension of this <see cref="CollisionBound"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public short HalfDimensionY { get; set; }
+		public float HalfDimensionY { get; set; }
 
 		/// <summary>
 		/// Z value of the half dimension of this <see cref="CollisionBound"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public short HalfDimensionZ { get; set; }
+		public float HalfDimensionZ { get; set; }
 
 		/// <summary>
 		/// Indicates number of children <see cref="CollisionBound"/>.
@@ -178,19 +179,19 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		/// X value of pivot of this <see cref="CollisionBound"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public short PivotX { get; set; }
+		public float PivotX { get; set; }
 
 		/// <summary>
 		/// Y value of pivot of this <see cref="CollisionBound"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public short PivotY { get; set; }
+		public float PivotY { get; set; }
 
 		/// <summary>
 		/// Z value of pivot of this <see cref="CollisionBound"/>.
 		/// </summary>
 		[AccessModifiable()]
-		public short PivotZ { get; set; }
+		public float PivotZ { get; set; }
 
 		/// <summary>
 		/// Indicates children index of this <see cref="CollisionBound"/>.
@@ -202,19 +203,19 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		/// Vlt hash of attribute name.
 		/// </summary>
 		[AccessModifiable()]
-		public uint AttributeName { get; set; }
+		public string AttributeName { get; set; }
 
 		/// <summary>
 		/// Vlt hash of surface name.
 		/// </summary>
 		[AccessModifiable()]
-		public uint SurfaceName { get; set; }
+		public string SurfaceName { get; set; }
 
 		/// <summary>
 		/// Vlt hash of bound name.
 		/// </summary>
 		[AccessModifiable()]
-		public uint NameHash { get; set; }
+		public string NameHash { get; set; }
 
 		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.
@@ -233,26 +234,26 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		/// <param name="br"><see cref="BinaryReader"/> to read <see cref="CollisionBound"/> with.</param>
 		public void Read(BinaryReader br)
 		{
-			this.OrientationX = br.ReadInt16();
-			this.OrientationY = br.ReadInt16();
-			this.OrientationZ = br.ReadInt16();
-			this.OrientationW = br.ReadInt16();
-			this.PositionX = br.ReadInt16();
-			this.PositionY = br.ReadInt16();
-			this.PositionZ = br.ReadInt16();
+			this.OrientationX = br.ReadInt16() / 1024.0f;
+			this.OrientationY = br.ReadInt16() / 1024.0f;
+			this.OrientationZ = br.ReadInt16() / 1024.0f;
+			this.OrientationW = br.ReadInt16() * 180.0f / 0x8000;			
+			this.PositionX = br.ReadInt16() / 1024.0f;
+			this.PositionY = br.ReadInt16() / 1024.0f;
+			this.PositionZ = br.ReadInt16() / 1024.0f;
 			this.BoundType = (BoundFlags)br.ReadInt16();
-			this.HalfDimensionX = br.ReadInt16();
-			this.HalfDimensionY = br.ReadInt16();
-			this.HalfDimensionZ = br.ReadInt16();
+			this.HalfDimensionX = br.ReadInt16() / 1024.0f;
+			this.HalfDimensionY = br.ReadInt16() / 1024.0f;
+			this.HalfDimensionZ = br.ReadInt16() / 1024.0f;
 			this.NumberOfChildren = br.ReadByte();
 			this.CollisionCloudIndex = br.ReadSByte();
-			this.PivotX = br.ReadInt16();
-			this.PivotY = br.ReadInt16();
-			this.PivotZ = br.ReadInt16();
+			this.PivotX = br.ReadInt16() / 1024.0f;
+			this.PivotY = br.ReadInt16() / 1024.0f;
+			this.PivotZ = br.ReadInt16() / 1024.0f;
 			this.ChildrenIndex = br.ReadInt16();
-			this.AttributeName = br.ReadUInt32();
-			this.SurfaceName = br.ReadUInt32();
-			this.NameHash = br.ReadUInt32();
+			this.AttributeName = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.SurfaceName = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+			this.NameHash = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			br.BaseStream.Position += 4;
 		}
 
@@ -262,26 +263,26 @@ namespace Nikki.Support.Shared.Parts.BoundParts
 		/// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="CollisionBound"/> with.</param>
 		public void Write(BinaryWriter bw)
 		{
-			bw.Write(this.OrientationX);
-			bw.Write(this.OrientationY);
-			bw.Write(this.OrientationZ);
-			bw.Write(this.OrientationW);
-			bw.Write(this.PositionX);
-			bw.Write(this.PositionY);
-			bw.Write(this.PositionZ);
+			bw.Write((short)(this.OrientationX * 1024.0f));
+			bw.Write((short)(this.OrientationY * 1024.0f));
+			bw.Write((short)(this.OrientationZ * 1024.0f));
+			bw.Write((short)(this.OrientationW * 0x8000 / 180.0f));
+			bw.Write((short)(this.PositionX * 1024.0f));
+			bw.Write((short)(this.PositionY * 1024.0f));
+			bw.Write((short)(this.PositionZ * 1024.0f));
 			bw.WriteEnum(this.BoundType);
-			bw.Write(this.HalfDimensionX);
-			bw.Write(this.HalfDimensionY);
-			bw.Write(this.HalfDimensionZ);
+			bw.Write((short)(this.HalfDimensionX * 1024.0f));
+			bw.Write((short)(this.HalfDimensionY * 1024.0f));
+			bw.Write((short)(this.HalfDimensionZ * 1024.0f));
 			bw.Write(this.NumberOfChildren);
 			bw.Write(this.CollisionCloudIndex);
-			bw.Write(this.PivotX);
-			bw.Write(this.PivotY);
-			bw.Write(this.PivotZ);
+			bw.Write((short)(this.PivotX * 1024.0f));
+			bw.Write((short)(this.PivotY * 1024.0f));
+			bw.Write((short)(this.PivotZ * 1024.0f));
 			bw.Write(this.ChildrenIndex);
-			bw.Write(this.AttributeName);
-			bw.Write(this.SurfaceName);
-			bw.Write(this.NameHash);
+			bw.Write(this.AttributeName.BinHash());
+			bw.Write(this.SurfaceName.BinHash());
+			bw.Write(this.NameHash.BinHash());
 			bw.Write((int)0);
 		}
 

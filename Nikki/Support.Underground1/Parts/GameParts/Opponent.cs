@@ -22,12 +22,6 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 		public string Name { get; set; } = String.Empty;
 
 		/// <summary>
-		/// Unknown integer value 1.
-		/// </summary>
-		[AccessModifiable()]
-		public uint UnknownInt1 { get; set; }
-
-		/// <summary>
 		/// Preset ride of the opponent.
 		/// </summary>
 		[AccessModifiable()]
@@ -80,8 +74,7 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Read(BinaryReader br)
 		{
-			this.Name = br.ReadNullTermUTF8(0x8);
-			this.UnknownInt1 = br.ReadUInt32();
+			this.Name = br.ReadNullTermUTF8(0xC);
 			this.PresetRide = br.ReadUInt32().BinString(LookupReturn.EMPTY);
 			this.SkillEasy = br.ReadInt16();
 			this.SkillMedium = br.ReadInt16();
@@ -96,8 +89,7 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 		/// <param name="bw"><see cref="BinaryWriter"/> to read data with.</param>
 		public void Write(BinaryWriter bw)
 		{
-			bw.WriteNullTermUTF8(this.Name, 0x8);
-			bw.Write(this.UnknownInt1);
+			bw.WriteNullTermUTF8(this.Name, 0xC);
 			bw.Write(this.PresetRide.BinHash());
 			bw.Write(this.SkillEasy);
 			bw.Write(this.SkillMedium);
@@ -112,7 +104,6 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 		public void Serialize(BinaryWriter bw)
 		{
 			bw.WriteNullTermUTF8(this.Name);
-			bw.Write(this.UnknownInt1);
 			bw.WriteNullTermUTF8(this.PresetRide);
 			bw.Write(this.SkillEasy);
 			bw.Write(this.SkillMedium);
@@ -127,7 +118,6 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 		public void Deserialize(BinaryReader br)
 		{
 			this.Name = br.ReadNullTermUTF8();
-			this.UnknownInt1 = br.ReadUInt32();
 			this.PresetRide = br.ReadNullTermUTF8();
 			this.SkillEasy = br.ReadInt16();
 			this.SkillMedium = br.ReadInt16();

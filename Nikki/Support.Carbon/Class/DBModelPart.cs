@@ -368,7 +368,7 @@ namespace Nikki.Support.Carbon.Class
 					if (!Map.CarPartKeys.TryGetValue(key, out var type))
 					{
 
-						type = CarPartAttribType.Integer;
+						type = CarPartAttribType.Custom;
 
 					}
 
@@ -377,12 +377,13 @@ namespace Nikki.Support.Carbon.Class
 						CarPartAttribType.Boolean => new BoolAttribute(),
 						CarPartAttribType.Color => new ColorAttribute(),
 						CarPartAttribType.CarPartID => new PartIDAttribute(),
+						CarPartAttribType.Integer => new IntAttribute(),
 						CarPartAttribType.Floating => new FloatAttribute(),
 						CarPartAttribType.String => new StringAttribute(),
 						CarPartAttribType.TwoString => new TwoStringAttribute(),
 						CarPartAttribType.Key => new KeyAttribute(),
 						CarPartAttribType.ModelTable => new ModelTableAttribute(),
-						_ => new IntAttribute(),
+						_ => new CustomAttribute(),
 					};
 
 					attrib.Key = key;

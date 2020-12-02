@@ -1457,8 +1457,8 @@ namespace Nikki.Support.Underground1.Class
             using (var writer = new BinaryWriter(ms))
             {
 
-                this.Assemble(bw);
-                this.GetCarSkins(bw);
+                this.Assemble(writer);
+                this.GetCarSkins(writer);
 
                 array = ms.ToArray();
 

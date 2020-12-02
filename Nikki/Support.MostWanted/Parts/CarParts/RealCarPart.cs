@@ -13,6 +13,7 @@ using Nikki.Reflection.Enum.PartID;
 using Nikki.Support.MostWanted.Class;
 using Nikki.Support.MostWanted.Attributes;
 using Nikki.Support.Shared.Parts.CarParts;
+using CoreExtensions.Text;
 using CoreExtensions.Conversions;
 
 
@@ -306,6 +307,16 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 					switch (attribute.AttribType)
 					{
 
+						case CarPartAttribType.Key:
+							var keyAttr = attribute as KeyAttribute;
+							if (!keyAttr.Value.IsHexString())
+							{
+
+								keyAttr.Value = Regex.Replace(keyAttr.Value, pattern, replacement, regexOptions);
+
+							}
+							break;
+
 						case CarPartAttribType.String:
 							var strAttr = attribute as StringAttribute;
 							strAttr.Value = Regex.Replace(strAttr.Value, pattern, replacement, regexOptions);
@@ -313,6 +324,12 @@ namespace Nikki.Support.MostWanted.Parts.CarParts
 
 						case CarPartAttribType.Custom:
 							var custAttr = attribute as CustomAttribute;
+							if (custAttr.Type == CarPartAttribType.Key && !custAttr.ValueKey.IsHexString())
+							{
+
+								custAttr.ValueKey = Regex.Replace(custAttr.ValueKey, pattern, replacement, regexOptions);
+
+							}
 							if (custAttr.Type == CarPartAttribType.String)
 							{
 

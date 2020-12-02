@@ -383,17 +383,18 @@ namespace Nikki.Support.MostWanted.Class
 					if (!Map.CarPartKeys.TryGetValue(key, out var type))
 					{
 
-						type = CarPartAttribType.Integer;
+						type = CarPartAttribType.Custom;
 
 					}
 
 					CPAttribute attrib = type switch
 					{
 						CarPartAttribType.Boolean => new BoolAttribute(),
+						CarPartAttribType.Integer => new IntAttribute(),
 						CarPartAttribType.Floating => new FloatAttribute(),
 						CarPartAttribType.String => new StringAttribute(),
 						CarPartAttribType.Key => new KeyAttribute(),
-						_ => new IntAttribute(),
+						_ => new CustomAttribute(),
 					};
 
 					attrib.Key = key;

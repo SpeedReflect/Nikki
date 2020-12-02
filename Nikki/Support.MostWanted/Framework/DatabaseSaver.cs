@@ -175,6 +175,7 @@ namespace Nikki.Support.MostWanted.Framework
 					case BinBlockID.PresetRides:
 					case BinBlockID.TPKSettings:
 					case BinBlockID.CarTypeInfos:
+					case BinBlockID.CompTPKBlock:
 					case BinBlockID.CarInfoAnimHideup:
 					case BinBlockID.CarInfoAnimHookup:
 						br.BaseStream.Position += size;

@@ -401,6 +401,7 @@ namespace Nikki.Support.Underground1.Attributes
 		/// </summary>
 		public override void Serialize(BinaryWriter bw)
 		{
+			bw.Write(this.Key);
 			bw.WriteNullTermUTF8(this.Name);
 			bw.WriteEnum(this.Type);
 

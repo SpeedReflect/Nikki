@@ -14213,6 +14213,16 @@
             Name of this <see cref="T:Nikki.Support.Carbon.Parts.CarParts.RealCarPart"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.NameByLodOffsets">
+            <summary>
+            Gets the name of the part using its lod offsets.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.NameByPartOffsets">
+            <summary>
+            Gets the name of the part using its part offsets.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Carbon.Parts.CarParts.RealCarPart.Model">
             <summary>
             <see cref="T:Nikki.Support.Carbon.Class.DBModelPart"/> to which this instance belongs to.
@@ -25679,6 +25689,16 @@
             Name of this <see cref="T:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.NameByLodOffsets">
+            <summary>
+            Gets the name of the part using its lod offsets.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.NameByPartOffsets">
+            <summary>
+            Gets the name of the part using its part offsets.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Prostreet.Parts.CarParts.RealCarPart.Model">
             <summary>
             <see cref="T:Nikki.Support.Prostreet.Class.DBModelPart"/> to which this instance belongs to.
@@ -27951,6 +27971,11 @@
         <member name="F:Nikki.Support.Shared.Class.TPKBlock.TPKCompressionType.CompressedByParts">
             <summary>
             All TPK textures data are compressed fully by splitting and compressing them in parts.
+            </summary>
+        </member>
+        <member name="F:Nikki.Support.Shared.Class.TPKBlock.TPKCompressionType.CompressedMiniMap">
+            <summary>
+            MiniMap compression type, where TPK is compressed and put inside 0x0003A100 block.
             </summary>
         </member>
         <member name="P:Nikki.Support.Shared.Class.TPKBlock.Version">
@@ -35723,11 +35748,6 @@
         <member name="P:Nikki.Support.Underground1.Parts.GameParts.Opponent.Name">
             <summary>
             Name of the opponent.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground1.Parts.GameParts.Opponent.UnknownInt1">
-            <summary>
-            Unknown integer value 1.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground1.Parts.GameParts.Opponent.PresetRide">
