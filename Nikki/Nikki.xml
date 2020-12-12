@@ -2485,6 +2485,11 @@
             
             </summary>
         </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.SPEECHCOLOUR">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.WHEELEMITTER">
             <summary>
             
@@ -2541,11 +2546,6 @@
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribKey.LOD_NAME_PREFIX_NAMEHASH">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribKey._0xD68A7BAB">
             <summary>
             
             </summary>
@@ -5362,7 +5362,7 @@
             
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.SlotID.SlotMostWanted.RIGHT_SIDE_WINDOW">
+        <member name="F:Nikki.Reflection.Enum.SlotID.SlotMostWanted.RIGHT_SIDE_MIRROR">
             <summary>
             
             </summary>
@@ -27849,6 +27849,11 @@
             DDS data of this <see cref="T:Nikki.Support.Shared.Class.Texture"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Shared.Class.Texture.DataLength">
+            <summary>
+            Length of decoded DDS data of this <see cref="T:Nikki.Support.Shared.Class.Texture"/>.
+            </summary>
+        </member>
         <member name="M:Nikki.Support.Shared.Class.Texture.Assemble(System.IO.BinaryWriter)">
             <summary>
             Assembles <see cref="T:Nikki.Support.Shared.Class.Texture"/> header into a byte array.
@@ -27907,6 +27912,19 @@
             </summary>
             <param name="CName">CollectionName of the new created object.</param>
             <returns>Memory casted copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.Texture.GetCompressedBuffer">
+            <summary>
+            Returns LZF compressed buffer of this <see cref="T:Nikki.Support.Shared.Class.Texture"/>.
+            </summary>
+            <returns>LZF compressed data buffer.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.Texture.CopyMemory(Nikki.Support.Shared.Class.Texture,Nikki.Support.Shared.Class.Texture)">
+            <summary>
+            Copies data buffer from one texture to another.
+            </summary>
+            <param name="from">Texture to copy data from.</param>
+            <param name="to">Texture to copy data into.</param>
         </member>
         <member name="T:Nikki.Support.Shared.Class.TPKBlock">
             <summary>
@@ -48501,6 +48519,43 @@
             <summary>
             Returns <see cref="F:Nikki.Reflection.BaseArguments.NULL"/>.
             </summary>
+        </member>
+        <member name="T:Nikki.Utils.LZF">
+            <summary>
+            Improved C# LZF Compressor, a very small data compression library. The compression algorithm is extremely fast.
+            </summary>
+        </member>
+        <member name="M:Nikki.Utils.LZF.Compress(System.Byte[])">
+            <summary>
+            Compresses buffer passed using LZF compression algorithm.
+            </summary>
+            <param name="input">Input buffer to compress.</param>
+            <returns>Compressed buffer.</returns>
+        </member>
+        <member name="M:Nikki.Utils.LZF.Decompress(System.Byte[],System.Int32)">
+            <summary>
+            Decompresses buffer passed using LZF decompression algorithm.
+            </summary>
+            <param name="input">Input buffer to decompress.</param>
+            <param name="decompressedSize">Actual original decompressed size, if known. In case
+            size is not final, resizes output automatically.</param>
+            <returns>Decompressed buffer.</returns>
+        </member>
+        <member name="M:Nikki.Utils.LZF.Compress(CoreExtensions.Native.NativeArray{System.Byte})">
+            <summary>
+            Compresses buffer passed using LZF compression algorithm.
+            </summary>
+            <param name="input">Input buffer to compress.</param>
+            <returns>Compressed buffer.</returns>
+        </member>
+        <member name="M:Nikki.Utils.LZF.Decompress(CoreExtensions.Native.NativeArray{System.Byte},System.Int32)">
+            <summary>
+            Decompresses buffer passed using LZF decompression algorithm.
+            </summary>
+            <param name="input">Input buffer to decompress.</param>
+            <param name="decompressedSize">Actual original decompressed size, if known. In case
+            size is not final, resizes output automatically.</param>
+            <returns>Decompressed buffer.</returns>
         </member>
         <member name="T:Nikki.Utils.MemoryUnlock">
             <summary>

@@ -828,7 +828,7 @@ namespace Nikki.Support.Underground1.Class
             string path2 = Path.Combine("CARS", this.CollectionName, "GEOMETRY.LZC");
             bw.WriteNullTermUTF8(path1, 0x20);
             bw.WriteNullTermUTF8(path2, 0x20);
-            bw.WriteBytes(0x40);
+            bw.WriteBytes(0, 0x40);
 
             // Write ManufacturerName
             bw.WriteNullTermUTF8(this.ManufacturerName, 0x10);
@@ -882,14 +882,14 @@ namespace Nikki.Support.Underground1.Class
             bw.Write(this.PVEHICLE.TensorScaleY);
             bw.Write(this.PVEHICLE.TensorScaleZ);
             bw.Write(this.PVEHICLE.TensorScaleW);
-            bw.WriteBytes(0x10);
+            bw.WriteBytes(0, 0x10);
             bw.Write(this.ECAR.Unknown1);
-            bw.WriteBytes(0x10);
+            bw.WriteBytes(0, 0x10);
             bw.Write(this.ECAR.Unknown2);
-            bw.WriteBytes(0x10);
+            bw.WriteBytes(0, 0x10);
             bw.Write(this.PVEHICLE.Unknown1);
             bw.Write(this.PVEHICLE.InitialHandlingRating);
-            bw.WriteBytes(0xC);
+            bw.WriteBytes(0, 0xC);
 
             // Base Suspension Performance
             this.BASE_SUSPENSION.Write(bw, true);
@@ -922,7 +922,7 @@ namespace Nikki.Support.Underground1.Class
             bw.Write(this.PVEHICLE.Unknown3);
             bw.Write((int)0);
             bw.Write(this.PVEHICLE.StockTopSpeedLimiter);
-            bw.WriteBytes(0x1C);
+            bw.WriteBytes(0, 0x1C);
 
             // Weight Reduction Performance
             this.STREET_WEIGHT_REDUCTION.Write(bw);
@@ -935,11 +935,11 @@ namespace Nikki.Support.Underground1.Class
             this.TOP_TRANSMISSION.Write(bw);
 
             // Engine Performance
-            bw.WriteBytes(0xC);
+            bw.WriteBytes(0, 0xC);
             this.STREET_ENGINE.Write(bw);
-            bw.WriteBytes(0xC);
+            bw.WriteBytes(0, 0xC);
             this.PRO_ENGINE.Write(bw);
-            bw.WriteBytes(0xC);
+            bw.WriteBytes(0, 0xC);
             this.TOP_ENGINE.Write(bw);
 
             // RPM & ECU Performance

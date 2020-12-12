@@ -166,7 +166,7 @@ namespace Nikki.Support.Shared.Parts.TPKParts
 			bw.Write((byte)this.FrameTextures.Count);
 			bw.Write(this.FramesPerSecond);
 			bw.Write(this.TimeBase);
-			bw.WriteBytes(0xD);
+			bw.WriteBytes(0, 0xD);
 
 			// Write frames
 			bw.WriteEnum(BinBlockID.TPK_AnimPart2);

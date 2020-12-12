@@ -307,7 +307,7 @@ namespace Nikki.Support.Underground2.Gameplay
 			// Write settings
 			bw.WriteEnum(this.ShopType);
 			bw.WriteEnum(this.InitiallyHidden);
-			bw.WriteBytes(0x22);
+			bw.WriteBytes(0, 0x22);
 
 			switch (this.UnlockMethod)
 			{
@@ -328,7 +328,7 @@ namespace Nikki.Support.Underground2.Gameplay
 
 			}
 
-			bw.WriteBytes(0x24);
+			bw.WriteBytes(0, 0x24);
 			bw.WriteEnum(this.UnlockMethod);
 			bw.Write(this.BelongsToStage);
 			bw.Write((short)0);

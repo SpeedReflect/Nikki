@@ -371,7 +371,7 @@ namespace Nikki.Support.Shared.Parts.VinylParts
 			bw.Write(this.NumPathDatas);
 			bw.Write((int)0);
 			bw.Write(this.NumPathPoints);
-			bw.WriteBytes(0x1C);
+			bw.WriteBytes(0, 0x1C);
 		}
 
 		private void WritePathDatas(BinaryWriter bw)

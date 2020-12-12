@@ -115,7 +115,7 @@ namespace Nikki.Support.Underground1.Parts.InfoParts
 			bw.Write(this.TurboTorque7);
 			bw.Write(this.TurboTorque8);
 			bw.Write(this.TurboTorque9);
-			bw.WriteBytes(0xC);
+			bw.WriteBytes(0, 0xC);
 		}
 	}
 }

@@ -423,11 +423,11 @@ namespace Nikki.Utils.DDS
 				bw.Write(1); // depth = 1
 				bw.Write(this.MipMaps);
 
-				bw.WriteBytes(0x2C);
+				bw.WriteBytes(0, 0x2C);
 				this.WritePixelFormat(bw);
 
 				bw.WriteEnum(DDS_SURFACE.SURFACE_FLAGS_ALL);
-				bw.WriteBytes(0x10);
+				bw.WriteBytes(0, 0x10);
 
 			}
 

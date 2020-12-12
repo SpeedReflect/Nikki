@@ -196,7 +196,7 @@ namespace Nikki.Support.Underground1.Class
             var position_0 = bw.BaseStream.Position;
             bw.Write((int)0);
             bw.Write(0x30);
-            bw.WriteBytes(0x30);
+            bw.WriteBytes(0, 0x30);
 
             // Partial 1 Block
             bw.WriteEnum(BinBlockID.TPK_InfoBlock);
@@ -238,7 +238,7 @@ namespace Nikki.Support.Underground1.Class
             var position_0 = bw.BaseStream.Position;
             bw.Write((int)0);
             bw.Write(0x30);
-            bw.WriteBytes(0x30);
+            bw.WriteBytes(0, 0x30);
 
             // Partial 1 Block
             bw.WriteEnum(BinBlockID.TPK_InfoBlock);
@@ -250,7 +250,7 @@ namespace Nikki.Support.Underground1.Class
             // Write temporary Part3
             var position_3 = bw.BaseStream.Position;
             bw.Write((long)0);
-            bw.WriteBytes(0x14 * this.Textures.Count);
+            bw.WriteBytes(0, 0x14 * this.Textures.Count);
 
             // Write Parts 4 & 5
             this.Get1Part4(bw, true);
@@ -870,7 +870,7 @@ namespace Nikki.Support.Underground1.Class
 
             // Write all other settings
             bw.Write(this.FilenameHash);
-            bw.WriteBytes(0x18);
+            bw.WriteBytes(0, 0x18);
         }
 
         /// <summary>
@@ -1009,7 +1009,7 @@ namespace Nikki.Support.Underground1.Class
             bw.Write(0);
             bw.Write(0x50);
             bw.WriteNullTermUTF8(this.Watermark, 0x20);
-            bw.WriteBytes(0x30);
+            bw.WriteBytes(0, 0x30);
         }
 
         /// <summary>
@@ -1047,7 +1047,7 @@ namespace Nikki.Support.Underground1.Class
             byte[] array;
 
             var start = bw.BaseStream.Position;
-            bw.WriteBytes(SerializationHeader.ThisSize + 4);
+            bw.WriteBytes(0, SerializationHeader.ThisSize + 4);
 
             using (var ms = new MemoryStream(this.Animations.Count * 0x200 + 0x80))
             using (var writer = new BinaryWriter(ms))
@@ -1077,7 +1077,7 @@ namespace Nikki.Support.Underground1.Class
 
                 }
 
-                writer.WriteBytes(0x40);
+                writer.WriteBytes(0, 0x40);
 
                 array = ms.ToArray();
                 array = Interop.Compress(array, LZCompressionType.BEST);

@@ -213,7 +213,7 @@ namespace Nikki.Support.Underground1.Framework
 
 			// Return number of attributes
 			var dif = 0x10 - ((int)ms.Length + 0x8) % 0x10;
-			if (dif != 0x10) bw.WriteBytes(dif);
+			if (dif != 0x10) bw.WriteBytes(0, dif);
 
 			attrib_buffer = ms.ToArray();
 			return length;
@@ -321,7 +321,7 @@ namespace Nikki.Support.Underground1.Framework
 
 			// Return buffer and its length
 			var dif = 0x10 - ((int)ms.Length + 8) % 0x10;
-			if (dif != 0x10) bw.WriteBytes(dif);
+			if (dif != 0x10) bw.WriteBytes(0, dif);
 
 			bw.BaseStream.Position = 0;
 			bw.Write(count);

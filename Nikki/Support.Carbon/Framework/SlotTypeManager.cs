@@ -88,7 +88,7 @@ namespace Nikki.Support.Carbon.Framework
 
 			}
 
-			bw.WriteBytes(dif);
+			bw.WriteBytes(0, dif);
 
 			// Write CarInfo Animation Hideups
 			bw.WriteEnum(BinBlockID.CarInfoAnimHideup);

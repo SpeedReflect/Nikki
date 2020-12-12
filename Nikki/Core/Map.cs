@@ -57,6 +57,7 @@ namespace Nikki.Core
 			{ 0x2DFDDCBE, "Collisions" },
 			{ 0x311151F8, "HUDINDEX" },
 			{ 0x368A1A6A, "DISPRED" },
+			{ 0x377065A6, "GCareerRaces" },
 			{ 0x3882376C, "TPKBlocks" },
 			{ 0x38A30E75, "ANIMSTYLE" },
 			{ 0x3DA5ADAC, "VERTSPLIT" },
@@ -109,6 +110,7 @@ namespace Nikki.Core
 			{ 0xCDAB2874, "ISDECAL" },
 			{ 0xD2BCA329, "PresetRides" },
 			{ 0xD2CFEADA, "PresetSkins" },
+			{ 0xD68A7BAB, "SPEECHCOLOUR" },
 			{ 0xD90271FB, "COLOR0ID" },
 			{ 0xD902763C, "COLOR1ID" },
 			{ 0xD9027A7D, "COLOR2ID" },
@@ -218,12 +220,12 @@ namespace Nikki.Core
 			{ 0x0D4B85C7, CarPartAttribType.Key }, // HOODUNDER
 			{ 0xEBB03E66, CarPartAttribType.Key }, // BRAND_NAME
 			{ 0xEDB20048, CarPartAttribType.Key }, // PAINTGROUP
-			{ 0xD68A7BAB, CarPartAttribType.Key }, // 0xD68A7BAB // Paint Color
 			{ 0xBCADE4C3, CarPartAttribType.Key }, // HOODEMITTER
 			{ 0x8C185134, CarPartAttribType.Key }, // TEXTUREHASH
-			{ 0x10C98090, CarPartAttribType.Key }, // TEXTURE_NAME
-			{ 0x4732DA07, CarPartAttribType.Key }, // LANGUAGEHASH
 			{ 0xE80A3B62, CarPartAttribType.Key }, // EXCLUDEDECAL
+			{ 0x4732DA07, CarPartAttribType.Key }, // LANGUAGEHASH
+			{ 0xD68A7BAB, CarPartAttribType.Key }, // SPEECHCOLOUR
+			{ 0x10C98090, CarPartAttribType.Key }, // TEXTURE_NAME
 			{ 0xEDBF864E, CarPartAttribType.Key }, // WHEELEMITTER
 			{ 0x8E73B5DC, CarPartAttribType.Key }, // SPECIFICCARNAME
 			{ 0x931FF82E, CarPartAttribType.Key }, // SPINNER_TEXTURE
@@ -396,6 +398,7 @@ namespace Nikki.Core
 			"Collisions".BinHash();
 			"HUDINDEX".BinHash();
 			"DISPRED".BinHash();
+			"GCareerRaces".BinHash();
 			"TPKBlocks".BinHash();
 			"ANIMSTYLE".BinHash();
 			"VERTSPLIT".BinHash();
@@ -448,6 +451,7 @@ namespace Nikki.Core
 			"ISDECAL".BinHash();
 			"PresetRides".BinHash();
 			"PresetSkins".BinHash();
+			"SPEECHCOLOUR".BinHash();
 			"COLOR0ID".BinHash();
 			"COLOR1ID".BinHash();
 			"COLOR2ID".BinHash();

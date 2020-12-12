@@ -202,7 +202,7 @@ namespace Nikki.Support.Underground2.Framework
 
 			// Return prepared dictionary
 			var dif = 0x10 - ((int)ms.Length + 4) % 0x10;
-			if (dif != 0x10) bw.WriteBytes(dif);
+			if (dif != 0x10) bw.WriteBytes(0, dif);
 
 			string_buffer = ms.ToArray();
 			return string_dict;
@@ -276,7 +276,7 @@ namespace Nikki.Support.Underground2.Framework
 
 			// Return prepared dictionary
 			var dif = 0x10 - ((int)ms.Length + 0xC) % 0x10;
-			if (dif != 0x10) bw.WriteBytes(dif);
+			if (dif != 0x10) bw.WriteBytes(0, dif);
 
 			offset_buffer = ms.ToArray();
 			return offset_dict;
@@ -446,7 +446,7 @@ namespace Nikki.Support.Underground2.Framework
 
 			// Return number of parts and buffer
 			var dif = 0x10 - ((int)ms.Length + 0xC) % 0x10;
-			if (dif != 0x10) bw.WriteBytes(dif);
+			if (dif != 0x10) bw.WriteBytes(0, dif);
 
 			cppart_buffer = ms.ToArray();
 			return length;
@@ -498,7 +498,7 @@ namespace Nikki.Support.Underground2.Framework
 
 			// Return buffer and its length
 			var dif = 0x10 - ((int)ms.Length + 8) % 0x10;
-			if (dif != 0x10) bw.WriteBytes(dif);
+			if (dif != 0x10) bw.WriteBytes(0, dif);
 
 			bw.BaseStream.Position = 0;
 			bw.Write(count);

@@ -73,11 +73,13 @@ namespace Nikki.Support.Underground1.Parts.GameParts
 		/// <summary>
 		/// Upgrade level of an unlock.
 		/// </summary>
+		[AccessModifiable()]
 		public int UpgradeLevel { get; set; }
 
 		/// <summary>
 		/// Indicates whether track unlocked is in reverse.
 		/// </summary>
+		[AccessModifiable()]
 		public eBoolean IsInReverse { get; set; }
 
 		/// <summary>

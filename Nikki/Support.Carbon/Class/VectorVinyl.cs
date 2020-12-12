@@ -165,7 +165,7 @@ namespace Nikki.Support.Carbon.Class
 
 			bw.WriteEnum(BinBlockID.Vinyl_PointerTable);
 			bw.Write(this.NumberOfPaths << 2);
-			bw.WriteBytes(this.NumberOfPaths << 2);
+			bw.WriteBytes(0, this.NumberOfPaths << 2);
 
 			foreach (var set in this._pathsets) set.Write(bw);
 

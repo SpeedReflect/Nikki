@@ -474,7 +474,7 @@ namespace Nikki.Support.Shared.Class
                     texture = this.CreateNewTexture(texr);
 
                     // Initialize stack for data and copy it
-                    texture.Data = new byte[texture.Size + texture.PaletteSize];
+                    var textureData = new byte[texture.Size + texture.PaletteSize];
 
                     // Calculate offsets of data and palette
                     int datoff = 0;
@@ -488,17 +488,19 @@ namespace Nikki.Support.Shared.Class
                     if (texture.PaletteSize == 0)
                     {
 
-                        Array.Copy(array, 0, texture.Data, 0, texture.Size);
+                        Array.Copy(array, 0, textureData, 0, texture.Size);
 
                     }
                     else
                     {
 
-                        Array.Copy(array, paloff, texture.Data, 0, texture.PaletteSize);
-                        Array.Copy(array, datoff, texture.Data, texture.PaletteSize, texture.Size);
+                        Array.Copy(array, paloff, textureData, 0, texture.PaletteSize);
+                        Array.Copy(array, datoff, textureData, texture.PaletteSize, texture.Size);
 
                     }
 
+                    // Assign data and add texture
+                    texture.Data = textureData;
                     this.Textures.Add(texture);
 
                 }
@@ -566,23 +568,25 @@ namespace Nikki.Support.Shared.Class
                     else datoff = texture.Offset - texture.PaletteOffset;
 
                     // Initialize stack for data
-                    texture.Data = new byte[texture.Size + texture.PaletteSize];
+                    var textureData = new byte[texture.Size + texture.PaletteSize];
 
                     // Quick way to copy palette in front and data to the back
                     if (texture.PaletteSize == 0)
                     {
 
-                        Array.Copy(array, 0, texture.Data, 0, texture.Size);
+                        Array.Copy(array, 0, textureData, 0, texture.Size);
 
                     }
                     else
                     {
 
-                        Array.Copy(array, paloff, texture.Data, 0, texture.PaletteSize);
-                        Array.Copy(array, datoff, texture.Data, texture.PaletteSize, texture.Size);
+                        Array.Copy(array, paloff, textureData, 0, texture.PaletteSize);
+                        Array.Copy(array, datoff, textureData, texture.PaletteSize, texture.Size);
 
                     }
 
+                    // Assign data and add texture
+                    texture.Data = textureData;
                     this.Textures.Add(texture);
 
                 }
@@ -691,7 +695,8 @@ namespace Nikki.Support.Shared.Class
             for (int loop = 0; loop < this.Textures.Count; ++loop)
             {
 
-                bw.Write(this.Textures[loop].Data);
+                var data = this.Textures[loop].Data;
+                bw.Write(data);
                 bw.FillBuffer(0x80);
 
             }
@@ -758,19 +763,21 @@ namespace Nikki.Support.Shared.Class
             {
 
                 // Initialize array of texture data and header, write it
-                var array = new byte[texture.Data.Length + this.CompTexHeaderSize];
+                var array = new byte[texture.DataLength + this.CompTexHeaderSize];
+
+                var textureData = texture.Data;
 
                 if (texture.HasPalette)
                 {
 
-                    Array.Copy(texture.Data, texture.PaletteSize, array, 0, texture.Size);
-                    Array.Copy(texture.Data, 0, array, texture.Size, texture.PaletteSize);
+                    Array.Copy(textureData, texture.PaletteSize, array, 0, texture.Size);
+                    Array.Copy(textureData, 0, array, texture.Size, texture.PaletteSize);
 
                 }
                 else
                 {
 
-                    Array.Copy(texture.Data, 0, array, 0, texture.Data.Length);
+                    Array.Copy(textureData, 0, array, 0, textureData.Length);
 
                 }
 
@@ -778,9 +785,9 @@ namespace Nikki.Support.Shared.Class
                 using (var strWriter = new BinaryWriter(strMemory))
                 {
 
-                    strWriter.BaseStream.Position = texture.Data.Length;
+                    strWriter.BaseStream.Position = textureData.Length;
                     this.WriteDownTexture(texture, strWriter, totalTexSize);
-                    CalculateNextOffset(texture.Data.Length);
+                    CalculateNextOffset(textureData.Length);
 
                 }
 
@@ -789,7 +796,7 @@ namespace Nikki.Support.Shared.Class
                 {
                     Key = texture.BinKey,
                     AbsoluteOffset = (int)(bw.BaseStream.Position - thisOffset),
-                    DecodedSize = texture.Data.Length + this.CompTexHeaderSize,
+                    DecodedSize = textureData.Length + this.CompTexHeaderSize,
                     EncodedSize = array.Length,
                     UserFlags = 0,
                     Flags = 0,
@@ -858,19 +865,21 @@ namespace Nikki.Support.Shared.Class
             {
 
                 // Initialize array of texture data and header, write it
-                var array = new byte[texture.Data.Length + this.CompTexHeaderSize];
+                var array = new byte[texture.DataLength + this.CompTexHeaderSize];
+
+                var textureData = texture.Data;
 
                 if (texture.HasPalette)
                 {
 
-                    Array.Copy(texture.Data, texture.PaletteSize, array, 0, texture.Size);
-                    Array.Copy(texture.Data, 0, array, texture.Size, texture.PaletteSize);
+                    Array.Copy(textureData, texture.PaletteSize, array, 0, texture.Size);
+                    Array.Copy(textureData, 0, array, texture.Size, texture.PaletteSize);
 
                 }
                 else
                 {
 
-                    Array.Copy(texture.Data, 0, array, 0, texture.Data.Length);
+                    Array.Copy(textureData, 0, array, 0, textureData.Length);
 
                 }
 
@@ -878,9 +887,9 @@ namespace Nikki.Support.Shared.Class
                 using (var strWriter = new BinaryWriter(strMemory))
                 {
 
-                    strWriter.BaseStream.Position = texture.Data.Length;
+                    strWriter.BaseStream.Position = textureData.Length;
                     this.WriteDownTexture(texture, strWriter, totalTexSize);
-                    CalculateNextOffset(texture.Data.Length);
+                    CalculateNextOffset(textureData.Length);
 
                 }
 
@@ -892,7 +901,7 @@ namespace Nikki.Support.Shared.Class
                 {
                     Key = texture.BinKey,
                     AbsoluteOffset = (int)(bw.BaseStream.Position - thisOffset),
-                    DecodedSize = texture.Data.Length + this.CompTexHeaderSize,
+                    DecodedSize = textureData.Length + this.CompTexHeaderSize,
                     EncodedSize = array.Length,
                     UserFlags = 0,
                     Flags = 1,
@@ -965,21 +974,23 @@ namespace Nikki.Support.Shared.Class
                 const int headerSize = 0x18; // header size is constant for all compressions
                 const int maxBlockSize = 0x8000; // maximum block size of data
 
-                // If has palette, temporarily swap
+                var textureData = texture.Data;
+
+                // If has palette, swap it with actual data
                 if (texture.HasPalette)
                 {
 
                     var tempbuf = new byte[texture.PaletteSize];
-                    Array.Copy(texture.Data, tempbuf, texture.PaletteSize);
-                    Array.Copy(texture.Data, texture.PaletteSize, texture.Data, 0, texture.Size);
-                    Array.Copy(tempbuf, 0, texture.Data, texture.Size, texture.PaletteSize);
+                    Array.Copy(textureData, tempbuf, texture.PaletteSize);
+                    Array.Copy(textureData, texture.PaletteSize, textureData, 0, texture.Size);
+                    Array.Copy(tempbuf, 0, textureData, texture.Size, texture.PaletteSize);
 
                 }
 
                 // Calculate header length. Header consists of leftover dds data got by 
                 // dividing it in blocks of 0x8000 bytes + size of texture header + 
                 // size of dds info header
-                var numParts = texture.Data.Length / maxBlockSize + 1;
+                var numParts = textureData.Length / maxBlockSize + 1;
                 var magiclist = new List<MagicHeader>(numParts);
 
                 for (int loop = 0; loop < numParts; ++loop)
@@ -991,17 +1002,17 @@ namespace Nikki.Support.Shared.Class
                     if (loop == numParts - 1)
                     {
 
-                        var difference = texture.Data.Length - texOffset;
+                        var difference = textureData.Length - texOffset;
                         var head = new byte[difference + this.CompTexHeaderSize];
 
                         if (difference != 0)
                         {
 
-                            Array.Copy(texture.Data, texOffset, head, 0, difference);
+                            Array.Copy(textureData, texOffset, head, 0, difference);
 
                         }
 
-                        texOffset = texture.Data.Length;
+                        texOffset = textureData.Length;
 
                         // Initialize new stream over header and set position at the end
                         using var strMemory = new MemoryStream(head);
@@ -1010,7 +1021,7 @@ namespace Nikki.Support.Shared.Class
 
                         // Write header data and calculate next offset
                         this.WriteDownTexture(texture, strWriter, totalTexSize);
-                        CalculateNextOffset(texture.Data.Length);
+                        CalculateNextOffset(textureData.Length);
 
                         // Save compressed data to MagicHeader
                         magic.Data = Interop.Compress(head, LZCompressionType.BEST);
@@ -1023,7 +1034,7 @@ namespace Nikki.Support.Shared.Class
                     {
 
                         // Use compression type passed
-                        magic.Data = Interop.Compress(texture.Data, texOffset, maxBlockSize, LZCompressionType.BEST);
+                        magic.Data = Interop.Compress(textureData, texOffset, maxBlockSize, LZCompressionType.BEST);
                         texOffset += maxBlockSize;
                         magic.DecodedSize = maxBlockSize;
 
@@ -1105,17 +1116,6 @@ namespace Nikki.Support.Shared.Class
 
                 // Yield return OffSlot made
                 result.Add(offslot);
-
-                // If has palette, swap back
-                if (texture.HasPalette)
-                {
-
-                    var tempbuf = new byte[texture.PaletteSize];
-                    Array.Copy(texture.Data, texture.Size, tempbuf, 0, texture.PaletteSize);
-                    Array.Copy(texture.Data, 0, texture.Data, texture.PaletteSize, texture.Size);
-                    Array.Copy(tempbuf, texture.Data, texture.PaletteSize);
-
-                }
 
             }
 

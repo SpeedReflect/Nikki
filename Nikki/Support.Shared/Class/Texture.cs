@@ -17,12 +17,19 @@ namespace Nikki.Support.Shared.Class
     /// </summary>
     public abstract class Texture : Collectable, IAssembly
     {
-        #region Shared Enums
+        #region Private Fields
 
-        /// <summary>
-        /// Enum of alpha usage types for textures.
-        /// </summary>
-        public enum TextureAlphaUsageType : byte
+        private byte[] _data;
+        private int _decodedSize;
+
+		#endregion
+
+		#region Shared Enums
+
+		/// <summary>
+		/// Enum of alpha usage types for textures.
+		/// </summary>
+		public enum TextureAlphaUsageType : byte
         {
             /// <summary>
             /// 
@@ -398,7 +405,37 @@ namespace Nikki.Support.Shared.Class
         /// DDS data of this <see cref="Texture"/>.
         /// </summary>
         [Browsable(false)]
-        public byte[] Data { get; set; }
+        public byte[] Data
+		{
+            get
+			{
+                if (this._decodedSize == 0) return this._data;
+                return LZF.Decompress(this._data, this._decodedSize);
+			}
+            set
+			{
+                if (value is null || value.Length == 0)
+				{
+
+                    this._decodedSize = 0;
+                    this._data = value;
+
+				}
+                else
+				{
+
+                    this._decodedSize = value.Length;
+                    this._data = LZF.Compress(value);
+
+				}
+			}
+		}
+
+        /// <summary>
+        /// Length of decoded DDS data of this <see cref="Texture"/>.
+        /// </summary>
+        [Browsable(false)]
+        public int DataLength => this._decodedSize;
 
         #endregion
 
@@ -465,6 +502,27 @@ namespace Nikki.Support.Shared.Class
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Returns LZF compressed buffer of this <see cref="Texture"/>.
+        /// </summary>
+        /// <returns>LZF compressed data buffer.</returns>
+        protected byte[] GetCompressedBuffer()
+		{
+            return this._data;
+		}
+
+        /// <summary>
+        /// Copies data buffer from one texture to another.
+        /// </summary>
+        /// <param name="from">Texture to copy data from.</param>
+        /// <param name="to">Texture to copy data into.</param>
+        protected static void CopyMemory(Texture from, Texture to)
+		{
+            to._decodedSize = from._decodedSize;
+            to._data = new byte[from._data.Length];
+            Array.Copy(from._data, to._data, to._data.Length);
+		}
 
         #endregion
     }

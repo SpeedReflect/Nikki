@@ -115,7 +115,7 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
 			bw.Write(this.TurboSpool);
 			bw.Write(this.TurboSpoolTimeDown);
 			bw.Write(this.TurboSpoolTimeUp);
-			bw.WriteBytes(0xC);
+			bw.WriteBytes(0, 0xC);
 		}
 	}
 }

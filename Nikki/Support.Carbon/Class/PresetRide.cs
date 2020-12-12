@@ -846,7 +846,7 @@ namespace Nikki.Support.Carbon.Class
             bw.Write(this.Frontend.VltHash());
             bw.Write((int)0);
             bw.Write(this.Pvehicle.VltHash());
-            bw.WriteBytes(0xC);
+            bw.WriteBytes(0, 0xC);
 
             // Start writing parts
             bw.Write(this.Base.BinHash());
@@ -922,7 +922,7 @@ namespace Nikki.Support.Carbon.Class
             this.PAINT_VALUES.Write(bw);
 
             // Write Autosculpt
-            bw.WriteBytes(0x10);
+            bw.WriteBytes(0, 0x10);
             this.FRONTBUMPER.Write(bw);
             bw.Write((short)0);
             this.REARBUMPER.Write(bw);
@@ -938,9 +938,9 @@ namespace Nikki.Support.Carbon.Class
             this.ROOFSCOOP.Write(bw);
             bw.Write((short)0);
             bw.Write(this.ChopTopSizeValue);
-            bw.WriteBytes(10);
+            bw.WriteBytes(0, 10);
             bw.Write(this.ExhaustSizeValue);
-            bw.WriteBytes(11);
+            bw.WriteBytes(0, 11);
 
             // Write Vinyls
             this.VINYL01.Write(bw);

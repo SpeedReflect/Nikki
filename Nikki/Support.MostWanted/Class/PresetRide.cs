@@ -559,7 +559,7 @@ namespace Nikki.Support.MostWanted.Class
             bw.Write(this.Frontend.VltHash());
             bw.Write((int)0);
             bw.Write(this.Pvehicle.VltHash());
-            bw.WriteBytes(0xC);
+            bw.WriteBytes(0, 0xC);
 
             // Start writing parts
             bw.Write(this.Base.BinHash());

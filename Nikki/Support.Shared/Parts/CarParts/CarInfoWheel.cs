@@ -163,7 +163,7 @@ namespace Nikki.Support.Shared.Parts.CarParts
             bw.WriteEnum(this.WheelID);
             bw.Write(this.YValue);
             bw.Write(this.WideBodyYValue);
-            bw.WriteBytes(0xC);
+            bw.WriteBytes(0, 0xC);
         }
     }
 }

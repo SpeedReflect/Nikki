@@ -119,13 +119,13 @@ namespace Nikki.Support.Underground2.Parts.InfoParts
             bw.Write(this.SteeringAmplifier);
             bw.Write(this.DynamicGripScale);
             bw.Write(this.SteeringResponse);
-            bw.WriteBytes(0xC);
+            bw.WriteBytes(0, 0xC);
             bw.Write(this.DriftYawControl);
             bw.Write(this.DriftCounterSteerBuildUp);
             bw.Write(this.DriftCounterSteerReduction);
             bw.Write(this.PowerSlideBreakThru1);
             bw.Write(this.PowerSlideBreakThru2);
-            bw.WriteBytes(0xC);
+            bw.WriteBytes(0, 0xC);
         }
     }
 }

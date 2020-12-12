@@ -264,7 +264,7 @@ namespace Nikki.Support.Prostreet.Class
             bw.Write(this.InfoOverrideGroup13.BinHash());
             bw.Write(this.InfoOverrideGroup14.BinHash());
             bw.Write(this.InfoOverrideGroup15.BinHash());
-            bw.WriteBytes(0x44);
+            bw.WriteBytes(0, 0x44);
         }
 
         /// <summary>

@@ -413,12 +413,12 @@ namespace Nikki.Support.Underground2.Class
         {
             // Initialize data
             int total = this.PaletteSize + this.Size;
-            this.Data = new byte[total];
+            var data = new byte[total];
             
             if (forced)
             {
 
-                this.Data = br.ReadBytes(total);
+                data = br.ReadBytes(total);
 
             }
             else
@@ -426,11 +426,13 @@ namespace Nikki.Support.Underground2.Class
              
                 var offset = br.BaseStream.Position;
                 br.BaseStream.Position = offset + this.PaletteOffset;
-                Array.Copy(br.ReadBytes(this.PaletteSize), 0, this.Data, 0, this.PaletteSize);
+                Array.Copy(br.ReadBytes(this.PaletteSize), 0, data, 0, this.PaletteSize);
                 br.BaseStream.Position = offset + this.Offset;
-                Array.Copy(br.ReadBytes(this.Size), 0, this.Data, this.PaletteSize, this.Size);
+                Array.Copy(br.ReadBytes(this.Size), 0, data, this.PaletteSize, this.Size);
             
             }
+
+            this.Data = data;
         }
 
         /// <summary>
@@ -442,8 +444,7 @@ namespace Nikki.Support.Underground2.Class
         {
             var result = new Texture(CName, this.TPK);
             base.MemoryCast(this, result);
-            result.Data = new byte[this.Data.Length];
-            Buffer.BlockCopy(this.Data, 0, result.Data, 0, this.Data.Length);
+            CopyMemory(this, result);
             return result;
         }
 
@@ -471,8 +472,8 @@ namespace Nikki.Support.Underground2.Class
             byte[] array;
             var datalist = new List<byte[]>();
 
-            var size = this.Data.Length >> 15;
-            var modulo = this.Data.Length % 0x8000;
+            var size = this.DataLength >> 15;
+            var modulo = this.DataLength % 0x8000;
 
             using (var ms = new MemoryStream(0x100 + this._collection_name.Length))
             using (var writer = new BinaryWriter(ms))
@@ -517,13 +518,15 @@ namespace Nikki.Support.Underground2.Class
                 writer.Write(this.CompressionValue1);
                 writer.Write(this.CompressionValue2);
                 writer.Write(this.CompressionValue3);
-                writer.WriteBytes(0x20); // write padding for better compression
+                writer.WriteBytes(0, 0x20); // write padding for better compression
                 writer.Write(modulo == 0 ? size : size + 1);
 
                 array = Interop.Compress(ms.ToArray(), LZCompressionType.BEST);
                 datalist.Add(array);
 
             }
+
+            var data = this.Data;
 
             for (int loop = 0; loop <= size; ++loop)
             {
@@ -533,7 +536,7 @@ namespace Nikki.Support.Underground2.Class
                 if (total == 0) break;
 
                 var temp = new byte[total];
-                Array.Copy(this.Data, loop << 15, temp, 0, total);
+                Array.Copy(data, loop << 15, temp, 0, total);
                 array = Interop.Compress(temp, LZCompressionType.BEST);
                 datalist.Add(array);
 
@@ -610,7 +613,7 @@ namespace Nikki.Support.Underground2.Class
             reader.BaseStream.Position += 0x20;
             var count = reader.ReadInt32();
 
-            this.Data = new byte[this.Size + this.PaletteSize];
+            var data = new byte[this.Size + this.PaletteSize];
 
             for (int loop = 0; loop < count; ++loop)
             {
@@ -618,9 +621,11 @@ namespace Nikki.Support.Underground2.Class
                 var total = br.ReadInt32();
                 var temp = br.ReadBytes(total);
                 temp = Interop.Decompress(temp);
-                Array.Copy(temp, 0, this.Data, loop << 15, temp.Length);
+                Array.Copy(temp, 0, data, loop << 15, temp.Length);
 
             }
+
+            this.Data = data;
         }
 
         #endregion
