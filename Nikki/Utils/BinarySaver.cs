@@ -7,7 +7,7 @@ using CoreExtensions.IO;
 
 namespace Nikki.Utils
 {
-	internal static class BinarySaver
+	public static class BinarySaver
 	{
 		public static void GeneratePadding(this BinaryWriter bw, string mark, Alignment alignment)
 		{
@@ -111,17 +111,22 @@ namespace Nikki.Utils
 				case BinBlockID.PCAWater0:
 				case BinBlockID.QuickSpline:
 				case BinBlockID.SpeedScenery:
-				case BinBlockID.Stream37220:
-				case BinBlockID.Stream37240:
-				case BinBlockID.Stream37250:
-				case BinBlockID.Stream37260:
-				case BinBlockID.Stream37270:
 				case BinBlockID.StyleMomentsInfo:
 				case BinBlockID.TrackPosMarkers:
 				case BinBlockID.WorldBounds:
 				case BinBlockID.WCollisionPack:
 				case BinBlockID.Weatherman:
 				case BinBlockID.WWorld:
+					dif = (int)(position % 0x100);
+					MakeBigAlign(bw, mark, dif);
+					return;
+
+				case BinBlockID.Stream37220:
+				case BinBlockID.Stream37240:
+				case BinBlockID.Stream37250:
+				case BinBlockID.Stream37260:
+				case BinBlockID.Stream37270:
+					if ((byte)position == (byte)bw.BaseStream.Position) return;
 					dif = (int)(position % 0x100);
 					MakeBigAlign(bw, mark, dif);
 					return;

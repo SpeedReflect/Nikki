@@ -71,6 +71,11 @@
         SceneryGroup = 0x00034108, // 0x10 Modular
 
         /// <summary>
+        /// 0x00034110
+        /// </summary>
+        TrackStreamingSections = 0x00034110, // varies
+
+        /// <summary>
         /// 0x00034146
         /// </summary>
         TrackPosMarkers = 0x00034146, // varies

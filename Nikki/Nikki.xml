@@ -1285,6 +1285,11 @@
             0x00034108
             </summary>
         </member>
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.TrackStreamingSections">
+            <summary>
+            0x00034110
+            </summary>
+        </member>
         <member name="F:Nikki.Reflection.Enum.BinBlockID.TrackPosMarkers">
             <summary>
             0x00034146
