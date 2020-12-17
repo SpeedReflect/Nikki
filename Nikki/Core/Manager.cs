@@ -147,7 +147,7 @@ namespace Nikki.Core
 		{
 			get
 			{
-				if (index < 0 || index > this._size)
+				if (index < 0 || index >= this._size)
 				{
 
 					throw new IndexOutOfRangeException();
@@ -162,7 +162,7 @@ namespace Nikki.Core
 			}
 			set
 			{
-				if (index < 0 || index > this._size)
+				if (index < 0 || index >= this._size)
 				{
 
 					throw new IndexOutOfRangeException();
