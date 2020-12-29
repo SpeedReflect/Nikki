@@ -98,6 +98,46 @@
 		/// <summary>
 		/// 
 		/// </summary>
+		WARNONDELETE = 0xF9661A07,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		KITNOTPAINT01 = 0x1BC91595,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		KITNOTPAINT03 = 0x1BC91597,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		KITNOTPAINT04 = 0x1BC91598,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		KITNOTPAINT06 = 0x1BC9159A,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		KITNOTPAINT07 = 0x1BC9159B,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		KITNOTPAINT10 = 0x1BC915B5,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		KITNOTPAINT18 = 0x1BC915BD,
+
+		/// <summary>
+		/// 
+		/// </summary>
 		STOCK_MATERIAL = 0x6DB4AF51,
 
 		/// <summary>
@@ -109,45 +149,5 @@
 		/// 
 		/// </summary>
 		_0x87557E1E = 0x87557E1E,
-
-		/// <summary>
-		/// 
-		/// </summary>
-		_0xF9661A07 = 0xF9661A07,
-
-		/// <summary>
-		/// 
-		/// </summary>
-		_0x1BC91595 = 0x1BC91595,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		_0x1BC91597 = 0x1BC91597,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		_0x1BC91598 = 0x1BC91598,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		_0x1BC9159A = 0x1BC9159A,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		_0x1BC9159B = 0x1BC9159B,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		_0x1BC915B5 = 0x1BC915B5,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		_0x1BC915BD = 0x1BC915BD,
 	}
 }

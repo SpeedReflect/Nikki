@@ -2095,6 +2095,46 @@
             
             </summary>
         </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.WARNONDELETE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.KITNOTPAINT01">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.KITNOTPAINT03">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.KITNOTPAINT04">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.KITNOTPAINT06">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.KITNOTPAINT07">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.KITNOTPAINT10">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.KITNOTPAINT18">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.STOCK_MATERIAL">
             <summary>
             
@@ -2106,46 +2146,6 @@
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0x87557E1E">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0xF9661A07">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0x1BC91595">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0x1BC91597">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0x1BC91598">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0x1BC9159A">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0x1BC9159B">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0x1BC915B5">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0x1BC915BD">
             <summary>
             
             </summary>

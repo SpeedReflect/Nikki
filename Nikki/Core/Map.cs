@@ -12,7 +12,7 @@ namespace Nikki.Core
 	/// </summary>
 	public static class Map
 	{
-		private static Dictionary<uint, string> _binkeys = new Dictionary<uint, string>()
+		private static readonly Dictionary<uint, string> _binkeys = new Dictionary<uint, string>()
 		{
 			{ 0, String.Empty },
 			{ 0x000004B8, "CV" },
@@ -51,6 +51,13 @@ namespace Nikki.Core
 			{ 0x10CB799D, "MODEL_TABLE_OFFSET" },
 			{ 0x18E6DD34, "SlotOverrides" },
 			{ 0x1B0EA1A9, "SPOKE_COUNT" },
+			{ 0x1BC91595, "KITNOTPAINT01" },
+			{ 0x1BC91597, "KITNOTPAINT03" },
+			{ 0x1BC91598, "KITNOTPAINT04" },
+			{ 0x1BC9159A, "KITNOTPAINT06" },
+			{ 0x1BC9159B, "KITNOTPAINT07" },
+			{ 0x1BC915B5, "KITNOTPAINT10" },
+			{ 0x1BC915BD, "KITNOTPAINT18" },
 			{ 0x21CFED6B, "GCareers" },
 			{ 0x2850A03B, "MORPHTARGET_NUM" },
 			{ 0x29008B14, "GROUPLANGUAGEHASH" },
@@ -102,6 +109,7 @@ namespace Nikki.Core
 			{ 0x931FF82E, "SPINNER_TEXTURE" },
 			{ 0x956326AF, "LOD_NAME_PREFIX_NAMEHASH" },
 			{ 0xA0773FA5, "SPINNEROFFSET" },
+			{ 0xA0AF9D37, "VectorVinyls" },
 			{ 0xA77BDCFA, "NUM_DECALS" },
 			{ 0xBB318B8F, "PART_NAME_OFFSETS" },
 			{ 0xBCADE4C3, "HOODEMITTER" },
@@ -127,16 +135,17 @@ namespace Nikki.Core
 			{ 0xF7933C86, "EXCLUDE_SUV" },
 			{ 0xF7934315, "EXCLUDE_UG1" },
 			{ 0xF7934316, "EXCLUDE_UG2" },
+			{ 0xF9661A07, "WARNONDELETE" },
 			{ 0xFD35FE70, "TEXTURE" },
 			{ 0xFE613B98, "LOD_BASE_NAME" },
 			{ 0xFFFFFFFF, String.Empty },
 		};
-		private static Dictionary<uint, string> _vltkeys = new Dictionary<uint, string>()
+		private static readonly Dictionary<uint, string> _vltkeys = new Dictionary<uint, string>()
 		{
 			{ 0, String.Empty },
 			{ 0x2B5B1321, "m3gtre46" }
 		};
-		private static Dictionary<uint, CarPartAttribType> _carpartkeys = new Dictionary<uint, CarPartAttribType>()
+		private static readonly Dictionary<uint, CarPartAttribType> _carpartkeys = new Dictionary<uint, CarPartAttribType>()
 		{
 			// Boolean Attributes
 			{ 0x03B83203, CarPartAttribType.Boolean }, // STOCK
@@ -155,18 +164,18 @@ namespace Nikki.Core
 			{ 0x09163FA0, CarPartAttribType.Boolean }, // USEMARKER2
 			{ 0x87557E1E, CarPartAttribType.Boolean }, // 0x87557E1E // some hood value
 			{ 0x6509EC92, CarPartAttribType.Boolean }, // 0x6509EC92 // ALUMINUM ???
-			{ 0xF9661A07, CarPartAttribType.Boolean }, // 0xF9661A07 // ???
-			{ 0x1BC91595, CarPartAttribType.Boolean }, // 0x1BC91595 // ???
-			{ 0x1BC91597, CarPartAttribType.Boolean }, // 0x1BC91597 // ???
-			{ 0x1BC91598, CarPartAttribType.Boolean }, // 0x1BC91598 // ???
-			{ 0x1BC9159A, CarPartAttribType.Boolean }, // 0x1BC9159A // ???
-			{ 0x1BC9159B, CarPartAttribType.Boolean }, // 0x1BC9159B // ???
-			{ 0x1BC915B5, CarPartAttribType.Boolean }, // 0x1BC915B5 // ???
-			{ 0x1BC915BD, CarPartAttribType.Boolean }, // 0x1BC915BD // ???
 			{ 0x721AFF7C, CarPartAttribType.Boolean }, // CARBONFIBRE
 			{ 0xF7933C86, CarPartAttribType.Boolean }, // EXCLUDE_SUV
 			{ 0xF7934315, CarPartAttribType.Boolean }, // EXCLUDE_UG1
 			{ 0xF7934316, CarPartAttribType.Boolean }, // EXCLUDE_UG2
+			{ 0xF9661A07, CarPartAttribType.Boolean }, // WARNONDELETE
+			{ 0x1BC91595, CarPartAttribType.Boolean }, // KITNOTPAINT01
+			{ 0x1BC91597, CarPartAttribType.Boolean }, // KITNOTPAINT03
+			{ 0x1BC91598, CarPartAttribType.Boolean }, // KITNOTPAINT04
+			{ 0x1BC9159A, CarPartAttribType.Boolean }, // KITNOTPAINT06
+			{ 0x1BC9159B, CarPartAttribType.Boolean }, // KITNOTPAINT07
+			{ 0x1BC915B5, CarPartAttribType.Boolean }, // KITNOTPAINT10
+			{ 0x1BC915BD, CarPartAttribType.Boolean }, // KITNOTPAINT18
 			{ 0x6DB4AF51, CarPartAttribType.Boolean }, // STOCK_MATERIAL
 			
 			// Floating Attributes
@@ -392,6 +401,13 @@ namespace Nikki.Core
 			"MODEL_TABLE_OFFSET".BinHash();
 			"SlotOverrides".BinHash();
 			"SPOKE_COUNT".BinHash();
+			"KITNOTPAINT01".BinHash();
+			"KITNOTPAINT03".BinHash();
+			"KITNOTPAINT04".BinHash();
+			"KITNOTPAINT06".BinHash();
+			"KITNOTPAINT07".BinHash();
+			"KITNOTPAINT10".BinHash();
+			"KITNOTPAINT18".BinHash();
 			"GCareers".BinHash();
 			"MORPHTARGET_NUM".BinHash();
 			"GROUPLANGUAGEHASH".BinHash();
@@ -443,6 +459,7 @@ namespace Nikki.Core
 			"SPINNER_TEXTURE".BinHash();
 			"LOD_NAME_PREFIX_NAMEHASH".BinHash();
 			"SPINNEROFFSET".BinHash();
+			"VectorVinyls".BinHash();
 			"NUM_DECALS".BinHash();
 			"PART_NAME_OFFSETS".BinHash();
 			"HOODEMITTER".BinHash();
@@ -468,6 +485,7 @@ namespace Nikki.Core
 			"EXCLUDE_SUV".BinHash();
 			"EXCLUDE_UG1".BinHash();
 			"EXCLUDE_UG2".BinHash();
+			"WARNONDELETE".BinHash();
 			"TEXTURE".BinHash();
 			"LOD_BASE_NAME".BinHash();
 
