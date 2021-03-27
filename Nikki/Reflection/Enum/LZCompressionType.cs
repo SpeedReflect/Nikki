@@ -26,6 +26,11 @@
 		COMP = 0x504D4F43,
 
 		/// <summary>
+		/// Use RefPack compression.
+		/// </summary>
+		RFPK = 0x4B504652,
+
+		/// <summary>
 		/// Use BEST compression (system chooses which one depending on the smallest size). 
 		/// </summary>
 		BEST = 0x54534542,

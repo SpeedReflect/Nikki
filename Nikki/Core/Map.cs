@@ -100,6 +100,7 @@ namespace Nikki.Core
 			{ 0x7C811574, "HOODLEFT" },
 			{ 0x7D65A926, "NAME_OFFSET" },
 			{ 0x7F3CE5A7, "Tracks" },
+			{ 0x87557E1E, "COMPLEXTARGET" },
 			{ 0x8C185134, "TEXTUREHASH" },
 			{ 0x8E73B5DC, "SPECIFICCARNAME" },
 			{ 0x8FE4C336, "STRBlocks" },
@@ -162,7 +163,7 @@ namespace Nikki.Core
 			{ 0xC1A84E52, CarPartAttribType.Boolean }, // WHEELRIGHT
 			{ 0x09163F9F, CarPartAttribType.Boolean }, // USEMARKER1
 			{ 0x09163FA0, CarPartAttribType.Boolean }, // USEMARKER2
-			{ 0x87557E1E, CarPartAttribType.Boolean }, // 0x87557E1E // some hood value
+			{ 0x87557E1E, CarPartAttribType.Boolean }, // COMPLEXTARGET
 			{ 0x6509EC92, CarPartAttribType.Boolean }, // 0x6509EC92 // ALUMINUM ???
 			{ 0x721AFF7C, CarPartAttribType.Boolean }, // CARBONFIBRE
 			{ 0xF7933C86, CarPartAttribType.Boolean }, // EXCLUDE_SUV
@@ -450,6 +451,7 @@ namespace Nikki.Core
 			"HOODLEFT".BinHash();
 			"NAME_OFFSET".BinHash();
 			"Tracks".BinHash();
+			"COMPLEXTARGET".BinHash();
 			"TEXTUREHASH".BinHash();
 			"SPECIFICCARNAME".BinHash();
 			"STRBlocks".BinHash();
