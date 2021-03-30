@@ -148,6 +148,6 @@
 		/// <summary>
 		/// 
 		/// </summary>
-		_0x87557E1E = 0x87557E1E,
+		COMPLEXTARGET = 0x87557E1E,
 	}
 }

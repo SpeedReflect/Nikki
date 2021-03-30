@@ -51,8 +51,6 @@ using System;
 using System.Runtime.InteropServices;
 using CoreExtensions.Native;
 
-
-
 namespace Nikki.Utils
 {
     /// <summary>

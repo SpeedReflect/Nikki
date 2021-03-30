@@ -444,7 +444,7 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         /// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
         /// <param name="offslots">An enumeration of texture <see cref="OffSlot"/>.</param>
-        protected void ParseCompTextures(BinaryReader br, IEnumerable<OffSlot> offslots)
+        protected virtual void ParseCompTextures(BinaryReader br, IEnumerable<OffSlot> offslots)
 		{
             var start = br.BaseStream.Position;
 
@@ -552,11 +552,9 @@ namespace Nikki.Support.Shared.Class
                     using (var ms = new MemoryStream(header.Data))
                     using (var texr = new BinaryReader(ms))
                     {
-
                         // Texture header is located at the end of data
                         texr.BaseStream.Position = header.Length - this.CompTexHeaderSize;
                         texture = this.CreateNewTexture(texr);
-
                     }
 
                     // Calculate offsets of data and palette
@@ -936,7 +934,7 @@ namespace Nikki.Support.Shared.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
         /// <param name="thisOffset">Offset of this <see cref="TPKBlock"/> in the buffer.</param>
         /// <returns><see cref="List{T}"/> of <see cref="OffSlot"/> from textures written.</returns>
-        protected List<OffSlot> GetCompressedByParts(BinaryWriter bw, int thisOffset)
+        protected virtual List<OffSlot> GetCompressedByParts(BinaryWriter bw, int thisOffset)
 		{
             // Initialize result offslot list
             var result = new List<OffSlot>(this.Textures.Count);
