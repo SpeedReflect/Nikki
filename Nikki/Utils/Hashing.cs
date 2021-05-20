@@ -25,19 +25,17 @@ namespace Nikki.Utils
         /// <returns>Bin Memory Hash of the string as an unsigned integer.</returns>
         public static uint BinHash(this string value)
         {
-            if (string.IsNullOrWhiteSpace(value)) return 0;
+            if (String.IsNullOrWhiteSpace(value)) return 0;
             if (value == BaseArguments.NULL) return 0;
-            if (value.IsHexString()) return Convert.ToUInt32(value, 16);
+            if (value.TryHexStringToUInt32(out var hex)) return hex;
 
-            var arr = value.GetBytes();
-            var len = 0;
-            var result = 0xFFFFFFFF;
+            var result = UInt32.MaxValue;
 
-            while (len < arr.Length)
+            for (int i = 0; i < value.Length; ++i)
             {
 
                 result *= 0x21;
-                result += arr[len++];
+                result += (byte)value[i];
             
             }
 
@@ -61,18 +59,17 @@ namespace Nikki.Utils
         /// <returns>Bin Memory Hash of the string as an unsigned integer.</returns>
         public static uint BinHash(this string value, uint prefix)
 		{
-            if (string.IsNullOrWhiteSpace(value)) return prefix;
+            if (String.IsNullOrWhiteSpace(value)) return prefix;
             if (value == BaseArguments.NULL) return prefix;
-            if (value.IsHexString()) return Convert.ToUInt32(value, 16);
+            if (value.TryHexStringToUInt32(out var hex)) return hex;
 
-            var arr = value.GetBytes();
             var result = prefix;
 
-            for (int len = 0; len < arr.Length; ++len)
+            for (int len = 0; len < value.Length; ++len)
             {
 
                 result *= 0x21;
-                result += arr[len];
+                result += (byte)value[len];
 
             }
 
@@ -86,9 +83,9 @@ namespace Nikki.Utils
         /// <returns>Vlt Memory Hash of the string as an unsigned integer.</returns>
         public static uint VltHash(this string value)
         {
-            if (string.IsNullOrWhiteSpace(value)) return 0;
+            if (String.IsNullOrWhiteSpace(value)) return 0;
             if (value == BaseArguments.NULL) return 0;
-            if (value.IsHexString()) return Convert.ToUInt32(value, 16);
+            if (value.TryHexStringToUInt32(out var hex)) return hex;
 
             var arr = value.GetBytes();
             var a = 0x9E3779B9;
@@ -175,11 +172,11 @@ namespace Nikki.Utils
         /// <returns>Vlt64 Memory Hash of the string as an unsigned long.</returns>
         public static ulong VltHash64(this string value)
         {
-            if (string.IsNullOrWhiteSpace(value)) return 0;
+            if (String.IsNullOrWhiteSpace(value)) return 0;
             if (value == BaseArguments.NULL) return 0;
-            if (value.IsHexString()) return Convert.ToUInt64(value, 16);
+            if (value.TryHexStringToUInt32(out var hex)) return hex;
 
-            var arr = Encoding.ASCII.GetBytes(value);
+            var arr = value.GetBytes();
             ulong a = 0x9E3779B97F4A7C13;
             ulong b = 0x9E3779B97F4A7C13;
             ulong c = 0x11223344ABCDEF00;
@@ -316,7 +313,7 @@ namespace Nikki.Utils
                     LookupReturn.EMPTY => String.Empty,
                     _ => null
                 })
-                : Map.BinKeys.TryGetValue(key, out var result) ? result : $"0x{key:X8}";
+                : Map.BinKeys.TryGetValue(key, out var result) ? result : key.FastToHexString(false);
         }
 
         /// <summary>
@@ -334,7 +331,7 @@ namespace Nikki.Utils
                     LookupReturn.EMPTY => String.Empty,
                     _ => null
                 })
-                : Map.VltKeys.TryGetValue(key, out var result) ? result : $"0x{key:X8}";
+                : Map.VltKeys.TryGetValue(key, out var result) ? result : key.FastToHexString(false);
         }
 
         private static void Mix32_1(ref uint a, ref uint b, ref uint c)

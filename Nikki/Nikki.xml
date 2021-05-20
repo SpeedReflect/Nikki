@@ -28954,6 +28954,11 @@
             Represents class key of the texture.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Shared.Class.Texture.ClassName">
+            <summary>
+            Represents class name of the texture. Directly linked to <see cref="P:Nikki.Support.Shared.Class.Texture.ClassKey"/>.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Shared.Class.Texture.MipmapBiasType">
             <summary>
             Represents mipmap bias type of the texture.
@@ -28992,6 +28997,46 @@
         <member name="P:Nikki.Support.Shared.Class.Texture.TileableUV">
             <summary>
             Represents tileable level of the texture.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Texture.OffsetS">
+            <summary>
+            Represents offset S of the texture.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Texture.OffsetT">
+            <summary>
+            Represents offset T of the texture.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Texture.ScaleS">
+            <summary>
+            Represents scale S of the texture.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Texture.ScaleT">
+            <summary>
+            Represents scale T of the texture.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Texture.ScrollTimestep">
+            <summary>
+            Represents scroll time step of the texture.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Texture.ScrollSpeedS">
+            <summary>
+            Represents scroll speed S of the texture.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Texture.ScrollSpeedT">
+            <summary>
+            Represents scroll speed T of the texture.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Texture.Flags">
+            <summary>
+            Represents flags of the texture.
             </summary>
         </member>
         <member name="P:Nikki.Support.Shared.Class.Texture.Data">

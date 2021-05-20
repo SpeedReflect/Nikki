@@ -43,31 +43,7 @@ namespace Nikki.Support.Underground2.Class
         private byte _used_flag = 0;
 
         [MemoryCastable()]
-        private byte _flags = 0;
-
-        [MemoryCastable()]
         private byte _padding = 0;
-
-        [MemoryCastable()]
-        private short _offsetS = 0;
-
-        [MemoryCastable()]
-        private short _offsetT = 0x100;
-
-        [MemoryCastable()]
-        private short _scaleS = 0x100;
-
-        [MemoryCastable()]
-        private short _scaleT = 0;
-
-        [MemoryCastable()]
-        private short _scroll_timestep = 0;
-
-        [MemoryCastable()]
-        private short _scroll_speedS = 0;
-
-        [MemoryCastable()]
-        private short _scroll_speedT = 0;
 
         [MemoryCastable()]
         private int _unknown0 = 0;
@@ -285,16 +261,16 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(this.ApplyAlphaSort);
             bw.WriteEnum(this.AlphaUsageType);
             bw.WriteEnum(this.AlphaBlendType);
-            bw.Write(this._flags);
+            bw.Write(this.Flags);
             bw.WriteEnum(this.MipmapBiasType);
             bw.Write(this._padding);
-            bw.Write(this._scroll_timestep);
-            bw.Write(this._scroll_speedS);
-            bw.Write(this._scroll_speedT);
-            bw.Write(this._offsetS);
-            bw.Write(this._offsetT);
-            bw.Write(this._scaleS);
-            bw.Write(this._scaleT);
+            bw.Write(this.ScrollTimestep);
+            bw.Write(this.ScrollSpeedS);
+            bw.Write(this.ScrollSpeedT);
+            bw.Write(this.OffsetS);
+            bw.Write(this.OffsetT);
+            bw.Write(this.ScaleS);
+            bw.Write(this.ScaleT);
             bw.Write(this._unknown1);
             bw.Write(this._unknown2);
             bw.Write(this._unknown3);
@@ -335,16 +311,16 @@ namespace Nikki.Support.Underground2.Class
             this.ApplyAlphaSort = br.ReadByte();
             this.AlphaUsageType = br.ReadEnum<TextureAlphaUsageType>();
             this.AlphaBlendType = br.ReadEnum<TextureAlphaBlendType>();
-            this._flags = br.ReadByte();
+            this.Flags = br.ReadByte();
             this.MipmapBiasType = br.ReadEnum<TextureMipmapBiasType>();
             this._padding = br.ReadByte();
-            this._scroll_timestep = br.ReadInt16();
-            this._scroll_speedS = br.ReadInt16();
-            this._scroll_speedT = br.ReadInt16();
-            this._offsetS = br.ReadInt16();
-            this._offsetT = br.ReadInt16();
-            this._scaleS = br.ReadInt16();
-            this._scaleT = br.ReadInt16();
+            this.ScrollTimestep = br.ReadInt16();
+            this.ScrollSpeedS = br.ReadInt16();
+            this.ScrollSpeedT = br.ReadInt16();
+            this.OffsetS = br.ReadInt16();
+            this.OffsetT = br.ReadInt16();
+            this.ScaleS = br.ReadInt16();
+            this.ScaleT = br.ReadInt16();
             this._unknown1 = br.ReadInt32();
             this._unknown2 = br.ReadInt32();
             this._unknown3 = br.ReadInt32();
@@ -394,13 +370,13 @@ namespace Nikki.Support.Underground2.Class
 
             // Default all other values
             this._num_palettes = (short)(this.PaletteSize / 4);
-            this._scroll_timestep = 0;
-            this._scroll_speedS = 0;
-            this._scroll_speedT = 0;
-            this._offsetS = 0;
-            this._offsetT = 0x100;
-            this._scaleS = 0x100;
-            this._scaleT = 0;
+            this.ScrollTimestep = 0;
+            this.ScrollSpeedS = 0;
+            this.ScrollSpeedT = 0;
+            this.OffsetS = 0;
+            this.OffsetT = 0x100;
+            this.ScaleS = 0x100;
+            this.ScaleT = 0;
         }
 
         /// <summary>
@@ -501,15 +477,15 @@ namespace Nikki.Support.Underground2.Class
                 writer.Write(this.ApplyAlphaSort);
                 writer.WriteEnum(this.AlphaUsageType);
                 writer.WriteEnum(this.AlphaBlendType);
-                writer.Write(this._flags);
+                writer.Write(this.Flags);
                 writer.WriteEnum(this.MipmapBiasType);
-                writer.Write(this._scroll_timestep);
-                writer.Write(this._scroll_speedS);
-                writer.Write(this._scroll_speedT);
-                writer.Write(this._offsetS);
-                writer.Write(this._offsetT);
-                writer.Write(this._scaleS);
-                writer.Write(this._scaleT);
+                writer.Write(this.ScrollTimestep);
+                writer.Write(this.ScrollSpeedS);
+                writer.Write(this.ScrollSpeedT);
+                writer.Write(this.OffsetS);
+                writer.Write(this.OffsetT);
+                writer.Write(this.ScaleS);
+                writer.Write(this.ScaleT);
                 writer.Write(this._unknown1);
                 writer.Write(this._unknown2);
                 writer.Write(this._unknown3);
@@ -593,15 +569,15 @@ namespace Nikki.Support.Underground2.Class
             this.ApplyAlphaSort = reader.ReadByte();
             this.AlphaUsageType = reader.ReadEnum<TextureAlphaUsageType>();
             this.AlphaBlendType = reader.ReadEnum<TextureAlphaBlendType>();
-            this._flags = reader.ReadByte();
+            this.Flags = reader.ReadByte();
             this.MipmapBiasType = reader.ReadEnum<TextureMipmapBiasType>();
-            this._scroll_timestep = reader.ReadInt16();
-            this._scroll_speedS = reader.ReadInt16();
-            this._scroll_speedT = reader.ReadInt16();
-            this._offsetS = reader.ReadInt16();
-            this._offsetT = reader.ReadInt16();
-            this._scaleS = reader.ReadInt16();
-            this._scaleT = reader.ReadInt16();
+            this.ScrollTimestep = reader.ReadInt16();
+            this.ScrollSpeedS = reader.ReadInt16();
+            this.ScrollSpeedT = reader.ReadInt16();
+            this.OffsetS = reader.ReadInt16();
+            this.OffsetT = reader.ReadInt16();
+            this.ScaleS = reader.ReadInt16();
+            this.ScaleT = reader.ReadInt16();
             this._unknown1 = reader.ReadInt32();
             this._unknown2 = reader.ReadInt32();
             this._unknown3 = reader.ReadInt32();

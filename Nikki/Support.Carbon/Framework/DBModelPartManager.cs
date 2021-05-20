@@ -258,6 +258,7 @@ namespace Nikki.Support.Carbon.Framework
 			// Initialize stack
 			var offset_map = new Dictionary<int, int>();  // CPOffset to AttribOffset
 			var offset_dict = new Dictionary<int, int>(); // RealCarPart to AttribOffset
+			var offset_list = new Dictionary<int, CPOffset>(); // for debugging
 			offset_buffer = null;
 			int length = 0;
 			int key = 0;
@@ -301,6 +302,8 @@ namespace Nikki.Support.Carbon.Framework
 					{
 					
 						offset_map[key] = length; // write length to map
+						offset_list[key] = offset; // save offset for debug
+
 						bw.Write((ushort)offset.AttribOffsets.Count); // write count
 
 						foreach (var attrib in offset.AttribOffsets)  // write all attributes
@@ -312,6 +315,20 @@ namespace Nikki.Support.Carbon.Framework
 
 						length += 1 + offset.AttribOffsets.Count; // increase length
 					
+					}
+					else
+					{
+
+						var original = offset_list[key];
+
+						if (original != offset)
+						{
+
+							throw new Exception("Internal error has occured: DBMP:AO Key Exception. Please report to the developer immediately, " +
+								"and try resaving the file!");
+						
+						}
+
 					}
 
 					offset_dict[realpart.GetHashCode()] = offset_map[key]; // store to main map

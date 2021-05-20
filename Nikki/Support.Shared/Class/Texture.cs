@@ -338,6 +338,18 @@ namespace Nikki.Support.Shared.Class
         public uint ClassKey { get; set; } = 0x001A93CF;
 
         /// <summary>
+        /// Represents class name of the texture. Directly linked to <see cref="ClassKey"/>.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        [Category("Secondary")]
+        public string ClassName
+		{
+            get => this.ClassKey.BinString(LookupReturn.EMPTY);
+            set => this.ClassKey = value.BinHash();
+		}
+
+        /// <summary>
         /// Represents mipmap bias type of the texture.
         /// </summary>
         [AccessModifiable()]
@@ -400,6 +412,70 @@ namespace Nikki.Support.Shared.Class
         [MemoryCastable()]
         [Category("Secondary")]
         public TextureTileableType TileableUV { get; set; }
+
+        /// <summary>
+        /// Represents offset S of the texture.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        [Category("Secondary")]
+        public short OffsetS { get; set; }
+
+        /// <summary>
+        /// Represents offset T of the texture.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        [Category("Secondary")]
+        public short OffsetT { get; set; }
+
+        /// <summary>
+        /// Represents scale S of the texture.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        [Category("Secondary")]
+        public short ScaleS { get; set; }
+
+        /// <summary>
+        /// Represents scale T of the texture.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        [Category("Secondary")]
+        public short ScaleT { get; set; }
+
+        /// <summary>
+        /// Represents scroll time step of the texture.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        [Category("Secondary")]
+        public short ScrollTimestep { get; set; }
+
+        /// <summary>
+        /// Represents scroll speed S of the texture.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        [Category("Secondary")]
+        public short ScrollSpeedS { get; set; }
+
+        /// <summary>
+        /// Represents scroll speed T of the texture.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        [Category("Secondary")]
+        public short ScrollSpeedT { get; set; }
+
+        /// <summary>
+        /// Represents flags of the texture.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        [Category("Secondary")]
+        public byte Flags { get; set; }
 
         /// <summary>
         /// DDS data of this <see cref="Texture"/>.
