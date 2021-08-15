@@ -124,6 +124,7 @@ namespace Nikki.Support.Prostreet.Class
         public TPKBlock()
 		{
             this._animations = new List<AnimSlot>();
+            this._texturePages = new List<TexturePage>();
             this._textures = new List<Shared.Class.Texture>();
 		}
 
