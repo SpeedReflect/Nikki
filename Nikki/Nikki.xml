@@ -1490,27 +1490,27 @@
             0x00035021
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.BinBlockID.Stream37220">
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.WorldAnimHeader">
             <summary>
             0x00037220
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.BinBlockID.Stream37240">
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.WorldAnimMatrices">
             <summary>
             0x00037240
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.BinBlockID.Stream37250">
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.WorldAnimRTNode">
             <summary>
             0x00037250
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.BinBlockID.Stream37260">
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.WorldAnimNodeInfo">
             <summary>
             0x00037260
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.BinBlockID.Stream37270">
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.WorldAnimPointer">
             <summary>
             0x00037270
             </summary>
@@ -1795,7 +1795,7 @@
             0x75736E47
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.BinBlockID.SpeedScenery">
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.ScenerySection">
             <summary>
             0x80034100
             </summary>
@@ -1820,7 +1820,7 @@
             0x80034A30
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.BinBlockID.EmitterTriggers">
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.EventTriggers">
             <summary>
             0x80036000
             </summary>
@@ -1900,17 +1900,17 @@
             0x8003CE0D
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.BinBlockID.Geometry">
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.GeometryPack">
             <summary>
             0x80134000
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.BinBlockID.ELights">
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.LightSourcePack">
             <summary>
             0x80135000
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.BinBlockID.SpecialEffects">
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.OldAnimationPack">
             <summary>
             0xB0300100
             </summary>

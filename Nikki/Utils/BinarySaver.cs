@@ -99,18 +99,18 @@ namespace Nikki.Utils
 				case BinBlockID.AcidEmitters:
 				case BinBlockID.EAGLSkeleton:
 				case BinBlockID.EAGLAnimations:
-				case BinBlockID.ELights:
+				case BinBlockID.LightSourcePack:
 				case BinBlockID.EmitterLibrary:
-				case BinBlockID.EmitterTriggers:
+				case BinBlockID.EventTriggers:
 				case BinBlockID.EventSequence:
 				case BinBlockID.FEngFont:
-				case BinBlockID.Geometry:
+				case BinBlockID.GeometryPack:
 				case BinBlockID.GCareer_Styles:
 				case BinBlockID.NISDescription:
 				case BinBlockID.NISScript:
 				case BinBlockID.PCAWater0:
 				case BinBlockID.QuickSpline:
-				case BinBlockID.SpeedScenery:
+				case BinBlockID.ScenerySection:
 				case BinBlockID.StyleMomentsInfo:
 				case BinBlockID.TrackPosMarkers:
 				case BinBlockID.WorldBounds:
@@ -121,11 +121,11 @@ namespace Nikki.Utils
 					MakeBigAlign(bw, mark, dif);
 					return;
 
-				case BinBlockID.Stream37220:
-				case BinBlockID.Stream37240:
-				case BinBlockID.Stream37250:
-				case BinBlockID.Stream37260:
-				case BinBlockID.Stream37270:
+				case BinBlockID.WorldAnimHeader:
+				case BinBlockID.WorldAnimMatrices:
+				case BinBlockID.WorldAnimRTNode:
+				case BinBlockID.WorldAnimNodeInfo:
+				case BinBlockID.WorldAnimPointer:
 					if ((byte)position == (byte)bw.BaseStream.Position) return;
 					dif = (int)(position % 0x100);
 					MakeBigAlign(bw, mark, dif);

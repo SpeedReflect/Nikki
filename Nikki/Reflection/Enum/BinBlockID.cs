@@ -278,27 +278,27 @@
         /// <summary>
         /// 0x00037220
         /// </summary>
-        Stream37220 = 0x00037220, // varies
+        WorldAnimHeader = 0x00037220, // varies
 
         /// <summary>
         /// 0x00037240
         /// </summary>
-        Stream37240 = 0x00037240, // varies
+        WorldAnimMatrices = 0x00037240, // varies
 
         /// <summary>
         /// 0x00037250
         /// </summary>
-        Stream37250 = 0x00037250, // varies
+        WorldAnimRTNode = 0x00037250, // varies
 
         /// <summary>
         /// 0x00037260
         /// </summary>
-        Stream37260 = 0x00037260, // varies
+        WorldAnimNodeInfo = 0x00037260, // varies
 
         /// <summary>
         /// 0x00037270
         /// </summary>
-        Stream37270 = 0x00037270, // varies
+        WorldAnimPointer = 0x00037270, // varies
 
         /// <summary>
         /// 0x00039000
@@ -583,7 +583,7 @@
         /// <summary>
         /// 0x80034100
         /// </summary>
-        SpeedScenery = 0x80034100, // varies
+        ScenerySection = 0x80034100, // varies
 
         /// <summary>
         /// 0x80034602
@@ -608,7 +608,7 @@
         /// <summary>
         /// 0x80036000
         /// </summary>
-        EmitterTriggers = 0x80036000, // varies
+        EventTriggers = 0x80036000, // varies
 
         /// <summary>
         /// 0x80037020
@@ -688,17 +688,17 @@
         /// <summary>
         /// 0x80134000
         /// </summary>
-        Geometry = 0x80134000, // varies
+        GeometryPack = 0x80134000, // varies
 
         /// <summary>
         /// 0x80135000
         /// </summary>
-        ELights = 0x80135000, // varies
+        LightSourcePack = 0x80135000, // varies
 
         /// <summary>
         /// 0xB0300100
         /// </summary>
-        SpecialEffects = 0xB0300100, // 0x80 Modular
+        OldAnimationPack = 0xB0300100, // 0x80 Modular
 
         /// <summary>
         /// 0xB0300300

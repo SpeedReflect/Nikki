@@ -1,0 +1,3 @@
+[submodule "Modules/CoreExtensions"]
+    path = Modules/CoreExtensions
+    url = git@github.com:MaxHwoy/CoreExtensions.git

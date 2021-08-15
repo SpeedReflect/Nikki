@@ -324,7 +324,7 @@ namespace Nikki.Support.Carbon.Framework
 						if (original != offset)
 						{
 
-							throw new Exception("Internal error has occured: DBMP:AO Key Exception. Please report to the developer immediately, " +
+							throw new Exception("Internal error has occurred: DBMP:AO Key Exception. Please report to the developer immediately, " +
 								"and try resaving the file!");
 						
 						}

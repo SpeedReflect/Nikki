@@ -173,7 +173,6 @@ namespace Nikki.Support.Shared.Class
 
 					builder.Append($"{lx} {ly} Z " + Environment.NewLine);
 
-
 				}
 
 				builder.Append("\" />" + Environment.NewLine);
@@ -223,15 +222,26 @@ namespace Nikki.Support.Shared.Class
 
 		private string GetFormattedSetG(PathSet set, string id, int resolution)
 		{
-			var result = $"<use xlink:href=\"#{id}\" fill-rule=\"evenodd\" ";
+			var result = $"<use xlink:href=\"#{id}\" fill-rule=\"evenodd\"";
 
-			var fill = set.FillEffect.GetHTMLColor();
-			var stroke = set.StrokeEffect.GetHTMLColor();
-			var thick = set.StrokeEffect.Thickness * resolution;
-			if (thick == 0) thick = resolution >> 11;
+			if (set.FillEffectExists == Reflection.Enum.eBoolean.True)
+			{
+			
+				result += $" fill=\"{set.FillEffect.GetHTMLColor()}\"";
+			
+			}
 
-			result += $"fill=\"{fill}\" stroke=\"{stroke}\" stroke-width=\"{thick:0.00}\" />";
-			return result + Environment.NewLine;
+			if (set.StrokeEffectExists == Reflection.Enum.eBoolean.True)
+			{
+
+				var thick = set.StrokeEffect.Thickness * resolution;
+				if (thick == 0) thick = (float)resolution / 2048.0f; // this should crash the game btw
+
+				result += $" stroke=\"{set.StrokeEffect.GetHTMLColor()}\" stroke-width=\"{thick:0.00}\"";
+
+			}
+
+			return result + " />" + Environment.NewLine;
 		}
 
 		#endregion

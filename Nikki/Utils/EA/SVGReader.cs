@@ -242,7 +242,7 @@ namespace Nikki.Utils.EA
 				{
 					
 					set.FillEffectExists = eBoolean.True;
-					set.FillEffect.Alpha = (byte)(element.FillSingleOpacity * 255);
+					set.FillEffect.Alpha = (byte)(element.FillSingleOpacity * 255.0f);
 
 				}
 
@@ -250,7 +250,7 @@ namespace Nikki.Utils.EA
 				{
 
 					set.StrokeEffectExists = eBoolean.True;
-					set.StrokeEffect.Alpha = (byte)(element.StrokeSingleOpacity * 255);
+					set.StrokeEffect.Alpha = (byte)(element.StrokeSingleOpacity * 255.0f);
 					set.StrokeEffect.Thickness = (float)(element.ThinknessSingle / maxres);
 
 				}

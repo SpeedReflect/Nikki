@@ -349,8 +349,8 @@ namespace Nikki.Core
 			{ BinBlockID.DBCarBounds,       new Alignment(0x08, Alignment.AlignmentType.Actual) },
 			{ BinBlockID.VinylSystem,       new Alignment(0x800, Alignment.AlignmentType.Modular) },
 			{ BinBlockID.VinylDataTable,    Alignment.Default },
-			{ BinBlockID.Geometry,          new Alignment(0x80, Alignment.AlignmentType.Modular) },
-			{ BinBlockID.SpecialEffects,    new Alignment(0x80, Alignment.AlignmentType.Modular) },
+			{ BinBlockID.GeometryPack,          new Alignment(0x80, Alignment.AlignmentType.Modular) },
+			{ BinBlockID.OldAnimationPack,    new Alignment(0x80, Alignment.AlignmentType.Modular) },
 			{ BinBlockID.PCAWeights,        new Alignment(0x80, Alignment.AlignmentType.Modular) },
 			{ BinBlockID.TPKBlocks,         new Alignment(0x80, Alignment.AlignmentType.Modular) },
 		};
