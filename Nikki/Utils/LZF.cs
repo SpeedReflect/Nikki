@@ -58,8 +58,6 @@ namespace Nikki.Utils
     /// </summary>
     public static class LZF
     {
-        private static readonly long[] HashTable = new long[HSIZE];
-
         private const uint HLOG = 14;
         private const uint HSIZE = (1 << 14);
         private const uint MAX_LIT = (1 << 5);
@@ -250,7 +248,7 @@ namespace Nikki.Utils
 
         private static unsafe int Compress(byte* input, int inputLength, byte* output, int outputLength)
         {
-            Array.Clear(HashTable, 0, (int)HSIZE);
+            var HashTable = new long[HSIZE];
 
             long hslot;
             uint iidx = 0;

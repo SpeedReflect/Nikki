@@ -23,6 +23,13 @@ namespace Nikki.Utils
 		[DllImport("LZCompressLib.dll", EntryPoint = "BlockCompress", CallingConvention = CallingConvention.Cdecl)]
 		private static extern unsafe int PrivateEncode(byte* input, int insize, byte* output, int comp);
 
+		private static readonly object _s_lock;
+
+		static Interop()
+		{
+			Interop._s_lock = new object();
+		}
+
 		/// <summary>
 		/// Decompresses buffer based on its header.
 		/// </summary>
@@ -38,7 +45,13 @@ namespace Nikki.Utils
 			var outsize = BitConverter.ToInt32(input, 8);
 			var output = new byte[outsize];
 
-			PrivateDecode(input, input.Length, output);
+			lock (Interop._s_lock)
+			{
+			
+				PrivateDecode(input, input.Length, output);
+			
+			}
+
 			return output;
 		}
 	
@@ -53,7 +66,14 @@ namespace Nikki.Utils
 			if (input == null) return null;
 
 			var output = new byte[input.Length << 1];
-			var outsize = PrivateEncode(input, input.Length, output, (int)type);
+			int outsize = 0;
+
+			lock (Interop._s_lock)
+			{
+			
+				outsize = PrivateEncode(input, input.Length, output, (int)type);
+			
+			}
 
 			Array.Resize(ref output, outsize);
 			return output;
@@ -81,14 +101,19 @@ namespace Nikki.Utils
 
 				fixed (byte* inptr = &input[start])
 				{
-				
+
 					fixed (byte* outptr = &output[0])
 					{
-					
-						outsize = PrivateEncode(inptr, count, outptr, (int)type);
-					
+
+						lock (Interop._s_lock)
+						{
+
+							outsize = PrivateEncode(inptr, count, outptr, (int)type);
+
+						}
+
 					}
-				
+
 				}
 
 			}

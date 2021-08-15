@@ -116,39 +116,24 @@ namespace Nikki.Support.Underground2.Framework
 
 		public void Disassemble(BinaryReader br)
 		{
-			#if !DEBUG
-			try
-			{
-			#endif
+			this.ReadBlockOffsets(br);
 
-				this.ReadBlockOffsets(br);
-
-				this._db.STRBlocks.Disassemble(br, this.strblocks);
-				this._db.Materials.Disassemble(br, this.materials);
-				this._db.TPKBlocks.Disassemble(br, this.tpkblocks);
-				this._db.CarTypeInfos.Disassemble(br, this.cartypeinfos);
-				this._db.SunInfos.Disassemble(br, this.suninfos);
-				this._db.Tracks.Disassemble(br, this.tracks);
-				this._db.PresetRides.Disassemble(br, this.presetrides);
-				this._db.FNGroups.Disassemble(br, this.fngroups);
-				this._db.SlotTypes.Disassemble(br, this.slottypes);
-				this._db.SlotOverrides.Disassemble(br, this.slottypes);
-				this._db.AcidEffects.Disassemble(br, this.acideffects);
-				this._db.AcidEmitters.Disassemble(br, this.acidemitters);
-				this._db.DBModelParts.Disassemble(br, this.dbmodelparts);
-				this._db.GCareers.Disassemble(br, this.gcareer);
-				this.ProcessCarAnimations(br);
-				this.ProcessCarSkins(br);
-
-			#if !DEBUG
-			}
-			catch (Exception e)
-			{
-			
-				this._logger.WriteException(e, br.BaseStream);
-			
-			}
-			#endif
+			this._db.STRBlocks.Disassemble(br, this.strblocks);
+			this._db.Materials.Disassemble(br, this.materials);
+			this._db.TPKBlocks.Disassemble(br, this.tpkblocks);
+			this._db.CarTypeInfos.Disassemble(br, this.cartypeinfos);
+			this._db.SunInfos.Disassemble(br, this.suninfos);
+			this._db.Tracks.Disassemble(br, this.tracks);
+			this._db.PresetRides.Disassemble(br, this.presetrides);
+			this._db.FNGroups.Disassemble(br, this.fngroups);
+			this._db.SlotTypes.Disassemble(br, this.slottypes);
+			this._db.SlotOverrides.Disassemble(br, this.slottypes);
+			this._db.AcidEffects.Disassemble(br, this.acideffects);
+			this._db.AcidEmitters.Disassemble(br, this.acidemitters);
+			this._db.DBModelParts.Disassemble(br, this.dbmodelparts);
+			this._db.GCareers.Disassemble(br, this.gcareer);
+			this.ProcessCarAnimations(br);
+			this.ProcessCarSkins(br);
 		}
 
 		private void ReadBlockOffsets(BinaryReader br)

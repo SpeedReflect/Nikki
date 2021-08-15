@@ -57,30 +57,19 @@ namespace Nikki.Support.Underground2.Framework
 		{
 			using var bw = new BinaryWriter(File.Open(this._options.File, FileMode.Create));
 
-			try
-			{
-
-				this._db.STRBlocks.Assemble(bw, this._options.Watermark);
-				this._db.Materials.Assemble(bw, this._options.Watermark);
-				this._db.TPKBlocks.Assemble(bw, this._options.Watermark);
-				this._db.CarTypeInfos.Assemble(bw, this._options.Watermark);
-				this._db.SlotTypes.Assemble(bw, this._options.Watermark);
-				this._db.DBModelParts.Assemble(bw, this._options.Watermark);
-				this._db.Tracks.Assemble(bw, this._options.Watermark);
-				this._db.SunInfos.Assemble(bw, this._options.Watermark);
-				this._db.AcidEmitters.Assemble(bw, this._options.Watermark);
-				this._db.AcidEffects.Assemble(bw, this._options.Watermark);
-				this._db.GCareers.Assemble(bw, this._options.Watermark);
-				this._db.PresetRides.Assemble(bw, this._options.Watermark);
-				this._db.FNGroups.Assemble(bw, this._options.Watermark);
-
-			}
-			catch (Exception e)
-			{
-
-				this._logger.WriteException(e, bw.BaseStream);
-
-			}
+			this._db.STRBlocks.Assemble(bw, this._options.Watermark);
+			this._db.Materials.Assemble(bw, this._options.Watermark);
+			this._db.TPKBlocks.Assemble(bw, this._options.Watermark);
+			this._db.CarTypeInfos.Assemble(bw, this._options.Watermark);
+			this._db.SlotTypes.Assemble(bw, this._options.Watermark);
+			this._db.DBModelParts.Assemble(bw, this._options.Watermark);
+			this._db.Tracks.Assemble(bw, this._options.Watermark);
+			this._db.SunInfos.Assemble(bw, this._options.Watermark);
+			this._db.AcidEmitters.Assemble(bw, this._options.Watermark);
+			this._db.AcidEffects.Assemble(bw, this._options.Watermark);
+			this._db.GCareers.Assemble(bw, this._options.Watermark);
+			this._db.PresetRides.Assemble(bw, this._options.Watermark);
+			this._db.FNGroups.Assemble(bw, this._options.Watermark);
 		}
 
 		private void WriteFromStream()
@@ -113,35 +102,20 @@ namespace Nikki.Support.Underground2.Framework
 
 		private void Assemble(BinaryWriter bw, BinaryReader br)
 		{
-			#if !DEBUG
-			try
-			{
-			#endif
-
-				this._db.STRBlocks.Assemble(bw, this._options.Watermark);
-				this._db.Materials.Assemble(bw, this._options.Watermark);
-				this._db.TPKBlocks.Assemble(bw, this._options.Watermark);
-				this._db.CarTypeInfos.Assemble(bw, this._options.Watermark);
-				this._db.SlotTypes.Assemble(bw, this._options.Watermark);
-				this._db.DBModelParts.Assemble(bw, this._options.Watermark);
-				this._db.Tracks.Assemble(bw, this._options.Watermark);
-				this._db.SunInfos.Assemble(bw, this._options.Watermark);
-				this._db.AcidEmitters.Assemble(bw, this._options.Watermark);
-				this._db.AcidEffects.Assemble(bw, this._options.Watermark);
-				this._db.GCareers.Assemble(bw, this._options.Watermark);
-				this._db.PresetRides.Assemble(bw, this._options.Watermark);
-				this._db.FNGroups.Assemble(bw, this._options.Watermark);
-				this.WriteBlockOffsets(bw, br);
-
-			#if !DEBUG
-			}
-			catch (Exception e)
-			{
-
-				this._logger.WriteException(e, bw.BaseStream);
-
-			}
-			#endif
+			this._db.STRBlocks.Assemble(bw, this._options.Watermark);
+			this._db.Materials.Assemble(bw, this._options.Watermark);
+			this._db.TPKBlocks.Assemble(bw, this._options.Watermark);
+			this._db.CarTypeInfos.Assemble(bw, this._options.Watermark);
+			this._db.SlotTypes.Assemble(bw, this._options.Watermark);
+			this._db.DBModelParts.Assemble(bw, this._options.Watermark);
+			this._db.Tracks.Assemble(bw, this._options.Watermark);
+			this._db.SunInfos.Assemble(bw, this._options.Watermark);
+			this._db.AcidEmitters.Assemble(bw, this._options.Watermark);
+			this._db.AcidEffects.Assemble(bw, this._options.Watermark);
+			this._db.GCareers.Assemble(bw, this._options.Watermark);
+			this._db.PresetRides.Assemble(bw, this._options.Watermark);
+			this._db.FNGroups.Assemble(bw, this._options.Watermark);
+			this.WriteBlockOffsets(bw, br);
 		}
 
 		private void WriteBlockOffsets(BinaryWriter bw, BinaryReader br)

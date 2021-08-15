@@ -110,32 +110,21 @@ namespace Nikki.Support.Prostreet.Framework
 
 		private void Disassemble(BinaryReader br)
 		{
-			try
-			{
+			this.ReadBlockOffsets(br);
 
-				this.ReadBlockOffsets(br);
-
-				this._db.STRBlocks.Disassemble(br, this.strblocks);
-				this._db.Materials.Disassemble(br, this.materials);
-				this._db.TPKBlocks.Disassemble(br, this.tpkblocks);
-				this._db.CarTypeInfos.Disassemble(br, this.cartypeinfos);
-				this._db.DBModelParts.Disassemble(br, this.dbmodelparts);
-				this._db.SunInfos.Disassemble(br, this.suninfos);
-				this._db.Tracks.Disassemble(br, this.tracks);
-				this._db.Collisions.Disassemble(br, this.collisions);
-				this._db.FNGroups.Disassemble(br, this.fngroups);
-				this._db.SlotTypes.Disassemble(br, this.slottypes);
-				this._db.SlotOverrides.Disassemble(br, this.slottypes);
-				this._db.VectorVinyls.Disassemble(br, this.vectorvinyls);
-				this.ProcessCarAnimations(br);
-
-			}
-			catch (Exception e)
-			{
-
-				this._logger.WriteException(e, br.BaseStream);
-
-			}
+			this._db.STRBlocks.Disassemble(br, this.strblocks);
+			this._db.Materials.Disassemble(br, this.materials);
+			this._db.TPKBlocks.Disassemble(br, this.tpkblocks);
+			this._db.CarTypeInfos.Disassemble(br, this.cartypeinfos);
+			this._db.DBModelParts.Disassemble(br, this.dbmodelparts);
+			this._db.SunInfos.Disassemble(br, this.suninfos);
+			this._db.Tracks.Disassemble(br, this.tracks);
+			this._db.Collisions.Disassemble(br, this.collisions);
+			this._db.FNGroups.Disassemble(br, this.fngroups);
+			this._db.SlotTypes.Disassemble(br, this.slottypes);
+			this._db.SlotOverrides.Disassemble(br, this.slottypes);
+			this._db.VectorVinyls.Disassemble(br, this.vectorvinyls);
+			this.ProcessCarAnimations(br);
 		}
 
 		private void ReadBlockOffsets(BinaryReader br)
