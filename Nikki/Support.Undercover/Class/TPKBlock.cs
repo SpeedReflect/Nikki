@@ -566,20 +566,38 @@ namespace Nikki.Support.Undercover.Class
 
                 fname = Path.GetFileNameWithoutExtension(fname).ToUpper();
 
-                this._collection_name = !this.Manager.Contains(fname)
-                    ? fname : !this.Manager.Contains(cname)
-                    ? cname : $"TPK{this.Manager.Count}";
+                if (this.Manager is null)
+                {
+
+                    this._collection_name = fname;
+
+                }
+                else
+                {
+
+                    this._collection_name = !this.Manager.Contains(fname)
+                        ? fname : !this.Manager.Contains(cname)
+                        ? cname : $"TPK{this.Manager.Count}";
+                }
 
             }
             else
             {
 
-                this._collection_name = !this.Manager.Contains(cname)
-                    ? cname :
-                    $"TPK{this.Manager.Count}";
+                if (this.Manager is null)
+                {
+
+                    this._collection_name = cname;
+
+                }
+                else
+                {
+                    this._collection_name = !this.Manager.Contains(cname)
+                        ? cname :
+                        $"TPK{this.Manager.Count}";
+                }
 
             }
-
 
             // Get the rest of the settings
             br.BaseStream.Position += 0x1C;
