@@ -975,12 +975,12 @@ namespace Nikki.Support.Carbon.Class
 
                 var page = new TexturePage()
                 {
-                    TextureName = br.ReadNullTermUTF8(),
-                    U0 = br.ReadSingle(),
-                    V0 = br.ReadSingle(),
-                    U1 = br.ReadSingle(),
-                    V1 = br.ReadSingle(),
-                    Flags = br.ReadUInt32(),
+                    TextureName = reader.ReadNullTermUTF8(),
+                    U0 = reader.ReadSingle(),
+                    V0 = reader.ReadSingle(),
+                    U1 = reader.ReadSingle(),
+                    V1 = reader.ReadSingle(),
+                    Flags = reader.ReadUInt32(),
                 };
 
                 this.TexturePages.Add(page);
