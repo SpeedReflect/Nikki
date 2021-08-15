@@ -23,7 +23,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\CoreExtensions\CoreExtensions\CoreExtensions.csproj" />
+    <ProjectReference Include="..\Modules\CoreExtensions\CoreExtensions\CoreExtensions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
