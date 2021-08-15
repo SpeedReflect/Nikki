@@ -1121,7 +1121,7 @@ namespace Nikki.Support.Underground1.Class
                 writer.WriteBytes(0, 0x40);
 
                 array = ms.ToArray();
-                array = Interop.Compress(array, LZCompressionType.BEST);
+                array = Interop.Compress(array, LZCompressionType.RAWW);
                 bw.Write(array.Length);
                 bw.Write(array);
 

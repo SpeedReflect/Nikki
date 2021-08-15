@@ -96,31 +96,22 @@ namespace Nikki.Support.Underground2.Class
         public override uint VltKey => this._collection_name.VltHash();
 
         /// <summary>
-        /// Class key of the <see cref="AcidEffect"/>.
+        /// Emitter name of the <see cref="AcidEffect"/>.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
         [Category("Primary")]
-        public uint ClassKey { get; set; }
+        public string EmitterName { get; set; } = String.Empty;
 
         /// <summary>
-        /// Flags used by the effect's properties.
+        /// State of this <see cref="AcidEffect"/>.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
         [Category("Primary")]
-        public uint Flags { get; set; }
-
-        /// <summary>
-        /// Number of emmiters in this <see cref="AcidEffect"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Primary")]
-        public ushort NumEmitters { get; set; }
+        public int State { get; set; }
 
         /// <summary>
         /// Section number of this <see cref="AcidEffect"/>.
@@ -132,92 +123,20 @@ namespace Nikki.Support.Underground2.Class
         public ushort SectionNumber { get; set; }
 
         /// <summary>
-        /// Key of the collection from which this <see cref="AcidEffect"/> is inherited.
+        /// Scenery barrier group to which this <see cref="AcidEffect"/> belongs to.
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
         [Category("Primary")]
-        public string InheritanceKey { get; set; } = String.Empty;
-
-        /// <summary>
-        /// Far clip value.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Primary")]
-        public float FarClip { get; set; }
-
-        /// <summary>
-        /// Intensity of the effect.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Primary")]
-        public float Intensity { get; set; }
-
-        /// <summary>
-        /// Last position X of the effect.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Secondary")]
-        public float LastPositionX { get; set; }
-
-        /// <summary>
-        /// Last position Y of the effect.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Secondary")]
-        public float LastPositionY { get; set; }
-
-        /// <summary>
-        /// Last position Z of the effect.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Secondary")]
-        public float LastPositionZ { get; set; }
-
-        /// <summary>
-        /// Last position W of the effect.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Secondary")]
-        public float LastPositionW { get; set; }
-
-        /// <summary>
-        /// Number of particle frames in this <see cref="AcidEffect"/>.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Primary")]
-        public uint NumZeroParticleFrames { get; set; }
-
-        /// <summary>
-        /// Time stamp of this <see cref="AcidEffect"/> creation.
-        /// </summary>
-        [AccessModifiable()]
-        [StaticModifiable()]
-        [MemoryCastable()]
-        [Category("Primary")]
-        public uint CreationTimeStamp { get; set; }
+        public string SceneryBarrierGroup { get; set; }
 
         /// <summary>
         /// LocalWorld <see cref="Matrix"/> of this <see cref="AcidEffect"/>.
         /// </summary>
         [Expandable("Matrix")]
         [Browsable(false)]
-        public Matrix LocalWorld { get; set; }
+        public Matrix Transform { get; set; }
 
         #endregion
 
@@ -226,7 +145,7 @@ namespace Nikki.Support.Underground2.Class
         /// <summary>
         /// Initializes new instance of <see cref="AcidEffect"/>.
         /// </summary>
-        public AcidEffect() => this.LocalWorld = new Matrix();
+        public AcidEffect() => this.Transform = new Matrix();
 
         /// <summary>
         /// Initializes new instance of <see cref="AcidEffect"/>.
@@ -262,31 +181,15 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="AcidEffect"/> with.</param>
         public override void Assemble(BinaryWriter bw)
         {
-            // Write all settings
-            bw.Write(this.Localizer);
-            bw.Write(this.Localizer);
-            bw.Write(this.BinKey);
-            bw.Write(this.BinKey);
-            bw.Write(this.ClassKey);
-            bw.Write((int)0);
-            bw.Write(this.Flags);
-            bw.Write(this.NumEmitters);
+            bw.WriteBytes(0, 0x0C);
+            bw.Write(this.EmitterName.BinHash());
+            bw.Write(this.State);
+            bw.WriteBytes(0, 0x16);
             bw.Write(this.SectionNumber);
-            this.LocalWorld.Write(bw);
-            bw.Write(this.InheritanceKey.BinHash());
-            bw.Write(this.FarClip);
-            bw.Write(this.Intensity);
-            bw.Write((int)0);
-            bw.Write(this.LastPositionX);
-            bw.Write(this.LastPositionY);
-            bw.Write(this.LastPositionZ);
-            bw.Write(this.LastPositionW);
-            bw.Write((int)0);
-            bw.Write(this.NumZeroParticleFrames);
-            bw.Write(this.CreationTimeStamp);
-            bw.Write((int)0);
-
-            // Write CollectionName
+            bw.Write(this.SceneryBarrierGroup.BinHash());
+            bw.WriteBytes(0, 0x10);
+            this.Transform.Write(bw);
+            bw.WriteBytes(0, 0x10);
             bw.WriteNullTermUTF8(this._collection_name, 0x40);
         }
 
@@ -296,27 +199,15 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="AcidEffect"/> with.</param>
         public override void Disassemble(BinaryReader br)
         {
-            br.BaseStream.Position += 0x10;
-            this.ClassKey = br.ReadUInt32();
-            br.BaseStream.Position += 4;
-            this.Flags = br.ReadUInt32();
-            this.NumEmitters = br.ReadUInt16();
+            br.BaseStream.Position += 0x0C;
+            this.EmitterName = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            this.State = br.ReadInt32();
+            br.BaseStream.Position += 0x16;
             this.SectionNumber = br.ReadUInt16();
-            this.LocalWorld.Read(br);
-            this.InheritanceKey = br.ReadUInt32().BinString(LookupReturn.EMPTY);
-            this.FarClip = br.ReadSingle();
-            this.Intensity = br.ReadSingle();
-            br.BaseStream.Position += 4;
-            this.LastPositionX = br.ReadSingle();
-            this.LastPositionY = br.ReadSingle();
-            this.LastPositionZ = br.ReadSingle();
-            this.LastPositionW = br.ReadSingle();
-            br.BaseStream.Position += 4;
-            this.NumZeroParticleFrames = br.ReadUInt32();
-            this.CreationTimeStamp = br.ReadUInt32();
-            br.BaseStream.Position += 4;
-
-            // Read CollectionName
+            this.SceneryBarrierGroup = br.ReadUInt32().BinString(LookupReturn.EMPTY);
+            br.BaseStream.Position += 0x10;
+            this.Transform.Read(br);
+            br.BaseStream.Position += 0x10;
             this._collection_name = br.ReadNullTermUTF8(0x40);
         }
 
@@ -359,26 +250,17 @@ namespace Nikki.Support.Underground2.Class
             {
 
                 writer.WriteNullTermUTF8(this._collection_name);
-                writer.Write(this.ClassKey);
-                writer.Write(this.Flags);
-                writer.Write(this.NumEmitters);
+                writer.WriteNullTermUTF8(this.EmitterName);
+                writer.WriteNullTermUTF8(this.SceneryBarrierGroup);
+                writer.Write(this.State);
                 writer.Write(this.SectionNumber);
-                this.LocalWorld.Write(writer);
-                writer.WriteNullTermUTF8(this.InheritanceKey);
-                writer.Write(this.FarClip);
-                writer.Write(this.Intensity);
-                writer.Write(this.LastPositionX);
-                writer.Write(this.LastPositionY);
-                writer.Write(this.LastPositionZ);
-                writer.Write(this.LastPositionW);
-                writer.Write(this.NumZeroParticleFrames);
-                writer.Write(this.CreationTimeStamp);
+                this.Transform.Write(writer);
 
                 array = ms.ToArray();
 
             }
 
-            array = Interop.Compress(array, LZCompressionType.BEST);
+            array = Interop.Compress(array, LZCompressionType.RAWW);
 
             var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
             header.Write(bw);
@@ -401,20 +283,11 @@ namespace Nikki.Support.Underground2.Class
             using var reader = new BinaryReader(ms);
 
             this._collection_name = reader.ReadNullTermUTF8();
-            this.ClassKey = reader.ReadUInt32();
-            this.Flags = reader.ReadUInt32();
-            this.NumEmitters = reader.ReadUInt16();
+            this.EmitterName = reader.ReadNullTermUTF8();
+            this.SceneryBarrierGroup = reader.ReadNullTermUTF8();
+            this.State = reader.ReadInt32();
             this.SectionNumber = reader.ReadUInt16();
-            this.LocalWorld.Read(reader);
-            this.InheritanceKey = reader.ReadNullTermUTF8();
-            this.FarClip = reader.ReadSingle();
-            this.Intensity = reader.ReadSingle();
-            this.LastPositionX = reader.ReadSingle();
-            this.LastPositionY = reader.ReadSingle();
-            this.LastPositionZ = reader.ReadSingle();
-            this.LastPositionW = reader.ReadSingle();
-            this.NumZeroParticleFrames = reader.ReadUInt32();
-            this.CreationTimeStamp = reader.ReadUInt32();
+            this.Transform.Read(reader);
         }
 
         #endregion

@@ -497,7 +497,7 @@ namespace Nikki.Support.MostWanted.Class
                 writer.WriteBytes(0, 0x20); // write padding for better compression
                 writer.Write(modulo == 0 ? size : size + 1);
 
-                array = Interop.Compress(ms.ToArray(), LZCompressionType.BEST);
+                array = Interop.Compress(ms.ToArray(), LZCompressionType.RAWW);
                 datalist.Add(array);
 
             }
@@ -513,7 +513,7 @@ namespace Nikki.Support.MostWanted.Class
 
                 var temp = new byte[total];
                 Array.Copy(data, loop << 15, temp, 0, total);
-                array = Interop.Compress(temp, LZCompressionType.BEST);
+                array = Interop.Compress(temp, LZCompressionType.RAWW);
                 datalist.Add(array);
 
             }

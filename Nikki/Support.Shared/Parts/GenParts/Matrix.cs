@@ -15,97 +15,97 @@ namespace Nikki.Support.Shared.Parts.GenParts
 		/// 
 		/// </summary>
 		[AccessModifiable()]
-		public float Value1X { get; set; }
+		public float Value11 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
-		public float Value1Y { get; set; }
+		public float Value12 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
-		public float Value1Z { get; set; }
+		public float Value13 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
-		public float Value1W { get; set; }
+		public float Value14 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
-		public float Value2X { get; set; }
+		public float Value21 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
-		public float Value2Y { get; set; }
+		public float Value22 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
-		public float Value2Z { get; set; }
+		public float Value23 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
-		public float Value2W { get; set; }
+		public float Value24 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
-		public float Value3X { get; set; }
+		public float Value31 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
-		public float Value3Y { get; set; }
+		public float Value32 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
-		public float Value3Z { get; set; }
+		public float Value33 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
-		public float Value3W { get; set; }
+		public float Value34 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
-		public float Value4X { get; set; }
+		public float Value41 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
-		public float Value4Y { get; set; }
+		public float Value42 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
-		public float Value4Z { get; set; }
+		public float Value43 { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[AccessModifiable()]
-		public float Value4W { get; set; }
+		public float Value44 { get; set; }
 
 		/// <summary>
 		/// Creates a plain copy of the objects that contains same values.
@@ -124,22 +124,22 @@ namespace Nikki.Support.Shared.Parts.GenParts
 		/// <param name="br"><see cref="BinaryReader"/> to read data with.</param>
 		public void Read(BinaryReader br)
 		{
-			this.Value1X = br.ReadSingle();
-			this.Value1Y = br.ReadSingle();
-			this.Value1Z = br.ReadSingle();
-			this.Value1W = br.ReadSingle();
-			this.Value2X = br.ReadSingle();
-			this.Value2Y = br.ReadSingle();
-			this.Value2Z = br.ReadSingle();
-			this.Value2W = br.ReadSingle();
-			this.Value3X = br.ReadSingle();
-			this.Value3Y = br.ReadSingle();
-			this.Value3Z = br.ReadSingle();
-			this.Value3W = br.ReadSingle();
-			this.Value4X = br.ReadSingle();
-			this.Value4Y = br.ReadSingle();
-			this.Value4Z = br.ReadSingle();
-			this.Value4W = br.ReadSingle();
+			this.Value11 = br.ReadSingle();
+			this.Value12 = br.ReadSingle();
+			this.Value13 = br.ReadSingle();
+			this.Value14 = br.ReadSingle();
+			this.Value21 = br.ReadSingle();
+			this.Value22 = br.ReadSingle();
+			this.Value23 = br.ReadSingle();
+			this.Value24 = br.ReadSingle();
+			this.Value31 = br.ReadSingle();
+			this.Value32 = br.ReadSingle();
+			this.Value33 = br.ReadSingle();
+			this.Value34 = br.ReadSingle();
+			this.Value41 = br.ReadSingle();
+			this.Value42 = br.ReadSingle();
+			this.Value43 = br.ReadSingle();
+			this.Value44 = br.ReadSingle();
 		}
 
 		/// <summary>
@@ -148,22 +148,22 @@ namespace Nikki.Support.Shared.Parts.GenParts
 		/// <param name="bw"><see cref="BinaryWriter"/> to write data with.</param>
 		public void Write(BinaryWriter bw)
 		{
-			bw.Write(this.Value1X);
-			bw.Write(this.Value1Y);
-			bw.Write(this.Value1Z);
-			bw.Write(this.Value1W);
-			bw.Write(this.Value2X);
-			bw.Write(this.Value2Y);
-			bw.Write(this.Value2Z);
-			bw.Write(this.Value2W);
-			bw.Write(this.Value3X);
-			bw.Write(this.Value3Y);
-			bw.Write(this.Value3Z);
-			bw.Write(this.Value3W);
-			bw.Write(this.Value4X);
-			bw.Write(this.Value4Y);
-			bw.Write(this.Value4Z);
-			bw.Write(this.Value4W);
+			bw.Write(this.Value11);
+			bw.Write(this.Value12);
+			bw.Write(this.Value13);
+			bw.Write(this.Value14);
+			bw.Write(this.Value21);
+			bw.Write(this.Value22);
+			bw.Write(this.Value23);
+			bw.Write(this.Value24);
+			bw.Write(this.Value31);
+			bw.Write(this.Value32);
+			bw.Write(this.Value33);
+			bw.Write(this.Value34);
+			bw.Write(this.Value41);
+			bw.Write(this.Value42);
+			bw.Write(this.Value43);
+			bw.Write(this.Value44);
 		}
 	}
 }

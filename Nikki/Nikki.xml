@@ -17628,27 +17628,27 @@
             Blue value of the second bright color of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.EnvmapMinPower">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.EnvmapMaxLevel">
             <summary>
             Linear negativity of the material colors.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.EnvmapMaxPower">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.EnvmapMaxRed">
             <summary>
             Gradient negativity of the material colors.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.ClampLevel">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.EnvmapPower">
             <summary>
             Shadow level value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.VinylScaleLevel">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.EnvmapMinRed">
             <summary>
             Chrome level value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.FlakesLevel">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.EnvmapMinLevel">
             <summary>
             Matte level value of the material.
             </summary>
@@ -17708,32 +17708,32 @@
             Unknown 3 value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown0">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.EnvmapMinGreen">
             <summary>
             Unknown 0 value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown1">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.EnvmapMinBlue">
             <summary>
             Unknown 1 value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown2">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.EnvmapMaxGreen">
             <summary>
             Unknown 2 value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown3">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.EnvmapMaxBlue">
             <summary>
             Unknown 3 value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown4">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.MetallicScale">
             <summary>
             Unknown 4 value of the material.
             </summary>
         </member>
-        <member name="P:Nikki.Support.MostWanted.Class.Material.Unknown5">
+        <member name="P:Nikki.Support.MostWanted.Class.Material.SpecularHotSpot">
             <summary>
             Unknown 5 value of the material.
             </summary>
@@ -30936,82 +30936,82 @@
             A unit <see cref="T:Nikki.Support.Shared.Parts.GenParts.Matrix"/> class with 4 (X, Y, Z, W) vectors.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value1X">
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value11">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value1Y">
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value12">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value1Z">
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value13">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value1W">
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value14">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value2X">
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value21">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value2Y">
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value22">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value2Z">
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value23">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value2W">
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value24">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value3X">
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value31">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value3Y">
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value32">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value3Z">
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value33">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value3W">
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value34">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value4X">
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value41">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value4Y">
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value42">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value4Z">
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value43">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value4W">
+        <member name="P:Nikki.Support.Shared.Parts.GenParts.Matrix.Value44">
             <summary>
             
             </summary>
@@ -46385,19 +46385,14 @@
             Vault memory hash of the collection name.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.ClassKey">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.EmitterName">
             <summary>
-            Class key of the <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
+            Emitter name of the <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.Flags">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.State">
             <summary>
-            Flags used by the effect's properties.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.NumEmitters">
-            <summary>
-            Number of emmiters in this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
+            State of this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Class.AcidEffect.SectionNumber">
@@ -46405,52 +46400,12 @@
             Section number of this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.InheritanceKey">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.SceneryBarrierGroup">
             <summary>
-            Key of the collection from which this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/> is inherited.
+            Scenery barrier group to which this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/> belongs to.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.FarClip">
-            <summary>
-            Far clip value.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.Intensity">
-            <summary>
-            Intensity of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LastPositionX">
-            <summary>
-            Last position X of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LastPositionY">
-            <summary>
-            Last position Y of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LastPositionZ">
-            <summary>
-            Last position Z of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LastPositionW">
-            <summary>
-            Last position W of the effect.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.NumZeroParticleFrames">
-            <summary>
-            Number of particle frames in this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.CreationTimeStamp">
-            <summary>
-            Time stamp of this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/> creation.
-            </summary>
-        </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.LocalWorld">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEffect.Transform">
             <summary>
             LocalWorld <see cref="T:Nikki.Support.Shared.Parts.GenParts.Matrix"/> of this <see cref="T:Nikki.Support.Underground2.Class.AcidEffect"/>.
             </summary>
@@ -46567,124 +46522,259 @@
             Vault memory hash of the collection name.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.SpecialEffect">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.TextureName">
             <summary>
             Special effect name of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.EmitterName">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.GroupName">
             <summary>
             Emitter name of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Unknown0x14">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.SpreadAsDisc">
             <summary>
-            Unknown value at offset 0x14.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.ClassKey">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.ContactSheetW">
             <summary>
-            Class key value of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Stamp">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.ContactSheetH">
             <summary>
-            Stamp value of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.SectionNumber">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.AnimFPS">
             <summary>
-            Section number of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Flags">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.RandomStartFrame">
             <summary>
-            Flags used by the effect's properties.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Unknown0x1C">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.RandomRotationDirection">
             <summary>
-            Unknown value at offset 0x1C.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Unknown0x1D">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.MotionLive">
             <summary>
-            Unknown value at offset 0x1D.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Unknown0x1E">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.OnCycle">
             <summary>
-            Unknown value at offset 0x1E.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Unknown0x1F">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.OnCycleVariance">
             <summary>
-            Unknown value at offset 0x1F.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.LastPositionX">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.OffCycle">
             <summary>
-            Last position X of the effect.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.LastPositionY">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.OffCycleVariance">
             <summary>
-            Last position Y of the effect.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.LastPositionZ">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.NumParticles">
             <summary>
-            Last position Z of the effect.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.LastPositionW">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.NumParticlesVariance">
             <summary>
-            Last position W of the effect.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.ComplexityX">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Life">
             <summary>
-            Complexity X of the effect.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.ComplexityY">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.LifeVariance">
             <summary>
-            Complexity Y of the effect.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.ComplexityZ">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Speed">
             <summary>
-            Complexity Z of the effect.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.ComplexityW">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.SpeedVariance">
             <summary>
-            Complexity W of the effect.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.LocalWorld">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.InitialAngleRange">
             <summary>
-            LocalWorld <see cref="T:Nikki.Support.Shared.Parts.GenParts.Matrix"/> of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Intensity">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.SpreadAngle">
             <summary>
-            Intensity <see cref="T:Nikki.Support.Shared.Parts.GenParts.Matrix"/> of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Range">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.MotionInherit">
             <summary>
-            Range <see cref="T:Nikki.Support.Shared.Parts.GenParts.Matrix"/> of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Translation">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.MotionInheritVariance">
             <summary>
-            Translation <see cref="T:Nikki.Support.Shared.Parts.GenParts.Matrix"/> of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
+            
             </summary>
         </member>
-        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Magnitude">
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.CarPosition">
             <summary>
-            Magnitude <see cref="T:Nikki.Support.Shared.Parts.GenParts.Matrix"/> of this <see cref="T:Nikki.Support.Underground2.Class.AcidEmitter"/>.
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.VolumeCenterX">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.VolumeCenterY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.VolumeCenterZ">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.VolumeCenterW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.VolumeExtentX">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.VolumeExtentY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.VolumeExtentZ">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.VolumeExtentW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.FarClip">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Gravity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Drag">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.MaxPixelSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.KeyPosition1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.KeyPosition2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.KeyPosition3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.KeyPosition4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.SizeX">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.SizeY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.SizeZ">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.SizeW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.RelativeAngleX">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.RelativeAngleY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.RelativeAngleZ">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.RelativeAngleW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.ColorMatrix">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.ColorBasis">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.ExtraBasis">
+            <summary>
+            
             </summary>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.AcidEmitter.#ctor">

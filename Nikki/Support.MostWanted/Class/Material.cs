@@ -167,7 +167,7 @@ namespace Nikki.Support.MostWanted.Class
         [StaticModifiable()]
         [MemoryCastable()]
         [Category("Primary")]
-        public float EnvmapMinPower { get; set; }
+        public float EnvmapMaxLevel { get; set; }
 
         /// <summary>
         /// Gradient negativity of the material colors.
@@ -176,7 +176,7 @@ namespace Nikki.Support.MostWanted.Class
         [StaticModifiable()]
         [MemoryCastable()]
         [Category("Primary")]
-        public float EnvmapMaxPower { get; set; }
+        public float EnvmapMaxRed { get; set; }
 
         /// <summary>
         /// Shadow level value of the material.
@@ -185,7 +185,7 @@ namespace Nikki.Support.MostWanted.Class
         [StaticModifiable()]
         [MemoryCastable()]
         [Category("Primary")]
-        public float ClampLevel { get; set; }
+        public float EnvmapPower { get; set; }
 
         /// <summary>
         /// Chrome level value of the material.
@@ -194,7 +194,7 @@ namespace Nikki.Support.MostWanted.Class
         [StaticModifiable()]
         [MemoryCastable()]
         [Category("Primary")]
-        public float VinylScaleLevel { get; set; }
+        public float EnvmapMinRed { get; set; }
 
         /// <summary>
         /// Matte level value of the material.
@@ -203,7 +203,7 @@ namespace Nikki.Support.MostWanted.Class
         [StaticModifiable()]
         [MemoryCastable()]
         [Category("Primary")]
-        public float FlakesLevel { get; set; }
+        public float EnvmapMinLevel { get; set; }
 
         /// <summary>
         /// First reflection value of the material.
@@ -311,7 +311,7 @@ namespace Nikki.Support.MostWanted.Class
         [StaticModifiable()]
         [MemoryCastable()]
         [Category("Unknown")]
-        public float Unknown0 { get; set; }
+        public float EnvmapMinGreen { get; set; }
 
         /// <summary>
         /// Unknown 1 value of the material.
@@ -320,7 +320,7 @@ namespace Nikki.Support.MostWanted.Class
         [StaticModifiable()]
         [MemoryCastable()]
         [Category("Unknown")]
-        public float Unknown1 { get; set; }
+        public float EnvmapMinBlue { get; set; }
 
         /// <summary>
         /// Unknown 2 value of the material.
@@ -329,7 +329,7 @@ namespace Nikki.Support.MostWanted.Class
         [StaticModifiable()]
         [MemoryCastable()]
         [Category("Unknown")]
-        public float Unknown2 { get; set; }
+        public float EnvmapMaxGreen { get; set; }
 
         /// <summary>
         /// Unknown 3 value of the material.
@@ -338,7 +338,7 @@ namespace Nikki.Support.MostWanted.Class
         [StaticModifiable()]
         [MemoryCastable()]
         [Category("Unknown")]
-        public float Unknown3 { get; set; }
+        public float EnvmapMaxBlue { get; set; }
 
         /// <summary>
         /// Unknown 4 value of the material.
@@ -347,7 +347,7 @@ namespace Nikki.Support.MostWanted.Class
         [StaticModifiable()]
         [MemoryCastable()]
         [Category("Unknown")]
-        public float Unknown4 { get; set; }
+        public float MetallicScale { get; set; }
 
         /// <summary>
         /// Unknown 5 value of the material.
@@ -356,7 +356,7 @@ namespace Nikki.Support.MostWanted.Class
         [StaticModifiable()]
         [MemoryCastable()]
         [Category("Unknown")]
-        public float Unknown5 { get; set; }
+        public float SpecularHotSpot { get; set; }
 
         #endregion
 
@@ -433,17 +433,17 @@ namespace Nikki.Support.MostWanted.Class
             bw.Write(this.SpecularMaxRed);
             bw.Write(this.SpecularMaxGreen);
             bw.Write(this.SpecularMaxBlue);
-            bw.Write(this.ClampLevel);
-            bw.Write(this.FlakesLevel);
-            bw.Write(this.VinylScaleLevel);
-            bw.Write(this.Unknown0);
-            bw.Write(this.Unknown1);
-            bw.Write(this.EnvmapMinPower);
-            bw.Write(this.EnvmapMaxPower);
-            bw.Write(this.Unknown2);
-            bw.Write(this.Unknown3);
-            bw.Write(this.Unknown4);
-            bw.Write(this.Unknown5);
+            bw.Write(this.EnvmapPower);
+            bw.Write(this.EnvmapMinLevel);
+            bw.Write(this.EnvmapMinRed);
+            bw.Write(this.EnvmapMinGreen);
+            bw.Write(this.EnvmapMinBlue);
+            bw.Write(this.EnvmapMaxLevel);
+            bw.Write(this.EnvmapMaxRed);
+            bw.Write(this.EnvmapMaxGreen);
+            bw.Write(this.EnvmapMaxBlue);
+            bw.Write(this.MetallicScale);
+            bw.Write(this.SpecularHotSpot);
         }
 
         /// <summary>
@@ -474,17 +474,17 @@ namespace Nikki.Support.MostWanted.Class
             this.SpecularMaxRed = br.ReadSingle();
             this.SpecularMaxGreen = br.ReadSingle();
             this.SpecularMaxBlue = br.ReadSingle();
-            this.ClampLevel = br.ReadSingle();
-            this.FlakesLevel = br.ReadSingle();
-            this.VinylScaleLevel = br.ReadSingle();
-            this.Unknown0 = br.ReadSingle();
-            this.Unknown1 = br.ReadSingle();
-            this.EnvmapMinPower = br.ReadSingle();
-            this.EnvmapMaxPower = br.ReadSingle();
-            this.Unknown2 = br.ReadSingle();
-            this.Unknown3 = br.ReadSingle();
-            this.Unknown4 = br.ReadSingle();
-            this.Unknown5 = br.ReadSingle();
+            this.EnvmapPower = br.ReadSingle();
+            this.EnvmapMinLevel = br.ReadSingle();
+            this.EnvmapMinRed = br.ReadSingle();
+            this.EnvmapMinGreen = br.ReadSingle();
+            this.EnvmapMinBlue = br.ReadSingle();
+            this.EnvmapMaxLevel = br.ReadSingle();
+            this.EnvmapMaxRed = br.ReadSingle();
+            this.EnvmapMaxGreen = br.ReadSingle();
+            this.EnvmapMaxBlue = br.ReadSingle();
+            this.MetallicScale = br.ReadSingle();
+            this.SpecularHotSpot = br.ReadSingle();
         }
 
         /// <summary>
@@ -545,23 +545,23 @@ namespace Nikki.Support.MostWanted.Class
                 writer.Write(this.SpecularMaxRed);
                 writer.Write(this.SpecularMaxGreen);
                 writer.Write(this.SpecularMaxBlue);
-                writer.Write(this.ClampLevel);
-                writer.Write(this.FlakesLevel);
-                writer.Write(this.VinylScaleLevel);
-                writer.Write(this.Unknown0);
-                writer.Write(this.Unknown1);
-                writer.Write(this.EnvmapMinPower);
-                writer.Write(this.EnvmapMaxPower);
-                writer.Write(this.Unknown2);
-                writer.Write(this.Unknown3);
-                writer.Write(this.Unknown4);
-                writer.Write(this.Unknown5);
+                writer.Write(this.EnvmapPower);
+                writer.Write(this.EnvmapMinLevel);
+                writer.Write(this.EnvmapMinRed);
+                writer.Write(this.EnvmapMinGreen);
+                writer.Write(this.EnvmapMinBlue);
+                writer.Write(this.EnvmapMaxLevel);
+                writer.Write(this.EnvmapMaxRed);
+                writer.Write(this.EnvmapMaxGreen);
+                writer.Write(this.EnvmapMaxBlue);
+                writer.Write(this.MetallicScale);
+                writer.Write(this.SpecularHotSpot);
 
                 array = ms.ToArray();
 
             }
 
-            array = Interop.Compress(array, LZCompressionType.BEST);
+            array = Interop.Compress(array, LZCompressionType.RAWW);
 
             var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
             header.Write(bw);
@@ -603,17 +603,17 @@ namespace Nikki.Support.MostWanted.Class
             this.SpecularMaxRed = reader.ReadSingle();
             this.SpecularMaxGreen = reader.ReadSingle();
             this.SpecularMaxBlue = reader.ReadSingle();
-            this.ClampLevel = reader.ReadSingle();
-            this.FlakesLevel = reader.ReadSingle();
-            this.VinylScaleLevel = reader.ReadSingle();
-            this.Unknown0 = reader.ReadSingle();
-            this.Unknown1 = reader.ReadSingle();
-            this.EnvmapMinPower = reader.ReadSingle();
-            this.EnvmapMaxPower = reader.ReadSingle();
-            this.Unknown2 = reader.ReadSingle();
-            this.Unknown3 = reader.ReadSingle();
-            this.Unknown4 = reader.ReadSingle();
-            this.Unknown5 = reader.ReadSingle();
+            this.EnvmapPower = reader.ReadSingle();
+            this.EnvmapMinLevel = reader.ReadSingle();
+            this.EnvmapMinRed = reader.ReadSingle();
+            this.EnvmapMinGreen = reader.ReadSingle();
+            this.EnvmapMinBlue = reader.ReadSingle();
+            this.EnvmapMaxLevel = reader.ReadSingle();
+            this.EnvmapMaxRed = reader.ReadSingle();
+            this.EnvmapMaxGreen = reader.ReadSingle();
+            this.EnvmapMaxBlue = reader.ReadSingle();
+            this.MetallicScale = reader.ReadSingle();
+            this.SpecularHotSpot = reader.ReadSingle();
         }
 
         #endregion

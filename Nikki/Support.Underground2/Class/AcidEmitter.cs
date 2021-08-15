@@ -24,8 +24,8 @@ namespace Nikki.Support.Underground2.Class
         #region Fields
 
         private string _collection_name;
-        private string _special_effect = String.Empty;
-        private string _emitter_name = String.Empty;
+        private string _texture_name = String.Empty;
+        private string _group_name = String.Empty;
 
         /// <summary>
         /// Maximum length of the CollectionName.
@@ -104,13 +104,13 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [MemoryCastable()]
         [Category("Primary")]
-        public string SpecialEffect
+        public string TextureName
 		{
-            get => this._special_effect;
+            get => this._texture_name;
             set
 			{
                 if (value?.Length >= 0x30) throw new ArgumentLengthException(0x2F);
-                else this._special_effect = value ?? String.Empty;
+                else this._texture_name = value ?? String.Empty;
 			}
 		}
 
@@ -120,203 +120,450 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [MemoryCastable()]
         [Category("Primary")]
-        public string EmitterName
+        public string GroupName
 		{
-            get => this._emitter_name;
+            get => this._group_name;
             set
 			{
                 if (value?.Length >= 0x30) throw new ArgumentLengthException(0x2F);
-                else this._emitter_name = value ?? String.Empty;
+                else this._group_name = value ?? String.Empty;
             }
         }
 
         /// <summary>
-        /// Unknown value at offset 0x14.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Secondary")]
-        public int Unknown0x14 { get; set; }
+        [Category("Settings")]
+        public byte SpreadAsDisc { get; set; }
 
         /// <summary>
-        /// Class key value of this <see cref="AcidEmitter"/>.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Primary")]
-        public byte ClassKey { get; set; }
+        [Category("Settings")]
+        public byte ContactSheetW { get; set; }
 
         /// <summary>
-        /// Stamp value of this <see cref="AcidEmitter"/>.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Primary")]
-        public byte Stamp { get; set; }
+        [Category("Settings")]
+        public byte ContactSheetH { get; set; }
 
         /// <summary>
-        /// Section number of this <see cref="AcidEmitter"/>.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Primary")]
-        public byte SectionNumber { get; set; }
+        [Category("Settings")]
+        public byte AnimFPS { get; set; }
 
         /// <summary>
-        /// Flags used by the effect's properties.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Primary")]
-        public byte Flags { get; set; }
+        [Category("Settings")]
+        public byte RandomStartFrame { get; set; }
 
         /// <summary>
-        /// Unknown value at offset 0x1C.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Secondary")]
-        public byte Unknown0x1C { get; set; }
+        [Category("Settings")]
+        public byte RandomRotationDirection { get; set; }
 
         /// <summary>
-        /// Unknown value at offset 0x1D.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Secondary")]
-        public byte Unknown0x1D { get; set; }
+        [Category("Settings")]
+        public byte MotionLive { get; set; }
 
         /// <summary>
-        /// Unknown value at offset 0x1E.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Secondary")]
-        public byte Unknown0x1E { get; set; }
+        [Category("Variance")]
+        public int OnCycle { get; set; }
 
         /// <summary>
-        /// Unknown value at offset 0x1F.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Secondary")]
-        public byte Unknown0x1F { get; set; }
+        [Category("Variance")]
+        public float OnCycleVariance { get; set; }
 
         /// <summary>
-        /// Last position X of the effect.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Secondary")]
-        public float LastPositionX { get; set; }
+        [Category("Variance")]
+        public int OffCycle { get; set; }
 
         /// <summary>
-        /// Last position Y of the effect.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Secondary")]
-        public float LastPositionY { get; set; }
+        [Category("Variance")]
+        public float OffCycleVariance { get; set; }
 
         /// <summary>
-        /// Last position Z of the effect.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Secondary")]
-        public float LastPositionZ { get; set; }
+        [Category("Variance")]
+        public int NumParticles { get; set; }
 
         /// <summary>
-        /// Last position W of the effect.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Secondary")]
-        public float LastPositionW { get; set; }
+        [Category("Variance")]
+        public float NumParticlesVariance { get; set; }
 
         /// <summary>
-        /// Complexity X of the effect.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Secondary")]
-        public float ComplexityX { get; set; }
+        [Category("Variance")]
+        public float Life { get; set; }
 
         /// <summary>
-        /// Complexity Y of the effect.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Secondary")]
-        public float ComplexityY { get; set; }
+        [Category("Variance")]
+        public float LifeVariance { get; set; }
 
         /// <summary>
-        /// Complexity Z of the effect.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Secondary")]
-        public float ComplexityZ { get; set; }
+        [Category("Variance")]
+        public float Speed { get; set; }
 
         /// <summary>
-        /// Complexity W of the effect.
+        /// 
         /// </summary>
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Secondary")]
-        public float ComplexityW { get; set; }
+        [Category("Variance")]
+        public float SpeedVariance { get; set; }
 
         /// <summary>
-        /// LocalWorld <see cref="Matrix"/> of this <see cref="AcidEmitter"/>.
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("Angular")]
+        public float InitialAngleRange { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("Angular")]
+        public float SpreadAngle { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("Variance")]
+        public float MotionInherit { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("Variance")]
+        public float MotionInheritVariance { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("Settings")]
+        public float CarPosition { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("VolumeCenter")]
+        public float VolumeCenterX { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("VolumeCenter")]
+        public float VolumeCenterY { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("VolumeCenter")]
+        public float VolumeCenterZ { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("VolumeCenter")]
+        public float VolumeCenterW { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("VolumeExtent")]
+        public float VolumeExtentX { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("VolumeExtent")]
+        public float VolumeExtentY { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("VolumeExtent")]
+        public float VolumeExtentZ { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("VolumeExtent")]
+        public float VolumeExtentW { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("Angular")]
+        public float FarClip { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("Angular")]
+        public float Gravity { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("Angular")]
+        public float Drag { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("Angular")]
+        public float MaxPixelSize { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("KeyPositions")]
+        public float KeyPosition1 { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("KeyPositions")]
+        public float KeyPosition2 { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("KeyPositions")]
+        public float KeyPosition3 { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("KeyPositions")]
+        public float KeyPosition4 { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("Size")]
+        public float SizeX { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("Size")]
+        public float SizeY { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("Size")]
+        public float SizeZ { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("Size")]
+        public float SizeW { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("RelativeAngle")]
+        public float RelativeAngleX { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("RelativeAngle")]
+        public float RelativeAngleY { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("RelativeAngle")]
+        public float RelativeAngleZ { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("RelativeAngle")]
+        public float RelativeAngleW { get; set; }
+
+        /// <summary>
+        /// 
         /// </summary>
         [Expandable("Matrix")]
         [Browsable(false)]
-        public Matrix LocalWorld { get; set; }
+        public Matrix ColorMatrix { get; }
 
         /// <summary>
-        /// Intensity <see cref="Matrix"/> of this <see cref="AcidEmitter"/>.
+        /// 
         /// </summary>
         [Expandable("Matrix")]
         [Browsable(false)]
-        public Matrix Intensity { get; set; }
+        public Matrix ColorBasis { get; }
 
         /// <summary>
-        /// Range <see cref="Matrix"/> of this <see cref="AcidEmitter"/>.
+        /// 
         /// </summary>
         [Expandable("Matrix")]
         [Browsable(false)]
-        public Matrix Range { get; set; }
-
-        /// <summary>
-        /// Translation <see cref="Matrix"/> of this <see cref="AcidEmitter"/>.
-        /// </summary>
-        [Expandable("Matrix")]
-        [Browsable(false)]
-        public Matrix Translation { get; set; }
-
-        /// <summary>
-        /// Magnitude <see cref="Matrix"/> of this <see cref="AcidEmitter"/>.
-        /// </summary>
-        [Expandable("Matrix")]
-        [Browsable(false)]
-        public Matrix Magnitude { get; set; }
+        public Matrix ExtraBasis { get; }
 
         #endregion
 
@@ -327,11 +574,9 @@ namespace Nikki.Support.Underground2.Class
         /// </summary>
         public AcidEmitter()
 		{
-            this.Intensity = new Matrix();
-            this.LocalWorld = new Matrix();
-            this.Magnitude = new Matrix();
-            this.Range = new Matrix();
-            this.Translation = new Matrix();
+            this.ColorMatrix = new Matrix();
+            this.ColorBasis = new Matrix();
+            this.ExtraBasis = new Matrix();
 		}
 
         /// <summary>
@@ -368,39 +613,66 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="AcidEmitter"/> with.</param>
         public override void Assemble(BinaryWriter bw)
         {
-            // Write header and all values
-            bw.Write(this.Localizer);
-            bw.Write(this.Localizer);
-            bw.Write(this.BinKey);
-            bw.Write(this.SpecialEffect.BinHash());
-            bw.Write(this.EmitterName.BinHash());
-            bw.Write(this.Unknown0x14);
-            bw.Write(this.ClassKey);
-            bw.Write(this.Stamp);
-            bw.Write(this.SectionNumber);
-            bw.Write(this.Flags);
-            bw.Write(this.Unknown0x1C);
-            bw.Write(this.Unknown0x1D);
-            bw.Write(this.Unknown0x1E);
-            bw.Write(this.Unknown0x1F);
-            this.LocalWorld.Write(bw);
-            this.Intensity.Write(bw);
-            this.Range.Write(bw);
-            bw.Write(this.LastPositionX);
-            bw.Write(this.LastPositionY);
-            bw.Write(this.LastPositionZ);
-            bw.Write(this.LastPositionW);
-            bw.Write(this.ComplexityX);
-            bw.Write(this.ComplexityY);
-            bw.Write(this.ComplexityZ);
-            bw.Write(this.ComplexityW);
-            this.Translation.Write(bw);
-            this.Magnitude.Write(bw);
-
-            // Write CollectionName, SpecialEffect, and EmitterName
+            bw.Write(0);
+            bw.Write(0);
+            bw.Write(this._collection_name.BinHash());
+            bw.Write(this._texture_name.BinHash());
+            bw.Write(this._group_name.BinHash());
+            bw.Write(0);
+            bw.Write(this.SpreadAsDisc);
+            bw.Write(this.ContactSheetW);
+            bw.Write(this.ContactSheetH);
+            bw.Write(this.AnimFPS);
+            bw.Write(this.RandomStartFrame);
+            bw.Write(this.RandomRotationDirection);
+            bw.Write(this.MotionLive);
+            bw.Write((byte)0);
+            bw.Write(this.OnCycle);
+            bw.Write(this.OnCycleVariance);
+            bw.Write(this.OffCycle);
+            bw.Write(this.OffCycleVariance);
+            bw.Write(this.NumParticles);
+            bw.Write(this.NumParticlesVariance);
+            bw.Write(this.Life);
+            bw.Write(this.LifeVariance);
+            bw.Write(this.Speed);
+            bw.Write(this.SpeedVariance);
+            bw.Write(this.InitialAngleRange);
+            bw.Write(this.SpreadAngle);
+            bw.Write(this.MotionInherit);
+            bw.Write(this.MotionInheritVariance);
+            bw.Write(this.CarPosition);
+            bw.Write(0);
+            bw.Write(this.VolumeCenterX);
+            bw.Write(this.VolumeCenterY);
+            bw.Write(this.VolumeCenterZ);
+            bw.Write(this.VolumeCenterW);
+            bw.Write(this.VolumeExtentX);
+            bw.Write(this.VolumeExtentY);
+            bw.Write(this.VolumeExtentZ);
+            bw.Write(this.VolumeExtentW);
+            bw.Write(this.FarClip);
+            bw.Write(this.Gravity);
+            bw.Write(this.Drag);
+            bw.Write(this.MaxPixelSize);
+            bw.Write(this.KeyPosition1);
+            bw.Write(this.KeyPosition2);
+            bw.Write(this.KeyPosition3);
+            bw.Write(this.KeyPosition4);
+            this.ColorMatrix.Write(bw);
+            bw.Write(this.SizeX);
+            bw.Write(this.SizeY);
+            bw.Write(this.SizeZ);
+            bw.Write(this.SizeW);
+            bw.Write(this.RelativeAngleX);
+            bw.Write(this.RelativeAngleY);
+            bw.Write(this.RelativeAngleZ);
+            bw.Write(this.RelativeAngleW);
+            this.ColorBasis.Write(bw);
+            this.ExtraBasis.Write(bw);
             bw.WriteNullTermUTF8(this._collection_name, 0x40);
-            bw.WriteNullTermUTF8(this.SpecialEffect, 0x30);
-            bw.WriteNullTermUTF8(this.EmitterName, 0x30);
+            bw.WriteNullTermUTF8(this.TextureName, 0x30);
+            bw.WriteNullTermUTF8(this.GroupName, 0x30);
         }
 
         /// <summary>
@@ -409,37 +681,63 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="br"><see cref="BinaryReader"/> to read <see cref="AcidEmitter"/> with.</param>
         public override void Disassemble(BinaryReader br)
         {
-            // Skip header and read values
-            br.BaseStream.Position += 0x14;
-            this.Unknown0x14 = br.ReadInt32();
-            this.ClassKey = br.ReadByte();
-            this.Stamp = br.ReadByte();
-            this.SectionNumber = br.ReadByte();
-            this.Flags = br.ReadByte();
-            this.Unknown0x1C = br.ReadByte();
-            this.Unknown0x1D = br.ReadByte();
-            this.Unknown0x1E = br.ReadByte();
-            this.Unknown0x1F = br.ReadByte();
-            this.LocalWorld.Read(br);
-            this.Intensity.Read(br);
-            this.Range.Read(br);
-            this.LastPositionX = br.ReadSingle();
-            this.LastPositionY = br.ReadSingle();
-            this.LastPositionZ = br.ReadSingle();
-            this.LastPositionW = br.ReadSingle();
-            this.ComplexityX = br.ReadSingle();
-            this.ComplexityY = br.ReadSingle();
-            this.ComplexityZ = br.ReadSingle();
-            this.ComplexityW = br.ReadSingle();
-            this.Translation.Read(br);
-            this.Magnitude.Read(br);
-
-            // Read CollectionName, SpecialEffect, and EmitterName
+            br.BaseStream.Position += 0x18;
+            this.SpreadAsDisc = br.ReadByte();
+            this.ContactSheetW = br.ReadByte();
+            this.ContactSheetH = br.ReadByte();
+            this.AnimFPS = br.ReadByte();
+            this.RandomStartFrame = br.ReadByte();
+            this.RandomRotationDirection = br.ReadByte();
+            this.MotionLive = br.ReadByte();
+            br.BaseStream.Position += 0x01;
+            this.OnCycle = br.ReadInt32();
+            this.OnCycleVariance = br.ReadSingle();
+            this.OffCycle = br.ReadInt32();
+            this.OffCycleVariance = br.ReadSingle();
+            this.NumParticles = br.ReadInt32();
+            this.NumParticlesVariance = br.ReadSingle();
+            this.Life = br.ReadSingle();
+            this.LifeVariance = br.ReadSingle();
+            this.Speed = br.ReadSingle();
+            this.SpeedVariance = br.ReadSingle();
+            this.InitialAngleRange = br.ReadSingle();
+            this.SpreadAngle = br.ReadSingle();
+            this.MotionInherit = br.ReadSingle();
+            this.MotionInheritVariance = br.ReadSingle();
+            this.CarPosition = br.ReadSingle();
+            br.BaseStream.Position += 0x04;
+            this.VolumeCenterX = br.ReadSingle();
+            this.VolumeCenterY = br.ReadSingle();
+            this.VolumeCenterZ = br.ReadSingle();
+            this.VolumeCenterW = br.ReadSingle();
+            this.VolumeExtentX = br.ReadSingle();
+            this.VolumeExtentY = br.ReadSingle();
+            this.VolumeExtentZ = br.ReadSingle();
+            this.VolumeExtentW = br.ReadSingle();
+            this.FarClip = br.ReadSingle();
+            this.Gravity = br.ReadSingle();
+            this.Drag = br.ReadSingle();
+            this.MaxPixelSize = br.ReadSingle();
+            this.KeyPosition1 = br.ReadSingle();
+            this.KeyPosition2 = br.ReadSingle();
+            this.KeyPosition3 = br.ReadSingle();
+            this.KeyPosition4 = br.ReadSingle();
+            this.ColorMatrix.Read(br);
+            this.SizeX = br.ReadSingle();
+            this.SizeY = br.ReadSingle();
+            this.SizeZ = br.ReadSingle();
+            this.SizeW = br.ReadSingle();
+            this.RelativeAngleX = br.ReadSingle();
+            this.RelativeAngleY = br.ReadSingle();
+            this.RelativeAngleZ = br.ReadSingle();
+            this.RelativeAngleW = br.ReadSingle();
+            this.ColorBasis.Read(br);
+            this.ExtraBasis.Read(br);
             this._collection_name = br.ReadNullTermUTF8(0x40);
-            this._special_effect = br.ReadNullTermUTF8(0x30);
-            this._emitter_name = br.ReadNullTermUTF8(0x30);
-            this._special_effect.BinHash();
-            this._emitter_name.BinHash();
+            this._texture_name = br.ReadNullTermUTF8(0x30);
+            this._group_name = br.ReadNullTermUTF8(0x30);
+            this._texture_name.BinHash();
+            this._group_name.BinHash();
         }
 
         /// <summary>
@@ -481,37 +779,64 @@ namespace Nikki.Support.Underground2.Class
             {
 
                 writer.WriteNullTermUTF8(this._collection_name);
-                writer.WriteNullTermUTF8(this._special_effect);
-                writer.WriteNullTermUTF8(this._emitter_name);
+                writer.WriteNullTermUTF8(this._texture_name);
+                writer.WriteNullTermUTF8(this._group_name);
 
-                writer.Write(this.Unknown0x14);
-                writer.Write(this.ClassKey);
-                writer.Write(this.Stamp);
-                writer.Write(this.SectionNumber);
-                writer.Write(this.Flags);
-                writer.Write(this.Unknown0x1C);
-                writer.Write(this.Unknown0x1D);
-                writer.Write(this.Unknown0x1E);
-                writer.Write(this.Unknown0x1F);
-                writer.Write(this.LastPositionX);
-                writer.Write(this.LastPositionY);
-                writer.Write(this.LastPositionZ);
-                writer.Write(this.LastPositionW);
-                writer.Write(this.ComplexityX);
-                writer.Write(this.ComplexityY);
-                writer.Write(this.ComplexityZ);
-                writer.Write(this.ComplexityW);
-                this.LocalWorld.Write(writer);
-                this.Intensity.Write(writer);
-                this.Range.Write(writer);
-                this.Translation.Write(writer);
-                this.Magnitude.Write(writer);
+                bw.Write(this.SpreadAsDisc);
+                bw.Write(this.ContactSheetW);
+                bw.Write(this.ContactSheetH);
+                bw.Write(this.AnimFPS);
+                bw.Write(this.RandomStartFrame);
+                bw.Write(this.RandomRotationDirection);
+                bw.Write(this.MotionLive);
+                bw.Write(this.OnCycle);
+                bw.Write(this.OnCycleVariance);
+                bw.Write(this.OffCycle);
+                bw.Write(this.OffCycleVariance);
+                bw.Write(this.NumParticles);
+                bw.Write(this.NumParticlesVariance);
+                bw.Write(this.Life);
+                bw.Write(this.LifeVariance);
+                bw.Write(this.Speed);
+                bw.Write(this.SpeedVariance);
+                bw.Write(this.InitialAngleRange);
+                bw.Write(this.SpreadAngle);
+                bw.Write(this.MotionInherit);
+                bw.Write(this.MotionInheritVariance);
+                bw.Write(this.CarPosition);
+                bw.Write(this.VolumeCenterX);
+                bw.Write(this.VolumeCenterY);
+                bw.Write(this.VolumeCenterZ);
+                bw.Write(this.VolumeCenterW);
+                bw.Write(this.VolumeExtentX);
+                bw.Write(this.VolumeExtentY);
+                bw.Write(this.VolumeExtentZ);
+                bw.Write(this.VolumeExtentW);
+                bw.Write(this.FarClip);
+                bw.Write(this.Gravity);
+                bw.Write(this.Drag);
+                bw.Write(this.MaxPixelSize);
+                bw.Write(this.KeyPosition1);
+                bw.Write(this.KeyPosition2);
+                bw.Write(this.KeyPosition3);
+                bw.Write(this.KeyPosition4);
+                this.ColorMatrix.Write(bw);
+                bw.Write(this.SizeX);
+                bw.Write(this.SizeY);
+                bw.Write(this.SizeZ);
+                bw.Write(this.SizeW);
+                bw.Write(this.RelativeAngleX);
+                bw.Write(this.RelativeAngleY);
+                bw.Write(this.RelativeAngleZ);
+                bw.Write(this.RelativeAngleW);
+                this.ColorBasis.Write(bw);
+                this.ExtraBasis.Write(bw);
 
                 array = ms.ToArray();
 
             }
 
-            array = Interop.Compress(array, LZCompressionType.BEST);
+            array = Interop.Compress(array, LZCompressionType.RAWW);
 
             var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
             header.Write(bw);
@@ -534,31 +859,57 @@ namespace Nikki.Support.Underground2.Class
             using var reader = new BinaryReader(ms);
 
             this._collection_name = reader.ReadNullTermUTF8();
-            this._special_effect = reader.ReadNullTermUTF8();
-            this._emitter_name = reader.ReadNullTermUTF8();
+            this._texture_name = reader.ReadNullTermUTF8();
+            this._group_name = reader.ReadNullTermUTF8();
 
-            this.Unknown0x14 = reader.ReadInt32();
-            this.ClassKey = reader.ReadByte();
-            this.Stamp = reader.ReadByte();
-            this.SectionNumber = reader.ReadByte();
-            this.Flags = reader.ReadByte();
-            this.Unknown0x1C = reader.ReadByte();
-            this.Unknown0x1D = reader.ReadByte();
-            this.Unknown0x1E = reader.ReadByte();
-            this.Unknown0x1F = reader.ReadByte();
-            this.LastPositionX = reader.ReadSingle();
-            this.LastPositionY = reader.ReadSingle();
-            this.LastPositionZ = reader.ReadSingle();
-            this.LastPositionW = reader.ReadSingle();
-            this.ComplexityX = reader.ReadSingle();
-            this.ComplexityY = reader.ReadSingle();
-            this.ComplexityZ = reader.ReadSingle();
-            this.ComplexityW = reader.ReadSingle();
-            this.LocalWorld.Read(reader);
-            this.Intensity.Read(reader);
-            this.Range.Read(reader);
-            this.Translation.Read(reader);
-            this.Magnitude.Read(reader);
+            this.SpreadAsDisc = br.ReadByte();
+            this.ContactSheetW = br.ReadByte();
+            this.ContactSheetH = br.ReadByte();
+            this.AnimFPS = br.ReadByte();
+            this.RandomStartFrame = br.ReadByte();
+            this.RandomRotationDirection = br.ReadByte();
+            this.OnCycle = br.ReadInt32();
+            this.OnCycleVariance = br.ReadSingle();
+            this.OffCycle = br.ReadInt32();
+            this.OffCycleVariance = br.ReadSingle();
+            this.NumParticles = br.ReadInt32();
+            this.NumParticlesVariance = br.ReadSingle();
+            this.Life = br.ReadSingle();
+            this.LifeVariance = br.ReadSingle();
+            this.Speed = br.ReadSingle();
+            this.SpeedVariance = br.ReadSingle();
+            this.InitialAngleRange = br.ReadSingle();
+            this.SpreadAngle = br.ReadSingle();
+            this.MotionInherit = br.ReadSingle();
+            this.MotionInheritVariance = br.ReadSingle();
+            this.CarPosition = br.ReadSingle();
+            this.VolumeCenterX = br.ReadSingle();
+            this.VolumeCenterY = br.ReadSingle();
+            this.VolumeCenterZ = br.ReadSingle();
+            this.VolumeCenterW = br.ReadSingle();
+            this.VolumeExtentX = br.ReadSingle();
+            this.VolumeExtentY = br.ReadSingle();
+            this.VolumeExtentZ = br.ReadSingle();
+            this.VolumeExtentW = br.ReadSingle();
+            this.FarClip = br.ReadSingle();
+            this.Gravity = br.ReadSingle();
+            this.Drag = br.ReadSingle();
+            this.MaxPixelSize = br.ReadSingle();
+            this.KeyPosition1 = br.ReadSingle();
+            this.KeyPosition2 = br.ReadSingle();
+            this.KeyPosition3 = br.ReadSingle();
+            this.KeyPosition4 = br.ReadSingle();
+            this.ColorMatrix.Read(br);
+            this.SizeX = br.ReadSingle();
+            this.SizeY = br.ReadSingle();
+            this.SizeZ = br.ReadSingle();
+            this.SizeW = br.ReadSingle();
+            this.RelativeAngleX = br.ReadSingle();
+            this.RelativeAngleY = br.ReadSingle();
+            this.RelativeAngleZ = br.ReadSingle();
+            this.RelativeAngleW = br.ReadSingle();
+            this.ColorBasis.Read(br);
+            this.ExtraBasis.Read(br);
         }
 
         #endregion

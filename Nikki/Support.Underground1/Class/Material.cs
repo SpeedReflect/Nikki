@@ -538,7 +538,7 @@ namespace Nikki.Support.Underground1.Class
 
             }
 
-            array = Interop.Compress(array, LZCompressionType.BEST);
+            array = Interop.Compress(array, LZCompressionType.RAWW);
 
             var header = new SerializationHeader(array.Length, this.GameINT, this.Manager.Name);
             header.Write(bw);

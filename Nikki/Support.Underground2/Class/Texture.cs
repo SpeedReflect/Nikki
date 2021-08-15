@@ -497,7 +497,7 @@ namespace Nikki.Support.Underground2.Class
                 writer.WriteBytes(0, 0x20); // write padding for better compression
                 writer.Write(modulo == 0 ? size : size + 1);
 
-                array = Interop.Compress(ms.ToArray(), LZCompressionType.BEST);
+                array = Interop.Compress(ms.ToArray(), LZCompressionType.RAWW);
                 datalist.Add(array);
 
             }
