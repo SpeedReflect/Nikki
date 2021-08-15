@@ -166,7 +166,7 @@ namespace Nikki.Support.MostWanted.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Primary")]
+        [Category("Envmap")]
         public float EnvmapMaxLevel { get; set; }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace Nikki.Support.MostWanted.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Primary")]
+        [Category("Envmap")]
         public float EnvmapMaxRed { get; set; }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace Nikki.Support.MostWanted.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Primary")]
+        [Category("Envmap")]
         public float EnvmapMinRed { get; set; }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace Nikki.Support.MostWanted.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Primary")]
+        [Category("Envmap")]
         public float EnvmapMinLevel { get; set; }
 
         /// <summary>
@@ -310,7 +310,7 @@ namespace Nikki.Support.MostWanted.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Unknown")]
+        [Category("Envmap")]
         public float EnvmapMinGreen { get; set; }
 
         /// <summary>
@@ -319,7 +319,7 @@ namespace Nikki.Support.MostWanted.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Unknown")]
+        [Category("Envmap")]
         public float EnvmapMinBlue { get; set; }
 
         /// <summary>
@@ -328,7 +328,7 @@ namespace Nikki.Support.MostWanted.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Unknown")]
+        [Category("Envmap")]
         public float EnvmapMaxGreen { get; set; }
 
         /// <summary>
@@ -337,7 +337,7 @@ namespace Nikki.Support.MostWanted.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Unknown")]
+        [Category("Envmap")]
         public float EnvmapMaxBlue { get; set; }
 
         /// <summary>
@@ -346,7 +346,7 @@ namespace Nikki.Support.MostWanted.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Unknown")]
+        [Category("Primary")]
         public float MetallicScale { get; set; }
 
         /// <summary>
@@ -355,7 +355,7 @@ namespace Nikki.Support.MostWanted.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
-        [Category("Unknown")]
+        [Category("Primary")]
         public float SpecularHotSpot { get; set; }
 
         #endregion
