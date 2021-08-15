@@ -6,6 +6,7 @@ using Nikki.Core;
 using Nikki.Utils;
 using Nikki.Reflection;
 using Nikki.Reflection.Enum;
+using Nikki.Reflection.Abstract;
 using Nikki.Reflection.Exception;
 using Nikki.Reflection.Attributes;
 using Nikki.Support.Carbon.Framework;
@@ -13,8 +14,6 @@ using Nikki.Support.Shared.Parts.STRParts;
 using CoreExtensions.IO;
 using CoreExtensions.Text;
 using CoreExtensions.Conversions;
-
-
 
 namespace Nikki.Support.Carbon.Class
 {
@@ -223,6 +222,25 @@ namespace Nikki.Support.Carbon.Class
 
 			// Set position to end
 			br.BaseStream.Position = broffset + BlockSize;
+		}
+
+		/// <summary>
+		/// Casts all attributes from this object to another one.
+		/// </summary>
+		/// <param name="CName">CollectionName of the new created object.</param>
+		/// <returns>Memory casted copy of the object.</returns>
+		public override Collectable MemoryCast(string CName)
+		{
+			var result = new STRBlock(CName, this.Manager);
+			
+			foreach (var record in this._stringinfo)
+			{
+
+				result._stringinfo.Add(record.PlainCopy() as StringRecord);
+
+			}
+
+			return result;
 		}
 
 		/// <summary>

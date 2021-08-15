@@ -358,6 +358,18 @@ namespace Nikki.Support.Shared.Class
         public TextureMipmapBiasType MipmapBiasType { get; set; }
 
         /// <summary>
+        /// Represents mipmap bias type of the texture as a <see cref="Byte"/>. Directly linked to <see cref="MipmapBiasType"/>.
+        /// </summary>
+        [AccessModifiable()]
+        [MemoryCastable()]
+        [Category("Secondary")]
+        public byte MipmapBiasInt
+		{
+            get => (byte)this.MipmapBiasType;
+            set => this.MipmapBiasType = (TextureMipmapBiasType)value;
+		}
+
+        /// <summary>
         /// Represents bias level of the texture.
         /// </summary>
         [AccessModifiable()]
