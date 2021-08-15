@@ -1575,7 +1575,7 @@
             0x0003BC00
             </summary>
         </member>
-        <member name="F:Nikki.Reflection.Enum.BinBlockID.TPKSettings">
+        <member name="F:Nikki.Reflection.Enum.BinBlockID.EmitterTexturePage">
             <summary>
             0x0003BD00
             </summary>
@@ -13404,6 +13404,11 @@
             Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/> of this <see cref="T:Nikki.Support.Carbon.Class.TPKBlock"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Carbon.Class.TPKBlock.TexturePages">
+            <summary>
+            Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.TexturePage"/> of this <see cref="T:Nikki.Support.Carbon.Class.TPKBlock"/>.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Carbon.Class.TPKBlock.Textures">
             <summary>
             List of <see cref="T:Nikki.Support.Carbon.Class.Texture"/> in this <see cref="T:Nikki.Support.Carbon.Class.TPKBlock"/>.
@@ -18869,6 +18874,11 @@
             Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/> of this <see cref="T:Nikki.Support.MostWanted.Class.TPKBlock"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.MostWanted.Class.TPKBlock.TexturePages">
+            <summary>
+            Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.TexturePage"/> of this <see cref="T:Nikki.Support.MostWanted.Class.TPKBlock"/>.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.MostWanted.Class.TPKBlock.Textures">
             <summary>
             List of <see cref="T:Nikki.Support.MostWanted.Class.Texture"/> in this <see cref="T:Nikki.Support.MostWanted.Class.TPKBlock"/>.
@@ -20399,7 +20409,7 @@
         </member>
         <member name="M:Nikki.Support.MostWanted.Framework.TPKBlockManager.Disassemble(System.IO.BinaryReader,Nikki.Core.Block)">
             <summary>
-            Disassembles data into separate collections in this <see cref="T:Nikki.Support.MostWanted.Framework.PresetRideManager"/>.
+            Disassembles data into separate collections in this <see cref="T:Nikki.Support.MostWanted.Framework.TPKBlockManager"/>.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="block"><see cref="T:Nikki.Core.Block"/> with offsets.</param>
@@ -25051,6 +25061,11 @@
             Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/> of this <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Prostreet.Class.TPKBlock.TexturePages">
+            <summary>
+            Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.TexturePage"/> of this <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Prostreet.Class.TPKBlock.Textures">
             <summary>
             List of <see cref="T:Nikki.Support.Prostreet.Class.Texture"/> in this <see cref="T:Nikki.Support.Prostreet.Class.TPKBlock"/>.
@@ -29211,14 +29226,14 @@
             <see cref="T:Nikki.Support.Shared.Class.TPKBlock.TPKCompressionType"/> of this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
             </summary>
         </member>
-        <member name="P:Nikki.Support.Shared.Class.TPKBlock.SettingData">
-            <summary>
-            Settings data related to this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
-            </summary>
-        </member>
         <member name="P:Nikki.Support.Shared.Class.TPKBlock.Animations">
             <summary>
             Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/> of this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.TPKBlock.TexturePages">
+            <summary>
+            Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.TexturePage"/> of this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Shared.Class.TPKBlock.Textures">
@@ -29234,6 +29249,11 @@
         <member name="P:Nikki.Support.Shared.Class.TPKBlock.AnimationCount">
             <summary>
             Number of <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/> in this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.TPKBlock.TexturePageCount">
+            <summary>
+            Number of <see cref="T:Nikki.Support.Shared.Parts.TPKParts.TexturePage"/> in this <see cref="T:Nikki.Support.Shared.Class.TPKBlock"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Shared.Class.TPKBlock.Watermark">
@@ -29360,6 +29380,18 @@
             <param name="key">Key of the Collection Name of the <see cref="T:Nikki.Support.Shared.Class.Texture"/> to be replaced.</param>
             <param name="type">Type of the key passed.</param>
             <param name="filename">Path of the texture that replaces the current one.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.TPKBlock.ReadTexturePages(System.IO.BinaryReader)">
+            <summary>
+            Reads all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.TexturePage"/> using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Class.TPKBlock.WriteTexturePages(System.IO.BinaryWriter)">
+            <summary>
+            Writes all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.TexturePage"/> using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write with.</param>
         </member>
         <member name="M:Nikki.Support.Shared.Class.TPKBlock.FindOffsets(System.IO.BinaryReader)">
             <summary>
@@ -31471,6 +31503,65 @@
             <summary>
             Unknown 4-byte signed integer value.
             </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.TexturePage.U0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.TexturePage.V0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.TexturePage.U1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.TexturePage.V1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.TexturePage.Flags">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.TexturePage.TextureName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Parts.TPKParts.TexturePage.TextureKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.TPKParts.TexturePage.PlainCopy">
+            <summary>
+            Creates a plain copy of the objects that contains same values.
+            </summary>
+            <returns>Exact plain copy of the object.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.TPKParts.TexturePage.Read(System.IO.BinaryReader)">
+            <summary>
+            Reads data using <see cref="T:System.IO.BinaryReader"/> provided.
+            </summary>
+            <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.TPKParts.TexturePage.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes data using <see cref="T:System.IO.BinaryWriter"/> provided.
+            </summary>
+            <param name="bw"><see cref="T:System.IO.BinaryWriter"/> to write data with.</param>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.TPKParts.TexturePage.ToString">
+            <summary>
+            Name of the texture page.
+            </summary>
+            <returns>Name of the texture page as a string value.</returns>
         </member>
         <member name="T:Nikki.Support.Shared.Parts.VinylParts.DropShadowEffect">
             <summary>
@@ -35885,6 +35976,11 @@
         <member name="P:Nikki.Support.Undercover.Class.TPKBlock.Animations">
             <summary>
             Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/> of this <see cref="T:Nikki.Support.Undercover.Class.TPKBlock"/>.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Undercover.Class.TPKBlock.TexturePages">
+            <summary>
+            Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.TexturePage"/> of this <see cref="T:Nikki.Support.Undercover.Class.TPKBlock"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Undercover.Class.TPKBlock.Textures">
@@ -41807,6 +41903,11 @@
             Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/> of this <see cref="T:Nikki.Support.Underground1.Class.TPKBlock"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Underground1.Class.TPKBlock.TexturePages">
+            <summary>
+            Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.TexturePage"/> of this <see cref="T:Nikki.Support.Underground1.Class.TPKBlock"/>.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Underground1.Class.TPKBlock.Textures">
             <summary>
             List of <see cref="T:Nikki.Support.Underground1.Class.Texture"/> in this <see cref="T:Nikki.Support.Underground1.Class.TPKBlock"/>.
@@ -43123,7 +43224,7 @@
         </member>
         <member name="M:Nikki.Support.Underground1.Framework.TPKBlockManager.Disassemble(System.IO.BinaryReader,Nikki.Core.Block)">
             <summary>
-            Disassembles data into separate collections in this <see cref="T:Nikki.Support.Underground1.Framework.PresetRideManager"/>.
+            Disassembles data into separate collections in this <see cref="T:Nikki.Support.Underground1.Framework.TPKBlockManager"/>.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="block"><see cref="T:Nikki.Core.Block"/> with offsets.</param>
@@ -48888,6 +48989,11 @@
             Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.AnimSlot"/> of this <see cref="T:Nikki.Support.Underground2.Class.TPKBlock"/>.
             </summary>
         </member>
+        <member name="P:Nikki.Support.Underground2.Class.TPKBlock.TexturePages">
+            <summary>
+            Represents all <see cref="T:Nikki.Support.Shared.Parts.TPKParts.TexturePage"/> of this <see cref="T:Nikki.Support.Underground2.Class.TPKBlock"/>.
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Underground2.Class.TPKBlock.Textures">
             <summary>
             List of <see cref="T:Nikki.Support.Underground2.Class.Texture"/> in this <see cref="T:Nikki.Support.Underground2.Class.TPKBlock"/>.
@@ -50594,7 +50700,7 @@
         </member>
         <member name="M:Nikki.Support.Underground2.Framework.TPKBlockManager.Disassemble(System.IO.BinaryReader,Nikki.Core.Block)">
             <summary>
-            Disassembles data into separate collections in this <see cref="T:Nikki.Support.Underground2.Framework.PresetRideManager"/>.
+            Disassembles data into separate collections in this <see cref="T:Nikki.Support.Underground2.Framework.TPKBlockManager"/>.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read data with.</param>
             <param name="block"><see cref="T:Nikki.Core.Block"/> with offsets.</param>
