@@ -74,12 +74,10 @@ namespace Nikki.Support.Carbon.Framework
 			{
 				bw.GeneratePadding(mark, this.Alignment);
 
-				if (collection.SettingData != null)
+				if (collection.TexturePageCount > 0)
 				{
 
-					bw.WriteEnum(BinBlockID.TPKSettings);
-					bw.Write(collection.SettingData.Length);
-					bw.Write(collection.SettingData);
+					collection.WriteTexturePages(bw);
 					bw.GeneratePadding(mark, this.Alignment);
 
 				}
@@ -101,31 +99,37 @@ namespace Nikki.Support.Carbon.Framework
 			if (block.BlockID != BinBlockID.TPKBlocks) return;
 
 			this.Capacity = block.Offsets.Count;
-			byte[] settings = null;
+			long settings = -1;
 
 			for (int loop = 0; loop < block.Offsets.Count; ++loop)
 			{
 
-				br.BaseStream.Position = block.Offsets[loop];
+				var offset = block.Offsets[loop];
+				br.BaseStream.Position = offset;
 				var id = br.ReadEnum<BinBlockID>();
-				var size = br.ReadInt32();
 
-				if (id == BinBlockID.TPKSettings)
+				if (id == BinBlockID.EmitterTexturePage)
 				{
 
-					settings = br.ReadBytes(size);
+					settings = block.Offsets[loop];
 					continue;
 
 				}
 				else if (id == BinBlockID.TPKBlocks)
 				{
 
-					br.BaseStream.Position -= 8;
+					br.BaseStream.Position = offset;
 
-					var collection = new TPKBlock(br, this)
+					var collection = new TPKBlock(br, this);
+
+					if (settings != -1)
 					{
-						SettingData = settings
-					};
+
+						br.BaseStream.Position = settings;
+						collection.ReadTexturePages(br);
+						settings = -1;
+
+					}
 
 					try { this.Add(collection); }
 					catch { } // skip if exists
@@ -190,8 +194,28 @@ namespace Nikki.Support.Carbon.Framework
 			else
 			{
 
-				if (serialized) this[index].Serialize(bw);
-				else this[index].Assemble(bw);
+				if (serialized)
+				{
+
+					this[index].Serialize(bw);
+
+				}
+				else
+				{
+
+					var collection = this[index];
+
+					if (collection.TexturePageCount > 0)
+					{
+
+						collection.WriteTexturePages(bw);
+						bw.GeneratePadding(String.Empty, this.Alignment);
+
+					}
+
+					collection.Assemble(bw);
+
+				}
 
 			}
 		}
@@ -214,7 +238,34 @@ namespace Nikki.Support.Carbon.Framework
 			{
 
 				br.BaseStream.Position = position;
-				collection.Disassemble(br);
+
+				while (br.BaseStream.Position < br.BaseStream.Length)
+				{
+
+					var offset = br.BaseStream.Position;
+					var id = br.ReadEnum<BinBlockID>();
+					var size = br.ReadInt32();
+
+					br.BaseStream.Position = offset;
+
+					if (id == BinBlockID.EmitterTexturePage)
+					{
+
+						collection.ReadTexturePages(br);
+
+					}
+
+					if (id == BinBlockID.TPKBlocks)
+					{
+
+						collection.Disassemble(br);
+						break;
+
+					}
+
+					br.BaseStream.Position = offset + size + 8;
+
+				}
 
 			}
 			else

@@ -363,7 +363,7 @@
         /// <summary>
         /// 0x0003BD00
         /// </summary>
-        TPKSettings = 0x0003BD00, // 0x80 Modular
+        EmitterTexturePage = 0x0003BD00, // 0x80 Modular
 
         /// <summary>
         /// 0x0003CE01

@@ -172,7 +172,7 @@ namespace Nikki.Support.Undercover.Framework
 					case BinBlockID.DBCarParts:
 					case BinBlockID.DBCarBounds:
 					case BinBlockID.FNGCompress:
-					case BinBlockID.TPKSettings:
+					case BinBlockID.EmitterTexturePage:
 					case BinBlockID.VinylSystem:
 					case BinBlockID.CarTypeInfos:
 					case BinBlockID.CarInfoAnimHideup:

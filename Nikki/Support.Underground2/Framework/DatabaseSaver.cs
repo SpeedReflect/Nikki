@@ -183,7 +183,7 @@ namespace Nikki.Support.Underground2.Framework
 					case BinBlockID.AcidEffects:
 					case BinBlockID.FNGCompress:
 					case BinBlockID.PresetRides:
-					case BinBlockID.TPKSettings:
+					case BinBlockID.EmitterTexturePage:
 					case BinBlockID.AcidEmitters:
 					case BinBlockID.CarTypeInfos:
 					case BinBlockID.CarInfoAnimHideup:

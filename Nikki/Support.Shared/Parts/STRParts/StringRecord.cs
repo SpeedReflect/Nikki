@@ -65,7 +65,7 @@ namespace Nikki.Support.Shared.Parts.STRParts
 		/// <see cref="StringRecord"/> belongs to.</param>
 		public StringRecord(STRBlock block)
 		{
-			this.Label = string.Empty;
+			this.Label = String.Empty;
 			this.ThisSTRBlock = block;
 		}
 

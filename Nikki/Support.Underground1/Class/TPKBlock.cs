@@ -26,6 +26,7 @@ namespace Nikki.Support.Underground1.Class
 
         private string _collection_name;
         private List<AnimSlot> _animations;
+        private List<TexturePage> _texturePages;
         private List<Shared.Class.Texture> _textures;
         private const long max = 0x7FFFFFFF;
         private TPKCompressionType _comp_type;
@@ -114,6 +115,12 @@ namespace Nikki.Support.Underground1.Class
         /// </summary>
         [Category("Primary")]
         public override List<AnimSlot> Animations => this._animations;
+
+        /// <summary>
+        /// Represents all <see cref="TexturePage"/> of this <see cref="TPKBlock"/>.
+        /// </summary>
+        [Category("Primary")]
+        public override List<TexturePage> TexturePages => this._texturePages;
 
         /// <summary>
         /// List of <see cref="Texture"/> in this <see cref="TPKBlock"/>.
@@ -1049,13 +1056,14 @@ namespace Nikki.Support.Underground1.Class
             var start = bw.BaseStream.Position;
             bw.WriteBytes(0, SerializationHeader.ThisSize + 4);
 
-            using (var ms = new MemoryStream(this.Animations.Count * 0x200 + 0x80))
+            using (var ms = new MemoryStream(0x8000))
             using (var writer = new BinaryWriter(ms))
             {
 
                 writer.WriteNullTermUTF8(this._collection_name);
                 writer.WriteEnum(this.CompressionType);
                 writer.Write(this.Animations.Count);
+                writer.Write(this.TexturePages.Count);
                 writer.Write(this.Textures.Count);
 
                 for (int loop = 0; loop < this.Animations.Count; ++loop)
@@ -1074,6 +1082,19 @@ namespace Nikki.Support.Underground1.Class
                         writer.WriteNullTermUTF8(anim.FrameTextures[i].Name);
 
                     }
+
+                }
+
+                for (int loop = 0; loop < this.TexturePages.Count; ++loop)
+                {
+
+                    var page = this.TexturePages[loop];
+                    writer.WriteNullTermUTF8(page.TextureName);
+                    writer.Write(page.U0);
+                    writer.Write(page.V0);
+                    writer.Write(page.U1);
+                    writer.Write(page.V1);
+                    writer.Write(page.Flags);
 
                 }
 
@@ -1120,8 +1141,10 @@ namespace Nikki.Support.Underground1.Class
             this._collection_name = reader.ReadNullTermUTF8();
             this.CompressionType = reader.ReadEnum<TPKCompressionType>();
             int animcount = reader.ReadInt32();
+            int pageCount = reader.ReadInt32();
             int textcount = reader.ReadInt32();
             this.Animations.Capacity = animcount;
+            this.TexturePages.Capacity = pageCount;
             this.Textures.Capacity = textcount;
 
             for (int loop = 0; loop < animcount; ++loop)
@@ -1154,6 +1177,23 @@ namespace Nikki.Support.Underground1.Class
 
             }
 
+            for (int loop = 0; loop < pageCount; ++loop)
+            {
+
+                var page = new TexturePage()
+                {
+                    TextureName = br.ReadNullTermUTF8(),
+                    U0 = br.ReadSingle(),
+                    V0 = br.ReadSingle(),
+                    U1 = br.ReadSingle(),
+                    V1 = br.ReadSingle(),
+                    Flags = br.ReadUInt32(),
+                };
+
+                this.TexturePages.Add(page);
+
+            }
+
             for (int loop = 0; loop < textcount; ++loop)
             {
 
@@ -1183,6 +1223,7 @@ namespace Nikki.Support.Underground1.Class
         internal void Synchronize(TPKBlock other)
         {
             var animations = new List<AnimSlot>(other.Animations);
+            var texturePages = new List<TexturePage>(other.TexturePages);
             var textures = new List<Shared.Class.Texture>(other.Textures);
 
             // Synchronize animations
@@ -1205,6 +1246,29 @@ namespace Nikki.Support.Underground1.Class
                 }
 
                 if (!found) animations.Add(this.Animations[i]);
+
+            }
+
+            // Synchronize texture pages
+            for (int i = 0; i < this.TexturePages.Count; ++i)
+            {
+
+                bool found = false;
+
+                for (int j = 0; j < other.TexturePages.Count; ++j)
+                {
+
+                    if (other.TexturePages[j].TextureKey == this.TexturePages[i].TextureKey)
+                    {
+
+                        found = true;
+                        break;
+
+                    }
+
+                }
+
+                if (!found) texturePages.Add(this.TexturePages[i]);
 
             }
 
@@ -1232,9 +1296,9 @@ namespace Nikki.Support.Underground1.Class
             }
 
             this._animations = animations;
+            this._texturePages = texturePages;
             this._textures = textures;
             this.CompressionType = other.CompressionType;
-            this.SettingData = other.SettingData;
         }
 
         #endregion

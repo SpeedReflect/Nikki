@@ -178,7 +178,7 @@ namespace Nikki.Support.Carbon.Framework
 					case BinBlockID.FNGCompress:
 					case BinBlockID.PresetRides:
 					case BinBlockID.PresetSkins:
-					case BinBlockID.TPKSettings:
+					case BinBlockID.EmitterTexturePage:
 					case BinBlockID.VinylSystem:
 					case BinBlockID.CarTypeInfos:
 					case BinBlockID.CarInfoAnimHideup:

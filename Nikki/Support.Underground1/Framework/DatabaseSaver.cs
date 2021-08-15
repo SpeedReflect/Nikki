@@ -175,7 +175,7 @@ namespace Nikki.Support.Underground1.Framework
 					case BinBlockID.FNGCompress:
 					case BinBlockID.GCareer_Old:
 					case BinBlockID.PresetRides:
-					case BinBlockID.TPKSettings:
+					case BinBlockID.EmitterTexturePage:
 					case BinBlockID.CarTypeInfos:
 						br.BaseStream.Position += size;
 						break;

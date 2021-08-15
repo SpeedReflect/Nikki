@@ -119,11 +119,15 @@ namespace Nikki.Support.Underground1.Framework
 
 				br.BaseStream.Position = block.Offsets[loop] + 4;
 				var size = br.ReadInt32();
-				br.BaseStream.Position += 8;
 
-				int count = (size - 8) / CarTypeInfo.BaseClassSize;
+				var current = br.BaseStream.Position;
+
+				br.AlignReaderPow2(0x10);
+
+				size -= (int)(br.BaseStream.Position - current);
+				int count = size / CarTypeInfo.BaseClassSize;
 				this.Capacity += count;
-				
+
 				for (int i = 0; i < count; ++i)
 				{
 

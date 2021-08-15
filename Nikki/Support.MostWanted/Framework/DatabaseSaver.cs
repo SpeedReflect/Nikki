@@ -173,7 +173,7 @@ namespace Nikki.Support.MostWanted.Framework
 					case BinBlockID.DBCarBounds:
 					case BinBlockID.FNGCompress:
 					case BinBlockID.PresetRides:
-					case BinBlockID.TPKSettings:
+					case BinBlockID.EmitterTexturePage:
 					case BinBlockID.CarTypeInfos:
 					case BinBlockID.CompTPKBlock:
 					case BinBlockID.CarInfoAnimHideup:

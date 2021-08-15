@@ -77,7 +77,7 @@ namespace Nikki.Support.Underground2.Framework
 				if (collection.SettingData != null)
 				{
 
-					bw.WriteEnum(BinBlockID.TPKSettings);
+					bw.WriteEnum(BinBlockID.EmitterTexturePage);
 					bw.Write(collection.SettingData.Length);
 					bw.Write(collection.SettingData);
 					bw.GeneratePadding(mark, this.Alignment);
@@ -110,7 +110,7 @@ namespace Nikki.Support.Underground2.Framework
 				var id = br.ReadEnum<BinBlockID>();
 				var size = br.ReadInt32();
 
-				if (id == BinBlockID.TPKSettings)
+				if (id == BinBlockID.EmitterTexturePage)
 				{
 
 					settings = br.ReadBytes(size);

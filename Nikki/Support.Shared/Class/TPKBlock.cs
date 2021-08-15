@@ -119,16 +119,16 @@ namespace Nikki.Support.Shared.Class
         public virtual TPKCompressionType CompressionType { get; set; }
 
         /// <summary>
-        /// Settings data related to this <see cref="TPKBlock"/>.
-        /// </summary>
-        [Browsable(false)]
-        public byte[] SettingData { get; set; }
-
-        /// <summary>
         /// Represents all <see cref="AnimSlot"/> of this <see cref="TPKBlock"/>.
         /// </summary>
         [Category("Primary")]
         public abstract List<AnimSlot> Animations { get; }
+
+        /// <summary>
+        /// Represents all <see cref="TexturePage"/> of this <see cref="TPKBlock"/>.
+        /// </summary>
+        [Category("Primary")]
+        public abstract List<TexturePage> TexturePages { get; }
 
         /// <summary>
         /// List of <see cref="Texture"/> in this <see cref="TPKBlock"/>.
@@ -147,6 +147,12 @@ namespace Nikki.Support.Shared.Class
         /// </summary>
         [Category("Primary")]
         public int AnimationCount => this.Animations.Count;
+
+        /// <summary>
+        /// Number of <see cref="TexturePage"/> in this <see cref="TPKBlock"/>.
+        /// </summary>
+        [Category("Primary")]
+        public int TexturePageCount => this.TexturePages.Count;
 
         /// <summary>
         /// Custom watermark written on assembly.
@@ -360,6 +366,60 @@ namespace Nikki.Support.Shared.Class
 
             tex.Reload(filename);
         }
+
+        /// <summary>
+        /// Reads all <see cref="TexturePage"/> using <see cref="BinaryReader"/> provided.
+        /// </summary>
+        /// <param name="br"><see cref="BinaryReader"/> to read with.</param>
+        public void ReadTexturePages(BinaryReader br)
+		{
+            var id = br.ReadEnum<BinBlockID>();
+            var size = br.ReadInt32();
+
+            if (id != BinBlockID.EmitterTexturePage) return;
+
+            var current = br.BaseStream.Position;
+
+            br.AlignReaderPow2(0x10);
+
+            size -= (int)(br.BaseStream.Position - current);
+
+            for (int i = 0; i < size >> 5; ++i)
+			{
+
+                var texturePage = new TexturePage();
+                texturePage.Read(br);
+                this.TexturePages.Add(texturePage);
+			
+            }
+		}
+
+        /// <summary>
+        /// Writes all <see cref="TexturePage"/> using <see cref="BinaryWriter"/> provided.
+        /// </summary>
+        /// <param name="bw"><see cref="BinaryWriter"/> to write with.</param>
+        public void WriteTexturePages(BinaryWriter bw)
+		{
+            bw.WriteEnum(BinBlockID.EmitterTexturePage);
+            bw.Write(-1);
+
+            var start = bw.BaseStream.Position;
+
+            bw.AlignWriterPow2(0x10);
+
+            for (int i = 0; i < this.TexturePageCount; ++i)
+			{
+
+                this.TexturePages[i].Write(bw);
+
+			}
+
+            var end = bw.BaseStream.Position;
+
+            bw.BaseStream.Position = start - 4;
+            bw.Write((int)(end - start));
+            bw.BaseStream.Position = end;
+		}
 
         #endregion
 

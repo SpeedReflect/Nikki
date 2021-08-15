@@ -7,8 +7,38 @@ using CoreExtensions.IO;
 
 namespace Nikki.Utils
 {
-	public static class BinarySaver
+	public static class BinaryUtils
 	{
+		public static void AlignReader(this BinaryReader br, int alignment, long absOffset = 0)
+		{
+			var offset = absOffset + br.BaseStream.Position;
+			var diff = alignment - (offset % alignment);
+			if (diff != alignment) br.BaseStream.Position += diff;
+		}
+
+		public static void AlignReaderPow2(this BinaryReader br, int alignment, long absOffset = 0)
+		{
+			var offset = absOffset + br.BaseStream.Position;
+			var diff = alignment - (offset & (alignment - 1));
+			if (diff != alignment) br.BaseStream.Position += diff;
+		}
+
+		public static void AlignWriter(this BinaryWriter bw, int alignment, long absOffset = 0)
+		{
+			var offset = absOffset + bw.BaseStream.Position;
+			var diff = alignment - (offset % alignment);
+			if (diff == alignment) diff = 0;
+			for (int i = 0; i < diff; ++i) bw.Write((byte)0x11);
+		}
+
+		public static void AlignWriterPow2(this BinaryWriter bw, int alignment, long absOffset = 0)
+		{
+			var offset = absOffset + bw.BaseStream.Position;
+			var diff = alignment - (offset & (alignment - 1));
+			if (diff == alignment) diff = 0;
+			for (int i = 0; i < diff; ++i) bw.Write((byte)0x11);
+		}
+
 		public static void GeneratePadding(this BinaryWriter bw, string mark, Alignment alignment)
 		{
 			if (bw.BaseStream.Position == 0) return;

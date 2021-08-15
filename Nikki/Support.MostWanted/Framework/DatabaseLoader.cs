@@ -201,7 +201,7 @@ namespace Nikki.Support.MostWanted.Framework
 						goto default;
 
 					case BinBlockID.TPKBlocks:
-					case BinBlockID.TPKSettings:
+					case BinBlockID.EmitterTexturePage:
 					case BinBlockID.CompTPKBlock:
 						this.tpkblocks.Offsets.Add(off);
 						goto default;
