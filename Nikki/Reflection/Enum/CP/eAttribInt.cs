@@ -118,6 +118,11 @@
 		/// <summary>
 		/// 
 		/// </summary>
+		LANGUAGEHASHABR = 0xC9818DFC,
+
+		/// <summary>
+		/// 
+		/// </summary>
 		NUMREMAPCOLOURS = 0x6212682B,
 		
 		/// <summary>
@@ -139,10 +144,5 @@
 		/// 
 		/// </summary>
 		_0x7D29CF3E = 0x7D29CF3E,
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		_0xC9818DFC = 0xC9818DFC,
 	}
 }

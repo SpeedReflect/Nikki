@@ -103,6 +103,11 @@
 		/// <summary>
 		/// 
 		/// </summary>
+		COMPLEXTARGET = 0x87557E1E,
+
+		/// <summary>
+		/// 
+		/// </summary>
 		KITNOTPAINT01 = 0x1BC91595,
 
 		/// <summary>
@@ -144,10 +149,5 @@
 		/// 
 		/// </summary>
 		_0x6509EC92 = 0x6509EC92,
-
-		/// <summary>
-		/// 
-		/// </summary>
-		COMPLEXTARGET = 0x87557E1E,
 	}
 }

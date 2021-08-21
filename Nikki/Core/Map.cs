@@ -115,6 +115,7 @@ namespace Nikki.Core
 			{ 0xBB318B8F, "PART_NAME_OFFSETS" },
 			{ 0xBCADE4C3, "HOODEMITTER" },
 			{ 0xC1A84E52, "WHEELRIGHT" },
+			{ 0xC9818DFC, "LANGUAGEHASHABR" },
 			{ 0xCE7D8DB5, "OUTER_RADIUS" },
 			{ 0xCDAB2874, "ISDECAL" },
 			{ 0xD2BCA329, "PresetRides" },
@@ -269,11 +270,11 @@ namespace Nikki.Core
 			{ 0x564B8CB6, CarPartAttribType.Integer }, // NUMCOLOURS
 			{ 0xA77BDCFA, CarPartAttribType.Integer }, // NUM_DECALS
 			{ 0x7D29CF3E, CarPartAttribType.Integer }, // 0x7D29CF3E // ???
-			{ 0xC9818DFC, CarPartAttribType.Integer }, // 0xC9818DFC // ???
 			{ 0x48620C16, CarPartAttribType.Integer }, // DAMAGELEVEL
 			{ 0x1B0EA1A9, CarPartAttribType.Integer }, // SPOKE_COUNT
 			{ 0xEB0101E2, CarPartAttribType.Integer }, // INNER_RADIUS
 			{ 0xCE7D8DB5, CarPartAttribType.Integer }, // OUTER_RADIUS
+			{ 0xC9818DFC, CarPartAttribType.Integer }, // LANGUAGEHASHABR
 			{ 0x6212682B, CarPartAttribType.Integer }, // NUMREMAPCOLOURS
 			{ 0x2850A03B, CarPartAttribType.Integer }, // MORPHTARGET_NUM
 			{ 0x927097F6, CarPartAttribType.Integer }, // PART_NAME_SELECTOR
@@ -466,6 +467,7 @@ namespace Nikki.Core
 			"PART_NAME_OFFSETS".BinHash();
 			"HOODEMITTER".BinHash();
 			"WHEELRIGHT".BinHash();
+			"LANGUAGEHASHABR".BinHash();
 			"OUTER_RADIUS".BinHash();
 			"ISDECAL".BinHash();
 			"PresetRides".BinHash();

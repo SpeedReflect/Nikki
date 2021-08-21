@@ -58,11 +58,6 @@
         /// <summary>
         /// 
         /// </summary>
-        TEXCOMP_S3TC = 34,
-        
-        /// <summary>
-        /// 
-        /// </summary>
         TEXCOMP_DXTC1 = 34,
         
         /// <summary>
