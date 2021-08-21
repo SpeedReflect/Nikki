@@ -199,6 +199,15 @@ namespace Nikki.Support.Underground2.Class
         [AccessModifiable()]
         [StaticModifiable()]
         [MemoryCastable()]
+        [Category("Settings")]
+        public byte Padding { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
         [Category("Variance")]
         public int OnCycle { get; set; }
 
@@ -326,7 +335,16 @@ namespace Nikki.Support.Underground2.Class
         [StaticModifiable()]
         [MemoryCastable()]
         [Category("Settings")]
-        public float CarPosition { get; set; }
+        public int CarPosition { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [AccessModifiable()]
+        [StaticModifiable()]
+        [MemoryCastable()]
+        [Category("Settings")]
+        public int EmitterID { get; set; }
 
         /// <summary>
         /// 
@@ -626,7 +644,7 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(this.RandomStartFrame);
             bw.Write(this.RandomRotationDirection);
             bw.Write(this.MotionLive);
-            bw.Write((byte)0);
+            bw.Write(this.Padding);
             bw.Write(this.OnCycle);
             bw.Write(this.OnCycleVariance);
             bw.Write(this.OffCycle);
@@ -642,7 +660,7 @@ namespace Nikki.Support.Underground2.Class
             bw.Write(this.MotionInherit);
             bw.Write(this.MotionInheritVariance);
             bw.Write(this.CarPosition);
-            bw.Write(0);
+            bw.Write(this.EmitterID);
             bw.Write(this.VolumeCenterX);
             bw.Write(this.VolumeCenterY);
             bw.Write(this.VolumeCenterZ);
@@ -689,7 +707,7 @@ namespace Nikki.Support.Underground2.Class
             this.RandomStartFrame = br.ReadByte();
             this.RandomRotationDirection = br.ReadByte();
             this.MotionLive = br.ReadByte();
-            br.BaseStream.Position += 0x01;
+            this.Padding = br.ReadByte();
             this.OnCycle = br.ReadInt32();
             this.OnCycleVariance = br.ReadSingle();
             this.OffCycle = br.ReadInt32();
@@ -704,8 +722,8 @@ namespace Nikki.Support.Underground2.Class
             this.SpreadAngle = br.ReadSingle();
             this.MotionInherit = br.ReadSingle();
             this.MotionInheritVariance = br.ReadSingle();
-            this.CarPosition = br.ReadSingle();
-            br.BaseStream.Position += 0x04;
+            this.CarPosition = br.ReadInt32();
+            this.EmitterID = br.ReadInt32();
             this.VolumeCenterX = br.ReadSingle();
             this.VolumeCenterY = br.ReadSingle();
             this.VolumeCenterZ = br.ReadSingle();
@@ -782,55 +800,57 @@ namespace Nikki.Support.Underground2.Class
                 writer.WriteNullTermUTF8(this._texture_name);
                 writer.WriteNullTermUTF8(this._group_name);
 
-                bw.Write(this.SpreadAsDisc);
-                bw.Write(this.ContactSheetW);
-                bw.Write(this.ContactSheetH);
-                bw.Write(this.AnimFPS);
-                bw.Write(this.RandomStartFrame);
-                bw.Write(this.RandomRotationDirection);
-                bw.Write(this.MotionLive);
-                bw.Write(this.OnCycle);
-                bw.Write(this.OnCycleVariance);
-                bw.Write(this.OffCycle);
-                bw.Write(this.OffCycleVariance);
-                bw.Write(this.NumParticles);
-                bw.Write(this.NumParticlesVariance);
-                bw.Write(this.Life);
-                bw.Write(this.LifeVariance);
-                bw.Write(this.Speed);
-                bw.Write(this.SpeedVariance);
-                bw.Write(this.InitialAngleRange);
-                bw.Write(this.SpreadAngle);
-                bw.Write(this.MotionInherit);
-                bw.Write(this.MotionInheritVariance);
-                bw.Write(this.CarPosition);
-                bw.Write(this.VolumeCenterX);
-                bw.Write(this.VolumeCenterY);
-                bw.Write(this.VolumeCenterZ);
-                bw.Write(this.VolumeCenterW);
-                bw.Write(this.VolumeExtentX);
-                bw.Write(this.VolumeExtentY);
-                bw.Write(this.VolumeExtentZ);
-                bw.Write(this.VolumeExtentW);
-                bw.Write(this.FarClip);
-                bw.Write(this.Gravity);
-                bw.Write(this.Drag);
-                bw.Write(this.MaxPixelSize);
-                bw.Write(this.KeyPosition1);
-                bw.Write(this.KeyPosition2);
-                bw.Write(this.KeyPosition3);
-                bw.Write(this.KeyPosition4);
-                this.ColorMatrix.Write(bw);
-                bw.Write(this.SizeX);
-                bw.Write(this.SizeY);
-                bw.Write(this.SizeZ);
-                bw.Write(this.SizeW);
-                bw.Write(this.RelativeAngleX);
-                bw.Write(this.RelativeAngleY);
-                bw.Write(this.RelativeAngleZ);
-                bw.Write(this.RelativeAngleW);
-                this.ColorBasis.Write(bw);
-                this.ExtraBasis.Write(bw);
+                writer.Write(this.SpreadAsDisc);
+                writer.Write(this.ContactSheetW);
+                writer.Write(this.ContactSheetH);
+                writer.Write(this.AnimFPS);
+                writer.Write(this.RandomStartFrame);
+                writer.Write(this.RandomRotationDirection);
+                writer.Write(this.MotionLive);
+                writer.Write(this.Padding);
+                writer.Write(this.OnCycle);
+                writer.Write(this.OnCycleVariance);
+                writer.Write(this.OffCycle);
+                writer.Write(this.OffCycleVariance);
+                writer.Write(this.NumParticles);
+                writer.Write(this.NumParticlesVariance);
+                writer.Write(this.Life);
+                writer.Write(this.LifeVariance);
+                writer.Write(this.Speed);
+                writer.Write(this.SpeedVariance);
+                writer.Write(this.InitialAngleRange);
+                writer.Write(this.SpreadAngle);
+                writer.Write(this.MotionInherit);
+                writer.Write(this.MotionInheritVariance);
+                writer.Write(this.CarPosition);
+                writer.Write(this.EmitterID);
+                writer.Write(this.VolumeCenterX);
+                writer.Write(this.VolumeCenterY);
+                writer.Write(this.VolumeCenterZ);
+                writer.Write(this.VolumeCenterW);
+                writer.Write(this.VolumeExtentX);
+                writer.Write(this.VolumeExtentY);
+                writer.Write(this.VolumeExtentZ);
+                writer.Write(this.VolumeExtentW);
+                writer.Write(this.FarClip);
+                writer.Write(this.Gravity);
+                writer.Write(this.Drag);
+                writer.Write(this.MaxPixelSize);
+                writer.Write(this.KeyPosition1);
+                writer.Write(this.KeyPosition2);
+                writer.Write(this.KeyPosition3);
+                writer.Write(this.KeyPosition4);
+                this.ColorMatrix.Write(writer);
+                writer.Write(this.SizeX);
+                writer.Write(this.SizeY);
+                writer.Write(this.SizeZ);
+                writer.Write(this.SizeW);
+                writer.Write(this.RelativeAngleX);
+                writer.Write(this.RelativeAngleY);
+                writer.Write(this.RelativeAngleZ);
+                writer.Write(this.RelativeAngleW);
+                this.ColorBasis.Write(writer);
+                this.ExtraBasis.Write(writer);
 
                 array = ms.ToArray();
 
@@ -862,54 +882,57 @@ namespace Nikki.Support.Underground2.Class
             this._texture_name = reader.ReadNullTermUTF8();
             this._group_name = reader.ReadNullTermUTF8();
 
-            this.SpreadAsDisc = br.ReadByte();
-            this.ContactSheetW = br.ReadByte();
-            this.ContactSheetH = br.ReadByte();
-            this.AnimFPS = br.ReadByte();
-            this.RandomStartFrame = br.ReadByte();
-            this.RandomRotationDirection = br.ReadByte();
-            this.OnCycle = br.ReadInt32();
-            this.OnCycleVariance = br.ReadSingle();
-            this.OffCycle = br.ReadInt32();
-            this.OffCycleVariance = br.ReadSingle();
-            this.NumParticles = br.ReadInt32();
-            this.NumParticlesVariance = br.ReadSingle();
-            this.Life = br.ReadSingle();
-            this.LifeVariance = br.ReadSingle();
-            this.Speed = br.ReadSingle();
-            this.SpeedVariance = br.ReadSingle();
-            this.InitialAngleRange = br.ReadSingle();
-            this.SpreadAngle = br.ReadSingle();
-            this.MotionInherit = br.ReadSingle();
-            this.MotionInheritVariance = br.ReadSingle();
-            this.CarPosition = br.ReadSingle();
-            this.VolumeCenterX = br.ReadSingle();
-            this.VolumeCenterY = br.ReadSingle();
-            this.VolumeCenterZ = br.ReadSingle();
-            this.VolumeCenterW = br.ReadSingle();
-            this.VolumeExtentX = br.ReadSingle();
-            this.VolumeExtentY = br.ReadSingle();
-            this.VolumeExtentZ = br.ReadSingle();
-            this.VolumeExtentW = br.ReadSingle();
-            this.FarClip = br.ReadSingle();
-            this.Gravity = br.ReadSingle();
-            this.Drag = br.ReadSingle();
-            this.MaxPixelSize = br.ReadSingle();
-            this.KeyPosition1 = br.ReadSingle();
-            this.KeyPosition2 = br.ReadSingle();
-            this.KeyPosition3 = br.ReadSingle();
-            this.KeyPosition4 = br.ReadSingle();
-            this.ColorMatrix.Read(br);
-            this.SizeX = br.ReadSingle();
-            this.SizeY = br.ReadSingle();
-            this.SizeZ = br.ReadSingle();
-            this.SizeW = br.ReadSingle();
-            this.RelativeAngleX = br.ReadSingle();
-            this.RelativeAngleY = br.ReadSingle();
-            this.RelativeAngleZ = br.ReadSingle();
-            this.RelativeAngleW = br.ReadSingle();
-            this.ColorBasis.Read(br);
-            this.ExtraBasis.Read(br);
+            this.SpreadAsDisc = reader.ReadByte();
+            this.ContactSheetW = reader.ReadByte();
+            this.ContactSheetH = reader.ReadByte();
+            this.AnimFPS = reader.ReadByte();
+            this.RandomStartFrame = reader.ReadByte();
+            this.RandomRotationDirection = reader.ReadByte();
+            this.MotionLive = reader.ReadByte();
+            this.Padding = reader.ReadByte();
+            this.OnCycle = reader.ReadInt32();
+            this.OnCycleVariance = reader.ReadSingle();
+            this.OffCycle = reader.ReadInt32();
+            this.OffCycleVariance = reader.ReadSingle();
+            this.NumParticles = reader.ReadInt32();
+            this.NumParticlesVariance = reader.ReadSingle();
+            this.Life = reader.ReadSingle();
+            this.LifeVariance = reader.ReadSingle();
+            this.Speed = reader.ReadSingle();
+            this.SpeedVariance = reader.ReadSingle();
+            this.InitialAngleRange = reader.ReadSingle();
+            this.SpreadAngle = reader.ReadSingle();
+            this.MotionInherit = reader.ReadSingle();
+            this.MotionInheritVariance = reader.ReadSingle();
+            this.CarPosition = reader.ReadInt32();
+            this.EmitterID = reader.ReadInt32();
+            this.VolumeCenterX = reader.ReadSingle();
+            this.VolumeCenterY = reader.ReadSingle();
+            this.VolumeCenterZ = reader.ReadSingle();
+            this.VolumeCenterW = reader.ReadSingle();
+            this.VolumeExtentX = reader.ReadSingle();
+            this.VolumeExtentY = reader.ReadSingle();
+            this.VolumeExtentZ = reader.ReadSingle();
+            this.VolumeExtentW = reader.ReadSingle();
+            this.FarClip = reader.ReadSingle();
+            this.Gravity = reader.ReadSingle();
+            this.Drag = reader.ReadSingle();
+            this.MaxPixelSize = reader.ReadSingle();
+            this.KeyPosition1 = reader.ReadSingle();
+            this.KeyPosition2 = reader.ReadSingle();
+            this.KeyPosition3 = reader.ReadSingle();
+            this.KeyPosition4 = reader.ReadSingle();
+            this.ColorMatrix.Read(reader);
+            this.SizeX = reader.ReadSingle();
+            this.SizeY = reader.ReadSingle();
+            this.SizeZ = reader.ReadSingle();
+            this.SizeW = reader.ReadSingle();
+            this.RelativeAngleX = reader.ReadSingle();
+            this.RelativeAngleY = reader.ReadSingle();
+            this.RelativeAngleZ = reader.ReadSingle();
+            this.RelativeAngleW = reader.ReadSingle();
+            this.ColorBasis.Read(reader);
+            this.ExtraBasis.Read(reader);
         }
 
         #endregion

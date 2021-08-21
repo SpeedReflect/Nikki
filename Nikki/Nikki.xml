@@ -13007,6 +13007,13 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Carbon.Class.STRBlock"/> with.</param>
         </member>
+        <member name="M:Nikki.Support.Carbon.Class.STRBlock.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
         <member name="M:Nikki.Support.Carbon.Class.STRBlock.GetRecord(System.UInt32)">
             <summary>
             Gets the <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> from the internal list.
@@ -18461,6 +18468,13 @@
             Disassembles array into <see cref="T:Nikki.Support.MostWanted.Class.STRBlock"/> properties.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.MostWanted.Class.STRBlock"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.MostWanted.Class.STRBlock.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
         </member>
         <member name="M:Nikki.Support.MostWanted.Class.STRBlock.GetRecord(System.UInt32)">
             <summary>
@@ -24664,6 +24678,13 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Prostreet.Class.STRBlock"/> with.</param>
         </member>
+        <member name="M:Nikki.Support.Prostreet.Class.STRBlock.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
         <member name="M:Nikki.Support.Prostreet.Class.STRBlock.GetRecord(System.UInt32)">
             <summary>
             Gets the <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> from the internal list.
@@ -28977,6 +28998,11 @@
         <member name="P:Nikki.Support.Shared.Class.Texture.MipmapBiasType">
             <summary>
             Represents mipmap bias type of the texture.
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Shared.Class.Texture.MipmapBiasInt">
+            <summary>
+            Represents mipmap bias type of the texture as a <see cref="T:System.Byte"/>. Directly linked to <see cref="P:Nikki.Support.Shared.Class.Texture.MipmapBiasType"/>.
             </summary>
         </member>
         <member name="P:Nikki.Support.Shared.Class.Texture.BiasLevel">
@@ -35581,6 +35607,13 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Undercover.Class.STRBlock"/> with.</param>
         </member>
+        <member name="M:Nikki.Support.Undercover.Class.STRBlock.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
         <member name="M:Nikki.Support.Undercover.Class.STRBlock.GetRecord(System.UInt32)">
             <summary>
             Gets the <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> from the internal list.
@@ -41486,6 +41519,13 @@
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground1.Class.STRBlock"/> with.</param>
         </member>
+        <member name="M:Nikki.Support.Underground1.Class.STRBlock.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
+        </member>
         <member name="M:Nikki.Support.Underground1.Class.STRBlock.GetRecord(System.UInt32)">
             <summary>
             Gets the <see cref="T:Nikki.Support.Shared.Parts.STRParts.StringRecord"/> from the internal list.
@@ -46567,6 +46607,11 @@
             
             </summary>
         </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.Padding">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.OnCycle">
             <summary>
             
@@ -46638,6 +46683,11 @@
             </summary>
         </member>
         <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.CarPosition">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nikki.Support.Underground2.Class.AcidEmitter.EmitterID">
             <summary>
             
             </summary>
@@ -48666,6 +48716,13 @@
             Disassembles array into <see cref="T:Nikki.Support.Underground2.Class.STRBlock"/> properties.
             </summary>
             <param name="br"><see cref="T:System.IO.BinaryReader"/> to read <see cref="T:Nikki.Support.Underground2.Class.STRBlock"/> with.</param>
+        </member>
+        <member name="M:Nikki.Support.Underground2.Class.STRBlock.MemoryCast(System.String)">
+            <summary>
+            Casts all attributes from this object to another one.
+            </summary>
+            <param name="CName">CollectionName of the new created object.</param>
+            <returns>Memory casted copy of the object.</returns>
         </member>
         <member name="M:Nikki.Support.Underground2.Class.STRBlock.GetRecord(System.UInt32)">
             <summary>

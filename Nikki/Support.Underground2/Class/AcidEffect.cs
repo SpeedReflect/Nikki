@@ -181,7 +181,8 @@ namespace Nikki.Support.Underground2.Class
         /// <param name="bw"><see cref="BinaryWriter"/> to write <see cref="AcidEffect"/> with.</param>
         public override void Assemble(BinaryWriter bw)
         {
-            bw.WriteBytes(0, 0x0C);
+            bw.WriteBytes(0, 0x08);
+            bw.Write(this.BinKey);
             bw.Write(this.EmitterName.BinHash());
             bw.Write(this.State);
             bw.WriteBytes(0, 0x16);
