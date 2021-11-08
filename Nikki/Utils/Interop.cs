@@ -23,12 +23,7 @@ namespace Nikki.Utils
 		[DllImport("LZCompressLib.dll", EntryPoint = "BlockCompress", CallingConvention = CallingConvention.Cdecl)]
 		private static extern unsafe int PrivateEncode(byte* input, int insize, byte* output, int comp);
 
-		private static readonly object _s_lock;
-
-		static Interop()
-		{
-			Interop._s_lock = new object();
-		}
+		private static readonly object _s_lock = new object();
 
 		/// <summary>
 		/// Decompresses buffer based on its header.

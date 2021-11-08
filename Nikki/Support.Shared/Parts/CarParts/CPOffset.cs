@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Nikki.Support.Shared.Class;
+using CoreExtensions.IO;
 
 
 
@@ -122,5 +123,40 @@ namespace Nikki.Support.Shared.Parts.CarParts
 		/// <param name="off2">The second <see cref="CPOffset"/> to compare, or null.</param>
 		/// <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
 		public static bool operator !=(CPOffset off1, CPOffset off2) => !(off1 == off2);
+
+		/// <summary>
+		/// Writes current information stored to <see cref="Logger"/> provided.
+		/// </summary>
+		/// <param name="logger"><see cref="Logger"/> to write information with.</param>
+		public void WriteToLog(Logger logger)
+		{
+			logger.WriteLine($"Offset: 0x{this.Offset:X4}");
+
+			int code = 0x17;
+			var line = String.Empty;
+			var sort = new List<ushort>(this.AttribOffsets);
+
+			sort.Sort();
+
+			foreach (var offset in sort)
+			{
+
+				line += $"0x{offset:X4} ";
+			
+			}
+
+			logger.WriteLine($"Attrib: {line}");
+			logger.WriteLine($"Computations (initial timestep [0x{code:X8}]):");
+
+			for (int i = 0; i < sort.Count; ++i)
+			{
+
+				code = HashCode.Combine(code, sort[i], sort[i].ToString());
+				logger.WriteLine($"Iteration {i + 1} -> HashCode [0x{code:X8}]");
+
+			}
+
+			logger.WriteLine($"Final HashCode [0x{code:X8}]");
+		}
 	}
 }

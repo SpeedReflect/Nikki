@@ -324,6 +324,22 @@ namespace Nikki.Support.Carbon.Framework
 						if (original != offset)
 						{
 
+							var logger = new Logger("MainLog.txt", "Nikki.dll : Carbon DatabaseSaver", true);
+
+							logger.WriteLine("Internal error has occurred: DBMP:AO Key Exception");
+							logger.WriteLine($"Comparing keys 9x{original.GetHashCode():X8} vs 0x{offset.GetHashCode():X8}");
+
+							logger.WriteLine($"Currently stored: {original}");
+							logger.WriteLine($"Attempted to add: {offset}");
+
+							logger.WriteLine("---------------------------------------------------------------------------");
+							logger.WriteLine("Currently stored information");
+							original.WriteToLog(logger);
+
+							logger.WriteLine("---------------------------------------------------------------------------");
+							logger.WriteLine("Attempted to add information");
+							offset.WriteToLog(logger);
+
 							throw new Exception("Internal error has occurred: DBMP:AO Key Exception. Please report to the developer immediately, " +
 								"and try resaving the file!");
 						

@@ -2140,6 +2140,11 @@
             
             </summary>
         </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.COMPLEXTARGET">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.KITNOTPAINT01">
             <summary>
             
@@ -2181,11 +2186,6 @@
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribBool._0x6509EC92">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribBool.COMPLEXTARGET">
             <summary>
             
             </summary>
@@ -2380,6 +2380,11 @@
             
             </summary>
         </member>
+        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.LANGUAGEHASHABR">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt.NUMREMAPCOLOURS">
             <summary>
             
@@ -2401,11 +2406,6 @@
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0x7D29CF3E">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.CP.eAttribInt._0xC9818DFC">
             <summary>
             
             </summary>
@@ -8753,11 +8753,6 @@
             </summary>
         </member>
         <member name="F:Nikki.Reflection.Enum.TextureCompressionType.TEXCOMP_DXT">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Nikki.Reflection.Enum.TextureCompressionType.TEXCOMP_S3TC">
             <summary>
             
             </summary>
@@ -30626,6 +30621,12 @@
             <param name="off1">The first <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPOffset"/> to compare, or null.</param>
             <param name="off2">The second <see cref="T:Nikki.Support.Shared.Parts.CarParts.CPOffset"/> to compare, or null.</param>
             <returns>True if the value of c1 is different from the value of c2; false otherwise.</returns>
+        </member>
+        <member name="M:Nikki.Support.Shared.Parts.CarParts.CPOffset.WriteToLog(CoreExtensions.IO.Logger)">
+            <summary>
+            Writes current information stored to <see cref="T:CoreExtensions.IO.Logger"/> provided.
+            </summary>
+            <param name="logger"><see cref="T:CoreExtensions.IO.Logger"/> to write information with.</param>
         </member>
         <member name="T:Nikki.Support.Shared.Parts.CarParts.CPStruct">
             <summary>

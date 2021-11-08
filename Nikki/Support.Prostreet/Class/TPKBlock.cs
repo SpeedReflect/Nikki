@@ -564,6 +564,8 @@ namespace Nikki.Support.Prostreet.Class
             if (fname.EndsWith(".xml") || fname.EndsWith(".XML"))
             {
 
+                fname = Path.GetFileNameWithoutExtension(fname).ToUpper();
+
                 if (this.Manager is null)
                 {
 
