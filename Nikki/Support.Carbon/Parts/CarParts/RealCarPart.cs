@@ -293,7 +293,7 @@ namespace Nikki.Support.Carbon.Parts.CarParts
 
 								var lodname = $"Geometry{i}Lod{(char)lod}";
 								var value = modelAttr.GetValue(lodname);
-								Regex.Replace(value, pattern, replacement, regexOptions);
+								value = Regex.Replace(value, pattern, replacement, regexOptions);
 								modelAttr.SetValue(lodname, value);
 
 							}
